@@ -215,6 +215,15 @@ declare module '*/updateWatchedRepositories.gql' {
 }
     
 
+declare module '*/adsInstallationLanding.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const adsInstallationLanding: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/bitbucketInstallationLandingInput.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -2156,6 +2165,33 @@ declare module '*/starredRepos.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const ViewerStarredRepos: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/userADSOrgSettingsUrl.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const userADSOrgSettingsUrl: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/userADSOrganizationInfo.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const userADSOrganizationInfo: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/userADSOrganizations.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const userADSOrganizations: DocumentNode;
 
   export default defaultDocument;
 }

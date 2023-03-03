@@ -1,0 +1,5 @@
+mutation adsInstallationLanding($input: ADSInstallationLandingInput!) {
+  adsInstallationLanding(input: $input) {
+    ok
+  }
+}

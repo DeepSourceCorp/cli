@@ -211,10 +211,8 @@ export default class DashboardHeader extends mixins(ActiveUserMixin, ContextMixi
   }
 
   get repoVCSIcon(): string {
-    const provider = this.activeDashboardContext.vcs_provider_display.toLowerCase()
-    return ['github enterprise', 'github_enterprise', 'github-enterprise'].includes(provider)
-      ? 'github'
-      : provider
+    const provider = this.activeDashboardContext.vcs_provider
+    return this.$providerMetaMap[provider].icon ?? ''
   }
 
   // TODO: Enable once the avatar sizing inconsistency is fixed

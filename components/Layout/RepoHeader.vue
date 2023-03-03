@@ -270,11 +270,8 @@ export default class RepoHeader extends mixins(
   }
 
   get repoVCSIcon(): string {
-    const provider = this.repository.vcsProvider.toLowerCase()
-    if (provider === 'gsr') {
-      return 'google-cloud'
-    }
-    return ['github_enterprise', 'github-enterprise'].includes(provider) ? 'github' : provider
+    const provider = this.repository.vcsProvider
+    return this.$providerMetaMap[provider].icon ?? ''
   }
 
   async toggleStar(isStarred: boolean) {

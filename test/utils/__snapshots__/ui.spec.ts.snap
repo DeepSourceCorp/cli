@@ -2,6 +2,8 @@
 
 exports[`[[ Test prCopyText ]] has a default for invalid VCS provider: unknown VCS provider 1`] = `"pull request"`;
 
+exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: ADS 1`] = `"pull request"`;
+
 exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: BB 1`] = `"pull request"`;
 
 exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: BITBUCKET 1`] = `"pull request"`;
@@ -19,6 +21,8 @@ exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: GITLA
 exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: GL 1`] = `"merge request"`;
 
 exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: GSR 1`] = `"pull request"`;
+
+exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: ads 1`] = `"pull request"`;
 
 exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: bb 1`] = `"pull request"`;
 

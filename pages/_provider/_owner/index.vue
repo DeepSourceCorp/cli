@@ -9,7 +9,7 @@
         "
       ></recently-active-repo-list>
       <template v-if="steps.length && completion < 100 && allowAccountSetupCard">
-        <account-setup-card :completion="completion" />
+        <account-setup-card :completion="completion" :provider="provider" />
       </template>
     </div>
 
@@ -36,7 +36,7 @@
           :loading-value="loadingValues[reportSlot]"
           :level="ReportLevel.Owner"
           :owner="$route.params.owner"
-          :provider="$route.params.provider"
+          :provider="provider"
           :pinned-reports="pinnedReports"
           :report-slot="reportSlot"
           class="pinned-report-widget"
@@ -66,7 +66,7 @@ import ActiveUserMixin, { DashboardContext } from '~/mixins/activeUserMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import PinnedReportsMixin from '~/mixins/pinnedReportsMixin'
 
-import { TeamPerms } from '~/types/permTypes'
+import { AppFeatures, TeamPerms } from '~/types/permTypes'
 import { PinnedReportInput, ReportLevel } from '~/types/types'
 import { LoadingConditions } from '~/types/reportTypes'
 
@@ -173,14 +173,35 @@ export default class TeamHome extends mixins(
   }
 
   get steps(): Array<SetupStep> {
-    return (this.owner.accountSetupStatus as Array<SetupStep>).map((step) => {
-      return step as SetupStep
-    })
+    const setupOptionsSupportStatus: Record<string, boolean> = {
+      'activate-repository': true,
+      'install-autofix': this.$gateKeeper.provider(AppFeatures.AUTOFIX, this.provider),
+      'invite-team': true,
+      'configure-transformers': this.$gateKeeper.provider(AppFeatures.TRANSFORMS, this.provider)
+    }
+
+    return (this.owner.accountSetupStatus as Array<SetupStep>)
+      .filter((step) => {
+        const { shortcode } = step
+
+        const isFeatureSupported = setupOptionsSupportStatus[shortcode]
+
+        if (isFeatureSupported) {
+          return step
+        }
+      })
+      .map((step) => {
+        return step as SetupStep
+      })
   }
 
   get completion(): number {
     const completed = this.steps.filter((step) => step.completed).length
     return Math.round((completed / this.steps.length) * 100)
+  }
+
+  get provider(): string {
+    return this.$route.params.provider
   }
 
   /**

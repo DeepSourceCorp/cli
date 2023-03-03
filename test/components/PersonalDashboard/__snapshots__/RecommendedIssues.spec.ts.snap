@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ RecommendedIssues ]] renders \`RecommendedIssues\` with all prop combinations 1`] = `
+"<section class=\\"flex flex-col justify-between\\">
+  <div class=\\"grid grid-cols-1 gap-2 md:gap-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 pt-0 pb-3\\">
+    <div class=\\"text-vanilla-100 col-span-full\\">
+      <div class=\\"flex items-center h-full space-x-2\\"><span class=\\"text-base font-semibold tracking-snug\\">Recommended issues</span>
+        <!---->
+      </div>
+    </div>
+    <!---->
+  </div>
+  <div class=\\"flex-grow p-0\\">
+    <div class=\\"space-y-3\\">
+      <autofixfilechooser-stub repoparams=\\"[object Object]\\"></autofixfilechooser-stub>
+      <!---->
+    </div>
+  </div>
+  <div></div>
+</section>"
+`;

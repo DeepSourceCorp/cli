@@ -15,21 +15,26 @@
         enter-class="scale-95 translate-y-0 opacity-0"
         leave-to-class="scale-105 translate-y-0 opacity-0"
       >
-        <div class="relative" :class="{ [customClass]: customClass }">
+        <div class="relative" :class="{ [customClass]: Boolean(customClass) }">
           <div
             v-if="showGlow"
             class="absolute inset-0 scale-95 rounded-md glow opacity-40 no-filter:bg-opacity-80 transform-gpu"
           ></div>
           <div
             v-if="show"
-            class="p-6 mx-2 border rounded-lg bg-ink-400 bg-opacity-40 blur border-slate-400 transform-gpu sm:p-10 sm:mx-0"
-            :class="{
-              'max-w-sm': width === 'sm',
-              'max-w-md': width === 'md',
-              'max-w-lg': width === 'lg',
-              'max-w-xl': width === 'xl',
-              'max-w-2xl': width === '2xl'
-            }"
+            class="p-6 mx-2 rounded-lg transform-gpu sm:p-10 sm:mx-0"
+            :class="[
+              {
+                'max-w-sm': width === 'sm',
+                'max-w-md': width === 'md',
+                'max-w-lg': width === 'lg',
+                'max-w-xl': width === 'xl',
+                'max-w-2xl': width === '2xl',
+                'max-w-3xl': width === '3xl',
+                'max-w-4xl': width === '4xl'
+              },
+              { 'border bg-ink-400 bg-opacity-40 blur border-slate-400': showBorder }
+            ]"
           >
             <slot></slot>
           </div>
@@ -40,9 +45,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { ZButton, ZIcon } from '@deepsource/zeal'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-@Component({})
+@Component({ components: { ZButton, ZIcon } })
 export default class HeroCard extends Vue {
   @Prop({ default: true })
   showBackground: boolean
@@ -55,6 +61,9 @@ export default class HeroCard extends Vue {
 
   @Prop({ default: '' })
   customClass: string
+
+  @Prop({ default: true })
+  showBorder: boolean
 
   show = false
 

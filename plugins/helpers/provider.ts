@@ -54,7 +54,8 @@ enum routerVcsMap {
   ghe = 'ghe',
   gl = 'gl',
   bb = 'bb',
-  gsr = 'gsr'
+  gsr = 'gsr',
+  ads = 'ads'
 }
 
 const howToMakeAVcsMap = {
@@ -91,7 +92,14 @@ const howToMakeAVcsMap = {
     routerVcsMap.gsr,
     VcsProviderChoices.Gsr,
     'google-oauth2',
-    'google-cloud'
+    'gsr-colored'
+  ),
+  [routerVcsMap.ads]: new ProviderMeta(
+    'Azure Devops Services',
+    routerVcsMap.ads,
+    VcsProviderChoices.Ads,
+    'ads-oauth2',
+    'ads-colored'
   )
 }
 
@@ -105,6 +113,7 @@ export const providerMetaMap: Record<string, ProviderMeta> = {
   [routerVcsMap.gl]: howToMakeAVcsMap[routerVcsMap.gl],
   [routerVcsMap.bb]: howToMakeAVcsMap[routerVcsMap.bb],
   [routerVcsMap.gsr]: howToMakeAVcsMap[routerVcsMap.gsr],
+  [routerVcsMap.ads]: howToMakeAVcsMap[routerVcsMap.ads],
 
   // VcsProviderChoices
   [VcsProviderChoices.Github]: howToMakeAVcsMap[routerVcsMap.gh],
@@ -112,13 +121,15 @@ export const providerMetaMap: Record<string, ProviderMeta> = {
   [VcsProviderChoices.Gitlab]: howToMakeAVcsMap[routerVcsMap.gl],
   [VcsProviderChoices.Bitbucket]: howToMakeAVcsMap[routerVcsMap.bb],
   [VcsProviderChoices.Gsr]: howToMakeAVcsMap[routerVcsMap.gsr],
+  [VcsProviderChoices.Ads]: howToMakeAVcsMap[routerVcsMap.ads],
 
   // OwnerVcsProvider
   [OwnerVcsProvider.Gh]: howToMakeAVcsMap[routerVcsMap.gh],
   [OwnerVcsProvider.Ghe]: howToMakeAVcsMap[routerVcsMap.ghe],
   [OwnerVcsProvider.Gl]: howToMakeAVcsMap[routerVcsMap.gl],
   [OwnerVcsProvider.Bb]: howToMakeAVcsMap[routerVcsMap.bb],
-  [OwnerVcsProvider.Gsr]: howToMakeAVcsMap[routerVcsMap.gsr]
+  [OwnerVcsProvider.Gsr]: howToMakeAVcsMap[routerVcsMap.gsr],
+  [OwnerVcsProvider.Ads]: howToMakeAVcsMap[routerVcsMap.ads]
 }
 
 export default (_context: Context, inject: Inject): void => {

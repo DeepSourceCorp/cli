@@ -3,6 +3,23 @@ schema {
   mutation: Mutation
 }
 
+input ADSInstallationLandingInput {
+  login: String!
+  clientMutationId: String
+}
+
+type ADSInstallationLandingPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+type ADSOrganization {
+  login: String
+  hasInstalled: Boolean
+  hasEnabledThirdPartyAccess: Boolean
+  orgSettingsUrl: String
+}
+
 input AcceptGroupInviteInput {
   invitationCode: String!
   clientMutationId: String
@@ -1839,6 +1856,7 @@ type Mutation {
   bitbucketInstallationLanding(input: BitbucketInstallationLandingInput!): BitbucketInstallationLandingPayload
   gitlabInstallationLanding(input: GitlabInstallationLandingInput!): GitlabInstallationLandingPayload
   gsrInstallationLanding(input: GSRInstallationLandingInput!): GSRInstallationLandingPayload
+  adsInstallationLanding(input: ADSInstallationLandingInput!): ADSInstallationLandingPayload
   updateStarredRepository(input: UpdateStarredRepositoryInput!): UpdateStarredRepositoryPayload
   updateWatchedRepository(input: UpdateWatchedRepositoryInput!): UpdateWatchedRepositoryPayload
   updateUserDetails(input: UpdateUserDetailsInput!): UpdateUserDetailsPayload
@@ -1988,6 +2006,7 @@ enum OwnerVcsProvider {
   BB
   GHE
   GSR
+  ADS
 }
 
 type PR implements MaskPrimaryKeyNode {
@@ -3640,6 +3659,8 @@ type User implements MaskPrimaryKeyNode {
   recommendedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection
   gitlabAccounts: [GenericScalar]
   gsrProjects: [GSRProject]
+  adsOrganization(login: String!): ADSOrganization
+  adsOrganizations: [ADSOrganization]
   isAsgardian: Boolean
   intercomUserHash: String
   missiveUserHash: String
@@ -3694,6 +3715,7 @@ enum UserSocialConnectionChoices {
   BITBUCKET
   GITHUB_ENTERPRISE
   GSR
+  ADS
 }
 
 type UserSocialConnectionConnection {
@@ -3713,6 +3735,7 @@ enum VCSProviderChoices {
   BITBUCKET
   GITHUB_ENTERPRISE
   GSR
+  ADS
 }
 
 type VerifiableDomain implements MaskPrimaryKeyNode {

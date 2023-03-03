@@ -51,10 +51,10 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Activate Repo ]]: Snapshot: 
               <line x1=\\"20\\" y1=\\"8\\" x2=\\"20\\" y2=\\"14\\"></line>
               <line x1=\\"23\\" y1=\\"11\\" x2=\\"17\\" y2=\\"11\\"></line>
             </svg>Invite team</button>
-          <portal to=\\"modal\\">
+          <portal-stub to=\\"modal\\">
             <!---->
             <!---->
-          </portal>
+          </portal-stub>
         </div>
       </div>
     </div>
@@ -73,29 +73,7 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Activate Repo ]]: Snapshot: 
       </div>
     </div>
   </div>
-  <portal to=\\"modal\\">
-    <div class=\\"fixed inset-0 flex items-end bg-opacity-60 bg-ink-400 z-dialog-backdrop sm:items-center\\">
-      <transition-stub enterclass=\\"translate-y-full sm:translate-y-0 sm:scale-95 sm:opacity-0\\" leavetoclass=\\"translate-y-full sm:translate-y-0 sm:scale-105 sm:opacity-0\\" enteractiveclass=\\"transition-all duration-100 ease-in-out\\" leaveactiveclass=\\"transition-all duration-100 ease-in-out\\">
-        <div class=\\"mx-auto sm:mb-12 rounded-t-lg sm:rounded-md bg-ink-300 transform-gpu w-full sm:w-auto shadow-md\\">
-          <div>
-            <div class=\\"z-tabs text-vanilla-400 w-full max-w-xl -mb-px sm:w-120\\">
-              <div class=\\"flex justify-between px-4 border-b border-slate-400\\">
-                <div class=\\"pt-4 z-tab-list space-x-5 overflow-auto flex flex-nowrap\\"><button role=\\"tab\\" aria-selected=\\"true\\" class=\\"inline-flex items-end gap-2 pb-3 px-1 text-sm leading-none outline-none z-nav-item focus:outline-none z-tab-item flex items-center space-x-1 border-b-2 text-vanilla-100 border-juniper cursor-pointer\\">
-                    <!----><span>Activate a repository</span></button> <button role=\\"tab\\" aria-selected=\\"false\\" class=\\"inline-flex items-end gap-2 pb-3 px-1 text-sm leading-none outline-none z-nav-item focus:outline-none z-tab-item flex items-center space-x-1 border-b-2 text-vanilla-400 border-transparent hover:border-ink-100\\">
-                    <!----><span>Use Auto Onboard</span></button></div> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap self-center text-vanilla-100 justify-center p-0 h-6 w-6 bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--x text-vanilla-100\\">
-                    <line x1=\\"18\\" y1=\\"6\\" x2=\\"6\\" y2=\\"18\\"></line>
-                    <line x1=\\"6\\" y1=\\"6\\" x2=\\"18\\" y2=\\"18\\"></line>
-                  </svg></button>
-              </div>
-              <div role=\\"tabpanel\\" tabindex=\\"0\\" class=\\"h-102 outline-none focus:outline-none z-tab-items\\">
-                <activate-single-repo analyzer-shortcode=\\"\\" transformer-shortcode=\\"\\"></activate-single-repo>
-              </div>
-            </div>
-          </div>
-        </div>
-      </transition-stub>
-    </div>
-  </portal>
+  <addrepomodal-stub currenttab=\\"0\\" showautoonboard=\\"true\\" analyzershortcode=\\"\\" transformershortcode=\\"\\" showmodal=\\"true\\"></addrepomodal-stub>
   <!---->
 </div>"
 `;
@@ -151,10 +129,10 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Install Autofix ]]: Snapshot
               <line x1=\\"20\\" y1=\\"8\\" x2=\\"20\\" y2=\\"14\\"></line>
               <line x1=\\"23\\" y1=\\"11\\" x2=\\"17\\" y2=\\"11\\"></line>
             </svg>Invite team</button>
-          <portal to=\\"modal\\">
+          <portal-stub to=\\"modal\\">
             <!---->
             <!---->
-          </portal>
+          </portal-stub>
         </div>
       </div>
     </div>
@@ -173,34 +151,8 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Install Autofix ]]: Snapshot
       </div>
     </div>
   </div>
-  <portal to=\\"modal\\">
-    <!---->
-  </portal>
-  <portal to=\\"modal\\">
-    <div class=\\"fixed inset-0 flex items-end bg-opacity-60 bg-ink-400 z-dialog-backdrop sm:items-center z-modal-backdrop shadow-double-dark\\">
-      <transition-stub enterclass=\\"translate-y-full sm:translate-y-0 sm:scale-95 sm:opacity-0\\" leavetoclass=\\"translate-y-full sm:translate-y-0 sm:scale-105 sm:opacity-0\\" enteractiveclass=\\"transition-all duration-100 ease-in-out\\" leaveactiveclass=\\"transition-all duration-100 ease-in-out\\">
-        <div class=\\"mx-auto sm:mb-12 rounded-t-lg sm:rounded-md bg-ink-300 transform-gpu w-full sm:w-auto shadow-md\\">
-          <div class=\\"z-modal w-full sm:w-102\\">
-            <div class=\\"flex items-center justify-between p-4 space-x-2 border-ink-200 border-b\\"><span class=\\"text-base text-vanilla-100\\">Install Autofix app</span><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap z-modal-close-x text-vanilla-100 justify-center p-0 h-6 w-6 bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--x text-vanilla-100\\">
-                  <line x1=\\"18\\" y1=\\"6\\" x2=\\"6\\" y2=\\"18\\"></line>
-                  <line x1=\\"6\\" y1=\\"6\\" x2=\\"18\\" y2=\\"18\\"></line>
-                </svg></button></div>
-            <div class=\\"p-4 text-sm text-vanilla-400 min-h-20\\">
-              <p>
-                To create commits and pull-requests automatically, we need the Autofix app installed on
-                the account with access to this repository.
-              </p>
-            </div>
-            <div class=\\"p-4 space-x-4 text-right text-vanilla-100 border-slate-400\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap modal-primary-action w-48 text-ink-400 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-juniper hover:bg-juniper-600\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-1.5 w-4 h-4 z-icon--autofix text-ink-400 mr-1.5\\">
-                  <path d=\\"M6.72583 1.71012C6.80126 1.42996 7.19874 1.42996 7.27417 1.71012L8.14598 4.94805C8.26495 5.38991 8.6101 5.73505 9.05195 5.85402L12.2899 6.72583C12.57 6.80126 12.57 7.19874 12.2899 7.27417L9.05195 8.14598C8.61009 8.26495 8.26495 8.61009 8.14598 9.05195L7.27417 12.2899C7.19874 12.57 6.80126 12.57 6.72583 12.2899L5.85402 9.05195C5.73505 8.6101 5.38991 8.26495 4.94805 8.14598L1.71012 7.27417C1.42996 7.19874 1.42996 6.80126 1.71012 6.72583L4.94805 5.85402C5.38991 5.73505 5.73505 5.38991 5.85402 4.94805L6.72583 1.71012Z\\" stroke=\\"currentColor\\"></path>
-                  <path d=\\"M16.7124 8.11492C16.813 7.85058 17.187 7.85058 17.2876 8.11492L18.1859 10.474C18.3187 10.8226 18.594 11.098 18.9427 11.2308L21.3018 12.129C21.5661 12.2297 21.5661 12.6036 21.3018 12.7043L18.9427 13.6026C18.594 13.7353 18.3187 14.0107 18.1859 14.3594L17.2876 16.7184C17.187 16.9827 16.813 16.9827 16.7124 16.7184L15.8141 14.3594C15.6813 14.0107 15.406 13.7353 15.0573 13.6026L12.6983 12.7043C12.4339 12.6036 12.4339 12.2297 12.6983 12.129L15.0573 11.2308C15.406 11.098 15.6813 10.8226 15.8141 10.474L16.7124 8.11492Z\\" stroke=\\"currentColor\\"></path>
-                  <path d=\\"M10.247 15.4244C10.3355 15.1919 10.6645 15.1919 10.753 15.4244L11.3976 17.1171C11.5266 17.4559 11.7941 17.7234 12.1329 17.8524L13.8256 18.497C14.0581 18.5855 14.0581 18.9145 13.8256 19.003L12.1329 19.6476C11.7941 19.7766 11.5266 20.0441 11.3976 20.3829L10.753 22.0756C10.6645 22.3081 10.3355 22.3081 10.247 22.0756L9.60244 20.3829C9.47344 20.0441 9.20588 19.7766 8.86709 19.6476L7.17439 19.003C6.94187 18.9145 6.94187 18.5855 7.17439 18.497L8.86709 17.8524C9.20588 17.7234 9.47344 17.4559 9.60244 17.1171L10.247 15.4244Z\\" stroke=\\"currentColor\\"></path>
-                </svg>Install Autofix app</button></div>
-          </div>
-        </div>
-      </transition-stub>
-    </div>
-  </portal>
+  <addrepomodal-stub currenttab=\\"0\\" showautoonboard=\\"true\\" analyzershortcode=\\"\\" transformershortcode=\\"\\"></addrepomodal-stub>
+  <installautofixmodal-stub></installautofixmodal-stub>
 </div>"
 `;
 
@@ -255,7 +207,7 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Invite Member ]]: Snapshot: 
               <line x1=\\"20\\" y1=\\"8\\" x2=\\"20\\" y2=\\"14\\"></line>
               <line x1=\\"23\\" y1=\\"11\\" x2=\\"17\\" y2=\\"11\\"></line>
             </svg>Invite team</button>
-          <portal to=\\"modal\\">
+          <portal-stub to=\\"modal\\">
             <div class=\\"fixed inset-0 flex items-end bg-opacity-60 bg-ink-400 z-dialog-backdrop sm:items-center z-modal-backdrop\\">
               <transition-stub enterclass=\\"translate-y-full sm:translate-y-0 sm:scale-95 sm:opacity-0\\" leavetoclass=\\"translate-y-full sm:translate-y-0 sm:scale-105 sm:opacity-0\\" enteractiveclass=\\"transition-all duration-100 ease-in-out\\" leaveactiveclass=\\"transition-all duration-100 ease-in-out\\">
                 <div class=\\"mx-auto sm:mb-12 rounded-t-lg sm:rounded-md bg-ink-300 transform-gpu w-full sm:w-auto shadow-md\\">
@@ -284,7 +236,7 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Invite Member ]]: Snapshot: 
                             </button></div>
                         </div>
                         <div class=\\"flex items-center w-full p-1 space-x-2 rounded-sm outline-none focus-within:border-vanilla-400 border border-ink-100 bg-ink-400 text-slate cursor-not-allowed h-10 text-sm space-x-2 leading-8 py-2 px-3 pr-1\\"><input aria-label=\\"\\" name=\\"\\" type=\\"text\\" placeholder=\\"Enter a value\\" disabled=\\"disabled\\" class=\\"flex flex-grow w-full overflow-hidden bg-transparent outline-none overflow-ellipsis caret-juniper cursor-not-allowed\\">
-                          <copy-button value=\\"https://deepsource.icu/invitation/5cnHJHRUdbbpts2ZeiBa-20oabC_W_/\\" label=\\"Copy link\\" class=\\"w-36\\"></copy-button>
+                          <copybutton-stub value=\\"https://deepsource.icu/invitation/5cnHJHRUdbbpts2ZeiBa-20oabC_W_/\\" label=\\"Copy link\\" class=\\"w-36\\"></copybutton-stub>
                         </div>
                       </div>
                     </div>
@@ -294,7 +246,7 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Invite Member ]]: Snapshot: 
               </transition-stub>
             </div>
             <!---->
-          </portal>
+          </portal-stub>
         </div>
       </div>
     </div>
@@ -313,9 +265,7 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Invite Member ]]: Snapshot: 
       </div>
     </div>
   </div>
-  <portal to=\\"modal\\">
-    <!---->
-  </portal>
+  <addrepomodal-stub currenttab=\\"0\\" showautoonboard=\\"true\\" analyzershortcode=\\"\\" transformershortcode=\\"\\"></addrepomodal-stub>
   <!---->
 </div>"
 `;
@@ -371,10 +321,10 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Start Transformers ]]: Snaps
               <line x1=\\"20\\" y1=\\"8\\" x2=\\"20\\" y2=\\"14\\"></line>
               <line x1=\\"23\\" y1=\\"11\\" x2=\\"17\\" y2=\\"11\\"></line>
             </svg>Invite team</button>
-          <portal to=\\"modal\\">
+          <portal-stub to=\\"modal\\">
             <!---->
             <!---->
-          </portal>
+          </portal-stub>
         </div>
       </div>
     </div>
@@ -393,9 +343,7 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Start Transformers ]]: Snaps
       </div>
     </div>
   </div>
-  <portal to=\\"modal\\">
-    <!---->
-  </portal>
+  <addrepomodal-stub currenttab=\\"0\\" showautoonboard=\\"true\\" analyzershortcode=\\"\\" transformershortcode=\\"\\"></addrepomodal-stub>
   <!---->
 </div>"
 `;
@@ -451,10 +399,10 @@ exports[`[[ AccountSetupCard ]] renders AccountSetupCard 1`] = `
               <line x1=\\"20\\" y1=\\"8\\" x2=\\"20\\" y2=\\"14\\"></line>
               <line x1=\\"23\\" y1=\\"11\\" x2=\\"17\\" y2=\\"11\\"></line>
             </svg>Invite team</button>
-          <portal to=\\"modal\\">
+          <portal-stub to=\\"modal\\">
             <!---->
             <!---->
-          </portal>
+          </portal-stub>
         </div>
       </div>
     </div>
@@ -473,9 +421,7 @@ exports[`[[ AccountSetupCard ]] renders AccountSetupCard 1`] = `
       </div>
     </div>
   </div>
-  <portal to=\\"modal\\">
-    <!---->
-  </portal>
+  <addrepomodal-stub currenttab=\\"0\\" showautoonboard=\\"true\\" analyzershortcode=\\"\\" transformershortcode=\\"\\"></addrepomodal-stub>
   <!---->
 </div>"
 `;

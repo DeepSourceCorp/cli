@@ -82,6 +82,7 @@ import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import { AddRepoModal } from '@/components/AddRepo'
 import InstallAutofixModal from '@/components/Autofix/Modals/InstallAutofixModal.vue'
 import { InviteMembersModal } from '@/components/Members'
+import { AppFeatures } from '~/types/permTypes'
 
 interface SetupStep {
   completed: boolean
@@ -90,6 +91,8 @@ interface SetupStep {
   description: string
   action?: () => void
   actionLabel?: string
+  icon?: string
+  isSupported: boolean
 }
 
 @Component({
@@ -106,17 +109,50 @@ export default class AccountSetupCard extends mixins(OwnerDetailMixin) {
   @Prop()
   completion!: number
 
+  @Prop({ required: true })
+  provider: string
+
+  setupOptions: Record<string, Partial<SetupStep>> = {}
+
+  created() {
+    this.setupOptions = {
+      'activate-repository': {
+        action: this.activateRepo,
+        actionLabel: 'Activate repo',
+        icon: 'plus',
+        isSupported: true
+      },
+      'install-autofix': {
+        action: this.installAutofix,
+        actionLabel: 'Install Autofix',
+        icon: 'autofix',
+        isSupported: this.$gateKeeper.provider(AppFeatures.AUTOFIX, this.provider)
+      },
+      'invite-team': {
+        actionLabel: 'Invite team',
+        icon: 'user-plus',
+        isSupported: true
+      },
+      'configure-transformers': {
+        action: this.activateRepo,
+        actionLabel: 'Setup Transformers',
+        icon: 'plus',
+        isSupported: this.$gateKeeper.provider(AppFeatures.TRANSFORMS, this.provider)
+      }
+    }
+  }
+
   async fetch(): Promise<void> {
     await this.fetchAccountSetupStatus({
       login: this.$route.params.owner,
-      provider: this.$route.params.provider
+      provider: this.provider
     })
   }
 
   async refetch(): Promise<void> {
     await this.fetchAccountSetupStatus({
       login: this.$route.params.owner,
-      provider: this.$route.params.provider,
+      provider: this.provider,
       refetch: true
     })
   }
@@ -132,35 +168,18 @@ export default class AccountSetupCard extends mixins(OwnerDetailMixin) {
     this.showInstallAutofixModal = true
   }
 
-  setupOptions: Record<string, unknown> = {
-    'activate-repository': {
-      action: this.activateRepo,
-      actionLabel: 'Activate repo',
-      icon: 'plus'
-    },
-    'install-autofix': {
-      action: this.installAutofix,
-      actionLabel: 'Install Autofix',
-      icon: 'autofix'
-    },
-    'invite-team': {
-      actionLabel: 'Invite team',
-      icon: 'user-plus'
-    },
-    'configure-transformers': {
-      action: this.activateRepo,
-      actionLabel: 'Setup Transformers',
-      icon: 'plus'
-    }
-  }
+  get steps(): Array<SetupStep> | undefined {
+    return (this.owner.accountSetupStatus as Array<SetupStep>)
+      .filter((step) => {
+        const { isSupported } = this.setupOptions[step.shortcode]
 
-  get steps(): Array<SetupStep> {
-    return (this.owner.accountSetupStatus as Array<SetupStep>).map((step) => {
-      return Object.assign(
-        JSON.parse(JSON.stringify(step)),
-        this.setupOptions[step.shortcode]
-      ) as SetupStep
-    })
+        if (isSupported) {
+          return step
+        }
+      })
+      .map((step) => {
+        return Object.assign(JSON.parse(JSON.stringify(step)), this.setupOptions[step.shortcode])
+      })
   }
 
   getStatus(step: SetupStep): boolean {

@@ -41,11 +41,12 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
 import { ZButton, ZIcon } from '@deepsource/zeal'
+import { Component, mixins } from 'nuxt-property-decorator'
+
 import ActiveUserMixin from '~/mixins/activeUserMixin'
-import ContextMixin from '~/mixins/contextMixin'
 import AuthMixin, { LoginOption } from '~/mixins/authMixin'
+import ContextMixin from '~/mixins/contextMixin'
 import MetaMixin from '~/mixins/metaMixin'
 
 @Component({
@@ -75,7 +76,8 @@ export default class InstallationProvider extends mixins(
       this.fetchContext(),
       this.fetchAuthUrls(),
       this.fetchGitlabAccounts(),
-      this.fetchGSRProjects()
+      this.fetchGSRProjects(),
+      this.fetchADSOrganizations()
     ])
   }
 
@@ -116,6 +118,25 @@ export default class InstallationProvider extends mixins(
   }
 
   /**
+   * Fetch ADS organizations
+   *
+   * @return {Promise<void>}
+   */
+  async fetchADSOrganizations(): Promise<void> {
+    if (!this.$config.adsEnabled) return
+
+    try {
+      await this.fetchActiveUserADSOrganizations()
+    } catch (e) {
+      this.$logErrorAndToast(
+        e as Error,
+        'Unable to fetch Azure DevOps Services organizations, please contact support.',
+        this.viewer
+      )
+    }
+  }
+
+  /**
    * Trigger account click action when adding a new org
    *
    * @returns void
@@ -137,7 +158,8 @@ export default class InstallationProvider extends mixins(
     return {
       ...this.context.installationUrls,
       gitlab: this.hasGitlabAccounts ? '/accounts/gitlab/login' : this.authUrls.gitlab,
-      gsr: this.hasGSRProjects ? '/accounts/gsr/projects' : this.authUrls.gsr
+      gsr: this.hasGSRProjects ? '/accounts/gsr/projects' : this.authUrls.gsr,
+      ads: this.hasADSOrganizations ? '/accounts/ads/login' : this.authUrls.ads
     }
   }
 
@@ -155,6 +177,11 @@ export default class InstallationProvider extends mixins(
       return true
     }
     return false
+  }
+
+  get hasADSOrganizations(): boolean {
+    const { adsOrganizations } = this.viewer
+    return Boolean(Array.isArray(adsOrganizations) && adsOrganizations.length)
   }
 }
 </script>

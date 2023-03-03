@@ -1,0 +1,10 @@
+query userADSOrganizationInfo($login: String!) {
+  viewer {
+    id
+    adsOrganization(login: $login) {
+      login
+      hasInstalled
+      hasEnabledThirdPartyAccess
+    }
+  }
+}

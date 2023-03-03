@@ -92,6 +92,7 @@ export default {
     bitbucketEnabled: IS_ON_PREM ? toBool(process.env.BITBUCKET_ENABLED) : true,
     githubServerEnabled: IS_ON_PREM ? toBool(process.env.GHE_SERVER_ENABLED) : false,
     gsrEnabled: IS_ON_PREM ? toBool(process.env.GSR_ENABLED) : false,
+    adsEnabled: IS_ON_PREM ? toBool(process.env.ADS_ENABLED) : true,
     enableSaml: toBool(process.env.ENABLE_SAML),
     emailEnabled: IS_ON_PREM ? toBool(process.env.EMAIL_ENABLED) : true,
     allowSocialAuth: IS_ON_PREM ? toBool(process.env.ALLOW_SOCIAL_AUTH) : true,
@@ -145,6 +146,7 @@ export default {
     ? [
         '**/_provider/_owner/settings/billing/*',
         '**/_provider/_owner/settings/security.vue',
+        '**/accounts/ads/login/*',
         '**/components/Settings/Security/*',
         '**/components/Billing/*',
         '**/discover/*'
@@ -282,6 +284,13 @@ export default {
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
         meta: { provider: 'google-oauth2' }
+      })
+      routes.push({
+        name: 'ads',
+        path: '/accounts/ads/login/callback/bifrost',
+        component: resolve(__dirname, 'pages/auth/-index.vue'),
+        chunkName: 'pages/auth',
+        meta: { provider: 'ads-oauth2' }
       })
     }
   },

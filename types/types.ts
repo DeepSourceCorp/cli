@@ -17,6 +17,25 @@ export type Scalars = {
   UUID: any;
 };
 
+export type AdsInstallationLandingInput = {
+  login: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type AdsInstallationLandingPayload = {
+  __typename?: 'ADSInstallationLandingPayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type AdsOrganization = {
+  __typename?: 'ADSOrganization';
+  login?: Maybe<Scalars['String']>;
+  hasInstalled?: Maybe<Scalars['Boolean']>;
+  hasEnabledThirdPartyAccess?: Maybe<Scalars['Boolean']>;
+  orgSettingsUrl?: Maybe<Scalars['String']>;
+};
+
 export type AcceptGroupInviteInput = {
   invitationCode: Scalars['String'];
   clientMutationId?: Maybe<Scalars['String']>;
@@ -2602,6 +2621,7 @@ export type Mutation = {
   bitbucketInstallationLanding?: Maybe<BitbucketInstallationLandingPayload>;
   gitlabInstallationLanding?: Maybe<GitlabInstallationLandingPayload>;
   gsrInstallationLanding?: Maybe<GsrInstallationLandingPayload>;
+  adsInstallationLanding?: Maybe<AdsInstallationLandingPayload>;
   updateStarredRepository?: Maybe<UpdateStarredRepositoryPayload>;
   updateWatchedRepository?: Maybe<UpdateWatchedRepositoryPayload>;
   updateUserDetails?: Maybe<UpdateUserDetailsPayload>;
@@ -3090,6 +3110,11 @@ export type MutationGsrInstallationLandingArgs = {
 };
 
 
+export type MutationAdsInstallationLandingArgs = {
+  input: AdsInstallationLandingInput;
+};
+
+
 export type MutationUpdateStarredRepositoryArgs = {
   input: UpdateStarredRepositoryInput;
 };
@@ -3529,7 +3554,8 @@ export enum OwnerVcsProvider {
   Gl = 'GL',
   Bb = 'BB',
   Ghe = 'GHE',
-  Gsr = 'GSR'
+  Gsr = 'GSR',
+  Ads = 'ADS'
 }
 
 export type Pr = MaskPrimaryKeyNode & {
@@ -6116,6 +6142,8 @@ export type User = MaskPrimaryKeyNode & {
   recommendedIssues?: Maybe<RepositoryIssueConnection>;
   gitlabAccounts?: Maybe<Array<Maybe<Scalars['GenericScalar']>>>;
   gsrProjects?: Maybe<Array<Maybe<GsrProject>>>;
+  adsOrganization?: Maybe<AdsOrganization>;
+  adsOrganizations?: Maybe<Array<Maybe<AdsOrganization>>>;
   isAsgardian?: Maybe<Scalars['Boolean']>;
   intercomUserHash?: Maybe<Scalars['String']>;
   missiveUserHash?: Maybe<Scalars['String']>;
@@ -6269,6 +6297,11 @@ export type UserRecommendedIssuesArgs = {
 };
 
 
+export type UserAdsOrganizationArgs = {
+  login: Scalars['String'];
+};
+
+
 export type UserPersonalAccountsArgs = {
   login?: Maybe<Scalars['String']>;
   offset?: Maybe<Scalars['Int']>;
@@ -6367,7 +6400,8 @@ export enum UserSocialConnectionChoices {
   Gitlab = 'GITLAB',
   Bitbucket = 'BITBUCKET',
   GithubEnterprise = 'GITHUB_ENTERPRISE',
-  Gsr = 'GSR'
+  Gsr = 'GSR',
+  Ads = 'ADS'
 }
 
 export type UserSocialConnectionConnection = {
@@ -6388,7 +6422,8 @@ export enum VcsProviderChoices {
   Gitlab = 'GITLAB',
   Bitbucket = 'BITBUCKET',
   GithubEnterprise = 'GITHUB_ENTERPRISE',
-  Gsr = 'GSR'
+  Gsr = 'GSR',
+  Ads = 'ADS'
 }
 
 export type VerifiableDomain = MaskPrimaryKeyNode & {
@@ -6918,6 +6953,19 @@ export type Unnamed_23_Mutation = (
   & { updateWatchedRepository?: Maybe<(
     { __typename?: 'UpdateWatchedRepositoryPayload' }
     & Pick<UpdateWatchedRepositoryPayload, 'ok'>
+  )> }
+);
+
+export type AdsInstallationLandingMutationVariables = Exact<{
+  input: AdsInstallationLandingInput;
+}>;
+
+
+export type AdsInstallationLandingMutation = (
+  { __typename?: 'Mutation' }
+  & { adsInstallationLanding?: Maybe<(
+    { __typename?: 'ADSInstallationLandingPayload' }
+    & Pick<AdsInstallationLandingPayload, 'ok'>
   )> }
 );
 

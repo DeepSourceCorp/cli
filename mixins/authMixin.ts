@@ -87,6 +87,7 @@ export default class AuthMixin extends Vue {
       allowSocialAuth,
       bitbucketEnabled,
       gsrEnabled,
+      adsEnabled,
       enableSaml
     } = this.$config
 
@@ -132,8 +133,17 @@ export default class AuthMixin extends Vue {
       if (gsrEnabled) {
         options.push({
           provider: 'gsr',
-          icon: 'google-cloud',
+          icon: 'gsr-colored',
           label: 'Google Cloud Source',
+          bg: 'bg-ink-200'
+        })
+      }
+
+      if (adsEnabled) {
+        options.push({
+          provider: 'ads',
+          icon: 'ads-colored',
+          label: 'Azure Devops Services',
           bg: 'bg-ink-200'
         })
       }

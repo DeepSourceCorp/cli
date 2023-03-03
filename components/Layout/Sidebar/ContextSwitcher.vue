@@ -93,7 +93,7 @@
             <div class="pr-2">
               <z-icon
                 v-tooltip="context.vcs_provider_display"
-                :icon="providerIcon(context.vcs_provider_display)"
+                :icon="providerIcon(context.vcs_provider)"
                 class="min-w-4 min-h-4"
               />
             </div>
@@ -175,13 +175,13 @@ export default class ContextSwitcher extends mixins(ActiveUserMixin, ContextMixi
   }
 
   /**
-   * Returns the icon name for the given provider
+   * Returns the icon name for the given VCS provider shortcode
    *
-   * @param {string} vcsName - Provider name
+   * @param {string} vcsShortcode - Provider shortcode
    * @returns {string}
    */
-  providerIcon(vcsName: string): string {
-    return vcsName.toLowerCase() || 'github'
+  providerIcon(vcsShortcode: string): string {
+    return this.$providerMetaMap[vcsShortcode]?.icon ?? ''
   }
 
   /**

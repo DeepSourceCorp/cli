@@ -70,7 +70,13 @@ export default ({
   return {
     defaultHttpLink: false,
     ssrMode: process.server,
-    cache: new InMemoryCache({} as InMemoryCacheConfig),
+    cache: new InMemoryCache({
+      typePolicies: {
+        ADSOrganization: {
+          keyFields: ['login']
+        }
+      }
+    } as InMemoryCacheConfig),
     link: from([errorLink, forwardHeadersMiddleware, httpLink])
   }
 }

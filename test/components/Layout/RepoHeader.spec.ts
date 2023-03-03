@@ -1,12 +1,12 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/vue'
-import RepoHeader from '~/components/Layout/RepoHeader.vue'
-
 import { createLocalVue, RouterLinkStub, shallowMount } from '@vue/test-utils'
-import Vuex from 'vuex'
 import { VueConstructor } from 'vue'
+import Vuex from 'vuex'
+
+import RepoHeader from '~/components/Layout/RepoHeader.vue'
+import { dashboardContextGenerator, mocksGenerator, storeModulesGenerator } from '~/test/mocks'
 import { VcsProviderChoices } from '~/types/types'
-import { mocksGenerator, storeModulesGenerator, dashboardContextGenerator } from '~/test/mocks'
 
 import VTooltip from 'v-tooltip'
 

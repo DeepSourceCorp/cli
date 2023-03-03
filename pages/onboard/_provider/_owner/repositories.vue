@@ -81,29 +81,44 @@
     </div>
     <div
       class="absolute bottom-0 w-full pt-12 pb-0 bg-gradient-to-t from-ink-400 via-ink-400 to-transparent"
-    ></div>
+    >
+      <z-alert v-if="providerIsAds" type="neutral">
+        <div class="inline-flex gap-x-2">
+          <z-icon icon="solid-alert-circle" class="self-start mt-0.5" />
+
+          <p class="text-vanilla-400 text-sm leading-">
+            DeepSource supports only git-based repositories. If your workspace has TFVC-based
+            repositories, they won't be synced.
+          </p>
+        </div>
+      </z-alert>
+    </div>
   </section>
 </template>
 
 <script lang="ts">
+import { ZAlert, ZButton, ZIcon, ZInput } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon } from '@deepsource/zeal'
+
+import { RepoCard } from '~/components/AddRepo'
+
+import MetaMixin from '~/mixins/metaMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
-import { Repository } from '~/types/types'
-import { RepoCard } from '~/components/AddRepo'
-import { resolveNodes } from '~/utils/array'
-import MetaMixin from '~/mixins/metaMixin'
 import RepoSyncMixin from '~/mixins/repoSyncMixin'
+
+import { Repository } from '~/types/types'
+import { resolveNodes } from '~/utils/array'
 
 /**
  * Page in onboarding step to select the repository
  */
 @Component({
   components: {
-    ZInput,
+    ZAlert,
     ZButton,
     ZIcon,
+    ZInput,
     RepoCard
   },
   middleware: ['restrictOnboarding'],
@@ -190,6 +205,10 @@ export default class OnboardRepositories extends mixins(
   get vcsProviderName(): string {
     const { provider } = this.$route.params
     return this.$providerMetaMap[provider].text
+  }
+
+  get providerIsAds(): boolean {
+    return this.$route.params.provider === 'ads'
   }
 }
 </script>

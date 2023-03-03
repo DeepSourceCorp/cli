@@ -1,0 +1,9 @@
+query userADSOrgSettingsUrl($login: String!) {
+  viewer {
+    id
+    adsOrganization(login: $login) {
+      login
+      orgSettingsUrl
+    }
+  }
+}

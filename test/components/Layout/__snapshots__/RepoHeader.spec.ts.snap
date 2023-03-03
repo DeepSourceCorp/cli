@@ -10,7 +10,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader for GSR: RepoHeader for GSR 1`] = `
               bifrost
             </a></div>
           <zbutton-stub color=\\"hover:text-slate\\" iconcolor=\\"current\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"z-star\\" class=\\"p-1 opacity-40 hover:opacity-70 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub> <a target=\\"_blank\\" rel=\\"noopener noreferrer\\">
-            <ztag-stub state=\\"default\\" iconleft=\\"google-cloud\\" size=\\"base\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"p-0.5\\" iconcolor=\\"current\\" class=\\"border-2 border-slate-400 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
+            <ztag-stub state=\\"default\\" iconleft=\\"gsr-colored\\" size=\\"base\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"p-0.5\\" iconcolor=\\"current\\" class=\\"border-2 border-slate-400 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
           </a>
           <!---->
         </h2>
@@ -122,7 +122,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader without a matching activeLink: Repo
               bifrost
             </a></div>
           <zbutton-stub color=\\"hover:text-slate\\" iconcolor=\\"current\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"z-star\\" class=\\"p-1 opacity-40 hover:opacity-70 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub> <a target=\\"_blank\\" rel=\\"noopener noreferrer\\">
-            <ztag-stub state=\\"default\\" iconleft=\\"google-cloud\\" size=\\"base\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"p-0.5\\" iconcolor=\\"current\\" class=\\"border-2 border-slate-400 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
+            <ztag-stub state=\\"default\\" iconleft=\\"gsr-colored\\" size=\\"base\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"p-0.5\\" iconcolor=\\"current\\" class=\\"border-2 border-slate-400 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
           </a>
           <!---->
         </h2>

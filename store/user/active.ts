@@ -7,6 +7,7 @@ import DeleteUser from '~/apollo/mutations/user/deleteUser.gql'
 import ActiveUserDetailGQLQuery from '~/apollo/queries/user/active/detail.gql'
 import ActiveUserGitlabAccounts from '~/apollo/queries/user/active/userGitlabAccounts.gql'
 import ActiveUserGSRProjects from '~/apollo/queries/user/active/userGSRProjects.gql'
+import ActiveUserADSOrganizations from '~/apollo/queries/user/active/userADSOrganizations.gql'
 import ActiveUserStarredRepos from '~/apollo/queries/user/active/starredRepos.gql'
 import ActiveUserRecommendedIssues from '~/apollo/queries/user/active/recommendedIssues.gql'
 import ActiveUserAccountInfo from '~/apollo/queries/user/active/accountInfo.gql'
@@ -92,6 +93,7 @@ export enum ActiveUserActions {
   FETCH_STARRED_REPOS = 'fetchStarredRepos',
   FETCH_GITLAB_ACCOUNTS = 'fetchGitlabAccounts',
   FETCH_GSR_PROJECTS = 'fetchGSRProjects',
+  FETCH_ADS_ORGANIZATIONS = 'fetchAdsOrganizations',
   FETCH_RECOMMENDED_ISSUES = 'fetchRecommendedIssues',
   UPDATE_STARRED_REPO = 'udpateStarredRepo',
   UPDATE_DEFAULT_CONTEXT = 'updateDefaultContext',
@@ -128,6 +130,10 @@ interface ActiveUserModuleActions extends ActionTree<ActiveUserState, RootState>
     injectee: ActiveUserActionContext
   ) => Promise<void>
   [ActiveUserActions.FETCH_GSR_PROJECTS]: (
+    this: Store<RootState>,
+    injectee: ActiveUserActionContext
+  ) => Promise<void>
+  [ActiveUserActions.FETCH_ADS_ORGANIZATIONS]: (
     this: Store<RootState>,
     injectee: ActiveUserActionContext
   ) => Promise<void>
@@ -209,6 +215,10 @@ export const actions: ActiveUserModuleActions = {
   },
   async [ActiveUserActions.FETCH_GSR_PROJECTS]({ commit }) {
     const response = await this.$fetchGraphqlData(ActiveUserGSRProjects, {}, true)
+    commit(ActiveUserMutations.SET_VIEWER, response.data.viewer)
+  },
+  async [ActiveUserActions.FETCH_ADS_ORGANIZATIONS]({ commit }) {
+    const response = await this.$fetchGraphqlData(ActiveUserADSOrganizations, {}, true)
     commit(ActiveUserMutations.SET_VIEWER, response.data.viewer)
   },
   async [ActiveUserActions.UPDATE_STARRED_REPO]({ dispatch }, { repoId, action }) {

@@ -31,7 +31,7 @@ const publicReportPassList = [
   'report-reportId-code-health-trend',
   'report-reportId-issues-autofixed'
 ]
-const passList = ['github', 'bitbucket', 'gitlab', ...publicReportPassList]
+const passList = ['github', 'bitbucket', 'gitlab', 'ads', ...publicReportPassList]
 
 const authMiddleware: Middleware = async ({ app, store, route, redirect, error }) => {
   let strict = false

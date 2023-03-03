@@ -74,18 +74,7 @@
       ></z-pagination>
     </div>
 
-    <floating-button-mobile
-      :nav-items="[
-        {
-          label: 'Analysis runs',
-          routePath: $generateRoute(['history', 'runs'])
-        },
-        {
-          label: 'Transforms',
-          routePath: $generateRoute(['history', 'transforms'])
-        }
-      ]"
-    />
+    <floating-button-mobile :nav-items="navItems" />
   </div>
 </template>
 
@@ -313,7 +302,34 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   }
 
   get prStatusFilterCopy() {
-    return `${this.prStatusFilter.toLowerCase()} ${prCopyText(this.$route.params.provider)}s`
+    return `${this.prStatusFilter.toLowerCase()} ${prCopyText(this.provider)}s`
+  }
+
+  get provider(): string {
+    return this.$route.params.provider
+  }
+
+  get navItems(): Array<Record<string, unknown>> {
+    const items = [
+      {
+        label: 'Analysis runs',
+        routePath: this.$generateRoute(['history', 'runs']),
+        isSupported: true
+      },
+      {
+        label: 'Transforms',
+        routePath: this.$generateRoute(['history', 'transforms']),
+        isSupported: this.$gateKeeper.provider(AppFeatures.TRANSFORMS, this.provider)
+      }
+    ]
+
+    return items.filter((item) => {
+      const { isSupported } = item
+
+      if (isSupported) {
+        return item
+      }
+    })
   }
 
   head(): Record<string, string> {

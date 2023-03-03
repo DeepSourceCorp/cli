@@ -1,0 +1,10 @@
+query userADSOrganizations {
+  viewer {
+    id
+    adsOrganizations {
+      login
+      hasInstalled
+      hasEnabledThirdPartyAccess
+    }
+  }
+}

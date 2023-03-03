@@ -10,7 +10,8 @@
         v-for="issue in issueList"
         :key="issue.id"
         v-bind="issue"
-        :issueLink="buildRoute(issue)"
+        :issue-link="buildRoute(issue)"
+        :show-autofix-button="allowAutofix"
         @autofix="(iss) => openAutofixModal(iss, issue)"
       >
         <template v-if="issue.repositoryInstance" slot="header">
@@ -43,6 +44,7 @@ import ActiveUserMixin from '@/mixins/activeUserMixin'
 
 import { RepositoryIssue } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
+import { AppFeatures } from '~/types/permTypes'
 
 @Component({
   components: {
@@ -104,6 +106,10 @@ export default class RecommendedIssues extends mixins(ActiveUserMixin) {
   public openUpgradeAccountModal(): void {
     this.isAutofixOpen = false
     this.isUpgradeAccountModalOpen = true
+  }
+
+  get allowAutofix(): boolean {
+    return this.$gateKeeper.provider(AppFeatures.AUTOFIX, this.activeProvider)
   }
 }
 </script>

@@ -26,10 +26,17 @@ describe('[[ AccountSetupCard ]]', () => {
 
     const rendered = render(AccountSetupCard, {
       props: {
-        completion: 45
+        completion: 45,
+        provider: 'gh'
       },
       mocks: mocksGenerator(),
-      store: new Vuex.Store(storeMock)
+      store: new Vuex.Store(storeMock),
+      stubs: {
+        addRepoModal: true,
+        installAutofixModal: true,
+        copyButton: true,
+        portal: true
+      }
     })
 
     html = rendered.html

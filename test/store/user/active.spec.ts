@@ -304,7 +304,8 @@ describe('[Store] User/Active', () => {
       ActiveUserActions.FETCH_GITLAB_ACCOUNTS,
       ActiveUserActions.FETCH_GSR_PROJECTS,
       ActiveUserActions.FETCH_RECOMMENDED_ISSUES,
-      ActiveUserActions.FETCH_WORKSPACES
+      ActiveUserActions.FETCH_WORKSPACES,
+      ActiveUserActions.FETCH_ADS_ORGANIZATIONS
     ].join(', ')}"`, () => {
       beforeEach(() => {
         if (spy) spy.mockReset()
@@ -324,7 +325,8 @@ describe('[Store] User/Active', () => {
         ActiveUserActions.FETCH_GITLAB_ACCOUNTS,
         ActiveUserActions.FETCH_GSR_PROJECTS,
         ActiveUserActions.FETCH_RECOMMENDED_ISSUES,
-        ActiveUserActions.FETCH_WORKSPACES
+        ActiveUserActions.FETCH_WORKSPACES,
+        ActiveUserActions.FETCH_ADS_ORGANIZATIONS
       ]
 
       actionsToTest.forEach((actionName) => {
