@@ -101,7 +101,7 @@ func (opts *ReportOptions) Run() int {
 	// Validate Key //
 	//////////////////
 
-	supportedKey := map[string]bool{
+	supportedKeys := map[string]bool{
 		"python":     true,
 		"go":         true,
 		"javascript": true,
@@ -114,8 +114,16 @@ func (opts *ReportOptions) Run() int {
 		"rust":       true,
 	}
 
-	if !supportedKey[reportCommandKey] {
-		err = fmt.Errorf("DeepSource | Error | Invalid Key: %s", reportCommandKey)
+	allowedKeys := func(m map[string]bool) []string {
+		keys := make([]string, 0, len(supportedKeys))
+		for k := range m {
+			keys = append(keys, k)
+		}
+		return keys
+	}
+
+	if !supportedKeys[reportCommandKey] {
+		err = fmt.Errorf("DeepSource | Error | Invalid Key: %s (Supported Keys: %v)", reportCommandKey, allowedKeys(supportedKeys))
 		fmt.Fprintln(os.Stderr, err)
 		sentry.CaptureException(err)
 		return 1

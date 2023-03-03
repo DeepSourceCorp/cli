@@ -9,7 +9,7 @@ import (
 	"os/exec"
 	"testing"
 
-	"github.com/go-test/deep"
+	"github.com/google/go-cmp/cmp"
 )
 
 // Workflow tested:
@@ -55,11 +55,8 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 	if want, got := string(requestBodyData), string(req); want == got {
 		w.Write([]byte(successResponseBodyData))
 	} else {
-		if eq := deep.Equal(want, got); len(eq) != 0 {
-			log.Println("Mismatch found:")
-			for _, e := range eq {
-				log.Printf("diff: %v\n", e)
-			}
+		if want != got {
+			log.Printf("Mismatch found:\nDiff: %s\n", cmp.Diff(want, got))
 		}
 		w.Write([]byte(errorResponseBodyData))
 	}

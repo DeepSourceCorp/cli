@@ -10,7 +10,7 @@ require (
 	github.com/deepsourcelabs/graphql v0.2.2
 	github.com/fatih/color v1.12.0
 	github.com/getsentry/sentry-go v0.6.0
-	github.com/go-test/deep v1.1.0
+	github.com/google/go-cmp v0.5.5
 	github.com/owenrumney/go-sarif/v2 v2.1.0
 	github.com/pelletier/go-toml v1.9.2
 	github.com/pterm/pterm v0.12.23
@@ -24,7 +24,6 @@ require (
 	github.com/atomicgo/cursor v0.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.4.7 // indirect
-	github.com/google/go-cmp v0.5.5 // indirect
 	github.com/gookit/color v1.4.2 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
