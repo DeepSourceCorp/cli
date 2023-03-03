@@ -618,7 +618,10 @@ export const actions: OwnerDetailModuleActions = {
       )
       commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
     } catch (e) {
-      this.$toast.danger('There was an error fetching configuration from VCS provider.')
+      this.$logErrorAndToast(
+        e as Error,
+        'There was an error fetching configuration from VCS provider.'
+      )
     }
   },
 

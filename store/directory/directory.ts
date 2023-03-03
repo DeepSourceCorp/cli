@@ -229,7 +229,7 @@ export const actions: DirectoryModuleActions = {
       }
     } catch (e) {
       commit(DirectoryMutations.SET_ERROR, e as GraphqlError)
-      this.$toast.danger('There was an error submitting your feedback.')
+      this.$logErrorAndToast(e as Error, 'There was an error submitting your feedback.')
     }
     return false
   },
@@ -260,7 +260,7 @@ export const actions: DirectoryModuleActions = {
       }
     } catch (e) {
       commit(DirectoryMutations.SET_ERROR, e as GraphqlError)
-      this.$toast.danger('There was an error submitting your feedback.')
+      this.$logErrorAndToast(e as Error, 'There was an error submitting your feedback.')
     }
     return false
   }

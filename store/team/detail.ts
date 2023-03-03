@@ -400,7 +400,10 @@ export const actions: TeamModuleActions = {
       if (response.data.removeTeamMember?.ok)
         this.$toast.success('Team member removed successfully.')
     } catch (e) {
-      this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
+      const err = e as Error
+      const errMsg = `${err.message.replace('GraphQL error: ', '')}.` as `${string}.`
+
+      this.$logErrorAndToast(err, errMsg)
       commit(TeamMutations.SET_ERROR, e)
     } finally {
       commit(TeamMutations.SET_LOADING, false)

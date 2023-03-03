@@ -175,7 +175,7 @@ export const actions: AutoOnboardModuleActions = {
       )
       commit(AutoOnboardMutations.SET_CONFIG_TEMPLATE, response.data.owner.configTemplate)
     } catch (e) {
-      this.$toast.danger('There was an error fetching')
+      this.$logErrorAndToast(e as Error, 'There was an error fetching.')
     }
   },
   async [AutoOnboardActions.FETCH_TEMPLATES]({ commit }, args) {
@@ -196,7 +196,7 @@ export const actions: AutoOnboardModuleActions = {
       }
       return response.data.owner.configTemplates
     } catch (e) {
-      this.$toast.danger('There was an error fetching templates')
+      this.$logErrorAndToast(e as Error, 'There was an error fetching templates.')
     }
   },
   async [AutoOnboardActions.FETCH_ONBOARDING_EVENT_LIST]({ commit }, args) {
@@ -211,7 +211,7 @@ export const actions: AutoOnboardModuleActions = {
       )
       commit(AutoOnboardMutations.SET_EVENT_LIST, response.data.owner.autoonboardingEvents)
     } catch (e) {
-      this.$toast.danger('There was an error fetching')
+      this.$logErrorAndToast(e as Error, 'There was an error fetching.')
     }
   },
   async [AutoOnboardActions.FETCH_AUTO_ONBOARDABLE_REPO_LIST]({ commit }, args) {
@@ -229,7 +229,7 @@ export const actions: AutoOnboardModuleActions = {
       )
       commit(AutoOnboardMutations.SET_ONBOARDABLE_REPOS, response.data.owner.repoList)
     } catch (e) {
-      this.$toast.danger('There was an error fetching')
+      this.$logErrorAndToast(e as Error, 'There was an error fetching.')
     }
   },
   async [AutoOnboardActions.START_ONBOARDING](_, args) {

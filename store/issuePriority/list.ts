@@ -125,7 +125,7 @@ export const actions: IssuePriorityListModuleActions = {
         response?.data?.issuesWithPriority
       )
     } catch (e) {
-      this.$toast.danger('There was an error fetching issues.')
+      this.$logErrorAndToast(e as Error, 'There was an error fetching issues.')
     }
   },
   async [IssuePriorityListActions.FETCH_ISSUES_WITH_PRIORITY_COUNT](_, args) {
@@ -138,7 +138,7 @@ export const actions: IssuePriorityListModuleActions = {
 
       return response?.data?.issuesWithPriority?.totalCount || 0
     } catch (e) {
-      this.$toast.danger('There was an error fetching issues.')
+      this.$logErrorAndToast(e as Error, 'There was an error fetching issues.')
       return 0
     }
   },
@@ -151,7 +151,7 @@ export const actions: IssuePriorityListModuleActions = {
       )
       return response?.data?.updateIssuePriority
     } catch (e) {
-      this.$toast.danger('There was an error in priority assignment.')
+      this.$logErrorAndToast(e as Error, 'There was an error in priority assignment.')
     }
   },
   async [IssuePriorityListActions.UNSET_ISSUE_PRIORITY](_, args) {
@@ -159,7 +159,7 @@ export const actions: IssuePriorityListModuleActions = {
       const response = await this.$applyGraphqlMutation(UnsetIssuePriorityGQLMutation, args)
       return response?.data?.unsetIssuePriority
     } catch (e) {
-      this.$toast.danger('There was an error in removing priority assignment.')
+      this.$logErrorAndToast(e as Error, 'There was an error in removing priority assignment.')
     }
   }
 }

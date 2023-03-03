@@ -672,7 +672,8 @@ describe('[Store] Owner/Details', () => {
             },
             $fetchGraphqlData(): Promise<Error> {
               return Promise.reject(new Error('ERR1'))
-            }
+            },
+            $logErrorAndToast: jest.fn()
           }
 
           // Setting the global spy on `localThis.$fetchGraphqlData`
@@ -1056,9 +1057,7 @@ describe('[Store] Owner/Details', () => {
             $fetchGraphqlData(): Promise<Error> {
               return Promise.reject(new Error('ERR1'))
             },
-            $toast: {
-              danger: jest.fn()
-            }
+            $logErrorAndToast: jest.fn()
           }
 
           // Setting the global spy on `localThis.$fetchGraphqlData`
@@ -1075,7 +1074,8 @@ describe('[Store] Owner/Details', () => {
         })
 
         test('error handler', () => {
-          expect(localThis.$toast.danger).toBeCalledWith(
+          expect(localThis.$logErrorAndToast).toBeCalledWith(
+            new Error('ERR1'),
             'There was an error fetching configuration from VCS provider.'
           )
         })

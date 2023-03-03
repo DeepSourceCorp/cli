@@ -14,11 +14,7 @@ import {
   IssuePriorityListMutations,
   mutations
 } from '~/store/issuePriority/list'
-import {
-  IssuePriorityLevel,
-  UnsetIssuePriorityPayload,
-  UpdateIssuePriorityPayload
-} from '~/types/types'
+import { IssuePriorityLevel, UpdateIssuePriorityPayload } from '~/types/types'
 
 let actionCxt: IssuePriorityListActionContext
 let commit: jest.Mock
@@ -55,7 +51,7 @@ describe('[[ ACTIONS ]]', () => {
   })
 
   describe(`Runs ${IssuePriorityListActions.FETCH_ISSUES_WITH_PRIORITY}`, () => {
-    beforeEach(async () => {
+    test('Success', async () => {
       localThis = {
         $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
           return new Promise<GraphqlQueryResponse>((resolve) =>
@@ -81,16 +77,11 @@ describe('[[ ACTIONS ]]', () => {
           analyzerShortcode: ''
         }
       )
-    })
-    test('successfully calls the api', () => {
-      expect(spy).toHaveBeenCalledTimes(1)
-    })
-    test('successfully commits mutations', () => {
-      expect(commit).toHaveBeenCalledTimes(1)
-    })
 
-    test(`successfully commits mutation ${IssuePriorityListMutations.SET_ISSUES_WITH_PRIORITY}`, () => {
-      // Storing the first commit call made
+      // Assertions
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(commit).toHaveBeenCalledTimes(1)
+
       const {
         mock: {
           calls: [firstCall]
@@ -101,11 +92,46 @@ describe('[[ ACTIONS ]]', () => {
 
       expect(firstCall[1]).toEqual(issueWithPriorityList)
     })
+
+    test('Failure', async () => {
+      localThis = {
+        $fetchGraphqlData(): Promise<Error> {
+          return Promise.reject(new Error('ERR1'))
+        },
+        $logErrorAndToast: jest.fn()
+      }
+
+      // Setting the global spy on `localThis.$fetchGraphqlData`
+      spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+      await actions[IssuePriorityListActions.FETCH_ISSUES_WITH_PRIORITY].call(
+        localThis,
+        actionCxt,
+        {
+          isIssuePrioritySet: true,
+          objectId: 'UmVwb3NpdG9yeTp6ZXBqZWI=',
+          level: IssuePriorityLevel.Repository,
+          q: '',
+          first: 10,
+          offset: 0,
+          sort: '',
+          analyzerShortcode: ''
+        }
+      )
+
+      // Assertions
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(commit).not.toHaveBeenCalled()
+
+      expect(localThis.$logErrorAndToast).toBeCalledWith(
+        new Error('ERR1'),
+        'There was an error fetching issues.'
+      )
+    })
   })
 
   describe(`Runs ${IssuePriorityListActions.FETCH_ISSUES_WITH_PRIORITY_COUNT}`, () => {
-    let resp: number
-    beforeEach(async () => {
+    test('Success', async () => {
       localThis = {
         $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
           return new Promise<GraphqlQueryResponse>((resolve) =>
@@ -128,30 +154,52 @@ describe('[[ ACTIONS ]]', () => {
       // Setting the global spy on `localThis.$fetchGraphqlData`
       spy = jest.spyOn(localThis, '$fetchGraphqlData')
 
-      resp = await actions[IssuePriorityListActions.FETCH_ISSUES_WITH_PRIORITY_COUNT].call(
-        localThis,
-        actionCxt,
-        {
-          isIssuePrioritySet: true,
-          objectId: 'UmVwb3NpdG9yeTp6ZXBqZWI=',
-          level: IssuePriorityLevel.Repository
-        }
-      )
-    })
-    test('successfully calls the api', () => {
+      const issuesWithPriorityCount = await actions[
+        IssuePriorityListActions.FETCH_ISSUES_WITH_PRIORITY_COUNT
+      ].call(localThis, actionCxt, {
+        isIssuePrioritySet: true,
+        objectId: 'UmVwb3NpdG9yeTp6ZXBqZWI=',
+        level: IssuePriorityLevel.Repository
+      })
+
+      // Assertions
       expect(spy).toHaveBeenCalledTimes(1)
-    })
-    test('successfully commits mutations', () => {
       expect(commit).toHaveBeenCalledTimes(0)
+      expect(issuesWithPriorityCount).toBe(4)
     })
-    test('response is ok', () => {
-      expect(resp).toBe(4)
+
+    test('Failure', async () => {
+      localThis = {
+        $fetchGraphqlData(): Promise<Error> {
+          return Promise.reject(new Error('ERR1'))
+        },
+        $logErrorAndToast: jest.fn()
+      }
+
+      // Setting the global spy on `localThis.$fetchGraphqlData`
+      spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+      const issuesWithPriorityCount = await actions[
+        IssuePriorityListActions.FETCH_ISSUES_WITH_PRIORITY_COUNT
+      ].call(localThis, actionCxt, {
+        isIssuePrioritySet: true,
+        objectId: 'UmVwb3NpdG9yeTp6ZXBqZWI=',
+        level: IssuePriorityLevel.Repository
+      })
+
+      // Assertions
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(issuesWithPriorityCount).toBe(0)
+
+      expect(localThis.$logErrorAndToast).toBeCalledWith(
+        new Error('ERR1'),
+        'There was an error fetching issues.'
+      )
     })
   })
 
   describe(`Runs ${IssuePriorityListActions.UNSET_ISSUE_PRIORITY}`, () => {
-    let resp: UnsetIssuePriorityPayload
-    beforeEach(async () => {
+    test('Success', async () => {
       localThis = {
         $applyGraphqlMutation(): Promise<unknown> {
           return new Promise<unknown>((resolve) =>
@@ -173,7 +221,7 @@ describe('[[ ACTIONS ]]', () => {
       // Setting the global spy on `localThis.$applyGraphqlMutation`
       spy = jest.spyOn(localThis, '$applyGraphqlMutation')
 
-      resp = await actions[IssuePriorityListActions.UNSET_ISSUE_PRIORITY].call(
+      const { ok } = await actions[IssuePriorityListActions.UNSET_ISSUE_PRIORITY].call(
         localThis,
         actionCxt,
         {
@@ -184,21 +232,50 @@ describe('[[ ACTIONS ]]', () => {
           }
         }
       )
-    })
-    test('successfully calls the api', () => {
+
+      // Assertions
       expect(spy).toHaveBeenCalledTimes(1)
+      expect(commit).not.toHaveBeenCalled()
+
+      expect(ok).toBe(true)
     })
-    test('successfully commits mutations', () => {
-      expect(commit).toHaveBeenCalledTimes(0)
-    })
-    test('response is ok', () => {
-      expect(resp.ok).toBe(true)
+
+    test('Failure', async () => {
+      localThis = {
+        $applyGraphqlMutation(): Promise<Error> {
+          return Promise.reject(new Error('ERR1'))
+        },
+        $logErrorAndToast: jest.fn()
+      }
+
+      // Setting the global spy on `localThis.$applyGraphqlMutation`
+      spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+      const unsetIssuePriority = await actions[IssuePriorityListActions.UNSET_ISSUE_PRIORITY].call(
+        localThis,
+        actionCxt,
+        {
+          input: {
+            issueShortcode: 'PYL-E1301',
+            objectId: 'UmVwb3NpdG9yeTp6ZXBqZWI=',
+            level: IssuePriorityLevel.Repository
+          }
+        }
+      )
+
+      // Assertions
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(localThis.$logErrorAndToast).toBeCalledWith(
+        new Error('ERR1'),
+        'There was an error in removing priority assignment.'
+      )
+
+      expect(unsetIssuePriority).toBe(undefined)
     })
   })
 
   describe(`Runs ${IssuePriorityListActions.UPDATE_ISSUE_PRIORITY}`, () => {
-    let resp: UpdateIssuePriorityPayload
-    beforeEach(async () => {
+    test('Success', async () => {
       localThis = {
         $applyGraphqlMutation(): Promise<unknown> {
           return new Promise<unknown>((resolve) =>
@@ -239,29 +316,58 @@ describe('[[ ACTIONS ]]', () => {
       // Setting the global spy on `localThis.$applyGraphqlMutation`
       spy = jest.spyOn(localThis, '$applyGraphqlMutation')
 
-      resp = await actions[IssuePriorityListActions.UPDATE_ISSUE_PRIORITY].call(
-        localThis,
-        actionCxt,
-        {
+      const updateIssuePriorityPayload: UpdateIssuePriorityPayload = await actions[
+        IssuePriorityListActions.UPDATE_ISSUE_PRIORITY
+      ].call(localThis, actionCxt, {
+        objectId: 'T3duZXI6cXpscnh6',
+        level: IssuePriorityLevel.Owner,
+        input: {
+          issueShortcode: 'TYP-041',
           objectId: 'T3duZXI6cXpscnh6',
           level: IssuePriorityLevel.Owner,
-          input: {
-            issueShortcode: 'TYP-041',
-            objectId: 'T3duZXI6cXpscnh6',
-            level: IssuePriorityLevel.Owner,
-            issuePriorityType: 'low'
-          }
+          issuePriorityType: 'low'
         }
-      )
-    })
-    test('successfully calls the api', () => {
+      })
+
+      // Assertions
       expect(spy).toHaveBeenCalledTimes(1)
+      expect(commit).not.toHaveBeenCalled()
+
+      expect(updateIssuePriorityPayload).toStrictEqual(updateIssuePriorityResponse)
     })
-    test('successfully commits mutations', () => {
-      expect(commit).toHaveBeenCalledTimes(0)
-    })
-    test('response is ok', () => {
-      expect(resp).toStrictEqual(updateIssuePriorityResponse)
+
+    test('Failure', async () => {
+      localThis = {
+        $applyGraphqlMutation(): Promise<Error> {
+          return Promise.reject(new Error('ERR1'))
+        },
+        $logErrorAndToast: jest.fn()
+      }
+
+      // Setting the global spy on `localThis.$applyGraphqlMutation`
+      spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+      const updateIssuePriorityPayload: UpdateIssuePriorityPayload = await actions[
+        IssuePriorityListActions.UPDATE_ISSUE_PRIORITY
+      ].call(localThis, actionCxt, {
+        objectId: 'T3duZXI6cXpscnh6',
+        level: IssuePriorityLevel.Owner,
+        input: {
+          issueShortcode: 'TYP-041',
+          objectId: 'T3duZXI6cXpscnh6',
+          level: IssuePriorityLevel.Owner,
+          issuePriorityType: 'low'
+        }
+      })
+
+      // Assertions
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(localThis.$logErrorAndToast).toBeCalledWith(
+        new Error('ERR1'),
+        'There was an error in priority assignment.'
+      )
+
+      expect(updateIssuePriorityPayload).toBe(undefined)
     })
   })
 })
