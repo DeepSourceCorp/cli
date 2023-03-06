@@ -16,8 +16,8 @@
         v-model="searchCandidate"
         icon="search"
         class="p-2"
-        :showBorder="false"
-        backgroundColor="ink-400"
+        :show-border="false"
+        background-color="ink-400"
         @debounceInput="fetchTemplates"
         placeholder="Search templates..."
       >
@@ -37,7 +37,7 @@
       <template v-else-if="currentTemplateList.length">
         <base-card
           v-for="template in currentTemplateList"
-          :showInfo="false"
+          :show-info="false"
           class="cursor-pointer hover:bg-ink-200"
           :key="template.shortcode"
           @click="$emit('selectTemplate', template)"

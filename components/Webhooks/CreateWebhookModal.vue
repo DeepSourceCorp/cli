@@ -12,9 +12,9 @@
       </label>
       <toggle-input
         v-model="enableApiSigning"
-        inputWidth="xx-small"
+        input-width="xx-small"
         label="Enable API signing"
-        inputId="enable-api-signing"
+        input-id="enable-api-signing"
         :remove-y-padding="true"
       >
         <template slot="description">
@@ -91,14 +91,14 @@
     <template v-slot:footer="{ close }">
       <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
         <z-button
-          :isLoading="savingWebhookEndpoint"
+          :is-loading="savingWebhookEndpoint"
           :disabled="savingWebhookEndpoint || selectedEvents.length === 0"
           icon="plus"
           class="modal-primary-action"
-          buttonType="primary"
+          button-type="primary"
           size="small"
           label="Add endpoint"
-          loadingLabel="Adding endpoint"
+          loading-label="Adding endpoint"
           @click="saveConfig(close)"
         >
         </z-button>

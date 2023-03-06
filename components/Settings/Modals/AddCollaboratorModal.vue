@@ -1,7 +1,7 @@
 <template>
   <z-modal
     :title="`Add a new collaborator to ${$route.params.owner}/${$route.params.repo}`"
-    :primaryActionLabel="selectedMember ? 'Confirm and add' : ''"
+    :primary-action-label="selectedMember ? 'Confirm and add' : ''"
     @primaryAction="addMember"
     @onClose="close"
   >
@@ -18,8 +18,8 @@
           <member-list-item
             :key="selectedMember.id"
             :role="selectedMember.role"
-            :showRoleOptions="false"
-            :isPrimaryUser="selectedMember.isPrimaryUser"
+            :show-role-options="false"
+            :is-primary-user="selectedMember.isPrimaryUser"
             v-bind="selectedMember.user"
           />
         </div>
@@ -67,8 +67,8 @@
             v-for="member in repository.addableMembers.edges"
             :key="member.node.id"
             :role="member.node.role"
-            :showRoleOptions="false"
-            :isPrimaryUser="member.node.isPrimaryUser"
+            :show-role-options="false"
+            :is-primary-user="member.node.isPrimaryUser"
             v-bind="member.node.user"
           />
         </div>

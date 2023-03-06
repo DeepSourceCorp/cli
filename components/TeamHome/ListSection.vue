@@ -1,5 +1,5 @@
 <template>
-  <stat-section :title="title" :bodySpacing="0" :bodyIsGrid="false" :helpText="helpText">
+  <stat-section :title="title" :body-spacing="0" :body-is-grid="false" :help-text="helpText">
     <template slot="controls">
       <slot name="controls"></slot>
     </template>
@@ -12,10 +12,10 @@
       <div v-if="footerLink" class="border-t border-slate-400 flex justify-center">
         <z-button
           :to="footerLink"
-          buttonType="ghost"
+          button-type="ghost"
           size="medium"
           class="text-vanilla-400 h-10"
-          :fullWidth="true"
+          :full-width="true"
         >
           <div class="text-xs flex items-center leading-none">
             {{ footerLinkLabel }}

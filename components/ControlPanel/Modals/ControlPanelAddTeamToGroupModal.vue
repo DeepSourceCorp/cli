@@ -1,6 +1,6 @@
 <template>
   <div>
-    <slot name="activator" :showModal="showModal">
+    <slot name="activator" :show-modal="showModal">
       <z-button icon="plus" label="Add a team" size="small" @click="showModal" />
     </slot>
     <portal to="modal">
@@ -16,8 +16,8 @@
               :value="addTeamSearchCandidate"
               placeholder="Search teams..."
               icon="search"
-              :showBorder="false"
-              backgroundColor="ink-400"
+              :show-border="false"
+              background-color="ink-400"
               @debounceInput="searchTeams"
             />
           </div>

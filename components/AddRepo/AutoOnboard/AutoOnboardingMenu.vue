@@ -8,8 +8,8 @@
           </span>
           <z-tag
             v-if="openCount || pendingCount"
-            bgColor="ink-400 border border-slate-400"
-            textSize="xxs"
+            bg-color="ink-400 border border-slate-400"
+            text-size="xxs"
             spacing="px-2 py-0.5"
             class="tracking-wider font-semibold"
           >
@@ -54,7 +54,7 @@
               size="small"
               :to="event.vcsPrUrl"
               target="_blank"
-              buttonType="secondary"
+              button-type="secondary"
               rel="noopener noreferrer"
               icon="external-link"
               >View {{ prText }}-request</z-button
@@ -62,9 +62,9 @@
             <z-button
               v-else-if="event.status === 'PEND'"
               size="small"
-              buttonType="secondary"
+              button-type="secondary"
               :disabled="true"
-              iconColor="vanilla-400 animate-spin"
+              icon-color="vanilla-400 animate-spin"
               icon="spin-loader"
             >
               Creating {{ prText }}-request
@@ -75,12 +75,12 @@
     </div>
     <button-input
       label="Onboard new repositories"
-      inputId="onboard-new-repositories"
-      buttonLabel="Select template"
-      buttonType="primary"
+      input-id="onboard-new-repositories"
+      button-label="Select template"
+      button-type="primary"
       @click="$emit('startOnboarding')"
       icon="file-plus"
-      inputWidth="x-small"
+      input-width="x-small"
     >
       <template slot="description">
         Use Auto Onboard to activate DeepSource analysis on multiple repositories.
@@ -88,12 +88,12 @@
     </button-input>
     <button-input
       label="Update templates"
-      inputId="autoonboard-settings"
-      buttonLabel="Settings"
-      buttonType="secondary"
+      input-id="autoonboard-settings"
+      button-label="Settings"
+      button-type="secondary"
       :to="settingsLink"
       icon="settings"
-      inputWidth="x-small"
+      input-width="x-small"
     >
       <template slot="description">Create and edit templates to be used for Auto Onboard.</template>
     </button-input>

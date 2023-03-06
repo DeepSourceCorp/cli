@@ -4,10 +4,10 @@
     @click="handleClick()"
   >
     <analyzer-logo
-      :analyzerLogo="analyzerLogo"
+      :analyzer-logo="analyzerLogo"
       :shortcode="icon"
       :name="name"
-      :hideTooltip="true"
+      :hide-tooltip="true"
     />
     <div class="flex-1 text-sm text-vanilla-200">{{ name }}</div>
     <z-icon icon="plus" size="small" class="cursor-pointer" color="vanilla-200"></z-icon>

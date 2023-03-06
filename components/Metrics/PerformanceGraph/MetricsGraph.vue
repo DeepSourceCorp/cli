@@ -1,22 +1,22 @@
 <template>
   <stat-section
     :title="title"
-    helpText="Overview of key quality metrics over time"
-    :bodySpacing="0"
-    :gridSpacing="0"
+    help-text="Overview of key quality metrics over time"
+    :body-spacing="0"
+    :grid-spacing="0"
   >
     <template v-slot:controls>
       <div class="flex justify-end h-full">
         <graph-control
           class="flex space-x-2 w-full sm:w-auto"
-          :dayOptions="pageLengthOptions"
-          :filterValue="pageLength"
+          :day-options="pageLengthOptions"
+          :filter-value="pageLength"
           @updateFilter="updatePageLength"
         ></graph-control>
       </div>
     </template>
     <graph-data-selector
-      :dataPoints="sortedData"
+      :data-points="sortedData"
       v-if="sortedData.length"
       v-model="selectedIndex"
     ></graph-data-selector>
@@ -26,11 +26,11 @@
       <div v-for="ns in namespaces" :key="ns">
         <graph-chart
           v-if="chartData[ns]"
-          :chartData="build(chartData[ns])"
+          :chart-data="build(chartData[ns])"
           :namespace="chartData[ns]"
-          :currentMetric="currentMetric"
+          :current-metric="currentMetric"
           :shortcode="currentMetric.shortcode"
-          :chartHeight="chartHeight"
+          :chart-height="chartHeight"
           :clip="true"
         ></graph-chart>
       </div>

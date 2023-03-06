@@ -1,6 +1,12 @@
 <template>
   <div>
-    <z-button :disabled="disabled" @click="openModal" size="small" buttonType="primary" icon="save">
+    <z-button
+      :disabled="disabled"
+      @click="openModal"
+      size="small"
+      button-type="primary"
+      icon="save"
+    >
       Save template
     </z-button>
     <portal to="modal">
@@ -34,9 +40,9 @@
           <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
             <z-button
               :icon="savingConfig ? 'animate-spin' : 'autofix'"
-              :iconColor="savingConfig ? 'ink animate-spin' : ''"
+              :icon-color="savingConfig ? 'ink animate-spin' : ''"
               class="modal-primary-action w-48"
-              buttonType="primary"
+              button-type="primary"
               size="small"
               @click="updateConfig(close)"
               :disabled="savingConfig"

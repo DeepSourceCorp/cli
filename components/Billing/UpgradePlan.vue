@@ -2,9 +2,9 @@
   <div v-if="Object.keys(availableUpgradePlans).length > 0">
     <button-input
       label="Upgrade plan"
-      inputId="billing-settings-upgrade-plan"
-      buttonType="primary"
-      :buttonLabel="`Upgrade to ${availableUpgradePlans.name}`"
+      input-id="billing-settings-upgrade-plan"
+      button-type="primary"
+      :button-label="`Upgrade to ${availableUpgradePlans.name}`"
       icon="arrow-up"
       @click="showUpgradeConfirmModal"
     >
@@ -27,13 +27,13 @@
       >
         <template v-slot:footer="{ close }">
           <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
-            <z-button buttonType="ghost" class="text-vanilla-100" size="small" @click="close">
+            <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               Nevermind
             </z-button>
             <z-button
               v-if="updating"
               class="w-52 flex items-center"
-              buttonType="primary"
+              button-type="primary"
               size="small"
               :disabled="true"
             >
@@ -44,7 +44,7 @@
               v-else
               icon="check-circle"
               class="modal-primary-action w-52"
-              buttonType="primary"
+              button-type="primary"
               size="small"
               @click="upgrade(close)"
             >

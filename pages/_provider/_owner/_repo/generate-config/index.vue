@@ -13,7 +13,7 @@
     </div>
     <div class="grid max-w-6xl grid-cols-9 p-4 space-x-4">
       <!-- Steps -->
-      <z-stepper align="vertical" :showNumbers="true" class="w-full col-span-5">
+      <z-stepper align="vertical" :show-numbers="true" class="w-full col-span-5">
         <z-step class="w-full">
           <template slot="title">
             <div

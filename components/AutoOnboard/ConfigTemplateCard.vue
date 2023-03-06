@@ -14,19 +14,19 @@
           v-tooltip="'Edit template'"
           v-if="allowCrud"
           icon="edit"
-          buttonType="ghost"
+          button-type="ghost"
           @click.stop.prevent="editTemplate"
-          iconColor="vanilla-400 opacity-75"
+          icon-color="vanilla-400 opacity-75"
           size="small"
         ></z-button>
         <z-button
           v-tooltip="'Use template'"
           @click.stop.prevent="onboard"
           :icon="loadOnboarding ? 'spin-loader' : 'fast-forward'"
-          :iconColor="
+          :icon-color="
             loadOnboarding ? 'vanilla-400 opacity-75 animate-spin' : 'vanilla-400 opacity-75'
           "
-          buttonType="ghost"
+          button-type="ghost"
           size="small"
         ></z-button>
       </div>

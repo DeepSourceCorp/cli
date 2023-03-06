@@ -49,7 +49,7 @@
       <z-button
         v-if="status === 'loading'"
         icon="spin-loader"
-        iconColor="ink-400 animate-spin"
+        icon-color="ink-400 animate-spin"
         class="mt-4 w-80 mt-8"
         :disabled="true"
         >Authenticating</z-button

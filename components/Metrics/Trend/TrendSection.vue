@@ -28,7 +28,7 @@
         :height="288"
         :colors="chartColors"
         :type="chartType"
-        :tooltipOptions="{
+        :tooltip-options="{
           formatTooltipY: formatIntl
         }"
         :axis-options="{

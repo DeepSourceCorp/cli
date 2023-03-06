@@ -35,13 +35,13 @@
           :class="selectedAnalyzers.includes(analyzer.name) ? 'bg-ink-200' : 'bg-ink-400'"
         >
           <span class="flex items-center w-full space-x-2">
-            <analyzer-logo v-bind="analyzer" :hideTooltip="true" />
+            <analyzer-logo v-bind="analyzer" :hide-tooltip="true" />
             <span>{{ analyzer.label }}</span>
             <z-tag
               v-if="analyzer.isBeta"
               text-size="xxs"
               spacing="py-1 px-3"
-              bgColor="ink-200"
+              bg-color="ink-200"
               class="font-thin leading-none tracking-wider uppercase text-xxs"
               >Beta</z-tag
             >

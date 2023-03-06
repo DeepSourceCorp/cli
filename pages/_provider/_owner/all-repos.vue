@@ -6,8 +6,8 @@
         <z-input
           v-model="searchCandidate"
           icon="search"
-          :showBorder="false"
-          backgroundColor="ink-300"
+          :show-border="false"
+          background-color="ink-300"
           size="small"
           class="w-full"
           @debounceInput="$fetch"
@@ -20,7 +20,7 @@
         <z-button
           v-if="canActivateRepo"
           @click="showAddRepoModal = true"
-          buttonType="primary"
+          button-type="primary"
           size="small"
           icon="plus"
           >Activate new repository</z-button
@@ -48,7 +48,7 @@
                 <z-button
                   v-for="opt in pageSizeOptions"
                   :key="opt"
-                  buttonType="secondary"
+                  button-type="secondary"
                   size="small"
                   @click="updatePageSize(opt)"
                   :disabled="pageSize == opt"
@@ -96,13 +96,13 @@
     <z-pagination
       class="flex justify-center"
       v-if="pageCount > 1 && !repoListloading"
-      :totalPages="pageCount"
-      :totalVisible="5"
+      :total-pages="pageCount"
+      :total-visible="5"
       :page="currentPage"
       @selected="updateCurrentPage"
     ></z-pagination>
     <add-repo-modal
-      :showModal="showAddRepoModal"
+      :show-modal="showAddRepoModal"
       @close="showAddRepoModal = false"
     ></add-repo-modal>
   </div>

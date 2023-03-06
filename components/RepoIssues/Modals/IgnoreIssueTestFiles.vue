@@ -40,14 +40,14 @@
           <z-button
             class="flex items-center space-x-2 modal-primary-action"
             spacing="px-2"
-            buttonType="primary"
+            button-type="primary"
             size="small"
             icon="check"
             label="Confirm and ignore"
-            loadingLabel="Updating issue"
+            loading-label="Updating issue"
             @click="confirm"
             :disabled="!hasPatterns || isLoading"
-            :isLoading="isLoading"
+            :is-loading="isLoading"
           />
         </div>
       </template>

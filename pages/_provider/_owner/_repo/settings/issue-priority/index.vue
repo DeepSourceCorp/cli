@@ -29,7 +29,7 @@
         v-model="query"
         size="small"
         icon="search"
-        :showBorder="false"
+        :show-border="false"
         background-color="ink-300"
         placeholder="Search issues..."
         @debounceInput="onSearchQueryChange"

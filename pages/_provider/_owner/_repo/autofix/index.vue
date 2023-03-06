@@ -9,11 +9,11 @@
         ($fetchState.pending && loaderCount > 0)
       "
       title="Available Autofixes"
-      helpText="Summary of issues that can be Autofixed"
-      :showBorder="false"
-      spacingClass="gap-3"
-      customGridClass="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
-      :bodyIsGrid="$fetchState.pending || showAvailableAutofixes"
+      help-text="Summary of issues that can be Autofixed"
+      :show-border="false"
+      spacing-class="gap-3"
+      custom-grid-class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
+      :body-is-grid="$fetchState.pending || showAvailableAutofixes"
     >
       <template v-if="$fetchState.pending">
         <div
@@ -56,7 +56,11 @@
         </div>
       </div>
     </div>
-    <stat-section title="Recent Autofixes" customGridClass="grid grid-cols-12-fr" :gridSpacing="2">
+    <stat-section
+      title="Recent Autofixes"
+      custom-grid-class="grid grid-cols-12-fr"
+      :grid-spacing="2"
+    >
       <div class="grid grid-cols-3 col-span-2 gap-1 md:space-y-2 md:col-span-1 md:block">
         <div
           v-for="opt in options"
@@ -80,7 +84,7 @@
               v-for="run in pendingAutofixList"
               v-bind="getAutofixListItem(run)"
               :key="run.runId"
-              :showInfo="false"
+              :show-info="false"
             />
           </div>
           <empty-state v-else title="No pending commits" />

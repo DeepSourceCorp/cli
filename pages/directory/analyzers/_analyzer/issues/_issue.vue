@@ -5,7 +5,7 @@
         <z-breadcrumb-item>
           <nuxt-link :to="`${analyzerUrl}/issues`" class="text-vanilla-400">All issues</nuxt-link>
         </z-breadcrumb-item>
-        <z-breadcrumb-item isCurrent>{{ issue.shortcode }}</z-breadcrumb-item>
+        <z-breadcrumb-item is-current>{{ issue.shortcode }}</z-breadcrumb-item>
       </z-breadcrumb>
     </div>
     <div class="p-4 border-b border-slate-400">

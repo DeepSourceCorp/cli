@@ -167,7 +167,7 @@
               content: isCollapsed ? 'Dashboard' : '',
               placement: 'right'
             }"
-            :isCollapsed="isCollapsed"
+            :is-collapsed="isCollapsed"
             icon="dashboard"
             :active="$route.path === '/me'"
             to="/me"
@@ -225,7 +225,7 @@
       </div>
     </section>
     <add-repo-modal
-      :showModal="showAddRepoModal"
+      :show-modal="showAddRepoModal"
       @close="showAddRepoModal = false"
     ></add-repo-modal>
   </aside>

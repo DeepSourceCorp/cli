@@ -3,7 +3,7 @@
     <div class="items-center w-1/2 space-y-2 leading-none text-vanilla-100">
       <div>{{ email }}</div>
       <z-button
-        buttonType="ghost"
+        button-type="ghost"
         size="x-small"
         @click="cancelInvite"
         class="text-xs cursor-pointer text-cherry"

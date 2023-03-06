@@ -1,8 +1,8 @@
 <template>
   <z-confirm
     v-if="showModal"
-    primaryActionType="danger"
-    :primaryActionLabel="`Yes, remove ${fullName || email}`"
+    primary-action-type="danger"
+    :primary-action-label="`Yes, remove ${fullName || email}`"
     :title="`Remove ${fullName || email}`"
     :subtitle="`Are you sure you want to remove ${
       fullName || email

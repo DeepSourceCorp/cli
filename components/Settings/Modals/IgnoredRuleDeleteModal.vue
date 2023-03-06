@@ -4,9 +4,9 @@
       v-if="isOpen"
       @onClose="close"
       @primaryAction="confirm"
-      primaryActionLabel="Confirm and delete"
-      primaryActionIcon="trash-2"
-      primaryActionType="danger"
+      primary-action-label="Confirm and delete"
+      primary-action-icon="trash-2"
+      primary-action-type="danger"
     >
       <div class="mb-2 text-base leading-relaxed text-vanilla-100 flex items-center">
         Confirm, delete this ignore rule?

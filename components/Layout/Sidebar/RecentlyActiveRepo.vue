@@ -53,7 +53,7 @@
           <span>Recently active</span>
         </div>
 
-        <z-tag bgColor="ink-100" textSize="xs" spacing="pl-2 pr-1.5 py-0.5">
+        <z-tag bg-color="ink-100" text-size="xs" spacing="pl-2 pr-1.5 py-0.5">
           {{ repoList.length }}
           <z-icon class="pl-1" :icon="dropdownCollapsed ? 'chevron-up' : 'chevron-down'"></z-icon>
         </z-tag>

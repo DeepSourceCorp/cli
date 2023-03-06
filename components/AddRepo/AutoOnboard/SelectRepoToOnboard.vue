@@ -16,8 +16,8 @@
         v-model="searchCandidate"
         icon="search"
         class="p-2"
-        :showBorder="false"
-        backgroundColor="ink-400"
+        :show-border="false"
+        background-color="ink-400"
         @debounceInput="search"
         placeholder="Search repositories..."
       >
@@ -58,7 +58,7 @@
         />
         <z-button
           v-if="hasMoreReposToOnboard"
-          buttonType="ghost"
+          button-type="ghost"
           class="w-full"
           size="x-small"
           @click="loadMore"

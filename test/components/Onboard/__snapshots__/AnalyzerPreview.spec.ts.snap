@@ -16,7 +16,7 @@ exports[`[[ AnalyzerPreview ]] renders AnalyzerPreview 1`] = `
           <polyline points=\\"22 12 18 12 15 21 9 3 6 12 2 12\\"></polyline>
         </svg>
         <div class=\\"flex-1 text-xs\\">Actively analyzing</div>
-        <div class=\\"p-1 rounded-md bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-3 h-3 z-icon--plus text-vanilla-400\\" iconColor=\\"ink-400\\">
+        <div class=\\"p-1 rounded-md bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-3 h-3 z-icon--plus text-vanilla-400\\" icon-color=\\"ink-400\\">
             <line x1=\\"12\\" y1=\\"5\\" x2=\\"12\\" y2=\\"19\\"></line>
             <line x1=\\"5\\" y1=\\"12\\" x2=\\"19\\" y2=\\"12\\"></line>
           </svg></div>

@@ -84,9 +84,9 @@
         v-model="searchIssue"
         size="small"
         class="text-sm"
-        backgroundColor="ink-300"
+        background-color="ink-300"
         placeholder="Search occurrences in a file path"
-        :showBorder="false"
+        :show-border="false"
         @debounceInput="searchIssueChildren"
       >
         <template slot="left">

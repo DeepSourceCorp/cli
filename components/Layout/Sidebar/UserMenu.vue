@@ -14,7 +14,7 @@
         <z-avatar
           :image="viewer.avatar"
           :fallback-image="getDefaultAvatar(viewer.email)"
-          :userName="viewer.fullName || viewer.email"
+          :user-name="viewer.fullName || viewer.email"
           size="sm"
           class="flex-shrink-0 leading-none rounded-full"
         />

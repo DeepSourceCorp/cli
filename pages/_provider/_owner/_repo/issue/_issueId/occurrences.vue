@@ -29,9 +29,9 @@
           <div v-for="(child, index) in issuesInCheck" :key="index">
             <issue-editor
               v-bind="child"
-              :blobUrlRoot="repository.blobUrlRoot"
-              :checkIssueIds="issuesIgnored"
-              :canIgnoreIssues="canIgnoreIssues"
+              :blob-url-root="repository.blobUrlRoot"
+              :check-issue-ids="issuesIgnored"
+              :can-ignore-issues="canIgnoreIssues"
               @ignoreIssues="ignoreIssues"
             ></issue-editor>
           </div>
@@ -39,8 +39,8 @@
         <z-pagination
           class="flex justify-center w-full"
           v-if="pageCount > 1"
-          :totalPages="pageCount"
-          :totalVisible="5"
+          :total-pages="pageCount"
+          :total-visible="5"
           :page="currentPage"
           @selected="updatePage"
         />

@@ -35,7 +35,7 @@
         </template>
         <template slot="actions" v-if="allowEdit">
           <template v-if="readOnly">
-            <z-button @click="readOnly = false" size="small" buttonType="secondary" icon="edit">
+            <z-button @click="readOnly = false" size="small" button-type="secondary" icon="edit">
               Edit
             </z-button>
             <test-webhook-endpoint v-if="localEndpoint.active"></test-webhook-endpoint>
@@ -51,8 +51,8 @@
             <z-button
               @click="reset"
               size="small"
-              buttonType="ghost"
-              iconColor="vanilla-300"
+              button-type="ghost"
+              icon-color="vanilla-300"
               v-tooltip="'Discard changes'"
               icon="corner-up-left"
             />
@@ -71,7 +71,7 @@
                     class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100"
                   >
                     <z-button
-                      buttonType="ghost"
+                      button-type="ghost"
                       class="text-vanilla-100"
                       size="small"
                       @click="close"
@@ -79,8 +79,8 @@
                       Cancel
                     </z-button>
                     <z-button
-                      :isLoading="savingConfig"
-                      loadingLabel="Updating endpoint"
+                      :is-loading="savingConfig"
+                      loading-label="Updating endpoint"
                       icon="save"
                       class="modal-primary-action"
                       size="small"
@@ -96,19 +96,19 @@
       </page-title>
       <!-- Endpoint configuration -->
       <div class="space-y-6">
-        <form-group label="Configuration" :divide="false" bodyWidthClass="max-w-2xl">
+        <form-group label="Configuration" :divide="false" body-width-class="max-w-2xl">
           <text-input
-            inputWidth="wide"
+            input-width="wide"
             label="Endpoint URL"
             description="A public url to send events to as they happen."
-            inputId="webhook-endpoint-url"
+            input-id="webhook-endpoint-url"
             v-model="localEndpoint.url"
-            :readOnly="readOnly"
+            :read-only="readOnly"
           ></text-input>
           <toggle-input
             v-if="Object.keys(localEndpoint).includes('apiSigning')"
             label="Enable API signing"
-            inputId="enable-api-signing"
+            input-id="enable-api-signing"
             :disabled="readOnly"
             v-model="localEndpoint.apiSigning"
           >
@@ -215,13 +215,13 @@
           v-if="allowEdit && readOnly"
           label="Settings"
           :divide="false"
-          bodyWidthClass="max-w-2xl"
+          body-width-class="max-w-2xl"
         >
           <button-input
             v-if="localEndpoint.active"
-            inputId="webhook-settings-disable"
-            buttonLabel="Disable endpoint"
-            buttonType="secondary"
+            input-id="webhook-settings-disable"
+            button-label="Disable endpoint"
+            button-type="secondary"
             icon="pause-circle"
             description="This will immediately disable all events for this endpoint."
             @click="disable"
@@ -233,9 +233,9 @@
           <enable-webhook-endpoint v-else @reset="reset(false)">
             <template v-slot:default="{ toggleModal }">
               <button-input
-                inputId="webhook-settings-enable"
-                buttonLabel="Enable endpoint"
-                buttonType="secondary"
+                input-id="webhook-settings-enable"
+                button-label="Enable endpoint"
+                button-type="secondary"
                 icon="play-circle"
                 description="This will enable all events for this endpoint."
                 @click="toggleModal"
@@ -246,7 +246,7 @@
               </button-input>
             </template></enable-webhook-endpoint
           >
-          <delete-webhook-endpoint :title="title" :webhookId="$route.params.webhookId" />
+          <delete-webhook-endpoint :title="title" :webhook-id="$route.params.webhookId" />
         </form-group>
       </div>
     </section>

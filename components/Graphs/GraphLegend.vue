@@ -14,11 +14,11 @@
       </span>
       <ticker
         v-if="showTrends && isFinite(trendValue)"
-        :trendHint="trendHint"
-        :trendDirection="trendDirection"
-        :trendValue="trendValue"
-        :isPercent="isPercent"
-        :trendPositive="trendPositive"
+        :trend-hint="trendHint"
+        :trend-direction="trendDirection"
+        :trend-value="trendValue"
+        :is-percent="isPercent"
+        :trend-positive="trendPositive"
       />
     </div>
 

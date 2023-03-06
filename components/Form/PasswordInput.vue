@@ -3,7 +3,7 @@
     :label="label"
     :description="description"
     :input-id="inputId"
-    :inputWidth="inputWidth"
+    :input-width="inputWidth"
   >
     <template slot="label">
       <slot name="label"></slot>

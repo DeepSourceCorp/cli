@@ -13,9 +13,9 @@
       <z-pagination
         v-if="totalPages"
         class="flex justify-center"
-        :totalPages="totalPages"
-        :totalVisible="5"
-        :hideForSinglePage="true"
+        :total-pages="totalPages"
+        :total-visible="5"
+        :hide-for-single-page="true"
         v-model="currentPage"
       ></z-pagination>
     </template>
@@ -51,11 +51,11 @@
         </p>
         <template slot="footer">
           <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
-            <z-button buttonType="ghost" class="text-vanilla-100" size="small" @click="close"
+            <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close"
               >Cancel</z-button
             >
             <z-button
-              buttonType="danger"
+              button-type="danger"
               size="small"
               @click="cancelInviteForMember"
               class="inline-flex space-x-1.5 items-center"

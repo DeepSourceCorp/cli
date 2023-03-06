@@ -32,13 +32,13 @@
           <z-button
             class="flex items-center space-x-2 modal-primary-action"
             spacing="px-2"
-            buttonType="primary"
+            button-type="primary"
             size="small"
             icon="check"
             label="Confirm and ignore"
-            :isLoading="isLoading"
+            :is-loading="isLoading"
             :disabled="isLoading"
-            loadingLabel="Updating issue"
+            loading-label="Updating issue"
             @click="confirm"
           />
         </div>

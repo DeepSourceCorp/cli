@@ -40,7 +40,7 @@
     <template slot="footer">
       <div class="p-4 space-x-2 text-right text-vanilla-100">
         <z-button
-          :buttonType="loading ? 'secondary' : 'primary'"
+          :button-type="loading ? 'secondary' : 'primary'"
           size="small"
           :disable="loading"
           @click="updateDetails"

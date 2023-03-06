@@ -1,5 +1,5 @@
 <template>
-  <hero-card width="md" :showBackground="true" :showGlow="false" customClass="md:mb-24">
+  <hero-card width="md" :show-background="true" :show-glow="false" custom-class="md:mb-24">
     <template v-if="dataState !== 'errored' && acceptInviteState !== 'errored'">
       <template v-if="details.joined">
         <h1 class="text-base font-bold leading-snug text-center text-vanilla-100">

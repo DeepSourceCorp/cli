@@ -10,7 +10,7 @@ exports[`[[ AutofixCodeDiff ]] renders the component with all prop options: {"is
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580653\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580653\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400\\">
@@ -29,7 +29,7 @@ exports[`[[ AutofixCodeDiff ]] renders the component with all prop options: {"is
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580654\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580654\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400 bg-ink-300 opacity-20\\">
@@ -54,7 +54,7 @@ exports[`[[ AutofixCodeDiff ]] renders the component with all prop options: {"is
     </div>
     <div class=\\"flex w-full\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580655\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580655\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400\\">
@@ -96,7 +96,7 @@ exports[`[[ AutofixCodeDiff ]] renders the component with all prop options: {"is
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580653\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580653\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400\\">
@@ -115,7 +115,7 @@ exports[`[[ AutofixCodeDiff ]] renders the component with all prop options: {"is
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580654\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580654\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400 bg-ink-300 opacity-20\\">
@@ -140,7 +140,7 @@ exports[`[[ AutofixCodeDiff ]] renders the component with all prop options: {"is
     </div>
     <div class=\\"flex w-full\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580655\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580655\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400\\">
@@ -339,7 +339,7 @@ exports[`[[ AutofixCodeDiff ]] renders the component with all prop options: {"is
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580653\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580653\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400\\">
@@ -358,7 +358,7 @@ exports[`[[ AutofixCodeDiff ]] renders the component with all prop options: {"is
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580654\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580654\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400 bg-ink-300 opacity-20\\">
@@ -383,7 +383,7 @@ exports[`[[ AutofixCodeDiff ]] renders the component with all prop options: {"is
     </div>
     <div class=\\"flex w-full\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580655\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580655\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400\\">
@@ -425,7 +425,7 @@ exports[`[[ AutofixCodeDiff ]] renders the component with all prop options: {"is
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580653\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580653\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400\\">
@@ -444,7 +444,7 @@ exports[`[[ AutofixCodeDiff ]] renders the component with all prop options: {"is
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580654\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580654\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400 bg-ink-300 opacity-20\\">
@@ -469,7 +469,7 @@ exports[`[[ AutofixCodeDiff ]] renders the component with all prop options: {"is
     </div>
     <div class=\\"flex w-full\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580655\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"580655\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400\\">
@@ -679,7 +679,7 @@ exports[`[[ AutofixCodeDiff ]] shows the remaining count when the issue codes ex
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10716\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10716\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400 bg-ink-300 opacity-20\\">
@@ -698,7 +698,7 @@ exports[`[[ AutofixCodeDiff ]] shows the remaining count when the issue codes ex
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10717\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10717\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400 bg-ink-300 opacity-20\\">
@@ -719,7 +719,7 @@ exports[`[[ AutofixCodeDiff ]] shows the remaining count when the issue codes ex
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10718\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10718\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400 bg-ink-300 opacity-20\\">
@@ -742,7 +742,7 @@ exports[`[[ AutofixCodeDiff ]] shows the remaining count when the issue codes ex
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10719\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10719\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400 bg-ink-300 opacity-20\\">
@@ -765,7 +765,7 @@ exports[`[[ AutofixCodeDiff ]] shows the remaining count when the issue codes ex
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10720\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10720\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400 bg-ink-300 opacity-20\\">
@@ -788,7 +788,7 @@ exports[`[[ AutofixCodeDiff ]] shows the remaining count when the issue codes ex
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10721\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10721\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400 bg-ink-300 opacity-20\\">
@@ -811,7 +811,7 @@ exports[`[[ AutofixCodeDiff ]] shows the remaining count when the issue codes ex
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10722\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10722\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400 bg-ink-300 opacity-20\\">
@@ -834,7 +834,7 @@ exports[`[[ AutofixCodeDiff ]] shows the remaining count when the issue codes ex
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10723\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10723\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400 bg-ink-300 opacity-20\\">
@@ -857,7 +857,7 @@ exports[`[[ AutofixCodeDiff ]] shows the remaining count when the issue codes ex
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10724\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10724\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400 bg-ink-300 opacity-20\\">
@@ -882,7 +882,7 @@ exports[`[[ AutofixCodeDiff ]] shows the remaining count when the issue codes ex
     </div>
     <div class=\\"flex w-full border-b-2 border-slate-400\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10725\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10725\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400 bg-ink-300 opacity-20\\">
@@ -907,7 +907,7 @@ exports[`[[ AutofixCodeDiff ]] shows the remaining count when the issue codes ex
     </div>
     <div class=\\"flex w-full\\">
       <div class=\\"flex items-start pt-4 bg-ink-300 pl-2\\">
-        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10726\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" fontsize=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"10726\\" truevalue=\\"true\\" modelvalue=\\"580653,580655\\" size=\\"small\\" font-size=\\"base\\" spacing=\\"4\\"></zcheckbox-stub>
       </div>
       <div class=\\"grid w-full grid-cols-2\\">
         <div class=\\"col-span-1 border-r after_html border-slate-400 bg-ink-300 opacity-20\\">

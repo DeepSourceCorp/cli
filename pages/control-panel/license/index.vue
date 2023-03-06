@@ -25,16 +25,16 @@
     </div>
     <stat-section
       title="License usage history"
-      helpText="Summary of seats used over time"
-      :fullWidth="true"
-      :bodyIsGrid="false"
-      :bodySpacing="0"
+      help-text="Summary of seats used over time"
+      :full-width="true"
+      :body-is-grid="false"
+      :body-spacing="0"
       class="mt-6"
     >
       <template slot="controls">
         <graph-control
           class="float-right w-full h-8 xl:w-auto"
-          :filterValue="lastDays"
+          :filter-value="lastDays"
           :day-options="[180, 240, 360]"
           :display-duration-type="DurationTypeMonths"
           @updateFilter="updateLastDays"
@@ -54,7 +54,7 @@
         v-if="chartDataAvailable"
         :datasets="datasetArr"
         :labels="orgLicenseData.seatUsageTrend.labels"
-        :showControl="false"
+        :show-control="false"
         :height="290"
         :colors="['robin-500', 'vanilla-400']"
         :spline="false"

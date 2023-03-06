@@ -8,7 +8,7 @@
       <slot name="controls" />
     </div>
     <div class="p-3">
-      <run-error-box v-if="errorsRendered.length" :errorsRendered="errorsRendered" class="mb-3" />
+      <run-error-box v-if="errorsRendered.length" :errors-rendered="errorsRendered" class="mb-3" />
       <lazy-run-loading v-if="status === CheckStatus.Pend" />
       <lazy-run-pass v-else-if="status === CheckStatus.Pass && issueCount === 0" />
       <lazy-run-failed v-if="status === CheckStatus.Fail && issueCount === 0 && !isFilterApplied">

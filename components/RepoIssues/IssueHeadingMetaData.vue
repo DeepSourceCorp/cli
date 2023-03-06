@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-2 gap-2 xl:flex space-x-0 xl:space-x-6">
     <!-- Issue type -->
-    <issue-type :issueType="issueType" class="order-1 xl:order-1 uppercase"></issue-type>
+    <issue-type :issue-type="issueType" class="order-1 xl:order-1 uppercase"></issue-type>
     <!-- Found -->
     <div class="flex items-center space-x-1 order-3 xl:order-1">
       <z-icon icon="file" size="small" color="vanilla-400"></z-icon>

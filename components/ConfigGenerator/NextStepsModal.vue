@@ -14,7 +14,7 @@
           </p>
         </div>
       </div>
-      <z-stepper align="vertical" :showNumbers="true" class="w-full px-4">
+      <z-stepper align="vertical" :show-numbers="true" class="w-full px-4">
         <z-step v-for="step in steps" :key="step.title" class="w-full">
           <template slot="title">
             <h3 class="text-vanilla-100 font-base uppercase tracking-wide text-xs font-semibold">
@@ -32,8 +32,8 @@
         <z-button
           class="modal-primary-action"
           size="small"
-          buttonType="primary"
-          :actionDisabled="actionDisabled"
+          button-type="primary"
+          :action-disabled="actionDisabled"
           @click="triggerAction"
           >I’ve added .deepsource.toml to my repository</z-button
         >

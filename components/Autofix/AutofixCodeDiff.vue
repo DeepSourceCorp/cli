@@ -80,7 +80,7 @@
             @change="selectFileIfAllHunksSelected(name, code.id)"
             :value="code.id"
             size="small"
-            fontSize="base"
+            font-size="base"
             spacing="4"
           />
         </div>

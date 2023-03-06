@@ -25,7 +25,7 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
           <zicon-stub icon=\\"help-circle\\" color=\\"vanilla-100\\" size=\\"small\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
         </a>
         <div class=\\"md:w-40 h-8\\">
-          <zselect-stub backgroundclass=\\"bg-ink-200\\" borderclass=\\"border-slate-400\\" border-radius=\\"rounded-sm\\" spacing=\\"px-2 py-1\\" placeholder=\\"Duration filter\\" value=\\"30\\">
+          <zselect-stub background-class=\\"bg-ink-200\\" border-class=\\"border-slate-400\\" border-radius=\\"rounded-sm\\" spacing=\\"px-2 py-1\\" placeholder=\\"Duration filter\\" value=\\"30\\">
             <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 30 days</div>
             <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
             <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
@@ -87,7 +87,7 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
           <zicon-stub icon=\\"help-circle\\" color=\\"vanilla-100\\" size=\\"small\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
         </a>
         <div class=\\"md:w-40 h-8\\">
-          <zselect-stub backgroundclass=\\"bg-ink-200\\" borderclass=\\"border-slate-400\\" border-radius=\\"rounded-sm\\" spacing=\\"px-2 py-1\\" placeholder=\\"Duration filter\\" value=\\"30\\">
+          <zselect-stub background-class=\\"bg-ink-200\\" border-class=\\"border-slate-400\\" border-radius=\\"rounded-sm\\" spacing=\\"px-2 py-1\\" placeholder=\\"Duration filter\\" value=\\"30\\">
             <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 30 days</div>
             <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
             <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>

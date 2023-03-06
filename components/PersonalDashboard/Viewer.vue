@@ -1,5 +1,5 @@
 <template>
-  <stat-section :bodyIsGrid="false" :bodySpacing="0">
+  <stat-section :body-is-grid="false" :body-spacing="0">
     <div class="p-4 space-y-4 border-b border-slate-400">
       <div class="flex space-x-4">
         <z-avatar
@@ -49,7 +49,7 @@
         <div v-for="(step, index) in steps" :key="index" class="flex items-start space-x-2">
           <z-checkbox
             class="mt-2"
-            :modelValue="step.isComplete"
+            :model-value="step.isComplete"
             @change="(val) => updateCheck(step.name, val)"
           ></z-checkbox>
           <div class="space-y-2">
@@ -64,7 +64,7 @@
             </h5>
             <template v-if="!step.isComplete">
               <p v-if="step.description" class="text-sm text-vanilla-400">{{ step.description }}</p>
-              <z-button @click="triggerStep(step)" size="small" buttonType="secondary">{{
+              <z-button @click="triggerStep(step)" size="small" button-type="secondary">{{
                 step.actionLabel
               }}</z-button>
             </template>
@@ -72,7 +72,7 @@
         </div>
       </div>
     </div>
-    <add-repo-modal :showModal="showAddRepoModal" @close="showAddRepoModal = false" />
+    <add-repo-modal :show-modal="showAddRepoModal" @close="showAddRepoModal = false" />
   </stat-section>
 </template>
 

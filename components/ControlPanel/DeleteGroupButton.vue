@@ -1,6 +1,6 @@
 <template>
   <div>
-    <slot name="activator" :showConfirm="showConfirm">
+    <slot name="activator" :show-confirm="showConfirm">
       <z-button size="small" button-type="secondary" @click.stop.prevent="showConfirm">
         <span class="inline-flex items-center gap-x-2 text-xs text-cherry">
           <z-icon size="small" icon="trash-2" color="current" />

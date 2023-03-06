@@ -8,7 +8,7 @@
     <z-button
       v-if="installing"
       class="w-56 flex items-center mt-5"
-      buttonType="primary"
+      button-type="primary"
       :disabled="true"
     >
       <z-icon icon="spin-loader" color="ink" class="animate-spin mr-2"></z-icon>

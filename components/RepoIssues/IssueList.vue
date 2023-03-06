@@ -6,7 +6,7 @@
         <template v-slot:trigger="{ toggle }">
           <z-button
             type="button"
-            buttonType="secondary"
+            button-type="secondary"
             icon="amount-down"
             size="small"
             @click="toggle"
@@ -59,8 +59,8 @@
       <z-pagination
         class="flex justify-center"
         v-if="pageCount > 1"
-        :totalPages="pageCount"
-        :totalVisible="5"
+        :total-pages="pageCount"
+        :total-visible="5"
         :page="startPage"
         @selected="updatePage"
       />

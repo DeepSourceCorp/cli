@@ -1,6 +1,6 @@
 <template>
   <div>
-    <slot name="activator" :showModal="showModal">
+    <slot name="activator" :show-modal="showModal">
       <z-button
         icon="edit-2"
         label="Edit"

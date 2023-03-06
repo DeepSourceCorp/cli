@@ -11,7 +11,7 @@
       <z-input
         required="true"
         type="email"
-        :showBorder="validBillingEmail"
+        :show-border="validBillingEmail"
         :class="{
           'border border-cherry': !validBillingEmail
         }"
@@ -37,7 +37,7 @@
       v-if="!checkoutLoading && checkoutState === null"
       class="mt-3"
       icon="z-lock"
-      iconSize="small"
+      icon-size="small"
       :disabled="!enableCheckout"
       @click="checkout"
     >
@@ -47,9 +47,9 @@
       v-else-if="checkoutState === 'SUCCESS'"
       class="mt-3 text-vanilla-100 hover:bg-ink-300"
       icon="check-circle"
-      iconColor="vanilla-100"
+      icon-color="vanilla-100"
       :disabled="true"
-      buttonType="primary"
+      button-type="primary"
     >
       <span>Payment successful</span>
     </z-button>
@@ -57,7 +57,7 @@
       v-else-if="checkoutState === 'FAIL'"
       icon="repeat"
       class="mt-3"
-      iconSize="small"
+      icon-size="small"
       :disabled="!enableCheckout"
       @click="checkout"
     >
@@ -67,10 +67,10 @@
       v-else-if="checkoutState === 'PARTIAL'"
       class="mt-3 text-vanilla-100 hover:bg-ink-300"
       icon="spin-loader"
-      iconColor="vanilla-100"
+      icon-color="vanilla-100"
       :disabled="true"
       :is-loading="true"
-      buttonType="secondary"
+      button-type="secondary"
     >
       <span>Authorization failed, redirecting...</span>
     </z-button>

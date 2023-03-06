@@ -101,29 +101,29 @@
     </z-accordion-item>
     <ignore-issue-intentional
       v-if="currentComponent === 'intentional'"
-      :isOpen="isOpen"
-      :filePath="path"
-      :checkIssueId="id"
+      :is-open="isOpen"
+      :file-path="path"
+      :check-issue-id="id"
       :shortcode="shortcode"
       @close="close"
       @ignore="markOccurrencesDisabled"
     ></ignore-issue-intentional>
     <ignore-issue-false-positive
       v-if="currentComponent === 'falsePositive'"
-      :isOpen="isOpen"
-      :filePath="path"
+      :is-open="isOpen"
+      :file-path="path"
       :shortcode="shortcode"
-      :checkIssueId="id"
+      :check-issue-id="id"
       @close="close"
       @ignore="markOccurrencesDisabled"
     ></ignore-issue-false-positive>
     <ignore-issue-occurrence
       v-if="currentComponent === 'occurence'"
-      :isOpen="isOpen"
-      :filePath="path"
-      :checkIssueId="id"
+      :is-open="isOpen"
+      :file-path="path"
+      :check-issue-id="id"
       :shortcode="shortcode"
-      :checkId="checkId"
+      :check-id="checkId"
       @close="close"
       @ignoreForever="markOccurrencesDisabled"
     ></ignore-issue-occurrence>

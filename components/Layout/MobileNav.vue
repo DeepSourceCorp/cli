@@ -3,12 +3,12 @@
     <z-button
       id="mobile-menu-toggle"
       icon="menu"
-      buttonType="ghost"
+      button-type="ghost"
       size="small"
       color="vanilla-100"
       @click="triggerExpand"
     />
-    <user-menu :isCollapsed="true" />
+    <user-menu :is-collapsed="true" />
   </div>
 </template>
 

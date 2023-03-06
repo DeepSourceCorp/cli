@@ -1,15 +1,15 @@
 <template>
   <stat-section
     title="Autofixed issues"
-    helpText="Summary of issues resolved using Autofix"
-    :bodyIsGrid="false"
-    :bodySpacing="0"
+    help-text="Summary of issues resolved using Autofix"
+    :body-is-grid="false"
+    :body-spacing="0"
   >
     <template slot="controls">
       <div class="flex justify-end w-full space-x-2">
         <graph-control
           class="float-right w-full sm:w-auto"
-          :filterValue="30"
+          :filter-value="30"
           @updateFilter="updateLastDays"
         ></graph-control>
       </div>
@@ -36,10 +36,10 @@
         <div class="flex items-start p-4 space-x-5">
           <graph-legend
             class="w-1/2 md:w-auto"
-            :allowHover="false"
-            :showTrends="false"
+            :allow-hover="false"
+            :show-trends="false"
             :value="currentAutofixCount"
-            labelBgClass="bg-robin"
+            label-bg-class="bg-robin"
             label="Autofixed issues"
             :loading="$fetchState.pending"
           />

@@ -50,8 +50,8 @@
           <z-select
             v-model="currentFilterValue"
             :key="filterValue"
-            backgroundClass="bg-ink-200"
-            borderClass="border-slate-400"
+            background-class="bg-ink-200"
+            border-class="border-slate-400"
             border-radius="rounded-sm"
             spacing="px-2 py-1"
             placeholder="Duration filter"

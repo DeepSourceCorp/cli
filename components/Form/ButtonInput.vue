@@ -2,10 +2,10 @@
   <input-wrapper
     :label="label"
     :description="description"
-    :inputId="inputId"
-    :inputWidth="inputWidth"
+    :input-id="inputId"
+    :input-width="inputWidth"
     :remove-y-padding="removeYPadding"
-    :cascadeInput="true"
+    :cascade-input="true"
   >
     <template slot="label">
       <slot name="label"></slot>

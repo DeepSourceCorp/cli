@@ -44,11 +44,11 @@
         :read-only="true"
         :key="analyzer.shortcode"
         v-bind="analyzer"
-        :analyzerLogo="analyzer.analyzerLogo"
-        :availableTransformers="analyzer.transformers"
-        :analyzerMeta="analyzer.meta"
-        :selectedAnalyzer="getConfig(analyzer.shortcode)"
-        :selectedTransformers="userConfig.transformers"
+        :analyzer-logo="analyzer.analyzerLogo"
+        :available-transformers="analyzer.transformers"
+        :analyzer-meta="analyzer.meta"
+        :selected-analyzer="getConfig(analyzer.shortcode)"
+        :selected-transformers="userConfig.transformers"
         :collapsible="false"
       />
     </section>

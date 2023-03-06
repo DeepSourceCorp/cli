@@ -15,7 +15,7 @@
           :key="branchRun.node.runId"
           class="nested-group-item"
           v-bind="branchRun.node"
-          actionText="Analyzed"
+          action-text="Analyzed"
           link="/history/runs/details"
         ></transform-card>
       </template>
@@ -25,7 +25,7 @@
         :key="run.commitOid"
         v-bind="run"
         class="nested-group-item"
-        actionText="Analyzed"
+        action-text="Analyzed"
         link="/history/runs/details"
       ></transform-card>
     </template>

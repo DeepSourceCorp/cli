@@ -7,9 +7,9 @@
         v-model="searchCandidate"
         icon="search"
         class="p-2"
-        :showBorder="false"
+        :show-border="false"
         size="small"
-        backgroundColor="ink-300"
+        background-color="ink-300"
         @debounceInput="searchRepoMembers"
         placeholder="Search for a name or email"
       >
@@ -19,7 +19,7 @@
       </z-input>
       <z-button
         size="small"
-        buttonType="primary"
+        button-type="primary"
         class="whitespace-nowrap"
         @click="showAddCollaboratorModal = true"
       >
@@ -71,9 +71,9 @@
       <z-pagination
         v-if="totalPages"
         class="flex justify-center"
-        :totalPages="totalPages"
-        :totalVisible="5"
-        :hideForSinglePage="true"
+        :total-pages="totalPages"
+        :total-visible="5"
+        :hide-for-single-page="true"
         v-model="currentPageNumber"
       ></z-pagination>
     </template>
@@ -90,7 +90,7 @@
         v-if="isUpdateModalOpen"
         @onClose="isUpdateModalOpen = false"
         title="Update collaborator's permissions"
-        primaryActionLabel="Confirm and grant permissions"
+        primary-action-label="Confirm and grant permissions"
         @primaryAction="updatePermission"
       >
         <div class="flex items-center mb-2 text-base leading-relaxed text-vanilla-100">
@@ -106,9 +106,9 @@
         v-if="isRemoveModalOpen"
         @onClose="isRemoveModalOpen = false"
         title="Confirm remove collaborator from repository?"
-        primaryActionLabel="Confirm and remove"
-        primaryActionType="danger"
-        primaryActionIcon="x"
+        primary-action-label="Confirm and remove"
+        primary-action-type="danger"
+        primary-action-icon="x"
         subtitle="They will lose access to the repository immediately. You can add them again later."
         @primaryAction="removeMember"
       >

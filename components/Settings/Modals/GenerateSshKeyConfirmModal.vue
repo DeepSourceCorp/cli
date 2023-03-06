@@ -5,7 +5,7 @@
       @onClose="close"
       title="Confirm regenerate SSH keys for this repository?"
       subtitle="This action is irreversible, and will invalidate the old keys. You must replace the old keys with the new one everywhere you're using it."
-      primaryActionLabel="Confirm and regenerate keys"
+      primary-action-label="Confirm and regenerate keys"
       @primaryAction="confirm"
     >
     </z-confirm>

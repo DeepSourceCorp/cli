@@ -6,7 +6,7 @@
         v-if="webhookEndpoints.length"
         @click="showAddEndpointModal = true"
         size="small"
-        buttonType="primary"
+        button-type="primary"
         icon="plus"
       >
         Add new endpoint
@@ -24,8 +24,8 @@
         <z-pagination
           class="flex justify-center"
           v-if="pageCount > 1"
-          :totalPages="pageCount"
-          :totalVisible="5"
+          :total-pages="pageCount"
+          :total-visible="5"
           @selected="updateCurrentPage"
         ></z-pagination>
       </template>

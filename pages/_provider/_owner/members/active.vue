@@ -5,8 +5,8 @@
         v-model="searchCandidate"
         icon="search"
         class="p-2"
-        :showBorder="false"
-        backgroundColor="ink-300"
+        :show-border="false"
+        background-color="ink-300"
         @debounceInput="searchActiveUsers"
         placeholder="Search for team member"
       >
@@ -41,9 +41,9 @@
       <z-pagination
         v-if="totalPages"
         class="flex justify-center"
-        :totalPages="totalPages"
-        :totalVisible="5"
-        :hideForSinglePage="true"
+        :total-pages="totalPages"
+        :total-visible="5"
+        :hide-for-single-page="true"
         v-model="currentPage"
       ></z-pagination>
     </template>
@@ -61,14 +61,14 @@
         @close="closeUpdateRoleModal"
         @primaryAction="updateRole"
         v-bind="userToUpdate"
-        :showModal="showUpdateRoleModal"
+        :show-modal="showUpdateRoleModal"
       ></update-role-modal>
       <remove-member-modal
         v-if="showRemoveMemberModal"
         @close="closeRemoveMemberModal"
         @primaryAction="removeMember"
         v-bind="userToUpdate"
-        :showModal="showRemoveMemberModal"
+        :show-modal="showRemoveMemberModal"
       ></remove-member-modal>
       <transfer-ownership-modal
         v-if="showTransferOwnershipModal"

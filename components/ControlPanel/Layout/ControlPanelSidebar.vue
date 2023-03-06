@@ -19,7 +19,7 @@
       <sidebar-item
         v-for="cpItem in mainControlPanelMenus"
         :key="getPageTitle(cpItem.title)"
-        :isCollapsed="isCollapsed"
+        :is-collapsed="isCollapsed"
         :icon="cpItem.icon"
         icon-color="current"
         :active="parentRoute === cpItem.to"
@@ -35,7 +35,7 @@
         <sidebar-item
           v-for="cpItem in secondaryControlPanelMenus"
           :key="getPageTitle(cpItem.title)"
-          :isCollapsed="isCollapsed"
+          :is-collapsed="isCollapsed"
           :icon="cpItem.icon"
           :active="parentRoute === cpItem.to"
           :to="cpItem.to ? cpItem.to : cpItem.href ? cpItem.href : managementConsoleUrl"

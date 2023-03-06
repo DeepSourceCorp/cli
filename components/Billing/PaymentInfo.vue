@@ -2,7 +2,7 @@
   <form-group
     label="Payment Method"
     :divide="false"
-    bodyClass="space-y-2"
+    body-class="space-y-2"
     class="mt-5"
     v-if="isBilledByStripe && ownerBillingInfo.activeCard"
   >
@@ -33,7 +33,7 @@
         @click="showUpdateCardModal = true"
         size="small"
         button-type="secondary"
-        iconColor="vanilla-200 m-px"
+        icon-color="vanilla-200 m-px"
         icon="credit-card"
       >
         Update card

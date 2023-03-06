@@ -1,5 +1,5 @@
 <template>
-  <form-group label="Invoices" :divide="false" bodyClass="space-y-2">
+  <form-group label="Invoices" :divide="false" body-class="space-y-2">
     <template v-if="Array.isArray(invoices)">
       <a
         :href="inv.url"

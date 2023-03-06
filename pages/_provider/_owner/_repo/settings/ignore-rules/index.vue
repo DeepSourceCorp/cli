@@ -25,8 +25,8 @@
       class="py-20 border-2 border-dashed rounded-lg border-slate-400"
     />
     <ignored-rule-delete-modal
-      :isOpen="isDeleteModalOpen"
-      :silenceRuleId="deleteRuleId"
+      :is-open="isDeleteModalOpen"
+      :silence-rule-id="deleteRuleId"
       @close="closeDeleteModal"
       @delete="deleteRule"
     ></ignored-rule-delete-modal>

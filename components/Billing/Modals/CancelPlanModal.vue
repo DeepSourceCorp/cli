@@ -1,7 +1,7 @@
 <template>
   <z-modal
     title="Are you sure you want to cancel your subscription?"
-    :closeAfterPrimaryAction="false"
+    :close-after-primary-action="false"
     @onClose="$emit('close')"
   >
     <div class="p-4 text-sm text-vanilla-400 min-h-20">
@@ -31,7 +31,7 @@
         id="cancel-sub-confirm"
         v-model="userEnteredOwner"
         :disabled="updating"
-        :readOnly="updating"
+        :read-only="updating"
         class="px-2 mt-3"
         size="small"
         placeholder="Organization name"
@@ -47,7 +47,7 @@
         <z-button
           v-if="updating"
           class="flex items-center w-48"
-          buttonType="danger"
+          button-type="danger"
           size="small"
           :disabled="true"
         >
@@ -58,7 +58,7 @@
           v-else
           icon="x-circle"
           class="w-48 modal-primary-action"
-          buttonType="danger"
+          button-type="danger"
           size="small"
           :disabled="owner.login && userEnteredOwner.toLowerCase() !== owner.login.toLowerCase()"
           @click="cancelPlan(close)"

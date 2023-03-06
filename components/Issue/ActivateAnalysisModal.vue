@@ -25,26 +25,26 @@
         <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
           <z-button
             v-if="repository.isCommitPossible"
-            :isLoading="triggeringActivation"
+            :is-loading="triggeringActivation"
             :disabled="triggeringActivation"
             icon="play-circle"
             class="modal-primary-action"
-            buttonType="primary"
+            button-type="primary"
             size="small"
             :label="`Commit config to ${$providerMetaMap[repository.vcsProvider].text}`"
-            loadingLabel="Adding configuration"
+            loading-label="Adding configuration"
             @click="commitConfig(close)"
           />
           <z-button
             v-else
-            :isLoading="triggeringActivation"
+            :is-loading="triggeringActivation"
             :disabled="triggeringActivation"
             icon="git-pull-request"
             class="modal-primary-action"
-            buttonType="primary"
+            button-type="primary"
             size="small"
             :label="`Create ${pullLabel} request with config`"
-            :loadingLabel="`Creating ${pullLabel} request`"
+            :loading-label="`Creating ${pullLabel} request`"
             @click="commitConfig(close, true)"
           />
         </div>

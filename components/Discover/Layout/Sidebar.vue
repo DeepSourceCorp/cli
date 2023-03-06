@@ -26,8 +26,8 @@
             <span>Watchlist</span>
             <z-tag
               v-if="watchedRepositoriesCount"
-              bgColor="ink-100"
-              textSize="xs"
+              bg-color="ink-100"
+              text-size="xs"
               spacing="px-2 py-0.5"
             >
               {{ watchedRepositoriesCount }}
@@ -113,7 +113,7 @@
         </div>
         <div class="flex items-center">
           <sidebar-item
-            :isCollapsed="isCollapsed"
+            :is-collapsed="isCollapsed"
             icon="dashboard"
             :active="$route.path === '/me'"
             to="/me"
@@ -179,7 +179,7 @@
         @onClose="showInDiscoverInfoDialog = false"
         title="Show in discover"
         subtitle="On the repository settings page, scroll to the bottom to find the Add to discover button."
-        primaryActionLabel="Okay"
+        primary-action-label="Okay"
         @primaryAction="showInDiscoverInfoDialog = false"
       />
     </portal>

@@ -108,7 +108,7 @@
               label="Update seats"
               icon="check-circle"
               class="ml-auto modal-primary-action w-36"
-              buttonType="primary"
+              button-type="primary"
               size="small"
               :disabled="!isValid || loading"
               :is-loading="loading"

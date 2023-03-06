@@ -2,8 +2,8 @@
   <div>
     <transform-header
       v-bind="transformerRun"
-      :routeToPrevious="routeToPrevious"
-      :currentAnalyzer="$route.params.analyzer"
+      :route-to-previous="routeToPrevious"
+      :current-analyzer="$route.params.analyzer"
     ></transform-header>
     <div class="flex flex-col w-full space-y-3">
       <!-- Transform section banner -->
@@ -18,9 +18,9 @@
             v-for="tool in transformerRun.tools"
             :key="tool.shortcode"
             class="flex items-center space-x-1 text-vanilla-300"
-            textSize="xs"
+            text-size="xs"
             spacing="py-1 px-2"
-            bgColor="ink-200"
+            bg-color="ink-200"
           >
             <img
               class="h-3.5 inline-block overflow-hidden"
@@ -37,7 +37,7 @@
           rel="noopener noreferrer"
         >
           <z-button
-            buttonType="secondary"
+            button-type="secondary"
             size="small"
             class="flex space-x-2"
             spacing="px-1.5 sm:px-3"
@@ -53,7 +53,7 @@
           rel="noopener noreferrer"
         >
           <z-button
-            buttonType="secondary"
+            button-type="secondary"
             size="small"
             class="flex space-x-2"
             spacing="px-1.5 sm:px-3"

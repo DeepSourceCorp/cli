@@ -1,6 +1,6 @@
 <template>
   <div>
-    <slot name="activator" :showConfirm="showConfirm">
+    <slot name="activator" :show-confirm="showConfirm">
       <z-button
         icon="trash-2"
         size="small"

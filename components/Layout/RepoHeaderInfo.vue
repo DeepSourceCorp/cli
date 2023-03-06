@@ -76,7 +76,7 @@
               <z-button
                 v-if="updating"
                 class="flex items-center w-54"
-                buttonType="primary"
+                button-type="primary"
                 size="small"
                 :disabled="true"
               >
@@ -87,7 +87,7 @@
                 v-else
                 icon="check-circle"
                 class="w-54 modal-primary-action"
-                buttonType="primary"
+                button-type="primary"
                 size="small"
                 @click="updateDefaultBranch(close)"
                 >Update Branch</z-button

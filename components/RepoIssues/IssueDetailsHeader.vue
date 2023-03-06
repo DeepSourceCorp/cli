@@ -8,7 +8,7 @@
     <div class="flex items-center w-full text-vanilla-400 sm:w-auto">
       <!-- Meta data -->
       <div class="flex flex-wrap items-center leading-none gap-x-4 gap-y-2">
-        <issue-type v-if="issueType" :issueType="issueType"></issue-type>
+        <issue-type v-if="issueType" :issue-type="issueType"></issue-type>
         <issue-severity-tag v-if="severity && issueType === 'security'" :severity="severity" />
         <meta-data-item v-if="count" icon="file-pulse"
           >{{ count }} {{ count > 1 ? 'occurrences' : 'occurrence' }} in this check</meta-data-item

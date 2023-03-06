@@ -11,18 +11,18 @@
         class="absolute top-0 hidden w-px h-full lg:group-hover:block -right-px bg-gradient-juniper"
       ></div>
       <header class="relative w-full" v-if="$scopedSlots.header">
-        <slot name="header" :isCollapsed="isCollapsed"></slot>
+        <slot name="header" :is-collapsed="isCollapsed"></slot>
         <div
           v-if="collapsible"
           class="relative hidden p-1 -translate-y-1/2 rounded-full lg:group-hover:block bg-juniper lg:absolute top-full transform-gpu"
           @click.stop="collapseSidebar()"
           :class="[hoverStyle]"
         >
-          <z-icon :icon="arrow" size="small" color="ink-400" boxWidth="16"></z-icon>
+          <z-icon :icon="arrow" size="small" color="ink-400" box-width="16"></z-icon>
         </div>
       </header>
       <div class="flex justify-center w-full px-2">
-        <slot name="subHeader" :isCollapsed="isCollapsed"></slot>
+        <slot name="subHeader" :is-collapsed="isCollapsed"></slot>
       </div>
       <div
         class="flex-1 w-full px-2 pt-2 pb-4 sidebar-items"
@@ -30,21 +30,21 @@
           'custom-y-scroll': !isCollapsed
         }"
       >
-        <slot :isCollapsed="isCollapsed"></slot>
+        <slot :is-collapsed="isCollapsed"></slot>
       </div>
       <footer
         class="w-full p-3 border-t border-solid border-slate-400 bg-gradient-dark-dawn backdrop-blur-xl"
         :class="footerClass"
         v-if="$scopedSlots.footer"
       >
-        <slot name="footer" :isCollapsed="isCollapsed"></slot>
+        <slot name="footer" :is-collapsed="isCollapsed"></slot>
       </footer>
       <footer
         class="w-full px-2 py-4 border-t border-solid border-slate-400"
         :class="footerBrandClass"
         v-if="$scopedSlots.brand"
       >
-        <slot name="brand" :isCollapsed="isCollapsed"></slot>
+        <slot name="brand" :is-collapsed="isCollapsed"></slot>
       </footer>
     </div>
     <!-- Overlay -->

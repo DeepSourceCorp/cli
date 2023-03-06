@@ -28,13 +28,13 @@
                   ? 'Click to remove from starred repositories'
                   : 'Star this repository'
               "
-              buttonType="ghost"
+              button-type="ghost"
               icon="z-star"
               size="x-small"
               class="p-1"
               :color="repository.isStarred ? 'juniper' : 'hover:text-slate'"
               :class="repository.isStarred ? 'opacity-1' : 'opacity-40 hover:opacity-70'"
-              :iconColor="'current'"
+              :icon-color="'current'"
               @click.prevent="toggleStar(!repository.isStarred)"
             />
             <a
@@ -49,7 +49,7 @@
                 bg-color="ink-200"
                 v-tooltip="`Open repo on ${$providerMetaMap[repository.vcsProvider].text}`"
                 size="base"
-                :iconLeft="repoVCSIcon"
+                :icon-left="repoVCSIcon"
               ></z-tag>
             </a>
 
@@ -82,15 +82,15 @@
       </div>
       <div v-if="repository && lastRun" id="info" class="xl:row-span-2">
         <repo-header-info
-          :commitId="lastRun.commitOid"
-          :runId="lastRun.runId"
+          :commit-id="lastRun.commitOid"
+          :run-id="lastRun.runId"
           :analyzer="lastRun.config.analyzers[0].name"
-          :defaultBranch="repository.defaultBranchName"
-          :lastAnalyzed="lastRun.finishedAt"
-          :vcsUrl="repository.vcsDefaultBranchUrl || repository.vcsUrl"
-          :vcsCommitUrl="lastRun.vcsCommitUrl"
-          :currentlyAnalysing="repository.runs && repository.runs.totalCount"
-          :canChangeBranch="canChangeBranch"
+          :default-branch="repository.defaultBranchName"
+          :last-analyzed="lastRun.finishedAt"
+          :vcs-url="repository.vcsDefaultBranchUrl || repository.vcsUrl"
+          :vcs-commit-url="lastRun.vcsCommitUrl"
+          :currently-analysing="repository.runs && repository.runs.totalCount"
+          :can-change-branch="canChangeBranch"
           class="flex flex-col h-full px-4 py-2 space-y-2 text-sm md:px-3 xl:border-l xl:border-slate-400 text-vanilla-400"
         ></repo-header-info>
       </div>
@@ -102,7 +102,7 @@
               :key="item.label"
               :to="$generateRoute(item.link)"
             >
-              <z-tab :icon="item.icon" :isActive="activeLink(item)">{{ item.label }}</z-tab>
+              <z-tab :icon="item.icon" :is-active="activeLink(item)">{{ item.label }}</z-tab>
             </nuxt-link>
           </template>
         </div>

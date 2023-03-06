@@ -7,7 +7,7 @@
       <z-button
         id="mobile-sidebar-toggle"
         icon="menu"
-        buttonType="ghost"
+        button-type="ghost"
         size="large"
         color="vanilla-100"
         @click="triggerSidebarExpand"

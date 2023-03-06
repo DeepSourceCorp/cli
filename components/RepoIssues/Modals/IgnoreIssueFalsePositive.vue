@@ -16,7 +16,7 @@
         <div class="flex flex-col space-y-2">
           <span>Tell us why this is a false positive (optional)</span>
           <div class="h-24 bg-ink-400">
-            <z-textarea v-model="comment" textSize="sm"></z-textarea>
+            <z-textarea v-model="comment" text-size="sm"></z-textarea>
           </div>
         </div>
       </div>
@@ -25,14 +25,14 @@
           <z-button
             class="flex items-center space-x-2 modal-primary-action"
             spacing="px-2"
-            buttonType="primary"
+            button-type="primary"
             size="small"
             icon="check"
             label="Confirm and ignore"
-            loadingLabel="Updating issue"
+            loading-label="Updating issue"
             @click="confirm"
             :disabled="isLoading"
-            :isLoading="isLoading"
+            :is-loading="isLoading"
           />
         </div>
       </template>

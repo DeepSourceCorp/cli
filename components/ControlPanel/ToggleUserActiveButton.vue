@@ -1,6 +1,6 @@
 <template>
   <div>
-    <slot name="activator" :showConfirm="showConfirm">
+    <slot name="activator" :show-confirm="showConfirm">
       <span
         v-tooltip="
           orgUser.isSuperuser

@@ -1,10 +1,10 @@
 <template>
   <input-wrapper
     :label="label"
-    :removeYPadding="removeYPadding"
+    :remove-y-padding="removeYPadding"
     :description="description"
-    :inputId="inputId"
-    :inputWidth="inputWidth"
+    :input-id="inputId"
+    :input-width="inputWidth"
   >
     <template slot="label">
       <slot name="label"></slot>

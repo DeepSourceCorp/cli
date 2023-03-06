@@ -52,9 +52,9 @@
       <div class="flex-col justify-center hidden min-h-full px-8 lg:px-12 bg-ink-300 md:flex">
         <div class="h-5/6">
           <z-carousel
-            :showControls="false"
-            autoTiming="8000"
-            :autoSlide="true"
+            :show-controls="false"
+            auto-timing="8000"
+            :auto-slide="true"
             class="block max-w-lg mx-auto"
           >
             <z-slide v-for="(testimonial, index) in testimonials" :key="index">

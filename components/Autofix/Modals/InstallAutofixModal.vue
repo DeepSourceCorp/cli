@@ -3,9 +3,9 @@
     <z-modal
       class="shadow-double-dark"
       title="Install Autofix app"
-      primaryActionLabel="Install Autofix app"
-      primaryActionIcon="autofix"
-      :closeAfterPrimaryAction="false"
+      primary-action-label="Install Autofix app"
+      primary-action-icon="autofix"
+      :close-after-primary-action="false"
       @primaryAction="openAutofixInstallationUrl"
       @onClose="$emit('close')"
     >
@@ -20,7 +20,7 @@
           <z-button
             v-if="installing"
             class="w-48 flex items-center"
-            buttonType="primary"
+            button-type="primary"
             size="small"
             :disabled="true"
           >
@@ -31,7 +31,7 @@
             v-else
             icon="autofix"
             class="modal-primary-action w-48"
-            buttonType="primary"
+            button-type="primary"
             size="small"
             @click="openAutofixInstallationUrl(close)"
             >Install Autofix app</z-button

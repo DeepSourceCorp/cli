@@ -4,13 +4,13 @@
       <div class="hidden text-right md:block">
         <z-button
           v-tooltip="'Activate new repository'"
-          buttonType="ghost"
+          button-type="ghost"
           icon="plus"
           size="small"
           color="vanilla-400"
           @click="showAddRepoModal = true"
         ></z-button>
-        <add-repo-modal :showModal="showAddRepoModal" @close="showAddRepoModal = false" />
+        <add-repo-modal :show-modal="showAddRepoModal" @close="showAddRepoModal = false" />
       </div>
     </template>
     <template v-if="repoListLoading">

@@ -7,8 +7,8 @@
     <span>
       <z-tag
         v-if="Number.isFinite(httpStatusCode)"
-        bgColor="ink-400 bg-opacity-20"
-        textSize="xs"
+        bg-color="ink-400 bg-opacity-20"
+        text-size="xs"
         spacing="px-2 py-0.5"
         class="font-semibold tracking-wider border"
         :class="{

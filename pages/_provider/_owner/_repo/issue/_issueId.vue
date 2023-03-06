@@ -41,7 +41,7 @@
       <div class="flex self-end px-4 space-x-4 overflow-auto flex-nowrap">
         <nuxt-link :to="getRoute('occurrences')">
           <z-tab
-            :isActive="$route.path === getRoute('occurrences')"
+            :is-active="$route.path === getRoute('occurrences')"
             border-active-color="vanilla-400"
             class="flex items-center"
           >
@@ -51,14 +51,14 @@
               text-size="xs"
               spacing="px-2 py-1"
               class="leading-none"
-              bgColor="ink-100"
+              bg-color="ink-100"
               >{{ issue.occurrenceCount }}</z-tag
             >
           </z-tab>
         </nuxt-link>
         <nuxt-link :to="getRoute('ignore-rules')">
           <z-tab
-            :isActive="$route.path === getRoute('ignore-rules')"
+            :is-active="$route.path === getRoute('ignore-rules')"
             border-active-color="vanilla-400"
             >Ignore rules</z-tab
           >

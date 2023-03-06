@@ -50,7 +50,7 @@
         <z-tag
           v-for="tool in tools"
           :key="tool.shortcode"
-          bgColor="ink-300 group-hover:bg-ink-200"
+          bg-color="ink-300 group-hover:bg-ink-200"
           spacing="p-1 px-2"
         >
           <img :src="tool.logo_path" alt="tool.name" class="h-2.5 w-auto" />

@@ -2,9 +2,9 @@
   <div>
     <button-input
       label="Cancel subscription"
-      inputId="billing-settings-cancel-plan"
-      buttonType="danger"
-      buttonLabel="Cancel subscription"
+      input-id="billing-settings-cancel-plan"
+      button-type="danger"
+      button-label="Cancel subscription"
       icon="x"
       @click="showCancelPlanModal = true"
     >

@@ -5,7 +5,7 @@
       <template v-slot:trigger="{ toggle }">
         <z-button
           type="button"
-          buttonType="secondary"
+          button-type="secondary"
           icon="amount-down"
           size="small"
           @click="toggle"
@@ -43,9 +43,9 @@
         v-model="searchIssue"
         size="small"
         icon="search"
-        backgroundColor="ink-300"
+        background-color="ink-300"
         placeholder="Search for issue title, file or issue code"
-        :showBorder="false"
+        :show-border="false"
       ></z-input>
     </div>
   </div>

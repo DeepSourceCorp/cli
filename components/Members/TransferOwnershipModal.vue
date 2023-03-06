@@ -57,7 +57,7 @@
                 icon="search"
                 placeholder="Search for team member"
                 background-color="ink-300"
-                :debounceDelay="150"
+                :debounce-delay="150"
                 ref="input"
                 @debounceInput="fetchTransferCandidates"
                 @focus="revealResults"
@@ -136,7 +136,7 @@
       </div>
       <template slot="footer">
         <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
-          <z-button buttonType="ghost" class="text-vanilla-100" size="small" @click="close"
+          <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close"
             >Cancel</z-button
           >
           <z-button

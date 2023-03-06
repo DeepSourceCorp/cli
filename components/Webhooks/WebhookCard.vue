@@ -1,6 +1,6 @@
 <template>
   <base-card
-    :showInfo="false"
+    :show-info="false"
     :to="$generateRoute(['settings', 'webhooks', id])"
     :class="active ? '' : 'opacity-75'"
   >

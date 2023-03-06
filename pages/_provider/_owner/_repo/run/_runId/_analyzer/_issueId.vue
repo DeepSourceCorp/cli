@@ -14,13 +14,13 @@
         <!-- issue header and actions -->
         <div v-else class="flex justify-between w-full relative z-20">
           <issue-details-header
-            :issueType="singleIssue.issueType"
+            :issue-type="singleIssue.issueType"
             :shortcode="singleIssue.shortcode"
             :title="singleIssue.title"
             :tags="singleIssue.tags"
             :severity="singleIssue.severity"
-            :firstSeen="issue.firstSeen"
-            :lastSeen="issue.lastSeen"
+            :first-seen="issue.firstSeen"
+            :last-seen="issue.lastSeen"
             :count="issueOccurrences.totalCount"
             :issue-priority="issuePriority"
             :can-edit-priority="canEditPriority"
@@ -30,7 +30,7 @@
             <issue-actions
               class="ml-4"
               :issue="singleIssue"
-              :checkId="currentCheck ? currentCheck.id : ''"
+              :check-id="currentCheck ? currentCheck.id : ''"
               :shortcode="$route.params.issueId"
               @ignoreIssues="ignoreIssues"
               :repository="repository"

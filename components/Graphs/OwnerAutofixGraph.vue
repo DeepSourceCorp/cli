@@ -2,24 +2,24 @@
   <stat-section
     class="min-h-40"
     title="Autofix overview"
-    helpText="Summary of issues resolved using Autofix"
-    :fullWidth="false"
-    :bodyIsGrid="false"
-    :bodySpacing="0"
+    help-text="Summary of issues resolved using Autofix"
+    :full-width="false"
+    :body-is-grid="false"
+    :body-spacing="0"
   >
     <template slot="controls">
       <graph-control
         class="float-right w-full h-8 xl:w-auto"
-        :filterValue="lastDays"
+        :filter-value="lastDays"
         @updateFilter="updateLastDays"
       ></graph-control>
     </template>
     <div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-2">
       <graph-legend
-        :allowHover="false"
-        :showTrends="false"
+        :allow-hover="false"
+        :show-trends="false"
         :value="currentAutofixCount"
-        labelBgClass="bg-robin"
+        label-bg-class="bg-robin"
         label="Autofixed issues"
         :loading="isLoading"
       />
@@ -31,7 +31,7 @@
       v-else-if="autofixTrend.values && autofixTrend.values.length"
       :datasets="dataSets"
       :labels="formattedLabels"
-      :showControl="false"
+      :show-control="false"
       :colors="['robin-500']"
       :spline="false"
       class="chart-tooltip-z-20"

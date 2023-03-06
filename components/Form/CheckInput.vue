@@ -2,8 +2,8 @@
   <input-wrapper
     :label="label"
     :description="description"
-    :inputId="inputId"
-    :inputWidth="inputWidth"
+    :input-id="inputId"
+    :input-width="inputWidth"
   >
     <!-- TODO: Fix this magic component. -->
     <houdini v-model="modelValue" @change="$emit('change')" :id="inputId" class="space-y-5">

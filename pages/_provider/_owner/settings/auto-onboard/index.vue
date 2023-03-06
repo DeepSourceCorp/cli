@@ -6,7 +6,7 @@
         v-if="configTemplateList.length && allowCrud"
         @click="showNewTemplateModal = true"
         size="small"
-        buttonType="primary"
+        button-type="primary"
         icon="plus"
       >
         Add new template
@@ -22,8 +22,8 @@
       v-model="searchCandidate"
       icon="search"
       class="p-2 mb-4"
-      :showBorder="false"
-      backgroundColor="ink-300"
+      :show-border="false"
+      background-color="ink-300"
       @debounceInput="getData"
       placeholder="Search templates..."
     >
@@ -40,17 +40,17 @@
           v-for="template in configTemplateList"
           v-bind="template"
           @onboard="onboardUsingTemplate"
-          :allowCrud="allowCrud"
+          :allow-crud="allowCrud"
           :key="template.shortcode"
-          :loadOnboarding="
+          :load-onboarding="
             fetchingRepos && selectedTemplate && selectedTemplate.shortcode === template.shortcode
           "
         />
         <z-pagination
           class="flex justify-center"
           v-if="pageCount > 1"
-          :totalPages="pageCount"
-          :totalVisible="5"
+          :total-pages="pageCount"
+          :total-visible="5"
           @selected="updateCurrentPage"
         ></z-pagination>
       </template>
@@ -80,15 +80,15 @@
         :title="`We couldn't find any templates matching &quot;${searchCandidate}&quot;`"
       >
         <template slot="action">
-          <z-button buttonType="secondary" size="small" icon="x" @click="searchCandidate = ''">
+          <z-button button-type="secondary" size="small" icon="x" @click="searchCandidate = ''">
             Clear search
           </z-button>
         </template>
       </empty-state>
     </div>
     <add-repo-modal
-      :currentTab="2"
-      :showModal="showAddRepoModal"
+      :current-tab="2"
+      :show-modal="showAddRepoModal"
       @close="showAddRepoModal = false"
     />
   </section>

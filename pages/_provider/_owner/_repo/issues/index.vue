@@ -6,11 +6,11 @@
     >
       <issue-analyzer-selector
         @updateAnalyzer="updateAnalyzer"
-        :selectedAnalyzer="parsedParams.analyzer"
+        :selected-analyzer="parsedParams.analyzer"
       />
       <div class="flex items-center justify-end w-auto space-x-2">
         <issue-sort
-          :selectedSortFilter="parsedParams.sort"
+          :selected-sort-filter="parsedParams.sort"
           @updateSortFilter="(value) => addFilters({ sort: value })"
           @reset="removeFilter('sort')"
         />
@@ -126,8 +126,8 @@
         v-if="pageCount > 1"
         :page="queryParams.page"
         :key="$route.fullPath"
-        :totalPages="pageCount"
-        :totalVisible="5"
+        :total-pages="pageCount"
+        :total-visible="5"
         class="flex justify-center"
         @selected="(page) => addFilters({ page })"
       ></z-pagination>
@@ -135,7 +135,7 @@
     <!-- Autofix Modal -->
     <autofix-file-chooser
       v-bind="autofixIssue"
-      :isOpen="isAutofixOpen"
+      :is-open="isAutofixOpen"
       @close="isAutofixOpen = false"
       @run-quota-exhausted="openUpgradeAccountModal"
     />

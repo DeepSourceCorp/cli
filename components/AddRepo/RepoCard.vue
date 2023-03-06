@@ -2,7 +2,7 @@
   <base-card
     :show-info="false"
     :to="repoRoute"
-    :removeDefaultStyle="removeDefaultStyle"
+    :remove-default-style="removeDefaultStyle"
     class="group"
     @click="$emit('click')"
     @click.native="$emit('click')"
@@ -101,7 +101,7 @@
             :key="analyzer.shortcode"
             class="p-px border-2 rounded-full bg-ink-200 border-slate-400 group-hover:border-slate-400"
           >
-            <analyzer-logo v-bind="analyzer" :hideTooltip="true" size="small" />
+            <analyzer-logo v-bind="analyzer" :hide-tooltip="true" size="small" />
           </span>
         </div>
       </div>

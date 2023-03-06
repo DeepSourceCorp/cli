@@ -1,6 +1,6 @@
 <template>
   <div>
-    <z-button @click="toggleModal" size="small" buttonType="secondary" icon="send">
+    <z-button @click="toggleModal" size="small" button-type="secondary" icon="send">
       Send test payload
     </z-button>
     <portal to="modal">
@@ -14,13 +14,13 @@
         </div>
         <template v-slot:footer="{ close }">
           <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
-            <z-button buttonType="ghost" class="text-vanilla-100" size="small" @click="close">
+            <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               Cancel
             </z-button>
             <z-button
               icon="send"
-              :isLoading="testing"
-              loadingLabel="Sending test payload"
+              :is-loading="testing"
+              loading-label="Sending test payload"
               class="modal-primary-action"
               size="small"
               @click="sendTestPayload(close)"

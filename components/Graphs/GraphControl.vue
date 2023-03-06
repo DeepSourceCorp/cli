@@ -3,8 +3,8 @@
     <div class="flex-grow h-8 lg:flex-grow-0 lg:w-56">
       <z-select
         v-model="currentFilterValue"
-        backgroundClass="bg-ink-300"
-        borderClass="border-slate-400"
+        background-class="bg-ink-300"
+        border-class="border-slate-400"
       >
         <template #icon>
           <z-icon color="vanilla-400" icon="calendar-clock" />

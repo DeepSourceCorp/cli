@@ -1,5 +1,5 @@
 <template>
-  <list-section title="Activity Feed" footerLinkLabel="See all activity" footerLink="#">
+  <list-section title="Activity Feed" footer-link-label="See all activity" footer-link="#">
     <div class="divide-y divide-solid divide-ink-300 max-h-52 overflow-y-scroll">
       <div
         v-for="act in activityFeed"

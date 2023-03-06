@@ -24,7 +24,7 @@
         >
           <z-avatar
             :image="getDefaultAvatar(organization.login, false)"
-            :userName="organization.login"
+            :user-name="organization.login"
             class="flex-shrink-0"
           />
           <div class="flex-grow overflow-hidden overflow-ellipsis text-left">

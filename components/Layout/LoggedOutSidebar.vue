@@ -9,8 +9,8 @@
       @open="openModal()"
       @close="closeModal()"
       :collapsible="false"
-      footerClass="bg-ink-300 px-4"
-      footerBrandClass="bg-ink-300 px-4"
+      footer-class="bg-ink-300 px-4"
+      footer-brand-class="bg-ink-300 px-4"
     >
       <template slot="header">
         <section class="p-4 border-b border-slate-400">
@@ -79,32 +79,32 @@
           Find thousands of code security and quality issues in your codebase, before they end up in
           production.
         </p>
-        <z-button to="/signup" buttonType="primary" class="w-full mt-4">Start now</z-button>
+        <z-button to="/signup" button-type="primary" class="w-full mt-4">Start now</z-button>
       </template>
       <template slot="brand">
         <div class="flex justify-center space-x-3">
           <z-button
             to="https://twitter.com/DeepSourceHQ"
             size="small"
-            buttonType="secondary"
+            button-type="secondary"
             icon="twitter-solid"
           />
           <z-button
             to="https://www.instagram.com/deepsourcehq/"
             size="small"
-            buttonType="secondary"
+            button-type="secondary"
             icon="instagram-solid"
           />
           <z-button
             to="https://linkedin.com/company/deepsourcelabs"
             size="small"
-            buttonType="secondary"
+            button-type="secondary"
             icon="linkedin-solid"
           />
           <z-button
             to="https://www.youtube.com/channel/UCzSjS7r8wY7rgDn79dFd1MA"
             size="small"
-            buttonType="secondary"
+            button-type="secondary"
             icon="youtube-solid"
           />
         </div>

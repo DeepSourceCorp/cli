@@ -1,6 +1,6 @@
 <template>
   <div>
-    <slot :toggleModal="toggleModal"></slot>
+    <slot :toggle-modal="toggleModal"></slot>
     <portal to="modal">
       <z-confirm v-if="showEnableModal" @onClose="showEnableModal = false">
         <div class="mb-2 text-base leading-relaxed text-vanilla-100">
@@ -18,13 +18,13 @@
         </div>
         <template v-slot:footer="{ close }">
           <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
-            <z-button buttonType="ghost" class="text-vanilla-100" size="small" @click="close">
+            <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               Cancel
             </z-button>
             <z-button
               icon="send"
-              :isLoading="enabling"
-              loadingLabel="Sending test payload"
+              :is-loading="enabling"
+              loading-label="Sending test payload"
               class="modal-primary-action"
               size="small"
               @click="sendTestPayload(close)"

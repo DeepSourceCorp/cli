@@ -1,6 +1,6 @@
 <template>
   <z-badge type="success" :is-dot="filterApplied" :size="badgeSize">
-    <slot :filterApplied="filterApplied" :filterLabel="filterLabel" :filterIcon="filterIcon">
+    <slot :filter-applied="filterApplied" :filter-label="filterLabel" :filter-icon="filterIcon">
     </slot>
   </z-badge>
 </template>

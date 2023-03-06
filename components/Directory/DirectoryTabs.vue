@@ -3,7 +3,7 @@
     class="sticky z-10 flex px-4 pt-3 border-b border-slate-400 gap-x-5 top-23 lg:top-14 bg-ink-400"
   >
     <nuxt-link v-for="(tab, id) in tabList" :key="tab.label" :to="tab.link">
-      <z-tab :icon="tab.icon" :isActive="id === activeTab" border-active-color="vanilla-100">
+      <z-tab :icon="tab.icon" :is-active="id === activeTab" border-active-color="vanilla-100">
         {{ tab.label }}
       </z-tab>
     </nuxt-link>

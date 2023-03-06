@@ -26,7 +26,7 @@
     <template v-if="$route.params.provider === 'gsr'">
       <z-button
         @click="commitGSRConfigToVCS"
-        buttonType="primary"
+        button-type="primary"
         class="w-full"
         icon="zap"
         :disabled="actionDisabled"
@@ -38,7 +38,7 @@
       <z-button
         v-if="isCommitPossible"
         @click="commitConfigToVCS(false)"
-        buttonType="primary"
+        button-type="primary"
         class="w-full"
         icon="zap"
         :disabled="actionDisabled"
@@ -47,7 +47,7 @@
       </z-button>
       <z-button
         v-else-if="isAutofixEnabled"
-        buttonType="primary"
+        button-type="primary"
         class="w-full"
         icon="git-pull-request"
         :disabled="actionDisabled"
@@ -57,7 +57,7 @@
       </z-button>
       <z-button
         v-else
-        buttonType="primary"
+        button-type="primary"
         class="w-full"
         icon="arrow-up-right"
         :disabled="actionDisabled"
@@ -65,7 +65,7 @@
       >
         Show next steps
       </z-button>
-      <z-button buttonType="secondary" class="w-full" @click="activateRepo">
+      <z-button button-type="secondary" class="w-full" @click="activateRepo">
         I’ve added deepsource.toml, activate repo
       </z-button>
     </template>
@@ -74,7 +74,7 @@
         class="block"
         :to="['', $route.params.provider, $route.params.owner, 'settings', 'billing'].join('/')"
       >
-        <z-button icon="arrow-up" buttonType="primary" class="w-full">
+        <z-button icon="arrow-up" button-type="primary" class="w-full">
           Upgrade to Activate this Repo
         </z-button>
       </nuxt-link>
@@ -84,7 +84,7 @@
       </p>
     </template>
     <template v-else>
-      <z-button buttonType="secondary" class="w-full" :disabled="true">
+      <z-button button-type="secondary" class="w-full" :disabled="true">
         Unavailable in current plan
       </z-button>
       <p class="text-sm text-center text-vanilla-400">

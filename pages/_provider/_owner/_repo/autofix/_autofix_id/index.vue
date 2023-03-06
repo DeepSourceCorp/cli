@@ -17,7 +17,7 @@
         <span class="inline md:flex" v-if="autofixRun.issue">{{ autofixRun.issue.shortcode }}</span>
       </div>
       <div class="flex space-x-6">
-        <issue-type v-if="autofixRun.issue" :issueType="autofixRun.issue.issueType"></issue-type>
+        <issue-type v-if="autofixRun.issue" :issue-type="autofixRun.issue.issueType"></issue-type>
         <!-- Created -->
         <info icon="clock" :title="formatDuration"></info>
         <!-- Analyzer -->
@@ -78,7 +78,7 @@
       <div v-if="!isReadOnly">
         <z-button
           v-if="repository.isAutofixEnabled"
-          buttonType="primary"
+          button-type="primary"
           size="small"
           :disabled="
             selectedHunkIds.length === 0 || shouldDisableActionButtons || triggeringAutofix
@@ -113,7 +113,7 @@
         <template v-if="autofixRun.isGeneratedFromPr">
           <z-button
             v-if="autofixRun.committedToBranchStatus === COMMIT_STATUS.IN_PROGRESS"
-            buttonType="primary"
+            button-type="primary"
             size="small"
             :disabled="true"
             class="cursor-wait"
@@ -123,7 +123,7 @@
           </z-button>
           <z-button
             v-if="autofixRun.committedToBranchStatus === COMMIT_STATUS.COMMITTED"
-            buttonType="primary"
+            button-type="primary"
             size="small"
             target="_blank"
             rel="noopener noreferrer"
@@ -135,7 +135,7 @@
         </template>
         <template v-else>
           <z-button
-            buttonType="primary"
+            button-type="primary"
             size="small"
             class="cursor-wait"
             v-if="autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.IN_PROGRESS"
@@ -148,7 +148,7 @@
               autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.OPENED ||
               autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.MERGED
             "
-            buttonType="primary"
+            button-type="primary"
             size="small"
             target="_blank"
             rel="noopener noreferrer"
@@ -158,7 +158,7 @@
             <span>{{ pullRequestStatusText.VIEW }}</span>
           </z-button>
           <z-button
-            buttonType="primary"
+            button-type="primary"
             size="small"
             target="_blank"
             :to="autofixRun.vcsPrUrl"
@@ -232,7 +232,7 @@
             :true-value="false"
             :false-value="true"
             spacing="4"
-            fontSize="base"
+            font-size="base"
             @change="selectFile(key)"
           />
           <z-icon icon="bug-risk" size="small" color="vanilla-400"></z-icon>
@@ -245,12 +245,12 @@
           }"
         >
           <autofix-code-diff
-            :changeSet="autofixRun.changeset"
-            :isGeneratedFromPr="autofixRun.isGeneratedFromPr"
-            :isGroup="isGroup"
-            :selectedFiles="selectedFiles"
-            :isReadOnly="isReadOnly"
-            :selectedHunkIds="selectedHunkIds"
+            :change-set="autofixRun.changeset"
+            :is-generated-from-pr="autofixRun.isGeneratedFromPr"
+            :is-group="isGroup"
+            :selected-files="selectedFiles"
+            :is-read-only="isReadOnly"
+            :selected-hunk-ids="selectedHunkIds"
             @selectFile="selectFile"
             @selectFileIfAllHunksSelected="selectFileIfAllHunksSelected"
           ></autofix-code-diff>

@@ -19,7 +19,7 @@
           v-if="account.avatar_url"
           :image="account.avatar_url"
           :fallback-image="getDefaultAvatar(account.login, !account.is_team)"
-          :userName="account.login"
+          :user-name="account.login"
           class="flex-shrink-0"
         ></z-avatar>
         <div class="flex-grow overflow-hidden text-left overflow-ellipsis">

@@ -60,8 +60,8 @@
         <z-pagination
           v-if="totalPageCount > 1"
           :page="currentPage"
-          :totalPages="totalPageCount"
-          :totalVisible="perPageCount"
+          :total-pages="totalPageCount"
+          :total-visible="perPageCount"
           @selected="updatePageNum"
         />
       </div>

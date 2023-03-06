@@ -1,5 +1,5 @@
 <template>
-  <base-card :showInfo="showInfo" :to="$generateRoute(['autofix', runId])">
+  <base-card :show-info="showInfo" :to="$generateRoute(['autofix', runId])">
     <template slot="title">
       <z-icon
         v-tooltip="tooltipText"
@@ -21,7 +21,7 @@
       <div class="items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex">
         <!-- Issue type -->
         <div class="flex space-x-5">
-          <issue-type v-if="issue" :issueType="issue.issueType"></issue-type>
+          <issue-type v-if="issue" :issue-type="issue.issueType"></issue-type>
           <!-- Analyzer -->
           <div class="flex items-center space-x-1.5 text-sm">
             <analyzer-logo v-bind="analyzer" size="small" class="flex-shrink-0" />

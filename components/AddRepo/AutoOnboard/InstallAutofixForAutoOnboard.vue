@@ -8,7 +8,7 @@
       <z-button
         v-if="installing"
         class="flex items-center w-48"
-        buttonType="primary"
+        button-type="primary"
         size="small"
         :disabled="true"
       >
@@ -19,7 +19,7 @@
         v-else
         icon="autofix"
         class="w-48 modal-primary-action"
-        buttonType="primary"
+        button-type="primary"
         size="small"
         @click="openAutofixInstallationUrl"
         >Install Autofix app</z-button

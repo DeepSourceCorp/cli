@@ -40,7 +40,7 @@
           :is-loading="isLoading"
           :disabled="isLoading || !feedback.length"
           class="modal-primary-action"
-          buttonType="primary"
+          button-type="primary"
           size="small"
           label="Submit feedback"
           loading-label="Submitting feedback"

@@ -9,10 +9,10 @@
         @click="isCollapsed = !isCollapsed"
       >
         <analyzer-logo
-          :analyzerLogo="analyzerLogo"
+          :analyzer-logo="analyzerLogo"
           :shortcode="name"
           :name="label"
-          :hideTooltip="true"
+          :hide-tooltip="true"
         />
         <span>{{ label }}</span>
         <z-icon

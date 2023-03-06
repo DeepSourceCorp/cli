@@ -11,7 +11,7 @@
         <z-input
           v-model="pattern"
           class="py-3 font-mono"
-          backgroundColor="ink-400"
+          background-color="ink-400"
           size="small"
           placeholder="Add a valid glob pattern eg. foundations/core/*.py"
         ></z-input>
@@ -21,14 +21,14 @@
           <z-button
             class="flex items-center space-x-2 modal-primary-action"
             spacing="px-2"
-            buttonType="primary"
+            button-type="primary"
             size="small"
             icon="check"
             label="Confirm and ignore"
-            loadingLabel="Updating issue"
+            loading-label="Updating issue"
             @click="confirm"
             :disabled="!pattern || isLoading"
-            :isLoading="isLoading"
+            :is-loading="isLoading"
           />
         </div>
       </template>

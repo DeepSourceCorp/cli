@@ -7,7 +7,7 @@
       <z-chart
         v-if="chartLabels.length && chartData.length"
         type="donut"
-        :dataSets="[{ values: chartData }]"
+        :data-sets="[{ values: chartData }]"
         :labels="chartLabels"
         :colors="chartColors"
       />

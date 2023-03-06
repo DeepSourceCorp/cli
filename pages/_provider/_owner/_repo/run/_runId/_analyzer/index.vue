@@ -42,7 +42,7 @@
             v-bind="check"
             :filters="queryParams"
             :can-create-autofix="canCreateAutofix"
-            :currentPage="currentPage"
+            :current-page="currentPage"
           >
             <template #controls>
               <div class="flex flex-col pt-3 gap-y-4 md:relative">
@@ -56,7 +56,7 @@
                   v-if="showAutofixBar"
                   @autofixIssues="autofixSelectedIssues"
                   v-bind="check"
-                  :autofixLoading="autofixLoading"
+                  :autofix-loading="autofixLoading"
                   :can-create-autofix="canCreateAutofix"
                   class="md:z-10"
                 />
@@ -248,7 +248,7 @@
         </template>
         <template v-slot:footer="{ close }">
           <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
-            <z-button buttonType="ghost" class="text-vanilla-100" size="small" @click="close">
+            <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               Cancel
             </z-button>
             <z-button

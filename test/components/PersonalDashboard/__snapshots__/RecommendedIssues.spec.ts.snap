@@ -12,7 +12,7 @@ exports[`[[ RecommendedIssues ]] renders \`RecommendedIssues\` with all prop com
   </div>
   <div class=\\"flex-grow p-0\\">
     <div class=\\"space-y-3\\">
-      <autofixfilechooser-stub repoparams=\\"[object Object]\\"></autofixfilechooser-stub>
+      <autofixfilechooser-stub repo-params=\\"[object Object]\\"></autofixfilechooser-stub>
       <!---->
     </div>
   </div>

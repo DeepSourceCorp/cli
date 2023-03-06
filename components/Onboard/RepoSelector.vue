@@ -7,11 +7,11 @@
       <z-input
         v-model="searchCandidate"
         icon="search"
-        iconPosition="left"
+        icon-position="left"
         spacing="tight"
-        backgroundColor="ink-300"
+        background-color="ink-300"
         placeholder="Search for a repository by name..."
-        :showBorder="false"
+        :show-border="false"
         @debounceInput="fetchRepositories"
       >
         <template slot="left">
@@ -31,11 +31,11 @@
             class="p-1 px-2 rounded-sm"
             v-for="(repo, index) in repositoriesToOnboard"
             :key="index"
-            :handleName="repo.ownerLogin"
+            :handle-name="repo.ownerLogin"
             :language="repo.supportedAnalyzers ? repo.supportedAnalyzers[0] : ''"
             :analyzer="repo.primaryAnalyzer"
             :icon="repo.isPrivate ? 'z-lock' : 'globe'"
-            :repoName="repo.name"
+            :repo-name="repo.name"
             @click="pickRepo(repo)"
           >
           </repo-list-item>

@@ -8,7 +8,7 @@
           <z-input
             v-model="searchCandidate"
             spacing="tight"
-            backgroundColor="ink-400"
+            background-color="ink-400"
             placeholder="Search for files"
             class="py-1.5 leading-6 px-2"
           >
@@ -70,11 +70,11 @@
           </button>
           <z-button
             :disabled="selectedFiles.length < 1 || autofixLoading"
-            :isLoading="autofixLoading"
-            loadingLabel="Creating Autofix"
+            :is-loading="autofixLoading"
+            loading-label="Creating Autofix"
             class="flex items-center space-x-2 modal-primary-action"
             spacing="px-2"
-            buttonType="primary"
+            button-type="primary"
             size="small"
             @click="autofixSelectedFiles(close)"
           >

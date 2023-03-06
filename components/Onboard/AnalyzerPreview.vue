@@ -29,7 +29,7 @@
           <z-icon icon="activity" size="x-small" class="flex-shrink-0 mr-1"></z-icon>
           <div class="flex-1 text-xs">Actively analyzing</div>
           <div class="p-1 rounded-md bg-ink-200">
-            <z-icon icon="plus" iconColor="ink-400" size="x-small"></z-icon>
+            <z-icon icon="plus" icon-color="ink-400" size="x-small"></z-icon>
           </div>
         </div>
         <!-- Placeholders - Subtree - Repo list -->
@@ -80,12 +80,12 @@
             v-if="index == selectedAnalyzers.length - 1"
             class="inline-flex items-center px-2 py-1 space-x-1 border-2 border-solid bg-ink-200 border-slate-400"
           >
-            <analyzer-logo v-bind="analyzer" :hideTooltip="true" />
+            <analyzer-logo v-bind="analyzer" :hide-tooltip="true" />
             <span class="text-sm font-bold text-vanilla-200">{{ analyzer.label }}</span>
           </div>
           <!-- Analyzer in shrink state -->
           <div v-else class="inline-flex items-center px-2 py-1 space-x-1">
-            <analyzer-logo v-bind="analyzer" :hideTooltip="true" />
+            <analyzer-logo v-bind="analyzer" :hide-tooltip="true" />
           </div>
         </div>
       </div>

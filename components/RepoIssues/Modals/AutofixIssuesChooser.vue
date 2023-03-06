@@ -13,8 +13,8 @@
             <z-input
               v-model="searchedIssue"
               spacing="tight"
-              backgroundColor="ink-400"
-              :showBorder="false"
+              background-color="ink-400"
+              :show-border="false"
               placeholder="Search for issues"
               class="py-1.5 leading-6 px-2"
             >
@@ -83,10 +83,10 @@
         <div
           class="p-4 space-x-4 text-right text-vanilla-100 border-t border-slate-400 flex items-center justify-end"
         >
-          <z-button buttonType="secondary" size="small" @click="close">Cancel</z-button>
+          <z-button button-type="secondary" size="small" @click="close">Cancel</z-button>
           <z-button
             :disabled="selectedIssues.length < 1"
-            buttonType="primary"
+            button-type="primary"
             icon="autofix"
             size="small"
             @click="autofixSelectedIssues(close)"

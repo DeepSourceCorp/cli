@@ -62,13 +62,13 @@
         :colors="namespace.is_passing === false ? ['cherry-500'] : ['robin-500']"
         :height="chartHeight"
         :type="chartType"
-        :tooltipOptions="{
+        :tooltip-options="{
           formatTooltipY: formatIntl
         }"
-        :showLegend="false"
-        :axisOptions="axisOptions"
-        :yAxisMax="clip ? 100 : null"
-        :yAxisMin="clip ? 0 : null"
+        :show-legend="false"
+        :axis-options="axisOptions"
+        :y-axis-max="clip ? 100 : null"
+        :y-axis-min="clip ? 0 : null"
       ></z-chart>
       <div v-else class="flex items-center justify-center py-12 text-vanilla-400">
         No Data to Display
@@ -105,7 +105,7 @@
               <z-button
                 icon="check-circle"
                 class="modal-primary-action"
-                buttonType="primary"
+                button-type="primary"
                 size="small"
                 @click="updateThreshold(close)"
                 >Update</z-button

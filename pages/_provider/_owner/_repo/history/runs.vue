@@ -16,7 +16,7 @@
         v-if="defaultBranchRun && !initialFetch"
         :key="defaultBranchRun.branchName"
         :generalized-run="generalizeRun(defaultBranchRun, true)"
-        :branchRunCount="defaultBranchRunCount"
+        :branch-run-count="defaultBranchRunCount"
         :is-expanded="expandedBranch === defaultBranchRun.branchName"
         :class="{
           'opacity-30 pointer-events-none':
@@ -67,8 +67,8 @@
     <div v-if="pageCount > 1" class="grid place-content-center">
       <z-pagination
         class="flex justify-center w-full xl:w-4/6"
-        :totalPages="pageCount"
-        :totalVisible="5"
+        :total-pages="pageCount"
+        :total-visible="5"
         :page="currentPage"
         @selected="updatePage"
       ></z-pagination>

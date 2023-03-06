@@ -2,12 +2,12 @@
   <div id="tabs" class="flex border-b xl:col-span-2 border-slate-400 sub-nav-wrapper">
     <div class="flex self-end px-2 space-x-5 overflow-auto md:px-4 flex-nowrap">
       <nuxt-link :to="getRoute('runs')">
-        <z-tab border-active-color="vanilla-400" icon="trending-up" :isActive="active == 'runs'">
+        <z-tab border-active-color="vanilla-400" icon="trending-up" :is-active="active == 'runs'">
           Analysis runs
         </z-tab>
       </nuxt-link>
       <nuxt-link :to="getRoute('transforms')">
-        <z-tab border-active-color="vanilla-400" icon="zap" :isActive="active == 'transforms'">
+        <z-tab border-active-color="vanilla-400" icon="zap" :is-active="active == 'transforms'">
           Transforms
         </z-tab>
       </nuxt-link>

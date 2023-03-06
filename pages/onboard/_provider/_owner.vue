@@ -59,7 +59,7 @@
           "
         >
           <client-only>
-            <z-stepper align="vertical" :showNumbers="false" class="w-full mb-2">
+            <z-stepper align="vertical" :show-numbers="false" class="w-full mb-2">
               <z-step
                 v-for="(step, index) in steps"
                 :key="step.route"

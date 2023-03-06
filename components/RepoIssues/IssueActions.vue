@@ -3,7 +3,7 @@
     <!-- Autofix -->
     <z-button
       v-if="isAutofixEnabled && issue.autofixAvailable && hasRepoReadAccess"
-      buttonType="primary"
+      button-type="primary"
       size="small"
       custom-classes="hidden xl:flex items-center space-x-2"
       :disabled="!canCreateAutofix"
@@ -20,7 +20,7 @@
           <div v-if="showNavButtons" class="flex items-center gap-x-2">
             <z-button
               type="button"
-              buttonType="secondary"
+              button-type="secondary"
               size="small"
               icon="chevron-left"
               class="hidden sm:flex"
@@ -31,7 +31,7 @@
 
             <z-button
               type="button"
-              buttonType="secondary"
+              button-type="secondary"
               size="small"
               icon="chevron-right"
               class="hidden sm:flex"
@@ -43,7 +43,7 @@
 
           <z-button
             type="button"
-            buttonType="secondary"
+            button-type="secondary"
             size="small"
             icon="slash"
             class="hidden sm:flex"
@@ -53,7 +53,7 @@
           </z-button>
           <z-button
             type="button"
-            buttonType="secondary"
+            button-type="secondary"
             size="small"
             icon="slash"
             class="sm:hidden"
@@ -73,35 +73,35 @@
     </z-menu>
     <ignore-issue-all-files
       v-if="currentComponent === 'all-files'"
-      :isOpen="isOpen"
-      :checkId="checkId"
+      :is-open="isOpen"
+      :check-id="checkId"
       :shortcode="shortcode"
       @close="close"
       @ignore="markAllOccurrenceDisabled"
     ></ignore-issue-all-files>
     <ignore-issue-test-files
       v-if="currentComponent === 'test-files'"
-      :isOpen="isOpen"
-      :checkId="checkId"
+      :is-open="isOpen"
+      :check-id="checkId"
       :shortcode="shortcode"
       @close="close"
       @ignore="markAllOccurrenceDisabled"
     ></ignore-issue-test-files>
     <ignore-issue-file-pattern
       v-if="currentComponent === 'file-pattern'"
-      :isOpen="isOpen"
-      :checkId="checkId"
+      :is-open="isOpen"
+      :check-id="checkId"
       :shortcode="shortcode"
       @close="close"
       @ignore="markAllOccurrenceDisabled"
     ></ignore-issue-file-pattern>
     <autofix-file-chooser
       v-if="currentComponent === 'autofix'"
-      :isOpen="isOpen"
-      :issueId="issue.id"
-      :repositoryId="repository.id"
+      :is-open="isOpen"
+      :issue-id="issue.id"
+      :repository-id="repository.id"
       :shortcode="issue.shortcode"
-      :raisedInFiles="issue.raisedInFiles"
+      :raised-in-files="issue.raisedInFiles"
       @close="close"
       @run-quota-exhausted="openUpgradeAccountModal"
     />

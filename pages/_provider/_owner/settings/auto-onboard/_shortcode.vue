@@ -29,7 +29,7 @@
               v-if="allowEdit"
               @click="readOnly = false"
               size="small"
-              buttonType="secondary"
+              button-type="secondary"
               icon="edit"
             >
               Edit
@@ -37,15 +37,15 @@
             <z-button
               @click="onboardUsingTemplate"
               size="small"
-              buttonType="primary"
-              :iconColor="fetchingRepos ? 'ink-400 animate-spin' : 'ink-400'"
+              button-type="primary"
+              :icon-color="fetchingRepos ? 'ink-400 animate-spin' : 'ink-400'"
               :icon="fetchingRepos ? 'spin-loader' : 'fast-forward'"
             >
               Use this template
             </z-button>
             <add-repo-modal
-              :currentTab="2"
-              :showModal="showAddRepoModal"
+              :current-tab="2"
+              :show-modal="showAddRepoModal"
               @close="showAddRepoModal = false"
             />
           </template>
@@ -54,8 +54,8 @@
               v-if="!readOnly"
               @click="discardConfig"
               size="small"
-              buttonType="ghost"
-              iconColor="vanilla-300"
+              button-type="ghost"
+              icon-color="vanilla-300"
               v-tooltip="'Discard changes'"
               icon="corner-up-left"
             >
@@ -63,11 +63,11 @@
             <delete-template-config v-if="!readOnly" :title="title" />
             <save-template-config
               v-if="!readOnly"
-              :readOnly="readOnly"
+              :read-only="readOnly"
               :disabled="selectedAnalyzers.length === 0"
               :title="title"
               :description="description"
-              :templateConfig="templateConfig"
+              :template-config="templateConfig"
               @refetch="fetchTemplate"
             />
           </template>
@@ -77,8 +77,8 @@
         <analyzer-search
           ref="analyzer-search-component"
           :disabled="readOnly || !allowEdit"
-          :selectedAnalyzers="selectedAnalyzers"
-          :toggleSearch="showAnalyzerList"
+          :selected-analyzers="selectedAnalyzers"
+          :toggle-search="showAnalyzerList"
           @addAnalyzer="addAnalyzer"
           @closeSearch="showAnalyzerList = false"
         />
@@ -88,12 +88,12 @@
             v-for="analyzer in activeAnalyzers"
             :key="analyzer.shortcode"
             v-bind="analyzer"
-            :readOnly="readOnly || !allowEdit"
-            :forTemplate="true"
-            :analyzerMeta="analyzer.meta"
-            :availableTransformers="analyzer.transformers"
-            :selectedAnalyzer="getConfig(analyzer.shortcode)"
-            :selectedTransformers="templateConfig.transformers"
+            :read-only="readOnly || !allowEdit"
+            :for-template="true"
+            :analyzer-meta="analyzer.meta"
+            :available-transformers="analyzer.transformers"
+            :selected-analyzer="getConfig(analyzer.shortcode)"
+            :selected-transformers="templateConfig.transformers"
             @onClose="removeAnalyzer(analyzer)"
             @analyzersUpdated="syncAnalyzer"
             @transformersUpdated="syncTransformers"
@@ -105,7 +105,7 @@
             <z-button
               @click="showAnalyzerList = true"
               ref="add-analyzer-button"
-              buttonType="secondary"
+              button-type="secondary"
               icon="plus"
               size="small"
             >

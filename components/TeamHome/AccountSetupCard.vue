@@ -45,7 +45,7 @@
               v-else
               @click="step.action"
               size="small"
-              buttonType="secondary"
+              button-type="secondary"
               :icon="step.icon"
               >{{ step.actionLabel }}</z-button
             >
@@ -54,7 +54,7 @@
       </div>
     </div>
     <add-repo-modal
-      :showModal="showAddRepoModal"
+      :show-modal="showAddRepoModal"
       @close="
         () => {
           showAddRepoModal = false

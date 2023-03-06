@@ -2,9 +2,9 @@
   <div v-if="Object.keys(availableDowngradePlans).length > 0">
     <button-input
       label="Downgrade plan"
-      inputId="billing-settings-downgrade-plan"
-      buttonType="secondary"
-      :buttonLabel="`Downgrade to ${availableDowngradePlans.name}`"
+      input-id="billing-settings-downgrade-plan"
+      button-type="secondary"
+      :button-label="`Downgrade to ${availableDowngradePlans.name}`"
       icon="arrow-down"
       @click="showDowngradePlanModal"
     >
@@ -20,7 +20,7 @@
     <portal to="modal">
       <z-confirm
         v-if="showConfirmDialog"
-        primaryActionType="danger"
+        primary-action-type="danger"
         title="Are you sure you want to downgrade your DeepSource subscription"
         :subtitle="message"
         @primaryAction="downgrade"
@@ -28,13 +28,13 @@
       >
         <template v-slot:footer="{ close }">
           <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
-            <z-button buttonType="ghost" class="text-vanilla-100" size="small" @click="close">
+            <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               I changed my mind
             </z-button>
             <z-button
               v-if="updating"
               class="w-60 flex items-center"
-              buttonType="danger"
+              button-type="danger"
               size="small"
               :disabled="true"
             >
@@ -45,7 +45,7 @@
               v-else
               icon="check-circle"
               class="modal-primary-action w-60"
-              buttonType="danger"
+              button-type="danger"
               size="small"
               @click="downgrade(close)"
             >

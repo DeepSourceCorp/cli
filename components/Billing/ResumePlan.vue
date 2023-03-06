@@ -2,9 +2,9 @@
   <div>
     <button-input
       label="Resume subscription"
-      inputId="billing-settings-resume-plan"
-      buttonType="primary"
-      buttonLabel="Resume subscription"
+      input-id="billing-settings-resume-plan"
+      button-type="primary"
+      button-label="Resume subscription"
       icon="play-circle"
       @click="showResumePlanModal"
     >
@@ -16,7 +16,7 @@
     <portal to="modal">
       <z-confirm
         v-if="showConfirmDialog"
-        primaryActionType="primary"
+        primary-action-type="primary"
         title="Resume your DeepSource subscription?"
         :subtitle="message"
         @primaryAction="resumePlan(close)"
@@ -30,7 +30,7 @@
             <z-button
               v-if="updating"
               class="flex items-center"
-              buttonType="primary"
+              button-type="primary"
               size="small"
               :disabled="true"
             >
@@ -41,7 +41,7 @@
               v-else
               icon="check-circle"
               class="modal-primary-action"
-              buttonType="primary"
+              button-type="primary"
               size="small"
               @click="resumePlan(close)"
             >

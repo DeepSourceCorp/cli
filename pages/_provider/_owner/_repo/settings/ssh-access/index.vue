@@ -27,7 +27,7 @@
         />
         <div class="flex flex-wrap md:flex-nowrap gap-2">
           <z-button
-            buttonType="secondary"
+            button-type="secondary"
             size="small"
             icon="refresh-ccw"
             class="w-full md:w-auto"
@@ -36,7 +36,7 @@
             Regenerate
           </z-button>
           <z-button
-            buttonType="danger"
+            button-type="danger"
             size="small"
             icon="trash-2"
             class="w-full md:w-auto"

@@ -2,9 +2,9 @@
   <input-wrapper
     :label="label"
     :description="description"
-    :inputId="inputId"
-    :inputWidth="inputWidth"
-    :cascadeInput="cascadeInput"
+    :input-id="inputId"
+    :input-width="inputWidth"
+    :cascade-input="cascadeInput"
   >
     <template slot="label">
       <slot name="label"></slot>
@@ -17,7 +17,7 @@
         :id="inputId"
         v-model="modelValue"
         :disabled="disabled"
-        :readOnly="readOnly"
+        :read-only="readOnly"
         @blur="triggerBlur"
         class="px-2"
         size="small"

@@ -4,7 +4,7 @@
     :grid-spacing="0"
     spacing-class="gap-px p-0"
     header-spacing-class="py-2 pl-4 pr-2"
-    customGridClass="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+    custom-grid-class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
   >
     <div slot="title" class="flex items-center justify-between">
       <div class="flex items-center h-full space-x-2">

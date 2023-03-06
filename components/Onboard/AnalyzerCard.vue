@@ -6,10 +6,10 @@
     <!-- Header -->
     <div v-if="configItems.length > 0" class="flex items-center w-full space-x-2">
       <analyzer-logo
-        :analyzerLogo="analyzerLogo"
+        :analyzer-logo="analyzerLogo"
         :shortcode="icon"
         :name="label"
-        :hideTooltip="true"
+        :hide-tooltip="true"
       />
       <!-- TODO: Get Repo name and handle name -->
       <div class="flex-1 text-sm font-bold text-vanilla-200">
@@ -38,12 +38,12 @@
             </z-radio-group>
           </template>
           <template v-else>
-            <z-input v-model="config.selected" textSize="xs" />
+            <z-input v-model="config.selected" text-size="xs" />
           </template>
         </template>
         <template v-else-if="config.type == 'boolean'">
           <z-radio-group
-            :modelValue="`${String(config.selected)}`"
+            :model-value="`${String(config.selected)}`"
             @change="(val) => (config.selected = val === 'true')"
             class="grid grid-cols-3 gap-1 space-x-4 text-sm"
           >
@@ -61,7 +61,7 @@
               :key="option"
               :label="config.labels ? config.labels[option] : option"
               :value="option"
-              :modelValue="
+              :model-value="
                 Array.isArray(config.selected) ? config.selected.includes(option) : false
               "
               @change="(isChecked) => updateChecks(option, isChecked, config)"
@@ -76,7 +76,7 @@
           </div>
         </template>
         <template v-else-if="config.type == 'integer'">
-          <z-input v-model="config.selected" textSize="xs" type="number" />
+          <z-input v-model="config.selected" text-size="xs" type="number" />
         </template>
       </div>
     </template>

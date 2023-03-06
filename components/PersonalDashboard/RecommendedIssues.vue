@@ -21,8 +21,8 @@
       <!-- Autofix Modal -->
       <autofix-file-chooser
         v-bind="autofixIssue"
-        :isOpen="isAutofixOpen"
-        :repoParams="repoParams"
+        :is-open="isAutofixOpen"
+        :repo-params="repoParams"
         @close="closeAutofixModal"
         @run-quota-exhausted="openUpgradeAccountModal"
       />

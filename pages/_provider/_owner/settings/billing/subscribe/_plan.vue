@@ -49,7 +49,7 @@
                 <z-button
                   size="x-small"
                   icon="minus"
-                  buttonType="secondary"
+                  button-type="secondary"
                   :disabled="seats <= minSeats"
                   v-on:click.shift="updateSeatsInStore(seats - 4)"
                   @click="updateSeatsInStore(seats - 1)"
@@ -66,7 +66,7 @@
                 <z-button
                   size="x-small"
                   icon="plus"
-                  buttonType="secondary"
+                  button-type="secondary"
                   :disabled="seats >= maxSeats"
                   v-on:click.shift="updateSeatsInStore(seats + 4)"
                   @click="updateSeatsInStore(seats + 1)"
@@ -136,7 +136,7 @@
             <z-input
               v-model="couponCode"
               placeholder="Have a coupon? Enter code."
-              :showBorder="!couponError"
+              :show-border="!couponError"
               :class="{
                 'border border-cherry': couponError
               }"
@@ -144,7 +144,7 @@
               <template slot="right">
                 <z-button
                   @click="redeemCoupon"
-                  buttonType="secondary"
+                  button-type="secondary"
                   class="w-24 text-vanilla-100"
                   size="small"
                 >
@@ -163,7 +163,7 @@
         </div>
       </div>
       <div>
-        <stripe-checkout-box :planSlug="planSlug" :coupon="couponCode" />
+        <stripe-checkout-box :plan-slug="planSlug" :coupon="couponCode" />
       </div>
     </section>
   </div>

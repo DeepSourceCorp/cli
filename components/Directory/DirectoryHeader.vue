@@ -9,7 +9,7 @@
             >All {{ isAnalyzer ? 'analyzers' : 'transformers' }}</nuxt-link
           ></z-breadcrumb-item
         >
-        <z-breadcrumb-item isCurrent
+        <z-breadcrumb-item is-current
           ><nuxt-link
             :to="
               shortcode
@@ -174,7 +174,7 @@
     </portal>
     <lazy-add-repo-modal
       v-if="showAddRepoModal"
-      :showModal="showAddRepoModal"
+      :show-modal="showAddRepoModal"
       :show-auto-onboard="false"
       :analyzer-shortcode="isAnalyzer ? shortcode : analyzerShortcode"
       :transformer-shortcode="isAnalyzer ? '' : shortcode"
