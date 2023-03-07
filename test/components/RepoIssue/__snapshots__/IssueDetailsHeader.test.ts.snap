@@ -5,7 +5,7 @@ exports[`renders IssueDetailsHeader with all props 1`] = `
   <div class=\\"flex flex-wrap items-baseline text-lg font-normal text-vanilla-400\\"><span class=\\"pr-2 font-bold text-vanilla-100\\">Imports from same package are not grouped</span> <span class=\\"flex-shrink-0 block md:flex font-medium\\">PYL-C0412</span></div>
   <div class=\\"flex items-center w-full text-vanilla-400 sm:w-auto\\">
     <div class=\\"flex flex-wrap items-center leading-none gap-x-4 gap-y-2\\">
-      <issuetype-stub issuetype=\\"style\\"></issuetype-stub>
+      <issuetype-stub issue-type=\\"style\\"></issuetype-stub>
       <!---->
       <!---->
       <div class=\\"flex items-center space-x-2\\">
@@ -13,7 +13,7 @@ exports[`renders IssueDetailsHeader with all props 1`] = `
         —
         <span data-original-title=\\"null\\" class=\\" has-tooltip\\">2 years old</span></span>
       </div>
-      <prioritytypeselect-stub priority=\\"high\\" menutitle=\\"\\" showfooter=\\"true\\" size=\\"small\\" width=\\"small\\" direction=\\"right\\" verbosetitle=\\"true\\" source=\\"REPOSITORY\\" showtooltip=\\"true\\"></prioritytypeselect-stub>
+      <prioritytypeselect-stub width=\\"small\\" priority=\\"high\\" source=\\"REPOSITORY\\" verbose-title=\\"true\\" show-tooltip=\\"true\\" show-footer=\\"true\\"></prioritytypeselect-stub>
       <div class=\\"flex items-center justify-between gap-x-1\\"><a class=\\"flex items-center gap-x-1 uppercase border border-slate-400 rounded-full px-1.5 py-1 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"w-2 h-2 rounded-full\\" style=\\"background: rgb(234, 88, 12);\\"></span> <span class=\\"font-medium tracking-wide text-xxs text-vanilla-400\\">
             a01
           </span></a><a class=\\"flex items-center gap-x-1 uppercase border border-slate-400 rounded-full px-1.5 py-1 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"w-2 h-2 rounded-full\\" style=\\"background: rgb(234, 88, 12);\\"></span> <span class=\\"font-medium tracking-wide text-xxs text-vanilla-400\\">

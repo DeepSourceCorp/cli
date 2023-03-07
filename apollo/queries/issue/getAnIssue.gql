@@ -1,4 +1,4 @@
-query($shortcode: String!) {
+query getAnIssue($shortcode: String!) {
   issue(shortcode: $shortcode) {
     title
     descriptionRendered
@@ -6,5 +6,6 @@ query($shortcode: String!) {
     autofixAvailable
     shortcode
     issueType
+    tags
   }
 }

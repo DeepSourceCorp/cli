@@ -34,7 +34,7 @@
       </div>
       <z-input
         size="small"
-        placeholder="Search for issue title or issue code"
+        placeholder="Search for an issue..."
         background-color="ink-300"
         :show-border="false"
         :value="searchTerm"

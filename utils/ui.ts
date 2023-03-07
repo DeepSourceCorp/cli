@@ -313,3 +313,19 @@ export function prCopyText(providerShortcode: ProviderMeta['shortcode']): string
 
   return copyText[providerShortcode] ?? 'pull request'
 }
+
+/**
+ * Remove hyphens from tag slugs except for cwe tags
+ *
+ * @param  {string} tag
+ * @returns {string}
+ */
+export function deslugifyTag(tag: string): string {
+  const cweRegex = /^(cwe-)[0-9]+$/i
+
+  if (cweRegex.test(tag)) {
+    return String(tag)
+  }
+
+  return String(tag).replace(/-/g, ' ')
+}

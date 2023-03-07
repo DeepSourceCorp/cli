@@ -11,7 +11,6 @@ import { DurationTypeT, getDateFromXAgo } from '~/utils/date'
 interface IssueDetailsHeaderT extends Vue {
   lastSeenDisplay: string
   firstSeenDisplay: string
-  deslugifyTag: (tag: string) => string
 }
 
 const stubs = {
@@ -82,23 +81,4 @@ test('EmptyChart computed properties', () => {
 
   expect(vm.firstSeenDisplay).toEqual('2 years old')
   expect(vm.lastSeenDisplay).toEqual('2 years ago')
-})
-
-test('deslugifyTag', () => {
-  const localVue = createLocalVue()
-  localVue.use(VTooltip)
-
-  const wrapper = shallowMount(IssueDetailsHeader, {
-    stubs,
-    propsData: defaultProps,
-    mocks,
-    localVue
-  })
-
-  const vm = wrapper.vm as IssueDetailsHeaderT
-
-  expect(vm.deslugifyTag('cwe-123')).toEqual('cwe-123')
-  expect(vm.deslugifyTag('owasp-top-10')).toEqual('owasp top 10')
-  expect(vm.deslugifyTag('a02')).toEqual('a02')
-  expect(vm.deslugifyTag('sans-top-25')).toEqual('sans top 25')
 })

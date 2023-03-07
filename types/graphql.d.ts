@@ -1339,7 +1339,7 @@ declare module '*/singleIssueWithPriority.gql' {
 declare module '*/getAnIssue.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const getAnIssue: DocumentNode;
 
   export default defaultDocument;
 }

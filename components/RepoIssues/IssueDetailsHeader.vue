@@ -68,25 +68,22 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import dayjs from 'dayjs'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { ZIcon } from '@deepsource/zeal'
-import IssueType from '@/components/Repository/IssueType.vue'
-import { PriorityTypeBadge, PriorityTypeSelect } from '@/components/IssuePriority/index'
+import dayjs from 'dayjs'
+
 import { formatDate } from '@/utils/date'
-import { safeRenderBackticks } from '~/utils/string'
 import { IssuePriority, IssueSeverity } from '~/types/types'
-import { generateColorFromTag } from '~/utils/ui'
+import { safeRenderBackticks } from '~/utils/string'
+import { deslugifyTag, generateColorFromTag } from '~/utils/ui'
 
 @Component({
   components: {
-    ZIcon,
-    IssueType,
-    PriorityTypeBadge,
-    PriorityTypeSelect
+    ZIcon
   },
   layout: 'repository',
   methods: {
+    deslugifyTag,
     safeRenderBackticks,
     formatDate,
     generateColorFromTag
@@ -135,20 +132,6 @@ export default class IssueDetailsHeader extends Vue {
      * Return when the issue was first seen in a human-readable form.
      */
     return `${dayjs(this.firstSeen).fromNow(true)} old`
-  }
-
-  /**
-   * Remove hyphens from tag slugs except for cwe tags
-   *
-   * @param  {string} tag
-   * @returns {string}
-   */
-  deslugifyTag(tag: string): string {
-    const cweRegex = new RegExp('^(cwe-)[0-9]+$', 'i')
-
-    if (cweRegex.test(tag)) return String(tag)
-
-    return String(tag).replace(/-/g, ' ')
   }
 }
 </script>

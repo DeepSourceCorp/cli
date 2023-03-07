@@ -4,7 +4,8 @@ import {
   getColorShades,
   newShade,
   containsElement,
-  prCopyText
+  prCopyText,
+  deslugifyTag
 } from '~/utils/ui'
 
 describe('[[ Test generateColorFromTag ]]', () => {
@@ -137,5 +138,22 @@ describe('[[ Test prCopyText ]]', () => {
 
   it('has a default for invalid VCS provider', () => {
     expect(prCopyText('undefined')).toMatchSnapshot('unknown VCS provider')
+  })
+})
+
+describe('[[ Test deslugifyTag ]]', () => {
+  it('removes hyphens from tag slugs except for cwe tags', () => {
+    const deslugifyTagMap: Record<string, string> = {
+      'cwe-123': 'cwe-123',
+      'owasp-top-10': 'owasp top 10',
+      a02: 'a02',
+      'sans-top-25': 'sans top 25'
+    }
+
+    Object.keys(deslugifyTagMap).forEach((tag) => {
+      const deslugifiedTag = deslugifyTagMap[tag]
+
+      expect(deslugifyTag(tag)).toBe(deslugifiedTag)
+    })
   })
 })
