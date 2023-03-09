@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="px-4 py-3 border-b border-slate-400">
+    <div class="border-b border-slate-400 px-4 py-3">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item>
           <nuxt-link :to="`${analyzerUrl}/issues`" class="text-vanilla-400">All issues</nuxt-link>
@@ -8,53 +8,53 @@
         <z-breadcrumb-item is-current>{{ issue.shortcode }}</z-breadcrumb-item>
       </z-breadcrumb>
     </div>
-    <div class="p-4 border-b border-slate-400">
+    <div class="border-b border-slate-400 p-4">
       <div class="max-w-prose">
         <h1 v-if="isLoaded" class="text-2xl font-semibold">
           <span v-html="safeRenderBackticks(issue.title)" />
-          <span class="ml-3 text-lg font-normal text-vanilla-400 whitespace-nowrap">{{
+          <span class="ml-3 whitespace-nowrap text-lg font-normal text-vanilla-400">{{
             issue.shortcode
           }}</span>
         </h1>
-        <div v-else class="w-full h-9 bg-ink-300 animate-pulse"></div>
+        <div v-else class="h-9 w-full animate-pulse bg-ink-300"></div>
       </div>
-      <div class="flex mt-3 space-x-5 text-sm text-vanilla-400">
-        <div v-if="isLoaded" class="flex space-x-1.5 items-center self-start">
+      <div class="mt-3 flex flex-wrap items-center gap-x-2 gap-y-3 text-sm text-vanilla-400">
+        <span v-if="isLoaded" class="mr-3 flex items-center gap-x-1.5">
           <z-icon :icon="issue.issueType" size="x-small" color="vanilla-400" />
           <span>{{ issueTypeTitles[issue.issueType] }}</span>
-        </div>
-        <div v-else class="w-16 h-6 bg-ink-300 animate-pulse"></div>
+        </span>
+        <span v-else class="mr-3 h-6 w-16 animate-pulse bg-ink-300"></span>
 
-        <div v-if="isLoaded && issue.autofixAvailable" class="flex space-x-1.5 items-center">
+        <span v-if="isLoaded && issue.autofixAvailable" class="mr-3 flex items-center gap-x-1.5">
           <z-icon icon="autofix" size="x-small" color="vanilla-400" />
           <span>Autofix</span>
-        </div>
-        <div v-else-if="!isLoaded" class="w-16 h-6 bg-ink-300 animate-pulse"></div>
+        </span>
+        <span v-else-if="!isLoaded" class="mr-3 h-6 w-16 animate-pulse bg-ink-300"></span>
 
-        <div v-if="isLoaded && tags.length" class="flex items-center gap-x-1 flex-wrap">
+        <template v-if="isLoaded && tags.length">
           <span
             v-for="tag in tags"
             :key="tag"
-            class="flex items-center gap-x-1 uppercase border border-slate-400 rounded-full px-1.5 py-1"
+            class="flex items-center gap-x-1 rounded-full border border-slate-400 px-1.5 py-1 uppercase"
           >
             <span
-              class="w-2 h-2 rounded-full"
+              class="h-2 w-2 rounded-full"
               :style="{
                 background: generateColorFromTag(tag)
               }"
             ></span>
-            <span class="font-medium tracking-wide text-xxs text-vanilla-400">
+            <span class="text-xxs font-medium tracking-wide text-vanilla-400">
               {{ deslugifyTag(tag) }}
             </span>
           </span>
-        </div>
+        </template>
       </div>
     </div>
     <div class="p-4">
       <div
         v-if="isLoaded && issue.descriptionRendered"
         v-html="issue.descriptionRendered"
-        class="py-2 prose-issue-description max-w-prose"
+        class="prose-issue-description max-w-prose py-2"
       ></div>
       <lazy-empty-state v-else-if="isLoaded" title="No issue description found!" />
     </div>
