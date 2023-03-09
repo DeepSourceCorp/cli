@@ -49,7 +49,7 @@ export class ProviderMeta {
   }
 }
 
-enum routerVcsMap {
+export enum routerVcsMap {
   gh = 'gh',
   ghe = 'ghe',
   gl = 'gl',

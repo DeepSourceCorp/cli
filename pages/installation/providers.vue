@@ -6,11 +6,11 @@
     <p class="mt-2 text-base text-vanilla-400">
       You can connect an existing personal or organization account.
     </p>
-    <div class="flex flex-col items-center mt-6 space-y-4">
+    <div class="mt-6 flex flex-col items-center space-y-4">
       <button
         v-for="opt in loginOptions"
         :key="opt.provider"
-        class="flex items-center justify-center w-full p-2 space-x-2 text-base font-medium rounded-sm text-vanilla-100 hover:bg-opacity-90"
+        class="flex w-full items-center justify-center space-x-2 rounded-sm p-2 text-base font-medium text-vanilla-100 hover:bg-opacity-90"
         :class="opt.bg"
         @click="triggerAccountClickAction(opt)"
       >
@@ -48,6 +48,7 @@ import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AuthMixin, { LoginOption } from '~/mixins/authMixin'
 import ContextMixin from '~/mixins/contextMixin'
 import MetaMixin from '~/mixins/metaMixin'
+import { routerVcsMap } from '~/plugins/helpers/provider'
 
 @Component({
   components: {
@@ -141,9 +142,18 @@ export default class InstallationProvider extends mixins(
    *
    * @returns void
    */
-  triggerAccountClickAction({ provider }: LoginOption) {
-    if (provider === this.$providerMetaMap['gl'].auth) {
+  triggerAccountClickAction({ provider, shortcode }: LoginOption) {
+    if (shortcode === this.$providerMetaMap[routerVcsMap.gl].shortcode) {
       const nextUrl = ['', 'accounts', 'gitlab', 'login'].join('/')
+      const expiry = new Date().getTime() + 5 * 60 * 1000 // 5 min life
+      this.$nuxt.$cookies.set('bifrost-post-auth-redirect', nextUrl, {
+        expires: new Date(expiry),
+        path: '/'
+      })
+    }
+
+    if (shortcode === this.$providerMetaMap[routerVcsMap.ads].shortcode) {
+      const nextUrl = ['', 'accounts', 'ads', 'login'].join('/')
       const expiry = new Date().getTime() + 5 * 60 * 1000 // 5 min life
       this.$nuxt.$cookies.set('bifrost-post-auth-redirect', nextUrl, {
         expires: new Date(expiry),

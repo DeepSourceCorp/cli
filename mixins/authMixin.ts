@@ -1,10 +1,12 @@
 import { Component, Vue, namespace } from 'nuxt-property-decorator'
+import { routerVcsMap } from '~/plugins/helpers/provider'
 
 import { AuthActionTypes } from '~/store/account/auth'
 
 const authStore = namespace('account/auth')
 
 export interface LoginOption {
+  shortcode: routerVcsMap
   provider: string
   icon: string
   label: string
@@ -96,6 +98,7 @@ export default class AuthMixin extends Vue {
     if (!onPrem || !enableSaml || allowSocialAuth || onProvidersPage) {
       if (githubEnabled) {
         options.push({
+          shortcode: routerVcsMap.gh,
           provider: 'github',
           icon: 'github',
           label: 'GitHub',
@@ -105,6 +108,7 @@ export default class AuthMixin extends Vue {
 
       if (githubServerEnabled) {
         options.push({
+          shortcode: routerVcsMap.ghe,
           provider: 'github-enterprise',
           icon: 'github-enterprise',
           label: 'GitHub Enterprise',
@@ -114,6 +118,7 @@ export default class AuthMixin extends Vue {
 
       if (gitlabEnabled) {
         options.push({
+          shortcode: routerVcsMap.gl,
           provider: 'gitlab',
           icon: 'gitlab',
           label: 'GitLab',
@@ -123,6 +128,7 @@ export default class AuthMixin extends Vue {
 
       if (bitbucketEnabled) {
         options.push({
+          shortcode: routerVcsMap.bb,
           provider: 'bitbucket',
           icon: 'bitbucket',
           label: 'Bitbucket',
@@ -132,6 +138,7 @@ export default class AuthMixin extends Vue {
 
       if (gsrEnabled) {
         options.push({
+          shortcode: routerVcsMap.gsr,
           provider: 'gsr',
           icon: 'gsr-colored',
           label: 'Google Cloud Source',
@@ -141,6 +148,7 @@ export default class AuthMixin extends Vue {
 
       if (adsEnabled) {
         options.push({
+          shortcode: routerVcsMap.ads,
           provider: 'ads',
           icon: 'ads-colored',
           label: 'Azure Devops Services',
