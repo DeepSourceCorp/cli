@@ -2,7 +2,7 @@
   <base-card :remove-default-style="true" custom-padding="pb-3 pr-3 pt-2">
     <template slot="title">
       <p class="text-sm font-semibold text-vanilla-300">
-        <span v-html="safeRenderBackticks(title)" />
+        <span v-html="safeRenderBackticks(title)"></span>
         <span class="ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap"
           >{{ shortcode }}
         </span>
@@ -28,7 +28,7 @@
         </div>
 
         <!-- Issue type -->
-        <issue-type :issue-type="issueType"></issue-type>
+        <issue-type :issue-type="issueType" />
       </div>
     </template>
 

@@ -11,7 +11,7 @@
           class="float-right w-full sm:w-auto"
           :filter-value="30"
           @updateFilter="updateLastDays"
-        ></graph-control>
+        />
       </div>
     </template>
     <div class="sm:flex sm:flex-row-reverse">

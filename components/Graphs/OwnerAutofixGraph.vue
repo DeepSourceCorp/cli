@@ -12,7 +12,7 @@
         class="float-right w-full h-8 xl:w-auto"
         :filter-value="lastDays"
         @updateFilter="updateLastDays"
-      ></graph-control>
+      />
     </template>
     <div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-2">
       <graph-legend

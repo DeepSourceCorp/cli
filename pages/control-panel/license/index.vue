@@ -38,7 +38,7 @@
           :day-options="[180, 240, 360]"
           :display-duration-type="DurationTypeMonths"
           @updateFilter="updateLastDays"
-        ></graph-control>
+        />
       </template>
       <div class="flex items-center gap-x-6 px-7 ml-0.5 pt-4 text-vanilla-400">
         <div class="flex items-center gap-x-2">
@@ -60,7 +60,7 @@
         :spline="false"
         type="bar"
         :bar-options="{ stacked: 1, spaceRatio: 0.6 }"
-      ></base-graph>
+      />
     </stat-section>
   </div>
 </template>

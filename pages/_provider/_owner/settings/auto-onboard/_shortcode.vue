@@ -58,8 +58,7 @@
               icon-color="vanilla-300"
               v-tooltip="'Discard changes'"
               icon="corner-up-left"
-            >
-            </z-button>
+            />
             <delete-template-config v-if="!readOnly" :title="title" />
             <save-template-config
               v-if="!readOnly"
@@ -97,8 +96,7 @@
             @onClose="removeAnalyzer(analyzer)"
             @analyzersUpdated="syncAnalyzer"
             @transformersUpdated="syncTransformers"
-          >
-          </analyzer>
+          />
         </template>
         <empty-state v-else title="Select an analyzer to proceed">
           <template slot="action">

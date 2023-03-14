@@ -7,8 +7,7 @@
       subtitle="This action is irreversible, and will invalidate the old keys. You must replace the old keys with the new one everywhere you're using it."
       primary-action-label="Confirm and regenerate keys"
       @primaryAction="confirm"
-    >
-    </z-confirm>
+    />
   </portal>
 </template>
 <script lang="ts">

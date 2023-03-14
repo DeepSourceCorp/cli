@@ -25,8 +25,7 @@
         @onClose="removeAnalyzer(analyzer)"
         @analyzersUpdated="syncAnalyzer"
         @transformersUpdated="syncTransformers"
-      >
-      </analyzer>
+      />
     </template>
     <div v-else class="flex items-center h-64 border rounded-sm border-slate-400">
       <div class="max-w-md mx-auto space-y-4 font-medium text-center font-base">

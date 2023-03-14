@@ -4,7 +4,7 @@
     class="flex items-center"
     :class="[spacing]"
   >
-    <z-icon :icon="iconType" size="x-small" :color="iconColor"></z-icon>
+    <z-icon :icon="iconType" size="x-small" :color="iconColor" />
     <span class="text-sm text-vanilla-400 tracking-wide capitalize">{{ label }}</span>
   </div>
 </template>

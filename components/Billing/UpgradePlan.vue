@@ -37,7 +37,7 @@
               size="small"
               :disabled="true"
             >
-              <z-icon icon="spin-loader" color="ink" class="animate-spin mr-2"></z-icon>
+              <z-icon icon="spin-loader" color="ink" class="animate-spin mr-2" />
               Upgrading subscription
             </z-button>
             <z-button

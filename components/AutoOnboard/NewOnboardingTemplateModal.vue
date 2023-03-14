@@ -4,7 +4,7 @@
       <fieldset class="p-4 space-y-4">
         <div>
           <label for="title" class="mb-2 text-sm sr-only text-vanilla-200">Template name</label>
-          <z-input v-model="title" placeholder="Template name" id="Title" required="true"></z-input>
+          <z-input v-model="title" placeholder="Template name" id="Title" required="true" />
         </div>
         <div>
           <label for="desc" class="mb-2 text-sm sr-only text-vanilla-200">Description</label>
@@ -46,8 +46,7 @@
             @onClose="removeAnalyzer(analyzer)"
             @analyzersUpdated="syncAnalyzer"
             @transformersUpdated="syncTransformers"
-          >
-          </analyzer>
+          />
         </div>
         <div class="space-y-2" v-else>
           <div

@@ -7,7 +7,7 @@
           :fallback-image="getDefaultAvatar(viewer.email)"
           :user-name="viewer.fullName"
           size="lg"
-        ></z-avatar>
+        />
         <div>
           <h3 class="text-base font-medium text-vanilla-100">{{ viewer.fullName }}</h3>
           <p class="text-xs text-vanilla-400">{{ viewer.email }}</p>
@@ -51,7 +51,7 @@
             class="mt-2"
             :model-value="step.isComplete"
             @change="(val) => updateCheck(step.name, val)"
-          ></z-checkbox>
+          />
           <div class="space-y-2">
             <h5
               class="leading-none"

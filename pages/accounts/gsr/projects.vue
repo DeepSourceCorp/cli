@@ -24,7 +24,7 @@
           v-model="searchCandidate"
           class="rounded-md"
           placeholder="Search for a project"
-        ></z-input>
+        />
         <template v-if="projectsInSearch.length > 0">
           <button
             v-for="project in projectsInSearch"
@@ -46,8 +46,8 @@
                 size="medium"
                 v-tooltip="`Project setup pending`"
                 color="honey"
-              ></z-icon>
-              <z-icon v-else icon="check-circle" size="medium" color="juniper"></z-icon>
+              />
+              <z-icon v-else icon="check-circle" size="medium" color="juniper" />
             </template>
             <z-icon
               v-else-if="loadingAccount === project.login"
@@ -55,13 +55,13 @@
               size="medium"
               color="juniper"
               class="animate-spin"
-            ></z-icon>
+            />
             <z-icon
               v-else
               icon="chevron-right"
               size="medium"
               class="flex-shrink-0 duration-100 ease-linear transform group-hover:translate-x-1"
-            ></z-icon>
+            />
           </button>
         </template>
         <empty-state v-else>

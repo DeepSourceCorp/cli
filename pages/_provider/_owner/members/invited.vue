@@ -7,8 +7,7 @@
           :key="invite.node.email"
           v-bind="invite.node"
           @cancelInvite="confirmCancelInvite"
-        >
-        </invited-member-list-item>
+        />
       </transition-group>
       <z-pagination
         v-if="totalPages"
@@ -17,7 +16,7 @@
         :total-visible="5"
         :hide-for-single-page="true"
         v-model="currentPage"
-      ></z-pagination>
+      />
     </template>
     <div v-else-if="$fetchState.pending" class="flex flex-col space-y-2">
       <div
@@ -37,12 +36,11 @@
       :show-border="true"
       title="No pending invites"
       subtitle="Looks like all your invitations have been accepted. Go ahead and invite someone new!"
-    >
-    </empty-state>
+    />
     <portal to="modal">
       <z-confirm v-if="showCancelConfirm" @primaryAction="cancelInviteForMember" @onClose="close">
         <div class="flex items-center mb-2 text-base leading-relaxed text-vanilla-100">
-          <z-icon icon="alert-circle" size="small" class="mr-2"></z-icon>
+          <z-icon icon="alert-circle" size="small" class="mr-2" />
           Do you want to cancel this invite?
         </div>
         <p class="text-sm leading-relaxed text-vanilla-400">
@@ -65,8 +63,8 @@
                 icon="spin-loader"
                 class="animate-spin"
                 color="ink-400"
-              ></z-icon>
-              <z-icon v-else icon="trash-2" color="ink-400" class="mb-0.5"></z-icon>
+              />
+              <z-icon v-else icon="trash-2" color="ink-400" class="mb-0.5" />
               <span v-if="inviteLoading"> Cancelling Invite </span>
               <span v-else> Yes, cancel invite </span>
             </z-button>

@@ -6,7 +6,7 @@
         <div class="h-4 w-16 bg-ink-300 animate-pulse"></div>
         <div class="h-4 w-16 bg-ink-300 animate-pulse"></div>
       </div>
-      <div class="mt-4 h-17 w-full bg-ink-300 animate-pulse" />
+      <div class="mt-4 h-17 w-full bg-ink-300 animate-pulse"></div>
     </div>
   </div>
 </template>

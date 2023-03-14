@@ -3,11 +3,7 @@
     <div class="grid grid-cols-2 p-4 pb-0">
       <div class="flex flex-col space-y-2">
         <div class="flex items-center space-x-2">
-          <z-icon
-            v-if="namespace.key"
-            :icon="namespace.key.toLowerCase()"
-            color="transparent"
-          ></z-icon>
+          <z-icon v-if="namespace.key" :icon="namespace.key.toLowerCase()" color="transparent" />
           <span class="font-semibold text-vanilla-100"
             >{{ namespace.key }}
             <span v-if="currentMetric.name" class="font-normal text-vanilla-400"
@@ -29,7 +25,7 @@
         <z-menu direction="left" width="small" size="small" class="inline-block">
           <template v-slot:trigger="{ toggle }">
             <button type="button" class="outline-none focus:outline-none" @click="toggle">
-              <z-icon class="inline" icon="more-vertical"></z-icon>
+              <z-icon class="inline" icon="more-vertical" />
             </button>
           </template>
           <template slot="body">
@@ -47,7 +43,7 @@
           class="flex items-center h-8 px-2 py-1 space-x-2 text-sm border border-dashed rounded-md border-slate-400 hover:border-slate-400 text-vanilla-400 hover:text-vanilla-200"
           @click="showThresholdUpdate = true"
         >
-          <z-icon size="small" icon="plus"></z-icon>
+          <z-icon size="small" icon="plus" />
           <span class="leading-none">Add threshold</span>
         </button>
       </div>
@@ -69,7 +65,7 @@
         :axis-options="axisOptions"
         :y-axis-max="clip ? 100 : null"
         :y-axis-min="clip ? 0 : null"
-      ></z-chart>
+      />
       <div v-else class="flex items-center justify-center py-12 text-vanilla-400">
         No Data to Display
       </div>
@@ -97,7 +93,7 @@
               :max="isNumberType ? null : 100"
               @blur="validateThreshold"
               @debounceInput="validateThreshold"
-            ></z-input>
+            />
             <p v-if="thresholdInputError" class="text-xs text-cherry">
               {{ thresholdInputErrorMessage }}
             </p>

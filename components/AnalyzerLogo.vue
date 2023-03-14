@@ -14,7 +14,7 @@
       color="transparent"
       :size="size"
       v-tooltip="hideTooltip ? '' : name"
-    ></z-icon>
+    />
   </div>
 </template>
 <script lang="ts">

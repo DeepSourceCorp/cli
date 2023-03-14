@@ -3,17 +3,17 @@
     <slot>
       <!-- Found -->
       <div class="flex items-center space-x-2">
-        <z-icon icon="clock" size="small" color="vanilla-400"></z-icon>
+        <z-icon icon="clock" size="small" color="vanilla-400" />
         <span class="text-sm text-vanilla-400">{{ actionText }} {{ createdString }}</span>
       </div>
       <!-- Issue type -->
       <div class="items-center hidden space-x-2 md:flex">
-        <z-icon icon="git-commit" size="small" color="vanilla-400"></z-icon>
+        <z-icon icon="git-commit" size="small" color="vanilla-400" />
         <span class="text-sm text-vanilla-400">{{ compareHash }}</span>
       </div>
       <!-- Created -->
       <div class="items-center hidden space-x-2 md:flex">
-        <z-icon icon="timer-reset" size="small" color="vanilla-400"></z-icon>
+        <z-icon icon="timer-reset" size="small" color="vanilla-400" />
         <span class="text-sm text-vanilla-400"
           >{{ finishedInLabel }} <span v-if="showFinishedInTime"> {{ finishedString }}</span>
         </span>

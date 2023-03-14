@@ -27,7 +27,7 @@
           v-for="ii in 2"
           :key="ii"
           class="h-20 bg-opacity-50 rounded-md animate-pulse bg-ink-200"
-        />
+        ></div>
       </div>
 
       <div v-else class="grid grid-cols-1 gap-4 md:grid-cols-2 3xl:grid-cols-3">

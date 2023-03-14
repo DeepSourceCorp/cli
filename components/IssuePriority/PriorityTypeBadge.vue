@@ -3,7 +3,7 @@
     v-tooltip="{ content: tooltipCopy, delay: { show: 200, hide: 100 }, classes: 'w-64' }"
     class="flex items-center gap-x-1 uppercase bg-ink-200 rounded-full px-1.5 py-1 cursor"
   >
-    <span v-if="badgeType" class="h-2 rounded-full w-2" :class="badgeType" />
+    <span v-if="badgeType" class="h-2 rounded-full w-2" :class="badgeType"></span>
     <z-icon v-else icon="ellipsis-small" size="x-small" class="-mx-0.5" />
     <span class="text-xxs text-vanilla-400 tracking-wide font-medium">
       {{ priorityLabel }}

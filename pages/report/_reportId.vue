@@ -32,7 +32,7 @@
           :owner-login="publicReport.owner.login"
           :created-at="formatDate(parseISODate(publicReport.createdAt))"
           :token="token"
-        ></nuxt-child>
+        />
 
         <section
           id="about"

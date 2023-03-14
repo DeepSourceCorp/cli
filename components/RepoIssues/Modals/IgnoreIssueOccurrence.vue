@@ -10,7 +10,7 @@
         </span>
       </template>
       <div class="flex p-4 space-x-2 text-vanilla-400">
-        <z-icon icon="alert-circle" size="medium" color="vanilla-400"></z-icon>
+        <z-icon icon="alert-circle" size="medium" color="vanilla-400" />
         <div class="flex flex-col space-y-2 text-sm leading-7 text-vanilla-400">
           Doing this will remove all current occurrences of this issue and silence all the future
           ones in this file.

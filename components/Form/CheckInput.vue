@@ -14,7 +14,7 @@
           v-model="modelValue[opt.value]"
           spacing="4"
           size="small"
-        ></z-checkbox>
+        />
         <p
           v-if="opt.description"
           class="text-xs text-vanilla-400 ml-6 leading-5"

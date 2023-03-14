@@ -3,7 +3,7 @@
     <section-header title="Projects" />
 
     <div v-if="$fetchState.pending" class="grid gap-4 md:w-2/3 animate-pulse">
-      <div v-for="ii in 5" :key="ii" class="h-32 rounded-md bg-ink-300" />
+      <div v-for="ii in 5" :key="ii" class="h-32 rounded-md bg-ink-300"></div>
     </div>
 
     <div v-else-if="resolveNodes(watchedRepositories).length" class="grid gap-4 md:w-2/3">

@@ -15,7 +15,7 @@
       size="small"
       :color="iconColor ? iconColor : active ? 'vanilla-100' : ''"
       class="min-w-4 min-h-4"
-    ></z-icon>
+    />
     <div
       v-show="!isCollapsed"
       class="w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5"

@@ -25,17 +25,16 @@ module.exports = {
   // add your custom rules here
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'vue/attribute-hyphenation': 'error' // Strongly recommended
-
-    // 'vue/html-self-closing': [
-    //   'error',
-    //   {
-    //     html: { normal: 'never', void: 'always' }
-    //   }
-    // ] // Strongly recommended
-    // 'vue/attributes-order': 'error' // Recommended
+    'vue/attribute-hyphenation': 'error', // Strongly recommended
+    'vue/html-self-closing': [
+      'error',
+      {
+        html: { normal: 'never', void: 'always' }
+      }
+    ] // Strongly recommended
     // 'vue/v-bind-style': 'error', // Strongly recommended
     // 'vue/v-on-style': 'error', // Strongly recommended
     // 'vue/v-slot-style': 'error', // Strongly recommended
+    // 'vue/attributes-order': 'error' // Recommended
   }
 }

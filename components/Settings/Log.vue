@@ -5,9 +5,9 @@
       <template v-if="actorName"> — {{ actorName }} </template>
     </div>
     <div class="flex space-x-4">
-      <info v-tooltip="formattedDate" v-if="createdAt" icon="clock" :title="formatDuration"></info>
-      <info v-if="location" icon="map-pin" :title="location"></info>
-      <info v-if="ipAddress" icon="globe" :title="ipAddress"></info>
+      <info v-tooltip="formattedDate" v-if="createdAt" icon="clock" :title="formatDuration" />
+      <info v-if="location" icon="map-pin" :title="location" />
+      <info v-if="ipAddress" icon="globe" :title="ipAddress" />
     </div>
   </div>
 </template>

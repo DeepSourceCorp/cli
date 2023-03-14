@@ -19,7 +19,7 @@
       @debounceInput="(val) => (modelValue = val)"
     >
       <template slot="left">
-        <z-icon class="flex-shrink-0 p-px" icon="search" size="small"></z-icon>
+        <z-icon class="flex-shrink-0 p-px" icon="search" size="small" />
       </template>
       <template slot="right">
         <z-icon
@@ -28,7 +28,7 @@
           class="cursor-pointer"
           v-show="modelValue"
           @click="modelValue = null"
-        ></z-icon>
+        />
       </template>
     </z-input>
   </div>

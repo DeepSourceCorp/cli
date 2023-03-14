@@ -65,7 +65,7 @@
               :key="opt"
               :label="`Last ${displayDayOptions[index]} ${displayDurationType}`"
               :value="opt"
-            ></z-option>
+            />
           </z-select>
         </div>
       </div>

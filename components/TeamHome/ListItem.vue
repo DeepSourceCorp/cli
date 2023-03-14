@@ -8,7 +8,7 @@
     <div class="w-2/3 flex items-center text-sm">
       <div class="w-8 flex items-center">
         <slot name="avatar">
-          <z-icon :icon="icon" size="small"></z-icon>
+          <z-icon :icon="icon" size="small" />
         </slot>
       </div>
       <slot name="label">

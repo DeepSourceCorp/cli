@@ -11,7 +11,7 @@
             <h3
               class="inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base"
               v-html="safeRenderBackticks(title)"
-            />
+            ></h3>
             <span class="text-sm font-normal whitespace-nowrap text-vanilla-400">
               {{ shortcode }}
             </span>

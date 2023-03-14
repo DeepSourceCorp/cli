@@ -26,7 +26,7 @@
                 size="x-small"
                 class="self-center"
                 @click="close"
-              ></z-button>
+              />
             </div>
             <z-tab-panes class="h-102">
               <activate-single-repo

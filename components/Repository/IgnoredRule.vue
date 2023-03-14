@@ -36,7 +36,7 @@
           <span class="text-vanilla-400">{{ rule.creator.email }}</span>
         </span>
         <span class="flex items-center leading-none gap-x-2">
-          <z-icon icon="clock" color="vanilla-400" size="small"></z-icon>
+          <z-icon icon="clock" color="vanilla-400" size="small" />
           <span class="text-vanilla-400">Added {{ ruleCreatedTime }}</span>
         </span>
       </div>

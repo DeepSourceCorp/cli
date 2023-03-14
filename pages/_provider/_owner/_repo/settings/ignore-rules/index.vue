@@ -29,7 +29,7 @@
       :silence-rule-id="deleteRuleId"
       @close="closeDeleteModal"
       @delete="deleteRule"
-    ></ignored-rule-delete-modal>
+    />
   </div>
 </template>
 

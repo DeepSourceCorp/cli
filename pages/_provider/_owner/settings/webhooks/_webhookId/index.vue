@@ -38,7 +38,7 @@
             <z-button @click="readOnly = false" size="small" button-type="secondary" icon="edit">
               Edit
             </z-button>
-            <test-webhook-endpoint v-if="localEndpoint.active"></test-webhook-endpoint>
+            <test-webhook-endpoint v-if="localEndpoint.active" />
             <enable-webhook-endpoint v-if="!localEndpoint.active" @reset="reset(false)">
               <template v-slot:default="{ toggleModal }">
                 <z-button @click="toggleModal" size="small" icon="play-circle">
@@ -104,7 +104,7 @@
             input-id="webhook-endpoint-url"
             v-model="localEndpoint.url"
             :read-only="readOnly"
-          ></text-input>
+          />
           <toggle-input
             v-if="Object.keys(localEndpoint).includes('apiSigning')"
             label="Enable API signing"
@@ -190,8 +190,7 @@
                       :value="event.shortcode"
                       :name="event.shortcode"
                       size="small"
-                    >
-                    </z-checkbox>
+                    />
                     <code class="text-sm">{{ event.shortcode }}</code>
                   </div>
                   <p class="ml-6 text-xs text-vanilla-400">{{ event.shortDescription }}</p>

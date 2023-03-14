@@ -3,7 +3,7 @@
     <section-header title="Trending" />
 
     <div v-if="$fetchState.pending" class="grid gap-4 animate-pulse">
-      <div v-for="ii in 5" :key="ii" class="rounded-md h-17 bg-ink-300" />
+      <div v-for="ii in 5" :key="ii" class="rounded-md h-17 bg-ink-300"></div>
     </div>
 
     <div v-else class="grid gap-4">

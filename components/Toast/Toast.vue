@@ -21,13 +21,13 @@
         >
           <div class="flex-shrink-0">
             <div v-if="type === 'success'" class="p-1 rounded-full">
-              <z-icon icon="check-circle" size="small" color="juniper"></z-icon>
+              <z-icon icon="check-circle" size="small" color="juniper" />
             </div>
             <div v-else-if="type === 'danger'" class="p-1 rounded-full">
-              <z-icon icon="alert-circle" size="small" color="vanilla-100"></z-icon>
+              <z-icon icon="alert-circle" size="small" color="vanilla-100" />
             </div>
             <div v-else-if="type === 'info'" class="p-1 rounded-full">
-              <z-icon icon="alert-circle" size="small" color="vanilla-400"></z-icon>
+              <z-icon icon="alert-circle" size="small" color="vanilla-400" />
             </div>
           </div>
           <div class="w-0 flex-1 px-2 mt-0.5">

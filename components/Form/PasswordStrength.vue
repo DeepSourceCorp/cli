@@ -1,6 +1,6 @@
 <template>
   <svg :class="sizeClass" viewBox="0 0 48 48" v-tooltip="passwordGrade">
-    <circle class="donut-hole" cx="20" cy="20" r="15" fill="none"></circle>
+    <circle class="donut-hole" cx="20" cy="20" r="15" fill="none" />
     <circle
       class="text-ink-100"
       stroke="currentColor"
@@ -9,7 +9,7 @@
       r="15"
       fill="transparent"
       stroke-width="4"
-    ></circle>
+    />
     <circle
       class="transition-all duration-300 ease-in"
       :class="{
@@ -25,7 +25,7 @@
       stroke-width="4"
       :stroke-dasharray="2 * Math.PI * 15"
       :stroke-dashoffset="strokeOffset"
-    ></circle>
+    />
   </svg>
 </template>
 <script lang="ts">

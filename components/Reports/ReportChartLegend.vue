@@ -11,7 +11,7 @@
         :class="{ 'col-start-2': datasets.length === 3 && idx === 2 && !othersDatasetNames.length }"
         class="flex items-center gap-x-2 truncate"
       >
-        <span :class="dataset.bgColor" class="w-2 h-2 rounded-sm flex-shrink-0" />
+        <span :class="dataset.bgColor" class="w-2 h-2 rounded-sm flex-shrink-0"></span>
         {{ datasetNameFormatter(dataset.name) }}
       </div>
 
@@ -28,7 +28,7 @@
             class="flex items-center gap-x-2 leading-3 cursor-pointer hover:text-vanilla-100 focus:text-vanilla-100"
             @click="toggle"
           >
-            <span :class="dataset.bgColor" class="w-2 h-2 rounded-sm" /> Others
+            <span :class="dataset.bgColor" class="w-2 h-2 rounded-sm"></span> Others
           </button>
         </template>
         <template #body>

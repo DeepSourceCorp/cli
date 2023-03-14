@@ -28,7 +28,7 @@
       placeholder="Search templates..."
     >
       <template slot="left">
-        <z-icon icon="search" class="ml-1.5" size="small"></z-icon>
+        <z-icon icon="search" class="ml-1.5" size="small" />
       </template>
     </z-input>
     <div class="grid grid-cols-1 gap-2">
@@ -52,7 +52,7 @@
           :total-pages="pageCount"
           :total-visible="5"
           @selected="updateCurrentPage"
-        ></z-pagination>
+        />
       </template>
       <empty-state
         v-else-if="!searchCandidate"

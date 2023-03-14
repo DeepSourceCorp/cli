@@ -31,7 +31,7 @@
         class="p-1 rounded-md cursor-pointer hover:bg-cherry-600 hover:bg-opacity-20"
         @click="onClose"
       >
-        <z-icon icon="trash-2" color="cherry" size="small"></z-icon>
+        <z-icon icon="trash-2" color="cherry" size="small" />
       </button>
     </div>
     <form v-show="!isCollapsed" class="-mt-1 divide-y divide-ink-200">

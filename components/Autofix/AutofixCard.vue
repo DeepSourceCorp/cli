@@ -18,9 +18,9 @@
       in {{ files }} {{ filesAffected > 1 ? 'files' : 'file' }}
     </h4>
     <div class="text-vanilla-400 flex space-x-2 items-center text-sm">
-      <z-icon icon="autofix" size="small" color="vanilla-400"></z-icon>
+      <z-icon icon="autofix" size="small" color="vanilla-400" />
       <span>Autofix</span>
-      <z-icon icon="arrow-right" size="small" color="vanilla-400"></z-icon>
+      <z-icon icon="arrow-right" size="small" color="vanilla-400" />
     </div>
   </nuxt-link>
 </template>

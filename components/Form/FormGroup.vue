@@ -5,7 +5,7 @@
         {{ label }}
       </h5>
       <div class="flex-grow">
-        <z-divider color="ink-200"></z-divider>
+        <z-divider color="ink-200" />
       </div>
     </div>
     <div :class="[bodyWidthClass, bodyClass, divide ? 'divide-y divide-ink-300' : '']">

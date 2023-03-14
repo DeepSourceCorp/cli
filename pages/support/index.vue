@@ -191,7 +191,7 @@
                 class="p-1 rounded-sm hover:bg-cherry-600 hover:bg-opacity-20 disabled:opacity-50"
                 @click="removeFile(index)"
               >
-                <z-icon icon="trash-2" color="cherry" size="x-small"></z-icon>
+                <z-icon icon="trash-2" color="cherry" size="x-small" />
               </button>
             </div>
           </div>

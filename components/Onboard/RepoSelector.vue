@@ -15,7 +15,7 @@
         @debounceInput="fetchRepositories"
       >
         <template slot="left">
-          <z-icon icon="search" size="small" class="ml-1.5"></z-icon>
+          <z-icon icon="search" size="small" class="ml-1.5" />
         </template>
       </z-input>
       <div class="text-xs text-vanilla-400">
@@ -37,15 +37,14 @@
             :icon="repo.isPrivate ? 'z-lock' : 'globe'"
             :repo-name="repo.name"
             @click="pickRepo(repo)"
-          >
-          </repo-list-item>
+          />
         </template>
         <div
           v-else
           class="flex flex-col items-center justify-center flex-1 w-full p-6 text-sm text-center border border-dashed rounded-md text-vanilla-400 border-slate-400"
         >
           <div v-if="loading" class="flex flex-col items-center space-y-2">
-            <z-icon class="animate-spin" icon="spin-loader"></z-icon>
+            <z-icon class="animate-spin" icon="spin-loader" />
             <span class="text-vanilla-400">Loading repositories</span>
           </div>
           <div v-else class="space-y-5">
@@ -64,12 +63,7 @@
                 class="flex items-center w-48"
                 :disabled="true"
               >
-                <z-icon
-                  icon="spin-loader"
-                  class="mr-2 animate-spin"
-                  size="small"
-                  color="ink-400"
-                ></z-icon>
+                <z-icon icon="spin-loader" class="mr-2 animate-spin" size="small" color="ink-400" />
                 <span>Syncing repositories</span>
               </z-button>
               <z-button v-else size="small" class="w-48" icon="refresh-cw" @click="syncRepos">

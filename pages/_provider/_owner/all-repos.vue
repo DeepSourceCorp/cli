@@ -14,7 +14,7 @@
           placeholder="Search for repository name"
         >
           <template slot="left">
-            <z-icon icon="search" size="small" class="ml-1.5"></z-icon>
+            <z-icon icon="search" size="small" class="ml-1.5" />
           </template>
         </z-input>
         <z-button
@@ -36,7 +36,7 @@
               @click="toggle"
             >
               {{ pageSize }}
-              <z-icon icon="chevron-down" size="small"></z-icon>
+              <z-icon icon="chevron-down" size="small" />
             </button>
           </template>
           <template slot="body">
@@ -100,11 +100,8 @@
       :total-visible="5"
       :page="currentPage"
       @selected="updateCurrentPage"
-    ></z-pagination>
-    <add-repo-modal
-      :show-modal="showAddRepoModal"
-      @close="showAddRepoModal = false"
-    ></add-repo-modal>
+    />
+    <add-repo-modal :show-modal="showAddRepoModal" @close="showAddRepoModal = false" />
   </div>
 </template>
 

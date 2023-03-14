@@ -27,7 +27,7 @@
           :total-pages="pageCount"
           :total-visible="5"
           @selected="updateCurrentPage"
-        ></z-pagination>
+        />
       </template>
       <empty-state
         v-else

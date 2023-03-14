@@ -16,7 +16,7 @@
         <div class="flex flex-col space-y-2">
           <span>Tell us why this is a false positive (optional)</span>
           <div class="h-24 bg-ink-400">
-            <z-textarea v-model="comment" text-size="sm"></z-textarea>
+            <z-textarea v-model="comment" text-size="sm" />
           </div>
         </div>
       </div>

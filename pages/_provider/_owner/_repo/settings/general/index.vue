@@ -81,8 +81,8 @@
                 spacing="py-1 px-2"
                 class="text-sm"
               >
-                <z-option label="Granular (recommended)" value="granular"></z-option>
-                <z-option label="Broad" value="broad"></z-option>
+                <z-option label="Granular (recommended)" value="granular" />
+                <z-option label="Broad" value="broad" />
               </z-select>
             </div>
           </div>
@@ -115,8 +115,8 @@
               spacing="py-1 px-2"
               class="text-sm"
             >
-              <z-option label="Granular (recommended)" value="granular"></z-option>
-              <z-option label="Broad" value="broad"></z-option>
+              <z-option label="Granular (recommended)" value="granular" />
+              <z-option label="Broad" value="broad" />
             </z-select>
           </div>
 

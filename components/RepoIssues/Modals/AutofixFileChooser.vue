@@ -13,7 +13,7 @@
             class="py-1.5 leading-6 px-2"
           >
             <template slot="left">
-              <z-icon icon="search" size="small" class="w-6 pl-2"></z-icon>
+              <z-icon icon="search" size="small" class="w-6 pl-2" />
             </template>
           </z-input>
           <z-list class="flex flex-col px-1 space-y-2">

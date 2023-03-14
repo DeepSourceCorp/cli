@@ -45,7 +45,7 @@
         input-width="wide"
         :options="basePermOptions"
         @change="updateBasePerms"
-      ></radio-group-input>
+      />
       <check-input
         v-model="issuePerms"
         label="Issue permissions"
@@ -53,7 +53,7 @@
         input-width="wide"
         :options="issuePermOptions"
         @change="updateBasePerms"
-      ></check-input>
+      />
       <check-input
         v-model="metricPerms"
         label="Metric thresholds permission"
@@ -61,7 +61,7 @@
         input-width="wide"
         :options="metricPermOptions"
         @change="updateBasePerms"
-      ></check-input>
+      />
       <check-input
         v-model="metricSuppressionPerms"
         label="Suppress metric permission"
@@ -70,7 +70,7 @@
         :options="metricSuppressOptions"
         @change="updateBasePerms"
         @value="(e) => $toast.success(e)"
-      ></check-input>
+      />
     </form-group>
     <portal to="modal">
       <confirm-sync-modal

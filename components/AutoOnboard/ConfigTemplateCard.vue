@@ -18,7 +18,7 @@
           @click.stop.prevent="editTemplate"
           icon-color="vanilla-400 opacity-75"
           size="small"
-        ></z-button>
+        />
         <z-button
           v-tooltip="'Use template'"
           @click.stop.prevent="onboard"
@@ -28,7 +28,7 @@
           "
           button-type="ghost"
           size="small"
-        ></z-button>
+        />
       </div>
     </template>
   </base-card>

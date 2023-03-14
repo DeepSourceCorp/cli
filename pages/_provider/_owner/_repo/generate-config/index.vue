@@ -3,7 +3,7 @@
   <div>
     <div class="flex items-center justify-between p-4 border-b border-slate-400">
       <h4 class="flex items-center space-x-2 text-md text-vanilla-400">
-        <z-icon :icon="repository.isPrivate ? 'z-lock' : 'globe'" size="small"></z-icon>
+        <z-icon :icon="repository.isPrivate ? 'z-lock' : 'globe'" size="small" />
         <span>
           <nuxt-link :to="['', $route.params.provider, owner].join('/')">{{ owner }}</nuxt-link>
           /
@@ -32,7 +32,7 @@
               class="mt-2"
               @updateAnalyzers="updateAnalyzerConfig"
               @updateTransformers="updateTransformersConfig"
-            ></analyzer-selector>
+            />
           </template>
         </z-step>
         <z-step class="w-full">
@@ -100,7 +100,7 @@
           :show-modal="showNextSteps"
           @close="showNextSteps = false"
           @activate="activateRepo"
-        ></next-steps-modal>
+        />
       </portal>
     </div>
   </div>

@@ -71,8 +71,7 @@
           loading-label="Generating"
           class="modal-primary-action"
           @click="saveToken"
-        >
-        </z-button>
+        />
       </div>
     </template>
   </z-modal>

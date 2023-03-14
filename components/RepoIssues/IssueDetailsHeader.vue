@@ -8,13 +8,13 @@
     <div class="flex items-center w-full text-vanilla-400 sm:w-auto">
       <!-- Meta data -->
       <div class="flex flex-wrap items-center leading-none gap-x-4 gap-y-2">
-        <issue-type v-if="issueType" :issue-type="issueType"></issue-type>
+        <issue-type v-if="issueType" :issue-type="issueType" />
         <issue-severity-tag v-if="severity && issueType === 'security'" :severity="severity" />
         <meta-data-item v-if="count" icon="file-pulse"
           >{{ count }} {{ count > 1 ? 'occurrences' : 'occurrence' }} in this check</meta-data-item
         >
         <div v-if="firstSeen && lastSeen" class="flex items-center space-x-2">
-          <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="clock" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400">
             <span v-tooltip="`Last seen on ${formatDate(lastSeen, 'lll')}`">{{
               lastSeenDisplay

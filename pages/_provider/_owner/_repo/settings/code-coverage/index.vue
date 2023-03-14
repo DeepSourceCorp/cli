@@ -58,8 +58,7 @@
             description="Ask DeepSource to re-use coverage reports from pull-requests after a merge. Turn this on if you don't run tests on your default branch commits."
             input-id="enable-infer-default-branch-coverage"
             @input="toggleInferDefaultBranchCoverage"
-          >
-          </toggle-input>
+          />
         </div>
       </div>
     </main>

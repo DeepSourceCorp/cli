@@ -1,9 +1,9 @@
 <template>
   <div>
-    <sub-nav active="transforms"></sub-nav>
+    <sub-nav active="transforms" />
     <!-- Back to Run List Page -->
     <div class="flex flex-col w-full px-4 py-6 space-y-2">
-      <link-to-prev :link="routeToPrevious" title="All transform runs"></link-to-prev>
+      <link-to-prev :link="routeToPrevious" title="All transform runs" />
       <!-- Details Header -->
       <div class="w-3/4 sm:w-4/5 py-2.5 flex flex-col space-y-2 justify-evenly">
         <gist-card-title
@@ -13,7 +13,7 @@
           :id="commitOidShort"
           link="/history/runs/details"
           :spin-icon="isPending"
-        ></gist-card-title>
+        />
         <gist-card-description
           :action-text="isPending ? 'Started' : 'Transformed'"
           :created-at="createdAt"
@@ -21,8 +21,7 @@
           :compare-hash="gitCompareDisplay"
           :finished-in-label="isPending ? 'Transform in progress' : undefined"
           :show-finished-in-time="!isPending"
-        >
-        </gist-card-description>
+        />
       </div>
     </div>
   </div>

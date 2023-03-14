@@ -16,7 +16,7 @@
         {{ label }}
       </div>
       <div class="cursor-pointer" @click="onClose">
-        <z-icon icon="x" size="small" color="vanilla-200"> </z-icon>
+        <z-icon icon="x" size="small" color="vanilla-200" />
       </div>
     </div>
     <!-- Config Section -->
@@ -34,7 +34,7 @@
                 :key="option"
                 :value="option"
                 :label="config.labels ? config.labels[option] : option"
-              ></z-radio>
+              />
             </z-radio-group>
           </template>
           <template v-else>
@@ -48,8 +48,8 @@
             class="grid grid-cols-3 gap-1 space-x-4 text-sm"
           >
             <!--Make these values boolean true and false-->
-            <z-radio value="true" label="Yes"></z-radio>
-            <z-radio value="false" label="No"></z-radio>
+            <z-radio value="true" label="Yes" />
+            <z-radio value="false" label="No" />
           </z-radio-group>
         </template>
         <template v-else-if="config.type == 'array'">
@@ -72,7 +72,7 @@
               :value="Array.isArray(config.selected) ? config.selected.join(', ') : ''"
               @input="(value) => updateArray(value, config)"
               size="small"
-            ></z-input>
+            />
           </div>
         </template>
         <template v-else-if="config.type == 'integer'">
@@ -83,9 +83,9 @@
     <!-- No Config Data Section -->
     <template v-if="configItems.length == 0">
       <div class="absolute cursor-pointer top-2 right-2" @click="onClose">
-        <z-icon icon="x" size="small" color="vanilla-200"> </z-icon>
+        <z-icon icon="x" size="small" color="vanilla-200" />
       </div>
-      <z-icon :icon="icon" color="pink" size="large"></z-icon>
+      <z-icon :icon="icon" color="pink" size="large" />
       <div class="text-sm font-bold text-vanilla-100">{{ label }}</div>
     </template>
   </div>

@@ -11,8 +11,8 @@
     <div class="border-b border-slate-400 p-4">
       <div class="max-w-prose">
         <h1 v-if="isLoaded" class="text-2xl font-semibold">
-          <span v-html="safeRenderBackticks(issue.title)" />
-          <span class="ml-3 whitespace-nowrap text-lg font-normal text-vanilla-400">{{
+          <span v-html="safeRenderBackticks(issue.title)"></span>
+          <span class="ml-3 text-lg font-normal text-vanilla-400 whitespace-nowrap">{{
             issue.shortcode
           }}</span>
         </h1>

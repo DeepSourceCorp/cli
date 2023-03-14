@@ -35,7 +35,7 @@
         @debounceInput="onSearchQueryChange"
       >
         <template slot="left">
-          <z-icon icon="search" class="ml-1.5" size="small"></z-icon>
+          <z-icon icon="search" class="ml-1.5" size="small" />
         </template>
         <template slot="right">
           <z-icon
@@ -44,7 +44,7 @@
             class="cursor-pointer"
             v-show="query"
             @click="clearSearch"
-          ></z-icon>
+          />
         </template>
       </z-input>
     </div>

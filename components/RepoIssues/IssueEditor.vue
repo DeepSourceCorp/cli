@@ -26,7 +26,7 @@
                 <span
                   class="flex-grow text-base font-medium text-vanilla-100"
                   v-html="safeRenderBackticks(text)"
-                />
+                ></span>
               </div>
               <div
                 class="items-center block space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4"
@@ -107,7 +107,7 @@
       :shortcode="shortcode"
       @close="close"
       @ignore="markOccurrencesDisabled"
-    ></ignore-issue-intentional>
+    />
     <ignore-issue-false-positive
       v-if="currentComponent === 'falsePositive'"
       :is-open="isOpen"
@@ -116,7 +116,7 @@
       :check-issue-id="id"
       @close="close"
       @ignore="markOccurrencesDisabled"
-    ></ignore-issue-false-positive>
+    />
     <ignore-issue-occurrence
       v-if="currentComponent === 'occurence'"
       :is-open="isOpen"
@@ -126,7 +126,7 @@
       :check-id="checkId"
       @close="close"
       @ignoreForever="markOccurrencesDisabled"
-    ></ignore-issue-occurrence>
+    />
   </div>
 </template>
 

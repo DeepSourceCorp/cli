@@ -25,7 +25,7 @@
             :issue-priority="issuePriority"
             :can-edit-priority="canEditPriority"
             @priority-edited="editPriority"
-          ></issue-details-header>
+          />
           <div class="flex items-start justify-end gap-x-1.5">
             <issue-actions
               class="ml-4"
@@ -36,7 +36,7 @@
               :repository="repository"
               :next-issue="nextIssue"
               :previous-issue="previousIssue"
-            ></issue-actions>
+            />
           </div>
         </div>
       </div>
@@ -70,11 +70,8 @@
           @search="(val) => (searchCandidate = val)"
           @sort="(val) => (sort = val)"
           @page="(val) => (currentPage = val)"
-        ></issue-list>
-        <issue-description
-          :description="singleIssue.descriptionRendered"
-          class="col-span-1"
-        ></issue-description>
+        />
+        <issue-description :description="singleIssue.descriptionRendered" class="col-span-1" />
       </div>
     </div>
   </main>

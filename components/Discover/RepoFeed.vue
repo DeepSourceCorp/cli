@@ -2,7 +2,7 @@
   <section>
     <section-header title="Recommended projects" />
     <div v-if="loading" class="grid gap-4 animate-pulse">
-      <div v-for="ii in 5" :key="ii" class="h-32 rounded-md bg-ink-300" />
+      <div v-for="ii in 5" :key="ii" class="h-32 rounded-md bg-ink-300"></div>
     </div>
     <div v-else-if="resolveNodes(discoverRepositories).length" class="grid gap-4">
       <repo-card
@@ -13,7 +13,7 @@
         :show-info="true"
       >
         <template slot="stats">
-          <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="clock" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400">
             Updated {{ fromNow(edge.node.modifiedAt) }}
           </span>

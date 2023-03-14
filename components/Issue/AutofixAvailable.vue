@@ -8,11 +8,7 @@
         class="flex items-center space-x-2 overflow-hidden text-sm cursor-pointer overflow-ellipsis"
         @click="modelValue = modelValue ? null : true"
       >
-        <z-icon
-          icon="autofix"
-          size="small"
-          :color="!modelValue ? 'vanilla-400' : 'vanilla-100'"
-        ></z-icon>
+        <z-icon icon="autofix" size="small" :color="!modelValue ? 'vanilla-400' : 'vanilla-100'" />
         <span
           class="text-xs truncate"
           :class="modelValue ? 'text-vanilla-100' : 'text-vanilla-300'"
@@ -27,7 +23,7 @@
           :class="{
             'rotate-45': modelValue
           }"
-        ></z-icon>
+        />
       </div>
     </div>
   </z-badge>

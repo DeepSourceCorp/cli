@@ -224,10 +224,7 @@
         </button>
       </div>
     </section>
-    <add-repo-modal
-      :show-modal="showAddRepoModal"
-      @close="showAddRepoModal = false"
-    ></add-repo-modal>
+    <add-repo-modal :show-modal="showAddRepoModal" @close="showAddRepoModal = false" />
   </aside>
 </template>
 

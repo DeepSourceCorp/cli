@@ -4,8 +4,7 @@
     <div class="grid w-full grid-cols-1 p-4 gap-y-4">
       <template v-if="transformRuns">
         <template v-if="transformRuns.length">
-          <transform-branches v-for="run in transformRuns" :key="run.branchName" :run="run">
-          </transform-branches>
+          <transform-branches v-for="run in transformRuns" :key="run.branchName" :run="run" />
         </template>
         <template v-else>
           <empty-state

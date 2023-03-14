@@ -51,7 +51,7 @@
           size="small"
           :disabled="true"
         >
-          <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin"></z-icon>
+          <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin" />
           Cancelling plan
         </z-button>
         <z-button

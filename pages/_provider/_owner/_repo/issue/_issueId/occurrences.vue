@@ -3,7 +3,7 @@
     <issue-occurrence-section
       @filters-updated="triggerFilterUpdate"
       @filter-removed="removeFilter"
-    ></issue-occurrence-section>
+    />
     <div class="grid grid-cols-12">
       <!-- Issue list -->
       <div class="flex flex-col col-span-full lg:col-span-8 gap-y-4">
@@ -33,7 +33,7 @@
               :check-issue-ids="issuesIgnored"
               :can-ignore-issues="canIgnoreIssues"
               @ignoreIssues="ignoreIssues"
-            ></issue-editor>
+            />
           </div>
         </template>
         <z-pagination
@@ -49,11 +49,7 @@
       <div v-if="$fetchState.pending" class="hidden col-span-4 px-4 lg:block">
         <div class="rounded-md h-44 bg-ink-300 animate-pulse"></div>
       </div>
-      <issue-description
-        v-else
-        :description="issue.descriptionRendered"
-        class="col-span-4"
-      ></issue-description>
+      <issue-description v-else :description="issue.descriptionRendered" class="col-span-4" />
     </div>
   </div>
 </template>

@@ -18,7 +18,7 @@
           size="small"
           class="ml-1 mr-0.5"
           :class="{ 'animate-spin': isProcessing }"
-        ></z-icon>
+        />
       </template>
     </z-input>
     <div

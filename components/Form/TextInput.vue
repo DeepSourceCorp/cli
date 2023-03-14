@@ -21,7 +21,7 @@
         @blur="triggerBlur"
         class="px-2"
         size="small"
-      ></z-input>
+      />
     </div>
   </input-wrapper>
 </template>

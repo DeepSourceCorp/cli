@@ -21,27 +21,27 @@
           :fallback-image="getDefaultAvatar(account.login, !account.is_team)"
           :user-name="account.login"
           class="flex-shrink-0"
-        ></z-avatar>
+        />
         <div class="flex-grow overflow-hidden text-left overflow-ellipsis">
           <div>{{ account.login }}</div>
           <p class="text-xs text-vanilla-400">
             {{ account.is_team ? 'Team Account' : 'Personal Account' }}
           </p>
         </div>
-        <z-icon v-if="account.installed" icon="check-circle" size="medium" color="juniper"></z-icon>
+        <z-icon v-if="account.installed" icon="check-circle" size="medium" color="juniper" />
         <z-icon
           v-if="loadingAccount === account.login"
           icon="spin-loader"
           size="medium"
           color="juniper"
           class="animate-spin"
-        ></z-icon>
+        />
         <z-icon
           v-else
           icon="chevron-right"
           size="medium"
           class="flex-shrink-0 duration-100 ease-linear transform group-hover:translate-x-1"
-        ></z-icon>
+        />
       </button>
     </div>
     <p class="mt-4 text-sm text-vanilla-400">

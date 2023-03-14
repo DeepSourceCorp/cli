@@ -19,7 +19,7 @@
               placeholder="Template name"
               id="Title"
               required="true"
-            ></z-input>
+            />
           </div>
           <div class="space-y-2">
             <label for="desc" class="text-vanilla-200 text-sm">Description</label>

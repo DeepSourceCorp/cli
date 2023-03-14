@@ -6,8 +6,7 @@
     @primaryAction="updateRole"
   >
     <div class="mb-2 text-base leading-relaxed text-vanilla-100 flex items-center">
-      <z-icon icon="alert-circle" size="small" class="mr-2"></z-icon> Update {{ roles[role] }} role
-      to
+      <z-icon icon="alert-circle" size="small" class="mr-2" /> Update {{ roles[role] }} role to
       {{ roles[newRole] }}
     </div>
     <p class="text-sm leading-relaxed text-vanilla-400 blur" v-html="roleMessage"></p>

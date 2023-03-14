@@ -8,7 +8,7 @@
         >
       </template>
       <div class="flex p-4 space-x-2 text-vanilla-400">
-        <z-icon icon="alert-circle" size="medium" color="vanilla-400"></z-icon>
+        <z-icon icon="alert-circle" size="medium" color="vanilla-400" />
         <div class="text-sm leading-7 text-vanilla-400">
           Doing this will <span class="text-vanilla-100">remove all current occurrences</span> of
           this issue and <span class="text-vanilla-100">silence all the future ones</span> in this

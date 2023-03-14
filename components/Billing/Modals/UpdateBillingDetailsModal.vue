@@ -20,7 +20,7 @@
             @blur="(ev) => validateEmail(ev.target)"
             placeholder="jane@deepsource.io"
             class="mt-0.5"
-          ></z-input>
+          />
         </label>
         <p v-if="emailEmpty" class="text-xs text-cherry">This field is required.</p>
         <p v-else-if="!validBillingEmail" class="text-xs text-cherry">
@@ -34,7 +34,7 @@
           id="billing-address"
           :placeholder="`Avengers Tower \n200 Park Avenue, New York`"
           class="focus-within:border-vanilla-400 border-slate-400 bg-ink-400 text-vanilla-300"
-        ></z-textarea>
+        />
       </fieldset>
     </div>
     <template slot="footer">
@@ -46,11 +46,11 @@
           @click="updateDetails"
         >
           <div v-if="loading" class="flex items-center space-x-1.5">
-            <z-icon class="animate-spin" icon="spin-loader" color="juniper"></z-icon>
+            <z-icon class="animate-spin" icon="spin-loader" color="juniper" />
             <span>Updating Details</span>
           </div>
           <div v-else class="flex items-center space-x-1.5">
-            <z-icon icon="check" color="ink-400"></z-icon>
+            <z-icon icon="check" color="ink-400" />
             <span>Confirm and update</span>
           </div>
         </z-button>

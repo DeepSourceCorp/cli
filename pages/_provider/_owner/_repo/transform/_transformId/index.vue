@@ -4,11 +4,11 @@
       v-bind="transformerRun"
       :route-to-previous="routeToPrevious"
       :current-analyzer="$route.params.analyzer"
-    ></transform-header>
+    />
     <div class="flex flex-col w-full space-y-3">
       <!-- Transform section banner -->
       <div class="flex items-center w-full px-4 py-2 space-x-2 bg-ink-300 text-vanilla-400">
-        <z-icon icon="zap" color="vanilla-400" size="small"></z-icon>
+        <z-icon icon="zap" color="vanilla-400" size="small" />
         <span class="tracking-normal uppercase sm:tracking-wide text-xxs sm:text-sm">
           transform session
         </span>
@@ -43,7 +43,7 @@
             spacing="px-1.5 sm:px-3"
           >
             <span>View commit</span>
-            <z-icon icon="arrow-up-right" size="small"></z-icon>
+            <z-icon icon="arrow-up-right" size="small" />
           </z-button>
         </a>
         <a
@@ -59,7 +59,7 @@
             spacing="px-1.5 sm:px-3"
           >
             <span>View PR</span>
-            <z-icon icon="arrow-up-right" size="small"></z-icon>
+            <z-icon icon="arrow-up-right" size="small" />
           </z-button>
         </a>
       </div>
@@ -85,10 +85,10 @@
             :class="{ 'border-b-4 border-slate-400': index !== changes.length - 1 }"
           >
             <div class="col-span-1 border-r after_html border-slate-400">
-              <z-code :content="change.before_html"></z-code>
+              <z-code :content="change.before_html" />
             </div>
             <div class="col-span-1 before_html">
-              <z-code :content="change.after_html"></z-code>
+              <z-code :content="change.after_html" />
             </div>
           </div>
         </div>

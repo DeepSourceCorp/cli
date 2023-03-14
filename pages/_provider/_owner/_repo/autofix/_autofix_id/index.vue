@@ -13,19 +13,22 @@
       <div
         class="items-center space-x-2 text-xs font-normal sm:flex lg:text-lg lg:leading-9 text-vanilla-400"
       >
-        <span class="text-base font-medium text-vanilla-100" v-html="safeRenderBackticks(title)" />
+        <span
+          class="text-base font-medium text-vanilla-100"
+          v-html="safeRenderBackticks(title)"
+        ></span>
         <span class="inline md:flex" v-if="autofixRun.issue">{{ autofixRun.issue.shortcode }}</span>
       </div>
       <div class="flex space-x-6">
-        <issue-type v-if="autofixRun.issue" :issue-type="autofixRun.issue.issueType"></issue-type>
+        <issue-type v-if="autofixRun.issue" :issue-type="autofixRun.issue.issueType" />
         <!-- Created -->
-        <info icon="clock" :title="formatDuration"></info>
+        <info icon="clock" :title="formatDuration" />
         <!-- Analyzer -->
         <info
           v-if="autofixRun.analyzer && autofixRun.analyzer.name"
           :icon="autofixRun.analyzer.name.toLowerCase()"
           :title="autofixRun.analyzer.name"
-        ></info>
+        />
       </div>
     </div>
     <!-- banner -->
@@ -35,12 +38,12 @@
     >
       <div class="flex items-center flex-1 space-x-6">
         <div class="flex items-center space-x-2">
-          <z-icon icon="autofix" size="small" color="vanilla-400"></z-icon>
+          <z-icon icon="autofix" size="small" color="vanilla-400" />
           <span class="text-sm uppercase text-vanilla-400">Autofix Session</span>
         </div>
         <!-- issues being fixed -->
         <info v-if="autofixRun.isGeneratedFromPr">
-          <z-icon icon="flag" size="small" color="vanilla-400"></z-icon>
+          <z-icon icon="flag" size="small" color="vanilla-400" />
           <span class="text-sm">
             <span class="text-semibold">
               {{ autofixRun.issuesAffected }}
@@ -52,7 +55,7 @@
         </info>
         <!-- Total occurrences fixed -->
         <info v-if="autofixRun.resolvedIssuesCount">
-          <z-icon icon="target" size="small" color="vanilla-400"></z-icon>
+          <z-icon icon="target" size="small" color="vanilla-400" />
           <span class="text-sm">
             <span class="text-semibold">
               {{ autofixRun.resolvedIssuesCount }}
@@ -64,7 +67,7 @@
         </info>
         <!-- Total files being affected -->
         <info v-if="filesAffected.length">
-          <z-icon icon="file-text" size="small" color="vanilla-400"></z-icon>
+          <z-icon icon="file-text" size="small" color="vanilla-400" />
           <span class="text-sm">
             <span class="text-semibold">
               {{ filesAffected.length }}
@@ -87,15 +90,15 @@
         >
           <div class="flex items-center px-4 py-2 space-x-2">
             <template v-if="triggeringAutofix">
-              <z-icon icon="spin-loader" size="small" color="ink-300" class="animate-spin"></z-icon>
+              <z-icon icon="spin-loader" size="small" color="ink-300" class="animate-spin" />
               <span class="text-xs text-ink-300">Creating Autofix</span>
             </template>
             <template v-else-if="autofixRun.isGeneratedFromPr">
-              <z-icon icon="git-pull-request" size="small" color="ink-300"></z-icon>
+              <z-icon icon="git-pull-request" size="small" color="ink-300" />
               <span class="text-xs text-ink-300">{{ pullRequestStatusText.COMMIT }}</span>
             </template>
             <template v-else>
-              <z-icon icon="git-pull-request" size="small" color="ink-300"></z-icon>
+              <z-icon icon="git-pull-request" size="small" color="ink-300" />
               <span class="text-xs text-ink-300">{{ pullRequestStatusText.CREATE }}</span>
             </template>
           </div>
@@ -118,7 +121,7 @@
             :disabled="true"
             class="cursor-wait"
           >
-            <z-icon class="animate-spin" icon="spin-loader" color="ink-300"></z-icon>
+            <z-icon class="animate-spin" icon="spin-loader" color="ink-300" />
             <span>{{ pullRequestStatusText.COMMITTING }}</span>
           </z-button>
           <z-button
@@ -129,7 +132,7 @@
             rel="noopener noreferrer"
             :to="autofixRun.vcsPrUrl"
           >
-            <z-icon icon="external-link" color="ink-300"></z-icon>
+            <z-icon icon="external-link" color="ink-300" />
             <span>{{ pullRequestStatusText.VIEW }}</span>
           </z-button>
         </template>
@@ -140,7 +143,7 @@
             class="cursor-wait"
             v-if="autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.IN_PROGRESS"
           >
-            <z-icon class="animate-spin" icon="spin-loader" color="ink-300"></z-icon>
+            <z-icon class="animate-spin" icon="spin-loader" color="ink-300" />
             <span>{{ pullRequestStatusText.CREATING }}</span>
           </z-button>
           <z-button
@@ -154,7 +157,7 @@
             rel="noopener noreferrer"
             :to="autofixRun.vcsPrUrl"
           >
-            <z-icon icon="external-link" color="ink-300"></z-icon>
+            <z-icon icon="external-link" color="ink-300" />
             <span>{{ pullRequestStatusText.VIEW }}</span>
           </z-button>
           <z-button
@@ -165,7 +168,7 @@
             rel="noopener noreferrer"
             v-if="autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.CREATED"
           >
-            <z-icon icon="git-pull-request" color="ink-300"></z-icon>
+            <z-icon icon="git-pull-request" color="ink-300" />
             <span>{{ pullRequestStatusText.CLOSED }}</span>
           </z-button>
         </template>
@@ -235,7 +238,7 @@
             font-size="base"
             @change="selectFile(key)"
           />
-          <z-icon icon="bug-risk" size="small" color="vanilla-400"></z-icon>
+          <z-icon icon="bug-risk" size="small" color="vanilla-400" />
           <span class="text-sm font-bold">Missing argument in function call</span>
           <span class="text-sm text-vanilla-400">PYL-43WQ</span>
         </div>
@@ -253,7 +256,7 @@
             :selected-hunk-ids="selectedHunkIds"
             @selectFile="selectFile"
             @selectFileIfAllHunksSelected="selectFileIfAllHunksSelected"
-          ></autofix-code-diff>
+          />
         </div>
         <div
           v-if="isGroup"

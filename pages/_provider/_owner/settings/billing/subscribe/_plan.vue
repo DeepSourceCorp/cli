@@ -110,12 +110,7 @@
           <div class="flex">
             <label class="w-32 font-medium">Total payable now</label>
             <div class="flex items-center justify-end flex-grow space-x-2 text-lg font-bold">
-              <z-icon
-                class="animate-spin"
-                color="juniper"
-                icon="spin-loader"
-                v-if="loading"
-              ></z-icon>
+              <z-icon class="animate-spin" color="juniper" icon="spin-loader" v-if="loading" />
               <span v-if="billingInfo.netPayableThisCycle !== null">
                 {{ formatUSD(billingInfo.netPayableThisCycle) }}
               </span>
@@ -149,7 +144,7 @@
                   size="small"
                 >
                   <template v-if="couponLoading">
-                    <z-icon class="animate-spin" color="juniper" icon="spin-loader"></z-icon>
+                    <z-icon class="animate-spin" color="juniper" icon="spin-loader" />
                   </template>
                   <template v-else>Redeem</template>
                 </z-button>

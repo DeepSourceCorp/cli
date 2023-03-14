@@ -7,11 +7,11 @@
         size="small"
         class="flex-shrink-0"
         :color="statusColor"
-      ></z-icon>
+      />
       <h3
         class="overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis"
         v-html="safeRenderBackticks(pullRequestTitle.trim() || (issue && issue.title))"
-      />
+      ></h3>
 
       <span class="flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex" v-if="issue">
         {{ issue.shortcode }}
@@ -21,7 +21,7 @@
       <div class="items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex">
         <!-- Issue type -->
         <div class="flex space-x-5">
-          <issue-type v-if="issue" :issue-type="issue.issueType"></issue-type>
+          <issue-type v-if="issue" :issue-type="issue.issueType" />
           <!-- Analyzer -->
           <div class="flex items-center space-x-1.5 text-sm">
             <analyzer-logo v-bind="analyzer" size="small" class="flex-shrink-0" />
@@ -30,7 +30,7 @@
         </div>
         <!-- Created -->
         <div class="flex items-center space-x-1.5 text-sm">
-          <z-icon icon="clock" size="x-small" color="vanilla-400" class="flex-shrink-0"></z-icon>
+          <z-icon icon="clock" size="x-small" color="vanilla-400" class="flex-shrink-0" />
           <span class="text-sm text-vanilla-400">Created {{ formatDuration }}</span>
         </div>
         <!-- Avatar -->

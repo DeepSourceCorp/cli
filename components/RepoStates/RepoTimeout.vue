@@ -27,7 +27,7 @@
         Re-run analysis
       </z-button>
       <z-button v-else size="small" class="mt-4">
-        <z-icon class="animate-spin" icon="spin-loader" color="ink"></z-icon>
+        <z-icon class="animate-spin" icon="spin-loader" color="ink" />
         <span>Triggering Run</span>
       </z-button>
     </template>

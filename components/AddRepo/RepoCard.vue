@@ -12,7 +12,7 @@
         <z-icon
           :icon="isPrivate ? 'z-lock' : 'globe'"
           :size="size === 'small' ? 'x-small' : 'small'"
-        ></z-icon>
+        />
         <div
           class="font-normal text-vanilla-100"
           :class="{
@@ -69,7 +69,7 @@
           v-tooltip="`Last analyzed at`"
           class="inline-flex items-center gap-x-2"
         >
-          <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="clock" size="x-small" color="vanilla-400" />
           <span>Analyzed {{ lastAnalyzedAtString }}</span>
         </div>
         <!-- Created -->
@@ -78,7 +78,7 @@
           v-tooltip="`Default branch name`"
           class="inline-flex items-center gap-x-2"
         >
-          <z-icon icon="git-branch" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="git-branch" size="x-small" color="vanilla-400" />
           <span class="text-vanilla-400">{{ defaultBranchName }}</span>
         </div>
         <!-- Analyzer Type -->
@@ -87,7 +87,7 @@
           v-tooltip="`Latest commit hash`"
           class="inline-flex items-center gap-x-2"
         >
-          <z-icon icon="git-commit" size="x-small"></z-icon>
+          <z-icon icon="git-commit" size="x-small" />
           <span>{{ latestCommitOid.slice(0, 7) }}</span>
         </div>
         <!-- Supported Analyzers -->

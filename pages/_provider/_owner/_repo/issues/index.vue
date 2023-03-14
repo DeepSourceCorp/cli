@@ -130,7 +130,7 @@
         :total-visible="5"
         class="flex justify-center"
         @selected="(page) => addFilters({ page })"
-      ></z-pagination>
+      />
     </div>
     <!-- Autofix Modal -->
     <autofix-file-chooser

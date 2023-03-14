@@ -12,8 +12,7 @@
       :bar-options="{ stacked: this.stacked }"
       :type="this.chartType"
       class="mx-auto no-filter:opacity-10 blur-chart opacity-10"
-    >
-    </z-chart>
+    />
   </div>
 </template>
 <script lang="ts">

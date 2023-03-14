@@ -37,7 +37,7 @@
           @debounceInput="debounceSearch"
         >
           <template slot="left">
-            <z-icon class="flex-shrink-0 p-px" icon="search" size="small"></z-icon>
+            <z-icon class="flex-shrink-0 p-px" icon="search" size="small" />
           </template>
         </z-input>
       </div>

@@ -19,7 +19,7 @@
             'stroke-width': 4
           }"
         >
-          <z-icon icon="check" color="vanilla-100" size="x-small" v-if="getStatus(step)"></z-icon>
+          <z-icon icon="check" color="vanilla-100" size="x-small" v-if="getStatus(step)" />
         </div>
         <div class="space-y-2">
           <h5

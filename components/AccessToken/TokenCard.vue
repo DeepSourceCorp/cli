@@ -33,7 +33,7 @@
           v-tooltip="{ content: 'Token last used', delay: { show: 300, hide: 100 } }"
           class="flex items-center space-x-2"
         >
-          <z-icon icon="trending-up" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="trending-up" size="x-small" color="vanilla-400" />
           <span>Last used on {{ parsedlastUsedAt }}</span>
         </span>
         <span
@@ -41,7 +41,7 @@
           v-tooltip="{ content: 'Token last used', delay: { show: 300, hide: 100 } }"
           class="flex items-center space-x-2"
         >
-          <z-icon icon="frown" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="frown" size="x-small" color="vanilla-400" />
           <span>Never used</span>
         </span>
       </p>

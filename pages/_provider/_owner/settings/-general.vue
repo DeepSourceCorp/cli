@@ -2,13 +2,13 @@
   <div class="p-4 space-y-6">
     <h2 class="text-lg font-medium">Organization details</h2>
     <form-group>
-      <text-input label="Name" input-id="team-settings-branch" v-model="teamName"></text-input>
+      <text-input label="Name" input-id="team-settings-branch" v-model="teamName" />
       <image-input
         label="Logo"
         button-label="Update Logo"
         input-id="team-settings-logo"
         :value="teamlogo"
-      ></image-input>
+      />
     </form-group>
   </div>
 </template>

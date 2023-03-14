@@ -14,7 +14,7 @@
         placeholder="Search for a name or email"
       >
         <template slot="left"
-          ><span class="px-1"><z-icon icon="search" size="small"></z-icon></span
+          ><span class="px-1"><z-icon icon="search" size="small" /></span
         ></template>
       </z-input>
       <z-button
@@ -24,7 +24,7 @@
         @click="showAddCollaboratorModal = true"
       >
         <div class="flex items-center space-x-2">
-          <z-icon icon="user-plus" size="small" color="ink-400"></z-icon>
+          <z-icon icon="user-plus" size="small" color="ink-400" />
           <span>Add collaborator</span>
         </div>
       </z-button>
@@ -75,7 +75,7 @@
         :total-visible="5"
         :hide-for-single-page="true"
         v-model="currentPageNumber"
-      ></z-pagination>
+      />
     </template>
     <div v-else class="flex flex-col">
       <member-list-item-loading v-for="loader in LIMIT" :key="loader" />
@@ -94,7 +94,7 @@
         @primaryAction="updatePermission"
       >
         <div class="flex items-center mb-2 text-base leading-relaxed text-vanilla-100">
-          <z-icon icon="alert-circle" size="small" class="mr-2"></z-icon> Update member role to
+          <z-icon icon="alert-circle" size="small" class="mr-2" /> Update member role to
           {{ repoPerms[newMemberRole].label }}
         </div>
         <p
@@ -111,8 +111,7 @@
         primary-action-icon="x"
         subtitle="They will lose access to the repository immediately. You can add them again later."
         @primaryAction="removeMember"
-      >
-      </z-confirm>
+      />
     </portal>
   </div>
 </template>

@@ -50,7 +50,7 @@
                 v-tooltip="`Open repo on ${$providerMetaMap[repository.vcsProvider].text}`"
                 size="base"
                 :icon-left="repoVCSIcon"
-              ></z-tag>
+              />
             </a>
 
             <template v-if="repository.errorCode">
@@ -92,7 +92,7 @@
           :currently-analysing="repository.runs && repository.runs.totalCount"
           :can-change-branch="canChangeBranch"
           class="flex flex-col h-full px-4 py-2 space-y-2 text-sm md:px-3 xl:border-l xl:border-slate-400 text-vanilla-400"
-        ></repo-header-info>
+        />
       </div>
       <div id="tabs" class="flex xl:col-span-2">
         <div class="flex self-end px-4 space-x-5 overflow-auto flex-nowrap hide-scroll">

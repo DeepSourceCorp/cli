@@ -40,7 +40,7 @@
             :key="namespace.shortcode"
             :icon="namespace.shortcode"
             size="small"
-          ></z-icon>
+          />
           <span class="inline" v-if="metric.namespaces.length > 2">
             and {{ metric.namespaces.length - 2 }} more runs
           </span>

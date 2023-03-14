@@ -91,7 +91,7 @@
       >
         <template slot="left">
           <div class="pl-1">
-            <z-icon icon="search" size="small"></z-icon>
+            <z-icon icon="search" size="small" />
           </div>
         </template>
         <template slot="right">

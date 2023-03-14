@@ -9,18 +9,18 @@
 
     <div v-if="$fetchState.pending" class="p-4 pb-32 md:max-w-2xl">
       <div class="grid grid-cols-3">
-        <div class="h-8 bg-opacity-50 rounded-md animate-pulse bg-ink-200" />
-        <div />
-        <div class="h-8 bg-opacity-50 rounded-md animate-pulse bg-ink-200" />
+        <div class="h-8 bg-opacity-50 rounded-md animate-pulse bg-ink-200"></div>
+        <div></div>
+        <div class="h-8 bg-opacity-50 rounded-md animate-pulse bg-ink-200"></div>
       </div>
       <z-divider class="opacity-50 animate-pulse" />
       <div
         v-for="ii in 3"
         :key="ii"
         class="mb-6 bg-opacity-50 rounded-md h-15 animate-pulse bg-ink-200"
-      />
+      ></div>
       <z-divider class="opacity-50 animate-pulse" />
-      <div class="mb-6 bg-opacity-50 rounded-md h-15 animate-pulse bg-ink-200" />
+      <div class="mb-6 bg-opacity-50 rounded-md h-15 animate-pulse bg-ink-200"></div>
     </div>
 
     <div v-else class="p-4 pb-32 space-y-4 md:max-w-2xl">

@@ -47,7 +47,7 @@
             icon="chevron-right"
             size="medium"
             class="flex-shrink-0 duration-100 ease-linear transform group-hover:translate-x-1"
-          ></z-icon>
+          />
         </button>
         <p class="mt-4 text-sm text-center text-vanilla-400">
           Need help? Write to us at

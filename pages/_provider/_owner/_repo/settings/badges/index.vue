@@ -27,8 +27,8 @@
         <div class="flex items-center max-w-2xl py-4">
           <div class="flex-1 text-sm text-vanilla-100">Badge type</div>
           <z-radio-group v-model="badgeType" class="flex">
-            <z-radio-button value="active issues" label="Active issues"></z-radio-button>
-            <z-radio-button value="resolved issues" label="Resolved issues"></z-radio-button>
+            <z-radio-button value="active issues" label="Active issues" />
+            <z-radio-button value="resolved issues" label="Resolved issues" />
           </z-radio-group>
         </div>
         <!-- Show trend -->
@@ -55,15 +55,14 @@
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
-              >
-              </z-option>
+              />
             </z-select>
           </div>
         </div>
         <!-- Add referral -->
         <div class="flex items-center max-w-2xl py-4 border-t border-slate-400">
           <div class="flex-1 text-sm text-vanilla-100">Add referral to badge</div>
-          <z-toggle v-model="addReferral"></z-toggle>
+          <z-toggle v-model="addReferral" />
         </div>
       </form-group>
     </div>

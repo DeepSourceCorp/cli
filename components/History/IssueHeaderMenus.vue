@@ -28,7 +28,7 @@
             class="inline-flex items-center px-3 py-2 space-x-2 text-sm leading-none rounded-sm shadow-sm outline-none lg:px-4 bg-ink-300 hover:bg-ink-200 text-vanilla-100 focus:outline-none"
             @click="toggle"
           >
-            <z-icon icon="z-filter" size="small"></z-icon>
+            <z-icon icon="z-filter" size="small" />
             <span class="hidden lg:inline-block">Filter</span>
           </button>
         </z-badge>
@@ -46,7 +46,7 @@
         background-color="ink-300"
         placeholder="Search for issue title, file or issue code"
         :show-border="false"
-      ></z-input>
+      />
     </div>
   </div>
 </template>

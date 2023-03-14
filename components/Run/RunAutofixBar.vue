@@ -89,7 +89,7 @@
                       <span
                         class="text-vanilla-300 mr-1.5"
                         v-html="safeRenderBackticks(issue.title)"
-                      />
+                      ></span>
                     </nuxt-link>
                     <span class="text-slate">{{ issue.shortcode }}</span>
                   </span>

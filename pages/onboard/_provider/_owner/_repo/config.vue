@@ -59,8 +59,7 @@
               :analyzer-logo="analyzer.analyzerLogo"
               :name="analyzer.label"
               @click="toggleAnalyzer(analyzer.name, true)"
-            >
-            </analyzer-title-card>
+            />
           </template>
         </div>
       </form-group>

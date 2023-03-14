@@ -88,7 +88,7 @@
         @debounceInput="(val) => $emit('runs-filter-update', { searchText: val })"
       >
         <template slot="left">
-          <z-icon class="flex-shrink-0 p-px" icon="search" size="small"></z-icon>
+          <z-icon class="flex-shrink-0 p-px" icon="search" size="small" />
         </template>
         <template slot="right">
           <z-icon
@@ -97,7 +97,7 @@
             size="small"
             class="cursor-pointer"
             @click="$emit('runs-filter-update', { searchText: null })"
-          ></z-icon>
+          />
         </template>
       </z-input>
     </div>

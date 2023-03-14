@@ -9,7 +9,7 @@
           size="small"
           color="vanilla-400"
           @click="showAddRepoModal = true"
-        ></z-button>
+        />
         <add-repo-modal :show-modal="showAddRepoModal" @close="showAddRepoModal = false" />
       </div>
     </template>
@@ -76,7 +76,7 @@
         size="small"
         label="Activate new repository"
         @click="showAddRepoModal = true"
-      ></z-button>
+      />
     </empty-state>
   </list-section>
 </template>

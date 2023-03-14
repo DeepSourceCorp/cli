@@ -9,8 +9,7 @@
     } from the team? The user will loose all access to repositories and issues on DeepSource.`"
     @primaryAction="removeMember"
     @onClose="close"
-  >
-  </z-confirm>
+  />
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'

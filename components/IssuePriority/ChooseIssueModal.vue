@@ -62,7 +62,7 @@
           >
             <template slot="title">
               <p class="text-sm font-semibold text-vanilla-300">
-                <span v-html="safeRenderBackticks(issue.title)" />
+                <span v-html="safeRenderBackticks(issue.title)"></span>
                 <span class="ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap"
                   >{{ issue.shortcode }}
                 </span>

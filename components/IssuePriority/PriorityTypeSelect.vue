@@ -12,7 +12,7 @@
             v-if="badgeType(currentPriority)"
             class="rounded-full"
             :class="[badgeType(currentPriority), ellipseSize]"
-          />
+          ></span>
           <!-- Min. height & width allowed for z-icon are h-3 & w-3, but the badge circle
           has w-2 & h-2, messing with alignment. Hence -ve margins needed -->
           <z-icon
@@ -57,7 +57,7 @@
             v-if="badgeType(option.value)"
             class="h-2 rounded-full w-2"
             :class="badgeType(option.value)"
-          />
+          ></span>
           <!-- Min. height & width allowed for z-icon are h-3 & w-3, but the badge circle
           has w-2 & h-2, messing with alignment. Hence -ve margins needed -->
           <z-icon v-else icon="ellipsis-small" size="x-small" class="-mx-0.5" />

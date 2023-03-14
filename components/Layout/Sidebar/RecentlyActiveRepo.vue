@@ -10,7 +10,7 @@
           class="flex items-center justify-center h-8 py-1 space-x-2 text-sm rounded-sm outline-none hover:bg-ink-300 min-w-8 focus:outline-none"
           @click="toggle"
         >
-          <z-icon icon="repositories" size="small" class="min-w-4 min-h-4"></z-icon>
+          <z-icon icon="repositories" size="small" class="min-w-4 min-h-4" />
         </button>
       </template>
       <template v-slot:body="{ close }" class="z-10">
@@ -29,7 +29,7 @@
                 size="small"
                 :color="repo.isActive ? 'juniper' : ''"
                 class="min-w-4 min-h-4"
-              ></z-icon>
+              />
               <div class="text-sm">{{ repo.name }}</div>
             </div>
           </z-menu-item>
@@ -55,7 +55,7 @@
 
         <z-tag bg-color="ink-100" text-size="xs" spacing="pl-2 pr-1.5 py-0.5">
           {{ repoList.length }}
-          <z-icon class="pl-1" :icon="dropdownCollapsed ? 'chevron-up' : 'chevron-down'"></z-icon>
+          <z-icon class="pl-1" :icon="dropdownCollapsed ? 'chevron-up' : 'chevron-down'" />
         </z-tag>
       </button>
       <div class="space-y-0.5" v-show="dropdownCollapsed">

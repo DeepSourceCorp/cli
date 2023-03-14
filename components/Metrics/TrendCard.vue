@@ -21,7 +21,7 @@
             {{ title }}
           </slot>
         </h5>
-        <z-icon v-if="icon" :icon="icon"></z-icon>
+        <z-icon v-if="icon" :icon="icon" />
       </div>
       <div class="flex flex-col justify-between flex-grow space-y-1">
         <span class="text-xs text-vanilla-400">

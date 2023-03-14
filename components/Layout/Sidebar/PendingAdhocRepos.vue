@@ -24,7 +24,7 @@
                   :icon="repo.isPrivate ? 'z-lock' : 'globe'"
                   size="small"
                   class="min-w-4 min-h-4"
-                ></z-icon>
+                />
                 <div class="text-sm">{{ repo.name }}</div>
               </div>
             </z-menu-item>

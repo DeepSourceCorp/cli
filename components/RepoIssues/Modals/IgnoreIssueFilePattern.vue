@@ -14,7 +14,7 @@
           background-color="ink-400"
           size="small"
           placeholder="Add a valid glob pattern eg. foundations/core/*.py"
-        ></z-input>
+        />
       </div>
       <template slot="footer">
         <div class="px-3 py-3 space-x-2 text-right border-t text-vanilla-100 border-slate-400">

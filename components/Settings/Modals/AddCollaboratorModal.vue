@@ -30,7 +30,7 @@
             :key="opt.value"
             @click="selectedRole = opt.value"
           >
-            <z-radio :value="opt.value" :label="opt.label"></z-radio>
+            <z-radio :value="opt.value" :label="opt.label" />
             <p
               v-if="opt.description"
               class="ml-6 text-xs leading-5 text-vanilla-400 md:mr-5 lg:mr-12 xl:mr-15"

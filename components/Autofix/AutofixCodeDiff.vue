@@ -100,7 +100,7 @@
                 'bg-ink-300 opacity-20': !isHunkSelected(code.id)
               }"
             >
-              <z-code :content="code.before_html"></z-code>
+              <z-code :content="code.before_html" />
             </div>
             <div
               class="col-span-1 before_html"
@@ -108,7 +108,7 @@
                 'bg-ink-300 opacity-20': !isHunkSelected(code.id)
               }"
             >
-              <z-code :content="code.after_html"></z-code>
+              <z-code :content="code.after_html" />
             </div>
           </div>
         </template>

@@ -47,12 +47,7 @@
           >
             <div class="flex items-center">
               Add more seats
-              <z-icon
-                icon="arrow-right"
-                size="x-small"
-                color="ink-400"
-                class="stroke-2 ml-1.5"
-              ></z-icon>
+              <z-icon icon="arrow-right" size="x-small" color="ink-400" class="stroke-2 ml-1.5" />
             </div>
           </z-button>
         </div>

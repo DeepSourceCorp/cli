@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <slot />
+    <slot></slot>
   </div>
 </template>
 

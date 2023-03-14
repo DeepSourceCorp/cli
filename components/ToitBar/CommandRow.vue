@@ -16,7 +16,7 @@
       :fallback-image="context.emptyAvatarUrl"
       class="flex-shrink-0"
       stroke="bg-ink-100 p-1"
-    ></z-avatar>
+    />
     <!-- skipcq JS-0693 -->
     <span class="flex-grow text-sm font-medium" v-html="labelHTML || label"></span>
     <div v-if="shortkey" class="flex space-x-1">

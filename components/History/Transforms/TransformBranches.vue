@@ -6,7 +6,7 @@
   >
     <template v-slot:expanded>
       <div class="flex flex-col space-y-2 justify-center items-center h-28" v-if="loading">
-        <z-icon icon="loader" class="animate-spin duration-1000"></z-icon>
+        <z-icon icon="loader" class="animate-spin duration-1000" />
         Fetching Transforms
       </div>
       <template v-else>
@@ -17,7 +17,7 @@
           v-bind="branchRun.node"
           action-text="Analyzed"
           link="/history/runs/details"
-        ></transform-card>
+        />
       </template>
     </template>
     <template v-slot:collapsed>
@@ -27,7 +27,7 @@
         class="nested-group-item"
         action-text="Analyzed"
         link="/history/runs/details"
-      ></transform-card>
+      />
     </template>
   </branch-list>
 </template>

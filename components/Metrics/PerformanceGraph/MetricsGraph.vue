@@ -12,14 +12,14 @@
           :day-options="pageLengthOptions"
           :filter-value="pageLength"
           @updateFilter="updatePageLength"
-        ></graph-control>
+        />
       </div>
     </template>
     <graph-data-selector
       :data-points="sortedData"
       v-if="sortedData.length"
       v-model="selectedIndex"
-    ></graph-data-selector>
+    />
     <div
       class="col-span-1 border-l lg:col-span-2 xl:col-span-3 2xl:col-span-4 border-slate-400 divide-y divide-ink-300"
     >
@@ -32,7 +32,7 @@
           :shortcode="currentMetric.shortcode"
           :chart-height="chartHeight"
           :clip="true"
-        ></graph-chart>
+        />
       </div>
     </div>
   </stat-section>

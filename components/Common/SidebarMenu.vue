@@ -18,7 +18,7 @@
           @click.stop="collapseSidebar()"
           :class="[hoverStyle]"
         >
-          <z-icon :icon="arrow" size="small" color="ink-400" box-width="16"></z-icon>
+          <z-icon :icon="arrow" size="small" color="ink-400" box-width="16" />
         </div>
       </header>
       <div class="flex justify-center w-full px-2">

@@ -11,7 +11,7 @@
         placeholder="Search for team member"
       >
         <template slot="left">
-          <z-icon icon="search" class="ml-1.5" size="small"></z-icon>
+          <z-icon icon="search" class="ml-1.5" size="small" />
         </template>
       </z-input>
     </div>
@@ -45,7 +45,7 @@
         :total-visible="5"
         :hide-for-single-page="true"
         v-model="currentPage"
-      ></z-pagination>
+      />
     </template>
     <empty-state
       v-else
@@ -62,14 +62,14 @@
         @primaryAction="updateRole"
         v-bind="userToUpdate"
         :show-modal="showUpdateRoleModal"
-      ></update-role-modal>
+      />
       <remove-member-modal
         v-if="showRemoveMemberModal"
         @close="closeRemoveMemberModal"
         @primaryAction="removeMember"
         v-bind="userToUpdate"
         :show-modal="showRemoveMemberModal"
-      ></remove-member-modal>
+      />
       <transfer-ownership-modal
         v-if="showTransferOwnershipModal"
         v-bind="userToUpdate"

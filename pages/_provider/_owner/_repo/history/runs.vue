@@ -23,8 +23,7 @@
             expandedBranch && expandedBranch !== defaultBranchRun.branchName
         }"
         @expanded="updateExpandedBranch"
-      >
-      </run-branches>
+      />
       <template v-if="!fetching">
         <template v-if="prListNodes.length !== 0">
           <run-branches
@@ -71,7 +70,7 @@
         :total-visible="5"
         :page="currentPage"
         @selected="updatePage"
-      ></z-pagination>
+      />
     </div>
 
     <floating-button-mobile :nav-items="navItems" />

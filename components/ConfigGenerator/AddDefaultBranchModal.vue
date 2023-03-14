@@ -6,7 +6,7 @@
     <div class="flex flex-col p-4 space-y-3">
       <label class="space-y-2 text-sm">
         <span>Enter default branch name</span>
-        <z-input v-model="gsrDefaultBranch" placeholder="main"></z-input>
+        <z-input v-model="gsrDefaultBranch" placeholder="main" />
       </label>
       <p class="text-sm text-vanilla-400">
         To activate analysis on

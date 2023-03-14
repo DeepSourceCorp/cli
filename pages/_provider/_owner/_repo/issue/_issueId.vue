@@ -15,7 +15,7 @@
         :issue-create-integrations="issueCreateIntegrations"
         :can-create-autofix="canCreateAutofix"
         @ignoreIssues="ignoreIssues"
-      ></issue-actions>
+      />
     </div>
     <div class="flex flex-col px-4 py-3 space-y-1">
       <div class="space-y-2" v-if="$fetchState.pending">
@@ -34,8 +34,7 @@
         :issue-priority="issuePriority"
         :can-edit-priority="canEditPriority"
         @priority-edited="editPriority"
-      >
-      </issue-details-header>
+      />
     </div>
     <div id="tabs" class="flex mt-3 border-b xl:col-span-2 border-slate-400">
       <div class="flex self-end px-4 space-x-4 overflow-auto flex-nowrap">
@@ -65,7 +64,7 @@
         </nuxt-link>
       </div>
     </div>
-    <nuxt-child></nuxt-child>
+    <nuxt-child />
   </div>
 </template>
 <script lang="ts">

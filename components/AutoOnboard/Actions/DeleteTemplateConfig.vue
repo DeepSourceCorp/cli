@@ -7,8 +7,7 @@
       icon-color="cherry"
       v-tooltip="'Delete template'"
       icon="trash-2"
-    >
-    </z-button>
+    />
     <portal to="modal">
       <z-confirm
         v-if="showConfirmDelete"

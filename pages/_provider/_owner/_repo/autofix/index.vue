@@ -34,7 +34,7 @@
           v-for="autofix in repository.autofixableIssuesPerAnalyzer"
           :key="autofix.analyzer.shortcode"
           v-bind="autofix"
-        ></autofix-card>
+        />
       </template>
       <!-- TODO: Empty state -->
       <div v-else class="flex items-center justify-center w-full h-full p-2">

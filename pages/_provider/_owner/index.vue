@@ -7,7 +7,7 @@
             ? 'col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-5'
             : 'col-span-full'
         "
-      ></recently-active-repo-list>
+      />
       <template v-if="steps.length && completion < 100 && allowAccountSetupCard">
         <account-setup-card :completion="completion" :provider="provider" />
       </template>

@@ -23,14 +23,14 @@
               class="transform-gpu duration-100 group-hover:translate-x-0.5"
               icon="chevron-right"
               size="small"
-            ></z-icon>
+            />
           </div>
         </z-button>
       </div>
       <div v-if="allowLoadMore" class="border-t border-slate-400 p-2 flex justify-center">
         <div class="group flex items-center space-x-2 cursor-pointer text-vanilla-400 text-sm">
           Load more
-          <z-icon icon="chevron-down" size="small"></z-icon>
+          <z-icon icon="chevron-down" size="small" />
         </div>
       </div>
     </template>

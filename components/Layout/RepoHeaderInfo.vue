@@ -1,21 +1,21 @@
 <template>
   <div>
     <div v-if="commitId" class="flex items-center space-x-2">
-      <z-icon size="small" icon="clock"></z-icon>
+      <z-icon size="small" icon="clock" />
       <div class="space-x-1 overflow-hidden sm:flex sm:items-center overflow-ellipsis">
         <span class="whitespace-nowrap">Last analyzed</span>
         <nuxt-link
           :to="$generateRoute(['run', runId, analyzer])"
           class="inline-flex items-center gap-1 px-1 font-mono rounded-md cursor-pointer bg-ink-200"
         >
-          <z-icon icon="git-commit" size="x-small"></z-icon>
+          <z-icon icon="git-commit" size="x-small" />
           {{ commitId.slice(0, 7) }}
         </nuxt-link>
         <span class="whitespace-nowrap" v-if="lastAnalyzed">{{ fromNow(lastAnalyzed) }}</span>
       </div>
     </div>
     <div v-if="defaultBranch" class="flex items-center space-x-2">
-      <z-icon size="small" icon="git-branch" class="flex-shrink-0"></z-icon>
+      <z-icon size="small" icon="git-branch" class="flex-shrink-0" />
       <div>
         <span>Default analysis branch is</span>
         <z-menu direction="left" size="base" class="inline-block text-vanilla-100">
@@ -29,7 +29,7 @@
                 <span class="font-mono truncate" :class="defaultBranch.length > 12 ? 'w-24' : ''">
                   {{ defaultBranch }}
                 </span>
-                <z-icon icon="chevron-down" size="small"></z-icon>
+                <z-icon icon="chevron-down" size="small" />
               </span>
             </button>
           </template>
@@ -50,7 +50,7 @@
       </div>
     </div>
     <div class="flex items-center gap-2" :class="{ invisible: currentlyAnalysing === 0 }">
-      <z-pulse></z-pulse>
+      <z-pulse />
       <span
         >Currently analyzing {{ currentlyAnalysing }}
         {{ currentlyAnalysing > 1 ? 'runs' : 'run' }}</span
@@ -71,7 +71,7 @@
               class="mt-1"
               placeholder="New Branch name"
               v-model="currentAnalysisBranch"
-            ></z-input>
+            />
             <div class="mt-4 space-x-4 text-right text-vanilla-100">
               <z-button
                 v-if="updating"
@@ -80,7 +80,7 @@
                 size="small"
                 :disabled="true"
               >
-                <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin"></z-icon>
+                <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin" />
                 Updating Branch
               </z-button>
               <z-button

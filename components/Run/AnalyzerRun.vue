@@ -5,7 +5,7 @@
       id="issue-filters"
       class="px-3 md:sticky md:z-10 check-filter-headers-offset bg-ink-400"
     >
-      <slot name="controls" />
+      <slot name="controls"></slot>
     </div>
     <div class="p-3">
       <run-error-box v-if="errorsRendered.length" :errors-rendered="errorsRendered" class="mb-3" />

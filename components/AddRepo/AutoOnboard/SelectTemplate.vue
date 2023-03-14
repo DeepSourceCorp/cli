@@ -22,7 +22,7 @@
         placeholder="Search templates..."
       >
         <template slot="left">
-          <z-icon icon="search" class="ml-1.5" size="small"></z-icon>
+          <z-icon icon="search" class="ml-1.5" size="small" />
         </template>
       </z-input>
     </div>

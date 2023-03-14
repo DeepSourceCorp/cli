@@ -17,12 +17,12 @@
               :user-name="getName(log)"
               size="sm"
               class="flex-shrink-0"
-            ></z-avatar>
+            />
             <div v-else class="flex items-center justify-center w-6 h-6 rounded-full bg-ink-200">
               <z-icon icon="circle" />
             </div>
           </template>
-          <log v-bind="log"></log>
+          <log v-bind="log" />
         </z-timeline-item>
       </z-timeline>
     </div>

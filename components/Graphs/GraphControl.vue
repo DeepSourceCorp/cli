@@ -14,7 +14,7 @@
           :key="opt"
           :label="`Last ${displayDayOptions[index]} ${displayDurationType}`"
           :value="opt"
-        ></z-option>
+        />
       </z-select>
     </div>
     <div class="flex space-x-2" v-if="allowChartTypeToggle">
@@ -27,7 +27,7 @@
           icon="bar-chart-2"
           size="small"
           :color="currentChartType == 'bar' ? 'juniper' : 'vanilla-400'"
-        ></z-icon>
+        />
       </div>
       <div
         :class="currentChartType == 'line' ? 'bg-ink-200' : 'hover:bg-ink-300'"
@@ -38,7 +38,7 @@
           icon="trending-up"
           size="small"
           :color="currentChartType == 'line' ? 'juniper' : 'vanilla-400'"
-        ></z-icon>
+        />
       </div>
     </div>
   </div>

@@ -258,7 +258,7 @@
               :disabled="true"
               class="flex items-center w-44"
             >
-              <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin"></z-icon>
+              <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin" />
               Suppressing metric
             </z-button>
             <z-button

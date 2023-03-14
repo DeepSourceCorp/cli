@@ -5,7 +5,7 @@
   >
     <template #title>
       <h6 class="space-x-2 overflow-hidden cursor-pointer text-vanilla-100 overflow-ellipsis">
-        <span v-html="safeRenderBackticks(issue.title)" />
+        <span v-html="safeRenderBackticks(issue.title)"></span>
         <span class="text-sm font-normal text-vanilla-400">{{ issue.shortcode }}</span>
       </h6>
     </template>
@@ -23,7 +23,7 @@
       <div
         class="max-w-full mt-2 text-sm prose text-vanilla-400"
         v-html="issue.shortDescriptionRendered"
-      />
+      ></div>
     </template>
   </base-card>
 </template>

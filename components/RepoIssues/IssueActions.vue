@@ -9,7 +9,7 @@
       :disabled="!canCreateAutofix"
       @click.prevent="openModal('autofix')"
     >
-      <z-icon icon="autofix" size="small" color="ink-300"></z-icon>
+      <z-icon icon="autofix" size="small" color="ink-300" />
       <span>Autofix</span>
     </z-button>
 
@@ -58,7 +58,7 @@
             icon="slash"
             class="sm:hidden"
             @click="toggle"
-          ></z-button>
+          />
         </div>
       </template>
       <template slot="body" class="text-vanilla-200">
@@ -78,7 +78,7 @@
       :shortcode="shortcode"
       @close="close"
       @ignore="markAllOccurrenceDisabled"
-    ></ignore-issue-all-files>
+    />
     <ignore-issue-test-files
       v-if="currentComponent === 'test-files'"
       :is-open="isOpen"
@@ -86,7 +86,7 @@
       :shortcode="shortcode"
       @close="close"
       @ignore="markAllOccurrenceDisabled"
-    ></ignore-issue-test-files>
+    />
     <ignore-issue-file-pattern
       v-if="currentComponent === 'file-pattern'"
       :is-open="isOpen"
@@ -94,7 +94,7 @@
       :shortcode="shortcode"
       @close="close"
       @ignore="markAllOccurrenceDisabled"
-    ></ignore-issue-file-pattern>
+    />
     <autofix-file-chooser
       v-if="currentComponent === 'autofix'"
       :is-open="isOpen"

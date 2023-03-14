@@ -10,15 +10,14 @@
           :fallback-image="getDefaultAvatar(viewer.email)"
           :user-name="viewer.firstName"
           size="sm"
-        >
-        </z-avatar>
-        <z-avatar v-else :loading="true" user-name="loading" size="md"> </z-avatar>
+        />
+        <z-avatar v-else :loading="true" user-name="loading" size="md" />
         <!-- Handle Name -->
         <div
           class="flex items-center space-x-2 text-base font-medium cursor-pointer text-vanilla-200"
         >
           {{ viewer.firstName || viewer.email }}
-          <z-icon icon="chevron-down" size="small" color="vanilla-200"></z-icon>
+          <z-icon icon="chevron-down" size="small" color="vanilla-200" />
         </div>
       </div>
       <!-- Blank space -->
@@ -26,10 +25,10 @@
       <!-- Start analysing menu -->
       <div class="space-y-2">
         <div class="flex items-center space-x-1">
-          <z-icon icon="activity" size="x-small" class="flex-shrink-0 mr-1"></z-icon>
+          <z-icon icon="activity" size="x-small" class="flex-shrink-0 mr-1" />
           <div class="flex-1 text-xs">Actively analyzing</div>
           <div class="p-1 rounded-md bg-ink-200">
-            <z-icon icon="plus" icon-color="ink-400" size="x-small"></z-icon>
+            <z-icon icon="plus" icon-color="ink-400" size="x-small" />
           </div>
         </div>
         <!-- Placeholders - Subtree - Repo list -->
@@ -37,7 +36,7 @@
           v-if="selectedRepo"
           class="flex items-center h-6 px-2 space-x-2 text-sm rounded-md text-vanilla-300"
         >
-          <z-icon icon="refresh-ccw" size="x-small" color="juniper"></z-icon>
+          <z-icon icon="refresh-ccw" size="x-small" color="juniper" />
           <span>{{ selectedRepo }}</span>
         </div>
         <div v-else class="h-6 rounded-md bg-ink-200"></div>
