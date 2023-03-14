@@ -3,7 +3,7 @@
     <template v-slot:trigger="{ toggle }">
       <button
         type="button"
-        class="flex items-center py-1 space-x-2 text-sm rounded-sm outline-none max-w-3xs hover:bg-ink-300 focus:outline-none"
+        class="outline-none focus:outline-none flex max-w-3xs items-center space-x-2 rounded-sm py-1 text-sm hover:bg-ink-300"
         :class="{
           'pr-2 pl-1': !isCollapsed,
           'px-1': isCollapsed
@@ -16,7 +16,7 @@
           :fallback-image="getDefaultAvatar(viewer.email)"
           :user-name="viewer.fullName || viewer.email"
           size="sm"
-          class="flex-shrink-0 leading-none rounded-full"
+          class="flex-shrink-0 rounded-full leading-none"
         />
         <span
           v-show="!isCollapsed"
@@ -24,7 +24,7 @@
             content: showTooltip ? `${viewer.fullName || viewer.email}` : '',
             delay: { show: 200, hide: 100 }
           }"
-          class="overflow-hidden leading-none overflow-ellipsis whitespace-nowrap"
+          class="overflow-hidden overflow-ellipsis whitespace-nowrap leading-none"
         >
           {{ viewer.fullName || viewer.email }}
         </span>
@@ -78,12 +78,6 @@ export default class UserMenu extends mixins(ActiveUserMixin, AuthMixin) {
     if (username) {
       this.showTooltip = username.scrollWidth >= username.clientWidth
     }
-  }
-
-  public async signOut(): Promise<void> {
-    await this.logOutUser({ onPrem: this.$config.onPrem })
-    // router replace refreshes the browser and clears vuex cache
-    window.location.replace('/login')
   }
 }
 </script>

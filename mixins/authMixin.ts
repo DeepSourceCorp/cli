@@ -159,4 +159,10 @@ export default class AuthMixin extends Vue {
 
     return options
   }
+
+  public async signOut(): Promise<void> {
+    await this.logOutUser({ onPrem: this.$config.onPrem })
+    // router replace refreshes the browser and clears vuex cache
+    window.location.replace('/login')
+  }
 }
