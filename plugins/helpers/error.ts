@@ -32,35 +32,19 @@ declare module 'vuex/types/index' {
   }
 }
 
-export default ({ $config, $bugsnag, app }: Context, inject: Inject): void => {
+export default ({ app }: Context, inject: Inject): void => {
   /**
    * Log error to reporting service and show a toast to the user
    *
-   * @param {Error} error
+   * @param {Error} _error
    * @param {string} toastMessage
-   * @param {User} viewer
-   * @param {Object} metadata
+   * @param {User} _viewer
+   * @param {Object} _metadata
    *
    * @return {void}
    */
-  const logErrorAndToast: LogErrorAndToastT = function (error, toastMessage, viewer, metadata) {
-    const { context, params } = metadata ?? { context: null, params: null }
-    const bugsnag = process.client ? app.$bugsnag : $bugsnag
-
-    if (!$config.onPrem && bugsnag) {
-      bugsnag.notify(
-        error,
-        (event: {
-          context: string | undefined
-          setUser: (id: string, email: string, firstName: string) => void
-          addMetadata: (key: string, values: Record<string, unknown>) => void
-        }) => {
-          event.context = context ?? toastMessage
-          if (viewer) event.setUser(viewer.id, viewer.email, viewer.firstName)
-          if (params) event.addMetadata('errorParams', params)
-        }
-      )
-    }
+  const logErrorAndToast: LogErrorAndToastT = function (_error, toastMessage, _viewer, _metadata) {
+    // ?Integrate error reporting tool here
     if (process.client && toastMessage) {
       app.$toast.danger(toastMessage)
     }

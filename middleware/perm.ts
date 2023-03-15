@@ -150,28 +150,18 @@ async function getTeamRole(context: Context): Promise<TeamMemberRoleChoices | vo
  * @param context {Context}
  * @returns {Middleware}
  */
-const permsMiddlware: Middleware = async (context) => {
-  const { store, route, error, $gateKeeper, $config, $bugsnag } = context
+const permsMiddlware: Middleware = async (context: Context) => {
+  const { route, error, $gateKeeper } = context
 
   /**
-   * Log error to bugsnag
+   * Log error to error reporting tool
    *
-   * @param message
-   * @param repoPerms
-   * @param teamPerms
+   * @param _message
+   * @param _repoPerms
+   * @param _teamPerms
    */
-  const logError = (message: string, repoPerms: RepoPerms[][], teamPerms: TeamPerms[][]) => {
-    const viewer = store.state.user.active.viewer as User
-    if (!$config.onPrem && $bugsnag) {
-      $bugsnag.leaveBreadcrumb(message, {
-        repoPerms,
-        teamPerms,
-        viewer: {
-          id: viewer.id,
-          email: viewer.email
-        }
-      })
-    }
+  const logError = (_message: string, _repoPerms: RepoPerms[][], _teamPerms: TeamPerms[][]) => {
+    // ?Integrate error reporting tool here
   }
 
   if (route.name && passList.includes(route.name)) {

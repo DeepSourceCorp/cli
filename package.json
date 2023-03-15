@@ -32,7 +32,6 @@
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "nuxt": "^2.15.8",
-    "nuxt-bugsnag": "^4.2.2",
     "nuxt-prometheus-module": "^0.1.4",
     "nuxt-property-decorator": "^2.9.1",
     "nuxt-stripe-module": "^3.2.0",

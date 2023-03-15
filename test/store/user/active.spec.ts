@@ -160,7 +160,9 @@ describe('[Store] User/Active', () => {
             },
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return Promise.reject(
-                `To go wrong in one's own way is better than to go right in someone else's.`
+                new Error(
+                  "To go wrong in one's own way is better than to go right in someone else's."
+                )
               )
             }
           }
@@ -172,7 +174,7 @@ describe('[Store] User/Active', () => {
           await actions[ActiveUserActions.FETCH_VIEWER_INFO].call(localThis, actionCxt, {})
         })
 
-        test('successfully calls the api and bugsnag', () => {
+        test('successfully calls the api and reports it to the monitoring service', () => {
           expect(spy).toHaveBeenCalledTimes(1)
           expect(loggerFn).toHaveBeenCalledTimes(1)
         })
@@ -213,7 +215,9 @@ describe('[Store] User/Active', () => {
             },
             $applyGraphqlMutation(): Promise<GraphqlQueryResponse> {
               return Promise.reject(
-                `To go wrong in one's own way is better than to go right in someone else's.`
+                new Error(
+                  "To go wrong in one's own way is better than to go right in someone else's."
+                )
               )
             }
           }
@@ -227,7 +231,7 @@ describe('[Store] User/Active', () => {
           })
         })
 
-        test('successfully calls the api and bugsnag', () => {
+        test('successfully calls the api and reports it to the monitoring service', () => {
           expect(spy).toHaveBeenCalledTimes(1)
           expect(loggerFn).toHaveBeenCalledTimes(1)
         })
@@ -240,10 +244,13 @@ describe('[Store] User/Active', () => {
     describe(`Action "${ActiveUserActions.UPDATE_STARRED_REPO}"`, () => {
       beforeEach(async () => {
         localThis = {
-          $applyGraphqlMutation(): Promise<Object> {
+          $applyGraphqlMutation(): Promise<{
+            data: {
+              updateStarredRepository: boolean
+            }
+          }> {
             return Promise.resolve({
               data: {
-                // @ts-ignore
                 updateStarredRepository: true
               }
             })
@@ -266,10 +273,15 @@ describe('[Store] User/Active', () => {
     describe(`Action "${ActiveUserActions.UPDATE_USER_DETAILS}"`, () => {
       beforeEach(async () => {
         localThis = {
-          $applyGraphqlMutation(): Promise<Object> {
+          $applyGraphqlMutation(): Promise<{
+            data: {
+              updateUserDetails: {
+                viewer: Pick<User, 'fullName' | 'firstName' | 'lastName' | 'email' | 'avatar'>
+              }
+            }
+          }> {
             return Promise.resolve({
               data: {
-                // @ts-ignore
                 updateUserDetails: {
                   viewer: {
                     fullName: 'Rohan',

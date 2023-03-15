@@ -78,18 +78,9 @@ export default (context: Context, inject: Inject) => {
   // skipcq: JS-0323
   // Event listener to handle errors and report it to the monitoring service
   worker.addEventListener('message', (message: { data: { taskName: string; payload: any } }) => {
-    const { taskName, payload } = message.data
+    const { taskName } = message.data
     if (taskName === 'logError') {
-      context.app.$bugsnag.notify(
-        payload.error,
-        (event: {
-          context: string | undefined
-          addMetadata: (key: string, values: Record<string, unknown>) => void
-        }) => {
-          event.context = `Error in web worker task ${payload.taskName}`
-          event.addMetadata('errorParams', payload.params)
-        }
-      )
+      // ?Integrate error reporting tool here
     }
   })
 

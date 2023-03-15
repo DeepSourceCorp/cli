@@ -181,8 +181,7 @@ export default {
     '@nuxt/content',
     'portal-vue/nuxt',
     ...(IS_ON_PREM ? [] : ['nuxt-stripe-module']),
-    ...(process.env.NODE_ENV !== 'development' && !IS_ON_PREM ? ['nuxt-prometheus-module'] : []),
-    ...(process.env.BUGSNAG_TOKEN && !IS_ON_PREM ? ['nuxt-bugsnag'] : [])
+    ...(process.env.NODE_ENV !== 'development' && !IS_ON_PREM ? ['nuxt-prometheus-module'] : [])
   ],
 
   'nuxt-prometheus-module': {
@@ -191,18 +190,6 @@ export default {
     metrics: {
       collectDefault: true,
       requestDuration: false
-    }
-  },
-
-  bugsnag: {
-    config: {
-      appVersion: version
-    },
-    releaseStage: process.env.NODE_ENV,
-    apiKey: process.env.BUGSNAG_TOKEN,
-    publishRelease: true,
-    reporterOptions: {
-      autoAssignRelease: true
     }
   },
 

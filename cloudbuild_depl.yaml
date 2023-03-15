@@ -8,21 +8,17 @@ steps:
       - --build-arg=GOOGLE_ANALYTICS_ID=UA-125031134-1
       - --build-arg=ZEAL_SECRET
       - --build-arg=STRIPE_PUBLISHABLE_KEY
-      - --build-arg=BUGSNAG_TOKEN
       - --build-arg=NODE_ENV=prod
       - --build-arg=DOMAIN=assets.deepsource.io
       - --cache=false
     secretEnv:
       - 'ZEAL_SECRET'
-      - 'BUGSNAG_TOKEN'
       - 'STRIPE_PUBLISHABLE_KEY'
 
 availableSecrets:
   secretManager:
     - versionName: projects/66550703913/secrets/bifrost/versions/4
       env: 'ZEAL_SECRET'
-    - versionName: projects/66550703913/secrets/bifrost-bugsnag-token/versions/1
-      env: 'BUGSNAG_TOKEN'
     - versionName: projects/66550703913/secrets/bifrost-stripe-publishable-key/versions/1
       env: 'STRIPE_PUBLISHABLE_KEY'
 
