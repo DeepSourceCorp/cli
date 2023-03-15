@@ -5066,6 +5066,8 @@ export enum StatusOptions {
 }
 
 export type SubmitSupportTicketInput = {
+  ownerLogin?: Maybe<Scalars['String']>;
+  vcsProvider?: Maybe<VcsProviderChoices>;
   fromEmail: Scalars['String'];
   ccEmails?: Maybe<Scalars['String']>;
   subject: Scalars['String'];
@@ -11953,6 +11955,55 @@ export type ViewerStarredReposQuery = (
         )>> }
       ) }
     )> }
+  )> }
+);
+
+export type UserAdsOrgSettingsUrlQueryVariables = Exact<{
+  login: Scalars['String'];
+}>;
+
+
+export type UserAdsOrgSettingsUrlQuery = (
+  { __typename?: 'Query' }
+  & { viewer?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id'>
+    & { adsOrganization?: Maybe<(
+      { __typename?: 'ADSOrganization' }
+      & Pick<AdsOrganization, 'login' | 'orgSettingsUrl'>
+    )> }
+  )> }
+);
+
+export type UserAdsOrganizationInfoQueryVariables = Exact<{
+  login: Scalars['String'];
+}>;
+
+
+export type UserAdsOrganizationInfoQuery = (
+  { __typename?: 'Query' }
+  & { viewer?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id'>
+    & { adsOrganization?: Maybe<(
+      { __typename?: 'ADSOrganization' }
+      & Pick<AdsOrganization, 'login' | 'hasInstalled' | 'hasEnabledThirdPartyAccess'>
+    )> }
+  )> }
+);
+
+export type UserAdsOrganizationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UserAdsOrganizationsQuery = (
+  { __typename?: 'Query' }
+  & { viewer?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id'>
+    & { adsOrganizations?: Maybe<Array<Maybe<(
+      { __typename?: 'ADSOrganization' }
+      & Pick<AdsOrganization, 'login' | 'hasInstalled' | 'hasEnabledThirdPartyAccess'>
+    )>>> }
   )> }
 );
 

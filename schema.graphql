@@ -2740,6 +2740,8 @@ enum StatusOptions {
 }
 
 input SubmitSupportTicketInput {
+  ownerLogin: String
+  vcsProvider: VCSProviderChoices
   fromEmail: String!
   ccEmails: String
   subject: String!

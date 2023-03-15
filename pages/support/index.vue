@@ -1,26 +1,26 @@
 <template>
   <div>
-    <div class="sticky z-10 top-10 lg:top-0">
-      <div class="flex items-center px-4 py-4 bg-ink-300">
+    <div class="sticky top-10 z-10 lg:top-0">
+      <div class="flex items-center bg-ink-300 px-4 py-4">
         <!-- ! Need a custom icon to use -->
         <!-- <z-icon icon="support" size="medium" color="vanilla-100" class="mr-2" /> -->
         <h1 class="my-px text-xl font-semibold leading-none">Contact support</h1>
       </div>
       <hr class="border-slate-400" />
     </div>
-    <div class="p-4 pt-0 max-w-7xl">
+    <div class="max-w-7xl p-4 pt-0">
       <form
         novalidate
-        class="grid mt-4 gap-y-5"
+        class="mt-4 grid gap-y-5"
         @submit.prevent="createSupportTicket"
         @reset.prevent="resetFormData"
       >
-        <div class="space-y-1.5 max-w-lg">
+        <div class="max-w-lg space-y-1.5">
           <label for="author-account" class="text-xs">Account or team</label>
           <div>
             <div
               v-if="$fetchState.pending"
-              class="py-5 my-px rounded-sm bg-ink-300 animate-pulse"
+              class="my-px animate-pulse rounded-sm bg-ink-300 py-5"
             ></div>
             <z-select
               v-else
@@ -61,16 +61,16 @@
               </z-option>
             </z-select>
           </div>
-          <p class="text-vanilla-400 text-xs">
+          <p class="text-xs text-vanilla-400">
             Select the workspace to which this support request is related.
           </p>
         </div>
-        <div class="space-y-1.5 max-w-lg">
+        <div class="max-w-lg space-y-1.5">
           <label for="author-email" class="text-xs">From</label>
           <div>
             <div
               v-if="$fetchState.pending"
-              class="py-5 my-px rounded-sm bg-ink-300 animate-pulse"
+              class="my-px animate-pulse rounded-sm bg-ink-300 py-5"
             ></div>
             <z-select
               v-else
@@ -87,11 +87,11 @@
               />
             </z-select>
           </div>
-          <p class="text-vanilla-400 text-xs">
+          <p class="text-xs text-vanilla-400">
             We'll use this email as the primary point of contact for this support request.
           </p>
         </div>
-        <div class="space-y-1.5 max-w-lg">
+        <div class="max-w-lg space-y-1.5">
           <label for="author-cc" class="text-xs">CC</label>
           <z-input
             id="author-cc"
@@ -103,12 +103,12 @@
             placeholder=""
             multiple
           />
-          <p class="text-vanilla-400 text-xs">
+          <p class="text-xs text-vanilla-400">
             We'll keep these email addresses in CC when communicating to you about this ticket. Use
             a comma to separate multiple emails.
           </p>
         </div>
-        <div class="space-y-1.5 max-w-lg">
+        <div class="max-w-lg space-y-1.5">
           <label for="support-subject" class="text-xs">Subject</label>
           <z-input
             id="support-subject"
@@ -120,7 +120,7 @@
             padding="px-4"
           />
         </div>
-        <div class="space-y-2 max-w-lg">
+        <div class="max-w-lg space-y-2">
           <div class="space-y-1.5">
             <label id="support-description" class="text-xs">What is the issue?</label>
 
@@ -160,7 +160,7 @@
                             ? 'cursor-not-allowed'
                             : 'cursor-pointer'
                         "
-                        class="ml-1 opacity-60 hover:opacity-100 hover:text-vanilla-100"
+                        class="ml-1 opacity-60 hover:text-vanilla-100 hover:opacity-100"
                         @click="open"
                       />
                     </template>
@@ -168,17 +168,17 @@
                 </template>
               </z-rich-text>
             </div>
-            <p class="text-vanilla-400 text-xs">
+            <p class="text-xs text-vanilla-400">
               Please be as descriptive as possible. If you're reporting a bug, please list down the
               steps you took. This will help us reproduce the behavior. You can attach images,
               videos or text files up to 10 MB in size.
             </p>
           </div>
-          <div class="space-y-2 max-w-lg text-xs leading-none">
+          <div class="max-w-lg space-y-2 text-xs leading-none">
             <div
               v-for="(uploadedFile, index) in filesToUpload"
               :key="index"
-              class="flex items-center justify-between px-4 py-2 rounded-sm bg-ink-300 text-vanilla-400"
+              class="flex items-center justify-between rounded-sm bg-ink-300 px-4 py-2 text-vanilla-400"
             >
               <span>{{ uploadedFile.name }}</span>
               <button
@@ -188,7 +188,7 @@
                 :class="
                   isFileProcessing || isFormSubmitting ? 'cursor-not-allowed' : 'cursor-pointer'
                 "
-                class="p-1 rounded-sm hover:bg-cherry-600 hover:bg-opacity-20 disabled:opacity-50"
+                class="rounded-sm p-1 hover:bg-cherry-600 hover:bg-opacity-20 disabled:opacity-50"
                 @click="removeFile(index)"
               >
                 <z-icon icon="trash-2" color="cherry" size="x-small" />
@@ -196,7 +196,7 @@
             </div>
           </div>
         </div>
-        <div class="space-y-1.5 max-w-lg flex justify-end">
+        <div class="flex max-w-lg justify-end space-y-1.5">
           <z-button
             :disabled="isFileProcessing || isFormSubmitting"
             :is-loading="isFormSubmitting"
@@ -214,26 +214,28 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import ActiveUserMixin, { DashboardContext } from '~/mixins/activeUserMixin'
 import {
-  ZInput,
-  ZRichText,
-  ZButton,
-  ZSelect,
-  ZOption,
-  ZIcon,
   ZAvatar,
+  ZButton,
   ZConfirm,
-  ZFileInput
+  ZFileInput,
+  ZIcon,
+  ZInput,
+  ZOption,
+  ZRichText,
+  ZSelect
 } from '@deepsource/zeal'
-import { InfoBanner } from '@/components/Settings/index'
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
+
 import SubmitSupportTicketMutation from '~/apollo/mutations/support/submitSupportTicket.gql'
-import { FileUploadContexts, uploadFiles, FileUploadTokenT, FileUploadError } from '~/utils/files'
-import { getDefaultAvatar } from '~/utils/ui'
+import ActiveUserMixin, { DashboardContext } from '~/mixins/activeUserMixin'
 import { AuthActionTypes, AuthGetterTypes } from '~/store/account/auth'
+
 import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
-import { Attachment } from '~/types/types'
+import { SubmitSupportTicketInput, VcsProviderChoices } from '~/types/types'
+
+import { FileUploadContexts, FileUploadError, uploadFiles } from '~/utils/files'
+import { getDefaultAvatar } from '~/utils/ui'
 
 type SupportValidationData = {
   ticketAuthor: string
@@ -241,14 +243,6 @@ type SupportValidationData = {
   authorCC: string
   supportSubject: string
   supportText: string
-}
-
-interface FormDataT {
-  fromEmail: string
-  ccEmails: string
-  subject: string
-  body: string
-  attachments?: Attachment[]
 }
 
 const authStore = namespace('account/auth')
@@ -263,8 +257,7 @@ const authStore = namespace('account/auth')
     ZIcon,
     ZAvatar,
     ZConfirm,
-    ZFileInput,
-    InfoBanner
+    ZFileInput
   },
   meta: {
     auth: {
@@ -281,6 +274,8 @@ export default class Support extends mixins(ActiveUserMixin) {
   private supportSubject = ''
   private authorEmail = ''
   private authorCC = ''
+  private ownerLogin = ''
+  private ownerVCSProvider = '' as VcsProviderChoices
   private viewerContexts = []
   private isFileProcessing = false
   private isFormSubmitting = false
@@ -328,6 +323,9 @@ export default class Support extends mixins(ActiveUserMixin) {
     this.authorEmail = this.viewer.email
     this.viewerContexts = this.viewer.dashboardContext
     this.ticketAuthorId = this.activeDashboardContext.id.toString()
+    this.ownerLogin = this.activeDashboardContext?.login || ''
+    this.ownerVCSProvider =
+      this.$providerMetaMap[this.activeDashboardContext?.vcs_provider].value || ''
   }
 
   /**
@@ -477,7 +475,13 @@ export default class Support extends mixins(ActiveUserMixin) {
    * @param {FormDataT} formData - Data for the support ticket.
    * @returns {Promise<void>}
    */
-  async submitSupportData(formData: FormDataT): Promise<void> {
+  async submitSupportData(formData: SubmitSupportTicketInput): Promise<void> {
+    // Send owner `login` if not on prem
+    if (!this.$config.onPrem && this.ownerLogin && this.ownerVCSProvider) {
+      formData.ownerLogin = this.ownerLogin
+      formData.vcsProvider = this.ownerVCSProvider
+    }
+
     const response = (await this.$applyGraphqlMutation(SubmitSupportTicketMutation, {
       input: formData
     })) as GraphqlMutationResponse
@@ -534,10 +538,11 @@ export default class Support extends mixins(ActiveUserMixin) {
     }
 
     if (!this.validateInputs(dataToValidate)) {
+      this.isFormSubmitting = false
       return
     }
 
-    const formData: FormDataT = {
+    const formData: SubmitSupportTicketInput = {
       fromEmail: dataToValidate.authorEmail,
       ccEmails: dataToValidate.authorCC,
       subject: dataToValidate.supportSubject,
@@ -614,6 +619,6 @@ export default class Support extends mixins(ActiveUserMixin) {
 <style lang="postcss">
 .z-rich-text .ProseMirror p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
-  @apply h-0 pointer-events-none float-left text-slate;
+  @apply pointer-events-none float-left h-0 text-slate;
 }
 </style>
