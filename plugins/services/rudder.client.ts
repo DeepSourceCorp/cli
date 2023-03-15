@@ -58,7 +58,13 @@ export default async (context: Context, inject: Inject): Promise<void> => {
 
   inject('rudder', rudderAnalytics)
 
-  rudderAnalytics.load($config.rudderWriteKey, $config.rudderDataPlaneUrl)
+  rudderAnalytics.load($config.rudderWriteKey, $config.rudderDataPlaneUrl, {
+    anonymousIdOptions: {
+      autoCapture: {
+        enabled: false
+      }
+    }
+  })
 
   // Return early if the user is not logged in
   if (!isLoggedIn) {
@@ -78,9 +84,9 @@ export default async (context: Context, inject: Inject): Promise<void> => {
     } = viewer
 
     if (id && email) {
-      const parsedId = Buffer.from(id, 'base64').toString().toLowerCase().replace('user:', '')
+      const userId = Buffer.from(id, 'base64').toString().toLowerCase().replace('user:', '')
 
-      rudderAnalytics.identify(parsedId, {
+      rudderAnalytics.identify(userId, {
         avatar,
         createdAt,
         email,
@@ -100,15 +106,18 @@ export default async (context: Context, inject: Inject): Promise<void> => {
     // Identify the team via RudderStack
     if (activeDashboardContext && Object.keys(activeDashboardContext).length) {
       const {
-        avatar_url: team_avatar_url,
         id: groupId,
+        avatar_url: team_avatar_url,
         subscribed_plan_info,
         team_name,
         vcs_provider_display
       } = activeDashboardContext
 
       if (groupId && team_name) {
-        rudderAnalytics.group(String(groupId), {
+        const stringifiedGroupId = String(groupId)
+
+        rudderAnalytics.group(stringifiedGroupId, {
+          groupType: 'organization',
           avatar: team_avatar_url,
           name: team_name,
           plan:

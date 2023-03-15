@@ -38,7 +38,7 @@
     "pluralize": "^8.0.0",
     "portal-vue": "^2.1.7",
     "postcss": "7.0.36",
-    "rudder-sdk-js": "^1.2.20",
+    "rudder-sdk-js": "^2.26.0",
     "tinykeys": "^1.4.0",
     "vuedraggable": "^2.24.3"
   },

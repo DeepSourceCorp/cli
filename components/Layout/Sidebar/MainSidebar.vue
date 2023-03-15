@@ -1,7 +1,7 @@
 <template>
   <!-- TODO the sidebar shouldn't need a z-index in lg+ screens but conflicts with zeal components block this  -->
   <aside
-    class="fixed top-0 z-50 flex flex-col h-screen duration-200 border-r lg:sticky lg:left-0 transition-width transform-gpu border-slate-400 group bg-ink-400"
+    class="transition-width group fixed top-0 z-50 flex h-screen transform-gpu flex-col border-r border-slate-400 bg-ink-400 duration-200 lg:sticky lg:left-0"
     v-outside-click="closeMenu"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
@@ -12,7 +12,7 @@
       </section>
       <!-- Menu options -->
       <section
-        class="p-2.5 space-y-2 hide-scroll flex-grow"
+        class="hide-scroll flex-grow space-y-2 p-2.5"
         :class="isCollapsed ? '' : 'overflow-y-scroll'"
       >
         <button
@@ -21,10 +21,10 @@
             content: isCollapsed ? 'Activate new repository' : '',
             placement: 'right'
           }"
-          class="flex items-center w-full p-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-slate-400 hover:bg-ink-200"
+          class="flex w-full items-center space-x-2 rounded-sm border border-slate-400 bg-ink-300 p-2 leading-none hover:bg-ink-200"
           @click="showAddRepoModal = true"
         >
-          <z-icon icon="plus" size="small" color="vanilla-400" class="min-w-4 min-h-4" />
+          <z-icon icon="plus" size="small" color="vanilla-400" class="min-h-4 min-w-4" />
           <span v-show="!isCollapsed" class="text-sm font-medium">Activate new repository</span>
         </button>
         <nav class="space-y-2">
@@ -68,11 +68,11 @@
       </section>
     </template>
     <!-- Dummy menu when user isn't onboarded -->
-    <section v-else class="flex-grow hide-scroll">
+    <section v-else class="hide-scroll flex-grow">
       <div class="border-b border-slate-400" :class="[isCollapsed ? 'py-4 pl-5' : 'py-4 pl-5']">
         <deep-source-logo :is-collapsed="isCollapsed" />
       </div>
-      <nav class="p-2.5 space-y-2">
+      <nav class="space-y-2 p-2.5">
         <a
           v-if="installationUrl.startsWith('http')"
           v-tooltip="{
@@ -80,9 +80,9 @@
             placement: 'right'
           }"
           :href="installationUrl"
-          class="flex items-center w-full p-2 mb-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-slate-400 hover:bg-ink-200"
+          class="mb-2 flex w-full items-center space-x-2 rounded-sm border border-slate-400 bg-ink-300 p-2 leading-none hover:bg-ink-200"
         >
-          <z-icon icon="plus" size="small" color="vanilla-400" class="min-w-4 min-h-4" />
+          <z-icon icon="plus" size="small" color="vanilla-400" class="min-h-4 min-w-4" />
           <span v-show="!isCollapsed" class="text-sm font-medium">Activate new repository</span>
         </a>
         <nuxt-link
@@ -92,9 +92,9 @@
             placement: 'right'
           }"
           :to="installationUrl"
-          class="flex items-center w-full p-2 mb-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-slate-400 hover:bg-ink-200"
+          class="mb-2 flex w-full items-center space-x-2 rounded-sm border border-slate-400 bg-ink-300 p-2 leading-none hover:bg-ink-200"
         >
-          <z-icon icon="plus" size="small" color="vanilla-400" class="min-w-4 min-h-4" />
+          <z-icon icon="plus" size="small" color="vanilla-400" class="min-h-4 min-w-4" />
           <span v-show="!isCollapsed" class="text-sm font-medium">Activate new repository</span>
         </nuxt-link>
         <sidebar-item
@@ -139,7 +139,7 @@
       v-if="
         !isCollapsed && owner.maxUsagePercentage >= 100 && Object.keys(availableUpgradePlans).length
       "
-      class="p-4 border-t border-slate-400"
+      class="border-t border-slate-400 p-4"
     >
       <h4 class="mb-2 text-sm font-medium leading-6 text-vanilla-100">Usage quota exhausted :(</h4>
       <p class="mb-4 text-xs font-normal leading-5 text-vanilla-400">
@@ -156,8 +156,8 @@
       />
     </section>
     <!-- User menu -->
-    <section class="relative self-end w-full justify-self-end group">
-      <div class="p-2.5 border-t border-slate-400 space-y-2">
+    <section class="group relative w-full self-end justify-self-end">
+      <div class="space-y-2 border-t border-slate-400 p-2.5">
         <div class="lg:flex">
           <support-menu :is-collapsed="isCollapsed" />
         </div>
@@ -177,48 +177,48 @@
           <extras-menu v-if="!isCollapsed" />
         </nav>
         <div
-          class="items-center hidden lg:flex"
-          :class="{ 'lg:space-x-1 w-full justify-between': !isCollapsed, 'w-8': isCollapsed }"
+          class="hidden items-center lg:flex"
+          :class="{ 'w-full justify-between lg:space-x-1': !isCollapsed, 'w-8': isCollapsed }"
         >
           <user-menu :is-collapsed="isCollapsed" />
         </div>
       </div>
-      <div class="p-4 border-t border-slate-400" :class="{ 'pt-2': isChristmasSeason() }">
+      <div class="border-t border-slate-400 p-4" :class="{ 'pt-2': isChristmasSeason() }">
         <div class="flex items-center justify-between space-x-2 leading-none">
           <img
             v-if="isChristmasSeason()"
             v-tooltip="`'Tis the season`"
             src="~/assets/images/christmas-logo.svg"
             alt="Deepsource logo"
-            class="flex-shrink-0 cursor-pointer min-w-4 min-h-4"
+            class="min-h-4 min-w-4 flex-shrink-0 cursor-pointer"
           />
           <z-icon
             v-else
             icon="logo"
             size="small"
             color="vanilla-100"
-            class="flex-shrink-0 min-w-4 min-h-4"
+            class="min-h-4 min-w-4 flex-shrink-0"
           />
           <span
-            class="self-end text-xs transition-all text-vanilla-300"
+            class="self-end text-xs text-vanilla-300 transition-all"
             :class="{
-              'opacity-0 hidden delay-300': isCollapsed,
-              'opacity-1 flex delay-0': !isCollapsed
+              'hidden opacity-0 delay-300': isCollapsed,
+              'opacity-1 delay-0 flex': !isCollapsed
             }"
             >© {{ currentYear }} DeepSource Corp.</span
           >
         </div>
       </div>
-      <div class="absolute -top-2.5 -right-2.5 md:group-hover:block hidden">
+      <div class="absolute -top-2.5 -right-2.5 hidden md:group-hover:block">
         <button
           @click="toggleSidebarCollapse"
-          class="flex items-center justify-center w-5 h-5 rounded-full cursor-pointer bg-ink-100 hover:bg-slate group focus:outline-none"
+          class="focus:outline-none group flex h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-ink-100 hover:bg-slate"
         >
           <z-icon
             icon="chevron-left"
             size="small"
             color="vanilla-400"
-            class="transition-transform duration-300 transform-gpu"
+            class="transform-gpu transition-transform duration-300"
             :class="isCollapsed ? 'rotate-180' : ''"
           />
         </button>
@@ -320,10 +320,10 @@ export default class Sidebar extends mixins(
       const { avatar, dateJoined: createdAt, email, firstName, id, lastName } = this.viewer
 
       if (id && email) {
-        const parsedId = Buffer.from(id, 'base64').toString().toLowerCase().replace('user:', '')
+        const userId = Buffer.from(id, 'base64').toString().toLowerCase().replace('user:', '')
 
         // @ts-ignore
-        this.$rudder?.identify(parsedId, {
+        this.$rudder?.identify(userId, {
           avatar,
           createdAt,
           email,
@@ -343,7 +343,10 @@ export default class Sidebar extends mixins(
       } = this.activeDashboardContext
 
       if (type === 'team' && groupId && team_name) {
-        this.$rudder?.group(String(groupId), {
+        const stringifiedGroupId = String(groupId)
+
+        this.$rudder?.group(stringifiedGroupId, {
+          groupType: 'organization',
           avatar: team_avatar_url,
           name: team_name,
           plan:

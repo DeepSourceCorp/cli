@@ -163,7 +163,7 @@ export const actions: AuthModuleActions = {
 
       // reset rudder stack
       if (process.client) {
-        this.$rudder?.reset()
+        this.$rudder?.reset(true)
       }
 
       // reset the apollo cache

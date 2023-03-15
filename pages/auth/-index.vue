@@ -1,6 +1,6 @@
 <template>
-  <div class="flex items-center justify-center h-screen p-4">
-    <div class="w-full max-w-3xl py-20 mx-auto space-y-6 text-center">
+  <div class="flex h-screen items-center justify-center p-4">
+    <div class="mx-auto w-full max-w-3xl space-y-6 py-20 text-center">
       <video
         :poster="require('~/assets/images/ui-states/login/norris-hello.png')"
         autoplay
@@ -83,8 +83,8 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
       } = this.$store.state.user.active.viewer
 
       if (!this.$config.onPrem && id && email) {
-        const parsedId = Buffer.from(id, 'base64').toString().toLowerCase().replace('user:', '')
-        this.$rudder?.identify(parsedId, {
+        const userId = Buffer.from(id, 'base64').toString().toLowerCase().replace('user:', '')
+        this.$rudder?.identify(userId, {
           avatar,
           createdAt,
           email,
@@ -105,7 +105,10 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
 
       // Invoke `$rudder.group` only for team accounts
       if (!this.$config.onPrem && groupId && team_name && type === 'team') {
-        this.$rudder?.group(String(groupId), {
+        const stringifiedGroupId = String(groupId)
+
+        this.$rudder?.group(stringifiedGroupId, {
+          groupType: 'organization',
           avatar: team_avatar_url,
           name: team_name,
           plan:
