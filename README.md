@@ -26,7 +26,7 @@ Command line interface to DeepSource
 
 # Documentation
 
-For installation, configuration, usage, and other documentation, please refer to [CLI docs](https://deepsource.io/docs/cli/installation)
+For installation, configuration, usage, and other documentation, please refer to [DeepSource Docs](https://deepsource.io/docs/cli/installation).
 
 ## License
 
