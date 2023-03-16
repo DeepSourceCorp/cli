@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"crypto/tls"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strconv"
 	"time"
@@ -39,7 +39,7 @@ func makeQuery(url string, body []byte, bodyMimeType string, skipCertificateVeri
 	}
 	defer res.Body.Close()
 
-	resBody, err = ioutil.ReadAll(res.Body)
+	resBody, err = io.ReadAll(res.Body)
 	if err != nil {
 		return resBody, err
 	}

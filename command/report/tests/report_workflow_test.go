@@ -2,12 +2,14 @@ package tests
 
 import (
 	"bytes"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
 	"os/exec"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
 )
 
 // Workflow tested:
@@ -18,31 +20,30 @@ import (
 // Sample values to the run the analyzer on
 const (
 	analyzer  = "test-coverage"
+	commitOid = "b7ff1a5ecb0dce0541b935224f852ee98570bbd4"
 	dsn       = "http://f59ab9314307@localhost:8081"
-	commitOID = "c2d16c69dbcba139002757b6734ee43c714845a3"
 	key       = "python"
 )
 
 func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
-	req, _ := ioutil.ReadAll(r.Body)
-	log.Println(string(req))
+	req, _ := io.ReadAll(r.Body)
 
 	// Read test graphql request body artifact file
-	requestBodyData, err := ioutil.ReadFile("./dummy/report_graphql_request_body.json")
+	requestBodyData, err := os.ReadFile("./golden_files/report_graphql_request_body.json")
 	if err != nil {
 		log.Println(err)
 		return
 	}
 
 	// Read test graphql success response body artifact file
-	successResponseBodyData, err := ioutil.ReadFile("./dummy/report_graphql_success_response_body.json")
+	successResponseBodyData, err := os.ReadFile("./golden_files/report_graphql_success_response_body.json")
 	if err != nil {
 		log.Println(err)
 		return
 	}
 
 	// Read test graphql error response body artifact file
-	errorResponseBodyData, err := ioutil.ReadFile("./dummy/report_graphql_success_response_body.json")
+	errorResponseBodyData, err := os.ReadFile("./golden_files/report_graphql_error_response_body.json")
 	if err != nil {
 		log.Println(err)
 		return
@@ -51,18 +52,23 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 
-	if string(requestBodyData) == string(req) {
+	if want, got := string(requestBodyData), string(req); want == got {
 		w.Write([]byte(successResponseBodyData))
 	} else {
+		if want != got {
+			log.Printf("Mismatch found:\nDiff: %s\n", cmp.Diff(want, got))
+		}
 		w.Write([]byte(errorResponseBodyData))
 	}
 }
 
 func TestReportKeyValueWorkflow(t *testing.T) {
+	t.Setenv("GIT_COMMIT_SHA", commitOid)
+
 	// Read test artifact file
-	data, err := ioutil.ReadFile("./dummy/python_coverage.xml")
+	data, err := os.ReadFile("/tmp/python_coverage.xml")
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Error(err)
 	}
 
 	cmd := exec.Command("/tmp/deepsource",
@@ -91,11 +97,24 @@ func TestReportKeyValueWorkflow(t *testing.T) {
 	log.Printf("== Run deepsource CLI command ==\n%s\n%s\n", outStr, errStr)
 
 	if err != nil {
+		log.Println(outStr)
+		log.Println(errStr)
 		t.Errorf("Error executing deepsource CLI command: %v", err)
+	}
+
+	output, err := os.ReadFile("./golden_files/report_success.txt")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if want := string(output); want != outStr {
+		t.Errorf("Expected: %s, Got: %s", want, outStr)
 	}
 }
 
 func TestReportKeyValueFileWorkflow(t *testing.T) {
+	t.Setenv("GIT_COMMIT_SHA", commitOid)
+
 	cmd := exec.Command("/tmp/deepsource",
 		"report",
 		"--analyzer",
@@ -124,5 +143,14 @@ func TestReportKeyValueFileWorkflow(t *testing.T) {
 		log.Println(outStr)
 		log.Println(errStr)
 		t.Errorf("Error executing deepsource CLI command: %v", err)
+	}
+
+	output, err := os.ReadFile("./golden_files/report_success.txt")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if want := string(output); want != outStr {
+		t.Errorf("Expected: %s, Got: %s", want, outStr)
 	}
 }
