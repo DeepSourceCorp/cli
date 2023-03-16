@@ -95,7 +95,7 @@ const howToMakeAVcsMap = {
     'gsr-colored'
   ),
   [routerVcsMap.ads]: new ProviderMeta(
-    'Azure Devops Services',
+    'Azure DevOps Services',
     routerVcsMap.ads,
     VcsProviderChoices.Ads,
     'ads-oauth2',

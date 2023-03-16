@@ -151,7 +151,7 @@ export default class AuthMixin extends Vue {
           shortcode: routerVcsMap.ads,
           provider: 'ads',
           icon: 'ads-colored',
-          label: 'Azure Devops Services',
+          label: 'Azure DevOps Services',
           bg: 'bg-ink-200'
         })
       }
