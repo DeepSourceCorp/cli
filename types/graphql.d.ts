@@ -1532,6 +1532,7 @@ declare module '*/single.gql' {
   const defaultDocument: DocumentNode;
   export const webhookEventDelivery: DocumentNode;
 export const getSingleWebhook: DocumentNode;
+export const singleRepositoryIssue: DocumentNode;
 export const repositoryRunDetail: DocumentNode;
 
   export default defaultDocument;

@@ -1,13 +1,13 @@
 <template>
-  <div class="flex flex-col flex-1 gap-y-2 pb-1">
+  <div class="flex flex-1 flex-col gap-y-2 pb-1">
     <!-- Heading -->
     <div class="flex flex-wrap items-baseline text-lg font-normal text-vanilla-400">
       <span class="pr-2 font-bold text-vanilla-100" v-html="safeRenderBackticks(title)"> </span>
-      <span class="flex-shrink-0 block md:flex font-medium">{{ shortcode }}</span>
+      <span class="block flex-shrink-0 font-medium md:flex">{{ shortcode }}</span>
     </div>
-    <div class="flex items-center w-full text-vanilla-400 sm:w-auto">
+    <div class="flex w-full items-center text-vanilla-400 sm:w-auto">
       <!-- Meta data -->
-      <div class="flex flex-wrap items-center leading-none gap-x-4 gap-y-2">
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 leading-none">
         <issue-type v-if="issueType" :issue-type="issueType" />
         <issue-severity-tag v-if="severity && issueType === 'security'" :severity="severity" />
         <meta-data-item v-if="count" icon="file-pulse"
@@ -50,15 +50,15 @@
             :key="tag"
             :to="`${$generateRoute(['issues'])}?category=all&q=tag:${tag}`"
             v-tooltip="`View all issues tagged ${deslugifyTag(tag).toUpperCase()}`"
-            class="flex items-center gap-x-1 uppercase border border-slate-400 rounded-full px-1.5 py-1"
+            class="flex items-center gap-x-1 rounded-full border border-slate-400 px-1.5 py-1 uppercase"
           >
             <span
-              class="w-2 h-2 rounded-full"
+              class="h-2 w-2 rounded-full"
               :style="{
                 background: generateColorFromTag(tag)
               }"
             ></span>
-            <span class="font-medium tracking-wide text-xxs text-vanilla-400">
+            <span class="text-xxs font-medium tracking-wide text-vanilla-400">
               {{ deslugifyTag(tag) }}
             </span>
           </nuxt-link>
@@ -108,7 +108,7 @@ export default class IssueDetailsHeader extends Vue {
   @Prop()
   issuePriority: IssuePriority | null
 
-  @Prop()
+  @Prop({ default: () => [] })
   tags: Array<string>
 
   @Prop()

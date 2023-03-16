@@ -41,7 +41,7 @@ export default class IssueDetailMixin extends Vue {
     repositoryId: string
     shortcode: string
     refetch?: boolean
-  }) => Promise<void>
+  }) => Promise<RepositoryIssue | undefined>
 
   @issueStore.Action(IssueDetailActions.FETCH_SILENCE_RULES)
   fetchSilenceRules: (args: {
@@ -55,7 +55,7 @@ export default class IssueDetailMixin extends Vue {
   }) => Promise<Array<SilenceRule>>
 
   @issueStore.Action(IssueDetailActions.FETCH_SINGLE_ISSUE)
-  fetchSingleIssue: (args: { shortcode: string }) => Promise<void>
+  fetchSingleIssue: (args: { shortcode: string }) => Promise<Issue | undefined>
 
   @issueStore.Action(IssueDetailActions.FETCH_ISSUE_CHILDREN)
   fetchIssueChildren: (args: {

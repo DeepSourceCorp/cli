@@ -1,15 +1,15 @@
 <template>
-  <div class="flex flex-col p-4 gap-y-4">
+  <div class="flex flex-col gap-y-4 p-4">
     <issue-occurrence-section
       @filters-updated="triggerFilterUpdate"
       @filter-removed="removeFilter"
     />
     <div class="grid grid-cols-12">
       <!-- Issue list -->
-      <div class="flex flex-col col-span-full lg:col-span-8 gap-y-4">
+      <div class="col-span-full flex flex-col gap-y-4 lg:col-span-8">
         <div
           v-if="checkIssues.totalCount === 0"
-          class="flex items-center justify-center w-full h-full"
+          class="flex h-full w-full items-center justify-center"
         >
           <lazy-empty-state
             title="No results found"
@@ -22,7 +22,7 @@
           <div
             v-for="ii in 3"
             :key="ii"
-            class="w-full rounded-md h-36 bg-ink-300 animate-pulse"
+            class="h-36 w-full animate-pulse rounded-md bg-ink-300"
           ></div>
         </template>
         <template v-else>
@@ -37,7 +37,7 @@
           </div>
         </template>
         <z-pagination
-          class="flex justify-center w-full"
+          class="flex w-full justify-center"
           v-if="pageCount > 1"
           :total-pages="pageCount"
           :total-visible="5"
@@ -46,8 +46,8 @@
         />
       </div>
       <!-- Description -->
-      <div v-if="$fetchState.pending" class="hidden col-span-4 px-4 lg:block">
-        <div class="rounded-md h-44 bg-ink-300 animate-pulse"></div>
+      <div v-if="$fetchState.pending" class="col-span-4 hidden px-4 lg:block">
+        <div class="h-44 animate-pulse rounded-md bg-ink-300"></div>
       </div>
       <issue-description v-else :description="issue.descriptionRendered" class="col-span-4" />
     </div>
@@ -127,6 +127,9 @@ export default class IssuesDetails extends mixins(
 
   async fetchIssueData(): Promise<void> {
     const { repo, provider, owner, issueId } = this.$route.params
+
+    if (!issueId) this.$nuxt.error({ statusCode: 404 })
+
     if (!this.repository.id) {
       await this.fetchBasicRepoDetails({
         name: repo,
@@ -135,10 +138,17 @@ export default class IssuesDetails extends mixins(
       })
     }
 
-    await this.fetchIssueDetails({
+    const issue = await this.fetchIssueDetails({
       repositoryId: this.repository.id,
       shortcode: issueId
     })
+
+    if (!issue || !Object.keys(issue).length) {
+      this.$nuxt.error({
+        statusCode: 404,
+        message: `Issue "${issueId}" does not exist!`
+      })
+    }
   }
 
   triggerFilterUpdate(params: Record<string, string | number | null>) {

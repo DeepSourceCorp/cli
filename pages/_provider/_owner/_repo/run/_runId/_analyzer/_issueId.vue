@@ -1,18 +1,18 @@
 <template>
-  <main class="pb-6 issue-page">
-    <div class="z-20 p-4 md:sticky top-bar-offset bg-ink-400 border-b border-slate-400">
+  <main class="issue-page pb-6">
+    <div class="top-bar-offset z-20 border-b border-slate-400 bg-ink-400 p-4 md:sticky">
       <!-- Issue details -->
-      <div class="flex flex-col space-y-3 xl:flex-row xl:space-y-0 mb-px">
+      <div class="mb-px flex flex-col space-y-3 xl:flex-row xl:space-y-0">
         <div class="w-full space-y-2.5" v-if="$fetchState.pending || loading">
           <!-- Left Section -->
-          <div class="w-3/5 h-8 rounded-md md:w-4/5 bg-ink-300 animate-pulse"></div>
+          <div class="h-8 w-3/5 animate-pulse rounded-md bg-ink-300 md:w-4/5"></div>
           <div class="flex w-1/3 space-x-2">
-            <div class="w-1/3 h-4 rounded-md bg-ink-300 animate-pulse"></div>
-            <div class="w-1/3 h-4 rounded-md bg-ink-300 animate-pulse"></div>
+            <div class="h-4 w-1/3 animate-pulse rounded-md bg-ink-300"></div>
+            <div class="h-4 w-1/3 animate-pulse rounded-md bg-ink-300"></div>
           </div>
         </div>
         <!-- issue header and actions -->
-        <div v-else class="flex justify-between w-full relative z-20">
+        <div v-else class="relative z-20 flex w-full justify-between">
           <issue-details-header
             :issue-type="singleIssue.issueType"
             :shortcode="singleIssue.shortcode"
@@ -47,11 +47,11 @@
           <div
             v-for="ii in 3"
             :key="ii"
-            class="w-full rounded-md h-36 bg-ink-300 animate-pulse"
+            class="h-36 w-full animate-pulse rounded-md bg-ink-300"
           ></div>
         </div>
-        <div class="hidden w-2/6 h-full px-4 lg:block">
-          <div class="rounded-md h-44 bg-ink-300 animate-pulse"></div>
+        <div class="hidden h-full w-2/6 px-4 lg:block">
+          <div class="h-44 animate-pulse rounded-md bg-ink-300"></div>
         </div>
       </div>
       <div v-else class="grid grid-cols-3">
@@ -247,6 +247,8 @@ export default class RunIssueDetails extends mixins(
 
   async fetch(): Promise<void> {
     const { runId, issueId } = this.$route.params
+    if (!issueId) this.$nuxt.error({ statusCode: 404 })
+
     await Promise.all([
       this.fetchBasicRepoDetails(this.baseRouteParams),
       this.fetchRepoPerms(this.baseRouteParams),
@@ -260,11 +262,7 @@ export default class RunIssueDetails extends mixins(
     // Re-fetch only if the page visited corresponds to the issue being ignored
     const refetch = status && issueId === issueIdFromStore && page === (this.queryParams.page ?? 1)
 
-    await Promise.all([
-      this.fetchIssues(),
-      this.fetchIssuesInCheck(refetch),
-      this.fetchSingleIssue({ shortcode: issueId })
-    ])
+    await Promise.all([this.fetchIssues(), this.fetchIssuesInCheck(refetch), this.fetchIssue()])
     this.issuePriority = await this.fetchIssuePriority({
       objectId: this.repository.id,
       level: IssuePriorityLevel.Repository,
@@ -350,6 +348,19 @@ export default class RunIssueDetails extends mixins(
       q: (this.queryParams.listq as string) || '',
       refetch
     })
+  }
+
+  async fetchIssue() {
+    const { issueId } = this.$route.params
+
+    const issue = await this.fetchSingleIssue({ shortcode: issueId })
+
+    if (!issue || !Object.keys(issue).length) {
+      this.$nuxt.error({
+        statusCode: 404,
+        message: `Issue "${issueId}" does not exist!`
+      })
+    }
   }
 
   /**

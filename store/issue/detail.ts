@@ -133,7 +133,7 @@ interface IssueDetailModuleActions extends ActionTree<IssueDetailModuleState, Ro
       shortcode: string
       refetch?: boolean
     }
-  ) => Promise<void>
+  ) => Promise<RepositoryIssue | undefined>
   [IssueDetailActions.FETCH_ISSUE_CHILDREN]: (
     this: Store<RootState>,
     injectee: IssueDetailActionContext,
@@ -151,7 +151,7 @@ interface IssueDetailModuleActions extends ActionTree<IssueDetailModuleState, Ro
     args: {
       shortcode: string
     }
-  ) => Promise<void>
+  ) => Promise<Issue | undefined>
   [IssueDetailActions.FETCH_SILENCE_RULES]: (
     this: Store<RootState>,
     injectee: IssueDetailActionContext,
@@ -254,36 +254,46 @@ interface IssueDetailModuleActions extends ActionTree<IssueDetailModuleState, Ro
 export const actions: IssueDetailModuleActions = {
   async [IssueDetailActions.FETCH_ISSUE]({ commit }, args) {
     commit(IssueDetailMutations.SET_LOADING, true)
-    await this.$fetchGraphqlData(
-      RepositoryIssueDetailGQLQuery,
-      {
-        repositoryId: args.repositoryId,
-        shortcode: args.shortcode
-      },
-      args.refetch
-    )
-      .then((response: GraphqlQueryResponse) => {
-        commit(IssueDetailMutations.SET_ISSUE, response.data.repository?.issue)
-        commit(IssueDetailMutations.SET_LOADING, false)
-      })
-      .catch((e: GraphqlError) => {
-        commit(IssueDetailMutations.SET_ERROR, e)
-        commit(IssueDetailMutations.SET_LOADING, false)
-      })
+    try {
+      const res: GraphqlQueryResponse = await this.$fetchGraphqlData(
+        RepositoryIssueDetailGQLQuery,
+        {
+          repositoryId: args.repositoryId,
+          shortcode: args.shortcode
+        },
+        args.refetch
+      )
+
+      commit(IssueDetailMutations.SET_ISSUE, res.data.repository?.issue)
+
+      if (res.data.repository?.issue) {
+        return res.data.repository.issue as RepositoryIssue
+      }
+    } catch (e) {
+      commit(IssueDetailMutations.SET_ERROR, e as GraphqlError)
+    } finally {
+      commit(IssueDetailMutations.SET_LOADING, false)
+    }
+    return undefined
   },
   async [IssueDetailActions.FETCH_SINGLE_ISSUE]({ commit }, args) {
     commit(IssueDetailMutations.SET_LOADING, true)
-    await this.$fetchGraphqlData(SingleIssueDetailGQLQuery, {
-      shortcode: args.shortcode
-    })
-      .then((response: GraphqlQueryResponse) => {
-        commit(IssueDetailMutations.SET_SINGLE_ISSUE, response.data.issue)
-        commit(IssueDetailMutations.SET_LOADING, false)
+    try {
+      const res: GraphqlQueryResponse = await this.$fetchGraphqlData(SingleIssueDetailGQLQuery, {
+        shortcode: args.shortcode
       })
-      .catch((e: GraphqlError) => {
-        commit(IssueDetailMutations.SET_ERROR, e)
-        commit(IssueDetailMutations.SET_LOADING, false)
-      })
+
+      commit(IssueDetailMutations.SET_SINGLE_ISSUE, res.data?.issue)
+
+      if (res.data?.issue) {
+        return res.data.issue as Issue
+      }
+    } catch (e) {
+      commit(IssueDetailMutations.SET_ERROR, e as GraphqlError)
+    } finally {
+      commit(IssueDetailMutations.SET_LOADING, false)
+    }
+    return undefined
   },
   async [IssueDetailActions.FETCH_SILENCE_RULES](_, args) {
     const response = await this.$fetchGraphqlData(
