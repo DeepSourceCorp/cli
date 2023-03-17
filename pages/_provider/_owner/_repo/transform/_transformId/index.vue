@@ -5,14 +5,14 @@
       :route-to-previous="routeToPrevious"
       :current-analyzer="$route.params.analyzer"
     />
-    <div class="flex flex-col w-full space-y-3">
+    <div class="flex w-full flex-col space-y-3">
       <!-- Transform section banner -->
-      <div class="flex items-center w-full px-4 py-2 space-x-2 bg-ink-300 text-vanilla-400">
+      <div class="flex w-full items-center space-x-2 bg-ink-300 px-4 py-2 text-vanilla-400">
         <z-icon icon="zap" color="vanilla-400" size="small" />
-        <span class="tracking-normal uppercase sm:tracking-wide text-xxs sm:text-sm">
+        <span class="text-xxs uppercase tracking-normal sm:text-sm sm:tracking-wide">
           transform session
         </span>
-        <div class="w-px h-full bg-ink-200"></div>
+        <div class="h-full w-px bg-ink-200"></div>
         <div class="flex-1 space-x-2">
           <z-tag
             v-for="tool in transformerRun.tools"
@@ -23,7 +23,7 @@
             bg-color="ink-200"
           >
             <img
-              class="h-3.5 inline-block overflow-hidden"
+              class="inline-block h-3.5 overflow-hidden"
               :src="tool.logo_path"
               :alt="tool.name"
             />
@@ -63,18 +63,25 @@
           </z-button>
         </a>
       </div>
-      <div class="px-4" v-if="!$fetchState.pending && transformerRun.errorsRendered.length">
+      <div
+        v-if="
+          !$fetchState.pending &&
+          transformerRun.errorsRendered &&
+          transformerRun.errorsRendered.length
+        "
+        class="px-4"
+      >
         <run-error-box :errors-rendered="transformerRun.errorsRendered" />
       </div>
       <!-- Code Diff -->
-      <div class="p-4 space-y-4">
+      <div class="space-y-4 p-4">
         <div
           v-for="(changes, name) in transformerRun.changeset"
           :key="name"
-          class="w-full border rounded-md border-slate-400"
+          class="w-full rounded-md border border-slate-400"
         >
           <!-- Heading -->
-          <div class="px-4 py-2 font-medium bg-ink-300 text-vanilla-100">
+          <div class="bg-ink-300 px-4 py-2 font-medium text-vanilla-100">
             {{ name }}
           </div>
           <!-- Code -->
@@ -84,10 +91,10 @@
             class="grid w-full grid-cols-2"
             :class="{ 'border-b-4 border-slate-400': index !== changes.length - 1 }"
           >
-            <div class="col-span-1 border-r after_html border-slate-400">
+            <div class="after_html col-span-1 border-r border-slate-400">
               <z-code :content="change.before_html" />
             </div>
-            <div class="col-span-1 before_html">
+            <div class="before_html col-span-1">
               <z-code :content="change.after_html" />
             </div>
           </div>
@@ -129,6 +136,9 @@ export default class Issues extends mixins(RepoDetailMixin) {
   @transformDetailStore.State
   transformerRun: TransformerRun
 
+  @transformDetailStore.Action(TransformerRunActions.FETCH_TRANSFORMER_RUN)
+  fetchTransformRun: (args: { runId: string }) => Promise<TransformerRun | undefined>
+
   TRANSFORM_STATUS = {
     PASS: 'PASS',
     TIMO: 'TIMO',
@@ -151,6 +161,12 @@ export default class Issues extends mixins(RepoDetailMixin) {
   }
 
   async fetch(): Promise<void> {
+    const { transformId } = this.$route.params
+
+    if (!transformId) {
+      this.$nuxt.error({ statusCode: 404 })
+    }
+
     await this.fetchTransformerRun()
   }
 
@@ -164,13 +180,19 @@ export default class Issues extends mixins(RepoDetailMixin) {
     this.$socket.$off('repo-transform-created', this.fetchTransformerRun)
   }
 
-  fetchTransformerRun(): Promise<void> {
-    return this.$store.dispatch(
-      `transformerRun/detail/${TransformerRunActions.FETCH_TRANSFORMER_RUN}`,
-      {
-        runId: this.$route.params.transformId
-      }
-    )
+  async fetchTransformerRun(): Promise<void> {
+    const { transformId } = this.$route.params
+
+    const run = await this.fetchTransformRun({
+      runId: transformId
+    })
+
+    if (!run || !Object.keys(run).length) {
+      this.$nuxt.error({
+        statusCode: 404,
+        message: `transform run "${transformId}" does not exist!`
+      })
+    }
   }
 
   get routeToPrevious(): string {

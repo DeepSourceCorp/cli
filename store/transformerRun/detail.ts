@@ -70,22 +70,29 @@ interface TransformerRunDetailModuleActions
     args: {
       runId: string
     }
-  ) => Promise<void>
+  ) => Promise<TransformerRun | undefined>
 }
 
 export const actions: TransformerRunDetailModuleActions = {
   async [TransformerRunActions.FETCH_TRANSFORMER_RUN]({ commit }, args) {
     commit(TransformerRunMutations.SET_LOADING, true)
-    await this.$fetchGraphqlData(RepositoryTransformerRunGQLQuery, {
-      runId: args.runId
-    })
-      .then((response: GraphqlQueryResponse) => {
-        commit(TransformerRunMutations.SET_TRANSFORMER_RUN, response.data.transformerRun)
-        commit(TransformerRunMutations.SET_LOADING, false)
-      })
-      .catch((e: GraphqlError) => {
-        commit(TransformerRunMutations.SET_ERROR, e)
-        commit(TransformerRunMutations.SET_LOADING, false)
-      })
+
+    try {
+      const res: GraphqlQueryResponse = await this.$fetchGraphqlData(
+        RepositoryTransformerRunGQLQuery,
+        {
+          runId: args.runId
+        }
+      )
+
+      commit(TransformerRunMutations.SET_TRANSFORMER_RUN, res.data.transformerRun)
+      commit(TransformerRunMutations.SET_LOADING, false)
+      return res.data.transformerRun
+    } catch (error) {
+      commit(TransformerRunMutations.SET_ERROR, error as GraphqlError)
+      commit(TransformerRunMutations.SET_LOADING, false)
+    }
+
+    return undefined
   }
 }
