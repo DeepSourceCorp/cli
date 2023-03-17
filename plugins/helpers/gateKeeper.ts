@@ -48,7 +48,8 @@ const TEAM_PERMS_MAP = {
   [TeamPerms.UPDATE_BILLING_DETAILS]: [TeamMemberRoleChoices.Admin],
   [TeamPerms.MANAGE_TEAM_MEMEBERS]: [TeamMemberRoleChoices.Admin],
   [TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD]: [TeamMemberRoleChoices.Admin],
-  [TeamPerms.GENERATE_OWNER_SSH_KEY_PAIR]: [TeamMemberRoleChoices.Admin],
+  [TeamPerms.VIEW_OWNER_SSH_KEY_PAIR]: [TeamMemberRoleChoices.Admin],
+  [TeamPerms.MUTATE_OWNER_SSH_KEY_PAIR]: [TeamMemberRoleChoices.Admin],
   [TeamPerms.DELETE_TEAM_ACCOUNT]: [TeamMemberRoleChoices.Admin],
   [TeamPerms.ONBOARD_ACCOUNT]: [TeamMemberRoleChoices.Admin],
   [TeamPerms.SET_GRANUALAR_IGNORE_PERMISSION]: [TeamMemberRoleChoices.Admin],
@@ -76,6 +77,11 @@ const TEAM_PERMS_MAP = {
   [TeamPerms.UPDATE_PUBLIC_REPORTS]: [TeamMemberRoleChoices.Admin],
   [TeamPerms.MANAGE_PREFERENCES]: [TeamMemberRoleChoices.Admin],
   [TeamPerms.PIN_REPORTS]: [TeamMemberRoleChoices.Admin],
+  [TeamPerms.VIEW_TEAM_GENERAL_SETTINGS]: [
+    TeamMemberRoleChoices.Admin,
+    TeamMemberRoleChoices.Member,
+    TeamMemberRoleChoices.Contributor
+  ],
   [TeamPerms.MANAGE_SECURITY]: [TeamMemberRoleChoices.Admin]
 }
 

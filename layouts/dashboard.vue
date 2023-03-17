@@ -119,7 +119,7 @@ export default class DashboardLayout extends mixins(
       {
         label: 'Settings',
         icon: 'wrench',
-        link: this.settingsUrl,
+        link: this.getLink('settings'),
         validator: this.showTeamSettings
       }
     ] as ITabsList[]
@@ -183,7 +183,8 @@ export default class DashboardLayout extends mixins(
             TeamPerms.UPDATE_BILLING_DETAILS,
             TeamPerms.MANAGE_TEAM_MEMEBERS,
             TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD,
-            TeamPerms.DELETE_TEAM_ACCOUNT
+            TeamPerms.DELETE_TEAM_ACCOUNT,
+            TeamPerms.VIEW_TEAM_GENERAL_SETTINGS
           ],
           role
         ) || this.allowedAutoOnboard
@@ -191,41 +192,6 @@ export default class DashboardLayout extends mixins(
     }
 
     return false
-  }
-
-  get allowedBilling(): boolean {
-    if (this.$config.onPrem) {
-      return false
-    }
-    if ('role' in this.activeDashboardContext) {
-      const role = this.activeDashboardContext.role as TeamMemberRoleChoices
-      return this.$gateKeeper.team(
-        [TeamPerms.CHANGE_PLAN, TeamPerms.UPDATE_SEATS, TeamPerms.UPDATE_BILLING_DETAILS],
-        role
-      )
-    }
-    return false
-  }
-
-  get allowedAccessControl(): boolean {
-    if ('role' in this.activeDashboardContext) {
-      const role = this.activeDashboardContext.role as TeamMemberRoleChoices
-      return this.$gateKeeper.team(TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD, role)
-    }
-    return false
-  }
-
-  get settingsUrl(): string {
-    if (this.allowedBilling && !this.$config.onPrem) {
-      return this.getLink('settings/billing')
-    }
-    if (this.allowedAccessControl) {
-      return this.getLink('settings/access')
-    }
-    if (this.allowedAutoOnboard) {
-      return this.getLink('settings/auto-onboard')
-    }
-    return this.getLink('settings')
   }
 
   /**

@@ -1,0 +1,5 @@
+mutation deleteTeam($input: DeleteTeamInput!) {
+  deleteTeam(input: $input) {
+    ok
+  }
+}

@@ -1,4 +1,9 @@
-import { mockOwnerDetail, OWNER_DETAILS } from './__mocks__/owner-detail.mock'
+import {
+  mockOwnerDetail,
+  OWNER_DETAILS,
+  OWNER_SSH_KEY,
+  VCS_DETAILS
+} from './__mocks__/owner-detail.mock'
 import {
   state,
   mutations,
@@ -2183,188 +2188,712 @@ describe('[Store] Owner/Details', () => {
         expect((e as Error).message).toBe('ERR1')
       }
     })
+  })
 
-    describe(`Action "${OwnerDetailActions.FETCH_OWNER_PREFERENCES}"`, () => {
-      describe(`Success`, () => {
-        beforeEach(async () => {
-          localThis = {
-            $providerMetaMap: {
-              gh: {
-                text: 'Github',
-                shortcode: 'gh',
-                value: 'GITHUB'
-              }
-            },
-            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
-              )
+  describe(`Action "${OwnerDetailActions.FETCH_SHOULD_TIMEOUT_DATA_TRIGGER}"`, () => {
+    describe(`Success`, () => {
+      beforeEach(async () => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
             }
+          },
+          $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            return new Promise<GraphqlQueryResponse>((resolve) =>
+              setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
+            )
           }
+        }
 
-          // Setting the global spy on `localThis.$fetchGraphqlData`
-          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+        // Setting the global spy on `localThis.$fetchGraphqlData`
+        spy = jest.spyOn(localThis, '$fetchGraphqlData')
 
-          await actions[OwnerDetailActions.FETCH_OWNER_PREFERENCES].call(localThis, actionCxt, {
+        await actions[OwnerDetailActions.FETCH_SHOULD_TIMEOUT_DATA_TRIGGER].call(
+          localThis,
+          actionCxt,
+          {
             login: 'deepsourcelabs',
             provider: 'gh'
-          })
-        })
-
-        test('successfully calls the api', () => {
-          expect(spy).toHaveBeenCalledTimes(1)
-        })
-
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_OWNER}`, async () => {
-          expect(commit).toHaveBeenCalledTimes(1)
-
-          // Storing the second commit call made
-          const {
-            mock: {
-              calls: [firstCall]
-            }
-          } = commit
-
-          const apiResponse = await localThis.$fetchGraphqlData()
-
-          // Assert if `OwnerDetailMutations.SET_OWNER` is being commited or not
-          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_OWNER)
-
-          // Assert if the response from api is same as the one passed to the mutation
-          expect(firstCall[1]).toEqual(apiResponse.data.owner)
-        })
+          }
+        )
       })
-      describe(`Failure`, () => {
-        beforeEach(async () => {
-          localThis = {
-            $providerMetaMap: {
-              gh: {
-                text: 'Github',
-                shortcode: 'gh',
-                value: 'GITHUB'
-              }
-            },
-            $fetchGraphqlData(): Promise<Error> {
-              return Promise.reject(new Error('ERR1'))
-            },
-            $logErrorAndToast: jest.fn()
+
+      test('successfully calls the api', () => {
+        expect(spy).toHaveBeenCalledTimes(1)
+      })
+
+      test(`successfully commits mutation ${OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER}`, async () => {
+        expect(commit).toHaveBeenCalledTimes(1)
+
+        // Storing the second commit call made
+        const {
+          mock: {
+            calls: [firstCall]
           }
+        } = commit
 
-          // Setting the global spy on `localThis.$fetchGraphqlData`
-          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+        const apiResponse = await localThis.$fetchGraphqlData()
 
-          await actions[OwnerDetailActions.FETCH_OWNER_PREFERENCES].call(localThis, actionCxt, {
-            login: 'deepsourcelabs',
-            provider: 'gh'
-          })
-        })
+        // Assert if `OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER` is being commited or not
+        expect(firstCall[0]).toEqual(OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER)
 
-        test(`successfully invokes $logErrorAndToast plugin`, () => {
-          expect(localThis.$logErrorAndToast).toHaveBeenCalledWith(
-            Error('ERR1'),
-            'An error occured while fetching owner preferences.'
-          )
-        })
+        // Assert if the response from api is same as the one passed to the mutation
+        expect(firstCall[1]).toEqual(apiResponse.data.owner.ownerSetting.shouldTimeoutDataTrigger)
       })
     })
-
-    describe(`Action "${OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER}"`, () => {
-      const dataTriggerVal = true
-
-      describe(`Success`, () => {
-        beforeEach(async () => {
-          localThis = {
-            $providerMetaMap: {
-              gh: {
-                text: 'Github',
-                shortcode: 'gh',
-                value: 'GITHUB'
-              }
-            },
-            $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
-              return new Promise<GraphqlMutationResponse>((resolve) =>
-                setTimeout(() => resolve({ data: { updateTimeoutSetting: { ok: true } } }), 10)
-              )
-            },
-            $toast: { success: jest.fn() }
-          }
-
-          // Setting the global spy on `localThis.$applyGraphqlMutation`
-          spy = jest.spyOn(localThis, '$applyGraphqlMutation')
-
-          await actions[OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER].call(localThis, actionCxt, {
-            ownerId: '123',
-            shouldTimeoutDataTrigger: dataTriggerVal
-          })
-        })
-
-        test('successfully calls the api', () => {
-          expect(spy).toHaveBeenCalledTimes(1)
-        })
-
-        test(`successfully commits mutation ${OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER}`, () => {
-          expect(commit).toHaveBeenCalledTimes(1)
-
-          // Storing the second commit call made
-          const {
-            mock: {
-              calls: [firstCall]
+    describe(`Failure`, () => {
+      beforeEach(() => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
             }
-          } = commit
+          },
+          $fetchGraphqlData(): Promise<Error> {
+            return Promise.reject(new Error('ERR1'))
+          },
+          $logErrorAndToast: jest.fn()
+        }
 
-          // Assert if `OwnerDetailMutations.SET_OWNER` is being commited or not
-          expect(firstCall[0]).toEqual(OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER)
+        // Setting the global spy on `localThis.$fetchGraphqlData`
+        spy = jest.spyOn(localThis, '$fetchGraphqlData')
+      })
 
-          // Assert if the response from api is same as the one passed to the mutation
-          expect(firstCall[1]).toEqual(dataTriggerVal)
-        })
-
-        test(`successfully returns 'true' if action ${OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER} is successful`, async () => {
-          const apiResponse = await actions[OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER].call(
+      test(`successfully throws an error`, async () => {
+        try {
+          await actions[OwnerDetailActions.FETCH_SHOULD_TIMEOUT_DATA_TRIGGER].call(
             localThis,
             actionCxt,
             {
-              ownerId: '123',
-              shouldTimeoutDataTrigger: true
+              login: 'deepsourcelabs',
+              provider: 'gh'
             }
           )
+        } catch (e) {
+          expect(spy).toHaveBeenCalledTimes(1)
+        }
+      })
+    })
+  })
 
-          expect(apiResponse).toBe(true)
+  describe(`Action "${OwnerDetailActions.FETCH_VCS_DATA}"`, () => {
+    describe(`Success`, () => {
+      beforeEach(async () => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
+            }
+          },
+          $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            return new Promise<GraphqlQueryResponse>((resolve) =>
+              setTimeout(
+                () =>
+                  resolve({
+                    data: {
+                      owner: VCS_DETAILS
+                    }
+                  }),
+                10
+              )
+            )
+          }
+        }
+
+        // Setting the global spy on `localThis.$fetchGraphqlData`
+        spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+        await actions[OwnerDetailActions.FETCH_VCS_DATA].call(localThis, actionCxt, {
+          login: 'deepsourcelabs',
+          provider: 'gh'
         })
       })
-      describe(`Failure`, () => {
-        beforeEach(async () => {
-          localThis = {
-            $providerMetaMap: {
-              gh: {
-                text: 'Github',
-                shortcode: 'gh',
-                value: 'GITHUB'
-              }
-            },
-            $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
-              return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
-                setTimeout(() => reject(new Error('ERR1')), 10)
-              )
-            },
-            $logErrorAndToast: jest.fn()
+
+      test('successfully calls the api', () => {
+        expect(spy).toHaveBeenCalledTimes(1)
+      })
+
+      test(`successfully commits mutation ${OwnerDetailMutations.SET_OWNER}`, async () => {
+        expect(commit).toHaveBeenCalledTimes(1)
+
+        // Storing the second commit call made
+        const {
+          mock: {
+            calls: [firstCall]
           }
+        } = commit
 
-          // Setting the global spy on `localThis.$applyGraphqlMutation`
-          spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+        const apiResponse = await localThis.$fetchGraphqlData()
 
+        // Assert if `OwnerDetailMutations.SET_OWNER` is being commited or not
+        expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_OWNER)
+
+        // Assert if the response from api is same as the one passed to the mutation
+        expect(firstCall[1]).toEqual(apiResponse.data.owner)
+      })
+    })
+    describe(`Failure`, () => {
+      beforeEach(() => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
+            }
+          },
+          $fetchGraphqlData(): Promise<Error> {
+            return Promise.reject(new Error('ERR1'))
+          },
+          $logErrorAndToast: jest.fn()
+        }
+
+        // Setting the global spy on `localThis.$fetchGraphqlData`
+        spy = jest.spyOn(localThis, '$fetchGraphqlData')
+      })
+
+      test(`successfully throws an error`, async () => {
+        try {
+          await actions[OwnerDetailActions.FETCH_VCS_DATA].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        } catch (e) {
+          expect(spy).toHaveBeenCalledTimes(1)
+        }
+      })
+    })
+  })
+
+  describe(`Action "${OwnerDetailActions.FETCH_OWNER_SSH_KEY}"`, () => {
+    describe(`Success`, () => {
+      beforeEach(async () => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
+            }
+          },
+          $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            return new Promise<GraphqlQueryResponse>((resolve) =>
+              setTimeout(() => resolve({ data: { owner: OWNER_SSH_KEY } }), 10)
+            )
+          }
+        }
+
+        // Setting the global spy on `localThis.$fetchGraphqlData`
+        spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+        await actions[OwnerDetailActions.FETCH_OWNER_SSH_KEY].call(localThis, actionCxt, {
+          login: 'deepsourcelabs',
+          provider: 'gh'
+        })
+      })
+
+      test('successfully calls the api', () => {
+        expect(spy).toHaveBeenCalledTimes(1)
+      })
+
+      test(`successfully commits mutation ${OwnerDetailMutations.SET_OWNER_PUBLIC_KEY}`, async () => {
+        expect(commit).toHaveBeenCalledTimes(1)
+
+        // Storing the second commit call made
+        const {
+          mock: {
+            calls: [firstCall]
+          }
+        } = commit
+
+        const apiResponse = await localThis.$fetchGraphqlData()
+
+        // Assert if `OwnerDetailMutations.SET_OWNER` is being commited or not
+        expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_OWNER_PUBLIC_KEY)
+
+        // Assert if the response from api is same as the one passed to the mutation
+        expect(firstCall[1]).toEqual(apiResponse.data.owner.ownerSetting.publicKey)
+      })
+    })
+    describe(`Failure`, () => {
+      beforeEach(() => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
+            }
+          },
+          $fetchGraphqlData(): Promise<Error> {
+            return Promise.reject(new Error('ERR1'))
+          },
+          $logErrorAndToast: jest.fn()
+        }
+
+        // Setting the global spy on `localThis.$fetchGraphqlData`
+        spy = jest.spyOn(localThis, '$fetchGraphqlData')
+      })
+
+      test(`successfully throws an error`, async () => {
+        try {
+          await actions[OwnerDetailActions.FETCH_OWNER_SSH_KEY].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        } catch (e) {
+          expect(spy).toHaveBeenCalledTimes(1)
+        }
+      })
+    })
+  })
+
+  describe(`Action "${OwnerDetailActions.GENERATE_OWNER_SSH_KEY}"`, () => {
+    describe(`Success`, () => {
+      beforeEach(async () => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
+            }
+          },
+          $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            return new Promise<GraphqlMutationResponse>((resolve) =>
+              setTimeout(
+                () =>
+                  resolve({
+                    data: {
+                      generateKeyPairForOwner: {
+                        publicKey:
+                          'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDRQhOAywVrsdjTqMvnObjWCNxYN2r6'
+                      }
+                    }
+                  }),
+                10
+              )
+            )
+          }
+        }
+
+        // Setting the global spy on `localThis.$fetchGraphqlData`
+        spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+        await actions[OwnerDetailActions.GENERATE_OWNER_SSH_KEY].call(localThis, actionCxt, {
+          ownerId: 'random-owner-id'
+        })
+      })
+
+      test('successfully calls the api', () => {
+        expect(spy).toHaveBeenCalledTimes(1)
+      })
+
+      test(`successfully commits mutation ${OwnerDetailMutations.SET_OWNER_PUBLIC_KEY}`, async () => {
+        expect(commit).toHaveBeenCalledTimes(1)
+
+        // Storing the second commit call made
+        const {
+          mock: {
+            calls: [firstCall]
+          }
+        } = commit
+
+        const apiResponse = await localThis.$applyGraphqlMutation()
+
+        // Assert if `OwnerDetailMutations.SET_OWNER` is being commited or not
+        expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_OWNER_PUBLIC_KEY)
+
+        // Assert if the response from api is same as the one passed to the mutation
+        expect(firstCall[1]).toEqual(apiResponse.data.generateKeyPairForOwner.publicKey)
+      })
+    })
+    describe(`Failure`, () => {
+      beforeEach(() => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
+            }
+          },
+          $applyGraphqlMutation(): Promise<Error> {
+            return Promise.reject(new Error('ERR1'))
+          },
+          $logErrorAndToast: jest.fn()
+        }
+
+        // Setting the global spy on `localThis.$applyGraphqlMutation`
+        spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+      })
+
+      test(`successfully throws an error`, async () => {
+        try {
+          await actions[OwnerDetailActions.GENERATE_OWNER_SSH_KEY].call(localThis, actionCxt, {
+            ownerId: 'random-owner-id'
+          })
+        } catch (e) {
+          expect(spy).toHaveBeenCalledTimes(1)
+        }
+      })
+    })
+    describe(`Failure in key generation`, () => {
+      beforeEach(() => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
+            }
+          },
+          $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            return new Promise<GraphqlMutationResponse>((resolve) =>
+              setTimeout(
+                () =>
+                  resolve({
+                    data: {
+                      generateKeyPairForOwner: {
+                        publicKey: ''
+                      }
+                    }
+                  }),
+                10
+              )
+            )
+          },
+          $logErrorAndToast: jest.fn()
+        }
+
+        // Setting the global spy on `localThis.$applyGraphqlMutation`
+        spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+      })
+
+      test(`successfully throws an error`, async () => {
+        try {
+          await actions[OwnerDetailActions.GENERATE_OWNER_SSH_KEY].call(localThis, actionCxt, {
+            ownerId: 'random-owner-id'
+          })
+        } catch (e) {
+          const err = e as Error
+
+          expect(spy).toHaveBeenCalledTimes(1)
+
+          // Check correct error message is thrown
+          expect(err.message).toBe(
+            'There was a problem regenerating the key pair, please try later.'
+          )
+        }
+      })
+    })
+  })
+
+  describe(`Action "${OwnerDetailActions.REMOVE_OWNER_SSH_KEY}"`, () => {
+    describe(`Success`, () => {
+      beforeEach(async () => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
+            }
+          },
+          $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            return new Promise<GraphqlMutationResponse>((resolve) =>
+              setTimeout(
+                () =>
+                  resolve({
+                    data: {
+                      removeKeyPairForOwner: {
+                        ok: true
+                      }
+                    }
+                  }),
+                10
+              )
+            )
+          }
+        }
+
+        // Setting the global spy on `localThis.$fetchGraphqlData`
+        spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+        await actions[OwnerDetailActions.REMOVE_OWNER_SSH_KEY].call(localThis, actionCxt, {
+          ownerId: 'random-owner-id'
+        })
+      })
+
+      test('successfully calls the api', () => {
+        expect(spy).toHaveBeenCalledTimes(1)
+      })
+
+      test(`successfully commits mutation ${OwnerDetailMutations.SET_OWNER_PUBLIC_KEY}`, async () => {
+        expect(commit).toHaveBeenCalledTimes(1)
+
+        // Storing the second commit call made
+        const {
+          mock: {
+            calls: [firstCall]
+          }
+        } = commit
+
+        const apiResponse = await localThis.$applyGraphqlMutation()
+
+        // Assert if the response from api is correct
+        expect(apiResponse.data.removeKeyPairForOwner.ok).toBe(true)
+
+        // Assert if `OwnerDetailMutations.SET_OWNER` is being commited or not
+        expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_OWNER_PUBLIC_KEY)
+
+        // Assert if correct value is passed to mutation
+        expect(firstCall[1]).toEqual('')
+      })
+    })
+    describe(`Failure`, () => {
+      beforeEach(() => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
+            }
+          },
+          $applyGraphqlMutation(): Promise<Error> {
+            return Promise.reject(new Error('ERR1'))
+          },
+          $logErrorAndToast: jest.fn()
+        }
+
+        // Setting the global spy on `localThis.$applyGraphqlMutation`
+        spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+      })
+
+      test(`successfully throws an error`, async () => {
+        try {
+          await actions[OwnerDetailActions.REMOVE_OWNER_SSH_KEY].call(localThis, actionCxt, {
+            ownerId: 'random-owner-id'
+          })
+        } catch (e) {
+          expect(spy).toHaveBeenCalledTimes(1)
+        }
+      })
+    })
+    describe(`Failure in key deletion`, () => {
+      beforeEach(() => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
+            }
+          },
+          $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            return new Promise<GraphqlMutationResponse>((resolve) =>
+              setTimeout(
+                () =>
+                  resolve({
+                    data: {
+                      removeKeyPairForOwner: {
+                        ok: false
+                      }
+                    }
+                  }),
+                10
+              )
+            )
+          },
+          $logErrorAndToast: jest.fn()
+        }
+
+        // Setting the global spy on `localThis.$applyGraphqlMutation`
+        spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+      })
+
+      test(`successfully throws an error`, async () => {
+        try {
+          await actions[OwnerDetailActions.REMOVE_OWNER_SSH_KEY].call(localThis, actionCxt, {
+            ownerId: 'random-owner-id'
+          })
+        } catch (e) {
+          const err = e as Error
+
+          expect(spy).toHaveBeenCalledTimes(1)
+
+          // Check correct error message is thrown
+          expect(err.message).toBe('There was a problem removing the key pair, please try later.')
+        }
+      })
+    })
+  })
+
+  describe(`Action "${OwnerDetailActions.DELETE_TEAM}"`, () => {
+    describe(`Success`, () => {
+      beforeEach(async () => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
+            }
+          },
+          $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            return new Promise<GraphqlMutationResponse>((resolve) =>
+              setTimeout(
+                () =>
+                  resolve({
+                    data: {
+                      deleteTeam: {
+                        ok: true
+                      }
+                    }
+                  }),
+                10
+              )
+            )
+          }
+        }
+
+        // Setting the global spy on `localThis.$fetchGraphqlData`
+        spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+        await actions[OwnerDetailActions.DELETE_TEAM].call(localThis, actionCxt, {
+          teamId: 'random-team-id'
+        })
+      })
+
+      test('successfully calls the api', () => {
+        expect(spy).toHaveBeenCalledTimes(1)
+      })
+
+      test('successfully returns valid data', async () => {
+        const apiResponse = await localThis.$applyGraphqlMutation()
+
+        // Assert if the response from api is same as the one passed to the mutation
+        expect(apiResponse.data.deleteTeam.ok).toEqual(true)
+      })
+    })
+    describe(`Failure`, () => {
+      beforeEach(() => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
+            }
+          },
+          $applyGraphqlMutation(): Promise<Error> {
+            return Promise.reject(new Error('ERR1'))
+          },
+          $logErrorAndToast: jest.fn()
+        }
+
+        // Setting the global spy on `localThis.$applyGraphqlMutation`
+        spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+      })
+
+      test(`successfully throws an error`, async () => {
+        try {
+          await actions[OwnerDetailActions.DELETE_TEAM].call(localThis, actionCxt, {
+            teamId: 'random-team-id'
+          })
+        } catch (e) {
+          expect(spy).toHaveBeenCalledTimes(1)
+        }
+      })
+    })
+  })
+
+  describe(`Action "${OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER}"`, () => {
+    const dataTriggerVal = true
+
+    describe(`Success`, () => {
+      beforeEach(async () => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
+            }
+          },
+          $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            return new Promise<GraphqlMutationResponse>((resolve) =>
+              setTimeout(() => resolve({ data: { updateTimeoutSetting: { ok: true } } }), 10)
+            )
+          },
+          $toast: { success: jest.fn() }
+        }
+
+        // Setting the global spy on `localThis.$applyGraphqlMutation`
+        spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+        await actions[OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER].call(localThis, actionCxt, {
+          ownerId: '123',
+          shouldTimeoutDataTrigger: dataTriggerVal
+        })
+      })
+
+      test('successfully calls the api', () => {
+        expect(spy).toHaveBeenCalledTimes(1)
+      })
+
+      test(`successfully returns 'true' if action ${OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER} is successful`, async () => {
+        const apiResponse = await actions[OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER].call(
+          localThis,
+          actionCxt,
+          {
+            ownerId: '123',
+            shouldTimeoutDataTrigger: true
+          }
+        )
+
+        expect(apiResponse).toBe(true)
+      })
+    })
+    describe(`Failure`, () => {
+      beforeEach(() => {
+        localThis = {
+          $providerMetaMap: {
+            gh: {
+              text: 'Github',
+              shortcode: 'gh',
+              value: 'GITHUB'
+            }
+          },
+          $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
+              setTimeout(() => reject(new Error('ERR1')), 10)
+            )
+          },
+          $logErrorAndToast: jest.fn()
+        }
+
+        // Setting the global spy on `localThis.$applyGraphqlMutation`
+        spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+      })
+
+      test(`successfully throws an error`, async () => {
+        try {
           await actions[OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER].call(localThis, actionCxt, {
             ownerId: '123',
             shouldTimeoutDataTrigger: true
           })
-        })
-
-        test(`successfully invokes $logErrorAndToast plugin`, () => {
-          expect(localThis.$logErrorAndToast).toHaveBeenCalledWith(
-            Error('ERR1'),
-            'An error occured while updating owner preferences.'
-          )
-        })
+        } catch (e) {
+          expect(spy).toHaveBeenCalledTimes(1)
+        }
       })
     })
   })

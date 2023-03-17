@@ -16,7 +16,7 @@
         <div v-if="editMode" class="flex flex-col gap-y-2">
           <div class="text-vanilla-400 text-xs">The image should be less than 2MB (200x200).</div>
           <div>
-            <button @click="onFileUploadClick" class="auxillary-button">
+            <button class="auxillary-button h-7" @click="onFileUploadClick">
               <div
                 class="flex flex-shrink items-center text-xs gap-x-2 text-vanilla-400 hover:text-vanilla-100"
               >
@@ -43,7 +43,7 @@
       </div>
 
       <div v-if="!editMode" class="self-start">
-        <button class="auxillary-button" @click="toggleEditMode">
+        <button class="auxillary-button h-7" @click="toggleEditMode">
           <div class="flex items-center text-xs gap-x-2 text-vanilla-400 hover:text-vanilla-100">
             <z-icon icon="edit-2" color="vanilla-400" size="x-small" />
             <span> Edit </span>
@@ -66,7 +66,7 @@
         </div>
       </label>
       <div class="flex gap-x-3 justify-end col-span-2">
-        <button class="auxillary-button" @click="toggleEditMode">
+        <button class="auxillary-button h-7" @click="toggleEditMode">
           <div
             class="flex flex-shrink items-center text-xs gap-x-1 text-vanilla-400 hover:text-vanilla-100"
           >

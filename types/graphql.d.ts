@@ -899,6 +899,15 @@ declare module '*/submitSupportTicket.gql' {
 }
     
 
+declare module '*/deleteTeam.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const deleteTeam: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/inviteMembers.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1500,6 +1509,15 @@ declare module '*/IssueTypeSettings.gql' {
 }
     
 
+declare module '*/ownerPreferences.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ownerPreferences: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/publicKey.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1522,6 +1540,15 @@ declare module '*/usageDetails.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/vcsData.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const VCSData: DocumentNode;
 
   export default defaultDocument;
 }

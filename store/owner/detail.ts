@@ -21,12 +21,14 @@ import {
   VerifyGsrWebhooksInput,
   VerifyGsrWebhooksPayload,
   IntegrationFeature,
+  DeleteTeamInput,
   SyncRepositoryForOwnerInput,
   SyncRepositoriesForOwnerPayload
 } from '~/types/types'
 import { GraphqlError, GraphqlMutationResponse } from '~/types/apollo-graphql-types'
 
 import OwnerDetailQuery from '~/apollo/queries/owner/details.gql'
+import VCSData from '~/apollo/queries/owner/vcsData.gql'
 import OwnerIDQuery from '~/apollo/queries/owner/id.gql'
 import AccountSetupStatus from '~/apollo/queries/owner/accountSetupStatus.gql'
 import AppConfig from '~/apollo/queries/owner/appConfig.gql'
@@ -38,7 +40,7 @@ import SyncOwnerRepository from '~/apollo/mutations/owner/syncRepository.gql'
 // Settings
 import IssueTypeSettingsGQLQuery from '~/apollo/queries/owner/settings/IssueTypeSettings.gql'
 import OwnerSSHPublicKeyQuery from '~/apollo/queries/owner/settings/publicKey.gql'
-import UpdateOwnerSettingsGQLQuery from '~/apollo/queries/owner/settings/updateOwnerSettings.gql'
+import ownerPreferences from '~/apollo/queries/owner/settings/ownerPreferences.gql'
 import GenerateOwnerSSHPublicKey from '~/apollo/mutations/owner/settings/generateKeyPair.gql'
 import RemoveOwnerSSHPublicKey from '~/apollo/mutations/owner/settings/removeKeyPair.gql'
 import UpdateOwnerSettingsGQLMutation from '~/apollo/mutations/owner/settings/updateOwnerSettings.gql'
@@ -70,6 +72,9 @@ import VerifyGsrSetup from '~/apollo/mutations/owner/gsr/verifyGsrSetup.gql'
 
 // Integrations
 import OwnerInstalledIntegrations from '~/apollo/queries/owner/ownerInstalledIntegration.gql'
+
+// Delete team mutation
+import DeleteTeam from '~/apollo/mutations/team/deleteTeam.gql'
 
 import { GraphqlQueryResponse } from '~/types/apolloTypes'
 export interface Trend {
@@ -135,7 +140,8 @@ export enum OwnerDetailMutations {
   SET_OWNER_RESOLVED_ISSUES_TREND = 'setOwnerResolvedIssuesTrend',
   SET_BILLING_INFO = 'setBillingInfo',
   SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting',
-  UPDATE_DATA_TIMEOUT_TRIGGER = 'updateDataTimeoutTrigger'
+  UPDATE_DATA_TIMEOUT_TRIGGER = 'updateDataTimeoutTrigger',
+  SET_OWNER_PUBLIC_KEY = 'setOwnerPublicKey'
 }
 
 export const mutations: MutationTree<OwnerDetailModuleState> = {
@@ -175,9 +181,14 @@ export const mutations: MutationTree<OwnerDetailModuleState> = {
     }
   },
   [OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER]: (state, newDataTimeoutTriggerValue) => {
-    state.owner = Object.assign({}, state.owner, {
-      ownerSetting: { shouldTimeoutDataTrigger: newDataTimeoutTriggerValue }
-    } as Owner)
+    state.owner.ownerSetting = Object.assign({}, state.owner.ownerSetting, {
+      shouldTimeoutDataTrigger: newDataTimeoutTriggerValue
+    } as OwnerSetting)
+  },
+  [OwnerDetailMutations.SET_OWNER_PUBLIC_KEY]: (state, newPublicKey) => {
+    state.owner.ownerSetting = Object.assign({}, state.owner.ownerSetting, {
+      publicKey: newPublicKey
+    } as OwnerSetting)
   }
 }
 
@@ -185,8 +196,9 @@ export const mutations: MutationTree<OwnerDetailModuleState> = {
 export enum OwnerDetailActions {
   FETCH_OWNER_ID = 'fetchOwnerId',
   FETCH_OWNER_DETAILS = 'fetchOwnerDetails',
+  FETCH_VCS_DATA = 'fetchVCSData',
   FETCH_ISSUE_TYPE_SETTINGS = 'fetchIssueTypeSettings',
-  FETCH_OWNER_PREFERENCES = 'fetchOwnerPreferences',
+  FETCH_SHOULD_TIMEOUT_DATA_TRIGGER = 'fetchShouldTimeoutDataTrigger',
   FETCH_ISSUE_TRENDS = 'fetchIssueTrends',
   FETCH_AUTOFIX_TRENDS = 'fetchAutofixTrends',
   FETCH_ACCOUNT_SETUP_STATUS = 'fetchAccountSetupStatus',
@@ -224,7 +236,9 @@ export enum OwnerDetailActions {
   VERIFY_GSR_SSH = 'verifyGsrSsh',
   VERIFY_GSR_SETUP = 'verifyGsrSetup',
 
-  FETCH_INTEGRATIONS_FOR_FEATURE = 'fetchIntegrationsForFeature'
+  FETCH_INTEGRATIONS_FOR_FEATURE = 'fetchIntegrationsForFeature',
+
+  DELETE_TEAM = 'deleteTeam'
 }
 
 interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, RootState> {
@@ -235,6 +249,12 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
   ) => Promise<void>
 
   [OwnerDetailActions.FETCH_OWNER_DETAILS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string; refetch?: boolean }
+  ) => Promise<void>
+
+  [OwnerDetailActions.FETCH_VCS_DATA]: (
     this: Store<RootState>,
     injectee: OwnerDetailModuleActionContext,
     args: { login: string; provider: string; refetch?: boolean }
@@ -474,13 +494,19 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
     this: Store<RootState>,
     injectee: OwnerDetailModuleActionContext,
     args: { ownerId: string; shouldTimeoutDataTrigger: boolean }
-  ) => Promise<boolean | undefined>
+  ) => Promise<boolean>
 
-  [OwnerDetailActions.FETCH_OWNER_PREFERENCES]: (
+  [OwnerDetailActions.FETCH_SHOULD_TIMEOUT_DATA_TRIGGER]: (
     this: Store<RootState>,
     injectee: OwnerDetailModuleActionContext,
     args: { login: string; provider: string; refetch?: boolean }
   ) => Promise<void>
+
+  [OwnerDetailActions.DELETE_TEAM]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: DeleteTeamInput
+  ) => Promise<boolean>
 }
 
 export const actions: OwnerDetailModuleActions = {
@@ -520,6 +546,37 @@ export const actions: OwnerDetailModuleActions = {
     }
   },
 
+  async [OwnerDetailActions.FETCH_VCS_DATA]({ commit }, args) {
+    const response = await this.$fetchGraphqlData(
+      VCSData,
+      {
+        login: args.login,
+        provider: this.$providerMetaMap[args.provider].value
+      },
+      args.refetch
+    )
+    commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+  },
+  async [OwnerDetailActions.FETCH_OWNER_DETAILS]({ commit }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      const response = await this.$fetchGraphqlData(
+        OwnerDetailQuery,
+        {
+          login: args.login,
+          provider: this.$providerMetaMap[args.provider].value
+        },
+        args.refetch
+      )
+      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    } catch (e) {
+      const err = e as GraphqlError
+      commit(OwnerDetailMutations.SET_ERROR, err)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+
   async [OwnerDetailActions.FETCH_ISSUE_TYPE_SETTINGS]({ commit }, args) {
     try {
       commit(OwnerDetailMutations.SET_LOADING, true)
@@ -535,20 +592,18 @@ export const actions: OwnerDetailModuleActions = {
       commit(OwnerDetailMutations.SET_LOADING, false)
     }
   },
-  async [OwnerDetailActions.FETCH_OWNER_PREFERENCES]({ commit }, args) {
-    try {
-      const response = await this.$fetchGraphqlData(
-        UpdateOwnerSettingsGQLQuery,
-        {
-          login: args.login,
-          provider: this.$providerMetaMap[args.provider].value
-        },
-        args.refetch
-      )
-      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
-    } catch (e) {
-      this.$logErrorAndToast(e as Error, `An error occured while fetching owner preferences.`)
-    }
+  async [OwnerDetailActions.FETCH_SHOULD_TIMEOUT_DATA_TRIGGER]({ commit }, args) {
+    const response = await this.$fetchGraphqlData(
+      ownerPreferences,
+      {
+        login: args.login,
+        provider: this.$providerMetaMap[args.provider].value
+      },
+      args.refetch
+    )
+    const ownerSetting = response?.data?.owner?.ownerSetting as OwnerSetting
+
+    commit(OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER, ownerSetting?.shouldTimeoutDataTrigger)
   },
 
   async [OwnerDetailActions.FETCH_ISSUE_TRENDS]({ commit }, args) {
@@ -893,16 +948,26 @@ export const actions: OwnerDetailModuleActions = {
       },
       true
     )
-    commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+
+    const ownerSetting = response?.data?.owner?.ownerSetting as OwnerSetting
+    commit(OwnerDetailMutations.SET_OWNER_PUBLIC_KEY, ownerSetting?.publicKey)
   },
-  async [OwnerDetailActions.GENERATE_OWNER_SSH_KEY](_, args) {
-    await this.$applyGraphqlMutation(GenerateOwnerSSHPublicKey, args, true)
+  async [OwnerDetailActions.GENERATE_OWNER_SSH_KEY]({ commit }, args) {
+    const response = await this.$applyGraphqlMutation(GenerateOwnerSSHPublicKey, args, true)
+    const publicKey = response?.data?.generateKeyPairForOwner?.publicKey as string
+
+    if (!publicKey) {
+      throw new Error('There was a problem regenerating the key pair, please try later.')
+    }
+
+    commit(OwnerDetailMutations.SET_OWNER_PUBLIC_KEY, publicKey)
   },
-  async [OwnerDetailActions.REMOVE_OWNER_SSH_KEY](_, args) {
+  async [OwnerDetailActions.REMOVE_OWNER_SSH_KEY]({ commit }, args) {
     const response = await this.$applyGraphqlMutation(RemoveOwnerSSHPublicKey, args, true)
     if (!response.data.removeKeyPairForOwner.ok) {
-      throw Error('There was a problem removing the key pair, please try later')
+      throw new Error('There was a problem removing the key pair, please try later.')
     }
+    commit(OwnerDetailMutations.SET_OWNER_PUBLIC_KEY, '')
   },
   async [OwnerDetailActions.FETCH_USAGE_DETAILS]({ commit }, args) {
     try {
@@ -971,24 +1036,20 @@ export const actions: OwnerDetailModuleActions = {
       this.$logErrorAndToast(e as Error, 'There was an error fetching integrations.')
     }
   },
-  async [OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER]({ commit }, args) {
-    try {
-      const response = (await this.$applyGraphqlMutation(
-        UpdateOwnerDataTriggerTimeoutsGQLMutation,
-        {
-          ownerId: args.ownerId,
-          shouldTimeoutDataTrigger: args.shouldTimeoutDataTrigger
-        }
-      )) as GraphqlMutationResponse
+  async [OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER](_, args) {
+    const response = (await this.$applyGraphqlMutation(UpdateOwnerDataTriggerTimeoutsGQLMutation, {
+      ownerId: args.ownerId,
+      shouldTimeoutDataTrigger: args.shouldTimeoutDataTrigger
+    })) as GraphqlMutationResponse
 
-      if (response.data.updateTimeoutSetting?.ok) {
-        this.$toast.success('Successfully updated owner preferences.')
-        commit(OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER, args.shouldTimeoutDataTrigger)
-        return response.data.updateTimeoutSetting.ok
-      }
-    } catch (e) {
-      this.$logErrorAndToast(e as Error, `An error occured while updating owner preferences.`)
-    }
+    return Boolean(response.data?.updateTimeoutSetting?.ok)
+  },
+  async [OwnerDetailActions.DELETE_TEAM](_, args) {
+    const response = (await this.$applyGraphqlMutation(DeleteTeam, {
+      input: args
+    })) as GraphqlMutationResponse
+
+    return Boolean(response.data?.deleteTeam?.ok)
   }
 }
 

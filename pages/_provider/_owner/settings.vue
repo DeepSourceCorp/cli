@@ -65,14 +65,10 @@ export interface LinkOptions {
     'perm',
     'teamOnly',
     'validateProvider',
-    function ({ redirect, route, $config }: Context): void {
+    function ({ redirect, route }: Context): void {
       if (route.name === 'provider-owner-settings') {
         const { provider, owner } = route.params
-        if ($config.onPrem) {
-          redirect(`/${provider}/${owner}/settings/access`)
-        } else {
-          redirect(`/${provider}/${owner}/settings/preferences`)
-        }
+        redirect(`/${provider}/${owner}/settings/general`)
       }
     }
   ],
@@ -86,9 +82,10 @@ export interface LinkOptions {
         TeamPerms.UPDATE_BILLING_DETAILS,
         TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD,
         TeamPerms.AUTO_ONBOARD_VIEW_TEMPLATE,
-        TeamPerms.GENERATE_OWNER_SSH_KEY_PAIR,
+        TeamPerms.MUTATE_OWNER_SSH_KEY_PAIR,
         TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE,
-        TeamPerms.MANAGE_OWNER_ISSUE_PRIORITY
+        TeamPerms.MANAGE_OWNER_ISSUE_PRIORITY,
+        TeamPerms.VIEW_TEAM_GENERAL_SETTINGS
       ]
     }
   },
@@ -102,32 +99,26 @@ export default class TeamSettings extends mixins(ActiveUserMixin) {
   get settingsOptions(): LinkOptions[] {
     return [
       {
+        name: 'general',
+        label: 'General',
+        icon: 'settings',
+        routeName: 'provider-owner-settings-general',
+        validator: this.canViewGeneralSettings
+      },
+      {
         name: 'billing',
         label: 'Billing',
         icon: 'credit-card',
         routeName: 'provider-owner-settings-billing',
         validator: this.showBilling
       },
-      {
-        name: 'preferences',
-        label: 'Preferences',
-        icon: 'box',
-        routeName: 'provider-owner-settings-preferences',
-        validator: this.canViewPreferences
-      },
+
       {
         name: 'access',
         label: 'Access control',
         icon: 'z-lock',
         routeName: 'provider-owner-settings-access',
         validator: this.canViewAccessControl
-      },
-      {
-        name: 'ssh-access',
-        label: 'SSH access',
-        icon: 'key',
-        routeName: 'provider-owner-settings-ssh-access',
-        validator: this.canGenerateSSHKeyPair
       },
       {
         name: 'auto-onboard',
@@ -218,12 +209,11 @@ export default class TeamSettings extends mixins(ActiveUserMixin) {
     )
   }
 
+  get canViewGeneralSettings(): boolean {
+    return this.$gateKeeper.team(TeamPerms.VIEW_TEAM_GENERAL_SETTINGS, this.teamPerms.permission)
+  }
   get canViewAccessControl(): boolean {
     return this.$gateKeeper.team(TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD, this.teamPerms.permission)
-  }
-
-  get canGenerateSSHKeyPair(): boolean {
-    return this.$gateKeeper.team(TeamPerms.GENERATE_OWNER_SSH_KEY_PAIR, this.teamPerms.permission)
   }
 
   get canViewIntegrations(): boolean {
@@ -239,10 +229,6 @@ export default class TeamSettings extends mixins(ActiveUserMixin) {
       this.isTeam &&
       this.$gateKeeper.team(TeamPerms.MANAGE_SECURITY, this.teamPerms.permission)
     )
-  }
-
-  get canViewPreferences(): boolean {
-    return this.$gateKeeper.team(TeamPerms.MANAGE_PREFERENCES, this.teamPerms.permission)
   }
 
   get isTeam(): boolean {

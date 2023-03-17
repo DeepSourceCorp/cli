@@ -161,12 +161,12 @@ type Analyzer implements MaskPrimaryKeyNode {
   repository: Repository
   owner: String
   isPrimary: Boolean!
-  starIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String, autofixAvailable: Boolean): IssueConnection!
+  starIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, issueType: String, autofixAvailable: Boolean, auditRequired: Boolean, sort: String): IssueConnection!
   exampleConfig: String
   defaultTestPatterns: [String!]!
   supportedFilesRegex: String
-  issues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String, autofixAvailable: Boolean): IssueConnection!
   reviews(offset: Int, before: String, after: String, first: Int, last: Int): AnalyzerReviewConnection!
+  issues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, issueType: String, autofixAvailable: Boolean, auditRequired: Boolean, sort: String): IssueConnection!
   metrics(offset: Int, before: String, after: String, first: Int, last: Int): MetricConnection!
   checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
   repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection!
@@ -181,7 +181,7 @@ type Analyzer implements MaskPrimaryKeyNode {
   issuesCount: Int
   autofixableIssuesCount: Int
   issueDistribution: GenericScalar
-  issueTypeDistribution(q: String, sort: String, issueType: String, autofixAvailable: Boolean): GenericScalar
+  issueTypeDistribution(q: String, issueType: String, autofixAvailable: Boolean, auditRequired: Boolean, sort: String): GenericScalar
 }
 
 enum AnalyzerAnalyzerType {
@@ -267,14 +267,12 @@ type AuditLog implements MaskPrimaryKeyNode {
   id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
-  alive: Boolean
   eventName: String!
   description: String!
   actor: User
   ipAddress: String
   location: String
   reason: String
-  objectId: Int
 }
 
 type AuditLogConnection {
@@ -291,7 +289,7 @@ type AuditLogEdge {
 type AuditLogMeta {
   possibleActors: [String]
   events: [String]
-  exportFormats: [String]
+  exportFormats: [String] @deprecated(reason: "Only CSV format is supported by default.")
 }
 
 type AutoOnboardEvent implements MaskPrimaryKeyNode {
@@ -511,13 +509,13 @@ type Check implements MaskPrimaryKeyNode {
   run: Run!
   triggeredAt: DateTime
   finishedAt: DateTime
-  resolvedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
+  resolvedIssues(offset: Int, before: String, after: String, first: Int, last: Int, recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): RepositoryIssueConnection!
   extraData: JSONString!
   errors: GenericScalar
   metrics: JSONString!
   metricsCaptured: [RepositoryMetricValue]
   checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
-  concreteIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String, autofixAvailable: Boolean): IssueConnection
+  concreteIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, issueType: String, autofixAvailable: Boolean, auditRequired: Boolean, sort: String): IssueConnection
   finishedIn: Int
   finishedInDisplay: String
   errorsRendered: GenericScalar
@@ -557,7 +555,7 @@ type CheckIssue implements MaskPrimaryKeyNode {
   endLine: Int!
   endColumn: Int!
   extraData: JSONString!
-  inRepositoryIssue(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
+  inRepositoryIssue(offset: Int, before: String, after: String, first: Int, last: Int, recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): RepositoryIssueConnection!
   autofixRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String, status_In: [String], pullRequestStatus_In: [String]): AutofixRunConnection!
   sourceCodeMarkup: String
   issueType: String
@@ -1087,6 +1085,7 @@ type EnterpriseTeam implements MaskPrimaryKeyNode {
   customerId: String
   primaryUser: User
   gsrSetupPending: Boolean!
+  resourceSelector: OwnerResourceSelector
   name: String!
   members(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   invitationCode: String
@@ -1099,7 +1098,7 @@ type EnterpriseTeam implements MaskPrimaryKeyNode {
   teamMembers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String], isAddedFromVcs: Boolean, isRoleFromVcs: Boolean): TeamMemberConnection!
   invites(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection
   invitationUrl: String
-  logs(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection
+  logs(offset: Int, before: String, after: String, first: Int, last: Int, actorIn: [String], eventIn: [String], ipAddressIn: [String], createdAtGte: Date, createdAtLte: Date, q: String): AuditLogConnection
   auditLogMeta: AuditLogMeta
   accountSetupStatus: GenericScalar
   roleInGroup: TeamMemberRoleChoices
@@ -1107,7 +1106,7 @@ type EnterpriseTeam implements MaskPrimaryKeyNode {
   repositoryCollaborators(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String, isAddedFromVcs: Boolean, isPermFromVcs: Boolean): RepositoryCollaboratorConnection!
   activeRepositoryCount: Int
   verifiableDomain: VerifiableDomain
-  allLogs(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection
+  allLogs(offset: Int, before: String, after: String, first: Int, last: Int, actorIn: [String], eventIn: [String], ipAddressIn: [String], createdAtGte: Date, createdAtLte: Date, q: String): AuditLogConnection
 }
 
 type EnterpriseTeamConnection {
@@ -1139,7 +1138,7 @@ type EnterpriseUser implements MaskPrimaryKeyNode {
   primaryOwner: Owner
   avatar: String
   preferredTechnologies(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
-  bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
+  bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): RepositoryIssueConnection!
   preference: UserPreference
   IsBetaTester: Boolean!
   deleted: DateTime
@@ -1166,6 +1165,18 @@ type EnterpriseUserConnection {
 type EnterpriseUserEdge {
   node: EnterpriseUser
   cursor: String!
+}
+
+input ExportAuditLogsInput {
+  objectId: ID!
+  createdAtGte: Date!
+  createdAtLte: Date!
+  clientMutationId: String
+}
+
+type ExportAuditLogsPayload {
+  ok: Boolean!
+  clientMutationId: String
 }
 
 type FeatureDefinition implements MaskPrimaryKeyNode {
@@ -1552,11 +1563,13 @@ type Issue implements MaskPrimaryKeyNode {
   autofixTitle: String
   isRecommended: Boolean!
   weight: Int!
-  tags: [String]
+  auditRequired: Boolean
   starIssueInAnalyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
+  tags: [String]
   linkedMetrics(offset: Int, before: String, after: String, first: Int, last: Int): MetricConnection!
   issuePriorities(offset: Int, before: String, after: String, first: Int, last: Int): IssuePriorityConnection!
   checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
+  repoIssues(offset: Int, before: String, after: String, first: Int, last: Int, recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): RepositoryIssueConnection!
   autofixRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String, status_In: [String], pullRequestStatus_In: [String]): AutofixRunConnection!
   occurrenceCount: Int
   issueType: String
@@ -1588,6 +1601,12 @@ enum IssueDistributionSortKey {
 type IssueEdge {
   node: Issue
   cursor: String!
+}
+
+type IssueOccurrenceFrequency {
+  key: String!
+  label: String!
+  count: Int!
 }
 
 type IssuePriority implements MaskPrimaryKeyNode {
@@ -1663,6 +1682,17 @@ type IssueTrend {
   trendHint: String
   trendDirection: TrendDirection
   trendPositive: Boolean
+}
+
+enum IssueType {
+  ANTI_PATTERN
+  BUG_RISK
+  PERFORMANCE
+  SECURITY
+  COVERAGE
+  TYPECHECK
+  STYLE
+  DOCUMENTATION
 }
 
 type IssueTypeSetting {
@@ -1764,6 +1794,7 @@ enum MetricTypeChoices {
 }
 
 type Mutation {
+  exportAuditLogs(input: ExportAuditLogsInput!): ExportAuditLogsPayload
   createConfigTemplate(input: CreateConfigTemplateInput!): CreateConfigTemplatePayload
   updateConfigTemplate(input: UpdateConfigTemplateInput!): UpdateConfigTemplatePayload
   deleteConfigTemplate(input: DeleteConfigTemplateInput!): DeleteConfigTemplatePayload
@@ -1915,6 +1946,7 @@ type Owner implements MaskPrimaryKeyNode {
   customerId: String
   primaryUser: User
   gsrSetupPending: Boolean!
+  resourceSelector: OwnerResourceSelector
   features: GenericScalar
   analyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
   issuePriorities(offset: Int, before: String, after: String, first: Int, last: Int): IssuePriorityConnection!
@@ -1986,6 +2018,11 @@ enum OwnerPlan {
   FREE
   DEVELOPER
   TEAM
+}
+
+enum OwnerResourceSelector {
+  PLAN
+  OWNR
 }
 
 type OwnerSetting implements MaskPrimaryKeyNode {
@@ -2069,6 +2106,13 @@ input PinnedReportInput {
   metadata: GenericScalar
 }
 
+enum ProductType {
+  STATIC_ANALYSIS
+  SAST
+  COVERAGE
+  IAC_ANALYSIS
+}
+
 type PublicReport implements MaskPrimaryKeyNode {
   id: ID!
   createdAt: DateTime!
@@ -2123,20 +2167,20 @@ type Query {
   oauth: SocialAuthURL
   issuePriorityType(offset: Int, before: String, after: String, first: Int, last: Int, weight: Int, verboseName: String, slug: String): IssuePriorityTypeConnection
   issue(shortcode: String!): Issue
-  issuesWithPriority(isIssuePrioritySet: Boolean = false, objectId: ID!, level: IssuePriorityLevel!, analyzerShortcode: String, offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String, autofixAvailable: Boolean): IssueConnection
+  issuesWithPriority(isIssuePrioritySet: Boolean = false, objectId: ID!, level: IssuePriorityLevel!, analyzerShortcode: String, offset: Int, before: String, after: String, first: Int, last: Int, q: String, issueType: String, autofixAvailable: Boolean, auditRequired: Boolean, sort: String): IssueConnection
   integrations(level: IntegrationSettingsLevel, ownerId: ID, repositoryId: ID, onlyInstalled: Boolean): [IntegrationProvider]
   integration(shortcode: String!, level: IntegrationSettingsLevel, ownerId: ID, repositoryId: ID): IntegrationProvider
   transactions(userId: Int!, offset: Int, before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection
   owner(login: String!, provider: VCSProviderChoices!): Owner
   team(login: String!, provider: VCSProviderChoices!): Team
   getTeamInviteInfo(invitationCode: String!): TeamInviteInfo
-  fileIssues(repoId: ID!, filepath: String!, offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection
+  fileIssues(repoId: ID!, filepath: String!, offset: Int, before: String, after: String, first: Int, last: Int, recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): RepositoryIssueConnection
   checkIssues(checkId: ID!, offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection
   check(checkId: ID!): Check!
   analyzer(shortcode: String!): Analyzer
   analyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection
   viewer: User
-  repositoryIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection
+  repositoryIssues(offset: Int, before: String, after: String, first: Int, last: Int, recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): RepositoryIssueConnection
   repository(name: String!, owner: String!, provider: VCSProviderChoices!): Repository
   trendingRepositories(count: Int = 5, offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
   editorsPickRepository: Repository
@@ -2316,7 +2360,7 @@ type Repository implements MaskPrimaryKeyNode {
   encPublicKey: String
   isSubmoduleEnabled: Boolean!
   analyzeChangesetOnly: Boolean!
-  issues(all: Boolean = false, offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection
+  issues(all: Boolean = false, offset: Int, before: String, after: String, first: Int, last: Int, recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): RepositoryIssueConnection
   config: GenericScalar!
   owner: Owner!
   widgets: [String]
@@ -2382,7 +2426,7 @@ type Repository implements MaskPrimaryKeyNode {
   dsn: String
   hasTestCoverage: Boolean
   badge: GenericScalar!
-  logs(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection
+  logs(offset: Int, before: String, after: String, first: Int, last: Int, actorIn: [String], eventIn: [String], ipAddressIn: [String], createdAtGte: Date, createdAtLte: Date, q: String): AuditLogConnection
   auditLogMeta: AuditLogMeta
   issueTrend(lastDays: Int!): GenericScalar
   resolvedIssueTrend(lastDays: Int!): GenericScalar
@@ -2390,7 +2434,9 @@ type Repository implements MaskPrimaryKeyNode {
   autofixedIssueTrend(lastDays: Int!): GenericScalar
   autofixableIssuesMetadata: AutofixableIssuesMetadata
   userPermissionMeta: GenericScalar
-  issueTypeDistribution(issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): [GenericScalar]
+  issueOccurrenceDistributionByProduct(recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): [IssueOccurrenceFrequency!]!
+  issueOccurrenceDistributionByIssueType(recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): [IssueOccurrenceFrequency!]!
+  issueTypeDistribution(recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): [GenericScalar] @deprecated(reason: "Deprecated in favor of `issue_occurrence_distribution_by_issue_type`.")
   recommendedIssueCount: Int
   totalIssueCount: Int
   isStarred: Boolean
@@ -2467,6 +2513,7 @@ type RepositoryIssue implements MaskPrimaryKeyNode {
   modifiedAt: DateTime!
   alive: Boolean
   repositoryInstance: Repository!
+  issue: Issue
   checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
   shouldIgnore: Boolean!
   severity: RepositoryIssueSeverityChoices!
@@ -2487,6 +2534,7 @@ type RepositoryIssue implements MaskPrimaryKeyNode {
   analyzerLogo: String
   seenIn: String
   autofixAvailable: Boolean
+  auditRequired: Boolean!
   raisedInFiles: [String]
   silenceRules: [SilenceRule]
   newVcsIssueUrl: String
@@ -2848,6 +2896,7 @@ type Team implements MaskPrimaryKeyNode {
   customerId: String
   primaryUser: User
   gsrSetupPending: Boolean!
+  resourceSelector: OwnerResourceSelector
   name: String!
   members(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   invitationCode: String
@@ -2861,7 +2910,7 @@ type Team implements MaskPrimaryKeyNode {
   teamMembers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String], isAddedFromVcs: Boolean, isRoleFromVcs: Boolean): TeamMemberConnection!
   invites(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection
   invitationUrl: String
-  logs(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection
+  logs(offset: Int, before: String, after: String, first: Int, last: Int, actorIn: [String], eventIn: [String], ipAddressIn: [String], createdAtGte: Date, createdAtLte: Date, q: String): AuditLogConnection
   auditLogMeta: AuditLogMeta
   accountSetupStatus: GenericScalar
   roleInGroup: TeamMemberRoleChoices
@@ -3640,7 +3689,7 @@ type User implements MaskPrimaryKeyNode {
   primaryOwner: Owner
   avatar: String
   preferredTechnologies(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
-  bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
+  bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): RepositoryIssueConnection!
   preference: UserPreference
   IsBetaTester: Boolean!
   deleted: DateTime
@@ -3658,7 +3707,7 @@ type User implements MaskPrimaryKeyNode {
   repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
   dashboardContext: GenericScalar
   bookmarkedIssueCount: Int
-  recommendedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection
+  recommendedIssues(offset: Int, before: String, after: String, first: Int, last: Int, recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): RepositoryIssueConnection
   gitlabAccounts: [GenericScalar]
   gsrProjects: [GSRProject]
   adsOrganization(login: String!): ADSOrganization

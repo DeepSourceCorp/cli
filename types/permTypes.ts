@@ -4,7 +4,8 @@ export enum TeamPerms {
   UPDATE_BILLING_DETAILS = 'updateBillingDetails',
   MANAGE_TEAM_MEMEBERS = 'manageTeamMemebers',
   VIEW_ACCESS_CONTROL_DASHBOARD = 'viewAccessControlDashboard',
-  GENERATE_OWNER_SSH_KEY_PAIR = 'generateOwnerSSHKeyPair',
+  VIEW_OWNER_SSH_KEY_PAIR = 'viewOwnerSSHKeyPair',
+  MUTATE_OWNER_SSH_KEY_PAIR = 'mutateOwnerSSHKeyPair',
   DELETE_TEAM_ACCOUNT = 'deleteTeamAccount',
   SET_GRANUALAR_IGNORE_PERMISSION = 'setGranualarIgnorePermission',
   ACTIVATE_ANALYSIS = 'activateAnalysis',
@@ -22,6 +23,7 @@ export enum TeamPerms {
   UPDATE_PUBLIC_REPORTS = 'updatePublicReports',
   MANAGE_PREFERENCES = 'managePreferences',
   PIN_REPORTS = 'pinReports',
+  VIEW_TEAM_GENERAL_SETTINGS = 'viewTeamGeneralSettings',
   MANAGE_SECURITY = 'manageSecurity'
 }
 

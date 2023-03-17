@@ -5,6 +5,7 @@ import {
   Owner,
   IssueTypeSetting,
   IntegrationFeature,
+  DeleteTeamInput,
   SyncRepositoryForOwnerInput
 } from '~/types/types'
 
@@ -33,6 +34,9 @@ export default class OwnerDetailMixin extends Vue {
 
   @ownerDetailStore.Action(OwnerDetailActions.FETCH_OWNER_DETAILS)
   fetchOwnerDetails: (args: { login: string; provider: string; refetch?: boolean }) => Promise<void>
+
+  @ownerDetailStore.Action(OwnerDetailActions.FETCH_VCS_DATA)
+  fetchVCSData: (args: { login: string; provider: string; refetch?: boolean }) => Promise<void>
 
   @ownerDetailStore.Action(OwnerDetailActions.FETCH_ISSUE_TYPE_SETTINGS)
   fetchIssueTypeSettings: (args: { login: string; provider: string }) => Promise<void>
@@ -100,4 +104,20 @@ export default class OwnerDetailMixin extends Vue {
     feature: IntegrationFeature
     refetch?: boolean
   }) => Promise<void>
+
+  @ownerDetailStore.Action(OwnerDetailActions.FETCH_SHOULD_TIMEOUT_DATA_TRIGGER)
+  fetchShouldTimeoutDataTrigger: (args: {
+    login: string
+    provider: string
+    refetch?: boolean
+  }) => Promise<void>
+
+  @ownerDetailStore.Action(OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER)
+  setDataTimeoutTrigger: (args: {
+    ownerId: string
+    shouldTimeoutDataTrigger: boolean
+  }) => Promise<boolean>
+
+  @ownerDetailStore.Action(OwnerDetailActions.DELETE_TEAM)
+  deleteTeam: (args: DeleteTeamInput) => Promise<boolean>
 }

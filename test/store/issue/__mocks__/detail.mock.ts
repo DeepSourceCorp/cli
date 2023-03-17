@@ -70,6 +70,13 @@ export const SINGLE_ISSUE: Issue = {
   shortcode: 'JS-0271',
   title: 'Suggest correct usage of shebang',
   severity: IssueSeverity.Major,
+  repoIssues: {
+    edges: [],
+    pageInfo: {
+      hasNextPage: false,
+      hasPreviousPage: false
+    }
+  },
   analyzer: {
     id: 'QW5hbHl6ZXI6bHhiYW1i',
     createdAt: '2020-04-17T09:21:30.643859+00:00',
@@ -97,6 +104,7 @@ export const SINGLE_ISSUE: Issue = {
         hasPreviousPage: false
       }
     },
+
     defaultTestPatterns: [],
     issues: {
       edges: [],

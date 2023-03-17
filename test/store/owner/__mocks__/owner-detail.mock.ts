@@ -29,6 +29,26 @@ export const OWNER_DETAILS: Owner = <Owner>{
   }
 }
 
+export const VCS_DETAILS: Owner = <Owner>{
+  id: 'T3duZXI6cXpscnh6',
+  vcsInstallationId: '7054915',
+  autofixInstallationUrl:
+    'https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==',
+  isAutofixEnabled: true,
+  team: {
+    id: 'VGVhbTpxemxyeHo=',
+    __typename: 'EnterpriseTeam'
+  },
+  __typename: 'Owner'
+}
+export const OWNER_SSH_KEY: Owner = <Owner>{
+  id: 'T3duZXI6cXpscnh6',
+  ownerSetting: {
+    id: 'T3duZXJTZXR0aW5nOmxicGxhYg==',
+    publicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCw6oWArAdm8QN'
+  }
+}
+
 /**
  * Mock for issue type settings.
  */

@@ -1,0 +1,946 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixAvailable":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixAvailable":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixAvailable":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixEnabled":false,"autofixAvailable":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixEnabled":false,"autofixAvailable":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixEnabled":false,"autofixAvailable":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixEnabled":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixEnabled":null,"autofixAvailable":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixEnabled":null,"autofixAvailable":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixEnabled":null,"autofixAvailable":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixEnabled":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixEnabled":true,"autofixAvailable":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixEnabled":true,"autofixAvailable":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixEnabled":true,"autofixAvailable":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 py-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <div class=\\"flex justify-between px-4 pt-4 border-t border-ink-200\\">
+    <div class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        DeepSource Autofix
+
+        <!---->
+      </div>
+    </div>
+    <div class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixEnabled":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==","autofixAvailable":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==","autofixAvailable":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==","autofixAvailable":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==","autofixEnabled":false,"autofixAvailable":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==","autofixEnabled":false,"autofixAvailable":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==","autofixEnabled":false,"autofixAvailable":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==","autofixEnabled":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==","autofixEnabled":null,"autofixAvailable":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==","autofixEnabled":null,"autofixAvailable":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==","autofixEnabled":null,"autofixAvailable":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==","autofixEnabled":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==","autofixEnabled":true,"autofixAvailable":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==","autofixEnabled":true,"autofixAvailable":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==","autofixEnabled":true,"autofixAvailable":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 py-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <div class=\\"flex justify-between px-4 pt-4 border-t border-ink-200\\"><a href=\\"https://github.com/apps/None/installations/new/permissions?target_id=40287229&amp;state=Ymlmcm9zdA==\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        DeepSource Autofix
+
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/apps/None/installations/new/permissions?target_id=40287229&amp;state=Ymlmcm9zdA==\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA==","autofixEnabled":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":"https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=Ymlmcm9zdA=="} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null,"autofixAvailable":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null,"autofixAvailable":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null,"autofixAvailable":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null,"autofixEnabled":false,"autofixAvailable":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null,"autofixEnabled":false,"autofixAvailable":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null,"autofixEnabled":false,"autofixAvailable":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null,"autofixEnabled":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null,"autofixEnabled":null,"autofixAvailable":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null,"autofixEnabled":null,"autofixAvailable":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null,"autofixEnabled":null,"autofixAvailable":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null,"autofixEnabled":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null,"autofixEnabled":true,"autofixAvailable":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null,"autofixEnabled":true,"autofixAvailable":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null,"autofixEnabled":true,"autofixAvailable":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 py-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <div class=\\"flex justify-between px-4 pt-4 border-t border-ink-200\\">
+    <div class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        DeepSource Autofix
+
+        <!---->
+      </div>
+    </div>
+    <div class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null,"autofixEnabled":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs","autofixInstallationUrl":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;
+
+exports[`renders VcsConnections with all prop options: {"vcsInstallationUrl":"https://github.com/organizations/deepsourcelabs/settings/installations/7054915","vcsProviderDisplay":"GitHub","vcsProviderIcon":"github","teamName":"deepsourcelabs"} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md py-4\\">
+  <p class=\\"uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider\\">
+    VCS provider connections
+  </p>
+  <div class=\\"flex justify-between px-4 border-t border-ink-200 pt-4\\"><a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex gap-x-2.5 items-center group\\">
+      <zicon-stub icon=\\"github\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <div class=\\"text-sm\\">
+        GitHub
+        <span class=\\"text-vanilla-400\\">— deepsourcelabs</span>
+        <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline group-hover:ml-0.5\\"></zicon-stub>
+      </div>
+    </a> <a href=\\"https://github.com/organizations/deepsourcelabs/settings/installations/7054915\\" class=\\"flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2 hover:opacity-80\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Installed</span>
+    </a></div>
+  <!---->
+</div>"
+`;

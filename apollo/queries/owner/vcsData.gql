@@ -1,0 +1,11 @@
+query VCSData($login: String!, $provider: VCSProviderChoices!) {
+  owner(login: $login, provider: $provider) {
+    id
+    vcsInstallationId
+    autofixInstallationUrl
+    isAutofixEnabled
+    team {
+      id
+    }
+  }
+}
