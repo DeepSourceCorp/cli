@@ -14,7 +14,7 @@
         :title="`Are you sure you want to delete the group &quot;${group.name}&quot;?`"
         @onClose="showDeleteGroupConfirm = false"
       >
-        <template v-slot:footer="{ close }">
+        <template #footer="{ close }">
           <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
             <z-button
               button-type="ghost"

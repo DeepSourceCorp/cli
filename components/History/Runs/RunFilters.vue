@@ -57,7 +57,7 @@
             <span>Filter</span>
           </z-button>
         </template>
-        <template v-slot:body="{ close }">
+        <template #body="{ close }">
           <z-menu-item
             v-for="runStat in RUN_STATUSES"
             :key="runStat"

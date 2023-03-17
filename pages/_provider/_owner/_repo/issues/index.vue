@@ -45,7 +45,7 @@
         style="top: 147px"
         @updateCategory="updateCategory"
       >
-        <template v-slot:cta v-if="repository.errorCode === 3003 && hasRepoReadAccess">
+        <template #cta v-if="repository.errorCode === 3003 && hasRepoReadAccess">
           <activate-repo-cta :repository="repository" class="mx-2 mt-2" />
         </template>
       </issue-category-selector>

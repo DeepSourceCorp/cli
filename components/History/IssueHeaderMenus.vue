@@ -2,7 +2,7 @@
   <div class="flex gap-2 w-full flex-row-reverse xl:flex-row py-4">
     <!-- Sort menu -->
     <z-menu direction="left" width="40" class="text-vanilla-100">
-      <template v-slot:trigger="{ toggle }">
+      <template #trigger="{ toggle }">
         <z-button
           type="button"
           button-type="secondary"
@@ -14,14 +14,14 @@
         </z-button>
       </template>
       <template slot="body" class="text-vanilla-200">
-        <z-menu-item v-for="filter in sortFilters" v-bind:key="filter.name" :icon="filter.icon">
+        <z-menu-item v-for="filter in sortFilters" :key="filter.name" :icon="filter.icon">
           {{ filter.label }}
         </z-menu-item>
       </template>
     </z-menu>
     <!-- Filter Menu -->
     <z-menu direction="left" width="40" class="text-vanilla-100">
-      <template v-slot:trigger="{ toggle }">
+      <template #trigger="{ toggle }">
         <z-badge slot="trigger" type="success" is-dot :hidden="false">
           <button
             type="button"

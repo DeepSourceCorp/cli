@@ -4,7 +4,7 @@
       v-if="isCollapsed"
       v-tooltip="{ content: isCollapsed ? 'Recently active' : '', placement: 'right' }"
     >
-      <template v-slot:trigger="{ toggle }">
+      <template #trigger="{ toggle }">
         <button
           type="button"
           class="flex items-center justify-center h-8 py-1 space-x-2 text-sm rounded-sm outline-none hover:bg-ink-300 min-w-8 focus:outline-none"
@@ -13,7 +13,7 @@
           <z-icon icon="repositories" size="small" class="min-w-4 min-h-4" />
         </button>
       </template>
-      <template v-slot:body="{ close }" class="z-10">
+      <template #body="{ close }" class="z-10">
         <z-menu-section :divider="false">
           <z-menu-item
             v-for="repo in repoList"

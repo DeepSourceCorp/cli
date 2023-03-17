@@ -4,7 +4,7 @@
     :count="run.branchRunCount"
     @toggled="toggled"
   >
-    <template v-slot:expanded>
+    <template #expanded>
       <div class="flex flex-col space-y-2 justify-center items-center h-28" v-if="loading">
         <z-icon icon="loader" class="animate-spin duration-1000" />
         Fetching Transforms
@@ -20,7 +20,7 @@
         />
       </template>
     </template>
-    <template v-slot:collapsed>
+    <template #collapsed>
       <transform-card
         :key="run.commitOid"
         v-bind="run"

@@ -1,7 +1,7 @@
 <template>
   <z-badge type="success" :is-dot="sortApplied" size="md">
     <z-menu v-if="!sortApplied" direction="right" width="small" class="text-vanilla-100">
-      <template v-slot:trigger="{ toggle }">
+      <template #trigger="{ toggle }">
         <z-button
           size="small"
           label="Sort"
@@ -14,7 +14,7 @@
       <template slot="body" class="text-vanilla-200">
         <z-menu-item
           v-for="filter in sortFilters"
-          v-bind:key="filter.name"
+          :key="filter.name"
           :icon="filter.icon"
           @click="modelValue = filter.name"
         >

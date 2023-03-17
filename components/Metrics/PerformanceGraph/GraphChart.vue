@@ -23,7 +23,7 @@
           {{ isNumberType ? currentThreshold : `${currentThreshold}%` }}
         </span>
         <z-menu direction="left" width="small" size="small" class="inline-block">
-          <template v-slot:trigger="{ toggle }">
+          <template #trigger="{ toggle }">
             <button type="button" class="outline-none focus:outline-none" @click="toggle">
               <z-icon class="inline" icon="more-vertical" />
             </button>
@@ -77,7 +77,7 @@
         width="narrow"
         title="Update threshold"
       >
-        <template v-slot:default="{ close }">
+        <template #default="{ close }">
           <div class="p-4">
             <p class="text-sm text-vanilla-400">
               Update <b class="text-vanilla-200">{{ name }}</b> threshold for

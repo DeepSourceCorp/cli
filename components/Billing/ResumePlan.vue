@@ -22,7 +22,7 @@
         @primaryAction="resumePlan(close)"
         @onClose="close"
       >
-        <template v-slot:footer="{ close }">
+        <template #footer="{ close }">
           <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
             <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               Cancel

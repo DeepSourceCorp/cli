@@ -1,6 +1,6 @@
 <template>
   <z-modal title="Add threshold" width="narrow" @onClose="closeModal">
-    <template v-slot:default="{ close }">
+    <template #default="{ close }">
       <div class="p-4 space-y-6">
         <div class="space-y-3">
           <div class="space-y-1">

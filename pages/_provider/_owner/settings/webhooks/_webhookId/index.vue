@@ -40,7 +40,7 @@
             </z-button>
             <test-webhook-endpoint v-if="localEndpoint.active" />
             <enable-webhook-endpoint v-if="!localEndpoint.active" @reset="reset(false)">
-              <template v-slot:default="{ toggleModal }">
+              <template #default="{ toggleModal }">
                 <z-button @click="toggleModal" size="small" icon="play-circle">
                   Enable endpoint
                 </z-button>
@@ -66,7 +66,7 @@
                 title="Save endpoint configuration"
                 subtitle="Once updated, you won't be able to revert to previous changes"
               >
-                <template v-slot:footer="{ close }">
+                <template #footer="{ close }">
                   <div
                     class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100"
                   >
@@ -230,7 +230,7 @@
             </template>
           </button-input>
           <enable-webhook-endpoint v-else @reset="reset(false)">
-            <template v-slot:default="{ toggleModal }">
+            <template #default="{ toggleModal }">
               <button-input
                 input-id="webhook-settings-enable"
                 button-label="Enable endpoint"

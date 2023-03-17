@@ -41,7 +41,7 @@
           direction="right"
           items-z-class="z-50"
         >
-          <template v-slot:trigger="{ toggle, isOpen }">
+          <template #trigger="{ toggle, isOpen }">
             <z-button
               :full-width="true"
               button-type="secondary"

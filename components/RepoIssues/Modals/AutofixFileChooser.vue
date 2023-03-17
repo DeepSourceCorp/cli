@@ -58,7 +58,7 @@
           </z-list>
         </div>
       </div>
-      <template v-slot:footer="{ close }">
+      <template #footer="{ close }">
         <div
           class="p-2 space-x-1 leading-none text-right border-t text-vanilla-100 border-slate-400"
         >

@@ -1,6 +1,6 @@
 <template>
   <z-dialog-generic @onClose="$emit('close')">
-    <template v-slot:default="{ close }">
+    <template #default="{ close }">
       <div class="p-4 flex flex-col gap-y-4 w-98" @click.stop>
         <h3 class="text-sm font-medium text-vanilla-100 leading-6">
           Report has been successfully {{ editMode ? 'updated' : 'created' }}

@@ -29,7 +29,7 @@
       <div class="text-xs text-vanilla-400">
         Showing
         <z-menu direction="right" class="inline-block text-vanilla-100">
-          <template v-slot:trigger="{ toggle }">
+          <template #trigger="{ toggle }">
             <button
               slot="trigger"
               class="flex items-center px-1 space-x-1 rounded-md outline-none bg-ink-200 text-vanilla-400 focus:outline-none"

@@ -78,7 +78,7 @@
             <div class="flex items-center gap-x-1.5 leading-none">
               <div class="text-sm text-vanilla-400">Role:</div>
               <z-menu width="large" direction="left">
-                <template v-slot:trigger="{ toggle }">
+                <template #trigger="{ toggle }">
                   <button
                     type="button"
                     class="flex items-center space-x-1 text-sm outline-none focus:outline-none w-28"
@@ -118,7 +118,7 @@
               </z-menu>
             </div>
             <remove-team-from-group-button :group="group" :team="team.team" @refetch="refetchData">
-              <template v-slot:activator="{ showConfirm }">
+              <template #activator="{ showConfirm }">
                 <z-button
                   icon="x-circle"
                   size="small"

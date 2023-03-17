@@ -56,7 +56,7 @@
               <div v-if="team.roleInGroup" class="flex items-center gap-x-1.5 leading-none">
                 <div class="text-sm text-vanilla-400">Role:</div>
                 <z-menu width="large" direction="left">
-                  <template v-slot:trigger="{ toggle }">
+                  <template #trigger="{ toggle }">
                     <button
                       type="button"
                       class="flex items-center space-x-1 text-sm outline-none focus:outline-none"

@@ -8,7 +8,7 @@
         class="px-3 py-3 text-sm border rounded-md bg-ink-400"
       />
     </fieldset>
-    <template v-slot:footer="{ close }">
+    <template #footer="{ close }">
       <div class="flex justify-between p-4 space-x-4 text-vanilla-100 border-slate-400">
         <div class="flex items-end">
           <span class="leading-none bg-ink-200 rounded-bl-md text-xs px-2 py-1.5 text-vanilla-400">

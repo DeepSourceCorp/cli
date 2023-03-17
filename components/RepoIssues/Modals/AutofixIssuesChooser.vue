@@ -77,7 +77,7 @@
           </div>
         </div>
       </div>
-      <template v-slot:footer="{ close }">
+      <template #footer="{ close }">
         <div
           class="p-4 space-x-4 text-right text-vanilla-100 border-t border-slate-400 flex items-center justify-end"
         >

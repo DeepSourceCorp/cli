@@ -1,7 +1,7 @@
 <template>
   <z-badge type="success" :is-dot="sortApplied ? true : false" size="md">
     <z-menu v-if="!sortApplied" direction="right" width="small" class="text-vanilla-100">
-      <template v-slot:trigger="{ toggle }">
+      <template #trigger="{ toggle }">
         <z-button
           icon="amount-down"
           icon-color="vanilla-400"

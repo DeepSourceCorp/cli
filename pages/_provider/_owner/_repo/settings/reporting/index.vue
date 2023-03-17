@@ -27,7 +27,7 @@
           </p>
         </div>
         <z-table v-if="repoSettings && repoSettings.length" class="rounded-md text-vanilla-100">
-          <template v-slot:head>
+          <template #head>
             <z-table-row>
               <z-table-cell
                 v-for="head in headerData"
@@ -38,7 +38,7 @@
               >
             </z-table-row>
           </template>
-          <template v-slot:body>
+          <template #body>
             <template v-if="$fetchState.pending">
               <div
                 v-for="index in 8"
@@ -117,7 +117,7 @@
           v-if="issuePrioritySettings && issuePrioritySettings.length"
           class="mt-4 text-vanilla-100"
         >
-          <template v-slot:head>
+          <template #head>
             <z-table-row>
               <z-table-cell
                 v-for="head in priorityHeaderData"
@@ -128,7 +128,7 @@
               >
             </z-table-row>
           </template>
-          <template v-slot:body>
+          <template #body>
             <template v-if="$fetchState.pending">
               <div
                 v-for="index in 3"
@@ -214,7 +214,7 @@
           </p>
         </div>
         <z-table v-if="metricSettings && metricSettings.length" class="rounded-md text-vanilla-100">
-          <template v-slot:head>
+          <template #head>
             <z-table-row>
               <z-table-cell
                 v-for="head in metricsHeaderData"
@@ -225,7 +225,7 @@
               >
             </z-table-row>
           </template>
-          <template v-slot:body>
+          <template #body>
             <template v-if="$fetchState.pending">
               <div
                 v-for="index in 5"
@@ -413,7 +413,7 @@
 
       <div v-if="$fetchState.pending || repository.hasTestCoverage" class="space-y-2">
         <z-table>
-          <template v-slot:head>
+          <template #head>
             <z-table-row>
               <z-table-cell
                 v-for="head in nlcvHeaderData"
@@ -424,7 +424,7 @@
               >
             </z-table-row>
           </template>
-          <template v-slot:body>
+          <template #body>
             <template v-if="$fetchState.pending">
               <div
                 v-for="index in 3"
@@ -453,7 +453,7 @@
                       }}{{ nlcvMetricData.unit ? nlcvMetricData.unit : '' }}</span
                     >
                     <z-menu v-if="canModifyThreshold" direction="left">
-                      <template v-slot:trigger="{ toggle }">
+                      <template #trigger="{ toggle }">
                         <z-button
                           button-type="ghost"
                           icon="more-vertical"
@@ -502,7 +502,7 @@
           </template>
         </z-table>
         <z-table>
-          <template v-slot:body>
+          <template #body>
             <template v-if="$fetchState.pending">
               <div class="border-b opacity-50 h-11 bg-ink-300 animate-pulse border-slate-400"></div>
             </template>
@@ -549,7 +549,7 @@
                     }}{{ nlcvMetricData.unit ? nlcvMetricData.unit : '' }}</span
                   >
                   <z-menu v-if="canModifyThreshold" direction="left">
-                    <template v-slot:trigger="{ toggle }">
+                    <template #trigger="{ toggle }">
                       <z-button
                         button-type="ghost"
                         icon="more-vertical"
@@ -619,7 +619,7 @@
           subtitle="This action is irreversible, and will invalidate the old DSN. You must replace the old DSN with the new one wherever you are using it."
           @onClose="showDSNRegenerateConfirm = false"
         >
-          <template v-slot:footer="{ close }">
+          <template #footer="{ close }">
             <div class="flex items-center justify-end mt-6 gap-x-4">
               <z-button
                 label="Cancel"

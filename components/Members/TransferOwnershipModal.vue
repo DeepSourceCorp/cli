@@ -153,7 +153,7 @@
       </template>
     </z-confirm>
     <z-dialog-generic v-else @onClose="close">
-      <template v-slot:default="{ close }">
+      <template #default="{ close }">
         <div class="relative p-6 sm:p-8 sm:w-100" @click.stop>
           <slot>
             <div @click="close" class="absolute cursor-pointer top-4 right-4">

@@ -1,6 +1,6 @@
 <template>
   <z-menu placement="top">
-    <template v-slot:trigger="{ toggle }">
+    <template #trigger="{ toggle }">
       <z-button
         size="x-small"
         icon="more-vertical"
@@ -9,7 +9,7 @@
         @click="toggle"
       />
     </template>
-    <template v-slot:body="{ close }">
+    <template #body="{ close }">
       <z-menu-item
         v-if="!$config.onPrem"
         as="nuxt-link"

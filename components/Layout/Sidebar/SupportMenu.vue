@@ -1,6 +1,6 @@
 <template>
   <z-menu placement="top" class="w-full">
-    <template v-slot:trigger="{ toggle, isOpen }">
+    <template #trigger="{ toggle, isOpen }">
       <sidebar-item :is-collapsed="isCollapsed" :active="isOpen" icon="help-circle" @click="toggle">
         Help and support
       </sidebar-item>

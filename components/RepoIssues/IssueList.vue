@@ -3,7 +3,7 @@
     <div class="flex flex-row-reverse w-full gap-2 xl:flex-row">
       <!-- Sort menu -->
       <z-menu direction="right" width="x-small" class="text-vanilla-100">
-        <template v-slot:trigger="{ toggle }">
+        <template #trigger="{ toggle }">
           <z-button
             type="button"
             button-type="secondary"

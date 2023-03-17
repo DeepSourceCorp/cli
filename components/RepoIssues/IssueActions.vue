@@ -15,7 +15,7 @@
 
     <!-- Ignore issue actions -->
     <z-menu v-if="canIgnoreIssues" direction="left" class="text-vanilla-100">
-      <template v-slot:trigger="{ toggle }">
+      <template #trigger="{ toggle }">
         <div class="flex items-center gap-x-2">
           <div v-if="showNavButtons" class="flex items-center gap-x-2">
             <z-button
@@ -64,7 +64,7 @@
       <template slot="body" class="text-vanilla-200">
         <z-menu-item
           v-for="filter in ignoreIssues"
-          v-bind:key="filter.name"
+          :key="filter.name"
           @click="() => openModal(filter.name)"
         >
           {{ filter.label }}

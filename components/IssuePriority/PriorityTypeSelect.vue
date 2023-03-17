@@ -1,6 +1,6 @@
 <template>
   <z-menu :width="width" :direction="direction" @menu-toggle="open = !open">
-    <template v-slot:trigger="{ toggle }">
+    <template #trigger="{ toggle }">
       <slot name="trigger" :toggle="toggle">
         <button
           v-tooltip="{ content: tooltipCopy, delay: { show: 200, hide: 100 }, classes: 'w-64' }"

@@ -5,7 +5,7 @@
     :body-spacing="0"
     :grid-spacing="0"
   >
-    <template v-slot:controls>
+    <template #controls>
       <div class="flex justify-end h-full">
         <graph-control
           class="flex space-x-2 w-full sm:w-auto"

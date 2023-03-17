@@ -1,6 +1,6 @@
 <template>
   <z-menu placement="top">
-    <template v-slot:trigger="{ toggle }">
+    <template #trigger="{ toggle }">
       <button
         type="button"
         class="outline-none focus:outline-none flex max-w-3xs items-center space-x-2 rounded-sm py-1 text-sm hover:bg-ink-300"

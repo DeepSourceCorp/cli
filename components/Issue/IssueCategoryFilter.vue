@@ -1,7 +1,7 @@
 <template>
   <z-badge :is-dot="filterApplied" type="success" size="md">
     <z-menu v-if="!filterApplied" direction="right" width="small" class="text-vanilla-100">
-      <template v-slot:trigger="{ toggle }">
+      <template #trigger="{ toggle }">
         <z-button
           icon="filter"
           icon-color="vanilla-400"

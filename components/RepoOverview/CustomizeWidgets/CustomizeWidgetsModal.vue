@@ -53,7 +53,7 @@
         subtitle="No widgets matched the search term"
       />
     </section>
-    <template v-slot:footer="{ close }">
+    <template #footer="{ close }">
       <div
         class="flex items-center justify-between px-4 py-3 space-x-4 border-t text-vanilla-100 border-slate-400"
       >

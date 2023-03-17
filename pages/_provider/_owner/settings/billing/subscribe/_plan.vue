@@ -51,7 +51,7 @@
                   icon="minus"
                   button-type="secondary"
                   :disabled="seats <= minSeats"
-                  v-on:click.shift="updateSeatsInStore(seats - 4)"
+                  @click.shift="updateSeatsInStore(seats - 4)"
                   @click="updateSeatsInStore(seats - 1)"
                 />
                 <input
@@ -68,7 +68,7 @@
                   icon="plus"
                   button-type="secondary"
                   :disabled="seats >= maxSeats"
-                  v-on:click.shift="updateSeatsInStore(seats + 4)"
+                  @click.shift="updateSeatsInStore(seats + 4)"
                   @click="updateSeatsInStore(seats + 1)"
                 />
               </div>

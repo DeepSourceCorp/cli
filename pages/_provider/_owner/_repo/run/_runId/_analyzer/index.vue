@@ -246,7 +246,7 @@
             <span class="font-bold"> This action cannot be reversed. </span>
           </div>
         </template>
-        <template v-slot:footer="{ close }">
+        <template #footer="{ close }">
           <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
             <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               Cancel

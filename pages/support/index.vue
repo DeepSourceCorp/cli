@@ -145,7 +145,7 @@
                     @change="prepareFiles"
                     @files-emptied="filesToUpload = []"
                   >
-                    <template v-slot:activator="{ open }">
+                    <template #activator="{ open }">
                       <z-button
                         v-tooltip="'Attach files'"
                         :disabled="isFileProcessing || isFormSubmitting"

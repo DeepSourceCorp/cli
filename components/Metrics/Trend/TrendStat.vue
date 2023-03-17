@@ -13,7 +13,7 @@
         {{ thresholdDisplay }}
       </span>
       <z-menu v-if="isThreshold && canModifyThreshold">
-        <template v-slot:trigger="{ toggle }">
+        <template #trigger="{ toggle }">
           <z-button
             button-type="ghost"
             icon="more-vertical"

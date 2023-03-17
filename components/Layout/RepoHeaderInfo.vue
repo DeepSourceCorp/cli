@@ -19,7 +19,7 @@
       <div>
         <span>Default analysis branch is</span>
         <z-menu direction="left" size="base" class="inline-block text-vanilla-100">
-          <template v-slot:trigger="{ toggle }">
+          <template #trigger="{ toggle }">
             <button
               type="button"
               class="inline-block outline-none focus:outline-none"
@@ -63,7 +63,7 @@
         width="narrow"
         title="Update Default Analysis Branch"
       >
-        <template v-slot:default="{ close }">
+        <template #default="{ close }">
           <div class="p-4">
             <label class="text-sm text-vanilla-400">Update default analysis branch</label>
             <z-input

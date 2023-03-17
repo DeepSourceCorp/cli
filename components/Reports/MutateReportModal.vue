@@ -151,7 +151,7 @@
         <template slot="description"> Include data from past months in the report. </template>
       </toggle-input>
     </fieldset>
-    <template v-slot:footer="{ close }">
+    <template #footer="{ close }">
       <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
         <z-button
           icon="check"

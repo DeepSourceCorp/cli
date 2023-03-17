@@ -16,7 +16,7 @@
         }&quot; from the group &quot;${group.name}&quot;?`"
         @onClose="showRemoveUserFromGroupConfirm = false"
       >
-        <template v-slot:footer="{ close }">
+        <template #footer="{ close }">
           <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
             <z-button
               button-type="ghost"

@@ -1,6 +1,6 @@
 <template>
   <z-modal title="Update threshold" width="narrow" @onClose="$emit('close')">
-    <template v-slot:default="{ close }">
+    <template #default="{ close }">
       <div class="p-4 space-y-4">
         <p v-if="isAggregate" class="text-sm text-vanilla-400">
           Update <b class="text-vanilla-200">Aggregate</b> threshold

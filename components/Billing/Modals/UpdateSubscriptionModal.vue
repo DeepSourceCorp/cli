@@ -99,7 +99,7 @@
         </div>
       </section>
     </div>
-    <template v-slot:footer="{ close }">
+    <template #footer="{ close }">
       <div class="flex justify-between p-4 text-vanilla-100 border-slate-400">
         <div class="items-end hidden md:flex">
           <span class="leading-none bg-ink-200 rounded-bl-md text-xs px-2 py-1.5 text-vanilla-400">

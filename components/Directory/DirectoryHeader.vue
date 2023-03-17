@@ -78,7 +78,7 @@
                 class="hidden md:inline-flex"
               />
               <z-menu @menu-toggle="menuToggle">
-                <template v-slot:trigger="{ toggle }">
+                <template #trigger="{ toggle }">
                   <z-button
                     icon="more-vertical"
                     size="small"
@@ -88,7 +88,7 @@
                     @click="toggle"
                   />
                 </template>
-                <template v-slot:body="{ close }">
+                <template #body="{ close }">
                   <z-menu-item
                     v-if="infoObj.documentationUrl"
                     as="a"

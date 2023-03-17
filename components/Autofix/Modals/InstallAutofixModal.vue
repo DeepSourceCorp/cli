@@ -15,7 +15,7 @@
           the account with access to this repository.
         </p>
       </div>
-      <template v-slot:footer="{ close }">
+      <template #footer="{ close }">
         <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
           <z-button
             v-if="installing"

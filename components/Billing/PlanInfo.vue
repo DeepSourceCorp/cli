@@ -60,7 +60,7 @@
         @onClose="showUpdateSeatsModal = false"
         title="Add or remove seats"
       >
-        <template v-slot:default="{ close }">
+        <template #default="{ close }">
           <div class="flex flex-col p-4 space-y-3">
             <div class="flex justify-between">
               <label for="seats-count" class="text-sm text-vanilla-400">

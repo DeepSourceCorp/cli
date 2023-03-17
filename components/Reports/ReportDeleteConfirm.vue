@@ -11,7 +11,7 @@
       <span class="font-medium text-vanilla-100">{{ reportLabel }}</span
       >. Once deleted, you won’t be able to restore the report.
     </div>
-    <template v-slot:footer="{ close }">
+    <template #footer="{ close }">
       <div class="mt-6 text-right text-vanilla-100 flex items-center justify-end gap-x-2">
         <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
           Cancel

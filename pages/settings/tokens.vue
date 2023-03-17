@@ -69,7 +69,7 @@
           primary-action-label="Delete"
           @onClose="showDeleteAllConfirmation = false"
         >
-          <template v-slot:footer="{ close }">
+          <template #footer="{ close }">
             <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
               <z-button
                 :is-loading="deletingToken"

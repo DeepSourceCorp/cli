@@ -1,6 +1,6 @@
 <template>
   <filter-generic v-model="coverageSortFilter" :filters="coverageFilters" badge-size="sm">
-    <template v-slot:default="{ filterApplied, filterLabel, filterIcon }">
+    <template #default="{ filterApplied, filterLabel, filterIcon }">
       <z-button
         button-type="ghost"
         size="x-small"

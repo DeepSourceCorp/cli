@@ -34,7 +34,7 @@
           <template v-if="!getStatus(step)">
             <p v-if="step.description" class="text-sm text-vanilla-400">{{ step.description }}</p>
             <invite-members-modal v-if="step.shortcode === 'invite-team'" @inviteSuccess="refetch">
-              <template v-slot:trigger="{ open }">
+              <template #trigger="{ open }">
                 <z-button :icon="step.icon" button-type="secondary" size="small" @click="open">{{
                   step.actionLabel
                 }}</z-button>

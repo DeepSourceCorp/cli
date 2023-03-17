@@ -187,7 +187,7 @@
       @add-repo="handleRepoAddition"
     />
 
-    <template v-slot:footer="{ close }">
+    <template #footer="{ close }">
       <div
         class="p-4 text-right text-vanilla-100 border-slate-400"
         :class="{ 'border-t border-slate-400': showRepoSelection }"
