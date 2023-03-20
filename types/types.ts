@@ -1495,6 +1495,28 @@ export type EnterpriseInstallationSetup = MaskPrimaryKeyNode & {
   logo?: Maybe<Scalars['String']>;
 };
 
+export enum EnterprisePilotLicenseSeatChoices {
+  Blw_50 = 'BLW_50',
+  Btw_50_99 = 'BTW_50_99',
+  Btw_100_249 = 'BTW_100_249',
+  Btw_250_499 = 'BTW_250_499',
+  Btw_500_999 = 'BTW_500_999',
+  Btw_1000_2499 = 'BTW_1000_2499',
+  Btw_2500_4999 = 'BTW_2500_4999',
+  Abv_5000 = 'ABV_5000'
+}
+
+export enum EnterprisePilotLicenseVcsChoices {
+  GithubCloud = 'GITHUB_CLOUD',
+  GithubEnterpriseServer = 'GITHUB_ENTERPRISE_SERVER',
+  GithubEnterpriseCloud = 'GITHUB_ENTERPRISE_CLOUD',
+  GitlabCloud = 'GITLAB_CLOUD',
+  GitlabSelfHostedCe = 'GITLAB_SELF_HOSTED_CE',
+  GitlabSelfHostedEe = 'GITLAB_SELF_HOSTED_EE',
+  BitbucketCloud = 'BITBUCKET_CLOUD',
+  AzureDevopsServices = 'AZURE_DEVOPS_SERVICES'
+}
+
 export type EnterpriseTeam = MaskPrimaryKeyNode & {
   __typename?: 'EnterpriseTeam';
   ownerPtr: Owner;
@@ -2614,6 +2636,7 @@ export type Mutation = {
   toggleUserActive?: Maybe<ToggleUserActivePayload>;
   deleteUser?: Maybe<DeleteUserPayload>;
   acceptGroupInvite?: Maybe<AcceptGroupInvitePayload>;
+  requestEnterprisePilotLicense?: Maybe<RequestEnterprisePilotLicensePayload>;
   socialAuth?: Maybe<SocialAuthJwt>;
   revokeToken?: Maybe<Revoke>;
   deleteTokenCookie?: Maybe<DeleteJsonWebTokenCookie>;
@@ -2822,6 +2845,11 @@ export type MutationDeleteUserArgs = {
 
 export type MutationAcceptGroupInviteArgs = {
   input: AcceptGroupInviteInput;
+};
+
+
+export type MutationRequestEnterprisePilotLicenseArgs = {
+  input: RequestEnterprisePilotLicenseInput;
 };
 
 
@@ -4986,6 +5014,23 @@ export enum RepositoryVcsType {
   Svn = 'SVN',
   Hg = 'HG'
 }
+
+export type RequestEnterprisePilotLicenseInput = {
+  name: Scalars['String'];
+  email: Scalars['String'];
+  jobTitle: Scalars['String'];
+  companyName: Scalars['String'];
+  seats: EnterprisePilotLicenseSeatChoices;
+  vcs: EnterprisePilotLicenseVcsChoices;
+  purpose: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type RequestEnterprisePilotLicensePayload = {
+  __typename?: 'RequestEnterprisePilotLicensePayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
 
 export type ResetGroupInvitationLinkInput = {
   groupId: Scalars['ID'];
@@ -7396,6 +7441,19 @@ export type Unnamed_36_Mutation = (
   & { ignoreIssueForTestPatternsInRepository?: Maybe<(
     { __typename?: 'IgnoreIssueForTestPatternsInRepositoryPayload' }
     & Pick<IgnoreIssueForTestPatternsInRepositoryPayload, 'ok' | 'checkIssueIds'>
+  )> }
+);
+
+export type RequestEnterprisePilotLicenseMutationVariables = Exact<{
+  input: RequestEnterprisePilotLicenseInput;
+}>;
+
+
+export type RequestEnterprisePilotLicenseMutation = (
+  { __typename?: 'Mutation' }
+  & { requestEnterprisePilotLicense?: Maybe<(
+    { __typename?: 'RequestEnterprisePilotLicensePayload' }
+    & Pick<RequestEnterprisePilotLicensePayload, 'ok'>
   )> }
 );
 

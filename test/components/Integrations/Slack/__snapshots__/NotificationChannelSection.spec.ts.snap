@@ -3,7 +3,7 @@
 exports[`[[ NotificationChannelSection ]] Falls back to the channel list passed via \`availableChannels\` prop 1`] = `
 "<div class=\\"flex flex-col md:justify-between md:flex-row gap-y-4 md:gap-y-0\\"><label class=\\"text-sm md:place-self-center text-vanilla-100\\"> Notification channel </label>
   <div class=\\"w-full h-8 md:w-48\\">
-    <zselect-stub selected=\\"general\\" tabindex=\\"0\\" placeholder=\\"general\\" spacing=\\"pl-2.5 pr-2 py-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" truncate=\\"true\\" class=\\"text-sm\\">
+    <zselect-stub selected=\\"general\\" tabindex=\\"0\\" placeholder=\\"general\\" spacing=\\"pl-2.5 pr-2 py-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" truncate=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
       <zoption-stub value=\\"dev-testing\\" textsize=\\"text-xs\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> dev-testing </span></div>
       </zoption-stub>
@@ -21,7 +21,7 @@ exports[`[[ NotificationChannelSection ]] Falls back to the channel list passed 
 exports[`[[ NotificationChannelSection ]] renders the notification channel section: {"channel":"general","pending":false} 1`] = `
 "<div class=\\"flex flex-col md:justify-between md:flex-row gap-y-4 md:gap-y-0\\"><label class=\\"text-sm md:place-self-center text-vanilla-100\\"> Notification channel </label>
   <div class=\\"w-full h-8 md:w-48\\">
-    <zselect-stub selected=\\"general\\" tabindex=\\"0\\" placeholder=\\"general\\" spacing=\\"pl-2.5 pr-2 py-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" truncate=\\"true\\" class=\\"text-sm\\">
+    <zselect-stub selected=\\"general\\" tabindex=\\"0\\" placeholder=\\"general\\" spacing=\\"pl-2.5 pr-2 py-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" truncate=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
       <zoption-stub value=\\"dev-testing\\" textsize=\\"text-xs\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> dev-testing </span></div>
       </zoption-stub>
@@ -39,7 +39,7 @@ exports[`[[ NotificationChannelSection ]] renders the notification channel secti
 exports[`[[ NotificationChannelSection ]] renders the notification channel section: {"channel":"general","pending":null} 1`] = `
 "<div class=\\"flex flex-col md:justify-between md:flex-row gap-y-4 md:gap-y-0\\"><label class=\\"text-sm md:place-self-center text-vanilla-100\\"> Notification channel </label>
   <div class=\\"w-full h-8 md:w-48\\">
-    <zselect-stub selected=\\"general\\" tabindex=\\"0\\" placeholder=\\"general\\" spacing=\\"pl-2.5 pr-2 py-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" truncate=\\"true\\" class=\\"text-sm\\">
+    <zselect-stub selected=\\"general\\" tabindex=\\"0\\" placeholder=\\"general\\" spacing=\\"pl-2.5 pr-2 py-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" truncate=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
       <zoption-stub value=\\"dev-testing\\" textsize=\\"text-xs\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> dev-testing </span></div>
       </zoption-stub>
@@ -65,7 +65,7 @@ exports[`[[ NotificationChannelSection ]] renders the notification channel secti
 exports[`[[ NotificationChannelSection ]] renders the notification channel section: {"channel":"general"} 1`] = `
 "<div class=\\"flex flex-col md:justify-between md:flex-row gap-y-4 md:gap-y-0\\"><label class=\\"text-sm md:place-self-center text-vanilla-100\\"> Notification channel </label>
   <div class=\\"w-full h-8 md:w-48\\">
-    <zselect-stub selected=\\"general\\" tabindex=\\"0\\" placeholder=\\"general\\" spacing=\\"pl-2.5 pr-2 py-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" truncate=\\"true\\" class=\\"text-sm\\">
+    <zselect-stub selected=\\"general\\" tabindex=\\"0\\" placeholder=\\"general\\" spacing=\\"pl-2.5 pr-2 py-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" truncate=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
       <zoption-stub value=\\"dev-testing\\" textsize=\\"text-xs\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> dev-testing </span></div>
       </zoption-stub>

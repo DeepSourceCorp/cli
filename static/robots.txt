@@ -7,3 +7,4 @@ Disallow: /callback/*
 Disallow: /control-panel/*
 Disallow: /report/*
 Disallow: /health/*
+Disallow: /request-pilot-license/

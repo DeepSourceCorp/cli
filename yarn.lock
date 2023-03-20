@@ -1344,10 +1344,10 @@
   resolved "https://registry.yarnpkg.com/@deepsource/shifty/-/shifty-1.0.0.tgz#ecacb5337fd0ad9022af1df602bcede23664b485"
   integrity sha512-n+xr3puUHlsh5S7eYKtnJ+ASQqzfJ/SpUPi/ADZjiGqpZZu+Q1bSqiVfpUr670ceGL64AUEpAIeVe/N9eHLQ4w==
 
-"@deepsource/zeal@^0.12.18":
-  version "0.12.18"
-  resolved "https://registry.yarnpkg.com/@deepsource/zeal/-/zeal-0.12.18.tgz#37c0ff294c2a3948dbb59b6590e45c41e5a2d812"
-  integrity sha512-EHGUIkB/x8fpbd7F72OnjfpYzd0i3Vd6l5GaMcqlYSdWTy4wuMsFaBH7JTckHFas1yRk5uL/NifA0F7EmMQ+7w==
+"@deepsource/zeal@^0.12.20":
+  version "0.12.20"
+  resolved "https://registry.yarnpkg.com/@deepsource/zeal/-/zeal-0.12.20.tgz#c19e12a9434221cf5e77eb63d99a65fb2819d6ee"
+  integrity sha512-LxJp0qyEyG61M+WfQAFX4331GvjnT33ihZ0x76C/5gUXVJqrnr+hgxOdPNIAp2TXX08BTw8xfuQyZhAvI/Stnw==
   dependencies:
     "@deepsource/charts" "^1.0.0"
     "@tailwindcss/line-clamp" "^0.2.2"

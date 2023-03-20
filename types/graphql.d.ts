@@ -404,6 +404,15 @@ declare module '*/ignoreIssueTestPattern.gql' {
 }
     
 
+declare module '*/requestEnterprisePilotLicense.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const requestEnterprisePilotLicense: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/applyCreditsToOwner.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

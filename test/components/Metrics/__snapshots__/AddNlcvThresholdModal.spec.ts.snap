@@ -17,7 +17,7 @@ exports[`[[AddNlcvThresholdModal]] renders EditThresholdModal with all prop opti
                 <div class=\\"flex items-center justify-between h-full space-x-2 border border-solid selected border-ink-200 px-2 py-1 bg-transparent rounded-md text-vanilla-300 cursor-pointer\\">
                   <div class=\\"flex items-center flex-grow h-full outline-none cursor-pointer text-xs cursor-pointer\\"> C# </div><span><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"transition-all duration-300 transform z-icon stroke-current w-4 h-4 z-icon--chevron-down text-vanilla-400 rotate-0\\"><polyline points=\\"6 9 12 15 18 9\\"></polyline></svg></span>
                 </div>
-                <div class=\\"absolute left-0 right-0 z-10 mt-1 overflow-y-auto transition-all duration-300 border border-solid rounded-md max-h-64 options shadow-black border-ink-100 text-vanilla-300 bg-ink-300 hidden\\">
+                <div class=\\"absolute left-0 right-0 z-10 mt-1 overflow-y-auto transition-all duration-300 border border-solid rounded-md options shadow-black border-ink-100 text-vanilla-300 bg-ink-300 hidden max-h-64\\">
                   <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 is-selected bg-ink-200 text-xs\\">C#</div>
                   <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Dockerfile</div>
                   <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">PHP</div>

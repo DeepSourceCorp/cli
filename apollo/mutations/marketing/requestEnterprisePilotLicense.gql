@@ -1,0 +1,5 @@
+mutation requestEnterprisePilotLicense($input: RequestEnterprisePilotLicenseInput!) {
+  requestEnterprisePilotLicense(input: $input) {
+    ok
+  }
+}

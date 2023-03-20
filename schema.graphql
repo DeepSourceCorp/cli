@@ -1069,6 +1069,28 @@ type EnterpriseInstallationSetup implements MaskPrimaryKeyNode {
   logo: String
 }
 
+enum EnterprisePilotLicenseSeatChoices {
+  BLW_50
+  BTW_50_99
+  BTW_100_249
+  BTW_250_499
+  BTW_500_999
+  BTW_1000_2499
+  BTW_2500_4999
+  ABV_5000
+}
+
+enum EnterprisePilotLicenseVCSChoices {
+  GITHUB_CLOUD
+  GITHUB_ENTERPRISE_SERVER
+  GITHUB_ENTERPRISE_CLOUD
+  GITLAB_CLOUD
+  GITLAB_SELF_HOSTED_CE
+  GITLAB_SELF_HOSTED_EE
+  BITBUCKET_CLOUD
+  AZURE_DEVOPS_SERVICES
+}
+
 type EnterpriseTeam implements MaskPrimaryKeyNode {
   ownerPtr: Owner!
   id: ID!
@@ -1814,6 +1836,7 @@ type Mutation {
   toggleUserActive(input: ToggleUserActiveInput!): ToggleUserActivePayload
   deleteUser(input: DeleteUserInput!): DeleteUserPayload
   acceptGroupInvite(input: AcceptGroupInviteInput!): AcceptGroupInvitePayload
+  requestEnterprisePilotLicense(input: RequestEnterprisePilotLicenseInput!): RequestEnterprisePilotLicensePayload
   socialAuth(code: String!, provider: String!): SocialAuthJWT
   revokeToken(refreshToken: String): Revoke
   deleteTokenCookie: DeleteJSONWebTokenCookie
@@ -2603,6 +2626,22 @@ enum RepositoryVcsType {
   GIT
   SVN
   HG
+}
+
+input RequestEnterprisePilotLicenseInput {
+  name: String!
+  email: String!
+  jobTitle: String!
+  companyName: String!
+  seats: EnterprisePilotLicenseSeatChoices!
+  vcs: EnterprisePilotLicenseVCSChoices!
+  purpose: String!
+  clientMutationId: String
+}
+
+type RequestEnterprisePilotLicensePayload {
+  ok: Boolean
+  clientMutationId: String
 }
 
 input ResetGroupInvitationLinkInput {
