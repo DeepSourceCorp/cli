@@ -1,12 +1,12 @@
 <template>
-  <div id="tabs" class="flex border-b xl:col-span-2 border-slate-400 sub-nav-wrapper">
-    <div class="flex self-end px-2 space-x-5 overflow-auto md:px-4 flex-nowrap">
+  <div id="tabs" class="sub-nav-wrapper flex border-b border-slate-400 xl:col-span-2">
+    <div class="flex flex-nowrap space-x-5 self-end overflow-auto px-2 md:px-4">
       <nuxt-link :to="getRoute('runs')">
         <z-tab border-active-color="vanilla-400" icon="trending-up" :is-active="active == 'runs'">
           Analysis runs
         </z-tab>
       </nuxt-link>
-      <nuxt-link :to="getRoute('transforms')">
+      <nuxt-link v-if="showTransforms" :to="getRoute('transforms')">
         <z-tab border-active-color="vanilla-400" icon="zap" :is-active="active == 'transforms'">
           Transforms
         </z-tab>
@@ -26,6 +26,9 @@ import { ZTab } from '@deepsource/zeal'
 export default class SubNav extends Vue {
   @Prop({ default: 'runs' })
   public active: string
+
+  @Prop({ default: true, type: Boolean })
+  showTransforms: boolean
 
   getRoute(candidate: string): string {
     return this.$generateRoute(['history', candidate])

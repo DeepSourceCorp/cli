@@ -1,6 +1,6 @@
 <template>
-  <div class="pb-28 lg:pb-12 space-y-4">
-    <sub-nav v-if="transformsAllowed" active="runs" class="hidden lg:block" />
+  <div class="space-y-4 pb-28 lg:pb-12">
+    <sub-nav :show-transforms="transformsAllowed" active="runs" class="hidden lg:block" />
     <run-filters
       :open-count="openPrCount"
       :closed-count="closedPrCount"
@@ -19,7 +19,7 @@
         :branch-run-count="defaultBranchRunCount"
         :is-expanded="expandedBranch === defaultBranchRun.branchName"
         :class="{
-          'opacity-30 pointer-events-none':
+          'pointer-events-none opacity-30':
             expandedBranch && expandedBranch !== defaultBranchRun.branchName
         }"
         @expanded="updateExpandedBranch"
@@ -32,7 +32,7 @@
             :generalized-run="generalizePR(pr)"
             :is-expanded="expandedBranch === pr.branch"
             :class="{
-              'opacity-30 pointer-events-none': expandedBranch && expandedBranch !== pr.branch
+              'pointer-events-none opacity-30': expandedBranch && expandedBranch !== pr.branch
             }"
             @expanded="updateExpandedBranch"
           />
@@ -58,14 +58,14 @@
         </template>
       </template>
       <template v-else>
-        <div v-for="key in pageSize" :key="key" class="-mx-1 space-y-2 animate-pulse">
-          <div class="w-full h-20 rounded-md bg-ink-200"></div>
+        <div v-for="key in pageSize" :key="key" class="-mx-1 animate-pulse space-y-2">
+          <div class="h-20 w-full rounded-md bg-ink-200"></div>
         </div>
       </template>
     </div>
     <div v-if="pageCount > 1" class="grid place-content-center">
       <z-pagination
-        class="flex justify-center w-full xl:w-4/6"
+        class="flex w-full justify-center xl:w-4/6"
         :total-pages="pageCount"
         :total-visible="5"
         :page="currentPage"
