@@ -9,7 +9,7 @@
         <div class="flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5">
           <div class="pb-1">
             <h3
-              class="inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base"
+              class="inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all"
               v-html="safeRenderBackticks(title)"
             ></h3>
             <span class="text-sm font-normal whitespace-nowrap text-vanilla-400">

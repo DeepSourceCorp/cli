@@ -24,7 +24,7 @@
             >
               <div class="flex flex-grow">
                 <span
-                  class="flex-grow text-base font-medium text-vanilla-100"
+                  class="flex-grow text-base font-medium text-vanilla-100 break-all"
                   v-html="safeRenderBackticks(text)"
                 ></span>
               </div>
@@ -53,8 +53,9 @@
               </div>
             </div>
 
-            <div class="flex justify-end w-12">
-              <z-menu v-if="canIgnoreIssues">
+            <!-- hide the entire block if the user doesn't have permissions to ignore issues -->
+            <div v-if="canIgnoreIssues" class="flex justify-end w-12">
+              <z-menu>
                 <template #trigger="{ isOpen, toggle }">
                   <z-button
                     v-tooltip="'Ignore this occurrence'"
