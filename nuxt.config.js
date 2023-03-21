@@ -149,7 +149,9 @@ export default {
         '**/accounts/ads/login/*',
         '**/components/Settings/Security/*',
         '**/components/Billing/*',
-        '**/discover/*'
+        '**/discover/*',
+        '**/request-pilot-license.vue',
+        '**/components/Content/PilotEvaluationAgreement.vue'
       ]
     : [],
 
