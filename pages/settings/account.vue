@@ -122,7 +122,7 @@ export default class PersonalAccessTokenPage extends mixins(
   ContextMixin
 ) {
   isLoading = false
-  timeoutId: ReturnType<typeof setTimeout> | null = null
+  timeoutId: ReturnType<typeof setTimeout>
 
   /**
    * Fetch the user account related information
