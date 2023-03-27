@@ -7,8 +7,8 @@
         class="p-2"
         :show-border="false"
         background-color="ink-300"
-        @debounceInput="searchActiveUsers"
         placeholder="Search for team member"
+        @debounceInput="searchActiveUsers"
       >
         <template slot="left">
           <z-icon icon="search" class="ml-1.5" size="small" />
@@ -40,11 +40,11 @@
       </transition-group>
       <z-pagination
         v-if="totalPages"
+        v-model="currentPage"
         class="flex justify-center"
         :total-pages="totalPages"
         :total-visible="5"
         :hide-for-single-page="true"
-        v-model="currentPage"
       />
     </template>
     <empty-state
@@ -58,17 +58,17 @@
     <portal to="modal">
       <update-role-modal
         v-if="showUpdateRoleModal"
-        @close="closeUpdateRoleModal"
-        @primaryAction="updateRole"
         v-bind="userToUpdate"
         :show-modal="showUpdateRoleModal"
+        @close="closeUpdateRoleModal"
+        @primaryAction="updateRole"
       />
       <remove-member-modal
         v-if="showRemoveMemberModal"
-        @close="closeRemoveMemberModal"
-        @primaryAction="removeMember"
         v-bind="userToUpdate"
         :show-modal="showRemoveMemberModal"
+        @close="closeRemoveMemberModal"
+        @primaryAction="removeMember"
       />
       <transfer-ownership-modal
         v-if="showTransferOwnershipModal"

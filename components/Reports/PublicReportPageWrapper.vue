@@ -11,13 +11,13 @@
       <!-- Unsanitized v-html because copy text is in bifrost -->
       <div
         v-if="copyText.summary"
-        v-html="copyText.summary"
         class="space-y-4 text-vanilla-400"
+        v-html="copyText.summary"
       ></div>
       <div
         v-if="copyText.intendedUse"
-        v-html="copyText.intendedUse"
         class="space-y-4 text-vanilla-400"
+        v-html="copyText.intendedUse"
       ></div>
       <div class="space-y-4 text-vanilla-400">
         <h1 id="continuous-code-health" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">

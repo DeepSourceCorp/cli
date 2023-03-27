@@ -21,9 +21,9 @@
       </z-tag>
     </component>
     <component
+      :is="isIssuesPage ? 'button' : 'nuxt-link'"
       v-for="issueType in filteredIssueDistribution"
       :key="issueType.shortcode"
-      :is="isIssuesPage ? 'button' : 'nuxt-link'"
       :to="
         isIssuesPage && !analyzerShortcode
           ? ''

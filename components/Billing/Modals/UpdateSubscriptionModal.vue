@@ -1,5 +1,5 @@
 <template>
-  <z-modal @onClose="$emit('close')" title="Confirm updates to your subscription">
+  <z-modal title="Confirm updates to your subscription" @onClose="$emit('close')">
     <div class="p-4 space-y-4">
       <div class="flex items-center space-x-2">
         <z-avatar
@@ -57,14 +57,14 @@
           </span>
         </div>
         <div
-          class="flex items-baseline justify-between pt-3 border-t border-slate-400"
           v-if="!$fetchState.pending && !planInfo.billedImmediately && planInfo.upcomingBillDate"
+          class="flex items-baseline justify-between pt-3 border-t border-slate-400"
         >
           <div>
             <span class="text-sm font-semibold">
               >Due on {{ formatDate(parseISODate(planInfo.upcomingBillDate)) }}</span
             >
-            <span class="block text-xs text-vanilla-400" v-if="planInfo.proratedForDays"
+            <span v-if="planInfo.proratedForDays" class="block text-xs text-vanilla-400"
               >Prorated for {{ 'day' | pluralize(planInfo.proratedForDays) }}</span
             >
           </div>
@@ -80,9 +80,9 @@
               class="w-20 h-6 rounded-md bg-ink-200 animate-pulse"
             ></span>
             <span
+              v-else-if="planInfo.billedImmediately"
               class="text-lg"
               :class="{ 'text-juniper': planInfo.upcomingBillAmount === 0 }"
-              v-else-if="planInfo.billedImmediately"
             >
               {{ formatUSD(planInfo.upcomingBillAmount) }}
             </span>

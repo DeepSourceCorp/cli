@@ -10,7 +10,7 @@
       subtitle="You can install them from organization settings"
       class="border border-dashed rounded-lg border-slate-400"
     >
-      <nuxt-link :to="$generateRoute(['settings', 'integrations'], false)" slot="action">
+      <nuxt-link slot="action" :to="$generateRoute(['settings', 'integrations'], false)">
         <z-button size="small">
           <div class="inline-flex gap-x-2">
             <span>Go to organization settings</span>

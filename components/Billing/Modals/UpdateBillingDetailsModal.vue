@@ -11,15 +11,15 @@
         <label class="leading-loose text-vanilla-400"
           >Billing email
           <z-input
+            v-model="billingEmail"
             :required="true"
             type="email"
             size="small"
             :is-invalid="emailEmpty || !validBillingEmail"
             :validate-on-blur="true"
-            v-model="billingEmail"
-            @blur="(ev) => validateEmail(ev.target)"
             placeholder="jane@deepsource.io"
             class="mt-0.5"
+            @blur="(ev) => validateEmail(ev.target)"
           />
         </label>
         <p v-if="emailEmpty" class="text-xs text-cherry">This field is required.</p>
@@ -30,8 +30,8 @@
       <fieldset class="text-sm space-y-1">
         <label for="billing-address" class="leading-loose text-vanilla-400">Billing address</label>
         <z-textarea
-          v-model="billingAddress"
           id="billing-address"
+          v-model="billingAddress"
           :placeholder="`Avengers Tower \n200 Park Avenue, New York`"
           class="focus-within:border-vanilla-400 border-slate-400 bg-ink-400 text-vanilla-300"
         />

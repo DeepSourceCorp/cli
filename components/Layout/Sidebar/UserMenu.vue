@@ -2,13 +2,13 @@
   <z-menu placement="top">
     <template #trigger="{ toggle }">
       <button
+        ref="username"
         type="button"
         class="outline-none focus:outline-none flex max-w-3xs items-center space-x-2 rounded-sm py-1 text-sm hover:bg-ink-300"
         :class="{
           'pr-2 pl-1': !isCollapsed,
           'px-1': isCollapsed
         }"
-        ref="username"
         @click="toggle"
       >
         <z-avatar

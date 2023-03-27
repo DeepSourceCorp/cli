@@ -30,8 +30,8 @@
           Connect with your team’s workspace.
         </p>
         <button
-          @click="confirm"
           class="flex items-center w-full px-3 py-2 mt-2 space-x-2 rounded-md bg-ink-200 hover:bg-ink-300 text-vanilla-100 group"
+          @click="confirm"
         >
           <z-avatar
             v-if="viewer.avatar"

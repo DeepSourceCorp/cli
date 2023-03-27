@@ -1,12 +1,12 @@
 <template>
   <div>
     <z-button
-      @click="showConfirmDelete = true"
+      v-tooltip="'Delete template'"
       size="small"
       button-type="ghost"
       icon-color="cherry"
-      v-tooltip="'Delete template'"
       icon="trash-2"
+      @click="showConfirmDelete = true"
     />
     <portal to="modal">
       <z-confirm

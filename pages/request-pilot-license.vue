@@ -30,8 +30,8 @@
         @submit.prevent="validateForm"
       >
         <form-field
-          :err-condition="nameField.errCondition"
           :id="nameField.id"
+          :err-condition="nameField.errCondition"
           :label="nameField.label"
         >
           <z-input

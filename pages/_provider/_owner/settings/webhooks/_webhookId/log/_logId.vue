@@ -27,9 +27,9 @@
         <div class="h-32 col-span-3 rounded-sm bg-ink-300"></div>
       </div>
     </section>
-    <section v-else class="w-full p-4 mb-10" :key="$route.fullPath">
+    <section v-else :key="$route.fullPath" class="w-full p-4 mb-10">
       <page-title class="max-w-2xl">
-        <template slot="title" v-if="delivery.eventType">
+        <template v-if="delivery.eventType" slot="title">
           {{ delivery.eventType.name }}
           <span class="text-slate">({{ delivery.eventType.shortcode }})</span>
         </template>
@@ -49,10 +49,10 @@
               <span>{{ stat.label }}</span>
               <z-icon
                 v-if="stat.help"
+                v-tooltip="{ content: stat.help, delay: { show: 0, hide: 100 } }"
                 icon="help"
                 class="stroke-1.5 transition-opacity duration-75 flex-shrink-0"
                 color="vanilla-400"
-                v-tooltip="{ content: stat.help, delay: { show: 0, hide: 100 } }"
               />
             </div>
             <div

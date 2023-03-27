@@ -29,9 +29,9 @@
           <button
             v-for="project in projectsInSearch"
             :key="project.login"
-            @click="selectAccount(project)"
             :disabled="loading"
             class="flex items-center w-full px-3 py-2 mt-2 space-x-2 rounded-md text-vanilla-100 group bg-ink-100"
+            @click="selectAccount(project)"
           >
             <div class="flex-grow overflow-hidden text-left overflow-ellipsis">
               <div>{{ project.name || project.login }}</div>
@@ -42,9 +42,9 @@
             <template v-if="project.hasInstalled">
               <z-icon
                 v-if="project.isSetupPending"
+                v-tooltip="`Project setup pending`"
                 icon="alert-circle"
                 size="medium"
-                v-tooltip="`Project setup pending`"
                 color="honey"
               />
               <z-icon v-else icon="check-circle" size="medium" color="juniper" />

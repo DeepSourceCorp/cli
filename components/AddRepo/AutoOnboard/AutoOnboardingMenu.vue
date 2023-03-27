@@ -1,6 +1,6 @@
 <template>
   <section :class="hasAutoOnboardEvents ? 'p-4' : 'px-4'">
-    <div class="p-3 border rounded-md border-slate-400 -mx-1" v-if="hasAutoOnboardEvents">
+    <div v-if="hasAutoOnboardEvents" class="p-3 border rounded-md border-slate-400 -mx-1">
       <div class="flex justify-between items-center" :class="isCollapsed ? 'pb-0' : 'pb-3'">
         <div class="flex items-center space-x-1.5">
           <span class="text-vanilla-300 text-sm font-medium leading-none">
@@ -20,12 +20,12 @@
         </div>
         <button class="focus:outline-none">
           <z-icon
-            @click="isCollapsed = !isCollapsed"
             class="transform duration-150"
             :class="{
               'rotate-180': isCollapsed
             }"
             icon="chevron-up"
+            @click="isCollapsed = !isCollapsed"
           />
         </button>
       </div>
@@ -78,9 +78,9 @@
       input-id="onboard-new-repositories"
       button-label="Select template"
       button-type="primary"
-      @click="$emit('startOnboarding')"
       icon="file-plus"
       input-width="x-small"
+      @click="$emit('startOnboarding')"
     >
       <template slot="description">
         Use Auto Onboard to activate DeepSource analysis on multiple repositories.

@@ -11,11 +11,11 @@
       </transition-group>
       <z-pagination
         v-if="totalPages"
+        v-model="currentPage"
         class="flex justify-center"
         :total-pages="totalPages"
         :total-visible="5"
         :hide-for-single-page="true"
-        v-model="currentPage"
       />
     </template>
     <div v-else-if="$fetchState.pending" class="flex flex-col space-y-2">
@@ -55,8 +55,8 @@
             <z-button
               button-type="danger"
               size="small"
-              @click="cancelInviteForMember"
               class="inline-flex space-x-1.5 items-center"
+              @click="cancelInviteForMember"
             >
               <z-icon
                 v-if="inviteLoading"

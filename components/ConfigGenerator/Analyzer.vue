@@ -44,13 +44,13 @@
               </label>
               <z-icon
                 v-if="invalidFields.includes(config.name)"
-                icon="alert-circle"
-                color="cherry"
-                size="small"
                 v-tooltip="{
                   content: 'Value required',
                   delay: { show: 100, hide: 100 }
                 }"
+                icon="alert-circle"
+                color="cherry"
+                size="small"
               />
             </span>
             <template v-if="config.type == 'string'">
@@ -72,8 +72,8 @@
               </template>
               <template v-else>
                 <z-input
-                  v-tooltip="forTemplate ? 'This value will be added during runtime' : ''"
                   v-model="config.selected"
+                  v-tooltip="forTemplate ? 'This value will be added during runtime' : ''"
                   :disabled="forTemplate ? hasTemplate(config) : disableActions"
                   :read-only="readOnly && !(forTemplate && hasTemplate(config))"
                   size="small"

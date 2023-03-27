@@ -28,7 +28,7 @@
         {{ id }}
       </template>
     </code>
-    <span class="col-span-2 leading-none text-right text-vanilla-400" v-tooltip="createdAt">
+    <span v-tooltip="createdAt" class="col-span-2 leading-none text-right text-vanilla-400">
       {{ fromNow(createdAt) }}
     </span>
     <span v-if="finishedIn" class="col-span-1 text-right text-vanilla-400">

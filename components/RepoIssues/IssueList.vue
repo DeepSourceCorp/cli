@@ -17,10 +17,10 @@
         <template slot="body" class="text-vanilla-200">
           <z-menu-item
             v-for="filter in sortFilters"
-            @click="() => updateSort(filter.name)"
             :key="filter.name"
             :icon="filter.icon"
             direction="left"
+            @click="() => updateSort(filter.name)"
           >
             {{ filter.label }}
           </z-menu-item>
@@ -29,10 +29,10 @@
       <!-- Search -->
       <div class="flex-grow h-full xl:min-w-80">
         <z-input
+          v-model="searchValue"
           background-color="ink-300"
           size="small"
           placeholder="Search for issue title, file or issue code"
-          v-model="searchValue"
           :show-border="false"
           @debounceInput="debounceSearch"
         >
@@ -57,8 +57,8 @@
         @ignoreIssues="ignoreIssues"
       />
       <z-pagination
-        class="flex justify-center"
         v-if="pageCount > 1"
+        class="flex justify-center"
         :total-pages="pageCount"
         :total-visible="5"
         :page="startPage"

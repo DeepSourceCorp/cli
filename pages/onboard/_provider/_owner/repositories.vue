@@ -16,7 +16,7 @@
     </z-input>
     <div class="grid grid-cols-1 gap-4 pb-20 overflow-y-scroll max-h-102">
       <template v-if="$fetchState.pending || searching">
-        <div class="h-20 rounded-md bg-ink-300 animate-pulse" v-for="ii in 5" :key="ii"></div>
+        <div v-for="ii in 5" :key="ii" class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
       </template>
       <template v-else-if="repositoriesToOnboard && repositoriesToOnboard.length">
         <repo-card

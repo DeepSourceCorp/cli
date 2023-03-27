@@ -9,21 +9,21 @@
     <fieldset class="space-y-1 text-sm">
       <label class="leading-loose">Billing email</label>
       <z-input
+        v-model="billingEmail"
         required="true"
         type="email"
         :show-border="validBillingEmail"
         :class="{
           'border border-cherry': !validBillingEmail
         }"
-        v-model="billingEmail"
-        @blur="(ev) => validateEmail(ev.target)"
         placeholder="jane@deepsource.io"
+        @blur="(ev) => validateEmail(ev.target)"
       />
       <p v-if="!validBillingEmail" class="text-xs text-cherry">Please enter a valid email.</p>
     </fieldset>
     <fieldset class="space-y-1 text-sm">
       <label class="leading-loose">Name</label>
-      <z-input required="true" v-model="fullName" placeholder="Jane Doe" />
+      <z-input v-model="fullName" required="true" placeholder="Jane Doe" />
     </fieldset>
     <fieldset class="space-y-1 text-sm">
       <label class="leading-loose">Credit card number</label>

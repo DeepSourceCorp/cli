@@ -19,7 +19,7 @@
             'stroke-width': 4
           }"
         >
-          <z-icon icon="check" color="vanilla-100" size="x-small" v-if="getStatus(step)" />
+          <z-icon v-if="getStatus(step)" icon="check" color="vanilla-100" size="x-small" />
         </div>
         <div class="space-y-2">
           <h5
@@ -43,10 +43,10 @@
 
             <z-button
               v-else
-              @click="step.action"
               size="small"
               button-type="secondary"
               :icon="step.icon"
+              @click="step.action"
               >{{ step.actionLabel }}</z-button
             >
           </template>

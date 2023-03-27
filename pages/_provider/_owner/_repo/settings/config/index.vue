@@ -21,10 +21,10 @@
 
     <section class="flex items-center justify-between">
       <z-radio-group v-model="configMode" class="flex">
-        <z-radio-button value="cards" v-tooltip="'View as cards'">
+        <z-radio-button v-tooltip="'View as cards'" value="cards">
           <z-icon icon="layers" />
         </z-radio-button>
-        <z-radio-button value="toml" v-tooltip="'View toml'">
+        <z-radio-button v-tooltip="'View toml'" value="toml">
           <z-icon icon="code" />
         </z-radio-button>
       </z-radio-group>
@@ -39,10 +39,10 @@
     </section>
     <section v-if="configMode === 'cards'" class="space-y-3">
       <analyzer
-        class="z-20"
         v-for="analyzer in analyzersInConfig"
-        :read-only="true"
         :key="analyzer.shortcode"
+        class="z-20"
+        :read-only="true"
         v-bind="analyzer"
         :analyzer-logo="analyzer.analyzerLogo"
         :available-transformers="analyzer.transformers"
@@ -56,16 +56,16 @@
       <div class="sticky top-0 left-0 flex items-center justify-between p-3 space-x-2 bg-ink-200">
         <code class="font-bold text-vanilla-200">.deepsource.toml</code>
         <copy-button
-          :value="toml"
-          :disabled="!toml"
-          button-type="ghost"
-          :icon-only="true"
           v-tooltip="{
             placement: 'top',
             content: 'Copy to clipboard',
             delay: { show: 700, hide: 100 },
             classes: 'shadow-lg'
           }"
+          :value="toml"
+          :disabled="!toml"
+          button-type="ghost"
+          :icon-only="true"
           class="hover:bg-vanilla-400 hover:bg-opacity-5"
         />
       </div>

@@ -48,8 +48,8 @@
         >
         <div class="md:w-40 h-8">
           <z-select
-            v-model="currentFilterValue"
             :key="filterValue"
+            v-model="currentFilterValue"
             background-class="bg-ink-200"
             border-class="border-slate-400"
             border-radius="rounded-sm"

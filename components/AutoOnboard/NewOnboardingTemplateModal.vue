@@ -4,7 +4,7 @@
       <fieldset class="p-4 space-y-4">
         <div>
           <label for="title" class="mb-2 text-sm sr-only text-vanilla-200">Template name</label>
-          <z-input v-model="title" placeholder="Template name" id="Title" required="true" />
+          <z-input id="Title" v-model="title" placeholder="Template name" required="true" />
         </div>
         <div>
           <label for="desc" class="mb-2 text-sm sr-only text-vanilla-200">Description</label>
@@ -32,11 +32,11 @@
           @addAnalyzer="addAnalyzer"
           @closeSearch="showAnalyzerList = false"
         />
-        <div class="space-y-3" v-if="activeAnalyzers.length">
+        <div v-if="activeAnalyzers.length" class="space-y-3">
           <analyzer
-            class="z-20 border border-slate-400"
             v-for="analyzer in activeAnalyzers"
             :key="analyzer.shortcode"
+            class="z-20 border border-slate-400"
             v-bind="analyzer"
             :for-template="true"
             :analyzer-meta="analyzer.meta"
@@ -48,7 +48,7 @@
             @transformersUpdated="syncTransformers"
           />
         </div>
-        <div class="space-y-2" v-else>
+        <div v-else class="space-y-2">
           <div
             v-for="loopIndex in 3"
             :key="loopIndex"
@@ -65,8 +65,8 @@
           class="w-48 modal-primary-action"
           button-type="primary"
           size="small"
-          @click="saveConfig(close)"
           :disabled="savingConfig"
+          @click="saveConfig(close)"
         >
           {{ savingConfig ? 'Creating' : 'Create' }} template
         </z-button>

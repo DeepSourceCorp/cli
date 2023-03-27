@@ -50,8 +50,8 @@
             </a>
             <template v-if="!$config.onPrem && activeDashboardContext.type === 'team'">
               <component
-                v-if="hasPaidPlan || canVisitBillingPage"
                 :is="canVisitBillingPage ? 'nuxt-link' : 'span'"
+                v-if="hasPaidPlan || canVisitBillingPage"
                 :to="canVisitBillingPage ? $generateRoute(['settings', 'billing']) : false"
               >
                 <z-tag

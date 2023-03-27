@@ -10,10 +10,10 @@
       <button
         v-for="account in viewer.gitlabAccounts"
         :key="account.login"
-        @click="selectAccount(account)"
         :disabled="loading"
         class="flex items-center w-full px-3 py-2 mt-2 space-x-2 rounded-md text-vanilla-100 group"
         :class="account.installed ? 'bg-ink-200 cursor' : 'bg-ink-200 hover:bg-ink-300'"
+        @click="selectAccount(account)"
       >
         <z-avatar
           v-if="account.avatar_url"

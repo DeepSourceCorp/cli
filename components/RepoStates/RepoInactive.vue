@@ -26,10 +26,10 @@
         :is-loading="activateLoading"
         :disabled="activateLoading"
         loading-label="Activating Repository"
-        @click="activateAnalysis"
         icon="check-circle"
         size="small"
         class="mt-4"
+        @click="activateAnalysis"
       >
         Activate repository
       </z-button>

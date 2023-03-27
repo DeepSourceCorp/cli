@@ -10,8 +10,8 @@
           background-color="ink-300"
           size="small"
           class="w-full"
-          @debounceInput="$fetch"
           placeholder="Search for repository name"
+          @debounceInput="$fetch"
         >
           <template slot="left">
             <z-icon icon="search" size="small" class="ml-1.5" />
@@ -19,10 +19,10 @@
         </z-input>
         <z-button
           v-if="canActivateRepo"
-          @click="showAddRepoModal = true"
           button-type="primary"
           size="small"
           icon="plus"
+          @click="showAddRepoModal = true"
           >Activate new repository</z-button
         >
       </div>
@@ -50,8 +50,8 @@
                   :key="opt"
                   button-type="secondary"
                   size="small"
-                  @click="updatePageSize(opt)"
                   :disabled="pageSize == opt"
+                  @click="updatePageSize(opt)"
                   >{{ opt }}</z-button
                 >
               </div>
@@ -73,11 +73,11 @@
       <repo-card
         v-for="repo in repositoryList.edges"
         v-bind="repo.node"
+        :key="repo.node.id"
         size="small"
+        :allow-star="true"
         @star-repo="starRepo"
         @un-star-repo="unStarRepo"
-        :key="repo.node.id"
-        :allow-star="true"
       />
     </transition-group>
     <lazy-empty-state
@@ -94,8 +94,8 @@
       title="No repositories"
     />
     <z-pagination
-      class="flex justify-center"
       v-if="pageCount > 1 && !repoListloading"
+      class="flex justify-center"
       :total-pages="pageCount"
       :total-visible="5"
       :page="currentPage"

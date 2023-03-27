@@ -8,7 +8,7 @@
     </div>
     <div v-else-if="auditLogs.length">
       <z-timeline>
-        <z-timeline-item class="h-20" v-for="log in auditLogs" :key="log.id">
+        <z-timeline-item v-for="log in auditLogs" :key="log.id" class="h-20">
           <template slot="icon">
             <z-avatar
               v-if="log.actor"

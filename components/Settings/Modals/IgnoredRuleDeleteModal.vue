@@ -2,11 +2,11 @@
   <portal to="modal">
     <z-confirm
       v-if="isOpen"
-      @onClose="close"
-      @primaryAction="confirm"
       primary-action-label="Confirm and delete"
       primary-action-icon="trash-2"
       primary-action-type="danger"
+      @onClose="close"
+      @primaryAction="confirm"
     >
       <div class="mb-2 text-base leading-relaxed text-vanilla-100 flex items-center">
         Confirm, delete this ignore rule?

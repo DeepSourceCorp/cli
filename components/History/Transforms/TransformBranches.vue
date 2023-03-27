@@ -5,7 +5,7 @@
     @toggled="toggled"
   >
     <template #expanded>
-      <div class="flex flex-col space-y-2 justify-center items-center h-28" v-if="loading">
+      <div v-if="loading" class="flex flex-col space-y-2 justify-center items-center h-28">
         <z-icon icon="loader" class="animate-spin duration-1000" />
         Fetching Transforms
       </div>

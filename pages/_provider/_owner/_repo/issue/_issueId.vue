@@ -18,7 +18,7 @@
       />
     </div>
     <div class="flex flex-col space-y-1 px-4 py-3">
-      <div class="space-y-2" v-if="$fetchState.pending">
+      <div v-if="$fetchState.pending" class="space-y-2">
         <!-- Left Section -->
         <div class="h-10 w-3/5 animate-pulse rounded-md bg-ink-300 md:w-4/5"></div>
         <div class="flex w-1/3 space-x-2">

@@ -3,8 +3,8 @@
     <div class="fixed z-20 flex justify-center w-screen p-3 pb-5 filter-wrapper md:hidden">
       <z-button
         button-type="primary"
-        @click="isModalOpen = true"
         class="flex items-center min-w-48"
+        @click="isModalOpen = true"
       >
         <template v-if="currentAnalyzer">
           <img

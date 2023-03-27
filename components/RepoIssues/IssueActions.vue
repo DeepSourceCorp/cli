@@ -19,23 +19,23 @@
         <div class="flex items-center gap-x-2">
           <div v-if="showNavButtons" class="flex items-center gap-x-2">
             <z-button
+              v-tooltip="previousIssue && previousIssue.label"
               type="button"
               button-type="secondary"
               size="small"
               icon="chevron-left"
               class="hidden sm:flex"
-              v-tooltip="previousIssue && previousIssue.label"
               :disabled="!previousIssue"
               @click="() => $router.push(previousIssue.to)"
             />
 
             <z-button
+              v-tooltip="nextIssue && nextIssue.label"
               type="button"
               button-type="secondary"
               size="small"
               icon="chevron-right"
               class="hidden sm:flex"
-              v-tooltip="nextIssue && nextIssue.label"
               :disabled="!nextIssue"
               @click="() => $router.push(nextIssue.to)"
             />
@@ -130,9 +130,9 @@
                 v-if="currentOption.id !== opt.id"
                 :key="opt.id"
                 as="button"
-                @click="wrapAction(opt)"
                 :icon="opt.icon"
                 class="w-full"
+                @click="wrapAction(opt)"
               >
                 {{ opt.label }}
               </z-menu-item>

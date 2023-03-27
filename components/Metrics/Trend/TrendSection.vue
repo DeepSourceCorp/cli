@@ -1,16 +1,16 @@
 <template>
   <div class="space-y-6 py-6 border-b border-slate-400" :class="{ 'bg-ink-300': isAggregate }">
-    <trend-title v-bind="$props" @updateFilter="updateFilter" class="px-6" />
+    <trend-title v-bind="$props" class="px-6" @updateFilter="updateFilter" />
     <!-- The `grid` class is to prevent the chart lib's height/width computation from overflowing the parent -->
     <div class="grid grid-cols-1 max-w-full gap-y-1">
       <div class="flex gap-x-9 sm:gap-x-23 px-6">
         <trend-stat :type="STAT_TYPE.metric" :metric="metricTrendStat" />
         <trend-stat
           v-if="canViewThresholdModal"
-          v-on="thresholdListeners"
           :type="STAT_TYPE.threshold"
           :metric="thresholdTrendStat"
           :can-modify-threshold="canModifyThreshold"
+          v-on="thresholdListeners"
         />
       </div>
 

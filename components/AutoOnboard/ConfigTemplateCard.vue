@@ -11,23 +11,23 @@
     <template slot="info">
       <div class="flex items-center justify-around h-full">
         <z-button
-          v-tooltip="'Edit template'"
           v-if="allowCrud"
+          v-tooltip="'Edit template'"
           icon="edit"
           button-type="ghost"
-          @click.stop.prevent="editTemplate"
           icon-color="vanilla-400 opacity-75"
           size="small"
+          @click.stop.prevent="editTemplate"
         />
         <z-button
           v-tooltip="'Use template'"
-          @click.stop.prevent="onboard"
           :icon="loadOnboarding ? 'spin-loader' : 'fast-forward'"
           :icon-color="
             loadOnboarding ? 'vanilla-400 opacity-75 animate-spin' : 'vanilla-400 opacity-75'
           "
           button-type="ghost"
           size="small"
+          @click.stop.prevent="onboard"
         />
       </div>
     </template>

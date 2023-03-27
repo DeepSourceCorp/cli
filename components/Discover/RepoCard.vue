@@ -26,9 +26,9 @@
             />
             <z-icon
               v-else
-              class="-mb-px"
-              v-tooltip="repoInfo.isWatched ? 'Remove from watchlist' : 'Add to watchlist'"
               :key="repoInfo.id"
+              v-tooltip="repoInfo.isWatched ? 'Remove from watchlist' : 'Add to watchlist'"
+              class="-mb-px"
               :icon="repoInfo.isWatched ? 'remove-watchlist' : 'add-watchlist'"
             />
           </button>

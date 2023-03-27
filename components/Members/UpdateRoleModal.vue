@@ -1,8 +1,8 @@
 <template>
   <z-confirm
     v-if="showModal"
-    @onClose="close"
     primary-action-label="Confirm and update role"
+    @onClose="close"
     @primaryAction="updateRole"
   >
     <div class="mb-2 text-base leading-relaxed text-vanilla-100 flex items-center">

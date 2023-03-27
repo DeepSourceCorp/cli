@@ -13,7 +13,7 @@
       <slot name="description"></slot>
     </template>
     <div class="text-right">
-      <z-toggle v-model="modelValue" :id="inputId" :disabled="disabled" :class="toggleClass" />
+      <z-toggle :id="inputId" v-model="modelValue" :disabled="disabled" :class="toggleClass" />
     </div>
   </input-wrapper>
 </template>

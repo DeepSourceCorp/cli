@@ -2,8 +2,8 @@
   <z-tab-pane class="flex flex-col h-full">
     <div class="p-4 pb-0 space-y-2">
       <z-input
-        v-focus
         ref="search-repo-input"
+        v-focus
         :show-border="false"
         :value="searchCandidate"
         background-color="ink-400"

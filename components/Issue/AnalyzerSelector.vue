@@ -1,6 +1,6 @@
 <template>
   <z-radio-group v-model="modelValue" class="flex">
-    <z-radio-button value="all" v-tooltip="'All'">
+    <z-radio-button v-tooltip="'All'" value="all">
       <div class="flex items-center space-x-2 whitespace-nowrap h-4">
         <z-icon icon="all" size="small" />
         <span v-if="modelValue === 'all'" class="leading-none text-sm">All</span>
@@ -9,8 +9,8 @@
     <z-radio-button
       v-for="analyzer in languageFilters"
       :key="analyzer.shortcode"
-      :value="analyzer.shortcode"
       v-tooltip="analyzer.name"
+      :value="analyzer.shortcode"
     >
       <div class="flex items-center space-x-2 whitespace-nowrap h-4">
         <img

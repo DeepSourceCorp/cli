@@ -137,8 +137,8 @@
               >
                 <template #left-toolbar>
                   <z-file-input
-                    :disabled="isFileProcessing || isFormSubmitting"
                     ref="fileUploader"
+                    :disabled="isFileProcessing || isFormSubmitting"
                     label="Add files"
                     multiple
                     accept="video/mp4,video/quicktime,image/jpeg,image/png,text/plain,text/csv,application/rtf,application/xml,text/rtf"

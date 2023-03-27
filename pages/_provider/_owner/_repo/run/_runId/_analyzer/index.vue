@@ -54,11 +54,11 @@
                 ></div>
                 <run-autofix-bar
                   v-if="showAutofixBar"
-                  @autofixIssues="autofixSelectedIssues"
                   v-bind="check"
                   :autofix-loading="autofixLoading"
                   :can-create-autofix="canCreateAutofix"
                   class="md:z-10"
+                  @autofixIssues="autofixSelectedIssues"
                 />
                 <div class="flex w-full space-x-2 md:z-10">
                   <div class="flex w-auto space-x-2">
@@ -91,8 +91,8 @@
                 class="flex justify-center my-6 text-sm"
               >
                 <z-pagination
-                  :page="currentPage"
                   :key="currentPage"
+                  :page="currentPage"
                   :total-pages="totalPageCount"
                   :total-visible="5"
                   @selected="updatePageNum"

@@ -21,7 +21,7 @@
         <div v-for="ii in 4" :key="ii" class="h-20 bg-ink-300"></div>
       </div>
     </section>
-    <section v-else class="w-full p-4 mb-10" :key="$route.fullPath">
+    <section v-else :key="$route.fullPath" class="w-full p-4 mb-10">
       <page-title
         class="max-w-2xl"
         :title="title"
@@ -33,15 +33,15 @@
           </z-label>
           <z-label v-else class="inline-block select-none" state="warning"> Disabled </z-label>
         </template>
-        <template slot="actions" v-if="allowEdit">
+        <template v-if="allowEdit" slot="actions">
           <template v-if="readOnly">
-            <z-button @click="readOnly = false" size="small" button-type="secondary" icon="edit">
+            <z-button size="small" button-type="secondary" icon="edit" @click="readOnly = false">
               Edit
             </z-button>
             <test-webhook-endpoint v-if="localEndpoint.active" />
             <enable-webhook-endpoint v-if="!localEndpoint.active" @reset="reset(false)">
               <template #default="{ toggleModal }">
-                <z-button @click="toggleModal" size="small" icon="play-circle">
+                <z-button size="small" icon="play-circle" @click="toggleModal">
                   Enable endpoint
                 </z-button>
               </template>
@@ -49,22 +49,22 @@
           </template>
           <template v-else>
             <z-button
-              @click="reset"
+              v-tooltip="'Discard changes'"
               size="small"
               button-type="ghost"
               icon-color="vanilla-300"
-              v-tooltip="'Discard changes'"
               icon="corner-up-left"
+              @click="reset"
             />
-            <z-button @click="showSaveModal = true" size="small" icon="save">
+            <z-button size="small" icon="save" @click="showSaveModal = true">
               Save Configuration
             </z-button>
             <portal to="modal">
               <z-confirm
                 v-if="showSaveModal"
-                @onClose="showSaveModal = false"
                 title="Save endpoint configuration"
                 subtitle="Once updated, you won't be able to revert to previous changes"
+                @onClose="showSaveModal = false"
               >
                 <template #footer="{ close }">
                   <div
@@ -98,19 +98,19 @@
       <div class="space-y-6">
         <form-group label="Configuration" :divide="false" body-width-class="max-w-2xl">
           <text-input
+            v-model="localEndpoint.url"
             input-width="wide"
             label="Endpoint URL"
             description="A public url to send events to as they happen."
             input-id="webhook-endpoint-url"
-            v-model="localEndpoint.url"
             :read-only="readOnly"
           />
           <toggle-input
             v-if="Object.keys(localEndpoint).includes('apiSigning')"
+            v-model="localEndpoint.apiSigning"
             label="Enable API signing"
             input-id="enable-api-signing"
             :disabled="readOnly"
-            v-model="localEndpoint.apiSigning"
           >
             <template slot="description">
               Signing of the webhook payload allows you to verify incoming requests.

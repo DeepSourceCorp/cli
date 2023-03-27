@@ -5,9 +5,9 @@
     <div
       v-for="(metric, index) in dataPoints"
       :key="metric.shortcode"
-      @click="toggleMetric(index)"
       :class="index == selectedIndex ? 'bg-ink-300' : 'cursor-pointer hover:bg-ink-300'"
       class="flex flex-col rounded-md p-2 space-y-4"
+      @click="toggleMetric(index)"
     >
       <div class="flex flex-row items-center justify-between flex-grow space-x-2">
         <h5
@@ -35,13 +35,13 @@
         </span>
         <div class="text-xs text-vanilla-400 space-x-0.5 text-right hidden sm:block">
           <z-icon
-            class="inline"
             v-for="namespace in metric.namespaces.slice(0, 2)"
             :key="namespace.shortcode"
+            class="inline"
             :icon="namespace.shortcode"
             size="small"
           />
-          <span class="inline" v-if="metric.namespaces.length > 2">
+          <span v-if="metric.namespaces.length > 2" class="inline">
             and {{ metric.namespaces.length - 2 }} more runs
           </span>
         </div>

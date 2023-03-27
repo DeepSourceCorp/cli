@@ -41,7 +41,7 @@
         class="w-full lg:max-w-xs"
         @debounceInput="searchDir"
       >
-        <z-icon icon="search" size="small" slot="left" class="ml-1" />
+        <z-icon slot="left" icon="search" size="small" class="ml-1" />
       </z-input>
     </div>
     <div v-if="!isLoaded" class="p-4">

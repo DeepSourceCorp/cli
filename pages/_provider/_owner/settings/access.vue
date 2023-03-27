@@ -3,9 +3,9 @@
     <h2 class="text-lg font-medium">Access control</h2>
     <form-group v-if="allowSyncAccessSettings" label="Provider Permissions">
       <toggle-input
+        v-model="syncPermissionsWithVcs"
         :label="`Automatically sync access settings from ${providerName}`"
         input-id="team-settings-access-sync"
-        v-model="syncPermissionsWithVcs"
       >
         <template #description>
           <p>

@@ -40,10 +40,10 @@
         <div class="pt-1 mt-1 text-right">
           <z-button
             v-if="ownerBillingInfo && !ownerBillingInfo.cancelAtPeriodEnd && isBilledByStripe"
-            @click="toggleAddMoreSeats"
             button-type="primary"
             size="small"
             class=""
+            @click="toggleAddMoreSeats"
           >
             <div class="flex items-center">
               Add more seats
@@ -57,8 +57,8 @@
       <z-modal
         v-if="showUpdateSeatsModal"
         ref="update-billing-seats-modal"
-        @onClose="showUpdateSeatsModal = false"
         title="Add or remove seats"
+        @onClose="showUpdateSeatsModal = false"
       >
         <template #default="{ close }">
           <div class="flex flex-col p-4 space-y-3">
@@ -67,11 +67,11 @@
                 New number of seats in total
               </label>
               <z-number-input
+                id="seats-count"
+                v-model="seatsCount"
                 :min="ownerBillingInfo.seatsUsed"
                 :max="currentPlan.max_seats"
-                id="seats-count"
                 class="w-24 text-sm"
-                v-model="seatsCount"
               />
             </div>
             <alert-box

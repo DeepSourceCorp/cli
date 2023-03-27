@@ -3,8 +3,8 @@
     <h2 class="text-lg font-medium">Upgrade to get more for your team</h2>
     <z-radio-group
       :model-value="billingCycle"
-      @change="updateBillingCycle"
       class="flex font-medium"
+      @change="updateBillingCycle"
     >
       <z-radio-button value="yearly">
         Pay yearly <span class="inline text-juniper">(Save 20%)</span>

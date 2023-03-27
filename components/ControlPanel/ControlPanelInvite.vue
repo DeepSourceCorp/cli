@@ -8,9 +8,9 @@
       <div class="space-y-4 mt-6">
         <div v-if="!groupId">
           <z-select
+            :key="selectedGroup"
             v-model="selectedGroup"
             :selected="selectedGroup"
-            :key="selectedGroup"
             text-size="text-base"
             placeholder=""
             @change="triggerChange"
@@ -36,8 +36,8 @@
           loading-label="Resetting link"
           :is-loading="resettingLink"
           :disabled="resettingLink"
-          @click="resetLink"
           class="mt-4 w-36"
+          @click="resetLink"
         />
       </div>
     </div>

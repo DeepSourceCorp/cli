@@ -1,11 +1,11 @@
 <template>
-  <z-modal @onClose="$emit('close')" title="Update card">
+  <z-modal title="Update card" @onClose="$emit('close')">
     <fieldset class="p-4 space-y-1 text-sm">
       <label class="leading-loose">Credit card details</label>
       <stripe-card-input
         ref="card-modal-stripe-input"
-        @change="handleStripeCardChange"
         class="px-3 py-3 text-sm border rounded-md bg-ink-400"
+        @change="handleStripeCardChange"
       />
     </fieldset>
     <template #footer="{ close }">

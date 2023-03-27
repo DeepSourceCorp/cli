@@ -5,7 +5,7 @@
       <template v-if="actorName"> — {{ actorName }} </template>
     </div>
     <div class="flex space-x-4">
-      <info v-tooltip="formattedDate" v-if="createdAt" icon="clock" :title="formatDuration" />
+      <info v-if="createdAt" v-tooltip="formattedDate" icon="clock" :title="formatDuration" />
       <info v-if="location" icon="map-pin" :title="location" />
       <info v-if="ipAddress" icon="globe" :title="ipAddress" />
     </div>

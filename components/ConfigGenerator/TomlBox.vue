@@ -6,16 +6,16 @@
           <slot name="message"></slot>
         </p>
         <copy-button
-          :value="toml"
-          :disabled="!toml"
-          button-type="ghost"
-          :icon-only="true"
           v-tooltip="{
             placement: 'top',
             content: 'Copy to clipboard',
             delay: { show: 700, hide: 100 },
             classes: 'shadow-lg'
           }"
+          :value="toml"
+          :disabled="!toml"
+          button-type="ghost"
+          :icon-only="true"
           class="hover:bg-vanilla-400 hover:bg-opacity-5"
         />
       </div>
@@ -25,11 +25,11 @@
     </div>
     <template v-if="$route.params.provider === 'gsr'">
       <z-button
-        @click="commitGSRConfigToVCS"
         button-type="primary"
         class="w-full"
         icon="zap"
         :disabled="actionDisabled"
+        @click="commitGSRConfigToVCS"
       >
         Add configuration and start analysis
       </z-button>
@@ -37,11 +37,11 @@
     <template v-else-if="canBeActivated || isActivated">
       <z-button
         v-if="isCommitPossible"
-        @click="commitConfigToVCS(false)"
         button-type="primary"
         class="w-full"
         icon="zap"
         :disabled="actionDisabled"
+        @click="commitConfigToVCS(false)"
       >
         Add configuration and start analysis
       </z-button>

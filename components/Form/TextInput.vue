@@ -18,9 +18,9 @@
         v-model="modelValue"
         :disabled="disabled"
         :read-only="readOnly"
-        @blur="triggerBlur"
         class="px-2"
         size="small"
+        @blur="triggerBlur"
       />
     </div>
   </input-wrapper>

@@ -2,10 +2,10 @@
   <portal to="modal">
     <z-confirm
       v-if="isOpen"
-      @onClose="close"
       title="Confirm regenerate SSH keys for this repository?"
       subtitle="This action is irreversible, and will invalidate the old keys. You must replace the old keys with the new one everywhere you're using it."
       primary-action-label="Confirm and regenerate keys"
+      @onClose="close"
       @primaryAction="confirm"
     />
   </portal>

@@ -17,11 +17,11 @@
         />
       </z-select>
     </div>
-    <div class="flex space-x-2" v-if="allowChartTypeToggle">
+    <div v-if="allowChartTypeToggle" class="flex space-x-2">
       <div
         :class="currentChartType == 'bar' ? 'bg-ink-200' : 'hover:bg-ink-300'"
-        @click="toggleChart('bar')"
         class="flex items-center justify-center w-8 h-8 rounded-sm cursor-pointer"
+        @click="toggleChart('bar')"
       >
         <z-icon
           icon="bar-chart-2"
@@ -31,8 +31,8 @@
       </div>
       <div
         :class="currentChartType == 'line' ? 'bg-ink-200' : 'hover:bg-ink-300'"
-        @click="toggleChart('line')"
         class="flex items-center justify-center w-8 h-8 cursor-pointer rounded-s"
+        @click="toggleChart('line')"
       >
         <z-icon
           icon="trending-up"

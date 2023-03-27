@@ -13,9 +13,9 @@
             <span class="text-cherry">*</span>
           </span>
           <textarea
+            id="directory-feedback"
             v-model="feedback"
             name="directory-feedback"
-            id="directory-feedback"
             :readonly="isLoading"
             required
             class="w-full h-full p-2 mt-2 text-sm border outline-none bg-ink-400 min-h-28 max-h-44 lg:max-h-60 text-vanilla-100 focus:border-vanilla-100"

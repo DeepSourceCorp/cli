@@ -90,10 +90,10 @@
           </div>
           <div class="text-right">
             <z-button
-              @click="toggleBillingDetailUpdateModal"
               size="x-small"
               button-type="secondary"
               class="uppercase bg-ink-400 text-vanilla-400"
+              @click="toggleBillingDetailUpdateModal"
             >
               <z-icon icon="edit" size="x-small" class="mr-1.5" />
               Edit
@@ -173,8 +173,8 @@
         @onClose="toggleBillingDetailUpdateModal"
       />
       <update-subscription-modal
-        :new-plan-name="planAlternateInterval"
         v-if="showPlanUpdateModal"
+        :new-plan-name="planAlternateInterval"
         @close="showPlanUpdateModal = false"
       />
     </portal>

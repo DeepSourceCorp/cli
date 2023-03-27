@@ -10,8 +10,8 @@
         :show-border="false"
         size="small"
         background-color="ink-300"
-        @debounceInput="searchRepoMembers"
         placeholder="Search for a name or email"
+        @debounceInput="searchRepoMembers"
       >
         <template slot="left"
           ><span class="px-1"><z-icon icon="search" size="small" /></span
@@ -70,11 +70,11 @@
       />
       <z-pagination
         v-if="totalPages"
+        v-model="currentPageNumber"
         class="flex justify-center"
         :total-pages="totalPages"
         :total-visible="5"
         :hide-for-single-page="true"
-        v-model="currentPageNumber"
       />
     </template>
     <div v-else class="flex flex-col">
@@ -88,9 +88,9 @@
       />
       <z-confirm
         v-if="isUpdateModalOpen"
-        @onClose="isUpdateModalOpen = false"
         title="Update collaborator's permissions"
         primary-action-label="Confirm and grant permissions"
+        @onClose="isUpdateModalOpen = false"
         @primaryAction="updatePermission"
       >
         <div class="flex items-center mb-2 text-base leading-relaxed text-vanilla-100">
@@ -104,12 +104,12 @@
       </z-confirm>
       <z-confirm
         v-if="isRemoveModalOpen"
-        @onClose="isRemoveModalOpen = false"
         title="Confirm remove collaborator from repository?"
         primary-action-label="Confirm and remove"
         primary-action-type="danger"
         primary-action-icon="x"
         subtitle="They will lose access to the repository immediately. You can add them again later."
+        @onClose="isRemoveModalOpen = false"
         @primaryAction="removeMember"
       />
     </portal>

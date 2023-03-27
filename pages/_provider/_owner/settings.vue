@@ -13,8 +13,8 @@
 
         <nuxt-link
           v-else-if="isTeam && option.validator"
-          :to="getRoute(option.name)"
           :key="option.label"
+          :to="getRoute(option.name)"
           class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300"
         >
           <span

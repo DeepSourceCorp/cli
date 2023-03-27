@@ -58,8 +58,8 @@
           </template>
           <template slot="body">
             <div
-              @mousewheel.stop="scrollHandler"
               class="px-3.5 py-3 space-y-3 max-h-64 overflow-y-auto hide-scroll cursor leading-5"
+              @mousewheel.stop="scrollHandler"
             >
               <h6 class="uppercase text-slate tracking-wider text-xs font-semibold">
                 Repositories

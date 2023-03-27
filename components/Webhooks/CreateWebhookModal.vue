@@ -3,7 +3,7 @@
     <fieldset class="p-4 space-y-4">
       <label for="title" class="block text-sm font-medium text-vanilla-400">
         <span class="mb-2 sr-only">Endpoint URL</span>
-        <z-input v-model="url" placeholder="URL of the endpoint" id="Title" :required="true" />
+        <z-input id="Title" v-model="url" placeholder="URL of the endpoint" :required="true" />
       </label>
       <toggle-input
         v-model="enableApiSigning"

@@ -7,10 +7,10 @@
       <!-- Details Header -->
       <div class="w-3/4 sm:w-4/5 py-2.5 flex flex-col space-y-2 justify-evenly">
         <gist-card-title
+          :id="commitOidShort"
           :icon="statusIcon"
           :icon-color="statusIconColor"
           :title="branchName"
-          :id="commitOidShort"
           link="/history/runs/details"
           :spin-icon="isPending"
         />

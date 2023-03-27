@@ -23,10 +23,10 @@
       </template>
       <template slot="right">
         <z-icon
+          v-show="modelValue"
           icon="x"
           size="small"
           class="cursor-pointer"
-          v-show="modelValue"
           @click="modelValue = null"
         />
       </template>

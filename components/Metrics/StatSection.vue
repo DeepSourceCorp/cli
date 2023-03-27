@@ -31,10 +31,10 @@
             <span class="text-base font-semibold tracking-snug">{{ title }}</span>
             <z-icon
               v-if="helpText"
+              v-tooltip="{ content: helpText, delay: { show: 0, hide: 100 } }"
               icon="help"
               class="stroke-1.5 transition-opacity duration-75 flex-shrink-0"
               color="vanilla-400"
-              v-tooltip="{ content: helpText, delay: { show: 0, hide: 100 } }"
             />
           </div>
         </slot>

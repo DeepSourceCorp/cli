@@ -5,8 +5,8 @@
     >
       <template v-for="item in navItems">
         <nuxt-link
-          :to="item.link"
           :key="item.label"
+          :to="item.link"
           class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300"
         >
           <span

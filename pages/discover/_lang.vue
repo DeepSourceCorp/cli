@@ -10,16 +10,16 @@
       subtitle="Discover and fix bug risks, anti-patterns, performance issues and security flaws."
     >
       <z-input
+        v-model="searchTerm"
         size="large"
         placeholder="Search for a repository, technology, or by language"
         background-color="ink-300"
-        v-model="searchTerm"
         :show-border="false"
         :value="searchTerm"
         class="mt-4 rounded-md shadow-lg"
         @debounceInput="$fetch"
       >
-        <z-icon icon="search" size="base" color="vanilla-400" class="ml-3 mr-1" slot="left" />
+        <z-icon slot="left" icon="search" size="base" color="vanilla-400" class="ml-3 mr-1" />
       </z-input>
     </hero-header>
 

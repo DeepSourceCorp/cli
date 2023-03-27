@@ -14,7 +14,7 @@
         class="mt-4 rounded-md shadow-lg"
         @debounceInput="searchDir"
       >
-        <z-icon icon="search" size="base" color="vanilla-400" class="ml-3 mr-1" slot="left" />
+        <z-icon slot="left" icon="search" size="base" color="vanilla-400" class="ml-3 mr-1" />
       </z-input>
     </hero-header>
     <section class="px-4">
@@ -67,8 +67,8 @@
       >
         <directory-card
           v-for="transformer in transformerList"
-          type="transformer"
           :key="transformer.shortcode"
+          type="transformer"
           :info-obj="transformer"
         />
       </div>

@@ -1,10 +1,10 @@
 <template>
   <form-group
+    v-if="isBilledByStripe && ownerBillingInfo.activeCard"
     label="Payment Method"
     :divide="false"
     body-class="space-y-2"
     class="mt-5"
-    v-if="isBilledByStripe && ownerBillingInfo.activeCard"
   >
     <div
       class="flex items-center justify-between w-full p-4 border rounded-md border-slate-400 border-opacity-70"
@@ -30,11 +30,11 @@
     </div>
     <div class="flex items-center justify-end w-full">
       <z-button
-        @click="showUpdateCardModal = true"
         size="small"
         button-type="secondary"
         icon-color="vanilla-200 m-px"
         icon="credit-card"
+        @click="showUpdateCardModal = true"
       >
         Update card
       </z-button>

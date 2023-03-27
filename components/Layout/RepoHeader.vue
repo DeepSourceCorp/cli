@@ -44,10 +44,10 @@
               rel="noopener noreferrer"
             >
               <z-tag
+                v-tooltip="`Open repo on ${$providerMetaMap[repository.vcsProvider].text}`"
                 class="border-2 border-slate-400"
                 spacing="p-0.5"
                 bg-color="ink-200"
-                v-tooltip="`Open repo on ${$providerMetaMap[repository.vcsProvider].text}`"
                 size="base"
                 :icon-left="repoVCSIcon"
               />

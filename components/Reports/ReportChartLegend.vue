@@ -6,8 +6,8 @@
     <template v-for="(dataset, idx) in datasets">
       <div
         v-if="dataset.name !== 'others'"
-        v-tooltip="datasetNameFormatter(dataset.name)"
         :key="dataset.name"
+        v-tooltip="datasetNameFormatter(dataset.name)"
         :class="{ 'col-start-2': datasets.length === 3 && idx === 2 && !othersDatasetNames.length }"
         class="flex items-center gap-x-2 truncate"
       >

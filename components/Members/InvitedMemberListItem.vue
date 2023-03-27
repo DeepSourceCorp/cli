@@ -5,8 +5,8 @@
       <z-button
         button-type="ghost"
         size="x-small"
-        @click="cancelInvite"
         class="text-xs cursor-pointer text-cherry"
+        @click="cancelInvite"
       >
         Cancel Invite
       </z-button>

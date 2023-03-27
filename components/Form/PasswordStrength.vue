@@ -1,5 +1,5 @@
 <template>
-  <svg :class="sizeClass" viewBox="0 0 48 48" v-tooltip="passwordGrade">
+  <svg v-tooltip="passwordGrade" :class="sizeClass" viewBox="0 0 48 48">
     <circle class="donut-hole" cx="20" cy="20" r="15" fill="none" />
     <circle
       class="text-ink-100"

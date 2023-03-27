@@ -6,12 +6,12 @@
     :input-width="inputWidth"
   >
     <!-- TODO: Fix this magic component. -->
-    <houdini v-model="modelValue" @change="$emit('change')" :id="inputId" class="space-y-5">
-      <div class="text-sm space-y-1" v-for="opt in options" :key="opt.value">
+    <houdini :id="inputId" v-model="modelValue" class="space-y-5" @change="$emit('change')">
+      <div v-for="opt in options" :key="opt.value" class="text-sm space-y-1">
         <z-checkbox
+          v-model="modelValue[opt.value]"
           :value="opt.value"
           :label="opt.label"
-          v-model="modelValue[opt.value]"
           spacing="4"
           size="small"
         />

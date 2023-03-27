@@ -1,11 +1,11 @@
 <template>
   <z-menu
+    ref="menu-container"
     :placement="expandToTop ? 'top' : 'bottom'"
     direction="left"
     size="base"
     width="base"
     items-z-class="z-50"
-    ref="menu-container"
     @menu-toggle="menuToggleHandler"
   >
     <template #trigger="{ toggle }">

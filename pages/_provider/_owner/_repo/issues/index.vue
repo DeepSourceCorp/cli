@@ -5,8 +5,8 @@
       class="z-20 flex flex-col justify-between py-2 pl-2 pr-4 space-y-2 border-b lg:flex-row lg:space-y-0 lg:space-x-2 border-slate-400 lg:sticky lg:top-24 bg-ink-400 col-span-full analyzer-tab"
     >
       <issue-analyzer-selector
-        @updateAnalyzer="updateAnalyzer"
         :selected-analyzer="parsedParams.analyzer"
+        @updateAnalyzer="updateAnalyzer"
       />
       <div class="flex items-center justify-end w-auto space-x-2">
         <issue-sort
@@ -45,7 +45,7 @@
         style="top: 147px"
         @updateCategory="updateCategory"
       >
-        <template #cta v-if="repository.errorCode === 3003 && hasRepoReadAccess">
+        <template v-if="repository.errorCode === 3003 && hasRepoReadAccess" #cta>
           <activate-repo-cta :repository="repository" class="mx-2 mt-2" />
         </template>
       </issue-category-selector>
@@ -124,8 +124,8 @@
 
       <z-pagination
         v-if="pageCount > 1"
-        :page="queryParams.page"
         :key="$route.fullPath"
+        :page="queryParams.page"
         :total-pages="pageCount"
         :total-visible="5"
         class="flex justify-center"

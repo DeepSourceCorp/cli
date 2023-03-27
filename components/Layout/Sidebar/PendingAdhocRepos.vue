@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-1" v-if="repoWithPendingAdhocRuns && repoWithPendingAdhocRuns.length">
+  <div v-if="repoWithPendingAdhocRuns && repoWithPendingAdhocRuns.length" class="space-y-1">
     <z-menu v-if="isCollapsed">
       <template #trigger="{ toggle }">
         <button

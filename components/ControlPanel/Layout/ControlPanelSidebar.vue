@@ -1,8 +1,8 @@
 <template>
   <!-- TODO the sidebar shouldn't need a z-index in lg+ screens but conflicts with zeal components block this  -->
   <nav
-    class="fixed top-0 z-50 flex flex-col h-screen duration-200 border-r lg:sticky lg:left-0 transition-width transform-gpu border-slate-400 group bg-ink-400"
     v-outside-click="closeMenu"
+    class="fixed top-0 z-50 flex flex-col h-screen duration-200 border-r lg:sticky lg:left-0 transition-width transform-gpu border-slate-400 group bg-ink-400"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
     <section class="p-3 border-b border-slate-400">
@@ -47,8 +47,8 @@
       </div>
       <div class="absolute -top-2.5 -right-2.5 md:group-hover:block hidden">
         <button
-          @click="toggleSidebarCollapse"
           class="flex items-center justify-center w-5 h-5 rounded-full cursor-pointer bg-ink-100 hover:bg-slate group focus:outline-none"
+          @click="toggleSidebarCollapse"
         >
           <z-icon
             icon="chevron-left"

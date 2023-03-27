@@ -51,7 +51,7 @@
 
           <template v-else>
             <template v-for="(issue, idx) in change.issues">
-              <span v-tooltip="issue.title" :key="issue.shortcode" class="text-sm text-vanilla-100">
+              <span :key="issue.shortcode" v-tooltip="issue.title" class="text-sm text-vanilla-100">
                 {{ issue.shortcode.toUpperCase() }}
               </span>
 
@@ -77,11 +77,11 @@
           <z-checkbox
             v-if="!isReadOnly && code.action === 'modified' && code.action !== 'deleted'"
             v-model="selectedHunkIds"
-            @change="selectFileIfAllHunksSelected(name, code.id)"
             :value="code.id"
             size="small"
             font-size="base"
             spacing="4"
+            @change="selectFileIfAllHunksSelected(name, code.id)"
           />
         </div>
         <template v-if="code.action === 'deleted'">

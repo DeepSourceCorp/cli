@@ -19,9 +19,9 @@
       <label for="report-title" class="space-y-2 text-sm text-vanilla-200 w-full">
         <p class="text-sm font-medium text-vanilla-100">Label</p>
         <z-input
-          v-focus
           id="report-title"
           v-model="reportLabel"
+          v-focus
           :required="true"
           :show-border="false"
           placeholder="What’s this report for?"
@@ -35,8 +35,8 @@
       <label v-if="reportIdOld" for="report-link" class="space-y-2 text-sm text-vanilla-200 w-full">
         <p class="text-sm font-medium text-vanilla-100">Shareable link</p>
         <z-input
-          v-focus
           id="report-link"
+          v-focus
           :value="reportUrl"
           :read-only="true"
           :show-border="false"
@@ -133,8 +133,8 @@
             <z-checkbox
               v-if="report.type === ReportType.Compliance"
               :key="key"
-              :value="key"
               v-model="reportKeys"
+              :value="key"
               :label="report.title"
               size="small"
               class="cursor-pointer"
@@ -147,8 +147,8 @@
             <z-checkbox
               v-if="report.type === ReportType.Insight"
               :key="key"
-              :value="key"
               v-model="reportKeys"
+              :value="key"
               :label="report.title"
               size="small"
               class="cursor-pointer"
@@ -170,7 +170,7 @@
 
       <label for="source-repos" class="space-y-2 text-sm">
         <p class="font-medium text-vanilla-100">Select repositories</p>
-        <z-radio-group v-model="reportSource" id="source-repos" class="grid grid-cols-2">
+        <z-radio-group id="source-repos" v-model="reportSource" class="grid grid-cols-2">
           <z-radio :value="ReportSource.SourceAll" label="All repositories" />
           <z-radio :value="ReportSource.SourceSelected" label="Custom" />
         </z-radio-group>

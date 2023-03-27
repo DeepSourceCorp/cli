@@ -16,8 +16,8 @@
         <div>
           <div>{{ stage.title }}</div>
           <span
-            class="mt-1 text-xs text-vanilla-400"
             v-if="stage.message && stage.status === 'in-progress'"
+            class="mt-1 text-xs text-vanilla-400"
           >
             {{ stage.message }}
           </span>

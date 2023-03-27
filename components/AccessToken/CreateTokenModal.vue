@@ -32,9 +32,9 @@
       <label for="title" class="block space-y-2 text-sm text-vanilla-200">
         <p class="ml-px text-sm font-semibold text-vanilla-300">Token label</p>
         <z-input
-          v-focus
           id="title"
           v-model="label"
+          v-focus
           max-length="32"
           placeholder="What’s this token for?"
           :required="true"

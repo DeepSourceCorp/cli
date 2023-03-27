@@ -4,10 +4,10 @@
       <h2 class="text-lg font-medium">Auto Onboard</h2>
       <z-button
         v-if="configTemplateList.length && allowCrud"
-        @click="showNewTemplateModal = true"
         size="small"
         button-type="primary"
         icon="plus"
+        @click="showNewTemplateModal = true"
       >
         Add new template
       </z-button>
@@ -24,8 +24,8 @@
       class="p-2 mb-4"
       :show-border="false"
       background-color="ink-300"
-      @debounceInput="getData"
       placeholder="Search templates..."
+      @debounceInput="getData"
     >
       <template slot="left">
         <z-icon icon="search" class="ml-1.5" size="small" />
@@ -39,16 +39,16 @@
         <config-template-card
           v-for="template in configTemplateList"
           v-bind="template"
-          @onboard="onboardUsingTemplate"
-          :allow-crud="allowCrud"
           :key="template.shortcode"
+          :allow-crud="allowCrud"
           :load-onboarding="
             fetchingRepos && selectedTemplate && selectedTemplate.shortcode === template.shortcode
           "
+          @onboard="onboardUsingTemplate"
         />
         <z-pagination
-          class="flex justify-center"
           v-if="pageCount > 1"
+          class="flex justify-center"
           :total-pages="pageCount"
           :total-visible="5"
           @selected="updateCurrentPage"
@@ -69,7 +69,7 @@
         content-width="max-w-sm"
       >
         <template #action>
-          <z-button v-if="allowCrud" size="small" @click="showNewTemplateModal = true" icon="plus">
+          <z-button v-if="allowCrud" size="small" icon="plus" @click="showNewTemplateModal = true">
             Create a new template
           </z-button>
         </template>

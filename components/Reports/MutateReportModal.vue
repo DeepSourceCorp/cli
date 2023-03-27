@@ -4,9 +4,9 @@
       <label for="report-title" class="space-y-2 text-sm text-vanilla-200 w-full">
         <p class="text-sm font-medium text-vanilla-100">Label</p>
         <z-input
-          v-focus
           id="report-title"
           v-model="reportLabel"
+          v-focus
           :required="true"
           :show-border="false"
           placeholder="What’s this report for?"
@@ -18,8 +18,8 @@
       <label v-if="reportIdOld" for="report-link" class="space-y-2 text-sm text-vanilla-200 w-full">
         <p class="text-sm font-medium text-vanilla-100">Shareable link</p>
         <z-input
-          v-focus
           id="report-link"
+          v-focus
           :value="reportUrl"
           :read-only="true"
           :show-border="false"
@@ -116,8 +116,8 @@
             <z-checkbox
               v-if="report.type === ReportType.Compliance && report.level.includes(level)"
               :key="key"
-              :value="key"
               v-model="reportKeys"
+              :value="key"
               :label="report.title"
               size="small"
               class="cursor-pointer"
@@ -130,8 +130,8 @@
             <z-checkbox
               v-if="report.type === ReportType.Insight && report.level.includes(level)"
               :key="key"
-              :value="key"
               v-model="reportKeys"
+              :value="key"
               :label="report.title"
               size="small"
               class="cursor-pointer"

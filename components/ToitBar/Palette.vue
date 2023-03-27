@@ -15,8 +15,8 @@
           </span>
         </div>
         <input
-          v-focus
           ref="palette-search"
+          v-focus
           type="text"
           autoComplete="off"
           role="combobox"
@@ -40,9 +40,9 @@
           <command-row
             v-else
             v-bind="command"
-            :data-label="command.label"
             :id="buildId(index)"
             :ref="buildId(index)"
+            :data-label="command.label"
             :active="index === activeIndex"
           />
         </div>

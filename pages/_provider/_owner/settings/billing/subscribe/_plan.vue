@@ -55,13 +55,13 @@
                   @click="updateSeatsInStore(seats - 1)"
                 />
                 <input
-                  aria-label="Seats"
                   id="seats-count"
+                  aria-label="Seats"
                   class="w-12 text-center bg-transparent focus:outline-none focus:ring focus:border-slate-400"
                   :value="seats"
+                  type="text"
                   @debounceInput="updateSeatsInStore"
                   @blur="(e) => updateSeatsInStore(e.target.value)"
-                  type="text"
                 />
                 <z-button
                   size="x-small"
@@ -87,7 +87,7 @@
                 <span>{{ formatUSD(billingInfo.amountPayableThisCycle) }}</span>
               </div>
             </div>
-            <div class="flex" v-if="coupon.isApplied">
+            <div v-if="coupon.isApplied" class="flex">
               <label class="w-32 font-medium">Coupon Applied</label>
               <div class="flex-grow font-bold text-right text-juniper">
                 -
@@ -96,7 +96,7 @@
                 </span>
               </div>
             </div>
-            <div class="flex" v-if="credits.isApplied">
+            <div v-if="credits.isApplied" class="flex">
               <label class="w-32 font-medium">Credits Applied</label>
               <div class="flex-grow font-bold text-right">
                 -
@@ -110,7 +110,7 @@
           <div class="flex">
             <label class="w-32 font-medium">Total payable now</label>
             <div class="flex items-center justify-end flex-grow space-x-2 text-lg font-bold">
-              <z-icon class="animate-spin" color="juniper" icon="spin-loader" v-if="loading" />
+              <z-icon v-if="loading" class="animate-spin" color="juniper" icon="spin-loader" />
               <span v-if="billingInfo.netPayableThisCycle !== null">
                 {{ formatUSD(billingInfo.netPayableThisCycle) }}
               </span>
@@ -118,8 +118,8 @@
           </div>
           <z-divider color="ink-300" />
           <p
-            class="text-xs leading-snug text-vanilla-400 tracking-snug"
             v-if="billingInfo.netPayableNextCycle !== null && billingInfo.nextBillingCycle !== null"
+            class="text-xs leading-snug text-vanilla-400 tracking-snug"
           >
             You will be charged
             <span class="inline">{{ formatUSD(billingInfo.netPayableNextCycle) }}</span>
@@ -138,10 +138,10 @@
             >
               <template slot="right">
                 <z-button
-                  @click="redeemCoupon"
                   button-type="secondary"
                   class="w-24 text-vanilla-100"
                   size="small"
+                  @click="redeemCoupon"
                 >
                   <template v-if="couponLoading">
                     <z-icon class="animate-spin" color="juniper" icon="spin-loader" />

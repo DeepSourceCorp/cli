@@ -3,8 +3,8 @@
     <div class="fixed z-20 flex justify-center w-screen p-3 pb-8 lg:hidden filter-wrapper">
       <z-button
         button-type="primary"
-        @click="isModalOpen = true"
         class="flex items-center min-w-48"
+        @click="isModalOpen = true"
       >
         <div class="inline-flex items-center w-full leading-tight gap-x-2">
           <z-icon :icon="activeFilter || 'list'" size="small" color="ink-400" class="mr-0.5" />

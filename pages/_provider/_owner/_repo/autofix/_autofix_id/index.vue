@@ -17,7 +17,7 @@
           class="text-base font-medium text-vanilla-100"
           v-html="safeRenderBackticks(title)"
         ></span>
-        <span class="inline md:flex" v-if="autofixRun.issue">{{ autofixRun.issue.shortcode }}</span>
+        <span v-if="autofixRun.issue" class="inline md:flex">{{ autofixRun.issue.shortcode }}</span>
       </div>
       <div class="flex space-x-6">
         <issue-type v-if="autofixRun.issue" :issue-type="autofixRun.issue.issueType" />
@@ -138,10 +138,10 @@
         </template>
         <template v-else>
           <z-button
+            v-if="autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.IN_PROGRESS"
             button-type="primary"
             size="small"
             class="cursor-wait"
-            v-if="autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.IN_PROGRESS"
           >
             <z-icon class="animate-spin" icon="spin-loader" color="ink-300" />
             <span>{{ pullRequestStatusText.CREATING }}</span>
@@ -161,12 +161,12 @@
             <span>{{ pullRequestStatusText.VIEW }}</span>
           </z-button>
           <z-button
+            v-if="autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.CREATED"
             button-type="primary"
             size="small"
             target="_blank"
             :to="autofixRun.vcsPrUrl"
             rel="noopener noreferrer"
-            v-if="autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.CREATED"
           >
             <z-icon icon="git-pull-request" color="ink-300" />
             <span>{{ pullRequestStatusText.CLOSED }}</span>
@@ -216,7 +216,7 @@
         in a few minutes.
       </alert-box>
     </section>
-    <div class="px-4" v-if="!$fetchState.pending && autofixRun.errorsRendered.length">
+    <div v-if="!$fetchState.pending && autofixRun.errorsRendered.length" class="px-4">
       <run-error-box :errors-rendered="autofixRun.errorsRendered" />
     </div>
     <template v-if="isAutofixConcluded">

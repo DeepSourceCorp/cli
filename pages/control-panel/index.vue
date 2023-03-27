@@ -28,9 +28,9 @@
         </div>
         <div class="grid grid-cols-1 gap-4 mt-6 md:grid-cols-2 lg:grid-cols-3">
           <component
+            :is="getCardType(card)"
             v-for="card in CONTROL_PANELS"
             :key="getPageTitle(card.title)"
-            :is="getCardType(card)"
             :to="card.to || null"
             :href="card.href ? card.href : managementConsoleUrl ? managementConsoleUrl : null"
             :target="card.to ? false : '_blank'"

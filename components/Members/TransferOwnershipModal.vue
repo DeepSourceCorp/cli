@@ -45,12 +45,13 @@
                   {{ newOwner.user.email }}
                 </div>
               </div>
-              <div as="button" @click="clearNewOwner" class="my-auto cursor-pointer">
+              <div as="button" class="my-auto cursor-pointer" @click="clearNewOwner">
                 <z-icon icon="x" />
               </div>
             </div>
             <div v-else class="relative">
               <z-input
+                ref="input"
                 v-model="searchCandidate"
                 v-focus
                 :clearable="searchCandidate !== ''"
@@ -58,7 +59,6 @@
                 placeholder="Search for team member"
                 background-color="ink-300"
                 :debounce-delay="150"
-                ref="input"
                 @debounceInput="fetchTransferCandidates"
                 @focus="revealResults"
                 @keyup="(event) => handleKeyUp(event)"
@@ -81,13 +81,13 @@
                   <div
                     v-for="(member, index) in searchResults"
                     :key="member.id"
-                    tabindex="-1"
                     :ref="`searchResult${index}`"
+                    tabindex="-1"
+                    class="p-3 w-full leading-none cursor-pointer bg-ink-300 hover:bg-ink-200 space-y-1.5 focus:bg-ink-200 focus:outline-none"
                     @click="() => setNewOwner(member)"
                     @focus="() => setItemInFocus(index)"
                     @blur="clearItemInFocus"
                     @keydown="(event) => handleSearchResultKeyDown(event, member)"
-                    class="p-3 w-full leading-none cursor-pointer bg-ink-300 hover:bg-ink-200 space-y-1.5 focus:bg-ink-200 focus:outline-none"
                   >
                     <div class="text-sm font-medium">
                       {{ member.user.fullName || member.user.email }}
@@ -156,7 +156,7 @@
       <template #default="{ close }">
         <div class="relative p-6 sm:p-8 sm:w-100" @click.stop>
           <slot>
-            <div @click="close" class="absolute cursor-pointer top-4 right-4">
+            <div class="absolute cursor-pointer top-4 right-4" @click="close">
               <z-icon icon="x" />
             </div>
             <empty-state title="Ownership transferred">

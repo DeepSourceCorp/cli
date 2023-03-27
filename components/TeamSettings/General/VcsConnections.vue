@@ -59,8 +59,8 @@
       </component>
 
       <component
-        v-if="autofixEnabled"
         :is="autofixInstallationUrl ? 'a' : 'div'"
+        v-if="autofixEnabled"
         :href="autofixInstallationUrl || false"
         :class="{ 'hover:opacity-80': autofixInstallationUrl }"
         class="flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2"

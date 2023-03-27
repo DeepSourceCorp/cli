@@ -93,8 +93,8 @@
                     <z-menu-item v-for="(opt, key) in TEAM_PERMS" :key="key" class="text-sm">
                       <div
                         role="button"
-                        @click="updateTeamRole(group.id, team.team.id, key)"
                         class="w-full"
+                        @click="updateTeamRole(group.id, team.team.id, key)"
                       >
                         <div class="flex items-center space-x-2">
                           <span :class="key === team.role ? 'font-semibold' : ''">{{

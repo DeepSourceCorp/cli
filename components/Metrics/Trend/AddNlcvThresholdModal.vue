@@ -7,9 +7,9 @@
             <p class="text-sm text-vanilla-400">Language</p>
             <z-select
               v-if="analyzers.length"
+              :key="Number(computingFlag)"
               v-model="analyzerToAdd"
               placeholder="Analyzer"
-              :key="Number(computingFlag)"
               spacing="px-2 py-1"
               class="rounded-md bg-ink-400"
             >

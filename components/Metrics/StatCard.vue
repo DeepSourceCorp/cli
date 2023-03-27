@@ -36,9 +36,9 @@
           <div class="space-y-1">
             <slot name="info">
               <ticker
-                class="hidden md:flex"
                 v-if="trendValue"
                 v-tooltip="hintAsTooltip ? trendHint : ''"
+                class="hidden md:flex"
                 :icon="trendIcon"
                 :trend-direction="trendDirection"
                 :trend-hint="hintAsTooltip ? '' : trendHint"

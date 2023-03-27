@@ -1,10 +1,10 @@
 <template>
   <div
-    @click="isErrorsBlockExpanded = true"
     class="relative items-start rounded-md bg-ink-200"
     :class="{
       'cursor-pointer': !isErrorsBlockExpanded
     }"
+    @click="isErrorsBlockExpanded = true"
   >
     <button
       class="absolute p-1 top-4 right-4 focus:outline-none"
@@ -37,7 +37,7 @@
         </div>
       </template>
     </div>
-    <div class="flex items-center p-4 space-x-1 text-sm font-medium text-vanilla-100" v-else>
+    <div v-else class="flex items-center p-4 space-x-1 text-sm font-medium text-vanilla-100">
       <z-label v-if="runErrors.error.length" class="inline-block select-none" state="error">
         {{ getErrorTypeLabel('error') }}
       </z-label>

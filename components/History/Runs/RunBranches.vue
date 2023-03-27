@@ -17,11 +17,11 @@
         <template #toggleTrigger>
           <div v-if="count" class="flex space-x-2 cursor-pointer md:items-center">
             <button
-              :disabled="listLoading"
               v-tooltip="!isExpanded ? 'Show more runs' : ''"
+              :disabled="listLoading"
               tabindex="0"
-              @click.prevent="toggleItems"
               class="inline-flex items-center px-2 py-1 md:py-1.5 border rounded-full gap-x-1.5 justify-evenly bg-ink-300 hover:bg-ink-200 border-slate-400"
+              @click.prevent="toggleItems"
             >
               <span class="font-normal leading-none text-xxs md:text-xs text-vanilla-400">
                 {{ countText }}

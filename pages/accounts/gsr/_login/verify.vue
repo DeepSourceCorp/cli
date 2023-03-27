@@ -5,12 +5,12 @@
     </h1>
     <section class="mt-8 space-y-5">
       <verification-step
+        v-show="currentStep === 'TOKEN'"
         title="Verify OAuth token permissions"
         sequence="1"
         total="3"
-        @switch="currentStep = 'TOKEN'"
-        v-show="currentStep === 'TOKEN'"
         :is-complete="false"
+        @switch="currentStep = 'TOKEN'"
       >
         <p class="text-sm text-vanilla-300">
           DeepSource uses the OAuth token generated with your signup to run analysis on your
@@ -28,12 +28,12 @@
         </ul>
       </verification-step>
       <verification-step
+        v-show="currentStep === 'WEBHOOK'"
         title="Turn on webhooks for the project"
         sequence="2"
         total="3"
-        @switch="currentStep = 'WEBHOOK'"
-        v-show="currentStep === 'WEBHOOK'"
         :is-complete="false"
+        @switch="currentStep = 'WEBHOOK'"
       >
         <p class="text-sm text-vanilla-300">
           In order to enable webhooks you need to create a Pub/Sub topic, and a subscription for the
@@ -65,12 +65,12 @@
         </p>
       </verification-step>
       <verification-step
+        v-show="currentStep === 'SSH'"
         title="Register the SSH key with the project on GCP"
         sequence="3"
         total="3"
-        @switch="currentStep = 'SSH'"
-        v-show="currentStep === 'SSH'"
         :is-complete="false"
+        @switch="currentStep = 'SSH'"
       >
         <p class="text-vanilla-300">
           Go to the
@@ -112,8 +112,8 @@
           :disabled="verifying"
           :loading-label="`Verifying ${verifyButtonLabel}`"
           icon="check-circle"
-          @click="verifyStep"
           :label="`Verify ${verifyButtonLabel}`"
+          @click="verifyStep"
         />
       </div>
     </section>

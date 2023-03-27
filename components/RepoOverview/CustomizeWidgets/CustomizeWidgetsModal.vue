@@ -15,8 +15,8 @@
       </z-input>
       <draggable
         v-show="enabledWidgetsSearchResults.length"
-        :list="enabledWidgets"
         key="enabled-widgets"
+        :list="enabledWidgets"
         :animation="200"
         ghost-class="bg-ink-300"
         tag="ul"
@@ -66,7 +66,7 @@
         >
           You can only select at most {{ MAX_WIDGETS }} widgets
         </span>
-        <span class="text-xs font-medium text-juniper" v-else
+        <span v-else class="text-xs font-medium text-juniper"
           >{{ MAX_WIDGETS - enabledWidgets.length }} remaining</span
         >
         <z-button

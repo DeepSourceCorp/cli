@@ -21,12 +21,12 @@
         <div class="space-x-2">
           <nuxt-link
             v-for="ctx in viewer.dashboardContext"
-            :to="['', ctx.vcs_provider, ctx.login].join('/')"
             :key="ctx.id"
+            :to="['', ctx.vcs_provider, ctx.login].join('/')"
           >
             <z-avatar
-              v-tooltip="`${ctx.team_name || ctx.login} - ${ctx.vcs_provider_display}`"
               :key="ctx.login"
+              v-tooltip="`${ctx.team_name || ctx.login} - ${ctx.vcs_provider_display}`"
               :image="ctx.avatar_url"
               :fallback-image="getDefaultAvatar(ctx.login, ctx.type === 'user')"
               :user-name="ctx.login"
@@ -64,7 +64,7 @@
             </h5>
             <template v-if="!step.isComplete">
               <p v-if="step.description" class="text-sm text-vanilla-400">{{ step.description }}</p>
-              <z-button @click="triggerStep(step)" size="small" button-type="secondary">{{
+              <z-button size="small" button-type="secondary" @click="triggerStep(step)">{{
                 step.actionLabel
               }}</z-button>
             </template>

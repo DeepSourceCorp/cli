@@ -9,7 +9,7 @@
       create pull-requests."
     />
     <!-- Notice -->
-    <notice class="items-baseline" v-if="repository.isAutofixEnabled">
+    <notice v-if="repository.isAutofixEnabled" class="items-baseline">
       <p class="relative top-px">
         The Autofix app has been installed and has all the necessary permissions on this repository.
       </p>

@@ -6,11 +6,11 @@
   >
     <sidebar-menu
       width="lg:w-full"
-      @open="openModal()"
-      @close="closeModal()"
       :collapsible="false"
       footer-class="bg-ink-300 px-4"
       footer-brand-class="bg-ink-300 px-4"
+      @open="openModal()"
+      @close="closeModal()"
     >
       <template slot="header">
         <section class="p-4 border-b border-slate-400">

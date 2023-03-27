@@ -12,12 +12,12 @@
       </p>
       <z-button
         v-if="repository.isCommitPossible || repository.isAutofixEnabled"
-        @click="isActivationModalOpen = true"
         size="small"
         icon="play-circle"
         class="w-full mt-4 bg-robin hover:bg-robin-600"
         color="vanilla-200"
         label="Activate analysis"
+        @click="isActivationModalOpen = true"
       />
       <nuxt-link v-else :to="$generateRoute(['generate-config'])">
         <z-button

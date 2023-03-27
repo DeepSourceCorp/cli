@@ -18,8 +18,8 @@
         ></div>
 
         <component
-          v-else
           :is="report.componentName"
+          v-else
           v-bind="{ ...report, reportKey: report.key }"
           :allow-pinning-reports="allowPinningReports"
           :loading-value="loadingValues[reportSlot]"

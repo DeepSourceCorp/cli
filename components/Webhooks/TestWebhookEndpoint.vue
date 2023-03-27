@@ -1,6 +1,6 @@
 <template>
   <div>
-    <z-button @click="toggleModal" size="small" button-type="secondary" icon="send">
+    <z-button size="small" button-type="secondary" icon="send" @click="toggleModal">
       Send test payload
     </z-button>
     <portal to="modal">

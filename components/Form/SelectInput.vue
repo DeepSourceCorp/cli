@@ -18,8 +18,8 @@
         <z-select
           v-else
           ref="select-input"
-          v-model="modelValue"
           :key="modelValue"
+          v-model="modelValue"
           :placeholder="placeholder"
           :disabled="disabled"
           spacing="py-1 px-2"

@@ -26,9 +26,9 @@
       <div v-else-if="repoList.length" class="space-y-2.5">
         <z-checkbox
           v-for="repo in repoList"
+          :key="repo.id"
           :model-value="selectedRepos"
           :value="repo.id"
-          :key="repo.id"
           :label="`${repo.ownerLogin} / ${repo.name}`"
           size="small"
           class="cursor-pointer hover:text-vanilla-100"

@@ -3,7 +3,7 @@
     <div class="top-bar-offset z-20 border-b border-slate-400 bg-ink-400 p-4 md:sticky">
       <!-- Issue details -->
       <div class="mb-px flex flex-col space-y-3 xl:flex-row xl:space-y-0">
-        <div class="w-full space-y-2.5" v-if="$fetchState.pending || loading">
+        <div v-if="$fetchState.pending || loading" class="w-full space-y-2.5">
           <!-- Left Section -->
           <div class="h-8 w-3/5 animate-pulse rounded-md bg-ink-300 md:w-4/5"></div>
           <div class="flex w-1/3 space-x-2">
@@ -32,17 +32,17 @@
               :issue="singleIssue"
               :check-id="currentCheck ? currentCheck.id : ''"
               :shortcode="$route.params.issueId"
-              @ignoreIssues="ignoreIssues"
               :repository="repository"
               :next-issue="nextIssue"
               :previous-issue="previousIssue"
+              @ignoreIssues="ignoreIssues"
             />
           </div>
         </div>
       </div>
     </div>
     <div class="p-4">
-      <div class="flex" v-if="$fetchState.pending || loading">
+      <div v-if="$fetchState.pending || loading" class="flex">
         <div class="w-full space-y-4 lg:w-4/6">
           <div
             v-for="ii in 3"

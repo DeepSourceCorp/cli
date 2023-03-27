@@ -26,8 +26,8 @@
           that you use in this repository.
         </p>
         <z-button
-          size="small"
           ref="add-analyzer-button"
+          size="small"
           class="mx-auto"
           button-type="primary"
           icon="plus"

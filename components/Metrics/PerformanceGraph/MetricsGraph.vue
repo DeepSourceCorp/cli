@@ -16,9 +16,9 @@
       </div>
     </template>
     <graph-data-selector
-      :data-points="sortedData"
       v-if="sortedData.length"
       v-model="selectedIndex"
+      :data-points="sortedData"
     />
     <div
       class="col-span-1 border-l lg:col-span-2 xl:col-span-3 2xl:col-span-4 border-slate-400 divide-y divide-ink-300"

@@ -18,8 +18,8 @@
         class="p-2"
         :show-border="false"
         background-color="ink-400"
-        @debounceInput="search"
         placeholder="Search repositories..."
+        @debounceInput="search"
       >
         <template slot="left">
           <z-icon icon="search" class="ml-1.5" size="small" />
@@ -36,6 +36,7 @@
       </template>
       <template v-if="onboardableRepositories.length">
         <z-checkbox
+          v-model="selectAll"
           size="small"
           class="cursor-pointer py-1.5 font-semibold"
           :class="{
@@ -43,15 +44,14 @@
             'text-vanilla-100': selectAll
           }"
           :disabled="onboardableRepositories.length === 0"
-          @change="selectAllRepositories"
-          v-model="selectAll"
           :label="`Select all (${selectedRepos.length} selected)`"
+          @change="selectAllRepositories"
         />
         <z-checkbox
           v-for="repo in onboardableRepositories"
+          :key="repo.id"
           v-model="selectedRepos"
           :value="repo.id"
-          :key="repo.id"
           :label="`${activeOwner} / ${repo.name}`"
           size="small"
           class="cursor-pointer py-1.5 hover:text-vanilla-100"

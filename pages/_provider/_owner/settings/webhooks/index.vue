@@ -4,10 +4,10 @@
       <h2 class="text-lg font-medium">Endpoints</h2>
       <z-button
         v-if="webhookEndpoints.length"
-        @click="showAddEndpointModal = true"
         size="small"
         button-type="primary"
         icon="plus"
+        @click="showAddEndpointModal = true"
       >
         Add new endpoint
       </z-button>
@@ -22,8 +22,8 @@
       <template v-else-if="totalWebhookEndpoints">
         <webhook-card v-for="endpoint in webhookEndpoints" :key="endpoint.id" v-bind="endpoint" />
         <z-pagination
-          class="flex justify-center"
           v-if="pageCount > 1"
+          class="flex justify-center"
           :total-pages="pageCount"
           :total-visible="5"
           @selected="updateCurrentPage"
@@ -39,7 +39,7 @@
         subtitle="Configure webhook endpoints to let your apps and services know about events in DeepSource as they happen. Start with a new endpoint."
       >
         <template slot="action">
-          <z-button size="small" @click="showAddEndpointModal = true" icon="plus">
+          <z-button size="small" icon="plus" @click="showAddEndpointModal = true">
             Add a new endpoint
           </z-button>
         </template>

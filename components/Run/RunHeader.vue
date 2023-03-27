@@ -51,9 +51,9 @@
         <z-menu v-if="runCount" width="2x-large">
           <template #trigger="{ toggle, isOpen }">
             <button
-              @click="toggle"
               class="flex items-center gap-x-2 px-2 h-7 rounded-3px cursor-pointer border border-slate-400"
               :class="[isOpen ? 'bg-ink-100' : 'bg-ink-200 hover:bg-ink-100']"
+              @click="toggle"
             >
               <div class="flex items-center text-sm gap-x-2 text-vanilla-400">
                 <z-icon icon="refresh-cw" size="small" />
@@ -74,10 +74,10 @@
             >
               <z-menu-item
                 v-for="run in branchRuns"
+                :key="run.runId"
                 :to="getRoute(run.runId)"
                 as="nuxt-link"
                 class="bg-ink-300 p-4"
-                :key="run.runId"
               >
                 <div class="flex flex-col gap-y-2.5">
                   <div class="flex gap-x-1.5 items-center">

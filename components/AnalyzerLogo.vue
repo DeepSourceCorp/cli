@@ -1,8 +1,8 @@
 <template>
   <div>
     <img
-      v-tooltip="hideTooltip ? '' : name"
       v-if="analyzerLogo"
+      v-tooltip="hideTooltip ? '' : name"
       class="flex-shrink-0 w-auto"
       :class="sizeStyle"
       :src="analyzerLogo"
@@ -10,10 +10,10 @@
     />
     <z-icon
       v-else
+      v-tooltip="hideTooltip ? '' : name"
       :icon="shortcode"
       color="transparent"
       :size="size"
-      v-tooltip="hideTooltip ? '' : name"
     />
   </div>
 </template>

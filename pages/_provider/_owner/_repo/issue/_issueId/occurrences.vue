@@ -37,8 +37,8 @@
           </div>
         </template>
         <z-pagination
-          class="flex w-full justify-center"
           v-if="pageCount > 1"
+          class="flex w-full justify-center"
           :total-pages="pageCount"
           :total-visible="5"
           :page="currentPage"

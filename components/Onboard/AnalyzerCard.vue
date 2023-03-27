@@ -29,9 +29,9 @@
           <template v-if="config.enum && config.enum.length">
             <z-radio-group v-model="config.selected" class="grid grid-cols-1 gap-1 text-sm">
               <z-radio
-                class="mb-2 mr-4"
                 v-for="option in config.enum"
                 :key="option"
+                class="mb-2 mr-4"
                 :value="option"
                 :label="config.labels ? config.labels[option] : option"
               />
@@ -44,8 +44,8 @@
         <template v-else-if="config.type == 'boolean'">
           <z-radio-group
             :model-value="`${String(config.selected)}`"
-            @change="(val) => (config.selected = val === 'true')"
             class="grid grid-cols-3 gap-1 space-x-4 text-sm"
+            @change="(val) => (config.selected = val === 'true')"
           >
             <!--Make these values boolean true and false-->
             <z-radio value="true" label="Yes" />
@@ -55,10 +55,10 @@
         <template v-else-if="config.type == 'array'">
           <div v-if="config.items && config.items.enum" class="grid grid-cols-2 gap-1 text-sm">
             <z-checkbox
-              class="mb-2 mr-4"
-              size="small"
               v-for="option in config.items.enum"
               :key="option"
+              class="mb-2 mr-4"
+              size="small"
               :label="config.labels ? config.labels[option] : option"
               :value="option"
               :model-value="
@@ -70,8 +70,8 @@
           <div v-else>
             <z-input
               :value="Array.isArray(config.selected) ? config.selected.join(', ') : ''"
-              @input="(value) => updateArray(value, config)"
               size="small"
+              @input="(value) => updateArray(value, config)"
             />
           </div>
         </template>

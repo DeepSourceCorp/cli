@@ -28,9 +28,9 @@
       >
         <template v-if="repoCount">
           <repo-list-item
-            class="p-1 px-2 rounded-sm"
             v-for="(repo, index) in repositoriesToOnboard"
             :key="index"
+            class="p-1 px-2 rounded-sm"
             :handle-name="repo.ownerLogin"
             :language="repo.supportedAnalyzers ? repo.supportedAnalyzers[0] : ''"
             :analyzer="repo.primaryAnalyzer"
@@ -56,7 +56,7 @@
               We couldn’t find any repositories linked to this account. <br />You can try syncing
               them
             </template>
-            <div class="space-y-5" v-if="!loading">
+            <div v-if="!loading" class="space-y-5">
               <z-button
                 v-if="repoSyncLoading"
                 size="small"

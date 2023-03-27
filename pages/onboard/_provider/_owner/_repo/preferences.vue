@@ -4,8 +4,8 @@
     <div class="grid grid-cols-1 gap-4 overflow-y-scroll lg:grid-cols-2 max-h-102">
       <div
         v-for="issue in issueTypes"
-        class="p-5 transition-all duration-100 border rounded-md cursor-pointer"
         :key="issue.name"
+        class="p-5 transition-all duration-100 border rounded-md cursor-pointer"
         :class="issue.isChecked ? 'bg-ink-300 border-slate-400' : 'bg-ink-400 border-slate-400'"
         @click.prevent="issue.isChecked = !issue.isChecked"
       >
@@ -13,7 +13,7 @@
           <div class="flex items-center space-x-2">
             <z-icon :icon="issue.icon" color="vanilla-100" />
             <span class="flex-1 font-medium">{{ issue.label }}</span>
-            <z-checkbox :name="issue.name" v-model="issue.isChecked" />
+            <z-checkbox v-model="issue.isChecked" :name="issue.name" />
           </div>
         </div>
       </div>

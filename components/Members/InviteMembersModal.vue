@@ -43,10 +43,10 @@
                 <div class="h-8">
                   <z-select
                     v-model="member.role"
-                    :read-only="!member.modifyAllowed"
                     v-tooltip="
                       member.modifyAllowed ? '' : 'This is disabled because the seats are exhausted'
                     "
+                    :read-only="!member.modifyAllowed"
                     class="bg-ink-400"
                   >
                     <z-option

@@ -81,7 +81,7 @@
                     {{ step.title }}
                   </component>
                   <div class="h-12 text-xs font-normal text-vanilla-400">
-                    <div class="items-center" v-if="step.showRepo && currentRepo">
+                    <div v-if="step.showRepo && currentRepo" class="items-center">
                       <z-icon
                         v-if="repository && 'isPrivate' in repository"
                         :icon="repository.isPrivate ? 'z-lock' : 'globe'"

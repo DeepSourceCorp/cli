@@ -24,8 +24,8 @@
       <div v-else>
         <template v-if="shouldChartBeShown">
           <z-chart
-            :data-sets="datasets"
             :key="reportRerenderKey"
+            :data-sets="datasets"
             :labels="labels"
             :colors="chartColors"
             :axis-options="{

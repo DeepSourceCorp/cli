@@ -7,22 +7,22 @@
         <div class="grid grid-cols-9 gap-2">
           <template v-for="(digit, idx) in otpDigits">
             <div
-              :key="idx"
               v-if="idx === 4"
+              :key="idx"
               class="h-12 text-vanilla-100 grid place-content-center"
             >
               –
             </div>
             <input
               v-else
+              :id="`cli-otp-input-${idx}`"
+              :key="idx"
               v-model="otpDigits[idx]"
               maxlength="1"
               autocomplete="off"
               :disabled="freeze"
               class="p-1 bg-ink-400 rounded-md border border-slate-400 active:border-juniper focus:outline-none text-vanilla-100 font-bold text-center h-12"
               placeholder=""
-              :id="`cli-otp-input-${idx}`"
-              :key="idx"
               @keydown.delete.prevent="deleteHandler()"
               @input="handleInput"
               @blur="activeIndex = -1"

@@ -11,7 +11,7 @@
           <z-icon icon="git-commit" size="x-small" />
           {{ commitId.slice(0, 7) }}
         </nuxt-link>
-        <span class="whitespace-nowrap" v-if="lastAnalyzed">{{ fromNow(lastAnalyzed) }}</span>
+        <span v-if="lastAnalyzed" class="whitespace-nowrap">{{ fromNow(lastAnalyzed) }}</span>
       </div>
     </div>
     <div v-if="defaultBranch" class="flex items-center space-x-2">
@@ -59,18 +59,18 @@
     <portal to="modal">
       <z-modal
         v-if="showBranchUpdateModal"
-        @onClose="showBranchUpdateModal = false"
         width="narrow"
         title="Update Default Analysis Branch"
+        @onClose="showBranchUpdateModal = false"
       >
         <template #default="{ close }">
           <div class="p-4">
             <label class="text-sm text-vanilla-400">Update default analysis branch</label>
             <z-input
+              v-model="currentAnalysisBranch"
               size="small"
               class="mt-1"
               placeholder="New Branch name"
-              v-model="currentAnalysisBranch"
             />
             <div class="mt-4 space-x-4 text-right text-vanilla-100">
               <z-button

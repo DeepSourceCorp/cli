@@ -18,8 +18,8 @@
         class="p-2"
         :show-border="false"
         background-color="ink-400"
-        @debounceInput="fetchTemplates"
         placeholder="Search templates..."
+        @debounceInput="fetchTemplates"
       >
         <template slot="left">
           <z-icon icon="search" class="ml-1.5" size="small" />
@@ -37,9 +37,9 @@
       <template v-else-if="currentTemplateList.length">
         <base-card
           v-for="template in currentTemplateList"
+          :key="template.shortcode"
           :show-info="false"
           class="cursor-pointer hover:bg-ink-200"
-          :key="template.shortcode"
           @click="$emit('selectTemplate', template)"
         >
           <template slot="title">
@@ -52,14 +52,14 @@
           </template>
         </base-card>
       </template>
-      <div class="grid place-content-center h-full" v-else-if="searchCandidate">
+      <div v-else-if="searchCandidate" class="grid place-content-center h-full">
         <div class="text-center">
           <h4 class="text-vanilla-400 text-base mb-5">
             Found no templates matching name "{{ searchCandidate }}"
           </h4>
         </div>
       </div>
-      <div class="grid place-content-center h-full" v-else-if="!$fetchState.pending">
+      <div v-else-if="!$fetchState.pending" class="grid place-content-center h-full">
         <div class="text-center">
           <h4 class="text-vanilla-300 text-base">No Auto Onboard templates found.</h4>
           <p class="text-vanilla-400 text-sm mb-5">

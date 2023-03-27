@@ -20,7 +20,7 @@
         >
       </template>
     </button-input>
-    <portal to="modal" v-if="showCancelPlanModal">
+    <portal v-if="showCancelPlanModal" to="modal">
       <cancel-plan-modal @close="showCancelPlanModal = false" />
     </portal>
   </div>

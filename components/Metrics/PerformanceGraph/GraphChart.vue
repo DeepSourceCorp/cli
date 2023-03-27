@@ -53,8 +53,8 @@
         v-if="chartData.labels.length"
         v-bind="chartData"
         ref="wrapper"
-        class="flex-grow md:mx-auto"
         :key="namespace.is_passing"
+        class="flex-grow md:mx-auto"
         :colors="namespace.is_passing === false ? ['cherry-500'] : ['robin-500']"
         :height="chartHeight"
         :type="chartType"
@@ -73,9 +73,9 @@
     <portal to="modal">
       <z-modal
         v-if="showThresholdUpdate"
-        @onClose="showThresholdUpdate = false"
         width="narrow"
         title="Update threshold"
+        @onClose="showThresholdUpdate = false"
       >
         <template #default="{ close }">
           <div class="p-4">
@@ -84,12 +84,12 @@
               <b class="text-vanilla-200">{{ namespace.key }}</b>
             </p>
             <z-input
+              v-model="newThresholdValue"
               size="small"
               class="mt-2"
               min="0"
               placeholder="New threshold value"
               type="number"
-              v-model="newThresholdValue"
               :max="isNumberType ? null : 100"
               @blur="validateThreshold"
               @debounceInput="validateThreshold"

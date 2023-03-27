@@ -1,5 +1,5 @@
 <template>
-  <div class="box-content relative z-20" v-outside-click="outsideClickHandler">
+  <div v-outside-click="outsideClickHandler" class="box-content relative z-20">
     <z-input
       v-if="!disabled"
       v-model="searchCandidate"
@@ -30,9 +30,9 @@
         <li
           v-for="analyzer in searchAnalyzers"
           :key="analyzer.name"
-          @click="toggleAnalyzer(analyzer)"
           class="flex items-center justify-between px-2 py-2 rounded-md cursor-pointer hover:bg-ink-200"
           :class="selectedAnalyzers.includes(analyzer.name) ? 'bg-ink-200' : 'bg-ink-400'"
+          @click="toggleAnalyzer(analyzer)"
         >
           <span class="flex items-center w-full space-x-2">
             <analyzer-logo v-bind="analyzer" :hide-tooltip="true" />

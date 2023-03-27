@@ -74,9 +74,9 @@
     <portal to="modal">
       <z-confirm
         v-if="isGenerateSSHConfirmModalOpen"
-        @onClose="isGenerateSSHConfirmModalOpen = false"
         title="Confirm regenerate SSH keys for this repository?"
         subtitle="This action is irreversible, and will invalidate the old keys. You must replace the old keys with the new one everywhere you're using it."
+        @onClose="isGenerateSSHConfirmModalOpen = false"
       >
         <template #footer="{ close }">
           <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
@@ -98,9 +98,9 @@
       </z-confirm>
       <z-confirm
         v-if="isRemoveSSHConfirmModalOpen"
-        @onClose="isRemoveSSHConfirmModalOpen = false"
         title="Confirm delete SSH keys for this repository?"
         subtitle="This action is irreversible. You will have to generate a new key pair and add them to all your private dependencies again."
+        @onClose="isRemoveSSHConfirmModalOpen = false"
       >
         <template #footer="{ close }">
           <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">

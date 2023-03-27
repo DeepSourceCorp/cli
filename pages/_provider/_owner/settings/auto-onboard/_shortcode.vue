@@ -21,25 +21,25 @@
         <div class="h-32 bg-ink-300"></div>
       </div>
     </div>
-    <div v-else class="w-full max-w-3xl p-4 mb-10" :key="$route.fullPath">
+    <div v-else :key="$route.fullPath" class="w-full max-w-3xl p-4 mb-10">
       <page-title :title="title" :description="description">
         <template slot="actions">
           <template v-if="readOnly">
             <z-button
               v-if="allowEdit"
-              @click="readOnly = false"
               size="small"
               button-type="secondary"
               icon="edit"
+              @click="readOnly = false"
             >
               Edit
             </z-button>
             <z-button
-              @click="onboardUsingTemplate"
               size="small"
               button-type="primary"
               :icon-color="fetchingRepos ? 'ink-400 animate-spin' : 'ink-400'"
               :icon="fetchingRepos ? 'spin-loader' : 'fast-forward'"
+              @click="onboardUsingTemplate"
             >
               Use this template
             </z-button>
@@ -52,12 +52,12 @@
           <template v-else-if="allowEdit">
             <z-button
               v-if="!readOnly"
-              @click="discardConfig"
+              v-tooltip="'Discard changes'"
               size="small"
               button-type="ghost"
               icon-color="vanilla-300"
-              v-tooltip="'Discard changes'"
               icon="corner-up-left"
+              @click="discardConfig"
             />
             <delete-template-config v-if="!readOnly" :title="title" />
             <save-template-config
@@ -83,9 +83,9 @@
         />
         <template v-if="activeAnalyzers.length">
           <analyzer
-            class="z-20"
             v-for="analyzer in activeAnalyzers"
             :key="analyzer.shortcode"
+            class="z-20"
             v-bind="analyzer"
             :read-only="readOnly || !allowEdit"
             :for-template="true"
@@ -101,11 +101,11 @@
         <empty-state v-else title="Select an analyzer to proceed">
           <template slot="action">
             <z-button
-              @click="showAnalyzerList = true"
               ref="add-analyzer-button"
               button-type="secondary"
               icon="plus"
               size="small"
+              @click="showAnalyzerList = true"
             >
               Add analyzer
             </z-button>

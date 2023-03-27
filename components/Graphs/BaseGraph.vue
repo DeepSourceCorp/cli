@@ -1,6 +1,7 @@
 <template>
   <div class="grid grid-cols-1 min-h-40 col-span-full">
     <z-chart
+      ref="base-graph-chart"
       :data-sets="datasets"
       :height="chartHeight"
       :labels="labels"
@@ -13,7 +14,6 @@
       :line-options="lineOptions"
       :bar-options="barOptions"
       :y-axis-min="0"
-      ref="base-graph-chart"
       class="flex-grow md:mx-auto"
     />
   </div>

@@ -34,7 +34,7 @@ module.exports = {
     ], // Strongly recommended
     'vue/v-bind-style': 'error', // Strongly recommended
     'vue/v-on-style': 'error', // Strongly recommended
-    'vue/v-slot-style': 'error' // Strongly recommended
-    // 'vue/attributes-order': 'error' // Recommended
+    'vue/v-slot-style': 'error', // Strongly recommended
+    'vue/attributes-order': 'error' // Recommended
   }
 }

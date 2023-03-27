@@ -2,22 +2,22 @@
   <div>
     <z-button
       :disabled="disabled"
-      @click="openModal"
       size="small"
       button-type="primary"
       icon="save"
+      @click="openModal"
     >
       Save template
     </z-button>
     <portal to="modal">
-      <z-modal v-if="isSaveModalVisible" @onClose="isSaveModalVisible = false" title="Confirm save">
+      <z-modal v-if="isSaveModalVisible" title="Confirm save" @onClose="isSaveModalVisible = false">
         <fieldset class="space-y-4 p-4">
           <div class="space-y-2">
             <label for="title" class="text-vanilla-200 text-sm">Template name</label>
             <z-input
+              id="Title"
               v-model="internalTitle"
               placeholder="Template name"
-              id="Title"
               required="true"
             />
           </div>
@@ -44,8 +44,8 @@
               class="modal-primary-action w-48"
               button-type="primary"
               size="small"
-              @click="updateConfig(close)"
               :disabled="savingConfig"
+              @click="updateConfig(close)"
             >
               {{ savingConfig ? 'Updating' : 'Update' }} template
             </z-button>

@@ -39,10 +39,10 @@
         </template>
         <template slot="right">
           <z-icon
+            v-show="query"
             icon="x"
             size="small"
             class="cursor-pointer"
-            v-show="query"
             @click="clearSearch"
           />
         </template>

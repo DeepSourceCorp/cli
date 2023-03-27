@@ -2,11 +2,11 @@
   <form-group label="Invoices" :divide="false" body-class="space-y-2">
     <template v-if="Array.isArray(invoices)">
       <a
+        v-for="inv in invoices"
+        :key="inv.invoiceId"
         :href="inv.url"
         target="blank"
         rel="noopener noreferrer"
-        v-for="inv in invoices"
-        :key="inv.invoiceId"
         class="flex items-center w-full p-4 space-x-4 border rounded-md cursor-pointer group border-slate-400 border-opacity-70 hover:bg-ink-300 hover:border-slate-400 text-vanilla-400 hover:text-vanilla-100"
       >
         <!-- Replace with PDF -->

@@ -17,8 +17,8 @@
         <z-menu-section :divider="false">
           <z-menu-item
             v-for="repo in repoList"
-            as="nuxt-link"
             :key="repo.id"
+            as="nuxt-link"
             :to="buildRoute(repo)"
             class="w-full"
             @click.native="close"
@@ -39,7 +39,6 @@
     <template v-else>
       <button
         type="button"
-        @click.prevent="toggleDropdown"
         class="flex items-center justify-between w-full px-2 py-1 text-sm outline-none focus:outline-none"
         :class="[
           isActive && !(repoWithPendingAdhocRuns && repoWithPendingAdhocRuns.length)
@@ -47,6 +46,7 @@
             : 'text-vanilla-400',
           { cursor: repoList.length === 0 }
         ]"
+        @click.prevent="toggleDropdown"
       >
         <div class="flex items-center space-x-2">
           <z-icon icon="repositories" />
@@ -58,7 +58,7 @@
           <z-icon class="pl-1" :icon="dropdownCollapsed ? 'chevron-up' : 'chevron-down'" />
         </z-tag>
       </button>
-      <div class="space-y-0.5" v-show="dropdownCollapsed">
+      <div v-show="dropdownCollapsed" class="space-y-0.5">
         <sidebar-item
           v-for="repo in repoList"
           :key="repo.id"

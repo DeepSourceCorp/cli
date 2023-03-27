@@ -38,17 +38,17 @@
           <transition mode="out-in" enter-class="-translate-y-2" leave-class="-translate-y-2">
             <div
               v-if="internalStarredState"
-              @click.prevent="toggleStar(false)"
               key="starred"
               class="p-2 pt-3.5 h-10 bg-ink-200 rounded-tr-md shadow-md ribbon transform-gpu transition-all ease-in-out duration-150"
+              @click.prevent="toggleStar(false)"
             >
               <z-icon icon="z-star" color="juniper" />
             </div>
             <div
               v-else
-              @click.prevent="toggleStar(true)"
               key="not-starred"
               class="p-2 pt-3.5 h-10 transform-gpu transition-all ease-in-out duration-150"
+              @click.prevent="toggleStar(true)"
             >
               <z-icon icon="z-star" color="ink-200 text-ink-200" />
             </div>

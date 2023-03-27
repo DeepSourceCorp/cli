@@ -13,7 +13,7 @@
         v-html="safeRenderBackticks(pullRequestTitle.trim() || (issue && issue.title))"
       ></h3>
 
-      <span class="flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex" v-if="issue">
+      <span v-if="issue" class="flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex">
         {{ issue.shortcode }}
       </span>
     </template>

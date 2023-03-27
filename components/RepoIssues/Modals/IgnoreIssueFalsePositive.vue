@@ -1,6 +1,6 @@
 <template>
   <portal to="modal">
-    <z-modal v-if="isOpen" @onClose="close" width="wide">
+    <z-modal v-if="isOpen" width="wide" @onClose="close">
       <template slot="title">
         <span class="text-sm font-medium text-vanilla-400">
           Ignore and mark this occurrence of
@@ -30,9 +30,9 @@
             icon="check"
             label="Confirm and ignore"
             loading-label="Updating issue"
-            @click="confirm"
             :disabled="isLoading"
             :is-loading="isLoading"
+            @click="confirm"
           />
         </div>
       </template>

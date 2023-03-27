@@ -15,9 +15,9 @@
             <z-input
               id="team-settings-branch"
               v-model="branch"
-              @blur="updateBranch"
               class="px-2"
               size="small"
+              @blur="updateBranch"
             />
           </div>
         </div>
@@ -33,8 +33,8 @@
         label="Default analysis branch"
         input-id="team-settings-branch"
         :cascade-input="true"
-        @blur="updateBranch"
         class="flex-grow hidden max-w-2xl lg:grid"
+        @blur="updateBranch"
       >
         <template slot="description">
           <p class="max-w-sm">
@@ -45,10 +45,10 @@
       </text-input>
 
       <toggle-input
+        v-model="enableGitMod"
         input-width="x-small"
         label="Enable git submodules"
         input-id="enable-git-submodules"
-        v-model="enableGitMod"
         class="max-w-2xl border-t border-slate-400"
         @input="updateRepositorySettings"
       >
@@ -159,9 +159,6 @@
       >
         <button
           id="repo-settings-analysis-status"
-          @click="toggleState()"
-          @mouseenter="updateHoverStyle(true)"
-          @mouseleave="updateHoverStyle(false)"
           class="flex items-center self-end justify-center w-full h-10 px-4 py-1 space-x-2 font-medium transition-all duration-150 ease-in-out rounded-sm md:h-8 md:-ml-4 md:w-52"
           :class="{
             'bg-transparent text-cherry border border-cherry': isRepoActivated && isHovered,
@@ -169,6 +166,9 @@
             'bg-cherry text-vanilla-100': !isRepoActivated && !isHovered,
             'bg-juniper text-ink-400': isRepoActivated && !isHovered
           }"
+          @click="toggleState()"
+          @mouseenter="updateHoverStyle(true)"
+          @mouseleave="updateHoverStyle(false)"
         >
           <z-icon :icon="icon" size="small" color="current" />
           <span class="text-sm leading-none">{{ buttonText }}</span>

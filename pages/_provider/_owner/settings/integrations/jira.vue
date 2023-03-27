@@ -58,7 +58,7 @@
         </div>
       </z-alert>
 
-      <section class="space-y-8 sm:space-y-7" v-if="integration.installed">
+      <section v-if="integration.installed" class="space-y-8 sm:space-y-7">
         <select-input
           v-model="selectedCloudId"
           :disabled="updatingIntegration"

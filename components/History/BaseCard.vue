@@ -2,12 +2,12 @@
   <component
     :is="to ? 'nuxt-link' : 'div'"
     :to="to"
-    @click="$emit('click')"
     class="block group"
     :class="{
       'border rounded-lg border-slate-400': !removeDefaultStyle,
       'bg-ink-400 hover:bg-ink-300': to && !removeDefaultStyle
     }"
+    @click="$emit('click')"
   >
     <div
       v-if="$slots.header"

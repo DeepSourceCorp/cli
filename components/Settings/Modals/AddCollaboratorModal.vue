@@ -10,8 +10,8 @@
         <div class="relative px-2 border rounded-lg border-slate-400 group">
           <span
             v-tooltip="'Back to search'"
-            @click="selectedMember = null"
             class="absolute items-center justify-center hidden w-5 h-5 rounded-full cursor-pointer group-hover:flex -top-2 -right-2 bg-ink-100 hover:bg-slate"
+            @click="selectedMember = null"
           >
             <z-icon icon="corner-up-left" size="x-small" />
           </span>
@@ -23,11 +23,11 @@
             v-bind="selectedMember.user"
           />
         </div>
-        <z-radio-group v-model="selectedRole" @change="updateValue" class="space-y-3">
+        <z-radio-group v-model="selectedRole" class="space-y-3" @change="updateValue">
           <div
-            class="p-2 space-y-1 text-sm rounded-lg cursor-pointer hover:bg-ink-200"
             v-for="opt in repoPerms"
             :key="opt.value"
+            class="p-2 space-y-1 text-sm rounded-lg cursor-pointer hover:bg-ink-200"
             @click="selectedRole = opt.value"
           >
             <z-radio :value="opt.value" :label="opt.label" />
@@ -62,14 +62,14 @@
           class="border-t divide-y divide-ink-100 border-slate-400"
         >
           <member-list-item
-            class="px-4 cursor-pointer hover:bg-ink-200"
-            @click="selectedMember = member.node"
             v-for="member in repository.addableMembers.edges"
             :key="member.node.id"
+            class="px-4 cursor-pointer hover:bg-ink-200"
             :role="member.node.role"
             :show-role-options="false"
             :is-primary-user="member.node.isPrimaryUser"
             v-bind="member.node.user"
+            @click="selectedMember = member.node"
           />
         </div>
         <div v-else-if="memberSearchCandidate && !fetching" class="flex items-center p-4 min-h-40">

@@ -26,9 +26,9 @@
             icon="check"
             label="Confirm and ignore"
             loading-label="Updating issue"
-            @click="confirm"
             :disabled="!pattern || isLoading"
             :is-loading="isLoading"
+            @click="confirm"
           />
         </div>
       </template>

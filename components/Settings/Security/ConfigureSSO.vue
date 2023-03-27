@@ -19,7 +19,7 @@
       <div class="space-y-2">
         <label class="space-y-2">
           <div class="text-xs leading-5">XML Metadata URL</div>
-          <z-input v-focus v-model="xmlMetadataUrl" size="small" placeholder="" />
+          <z-input v-model="xmlMetadataUrl" v-focus size="small" placeholder="" />
         </label>
         <a
           v-if="CONFIGURE_DOCS_LINK"

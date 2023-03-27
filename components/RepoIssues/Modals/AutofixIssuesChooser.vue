@@ -2,8 +2,8 @@
   <portal to="modal">
     <z-modal
       v-if="isOpen"
-      @onClose="$emit('close')"
       title="Choose issues you want to run Autofix on"
+      @onClose="$emit('close')"
     >
       <div class="flex space-x-2 py-4 text-vanilla-400">
         <div
@@ -47,8 +47,8 @@
                   class="w-full flex space-x-1 items-center leading-7 py-2 px-4 cursor-pointer"
                 >
                   <z-checkbox
-                    :value="issue"
                     v-model="selectedIssues"
+                    :value="issue"
                     :true-value="true"
                     :false-value="false"
                     size="small"

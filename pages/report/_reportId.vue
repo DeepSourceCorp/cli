@@ -73,21 +73,21 @@
           <span class="text-xs font-medium">This report is password-protected</span>
         </div>
 
-        <form @submit="submitPassword" class="px-6 py-6 mb-10 rounded-md bg-ink-300">
+        <form class="px-6 py-6 mb-10 rounded-md bg-ink-300" @submit="submitPassword">
           <label for="public-report-pasword" class="block mb-2 text-sm font-medium">
             Enter password
           </label>
           <div class="mb-2 space-y-2">
             <div class="relative">
               <z-input
-                v-focus
                 id="public-report-pasword"
                 v-model="password"
+                v-focus
                 placeholder="Password to access the report"
                 :required="true"
                 :type="isPasswordHidden ? 'password' : 'text'"
-                @input="clearPasswordError"
                 class="rounded-md border-slate-400"
+                @input="clearPasswordError"
               />
               <div class="absolute flex top-1 right-1 gap-x-1 bg-ink-400">
                 <z-button

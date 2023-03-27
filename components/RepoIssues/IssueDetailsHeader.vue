@@ -48,8 +48,8 @@
           <nuxt-link
             v-for="tag in tags"
             :key="tag"
-            :to="`${$generateRoute(['issues'])}?category=all&q=tag:${tag}`"
             v-tooltip="`View all issues tagged ${deslugifyTag(tag).toUpperCase()}`"
+            :to="`${$generateRoute(['issues'])}?category=all&q=tag:${tag}`"
             class="flex items-center gap-x-1 rounded-full border border-slate-400 px-1.5 py-1 uppercase"
           >
             <span

@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-menu" v-outside-click="closeSidebar">
+  <div v-outside-click="closeSidebar" class="sidebar-menu">
     <!-- Sidebar modal -->
     <div
       class="absolute top-0 z-30 flex flex-col h-screen duration-200 cursor-pointer transition-width group bg-ink-400 sidebar-menu border-slate-400 text-vanilla-100"
@@ -10,13 +10,13 @@
         v-if="collapsible"
         class="absolute top-0 hidden w-px h-full lg:group-hover:block -right-px bg-gradient-juniper"
       ></div>
-      <header class="relative w-full" v-if="$scopedSlots.header">
+      <header v-if="$scopedSlots.header" class="relative w-full">
         <slot name="header" :is-collapsed="isCollapsed"></slot>
         <div
           v-if="collapsible"
           class="relative hidden p-1 -translate-y-1/2 rounded-full lg:group-hover:block bg-juniper lg:absolute top-full transform-gpu"
-          @click.stop="collapseSidebar()"
           :class="[hoverStyle]"
+          @click.stop="collapseSidebar()"
         >
           <z-icon :icon="arrow" size="small" color="ink-400" box-width="16" />
         </div>
@@ -33,16 +33,16 @@
         <slot :is-collapsed="isCollapsed"></slot>
       </div>
       <footer
+        v-if="$scopedSlots.footer"
         class="w-full p-3 border-t border-solid border-slate-400 bg-gradient-dark-dawn backdrop-blur-xl"
         :class="footerClass"
-        v-if="$scopedSlots.footer"
       >
         <slot name="footer" :is-collapsed="isCollapsed"></slot>
       </footer>
       <footer
+        v-if="$scopedSlots.brand"
         class="w-full px-2 py-4 border-t border-solid border-slate-400"
         :class="footerBrandClass"
-        v-if="$scopedSlots.brand"
       >
         <slot name="brand" :is-collapsed="isCollapsed"></slot>
       </footer>
