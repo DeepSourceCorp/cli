@@ -2,7 +2,7 @@ name: TruffleHog
 on: [pull_request]
 jobs:
   Secrets_Scan:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, charmeleon]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
