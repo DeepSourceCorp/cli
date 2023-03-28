@@ -9,6 +9,9 @@ build:
 sync-files:
 	aws s3 sync .nuxt/dist/client $(S3_BUCKET)/$(VERSION)/bifrost  --acl public-read --cache-control max-age=31536000 --size-only --delete
 
+sync-files-r2:
+	aws s3 sync .nuxt/dist/client $(S3_BUCKET)/$(VERSION)/bifrost --endpoint-url $(R2_ENDPOINT) --acl public-read --cache-control max-age=31536000 --size-only --delete
+
 major:
 	@git pull --tags; \
 	IFS='.' read -ra tag <<< "$$(git describe --tags `git rev-list --tags --max-count=1`)"; \
