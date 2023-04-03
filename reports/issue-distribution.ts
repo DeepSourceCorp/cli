@@ -21,7 +21,7 @@ export default {
     const handledResponse: IHandledResponse = {
       label: ReportMeta[reportKey].title,
       value: report?.currentValue ?? 0,
-      valueLabel: 'active issues'
+      valueLabel: report?.currentValue === 1 ? 'active issue' : 'active issues'
     }
 
     const { historicalValues } = report as Report
