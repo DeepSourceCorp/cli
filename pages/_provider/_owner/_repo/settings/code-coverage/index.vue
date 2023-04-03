@@ -18,8 +18,7 @@
             <p class="text-robin-150 leading-6 font-normal">
               Code Coverage is automatically enabled when we receive a coverage report for your
               repository. Send a coverage report to DeepSource directly using the CLI or integrate
-              coverage reporting in your CI pipeline. If you wish to stop tracking coverage, you can
-              disable Code Coverage on this repository from this page.
+              coverage reporting in your CI pipeline.
             </p>
             <p>
               <a
