@@ -508,7 +508,7 @@ export default class RequestPilotLicense extends Vue {
   }
 
   get actionDisabled(): boolean {
-    return this.name.toLowerCase().trim() !== this.confirmName.toLowerCase().trim()
+    return this.confirmName === ''
   }
 
   get title(): string {
