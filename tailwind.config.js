@@ -75,6 +75,7 @@ module.exports = {
         'slate-400': [`1px solid ${theme('colors.slate.400')}`, '0px']
       }),
       spacing: {
+        4.5: '1.125rem',
         19: '4.75rem',
         84: '21rem',
         88: '22rem',

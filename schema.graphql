@@ -1396,8 +1396,10 @@ type GroupUserMembershipEdge {
 type IdentityProvider implements MaskPrimaryKeyNode {
   id: ID!
   xmlMetadataUrl: String!
-  domain: VerifiableDomain
+  domain: VerifiableDomain!
   provider: String!
+  isScimEnabled: Boolean!
+  isScimAuthTokenSet: Boolean!
 }
 
 enum IgnoreCheckIssueActionChoice {
@@ -1823,6 +1825,7 @@ type Mutation {
   autoOnboard(input: AutoOnboardInput!): AutoOnboardPayload
   addIdentityProvider(input: AddIdentityProviderInput!): AddIdentityProviderPayload
   deleteIdentityProvider(input: DeleteIdentityProviderInput!): DeleteIdentityProviderPayload
+  updateIdentityProvider(input: UpdateIdentityProviderInput!): UpdateIdentityProviderPayload
   updateEnterpriseInstallation(input: UpdateEnterpriseInstallationInput!): UpdateEnterpriseInstallationPayload
   createGroup(input: CreateGroupInput!): CreateGroupPayload
   updateGroup(input: UpdateGroupInput!): UpdateGroupPayload
@@ -3460,6 +3463,18 @@ input UpdateGroupTeamRoleInput {
 
 type UpdateGroupTeamRolePayload {
   ok: Boolean
+  clientMutationId: String
+}
+
+input UpdateIdentityProviderInput {
+  teamId: ID!
+  isScimEnabled: Boolean
+  scimAuthToken: String
+  clientMutationId: String
+}
+
+type UpdateIdentityProviderPayload {
+  ok: Boolean!
   clientMutationId: String
 }
 

@@ -593,6 +593,15 @@ declare module '*/toggleDataTriggerTimeout.gql' {
 }
     
 
+declare module '*/updateIdentityProvider.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const updateIdentityProvider: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/updateOwnerSettings.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

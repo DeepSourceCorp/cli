@@ -17,6 +17,8 @@ query teamSecuritySettings($login: String!, $provider: VCSProviderChoices!) {
         id
         xmlMetadataUrl
         provider
+        isScimEnabled
+        isScimAuthTokenSet
         domain {
           id
           domainName

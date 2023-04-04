@@ -2066,8 +2066,10 @@ export type IdentityProvider = MaskPrimaryKeyNode & {
   __typename?: 'IdentityProvider';
   id: Scalars['ID'];
   xmlMetadataUrl: Scalars['String'];
-  domain?: Maybe<VerifiableDomain>;
+  domain: VerifiableDomain;
   provider: Scalars['String'];
+  isScimEnabled: Scalars['Boolean'];
+  isScimAuthTokenSet: Scalars['Boolean'];
 };
 
 export enum IgnoreCheckIssueActionChoice {
@@ -2623,6 +2625,7 @@ export type Mutation = {
   autoOnboard?: Maybe<AutoOnboardPayload>;
   addIdentityProvider?: Maybe<AddIdentityProviderPayload>;
   deleteIdentityProvider?: Maybe<DeleteIdentityProviderPayload>;
+  updateIdentityProvider?: Maybe<UpdateIdentityProviderPayload>;
   updateEnterpriseInstallation?: Maybe<UpdateEnterpriseInstallationPayload>;
   createGroup?: Maybe<CreateGroupPayload>;
   updateGroup?: Maybe<UpdateGroupPayload>;
@@ -2780,6 +2783,11 @@ export type MutationAddIdentityProviderArgs = {
 
 export type MutationDeleteIdentityProviderArgs = {
   input: DeleteIdentityProviderInput;
+};
+
+
+export type MutationUpdateIdentityProviderArgs = {
+  input: UpdateIdentityProviderInput;
 };
 
 
@@ -6014,6 +6022,19 @@ export type UpdateGroupTeamRolePayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type UpdateIdentityProviderInput = {
+  teamId: Scalars['ID'];
+  isScimEnabled?: Maybe<Scalars['Boolean']>;
+  scimAuthToken?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UpdateIdentityProviderPayload = {
+  __typename?: 'UpdateIdentityProviderPayload';
+  ok: Scalars['Boolean'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type UpdateIntegrationSettingsInput = {
   shortcode: Scalars['String'];
   level: IntegrationSettingsLevel;
@@ -7749,6 +7770,19 @@ export type Unnamed_48_Mutation = (
   & { updateTimeoutSetting?: Maybe<(
     { __typename?: 'UpdateTimeoutSettingPayload' }
     & Pick<UpdateTimeoutSettingPayload, 'ok'>
+  )> }
+);
+
+export type UpdateIdentityProviderMutationVariables = Exact<{
+  input: UpdateIdentityProviderInput;
+}>;
+
+
+export type UpdateIdentityProviderMutation = (
+  { __typename?: 'Mutation' }
+  & { updateIdentityProvider?: Maybe<(
+    { __typename?: 'UpdateIdentityProviderPayload' }
+    & Pick<UpdateIdentityProviderPayload, 'ok'>
   )> }
 );
 
@@ -11974,11 +12008,11 @@ export type TeamSecuritySettingsQuery = (
         & Pick<VerifiableDomain, 'id' | 'domainName' | 'verified'>
       )>, identityProvider?: Maybe<(
         { __typename?: 'IdentityProvider' }
-        & Pick<IdentityProvider, 'id' | 'xmlMetadataUrl' | 'provider'>
-        & { domain?: Maybe<(
+        & Pick<IdentityProvider, 'id' | 'xmlMetadataUrl' | 'provider' | 'isScimEnabled' | 'isScimAuthTokenSet'>
+        & { domain: (
           { __typename?: 'VerifiableDomain' }
           & Pick<VerifiableDomain, 'id' | 'domainName' | 'verified'>
-        )> }
+        ) }
       )> }
     )> }
   )> }
