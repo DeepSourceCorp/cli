@@ -1,0 +1,42 @@
+query teamLevelAuditLog(
+  $provider: VCSProviderChoices!
+  $login: String!
+  $first: Int
+  $after: String
+  $createdAtGte: Date
+  $createdAtLte: Date
+  $q: String
+) {
+  team(provider: $provider, login: $login) {
+    id
+    name
+    logs(
+      first: $first
+      after: $after
+      createdAtGte: $createdAtGte
+      createdAtLte: $createdAtLte
+      q: $q
+    ) {
+      edges {
+        node {
+          id
+          eventName
+          description
+          ipAddress
+          location
+          createdAt
+          actor {
+            fullName
+            firstName
+            email
+            avatar
+          }
+        }
+      }
+    }
+
+    fullLogs: logs(createdAtGte: $createdAtGte, createdAtLte: $createdAtLte, q: $q) {
+      totalCount
+    }
+  }
+}

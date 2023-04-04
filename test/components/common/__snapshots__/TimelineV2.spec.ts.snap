@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ TimelineV2 ]] renders a list of timeline items 1`] = `
+"<ul>
+  <timelineitemv2-stub>Timeline item 1</timelineitemv2-stub>
+  <timelineitemv2-stub>Timeline item 2</timelineitemv2-stub>
+  <timelineitemv2-stub>Timeline item 3</timelineitemv2-stub>
+  <timelineitemv2-stub>Timeline item 4</timelineitemv2-stub>
+  <timelineitemv2-stub>Timeline item 5</timelineitemv2-stub>
+</ul>"
+`;

@@ -1,4 +1,13 @@
 
+declare module '*/exportAuditLogs.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const exportAuditLogs: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/deleteRefreshToken.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -2049,6 +2058,7 @@ declare module '*/auditLog.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const auditLogs: DocumentNode;
+export const teamLevelAuditLog: DocumentNode;
 
   export default defaultDocument;
 }

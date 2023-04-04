@@ -1,24 +1,24 @@
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-16-fr team-level-settings-page">
+  <div class="team-level-settings-page grid grid-cols-1 lg:grid-cols-16-fr">
     <nav
-      class="hidden px-4 pt-2 overflow-x-auto border-b gap-x-8 hide-scroll border-slate-400 lg:sticky lg:flex lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r vertical-sidebar"
+      class="hide-scroll vertical-sidebar hidden gap-x-8 overflow-x-auto border-b border-slate-400 px-4 pt-2 lg:sticky lg:flex lg:flex-col lg:gap-y-1 lg:border-r lg:p-2"
     >
       <template v-for="option in settingsOptions">
         <!-- Show skeleton loader if `dashboardContext` is not populated yet -->
         <div
           v-if="showSkeletonLoaders"
           :key="option.label"
-          class="animate-pulse h-9 bg-ink-300"
+          class="h-9 animate-pulse bg-ink-300"
         ></div>
 
         <nuxt-link
           v-else-if="isTeam && option.validator"
           :key="option.label"
           :to="getRoute(option.name)"
-          class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300"
+          class="group flex-shrink-0 rounded-md text-sm hover:bg-ink-300"
         >
           <span
-            class="hidden p-2 rounded-md group-hover:text-vanilla-100 lg:block"
+            class="hidden rounded-md p-2 group-hover:text-vanilla-100 lg:block"
             :class="
               $route && $route.name && $route.name.startsWith(option.routeName)
                 ? 'bg-ink-300 text-vanilla-100'
@@ -154,6 +154,13 @@ export default class TeamSettings extends mixins(ActiveUserMixin) {
         label: 'Security',
         routeName: 'provider-owner-settings-security',
         validator: this.canViewSecurity
+      },
+      {
+        name: 'audit-log',
+        icon: 'list',
+        label: 'Audit log',
+        routeName: 'provider-owner-settings-audit-log',
+        validator: this.canViewAuditLog
       }
     ]
   }
@@ -229,6 +236,10 @@ export default class TeamSettings extends mixins(ActiveUserMixin) {
       this.isTeam &&
       this.$gateKeeper.team(TeamPerms.MANAGE_SECURITY, this.teamPerms.permission)
     )
+  }
+
+  get canViewAuditLog(): boolean {
+    return this.isTeam && this.$gateKeeper.team(TeamPerms.VIEW_AUDIT_LOG, this.teamPerms.permission)
   }
 
   get isTeam(): boolean {

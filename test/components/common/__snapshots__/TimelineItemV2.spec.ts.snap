@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ TimelineItemV2 ]] renders a timeline item with different list style types: {"listStyleType":"circle"} 1`] = `
+"<li class=\\"flex min-h-32 gap-x-4 text-sm md:min-h-24\\">
+  <div name=\\"list-item-type\\" class=\\"flex flex-col items-center justify-center\\">
+    <div name=\\"list-item-marker\\" class=\\"flex items-center justify-center py-1\\"><span class=\\"inline-block h-1.5 w-1.5 rounded-full border border-slate-200 bg-transparent\\"></span></div>
+    <div name=\\"list-item-border\\" class=\\"h-full border-l border-dashed border-ink-200\\"></div>
+  </div> Timeline item 1
+</li>"
+`;
+
+exports[`[[ TimelineItemV2 ]] renders a timeline item with different list style types: {"listStyleType":"disc"} 1`] = `
+"<li class=\\"flex min-h-32 gap-x-4 text-sm md:min-h-24\\">
+  <div name=\\"list-item-type\\" class=\\"flex flex-col items-center justify-center\\">
+    <div name=\\"list-item-marker\\" class=\\"flex items-center justify-center py-1\\"><span class=\\"inline-block h-1.5 w-1.5 rounded-full bg-slate-200\\"></span></div>
+    <div name=\\"list-item-border\\" class=\\"h-full border-l border-dashed border-ink-200\\"></div>
+  </div> Timeline item 2
+</li>"
+`;

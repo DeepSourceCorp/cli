@@ -1,0 +1,5 @@
+mutation exportAuditLogs($input: ExportAuditLogsInput!) {
+  exportAuditLogs(input: $input) {
+    ok
+  }
+}

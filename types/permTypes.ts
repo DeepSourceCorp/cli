@@ -24,7 +24,8 @@ export enum TeamPerms {
   MANAGE_PREFERENCES = 'managePreferences',
   PIN_REPORTS = 'pinReports',
   VIEW_TEAM_GENERAL_SETTINGS = 'viewTeamGeneralSettings',
-  MANAGE_SECURITY = 'manageSecurity'
+  MANAGE_SECURITY = 'manageSecurity',
+  VIEW_AUDIT_LOG = 'viewAuditLog'
 }
 
 export enum RepoPerms {

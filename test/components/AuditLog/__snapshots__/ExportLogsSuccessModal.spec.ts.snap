@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ ExportLogsSuccessModal ]] renders different states of the export logs success modal: {"showExportLogsSuccessModal":false,"loading":false} 1`] = `
+"<div><button class=\\"flex h-8 w-24 items-center justify-center gap-x-2 rounded-3px border border-ink-50 bg-ink-200 px-2 text-xs text-vanilla-400 hover:bg-ink-100 hover:text-vanilla-100 cursor-pointer\\">
+    <zicon-stub icon=\\"file-output\\" size=\\"small\\" position=\\"\\" color=\\"current\\" class=\\"\\"></zicon-stub> <span>Export</span>
+  </button>
+  <portal-stub to=\\"modal\\">
+    <!---->
+  </portal-stub>
+</div>"
+`;
+
+exports[`[[ ExportLogsSuccessModal ]] renders different states of the export logs success modal: {"showExportLogsSuccessModal":false,"loading":true} 1`] = `
+"<div><button disabled=\\"disabled\\" class=\\"flex h-8 w-24 items-center justify-center gap-x-2 rounded-3px border border-ink-50 bg-ink-200 px-2 text-xs text-vanilla-400 hover:bg-ink-100 hover:text-vanilla-100 cursor-not-allowed opacity-50\\">
+    <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"current\\" class=\\"animate-spin\\"></zicon-stub> <span>Export</span>
+  </button>
+  <portal-stub to=\\"modal\\">
+    <!---->
+  </portal-stub>
+</div>"
+`;
+
+exports[`[[ ExportLogsSuccessModal ]] renders different states of the export logs success modal: {"showExportLogsSuccessModal":true,"loading":false} 1`] = `
+"<div><button class=\\"flex h-8 w-24 items-center justify-center gap-x-2 rounded-3px border border-ink-50 bg-ink-200 px-2 text-xs text-vanilla-400 hover:bg-ink-100 hover:text-vanilla-100 cursor-pointer\\">
+    <zicon-stub icon=\\"file-output\\" size=\\"small\\" position=\\"\\" color=\\"current\\" class=\\"\\"></zicon-stub> <span>Export</span>
+  </button>
+  <portal-stub to=\\"modal\\">
+    <zmodal-stub title=\\"Export log\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+      <div class=\\"flex flex-col items-center px-4 py-8\\"><img src=\\"test-image-dir/test-image-file.png\\" class=\\"mx-auto max-h-84\\">
+        <div class=\\"space-y-1.5 text-center\\"><span class=\\"text-center text-base font-medium text-vanilla-200\\">Preparing your export...</span>
+          <p class=\\"max-w-sm text-center text-sm leading-6 text-vanilla-400\\">
+            We are processing the export request for your logs from
+            <span class=\\"font-medium text-vanilla-100\\">January 4, 2023</span> to
+            <span class=\\"font-medium text-vanilla-100\\">April 4, 2023</span>. You will receive them as a CSV file at
+            <span class=\\"font-medium text-vanilla-100\\">johndoe@test.com</span>.
+          </p>
+        </div>
+      </div>
+    </zmodal-stub>
+  </portal-stub>
+</div>"
+`;
+
+exports[`[[ ExportLogsSuccessModal ]] renders different states of the export logs success modal: {"showExportLogsSuccessModal":true,"loading":true} 1`] = `
+"<div><button disabled=\\"disabled\\" class=\\"flex h-8 w-24 items-center justify-center gap-x-2 rounded-3px border border-ink-50 bg-ink-200 px-2 text-xs text-vanilla-400 hover:bg-ink-100 hover:text-vanilla-100 cursor-not-allowed opacity-50\\">
+    <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"current\\" class=\\"animate-spin\\"></zicon-stub> <span>Export</span>
+  </button>
+  <portal-stub to=\\"modal\\">
+    <zmodal-stub title=\\"Export log\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+      <div class=\\"flex flex-col items-center px-4 py-8\\"><img src=\\"test-image-dir/test-image-file.png\\" class=\\"mx-auto max-h-84\\">
+        <div class=\\"space-y-1.5 text-center\\"><span class=\\"text-center text-base font-medium text-vanilla-200\\">Preparing your export...</span>
+          <p class=\\"max-w-sm text-center text-sm leading-6 text-vanilla-400\\">
+            We are processing the export request for your logs from
+            <span class=\\"font-medium text-vanilla-100\\">January 4, 2023</span> to
+            <span class=\\"font-medium text-vanilla-100\\">April 4, 2023</span>. You will receive them as a CSV file at
+            <span class=\\"font-medium text-vanilla-100\\">johndoe@test.com</span>.
+          </p>
+        </div>
+      </div>
+    </zmodal-stub>
+  </portal-stub>
+</div>"
+`;

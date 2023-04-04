@@ -86,7 +86,8 @@ const TEAM_PERMS_MAP = {
     TeamMemberRoleChoices.Member,
     TeamMemberRoleChoices.Contributor
   ],
-  [TeamPerms.MANAGE_SECURITY]: [TeamMemberRoleChoices.Admin]
+  [TeamPerms.MANAGE_SECURITY]: [TeamMemberRoleChoices.Admin],
+  [TeamPerms.VIEW_AUDIT_LOG]: [TeamMemberRoleChoices.Admin]
 }
 
 const REPO_PERMS_MAP = {

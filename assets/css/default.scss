@@ -81,7 +81,7 @@ input[type='number']::-webkit-inner-spin-button {
   @apply text-vanilla-200;
 }
 .hljs-section {
-  @apply text-lavender font-semibold;
+  @apply font-semibold text-lavender;
 }
 
 .toml-box {
@@ -90,14 +90,14 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 .cmd-kbd {
-  @apply px-0.5 py-px leading-none border rounded-sm text-xxs border-slate-400 bg-ink-400;
+  @apply rounded-sm border border-slate-400 bg-ink-400 px-0.5 py-px text-xxs leading-none;
 }
 
 .error-state {
   @apply text-sm;
 
   code {
-    @apply font-semibold text-sm;
+    @apply text-sm font-semibold;
   }
 
   a {
@@ -106,7 +106,7 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 code.bifrost-inline-code {
-  @apply bg-ink-200 rounded-md tracking-wider font-medium;
+  @apply rounded-md bg-ink-200 font-medium tracking-wider;
   padding: clamp(2px, 0.25em, 4px);
   font-size: 0.8em;
 }
@@ -184,7 +184,7 @@ code.bifrost-inline-code {
 }
 
 button.auxillary-button {
-  @apply flex items-center gap-x-1.5 px-2 rounded-3px cursor-pointer bg-ink-200 hover:bg-ink-100 border border-ink-50;
+  @apply flex cursor-pointer items-center gap-x-1.5 rounded-3px border border-ink-50 bg-ink-200 px-2 hover:bg-ink-100;
 }
 
 .intermediate-page-gradient-layer {
@@ -198,4 +198,14 @@ button.auxillary-button {
   box-shadow: 0px 10.5635px 660.221px 5281.77px rgba(0, 0, 0, 0.25);
   filter: blur(158.453px);
   height: 956px;
+}
+
+@mixin lhCrop($line-height) {
+  &::before {
+    content: '';
+    display: block;
+    height: 0;
+    width: 0;
+    margin-top: calc((1 - #{$line-height}) * 0.5em);
+  }
 }

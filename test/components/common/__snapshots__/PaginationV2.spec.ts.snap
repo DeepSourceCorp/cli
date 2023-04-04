@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ PaginationV2 ]] renders the new pagination pattern 1`] = `
+"<div class=\\"flex items-center justify-center gap-x-2\\">
+  <p class=\\"mr-2 text-sm text-vanilla-400\\">
+    1 - 30 <span class=\\"text-slate-200\\">of</span> 250
+  </p>
+  <zdivider-stub direction=\\"vertical\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub> <button class=\\"h-6 w-6 rounded-sm text-slate-200 hover:bg-ink-200\\">
+    <zicon-stub icon=\\"chevron-left\\" size=\\"small\\" position=\\"\\" color=\\"slate-200\\" class=\\"mx-auto\\"></zicon-stub>
+  </button> <button class=\\"h-6 w-6 rounded-sm text-slate-200 hover:bg-ink-200\\">
+    <zicon-stub icon=\\"chevron-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"mx-auto\\"></zicon-stub>
+  </button>
+</div>"
+`;

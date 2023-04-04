@@ -1,25 +1,49 @@
 <template>
-  <div class="flex flex-col space-y-2">
-    <div class="text-md text-vanilla-400">
-      <span class="font-semibold text-vanilla-100">{{ eventDescription }}</span>
-      <template v-if="actorName"> — {{ actorName }} </template>
-    </div>
-    <div class="flex space-x-4">
-      <info v-if="createdAt" v-tooltip="formattedDate" icon="clock" :title="formatDuration" />
-      <info v-if="location" icon="map-pin" :title="location" />
-      <info v-if="ipAddress" icon="globe" :title="ipAddress" />
+  <div class="min-h-12 space-y-3">
+    <p class="event-description leading-5 text-vanilla-100">{{ eventDescription }}</p>
+
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-vanilla-400">
+      <code class="bifrost-inline-code text-vanilla-100">{{ eventName }}</code>
+
+      <div v-if="ipAddress" class="flex items-center gap-x-2">
+        <z-icon icon="network" size="x-small" />
+        {{ ipAddress }}
+      </div>
+
+      <div v-if="actor" class="flex items-center gap-x-2">
+        <z-avatar
+          :image="actor.avatar"
+          :fallback-image="getDefaultAvatar(actor.email)"
+          :user-name="actorName"
+          size="xs"
+          class="flex-shrink-0"
+        />
+
+        <span v-tooltip="actor.email">{{ actorName }}</span>
+      </div>
+
+      <div class="flex items-center gap-x-2">
+        <z-icon icon="clock" size="x-small" />
+        <span v-tooltip="formattedDate">{{ formatDuration }}</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { fromNow, formatDate, parseISODate } from '@/utils/date'
-import { Info } from '@/components/Autofix/index'
+import { ZAvatar, ZIcon } from '@deepsource/zeal'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+
+import { formatDate, fromNow, parseISODate } from '@/utils/date'
+import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
   components: {
-    Info
+    ZAvatar,
+    ZIcon
+  },
+  methods: {
+    getDefaultAvatar
   }
 })
 export default class Log extends Vue {
@@ -71,3 +95,11 @@ export default class Log extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '~/assets/css/default.scss';
+
+.event-description {
+  @include lhCrop(1.125);
+}
+</style>

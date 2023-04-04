@@ -6844,6 +6844,19 @@ export type WebhookSecretPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type ExportAuditLogsMutationVariables = Exact<{
+  input: ExportAuditLogsInput;
+}>;
+
+
+export type ExportAuditLogsMutation = (
+  { __typename?: 'Mutation' }
+  & { exportAuditLogs?: Maybe<(
+    { __typename?: 'ExportAuditLogsPayload' }
+    & Pick<ExportAuditLogsPayload, 'ok'>
+  )> }
+);
+
 export type Unnamed_1_MutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -11853,6 +11866,42 @@ export type RepositoryWidgetsQuery = (
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'widgets' | 'widgetsDisplay' | 'widgetsAvailable' | 'allWidgets'>
+  )> }
+);
+
+export type TeamLevelAuditLogQueryVariables = Exact<{
+  provider: VcsProviderChoices;
+  login: Scalars['String'];
+  first?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  createdAtGte?: Maybe<Scalars['Date']>;
+  createdAtLte?: Maybe<Scalars['Date']>;
+  q?: Maybe<Scalars['String']>;
+}>;
+
+
+export type TeamLevelAuditLogQuery = (
+  { __typename?: 'Query' }
+  & { team?: Maybe<(
+    { __typename?: 'Team' }
+    & Pick<Team, 'id' | 'name'>
+    & { logs?: Maybe<(
+      { __typename?: 'AuditLogConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'AuditLogEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'AuditLog' }
+          & Pick<AuditLog, 'id' | 'eventName' | 'description' | 'ipAddress' | 'location' | 'createdAt'>
+          & { actor?: Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'fullName' | 'firstName' | 'email' | 'avatar'>
+          )> }
+        )> }
+      )>> }
+    )>, fullLogs?: Maybe<(
+      { __typename?: 'AuditLogConnection' }
+      & Pick<AuditLogConnection, 'totalCount'>
+    )> }
   )> }
 );
 
