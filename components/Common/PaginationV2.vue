@@ -7,17 +7,27 @@
     <z-divider direction="vertical" margin="m-0" />
 
     <button
-      class="h-6 w-6 rounded-sm text-slate-200 hover:bg-ink-200"
+      class="h-6 w-6 rounded-sm"
+      :class="
+        disableBackAction
+          ? 'cursor-not-allowed text-slate-200'
+          : 'text-vanilla-400 hover:bg-ink-200'
+      "
       @click="backActionClickHandler"
     >
-      <z-icon :color="backActionIconColor" icon="chevron-left" class="mx-auto" />
+      <z-icon color="current" icon="chevron-left" class="mx-auto" />
     </button>
 
     <button
-      class="h-6 w-6 rounded-sm text-slate-200 hover:bg-ink-200"
+      class="h-6 w-6 rounded-sm"
+      :class="
+        disableForwardAction
+          ? 'cursor-not-allowed text-slate-200'
+          : 'text-vanilla-400 hover:bg-ink-200'
+      "
       @click="forwardActionClickHandler"
     >
-      <z-icon :color="forwardActionIconColor" icon="chevron-right" class="mx-auto" />
+      <z-icon color="current" icon="chevron-right" class="mx-auto" />
     </button>
   </div>
 </template>
@@ -43,14 +53,6 @@ export default class PaginationV2 extends Vue {
 
   @Prop({ required: true, type: Number })
   totalCount: number
-
-  get backActionIconColor() {
-    return this.disableBackAction ? 'slate-200' : 'vanilla-400'
-  }
-
-  get forwardActionIconColor() {
-    return this.disableForwardAction ? 'slate-200' : 'vanilla-400'
-  }
 
   get disableBackAction() {
     return this.modelValue <= 1
