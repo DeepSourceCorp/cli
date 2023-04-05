@@ -5,11 +5,15 @@
     @onClose="close"
     @primaryAction="updateRole"
   >
-    <div class="mb-2 text-base leading-relaxed text-vanilla-100 flex items-center">
-      <z-icon icon="alert-circle" size="small" class="mr-2" /> Update {{ roles[role] }} role to
-      {{ roles[newRole] }}
+    <div class="mb-2 flex items-center text-base leading-relaxed text-vanilla-100">
+      <z-icon icon="alert-circle" size="small" class="mr-2" /> Update {{ ROLES[role] }} role to
+      {{ ROLES[newRole] }}
     </div>
-    <p class="text-sm leading-relaxed text-vanilla-400 blur" v-html="roleMessage"></p>
+    <p class="blur text-sm leading-relaxed text-vanilla-400">
+      Are you sure you want to make <span class="text-vanilla-100">{{ userName }}</span>
+      {{ formattedArticle }} <span class="text-vanilla-100">{{ ROLES[newRole] }}</span
+      >? {{ roleAccessMessage }}
+    </p>
   </z-confirm>
 </template>
 <script lang="ts">
@@ -44,28 +48,29 @@ export default class UpdateRoleModal extends Vue {
     this.$emit('close')
   }
 
-  private roles: Record<TeamMemberRoleChoices, string> = {
+  private readonly ROLES: Record<TeamMemberRoleChoices, string> = {
     [TeamMemberRoleChoices.Admin]: 'administrator',
     [TeamMemberRoleChoices.Contributor]: 'contributor',
     [TeamMemberRoleChoices.Member]: 'member'
   }
 
-  get roleMessage(): string {
-    const name = this.fullName ? this.fullName : this.email
-    const role = this.roles[this.newRole]
+  get userName() {
+    return this.fullName ? this.fullName : this.email
+  }
 
-    const formattedArticle = this.newRole === TeamMemberRoleChoices.Admin ? 'an' : 'a'
+  get formattedArticle() {
+    return this.newRole === TeamMemberRoleChoices.Admin ? 'an' : 'a'
+  }
 
-    const confirmMessage = `Are you sure you want to make <span class="text-vanilla-100">${name}</span> ${formattedArticle} <span class="text-vanilla-100">${role}</span>?`
-
+  get roleAccessMessage(): string {
     if (this.newRole === TeamMemberRoleChoices.Admin) {
-      return `${confirmMessage} This will give them full access to all repositories and the team, including billing, adding, or removing members.`
+      return `This will give them full access to all repositories and the team, including billing, adding, or removing members.`
     }
     if (this.newRole === TeamMemberRoleChoices.Contributor) {
-      return `${confirmMessage} Contributors don't have any team level access or any access to change repo level settings.`
+      return `Contributors don't have any team level access or any access to change repo level settings.`
     }
     if (this.newRole === TeamMemberRoleChoices.Member) {
-      return `${confirmMessage} Members have the ability to activate analysis on new repositories.`
+      return `Members have the ability to activate analysis on new repositories.`
     }
     return 'Are you sure you want to update the role?'
   }
