@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col space-y-4">
-    <div class="flex flex-row-reverse w-full gap-2 xl:flex-row">
+    <div class="flex w-full flex-row-reverse gap-2 xl:flex-row">
       <!-- Sort menu -->
       <z-menu direction="right" width="x-small" class="text-vanilla-100">
         <template #trigger="{ toggle }">
@@ -14,7 +14,7 @@
             Sort
           </z-button>
         </template>
-        <template slot="body" class="text-vanilla-200">
+        <template slot="body">
           <z-menu-item
             v-for="filter in sortFilters"
             :key="filter.name"
@@ -27,7 +27,7 @@
         </template>
       </z-menu>
       <!-- Search -->
-      <div class="flex-grow h-full xl:min-w-80">
+      <div class="h-full flex-grow xl:min-w-80">
         <z-input
           v-model="searchValue"
           background-color="ink-300"
@@ -44,7 +44,7 @@
     </div>
 
     <!-- Issue list -->
-    <div v-if="edges.length" class="flex flex-col gap-y-3.5">
+    <div v-if="edges && edges.length" class="flex flex-col gap-y-3.5">
       <issue-editor
         v-for="edge in edges"
         v-bind="edge.node"
