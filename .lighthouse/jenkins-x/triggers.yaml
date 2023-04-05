@@ -3,11 +3,6 @@ kind: TriggerConfig
 name: bifrost-trigger-config
 spec:
   presubmits:
-    - name: bifrost-tests
-      context: 'Bifrost-Run-Tests'
-      always_run: true
-      optional: false
-      source: 'pullrequest-tests.yaml'
     - name: bifrost-builds
       context: 'Bifrost-Run-Builds'
       always_run: true

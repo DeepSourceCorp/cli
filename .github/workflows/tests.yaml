@@ -1,0 +1,62 @@
+name: Run bifrost tests
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  run-tests:
+    runs-on: [self-hosted, moltres]
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.node-version'
+
+      - name: Setup yarn
+        run: npm install -g yarn
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - uses: whywaita/actions-cache-s3@v2.1.10
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+          aws-s3-bucket: ${{ vars.AWS_S3_BUCKET }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+          aws-endpoint: ${{ vars.AWS_ENDPOINT }}
+          aws-s3-bucket-endpoint: ${{ vars.AWS_S3_BUCKET_ENDPOINT }}
+          aws-s3-force-path-style: ${{ vars.AWS_S3_FORCE_PATH_STYLE }}
+
+      - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit == 'true'
+        run: yarn --prefer-offline --frozen-lockfile
+
+      - name: Run tests
+        run: yarn test --cache --silent --ci --coverage=true --coverageReporters=cobertura
+
+      - name: Report results to DeepSource
+        run: |
+
+          curl https://deepsource.io/cli | sh
+
+          ./bin/deepsource report --analyzer test-coverage --key javascript --value-file ./coverage/cobertura-coverage.xml
+
+        env:
+          DEEPSOURCE_DSN: ${{ secrets.BIFROST_DSN }}
+
+      - name: Remove yarn
+        if: always()
+        run: npm uninstall -g yarn
