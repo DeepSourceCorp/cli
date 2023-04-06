@@ -41,7 +41,6 @@ jobs:
           aws-s3-force-path-style: ${{ vars.AWS_S3_FORCE_PATH_STYLE }}
 
       - name: Install dependencies
-        if: steps.yarn-cache.outputs.cache-hit == 'true'
         run: yarn --prefer-offline --frozen-lockfile
 
       - name: Run tests
