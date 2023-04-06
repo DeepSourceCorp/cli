@@ -12,6 +12,9 @@ import RepositoryIssueTrendsQuery from '~/apollo/queries/repository/issueTrends.
 import RepositoryAutofixTrendsQuery from '~/apollo/queries/repository/autofixTrends.gql'
 import RepositoryAutofixStatsQuery from '~/apollo/queries/repository/autofixStats.gql'
 import RepositoryIssueTypeDistributionQuery from '~/apollo/queries/repository/issueTypeDistribution.gql'
+import RepositoryIssueOccurrenceDistributionByIssueType from '~/apollo/queries/repository/issueOccurrenceDistributionByIssueType.gql'
+import RepositoryIssueOccurrenceDistributionByProduct from '~/apollo/queries/repository/issueOccurrenceDistributionByProduct.gql'
+import RepositoryIssueTypeSettingsQuery from '~/apollo/queries/repository/issueTypeSettings.gql'
 import RepositoryWidgetsGQLQuery from '~/apollo/queries/repository/widgets.gql'
 import RepositoryMetricsGQLQuery from '~/apollo/queries/repository/metrics/metrics.gql'
 import RepositoryMetricGQLQuery from '~/apollo/queries/repository/metrics/metric.gql'
@@ -65,6 +68,7 @@ import {
 } from '~/types/apollo-graphql-types'
 import { NLCV_SHORTCODE } from '~/types/metric'
 import type { LogErrorAndToastT } from '~/plugins/helpers/error'
+import { IssueOccurrenceDistributionType } from '~/types/issues'
 
 export type RepoSettingOptions = {
   settingType: keyof Repository
@@ -126,6 +130,8 @@ export enum RepositoryDetailActions {
   FETCH_ISSUE_TRENDS = 'fetchIssueTrends',
   FETCH_AUTOFIX_TRENDS = 'fetchAutofixTrends',
   FETCH_ISSUE_TYPE_DISTRIBUTION = 'fetchIssueTypeDistribution',
+  FETCH_ISSUE_OCCURRENCE_DISTRIBUTION_COUNTS = 'fetchIssueOccurrenceDistributionCounts',
+  FETCH_ISSUE_TYPE_SETTINGS = 'fetchIssueTypeSettings',
   FETCH_REPOSITORY_SETTINGS_GENERAL = 'fetchRepositorySettingsGeneral',
   FETCH_REPOSITORY_SETTINGS_BADGES = 'fetchRepositorySettingsBadges',
   FETCH_REPOSITORY_SETTINGS_REPORTING = 'fetchRepositorySettingsReporting',
@@ -323,6 +329,27 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       refetch?: boolean
     }
   ) => Promise<void>
+  [RepositoryDetailActions.FETCH_ISSUE_OCCURRENCE_DISTRIBUTION_COUNTS]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext,
+    args: {
+      distributionType: IssueOccurrenceDistributionType
+      provider: string
+      owner: string
+      name: string
+      refetch?: boolean
+    }
+  ) => Promise<void>
+  [RepositoryDetailActions.FETCH_ISSUE_TYPE_SETTINGS]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext,
+    args: {
+      provider: string
+      owner: string
+      name: string
+      refetch?: boolean
+    }
+  ) => Promise<void>
   [RepositoryDetailActions.FETCH_REPOSITORY_ID]: (
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext,
@@ -492,6 +519,7 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       provider: string
       owner: string
       name: string
+      refetch?: boolean
     }
   ) => Promise<void>
   [RepositoryDetailActions.FETCH_AVAILABLE_ANALYZERS]: (
@@ -744,6 +772,35 @@ export const actions: RepositoryDetailModuleActions = {
         commit(RepositoryDetailMutations.SET_LOADING, false)
         // TODO: Toast("Failure in fetching widgets", e)
       })
+  },
+  async [RepositoryDetailActions.FETCH_ISSUE_OCCURRENCE_DISTRIBUTION_COUNTS]({ commit }, args) {
+    const distributionCountsQuery =
+      args.distributionType === IssueOccurrenceDistributionType.ISSUE_TYPE
+        ? RepositoryIssueOccurrenceDistributionByIssueType
+        : RepositoryIssueOccurrenceDistributionByProduct
+
+    const response = await this.$fetchGraphqlData(
+      distributionCountsQuery,
+      {
+        provider: this.$providerMetaMap[args.provider].value,
+        owner: args.owner,
+        name: args.name
+      },
+      args.refetch
+    )
+    commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+  },
+  async [RepositoryDetailActions.FETCH_ISSUE_TYPE_SETTINGS]({ commit }, args) {
+    const response = await this.$fetchGraphqlData(
+      RepositoryIssueTypeSettingsQuery,
+      {
+        provider: this.$providerMetaMap[args.provider].value,
+        owner: args.owner,
+        name: args.name
+      },
+      args.refetch
+    )
+    commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
   },
   async [RepositoryDetailActions.FETCH_REPOSITORY_ID](
     { commit },
@@ -1116,7 +1173,7 @@ export const actions: RepositoryDetailModuleActions = {
         owner: args.owner,
         name: args.name
       },
-      true
+      args.refetch
     )
     commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
   },

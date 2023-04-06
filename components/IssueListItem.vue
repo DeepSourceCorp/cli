@@ -162,7 +162,7 @@ export default class IssueListItem extends Vue {
   @Prop({ default: true })
   showSeenInfo!: boolean
 
-  @Prop({ default: {} })
+  @Prop({ default: () => ({}) })
   issueListFilters: FilterParams
 
   @Prop({ default: 0 })

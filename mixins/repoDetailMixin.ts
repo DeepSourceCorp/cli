@@ -1,5 +1,6 @@
 import { Component, Vue, namespace } from 'nuxt-property-decorator'
 import { RepositoryDetailActions } from '~/store/repository/detail'
+import { IssueOccurrenceDistributionType } from '~/types/issues'
 import {
   Repository,
   CommitConfigToVcsInput,
@@ -85,7 +86,12 @@ export default class RepoDetailMixin extends Vue {
   }) => Promise<void>
 
   @repoStore.Action(RepositoryDetailActions.FETCH_REPOSITORY_COMMIT_POSSIBLE)
-  fetchIsCommitPossible: (args: { provider: string; owner: string; name: string }) => Promise<void>
+  fetchIsCommitPossible: (args: {
+    provider: string
+    owner: string
+    name: string
+    refetch?: boolean
+  }) => Promise<void>
 
   @repoStore.Action(RepositoryDetailActions.FETCH_AVAILABLE_ANALYZERS)
   fetchAvailableAnalyzers: (args: {
@@ -217,6 +223,23 @@ export default class RepoDetailMixin extends Vue {
     analyzer?: string
     q?: string
     autofixAvailable?: boolean | null
+    refetch?: boolean
+  }) => Promise<void>
+
+  @repoStore.Action(RepositoryDetailActions.FETCH_ISSUE_OCCURRENCE_DISTRIBUTION_COUNTS)
+  fetchIssueOccurrenceDistributionCounts: (args: {
+    distributionType: IssueOccurrenceDistributionType
+    provider: string
+    owner: string
+    name: string
+    refetch?: boolean
+  }) => Promise<void>
+
+  @repoStore.Action(RepositoryDetailActions.FETCH_ISSUE_TYPE_SETTINGS)
+  fetchIssueTypeSettings: (args: {
+    provider: string
+    owner: string
+    name: string
     refetch?: boolean
   }) => Promise<void>
 

@@ -1901,6 +1901,24 @@ declare module '*/totalCount.gql' {
 }
     
 
+declare module '*/issueOccurrenceDistributionByIssueType.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const issueOccurrenceDistributionByIssueType: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/issueOccurrenceDistributionByProduct.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const issueOccurrenceDistributionByProduct: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/issueRaisedInFiles.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1914,6 +1932,15 @@ declare module '*/issueTypeDistribution.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const issueTypeDistribution: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/issueTypeSettings.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const issueTypeSettingsIgnored: DocumentNode;
 
   export default defaultDocument;
 }

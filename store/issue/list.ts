@@ -64,14 +64,17 @@ interface IssueListModuleActions extends ActionTree<IssueListModuleState, RootSt
       provider: string
       owner: string
       name: string
-      currentPageNumber?: number
       limit: number
+      currentPageNumber?: number
       issueType?: string
+      product?: string
       analyzer?: string
       sort?: string
       q?: string
       autofixAvailable?: boolean
       all?: boolean
+      recommended?: boolean
+      auditRequired?: boolean
       refetch?: boolean
     }
   ) => Promise<void>
@@ -90,11 +93,14 @@ export const actions: IssueListModuleActions = {
         after: this.$getGQLAfter(args.currentPageNumber || 1, args.limit),
         limit: args.limit,
         issueType: args.issueType,
+        product: args.product,
         analyzer: args.analyzer,
         sort: args.sort,
         q: args.q,
         autofixAvailable: args.autofixAvailable,
-        all: args.all
+        all: args.all,
+        recommended: args.recommended,
+        auditRequired: args.auditRequired
       },
       args.refetch
     )

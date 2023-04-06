@@ -9,10 +9,10 @@
           button-type="secondary"
           @click="toggle"
         >
-          <span class="hidden md:inline text-vanilla-100">Filter</span>
+          <span class="hidden text-vanilla-100 md:inline">Filter</span>
         </z-button>
       </template>
-      <template slot="body" class="text-vanilla-200">
+      <template #body>
         <z-menu-item
           v-for="filter in issueCategoryOptions"
           :key="filter.shortcode"
@@ -41,7 +41,7 @@
 import { Vue, Component } from 'nuxt-property-decorator'
 import { ModelSync } from 'vue-property-decorator'
 import { ZIcon, ZButton, ZInput, ZMenu, ZMenuItem, ZBadge } from '@deepsource/zeal'
-import { IssueCategoryChoice, IssueTypeOptions } from '~/mixins/issueCategoryMixin'
+import { IssueTypeOptions, IssueFilterChoice } from '~/types/issues'
 
 /**
  * Issue category filter
@@ -71,7 +71,7 @@ export default class IssueCategoryFilter extends Vue {
     [IssueTypeOptions.DOCUMENTATION]: 'Documentation'
   }
 
-  get issueCategoryOptions(): IssueCategoryChoice[] {
+  get issueCategoryOptions(): IssueFilterChoice[] {
     return Object.keys(this.categoryLabelMap).map((categoryKey) => {
       return {
         name: this.categoryLabelMap[categoryKey],

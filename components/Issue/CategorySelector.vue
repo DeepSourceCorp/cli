@@ -1,47 +1,77 @@
 <template>
-  <div class="flex-col hidden p-2 space-y-4 border-r border-slate-400 lg:flex">
+  <div class="hidden flex-col justify-between border-r border-slate-400 p-2 lg:flex">
     <!-- Issue Types View -->
     <slot name="cta"></slot>
-    <section class="flex-shrink space-y-1 overflow-y-scroll hide-scroll">
+
+    <section class="hide-scroll flex-shrink space-y-1 overflow-y-scroll pb-8">
       <div
         v-for="issueType in issueCategories"
         :key="issueType.shortcode"
-        :class="{
-          'bg-ink-300': issueType.shortcode === modelValue
-        }"
-        class="flex items-center p-2 space-x-2 rounded-sm cursor-pointer group hover:bg-ink-300"
-        @click="modelValue = issueType.shortcode"
+        class="cursor-pointer text-sm"
       >
-        <z-icon
-          :icon="issueType.icon"
-          :color="issueType.shortcode === modelValue ? 'vanilla-100' : 'slate'"
-          class="group-hover:text-vanilla-100"
-        />
-        <span
-          :class="issueType.shortcode === modelValue ? 'text-vanilla-100' : 'text-vanilla-400'"
-          class="flex-1 text-sm group-hover:text-vanilla-100"
+        <div
+          class="group flex items-center space-x-2 rounded-sm p-2 hover:bg-ink-300"
+          :class="{
+            'bg-ink-300': issueType.shortcode === activeSidebarItem
+          }"
+          @click="$emit('update-category', issueType.shortcode)"
         >
-          {{ issueType.name }}
-        </span>
-        <z-tag
-          v-tooltip="`${issueType.count} occurrences for this category`"
-          :bg-color="issueType.shortcode === modelValue ? 'ink-200' : 'ink-300'"
-          text-size="xs"
-          spacing="py-1 px-2"
-          class="leading-none group-hover:bg-ink-200"
+          <z-icon
+            :icon="issueType.icon"
+            :color="issueType.shortcode === activeSidebarItem ? 'vanilla-100' : 'slate'"
+            class="group-hover:text-vanilla-100"
+          />
+          <span
+            class="flex-1 group-hover:text-vanilla-100"
+            :class="
+              issueType.shortcode === activeSidebarItem ? 'text-vanilla-100' : 'text-vanilla-400'
+            "
+          >
+            {{ issueType.name }}
+          </span>
+          <z-tag
+            v-tooltip="`${occurrenceCounts[issueType.shortcode]} occurrences for this category`"
+            :bg-color="issueType.shortcode === activeSidebarItem ? 'ink-200' : 'ink-300'"
+            text-size="xs"
+            spacing="py-1 px-2"
+            class="leading-none group-hover:bg-ink-200"
+          >
+            <span class="mt-px">{{
+              shortenLargeNumber(occurrenceCounts[issueType.shortcode])
+            }}</span>
+          </z-tag>
+        </div>
+
+        <div
+          v-if="Array.isArray(issueType.subCategories) && issueType.subCategories.length"
+          class="mt-1 ml-4 space-y-1 border-l border-slate-300 pl-3"
         >
-          <span class="mt-px">{{ formatIntl(issueType.count) }}</span>
-        </z-tag>
+          <div
+            v-for="subCategory in issueType.subCategories"
+            :key="subCategory.shortcode"
+            class="rounded-sm p-1.5 hover:bg-ink-300 hover:text-vanilla-100"
+            :class="
+              activeSidebarItem === `${issueType.shortcode}-${subCategory.shortcode}`
+                ? 'bg-ink-300 text-vanilla-100'
+                : 'text-vanilla-400'
+            "
+            @click="$emit('update-category', issueType.shortcode, subCategory.shortcode)"
+          >
+            {{ subCategory.name }}
+          </div>
+        </div>
       </div>
     </section>
+
+    <slot name="footer"></slot>
   </div>
 </template>
 <script lang="ts">
 import { ZIcon, ZTag } from '@deepsource/zeal'
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
-import IssueCategoryMixin from '~/mixins/issueCategoryMixin'
-import { formatIntl } from '~/utils/string'
+import { IssueFilterChoice } from '~/types/issues'
+import { shortenLargeNumber } from '~/utils/string'
 
 /**
  * Component to add issue filtering based on category for a repo
@@ -52,8 +82,17 @@ import { formatIntl } from '~/utils/string'
     ZTag
   },
   methods: {
-    formatIntl
+    shortenLargeNumber
   }
 })
-export default class IssueCategorySelector extends mixins(IssueCategoryMixin) {}
+export default class IssueCategorySelector extends Vue {
+  @Prop({ default: 'recommended' })
+  activeSidebarItem: string
+
+  @Prop({ default: () => [] })
+  issueCategories: IssueFilterChoice[]
+
+  @Prop({ default: () => ({}) })
+  occurrenceCounts: Record<string, number>
+}
 </script>

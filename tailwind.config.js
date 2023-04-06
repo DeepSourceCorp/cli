@@ -101,7 +101,8 @@ module.exports = {
         '3px': '3px'
       },
       boxShadow: {
-        blur: '-12px 0px 8px rgba(18, 19, 23, 1);'
+        blur: '-12px 0px 8px rgba(18, 19, 23, 1);',
+        'blur-lg': '-12px 0px 24px rgba(18, 19, 23, 1);'
       },
       // borderColor: {
       //   DEFAULT: '#52575c'

@@ -1,0 +1,13 @@
+query issueOccurrenceDistributionByIssueType(
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+) {
+  repository(provider: $provider, name: $name, owner: $owner) {
+    id
+    issueOccurrenceDistributionByIssueType {
+      key
+      count
+    }
+  }
+}

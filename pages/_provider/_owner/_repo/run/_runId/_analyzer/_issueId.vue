@@ -95,20 +95,22 @@ import {
   IssuePriority,
   IssuePriorityLevel,
   CheckIssueEdge,
-  CheckIssueConnection,
-  IssueEdge
+  CheckIssueConnection
 } from '~/types/types'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import IssueDetailMixin from '~/mixins/issueDetailMixin'
-import { IssueTypeOptions } from '~/mixins/issueCategoryMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import { fromNow } from '~/utils/date'
-import { RepoPerms, TeamPerms } from '~/types/permTypes'
-import { IssuePriorityLevelVerbose } from '~/types/issuePriorityTypes'
 import { IssueLink } from '~/mixins/issueListMixin'
+
 import { RunDetailMutations } from '~/store/run/detail'
+
+import { fromNow } from '~/utils/date'
+
+import { IssuePriorityLevelVerbose } from '~/types/issuePriorityTypes'
+import { RepoPerms, TeamPerms } from '~/types/permTypes'
+import { IssueTypeOptions } from '~/types/issues'
 
 const PAGE_SIZE = 25
 

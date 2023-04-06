@@ -23,14 +23,17 @@ export default class IssueListMixin extends Vue {
     provider: string
     owner: string
     name: string
-    currentPageNumber?: number | null
     limit: number
+    currentPageNumber?: number
     issueType?: string
+    product?: string
     analyzer?: string
     sort?: string
     q?: string
-    autofixAvailable?: boolean | null
-    all?: boolean | null
+    autofixAvailable?: boolean
+    all?: boolean
+    recommended?: boolean
+    auditRequired?: boolean
     refetch?: boolean
   }) => Promise<void>
 }

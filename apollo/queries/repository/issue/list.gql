@@ -5,10 +5,13 @@ query repositoryIssueList(
   $limit: Int
   $after: String
   $issueType: String
+  $product: String
   $analyzer: String
   $sort: String
   $q: String
   $autofixAvailable: Boolean
+  $auditRequired: Boolean
+  $recommended: Boolean
   $all: Boolean
 ) {
   repository(provider: $provider, owner: $owner, name: $name) {
@@ -18,10 +21,13 @@ query repositoryIssueList(
       first: $limit
       after: $after
       issueType: $issueType
+      product: $product
       analyzer: $analyzer
       sort: $sort
       q: $q
       autofixAvailable: $autofixAvailable
+      auditRequired: $auditRequired
+      recommended: $recommended
     ) {
       totalCount
       edges {
