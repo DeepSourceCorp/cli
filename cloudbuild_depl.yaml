@@ -9,7 +9,7 @@ steps:
       - --build-arg=ZEAL_SECRET
       - --build-arg=STRIPE_PUBLISHABLE_KEY
       - --build-arg=NODE_ENV=prod
-      - --build-arg=DOMAIN=assets.deepsource.io
+      - --build-arg=DOMAIN=assets.deepsource.com
       - --cache=false
     secretEnv:
       - 'ZEAL_SECRET'

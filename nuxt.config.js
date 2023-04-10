@@ -24,7 +24,7 @@ function toBool(item) {
 import { version } from './package.json'
 const IS_PRODUCTION = process.env.NODE_ENV === 'prod'
 const IS_ON_PREM = toBool(process.env.ON_PREM)
-const APP_DOMAIN = process.env.DEEPSOURCE_DOMAIN ?? 'deepsource.io'
+const APP_DOMAIN = process.env.DEEPSOURCE_DOMAIN ?? 'deepsource.com'
 const DEFAULT_PUBLIC_PATH = '/_nuxt/'
 
 export default {
@@ -84,7 +84,7 @@ export default {
     restClientUri: process.env.REST_CLIENT_URI,
     csrfClientUri: process.env.CSRF_CLIENT_URI,
     websocket: {
-      url: process.env.WEB_SOCKET_URI || 'wss://events.deepsource.io'
+      url: process.env.WEB_SOCKET_URI || 'wss://sockets.deepsource.com'
     },
     onPrem: IS_ON_PREM,
     gitlabEnabled: IS_ON_PREM ? toBool(process.env.GITLAB_ENABLED) : true,
