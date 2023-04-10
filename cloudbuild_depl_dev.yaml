@@ -1,0 +1,23 @@
+timeout: 30m0s
+
+steps:
+  - name: 'gcr.io/kaniko-project/executor:v1.6.0-debug'
+    args:
+      - --destination=us.gcr.io/deepsource-dev/bifrost:PR-$_PR_NUMBER
+      - --dockerfile=Dockerfile
+      - --build-arg=DISABLE_SENTRY=true
+      - --build-arg=GOOGLE_ANALYTICS_ID=UA-XXXXXXXX-X
+      - --build-arg=STRIPE_PUBLISHABLE_KEY
+      - --build-arg=NODE_ENV=staging
+      - --build-arg=DOMAIN=assets.deepsource.io
+      - --cache=true
+    secretEnv:
+      - 'STRIPE_PUBLISHABLE_KEY'
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/821280794258/secrets/bifrost-stripe-test-publishable-key/versions/1
+      env: 'STRIPE_PUBLISHABLE_KEY'
+
+options:
+  machineType: 'N1_HIGHCPU_8'

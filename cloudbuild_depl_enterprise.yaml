@@ -5,16 +5,8 @@ steps:
     args:
       - --destination=us.gcr.io/deepsource-production/bifrost-enterprise:$TAG_NAME
       - --dockerfile=Dockerfile
-      - --build-arg=ZEAL_SECRET
       - --build-arg=ON_PREM=true
       - --cache=false
-    secretEnv:
-      - 'ZEAL_SECRET'
-
-availableSecrets:
-  secretManager:
-    - versionName: projects/66550703913/secrets/bifrost/versions/4
-      env: 'ZEAL_SECRET'
 
 options:
   machineType: 'N1_HIGHCPU_8'

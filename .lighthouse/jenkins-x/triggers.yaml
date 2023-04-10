@@ -3,18 +3,6 @@ kind: TriggerConfig
 name: bifrost-trigger-config
 spec:
   presubmits:
-    - name: bifrost-builds
-      context: 'Bifrost-Run-Builds'
-      always_run: true
-      optional: false
-      source: 'pullrequest-builds.yaml'
-    - name: bifrost-rc-builds
-      context: 'Bifrost-Run-RC-Builds'
-      optional: false
-      source: 'pullrequest-builds.yaml'
-      branches:
-        - ^rc\d+\.\d+\.\d+$
-        - ^hf\d+\.\d+\.\d+$
     - name: bifrost-deploy
       context: 'Bifrost-Run-Deploy'
       always_run: false
@@ -25,25 +13,3 @@ spec:
       always_run: false
       optional: true
       source: 'pullrequest-deploy-enterprise.yaml'
-  postsubmits:
-    - name: bifrost-master-builds
-      context: 'Bifrost-Run-Master-Builds'
-      optional: false
-      source: 'pullrequest-builds-master.yaml'
-      branches:
-        - ^main$
-        - ^master$
-    - name: bifrost-master-tests
-      context: 'Bifrost-Run-Master-Tests'
-      always_run: true
-      optional: false
-      branches:
-        - ^main$
-        - ^master$
-      source: 'pullrequest-tests.yaml'
-    - name: bifrost-production-builds
-      context: 'Bifrost-Run-Production-Builds'
-      optional: false
-      source: 'pullrequest-builds-production.yaml'
-      branches:
-        - ^production$
