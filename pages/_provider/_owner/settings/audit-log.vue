@@ -121,6 +121,7 @@ import TeamLevelAuditLogGQLQuery from '~/apollo/queries/team/auditLog.gql'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+import { TeamPerms } from '~/types/permTypes'
 import { DateRangeOptionT } from '~/types/reportTypes'
 import { AuditLog, AuditLogConnection, ExportAuditLogsInput, Maybe, Team } from '~/types/types'
 
@@ -134,7 +135,14 @@ interface CustomAuditLogsQuery extends Team {
 }
 
 @Component({
-  components: { ZButton, ZDivider, ZIcon, ZInput }
+  components: { ZButton, ZDivider, ZIcon, ZInput },
+  middleware: ['perm'],
+  meta: {
+    auth: {
+      strict: true,
+      teamPerms: [TeamPerms.VIEW_AUDIT_LOG]
+    }
+  }
 })
 export default class TeamLevelAuditLog extends mixins(ActiveUserMixin) {
   pageNumber = 1
