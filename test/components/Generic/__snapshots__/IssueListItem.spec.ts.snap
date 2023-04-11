@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 1`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -25,13 +25,13 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 1`]
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
-        </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-slate-400 group-hover:border-slate-400\\">
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex h-auto w-full items-center justify-center border-t border-slate-400 p-2 group-hover:border-slate-400 sm:gap-x-2\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
         </button>
@@ -43,17 +43,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 1`]
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 2`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -61,13 +61,13 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 2`]
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
-        </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-slate-400 group-hover:border-slate-400\\">
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex h-auto w-full items-center justify-center border-t border-slate-400 p-2 group-hover:border-slate-400 sm:gap-x-2\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
         </button>
@@ -79,17 +79,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 2`]
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 3`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -103,13 +103,13 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 3`]
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
-        </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-slate-400 group-hover:border-slate-400 cursor-pointer hover:bg-ink-200\\">
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        </div> <button data-testid=\\"autofix-issue\\" class=\\"flex h-auto w-full items-center justify-center border-t border-slate-400 p-2 group-hover:border-slate-400 sm:gap-x-2 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
         </button>
@@ -121,17 +121,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 3`]
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 4`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -139,13 +139,13 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 4`]
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
-        </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-slate-400 group-hover:border-slate-400 cursor-pointer hover:bg-ink-200\\">
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        </div> <button data-testid=\\"autofix-issue\\" class=\\"flex h-auto w-full items-center justify-center border-t border-slate-400 p-2 group-hover:border-slate-400 sm:gap-x-2 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
         </button>
@@ -157,17 +157,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 4`]
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 5`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -181,12 +181,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 5`]
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -197,17 +197,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 5`]
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 6`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -215,12 +215,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 6`]
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -231,17 +231,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 6`]
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 7`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -255,12 +255,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 7`]
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -271,17 +271,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 7`]
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 8`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -289,12 +289,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 8`]
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -305,17 +305,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 8`]
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 9`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -329,13 +329,13 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 9`]
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
-        </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-slate-400 group-hover:border-slate-400\\">
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex h-auto w-full items-center justify-center border-t border-slate-400 p-2 group-hover:border-slate-400 sm:gap-x-2\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
         </button>
@@ -347,17 +347,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 9`]
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 10`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -365,13 +365,13 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 10`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
-        </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-slate-400 group-hover:border-slate-400\\">
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex h-auto w-full items-center justify-center border-t border-slate-400 p-2 group-hover:border-slate-400 sm:gap-x-2\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
         </button>
@@ -383,17 +383,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 10`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 11`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -407,13 +407,13 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 11`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
-        </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-slate-400 group-hover:border-slate-400 cursor-pointer hover:bg-ink-200\\">
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        </div> <button data-testid=\\"autofix-issue\\" class=\\"flex h-auto w-full items-center justify-center border-t border-slate-400 p-2 group-hover:border-slate-400 sm:gap-x-2 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
         </button>
@@ -425,17 +425,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 11`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 12`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -443,13 +443,13 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 12`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
-        </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-slate-400 group-hover:border-slate-400 cursor-pointer hover:bg-ink-200\\">
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        </div> <button data-testid=\\"autofix-issue\\" class=\\"flex h-auto w-full items-center justify-center border-t border-slate-400 p-2 group-hover:border-slate-400 sm:gap-x-2 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
         </button>
@@ -461,17 +461,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 12`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 13`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -485,12 +485,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 13`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -501,17 +501,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 13`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 14`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -519,12 +519,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 14`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -535,17 +535,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 14`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 15`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -559,12 +559,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 15`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -575,17 +575,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 15`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 16`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -593,12 +593,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 16`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -609,17 +609,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 16`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 17`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -633,12 +633,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 17`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -649,17 +649,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 17`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 18`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -667,12 +667,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 18`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -683,17 +683,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 18`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 19`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -707,12 +707,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 19`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -723,17 +723,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 19`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 20`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -741,12 +741,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 20`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -757,17 +757,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 20`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 21`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -781,12 +781,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 21`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -797,17 +797,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 21`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 22`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -815,12 +815,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 22`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -831,17 +831,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 22`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 23`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -855,12 +855,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 23`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -871,17 +871,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 23`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 24`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -889,12 +889,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 24`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5 items-center justify-center\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -905,17 +905,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 24`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 25`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -929,12 +929,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 25`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -945,17 +945,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 25`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 26`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -963,12 +963,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 26`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -979,17 +979,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 26`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 27`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -1003,12 +1003,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 27`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1019,17 +1019,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 27`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 28`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -1037,12 +1037,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 28`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1053,17 +1053,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 28`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 29`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -1077,12 +1077,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 29`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1093,17 +1093,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 29`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 30`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -1111,12 +1111,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 30`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1127,17 +1127,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 30`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 31`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <metadataitem-stub icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years ago
@@ -1151,12 +1151,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 31`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1167,17 +1167,17 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 31`
 `;
 
 exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 32`] = `
-"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
+"<nuxt-link to=\\"undefined?listindex=0\\" class=\\"block group rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+    <div class=\\"flex w-full justify-between\\">
+      <div class=\\"flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5\\">
         <div class=\\"pb-1\\">
-          <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
+          <h3 class=\\"mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"whitespace-nowrap text-sm font-normal text-vanilla-400\\">
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+        <div class=\\"flex flex-wrap items-center gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
           <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
@@ -1185,12 +1185,12 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 32`
           </metadataitem-stub>
         </div>
       </div>
-      <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
-        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
-          <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
+      <div class=\\"flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5\\">
+        <div class=\\"flex flex-grow flex-col items-center justify-center text-xs leading-none py-1\\">
+          <div class=\\"text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden text-xxs sm:block md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>

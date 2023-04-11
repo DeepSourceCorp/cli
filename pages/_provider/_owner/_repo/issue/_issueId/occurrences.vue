@@ -87,10 +87,6 @@ export default class IssuesDetails extends mixins(
 ) {
   issuesIgnored: Array<string> = []
 
-  created() {
-    this.queryParams = Object.assign(this.queryParams, this.$route.query)
-  }
-
   get currentPage(): number {
     return makeSafeNumber(this.queryParams.page as string, 1)
   }

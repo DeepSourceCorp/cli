@@ -1,17 +1,17 @@
 <template>
-  <main class="check-body-offset md:sticky pt-3 md:pt-0">
+  <main class="check-body-offset pt-3 md:sticky md:pt-0">
     <div v-if="!isLoading">
       <z-tabs>
-        <z-tab-list class="flex-row w-full ml-2 -space-x-2 text-center md:hidden">
+        <z-tab-list class="ml-2 w-full flex-row -space-x-2 text-center md:hidden">
           <z-tab
             :is-active="activeTabIndex === 0"
             :action="() => updateActiveTabIndex(0)"
             :remove-indicator-styles="true"
-            class="w-1/2 -mb-3"
+            class="-mb-3 w-1/2"
           >
             <div
-              class="w-full p-3 border rounded-l-md border-slate-400"
-              :class="{ 'bg-ink-50 border-r-0': activeTabIndex === 0 }"
+              class="w-full rounded-l-md border border-slate-400 p-3"
+              :class="{ 'border-r-0 bg-ink-50': activeTabIndex === 0 }"
             >
               Issues
             </div>
@@ -20,11 +20,11 @@
             :is-active="activeTabIndex === 1"
             :action="() => updateActiveTabIndex(1)"
             :remove-indicator-styles="true"
-            class="w-1/2 -mb-3"
+            class="-mb-3 w-1/2"
           >
             <div
-              class="w-full p-3 border rounded-r-md border-slate-400"
-              :class="{ 'bg-ink-50 border-l-0': activeTabIndex === 1 }"
+              class="w-full rounded-r-md border border-slate-400 p-3"
+              :class="{ 'border-l-0 bg-ink-50': activeTabIndex === 1 }"
             >
               Metrics
             </div>
@@ -35,7 +35,7 @@
           v-if="activeTabIndex === 0"
           class="grid grid-cols-1"
           :class="{
-            'md:grid-cols-fr-22 divide-x divide-ink-200': ['FAIL', 'PASS'].includes(check.status)
+            'divide-x divide-ink-200 md:grid-cols-fr-22': ['FAIL', 'PASS'].includes(check.status)
           }"
         >
           <analyzer-run
@@ -45,11 +45,11 @@
             :current-page="currentPage"
           >
             <template #controls>
-              <div class="flex flex-col pt-3 gap-y-4 md:relative">
+              <div class="flex flex-col gap-y-4 pt-3 md:relative">
                 <!-- shadow effect -->
                 <div
                   v-if="isScrolled"
-                  class="absolute hidden w-full pointer-events-none md:block bg-gradient-to-b from-ink-400 via-ink-400 to-transparent"
+                  class="pointer-events-none absolute hidden w-full bg-gradient-to-b from-ink-400 via-ink-400 to-transparent md:block"
                   :class="[showAutofixBar ? 'h-48' : 'h-20']"
                 ></div>
                 <run-autofix-bar
@@ -88,7 +88,7 @@
             <template #footer>
               <div
                 v-if="concreteIssueList.totalCount > perPageCount"
-                class="flex justify-center my-6 text-sm"
+                class="my-6 flex justify-center text-sm"
               >
                 <z-pagination
                   :key="currentPage"
@@ -101,14 +101,14 @@
             </template>
           </analyzer-run>
           <section v-if="['FAIL', 'PASS'].includes(check.status)">
-            <div class="sticky flex-col hidden p-3 space-y-2 md:flex metrics-header-offset">
+            <div class="metrics-header-offset sticky hidden flex-col space-y-2 p-3 md:flex">
               <div
                 v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
-                class="grid grid-cols-1 gap-3 overflow-y-auto hide-scroll"
+                class="hide-scroll grid grid-cols-1 gap-3 overflow-y-auto"
               >
                 <div class="flex items-center gap-x-1">
                   <z-icon v-tooltip="metricIconTooltip" :color="metricIconColor" icon="bar-chart" />
-                  <p class="text-xs font-semibold tracking-wide uppercase text-vanilla-400">
+                  <p class="text-xs font-semibold uppercase tracking-wide text-vanilla-400">
                     Metrics
                   </p>
                 </div>
@@ -117,12 +117,12 @@
                   v-for="metricGroup in metricsGroupedByName"
                   :key="metricGroup.name"
                   :metrics-captured="metricGroup.metrics"
-                  class="border rounded-md border-slate-400 bg-ink-300"
+                  class="rounded-md border border-slate-400 bg-ink-300"
                   @confirmMetricSuppression="confirmMetricSuppression"
                 >
                   <template #header>
                     <div
-                      class="w-full flex items-center gap-x-2 justify-between text-sm font-semibold text-vanilla-400"
+                      class="flex w-full items-center justify-between gap-x-2 text-sm font-semibold text-vanilla-400"
                     >
                       {{ metricGroup.name }}
                     </div>
@@ -141,7 +141,7 @@
           </section>
         </div>
         <!-- metrics -->
-        <div v-else class="flex flex-col p-3 space-y-2 xl:hidden">
+        <div v-else class="flex flex-col space-y-2 p-3 xl:hidden">
           <lazy-run-loading v-if="check.status === CheckStatus.Pend" />
           <lazy-run-cancelled v-else-if="check.status === CheckStatus.Cncl" />
           <lazy-run-timeout v-else-if="check.status === CheckStatus.Timo" />
@@ -150,18 +150,18 @@
           <template v-else>
             <div
               v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
-              class="grid grid-cols-1 gap-4 overflow-y-auto hide-scroll"
+              class="hide-scroll grid grid-cols-1 gap-4 overflow-y-auto"
             >
               <run-metric-card
                 v-for="metricGroup in metricsGroupedByName"
                 :key="metricGroup.name"
                 :metrics-captured="metricGroup.metrics"
-                class="border rounded-md border-slate-400 bg-ink-300"
+                class="rounded-md border border-slate-400 bg-ink-300"
                 @confirmMetricSuppression="confirmMetricSuppression"
               >
                 <template #header>
                   <div
-                    class="w-full flex items-center gap-x-2 justify-between text-sm font-semibold text-vanilla-400"
+                    class="flex w-full items-center justify-between gap-x-2 text-sm font-semibold text-vanilla-400"
                   >
                     {{ metricGroup.name }}
                   </div>
@@ -183,37 +183,37 @@
     <div v-else>
       <!-- Loading state -->
 
-      <div class="grid w-full grid-cols-1 md:grid-cols-fr-22 divide-x divide-ink-200">
+      <div class="grid w-full grid-cols-1 divide-x divide-ink-200 md:grid-cols-fr-22">
         <!-- Issues -->
 
-        <div class="flex flex-col p-3 gap-y-3">
+        <div class="flex flex-col gap-y-3 p-3">
           <!-- Controls -->
-          <div class="flex items-center w-full space-x-4 h-11">
-            <div class="h-8 rounded-md w-22 bg-ink-300 animate-pulse"></div>
-            <div class="h-8 rounded-md w-22 bg-ink-300 animate-pulse"></div>
-            <div class="flex-grow h-8 rounded-md bg-ink-300 animate-pulse"></div>
+          <div class="flex h-11 w-full items-center space-x-4">
+            <div class="h-8 w-22 animate-pulse rounded-md bg-ink-300"></div>
+            <div class="h-8 w-22 animate-pulse rounded-md bg-ink-300"></div>
+            <div class="h-8 flex-grow animate-pulse rounded-md bg-ink-300"></div>
           </div>
-          <div v-for="index in 10" :key="index" class="w-full h-24 bg-ink-300 animate-pulse"></div>
+          <div v-for="index in 10" :key="index" class="h-24 w-full animate-pulse bg-ink-300"></div>
         </div>
         <!-- Metrics -->
-        <div class="flex flex-col p-3 gap-y-3">
-          <div class="flex items-center h-5 w-15 bg-ink-300 animate-pulse"></div>
+        <div class="flex flex-col gap-y-3 p-3">
+          <div class="flex h-5 w-15 animate-pulse items-center bg-ink-300"></div>
           <div
             v-for="index in 5"
             :key="index"
-            class="w-full h-36 rounded-md bg-ink-300 animate-pulse"
+            class="h-36 w-full animate-pulse rounded-md bg-ink-300"
           ></div>
         </div>
       </div>
 
-      <div class="flex p-4 space-x-2">
-        <div class="w-24 h-8 rounded-md bg-ink-300 animate-pulse"></div>
-        <div class="h-8 rounded-md w-28 bg-ink-300 animate-pulse"></div>
+      <div class="flex space-x-2 p-4">
+        <div class="h-8 w-24 animate-pulse rounded-md bg-ink-300"></div>
+        <div class="h-8 w-28 animate-pulse rounded-md bg-ink-300"></div>
       </div>
 
-      <div class="p-4 space-y-2">
-        <div class="w-full rounded-md h-14 bg-ink-300 animate-pulse"></div>
-        <div class="w-full rounded-md h-14 bg-ink-300 animate-pulse"></div>
+      <div class="space-y-2 p-4">
+        <div class="h-14 w-full animate-pulse rounded-md bg-ink-300"></div>
+        <div class="h-14 w-full animate-pulse rounded-md bg-ink-300"></div>
       </div>
     </div>
     <portal to="modal">
@@ -227,12 +227,12 @@
             v-if="metricToSuppress"
             :metrics-captured="[metricToSuppress]"
             :is-in-modal="true"
-            class="border rounded-md border-slate-400 bg-ink-300 md:hidden shadow-xl mb-6"
+            class="mb-6 rounded-md border border-slate-400 bg-ink-300 shadow-xl md:hidden"
             @confirmMetricSuppression="confirmMetricSuppression"
           >
             <template #header>
               <div
-                class="w-full flex items-center gap-x-2 justify-between text-sm font-semibold text-vanilla-400"
+                class="flex w-full items-center justify-between gap-x-2 text-sm font-semibold text-vanilla-400"
               >
                 {{ metricToSuppress.name }}
               </div>
@@ -247,7 +247,7 @@
           </div>
         </template>
         <template #footer="{ close }">
-          <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
+          <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
             <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               Cancel
             </z-button>
@@ -256,7 +256,7 @@
               button-type="warning"
               size="small"
               :disabled="true"
-              class="flex items-center w-44"
+              class="flex w-44 items-center"
             >
               <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin" />
               Suppressing metric
@@ -389,7 +389,6 @@ export default class AnalyzerDetails extends mixins(
    * @return {void}
    */
   created(): void {
-    this.queryParams = Object.assign(this.queryParams, this.$route.query)
     setTimeout(() => {
       if (this.$fetchState.pending) this.isLoading = true
     }, 300)

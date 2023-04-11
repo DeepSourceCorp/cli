@@ -149,22 +149,6 @@ export default class RunIssueDetails extends mixins(
   public loading = true
   public issuePriority: IssuePriority | null = null
 
-  created() {
-    const { page, sort, q, listsort, listcategory, listq } = this.$route.query
-    this.queryParams = Object.assign(
-      this.queryParams,
-      {
-        page: 1,
-        sort: null,
-        q: null,
-        listsort: null,
-        listcategory: null,
-        listq: null
-      },
-      { page, sort, q, listsort, listcategory, listq }
-    )
-  }
-
   @Watch('searchCandidate')
   @Watch('currentPage')
   @Watch('sort')

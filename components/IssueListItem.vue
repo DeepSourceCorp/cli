@@ -2,21 +2,21 @@
   <base-card
     :to="link"
     :remove-default-style="true"
-    class="border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400"
+    class="rounded-lg border border-slate-400 bg-ink-400 hover:bg-ink-300"
   >
     <template #left-section>
-      <div class="flex justify-between w-full">
-        <div class="flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5">
+      <div class="flex w-full justify-between">
+        <div class="flex w-3/4 flex-col gap-y-0 p-4 xs:w-4/5">
           <div class="pb-1">
             <h3
-              class="inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base break-all"
+              class="mr-1 inline cursor-pointer break-all text-sm font-medium leading-snug text-vanilla-100 md:text-base"
               v-html="safeRenderBackticks(title)"
             ></h3>
-            <span class="text-sm font-normal whitespace-nowrap text-vanilla-400">
+            <span class="whitespace-nowrap text-sm font-normal text-vanilla-400">
               {{ shortcode }}
             </span>
           </div>
-          <div class="flex items-center flex-wrap gap-y-1.5 gap-x-4">
+          <div class="flex flex-wrap items-center gap-y-1.5 gap-x-4">
             <!-- Issue type -->
             <issue-type :issue-type="issueType" />
             <!-- First seen and last seen -->
@@ -39,20 +39,20 @@
 
         <!-- right section -->
         <div
-          class="flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400"
+          class="flex h-full w-1/4 flex-col border-l border-slate-400 group-hover:border-slate-400 xs:w-1/5"
           :class="{
-            'justify-center items-center': centerContent
+            'items-center justify-center': centerContent
           }"
         >
           <!-- Occurence count and Trend  -->
           <div
-            class="flex flex-col items-center justify-center flex-grow text-xs leading-none"
+            class="flex flex-grow flex-col items-center justify-center text-xs leading-none"
             :class="showTrend ? 'py-1' : 'py-2'"
           >
             <!-- Count -->
             <div
               v-tooltip="occurrenceCount > 1000 ? `${formatIntl(occurrenceCount)} occurrences` : ''"
-              class="text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100"
+              class="text-lg font-bold leading-10 text-vanilla-100 md:text-1.5xl"
             >
               {{ shortenLargeNumber(occurrenceCount) }}
             </div>
@@ -65,7 +65,7 @@
               :trend-value="trend.trendValue ? `${trend.trendValue}%` : 'from 0'"
               :show-bg="false"
               custom-bg-class="bg-ink-100"
-              class="hidden sm:block text-xxs md:text-xs"
+              class="hidden text-xxs sm:block md:text-xs"
               :class="trend.trendDirection === TrendDirection.Up ? 'text-cherry' : 'text-juniper'"
             />
           </div>
@@ -74,7 +74,7 @@
             v-if="autofixAvailable && showAutofixButton"
             :disabled="disableAutofixButton"
             data-testid="autofix-issue"
-            class="flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-slate-400 group-hover:border-slate-400"
+            class="flex h-auto w-full items-center justify-center border-t border-slate-400 p-2 group-hover:border-slate-400 sm:gap-x-2"
             :class="{
               'cursor-pointer hover:bg-ink-200': !disableAutofixButton
             }"
@@ -205,6 +205,11 @@ export default class IssueListItem extends Vue {
     let filters: string[] = []
     const filterTypes = ['category', 'sort', 'q']
 
+    /**
+     * ! These parameters are used to transfer the active filters from previous issues...
+     * ! ...page to this page for arrow navigation
+     * ? Ref: https://github.com/deepsourcelabs/bifrost/blob/d1c45b19d94f61159e60c71d717cf2d31ded048e/pages/_provider/_owner/_repo/run/_runId/_analyzer/_issueId.vue#L397
+     */
     Object.keys(this.issueListFilters).forEach((key) => {
       if (filterTypes.includes(key)) {
         filters = filters.concat(`list${key}=${this.issueListFilters[key as keyof FilterParams]}`)
