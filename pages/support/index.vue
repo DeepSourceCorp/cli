@@ -141,7 +141,7 @@
                     :disabled="isFileProcessing || isFormSubmitting"
                     label="Add files"
                     multiple
-                    accept="video/mp4,video/quicktime,image/jpeg,image/png,text/plain,text/csv,application/rtf,application/xml,text/rtf"
+                    accept="video/mp4,video/quicktime,image/jpeg,image/png,text/plain,text/csv,application/rtf,text/rtf"
                     @change="prepareFiles"
                     @files-emptied="filesToUpload = []"
                   >

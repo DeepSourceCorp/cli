@@ -1,7 +1,7 @@
 <template>
-  <div class="p-4 rounded-md bg-ink-300 border border-ink-200 space-y-4">
-    <div class="flex items-center w-full justify-between">
-      <div class="flex items-center gap-x-4 h-13">
+  <div class="space-y-4 rounded-md border border-ink-200 bg-ink-300 p-4">
+    <div class="flex w-full items-center justify-between">
+      <div class="flex h-13 items-center gap-x-4">
         <!-- account avatar -->
         <z-avatar
           :image="newAvatar.url ? newAvatar.url : viewer.avatar"
@@ -14,11 +14,11 @@
 
         <!-- account display name and email -->
         <div v-if="editMode" class="flex flex-col gap-y-2">
-          <div class="text-vanilla-400 text-xs">The image should be less than 2MB (200x200).</div>
+          <div class="text-xs text-vanilla-400">The image should be less than 2MB (200x200).</div>
           <div>
             <button class="auxillary-button h-7" @click="onFileUploadClick">
               <div
-                class="flex flex-shrink items-center text-xs gap-x-2 text-vanilla-400 hover:text-vanilla-100"
+                class="flex flex-shrink items-center gap-x-2 text-xs text-vanilla-400 hover:text-vanilla-100"
               >
                 <z-icon icon="upload" color="vanilla-400" />
                 <span> Upload new avatar </span>
@@ -29,14 +29,14 @@
             ref="fileInput"
             :disabled="isSaving"
             type="file"
-            accept="image/jpeg, image/png, image/svg+xml"
+            accept="image/jpeg, image/png"
             class="hidden"
             @change="filesChange($event.target.files)"
           />
         </div>
         <div v-else class="flex flex-col gap-y-1.5">
           <span class="leading-6">{{ viewer.fullName || viewer.firstName || viewer.email }}</span>
-          <span v-if="viewer.fullName || viewer.firstName" class="text-vanilla-400 text-sm">{{
+          <span v-if="viewer.fullName || viewer.firstName" class="text-sm text-vanilla-400">{{
             viewer.email
           }}</span>
         </div>
@@ -44,7 +44,7 @@
 
       <div v-if="!editMode" class="self-start">
         <button class="auxillary-button h-7" @click="toggleEditMode">
-          <div class="flex items-center text-xs gap-x-2 text-vanilla-400 hover:text-vanilla-100">
+          <div class="flex items-center gap-x-2 text-xs text-vanilla-400 hover:text-vanilla-100">
             <z-icon icon="edit-2" color="vanilla-400" size="x-small" />
             <span> Edit </span>
           </div>
@@ -53,22 +53,22 @@
     </div>
     <div v-if="editMode" class="grid grid-cols-2 gap-4 text-vanilla-100">
       <label>
-        <div class="text-xs mb-1.5">Display name</div>
+        <div class="mb-1.5 text-xs">Display name</div>
         <z-input v-model="displayName" label="Display name" size="small" />
       </label>
       <label>
-        <div class="text-xs mb-1.5">Email</div>
+        <div class="mb-1.5 text-xs">Email</div>
         <div
-          class="h-8 flex items-center w-full py-1 px-2 space-x-2 text-xs space-x-1 leading-loose text-vanilla-400 bg-ink-300 border border-ink-200 rounded-sm"
+          class="flex h-8 w-full items-center space-x-2 space-x-1 rounded-sm border border-ink-200 bg-ink-300 py-1 px-2 text-xs leading-loose text-vanilla-400"
         >
           <span class="flex-grow">{{ viewer.email }}</span>
           <z-icon icon="z-lock" size="x-small" />
         </div>
       </label>
-      <div class="flex gap-x-3 justify-end col-span-2">
+      <div class="col-span-2 flex justify-end gap-x-3">
         <button class="auxillary-button h-7" @click="toggleEditMode">
           <div
-            class="flex flex-shrink items-center text-xs gap-x-1 text-vanilla-400 hover:text-vanilla-100"
+            class="flex flex-shrink items-center gap-x-1 text-xs text-vanilla-400 hover:text-vanilla-100"
           >
             <z-icon icon="corner-up-left" color="vanilla-400" />
             <span>Discard</span>
