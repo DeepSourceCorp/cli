@@ -56,7 +56,7 @@
         <template #footer>
           <z-radio-group
             :model-value="issueDistributionType"
-            class="grid h-8 w-full min-w-52 flex-grow grid-cols-2 font-medium text-vanilla-100 shadow-blur-lg sm:w-auto sm:flex-grow-0"
+            class="grid h-8 w-full min-w-52 flex-shrink-0 grid-cols-2 font-medium text-vanilla-100 shadow-blur-lg"
             @change="handleDistributionTypeChange"
           >
             <z-radio-button
