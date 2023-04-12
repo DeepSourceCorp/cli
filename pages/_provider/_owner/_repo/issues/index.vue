@@ -405,6 +405,9 @@ export default class Issues extends mixins(
       await this.fetchIssueOccurrenceDistributionCounts({
         ...this.baseRouteParams,
         distributionType: this.issueDistributionType,
+        q,
+        analyzer,
+        autofixAvailable,
         refetch
       })
     } catch (err) {
@@ -476,10 +479,14 @@ export default class Issues extends mixins(
     refetch = false
   ) {
     this.issueDistributionType = distributionType
+    const { q, analyzer, autofixAvailable } = this.parsedParams
 
     await this.fetchIssueOccurrenceDistributionCounts({
       ...this.baseRouteParams,
       distributionType,
+      q,
+      analyzer,
+      autofixAvailable,
       refetch
     })
 

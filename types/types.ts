@@ -10785,6 +10785,9 @@ export type IssueOccurrenceDistributionByIssueTypeQueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
   name: Scalars['String'];
+  analyzer?: Maybe<Scalars['String']>;
+  q?: Maybe<Scalars['String']>;
+  autofixAvailable?: Maybe<Scalars['Boolean']>;
 }>;
 
 
@@ -10804,6 +10807,9 @@ export type IssueOccurrenceDistributionByProductQueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
   name: Scalars['String'];
+  analyzer?: Maybe<Scalars['String']>;
+  q?: Maybe<Scalars['String']>;
+  autofixAvailable?: Maybe<Scalars['Boolean']>;
 }>;
 
 
@@ -10849,25 +10855,6 @@ export type Unnamed_122_Query = (
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'issueTrend' | 'resolvedIssueTrend'>
-  )> }
-);
-
-export type IssueTypeDistributionQueryVariables = Exact<{
-  provider: VcsProviderChoices;
-  owner: Scalars['String'];
-  name: Scalars['String'];
-  issueType?: Maybe<Scalars['String']>;
-  analyzer?: Maybe<Scalars['String']>;
-  q?: Maybe<Scalars['String']>;
-  autofixAvailable?: Maybe<Scalars['Boolean']>;
-}>;
-
-
-export type IssueTypeDistributionQuery = (
-  { __typename?: 'Query' }
-  & { repository?: Maybe<(
-    { __typename?: 'Repository' }
-    & Pick<Repository, 'id' | 'issueTypeDistribution'>
   )> }
 );
 

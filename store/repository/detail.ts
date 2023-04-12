@@ -11,7 +11,6 @@ import RepositoryCurrentRunAnalysisQuery from '~/apollo/queries/repository/analy
 import RepositoryIssueTrendsQuery from '~/apollo/queries/repository/issueTrends.gql'
 import RepositoryAutofixTrendsQuery from '~/apollo/queries/repository/autofixTrends.gql'
 import RepositoryAutofixStatsQuery from '~/apollo/queries/repository/autofixStats.gql'
-import RepositoryIssueTypeDistributionQuery from '~/apollo/queries/repository/issueTypeDistribution.gql'
 import RepositoryIssueOccurrenceDistributionByIssueType from '~/apollo/queries/repository/issueOccurrenceDistributionByIssueType.gql'
 import RepositoryIssueOccurrenceDistributionByProduct from '~/apollo/queries/repository/issueOccurrenceDistributionByProduct.gql'
 import RepositoryIssueTypeSettingsQuery from '~/apollo/queries/repository/issueTypeSettings.gql'
@@ -129,7 +128,7 @@ export enum RepositoryDetailActions {
   FETCH_CURRENT_RUN_COUNT = 'fetchCurrentRunCount',
   FETCH_ISSUE_TRENDS = 'fetchIssueTrends',
   FETCH_AUTOFIX_TRENDS = 'fetchAutofixTrends',
-  FETCH_ISSUE_TYPE_DISTRIBUTION = 'fetchIssueTypeDistribution',
+
   FETCH_ISSUE_OCCURRENCE_DISTRIBUTION_COUNTS = 'fetchIssueOccurrenceDistributionCounts',
   FETCH_ISSUE_TYPE_SETTINGS = 'fetchIssueTypeSettings',
   FETCH_REPOSITORY_SETTINGS_GENERAL = 'fetchRepositorySettingsGeneral',
@@ -315,20 +314,6 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       status: string
     }
   ) => Promise<void>
-  [RepositoryDetailActions.FETCH_ISSUE_TYPE_DISTRIBUTION]: (
-    this: Store<RootState>,
-    injectee: RepositoryDetailActionContext,
-    args: {
-      provider: string
-      owner: string
-      name: string
-      issueType: string
-      analyzer: string
-      q: string
-      autofixAvailable: boolean | null
-      refetch?: boolean
-    }
-  ) => Promise<void>
   [RepositoryDetailActions.FETCH_ISSUE_OCCURRENCE_DISTRIBUTION_COUNTS]: (
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext,
@@ -337,6 +322,9 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       provider: string
       owner: string
       name: string
+      q?: string
+      analyzer?: string
+      autofixAvailable?: boolean
       refetch?: boolean
     }
   ) => Promise<void>
@@ -746,33 +734,6 @@ export const actions: RepositoryDetailModuleActions = {
         // TODO: Toast("Failure in fetching widgets", e)
       })
   },
-  async [RepositoryDetailActions.FETCH_ISSUE_TYPE_DISTRIBUTION]({ commit }, args) {
-    commit(RepositoryDetailMutations.SET_LOADING, true)
-    // use metrics query later
-    await this.$fetchGraphqlData(
-      RepositoryIssueTypeDistributionQuery,
-      {
-        provider: this.$providerMetaMap[args.provider].value,
-        owner: args.owner,
-        name: args.name,
-        issueType: args.issueType,
-        analyzer: args.analyzer,
-        q: args.q,
-        autofixAvailable: args.autofixAvailable
-      },
-      args.refetch
-    )
-      .then((response: GraphqlQueryResponse) => {
-        // TODO: Toast("Successfully fetched widgets")
-        commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
-        commit(RepositoryDetailMutations.SET_LOADING, false)
-      })
-      .catch((e: GraphqlError) => {
-        commit(RepositoryDetailMutations.SET_ERROR, e)
-        commit(RepositoryDetailMutations.SET_LOADING, false)
-        // TODO: Toast("Failure in fetching widgets", e)
-      })
-  },
   async [RepositoryDetailActions.FETCH_ISSUE_OCCURRENCE_DISTRIBUTION_COUNTS]({ commit }, args) {
     const distributionCountsQuery =
       args.distributionType === IssueOccurrenceDistributionType.ISSUE_TYPE
@@ -784,7 +745,10 @@ export const actions: RepositoryDetailModuleActions = {
       {
         provider: this.$providerMetaMap[args.provider].value,
         owner: args.owner,
-        name: args.name
+        name: args.name,
+        q: args.q,
+        analyzer: args.analyzer,
+        autofixAvailable: args.autofixAvailable
       },
       args.refetch
     )

@@ -2,10 +2,17 @@ query issueOccurrenceDistributionByProduct(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!
+  $analyzer: String
+  $q: String
+  $autofixAvailable: Boolean
 ) {
   repository(provider: $provider, name: $name, owner: $owner) {
     id
-    issueOccurrenceDistributionByProduct {
+    issueOccurrenceDistributionByProduct(
+      analyzer: $analyzer
+      q: $q
+      autofixAvailable: $autofixAvailable
+    ) {
       key
       count
     }

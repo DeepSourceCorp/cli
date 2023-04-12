@@ -1928,15 +1928,6 @@ declare module '*/issueRaisedInFiles.gql' {
 }
     
 
-declare module '*/issueTypeDistribution.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const issueTypeDistribution: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
 declare module '*/issueTypeSettings.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

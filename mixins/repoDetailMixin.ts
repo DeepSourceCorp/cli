@@ -214,24 +214,15 @@ export default class RepoDetailMixin extends Vue {
   @repoStore.Action(RepositoryDetailActions.UPDATE_REPO_SETTINGS)
   updateRepoSettings: (args: { input: UpdateRepositorySettingsInput }) => Promise<void>
 
-  @repoStore.Action(RepositoryDetailActions.FETCH_ISSUE_TYPE_DISTRIBUTION)
-  fetchIssueTypeDistribution: (args: {
-    provider: string
-    owner: string
-    name: string
-    issueType?: string
-    analyzer?: string
-    q?: string
-    autofixAvailable?: boolean | null
-    refetch?: boolean
-  }) => Promise<void>
-
   @repoStore.Action(RepositoryDetailActions.FETCH_ISSUE_OCCURRENCE_DISTRIBUTION_COUNTS)
   fetchIssueOccurrenceDistributionCounts: (args: {
     distributionType: IssueOccurrenceDistributionType
     provider: string
     owner: string
     name: string
+    q?: string
+    analyzer?: string
+    autofixAvailable?: boolean
     refetch?: boolean
   }) => Promise<void>
 
