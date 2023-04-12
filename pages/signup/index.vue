@@ -36,11 +36,13 @@
           <div class="flex flex-col space-y-4 leading-relaxed text-left">
             <div class="text-vanilla-400">
               By signing up, you are agreeing to our
-              <a href="/terms-of-service" class="text-juniper hover:underline">
+              <a href="https://deepsource.com/legal/terms" class="text-juniper hover:underline">
                 Terms of Service
               </a>
               and
-              <a href="/privacy" class="text-juniper hover:underline">Privacy Policy</a>.
+              <a href="https://deepsource.com/legal/privacy" class="text-juniper hover:underline"
+                >Privacy Policy</a
+              >.
             </div>
             <div class="pt-4 border-t text-vanilla-400 border-slate">
               Already have an account?
