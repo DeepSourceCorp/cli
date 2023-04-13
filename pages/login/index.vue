@@ -121,12 +121,6 @@ export default class SignIn extends mixins(AuthMixin, MetaMixin) {
   samlLoginLoading = false
   samlEmail = ''
 
-  FOOTER_LINKS = [
-    { text: 'Privacy', link: `${this.$config.domain}/privacy/` },
-    // { text: 'Legal', link: `${this.$config.domain}/legal/` },
-    { text: 'Terms of use', link: `${this.$config.domain}/terms-of-service/` }
-  ]
-
   /**
    * Reset input data and UI state from login via SAML to normal login
    */
