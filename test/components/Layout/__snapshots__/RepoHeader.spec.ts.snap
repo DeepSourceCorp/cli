@@ -2,11 +2,11 @@
 
 exports[`[[ RepoHeader ]] renders RepoHeader for GSR: RepoHeader for GSR 1`] = `
 "<div>
-  <div class=\\"grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-slate-400\\">
+  <div class=\\"grid-row-3 grid min-h-24 auto-rows-auto grid-cols-1 gap-2 border-b border-slate-400 bg-ink-300 lg:gap-0 xl:grid-cols-fr-fr-22 xl:grid-rows-2\\">
     <div id=\\"header\\" class=\\"xl:col-span-2\\">
-      <div class=\\"px-4 pt-3 space-x-2 space-y-2 xl:space-y-0\\">
-        <h2 class=\\"flex flex-wrap items-center gap-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400\\">
-          <div class=\\"space-x-0.5 md:space-x-1\\"><a class=\\"inline transition-colors duration-75 cursor-pointer hover:text-vanilla-300\\">deepsourcelabs</a> <span class=\\"inline\\">/</span> <a class=\\"inline font-bold text-vanilla-100\\">
+      <div class=\\"space-x-2 space-y-2 px-4 pt-3 xl:space-y-0\\">
+        <h2 class=\\"flex flex-wrap items-center gap-3 text-lg font-medium leading-none text-vanilla-400 xl:text-xl\\">
+          <div class=\\"space-x-0.5 md:space-x-1\\"><a class=\\"inline cursor-pointer transition-colors duration-75 hover:text-vanilla-300\\">deepsourcelabs</a> <span class=\\"inline\\">/</span> <a class=\\"inline font-bold text-vanilla-100\\">
               bifrost
             </a></div>
           <zbutton-stub color=\\"hover:text-slate\\" iconcolor=\\"current\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"z-star\\" class=\\"p-1 opacity-40 hover:opacity-70 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub> <a target=\\"_blank\\" rel=\\"noopener noreferrer\\">
@@ -18,7 +18,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader for GSR: RepoHeader for GSR 1`] = `
     </div>
     <!---->
     <div id=\\"tabs\\" class=\\"flex xl:col-span-2\\">
-      <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap hide-scroll\\"><a>
+      <div class=\\"hide-scroll flex flex-nowrap space-x-5 self-end overflow-auto px-4\\"><a>
           <ztab-stub isactive=\\"true\\" icon=\\"tachometer-fast\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
         </a><a>
           <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
@@ -40,11 +40,11 @@ exports[`[[ RepoHeader ]] renders RepoHeader for GSR: RepoHeader for GSR 1`] = `
 
 exports[`[[ RepoHeader ]] renders RepoHeader logged out: Default Repo Header Snap Logged Out 1`] = `
 "<div>
-  <div class=\\"grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-slate-400\\">
+  <div class=\\"grid-row-3 grid min-h-24 auto-rows-auto grid-cols-1 gap-2 border-b border-slate-400 bg-ink-300 lg:gap-0 xl:grid-cols-fr-fr-22 xl:grid-rows-2\\">
     <div id=\\"header\\" class=\\"xl:col-span-2\\">
-      <div class=\\"px-4 pt-3 space-x-2 space-y-2 xl:space-y-0\\">
-        <h2 class=\\"flex flex-wrap items-center gap-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400\\">
-          <div class=\\"space-x-0.5 md:space-x-1\\"><a class=\\"inline transition-colors duration-75 cursor-pointer hover:text-vanilla-300\\">deepsourcelabs</a> <span class=\\"inline\\">/</span> <a class=\\"inline font-bold text-vanilla-100\\">
+      <div class=\\"space-x-2 space-y-2 px-4 pt-3 xl:space-y-0\\">
+        <h2 class=\\"flex flex-wrap items-center gap-3 text-lg font-medium leading-none text-vanilla-400 xl:text-xl\\">
+          <div class=\\"space-x-0.5 md:space-x-1\\"><a class=\\"inline cursor-pointer transition-colors duration-75 hover:text-vanilla-300\\">deepsourcelabs</a> <span class=\\"inline\\">/</span> <a class=\\"inline font-bold text-vanilla-100\\">
               bifrost
             </a></div>
           <!----> <a target=\\"_blank\\" rel=\\"noopener noreferrer\\">
@@ -56,7 +56,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader logged out: Default Repo Header Sna
     </div>
     <!---->
     <div id=\\"tabs\\" class=\\"flex xl:col-span-2\\">
-      <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap hide-scroll\\"><a>
+      <div class=\\"hide-scroll flex flex-nowrap space-x-5 self-end overflow-auto px-4\\"><a>
           <ztab-stub isactive=\\"true\\" icon=\\"tachometer-fast\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
         </a><a>
           <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
@@ -76,11 +76,11 @@ exports[`[[ RepoHeader ]] renders RepoHeader logged out: Default Repo Header Sna
 
 exports[`[[ RepoHeader ]] renders RepoHeader with all permission: Default Repo Header Snap 1`] = `
 "<div>
-  <div class=\\"grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-slate-400\\">
+  <div class=\\"grid-row-3 grid min-h-24 auto-rows-auto grid-cols-1 gap-2 border-b border-slate-400 bg-ink-300 lg:gap-0 xl:grid-cols-fr-fr-22 xl:grid-rows-2\\">
     <div id=\\"header\\" class=\\"xl:col-span-2\\">
-      <div class=\\"px-4 pt-3 space-x-2 space-y-2 xl:space-y-0\\">
-        <h2 class=\\"flex flex-wrap items-center gap-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400\\">
-          <div class=\\"space-x-0.5 md:space-x-1\\"><a class=\\"inline transition-colors duration-75 cursor-pointer hover:text-vanilla-300\\">deepsourcelabs</a> <span class=\\"inline\\">/</span> <a class=\\"inline font-bold text-vanilla-100\\">
+      <div class=\\"space-x-2 space-y-2 px-4 pt-3 xl:space-y-0\\">
+        <h2 class=\\"flex flex-wrap items-center gap-3 text-lg font-medium leading-none text-vanilla-400 xl:text-xl\\">
+          <div class=\\"space-x-0.5 md:space-x-1\\"><a class=\\"inline cursor-pointer transition-colors duration-75 hover:text-vanilla-300\\">deepsourcelabs</a> <span class=\\"inline\\">/</span> <a class=\\"inline font-bold text-vanilla-100\\">
               bifrost
             </a></div>
           <zbutton-stub color=\\"hover:text-slate\\" iconcolor=\\"current\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"z-star\\" class=\\"p-1 opacity-40 hover:opacity-70 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub> <a target=\\"_blank\\" rel=\\"noopener noreferrer\\">
@@ -92,7 +92,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader with all permission: Default Repo H
     </div>
     <!---->
     <div id=\\"tabs\\" class=\\"flex xl:col-span-2\\">
-      <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap hide-scroll\\"><a>
+      <div class=\\"hide-scroll flex flex-nowrap space-x-5 self-end overflow-auto px-4\\"><a>
           <ztab-stub isactive=\\"true\\" icon=\\"tachometer-fast\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
         </a><a>
           <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
@@ -114,11 +114,11 @@ exports[`[[ RepoHeader ]] renders RepoHeader with all permission: Default Repo H
 
 exports[`[[ RepoHeader ]] renders RepoHeader without a matching activeLink: RepoHeader without a matching activeLink Snap 1`] = `
 "<div>
-  <div class=\\"grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-slate-400\\">
+  <div class=\\"grid-row-3 grid min-h-24 auto-rows-auto grid-cols-1 gap-2 border-b border-slate-400 bg-ink-300 lg:gap-0 xl:grid-cols-fr-fr-22 xl:grid-rows-2\\">
     <div id=\\"header\\" class=\\"xl:col-span-2\\">
-      <div class=\\"px-4 pt-3 space-x-2 space-y-2 xl:space-y-0\\">
-        <h2 class=\\"flex flex-wrap items-center gap-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400\\">
-          <div class=\\"space-x-0.5 md:space-x-1\\"><a class=\\"inline transition-colors duration-75 cursor-pointer hover:text-vanilla-300\\">deepsourcelabs</a> <span class=\\"inline\\">/</span> <a class=\\"inline font-bold text-vanilla-100\\">
+      <div class=\\"space-x-2 space-y-2 px-4 pt-3 xl:space-y-0\\">
+        <h2 class=\\"flex flex-wrap items-center gap-3 text-lg font-medium leading-none text-vanilla-400 xl:text-xl\\">
+          <div class=\\"space-x-0.5 md:space-x-1\\"><a class=\\"inline cursor-pointer transition-colors duration-75 hover:text-vanilla-300\\">deepsourcelabs</a> <span class=\\"inline\\">/</span> <a class=\\"inline font-bold text-vanilla-100\\">
               bifrost
             </a></div>
           <zbutton-stub color=\\"hover:text-slate\\" iconcolor=\\"current\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"z-star\\" class=\\"p-1 opacity-40 hover:opacity-70 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub> <a target=\\"_blank\\" rel=\\"noopener noreferrer\\">
@@ -130,7 +130,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader without a matching activeLink: Repo
     </div>
     <!---->
     <div id=\\"tabs\\" class=\\"flex xl:col-span-2\\">
-      <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap hide-scroll\\"><a>
+      <div class=\\"hide-scroll flex flex-nowrap space-x-5 self-end overflow-auto px-4\\"><a>
           <ztab-stub icon=\\"tachometer-fast\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
         </a><a>
           <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
@@ -152,10 +152,10 @@ exports[`[[ RepoHeader ]] renders RepoHeader without a matching activeLink: Repo
 
 exports[`[[ RepoHeader ]] renders RepoHeader without perms: Repo Header withut perms 1`] = `
 "<div>
-  <div class=\\"grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-slate-400\\">
+  <div class=\\"grid-row-3 grid min-h-24 auto-rows-auto grid-cols-1 gap-2 border-b border-slate-400 bg-ink-300 lg:gap-0 xl:grid-cols-fr-fr-22 xl:grid-rows-2\\">
     <div id=\\"header\\" class=\\"xl:col-span-2\\">
-      <div class=\\"px-4 pt-3 space-x-2 space-y-2 xl:space-y-0\\">
-        <h2 class=\\"flex flex-wrap items-center gap-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400\\">
+      <div class=\\"space-x-2 space-y-2 px-4 pt-3 xl:space-y-0\\">
+        <h2 class=\\"flex flex-wrap items-center gap-3 text-lg font-medium leading-none text-vanilla-400 xl:text-xl\\">
           <div class=\\"space-x-0.5 md:space-x-1\\"><span class=\\"inline\\">deepsourcelabs</span> <span class=\\"inline\\">/</span> <a class=\\"inline font-bold text-vanilla-100\\">
               bifrost
             </a></div>
@@ -168,7 +168,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader without perms: Repo Header withut p
     </div>
     <!---->
     <div id=\\"tabs\\" class=\\"flex xl:col-span-2\\">
-      <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap hide-scroll\\"><a>
+      <div class=\\"hide-scroll flex flex-nowrap space-x-5 self-end overflow-auto px-4\\"><a>
           <ztab-stub isactive=\\"true\\" icon=\\"tachometer-fast\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
         </a><a>
           <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>

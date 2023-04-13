@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   presets: [require('@deepsource/zeal/tailwind.config')],
   plugins: [require('@tailwindcss/line-clamp')],
@@ -166,5 +168,14 @@ module.exports = {
         '11px': '11px'
       }
     }
-  }
+  },
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.hyphens-none': { hyphens: 'none' },
+        '.hyphens-manual': { hyphens: 'manual' },
+        '.hyphens-auto': { hyphens: 'auto' }
+      })
+    })
+  ]
 }

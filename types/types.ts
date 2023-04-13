@@ -11662,22 +11662,24 @@ export type Unnamed_136_Query = (
   )> }
 );
 
-export type AuditLogsQueryVariables = Exact<{
+export type RepositoryLevelAuditLogQueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
   name: Scalars['String'];
+  first?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  createdAtGte?: Maybe<Scalars['Date']>;
+  createdAtLte?: Maybe<Scalars['Date']>;
+  q?: Maybe<Scalars['String']>;
 }>;
 
 
-export type AuditLogsQuery = (
+export type RepositoryLevelAuditLogQuery = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name'>
-    & { auditLogMeta?: Maybe<(
-      { __typename?: 'AuditLogMeta' }
-      & Pick<AuditLogMeta, 'events' | 'exportFormats' | 'possibleActors'>
-    )>, logs?: Maybe<(
+    & { logs?: Maybe<(
       { __typename?: 'AuditLogConnection' }
       & { edges: Array<Maybe<(
         { __typename?: 'AuditLogEdge' }
@@ -11690,6 +11692,9 @@ export type AuditLogsQuery = (
           )> }
         )> }
       )>> }
+    )>, fullLogs?: Maybe<(
+      { __typename?: 'AuditLogConnection' }
+      & Pick<AuditLogConnection, 'totalCount'>
     )> }
   )> }
 );

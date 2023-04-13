@@ -1,6 +1,8 @@
 <template>
   <div class="min-h-12 space-y-3">
-    <p class="event-description leading-5 text-vanilla-100">{{ eventDescription }}</p>
+    <p class="event-description break-words leading-5 text-vanilla-100 hyphens-auto">
+      {{ eventDescription }}
+    </p>
 
     <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-vanilla-400">
       <code class="bifrost-inline-code text-vanilla-100">{{ eventName }}</code>

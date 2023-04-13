@@ -2,10 +2,10 @@
   <div>
     <slot name="trigger">
       <button
-        :disabled="loading"
+        :disabled="disabled"
         class="flex h-8 w-24 items-center justify-center gap-x-2 rounded-3px border border-ink-50 bg-ink-200 px-2 text-xs text-vanilla-400 hover:bg-ink-100 hover:text-vanilla-100"
-        :class="loading ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'"
-        @click="loading ? false : $emit('primary')"
+        :class="disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'"
+        @click="disabled ? false : $emit('primary')"
       >
         <z-icon
           :icon="loading ? 'spin-loader' : 'file-output'"
@@ -59,9 +59,12 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
 @Component({ name: 'ExportLogsSuccessModal', components: { ZButton, ZIcon, ZModal } })
 export default class ExportLogsSuccessModal extends Vue {
   @Prop({ default: false, type: Boolean })
+  disabled: boolean
+
+  @Prop({ default: false, type: Boolean })
   loading: boolean
 
-  @Prop({ required: true, type: Boolean })
+  @Prop({ default: false, type: Boolean })
   showExportLogsSuccessModal: boolean
 
   @Prop({ required: true, type: String })

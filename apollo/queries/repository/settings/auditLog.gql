@@ -1,13 +1,23 @@
-query auditLogs($provider: VCSProviderChoices!, $owner: String!, $name: String!) {
+query repositoryLevelAuditLog(
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $first: Int
+  $after: String
+  $createdAtGte: Date
+  $createdAtLte: Date
+  $q: String
+) {
   repository(provider: $provider, owner: $owner, name: $name) {
     id
     name
-    auditLogMeta {
-      events
-      exportFormats
-      possibleActors
-    }
-    logs {
+    logs(
+      first: $first
+      after: $after
+      createdAtGte: $createdAtGte
+      createdAtLte: $createdAtLte
+      q: $q
+    ) {
       edges {
         node {
           id
@@ -24,6 +34,10 @@ query auditLogs($provider: VCSProviderChoices!, $owner: String!, $name: String!)
           }
         }
       }
+    }
+
+    fullLogs: logs(createdAtGte: $createdAtGte, createdAtLte: $createdAtLte, q: $q) {
+      totalCount
     }
   }
 }

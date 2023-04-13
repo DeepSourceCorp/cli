@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[[ TimelineItemLoading ]] renders the timeline item loading state 1`] = `
+exports[`[[ TimelineItemV2Loading ]] renders the timeline item loading state 1`] = `
 "<div class=\\"space-y-4\\">
   <div class=\\"h-3 w-full animate-pulse rounded-full bg-ink-200\\"></div>
   <div class=\\"flex items-center gap-x-4\\">

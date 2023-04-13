@@ -2075,7 +2075,7 @@ declare module '*/group.gql' {
 declare module '*/auditLog.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const auditLogs: DocumentNode;
+  export const repositoryLevelAuditLog: DocumentNode;
 export const teamLevelAuditLog: DocumentNode;
 
   export default defaultDocument;

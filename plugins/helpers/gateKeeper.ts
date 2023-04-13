@@ -162,7 +162,7 @@ const REPO_PERMS_MAP = {
   [RepoPerms.ADD_REMOVE_MEMBERS]: [RepositoryCollaboratorPermission.Admin],
   [RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS]: [RepositoryCollaboratorPermission.Admin],
   [RepoPerms.IGNORE_ISSUES]: [RepositoryCollaboratorPermission.Admin],
-  [RepoPerms.VIEW_AUDIT_LOGS]: [RepositoryCollaboratorPermission.Admin],
+  [RepoPerms.VIEW_AUDIT_LOG]: [RepositoryCollaboratorPermission.Admin],
   [RepoPerms.READ_REPO]: [
     RepositoryCollaboratorPermission.Admin,
     RepositoryCollaboratorPermission.Write,

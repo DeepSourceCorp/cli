@@ -1,17 +1,17 @@
 <template>
-  <section class="grid grid-cols-1 lg:grid-cols-16-fr repository-level-settings-page">
+  <section class="repository-level-settings-page grid grid-cols-1 lg:grid-cols-16-fr">
     <nav
-      class="hidden px-4 pt-2 overflow-x-auto border-b gap-x-8 hide-scroll border-slate-400 lg:sticky lg:flex lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r vertical-sidebar"
+      class="hide-scroll vertical-sidebar hidden gap-x-8 overflow-x-auto border-b border-slate-400 px-4 pt-2 lg:sticky lg:flex lg:flex-col lg:gap-y-1 lg:border-r lg:p-2"
     >
       <template v-for="item in navItems">
         <nuxt-link
           v-if="isNavLinkVisible(item)"
           :key="item.label"
           :to="$generateRoute(item.link)"
-          class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300"
+          class="group flex-shrink-0 rounded-md text-sm hover:bg-ink-300"
         >
           <span
-            class="block p-2 rounded-md group-hover:text-vanilla-100"
+            class="block rounded-md p-2 group-hover:text-vanilla-100"
             :class="$route.path.includes(item.link.join('/')) ? 'bg-ink-300' : 'text-vanilla-400'"
             >{{ item.label }}</span
           >
@@ -71,7 +71,7 @@ interface TabLink {
         RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY,
         RepoPerms.ADD_REMOVE_MEMBERS,
         RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS,
-        RepoPerms.VIEW_AUDIT_LOGS,
+        RepoPerms.VIEW_AUDIT_LOG,
         RepoPerms.VIEW_BADGES,
         RepoPerms.CHANGE_ISSUE_PRIORITY,
         RepoPerms.CHANGE_INTEGRATION_SETTINGS,
@@ -137,7 +137,7 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
       label: 'Audit log',
       icon: 'list',
       link: ['settings', 'audit-log'],
-      perms: [RepoPerms.VIEW_AUDIT_LOGS]
+      perms: [RepoPerms.VIEW_AUDIT_LOG]
     },
     {
       label: 'Repository members',

@@ -46,7 +46,7 @@ export enum RepoPerms {
   ADD_REMOVE_MEMBERS = 'add/removeMembers',
   UPDATE_ROLE_OF_EXISTING_MEMBERS = 'updateRoleOfExistingMembers',
   IGNORE_ISSUES = 'ignoreIssues',
-  VIEW_AUDIT_LOGS = 'viewAuditLogs',
+  VIEW_AUDIT_LOG = 'viewAuditLog',
   ALLOW_STAR = 'allowStar',
   READ_REPO = 'readRepository',
   ACTIVATE_REPOSITORY = 'activateRepository',

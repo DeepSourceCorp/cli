@@ -1,0 +1,765 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"repository","showExportLogsSuccessModal":false,"exportLogsLoading":false,"auditLogListLoading":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your repository.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub end-date=\\"Apr 13, 2023\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Logs for Last 3 months Jan 13, 2023 - Apr 13, 2023
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1\\">
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6Ymxya2xt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.20.3\\" createdat=\\"2023-04-10T05:57:58.403997+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6emRwb2x3\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:31.471602+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6enFxd2Rt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 70 entries from the audit log from 10 January, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:24.633953+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6YmF5bXdu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.6.3\\" createdat=\\"2023-01-19T07:51:28.072442+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6end2a2pu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.13.6\\" createdat=\\"2023-01-18T14:53:28.624988+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub list-style-type=\\"circle\\">
+      <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"-mt-1.5 self-start\\"></paginationv2-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"repository","showExportLogsSuccessModal":false,"exportLogsLoading":false,"auditLogListLoading":true} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your repository.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub end-date=\\"Apr 13, 2023\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Searching logs...
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1 space-y-2\\">
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"repository","showExportLogsSuccessModal":false,"exportLogsLoading":true,"auditLogListLoading":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your repository.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 13, 2023\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Logs for Last 3 months Jan 13, 2023 - Apr 13, 2023
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1\\">
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6Ymxya2xt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.20.3\\" createdat=\\"2023-04-10T05:57:58.403997+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6emRwb2x3\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:31.471602+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6enFxd2Rt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 70 entries from the audit log from 10 January, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:24.633953+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6YmF5bXdu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.6.3\\" createdat=\\"2023-01-19T07:51:28.072442+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6end2a2pu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.13.6\\" createdat=\\"2023-01-18T14:53:28.624988+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub list-style-type=\\"circle\\">
+      <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"-mt-1.5 self-start\\"></paginationv2-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"repository","showExportLogsSuccessModal":false,"exportLogsLoading":true,"auditLogListLoading":true} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your repository.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 13, 2023\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Searching logs...
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1 space-y-2\\">
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"repository","showExportLogsSuccessModal":true,"exportLogsLoading":false,"auditLogListLoading":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your repository.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub end-date=\\"Apr 13, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Logs for Last 3 months Jan 13, 2023 - Apr 13, 2023
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1\\">
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6Ymxya2xt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.20.3\\" createdat=\\"2023-04-10T05:57:58.403997+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6emRwb2x3\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:31.471602+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6enFxd2Rt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 70 entries from the audit log from 10 January, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:24.633953+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6YmF5bXdu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.6.3\\" createdat=\\"2023-01-19T07:51:28.072442+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6end2a2pu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.13.6\\" createdat=\\"2023-01-18T14:53:28.624988+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub list-style-type=\\"circle\\">
+      <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"-mt-1.5 self-start\\"></paginationv2-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"repository","showExportLogsSuccessModal":true,"exportLogsLoading":false,"auditLogListLoading":true} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your repository.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub end-date=\\"Apr 13, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Searching logs...
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1 space-y-2\\">
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"repository","showExportLogsSuccessModal":true,"exportLogsLoading":true,"auditLogListLoading":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your repository.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 13, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Logs for Last 3 months Jan 13, 2023 - Apr 13, 2023
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1\\">
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6Ymxya2xt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.20.3\\" createdat=\\"2023-04-10T05:57:58.403997+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6emRwb2x3\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:31.471602+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6enFxd2Rt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 70 entries from the audit log from 10 January, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:24.633953+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6YmF5bXdu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.6.3\\" createdat=\\"2023-01-19T07:51:28.072442+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6end2a2pu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.13.6\\" createdat=\\"2023-01-18T14:53:28.624988+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub list-style-type=\\"circle\\">
+      <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"-mt-1.5 self-start\\"></paginationv2-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"repository","showExportLogsSuccessModal":true,"exportLogsLoading":true,"auditLogListLoading":true} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your repository.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 13, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Searching logs...
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1 space-y-2\\">
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"team","showExportLogsSuccessModal":false,"exportLogsLoading":false,"auditLogListLoading":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your team.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub end-date=\\"Apr 13, 2023\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Logs for Last 3 months Jan 13, 2023 - Apr 13, 2023
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1\\">
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6Ymxya2xt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.20.3\\" createdat=\\"2023-04-10T05:57:58.403997+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6emRwb2x3\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:31.471602+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6enFxd2Rt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 70 entries from the audit log from 10 January, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:24.633953+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6YmF5bXdu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.6.3\\" createdat=\\"2023-01-19T07:51:28.072442+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6end2a2pu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.13.6\\" createdat=\\"2023-01-18T14:53:28.624988+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub list-style-type=\\"circle\\">
+      <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"-mt-1.5 self-start\\"></paginationv2-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"team","showExportLogsSuccessModal":false,"exportLogsLoading":false,"auditLogListLoading":true} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your team.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub end-date=\\"Apr 13, 2023\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Searching logs...
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1 space-y-2\\">
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"team","showExportLogsSuccessModal":false,"exportLogsLoading":true,"auditLogListLoading":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your team.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 13, 2023\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Logs for Last 3 months Jan 13, 2023 - Apr 13, 2023
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1\\">
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6Ymxya2xt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.20.3\\" createdat=\\"2023-04-10T05:57:58.403997+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6emRwb2x3\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:31.471602+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6enFxd2Rt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 70 entries from the audit log from 10 January, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:24.633953+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6YmF5bXdu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.6.3\\" createdat=\\"2023-01-19T07:51:28.072442+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6end2a2pu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.13.6\\" createdat=\\"2023-01-18T14:53:28.624988+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub list-style-type=\\"circle\\">
+      <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"-mt-1.5 self-start\\"></paginationv2-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"team","showExportLogsSuccessModal":false,"exportLogsLoading":true,"auditLogListLoading":true} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your team.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 13, 2023\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Searching logs...
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1 space-y-2\\">
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"team","showExportLogsSuccessModal":true,"exportLogsLoading":false,"auditLogListLoading":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your team.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub end-date=\\"Apr 13, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Logs for Last 3 months Jan 13, 2023 - Apr 13, 2023
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1\\">
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6Ymxya2xt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.20.3\\" createdat=\\"2023-04-10T05:57:58.403997+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6emRwb2x3\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:31.471602+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6enFxd2Rt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 70 entries from the audit log from 10 January, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:24.633953+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6YmF5bXdu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.6.3\\" createdat=\\"2023-01-19T07:51:28.072442+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6end2a2pu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.13.6\\" createdat=\\"2023-01-18T14:53:28.624988+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub list-style-type=\\"circle\\">
+      <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"-mt-1.5 self-start\\"></paginationv2-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"team","showExportLogsSuccessModal":true,"exportLogsLoading":false,"auditLogListLoading":true} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your team.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub end-date=\\"Apr 13, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Searching logs...
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1 space-y-2\\">
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"team","showExportLogsSuccessModal":true,"exportLogsLoading":true,"auditLogListLoading":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your team.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 13, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Logs for Last 3 months Jan 13, 2023 - Apr 13, 2023
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1\\">
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6Ymxya2xt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.20.3\\" createdat=\\"2023-04-10T05:57:58.403997+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6emRwb2x3\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 0 entries from the audit log from 03 April, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:31.471602+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6enFxd2Rt\\" eventname=\\"repo.audit_log_export\\" description=\\"Exported 70 entries from the audit log from 10 January, 2023 to 10 April, 2023.\\" ipaddress=\\"10.132.7.19\\" createdat=\\"2023-04-10T05:54:24.633953+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6YmF5bXdu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.6.3\\" createdat=\\"2023-01-19T07:51:28.072442+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"QXVkaXRMb2c6end2a2pu\\" eventname=\\"repo.create_ignore_rule\\" description=\\"An ignore rule was created.\\" ipaddress=\\"10.132.13.6\\" createdat=\\"2023-01-18T14:53:28.624988+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub list-style-type=\\"circle\\">
+      <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"-mt-1.5 self-start\\"></paginationv2-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the audit log page of different levels in various states: {"level":"team","showExportLogsSuccessModal":true,"exportLogsLoading":true,"auditLogListLoading":true} 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your team.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 13, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"mb-4 flex items-center justify-between h-6\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Searching logs...
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"ml-1 space-y-2\\">
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <timelineitemv2loading-stub></timelineitemv2loading-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the corresponding empty state when there are no events found for a search query 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your repository.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"test-query\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub disabled=\\"true\\" end-date=\\"Apr 13, 2023\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <!---->
+  <!---->
+  <lazyemptystate-stub title=\\"We could not find any logs for “test-query”\\" use-v2=\\"true\\" webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" show-border=\\"true\\" subtitle=\\"
+      There are no logs matching your search. Try searching for something different.
+    \\" content-width=\\"max-w-sm\\"></lazyemptystate-stub>
+</div>"
+`;
+
+exports[`[[ AuditLogPage ]] renders the empty state when there are no events found 1`] = `
+"<div class=\\"flex flex-col gap-y-3\\">
+  <div class=\\"space-y-0.5\\">
+    <h2 class=\\"text-lg font-medium text-vanilla-100\\">Audit log</h2>
+    <h3 class=\\"text-base font-normal text-vanilla-400\\">
+      Track activity and changes in your repository.
+    </h3>
+  </div>
+  <div class=\\"flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <div class=\\"flex w-full items-center gap-x-2\\">
+      <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
+      <exportlogssuccessmodal-stub disabled=\\"true\\" end-date=\\"Apr 13, 2023\\" start-date=\\"Jan 13, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
+    </div>
+  </div>
+  <!---->
+  <!---->
+  <lazyemptystate-stub title=\\"No Audit logs\\" subtitle=\\"No events have been logged for this account yet. Please check back later!\\" class=\\"rounded-lg border-2 border-dashed border-slate-400 py-20\\"></lazyemptystate-stub>
+</div>"
+`;

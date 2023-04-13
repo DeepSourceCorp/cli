@@ -1,18 +1,18 @@
 <template>
   <div>
     <div
-      class="grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-slate-400"
+      class="grid-row-3 grid min-h-24 auto-rows-auto grid-cols-1 gap-2 border-b border-slate-400 bg-ink-300 lg:gap-0 xl:grid-cols-fr-fr-22 xl:grid-rows-2"
     >
       <div id="header" class="xl:col-span-2">
-        <div class="px-4 pt-3 space-x-2 space-y-2 xl:space-y-0">
+        <div class="space-x-2 space-y-2 px-4 pt-3 xl:space-y-0">
           <h2
-            class="flex flex-wrap items-center gap-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400"
+            class="flex flex-wrap items-center gap-3 text-lg font-medium leading-none text-vanilla-400 xl:text-xl"
           >
             <div class="space-x-0.5 md:space-x-1">
               <nuxt-link
                 v-if="canReadTeamPage"
                 :to="['', provider, owner].join('/')"
-                class="inline transition-colors duration-75 cursor-pointer hover:text-vanilla-300"
+                class="inline cursor-pointer transition-colors duration-75 hover:text-vanilla-300"
                 >{{ $route.params.owner }}</nuxt-link
               >
               <span v-else class="inline">{{ $route.params.owner }}</span>
@@ -91,11 +91,11 @@
           :vcs-commit-url="lastRun.vcsCommitUrl"
           :currently-analysing="repository.runs && repository.runs.totalCount"
           :can-change-branch="canChangeBranch"
-          class="flex flex-col h-full px-4 py-2 space-y-2 text-sm md:px-3 xl:border-l xl:border-slate-400 text-vanilla-400"
+          class="flex h-full flex-col space-y-2 px-4 py-2 text-sm text-vanilla-400 md:px-3 xl:border-l xl:border-slate-400"
         />
       </div>
       <div id="tabs" class="flex xl:col-span-2">
-        <div class="flex self-end px-4 space-x-5 overflow-auto flex-nowrap hide-scroll">
+        <div class="hide-scroll flex flex-nowrap space-x-5 self-end overflow-auto px-4">
           <template v-for="item in navItems">
             <nuxt-link
               v-if="isNavLinkVisible(item)"
@@ -191,7 +191,7 @@ const navItems: TabLink[] = [
       RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY,
       RepoPerms.ADD_REMOVE_MEMBERS,
       RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS,
-      RepoPerms.VIEW_AUDIT_LOGS
+      RepoPerms.VIEW_AUDIT_LOG
     ],
     pattern: new RegExp(/^provider-owner-repo-settings-*/)
   }
