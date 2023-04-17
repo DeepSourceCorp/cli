@@ -1,5 +1,5 @@
 <template>
-  <div v-once class="space-y-4">
+  <div class="space-y-4">
     <div class="flex items-center justify-between">
       <div class="inline-flex items-center gap-x-3">
         <z-icon icon="list-end" class="flex-shrink-0 self-start" />
