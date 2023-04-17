@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ UpgradeFeature ]] renders a section asking to upgrade to the required plan with a CTA pointing to the billing page 1`] = `
+"<div class=\\"juniper-highlight-card\\">
+  <div class=\\"space-y-1.5\\">
+    <p class=\\"text-sm leading-4 text-juniper-300\\"><span>Audit Log</span> requires the
+      <span class=\\"capitalize\\">business</span> plan
+    </p>
+    <p class=\\"text-xs leading-6 text-juniper-150\\">
+      Please upgrade your plan to be able to access Audit Log for your team and
+      repositories.
+    </p>
+  </div> <a>
+    <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Upgrade plan\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"zap\\" class=\\"w-full xs:w-auto\\"></zbutton-stub>
+  </a>
+</div>"
+`;

@@ -2,10 +2,14 @@
   <div>
     <slot name="trigger">
       <button
-        :disabled="disabled"
-        class="flex h-8 w-24 items-center justify-center gap-x-2 rounded-3px border border-ink-50 bg-ink-200 px-2 text-xs text-vanilla-400 hover:bg-ink-100 hover:text-vanilla-100"
-        :class="disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'"
-        @click="disabled ? false : $emit('primary')"
+        :disabled="disablePrimaryAction"
+        class="flex h-8 w-24 items-center justify-center gap-x-2 rounded-3px border border-ink-50 bg-ink-200 px-2 text-xs text-vanilla-400"
+        :class="
+          disablePrimaryAction
+            ? 'cursor-not-allowed opacity-50'
+            : 'cursor-pointer hover:bg-ink-100 hover:text-vanilla-100'
+        "
+        @click="disablePrimaryAction ? false : $emit('primary')"
       >
         <z-icon
           :icon="loading ? 'spin-loader' : 'file-output'"
@@ -75,5 +79,9 @@ export default class ExportLogsSuccessModal extends Vue {
 
   @Prop({ required: true, type: String })
   viewerEmail: string
+
+  get disablePrimaryAction() {
+    return this.loading || this.disabled
+  }
 }
 </script>

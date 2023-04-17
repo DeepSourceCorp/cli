@@ -1,8 +1,10 @@
 import { Component, mixins } from 'nuxt-property-decorator'
 
-import ExportAuditLogsGQLMutation from '~/apollo/mutations/audit-log/exportAuditLogs.gql'
+import OwnerFeaturesGQLQuery from '~/apollo/queries/owner/features.gql'
 import RepositoryLevelAuditLogGQLQuery from '~/apollo/queries/repository/settings/auditLog.gql'
 import TeamLevelAuditLogGQLQuery from '~/apollo/queries/team/auditLog.gql'
+
+import ExportAuditLogsGQLMutation from '~/apollo/mutations/audit-log/exportAuditLogs.gql'
 
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 import { AuditLogLevel } from '~/types/auditLog'
@@ -21,6 +23,7 @@ import { resolveNodes } from '~/utils/array'
 import { dateRangeOptions, getDateRange } from '~/utils/reports'
 
 import ActiveUserMixin from './activeUserMixin'
+import { OwnerFeature, OwnerFeatureType } from '~/types/ownerTypes'
 
 // Refers to the `apollo/queries/repository/settings/auditLog.gql` GQL query
 interface CustomRepositoryLevelAuditLogQuery extends Repository {
@@ -58,6 +61,7 @@ export default class AuditLogMixin extends mixins(ActiveUserMixin) {
   perPageCount = 30
   totalCount = 0
 
+  auditLogEnabled = true
   auditLogListLoading = false
   exportLogsLoading = false
   showExportLogsSuccessModal = false
@@ -82,11 +86,22 @@ export default class AuditLogMixin extends mixins(ActiveUserMixin) {
       showExportLogsSuccessModal: this.showExportLogsSuccessModal,
       totalCount: this.totalCount,
       viewerEmail: this.viewer.email,
-      level: this.level
+      level: this.level,
+      auditLogEnabled: this.auditLogEnabled
     }
   }
 
   async fetch() {
+    this.auditLogListLoading = true
+
+    await this.fetchOwnerFeatures()
+
+    // If the feature isn't enabled for the team, return early since it isn't required to fetch Audit log events
+    if (!this.auditLogEnabled) {
+      this.auditLogListLoading = false
+      return
+    }
+
     await this.fetchAuditLogItems()
 
     if (!this.viewer?.email) {
@@ -114,6 +129,28 @@ export default class AuditLogMixin extends mixins(ActiveUserMixin) {
       this.$toast.danger((err as Error).message.replace('GraphQL error: ', ''))
     } finally {
       this.exportLogsLoading = false
+    }
+  }
+
+  async fetchOwnerFeatures() {
+    try {
+      const response = await this.$fetchGraphqlData(OwnerFeaturesGQLQuery, {
+        login: this.$route.params.owner,
+        provider: this.$providerMetaMap[this.$route.params.provider].value
+      })
+
+      const features = response.data.owner.features as OwnerFeature[]
+
+      const auditLogFeature = features.find(
+        (feature) => feature.shortcode === OwnerFeatureType.AUDIT_LOG
+      )
+
+      this.auditLogEnabled = auditLogFeature?.enabled ?? false
+    } catch (error) {
+      this.$logErrorAndToast(
+        error as Error,
+        'Unable to fetch details about the team. Please contact support.'
+      )
     }
   }
 

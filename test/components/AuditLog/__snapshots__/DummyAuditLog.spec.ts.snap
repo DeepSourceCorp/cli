@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ DummyAuditLog ]] renders a dummy list of Audit log events 1`] = `
+"<div class=\\"space-y-4\\">
+  <div class=\\"flex items-center justify-between\\">
+    <div class=\\"inline-flex items-center gap-x-3\\">
+      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words text-sm font-medium leading-5 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+        Logs for Last 3 months Jan 6, 2023 - Apr 6, 2023
+      </p>
+    </div>
+    <paginationv2-stub page-number=\\"1\\" per-page-count=\\"30\\" total-count=\\"90\\" disabled=\\"true\\" class=\\"hidden md:flex\\"></paginationv2-stub>
+  </div>
+  <timelinev2-stub class=\\"gradient-overlay-container ml-1\\">
+    <timelineitemv2-stub>
+      <log-stub id=\\"11\\" eventname=\\"jedi.change_role\\" description=\\"Role of the user Duck Norris (duck@quackotron.com) was changed to 'admin'.\\" ipaddress=\\"127.0.0.1\\" location=\\"Quackotron\\" createdat=\\"2023-02-24T08:15:24.207960+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"12\\" eventname=\\"jedi.remove\\" description=\\"User Bug Invader (bug@invaders.bug) was removed from team.\\" ipaddress=\\"127.0.0.1\\" location=\\"Quackotron\\" createdat=\\"2023-02-24T08:15:24.207960+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+    <timelineitemv2-stub>
+      <log-stub id=\\"13\\" eventname=\\"jedi.change_role\\" description=\\"Role of the user Duck Norris (duck@quackotron.com) was changed to 'member'.\\" ipaddress=\\"127.0.0.1\\" location=\\"Quackotron\\" createdat=\\"2023-02-24T08:15:24.207960+00:00\\" actor=\\"[object Object]\\"></log-stub>
+    </timelineitemv2-stub>
+  </timelinev2-stub>
+</div>"
+`;

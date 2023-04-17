@@ -9581,6 +9581,20 @@ export type Unnamed_108_Query = (
   )> }
 );
 
+export type OwnerFeaturesQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+}>;
+
+
+export type OwnerFeaturesQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id' | 'features'>
+  )> }
+);
+
 export type OwnerIdQueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;

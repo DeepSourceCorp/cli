@@ -9,10 +9,16 @@
       </h3>
     </div>
 
-    <div class="flex flex-col items-center gap-x-2 gap-y-3 sm:flex-row">
+    <upgrade-feature v-if="!auditLogEnabled" :feature-shortcode="FeatureType.AUDIT_LOG" />
+
+    <div
+      class="flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center"
+      :class="{ 'opacity-60': !auditLogEnabled }"
+    >
       <z-input
         :show-border="false"
         :value="searchQuery"
+        :disabled="!auditLogEnabled"
         background-color="ink-300"
         placeholder="Search by event name or user..."
         size="small"
@@ -28,12 +34,13 @@
         <date-range-picker
           :date-range-options="dateRangeOptions"
           :selected-filter="dateRange"
+          :disabled="!auditLogEnabled"
           class="flex-grow"
           @change="updateDateRange"
         />
 
         <export-logs-success-modal
-          :disabled="!auditLogItemsCount"
+          :disabled="!auditLogEnabled || !auditLogItemsCount"
           :loading="exportLogsLoading"
           :end-date="endDate"
           :show-export-logs-success-modal="showExportLogsSuccessModal"
@@ -45,9 +52,13 @@
       </div>
     </div>
 
-    <z-divider v-if="auditLogItemsCount" margin="m-0" />
+    <z-divider
+      v-if="auditLogItemsCount || !auditLogEnabled"
+      margin="m-0"
+      :class="{ 'opacity-60': !auditLogEnabled }"
+    />
 
-    <div v-if="auditLogItemsCount" class="mb-4 flex items-center justify-between h-6">
+    <div v-if="auditLogItemsCount" class="mb-4 flex h-6 items-center justify-between">
       <div class="inline-flex items-center gap-x-3">
         <z-icon icon="list-end" class="flex-shrink-0 self-start" />
 
@@ -74,6 +85,9 @@
         <timeline-item-v2-loading />
       </timeline-item-v2>
     </timeline-v2>
+
+    <!-- Dummy audit log to show when `audit_log` feature is disabled -->
+    <dummy-audit-log v-else-if="!auditLogEnabled" class="opacity-40" />
 
     <!-- Desktop -->
     <timeline-v2 v-else-if="auditLogItemsCount" class="ml-1">
@@ -126,12 +140,16 @@ import { formatDate, parseISODate } from '~/utils/date'
 import { dateRangeOptions, getDateRange } from '~/utils/reports'
 
 import { AuditLogLevel } from '~/types/auditLog'
+import { FeatureType } from '~/types/features'
 
 @Component({
   name: 'AuditLogPage',
   components: { ZDivider, ZIcon, ZInput }
 })
 export default class AuditLogPage extends mixins(ActiveUserMixin) {
+  @Prop({ default: true, type: Boolean })
+  auditLogEnabled: boolean
+
   @Prop({ required: true, type: Number })
   pageNumber: number
 
@@ -163,6 +181,7 @@ export default class AuditLogPage extends mixins(ActiveUserMixin) {
   auditLogItems: Array<AuditLog>
 
   readonly perPageCount = 30
+  readonly FeatureType = FeatureType
 
   dateRangeOptions = dateRangeOptions
 

@@ -1462,6 +1462,15 @@ declare module '*/details.gql' {
 }
     
 
+declare module '*/features.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ownerFeatures: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/id.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

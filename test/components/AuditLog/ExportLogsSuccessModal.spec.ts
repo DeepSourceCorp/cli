@@ -18,20 +18,23 @@ describe('[[ ExportLogsSuccessModal ]]', () => {
   }
 
   it('renders different states of the export logs success modal', () => {
+    const disabledOptions = generateBooleanProps('disabled', false)
     const loadingOptions = generateBooleanProps('loading', false)
     const showExportLogsSuccessModalOptions = generateBooleanProps(
       'showExportLogsSuccessModal',
       false
     )
 
-    cartesian(loadingOptions, showExportLogsSuccessModalOptions).forEach((propCombination) => {
-      const propsData = {
-        ...baseProps,
-        ...propCombination
-      }
+    cartesian(disabledOptions, loadingOptions, showExportLogsSuccessModalOptions).forEach(
+      (propCombination) => {
+        const propsData = {
+          ...baseProps,
+          ...propCombination
+        }
 
-      const { html } = render(ExportLogsSuccessModal, { propsData, stubs })
-      expect(html()).toMatchSnapshot(JSON.stringify(propCombination))
-    })
+        const { html } = render(ExportLogsSuccessModal, { propsData, stubs })
+        expect(html()).toMatchSnapshot(JSON.stringify(propCombination))
+      }
+    )
   })
 })
