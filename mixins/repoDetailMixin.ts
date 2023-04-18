@@ -185,13 +185,6 @@ export default class RepoDetailMixin extends Vue {
     currentPageNumber: number
   }) => Promise<void>
 
-  @repoStore.Action(RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_AUDIT_LOGS)
-  fetchRepositorySettingsAuditLogs: (args: {
-    provider: string
-    owner: string
-    name: string
-  }) => Promise<void>
-
   @repoStore.Action(RepositoryDetailActions.FETCH_METRICS)
   fetchMetrics: (args: { provider: string; owner: string; name: string }) => Promise<void>
 

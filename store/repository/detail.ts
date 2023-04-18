@@ -24,7 +24,6 @@ import RepositorySettingsIgnoreRulesGQLQuery from '~/apollo/queries/repository/s
 import RepositorySettingsBadgesGQLQuery from '~/apollo/queries/repository/settings/badges.gql'
 import RepositorySettingsReportingGQLQuery from '~/apollo/queries/repository/settings/reporting.gql'
 import RepositorySettingsManageAccessGQLQuery from '~/apollo/queries/repository/settings/manageAccess.gql'
-import RepositorySettingsAuditLogGQLQuery from '~/apollo/queries/repository/settings/auditLog.gql'
 import RepositoryAddableMembersGQLQuery from '~/apollo/queries/repository/addableMembers.gql'
 import RepoStatusPollQuery from '~/apollo/queries/repository/statusPoll.gql'
 
@@ -137,7 +136,6 @@ export enum RepositoryDetailActions {
   FETCH_REPOSITORY_SETTINGS_SSH = 'fetchRepositorySettingsSsh',
   FETCH_REPOSITORY_SETTINGS_IGNORE_RULES = 'fetchRepositorySettingsIgnoreRules',
   FETCH_REPOSITORY_SETTINGS_MANAGE_ACCESS = 'fetchRepositorySettingsManageAccess',
-  FETCH_REPOSITORY_SETTINGS_AUDIT_LOGS = 'fetchRepositorySettingsAuditLogs',
   COMMIT_CONFIG_TO_VCS = 'commitConfigToVcs',
   SET_METRIC_THRESHOLD = 'setRepoMetricsThreshold',
   DELETE_IGNORED_RULE = 'deleteIgnoredRule',
@@ -416,11 +414,6 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext,
     args: { id: string; refetch?: boolean }
-  ) => Promise<void>
-  [RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_AUDIT_LOGS]: (
-    this: Store<RootState>,
-    injectee: RepositoryDetailActionContext,
-    args: { provider: string; owner: string; name: string }
   ) => Promise<void>
   [RepositoryDetailActions.COMMIT_CONFIG_TO_VCS]: (
     this: Store<RootState>,
@@ -940,23 +933,6 @@ export const actions: RepositoryDetailModuleActions = {
         commit(RepositoryDetailMutations.SET_LOADING, false)
         // TODO: Toast("Failure in fetching repository settings detail -- SSH", e)
       })
-  },
-  async [RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_AUDIT_LOGS]({ commit }, args) {
-    commit(RepositoryDetailMutations.SET_LOADING, true)
-    try {
-      const response = await this.$fetchGraphqlData(RepositorySettingsAuditLogGQLQuery, {
-        provider: this.$providerMetaMap[args.provider].value,
-        owner: args.owner,
-        name: args.name
-      })
-
-      commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
-      commit(RepositoryDetailMutations.SET_LOADING, false)
-    } catch (e) {
-      const error = e as GraphqlError
-      commit(RepositoryDetailMutations.SET_ERROR, error)
-      commit(RepositoryDetailMutations.SET_LOADING, false)
-    }
   },
   async [RepositoryDetailActions.COMMIT_CONFIG_TO_VCS](_, args) {
     const response = await this.$applyGraphqlMutation(CommitConfigToVcsGQLMutation, {
