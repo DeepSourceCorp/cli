@@ -94,6 +94,15 @@ describe('[[ AuditLogPage ]]', () => {
     ]
   }
 
+  const computed = {
+    startDate() {
+      return 'Jan 17, 2023'
+    },
+    endDate() {
+      return 'Apr 17, 2023'
+    }
+  }
+
   const stubs = {
     DateRangePicker: true,
     ExportLogsSuccessModal: true,
@@ -133,7 +142,11 @@ describe('[[ AuditLogPage ]]', () => {
         ...propCombination
       }
 
-      const { html } = render(AuditLogPage, { propsData, stubs })
+      const { html } = render(AuditLogPage, {
+        propsData,
+        stubs,
+        computed
+      })
 
       expect(html()).toMatchSnapshot(JSON.stringify(propCombination))
     })
@@ -145,7 +158,11 @@ describe('[[ AuditLogPage ]]', () => {
       auditLogItems: []
     }
 
-    const { html } = render(AuditLogPage, { propsData, stubs })
+    const { html } = render(AuditLogPage, {
+      propsData,
+      stubs,
+      computed
+    })
 
     expect(html()).toMatchSnapshot()
   })
@@ -157,7 +174,11 @@ describe('[[ AuditLogPage ]]', () => {
       auditLogItems: []
     }
 
-    const { html } = render(AuditLogPage, { propsData, stubs })
+    const { html } = render(AuditLogPage, {
+      propsData,
+      stubs,
+      computed
+    })
 
     expect(html()).toMatchSnapshot()
   })
