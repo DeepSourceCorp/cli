@@ -38,7 +38,7 @@
       :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
       :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
       subtitle="Please try changing your search query."
-      class="border border-dashed rounded-lg border-slate-400 py-20"
+      class="rounded-lg border border-dashed border-slate-400 py-20"
     />
 
     <lazy-empty-state
@@ -54,7 +54,7 @@
       </template>
     </lazy-empty-state>
 
-    <div v-if="totalPageCount > 1" class="flex justify-center text-sm my-6">
+    <div v-if="totalPageCount > 1" class="my-6 flex justify-center text-sm">
       <z-pagination
         :page="currentPage"
         :total-pages="totalPageCount"
@@ -139,6 +139,15 @@ export default class OwnerCodeCoverage extends mixins(PaginationMixin, RouteQuer
    */
   async mounted(): Promise<void> {
     this.fetchCodeCoverage(false)
+  }
+
+  /**
+   * Callback for route replace
+   *
+   * @return {Promise<void>}
+   */
+  async refetchAfterRouteChange(): Promise<void> {
+    await this.fetchCodeCoverage(false)
   }
 
   /**
