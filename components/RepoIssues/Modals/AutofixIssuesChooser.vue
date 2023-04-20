@@ -18,7 +18,7 @@
               placeholder="Search for issues"
               class="py-1.5 leading-6 px-2"
             >
-              <template slot="left"><z-icon icon="search" size="small" class="ml-2" /></template>
+              <template #left><z-icon icon="search" size="small" class="ml-2" /></template>
             </z-input>
           </div>
           <div class="flex flex-col gap-y-2 overflow-y-auto">

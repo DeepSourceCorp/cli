@@ -6,7 +6,7 @@
       title="Issue priority"
       description-width-class="max-w-2xl"
     >
-      <template v-if="showCtaAndControls" slot="actions">
+      <template v-if="showCtaAndControls" #actions>
         <z-button
           v-if="canChangePriority"
           icon="flag"
@@ -34,10 +34,10 @@
         placeholder="Search issues..."
         @debounceInput="onSearchQueryChange"
       >
-        <template slot="left">
+        <template #left>
           <z-icon icon="search" class="ml-1.5" size="small" />
         </template>
-        <template slot="right">
+        <template #right>
           <z-icon
             v-show="query"
             icon="x"
@@ -85,7 +85,7 @@
       subtitle="You haven't assigned priorities to any issues yet."
       class="border border-dashed rounded-lg border-2 border-slate-400 py-20"
     >
-      <template slot="action">
+      <template #action>
         <div class="flex">
           <z-button
             v-if="canChangePriority"

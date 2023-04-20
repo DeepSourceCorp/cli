@@ -11,7 +11,7 @@ exports[`[[ render MutateOwnerReportModal ]] renders MutateOwnerReportModal in c
     </label>
     <!---->
     <div class=\\"space-y-3\\">
-      <toggleinput-stub input-width=\\"xx-small\\" label=\\"Restrict report access\\" input-id=\\"toggle-password-protection\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"><template></template></toggleinput-stub>
+      <toggleinput-stub input-width=\\"xx-small\\" label=\\"Restrict report access\\" input-id=\\"toggle-password-protection\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"></toggleinput-stub>
       <!---->
     </div>
     <div class=\\"grid grid-cols-2\\">
@@ -38,7 +38,7 @@ exports[`[[ render MutateOwnerReportModal ]] renders MutateOwnerReportModal in c
         <!---->
       </div>
     </div>
-    <toggleinput-stub input-width=\\"xx-small\\" label=\\"Share historical data\\" input-id=\\"toggle-share-historical-data\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"><template></template></toggleinput-stub> <label for=\\"source-repos\\" class=\\"space-y-2 text-sm\\">
+    <toggleinput-stub input-width=\\"xx-small\\" label=\\"Share historical data\\" input-id=\\"toggle-share-historical-data\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"></toggleinput-stub> <label for=\\"source-repos\\" class=\\"space-y-2 text-sm\\">
       <p class=\\"font-medium text-vanilla-100\\">Select repositories</p>
       <zradiogroup-stub modelvalue=\\"SOURCE_ALL\\" id=\\"source-repos\\" class=\\"grid grid-cols-2\\">
         <zradio-stub modelvalue=\\"\\" label=\\"All repositories\\" value=\\"SOURCE_ALL\\"></zradio-stub>
@@ -60,10 +60,10 @@ exports[`[[ render MutateOwnerReportModal ]] renders MutateOwnerReportModal in e
       </p>
     </label> <label for=\\"report-link\\" class=\\"space-y-2 text-sm text-vanilla-200 w-full\\">
       <p class=\\"text-sm font-medium text-vanilla-100\\">Shareable link</p>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/aa183352-4b5e-427a-ac8d-95c47c52b6a1\\" label=\\"\\" type=\\"text\\" placeholder=\\"Shareable link for the report...\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/aa183352-4b5e-427a-ac8d-95c47c52b6a1\\" label=\\"\\" type=\\"text\\" placeholder=\\"Shareable link for the report...\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\"></zinput-stub>
     </label>
     <div class=\\"space-y-3\\">
-      <toggleinput-stub input-width=\\"xx-small\\" label=\\"Restrict report access\\" input-id=\\"toggle-password-protection\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"><template></template></toggleinput-stub>
+      <toggleinput-stub input-width=\\"xx-small\\" label=\\"Restrict report access\\" input-id=\\"toggle-password-protection\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"></toggleinput-stub>
       <!---->
     </div>
     <div class=\\"grid grid-cols-2\\">
@@ -90,7 +90,7 @@ exports[`[[ render MutateOwnerReportModal ]] renders MutateOwnerReportModal in e
         <!---->
       </div>
     </div>
-    <toggleinput-stub input-width=\\"xx-small\\" label=\\"Share historical data\\" input-id=\\"toggle-share-historical-data\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"><template></template></toggleinput-stub> <label for=\\"source-repos\\" class=\\"space-y-2 text-sm\\">
+    <toggleinput-stub input-width=\\"xx-small\\" label=\\"Share historical data\\" input-id=\\"toggle-share-historical-data\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"></toggleinput-stub> <label for=\\"source-repos\\" class=\\"space-y-2 text-sm\\">
       <p class=\\"font-medium text-vanilla-100\\">Select repositories</p>
       <zradiogroup-stub modelvalue=\\"SOURCE_ALL\\" id=\\"source-repos\\" class=\\"grid grid-cols-2\\">
         <zradio-stub modelvalue=\\"\\" label=\\"All repositories\\" value=\\"SOURCE_ALL\\"></zradio-stub>

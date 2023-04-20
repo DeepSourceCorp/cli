@@ -1,6 +1,6 @@
 <template>
   <base-state title="Analysis cancelled">
-    <template slot="hero">
+    <template #hero>
       <empty-state-picture
         :webp-image-path="require('~/assets/images/ui-states/repo/run-cancelled.webp')"
         :png-image-path="require('~/assets/images/ui-states/repo/run-cancelled.png')"

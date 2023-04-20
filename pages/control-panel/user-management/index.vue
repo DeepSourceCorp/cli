@@ -14,7 +14,7 @@
           class="w-full max-w-xs"
           @debounceInput="searchUsers"
         >
-          <template slot="left"> <z-icon icon="search" size="small" class="ml-1.5" /> </template>
+          <template #left> <z-icon icon="search" size="small" class="ml-1.5" /> </template>
         </z-input>
         <nuxt-link to="/control-panel/user-management/invites">
           <z-button

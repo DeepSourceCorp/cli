@@ -14,7 +14,7 @@
         :show-description="true"
         :show-info="true"
       >
-        <template v-if="edge.node && edge.node.modifiedAt" slot="stats">
+        <template v-if="edge.node && edge.node.modifiedAt" #stats>
           <z-icon icon="clock" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400">
             Updated {{ fromNow(edge.node.modifiedAt) }}

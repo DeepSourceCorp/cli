@@ -12,7 +12,7 @@
         input-id="enable-api-signing"
         :remove-y-padding="true"
       >
-        <template slot="description">
+        <template #description>
           Signing of the webhook payload allows you to verify incoming requests.
           <span class="font-medium text-vanilla-200">We recommend enabling this.</span>
         </template>

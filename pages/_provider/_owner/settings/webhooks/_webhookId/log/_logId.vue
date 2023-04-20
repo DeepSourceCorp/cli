@@ -29,11 +29,11 @@
     </section>
     <section v-else :key="$route.fullPath" class="w-full p-4 mb-10">
       <page-title class="max-w-2xl">
-        <template v-if="delivery.eventType" slot="title">
+        <template v-if="delivery.eventType" #title>
           {{ delivery.eventType.name }}
           <span class="text-slate">({{ delivery.eventType.shortcode }})</span>
         </template>
-        <template slot="description">
+        <template #description>
           Created {{ formatDate(delivery.createdAt) }} · Finished in {{ delivery.finishedIn }}s
         </template>
       </page-title>

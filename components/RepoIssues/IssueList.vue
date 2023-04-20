@@ -14,7 +14,7 @@
             Sort
           </z-button>
         </template>
-        <template slot="body">
+        <template #body>
           <z-menu-item
             v-for="filter in sortFilters"
             :key="filter.name"
@@ -36,7 +36,7 @@
           :show-border="false"
           @debounceInput="debounceSearch"
         >
-          <template slot="left">
+          <template #left>
             <z-icon class="flex-shrink-0 p-px" icon="search" size="small" />
           </template>
         </z-input>

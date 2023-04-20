@@ -6,29 +6,32 @@
     header-spacing-class="py-2 pl-4 pr-2"
     custom-grid-class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
   >
-    <div slot="title" class="flex items-center justify-between">
-      <div class="flex items-center h-full space-x-2">
-        <span class="text-base font-semibold tracking-snug">Codebase report</span>
-        <z-icon
-          v-tooltip="{
-            content: 'Overview of issues currently present',
-            delay: { show: 0, hide: 100 }
-          }"
-          color="vanilla-400"
-          icon="help"
-          class="stroke-1.5 transition-opacity duration-75 flex-shrink-0"
+    <template #title>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center h-full space-x-2">
+          <span class="text-base font-semibold tracking-snug">Codebase report</span>
+          <z-icon
+            v-tooltip="{
+              content: 'Overview of issues currently present',
+              delay: { show: 0, hide: 100 }
+            }"
+            color="vanilla-400"
+            icon="help"
+            class="stroke-1.5 transition-opacity duration-75 flex-shrink-0"
+          />
+        </div>
+        <z-button
+          v-if="canCustomizeWidgets"
+          button-type="secondary"
+          icon="sliders"
+          size="small"
+          class="stroke-1.5"
+          label="Customize"
+          @click="showCustomizeModal = true"
         />
       </div>
-      <z-button
-        v-if="canCustomizeWidgets"
-        button-type="secondary"
-        icon="sliders"
-        size="small"
-        class="stroke-1.5"
-        label="Customize"
-        @click="showCustomizeModal = true"
-      />
-    </div>
+    </template>
+
     <template v-if="$fetchState.pending">
       <div
         v-for="idx in loaderCount"
@@ -57,7 +60,7 @@
               'text-lg font-medium tracking-wider text-vanilla-400'
           }"
         >
-          <template slot="title">
+          <template #title>
             <h5 class="text-base font-medium text-vanilla-100">
               {{ toSentenceCase(issueWidgets[widget].title) }}
             </h5>

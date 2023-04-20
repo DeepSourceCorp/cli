@@ -1,6 +1,6 @@
 <template>
   <base-card :remove-default-style="true" custom-padding="pb-3 pr-3 pt-2">
-    <template slot="title">
+    <template #title>
       <p class="text-sm font-semibold text-vanilla-300">
         <span v-html="safeRenderBackticks(title)"></span>
         <span class="ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap"
@@ -9,7 +9,7 @@
       </p>
     </template>
 
-    <template slot="description">
+    <template #description>
       <div class="flex flex-wrap text-xs gap-x-4">
         <!-- Priority type -->
         <priority-type-select
@@ -32,7 +32,7 @@
       </div>
     </template>
 
-    <template v-if="canChangePriority" slot="info">
+    <template v-if="canChangePriority" #info>
       <div class="flex justify-end h-full mt-1">
         <z-button
           v-tooltip="`Remove priority assignment`"

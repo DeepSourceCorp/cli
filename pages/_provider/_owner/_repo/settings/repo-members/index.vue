@@ -13,7 +13,7 @@
         placeholder="Search for a name or email"
         @debounceInput="searchRepoMembers"
       >
-        <template slot="left"
+        <template #left
           ><span class="px-1"><z-icon icon="search" size="small" /></span
         ></template>
       </z-input>

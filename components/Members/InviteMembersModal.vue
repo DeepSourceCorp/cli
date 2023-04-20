@@ -98,7 +98,7 @@
               </div>
             </div>
             <z-input :disabled="true" :show-border="true" :value="team.invitationUrl">
-              <template slot="right">
+              <template #right>
                 <copy-button
                   :disabled="!team.invitationUrl"
                   :value="team.invitationUrl"

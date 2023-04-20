@@ -27,7 +27,7 @@
       placeholder="Search templates..."
       @debounceInput="getData"
     >
-      <template slot="left">
+      <template #left>
         <z-icon icon="search" class="ml-1.5" size="small" />
       </template>
     </z-input>
@@ -79,7 +79,7 @@
         show-border
         :title="`We couldn't find any templates matching &quot;${searchCandidate}&quot;`"
       >
-        <template slot="action">
+        <template #action>
           <z-button button-type="secondary" size="small" icon="x" @click="searchCandidate = ''">
             Clear search
           </z-button>

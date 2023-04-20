@@ -12,7 +12,7 @@
           placeholder="SCIM token"
           class="border border-ink-200"
         >
-          <template slot="right">
+          <template #right>
             <copy-button v-tooltip="'Copy token'" :value="token" />
           </template>
         </z-input>

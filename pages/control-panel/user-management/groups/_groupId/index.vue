@@ -31,7 +31,7 @@
         class="hidden w-full max-w-xs md:flex"
         @debounceInput="search"
       >
-        <template slot="left">
+        <template #left>
           <z-icon icon="search" size="small" class="ml-1.5 flex-shrink-0" />
         </template>
       </z-input>

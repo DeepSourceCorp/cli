@@ -36,7 +36,7 @@
         class="flex-grow hidden max-w-2xl lg:grid"
         @blur="updateBranch"
       >
-        <template slot="description">
+        <template #description>
           <p class="max-w-sm">
             This is the base branch for analysis by DeepSource. Your issues tab will be populated
             with the issues found on this branch.
@@ -52,7 +52,7 @@
         class="max-w-2xl border-t border-slate-400"
         @input="updateRepositorySettings"
       >
-        <template slot="description">
+        <template #description>
           <p class="max-w-sm">
             If you are using private submodules, ensure that DeepSource has access to them via an
             <nuxt-link
@@ -120,7 +120,7 @@
             </z-select>
           </div>
 
-          <template slot="description">
+          <template #description>
             <ul class="max-w-sm ml-4 list-disc list-outside">
               <li>
                 If <b>Granular</b> is selected, issues would be reported only for lines that have
@@ -143,7 +143,7 @@
         :full-width="true"
         input-width="x-small"
       >
-        <template slot="description">
+        <template #description>
           <p class="max-w-sm">
             Change the deepsource.toml file in the repository's root to modify the analysis
             configuration.
@@ -174,7 +174,7 @@
           <span class="text-sm leading-none">{{ buttonText }}</span>
         </button>
 
-        <template slot="description">
+        <template #description>
           <p class="max-w-sm">
             Careful! DeepSource will stop monitoring changes to your code if analysis is deactivated
           </p>
@@ -196,7 +196,7 @@
           input-width="x-small"
           @click="updateDiscoverFeedPreference"
         >
-          <template slot="description">
+          <template #description>
             <p class="max-w-sm">
               Add your repository to
               <nuxt-link to="/discover" class="font-medium text-juniper">Discover</nuxt-link> to

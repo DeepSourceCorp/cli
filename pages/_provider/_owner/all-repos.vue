@@ -13,7 +13,7 @@
           placeholder="Search for repository name"
           @debounceInput="$fetch"
         >
-          <template slot="left">
+          <template #left>
             <z-icon icon="search" size="small" class="ml-1.5" />
           </template>
         </z-input>
@@ -31,7 +31,6 @@
         <z-menu direction="right" class="inline-block text-vanilla-100">
           <template #trigger="{ toggle }">
             <button
-              slot="trigger"
               class="flex items-center px-1 space-x-1 rounded-md outline-none bg-ink-200 text-vanilla-400 focus:outline-none"
               @click="toggle"
             >
@@ -39,7 +38,7 @@
               <z-icon icon="chevron-down" size="small" />
             </button>
           </template>
-          <template slot="body">
+          <template #body>
             <div class="px-2 py-1 space-y-1">
               <h6 class="font-semibold uppercase text-xxs text-vanilla-400">
                 Select Repos to show

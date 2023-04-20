@@ -136,7 +136,7 @@
                 'border border-cherry': couponError
               }"
             >
-              <template slot="right">
+              <template #right>
                 <z-button
                   button-type="secondary"
                   class="w-24 text-vanilla-100"

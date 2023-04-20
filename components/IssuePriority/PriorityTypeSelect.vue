@@ -43,7 +43,7 @@
       </slot>
     </template>
 
-    <template slot="body">
+    <template #body>
       <z-menu-section :title="menuTitle" :divider="showFooter">
         <z-menu-item
           v-for="option in priorityOptions"

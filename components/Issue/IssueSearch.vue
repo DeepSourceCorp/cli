@@ -18,10 +18,10 @@
       @blur="searchFocused = false"
       @debounceInput="(val) => (modelValue = val)"
     >
-      <template slot="left">
+      <template #left>
         <z-icon class="flex-shrink-0 p-px" icon="search" size="small" />
       </template>
-      <template slot="right">
+      <template #right>
         <z-icon
           v-show="modelValue"
           icon="x"

@@ -12,7 +12,7 @@
         :show-description="true"
         :show-info="true"
       >
-        <template slot="stats">
+        <template #stats>
           <z-icon icon="clock" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400">
             Updated {{ fromNow(edge.node.modifiedAt) }}

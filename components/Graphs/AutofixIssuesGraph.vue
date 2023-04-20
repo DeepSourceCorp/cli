@@ -5,7 +5,7 @@
     :body-is-grid="false"
     :body-spacing="0"
   >
-    <template slot="controls">
+    <template #controls>
       <div class="flex justify-end w-full space-x-2">
         <graph-control
           class="float-right w-full sm:w-auto"

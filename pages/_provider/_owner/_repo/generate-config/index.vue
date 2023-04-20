@@ -15,7 +15,7 @@
       <!-- Steps -->
       <z-stepper align="vertical" :show-numbers="true" class="w-full col-span-5">
         <z-step class="w-full">
-          <template slot="title">
+          <template #title>
             <div
               class="mt-1 text-xs font-medium leading-snug tracking-wider uppercase text-vanilla-400"
             >
@@ -36,7 +36,7 @@
           </template>
         </z-step>
         <z-step class="w-full">
-          <template slot="title">
+          <template #title>
             <div
               class="flex items-center mt-1 text-xs font-medium leading-snug tracking-wider uppercase text-vanilla-400"
             >

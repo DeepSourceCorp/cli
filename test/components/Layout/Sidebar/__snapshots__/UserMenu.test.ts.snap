@@ -1,9 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[[ UserMenu ]] renders UserMenu with all props: {"isCollapsed":false} 1`] = `"<z-menu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template class=\\"z-10\\"></template></z-menu-stub>"`;
+exports[`[[ UserMenu ]] renders UserMenu with all props: {"isCollapsed":false} 1`] = `
+"<z-menu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"><button type=\\"button\\" class=\\"outline-none focus:outline-none flex max-w-3xs items-center space-x-2 rounded-sm py-1 text-sm hover:bg-ink-300 pr-2 pl-1\\">
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Test Mishra\\" size=\\"sm\\" stroke=\\"bg-ink-300 p-0.5\\" class=\\"flex-shrink-0 rounded-full leading-none\\"></zavatar-stub> <span class=\\"overflow-hidden overflow-ellipsis whitespace-nowrap leading-none\\">
+        Test Mishra
+      </span>
+  </button>
+  <zmenusection-stub title=\\"Logged In As\\" divider=\\"true\\">
+    <zmenuitem-stub as=\\"div\\" closeonclick=\\"true\\" spacing=\\"p-3\\">test@deepsource.io</zmenuitem-stub>
+  </zmenusection-stub>
+  <zmenusection-stub>
+    <zmenuitem-stub as=\\"nuxt-link\\" icon=\\"settings\\" closeonclick=\\"true\\" spacing=\\"p-3\\" to=\\"/settings\\">Settings</zmenuitem-stub>
+    <zmenuitem-stub as=\\"nuxt-link\\" icon=\\"dashboard\\" closeonclick=\\"true\\" spacing=\\"p-3\\" to=\\"/me\\">Dashboard</zmenuitem-stub>
+    <zmenuitem-stub as=\\"div\\" icon=\\"log-out\\" closeonclick=\\"true\\" spacing=\\"p-3\\">Sign out</zmenuitem-stub>
+  </zmenusection-stub>
+</z-menu-stub>"
+`;
 
-exports[`[[ UserMenu ]] renders UserMenu with all props: {"isCollapsed":null} 1`] = `"<z-menu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template class=\\"z-10\\"></template></z-menu-stub>"`;
+exports[`[[ UserMenu ]] renders UserMenu with all props: {"isCollapsed":null} 1`] = `
+"<z-menu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"><button type=\\"button\\" class=\\"outline-none focus:outline-none flex max-w-3xs items-center space-x-2 rounded-sm py-1 text-sm hover:bg-ink-300 pr-2 pl-1\\">
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Test Mishra\\" size=\\"sm\\" stroke=\\"bg-ink-300 p-0.5\\" class=\\"flex-shrink-0 rounded-full leading-none\\"></zavatar-stub> <span class=\\"overflow-hidden overflow-ellipsis whitespace-nowrap leading-none\\">
+        Test Mishra
+      </span>
+  </button>
+  <zmenusection-stub title=\\"Logged In As\\" divider=\\"true\\">
+    <zmenuitem-stub as=\\"div\\" closeonclick=\\"true\\" spacing=\\"p-3\\">test@deepsource.io</zmenuitem-stub>
+  </zmenusection-stub>
+  <zmenusection-stub>
+    <zmenuitem-stub as=\\"nuxt-link\\" icon=\\"settings\\" closeonclick=\\"true\\" spacing=\\"p-3\\" to=\\"/settings\\">Settings</zmenuitem-stub>
+    <zmenuitem-stub as=\\"nuxt-link\\" icon=\\"dashboard\\" closeonclick=\\"true\\" spacing=\\"p-3\\" to=\\"/me\\">Dashboard</zmenuitem-stub>
+    <zmenuitem-stub as=\\"div\\" icon=\\"log-out\\" closeonclick=\\"true\\" spacing=\\"p-3\\">Sign out</zmenuitem-stub>
+  </zmenusection-stub>
+</z-menu-stub>"
+`;
 
-exports[`[[ UserMenu ]] renders UserMenu with all props: {"isCollapsed":true} 1`] = `"<z-menu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template class=\\"z-10\\"></template></z-menu-stub>"`;
+exports[`[[ UserMenu ]] renders UserMenu with all props: {"isCollapsed":true} 1`] = `
+"<z-menu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"><button type=\\"button\\" class=\\"outline-none focus:outline-none flex max-w-3xs items-center space-x-2 rounded-sm py-1 text-sm hover:bg-ink-300 px-1\\">
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Test Mishra\\" size=\\"sm\\" stroke=\\"bg-ink-300 p-0.5\\" class=\\"flex-shrink-0 rounded-full leading-none\\"></zavatar-stub> <span class=\\"overflow-hidden overflow-ellipsis whitespace-nowrap leading-none\\" style=\\"display: none;\\">
+        Test Mishra
+      </span>
+  </button>
+  <zmenusection-stub title=\\"Logged In As\\" divider=\\"true\\">
+    <zmenuitem-stub as=\\"div\\" closeonclick=\\"true\\" spacing=\\"p-3\\">test@deepsource.io</zmenuitem-stub>
+  </zmenusection-stub>
+  <zmenusection-stub>
+    <zmenuitem-stub as=\\"nuxt-link\\" icon=\\"settings\\" closeonclick=\\"true\\" spacing=\\"p-3\\" to=\\"/settings\\">Settings</zmenuitem-stub>
+    <zmenuitem-stub as=\\"nuxt-link\\" icon=\\"dashboard\\" closeonclick=\\"true\\" spacing=\\"p-3\\" to=\\"/me\\">Dashboard</zmenuitem-stub>
+    <zmenuitem-stub as=\\"div\\" icon=\\"log-out\\" closeonclick=\\"true\\" spacing=\\"p-3\\">Sign out</zmenuitem-stub>
+  </zmenusection-stub>
+</z-menu-stub>"
+`;
 
-exports[`[[ UserMenu ]] renders UserMenu with all props: {} 1`] = `"<z-menu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template class=\\"z-10\\"></template></z-menu-stub>"`;
+exports[`[[ UserMenu ]] renders UserMenu with all props: {} 1`] = `
+"<z-menu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"><button type=\\"button\\" class=\\"outline-none focus:outline-none flex max-w-3xs items-center space-x-2 rounded-sm py-1 text-sm hover:bg-ink-300 pr-2 pl-1\\">
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Test Mishra\\" size=\\"sm\\" stroke=\\"bg-ink-300 p-0.5\\" class=\\"flex-shrink-0 rounded-full leading-none\\"></zavatar-stub> <span class=\\"overflow-hidden overflow-ellipsis whitespace-nowrap leading-none\\">
+        Test Mishra
+      </span>
+  </button>
+  <zmenusection-stub title=\\"Logged In As\\" divider=\\"true\\">
+    <zmenuitem-stub as=\\"div\\" closeonclick=\\"true\\" spacing=\\"p-3\\">test@deepsource.io</zmenuitem-stub>
+  </zmenusection-stub>
+  <zmenusection-stub>
+    <zmenuitem-stub as=\\"nuxt-link\\" icon=\\"settings\\" closeonclick=\\"true\\" spacing=\\"p-3\\" to=\\"/settings\\">Settings</zmenuitem-stub>
+    <zmenuitem-stub as=\\"nuxt-link\\" icon=\\"dashboard\\" closeonclick=\\"true\\" spacing=\\"p-3\\" to=\\"/me\\">Dashboard</zmenuitem-stub>
+    <zmenuitem-stub as=\\"div\\" icon=\\"log-out\\" closeonclick=\\"true\\" spacing=\\"p-3\\">Sign out</zmenuitem-stub>
+  </zmenusection-stub>
+</z-menu-stub>"
+`;

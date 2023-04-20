@@ -10,7 +10,7 @@
         placeholder="Search for team member"
         @debounceInput="searchActiveUsers"
       >
-        <template slot="left">
+        <template #left>
           <z-icon icon="search" class="ml-1.5" size="small" />
         </template>
       </z-input>

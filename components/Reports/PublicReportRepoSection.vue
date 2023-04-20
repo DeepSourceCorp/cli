@@ -56,7 +56,7 @@
               Show all repositories
             </z-button>
           </template>
-          <template slot="body">
+          <template #body>
             <div
               class="px-3.5 py-3 space-y-3 max-h-64 overflow-y-auto hide-scroll cursor leading-5"
               @mousewheel.stop="scrollHandler"

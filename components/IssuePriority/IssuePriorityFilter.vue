@@ -11,7 +11,7 @@
           @click="toggle"
         />
       </template>
-      <template slot="body" class="text-vanilla-200">
+      <template #body class="text-vanilla-200">
         <div class="max-h-56 space-y-px overflow-y-auto hide-scroll">
           <z-menu-item
             v-for="filter in languageFilters"

@@ -12,7 +12,7 @@
       @focus="toggleAnalyzerList"
       @click="toggleAnalyzerList"
     >
-      <template slot="left">
+      <template #left>
         <z-icon
           :icon="isProcessing ? 'spin-loader' : 'search'"
           size="small"

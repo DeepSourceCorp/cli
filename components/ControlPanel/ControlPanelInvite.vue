@@ -20,7 +20,7 @@
         </div>
         <div>
           <z-input :value="inviteLink" size="large" read-only class="self-end pr-0.5">
-            <template slot="right">
+            <template #right>
               <div class="pr-1">
                 <copy-button :value="inviteLink" :disabled="!inviteLink" class="w-36" />
               </div>
@@ -55,7 +55,7 @@
       :show-border="true"
       class="h-control-panel flex flex-col justify-center"
     >
-      <template slot="action">
+      <template #action>
         <div class="flex justify-around">
           <nuxt-link-button to="/control-panel/user-management/groups" class="space-x-1.5">
             <z-icon icon="plus" size="small" color="current" />

@@ -1,6 +1,6 @@
 <template>
   <base-card :show-info="showInfo" :to="$generateRoute(['autofix', runId])">
-    <template slot="title">
+    <template #title>
       <z-icon
         v-tooltip="tooltipText"
         :icon="runIcon"
@@ -17,7 +17,7 @@
         {{ issue.shortcode }}
       </span>
     </template>
-    <template slot="description">
+    <template #description>
       <div class="items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex">
         <!-- Issue type -->
         <div class="flex space-x-5">
@@ -47,7 +47,7 @@
         </div>
       </div>
     </template>
-    <template slot="info">
+    <template #info>
       <div class="flex items-center justify-around h-full space-x-2">
         <div class="flex flex-col items-center">
           <div

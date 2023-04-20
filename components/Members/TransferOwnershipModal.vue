@@ -64,7 +64,7 @@
                 @keyup="(event) => handleKeyUp(event)"
                 @blur="handleBlur"
               >
-                <template slot="left">
+                <template #left>
                   <z-icon icon="search" size="small" class="ml-1.5" />
                 </template>
               </z-input>
@@ -134,7 +134,7 @@
           />
         </div>
       </div>
-      <template slot="footer">
+      <template #footer>
         <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
           <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close"
             >Cancel</z-button
@@ -160,7 +160,7 @@
               <z-icon icon="x" />
             </div>
             <empty-state title="Ownership transferred">
-              <template slot="subtitle">
+              <template #subtitle>
                 <div class="mt-2.5">
                   If you did not intend on transferring ownership, reach out to us at
                   <a href="mailto:support@deepsource.io" class="underline text-juniper"

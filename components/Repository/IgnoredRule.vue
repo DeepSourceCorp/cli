@@ -1,6 +1,6 @@
 <template>
   <base-card :remove-default-style="true" :custom-padding="verticalPadding">
-    <template slot="title">
+    <template #title>
       <p class="text-sm font-normal">
         <nuxt-link
           v-if="rule.issue"
@@ -25,7 +25,7 @@
       </p>
     </template>
 
-    <template slot="description">
+    <template #description>
       <div class="flex text-xs gap-x-4">
         <span class="flex items-center gap-x-1">
           <img
@@ -42,7 +42,7 @@
       </div>
     </template>
 
-    <template v-if="allowDelete" slot="info">
+    <template v-if="allowDelete" #info>
       <div class="flex justify-end h-full mt-1">
         <z-button
           v-tooltip="'Delete this rule'"

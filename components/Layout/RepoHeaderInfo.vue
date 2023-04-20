@@ -33,7 +33,7 @@
               </span>
             </button>
           </template>
-          <template slot="body">
+          <template #body>
             <a :href="vcsUrl" target="blank" rel="noreferrer noopener">
               <z-menu-item>
                 <span class="leading-snug">

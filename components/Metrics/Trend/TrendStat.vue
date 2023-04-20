@@ -22,7 +22,7 @@
             @click="toggle"
           />
         </template>
-        <template slot="body">
+        <template #body>
           <z-menu-section :divider="false" class="text-left">
             <z-menu-item class="text-sm" icon="edit-2" @click="$emit('openUpdateThresholdModal')">
               Update Threshold

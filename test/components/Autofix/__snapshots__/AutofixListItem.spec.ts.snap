@@ -1,25 +1,361 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 1`] = `"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\"><template></template> <template></template> <template></template></basecard-stub>"`;
+exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 1`] = `
+"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
+  <zicon-stub icon=\\"slash\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+  <h3 class=\\"overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis\\">Imported name is not used anywhere in the module</h3> <span class=\\"flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex\\">
+      PY-W2000
+    </span>
+  <div class=\\"items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex\\">
+    <div class=\\"flex space-x-5\\">
+      <issuetype-stub issue-type=\\"antipattern\\"></issuetype-stub>
+      <div class=\\"flex items-center space-x-1.5 text-sm\\">
+        <analyzerlogo-stub size=\\"small\\" name=\\"Python\\" shortcode=\\"python\\" avatar=\\"https://static.deepsource.io/avatars/123.png\\" class=\\"flex-shrink-0\\"></analyzerlogo-stub> <span class=\\"text-sm text-vanilla-400\\">Python</span>
+      </div>
+    </div>
+    <div class=\\"flex items-center space-x-1.5 text-sm\\">
+      <zicon-stub icon=\\"clock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400\\">Created 9 months ago</span>
+    </div>
+    <div class=\\"hidden sm:flex items-center space-x-1.5 text-sm\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/123.png\\" alt=\\"Souvik Dey\\" class=\\"rounded-full object-cover leading-none h-4 w-4 text-xxs\\">
+        <!----></a> <span class=\\"text-sm text-vanilla-400\\">Created by Souvik Dey</span></div>
+  </div>
+  <div class=\\"flex items-center justify-around h-full space-x-2\\">
+    <div class=\\"flex flex-col items-center\\">
+      <div class=\\"text-2xl font-medium text-juniper\\">
+        23
+      </div>
+      <div class=\\"text-xs text-vanilla-400\\">occurrences fixed</div>
+    </div>
+  </div>
+</basecard-stub>"
+`;
 
-exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 2`] = `"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\"><template></template> <template></template> <template></template></basecard-stub>"`;
+exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 2`] = `
+"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
+  <zicon-stub icon=\\"x\\" size=\\"small\\" position=\\"\\" color=\\"cherry\\" class=\\"flex-shrink-0 has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+  <h3 class=\\"overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis\\">Imported name is not used anywhere in the module</h3> <span class=\\"flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex\\">
+      PY-W2000
+    </span>
+  <div class=\\"items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex\\">
+    <div class=\\"flex space-x-5\\">
+      <issuetype-stub issue-type=\\"antipattern\\"></issuetype-stub>
+      <div class=\\"flex items-center space-x-1.5 text-sm\\">
+        <analyzerlogo-stub size=\\"small\\" name=\\"Python\\" shortcode=\\"python\\" avatar=\\"https://static.deepsource.io/avatars/123.png\\" class=\\"flex-shrink-0\\"></analyzerlogo-stub> <span class=\\"text-sm text-vanilla-400\\">Python</span>
+      </div>
+    </div>
+    <div class=\\"flex items-center space-x-1.5 text-sm\\">
+      <zicon-stub icon=\\"clock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400\\">Created 9 months ago</span>
+    </div>
+    <div class=\\"hidden sm:flex items-center space-x-1.5 text-sm\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/123.png\\" alt=\\"Souvik Dey\\" class=\\"rounded-full object-cover leading-none h-4 w-4 text-xxs\\">
+        <!----></a> <span class=\\"text-sm text-vanilla-400\\">Created by Souvik Dey</span></div>
+  </div>
+  <div class=\\"flex items-center justify-around h-full space-x-2\\">
+    <div class=\\"flex flex-col items-center\\">
+      <div class=\\"text-2xl font-medium text-juniper\\">
+        23
+      </div>
+      <div class=\\"text-xs text-vanilla-400\\">occurrences fixed</div>
+    </div>
+  </div>
+</basecard-stub>"
+`;
 
-exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 3`] = `"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\"><template></template> <template></template> <template></template></basecard-stub>"`;
+exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 3`] = `
+"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
+  <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0 has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+  <h3 class=\\"overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis\\">Imported name is not used anywhere in the module</h3> <span class=\\"flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex\\">
+      PY-W2000
+    </span>
+  <div class=\\"items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex\\">
+    <div class=\\"flex space-x-5\\">
+      <issuetype-stub issue-type=\\"antipattern\\"></issuetype-stub>
+      <div class=\\"flex items-center space-x-1.5 text-sm\\">
+        <analyzerlogo-stub size=\\"small\\" name=\\"Python\\" shortcode=\\"python\\" avatar=\\"https://static.deepsource.io/avatars/123.png\\" class=\\"flex-shrink-0\\"></analyzerlogo-stub> <span class=\\"text-sm text-vanilla-400\\">Python</span>
+      </div>
+    </div>
+    <div class=\\"flex items-center space-x-1.5 text-sm\\">
+      <zicon-stub icon=\\"clock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400\\">Created 9 months ago</span>
+    </div>
+    <div class=\\"hidden sm:flex items-center space-x-1.5 text-sm\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/123.png\\" alt=\\"Souvik Dey\\" class=\\"rounded-full object-cover leading-none h-4 w-4 text-xxs\\">
+        <!----></a> <span class=\\"text-sm text-vanilla-400\\">Created by Souvik Dey</span></div>
+  </div>
+  <div class=\\"flex items-center justify-around h-full space-x-2\\">
+    <div class=\\"flex flex-col items-center\\">
+      <div class=\\"text-2xl font-medium text-juniper\\">
+        23
+      </div>
+      <div class=\\"text-xs text-vanilla-400\\">occurrences fixed</div>
+    </div>
+  </div>
+</basecard-stub>"
+`;
 
-exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 4`] = `"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\"><template></template> <template></template> <template></template></basecard-stub>"`;
+exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 4`] = `
+"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
+  <zicon-stub icon=\\"refresh-cw\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"flex-shrink-0 has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+  <h3 class=\\"overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis\\">Imported name is not used anywhere in the module</h3> <span class=\\"flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex\\">
+      PY-W2000
+    </span>
+  <div class=\\"items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex\\">
+    <div class=\\"flex space-x-5\\">
+      <issuetype-stub issue-type=\\"antipattern\\"></issuetype-stub>
+      <div class=\\"flex items-center space-x-1.5 text-sm\\">
+        <analyzerlogo-stub size=\\"small\\" name=\\"Python\\" shortcode=\\"python\\" avatar=\\"https://static.deepsource.io/avatars/123.png\\" class=\\"flex-shrink-0\\"></analyzerlogo-stub> <span class=\\"text-sm text-vanilla-400\\">Python</span>
+      </div>
+    </div>
+    <div class=\\"flex items-center space-x-1.5 text-sm\\">
+      <zicon-stub icon=\\"clock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400\\">Created 9 months ago</span>
+    </div>
+    <div class=\\"hidden sm:flex items-center space-x-1.5 text-sm\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/123.png\\" alt=\\"Souvik Dey\\" class=\\"rounded-full object-cover leading-none h-4 w-4 text-xxs\\">
+        <!----></a> <span class=\\"text-sm text-vanilla-400\\">Created by Souvik Dey</span></div>
+  </div>
+  <div class=\\"flex items-center justify-around h-full space-x-2\\">
+    <div class=\\"flex flex-col items-center\\">
+      <div class=\\"text-2xl font-medium text-juniper\\">
+        23
+      </div>
+      <div class=\\"text-xs text-vanilla-400\\">occurrences fixable</div>
+    </div>
+  </div>
+</basecard-stub>"
+`;
 
-exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 5`] = `"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\"><template></template> <template></template> <template></template></basecard-stub>"`;
+exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 5`] = `
+"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
+  <zicon-stub icon=\\"stale\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"flex-shrink-0 has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+  <h3 class=\\"overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis\\">Imported name is not used anywhere in the module</h3> <span class=\\"flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex\\">
+      PY-W2000
+    </span>
+  <div class=\\"items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex\\">
+    <div class=\\"flex space-x-5\\">
+      <issuetype-stub issue-type=\\"antipattern\\"></issuetype-stub>
+      <div class=\\"flex items-center space-x-1.5 text-sm\\">
+        <analyzerlogo-stub size=\\"small\\" name=\\"Python\\" shortcode=\\"python\\" avatar=\\"https://static.deepsource.io/avatars/123.png\\" class=\\"flex-shrink-0\\"></analyzerlogo-stub> <span class=\\"text-sm text-vanilla-400\\">Python</span>
+      </div>
+    </div>
+    <div class=\\"flex items-center space-x-1.5 text-sm\\">
+      <zicon-stub icon=\\"clock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400\\">Created 9 months ago</span>
+    </div>
+    <div class=\\"hidden sm:flex items-center space-x-1.5 text-sm\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/123.png\\" alt=\\"Souvik Dey\\" class=\\"rounded-full object-cover leading-none h-4 w-4 text-xxs\\">
+        <!----></a> <span class=\\"text-sm text-vanilla-400\\">Created by Souvik Dey</span></div>
+  </div>
+  <div class=\\"flex items-center justify-around h-full space-x-2\\">
+    <div class=\\"flex flex-col items-center\\">
+      <div class=\\"text-2xl font-medium text-juniper\\">
+        23
+      </div>
+      <div class=\\"text-xs text-vanilla-400\\">occurrences fixed</div>
+    </div>
+  </div>
+</basecard-stub>"
+`;
 
-exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 6`] = `"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\"><template></template> <template></template> <template></template></basecard-stub>"`;
+exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 6`] = `
+"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
+  <zicon-stub icon=\\"clock\\" size=\\"small\\" position=\\"\\" color=\\"honey\\" class=\\"flex-shrink-0 has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+  <h3 class=\\"overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis\\">Imported name is not used anywhere in the module</h3> <span class=\\"flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex\\">
+      PY-W2000
+    </span>
+  <div class=\\"items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex\\">
+    <div class=\\"flex space-x-5\\">
+      <issuetype-stub issue-type=\\"antipattern\\"></issuetype-stub>
+      <div class=\\"flex items-center space-x-1.5 text-sm\\">
+        <analyzerlogo-stub size=\\"small\\" name=\\"Python\\" shortcode=\\"python\\" avatar=\\"https://static.deepsource.io/avatars/123.png\\" class=\\"flex-shrink-0\\"></analyzerlogo-stub> <span class=\\"text-sm text-vanilla-400\\">Python</span>
+      </div>
+    </div>
+    <div class=\\"flex items-center space-x-1.5 text-sm\\">
+      <zicon-stub icon=\\"clock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400\\">Created 9 months ago</span>
+    </div>
+    <div class=\\"hidden sm:flex items-center space-x-1.5 text-sm\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/123.png\\" alt=\\"Souvik Dey\\" class=\\"rounded-full object-cover leading-none h-4 w-4 text-xxs\\">
+        <!----></a> <span class=\\"text-sm text-vanilla-400\\">Created by Souvik Dey</span></div>
+  </div>
+  <div class=\\"flex items-center justify-around h-full space-x-2\\">
+    <div class=\\"flex flex-col items-center\\">
+      <div class=\\"text-2xl font-medium text-juniper\\">
+        23
+      </div>
+      <div class=\\"text-xs text-vanilla-400\\">occurrences fixed</div>
+    </div>
+  </div>
+</basecard-stub>"
+`;
 
-exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 7`] = `"<basecard-stub to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\"><template></template> <template></template> <template></template></basecard-stub>"`;
+exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 7`] = `
+"<basecard-stub to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
+  <zicon-stub icon=\\"slash\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+  <h3 class=\\"overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis\\">Imported name is not used anywhere in the module</h3> <span class=\\"flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex\\">
+      PY-W2000
+    </span>
+  <div class=\\"items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex\\">
+    <div class=\\"flex space-x-5\\">
+      <issuetype-stub issue-type=\\"antipattern\\"></issuetype-stub>
+      <div class=\\"flex items-center space-x-1.5 text-sm\\">
+        <analyzerlogo-stub size=\\"small\\" name=\\"Python\\" shortcode=\\"python\\" avatar=\\"https://static.deepsource.io/avatars/123.png\\" class=\\"flex-shrink-0\\"></analyzerlogo-stub> <span class=\\"text-sm text-vanilla-400\\">Python</span>
+      </div>
+    </div>
+    <div class=\\"flex items-center space-x-1.5 text-sm\\">
+      <zicon-stub icon=\\"clock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400\\">Created 9 months ago</span>
+    </div>
+    <div class=\\"hidden sm:flex items-center space-x-1.5 text-sm\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/123.png\\" alt=\\"Souvik Dey\\" class=\\"rounded-full object-cover leading-none h-4 w-4 text-xxs\\">
+        <!----></a> <span class=\\"text-sm text-vanilla-400\\">Created by Souvik Dey</span></div>
+  </div>
+  <div class=\\"flex items-center justify-around h-full space-x-2\\">
+    <div class=\\"flex flex-col items-center\\">
+      <div class=\\"text-2xl font-medium text-juniper\\">
+        23
+      </div>
+      <div class=\\"text-xs text-vanilla-400\\">occurrences fixed</div>
+    </div>
+  </div>
+</basecard-stub>"
+`;
 
-exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 8`] = `"<basecard-stub to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\"><template></template> <template></template> <template></template></basecard-stub>"`;
+exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 8`] = `
+"<basecard-stub to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
+  <zicon-stub icon=\\"x\\" size=\\"small\\" position=\\"\\" color=\\"cherry\\" class=\\"flex-shrink-0 has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+  <h3 class=\\"overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis\\">Imported name is not used anywhere in the module</h3> <span class=\\"flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex\\">
+      PY-W2000
+    </span>
+  <div class=\\"items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex\\">
+    <div class=\\"flex space-x-5\\">
+      <issuetype-stub issue-type=\\"antipattern\\"></issuetype-stub>
+      <div class=\\"flex items-center space-x-1.5 text-sm\\">
+        <analyzerlogo-stub size=\\"small\\" name=\\"Python\\" shortcode=\\"python\\" avatar=\\"https://static.deepsource.io/avatars/123.png\\" class=\\"flex-shrink-0\\"></analyzerlogo-stub> <span class=\\"text-sm text-vanilla-400\\">Python</span>
+      </div>
+    </div>
+    <div class=\\"flex items-center space-x-1.5 text-sm\\">
+      <zicon-stub icon=\\"clock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400\\">Created 9 months ago</span>
+    </div>
+    <div class=\\"hidden sm:flex items-center space-x-1.5 text-sm\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/123.png\\" alt=\\"Souvik Dey\\" class=\\"rounded-full object-cover leading-none h-4 w-4 text-xxs\\">
+        <!----></a> <span class=\\"text-sm text-vanilla-400\\">Created by Souvik Dey</span></div>
+  </div>
+  <div class=\\"flex items-center justify-around h-full space-x-2\\">
+    <div class=\\"flex flex-col items-center\\">
+      <div class=\\"text-2xl font-medium text-juniper\\">
+        23
+      </div>
+      <div class=\\"text-xs text-vanilla-400\\">occurrences fixed</div>
+    </div>
+  </div>
+</basecard-stub>"
+`;
 
-exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 9`] = `"<basecard-stub to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\"><template></template> <template></template> <template></template></basecard-stub>"`;
+exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 9`] = `
+"<basecard-stub to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
+  <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0 has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+  <h3 class=\\"overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis\\">Imported name is not used anywhere in the module</h3> <span class=\\"flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex\\">
+      PY-W2000
+    </span>
+  <div class=\\"items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex\\">
+    <div class=\\"flex space-x-5\\">
+      <issuetype-stub issue-type=\\"antipattern\\"></issuetype-stub>
+      <div class=\\"flex items-center space-x-1.5 text-sm\\">
+        <analyzerlogo-stub size=\\"small\\" name=\\"Python\\" shortcode=\\"python\\" avatar=\\"https://static.deepsource.io/avatars/123.png\\" class=\\"flex-shrink-0\\"></analyzerlogo-stub> <span class=\\"text-sm text-vanilla-400\\">Python</span>
+      </div>
+    </div>
+    <div class=\\"flex items-center space-x-1.5 text-sm\\">
+      <zicon-stub icon=\\"clock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400\\">Created 9 months ago</span>
+    </div>
+    <div class=\\"hidden sm:flex items-center space-x-1.5 text-sm\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/123.png\\" alt=\\"Souvik Dey\\" class=\\"rounded-full object-cover leading-none h-4 w-4 text-xxs\\">
+        <!----></a> <span class=\\"text-sm text-vanilla-400\\">Created by Souvik Dey</span></div>
+  </div>
+  <div class=\\"flex items-center justify-around h-full space-x-2\\">
+    <div class=\\"flex flex-col items-center\\">
+      <div class=\\"text-2xl font-medium text-juniper\\">
+        23
+      </div>
+      <div class=\\"text-xs text-vanilla-400\\">occurrences fixed</div>
+    </div>
+  </div>
+</basecard-stub>"
+`;
 
-exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 10`] = `"<basecard-stub to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\"><template></template> <template></template> <template></template></basecard-stub>"`;
+exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 10`] = `
+"<basecard-stub to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
+  <zicon-stub icon=\\"refresh-cw\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"flex-shrink-0 has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+  <h3 class=\\"overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis\\">Imported name is not used anywhere in the module</h3> <span class=\\"flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex\\">
+      PY-W2000
+    </span>
+  <div class=\\"items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex\\">
+    <div class=\\"flex space-x-5\\">
+      <issuetype-stub issue-type=\\"antipattern\\"></issuetype-stub>
+      <div class=\\"flex items-center space-x-1.5 text-sm\\">
+        <analyzerlogo-stub size=\\"small\\" name=\\"Python\\" shortcode=\\"python\\" avatar=\\"https://static.deepsource.io/avatars/123.png\\" class=\\"flex-shrink-0\\"></analyzerlogo-stub> <span class=\\"text-sm text-vanilla-400\\">Python</span>
+      </div>
+    </div>
+    <div class=\\"flex items-center space-x-1.5 text-sm\\">
+      <zicon-stub icon=\\"clock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400\\">Created 9 months ago</span>
+    </div>
+    <div class=\\"hidden sm:flex items-center space-x-1.5 text-sm\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/123.png\\" alt=\\"Souvik Dey\\" class=\\"rounded-full object-cover leading-none h-4 w-4 text-xxs\\">
+        <!----></a> <span class=\\"text-sm text-vanilla-400\\">Created by Souvik Dey</span></div>
+  </div>
+  <div class=\\"flex items-center justify-around h-full space-x-2\\">
+    <div class=\\"flex flex-col items-center\\">
+      <div class=\\"text-2xl font-medium text-juniper\\">
+        23
+      </div>
+      <div class=\\"text-xs text-vanilla-400\\">occurrences fixable</div>
+    </div>
+  </div>
+</basecard-stub>"
+`;
 
-exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 11`] = `"<basecard-stub to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\"><template></template> <template></template> <template></template></basecard-stub>"`;
+exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 11`] = `
+"<basecard-stub to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
+  <zicon-stub icon=\\"stale\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"flex-shrink-0 has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+  <h3 class=\\"overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis\\">Imported name is not used anywhere in the module</h3> <span class=\\"flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex\\">
+      PY-W2000
+    </span>
+  <div class=\\"items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex\\">
+    <div class=\\"flex space-x-5\\">
+      <issuetype-stub issue-type=\\"antipattern\\"></issuetype-stub>
+      <div class=\\"flex items-center space-x-1.5 text-sm\\">
+        <analyzerlogo-stub size=\\"small\\" name=\\"Python\\" shortcode=\\"python\\" avatar=\\"https://static.deepsource.io/avatars/123.png\\" class=\\"flex-shrink-0\\"></analyzerlogo-stub> <span class=\\"text-sm text-vanilla-400\\">Python</span>
+      </div>
+    </div>
+    <div class=\\"flex items-center space-x-1.5 text-sm\\">
+      <zicon-stub icon=\\"clock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400\\">Created 9 months ago</span>
+    </div>
+    <div class=\\"hidden sm:flex items-center space-x-1.5 text-sm\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/123.png\\" alt=\\"Souvik Dey\\" class=\\"rounded-full object-cover leading-none h-4 w-4 text-xxs\\">
+        <!----></a> <span class=\\"text-sm text-vanilla-400\\">Created by Souvik Dey</span></div>
+  </div>
+  <div class=\\"flex items-center justify-around h-full space-x-2\\">
+    <div class=\\"flex flex-col items-center\\">
+      <div class=\\"text-2xl font-medium text-juniper\\">
+        23
+      </div>
+      <div class=\\"text-xs text-vanilla-400\\">occurrences fixed</div>
+    </div>
+  </div>
+</basecard-stub>"
+`;
 
-exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 12`] = `"<basecard-stub to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\"><template></template> <template></template> <template></template></basecard-stub>"`;
+exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 12`] = `
+"<basecard-stub to=\\"/gh/deepsourcelabs/bifrost/autofix/string\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
+  <zicon-stub icon=\\"clock\\" size=\\"small\\" position=\\"\\" color=\\"honey\\" class=\\"flex-shrink-0 has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+  <h3 class=\\"overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis\\">Imported name is not used anywhere in the module</h3> <span class=\\"flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex\\">
+      PY-W2000
+    </span>
+  <div class=\\"items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex\\">
+    <div class=\\"flex space-x-5\\">
+      <issuetype-stub issue-type=\\"antipattern\\"></issuetype-stub>
+      <div class=\\"flex items-center space-x-1.5 text-sm\\">
+        <analyzerlogo-stub size=\\"small\\" name=\\"Python\\" shortcode=\\"python\\" avatar=\\"https://static.deepsource.io/avatars/123.png\\" class=\\"flex-shrink-0\\"></analyzerlogo-stub> <span class=\\"text-sm text-vanilla-400\\">Python</span>
+      </div>
+    </div>
+    <div class=\\"flex items-center space-x-1.5 text-sm\\">
+      <zicon-stub icon=\\"clock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400\\">Created 9 months ago</span>
+    </div>
+    <div class=\\"hidden sm:flex items-center space-x-1.5 text-sm\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/123.png\\" alt=\\"Souvik Dey\\" class=\\"rounded-full object-cover leading-none h-4 w-4 text-xxs\\">
+        <!----></a> <span class=\\"text-sm text-vanilla-400\\">Created by Souvik Dey</span></div>
+  </div>
+  <div class=\\"flex items-center justify-around h-full space-x-2\\">
+    <div class=\\"flex flex-col items-center\\">
+      <div class=\\"text-2xl font-medium text-juniper\\">
+        23
+      </div>
+      <div class=\\"text-xs text-vanilla-400\\">occurrences fixed</div>
+    </div>
+  </div>
+</basecard-stub>"
+`;

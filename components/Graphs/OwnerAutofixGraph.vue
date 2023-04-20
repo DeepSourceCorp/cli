@@ -7,7 +7,7 @@
     :body-is-grid="false"
     :body-spacing="0"
   >
-    <template slot="controls">
+    <template #controls>
       <graph-control
         class="float-right w-full h-8 xl:w-auto"
         :filter-value="lastDays"

@@ -1,10 +1,10 @@
 <template>
   <div>
     <div
-      class="flex flex-row-reverse items-center px-4 py-3 border-b gap-x-2 border-slate-400 lg:flex-row"
+      class="flex flex-row-reverse items-center gap-x-2 border-b border-slate-400 px-4 py-3 lg:flex-row"
     >
       <div
-        class="duration-300 ease-in-out border rounded-md border-slate-400"
+        class="rounded-md border border-slate-400 duration-300 ease-in-out"
         :class="
           onlyAutofix
             ? 'border-solid bg-vanilla-100 bg-opacity-5'
@@ -20,12 +20,12 @@
           @click="filterByAutofixable"
         >
           <z-icon icon="autofix" size="small" color="vanilla-200" />
-          <span class="px-1 truncate">Filter by Autofix</span>
+          <span class="truncate px-1">Filter by Autofix</span>
           <z-icon
             icon="plus"
             size="small"
             color="vanilla-200"
-            class="duration-75 transform"
+            class="transform duration-75"
             :class="{
               'rotate-45': onlyAutofix
             }"
@@ -41,7 +41,9 @@
         class="w-full lg:max-w-xs"
         @debounceInput="searchDir"
       >
-        <z-icon slot="left" icon="search" size="small" class="ml-1" />
+        <template #left>
+          <z-icon icon="search" size="small" class="ml-1" />
+        </template>
       </z-input>
     </div>
     <div v-if="!isLoaded" class="p-4">
@@ -54,9 +56,9 @@
         :issue="issue"
         :issue-type-title="issueTypeTitles[issue.issueType]"
         :analyzer-url="analyzerUrl"
-        class="block mb-3"
+        class="mb-3 block"
       />
-      <div class="flex justify-center mt-6 text-sm">
+      <div class="mt-6 flex justify-center text-sm">
         <z-pagination
           v-if="totalPageCount > 1"
           :page="currentPage"

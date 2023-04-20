@@ -27,13 +27,13 @@
         :title="title"
         :description="`Created ${formatDate(localEndpoint.createdAt)}`"
       >
-        <template slot="title-info">
+        <template #title-info>
           <z-label v-if="localEndpoint.active" class="inline-block select-none" state="success">
             Enabled
           </z-label>
           <z-label v-else class="inline-block select-none" state="warning"> Disabled </z-label>
         </template>
-        <template v-if="allowEdit" slot="actions">
+        <template v-if="allowEdit" #actions>
           <template v-if="readOnly">
             <z-button size="small" button-type="secondary" icon="edit" @click="readOnly = false">
               Edit
@@ -112,7 +112,7 @@
             input-id="enable-api-signing"
             :disabled="readOnly"
           >
-            <template slot="description">
+            <template #description>
               Signing of the webhook payload allows you to verify incoming requests.
               <span class="font-medium text-vanilla-200">We recommend enabling this.</span>
             </template>
@@ -225,7 +225,7 @@
             description="This will immediately disable all events for this endpoint."
             @click="disable"
           >
-            <template slot="label">
+            <template #label>
               Disable <b>{{ title }}</b>
             </template>
           </button-input>
@@ -239,7 +239,7 @@
                 description="This will enable all events for this endpoint."
                 @click="toggleModal"
               >
-                <template slot="label">
+                <template #label>
                   Enable <b>{{ title }}</b>
                 </template>
               </button-input>

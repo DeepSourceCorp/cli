@@ -8,7 +8,7 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>
@@ -28,7 +28,7 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>
@@ -48,7 +48,7 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>
@@ -73,10 +73,10 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
       </p>
     </zalert-stub> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456?password=deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456?password=deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label> <label for=\\"report-password\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Password</p>
-      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
@@ -101,10 +101,10 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
       </p>
     </zalert-stub> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456?password=deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456?password=deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label> <label for=\\"report-password\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Password</p>
-      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
@@ -129,10 +129,10 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
       </p>
     </zalert-stub> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456?password=deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456?password=deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label> <label for=\\"report-password\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Password</p>
-      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
@@ -157,10 +157,10 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
       </p>
     </zalert-stub> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456?password=deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456?password=deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label> <label for=\\"report-password\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Password</p>
-      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
@@ -180,7 +180,7 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>
@@ -200,7 +200,7 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>
@@ -220,7 +220,7 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>
@@ -240,7 +240,7 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>
@@ -260,7 +260,7 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>

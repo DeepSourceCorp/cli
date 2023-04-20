@@ -1,14 +1,14 @@
 <template>
   <base-card :to="$generateRoute(['settings', 'auto-onboard', shortcode])">
-    <template slot="title">
+    <template #title>
       <span class="text-base">{{ title }}</span>
     </template>
-    <template slot="description">
+    <template #description>
       <p class="line-clamp-1 text-sm">
         {{ description }}
       </p>
     </template>
-    <template slot="info">
+    <template #info>
       <div class="flex items-center justify-around h-full">
         <z-button
           v-if="allowCrud"

@@ -26,10 +26,10 @@
         placeholder="Search by report label..."
         @debounceInput="(val) => handlePublicReportSearch(val)"
       >
-        <template slot="left">
+        <template #left>
           <z-icon icon="search" size="small" class="ml-1.5" />
         </template>
-        <template slot="right">
+        <template #right>
           <z-icon v-show="q" icon="x" size="small" class="cursor-pointer" @click="clearSearch" />
         </template>
       </z-input>
@@ -74,7 +74,7 @@
       subtitle="No public report has been created for this team yet."
       class="border border-dashed rounded-lg border-slate-400 py-20"
     >
-      <template v-if="hasEditAccess" slot="action">
+      <template v-if="hasEditAccess" #action>
         <div class="flex justify-around">
           <z-button
             icon="share"

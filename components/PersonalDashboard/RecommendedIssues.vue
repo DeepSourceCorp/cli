@@ -14,7 +14,7 @@
         :show-autofix-button="allowAutofix"
         @autofix="(iss) => openAutofixModal(iss, issue)"
       >
-        <template v-if="issue.repositoryInstance" slot="header">
+        <template v-if="issue.repositoryInstance" #header>
           {{ issue.repositoryInstance.owner.login }}/{{ issue.repositoryInstance.name }}
         </template>
       </issue-list-item>

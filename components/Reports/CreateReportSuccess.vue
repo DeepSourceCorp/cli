@@ -23,7 +23,7 @@
             placeholder="Report URL"
             class="border border-ink-200"
           >
-            <template slot="right">
+            <template #right>
               <copy-button v-tooltip="'Copy public report link'" :value="formattedUrl" />
             </template>
           </z-input>
@@ -39,7 +39,7 @@
             placeholder="Report password"
             class="border border-ink-200"
           >
-            <template slot="right">
+            <template #right>
               <copy-button v-tooltip="'Copy password for the report'" :value="password" />
             </template>
           </z-input>

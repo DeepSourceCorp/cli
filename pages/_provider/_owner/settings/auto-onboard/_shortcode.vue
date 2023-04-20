@@ -23,7 +23,7 @@
     </div>
     <div v-else :key="$route.fullPath" class="w-full max-w-3xl p-4 mb-10">
       <page-title :title="title" :description="description">
-        <template slot="actions">
+        <template #actions>
           <template v-if="readOnly">
             <z-button
               v-if="allowEdit"
@@ -99,7 +99,7 @@
           />
         </template>
         <empty-state v-else title="Select an analyzer to proceed">
-          <template slot="action">
+          <template #action>
             <z-button
               ref="add-analyzer-button"
               button-type="secondary"

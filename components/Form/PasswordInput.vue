@@ -5,10 +5,10 @@
     :input-id="inputId"
     :input-width="inputWidth"
   >
-    <template slot="label">
+    <template #label>
       <slot name="label"></slot>
     </template>
-    <template slot="description">
+    <template #description>
       <slot name="description"></slot>
     </template>
     <div class="relative">

@@ -89,12 +89,12 @@
         :show-border="false"
         @debounceInput="searchIssueChildren"
       >
-        <template slot="left">
+        <template #left>
           <div class="pl-1">
             <z-icon icon="search" size="small" />
           </div>
         </template>
-        <template slot="right">
+        <template #right>
           <z-icon
             v-show="searchIssue"
             icon="x"

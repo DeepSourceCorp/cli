@@ -42,7 +42,7 @@
           :show-border="false"
           placeholder="Shareable link for the report..."
         >
-          <template slot="right">
+          <template #right>
             <copy-button
               v-tooltip="'Copy report shareable link'"
               :value="reportUrl"
@@ -62,7 +62,7 @@
           class="font-medium"
           @input="handlePasswordProtectedToggle"
         >
-          <template slot="description">
+          <template #description>
             <p>
               {{
                 isRestrictedOld && isRestricted
@@ -165,7 +165,7 @@
         :remove-y-padding="true"
         class="font-medium"
       >
-        <template slot="description"> Include data from past months in the report. </template>
+        <template #description> Include data from past months in the report. </template>
       </toggle-input>
 
       <label for="source-repos" class="space-y-2 text-sm">

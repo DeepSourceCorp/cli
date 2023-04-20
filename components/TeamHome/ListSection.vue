@@ -1,6 +1,6 @@
 <template>
   <stat-section :title="title" :body-spacing="0" :body-is-grid="false" :help-text="helpText">
-    <template slot="controls">
+    <template #controls>
       <slot name="controls"></slot>
     </template>
     <div class="h-full flex flex-col justify-between">
@@ -8,7 +8,7 @@
         <slot></slot>
       </div>
     </div>
-    <template slot="footer">
+    <template #footer>
       <div v-if="footerLink" class="border-t border-slate-400 flex justify-center">
         <z-button
           :to="footerLink"

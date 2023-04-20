@@ -8,7 +8,7 @@
       icon="arrow-down"
       @click="showDowngradePlanModal"
     >
-      <template slot="description">
+      <template #description>
         You will be downgraded to the {{ availableDowngradePlans.name }} plan.
         <nuxt-link
           :to="$generateRoute(['settings', 'billing', 'plans'])"

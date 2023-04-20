@@ -10,7 +10,7 @@
           <z-icon icon="plus-circle" size="small" class="min-w-4 min-h-4" />
         </button>
       </template>
-      <template slot="body" class="z-10">
+      <template #body class="z-10">
         <z-menu-section :divider="false">
           <nuxt-link
             v-for="repo in repoWithPendingAdhocRuns"

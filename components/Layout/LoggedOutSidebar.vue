@@ -12,7 +12,7 @@
       @open="openModal()"
       @close="closeModal()"
     >
-      <template slot="header">
+      <template #header>
         <section class="p-4 border-b border-slate-400">
           <img
             src="~/assets/images/logo-wordmark-white.svg"
@@ -21,7 +21,7 @@
           />
         </section>
       </template>
-      <template slot="default">
+      <template #default>
         <div class="grid gap-2 text-sm">
           <nuxt-link to="/me" class="flex items-center px-2 py-1 rounded-md hover:bg-ink-200"
             ><z-icon icon="dashboard" color="vanilla-300" class="mr-2.5" />
@@ -73,7 +73,7 @@
           >
         </div>
       </template>
-      <template slot="footer">
+      <template #footer>
         <h3 class="text-lg font-semibold">Run your first analysis.</h3>
         <p class="mt-2 text-sm text-vanilla-400">
           Find thousands of code security and quality issues in your codebase, before they end up in
@@ -81,7 +81,7 @@
         </p>
         <z-button to="/signup" button-type="primary" class="w-full mt-4">Start now</z-button>
       </template>
-      <template slot="brand">
+      <template #brand>
         <div class="flex justify-center space-x-3">
           <z-button
             to="https://twitter.com/DeepSourceHQ"

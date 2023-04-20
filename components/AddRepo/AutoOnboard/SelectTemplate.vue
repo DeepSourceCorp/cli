@@ -21,7 +21,7 @@
         placeholder="Search templates..."
         @debounceInput="fetchTemplates"
       >
-        <template slot="left">
+        <template #left>
           <z-icon icon="search" class="ml-1.5" size="small" />
         </template>
       </z-input>
@@ -42,10 +42,10 @@
           class="cursor-pointer hover:bg-ink-200"
           @click="$emit('selectTemplate', template)"
         >
-          <template slot="title">
+          <template #title>
             <span class="text-base">{{ template.title }}</span>
           </template>
-          <template slot="description">
+          <template #description>
             <p class="line-clamp-1 text-sm">
               {{ template.description }}
             </p>

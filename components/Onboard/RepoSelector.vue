@@ -14,7 +14,7 @@
         :show-border="false"
         @debounceInput="fetchRepositories"
       >
-        <template slot="left">
+        <template #left>
           <z-icon icon="search" size="small" class="ml-1.5" />
         </template>
       </z-input>

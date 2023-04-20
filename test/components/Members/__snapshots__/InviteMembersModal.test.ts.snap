@@ -39,7 +39,7 @@ exports[`[[ InviteMembersModal ]] renders invite members modal with the trigger 
               </zbutton-stub>
             </div>
           </div>
-          <zinput-stub name=\\"\\" value=\\"https://deepsource.icu/invitation/5cnHJHRUdbbpts2ZeiBa-20oabC_W_/\\" label=\\"\\" type=\\"text\\" placeholder=\\"Enter a value\\" disabled=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" showborder=\\"true\\" errorbordercolor=\\"cherry\\"><template></template></zinput-stub>
+          <zinput-stub name=\\"\\" value=\\"https://deepsource.icu/invitation/5cnHJHRUdbbpts2ZeiBa-20oabC_W_/\\" label=\\"\\" type=\\"text\\" placeholder=\\"Enter a value\\" disabled=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" showborder=\\"true\\" errorbordercolor=\\"cherry\\"></zinput-stub>
         </div>
       </div>
     </zmodal-stub>

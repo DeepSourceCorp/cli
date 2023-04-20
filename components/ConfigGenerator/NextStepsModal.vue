@@ -16,18 +16,18 @@
       </div>
       <z-stepper align="vertical" :show-numbers="true" class="w-full px-4">
         <z-step v-for="step in steps" :key="step.title" class="w-full">
-          <template slot="title">
+          <template #title>
             <h3 class="text-vanilla-100 font-base uppercase tracking-wide text-xs font-semibold">
               {{ step.title }}
             </h3>
           </template>
-          <template slot="description">
+          <template #description>
             <p class="text-sm font-normal text-vanilla-400" v-html="step.description"></p>
           </template>
         </z-step>
       </z-stepper>
     </div>
-    <template slot="footer">
+    <template #footer>
       <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
         <z-button
           class="modal-primary-action"

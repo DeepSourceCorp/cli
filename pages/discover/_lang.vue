@@ -19,13 +19,15 @@
         class="mt-4 rounded-md shadow-lg"
         @debounceInput="$fetch"
       >
-        <z-icon slot="left" icon="search" size="base" color="vanilla-400" class="ml-3 mr-1" />
+        <template #left>
+          <z-icon icon="search" size="base" color="vanilla-400" class="ml-3 mr-1" />
+        </template>
       </z-input>
     </hero-header>
 
     <!-- Layout for larger screens -->
-    <div class="hidden md:grid text-vanilla-100">
-      <div class="grid gap-4 px-4 grid-cols-discover">
+    <div class="hidden text-vanilla-100 md:grid">
+      <div class="grid grid-cols-discover gap-4 px-4">
         <!-- Discover repo feed -->
         <repo-feed :loading="$fetchState.pending" />
         <section class="space-y-4">
@@ -41,19 +43,19 @@
 
     <!-- Mobile layout -->
     <div class="flex flex-col items-center md:hidden">
-      <z-tabs class="w-full -mb-px">
-        <div class="flex justify-between px-4 border-b border-slate-400">
-          <z-tab-list class="flex pt-4 space-x-4 overflow-auto sm:w-auto hide-scroll">
-            <z-tab-item class="flex items-center flex-shrink-0" icon="tachometer-fast">
+      <z-tabs class="-mb-px w-full">
+        <div class="flex justify-between border-b border-slate-400 px-4">
+          <z-tab-list class="hide-scroll flex space-x-4 overflow-auto pt-4 sm:w-auto">
+            <z-tab-item class="flex flex-shrink-0 items-center" icon="tachometer-fast">
               <span>Recommended Projects</span>
             </z-tab-item>
-            <z-tab-item class="flex items-center flex-shrink-0" icon="trending-up">
+            <z-tab-item class="flex flex-shrink-0 items-center" icon="trending-up">
               <span>Trending</span>
             </z-tab-item>
           </z-tab-list>
         </div>
 
-        <z-tab-panes class="px-4 pt-4 min-h-48">
+        <z-tab-panes class="min-h-48 px-4 pt-4">
           <!-- Discover repo feed -->
           <repo-feed :loading="loading" />
 

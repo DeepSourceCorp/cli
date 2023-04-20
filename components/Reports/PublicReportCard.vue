@@ -5,8 +5,8 @@
     rel="noopener noreferrer"
     :show-info="hasEditAccess"
   >
-    <template slot="title">
-      <span class="text-sm font-semibold flex items-center gap-x-2 mb-2">
+    <template #title>
+      <span class="mb-2 flex items-center gap-x-2 text-sm font-semibold">
         <z-icon
           color="vanilla-400"
           size="x-small"
@@ -15,18 +15,18 @@
         <span>{{ label }}</span>
       </span>
     </template>
-    <template slot="description">
+    <template #description>
       <p class="flex items-center gap-x-4 text-sm">
         <meta-data-item icon="eye">
           {{ views }} {{ views === 1 ? 'view' : 'views' }}
         </meta-data-item>
         <meta-data-item icon="clock">
-          Created on {{ formatDate(parseISODate(this.createdAt), 'll') }}
+          Created on {{ formatDate(parseISODate(createdAt), 'll') }}
         </meta-data-item>
       </p>
     </template>
-    <template v-if="hasEditAccess" slot="info">
-      <div class="flex items-center justify-around h-full">
+    <template v-if="hasEditAccess" #info>
+      <div class="flex h-full items-center justify-around">
         <z-button
           v-tooltip="'Edit report'"
           icon="edit"

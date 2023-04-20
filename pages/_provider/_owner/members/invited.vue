@@ -47,7 +47,7 @@
           The invitation link sent via email would become invalid.
           <b class="text-vanilla-100">This action cannot be reversed.</b>
         </p>
-        <template slot="footer">
+        <template #footer>
           <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
             <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close"
               >Cancel</z-button

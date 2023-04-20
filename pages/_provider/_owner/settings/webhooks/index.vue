@@ -38,7 +38,7 @@
         title="Add your first endpoint"
         subtitle="Configure webhook endpoints to let your apps and services know about events in DeepSource as they happen. Start with a new endpoint."
       >
-        <template slot="action">
+        <template #action>
           <z-button size="small" icon="plus" @click="showAddEndpointModal = true">
             Add a new endpoint
           </z-button>

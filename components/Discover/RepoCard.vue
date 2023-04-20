@@ -1,6 +1,6 @@
 <template>
   <base-card :to="issuesPageUrl" :remove-default-style="removeDefaultStyle" :show-info="showInfo">
-    <template slot="title">
+    <template #title>
       <div class="font-normal text-vanilla-400" :class="showInfo ? 'text-lg' : 'text-base'">
         <div class="inline mr-2">
           <span class="transition-colors duration-75 cursor-pointer">{{
@@ -36,7 +36,7 @@
       </div>
     </template>
 
-    <template slot="description">
+    <template #description>
       <div class="flex flex-col space-y-1">
         <div v-if="showDescription && repoInfo.description" class="flex flex-wrap space-x-4">
           <div class="flex items-center space-x-1.5 mb-2 line-clamp-3">
@@ -63,7 +63,7 @@
       </div>
     </template>
 
-    <template slot="info">
+    <template #info>
       <div class="hidden h-full md:flex">
         <div
           class="flex-col justify-center flex-grow hidden py-4 text-xs leading-none lg:space-y-2 sm:flex"

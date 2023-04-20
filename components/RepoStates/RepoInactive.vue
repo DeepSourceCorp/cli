@@ -1,6 +1,6 @@
 <template>
   <base-state :title="noticeTitle">
-    <template slot="hero">
+    <template #hero>
       <img
         class="mx-auto mb-4"
         :src="require('~/assets/images/ui-states/repo/inactive.svg')"

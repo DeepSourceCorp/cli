@@ -1,6 +1,6 @@
 <template>
   <base-state title="Run failed because of a failing metric">
-    <template slot="hero">
+    <template #hero>
       <empty-state-picture
         :webp-image-path="require('~/assets/images/ui-states/repo/run-failed.webp')"
         :png-image-path="require('~/assets/images/ui-states/repo/run-failed.png')"

@@ -1,6 +1,6 @@
 <template>
   <base-card :to="getRoute(runId)" class="group">
-    <template slot="title">
+    <template #title>
       <z-icon
         v-tooltip="tooltipText"
         :icon="icon"
@@ -18,7 +18,7 @@
         >@{{ commitOid.slice(0, 7) }}</span
       >
     </template>
-    <template slot="description">
+    <template #description>
       <div class="space-y-1 md:space-y-0 md:flex md:flex-wrap md:items-center md:gap-x-4 mt-2 ml-6">
         <div v-if="!isPending" class="flex items-center space-x-1.5">
           <z-icon icon="clock" size="x-small" color="vanilla-400" />
@@ -58,7 +58,7 @@
         </z-tag>
       </div>
     </template>
-    <template slot="info">
+    <template #info>
       <div
         v-if="changedFilesCount !== null"
         class="flex justify-around items-center space-x-2 h-full"

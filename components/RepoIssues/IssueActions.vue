@@ -61,7 +61,7 @@
           />
         </div>
       </template>
-      <template slot="body" class="text-vanilla-200">
+      <template #body class="text-vanilla-200">
         <z-menu-item
           v-for="filter in ignoreIssues"
           :key="filter.name"

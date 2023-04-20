@@ -27,10 +27,10 @@
           class="text-sm"
           @debounceInput="onSearchQueryChange"
         >
-          <template slot="left">
+          <template #left>
             <z-icon icon="search" size="small" class="flex-shrink-0 p-px" />
           </template>
-          <template slot="right">
+          <template #right>
             <z-icon
               v-show="query"
               icon="x"
@@ -60,7 +60,7 @@
               'border-b border-slate-400': issueList.length > 0
             }"
           >
-            <template slot="title">
+            <template #title>
               <p class="text-sm font-semibold text-vanilla-300">
                 <span v-html="safeRenderBackticks(issue.title)"></span>
                 <span class="ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap"
@@ -68,7 +68,7 @@
                 </span>
               </p>
             </template>
-            <template slot="description">
+            <template #description>
               <div class="flex flex-wrap text-xs gap-x-4">
                 <!-- Analyzer type -->
                 <div class="flex items-center gap-x-1.5">
@@ -86,7 +86,7 @@
                 </div>
               </div>
             </template>
-            <template slot="info">
+            <template #info>
               <div class="flex justify-end pt-3 pr-3">
                 <priority-type-select
                   :priority="issue.priority"

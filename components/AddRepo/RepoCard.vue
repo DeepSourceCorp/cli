@@ -7,7 +7,7 @@
     @click="$emit('click')"
     @click.native="$emit('click')"
   >
-    <template slot="title">
+    <template #title>
       <div class="inline-flex items-center gap-x-2">
         <z-icon
           :icon="isPrivate ? 'z-lock' : 'globe'"
@@ -56,7 +56,7 @@
         </div>
       </template>
     </template>
-    <template slot="description">
+    <template #description>
       <div
         class="flex flex-wrap items-center gap-x-4 gap-y-2 text-vanilla-400"
         :class="{

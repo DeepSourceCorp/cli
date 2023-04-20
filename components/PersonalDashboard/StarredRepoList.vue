@@ -8,7 +8,7 @@
         :icon="repo.isPrivate ? 'z-lock' : 'globe'"
         class="px-4 py-3"
       >
-        <template slot="label">
+        <template #label>
           <div class="flex items-center space-x-3">
             <span>
               {{ repo.name }}
@@ -25,7 +25,7 @@
             </span>
           </div>
         </template>
-        <template slot="info">
+        <template #info>
           <span v-tooltip="formatDate(repo.lastAnalyzedAt, 'lll')">{{
             repo.lastAnalyzedAt ? getHumanizedTimeFromNow(repo.lastAnalyzedAt) : ''
           }}</span>

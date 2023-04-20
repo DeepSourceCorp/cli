@@ -14,25 +14,27 @@
         class="mt-4 rounded-md shadow-lg"
         @debounceInput="searchDir"
       >
-        <z-icon slot="left" icon="search" size="base" color="vanilla-400" class="ml-3 mr-1" />
+        <template #left>
+          <z-icon icon="search" size="base" color="vanilla-400" class="ml-3 mr-1" />
+        </template>
       </z-input>
     </hero-header>
     <section class="px-4">
       <div class="flex items-center space-x-3">
-        <h2 class="flex-shrink-0 font-medium tracking-wider uppercase text-vanilla-400">
+        <h2 class="flex-shrink-0 font-medium uppercase tracking-wider text-vanilla-400">
           Analyzers
         </h2>
         <hr class="flex-grow border-slate-400" />
       </div>
       <div
         v-if="areAnalyzersLoading"
-        class="grid grid-cols-1 gap-4 mt-4 md:grid-cols-3 xl:grid-cols-4"
+        class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3 xl:grid-cols-4"
       >
         <directory-card-skeleton v-for="loader in 8" :key="loader" />
       </div>
       <div
         v-else-if="analyzerList.length"
-        class="grid grid-cols-1 gap-4 mt-4 md:grid-cols-3 xl:grid-cols-4"
+        class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3 xl:grid-cols-4"
       >
         <directory-card
           v-for="analyzer in analyzerList"
@@ -48,22 +50,22 @@
         subtitle="Please try changing your search query."
       />
     </section>
-    <section class="px-4 pb-4 mt-10">
+    <section class="mt-10 px-4 pb-4">
       <div class="flex items-center space-x-3">
-        <h2 class="flex-shrink-0 font-medium tracking-wider uppercase text-vanilla-400">
+        <h2 class="flex-shrink-0 font-medium uppercase tracking-wider text-vanilla-400">
           Transformers
         </h2>
         <hr class="flex-grow border-slate-400" />
       </div>
       <div
         v-if="areTransformersLoading"
-        class="grid grid-cols-1 gap-4 mt-4 md:grid-cols-3 xl:grid-cols-4"
+        class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3 xl:grid-cols-4"
       >
         <directory-card-skeleton v-for="loader in 8" :key="loader" type="transformer" />
       </div>
       <div
         v-else-if="transformerList.length"
-        class="grid grid-cols-1 gap-4 mt-4 md:grid-cols-3 xl:grid-cols-4"
+        class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3 xl:grid-cols-4"
       >
         <directory-card
           v-for="transformer in transformerList"

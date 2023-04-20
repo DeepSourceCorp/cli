@@ -87,10 +87,10 @@
         class="text-sm"
         @debounceInput="(val) => $emit('runs-filter-update', { searchText: val })"
       >
-        <template slot="left">
+        <template #left>
           <z-icon class="flex-shrink-0 p-px" icon="search" size="small" />
         </template>
-        <template slot="right">
+        <template #right>
           <z-icon
             v-show="searchText"
             icon="x"

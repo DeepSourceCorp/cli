@@ -1,6 +1,6 @@
 <template>
   <list-section title="Recently active repositories">
-    <template v-if="canActivateRepo" slot="controls">
+    <template v-if="canActivateRepo" #controls>
       <div class="hidden text-right md:block">
         <z-button
           v-tooltip="'Activate new repository'"
@@ -17,13 +17,13 @@
       <div
         v-for="idx in loaderCount"
         :key="idx"
-        class="flex w-full h-12 px-4 py-3 space-x-3 border-b border-slate-400 last:border-none"
+        class="flex h-12 w-full space-x-3 border-b border-slate-400 px-4 py-3 last:border-none"
       >
-        <div class="w-5 h-full rounded-md bg-ink-300 animate-pulse"></div>
-        <div class="w-1/4 h-full rounded-md bg-ink-300 animate-pulse"></div>
-        <div class="w-1/6 h-full rounded-md bg-ink-300 animate-pulse"></div>
+        <div class="h-full w-5 animate-pulse rounded-md bg-ink-300"></div>
+        <div class="h-full w-1/4 animate-pulse rounded-md bg-ink-300"></div>
+        <div class="h-full w-1/6 animate-pulse rounded-md bg-ink-300"></div>
         <div class="flex-grow"></div>
-        <div class="w-1/5 h-full rounded-md bg-ink-300 animate-pulse"></div>
+        <div class="h-full w-1/5 animate-pulse rounded-md bg-ink-300"></div>
       </div>
     </template>
     <template
@@ -39,7 +39,7 @@
         :icon="repo.isPrivate ? 'z-lock' : 'globe'"
         class="px-4 py-3"
       >
-        <template slot="label">
+        <template #label>
           <div class="flex items-center space-x-3">
             <span>
               {{ repo.name }}
@@ -54,7 +54,7 @@
             </span>
           </div>
         </template>
-        <template slot="info">
+        <template #info>
           <span v-tooltip="formatDate(repo.lastAnalyzedAt, 'lll')">{{
             repo.lastAnalyzedAt ? getHumanizedTimeFromNow(repo.lastAnalyzedAt) : ''
           }}</span>
@@ -62,21 +62,26 @@
       </list-item>
     </template>
     <empty-state v-else :use-v2="true" title="No active repositories found">
-      <span v-if="canActivateRepo" slot="subtitle">
-        No repositories activated, generate a new config or activate a repository directly if a
-        <code class="font-medium text-vanilla-200">.deepsource.toml</code> already exists.
-      </span>
-      <span v-else slot="subtitle">
-        Please get in touch with the owner of your organization to activate analysis for a
-        repository.
-      </span>
-      <z-button
-        slot="action"
-        icon="plus"
-        size="small"
-        label="Activate new repository"
-        @click="showAddRepoModal = true"
-      />
+      <template #subtitle>
+        <span v-if="canActivateRepo">
+          No repositories activated, generate a new config or activate a repository directly if a
+          <code class="font-medium text-vanilla-200">.deepsource.toml</code> already exists.
+        </span>
+
+        <span v-else>
+          Please get in touch with the owner of your organization to activate analysis for a
+          repository.
+        </span>
+      </template>
+
+      <template #action>
+        <z-button
+          icon="plus"
+          size="small"
+          label="Activate new repository"
+          @click="showAddRepoModal = true"
+        />
+      </template>
     </empty-state>
   </list-section>
 </template>

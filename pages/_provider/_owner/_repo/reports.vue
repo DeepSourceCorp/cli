@@ -13,7 +13,7 @@
         description-width-class="max-w-xl"
         class="flex-col md:flex-row gap-y-4"
       >
-        <template v-if="hasPublicReportEditAccess" slot="actions">
+        <template v-if="hasPublicReportEditAccess" #actions>
           <z-button
             icon="share"
             label="Share"

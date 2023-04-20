@@ -1,6 +1,6 @@
 <template>
   <base-state title="Waiting to receive artifacts">
-    <template slot="hero">
+    <template #hero>
       <video
         :poster="require('~/assets/images/ui-states/autofix/loader-animation-108px.png')"
         autoplay

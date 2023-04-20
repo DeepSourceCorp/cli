@@ -7,10 +7,10 @@
       icon="trash-2"
       @click="showConfirmDelete = true"
     >
-      <template slot="label">
+      <template #label>
         Delete <b>{{ title }}</b>
       </template>
-      <template slot="description">
+      <template #description>
         Deleting this endpoint will disable all events and will delete all event logs.
         <span class="text-vanilla-200 font-medium">This action is not reversible.</span>
       </template>

@@ -6,10 +6,10 @@
     :input-width="inputWidth"
     :cascade-input="cascadeInput"
   >
-    <template slot="label">
+    <template #label>
       <slot name="label"></slot>
     </template>
-    <template slot="description">
+    <template #description>
       <slot name="description"></slot>
     </template>
     <div>

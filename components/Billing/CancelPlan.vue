@@ -8,7 +8,7 @@
       icon="x"
       @click="showCancelPlanModal = true"
     >
-      <template slot="description">
+      <template #description>
         Cancelling your subscription will downgrade analysis to only 1 private repository, and all
         the other members except up to 3 recently active members will be converted to contributors.
         <a

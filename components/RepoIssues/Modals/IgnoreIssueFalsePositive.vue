@@ -1,14 +1,14 @@
 <template>
   <portal to="modal">
     <z-modal v-if="isOpen" width="wide" @onClose="close">
-      <template slot="title">
+      <template #title>
         <span class="text-sm font-medium text-vanilla-400">
           Ignore and mark this occurrence of
           <span class="font-bold text-vanilla-100">{{ issueShortcode }}</span> as a
           <span class="font-bold text-vanilla-100">false-positive</span>
         </span>
       </template>
-      <div class="flex flex-col p-4 space-y-4 text-sm leading-7 text-vanilla-400">
+      <div class="flex flex-col space-y-4 p-4 text-sm leading-7 text-vanilla-400">
         <span>
           This will <span class="font-bold">remove the current occurrence</span> of this issue and
           notify our team who will be available to respond to your questions.</span
@@ -20,10 +20,10 @@
           </div>
         </div>
       </div>
-      <template slot="footer">
-        <div class="px-3 py-3 space-x-2 text-right border-t text-vanilla-100 border-slate-400">
+      <template #footer>
+        <div class="space-x-2 border-t border-slate-400 px-3 py-3 text-right text-vanilla-100">
           <z-button
-            class="flex items-center space-x-2 modal-primary-action"
+            class="modal-primary-action flex items-center space-x-2"
             spacing="px-2"
             button-type="primary"
             size="small"
@@ -87,7 +87,7 @@ export default class IgnoreIssueFalsePositive extends mixins(IssueDetailMixin, A
       if (response.ok) {
         this.$emit('ignore', [this.checkIssueId])
       } else {
-        throw new Error(`Received a non-ok response for this check`)
+        throw new Error('Received a non-ok response for this check')
       }
     } catch (e) {
       this.$toast.danger('Something went wrong while reporting this false positive')

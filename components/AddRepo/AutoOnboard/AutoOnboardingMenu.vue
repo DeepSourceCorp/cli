@@ -82,7 +82,7 @@
       input-width="x-small"
       @click="$emit('startOnboarding')"
     >
-      <template slot="description">
+      <template #description>
         Use Auto Onboard to activate DeepSource analysis on multiple repositories.
       </template>
     </button-input>
@@ -95,7 +95,7 @@
       icon="settings"
       input-width="x-small"
     >
-      <template slot="description">Create and edit templates to be used for Auto Onboard.</template>
+      <template #description>Create and edit templates to be used for Auto Onboard.</template>
     </button-input>
   </section>
 </template>

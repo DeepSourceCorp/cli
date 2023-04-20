@@ -8,7 +8,7 @@
       icon="play-circle"
       @click="showResumePlanModal"
     >
-      <template slot="description">
+      <template #description>
         This will void the plan cancellation request, and you will get full access to your existing
         plan.
       </template>

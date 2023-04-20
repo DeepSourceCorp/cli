@@ -66,7 +66,7 @@
                       <z-icon size="small" icon="chevron-down" />
                     </button>
                   </template>
-                  <template slot="body">
+                  <template #body>
                     <z-menu-section :divider="false" class="text-left">
                       <z-menu-item v-for="(opt, key) in TEAM_PERMS" :key="key" class="text-sm">
                         <div

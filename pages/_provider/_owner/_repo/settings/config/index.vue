@@ -5,7 +5,7 @@
       description-width-class="max-w-2xl"
       class="max-w-2xl"
     >
-      <template slot="description">
+      <template #description>
         <p v-if="$route.params.provider !== 'gsr'">
           The analysis configuration for a repository on DeepSource is defined in a
           <code class="font-medium text-vanilla-200">.deepsource.toml</code>

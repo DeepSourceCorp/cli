@@ -9,7 +9,7 @@ exports[`[[ MutateReportModal ]] renders MutateReportModal in create report mode
     </label>
     <!---->
     <div class=\\"space-y-3\\">
-      <toggleinput-stub input-width=\\"xx-small\\" label=\\"Restrict report access\\" input-id=\\"toggle-password-protection\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"><template></template></toggleinput-stub>
+      <toggleinput-stub input-width=\\"xx-small\\" label=\\"Restrict report access\\" input-id=\\"toggle-password-protection\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"></toggleinput-stub>
       <!---->
     </div>
     <div class=\\"grid grid-cols-2\\">
@@ -36,7 +36,7 @@ exports[`[[ MutateReportModal ]] renders MutateReportModal in create report mode
         <!---->
       </div>
     </div>
-    <toggleinput-stub input-width=\\"xx-small\\" label=\\"Share historical data\\" input-id=\\"toggle-share-historical-data\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"><template></template></toggleinput-stub>
+    <toggleinput-stub input-width=\\"xx-small\\" label=\\"Share historical data\\" input-id=\\"toggle-share-historical-data\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"></toggleinput-stub>
   </fieldset>
 </zmodal-stub>"
 `;
@@ -49,10 +49,10 @@ exports[`[[ MutateReportModal ]] renders MutateReportModal in edit report mode: 
       <p class=\\"text-vanilla-400 text-xs\\">This is used for internal reference only</p>
     </label> <label for=\\"report-link\\" class=\\"space-y-2 text-sm text-vanilla-200 w-full\\">
       <p class=\\"text-sm font-medium text-vanilla-100\\">Shareable link</p>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/aa183352-4b5e-427a-ac8d-95c47c52b6a1\\" label=\\"\\" type=\\"text\\" placeholder=\\"What’s this report for?\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\"><template></template></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/aa183352-4b5e-427a-ac8d-95c47c52b6a1\\" label=\\"\\" type=\\"text\\" placeholder=\\"What’s this report for?\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\"></zinput-stub>
     </label>
     <div class=\\"space-y-3\\">
-      <toggleinput-stub input-width=\\"xx-small\\" label=\\"Restrict report access\\" input-id=\\"toggle-password-protection\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"><template></template></toggleinput-stub>
+      <toggleinput-stub input-width=\\"xx-small\\" label=\\"Restrict report access\\" input-id=\\"toggle-password-protection\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"></toggleinput-stub>
       <!---->
     </div>
     <div class=\\"grid grid-cols-2\\">
@@ -79,7 +79,7 @@ exports[`[[ MutateReportModal ]] renders MutateReportModal in edit report mode: 
         <!---->
       </div>
     </div>
-    <toggleinput-stub input-width=\\"xx-small\\" label=\\"Share historical data\\" input-id=\\"toggle-share-historical-data\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"><template></template></toggleinput-stub>
+    <toggleinput-stub input-width=\\"xx-small\\" label=\\"Share historical data\\" input-id=\\"toggle-share-historical-data\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"></toggleinput-stub>
   </fieldset>
 </zmodal-stub>"
 `;

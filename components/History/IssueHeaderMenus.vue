@@ -13,7 +13,7 @@
           Sort
         </z-button>
       </template>
-      <template slot="body" class="text-vanilla-200">
+      <template #body>
         <z-menu-item v-for="filter in sortFilters" :key="filter.name" :icon="filter.icon">
           {{ filter.label }}
         </z-menu-item>
@@ -22,7 +22,7 @@
     <!-- Filter Menu -->
     <z-menu direction="left" width="40" class="text-vanilla-100">
       <template #trigger="{ toggle }">
-        <z-badge slot="trigger" type="success" is-dot :hidden="false">
+        <z-badge type="success" is-dot :hidden="false">
           <button
             type="button"
             class="inline-flex items-center px-3 py-2 space-x-2 text-sm leading-none rounded-sm shadow-sm outline-none lg:px-4 bg-ink-300 hover:bg-ink-200 text-vanilla-100 focus:outline-none"
@@ -33,7 +33,7 @@
           </button>
         </z-badge>
       </template>
-      <template slot="body">
+      <template #body>
         <z-menu-item icon="autofix">Autofix Available</z-menu-item>
       </template>
     </z-menu>

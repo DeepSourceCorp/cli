@@ -12,7 +12,7 @@
           <span class="hidden md:inline text-vanilla-100">Sort</span>
         </z-button>
       </template>
-      <template slot="body" class="text-vanilla-200">
+      <template #body class="text-vanilla-200">
         <z-menu-item
           v-for="filter in sortFilters"
           :key="filter.name"

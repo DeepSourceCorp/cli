@@ -1,13 +1,13 @@
 <template>
   <portal to="modal">
     <z-modal v-if="isOpen" @onClose="close">
-      <template slot="title">
+      <template #title>
         <span class="text-sm font-medium text-vanilla-400">
           Ignore and mark this occurrence of
           <span class="font-bold text-vanilla-100">{{ issueShortcode }}</span> as intentional
         </span>
       </template>
-      <div class="flex p-4 space-x-2 text-vanilla-400">
+      <div class="flex space-x-2 p-4 text-vanilla-400">
         <z-icon icon="alert-circle" size="medium" color="vanilla-400" />
         <div class="flex flex-col space-y-2 text-sm leading-7 text-vanilla-400">
           <span>This will only remove the current occurrence of this issue.</span>
@@ -27,10 +27,10 @@
           </span>
         </div>
       </div>
-      <template slot="footer">
-        <div class="px-3 py-2 space-x-2 text-right border-t text-vanilla-100 border-slate-400">
+      <template #footer>
+        <div class="space-x-2 border-t border-slate-400 px-3 py-2 text-right text-vanilla-100">
           <z-button
-            class="flex items-center space-x-2 modal-primary-action"
+            class="modal-primary-action flex items-center space-x-2"
             spacing="px-2"
             button-type="primary"
             size="small"
@@ -91,7 +91,7 @@ export default class IgnoreIssueIntentional extends mixins(IssueDetailMixin, Act
       if (response.ok) {
         this.$emit('ignore', [this.checkIssueId])
       } else {
-        throw new Error(`Received a non-ok response for this check`)
+        throw new Error('Received a non-ok response for this check')
       }
     } catch (e) {
       this.$toast.danger('Something went wrong while ignoring this issue')

@@ -28,7 +28,7 @@
               <z-icon class="inline" icon="more-vertical" />
             </button>
           </template>
-          <template slot="body">
+          <template #body>
             <z-menu-item class="text-sm" icon="edit-2" @click="showThresholdUpdate = true">
               Update Threshold
             </z-menu-item>

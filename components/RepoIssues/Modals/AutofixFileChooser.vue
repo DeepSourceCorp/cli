@@ -12,7 +12,7 @@
             placeholder="Search for files"
             class="py-1.5 leading-6 px-2"
           >
-            <template slot="left">
+            <template #left>
               <z-icon icon="search" size="small" class="w-6 pl-2" />
             </template>
           </z-input>

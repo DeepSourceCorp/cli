@@ -21,7 +21,7 @@
         placeholder="Search repositories..."
         @debounceInput="search"
       >
-        <template slot="left">
+        <template #left>
           <z-icon icon="search" class="ml-1.5" size="small" />
         </template>
       </z-input>

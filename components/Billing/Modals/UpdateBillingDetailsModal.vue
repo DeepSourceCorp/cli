@@ -37,7 +37,7 @@
         />
       </fieldset>
     </div>
-    <template slot="footer">
+    <template #footer>
       <div class="p-4 space-x-2 text-right text-vanilla-100">
         <z-button
           :button-type="loading ? 'secondary' : 'primary'"

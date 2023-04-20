@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 space-y-4 md:max-w-2xl">
+  <div class="space-y-4 p-4 md:max-w-2xl">
     <div class="inline-flex gap-x-2">
       <h2 class="text-lg font-medium">Integrations</h2>
     </div>
@@ -8,29 +8,31 @@
       v-if="!$fetchState.pending && !integrations.length"
       title="No integrations installed"
       subtitle="You can install them from organization settings"
-      class="border border-dashed rounded-lg border-slate-400"
+      class="rounded-lg border border-dashed border-slate-400"
     >
-      <nuxt-link slot="action" :to="$generateRoute(['settings', 'integrations'], false)">
-        <z-button size="small">
-          <div class="inline-flex gap-x-2">
-            <span>Go to organization settings</span>
-            <z-icon color="current-color" icon="arrow-right" class="place-self-center" />
-          </div>
-        </z-button>
-      </nuxt-link>
+      <template #action>
+        <nuxt-link :to="$generateRoute(['settings', 'integrations'], false)">
+          <z-button size="small">
+            <div class="inline-flex gap-x-2">
+              <span>Go to organization settings</span>
+              <z-icon color="current-color" icon="arrow-right" class="place-self-center" />
+            </div>
+          </z-button>
+        </nuxt-link>
+      </template>
     </empty-state>
 
     <template v-else>
       <!-- Loading state -->
-      <div v-if="$fetchState.pending" class="grid grid-cols-1 gap-4 md:grid-cols-2 3xl:grid-cols-3">
+      <div v-if="$fetchState.pending" class="3xl:grid-cols-3 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div
           v-for="ii in 2"
           :key="ii"
-          class="h-20 bg-opacity-50 rounded-md animate-pulse bg-ink-200"
+          class="h-20 animate-pulse rounded-md bg-ink-200 bg-opacity-50"
         ></div>
       </div>
 
-      <div v-else class="grid grid-cols-1 gap-4 md:grid-cols-2 3xl:grid-cols-3">
+      <div v-else class="3xl:grid-cols-3 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div v-for="integration in integrations" :key="integration.shortcode">
           <integration-card v-bind="integration" />
         </div>

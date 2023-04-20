@@ -462,7 +462,7 @@
                           @click="toggle"
                         />
                       </template>
-                      <template slot="body">
+                      <template #body>
                         <z-menu-section :divider="false" class="text-left">
                           <z-menu-item
                             class="text-sm"
@@ -558,7 +558,7 @@
                         @click="toggle"
                       />
                     </template>
-                    <template slot="body">
+                    <template #body>
                       <z-menu-section :divider="false" class="text-left">
                         <z-menu-item
                           class="text-sm"

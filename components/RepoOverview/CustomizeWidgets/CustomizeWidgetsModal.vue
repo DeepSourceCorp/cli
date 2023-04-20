@@ -9,7 +9,7 @@
         background-color="ink-200"
         placeholder="Search for a widget..."
       >
-        <template slot="left">
+        <template #left>
           <z-icon icon="search" size="small" class="ml-1.5" />
         </template>
       </z-input>

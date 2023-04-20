@@ -7,10 +7,10 @@
     :remove-y-padding="removeYPadding"
     :cascade-input="true"
   >
-    <template slot="label">
+    <template #label>
       <slot name="label"></slot>
     </template>
-    <template slot="description">
+    <template #description>
       <slot name="description"></slot>
     </template>
     <div class="text-left md:text-right" :class="fullWidth && 'col-span-full md:col-span-1'">

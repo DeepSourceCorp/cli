@@ -31,7 +31,7 @@
         class="hidden w-full max-w-xs md:flex"
         @debounceInput="search"
       >
-        <template slot="left">
+        <template #left>
           <z-icon icon="search" size="small" class="ml-1.5 flex-shrink-0" />
         </template>
       </z-input>
@@ -88,7 +88,7 @@
                     <z-icon size="small" icon="chevron-down" />
                   </button>
                 </template>
-                <template slot="body">
+                <template #body>
                   <z-menu-section :divider="false" class="text-left">
                     <z-menu-item v-for="(opt, key) in TEAM_PERMS" :key="key" class="text-sm">
                       <div

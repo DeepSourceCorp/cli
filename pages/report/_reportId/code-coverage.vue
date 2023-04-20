@@ -13,10 +13,10 @@
         placeholder="Search for a repository..."
         @debounceInput="handleSearch"
       >
-        <template slot="left">
+        <template #left>
           <z-icon icon="search" size="small" class="ml-1.5" />
         </template>
-        <template slot="right">
+        <template #right>
           <z-icon
             v-show="queryParams.q"
             icon="x"

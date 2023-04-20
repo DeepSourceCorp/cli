@@ -4,7 +4,7 @@
     :to="$generateRoute(['settings', 'webhooks', id])"
     :class="active ? '' : 'opacity-75'"
   >
-    <template slot="title">
+    <template #title>
       <z-icon
         v-tooltip="active ? 'Enabled' : 'Disabled'"
         :icon="active ? 'check-circle' : 'pause-circle'"
@@ -14,7 +14,7 @@
       />
       <h3 class="text-base">{{ urlHost }}</h3>
     </template>
-    <template slot="description">
+    <template #description>
       <div class="items-center mt-2 space-y-1 md:space-y-0 md:flex md:space-x-4">
         <div class="flex items-center space-x-1.5">
           <z-icon icon="calendar" size="x-small" color="vanilla-400" />

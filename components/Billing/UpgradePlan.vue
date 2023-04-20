@@ -8,7 +8,7 @@
       icon="arrow-up"
       @click="showUpgradeConfirmModal"
     >
-      <template slot="description">
+      <template #description>
         Upgrade to the {{ availableUpgradePlans.name }} plan and get more for your team.
         <nuxt-link
           :to="$generateRoute(['settings', 'billing', 'plans'])"

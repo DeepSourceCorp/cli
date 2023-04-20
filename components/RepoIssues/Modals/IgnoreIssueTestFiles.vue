@@ -1,7 +1,7 @@
 <template>
   <portal to="modal">
     <z-modal v-if="isOpen" @onClose="close">
-      <template slot="title">
+      <template #title>
         <span class="text-sm font-medium text-vanilla-100">
           Ignore issue <span class="font-bold">{{ issueShortcode }}</span> for all test files
         </span>
@@ -35,7 +35,7 @@
           for help.
         </div>
       </div>
-      <template slot="footer">
+      <template #footer>
         <div class="px-3 py-3 space-x-2 text-right text-vanilla-100">
           <z-button
             class="flex items-center space-x-2 modal-primary-action"
