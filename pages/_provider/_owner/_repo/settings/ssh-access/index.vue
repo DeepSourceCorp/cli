@@ -16,7 +16,7 @@
       <div
         class="p-3 font-mono text-sm break-all border rounded-md border-slate-400 text-vanilla-400"
       >
-        {{ this.repository.encPublicKey }}
+        {{ repository.encPublicKey }}
       </div>
 
       <div class="flex flex-col md:flex-row justify-between gap-2 mt-2">

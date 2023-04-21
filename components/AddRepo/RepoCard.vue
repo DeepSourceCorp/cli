@@ -60,8 +60,8 @@
       <div
         class="flex flex-wrap items-center gap-x-4 gap-y-2 text-vanilla-400"
         :class="{
-          'text-xs font-normal': this.size == 'small',
-          'text-sm font-normal': this.size == 'base'
+          'text-xs font-normal': size == 'small',
+          'text-sm font-normal': size == 'base'
         }"
       >
         <div

@@ -12,7 +12,7 @@
           </span>
         </div>
 
-        <span v-if="this.loggedIn" class="flex-shrink-0 inline">
+        <span v-if="loggedIn" class="flex-shrink-0 inline">
           <button
             :disabled="updatingWatchlist"
             class="focus:outline-none"

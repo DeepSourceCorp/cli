@@ -111,9 +111,7 @@
         </h3>
         <hr class="flex-grow border-slate-400" />
         <nuxt-link
-          :to="`/directory/analyzers/${
-            this.analyzer.shortcode || this.$route.params.analyzer
-          }/issues`"
+          :to="`/directory/analyzers/${analyzer.shortcode || $route.params.analyzer}/issues`"
           class="flex items-center flex-shrink-0 px-2 py-1 text-sm leading-none text-vanilla-400 hover:bg-ink-300 rounded-xs"
         >
           View all

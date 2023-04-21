@@ -2,7 +2,7 @@
   <section class="space-y-2">
     <div class="flex flex-wrap max-w-2xl md:flex-nowrap">
       <div class="flex-grow">
-        <div v-if="Object.keys(this.currentPlan)">
+        <div v-if="Object.keys(currentPlan)">
           <div
             class="flex items-center h-16 space-x-2 text-lg tracking-wider font-medium leading-none"
           >
@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="flex justify-between w-full mt-4 md:mt-0 md:block md:justify-start md:w-auto">
-        <div v-if="!isBilledManually && Object.keys(this.currentPlan)" class="mt-1.5">
+        <div v-if="!isBilledManually && Object.keys(currentPlan)" class="mt-1.5">
           <div v-if="currentPlan.amount" class="flex justify-end space-x-1">
             <div class="flex space-x-1">
               <div class="text-2xl">$</div>

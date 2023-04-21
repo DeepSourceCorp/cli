@@ -1,7 +1,7 @@
 <template>
-  <div class="relative h-full rounded-md pointer-events-none">
-    <div class="absolute inset-0 z-10 grid mx-auto rounded-md place-content-center">
-      <p class="text-sm text-center text-vanilla-400">
+  <div class="pointer-events-none relative h-full rounded-md">
+    <div class="absolute inset-0 z-10 mx-auto grid place-content-center rounded-md">
+      <p class="text-center text-sm text-vanilla-400">
         <slot name="subtitle">{{ subtitle }}</slot>
       </p>
     </div>
@@ -9,16 +9,18 @@
       :data-sets="chartData"
       :labels="mockLabels"
       :colors="colors"
-      :bar-options="{ stacked: this.stacked }"
-      :type="this.chartType"
-      class="mx-auto no-filter:opacity-10 blur-chart opacity-10"
+      :bar-options="{ stacked }"
+      :type="chartType"
+      class="blur-chart mx-auto opacity-10 no-filter:opacity-10"
     />
   </div>
 </template>
 <script lang="ts">
-import { Vue, Prop, Component } from 'nuxt-property-decorator'
-import { Dataset } from '~/types/reportTypes'
 import { ZChart } from '@deepsource/zeal'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+
+import { Dataset } from '~/types/reportTypes'
+
 import { getColorShades } from '~/utils/ui'
 
 const BASE_COLOR = '#1035ad'
@@ -30,7 +32,7 @@ const BASE_COLOR = '#1035ad'
   components: { ZChart }
 })
 export default class EmptyChart extends Vue {
-  @Prop({ default: `Not enough data to show a trend. Please come back later.` })
+  @Prop({ default: 'Not enough data to show a trend. Please come back later.' })
   subtitle: string
 
   @Prop({ default: 1 })

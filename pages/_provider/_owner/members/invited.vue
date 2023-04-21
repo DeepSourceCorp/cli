@@ -20,7 +20,7 @@
     </template>
     <div v-else-if="$fetchState.pending" class="flex flex-col space-y-2">
       <div
-        v-for="loader in Array.from(Array(this.limit).keys())"
+        v-for="loader in Array.from(Array(limit).keys())"
         :key="loader"
         class="flex w-full space-x-2 animate-pulse"
       >

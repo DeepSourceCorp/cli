@@ -71,7 +71,7 @@
       <z-button
         icon="zap"
         class="w-full"
-        :label="LABEL_MAP[this.nextStep]"
+        :label="LABEL_MAP[nextStep]"
         :disabled="actionDisabled"
         @click="triggerNextStep"
       />
