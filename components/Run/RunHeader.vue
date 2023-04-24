@@ -1,5 +1,5 @@
 <template>
-  <div class="flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-26">
+  <div class="flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22">
     <div class="flex flex-col gap-y-4 p-3">
       <div class="flex items-start gap-x-2">
         <analyzer-logo v-bind="currentCheck.analyzer" size="large" />
@@ -14,7 +14,7 @@
           </span>
         </div>
 
-        <z-tag class="border border-slate-400 py-0.5 px-2 hidden md:inline-flex" spacing="">
+        <z-tag class="hidden border border-slate-400 py-0.5 px-2 md:inline-flex" spacing="">
           <div class="flex items-center gap-x-1">
             <z-icon
               :icon="getCheckStatusIcon(currentCheck.status)"
@@ -23,7 +23,7 @@
               :class="{ 'animate-spin': isCheckPending }"
             />
             <span
-              class="font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs"
+              class="text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200"
               >{{ tagLabel }}</span
             >
           </div>
@@ -31,10 +31,10 @@
       </div>
       <div class="flex gap-x-3">
         <div
-          class="flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-slate-400 rounded-3px pl-2 pr-3 h-7"
+          class="flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100"
         >
           <z-icon
-            :icon="isForDefaultBranch ? 'git-branch' : 'git-pull-request'"
+            :icon="isForDefaultBranch ? 'z-git-branch' : 'git-pull-request'"
             size="small"
             class="flex-shrink-0"
           />
@@ -51,17 +51,17 @@
         <z-menu v-if="runCount" width="2x-large">
           <template #trigger="{ toggle, isOpen }">
             <button
-              class="flex items-center gap-x-2 px-2 h-7 rounded-3px cursor-pointer border border-slate-400"
+              class="flex h-7 cursor-pointer items-center gap-x-2 rounded-3px border border-slate-400 px-2"
               :class="[isOpen ? 'bg-ink-100' : 'bg-ink-200 hover:bg-ink-100']"
               @click="toggle"
             >
-              <div class="flex items-center text-sm gap-x-2 text-vanilla-400">
+              <div class="flex items-center gap-x-2 text-sm text-vanilla-400">
                 <z-icon icon="refresh-cw" size="small" />
                 <span> {{ countText }} </span>
                 <z-icon
                   icon="chevron-down"
                   size="small"
-                  class="transition-all duration-300 transform"
+                  class="transform transition-all duration-300"
                   :class="(isOpen && 'rotate-180') || 'rotate-0'"
                 />
               </div>
@@ -70,7 +70,7 @@
           <template #body>
             <z-menu-section
               :divider="false"
-              class="overflow-y-auto border divide-y rounded-md border-slate-400 divide-ink-200 max-h-96 hide-scroll"
+              class="hide-scroll max-h-96 divide-y divide-ink-200 overflow-y-auto rounded-md border border-slate-400"
             >
               <z-menu-item
                 v-for="run in branchRuns"
@@ -80,14 +80,14 @@
                 class="bg-ink-300 p-4"
               >
                 <div class="flex flex-col gap-y-2.5">
-                  <div class="flex gap-x-1.5 items-center">
+                  <div class="flex items-center gap-x-1.5">
                     <z-icon
                       :icon="getStatusIcon(run.status)"
                       :color="getStatusIconColor(run.status)"
                       :class="{ 'motion-safe:animate-spin': run.status === 'PEND' }"
                       class="mt-px"
                     />
-                    <div class="text-sm leading-6 font-medium text-vanilla-100 truncate max-w-xs">
+                    <div class="max-w-xs truncate text-sm font-medium leading-6 text-vanilla-100">
                       {{ run.commitMessage || run.branchName }}
                     </div>
                   </div>
@@ -132,7 +132,7 @@
       </div>
     </div>
     <div v-if="!isCheckInProgress" class="hidden p-3 sm:flex">
-      <div class="flex items-center justify-center w-full gap-x-6">
+      <div class="flex w-full items-center justify-center gap-x-6">
         <!-- introduced issues -->
         <div class="flex flex-col items-center">
           <div

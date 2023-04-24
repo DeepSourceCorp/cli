@@ -2,11 +2,11 @@
   <div>
     <div v-if="commitId" class="flex items-center space-x-2">
       <z-icon size="small" icon="clock" />
-      <div class="space-x-1 overflow-hidden sm:flex sm:items-center overflow-ellipsis">
+      <div class="space-x-1 overflow-hidden overflow-ellipsis sm:flex sm:items-center">
         <span class="whitespace-nowrap">Last analyzed</span>
         <nuxt-link
           :to="$generateRoute(['run', runId, analyzer])"
-          class="inline-flex items-center gap-1 px-1 font-mono rounded-md cursor-pointer bg-ink-200"
+          class="inline-flex cursor-pointer items-center gap-1 rounded-md bg-ink-200 px-1 font-mono"
         >
           <z-icon icon="git-commit" size="x-small" />
           {{ commitId.slice(0, 7) }}
@@ -15,18 +15,18 @@
       </div>
     </div>
     <div v-if="defaultBranch" class="flex items-center space-x-2">
-      <z-icon size="small" icon="git-branch" class="flex-shrink-0" />
+      <z-icon size="small" icon="z-git-branch" class="flex-shrink-0" />
       <div>
         <span>Default analysis branch is</span>
         <z-menu direction="left" size="base" class="inline-block text-vanilla-100">
           <template #trigger="{ toggle }">
             <button
               type="button"
-              class="inline-block outline-none focus:outline-none"
+              class="outline-none focus:outline-none inline-block"
               @click="toggle"
             >
-              <span class="flex items-center gap-1 px-1 rounded-md bg-ink-200 text-vanilla-400">
-                <span class="font-mono truncate" :class="defaultBranch.length > 12 ? 'w-24' : ''">
+              <span class="flex items-center gap-1 rounded-md bg-ink-200 px-1 text-vanilla-400">
+                <span class="truncate font-mono" :class="defaultBranch.length > 12 ? 'w-24' : ''">
                   {{ defaultBranch }}
                 </span>
                 <z-icon icon="chevron-down" size="small" />
@@ -75,7 +75,7 @@
             <div class="mt-4 space-x-4 text-right text-vanilla-100">
               <z-button
                 v-if="updating"
-                class="flex items-center w-54"
+                class="w-54 flex items-center"
                 button-type="primary"
                 size="small"
                 :disabled="true"

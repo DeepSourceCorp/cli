@@ -25,8 +25,10 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
-      - uses: whywaita/actions-cache-s3@v2.1.10
+      - uses: aseem-deepsource/actions-cache@main
         id: yarn-cache
+        env:
+          NODE_OPTIONS: “--max_old_space_size=4096”
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}

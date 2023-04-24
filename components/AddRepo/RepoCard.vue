@@ -31,7 +31,7 @@
             v-if="internalStarredState"
             class="absolute right-1 -top-1.5 transform-gpu transition-all ease-in-out"
           >
-            <div class="h-1.5 w-9 bg-ink-200 rounded-t-md opacity-60"></div>
+            <div class="h-1.5 w-9 rounded-t-md bg-ink-200 opacity-60"></div>
           </div>
         </transition>
         <div class="absolute right-1 -top-1.5 w-8">
@@ -39,7 +39,7 @@
             <div
               v-if="internalStarredState"
               key="starred"
-              class="p-2 pt-3.5 h-10 bg-ink-200 rounded-tr-md shadow-md ribbon transform-gpu transition-all ease-in-out duration-150"
+              class="ribbon h-10 transform-gpu rounded-tr-md bg-ink-200 p-2 pt-3.5 shadow-md transition-all duration-150 ease-in-out"
               @click.prevent="toggleStar(false)"
             >
               <z-icon icon="z-star" color="juniper" />
@@ -47,7 +47,7 @@
             <div
               v-else
               key="not-starred"
-              class="p-2 pt-3.5 h-10 transform-gpu transition-all ease-in-out duration-150"
+              class="h-10 transform-gpu p-2 pt-3.5 transition-all duration-150 ease-in-out"
               @click.prevent="toggleStar(true)"
             >
               <z-icon icon="z-star" color="ink-200 text-ink-200" />
@@ -78,7 +78,7 @@
           v-tooltip="`Default branch name`"
           class="inline-flex items-center gap-x-2"
         >
-          <z-icon icon="git-branch" size="x-small" color="vanilla-400" />
+          <z-icon icon="z-git-branch" size="x-small" color="vanilla-400" />
           <span class="text-vanilla-400">{{ defaultBranchName }}</span>
         </div>
         <!-- Analyzer Type -->
@@ -99,7 +99,7 @@
           <span
             v-for="analyzer in supportedAnalyzersLogos"
             :key="analyzer.shortcode"
-            class="p-px border-2 rounded-full bg-ink-200 border-slate-400 group-hover:border-slate-400"
+            class="rounded-full border-2 border-slate-400 bg-ink-200 p-px group-hover:border-slate-400"
           >
             <analyzer-logo v-bind="analyzer" :hide-tooltip="true" size="small" />
           </span>
@@ -270,7 +270,7 @@ export default class RepoCard extends mixins(AnalyzerListMixin) {
 </script>
 <style>
 .ribbon:after {
-  @apply border-slate-400 content top-10 h-0 left-0 absolute w-0;
+  @apply absolute top-10 left-0 h-0 w-0 border-slate-400 content;
   border-left-width: 16px;
   border-right-width: 16px;
   border-bottom: 10px solid transparent;
