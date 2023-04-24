@@ -84,5 +84,8 @@
     "tsconfig-paths-webpack-plugin": "^4.0.0",
     "user-agent-data-types": "^0.2.0",
     "vue-jest": "^3.0.4"
+  },
+  "graphql": {
+    "schema": "./schema.graphql"
   }
 }
