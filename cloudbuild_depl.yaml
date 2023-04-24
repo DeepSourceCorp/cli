@@ -19,4 +19,4 @@ availableSecrets:
       env: 'STRIPE_PUBLISHABLE_KEY'
 
 options:
-  machineType: 'N1_HIGHCPU_8'
+  machineType: 'E2_HIGHCPU_8'
