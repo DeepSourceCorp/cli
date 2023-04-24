@@ -3,7 +3,7 @@ timeout: 30m0s
 steps:
   - name: 'gcr.io/kaniko-project/executor:v1.6.0-debug'
     args:
-      - --destination=us.gcr.io/deepsource-dev/bifrost:PR-$_PR_NUMBER
+      - --destination=us.gcr.io/deepsource-dev/bifrost:$_IMAGE_TAG
       - --dockerfile=Dockerfile
       - --build-arg=DISABLE_SENTRY=true
       - --build-arg=GOOGLE_ANALYTICS_ID=UA-XXXXXXXX-X
