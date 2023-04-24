@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center flex-auto justify-end space-x-2">
+  <div class="flex flex-auto items-center justify-end space-x-2">
     <!-- Autofix -->
     <z-button
       v-if="isAutofixEnabled && issue.autofixAvailable && hasRepoReadAccess"
@@ -61,7 +61,8 @@
           />
         </div>
       </template>
-      <template #body class="text-vanilla-200">
+
+      <template #body>
         <z-menu-item
           v-for="filter in ignoreIssues"
           :key="filter.name"

@@ -3,7 +3,7 @@
     :title="showSuccess ? 'Token generated successfully!' : 'Generate a new token'"
     @onClose="$emit('close')"
   >
-    <section v-if="showSuccess" class="p-5 space-y-4 min-h-40">
+    <section v-if="showSuccess" class="min-h-40 space-y-4 p-5">
       <!-- <h3 class="text-lg font-semibold text-center">Token generated successfully</h3> -->
       <p class="text-sm text-vanilla-400">
         <template v-if="generatedToken && generatedToken.expirationStatus === 'DOES_NOT_EXPIRE'">
@@ -16,7 +16,7 @@
           >. Remember to rotate this token manually to prevent any service disruption.
         </template>
       </p>
-      <div class="flex items-center justify-between py-1 pl-4 pr-1 text-sm rounded-md bg-ink-400">
+      <div class="flex items-center justify-between rounded-md bg-ink-400 py-1 pl-4 pr-1 text-sm">
         <div>{{ generatedToken.token }}</div>
         <copy-button :value="generatedToken.token" button-type="secondary" class="w-24" />
       </div>
@@ -24,7 +24,7 @@
         Make sure to copy your Personal Access Token now. You won’t be able to see it again!
       </z-alert>
     </section>
-    <fieldset v-else class="p-4 space-y-4">
+    <fieldset v-else class="space-y-4 p-4">
       <p class="text-sm text-vanilla-400">
         Tokens you have generated can be used to access the DeepSource API. Services using your
         tokens have the same privileges as you.
@@ -60,7 +60,7 @@
       </label>
     </fieldset>
     <template v-if="!showSuccess">
-      <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
+      <div class="space-x-4 border-slate-400 p-4 text-right text-vanilla-100">
         <z-button
           :is-loading="savingToken"
           :disabled="disableAction"

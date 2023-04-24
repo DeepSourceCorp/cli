@@ -6,7 +6,7 @@
     class="flex flex-col space-y-2"
   >
     <slot name="collapsed" :toggle-items="toggleItems" :is-expanded="isExpanded"></slot>
-    <template v-if="isExpanded && !loading" class="relative">
+    <template v-if="isExpanded && !loading">
       <slot name="expanded"></slot>
     </template>
   </div>

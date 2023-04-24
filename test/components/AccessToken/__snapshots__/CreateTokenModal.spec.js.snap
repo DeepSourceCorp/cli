@@ -2,7 +2,7 @@
 
 exports[`[[ CreateTokenModal ]] Renders CreateTokenModal 1`] = `
 "<zmodal-stub title=\\"Generate a new token\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
-  <fieldset class=\\"p-4 space-y-4\\">
+  <fieldset class=\\"space-y-4 p-4\\">
     <p class=\\"text-sm text-vanilla-400\\">
       Tokens you have generated can be used to access the DeepSource API. Services using your
       tokens have the same privileges as you.
@@ -24,7 +24,7 @@ exports[`[[ CreateTokenModal ]] Renders CreateTokenModal 1`] = `
       <p class=\\"ml-px text-xs text-honey\\">Expires on Feb 21, 2055</p>
     </label>
   </fieldset>
-  <div class=\\"p-4 space-x-4 text-right text-vanilla-100 border-slate-400\\">
+  <div class=\\"space-x-4 border-slate-400 p-4 text-right text-vanilla-100\\">
     <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Generate\\" loadinglabel=\\"Generating\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"check\\" class=\\"modal-primary-action\\"></zbutton-stub>
   </div>
 </zmodal-stub>"

@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-row-reverse w-full gap-2 xl:w-4/6 xl:flex-row">
+  <div class="flex w-full flex-row-reverse gap-2 xl:w-4/6 xl:flex-row">
     <!-- Sort menu mobile -->
-    <z-menu direction="left" width="x-small" class="xl:hidden text-vanilla-100">
+    <z-menu direction="left" width="x-small" class="text-vanilla-100 xl:hidden">
       <template #trigger="{ toggle }">
         <z-button
           v-if="!sortApplied"
@@ -28,7 +28,8 @@
           </div>
         </z-button>
       </template>
-      <template #body class="text-vanilla-200">
+
+      <template #body>
         <z-menu-item
           v-for="filter in sortFilters"
           :key="filter.name"
@@ -40,7 +41,7 @@
       </template>
     </z-menu>
     <!-- Sort menu desktop -->
-    <z-menu direction="right" width="x-small" class="hidden xl:inline-block text-vanilla-100">
+    <z-menu direction="right" width="x-small" class="hidden text-vanilla-100 xl:inline-block">
       <template #trigger="{ toggle }">
         <z-button
           v-if="!sortApplied"
@@ -67,7 +68,8 @@
           </div>
         </z-button>
       </template>
-      <template #body class="text-vanilla-200">
+
+      <template #body>
         <z-menu-item
           v-for="filter in sortFilters"
           :key="filter.name"

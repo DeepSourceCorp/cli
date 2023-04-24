@@ -1,7 +1,7 @@
 <template>
   <portal to="modal">
     <z-dialog-generic v-if="showModal" @onClose="closeModal">
-      <template #default="{ close }" @click.stop>
+      <template #default="{ close }">
         <div @click.stop>
           <z-tabs :default-active="currentTab" class="w-full max-w-xl -mb-px sm:w-120">
             <div class="flex justify-between px-4 border-b border-slate-400">

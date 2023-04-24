@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":false,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
   <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
@@ -14,7 +14,7 @@ exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":false,"issueCreateIntegrations":["jira"],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
   <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
@@ -27,7 +27,7 @@ exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":false,"issueCreateIntegrations":[],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
   <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
@@ -40,7 +40,7 @@ exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":false,"issueCreateIntegrations":null,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
   <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
@@ -53,7 +53,7 @@ exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":true,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
     <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>
@@ -68,7 +68,7 @@ exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":true,"issueCreateIntegrations":["jira"],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
     <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>
@@ -83,7 +83,7 @@ exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":true,"issueCreateIntegrations":[],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
     <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>
@@ -98,7 +98,7 @@ exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":true,"issueCreateIntegrations":null,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
     <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>
@@ -113,7 +113,7 @@ exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":false,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
   <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
@@ -126,7 +126,7 @@ exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":false,"issueCreateIntegrations":["jira"],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
   <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
@@ -139,7 +139,7 @@ exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":false,"issueCreateIntegrations":[],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
   <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
@@ -152,7 +152,7 @@ exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":false,"issueCreateIntegrations":null,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
   <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
@@ -165,7 +165,7 @@ exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":true,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
     <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>
@@ -180,7 +180,7 @@ exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":true,"issueCreateIntegrations":["jira"],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
     <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>
@@ -195,7 +195,7 @@ exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":true,"issueCreateIntegrations":[],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
     <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>
@@ -210,7 +210,7 @@ exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":true,"issueCreateIntegrations":null,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
-"<div class=\\"flex items-center flex-auto justify-end space-x-2\\">
+"<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
     <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>

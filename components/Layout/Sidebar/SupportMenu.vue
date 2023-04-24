@@ -5,7 +5,8 @@
         Help and support
       </sidebar-item>
     </template>
-    <template #body class="z-10">
+
+    <template #body>
       <z-menu-section :divider="false" title="Help and support">
         <z-menu-item
           icon="book-open"

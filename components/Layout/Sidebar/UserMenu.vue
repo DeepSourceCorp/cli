@@ -30,7 +30,8 @@
         </span>
       </button>
     </template>
-    <template v-if="viewer" #body class="z-10">
+
+    <template v-if="viewer" #body>
       <z-menu-section title="Logged In As">
         <z-menu-item>{{ viewer.email }}</z-menu-item>
       </z-menu-section>

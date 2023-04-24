@@ -4,13 +4,14 @@
       <template #trigger="{ toggle }">
         <button
           type="button"
-          class="flex items-center justify-center h-8 py-1 space-x-2 text-sm rounded-sm outline-none hover:bg-ink-300 min-w-8 focus:outline-none"
+          class="outline-none focus:outline-none flex h-8 min-w-8 items-center justify-center space-x-2 rounded-sm py-1 text-sm hover:bg-ink-300"
           @click="toggle"
         >
-          <z-icon icon="plus-circle" size="small" class="min-w-4 min-h-4" />
+          <z-icon icon="plus-circle" size="small" class="min-h-4 min-w-4" />
         </button>
       </template>
-      <template #body class="z-10">
+
+      <template #body>
         <z-menu-section :divider="false">
           <nuxt-link
             v-for="repo in repoWithPendingAdhocRuns"
@@ -19,11 +20,11 @@
             class="w-full"
           >
             <z-menu-item>
-              <div class="flex space-x-2 leading-none items-center">
+              <div class="flex items-center space-x-2 leading-none">
                 <z-icon
                   :icon="repo.isPrivate ? 'z-lock' : 'globe'"
                   size="small"
-                  class="min-w-4 min-h-4"
+                  class="min-h-4 min-w-4"
                 />
                 <div class="text-sm">{{ repo.name }}</div>
               </div>
@@ -32,8 +33,9 @@
         </z-menu-section>
       </template>
     </z-menu>
+
     <template v-else>
-      <div class="flex items-center py-1 px-2 space-x-2 text-sm text-vanilla-400">
+      <div class="flex items-center space-x-2 py-1 px-2 text-sm text-vanilla-400">
         <z-icon icon="plus-circle" />
         <span>Commit pending</span>
       </div>

@@ -7,13 +7,14 @@
       <template #trigger="{ toggle }">
         <button
           type="button"
-          class="flex items-center justify-center h-8 py-1 space-x-2 text-sm rounded-sm outline-none hover:bg-ink-300 min-w-8 focus:outline-none"
+          class="outline-none focus:outline-none flex h-8 min-w-8 items-center justify-center space-x-2 rounded-sm py-1 text-sm hover:bg-ink-300"
           @click="toggle"
         >
-          <z-icon icon="repositories" size="small" class="min-w-4 min-h-4" />
+          <z-icon icon="repositories" size="small" class="min-h-4 min-w-4" />
         </button>
       </template>
-      <template #body="{ close }" class="z-10">
+
+      <template #body="{ close }">
         <z-menu-section :divider="false">
           <z-menu-item
             v-for="repo in repoList"
@@ -28,7 +29,7 @@
                 :icon="repo.icon"
                 size="small"
                 :color="repo.isActive ? 'juniper' : ''"
-                class="min-w-4 min-h-4"
+                class="min-h-4 min-w-4"
               />
               <div class="text-sm">{{ repo.name }}</div>
             </div>
@@ -36,10 +37,11 @@
         </z-menu-section>
       </template>
     </z-menu>
+
     <template v-else>
       <button
         type="button"
-        class="flex items-center justify-between w-full px-2 py-1 text-sm outline-none focus:outline-none"
+        class="outline-none focus:outline-none flex w-full items-center justify-between px-2 py-1 text-sm"
         :class="[
           isActive && !(repoWithPendingAdhocRuns && repoWithPendingAdhocRuns.length)
             ? 'text-vanilla-100'

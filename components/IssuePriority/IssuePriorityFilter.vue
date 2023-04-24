@@ -6,13 +6,14 @@
           size="small"
           label="Filter"
           icon="z-filter"
-          class="outline-none text-vanilla-100 focus:outline-none"
+          class="outline-none focus:outline-none text-vanilla-100"
           :class="buttonBackground"
           @click="toggle"
         />
       </template>
-      <template #body class="text-vanilla-200">
-        <div class="max-h-56 space-y-px overflow-y-auto hide-scroll">
+
+      <template #body>
+        <div class="hide-scroll max-h-56 space-y-px overflow-y-auto">
           <z-menu-item
             v-for="filter in languageFilters"
             :key="filter.shortcode"
@@ -28,14 +29,14 @@
     <z-button
       v-else
       size="small"
-      class="outline-none text-vanilla-100 focus:outline-none"
+      class="outline-none focus:outline-none text-vanilla-100"
       :class="buttonBackground"
       @click="modelValue = ''"
     >
       <div class="flex items-center gap-x-2">
-        <span class="items-center xl:flex gap-x-1">
+        <span class="items-center gap-x-1 xl:flex">
           <template v-if="languageFilters[modelValue]">
-            <analyzer-logo v-bind="languageFilters[modelValue]" class="flex-shrink-0 w-5" />
+            <analyzer-logo v-bind="languageFilters[modelValue]" class="w-5 flex-shrink-0" />
             <span class="hidden md:block">
               {{ languageFilters[modelValue].name }}
             </span>

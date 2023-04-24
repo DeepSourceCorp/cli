@@ -6,12 +6,13 @@
           size="small"
           label="Sort"
           icon="amount-down"
-          class="outline-none text-vanilla-100 focus:outline-none"
+          class="outline-none focus:outline-none text-vanilla-100"
           :class="buttonBackground"
           @click="toggle"
         />
       </template>
-      <template #body class="text-vanilla-200">
+
+      <template #body>
         <z-menu-item
           v-for="filter in sortFilters"
           :key="filter.name"
@@ -26,7 +27,7 @@
     <z-button
       v-else
       size="small"
-      class="outline-none text-vanilla-100 focus:outline-none"
+      class="outline-none focus:outline-none text-vanilla-100"
       :class="buttonBackground"
       @click="modelValue = ''"
     >
