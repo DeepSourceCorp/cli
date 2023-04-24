@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="isMissingAggregate">
+    <template v-if="!$fetchState.pending && isMissingAggregate">
       <lazy-empty-trend
         :namespaces-trend="mockAggregateData"
         :metric-meta="trendMetricData"
@@ -10,7 +10,7 @@
     </template>
     <template v-if="metric && metric.namespacesTrends.length">
       <trend-section
-        v-for="namespacesTrend in metric.namespacesTrends"
+        v-for="namespacesTrend in orderedMetrics"
         :key="namespacesTrend.key"
         :namespaces-trend="namespacesTrend"
         :metric-meta="trendMetricData"
@@ -34,14 +34,14 @@
       </portal>
     </template>
     <template v-else-if="$fetchState.pending">
-      <div class="bg-ink-300 h-23 animate-pulse"></div>
-      <div v-for="i in 2" :key="i" class="p-6 space-y-6 border-b border-slate-400">
-        <div class="h-8 w-32 bg-ink-300 animate-pulse"></div>
-        <div class="rounded-md space-y-4">
+      <div class="h-23 animate-pulse bg-ink-300"></div>
+      <div v-for="i in 2" :key="i" class="space-y-6 border-b border-slate-400 p-6">
+        <div class="h-8 w-32 animate-pulse bg-ink-300"></div>
+        <div class="space-y-4 rounded-md">
           <div class="flex gap-x-23">
             <div v-for="j in 2" :key="`s${j}`" class="h-13 w-32 animate-pulse bg-ink-300"></div>
           </div>
-          <div class="h-72 bg-ink-300 animate-pulse"></div>
+          <div class="h-72 animate-pulse bg-ink-300"></div>
         </div>
       </div>
     </template>
@@ -209,6 +209,21 @@ export default class MetricPage extends Vue {
     await this.fetchMetric(true)
   }
 
+  /**
+   * ? Sort metrics based on key, while ignoring the case they are in
+   */
+  get orderedMetrics() {
+    return (
+      this.metric?.namespacesTrends?.sort(
+        (prevTrend, nextTrend) =>
+          prevTrend?.key?.localeCompare(nextTrend?.key ?? '', 'en', {
+            sensitivity: 'base',
+            ignorePunctuation: true
+          }) ?? 0
+      ) ?? []
+    )
+  }
+
   get metric(): Maybe<Metric> | undefined {
     const metric = this.repository?.metricsCaptured?.find(
       (metric) => metric?.shortcode === this.$route.params.metric
@@ -216,17 +231,35 @@ export default class MetricPage extends Vue {
     return metric
   }
 
-  get trendMetricData(): {
-    shortcode?: Metric['shortcode']
-    name?: Metric['name']
-    description?: Metric['description']
-    supportsAggregateThreshold?: Metric['supportsAggregateThreshold']
-    unit?: Metric['unit']
-  } {
+  get trendMetricData():
+    | Pick<
+        Metric,
+        | 'shortcode'
+        | 'name'
+        | 'description'
+        | 'supportsAggregateThreshold'
+        | 'unit'
+        | 'newCodeMetricShortcode'
+      >
+    | {} {
     if (this.metric) {
-      const { shortcode, name, description, supportsAggregateThreshold, unit } = this
-        .metric as Metric
-      return { shortcode, name, description, supportsAggregateThreshold, unit }
+      const {
+        shortcode,
+        name,
+        description,
+        supportsAggregateThreshold,
+        unit,
+        newCodeMetricShortcode
+      } = this.metric as Metric
+
+      return {
+        shortcode,
+        name,
+        description,
+        supportsAggregateThreshold,
+        unit,
+        newCodeMetricShortcode
+      }
     }
     return {}
   }
@@ -266,14 +299,20 @@ export default class MetricPage extends Vue {
    *
    * @returns {void}
    */
-  openUpdateThresholdModal(namespacesTrend: MetricNamespaceTrend): void {
+  openUpdateThresholdModal(
+    shortcode: string,
+    threshold: MetricNamespaceTrend['threshold'] | MetricNamespaceTrend['newCodeThreshold'],
+    key: MetricNamespaceTrend['key'],
+    thresholdName: string
+  ): void {
     this.editModalProps = {
-      thresholdValue: namespacesTrend.threshold,
+      thresholdValue: threshold,
       metricName: this.metric?.name,
-      analyzerKey: namespacesTrend.key,
-      metricShortcode: this.$route.params.metric,
+      analyzerKey: key,
+      metricShortcode: shortcode,
       repositoryId: this.repository.id,
-      unit: this.metric?.unit
+      unit: this.metric?.unit,
+      thresholdName
     }
     this.showUpdateThresholdModal = true
   }
@@ -290,12 +329,13 @@ export default class MetricPage extends Vue {
   async editThreshold(
     newThresholdValue: number | null,
     analyzerKey: string,
+    metricShortcode: string,
     close?: () => void
   ): Promise<void> {
     if (newThresholdValue !== undefined) {
       try {
         const response = (await this.setMetricThreshold({
-          metricShortcode: this.$route.params.metric,
+          metricShortcode,
           repositoryId: this.repository.id,
           thresholdValue: newThresholdValue,
           key: analyzerKey
@@ -322,8 +362,8 @@ export default class MetricPage extends Vue {
    *
    * @returns {Promise<void>}
    */
-  async deleteThreshold(namespacesTrend: MetricNamespaceTrend): Promise<void> {
-    await this.editThreshold(null, namespacesTrend.key as string)
+  async deleteThreshold(shortcode: string, key: string): Promise<void> {
+    await this.editThreshold(null, key, shortcode)
   }
 
   /**

@@ -1973,15 +1973,6 @@ declare module '*/metric.gql' {
 }
     
 
-declare module '*/metricThresholdUpdateData.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const metricThresholdUpdateData: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
 declare module '*/metrics.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

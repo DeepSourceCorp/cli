@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360},"type":"metric"} 1`] = `
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":""},"type":"metric"} 1`] = `
 "<div class=\\"flex flex-col gap-y-2.5\\">
   <div class=\\"flex flex-grow items-end\\">
-    <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
       Around the world
     </p>
   </div>
-  <div class=\\"flex items-center gap-x-2 h-6 flex-shrink-0\\"><span class=\\"text-base font-semibold leading-8\\">
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
       360
     </span>
     <!---->
@@ -15,14 +15,464 @@ exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the 
 </div>"
 `;
 
-exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360},"type":"threshold"} 1`] = `
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":""},"type":"metric"} 2`] = `
 "<div class=\\"flex flex-col gap-y-2.5\\">
   <div class=\\"flex flex-grow items-end\\">
-    <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
-      Threshold
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
     </p>
   </div>
-  <div class=\\"flex items-center gap-x-2 h-6 flex-shrink-0\\"><span class=\\"text-base font-semibold leading-8\\">
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":""},"type":"metric"} 3`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":""},"type":"metric"} 4`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":""},"type":"threshold"} 1`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":""},"type":"threshold"} 2`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":""},"type":"threshold"} 3`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":""},"type":"threshold"} 4`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":"%"},"type":"metric"} 1`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360%
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":"%"},"type":"metric"} 2`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360%
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":"%"},"type":"metric"} 3`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360%
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":"%"},"type":"metric"} 4`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360%
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":"%"},"type":"threshold"} 1`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360%
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":"%"},"type":"threshold"} 2`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360%
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":"%"},"type":"threshold"} 3`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360%
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":"%"},"type":"threshold"} 4`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360%
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":null},"type":"metric"} 1`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":null},"type":"metric"} 2`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":null},"type":"metric"} 3`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":null},"type":"metric"} 4`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":null},"type":"threshold"} 1`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":null},"type":"threshold"} 2`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":null},"type":"threshold"} 3`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk","unit":null},"type":"threshold"} 4`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk"},"type":"metric"} 1`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk"},"type":"metric"} 2`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk"},"type":"metric"} 3`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk"},"type":"metric"} 4`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk"},"type":"threshold"} 1`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk"},"type":"threshold"} 2`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk"},"type":"threshold"} 3`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360,"shortcode":"DftPnk"},"type":"threshold"} 4`] = `
+"<div class=\\"flex flex-col gap-y-2.5\\">
+  <div class=\\"flex flex-grow items-end\\">
+    <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
+      Around the world
+    </p>
+  </div>
+  <div class=\\"flex h-6 flex-shrink-0 items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
       360
     </span>
     <!---->

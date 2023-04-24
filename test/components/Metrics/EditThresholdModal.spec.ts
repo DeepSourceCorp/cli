@@ -5,20 +5,22 @@ import { VueConstructor } from 'vue'
 import { ZInput, ZButton, ZModal } from '@deepsource/zeal'
 import { shallowMount } from '@vue/test-utils'
 import { cartesian, generateStringProps } from '~/test/utils'
+import { MetricType } from '~/types/metric'
 
 const injectDirective = (vue: VueConstructor) => vue.directive('tooltip', VTooltip)
 
 describe('[[EditThresholdModal]]', () => {
-  test('renders EditThresholdModal with all prop options', async () => {
-    const baseProps = {
-      thresholdValue: 20,
-      metricName: 'Zane Alexander',
-      analyzerKey: 'Your Convictions Are Your Own',
-      metricShortcode: 'ZALX',
-      repositoryId: '0987',
-      unit: '%'
-    }
+  const baseProps = {
+    thresholdValue: 20,
+    metricName: 'Zane Alexander',
+    analyzerKey: 'Your Convictions Are Your Own',
+    metricShortcode: 'ZALX',
+    repositoryId: '0987',
+    unit: '%',
+    thresholdName: 'NZLX'
+  }
 
+  test('renders EditThresholdModal with all prop options', async () => {
     //? `await` is needed since we wait for the `<transition>` to render, despite what the types say.
     //! Do not remove `await`
     const { html } = await render(
@@ -36,17 +38,28 @@ describe('[[EditThresholdModal]]', () => {
     expect(html()).toMatchSnapshot(JSON.stringify(baseProps))
   })
 
+  test('renders EditThresholdModal with aggregate metirc', async () => {
+    const props = { ...baseProps, analyzerKey: MetricType.aggregate }
+
+    //? `await` is needed since we wait for the `<transition>` to render, despite what the types say.
+    //! Do not remove `await`
+    const { html } = await render(
+      EditThresholdModal,
+      {
+        props,
+        stubs: {
+          AnalyzerLogo: true
+        },
+        components: { ZInput, ZButton, ZModal }
+      },
+      injectDirective
+    )
+
+    expect(html()).toMatchSnapshot(JSON.stringify(props))
+  })
+
   describe('validateThreshold', () => {
     test('valid % value', async () => {
-      const baseProps = {
-        thresholdValue: 20,
-        metricName: 'Zane Alexander',
-        analyzerKey: 'Your Convictions Are Your Own',
-        metricShortcode: 'ZALX',
-        repositoryId: '0987',
-        unit: '%'
-      }
-
       const { vm } = await shallowMount(EditThresholdModal, {
         propsData: { ...baseProps },
         stubs: {
@@ -90,15 +103,6 @@ describe('[[EditThresholdModal]]', () => {
     })
 
     test('invalid % value', async () => {
-      const baseProps = {
-        thresholdValue: 20,
-        metricName: 'Zane Alexander',
-        analyzerKey: 'Your Convictions Are Your Own',
-        metricShortcode: 'ZALX',
-        repositoryId: '0987',
-        unit: '%'
-      }
-
       const { vm } = await shallowMount(EditThresholdModal, {
         propsData: { ...baseProps },
         stubs: {
@@ -146,15 +150,6 @@ describe('[[EditThresholdModal]]', () => {
   })
 
   test('setThreshold', async () => {
-    const baseProps = {
-      thresholdValue: 20,
-      metricName: 'Zane Alexander',
-      analyzerKey: 'Your Convictions Are Your Own',
-      metricShortcode: 'ZALX',
-      repositoryId: '0987',
-      unit: '%'
-    }
-
     const { vm } = await shallowMount(EditThresholdModal, {
       propsData: { ...baseProps },
       stubs: {
@@ -172,15 +167,6 @@ describe('[[EditThresholdModal]]', () => {
   })
 
   test('resetErrorState', async () => {
-    const baseProps = {
-      thresholdValue: 20,
-      metricName: 'Zane Alexander',
-      analyzerKey: 'Your Convictions Are Your Own',
-      metricShortcode: 'ZALX',
-      repositoryId: '0987',
-      unit: '%'
-    }
-
     const { vm } = await shallowMount(EditThresholdModal, {
       propsData: { ...baseProps },
       stubs: {
@@ -200,15 +186,6 @@ describe('[[EditThresholdModal]]', () => {
   })
 
   test('fullReset', async () => {
-    const baseProps = {
-      thresholdValue: 20,
-      metricName: 'Zane Alexander',
-      analyzerKey: 'Your Convictions Are Your Own',
-      metricShortcode: 'ZALX',
-      repositoryId: '0987',
-      unit: '%'
-    }
-
     const { vm } = await shallowMount(EditThresholdModal, {
       propsData: { ...baseProps },
       stubs: {
@@ -233,15 +210,6 @@ describe('[[EditThresholdModal]]', () => {
 
   describe('updateThreshold', () => {
     test('emits data correctly on no error', async () => {
-      const baseProps = {
-        thresholdValue: 20,
-        metricName: 'Zane Alexander',
-        analyzerKey: 'Your Convictions Are Your Own',
-        metricShortcode: 'ZALX',
-        repositoryId: '0987',
-        unit: '%'
-      }
-
       const wrapper = await shallowMount(EditThresholdModal, {
         propsData: { ...baseProps },
         stubs: {
@@ -263,20 +231,12 @@ describe('[[EditThresholdModal]]', () => {
       expect(wrapper.emitted().editThreshold?.[0]).toEqual([
         30,
         'Your Convictions Are Your Own',
+        'ZALX',
         undefined
       ])
     })
 
     test('invokes toast when it has error', async () => {
-      const baseProps = {
-        thresholdValue: 20,
-        metricName: 'Zane Alexander',
-        analyzerKey: 'Your Convictions Are Your Own',
-        metricShortcode: 'ZALX',
-        repositoryId: '0987',
-        unit: '%'
-      }
-
       const localThis = {
         $toast: {
           danger: jest.fn()

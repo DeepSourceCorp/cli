@@ -3,6 +3,7 @@ const plugin = require('tailwindcss/plugin')
 module.exports = {
   presets: [require('@deepsource/zeal/tailwind.config')],
   plugins: [require('@tailwindcss/line-clamp')],
+  darkMode: 'media',
   purge: {
     content: [
       './node_modules/@deepsource/**/*.vue',

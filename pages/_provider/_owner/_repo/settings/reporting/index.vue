@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col max-w-2xl p-4 gap-y-2">
+  <div class="flex max-w-2xl flex-col gap-y-2 p-4">
     <!-- title -->
     <h2 class="text-lg font-medium" :class="{ 'mb-4': !providerIsGitLab }">Reporting</h2>
 
@@ -18,7 +18,7 @@
 
     <!-- Reporting Configuration -->
     <div class="space-y-4">
-      <div class="flex-grow max-w-2xl">
+      <div class="max-w-2xl flex-grow">
         <div class="mb-4">
           <h6 class="mb-1 text-sm text-vanilla-100">Issue reporting</h6>
           <p class="text-xs leading-5 text-vanilla-400">
@@ -43,7 +43,7 @@
               <div
                 v-for="index in 8"
                 :key="index"
-                class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-slate-400"
+                class="animate-pulse border-b border-slate-400 bg-ink-300 p-5 opacity-50"
               ></div>
             </template>
             <template v-else>
@@ -54,7 +54,7 @@
               >
                 <z-table-cell
                   text-align="left"
-                  class="overflow-hidden text-sm font-normal overflow-ellipsis"
+                  class="overflow-hidden overflow-ellipsis text-sm font-normal"
                   >{{ type.name }}</z-table-cell
                 >
                 <z-table-cell
@@ -98,7 +98,7 @@
                     :read-only="type.isIgnoredToDisplay"
                     spacing="4"
                     font-size="base"
-                    class="h-full m-0"
+                    class="m-0 h-full"
                     @change="
                       (newValue) =>
                         updateRepoSetting(InputTypes.ISSUE_TYPE, {
@@ -133,7 +133,7 @@
               <div
                 v-for="index in 3"
                 :key="index"
-                class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-slate-400"
+                class="animate-pulse border-b border-slate-400 bg-ink-300 p-5 opacity-50"
               ></div>
             </template>
             <template v-else>
@@ -188,7 +188,7 @@
                     :read-only="priority.isIgnoredToDisplay"
                     spacing="4"
                     font-size="base"
-                    class="h-full m-0"
+                    class="m-0 h-full"
                     @change="
                       (newValue) =>
                         updateRepoSetting(InputTypes.ISSUE_PRIORITY, {
@@ -205,7 +205,7 @@
         </z-table>
       </div>
 
-      <div class="flex-grow max-w-2xl">
+      <div class="max-w-2xl flex-grow">
         <div class="mb-4">
           <h6 class="mb-1 text-sm text-vanilla-100">Metrics reporting</h6>
           <p class="text-xs leading-5 text-vanilla-400">
@@ -230,7 +230,7 @@
               <div
                 v-for="index in 5"
                 :key="index"
-                class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-slate-400"
+                class="animate-pulse border-b border-slate-400 bg-ink-300 p-5 opacity-50"
               ></div>
             </template>
             <template v-else>
@@ -241,7 +241,7 @@
               >
                 <z-table-cell
                   text-align="left"
-                  class="overflow-hidden text-sm font-normal overflow-ellipsis"
+                  class="overflow-hidden overflow-ellipsis text-sm font-normal"
                   >{{ metricSetting.name }}</z-table-cell
                 >
                 <z-table-cell
@@ -289,7 +289,7 @@
                     :read-only="metricSetting.isIgnoredToDisplay"
                     spacing="4"
                     font-size="base"
-                    class="h-full m-0"
+                    class="m-0 h-full"
                     @change="
                       (newValue) =>
                         updateRepoSetting(InputTypes.METRICS, {
@@ -321,7 +321,7 @@
                   :type="isDSNHidden ? 'password' : 'text'"
                   class="mt-2 border-ink-200"
                 />
-                <div class="absolute flex top-1 right-1 gap-x-1 bg-ink-400">
+                <div class="absolute top-1 right-1 flex gap-x-1 bg-ink-400">
                   <z-button
                     v-tooltip="isDSNHidden ? 'Reveal DSN' : 'Hide DSN'"
                     :icon="isDSNHidden ? 'eye' : 'eye-off'"
@@ -382,237 +382,8 @@
           Test coverage has not been set up for this repository yet.
         </p>
       </notice>
-      <div class="flex justify-between gap-x-4">
-        <div>
-          <h6 class="mb-1 text-sm text-vanilla-100">New Line Coverage thresholds</h6>
-          <p class="text-xs leading-5 text-vanilla-400">
-            Configure thresholds for the New Line Coverage metric reported on commits.
-          </p>
-        </div>
-        <z-button
-          v-if="repository.hasTestCoverage && canModifyThreshold"
-          v-tooltip="{
-            content:
-              !analyzersWithoutThreshold.length && !$fetchState.pending
-                ? 'Thresholds for all langugages have been set'
-                : '',
-            delay: { show: 0, hide: 100 }
-          }"
-          button-type="ghost"
-          size="small"
-          color="vanilla-400"
-          icon="plus"
-          label="Add new threshold"
-          loading-label="Fetching data"
-          :disabled="!analyzersWithoutThreshold.length"
-          :is-loading="$fetchState.pending"
-          class="float-right border border-dashed border-slate-400"
-          @click="showAddThresholdModal = true"
-        />
-      </div>
 
-      <div v-if="$fetchState.pending || repository.hasTestCoverage" class="space-y-2">
-        <z-table>
-          <template #head>
-            <z-table-row>
-              <z-table-cell
-                v-for="head in nlcvHeaderData"
-                :key="head.title"
-                class="text-sm font-bold"
-                :class="head.align"
-                >{{ head.title }}</z-table-cell
-              >
-            </z-table-row>
-          </template>
-          <template #body>
-            <template v-if="$fetchState.pending">
-              <div
-                v-for="index in 3"
-                :key="index"
-                class="border-b opacity-50 h-11 bg-ink-300 animate-pulse border-slate-400"
-              ></div>
-            </template>
-            <template
-              v-else-if="nonAggregateMetricNamespaces && nonAggregateMetricNamespaces.length"
-            >
-              <z-table-row
-                v-for="namespace in nonAggregateMetricNamespaces"
-                :key="namespace.key"
-                class="text-vanilla-100 hover:bg-ink-300"
-              >
-                <z-table-cell text-align="left" class="text-sm font-normal">{{
-                  namespace.key
-                }}</z-table-cell>
-                <z-table-cell text-align="right" class="text-sm font-normal">
-                  <div
-                    v-if="namespace.threshold || namespace.threshold === 0"
-                    class="flex items-center justify-end gap-x-4"
-                  >
-                    <span
-                      >{{ namespace.threshold
-                      }}{{ nlcvMetricData.unit ? nlcvMetricData.unit : '' }}</span
-                    >
-                    <z-menu v-if="canModifyThreshold" direction="left">
-                      <template #trigger="{ toggle }">
-                        <z-button
-                          button-type="ghost"
-                          icon="more-vertical"
-                          icon-color="vanilla-400"
-                          size="x-small"
-                          @click="toggle"
-                        />
-                      </template>
-                      <template #body>
-                        <z-menu-section :divider="false" class="text-left">
-                          <z-menu-item
-                            class="text-sm"
-                            icon="edit-2"
-                            @click="toggleEditThreshold(namespace)"
-                          >
-                            Update Threshold
-                          </z-menu-item>
-                          <z-menu-item
-                            class="text-sm text-cherry"
-                            icon="trash-2"
-                            @click="deleteThreshold(namespace)"
-                          >
-                            Delete Threshold
-                          </z-menu-item>
-                        </z-menu-section>
-                      </template>
-                    </z-menu>
-                  </div>
-                </z-table-cell>
-              </z-table-row>
-            </template>
-            <lazy-empty-state
-              v-else-if="repository.hasTestCoverage"
-              title="No active analyzer threshold"
-            >
-              <template #action>
-                <z-button
-                  v-if="canModifyThreshold"
-                  icon="plus"
-                  size="small"
-                  label="Add new threshold"
-                  @click="showAddThresholdModal = true"
-                />
-              </template>
-            </lazy-empty-state>
-          </template>
-        </z-table>
-        <z-table>
-          <template #body>
-            <template v-if="$fetchState.pending">
-              <div class="border-b opacity-50 h-11 bg-ink-300 animate-pulse border-slate-400"></div>
-            </template>
-            <z-table-row v-else class="text-vanilla-100 hover:bg-ink-300">
-              <z-table-cell text-align="left" class="space-x-1 text-sm font-normal capitalize h-11">
-                <span>{{ aggregateMetricNamespace.key }}</span>
-                <tooltip
-                  :delay="{ show: 300, hide: 1500 }"
-                  :triggers="['hover', 'click']"
-                  placement="top"
-                  offset="5"
-                  popper-class="rich-tooltip w-44"
-                  class="inline"
-                >
-                  <z-icon
-                    icon="help-circle"
-                    size="x-small"
-                    color="current"
-                    class="inline text-vanilla-400 hover:text-vanilla-100"
-                  />
-                  <template #popper>
-                    <p class="text-xs text-vanilla-100">
-                      Aggregate is a weighted average of analyzers activated in the repo.
-                      <a
-                        href="https://deepsource.io/docs/dashboard/repo-overview#metric-aggregate-calculation"
-                        target="blank"
-                        rel="noopener noreferrer"
-                        class="text-juniper hover:underline whitespace-nowrap"
-                        >Learn more --></a
-                      >
-                    </p>
-                  </template>
-                </tooltip>
-              </z-table-cell>
-              <z-table-cell text-align="right" class="text-sm font-normal text-right">
-                <div
-                  v-if="
-                    aggregateMetricNamespace.threshold || aggregateMetricNamespace.threshold === 0
-                  "
-                  class="flex items-center justify-end gap-x-4"
-                >
-                  <span
-                    >{{ aggregateMetricNamespace.threshold
-                    }}{{ nlcvMetricData.unit ? nlcvMetricData.unit : '' }}</span
-                  >
-                  <z-menu v-if="canModifyThreshold" direction="left">
-                    <template #trigger="{ toggle }">
-                      <z-button
-                        button-type="ghost"
-                        icon="more-vertical"
-                        icon-color="vanilla-400"
-                        size="x-small"
-                        @click="toggle"
-                      />
-                    </template>
-                    <template #body>
-                      <z-menu-section :divider="false" class="text-left">
-                        <z-menu-item
-                          class="text-sm"
-                          icon="edit-2"
-                          @click="toggleEditThreshold(aggregateMetricNamespace)"
-                        >
-                          Update Threshold
-                        </z-menu-item>
-                        <z-menu-item
-                          class="text-sm text-cherry"
-                          icon="trash-2"
-                          @click="deleteThreshold(aggregateMetricNamespace)"
-                        >
-                          Delete Threshold
-                        </z-menu-item>
-                      </z-menu-section>
-                    </template>
-                  </z-menu>
-                </div>
-                <z-button
-                  v-else
-                  button-type="ghost"
-                  size="x-small"
-                  color="vanilla-400"
-                  class="text-sm font-normal outline-none focus:outline-none"
-                  @click="toggleEditThreshold(aggregateMetricNamespace)"
-                >
-                  Add threshold
-                </z-button>
-              </z-table-cell>
-            </z-table-row>
-          </template>
-        </z-table>
-      </div>
-      <lazy-empty-state
-        v-else
-        title="Test coverage has not been set up for this repository yet."
-        subtitle="Test coverage needs to be enabled for this repository in order to configure the new code coverage metric."
-        :show-border="true"
-      />
       <portal to="modal">
-        <add-nlcv-threshold-modal
-          v-if="showAddThresholdModal"
-          :analyzers="analyzersWithoutThreshold"
-          @addThreshold="addThreshold"
-          @close="showAddThresholdModal = false"
-        />
-        <edit-threshold-modal
-          v-if="showEditThresholdModal"
-          v-bind="editThresholdProps"
-          @editThreshold="editThreshold"
-          @close="showEditThresholdModal = false"
-        />
-
         <z-confirm
           v-if="showDSNRegenerateConfirm && canRegenerateDSN"
           title="Confirm regenerate DSN for this repository?"
@@ -620,7 +391,7 @@
           @onClose="showDSNRegenerateConfirm = false"
         >
           <template #footer="{ close }">
-            <div class="flex items-center justify-end mt-6 gap-x-4">
+            <div class="mt-6 flex items-center justify-end gap-x-4">
               <z-button
                 label="Cancel"
                 button-type="ghost"
@@ -638,8 +409,9 @@
                 :disabled="regenerateDSNLoading"
                 @click="regenerateDSN"
               />
-            </div> </template
-        ></z-confirm>
+            </div>
+          </template>
+        </z-confirm>
       </portal>
     </div>
   </div>
@@ -665,34 +437,22 @@ import {
 } from '@deepsource/zeal'
 import { Tooltip } from 'floating-vue'
 
-import {
-  RepositoryDetailMutations,
-  RepoSettingOptions,
-  RepositoryDetailActions
-} from '~/store/repository/detail'
-import { AnalyzerListActions } from '~/store/analyzer/list'
+import { RepositoryDetailMutations, RepoSettingOptions } from '~/store/repository/detail'
 
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 
 import {
-  Analyzer,
   IssuePrioritySetting,
   IssueTypeSetting,
-  Metric,
-  MetricNamespace,
   MetricSetting,
   MetricSettingsInput,
-  MetricTypeChoices,
   Repository,
   UpdateRepositorySettingsInput
 } from '~/types/types'
 import { RepoPerms } from '~/types/permTypes'
-import { MetricType, NLCV_SHORTCODE } from '~/types/metric'
-import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
 
 const repoStore = namespace('repository/detail')
-const analyzerStore = namespace('analyzer/list')
 
 export enum InputTypes {
   ISSUE_TYPE = 'issueType',
@@ -742,40 +502,12 @@ export default class Reporting extends mixins(RepoDetailMixin, RoleAccessMixin) 
   @repoStore.Mutation(RepositoryDetailMutations.SET_REPO_SETTING_VALUE)
   setRepoSettingField: (options: RepoSettingOptions) => void
 
-  @repoStore.Action(RepositoryDetailActions.FETCH_NLCV_METRIC)
-  fetchNlcvMetic: (args: {
-    provider: string
-    owner: string
-    name: string
-    shortcode: typeof NLCV_SHORTCODE
-    metricType: MetricTypeChoices.PullRequestOnly
-    refetch?: boolean
-  }) => Promise<Repository>
-
-  @repoStore.Action(RepositoryDetailActions.SET_METRIC_THRESHOLD)
-  setMetricThreshold: (args: {
-    metricShortcode: string
-    repositoryId: string
-    thresholdValue: number | null
-    key: string
-  }) => Promise<GraphqlMutationResponse>
-
-  @analyzerStore.Action(AnalyzerListActions.FETCH_ANALYZER_NAMES)
-  fetchAnalyzerNames: (args: { categories?: string[] }) => Promise<Analyzer[]>
-
   public isDSNHidden = true
   public showDSNRegenerateConfirm = false
   public regenerateDSNLoading = false
 
   public isFetchingData = false
   public updatingIntegrationModeSettings = false
-
-  //? NLCV
-  analyzerNames = [] as Analyzer[]
-  nlcvRepositoryData = {} as Repository
-  editThresholdProps = {}
-  showAddThresholdModal = false
-  showEditThresholdModal = false
 
   InputTypes = InputTypes
 
@@ -799,11 +531,6 @@ export default class Reporting extends mixins(RepoDetailMixin, RoleAccessMixin) 
     { title: 'Threshold enforced?', align: 'text-center' }
   ]
 
-  public nlcvHeaderData = [
-    { title: 'Analyzer', align: 'text-left' },
-    { title: 'Threshold', align: 'text-right' }
-  ]
-
   reportingModeOptions = [
     {
       value: 'commit',
@@ -821,25 +548,6 @@ export default class Reporting extends mixins(RepoDetailMixin, RoleAccessMixin) 
   ]
 
   /**
-   * Fetch function to fetch NLCV data.
-   *
-   * @param {boolean} [refetch=false] - Makes a `network-only` request when set to `true`
-   *
-   * @returns {Promise<Repository>}
-   */
-  async fetchNlcvData(refetch: boolean = false): Promise<Repository> {
-    const { provider, owner, repo } = this.$route.params
-    return this.fetchNlcvMetic({
-      provider,
-      owner,
-      name: repo,
-      shortcode: NLCV_SHORTCODE,
-      metricType: MetricTypeChoices.PullRequestOnly,
-      refetch
-    })
-  }
-
-  /**
    * Fetch hook for `reporting` page in repo settings.
    *
    * @returns {Promise<void>}
@@ -853,23 +561,6 @@ export default class Reporting extends mixins(RepoDetailMixin, RoleAccessMixin) 
         owner: owner,
         name: repo
       })
-
-      const analyzerNamesPromise = this.repository.hasTestCoverage
-        ? this.fetchAnalyzerNames({ categories: ['lang'] })
-        : new Promise<Analyzer[]>((resolve) => resolve([] as Analyzer[]))
-
-      const nlcvDataPromise: Promise<Repository> = this.repository.hasTestCoverage
-        ? this.fetchNlcvData(true)
-        : new Promise((resolve) => resolve({} as Repository))
-
-      const [nlcvData, analyzerNames] = await Promise.all([
-        nlcvDataPromise,
-        analyzerNamesPromise,
-        this.fetchRepoPerms(this.baseRouteParams)
-      ])
-
-      this.nlcvRepositoryData = nlcvData
-      this.analyzerNames = analyzerNames
     } catch (e) {
       this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
     } finally {
@@ -879,13 +570,6 @@ export default class Reporting extends mixins(RepoDetailMixin, RoleAccessMixin) 
         this.reportingMode = this.repository.gitlabIntegrationUseStatus ? 'commit' : 'comments'
       }
     }
-  }
-
-  get nlcvMetricData() {
-    if (this.nlcvRepositoryData.metricsCaptured?.[0]) {
-      return this.nlcvRepositoryData.metricsCaptured[0]
-    }
-    return {} as Metric
   }
 
   get gitlabIntegrationUseStatus(): boolean | undefined {
@@ -913,35 +597,6 @@ export default class Reporting extends mixins(RepoDetailMixin, RoleAccessMixin) 
 
   get metricSettings(): Array<MetricSetting> {
     return (this.repository?.metricSettings?.filter(Boolean) as MetricSetting[]) ?? []
-  }
-
-  get analyzersWithoutThreshold() {
-    return this.analyzerNames.filter((analyzer) => {
-      return (
-        !this.nlcvMetricData.namespaces?.some((namespace) => namespace?.key === analyzer.name) ||
-        this.nlcvMetricData.namespaces?.some(
-          (namespace) => namespace?.key === analyzer.name && namespace.threshold === null
-        )
-      )
-    })
-  }
-
-  get nonAggregateMetricNamespaces() {
-    return this.nlcvMetricData.namespaces?.filter(
-      (namespace) => namespace?.threshold !== null && namespace?.key !== MetricType.aggregate
-    )
-  }
-
-  get aggregateMetricNamespace() {
-    return (
-      this.nlcvRepositoryData.metricsCaptured?.[0]?.namespaces?.filter(
-        (namespace) => namespace?.key === MetricType.aggregate
-      )?.[0] ?? ({ key: MetricType.aggregate } as MetricNamespace)
-    )
-  }
-
-  get canModifyThreshold(): boolean {
-    return Boolean(this.nlcvRepositoryData.userPermissionMeta?.can_modify_metric_thresholds)
   }
 
   get canRegenerateDSN(): boolean {
@@ -1041,113 +696,6 @@ export default class Reporting extends mixins(RepoDetailMixin, RoleAccessMixin) 
     } finally {
       this.regenerateDSNLoading = false
     }
-  }
-
-  /**
-   * Toggle the edit threshold modal open with given parameters.
-   *
-   * @param {{key: MetricNamespace['key'], threshold: MetricNamespace['threshold']}} namespace - Object with a `key` and `threshold` of the metric namespace to edit
-   *
-   * @returns {void}
-   */
-  toggleEditThreshold(namespace: {
-    key: MetricNamespace['key']
-    threshold: MetricNamespace['threshold']
-  }): void {
-    if (this.nlcvMetricData?.name) {
-      this.editThresholdProps = {
-        thresholdValue: namespace.threshold,
-        analyzerKey: namespace.key,
-        metricShortcode: NLCV_SHORTCODE,
-        repositoryId: this.repository.id,
-        metricName: this.nlcvMetricData.name,
-        unit: this.nlcvMetricData.unit
-      }
-      this.showEditThresholdModal = true
-    }
-  }
-
-  /**
-   * Add a threshold for a namespace in the {@link NLCV_SHORTCODE} metric.
-   *
-   * @param {string} analyzerToAdd - `key` of the namespace whose threshold is being added
-   * @param {number} newThresholdValue - Value to update the threshold to
-   * @param {Function} close - Function to close the modal.
-   *
-   * @returns {Promise<void>}
-   */
-  async addThreshold(
-    analyzerToAdd: string,
-    newThresholdValue: number,
-    close?: () => void
-  ): Promise<void> {
-    if (newThresholdValue || newThresholdValue === 0) {
-      try {
-        const response = (await this.setMetricThreshold({
-          metricShortcode: NLCV_SHORTCODE,
-          repositoryId: this.repository.id,
-          thresholdValue: newThresholdValue || 0,
-          key: analyzerToAdd
-        })) as GraphqlMutationResponse
-
-        if (response.data.updateRepoMetricThreshold?.ok) {
-          this.$toast.success('Successfully created threshold.')
-          close?.()
-        }
-      } catch (e) {
-        this.$logErrorAndToast(e as Error, 'An error occured while updating repository metrics.')
-      } finally {
-        this.nlcvRepositoryData = await this.fetchNlcvData(true)
-      }
-    }
-  }
-
-  /**
-   * Edit a threshold for a namespace in the {@link NLCV_SHORTCODE} metric.
-   *
-   * @param {number} newThresholdValue - Value to update the threshold to
-   * @param {string} analyzerKey - `key` of the namespace whose threshold is being updated
-   * @param {Function} close - Function to close the modal.
-   *
-   * @returns {Promise<void>}
-   */
-  async editThreshold(
-    newThresholdValue: number | null,
-    analyzerKey: string,
-    close?: () => void
-  ): Promise<void> {
-    if (newThresholdValue !== undefined) {
-      try {
-        const response = (await this.setMetricThreshold({
-          metricShortcode: NLCV_SHORTCODE,
-          repositoryId: this.repository.id,
-          thresholdValue: newThresholdValue,
-          key: analyzerKey
-        })) as GraphqlMutationResponse
-
-        if (response.data.updateRepoMetricThreshold?.ok) {
-          this.$toast.success('Successfully updated threshold.')
-          close?.()
-        }
-      } catch (e) {
-        this.$logErrorAndToast(e as Error, 'An error occured while updating repository metrics.')
-      } finally {
-        this.nlcvRepositoryData = await this.fetchNlcvData(true)
-      }
-    } else {
-      this.$toast.danger('An error occured while updating repository metrics.')
-    }
-  }
-
-  /**
-   * Delete a threshold for a namespace in the {@link NLCV_SHORTCODE} metric.
-   *
-   * @param {MetricNamespace} namespace - MetricNamespace to delete threshold for.
-   *
-   * @returns {Promise<void>}
-   */
-  async deleteThreshold(namespace: MetricNamespace): Promise<void> {
-    await this.editThreshold(null, namespace.key as string)
   }
 }
 </script>

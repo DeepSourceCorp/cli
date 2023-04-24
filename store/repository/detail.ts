@@ -17,7 +17,6 @@ import RepositoryIssueTypeSettingsQuery from '~/apollo/queries/repository/issueT
 import RepositoryWidgetsGQLQuery from '~/apollo/queries/repository/widgets.gql'
 import RepositoryMetricsGQLQuery from '~/apollo/queries/repository/metrics/metrics.gql'
 import RepositoryMetricGQLQuery from '~/apollo/queries/repository/metrics/metric.gql'
-import RepositoryMetricUpdateThresoldGQLQuery from '~/apollo/queries/repository/metrics/metricThresholdUpdateData.gql'
 import RepositorySettingsGeneralGQLQuery from '~/apollo/queries/repository/settings/general.gql'
 import RepositorySettingsSshGQLQuery from '~/apollo/queries/repository/settings/ssh.gql'
 import RepositorySettingsIgnoreRulesGQLQuery from '~/apollo/queries/repository/settings/ignoreRules.gql'
@@ -64,7 +63,6 @@ import {
   GraphqlMutationResponse,
   GraphqlQueryResponse
 } from '~/types/apollo-graphql-types'
-import { NLCV_SHORTCODE } from '~/types/metric'
 import type { LogErrorAndToastT } from '~/plugins/helpers/error'
 import { IssueOccurrenceDistributionType } from '~/types/issues'
 
@@ -123,7 +121,7 @@ export enum RepositoryDetailActions {
   FETCH_WIDGETS = 'fetchWidgets',
   FETCH_METRICS = 'fetchMetrics',
   FETCH_METRIC = 'fetchMetric',
-  FETCH_NLCV_METRIC = 'fetchNlcvMetric',
+
   FETCH_CURRENT_RUN_COUNT = 'fetchCurrentRunCount',
   FETCH_ISSUE_TRENDS = 'fetchIssueTrends',
   FETCH_AUTOFIX_TRENDS = 'fetchAutofixTrends',
@@ -266,18 +264,6 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       shortcode: string
       metricType?: MetricTypeChoices
       lastDays?: number
-      refetch?: boolean
-    }
-  ) => Promise<Repository>
-  [RepositoryDetailActions.FETCH_NLCV_METRIC]: (
-    this: Store<RootState>,
-    injectee: RepositoryDetailActionContext,
-    args: {
-      provider: string
-      owner: string
-      name: string
-      shortcode: typeof NLCV_SHORTCODE
-      metricType?: MetricTypeChoices
       refetch?: boolean
     }
   ) => Promise<Repository>
@@ -632,32 +618,6 @@ export const actions: RepositoryDetailModuleActions = {
       this.$logErrorAndToast(e as Error, 'An error occured while fetching the metric.')
       throw e
     }
-  },
-  async [RepositoryDetailActions.FETCH_NLCV_METRIC](
-    { state: repoDetailState },
-    { owner, name, provider, shortcode, metricType = MetricTypeChoices.DefaultBranchOnly, refetch }
-  ) {
-    try {
-      const response = (await this.$fetchGraphqlData(
-        RepositoryMetricUpdateThresoldGQLQuery,
-        {
-          provider: this.$providerMetaMap[provider].value,
-          owner,
-          name,
-          shortcode,
-          metricType
-        },
-        refetch
-      )) as GraphqlQueryResponse
-
-      return response.data.repository ?? repoDetailState.repository
-    } catch (e: unknown) {
-      this.$logErrorAndToast(
-        e as Error,
-        'An error occured while fetching new line code coverage information.'
-      )
-    }
-    return repoDetailState.repository
   },
   async [RepositoryDetailActions.FETCH_CURRENT_RUN_COUNT]({ commit }, args) {
     commit(RepositoryDetailMutations.SET_LOADING, true)
@@ -1021,17 +981,13 @@ export const actions: RepositoryDetailModuleActions = {
     }
   },
   async [RepositoryDetailActions.UPDATE_REPO_SETTINGS]({ commit }, args) {
-    try {
-      const response = await this.$applyGraphqlMutation(UpdateRepositorySettings, {
-        input: args.input
-      })
-      commit(
-        RepositoryDetailMutations.SET_REPOSITORY,
-        (response.data as UpdateRepositorySettingsPayload).repository
-      )
-    } catch (e) {
-      throw e
-    }
+    const response = await this.$applyGraphqlMutation(UpdateRepositorySettings, {
+      input: args.input
+    })
+    commit(
+      RepositoryDetailMutations.SET_REPOSITORY,
+      (response.data as UpdateRepositorySettingsPayload).repository
+    )
   },
   async [RepositoryDetailActions.UPDATE_MEMBER_PERMISSION]({ commit }, args) {
     commit(RepositoryDetailMutations.SET_LOADING, true)

@@ -78,6 +78,7 @@ export const SINGLE_ISSUE: Issue = {
     }
   },
   analyzer: {
+    cacheVersion: 0,
     id: 'QW5hbHl6ZXI6bHhiYW1i',
     createdAt: '2020-04-17T09:21:30.643859+00:00',
     modifiedAt: '2021-06-16T08:48:36.485972+00:00',

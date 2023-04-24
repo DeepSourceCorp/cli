@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-col gap-y-2.5">
     <div class="flex flex-grow items-end">
-      <p class="uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7">
-        {{ isThreshold ? 'Threshold' : metric.name }}
+      <p class="text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400">
+        {{ metric.name }}
       </p>
     </div>
     <div
       v-if="metric.value || metric.value === 0"
-      class="flex items-center gap-x-2 h-6 flex-shrink-0"
+      class="flex h-6 flex-shrink-0 items-center gap-x-2"
     >
       <span class="text-base font-semibold leading-8">
         {{ thresholdDisplay }}
@@ -24,13 +24,17 @@
         </template>
         <template #body>
           <z-menu-section :divider="false" class="text-left">
-            <z-menu-item class="text-sm" icon="edit-2" @click="$emit('openUpdateThresholdModal')">
+            <z-menu-item
+              icon="edit-2"
+              class="text-sm"
+              @click="$emit('openUpdateThresholdModal', metric.shortcode)"
+            >
               Update Threshold
             </z-menu-item>
             <z-menu-item
-              class="text-sm text-cherry"
               icon="trash-2"
-              @click="$emit('deleteThreshold')"
+              class="text-sm text-cherry"
+              @click="$emit('deleteThreshold', metric.shortcode)"
             >
               Delete Threshold
             </z-menu-item>
@@ -46,8 +50,8 @@
         icon-size="x-small"
         color="vanilla-100"
         label="Add threshold"
-        class="border border-slate-400 border-dashed"
-        @click="$emit('addThreshold')"
+        class="border border-dashed border-slate-400"
+        @click="$emit('addThreshold', metric.shortcode)"
       />
     </div>
   </div>
@@ -60,6 +64,17 @@ import { ZButton, ZMenu, ZMenuItem, ZMenuSection, ZIcon } from '@deepsource/zeal
 import { StatType } from '~/types/metric'
 import { Metric, MetricNamespaceTrend } from '~/types/types'
 
+export interface TrendStatProps {
+  metric: {
+    name: Metric['name'] | MetricNamespaceTrend['key']
+    shortcode?: Metric['shortcode'] | Metric['newCodeMetricShortcode']
+    value: MetricNamespaceTrend['valueDisplay'] | MetricNamespaceTrend['threshold']
+    unit?: Metric['unit']
+  }
+  type: StatType
+  canModifyThreshold?: boolean
+}
+
 /**
  * Displays the trend metric of a page and adds components for updating threshold if required.
  */
@@ -69,17 +84,13 @@ import { Metric, MetricNamespaceTrend } from '~/types/types'
 })
 export default class TrendStat extends Vue {
   @Prop()
-  metric: {
-    name?: Metric['name'] | MetricNamespaceTrend['key']
-    value: MetricNamespaceTrend['valueDisplay'] | MetricNamespaceTrend['threshold']
-    unit?: Metric['unit']
-  }
+  metric: TrendStatProps['metric'] | Required<TrendStatProps['metric']>
 
   @Prop({ required: true })
-  type: StatType
+  type: TrendStatProps['type']
 
   @Prop({ default: false })
-  canModifyThreshold: boolean
+  canModifyThreshold: TrendStatProps['canModifyThreshold']
 
   get isThreshold(): boolean {
     return this.type === StatType.threshold

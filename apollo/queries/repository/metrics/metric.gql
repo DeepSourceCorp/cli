@@ -18,6 +18,7 @@ query fetchRepositoryMetricCaptured(
       description
       supportsAggregateThreshold
       unit
+      newCodeMetricShortcode
       namespacesTrends(lastDays: $lastDays) {
         key
         valueTrend
@@ -26,6 +27,7 @@ query fetchRepositoryMetricCaptured(
         analyzerShortcode
         analyzerLogo
         threshold
+        newCodeThreshold
       }
     }
   }

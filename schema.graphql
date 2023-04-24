@@ -165,6 +165,7 @@ type Analyzer implements MaskPrimaryKeyNode {
   exampleConfig: String
   defaultTestPatterns: [String!]!
   supportedFilesRegex: String
+  cacheVersion: Int!
   reviews(offset: Int, before: String, after: String, first: Int, last: Int): AnalyzerReviewConnection!
   issues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, issueType: String, autofixAvailable: Boolean, auditRequired: Boolean, sort: String): IssueConnection!
   metrics(offset: Int, before: String, after: String, first: Int, last: Int): MetricConnection!
@@ -1768,6 +1769,7 @@ type Metric implements MaskPrimaryKeyNode {
   category: String
   namespaces: [MetricNamespace]
   namespacesTrends(lastDays: Int!): [MetricNamespaceTrend]
+  newCodeMetricShortcode: String
 }
 
 type MetricConnection {
@@ -1784,6 +1786,7 @@ type MetricEdge {
 type MetricNamespace {
   key: String
   threshold: Int
+  newCodeThreshold: Int
   analyzerShortcode: String
   analyzerLogo: String
 }
@@ -1794,6 +1797,7 @@ type MetricNamespaceTrend {
   valueTrend: GenericScalar
   key: String
   threshold: Int
+  newCodeThreshold: Int
   analyzerShortcode: String
   analyzerLogo: String
 }
@@ -1818,6 +1822,11 @@ enum MetricTypeChoices {
 }
 
 type Mutation {
+  createWebhook(input: CreateWebhookInput!): CreateWebhookPayload
+  testWebhook(input: TestWebhookInput!): TestWebhookPayload
+  updateWebhook(input: UpdateWebhookInput!): UpdateWebhookPayload
+  disableWebhook(input: DisableWebhookInput!): DisableWebhookPayload
+  deleteWebhook(input: DeleteWebhookInput!): DeleteWebhookPayload
   exportAuditLogs(input: ExportAuditLogsInput!): ExportAuditLogsPayload
   createConfigTemplate(input: CreateConfigTemplateInput!): CreateConfigTemplatePayload
   updateConfigTemplate(input: UpdateConfigTemplateInput!): UpdateConfigTemplatePayload
@@ -1922,17 +1931,11 @@ type Mutation {
   confirmInvitation(input: ConfirmInvitationInput!): ConfirmInvitationPayload
   verifyDevice(input: VerifyDeviceInput!): VerifyDevicePayload
   submitSupportTicket(input: SubmitSupportTicketInput!): SubmitSupportTicketPayload
-  createWebhook(input: CreateWebhookInput!): CreateWebhookPayload
-  testWebhook(input: TestWebhookInput!): TestWebhookPayload
-  updateWebhook(input: UpdateWebhookInput!): UpdateWebhookPayload
-  disableWebhook(input: DisableWebhookInput!): DisableWebhookPayload
-  deleteWebhook(input: DeleteWebhookInput!): DeleteWebhookPayload
   createAccessToken(input: CreateAccessTokenInput!): CreateAccessTokenPayload
   updateAccessToken(input: UpdateAccessTokenInput!): UpdateAccessTokenPayload
   rotateAccessToken(input: RotateAccessTokenInput!): RotateAccessTokenPayload
   deleteAccessToken(input: DeleteAccessTokenInput!): DeleteAccessTokenPayload
   deleteAllAccessTokens(input: DeleteAllAccessTokensInput!): DeleteAllAccessTokensPayload
-  webhookSecret(input: WebhookSecretInput!): WebhookSecretPayload
   verifyGsrPermissions(input: VerifyGSRPermissionsInput!): VerifyGSRPermissionsPayload
   verifyGsrWebhooks(input: VerifyGSRWebhooksInput!): VerifyGSRWebhooksPayload
   triggerVerifyGsrSsh(input: TriggerVerifyGSRSSHInput!): TriggerVerifyGSRSSHPayload
@@ -1983,7 +1986,7 @@ type Owner implements MaskPrimaryKeyNode {
   onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
   ownerSetting: OwnerSetting
   publicReports(offset: Int, before: String, after: String, first: Int, last: Int, sort: String, q: String): PublicReportConnection
-  webhooks(offset: Int, before: String, after: String, first: Int, last: Int): WebhookConnection!
+  webhooks(offset: Int, before: String, after: String, first: Int, last: Int): WebhookConnection
   isAutofixEnabled: Boolean
   autofixInstallationUrl: String
   isTeam: Boolean
@@ -2185,7 +2188,6 @@ type Query {
   webhookEventDeliveries(ownerId: ID!, offset: Int, before: String, after: String, first: Int, last: Int): WebhookEventDeliveryConnection
   webhookEventDelivery(ownerId: ID!, deliveryId: ID!): WebhookEventDelivery
   webhook(webhookId: ID!): Webhook
-  webhooks(ownerId: ID!, offset: Int, before: String, after: String, first: Int, last: Int): WebhookConnection
   transformer(shortcode: String!): TransformerTool
   transformers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, language: [String]): TransformerToolConnection
   transformerRun(runId: String!): TransformerRun!
@@ -2382,7 +2384,6 @@ type Repository implements MaskPrimaryKeyNode {
   errorMessage: String
   errorCtaButtonText: String
   errorCtaButtonUrl: String
-  accessToken: UUID!
   encPublicKey: String
   isSubmoduleEnabled: Boolean!
   analyzeChangesetOnly: Boolean!
@@ -3990,13 +3991,4 @@ type WebhookEventTypesConnection {
 type WebhookEventTypesEdge {
   node: WebhookEventTypes
   cursor: String!
-}
-
-input WebhookSecretInput {
-  clientMutationId: String
-}
-
-type WebhookSecretPayload {
-  secret: String
-  clientMutationId: String
 }

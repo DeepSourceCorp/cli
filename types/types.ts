@@ -192,6 +192,7 @@ export type Analyzer = MaskPrimaryKeyNode & {
   exampleConfig?: Maybe<Scalars['String']>;
   defaultTestPatterns: Array<Scalars['String']>;
   supportedFilesRegex?: Maybe<Scalars['String']>;
+  cacheVersion: Scalars['Int'];
   reviews: AnalyzerReviewConnection;
   issues: IssueConnection;
   metrics: MetricConnection;
@@ -2557,6 +2558,7 @@ export type Metric = MaskPrimaryKeyNode & {
   category?: Maybe<Scalars['String']>;
   namespaces?: Maybe<Array<Maybe<MetricNamespace>>>;
   namespacesTrends?: Maybe<Array<Maybe<MetricNamespaceTrend>>>;
+  newCodeMetricShortcode?: Maybe<Scalars['String']>;
 };
 
 
@@ -2581,6 +2583,7 @@ export type MetricNamespace = {
   __typename?: 'MetricNamespace';
   key?: Maybe<Scalars['String']>;
   threshold?: Maybe<Scalars['Int']>;
+  newCodeThreshold?: Maybe<Scalars['Int']>;
   analyzerShortcode?: Maybe<Scalars['String']>;
   analyzerLogo?: Maybe<Scalars['String']>;
 };
@@ -2592,6 +2595,7 @@ export type MetricNamespaceTrend = {
   valueTrend?: Maybe<Scalars['GenericScalar']>;
   key?: Maybe<Scalars['String']>;
   threshold?: Maybe<Scalars['Int']>;
+  newCodeThreshold?: Maybe<Scalars['Int']>;
   analyzerShortcode?: Maybe<Scalars['String']>;
   analyzerLogo?: Maybe<Scalars['String']>;
 };
@@ -2618,6 +2622,11 @@ export enum MetricTypeChoices {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createWebhook?: Maybe<CreateWebhookPayload>;
+  testWebhook?: Maybe<TestWebhookPayload>;
+  updateWebhook?: Maybe<UpdateWebhookPayload>;
+  disableWebhook?: Maybe<DisableWebhookPayload>;
+  deleteWebhook?: Maybe<DeleteWebhookPayload>;
   exportAuditLogs?: Maybe<ExportAuditLogsPayload>;
   createConfigTemplate?: Maybe<CreateConfigTemplatePayload>;
   updateConfigTemplate?: Maybe<UpdateConfigTemplatePayload>;
@@ -2722,17 +2731,11 @@ export type Mutation = {
   confirmInvitation?: Maybe<ConfirmInvitationPayload>;
   verifyDevice?: Maybe<VerifyDevicePayload>;
   submitSupportTicket?: Maybe<SubmitSupportTicketPayload>;
-  createWebhook?: Maybe<CreateWebhookPayload>;
-  testWebhook?: Maybe<TestWebhookPayload>;
-  updateWebhook?: Maybe<UpdateWebhookPayload>;
-  disableWebhook?: Maybe<DisableWebhookPayload>;
-  deleteWebhook?: Maybe<DeleteWebhookPayload>;
   createAccessToken?: Maybe<CreateAccessTokenPayload>;
   updateAccessToken?: Maybe<UpdateAccessTokenPayload>;
   rotateAccessToken?: Maybe<RotateAccessTokenPayload>;
   deleteAccessToken?: Maybe<DeleteAccessTokenPayload>;
   deleteAllAccessTokens?: Maybe<DeleteAllAccessTokensPayload>;
-  webhookSecret?: Maybe<WebhookSecretPayload>;
   verifyGsrPermissions?: Maybe<VerifyGsrPermissionsPayload>;
   verifyGsrWebhooks?: Maybe<VerifyGsrWebhooksPayload>;
   triggerVerifyGsrSsh?: Maybe<TriggerVerifyGsrsshPayload>;
@@ -2748,6 +2751,31 @@ export type Mutation = {
   updatePublicReportSourcedRepositories?: Maybe<UpdatePublicReportSourcedRepositoriesPayload>;
   updatePublicReport?: Maybe<UpdatePublicReportPayload>;
   verifyPasswordForPublicReport?: Maybe<VerifyPasswordForPublicReportPayload>;
+};
+
+
+export type MutationCreateWebhookArgs = {
+  input: CreateWebhookInput;
+};
+
+
+export type MutationTestWebhookArgs = {
+  input: TestWebhookInput;
+};
+
+
+export type MutationUpdateWebhookArgs = {
+  input: UpdateWebhookInput;
+};
+
+
+export type MutationDisableWebhookArgs = {
+  input: DisableWebhookInput;
+};
+
+
+export type MutationDeleteWebhookArgs = {
+  input: DeleteWebhookInput;
 };
 
 
@@ -3262,31 +3290,6 @@ export type MutationSubmitSupportTicketArgs = {
 };
 
 
-export type MutationCreateWebhookArgs = {
-  input: CreateWebhookInput;
-};
-
-
-export type MutationTestWebhookArgs = {
-  input: TestWebhookInput;
-};
-
-
-export type MutationUpdateWebhookArgs = {
-  input: UpdateWebhookInput;
-};
-
-
-export type MutationDisableWebhookArgs = {
-  input: DisableWebhookInput;
-};
-
-
-export type MutationDeleteWebhookArgs = {
-  input: DeleteWebhookInput;
-};
-
-
 export type MutationCreateAccessTokenArgs = {
   input: CreateAccessTokenInput;
 };
@@ -3309,11 +3312,6 @@ export type MutationDeleteAccessTokenArgs = {
 
 export type MutationDeleteAllAccessTokensArgs = {
   input: DeleteAllAccessTokensInput;
-};
-
-
-export type MutationWebhookSecretArgs = {
-  input: WebhookSecretInput;
 };
 
 
@@ -3425,7 +3423,7 @@ export type Owner = MaskPrimaryKeyNode & {
   onboardingEvents: AutoOnboardEventConnection;
   ownerSetting?: Maybe<OwnerSetting>;
   publicReports?: Maybe<PublicReportConnection>;
-  webhooks: WebhookConnection;
+  webhooks?: Maybe<WebhookConnection>;
   isAutofixEnabled?: Maybe<Scalars['Boolean']>;
   autofixInstallationUrl?: Maybe<Scalars['String']>;
   isTeam?: Maybe<Scalars['Boolean']>;
@@ -3855,7 +3853,6 @@ export type Query = {
   webhookEventDeliveries?: Maybe<WebhookEventDeliveryConnection>;
   webhookEventDelivery?: Maybe<WebhookEventDelivery>;
   webhook?: Maybe<Webhook>;
-  webhooks?: Maybe<WebhookConnection>;
   transformer?: Maybe<TransformerTool>;
   transformers?: Maybe<TransformerToolConnection>;
   transformerRun: TransformerRun;
@@ -3936,16 +3933,6 @@ export type QueryWebhookEventDeliveryArgs = {
 
 export type QueryWebhookArgs = {
   webhookId: Scalars['ID'];
-};
-
-
-export type QueryWebhooksArgs = {
-  ownerId: Scalars['ID'];
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -4409,7 +4396,6 @@ export type Repository = MaskPrimaryKeyNode & {
   errorMessage?: Maybe<Scalars['String']>;
   errorCtaButtonText?: Maybe<Scalars['String']>;
   errorCtaButtonUrl?: Maybe<Scalars['String']>;
-  accessToken: Scalars['UUID'];
   encPublicKey?: Maybe<Scalars['String']>;
   isSubmoduleEnabled: Scalars['Boolean'];
   analyzeChangesetOnly: Scalars['Boolean'];
@@ -6832,16 +6818,6 @@ export type WebhookEventTypesEdge = {
   __typename?: 'WebhookEventTypesEdge';
   node?: Maybe<WebhookEventTypes>;
   cursor: Scalars['String'];
-};
-
-export type WebhookSecretInput = {
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type WebhookSecretPayload = {
-  __typename?: 'WebhookSecretPayload';
-  secret?: Maybe<Scalars['String']>;
-  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type ExportAuditLogsMutationVariables = Exact<{
@@ -9905,7 +9881,7 @@ export type ListWebhooksQuery = (
   & { owner?: Maybe<(
     { __typename?: 'Owner' }
     & Pick<Owner, 'id'>
-    & { webhooks: (
+    & { webhooks?: Maybe<(
       { __typename?: 'WebhookConnection' }
       & Pick<WebhookConnection, 'totalCount'>
       & { edges: Array<Maybe<(
@@ -9919,7 +9895,7 @@ export type ListWebhooksQuery = (
           ) }
         )> }
       )>> }
-    ) }
+    )> }
   )> }
 );
 
@@ -11002,35 +10978,10 @@ export type FetchRepositoryMetricCapturedQuery = (
     & Pick<Repository, 'id' | 'userPermissionMeta' | 'hasTestCoverage'>
     & { metricsCaptured?: Maybe<Array<Maybe<(
       { __typename?: 'Metric' }
-      & Pick<Metric, 'id' | 'shortcode' | 'name' | 'category' | 'description' | 'supportsAggregateThreshold' | 'unit'>
+      & Pick<Metric, 'id' | 'shortcode' | 'name' | 'category' | 'description' | 'supportsAggregateThreshold' | 'unit' | 'newCodeMetricShortcode'>
       & { namespacesTrends?: Maybe<Array<Maybe<(
         { __typename?: 'MetricNamespaceTrend' }
-        & Pick<MetricNamespaceTrend, 'key' | 'valueTrend' | 'isPassing' | 'valueDisplay' | 'analyzerShortcode' | 'analyzerLogo' | 'threshold'>
-      )>>> }
-    )>>> }
-  )> }
-);
-
-export type MetricThresholdUpdateDataQueryVariables = Exact<{
-  provider: VcsProviderChoices;
-  owner: Scalars['String'];
-  name: Scalars['String'];
-  shortcode: Scalars['String'];
-  metricType?: Maybe<MetricTypeChoices>;
-}>;
-
-
-export type MetricThresholdUpdateDataQuery = (
-  { __typename?: 'Query' }
-  & { repository?: Maybe<(
-    { __typename?: 'Repository' }
-    & Pick<Repository, 'id' | 'userPermissionMeta'>
-    & { metricsCaptured?: Maybe<Array<Maybe<(
-      { __typename?: 'Metric' }
-      & Pick<Metric, 'id' | 'shortcode' | 'name' | 'category' | 'description' | 'unit'>
-      & { namespaces?: Maybe<Array<Maybe<(
-        { __typename?: 'MetricNamespace' }
-        & Pick<MetricNamespace, 'key' | 'threshold'>
+        & Pick<MetricNamespaceTrend, 'key' | 'valueTrend' | 'isPassing' | 'valueDisplay' | 'analyzerShortcode' | 'analyzerLogo' | 'threshold' | 'newCodeThreshold'>
       )>>> }
     )>>> }
   )> }

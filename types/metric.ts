@@ -10,6 +10,11 @@ export enum StatType {
   'metric' = 'metric'
 }
 
+export enum ThresholdType {
+  'threshold',
+  'newCodeThreshold'
+}
+
 export interface GroupedMetrics {
   name: string
   metrics: RepositoryMetricValue[]

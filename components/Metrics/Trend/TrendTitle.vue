@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="flex flex-wrap md:flex-nowrap items-start gap-x-2 gap-y-4">
+    <div class="flex flex-wrap items-start gap-x-2 gap-y-4 md:flex-nowrap">
       <div class="flex-grow space-y-1.5">
-        <div class="flex items-center gap-x-3 min-h-8">
+        <div class="flex min-h-8 items-center gap-x-3">
           <div class="flex items-center gap-x-2">
             <analyzer-logo v-if="!isAggregate" v-bind="analyzerInformation" size="medium" />
             <h1 class="text-lg font-medium leading-tight">
@@ -21,19 +21,19 @@
             class="border border-slate-400"
           >
             <span
-              class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5"
+              class="py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider"
               :class="namespacesTrend.isPassing ? 'text-juniper' : 'text-cherry'"
               >{{ namespacesTrend.isPassing ? 'Threshold passing' : 'Threshold failing' }}</span
             >
           </z-tag>
         </div>
-        <p v-if="isAggregate" class="text-vanilla-400 text-sm leading-6">
+        <p v-if="isAggregate" class="text-sm leading-6 text-vanilla-400">
           {{ metricMeta.description }}
         </p>
       </div>
       <div
         v-if="isAggregate"
-        class="flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0 flex-wrap md:flex-nowrap"
+        class="flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start"
       >
         <z-button
           button-type="ghost"
@@ -43,10 +43,10 @@
           icon="help-circle"
           size="small"
           color="vanilla-100"
-          class="border border-slate-400 border-dashed"
+          class="border border-dashed border-slate-400"
           >How’s this calculated?</z-button
         >
-        <div class="md:w-40 h-8">
+        <div class="h-8 md:w-40">
           <z-select
             :key="filterValue"
             v-model="currentFilterValue"

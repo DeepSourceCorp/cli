@@ -3,25 +3,27 @@ import { TrendStat } from '~/components/Metrics'
 import { RouterLinkStub } from '@vue/test-utils'
 import { VTooltip } from 'v-tooltip'
 import { VueConstructor } from 'vue'
-import { cartesian, generateStringProps } from '~/test/utils'
+import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
 import { StatType } from '~/types/metric'
 
 const injectDirective = (vue: VueConstructor) => vue.directive('tooltip', VTooltip)
 
 test('renders TrendStat with all prop options', () => {
-  const baseProps = {
-    metric: {
-      name: 'Around the world',
-      value: 360
-    }
+  const baseMetricProps = {
+    name: 'Around the world',
+    value: 360,
+    shortcode: 'DftPnk'
   }
 
   const typeProp = generateStringProps('type', [StatType.metric, StatType.threshold], false)
+  const unitProp = generateStringProps('unit', ['%', ''], true)
+  const canModifyThresholdProp = generateBooleanProps('canModifyThreshold', true)
 
-  cartesian(typeProp).forEach((propCombination) => {
+  cartesian(typeProp, unitProp, canModifyThresholdProp).forEach((propCombination) => {
     const props = {
-      ...baseProps,
-      ...propCombination
+      metric: { ...baseMetricProps, unit: propCombination.unit },
+      canModifyThresholdProp: propCombination.canModifyThresholdProp,
+      type: propCombination.type
     }
 
     const { html } = render(

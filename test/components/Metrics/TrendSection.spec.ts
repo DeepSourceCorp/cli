@@ -15,7 +15,8 @@ describe('[[TrendSection]]', () => {
 
   const getMetricBase = () => ({
     shortcode: 'DftPnk',
-    name: 'Daft Punk'
+    name: 'Daft Punk',
+    newCodeMetricShortcode: 'NDftPnk'
   })
 
   const nonPercentageMetric = { ...getMetricBase(), unit: '' }

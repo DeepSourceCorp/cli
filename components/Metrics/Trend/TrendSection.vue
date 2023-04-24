@@ -1,22 +1,33 @@
 <template>
-  <div class="space-y-6 py-6 border-b border-slate-400" :class="{ 'bg-ink-300': isAggregate }">
+  <div class="space-y-8 border-b border-slate-400 py-4" :class="{ 'bg-ink-300': isAggregate }">
     <trend-title v-bind="$props" class="px-6" @updateFilter="updateFilter" />
     <!-- The `grid` class is to prevent the chart lib's height/width computation from overflowing the parent -->
-    <div class="grid grid-cols-1 max-w-full gap-y-1">
-      <div class="flex gap-x-9 sm:gap-x-23 px-6">
-        <trend-stat :type="STAT_TYPE.metric" :metric="metricTrendStat" />
-        <trend-stat
-          v-if="canViewThresholdModal"
-          :type="STAT_TYPE.threshold"
-          :metric="thresholdTrendStat"
-          :can-modify-threshold="canModifyThreshold"
-          v-on="thresholdListeners"
-        />
+    <div class="grid max-w-full grid-cols-1 gap-y-2">
+      <div class="flex flex-wrap gap-9 px-6 sm:gap-x-16">
+        <template v-for="(trend, index) in trendStats">
+          <z-divider
+            v-if="trend.type === 'blocker' && trendStatsLength > 1"
+            :key="trend.type + index"
+            color="ink-200"
+            direction="vertical"
+            margin="m-0"
+            class="hidden h-full md:block"
+          />
+          <trend-stat
+            v-else-if="trend.show"
+            :key="trend.key"
+            :type="trend.type"
+            :metric="trend.metric"
+            :can-modify-threshold="trend.canModifyThreshold"
+            :class="{ 'w-full md:w-auto': trend.key === STAT_TYPE.metric }"
+            v-on="trend.on"
+          />
+        </template>
       </div>
 
-      <div v-show="dataLoading" class="min-h-72 mx-5 pt-4 pb-2">
+      <div v-show="dataLoading" class="mx-5 min-h-72 pt-4 pb-2">
         <div
-          class="h-full rounded-lg animate-pulse"
+          class="h-full animate-pulse rounded-lg"
           :class="isAggregate ? 'bg-ink-200 bg-opacity-30' : 'bg-ink-300'"
         ></div>
       </div>
@@ -46,13 +57,20 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-import { ZTag, ZSelect, ZOption, ZButton, ZChart, ZIcon } from '@deepsource/zeal'
+import { ZTag, ZSelect, ZOption, ZButton, ZChart, ZIcon, ZDivider } from '@deepsource/zeal'
 
 import { DurationTypeT, formatDate, parseISODate } from '~/utils/date'
-import { StatType, MetricType } from '~/types/metric'
+import { StatType, MetricType, ThresholdType } from '~/types/metric'
 import { formatIntl } from '~/utils/string'
 import { roundToSignificantNumber } from '~/utils/number'
 import { Metric, MetricNamespaceTrend } from '~/types/types'
+import { TrendStatProps } from './TrendStat.vue'
+
+interface TrendStatPropsT extends TrendStatProps {
+  key: string
+  show: boolean
+  on: unknown
+}
 
 /**
  * Section of a component on metrics page that displays name of a metric namespace, its chart and its values.
@@ -65,7 +83,8 @@ import { Metric, MetricNamespaceTrend } from '~/types/types'
     ZOption,
     ZButton,
     ZChart,
-    ZIcon
+    ZIcon,
+    ZDivider
   },
   methods: {
     formatIntl
@@ -91,13 +110,15 @@ export default class TrendSection extends Vue {
   namespacesTrend: MetricNamespaceTrend
 
   @Prop({ required: true })
-  metricMeta: {
-    shortcode?: Metric['shortcode']
-    name?: Metric['name']
-    description?: Metric['description']
-    supportsAggregateThreshold?: Metric['supportsAggregateThreshold']
-    unit: Metric['unit']
-  }
+  metricMeta: Pick<
+    Metric,
+    | 'shortcode'
+    | 'name'
+    | 'description'
+    | 'supportsAggregateThreshold'
+    | 'unit'
+    | 'newCodeMetricShortcode'
+  >
 
   @Prop({ default: false })
   canModifyThreshold: boolean
@@ -109,25 +130,86 @@ export default class TrendSection extends Vue {
   readonly AGGREGATE_METRIC_KEY = MetricType.aggregate
   readonly METRICS_DOC = 'https://deepsource.io/docs/dashboard/repo-overview#the-metrics-tab'
 
-  get isAggregate(): boolean {
+  get trendStats() {
+    const stats: Array<TrendStatPropsT | { type: 'blocker' }> = [
+      {
+        key: StatType.metric,
+        metric: this.metricTrendStat,
+        type: StatType.metric,
+        show: true,
+        on: false
+      },
+      { type: 'blocker' },
+      {
+        key: StatType.threshold + ThresholdType.threshold,
+        metric: {
+          name: 'Overall threshold',
+          shortcode: this.metricMeta.shortcode,
+          ...this.thresholdTrendStat
+        },
+        type: StatType.threshold,
+        canModifyThreshold: this.canModifyThreshold,
+        show: this.canViewThresholdModal,
+        on: this.thresholdListeners(this.namespacesTrend.threshold, 'overall threshold')
+      }
+    ]
+
+    if (this.newCodeThresholdTrendStat) {
+      stats.push({
+        key: StatType.threshold + ThresholdType.newCodeThreshold,
+        metric: {
+          name: 'New code threshold',
+          shortcode: this.metricMeta.newCodeMetricShortcode as string,
+          ...this.newCodeThresholdTrendStat
+        },
+        type: StatType.threshold,
+        canModifyThreshold: this.canModifyThreshold,
+        show: this.canViewThresholdModal,
+        on: this.thresholdListeners(this.namespacesTrend.newCodeThreshold, 'new code threshold')
+      })
+    }
+
+    return stats
+  }
+
+  /**
+   * ? Get the length of `trendStats` excluding the blockers in it
+   */
+  get trendStatsLength() {
+    return this.trendStats.reduce(
+      (total, trendStat) => (trendStat.type !== 'blocker' && trendStat.show ? total + 1 : total),
+      0
+    )
+  }
+
+  get isAggregate() {
     return this.namespacesTrend.key === this.AGGREGATE_METRIC_KEY
   }
 
-  get displayName(): string {
-    return this.isAggregate ? 'Aggregate' : this.metricMeta.name ?? ''
+  get displayName() {
+    return this.isAggregate ? 'Overall aggregate' : this.metricMeta.name ?? ''
   }
 
-  get thresholdListeners() {
+  thresholdListeners(
+    threshold: MetricNamespaceTrend['threshold'] | MetricNamespaceTrend['newCodeThreshold'],
+    thresholdName: string
+  ) {
     return {
       ...this.$listeners,
-      addThreshold: () => {
-        this.$emit('addThreshold', this.namespacesTrend)
+      addThreshold: (shortcode: string) => {
+        this.$emit('addThreshold', shortcode, threshold, this.namespacesTrend.key, thresholdName)
       },
-      openUpdateThresholdModal: () => {
-        this.$emit('openUpdateThresholdModal', this.namespacesTrend)
+      openUpdateThresholdModal: (shortcode: string) => {
+        this.$emit(
+          'openUpdateThresholdModal',
+          shortcode,
+          threshold,
+          this.namespacesTrend.key,
+          thresholdName
+        )
       },
-      deleteThreshold: () => {
-        this.$emit('deleteThreshold', this.namespacesTrend)
+      deleteThreshold: (shortcode: string) => {
+        this.$emit('deleteThreshold', shortcode, this.namespacesTrend.key)
       }
     }
   }
@@ -139,8 +221,18 @@ export default class TrendSection extends Vue {
     }
   }
 
+  get chartUpdateKey() {
+    return this.chartColors[0] + this.namespacesTrend.valueTrend.values.length
+  }
+
   get thresholdTrendStat() {
     return { value: this.namespacesTrend.threshold, unit: this.metricMeta.unit }
+  }
+
+  get newCodeThresholdTrendStat() {
+    return this.metricMeta.newCodeMetricShortcode
+      ? { value: this.namespacesTrend.newCodeThreshold, unit: this.metricMeta.unit }
+      : null
   }
 
   get graphData(): Record<string, Array<string | number | unknown> | undefined> {
@@ -158,7 +250,7 @@ export default class TrendSection extends Vue {
         this.namespacesTrend.threshold || this.namespacesTrend.threshold === 0
           ? [
               {
-                label: 'Threshold',
+                label: 'Overall threshold',
                 value: this.namespacesTrend.threshold,
                 options: { labelPos: 'right', stroke: 'vanilla-400', lineType: 'dashed' }
               }
@@ -202,10 +294,6 @@ export default class TrendSection extends Vue {
       this.maxDigitInGraph,
       this.maxDigitInGraph.toString().length - 1
     )
-  }
-
-  get chartUpdateKey() {
-    return this.chartColors[0] + this.namespacesTrend.valueTrend.values.length
   }
 
   get canViewThresholdModal(): boolean {

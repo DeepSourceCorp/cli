@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-4 px-6 py-4 border-b border-slate-400" :class="{ 'bg-ink-300': isAggregate }">
+  <div class="space-y-4 border-b border-slate-400 px-6 py-4" :class="{ 'bg-ink-300': isAggregate }">
     <trend-title v-bind="$props" @updateFilter="updateFilter" />
   </div>
 </template>

@@ -1,13 +1,15 @@
 <template>
-  <z-modal title="Update threshold" width="narrow" @onClose="$emit('close')">
+  <z-modal :title="`Update ${thresholdName}`" width="narrow" @onClose="$emit('close')">
     <template #default="{ close }">
-      <div class="p-4 space-y-4">
+      <div class="space-y-4 p-4">
         <p v-if="isAggregate" class="text-sm text-vanilla-400">
-          Update <b class="text-vanilla-200">Aggregate</b> threshold
+          Update <span class="lowercase"> {{ thresholdName }} </span> for
+          <span class="bold text-vanilla-200">Aggregate</span>
         </p>
         <p v-else class="text-sm text-vanilla-400">
-          Update <b class="text-vanilla-200">{{ metricName }}</b> threshold for
-          <b class="text-vanilla-200">{{ analyzerKey }}</b>
+          Update <span class="bold lowercase text-vanilla-200">{{ metricName }}</span> ⎯
+          <span class="bold lowercase text-vanilla-200">{{ thresholdName }}</span> for
+          <span class="bold text-vanilla-200">{{ analyzerKey }}</span>
         </p>
         <div class="space-y-2">
           <z-input
@@ -55,7 +57,11 @@ import { MetricType } from '~/types/metric'
 })
 export default class EditThresholdModal extends Vue {
   @Prop()
-  thresholdValue: MetricNamespace['threshold'] | MetricNamespaceTrend['threshold'] | undefined
+  thresholdValue:
+    | MetricNamespace['threshold']
+    | MetricNamespaceTrend['newCodeThreshold']
+    | MetricNamespaceTrend['threshold']
+    | undefined
 
   @Prop({ required: true })
   metricName: Metric['name']
@@ -71,6 +77,9 @@ export default class EditThresholdModal extends Vue {
 
   @Prop({ required: true })
   unit: Metric['unit'] | Maybe<string> | undefined
+
+  @Prop({ required: true })
+  thresholdName: string
 
   newThresholdValue: number | undefined = undefined
   thresholdInputError = false
@@ -124,7 +133,13 @@ export default class EditThresholdModal extends Vue {
         return close()
       }
 
-      this.$emit('editThreshold', Number(this.newThresholdValue), this.analyzerKey, close)
+      this.$emit(
+        'editThreshold',
+        Number(this.newThresholdValue),
+        this.analyzerKey,
+        this.metricShortcode,
+        close
+      )
     } else {
       this.$toast.danger('Please enter a valid threshold value.')
     }
