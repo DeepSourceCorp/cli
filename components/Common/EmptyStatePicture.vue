@@ -6,8 +6,7 @@
       v-if="pngImagePath"
       :src="pngImagePath"
       :alt="altText"
-      class="mx-auto"
-      :class="[width, height]"
+      :class="[imageClasses, width, height]"
     />
   </picture>
 </template>
@@ -36,5 +35,8 @@ export default class EmptyStatePicture extends Vue {
 
   @Prop({ default: 'This page has no data' })
   altText: string
+
+  @Prop({ default: 'mx-auto' })
+  imageClasses: string
 }
 </script>

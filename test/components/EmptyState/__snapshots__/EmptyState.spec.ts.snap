@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders EmptyState with all prop options: EmptyState 1`] = `
-"<section class=\\"w-full rounded-md border border-dashed border-slate-400 flex flex-wrap items-start justify-center gap-x-7 gap-y-8 md:flex-nowrap px-3.5 py-12 md:px-12 md:py-19\\">
+"<section class=\\"w-full rounded-md border border-dashed border-slate-400 flex flex-wrap items-start justify-center gap-x-7 gap-y-8 md:flex-nowrap px-3.5 py-12 md:px-12 md:py-19\\" showshadow=\\"true\\">
   <emptystatepicture-stub webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"w-full md:w-auto\\"></emptystatepicture-stub>
   <div class=\\"text-center md:text-left max-w-2xs\\">
     <h3 class=\\"text-vanilla-100 mt-7 text-base font-medium md:mt-0\\"> No data found</h3>
@@ -12,7 +12,7 @@ exports[`renders EmptyState with all prop options: EmptyState 1`] = `
 `;
 
 exports[`renders EmptyState with all prop options: EmptyState 2`] = `
-"<section class=\\"w-full flex flex-wrap items-start justify-center gap-x-7 gap-y-8 md:flex-nowrap px-3.5 py-12 md:px-12 md:py-19\\">
+"<section class=\\"w-full rounded-md border border-dashed border-slate-400 flex flex-wrap items-start justify-center gap-x-7 gap-y-8 md:flex-nowrap px-3.5 py-12 md:px-12 md:py-19\\">
   <emptystatepicture-stub webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"w-full md:w-auto\\"></emptystatepicture-stub>
   <div class=\\"text-center md:text-left max-w-2xs\\">
     <h3 class=\\"text-vanilla-100 mt-7 text-base font-medium md:mt-0\\"> No data found</h3>
@@ -23,6 +23,39 @@ exports[`renders EmptyState with all prop options: EmptyState 2`] = `
 `;
 
 exports[`renders EmptyState with all prop options: EmptyState 3`] = `
+"<section class=\\"w-full flex flex-wrap items-start justify-center gap-x-7 gap-y-8 md:flex-nowrap px-3.5 py-12 md:px-12 md:py-19\\" showshadow=\\"true\\">
+  <emptystatepicture-stub webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"w-full md:w-auto\\"></emptystatepicture-stub>
+  <div class=\\"text-center md:text-left max-w-2xs\\">
+    <h3 class=\\"text-vanilla-100 mt-7 text-base font-medium md:mt-0\\"> No data found</h3>
+    <p class=\\"text-sm text-vanilla-400 mt-2 leading-6\\">No data found here </p>
+    <!---->
+  </div>
+</section>"
+`;
+
+exports[`renders EmptyState with all prop options: EmptyState 4`] = `
+"<section class=\\"w-full flex flex-wrap items-start justify-center gap-x-7 gap-y-8 md:flex-nowrap px-3.5 py-12 md:px-12 md:py-19\\">
+  <emptystatepicture-stub webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"w-full md:w-auto\\"></emptystatepicture-stub>
+  <div class=\\"text-center md:text-left max-w-2xs\\">
+    <h3 class=\\"text-vanilla-100 mt-7 text-base font-medium md:mt-0\\"> No data found</h3>
+    <p class=\\"text-sm text-vanilla-400 mt-2 leading-6\\">No data found here </p>
+    <!---->
+  </div>
+</section>"
+`;
+
+exports[`renders EmptyState with all prop options: EmptyState 5`] = `
+"<section class=\\"w-full rounded-md border border-dashed border-slate-400 px-3.5 py-12 md:px-12 md:py-19\\" showshadow=\\"true\\">
+  <emptystatepicture-stub webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"\\"></emptystatepicture-stub>
+  <div class=\\"\\">
+    <h3 class=\\"text-vanilla-100 mt-7 text-center text-lg font-semibold md:mt-5\\"> No data found</h3>
+    <p class=\\"text-sm text-vanilla-400 mx-auto mt-2 max-w-md text-center sm:mt-1\\">No data found here </p>
+    <!---->
+  </div>
+</section>"
+`;
+
+exports[`renders EmptyState with all prop options: EmptyState 6`] = `
 "<section class=\\"w-full rounded-md border border-dashed border-slate-400 px-3.5 py-12 md:px-12 md:py-19\\">
   <emptystatepicture-stub webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"\\"></emptystatepicture-stub>
   <div class=\\"\\">
@@ -33,7 +66,18 @@ exports[`renders EmptyState with all prop options: EmptyState 3`] = `
 </section>"
 `;
 
-exports[`renders EmptyState with all prop options: EmptyState 4`] = `
+exports[`renders EmptyState with all prop options: EmptyState 7`] = `
+"<section class=\\"w-full px-3.5 py-12 md:px-12 md:py-19\\" showshadow=\\"true\\">
+  <emptystatepicture-stub webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"\\"></emptystatepicture-stub>
+  <div class=\\"\\">
+    <h3 class=\\"text-vanilla-100 mt-7 text-center text-lg font-semibold md:mt-5\\"> No data found</h3>
+    <p class=\\"text-sm text-vanilla-400 mx-auto mt-2 max-w-md text-center sm:mt-1\\">No data found here </p>
+    <!---->
+  </div>
+</section>"
+`;
+
+exports[`renders EmptyState with all prop options: EmptyState 8`] = `
 "<section class=\\"w-full px-3.5 py-12 md:px-12 md:py-19\\">
   <emptystatepicture-stub webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"\\"></emptystatepicture-stub>
   <div class=\\"\\">

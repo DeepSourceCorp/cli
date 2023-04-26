@@ -14,8 +14,9 @@ const generateProps = (overrides = {}) => {
 test('renders EmptyState with all prop options', () => {
   const useV2Options = generateBooleanProps('useV2', false)
   const showBorderOptions = generateBooleanProps('showBorder', false)
+  const showShadowOptions = generateBooleanProps('showShadow', false)
 
-  cartesian(useV2Options, showBorderOptions).forEach((propCombination) => {
+  cartesian(useV2Options, showBorderOptions, showShadowOptions).forEach((propCombination) => {
     const { html } = render(EmptyState, {
       props: generateProps(propCombination),
       stubs: { EmptyStatePicture: true },
