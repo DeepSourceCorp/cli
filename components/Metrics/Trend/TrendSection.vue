@@ -222,7 +222,11 @@ export default class TrendSection extends Vue {
   }
 
   get chartUpdateKey() {
-    return this.chartColors[0] + this.namespacesTrend.valueTrend.values.length
+    return (
+      this.chartColors[0] +
+      this.namespacesTrend.valueTrend.values.length +
+      this.namespacesTrend.threshold
+    )
   }
 
   get thresholdTrendStat() {
