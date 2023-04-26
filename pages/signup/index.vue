@@ -1,30 +1,30 @@
 <template>
   <div class="relative bg-ink-400">
-    <div class="grid min-h-screen grid-cols-1 md:grid-cols-2 text-vanilla-100">
-      <div class="flex flex-col justify-center h-full">
+    <div class="grid min-h-screen grid-cols-1 text-vanilla-100 md:grid-cols-2">
+      <div class="flex h-full flex-col justify-center">
         <div
-          class="flex flex-col justify-between max-w-md px-6 py-24 mx-auto space-y-16 text-center lg:text-left lg:px-0 lg:py-0"
+          class="mx-auto flex max-w-md flex-col justify-between space-y-16 px-6 py-24 text-center lg:px-0 lg:py-0 lg:text-left"
         >
           <div class="space-y-8">
             <img
               src="~/assets/images/logo-wordmark-white.svg"
               alt="DeepSource Logo"
-              class="w-auto h-6"
+              class="h-6 w-auto"
             />
-            <h1 class="text-3xl font-bold leading-tight text-left">
+            <h1 class="text-left text-3xl font-bold leading-tight">
               Join the world's best developers
             </h1>
             <div
-              class="flex flex-col items-center mt-8 space-y-4 left-section__btn-group sm:mt-16 sm:items-start"
+              class="left-section__btn-group mt-8 flex flex-col items-center space-y-4 sm:mt-16 sm:items-start"
             >
               <a
                 v-for="opt in loginOptions"
                 :key="opt.provider"
                 :href="buildUrl(opt.provider)"
-                class="flex items-center w-full left-section__btn"
+                class="left-section__btn flex w-full items-center"
               >
                 <button
-                  class="flex items-center justify-center w-full p-2 space-x-2 rounded-sm text-vanilla-100 hover:bg-opacity-90"
+                  class="flex w-full items-center justify-center space-x-2 rounded-sm p-2 text-vanilla-100 hover:bg-opacity-90"
                   :class="opt.bg"
                 >
                   <z-icon :icon="opt.icon" />
@@ -33,45 +33,48 @@
               </a>
             </div>
           </div>
-          <div class="flex flex-col space-y-4 leading-relaxed text-left">
+          <div class="flex flex-col space-y-4 text-left leading-relaxed">
             <div class="text-vanilla-400">
               By signing up, you are agreeing to our
               <a href="https://deepsource.com/legal/terms" class="text-juniper hover:underline">
-                Terms of Service
-              </a>
+                Terms of Service</a
+              >,
+              <a href="https://deepsource.com/legal/msa" class="text-juniper hover:underline">
+                Master Subscription Agreement</a
+              >
               and
               <a href="https://deepsource.com/legal/privacy" class="text-juniper hover:underline"
                 >Privacy Policy</a
               >.
             </div>
-            <div class="pt-4 border-t text-vanilla-400 border-slate">
+            <div class="border-t border-slate pt-4 text-vanilla-400">
               Already have an account?
               <a href="/login" class="text-juniper hover:underline">Log in</a>
             </div>
           </div>
         </div>
       </div>
-      <div class="flex-col justify-center hidden min-h-full px-8 lg:px-12 bg-ink-300 md:flex">
+      <div class="hidden min-h-full flex-col justify-center bg-ink-300 px-8 md:flex lg:px-12">
         <div class="h-5/6">
           <z-carousel
             :show-controls="false"
             auto-timing="8000"
             :auto-slide="true"
-            class="block max-w-lg mx-auto"
+            class="mx-auto block max-w-lg"
           >
             <z-slide v-for="(testimonial, index) in testimonials" :key="index">
               <div class="w-full">
                 <img
-                  class="object-contain w-full h-40 lg:h-96"
+                  class="h-40 w-full object-contain lg:h-96"
                   :src="require(`~/assets/images/${testimonial.avatar}`)"
                   :alt="testimonial.author"
                 />
               </div>
               <p
-                class="box-content max-w-lg mt-4 text-lg leading-normal text-vanilla-300"
+                class="mt-4 box-content max-w-lg text-lg leading-normal text-vanilla-300"
                 v-html="testimonial.body"
               ></p>
-              <div class="mt-4 desc text-vanilla-300">
+              <div class="desc mt-4 text-vanilla-300">
                 <div class="name">{{ testimonial.author }}</div>
                 <div class="company text-vanilla-400">{{ testimonial.company }}</div>
               </div>
