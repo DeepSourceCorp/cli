@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders EnableCoverageSteps with all prop options: {"dsn":"http://6f7d439568e64460a5e0a31967314288@localhost:3000"} 1`] = `
+"<div class=\\"p-4 pb-0\\">
+  <div class=\\"z-accordion-item text-vanilla-200\\">
+    <div class=\\"flex cursor-pointer items-center gap-1 pb-4\\">
+      <zicon-stub icon=\\"chevron-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transform\\"></zicon-stub> <span class=\\"text-xs leading-6 text-vanilla-400\\">
+          How to send coverage reports to DeepSource?
+        </span>
+    </div>
+    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-0\\">
+      <div class=\\"z-stepper flex flex-col\\">
+        <div class=\\"mr-0 z-step w-1/3 flex-shrink-0 flex-grow-0\\">
+          <div class=\\"relative z-step__head currentStatus w-full\\">
+            <!---->
+            <div class=\\"w-6 h-6 rounded-full z-step__icon bg-ink-200\\">
+              <!---->
+            </div>
+            <!---->
+          </div>
+          <div class=\\"z-step__main mt-4\\">
+            <p class=\\"text-xs text-vanilla-400\\">
+              Set up the
+              <code class=\\"bifrost-inline-code uppercase text-vanilla-100\\">DEEPSOURCE_DSN</code>
+              environment variable.
+            </p>
+            <div class=\\"mt-1 text-sm font-bold leading-6 z-step__description text-vanilla-200 text-vanilla-400\\">
+              <div class=\\"copy-content-container h-8 max-w-2xs items-center gap-x-4 py-2 sm:max-w-none\\"><code class=\\"truncate font-mono text-xs font-normal leading-4 text-vanilla-100\\">
+              http://6f7d439568e64460a5e0a31967314288@localhost:3000
+            </code>
+                <unstyledcopybutton-stub value=\\"http://6f7d439568e64460a5e0a31967314288@localhost:3000\\" icon-size=\\"x-small\\" class=\\"auxillary-button text-xs text-vanilla-100\\"></unstyledcopybutton-stub>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class=\\"mr-0 z-step w-1/3 flex-shrink-0 flex-grow-0\\">
+          <div class=\\"relative z-step__head currentStatus w-full\\">
+            <!---->
+            <div class=\\"w-6 h-6 rounded-full z-step__icon bg-ink-200\\">
+              <!---->
+            </div>
+            <!---->
+          </div>
+          <div class=\\"z-step__main mt-4\\">
+            <p class=\\"mb-2 text-xs text-vanilla-400\\">
+              Install the
+              <a href=\\"https://deepsource.com/cli\\" target=\\"blank\\" rel=\\"noreferrer noopener\\" class=\\"inline-flex items-center gap-x-1 text-juniper\\">
+                DeepSource CLI
+                <zicon-stub icon=\\"arrow-up-right\\" size=\\"x-small\\" position=\\"\\" color=\\"current\\"></zicon-stub></a></p>
+            <div class=\\"mt-1 text-sm font-bold leading-6 z-step__description text-vanilla-200 text-vanilla-400\\">
+              <div class=\\"flex max-w-2xs items-center gap-2 font-normal sm:max-w-none\\">
+                <div class=\\"h-8 w-24 flex-shrink-0\\">
+                  <zselect-stub selected=\\"curl\\" tabindex=\\"0\\" placeholder=\\"Select an Option\\" spacing=\\"p-1.5\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-sm\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\">
+                    <zoption-stub label=\\"cURL\\" value=\\"curl\\" textsize=\\"text-xs\\" class=\\"z-20\\"></zoption-stub>
+                    <zoption-stub label=\\"Homebrew\\" value=\\"brew\\" textsize=\\"text-xs\\" class=\\"z-20\\"></zoption-stub>
+                  </zselect-stub>
+                </div>
+                <div class=\\"copy-content-container h-8 min-w-0 flex-grow items-center gap-x-2 py-2 sm:min-w-max\\"><code class=\\"truncate font-mono text-xs leading-3 text-vanilla-100\\"><span class=\\"select-none text-honey\\">$</span> 
+                  curl
+                  <span class=\\"text-aqua-500\\">deepsource.io/cli</span> <span class=\\"text-honey\\"> | sh</span></code>
+                  <unstyledcopybutton-stub value=\\"curl deepsource.io/cli | sh\\" label=\\"Copy\\" icon-size=\\"x-small\\" class=\\"auxillary-button text-xs text-vanilla-100\\"></unstyledcopybutton-stub>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class=\\"mr-0 z-step w-1/3 flex-shrink-0 flex-grow-0\\">
+          <div class=\\"relative z-step__head currentStatus w-full\\">
+            <!---->
+            <div class=\\"w-6 h-6 rounded-full z-step__icon bg-ink-200\\">
+              <!---->
+            </div>
+            <!---->
+          </div>
+          <div class=\\"z-step__main mt-4\\">
+            <p class=\\"mb-2 text-xs leading-6 text-vanilla-400\\">
+              Report your coverage artifact to DeepSource using the CLI.
+            </p>
+            <div class=\\"mt-1 text-sm font-bold leading-6 z-step__description text-vanilla-200 text-vanilla-400\\">
+              <div class=\\"copy-content-container max-w-2xs items-start sm:max-w-none\\"><code class=\\"max-w-md py-2 font-mono text-xs font-normal leading-4 text-vanilla-100 line-clamp-3\\">
+              ./bin/deepsource report --analyzer test-coverage --key &lt;key&gt; --value-file &lt;absolute-path-of-the-coverage report&gt;
+            </code>
+                <unstyledcopybutton-stub value=\\"./bin/deepsource report --analyzer test-coverage --key <key> --value-file <absolute-path-of-the-coverage report>\\" icon-size=\\"x-small\\" class=\\"auxillary-button mt-1 text-xs text-vanilla-100\\"></unstyledcopybutton-stub>
+              </div> <a href=\\"https://docs.deepsource.com/docs/analyzer/test-coverage#setup-test-coverage\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"auxillary-link mt-3 h-7 w-max text-xs font-normal text-vanilla-400\\">
+                Read full documentation
+                <zicon-stub icon=\\"arrow-up-right\\" size=\\"x-small\\" position=\\"\\" color=\\"current\\"></zicon-stub></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;

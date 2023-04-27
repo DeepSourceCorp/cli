@@ -5,6 +5,7 @@ import IssueType from './IssueType.vue'
 import IgnoredRule from './IgnoredRule.vue'
 import IssueSeverityTag from './IssueSeverityTag.vue'
 import CoverageEnabledCard from './CoverageEnabledCard.vue'
+import EnableCoverageSteps from './EnableCoverageSteps.vue'
 
 export {
   GistCard,
@@ -13,5 +14,6 @@ export {
   IssueType,
   IgnoredRule,
   IssueSeverityTag,
-  CoverageEnabledCard
+  CoverageEnabledCard,
+  EnableCoverageSteps
 }

@@ -11661,7 +11661,7 @@ export type CodeCoverageQuery = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
-    & Pick<Repository, 'id' | 'hasTestCoverage'>
+    & Pick<Repository, 'id' | 'hasTestCoverage' | 'dsn'>
     & { repositorySetting?: Maybe<(
       { __typename?: 'RepositorySetting' }
       & Pick<RepositorySetting, 'inferDefaultBranchCoverage'>

@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-2xl p-4 space-y-5">
+  <div class="max-w-2xl space-y-5 p-4">
     <page-title
       class="max-w-2xl"
       title="Code Coverage"
@@ -9,13 +9,10 @@
 
     <main class="space-y-7">
       <div class="space-y-5">
-        <z-alert
-          type="info"
-          class="pr-0 bg-opacity-5 border border-robin border-opacity-10 pt-2 pb-3"
-        >
-          <div class="space-y-2 text-xs text-robin-400 font-medium">
+        <z-alert type="info" class="border border-robin border-opacity-10 bg-opacity-5 pt-2 pb-3">
+          <div class="space-y-2 text-xs font-medium text-robin-400">
             <p class="text-sm leading-8">How does it work?</p>
-            <p class="text-robin-150 leading-6 font-normal">
+            <p class="font-normal leading-6 text-robin-150">
               Code Coverage is automatically enabled when we receive a coverage report for your
               repository. Send a coverage report to DeepSource directly using the CLI or integrate
               coverage reporting in your CI pipeline.
@@ -25,7 +22,7 @@
                 href="https://deepsource.io/docs/analyzer/test-coverage#setup-test-coverage"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex gap-x-0.5 items-center hover:underline focus:underline"
+                class="inline-flex items-center gap-x-0.5 hover:underline focus:underline"
               >
                 Learn more
                 <z-icon icon="arrow-up-right" color="robin-400" size="x-small" />
@@ -36,6 +33,7 @@
 
         <coverage-enabled-card
           :has-test-coverage="hasTestCoverage"
+          :dsn="dsn"
           :loading="$fetchState.pending"
         />
       </div>
@@ -45,10 +43,10 @@
 
         <div
           v-if="$fetchState.pending"
-          class="h-infer-toggle bg-ink-300 rounded-md animate-pulse"
+          class="h-infer-toggle animate-pulse rounded-md bg-ink-300"
         ></div>
 
-        <div v-else class="bg-ink-300 border border-ink-200 rounded-md p-4">
+        <div v-else class="rounded-md border border-ink-200 bg-ink-300 p-4">
           <toggle-input
             :value="inferDefaultBranchCoverage"
             :remove-y-padding="true"
@@ -96,6 +94,7 @@ export default class SettingsCodeCoverage extends Vue {
   inferDefaultBranchCoverage = false
   hasTestCoverage = false
   repoId = ''
+  dsn = ''
 
   async fetch() {
     const { provider, owner, repo: name } = this.$route.params
@@ -117,6 +116,8 @@ export default class SettingsCodeCoverage extends Vue {
           repoDetails?.repositorySetting?.inferDefaultBranchCoverage ?? false
 
         this.repoId = repoDetails?.id ?? ''
+
+        this.dsn = repoDetails?.dsn ?? ''
       } else {
         this.$toast.danger('Unable to fetch repository data. Please contact support.')
       }
