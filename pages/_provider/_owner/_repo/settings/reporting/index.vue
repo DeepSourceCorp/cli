@@ -356,64 +356,37 @@
         </p>
       </div>
     </div>
-    <z-divider margin="my-2" class="max-w-2xl" />
 
-    <div class="space-y-4">
-      <div>
-        <h6 class="mb-1 text-sm text-vanilla-100">Test Coverage</h6>
-        <!-- Notice -->
-        <p class="text-xs leading-5 text-vanilla-400">
-          For tracking test coverage, external data has to be sent to DeepSource. Read
-          <a
-            href="https://deepsource.io/docs/analyzer/test-coverage"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-juniper"
-            >documentation</a
-          >
-          on configuration.
-        </p>
-      </div>
-      <notice :enabled="true" class="items-baseline">
-        <p v-if="repository.hasTestCoverage" class="relative top-px">
-          Test coverage tracking is enabled, and we're ready to receive coverage data.
-        </p>
-        <p v-else class="relative top-px">
-          Test coverage has not been set up for this repository yet.
-        </p>
-      </notice>
+    <portal to="modal">
+      <z-confirm
+        v-if="showDSNRegenerateConfirm && canRegenerateDSN"
+        title="Confirm regenerate DSN for this repository?"
+        subtitle="This action is irreversible, and will invalidate the old DSN. You must replace the old DSN with the new one wherever you are using it."
+        @onClose="showDSNRegenerateConfirm = false"
+      >
+        <template #footer="{ close }">
+          <div class="mt-6 flex items-center justify-end gap-x-4">
+            <z-button
+              label="Cancel"
+              button-type="ghost"
+              size="small"
+              class="text-vanilla-100"
+              @click="close"
+            />
 
-      <portal to="modal">
-        <z-confirm
-          v-if="showDSNRegenerateConfirm && canRegenerateDSN"
-          title="Confirm regenerate DSN for this repository?"
-          subtitle="This action is irreversible, and will invalidate the old DSN. You must replace the old DSN with the new one wherever you are using it."
-          @onClose="showDSNRegenerateConfirm = false"
-        >
-          <template #footer="{ close }">
-            <div class="mt-6 flex items-center justify-end gap-x-4">
-              <z-button
-                label="Cancel"
-                button-type="ghost"
-                size="small"
-                class="text-vanilla-100"
-                @click="close"
-              />
-
-              <z-button
-                label="Confirm and regenerate DSN"
-                loading-label="Confirm and regenerate DSN"
-                icon="refresh-ccw"
-                size="small"
-                :is-loading="regenerateDSNLoading"
-                :disabled="regenerateDSNLoading"
-                @click="regenerateDSN"
-              />
-            </div>
-          </template>
-        </z-confirm>
-      </portal>
-    </div>
+            <z-button
+              :disabled="regenerateDSNLoading"
+              :is-loading="regenerateDSNLoading"
+              label="Confirm and regenerate DSN"
+              loading-label="Confirm and regenerate DSN"
+              icon="refresh-ccw"
+              size="small"
+              @click="regenerateDSN"
+            />
+          </div>
+        </template>
+      </z-confirm>
+    </portal>
   </div>
 </template>
 

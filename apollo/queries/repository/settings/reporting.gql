@@ -3,7 +3,6 @@ query RepositoryReportingSettings($provider: VCSProviderChoices!, $owner: String
     id
     name
     dsn
-    hasTestCoverage
     gitlabIntegrationUseStatus
     issueTypeSettings {
       name

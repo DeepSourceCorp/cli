@@ -11789,7 +11789,7 @@ export type RepositoryReportingSettingsQuery = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
-    & Pick<Repository, 'id' | 'name' | 'dsn' | 'hasTestCoverage' | 'gitlabIntegrationUseStatus'>
+    & Pick<Repository, 'id' | 'name' | 'dsn' | 'gitlabIntegrationUseStatus'>
     & { issueTypeSettings?: Maybe<Array<Maybe<(
       { __typename?: 'IssueTypeSetting' }
       & Pick<IssueTypeSetting, 'name' | 'slug' | 'description' | 'isIgnoredInCheckStatus' | 'isIgnoredToDisplay'>
