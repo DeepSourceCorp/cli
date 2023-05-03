@@ -1,9 +1,9 @@
 <template>
-  <section class="flex flex-col min-height-for-offset">
+  <section class="min-height-for-offset flex flex-col">
     <div
-      v-if="status === CheckStatus.Fail"
+      v-if="issueCount"
       id="issue-filters"
-      class="px-3 md:sticky md:z-10 check-filter-headers-offset bg-ink-400"
+      class="check-filter-headers-offset bg-ink-400 px-3 md:sticky md:z-10"
     >
       <slot name="controls"></slot>
     </div>
@@ -45,7 +45,7 @@
               :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
               :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
               subtitle="Please try changing your search query."
-              class="border-2 border-dashed rounded-md border-slate-400"
+              class="rounded-md border-2 border-dashed border-slate-400"
             >
               <template #title>
                 <p class="text-base text-vanilla-200">{{ emptyStateTitle }}</p>

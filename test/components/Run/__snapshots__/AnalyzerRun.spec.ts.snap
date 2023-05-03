@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ AnalyzerRun ]] empty state for all statuses when issue count is 0: {"status":"CNCL"} 1`] = `
-"<section class=\\"flex flex-col min-height-for-offset\\">
+"<section class=\\"min-height-for-offset flex flex-col\\">
   <!---->
   <div class=\\"p-3\\">
     <!---->
@@ -12,8 +12,8 @@ exports[`[[ AnalyzerRun ]] empty state for all statuses when issue count is 0: {
 `;
 
 exports[`[[ AnalyzerRun ]] empty state for all statuses when issue count is 0: {"status":"FAIL"} 1`] = `
-"<section class=\\"flex flex-col min-height-for-offset\\">
-  <div id=\\"issue-filters\\" class=\\"px-3 md:sticky md:z-10 check-filter-headers-offset bg-ink-400\\"></div>
+"<section class=\\"min-height-for-offset flex flex-col\\">
+  <!---->
   <div class=\\"p-3\\">
     <!---->
     <!---->
@@ -25,7 +25,7 @@ exports[`[[ AnalyzerRun ]] empty state for all statuses when issue count is 0: {
 `;
 
 exports[`[[ AnalyzerRun ]] empty state for all statuses when issue count is 0: {"status":"PASS"} 1`] = `
-"<section class=\\"flex flex-col min-height-for-offset\\">
+"<section class=\\"min-height-for-offset flex flex-col\\">
   <!---->
   <div class=\\"p-3\\">
     <!---->
@@ -38,7 +38,7 @@ exports[`[[ AnalyzerRun ]] empty state for all statuses when issue count is 0: {
 `;
 
 exports[`[[ AnalyzerRun ]] empty state for all statuses when issue count is 0: {"status":"PEND"} 1`] = `
-"<section class=\\"flex flex-col min-height-for-offset\\">
+"<section class=\\"min-height-for-offset flex flex-col\\">
   <!---->
   <div class=\\"p-3\\">
     <!---->
@@ -51,7 +51,7 @@ exports[`[[ AnalyzerRun ]] empty state for all statuses when issue count is 0: {
 `;
 
 exports[`[[ AnalyzerRun ]] empty state for all statuses when issue count is 0: {"status":"READ"} 1`] = `
-"<section class=\\"flex flex-col min-height-for-offset\\">
+"<section class=\\"min-height-for-offset flex flex-col\\">
   <!---->
   <div class=\\"p-3\\">
     <!---->
@@ -64,7 +64,7 @@ exports[`[[ AnalyzerRun ]] empty state for all statuses when issue count is 0: {
 `;
 
 exports[`[[ AnalyzerRun ]] empty state for all statuses when issue count is 0: {"status":"TIMO"} 1`] = `
-"<section class=\\"flex flex-col min-height-for-offset\\">
+"<section class=\\"min-height-for-offset flex flex-col\\">
   <!---->
   <div class=\\"p-3\\">
     <!---->
@@ -75,8 +75,8 @@ exports[`[[ AnalyzerRun ]] empty state for all statuses when issue count is 0: {
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"CNCL"} 1`] = `
-"<section class=\\"flex flex-col min-height-for-offset\\">
-  <!---->
+"<section class=\\"min-height-for-offset flex flex-col\\">
+  <div id=\\"issue-filters\\" class=\\"check-filter-headers-offset bg-ink-400 px-3 md:sticky md:z-10\\"></div>
   <div class=\\"p-3\\">
     <!---->
     <!---->
@@ -91,8 +91,8 @@ There can be cases where the value being raised is dynamically set. One common e
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"FAIL"} 1`] = `
-"<section class=\\"flex flex-col min-height-for-offset\\">
-  <div id=\\"issue-filters\\" class=\\"px-3 md:sticky md:z-10 check-filter-headers-offset bg-ink-400\\"></div>
+"<section class=\\"min-height-for-offset flex flex-col\\">
+  <div id=\\"issue-filters\\" class=\\"check-filter-headers-offset bg-ink-400 px-3 md:sticky md:z-10\\"></div>
   <div class=\\"p-3\\">
     <!---->
     <!---->
@@ -107,8 +107,8 @@ There can be cases where the value being raised is dynamically set. One common e
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"PASS"} 1`] = `
-"<section class=\\"flex flex-col min-height-for-offset\\">
-  <!---->
+"<section class=\\"min-height-for-offset flex flex-col\\">
+  <div id=\\"issue-filters\\" class=\\"check-filter-headers-offset bg-ink-400 px-3 md:sticky md:z-10\\"></div>
   <div class=\\"p-3\\">
     <!---->
     <!---->
@@ -123,8 +123,8 @@ There can be cases where the value being raised is dynamically set. One common e
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"PEND"} 1`] = `
-"<section class=\\"flex flex-col min-height-for-offset\\">
-  <!---->
+"<section class=\\"min-height-for-offset flex flex-col\\">
+  <div id=\\"issue-filters\\" class=\\"check-filter-headers-offset bg-ink-400 px-3 md:sticky md:z-10\\"></div>
   <div class=\\"p-3\\">
     <!---->
     <lazyrunloading-stub></lazyrunloading-stub>
@@ -139,8 +139,8 @@ There can be cases where the value being raised is dynamically set. One common e
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"READ"} 1`] = `
-"<section class=\\"flex flex-col min-height-for-offset\\">
-  <!---->
+"<section class=\\"min-height-for-offset flex flex-col\\">
+  <div id=\\"issue-filters\\" class=\\"check-filter-headers-offset bg-ink-400 px-3 md:sticky md:z-10\\"></div>
   <div class=\\"p-3\\">
     <!---->
     <!---->
@@ -155,8 +155,8 @@ There can be cases where the value being raised is dynamically set. One common e
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"TIMO"} 1`] = `
-"<section class=\\"flex flex-col min-height-for-offset\\">
-  <!---->
+"<section class=\\"min-height-for-offset flex flex-col\\">
+  <div id=\\"issue-filters\\" class=\\"check-filter-headers-offset bg-ink-400 px-3 md:sticky md:z-10\\"></div>
   <div class=\\"p-3\\">
     <!---->
     <!---->
