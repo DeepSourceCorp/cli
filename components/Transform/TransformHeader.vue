@@ -1,11 +1,10 @@
 <template>
   <div>
-    <sub-nav active="transforms" />
     <!-- Back to Run List Page -->
-    <div class="flex flex-col w-full px-4 py-6 space-y-2">
+    <div class="flex w-full flex-col space-y-2 px-4 py-6">
       <link-to-prev :link="routeToPrevious" title="All transform runs" />
       <!-- Details Header -->
-      <div class="w-3/4 sm:w-4/5 py-2.5 flex flex-col space-y-2 justify-evenly">
+      <div class="flex w-3/4 flex-col justify-evenly space-y-2 py-2.5 sm:w-4/5">
         <gist-card-title
           :id="commitOidShort"
           :icon="statusIcon"

@@ -1,6 +1,6 @@
 <template>
   <div class="relative top-0 flex w-full flex-col space-y-5 pb-6">
-    <div v-if="autofixViewLoading" class="space-y-5">
+    <div v-if="loadingOnPageVisit" class="space-y-5">
       <div class="h-13 w-full animate-pulse rounded-md bg-ink-300"></div>
       <div class="mx-4 mt-5 h-15 w-full animate-pulse rounded-md bg-ink-300"></div>
       <div class="mt-6 h-12 w-full animate-pulse rounded-md bg-ink-300"></div>
@@ -390,7 +390,7 @@ const runStore = namespace('run/detail')
   }
 })
 export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin) {
-  public autofixViewLoading = false
+  public loadingOnPageVisit = false
   public isArchivedAutofixRun = false
   public isGroup = false
   public isReadOnly = false
@@ -398,6 +398,10 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin) {
   public triggeringAutofix = false
 
   public height = '1px'
+
+  AUTOFIX_STATUS = AUTOFIX_STATUS
+  COMMIT_STATUS = COMMIT_STATUS
+  PULL_REQUEST_STATUS = PULL_REQUEST_STATUS
 
   autofixRun = {} as AutofixRun
 
@@ -466,8 +470,6 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin) {
    * @returns {Promise<AutofixRun>}
    */
   async fetchAutofixRun(refetch = true): Promise<void> {
-    this.autofixViewLoading = true
-
     try {
       await this.fetchRepoPerms(this.baseRouteParams)
 
@@ -490,8 +492,6 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin) {
         err as Error,
         'Something went wrong while fetching Autofix run details.'
       )
-    } finally {
-      this.autofixViewLoading = false
     }
   }
 
@@ -546,13 +546,21 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin) {
    * @returns {Promise<void>}
    */
   async fetch(): Promise<void> {
+    // Restrict showing skeleton loaders on page visits and not for subsequent actions
+    this.loadingOnPageVisit = true
+
     await this.fetchAutofixRun(false)
+
+    this.loadingOnPageVisit = false
 
     if (this.isArchivedAutofixRun) {
       return
     }
 
-    if (!Object.keys(this.autofixRun).length) {
+    if (
+      !Object.keys(this.autofixRun).length &&
+      this.$route.name === 'provider-owner-repo-autofix-autofix_id'
+    ) {
       this.$nuxt.error({ statusCode: 404 })
     }
 
