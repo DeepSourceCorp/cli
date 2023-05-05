@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/DataDog/zstd"
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/getsentry/sentry-go"
@@ -218,7 +219,17 @@ func (opts *ReportOptions) Run() int {
 			return 1
 		}
 
-		artifactValue = string(valueBytes)
+		// Compress the byte array
+		var compressedBytes []byte
+		compressLevel := 20
+		compressedBytes, err = zstd.CompressLevel(compressedBytes, valueBytes, compressLevel)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to compress value file:", reportCommandValueFile)
+			sentry.CaptureException(err)
+			return 1
+		}
+
+		artifactValue = string(compressedBytes)
 	}
 
 	////////////////////
