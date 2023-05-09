@@ -56,10 +56,6 @@ describe('[[ CreateReportSuccess ]]', () => {
   })
 
   describe('[[ CreateReportSuccess getters ]]', () => {
-    const {
-      $config: { domain }
-    } = mockData as Record<string, Record<string, string>>
-
     describe('[[ formattedUrl ]]', () => {
       test('Test for formattedUrl getter when password not available', () => {
         const wrapper = shallowMount(CreateReportSuccess, {
@@ -73,30 +69,7 @@ describe('[[ CreateReportSuccess ]]', () => {
 
         const { reportId } = baseProps
 
-        const url = `https://${domain}/report/${reportId}`
-
-        // Test formattedUrl returns correct value
-        expect(vm.formattedUrl).toBe(url)
-      })
-
-      test('Test for formattedUrl getter when password is available', () => {
-        const props = {
-          ...baseProps,
-          password: 'deepsource'
-        }
-        const wrapper = shallowMount(CreateReportSuccess, {
-          stubs,
-          propsData: props,
-          mocks: mockData,
-          localVue
-        })
-
-        const vm = wrapper.vm as CreateReportSuccessT
-
-        const { reportId } = baseProps
-        const { password } = props
-
-        const url = `https://${domain}/report/${reportId}?password=${password}`
+        const url = `${window.location.origin}/report/${reportId}`
 
         // Test formattedUrl returns correct value
         expect(vm.formattedUrl).toBe(url)

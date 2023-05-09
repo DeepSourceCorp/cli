@@ -1,8 +1,8 @@
 <template>
   <z-dialog-generic @onClose="$emit('close')">
     <template #default="{ close }">
-      <div class="p-4 flex flex-col gap-y-4 w-98" @click.stop>
-        <h3 class="text-sm font-medium text-vanilla-100 leading-6">
+      <div class="flex w-98 flex-col gap-y-4 p-4" @click.stop>
+        <h3 class="text-sm font-medium leading-6 text-vanilla-100">
           Report has been successfully {{ editMode ? 'updated' : 'created' }}
         </h3>
 
@@ -14,7 +14,7 @@
         </z-alert>
 
         <label for="report-link" class="space-y-1.5">
-          <p class="text-xs font-normal text-vanilla-100 leading-5">Report URL</p>
+          <p class="text-xs font-normal leading-5 text-vanilla-100">Report URL</p>
           <z-input
             id="report-link"
             :value="formattedUrl"
@@ -30,7 +30,7 @@
         </label>
 
         <label v-if="password" for="report-password" class="space-y-1.5">
-          <p class="text-xs font-normal text-vanilla-100 leading-5">Password</p>
+          <p class="text-xs font-normal leading-5 text-vanilla-100">Password</p>
           <z-input
             id="report-password"
             :value="password"
@@ -54,7 +54,7 @@
             label="Copy report details"
             succes-label="Report details copied"
             :value="reportDetails"
-            class="float-left hover:text-vanilla-100 pl-1 hover:no-underline"
+            class="float-left pl-1 hover:text-vanilla-100 hover:no-underline"
           />
 
           <z-button icon="check" size="small" label="Done" class="float-right" @click="close" />
@@ -91,9 +91,7 @@ export default class CreateReportSuccess extends Vue {
   editMode: boolean
 
   get formattedUrl(): string {
-    const reportUrl = `https://${this.$config.domain}/report/${this.reportId}`
-
-    return this.password ? `${reportUrl}?password=${this.password}` : reportUrl
+    return `${window.location.origin}/report/${this.reportId}`
   }
 
   get reportDetails(): string {

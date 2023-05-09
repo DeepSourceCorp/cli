@@ -1,8 +1,8 @@
 <template>
-  <div class="w-full min-h-screen mx-auto lg:max-w-6xl 2xl:max-w-7xl">
+  <div class="mx-auto min-h-screen w-full lg:max-w-6xl 2xl:max-w-7xl">
     <div
       v-if="publicReport && publicReport.owner"
-      class="sticky top-0 left-0 z-30 w-full border-b lg:hidden border-slate-400 bg-ink-400"
+      class="sticky top-0 left-0 z-30 w-full border-b border-slate-400 bg-ink-400 lg:hidden"
     >
       <z-button
         id="mobile-sidebar-toggle"
@@ -24,7 +24,7 @@
       />
 
       <div
-        class="w-screen px-4 pt-6 pb-10 text-sm border-t sm:w-auto lg:pt-26 md:px-6 md:text-base border-slate-400 md:border-t-0"
+        class="w-screen border-t border-slate-400 px-4 pt-6 pb-10 text-sm sm:w-auto md:border-t-0 md:px-6 md:text-base lg:pt-26"
       >
         <nuxt-child
           :share-historical-data="publicReport.shareHistoricalData"
@@ -36,7 +36,7 @@
 
         <section
           id="about"
-          class="space-y-4 leading-8 border-b text-vanilla-400 mt-14 pb-14 border-slate-400 scroll-mt-8"
+          class="scroll-mt-8 mt-14 space-y-4 border-b border-slate-400 pb-14 leading-8 text-vanilla-400"
         >
           <h2 class="text-lg font-semibold text-vanilla-100">About DeepSource</h2>
           <p>
@@ -56,7 +56,7 @@
           <p>DeepSource is based in San Francisco, California and Bengaluru, India.</p>
         </section>
 
-        <footer class="flex justify-between mt-10">
+        <footer class="mt-10 flex justify-between">
           <img class="h-4" src="~/assets/images/logo-wordmark-white.svg" alt="DeepSource logo" />
           <span class="text-xs text-vanilla-400">© {{ currentYear }} DeepSource Corp.</span>
         </footer>
@@ -65,16 +65,16 @@
 
     <div
       v-else-if="errorMessage"
-      class="flex items-center justify-center h-screen animate-glow-bg-brighter"
+      class="flex h-screen animate-glow-bg-brighter items-center justify-center"
     >
-      <div class="px-5 w-98">
-        <div class="bg-ink-300 px-4 py-2.5 flex items-center gap-x-2 mb-2 w-max">
+      <div class="w-98 px-5">
+        <div class="mb-2 flex w-max items-center gap-x-2 bg-ink-300 px-4 py-2.5">
           <z-icon icon="z-lock" />
           <span class="text-xs font-medium">This report is password-protected</span>
         </div>
 
-        <form class="px-6 py-6 mb-10 rounded-md bg-ink-300" @submit="submitPassword">
-          <label for="public-report-pasword" class="block mb-2 text-sm font-medium">
+        <form class="mb-10 rounded-md bg-ink-300 px-6 py-6" @submit="submitPassword">
+          <label for="public-report-pasword" class="mb-2 block text-sm font-medium">
             Enter password
           </label>
           <div class="mb-2 space-y-2">
@@ -89,7 +89,7 @@
                 class="rounded-md border-slate-400"
                 @input="clearPasswordError"
               />
-              <div class="absolute flex top-1 right-1 gap-x-1 bg-ink-400">
+              <div class="absolute top-1 right-1 flex gap-x-1 bg-ink-400">
                 <z-button
                   v-tooltip="isPasswordHidden ? 'Reveal password' : 'Hide password'"
                   button-type="secondary"
@@ -117,7 +117,7 @@
         </form>
 
         <img
-          class="w-auto h-5 mx-auto"
+          class="mx-auto h-5 w-auto"
           src="~/assets/images/logo-wordmark-white.svg"
           alt="DeepSource"
         />
@@ -221,13 +221,6 @@ export default class PublicReportPageParent extends mixins(PublicReportMixin) {
    * for protected reports.
    */
   async mounted() {
-    const password = this.$route.query['password']
-
-    // someone can pass string[] as query param too, preventing that
-    if (password && typeof password === 'string') {
-      this.password = password
-    }
-
     await this.fetchDataAndRedirect()
   }
 
