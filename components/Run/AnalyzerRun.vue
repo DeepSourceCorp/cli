@@ -1,7 +1,7 @@
 <template>
   <section class="min-height-for-offset flex flex-col">
     <div
-      v-if="issueCount"
+      v-if="issueCount || isFilterApplied"
       id="issue-filters"
       class="check-filter-headers-offset bg-ink-400 px-3 md:sticky md:z-10"
     >
