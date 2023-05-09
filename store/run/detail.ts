@@ -117,7 +117,7 @@ export const mutations: RunDetailModuleMutations = {
     runDetailState.loading = value
   },
   [RunDetailMutations.SET_ERROR]: (runDetailState, error) => {
-    runDetailState.error = Object.assign({}, runDetailState.error, error)
+    runDetailState.error = error
   },
   [RunDetailMutations.SET_RUN]: (runDetailState, run) => {
     runDetailState.run = run
@@ -153,7 +153,7 @@ interface RunDetailModuleActions extends ActionTree<RunDetailModuleState, RootSt
       runId: string
       refetch?: boolean
     }
-  ) => Promise<void>
+  ) => Promise<Run | undefined>
   [RunDetailActions.FETCH_CHECK]: (
     this: Store<RootState>,
     injectee: RunDetailActionContext,
@@ -243,10 +243,12 @@ export const actions: RunDetailModuleActions = {
       )
       commit(RunDetailMutations.SET_RUN, response.data.repository?.run)
       commit(RunDetailMutations.SET_LOADING, false)
-      return response.data.repository?.run
+      commit(RunDetailMutations.SET_ERROR, {})
+      return response.data.repository?.run as Run
     } catch (e) {
       commit(RunDetailMutations.SET_ERROR, e)
       commit(RunDetailMutations.SET_LOADING, false)
+      return undefined
     }
   },
   async [RunDetailActions.FETCH_CHECK]({ commit }, { checkId, refetch }) {
@@ -255,7 +257,7 @@ export const actions: RunDetailModuleActions = {
       const response = await this.$fetchGraphqlData(
         RepositoryRunCheckGQLQuery,
         {
-          checkId: checkId
+          checkId
         },
         refetch
       )
@@ -320,17 +322,13 @@ export const actions: RunDetailModuleActions = {
     }
   },
   async [RunDetailActions.CREATE_AUTOFIX_PR]({ commit }, args) {
-    try {
-      commit(RunDetailMutations.SET_LOADING, true)
-      const response = await this.$applyGraphqlMutation(CreateAutofixRunForPullRequestMutation, {
-        input: args.input
-      })
-      return response.data.createAutofixRunForPullRequest as CreateAutofixRunForPullRequestPayload
-    } catch (e) {
-      throw e
-    } finally {
-      commit(RunDetailMutations.SET_LOADING, false)
-    }
+    commit(RunDetailMutations.SET_LOADING, true)
+    const response = await this.$applyGraphqlMutation(CreateAutofixRunForPullRequestMutation, {
+      input: args.input
+    })
+
+    commit(RunDetailMutations.SET_LOADING, false)
+    return response.data.createAutofixRunForPullRequest as CreateAutofixRunForPullRequestPayload
   },
   async [RunDetailActions.COMMIT_TO_PR]({ commit }, args) {
     commit(RunDetailMutations.SET_LOADING, true)

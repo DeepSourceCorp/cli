@@ -32,12 +32,11 @@ import { resolveNodes } from '~/utils/array'
         runId
       })) as Run | undefined
 
+      // Show the UI state corresponding to archived runs after checking against the error message
       if (
         store.state.run.detail.error.message?.replace('GraphQL error: ', '') ===
-          RunTypes.ARCHIVED_RUN &&
-        !runResponse
+        RunTypes.ARCHIVED_RUN
       ) {
-        // Show the UI state corresponding to archived runs
         return
       }
 

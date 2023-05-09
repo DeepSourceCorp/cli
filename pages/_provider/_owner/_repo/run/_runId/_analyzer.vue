@@ -1,83 +1,96 @@
 <template>
   <main class="analyzer-page">
-    <div
-      class="z-40 flex flex-row items-center justify-between w-full p-2 px-4 space-x-4 border-b bg-ink-400 border-slate-400 md:sticky offset-for-breadcrumbs"
-    >
-      <div class="flex items-center py-4 md:py-1.5 my-px gap-x-2">
-        <nuxt-link
-          v-if="previousPageLink"
-          :to="previousPageLink"
-          class="flex md:hidden items-center justify-center gap-x-2 w-7 h-7 rounded-md cursor-pointer border border-slate-400 bg-ink-200 hover:bg-ink-100 text-sm text-vanilla-400"
-          ><z-icon icon="arrow-left"
-        /></nuxt-link>
-        <z-breadcrumb :key="$route.path" separator="/" class="text-sm text-vanilla-100">
-          <span class="text-vanilla-400 md:hidden">..</span>
-          <z-breadcrumb-item
-            v-for="(link, index) in breadCrumbLinks"
-            :key="link.label"
-            :class="{
-              'cursor-pointer text-vanilla-400': link.route,
-              'hidden md:block': index !== breadCrumbLinks.length - 1
-            }"
-          >
-            <span v-if="link.route && link.route === '/'" @click="triggerActiveAnalyzerFlash">{{
-              link.label
-            }}</span>
-            <nuxt-link v-else-if="link.route" :to="link.route">{{ link.label }}</nuxt-link>
-            <template v-else>{{ link.label }}</template>
-          </z-breadcrumb-item>
-        </z-breadcrumb>
-      </div>
-      <div class="flex items-center h-full">
-        <z-menu class="xl:hidden" direction="left">
-          <template #trigger="{ toggle }">
-            <button
-              class="flex items-center gap-x-2 px-2 h-7 rounded-md cursor-pointer border border-slate-400 bg-ink-200 hover:bg-ink-100 text-sm text-vanilla-400"
-              @click="toggle"
-            >
-              All checks
-            </button>
-          </template>
-          <template #body>
-            <z-menu-section :divider="false">
-              <analyzer-selector
-                v-bind="run"
-                :checks="checks"
-                :flash-active-analyzer="flashActiveAnalyzer"
-              />
-            </z-menu-section>
-          </template>
-        </z-menu>
-      </div>
-    </div>
-    <div class="grid grid-cols-1 xl:grid-cols-14-fr gap-y-0">
+    <!-- UI state corresponding to archived runs -->
+    <lazy-empty-state-card
+      v-if="showArchivedRunEmptyState"
+      :show-border="true"
+      :use-v2="true"
+      :webp-image-path="require('~/assets/images/ui-states/runs/no-recent-autofixes.webp')"
+      subtitle="We archive all older runs periodically to keep your dashboard lean, clean, and fast."
+      title="This Analysis run has been archived"
+      class="mt-52 max-w-sm md:max-w-xl"
+    />
+
+    <template v-else>
       <div
-        class="sticky flex-col justify-between hidden h-full border-r border-slate-400 xl:flex top-bar-offset run-body-height"
+        class="offset-for-breadcrumbs z-40 flex w-full flex-row items-center justify-between space-x-4 border-b border-slate-400 bg-ink-400 p-2 px-4 md:sticky"
       >
-        <analyzer-selector
-          v-bind="run"
-          :checks="checks"
-          :flash-active-analyzer="flashActiveAnalyzer"
-        />
-        <run-summary v-bind="run" />
+        <div class="my-px flex items-center gap-x-2 py-4 md:py-1.5">
+          <nuxt-link
+            v-if="previousPageLink"
+            :to="previousPageLink"
+            class="flex h-7 w-7 cursor-pointer items-center justify-center gap-x-2 rounded-md border border-slate-400 bg-ink-200 text-sm text-vanilla-400 hover:bg-ink-100 md:hidden"
+            ><z-icon icon="arrow-left"
+          /></nuxt-link>
+          <z-breadcrumb :key="$route.path" separator="/" class="text-sm text-vanilla-100">
+            <span class="text-vanilla-400 md:hidden">..</span>
+            <z-breadcrumb-item
+              v-for="(link, index) in breadCrumbLinks"
+              :key="link.label"
+              :class="{
+                'cursor-pointer text-vanilla-400': link.route,
+                'hidden md:block': index !== breadCrumbLinks.length - 1
+              }"
+            >
+              <span v-if="link.route && link.route === '/'" @click="triggerActiveAnalyzerFlash">{{
+                link.label
+              }}</span>
+              <nuxt-link v-else-if="link.route" :to="link.route">{{ link.label }}</nuxt-link>
+              <template v-else>{{ link.label }}</template>
+            </z-breadcrumb-item>
+          </z-breadcrumb>
+        </div>
+        <div class="flex h-full items-center">
+          <z-menu class="xl:hidden" direction="left">
+            <template #trigger="{ toggle }">
+              <button
+                class="flex h-7 cursor-pointer items-center gap-x-2 rounded-md border border-slate-400 bg-ink-200 px-2 text-sm text-vanilla-400 hover:bg-ink-100"
+                @click="toggle"
+              >
+                All checks
+              </button>
+            </template>
+            <template #body>
+              <z-menu-section :divider="false">
+                <analyzer-selector
+                  v-bind="run"
+                  :checks="checks"
+                  :flash-active-analyzer="flashActiveAnalyzer"
+                />
+              </z-menu-section>
+            </template>
+          </z-menu>
+        </div>
       </div>
-      <div>
-        <div class="z-30 md:sticky top-bar-offset">
-          <run-header
-            v-if="showRunHeader"
+      <div class="grid grid-cols-1 gap-y-0 xl:grid-cols-14-fr">
+        <div
+          class="top-bar-offset run-body-height sticky hidden h-full flex-col justify-between border-r border-slate-400 xl:flex"
+        >
+          <analyzer-selector
             v-bind="run"
             :checks="checks"
-            :current-analyzer="$route.params.analyzer"
-            class="border-b bg-ink-400 border-ink-200"
+            :flash-active-analyzer="flashActiveAnalyzer"
           />
-          <inferred-artifact
-            v-if="checkHasInferredArtifacts && checkInferredArtifactsPr"
-            v-bind="checkInferredArtifactsPr"
-          />
+          <run-summary v-bind="run" />
         </div>
-        <nuxt-child />
+        <div>
+          <div class="top-bar-offset z-30 md:sticky">
+            <run-header
+              v-if="showRunHeader"
+              v-bind="run"
+              :checks="checks"
+              :current-analyzer="$route.params.analyzer"
+              class="border-b border-ink-200 bg-ink-400"
+            />
+            <inferred-artifact
+              v-if="checkHasInferredArtifacts && checkInferredArtifactsPr"
+              v-bind="checkInferredArtifactsPr"
+            />
+          </div>
+          <nuxt-child />
+        </div>
       </div>
-    </div>
+    </template>
   </main>
 </template>
 <script lang="ts">
@@ -98,7 +111,8 @@ import RunDetailMixin from '~/mixins/runDetailMixin'
 import { ILinks } from '~/components/Common/BreadcrumbContainer.vue'
 import { toTitleCase } from '~/utils/string'
 import { PageRefetchStatusT, RunDetailActions } from '~/store/run/detail'
-import { Check, Pr, PrStatus, Run } from '~/types/types'
+import { Check, Pr, Run } from '~/types/types'
+import { RunTypes } from '~/types/run'
 
 /**
  * Page that provides detailed information about generated issues for a specific analyzer run.
@@ -131,7 +145,16 @@ import { Check, Pr, PrStatus, Run } from '~/types/types'
         refetch
       })) as Run | undefined
 
+      // Show the UI state corresponding to archived runs after checking against the error message
+      if (
+        store.state.run.detail.error.message?.replace('GraphQL error: ', '') ===
+        RunTypes.ARCHIVED_RUN
+      ) {
+        return
+      }
+
       if (!runResponse) {
+        // Show `404` page if the run doesn't exist
         error({ statusCode: 404, message: 'This page is not real' })
       }
     }
@@ -241,25 +264,12 @@ export default class AnalyzerDetails extends mixins(
     return this.$route.params.analyzer
   }
 
-  get showRunHeader() {
-    return !this.$route.params.issueId
+  get showArchivedRunEmptyState(): boolean {
+    return this.runDetailError.message?.replace('GraphQL error: ', '') === RunTypes.ARCHIVED_RUN
   }
 
-  /**
-   * Fetch of details of the current page's run.
-   *
-   * @param {boolean} refetch Whether to refetch data from server or use cache. Has a default value of **false**.
-   * @returns {Promise<void>} A promise that resolves with no return on completion of fetch.
-   */
-  async fetchCurrentRun(refetch = false): Promise<void> {
-    const { runId, repo, owner, provider } = this.$route.params
-    return this.fetchRun({
-      provider,
-      owner,
-      name: repo,
-      runId,
-      refetch
-    })
+  get showRunHeader() {
+    return !this.$route.params.issueId
   }
 
   /**

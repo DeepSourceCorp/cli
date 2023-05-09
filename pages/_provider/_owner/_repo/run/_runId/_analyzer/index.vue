@@ -289,7 +289,7 @@
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
 
 // Import State & Types
-import { Check, CheckStatus, RepositoryMetricValue } from '~/types/types'
+import { Check, CheckStatus, RepositoryMetricValue, Run } from '~/types/types'
 import { AppFeatures, RepoPerms } from '~/types/permTypes'
 import { RunHeader, AnalyzerRun } from '@/components/Run'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
@@ -568,7 +568,7 @@ export default class AnalyzerDetails extends mixins(
    * @param {boolean} refetch Whether to refetch data from server or use cache. Has a default value of **false**.
    * @returns {Promise<void>} A promise that resolves with no return on completion of fetch.
    */
-  async fetchCurrentRun(refetch = false): Promise<void> {
+  async fetchCurrentRun(refetch = false): Promise<Run | undefined> {
     const { runId, repo, owner, provider } = this.$route.params
     return this.fetchRun({
       provider,

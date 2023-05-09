@@ -21,7 +21,7 @@ import {
 
 let actionCxt: RunDetailActionContext
 let commit: jest.Mock
-let localThis: any
+let localThis: any // skipcq JS-0323
 let spy: jest.SpyInstance
 let runDetailState: RunDetailModuleState
 
@@ -65,7 +65,7 @@ describe('[Store] Run/Detail', () => {
   */
   describe('[[Actions]]', () => {
     describe(`Action "${RunDetailActions.FETCH_RUN}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -98,7 +98,7 @@ describe('[Store] Run/Detail', () => {
         })
 
         test('successfully commits mutations', () => {
-          expect(commit).toHaveBeenCalledTimes(3)
+          expect(commit).toHaveBeenCalledTimes(4)
         })
 
         test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
@@ -136,7 +136,7 @@ describe('[Store] Run/Detail', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.repository.run)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -204,7 +204,7 @@ describe('[Store] Run/Detail', () => {
     })
 
     describe(`Action "${RunDetailActions.FETCH_CHECK}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
@@ -265,7 +265,7 @@ describe('[Store] Run/Detail', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.check)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $fetchGraphqlData(): Promise<Error> {
@@ -322,7 +322,7 @@ describe('[Store] Run/Detail', () => {
     })
 
     describe(`Action "${RunDetailActions.FETCH_CHECK_ISSUES}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $getGQLAfter: jest.fn(),
@@ -387,7 +387,7 @@ describe('[Store] Run/Detail', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.checkIssues)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $getGQLAfter: jest.fn(),
@@ -448,7 +448,7 @@ describe('[Store] Run/Detail', () => {
     })
 
     describe(`Action "${RunDetailActions.FETCH_AUTOFIXABLE_ISSUES}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -517,7 +517,7 @@ describe('[Store] Run/Detail', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.check)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -582,7 +582,7 @@ describe('[Store] Run/Detail', () => {
     })
 
     describe(`Action "${RunDetailActions.FETCH_CONCRETE_ISSUE_LIST}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -655,7 +655,7 @@ describe('[Store] Run/Detail', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.check.concreteIssues)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -724,7 +724,7 @@ describe('[Store] Run/Detail', () => {
     })
 
     describe(`Action "${RunDetailActions.CREATE_PR}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $getGQLAfter: jest.fn(),
@@ -877,7 +877,7 @@ describe('[Store] Run/Detail', () => {
     })
 
     describe(`Action "${RunDetailActions.COMMIT_TO_PR}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $getGQLAfter: jest.fn(),
@@ -937,7 +937,7 @@ describe('[Store] Run/Detail', () => {
     })
 
     describe(`Action "${RunDetailActions.IGNORE_CHECK_METRIC}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $getGQLAfter: jest.fn(),
@@ -979,7 +979,7 @@ describe('[Store] Run/Detail', () => {
         })
       })
 
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $getGQLAfter: jest.fn(),

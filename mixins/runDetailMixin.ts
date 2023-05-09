@@ -35,7 +35,7 @@ export default class RunDetailMixin extends Vue {
   runDetailLoading: boolean
 
   @runDetailStore.State('error')
-  runDetailError: boolean
+  runDetailError: Error
 
   @runDetailStore.State
   pageRefetchStatus: PageRefetchStatusT
@@ -47,7 +47,7 @@ export default class RunDetailMixin extends Vue {
     name: string
     runId: string
     refetch?: boolean
-  }) => Promise<void>
+  }) => Promise<Run | undefined>
 
   @runDetailStore.Action(RunDetailActions.FETCH_CHECK)
   fetchCheck: (args: { checkId: string; refetch?: boolean }) => Promise<void>
