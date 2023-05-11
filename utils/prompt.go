@@ -31,8 +31,8 @@ func ConfirmFromUser(msg, helpText string) (bool, error) {
 // Used for Single Option Selection from Multiple Options
 // Being used for selecting Java version for configuring meta of Java analyzer
 // > * 1
-//   * 2
-//   * 3
+//   - 2
+//   - 3
 func SelectFromOptions(msg, helpText string, opts []string) (string, error) {
 	var result string
 	prompt := &survey.Select{
@@ -71,10 +71,11 @@ func GetSingleLineInput(msg, helpText string) (string, error) {
 // Example:
 // ? Which languages/tools does your project use?
 // > [ ]  Shell
-//   [ ]  Rust
-//   [ ]  Test Coverage
-//   [ ]  Python
-//   [ ]  Go
+//
+//	[ ]  Rust
+//	[ ]  Test Coverage
+//	[ ]  Python
+//	[ ]  Go
 func SelectFromMultipleOptions(msg, helpText string, options []string) ([]string, error) {
 	response := make([]string, 0)
 	// Extracting languages and tools being used in the project for Analyzers
