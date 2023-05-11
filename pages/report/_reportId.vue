@@ -63,17 +63,20 @@
       </div>
     </div>
 
-    <div
-      v-else-if="errorMessage"
-      class="flex h-screen animate-glow-bg-brighter items-center justify-center"
-    >
+    <div v-else-if="errorMessage" class="flex h-screen items-center justify-center">
+      <div class="bg-hero-layout-gradient"></div>
       <div class="w-98 px-5">
-        <div class="mb-2 flex w-max items-center gap-x-2 bg-ink-300 px-4 py-2.5">
+        <div
+          class="mb-2 flex w-max items-center gap-x-2 rounded-md border border-slate-300 bg-ink-200 bg-opacity-60 px-4 py-2.5"
+        >
           <z-icon icon="z-lock" />
           <span class="text-xs font-medium">This report is password-protected</span>
         </div>
 
-        <form class="mb-10 rounded-md bg-ink-300 px-6 py-6" @submit="submitPassword">
+        <form
+          class="mb-10 rounded-md border border-slate-300 bg-ink-300 bg-opacity-60 px-6 py-6"
+          @submit="submitPassword"
+        >
           <label for="public-report-pasword" class="mb-2 block text-sm font-medium">
             Enter password
           </label>
@@ -288,3 +291,36 @@ export default class PublicReportPageParent extends mixins(PublicReportMixin) {
   }
 }
 </script>
+
+<style lang="postcss" scoped>
+@tailwind base;
+@tailwind utilities;
+
+.bg-hero-layout-gradient {
+  position: absolute;
+  width: 956px;
+  height: 956px;
+  left: -298px;
+  margin-left: auto;
+  margin-right: auto;
+  top: -530px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(69, 175, 220, 0.6) 64.4%,
+    rgba(59, 100, 236, 0.6) 76.78%,
+    rgba(69, 104, 220, 0) 100%
+  );
+  opacity: 0.12;
+  box-shadow: 0px 10.5635px 660.221px 5281.77px rgba(0, 0, 0, 0.25);
+  filter: blur(158.453px);
+}
+
+@media screen and (min-width: 768px) {
+  .bg-hero-layout-gradient {
+    width: 75%;
+    left: 0;
+    right: 0;
+  }
+}
+</style>
