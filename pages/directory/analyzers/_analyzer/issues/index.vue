@@ -63,7 +63,7 @@
           v-if="totalPageCount > 1"
           :page="currentPage"
           :total-pages="totalPageCount"
-          :total-visible="perPageCount"
+          :total-visible="5"
           @selected="updatePageNum"
         />
       </div>

@@ -190,7 +190,7 @@ export const actions: DirectoryModuleActions = {
       commit(DirectoryMutations.SET_LOADING, false)
     }
   },
-  async [DirectoryActions.FETCH_ANALYZER_ISSUES]({ commit }, { first = 5, ...rest }) {
+  async [DirectoryActions.FETCH_ANALYZER_ISSUES]({ commit }, { first = 20, ...rest }) {
     commit(DirectoryMutations.SET_LOADING, true)
     try {
       const analyzerResponse = (await this.$fetchGraphqlData(AnalyzerIssuesQuery, {

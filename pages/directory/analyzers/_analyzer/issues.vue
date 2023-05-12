@@ -95,7 +95,7 @@ export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
   private searchTerm = ''
   private issueCategory = ''
   private isLoaded = false
-  private perPageCount = 5
+  private perPageCount = 20
   private currentPage = 1
   private filterVisible = true
 
@@ -109,7 +109,7 @@ export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
     const shortcode = this.$route.params.analyzer
     if (!shortcode) this.$nuxt.error({ statusCode: 404 })
     const issueType = (this.$route.query['filter-preset'] as string) || ''
-    const queryFilter = { shortcode, first: 5, issueType: '' }
+    const queryFilter = { shortcode, first: this.perPageCount, issueType: '' }
     if (typeof issueType === 'string' && issueType) {
       queryFilter.issueType = issueType
       this.issueCategory = issueType
@@ -171,6 +171,7 @@ export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
     this.isLoaded = false
     const filter = {
       q: this.searchTerm,
+      first: this.perPageCount,
       offset: this.queryOffset,
       shortcode: this.analyzer.shortcode || this.$route.params.analyzer,
       issueType: this.issueCategory
