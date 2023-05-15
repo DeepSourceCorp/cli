@@ -8,7 +8,7 @@ steps:
       - --build-arg=GOOGLE_ANALYTICS_ID=UA-125031134-1
       - --build-arg=STRIPE_PUBLISHABLE_KEY
       - --build-arg=NODE_ENV=prod
-      - --build-arg=DOMAIN=assets.deepsource.io
+      - --build-arg=DOMAIN=assets.deepsource.com
       - --cache=false
     secretEnv:
       - 'STRIPE_PUBLISHABLE_KEY'
