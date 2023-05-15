@@ -1,5 +1,5 @@
-// Team Permission Levels: https://deepsource.io/docs/access-control/people-access
-// Repository Permission Levels: https://deepsource.io/docs/access-control/repository-access
+// Team Permission Levels: https://docs.deepsource.com/docs/managing-peoples-access-to-team-with-roles
+// Repository Permission Levels: https://docs.deepsource.com/docs/managing-access-to-your-teams-repositories
 // Usage: `this.$gateKeeper.team(TeamPerms.CHANGE_PLAN, 'ADMIN')`
 
 import { Inject, Context } from '@nuxt/types/app'

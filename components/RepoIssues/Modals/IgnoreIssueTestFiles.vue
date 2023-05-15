@@ -26,7 +26,7 @@
           ><br />
           You can look at the
           <a
-            href="https://deepsource.io/docs/concepts#test_patterns"
+            href="https://docs.deepsource.com/docs/configuration#test_patterns"
             target="_blank"
             rel="noopener noreferrer"
             class="text-juniper hover:underline"
@@ -127,7 +127,7 @@ export default class IgnoreIssueTestFiles extends mixins(
       this.$emit('ignore', response.checkIssueIds)
     } catch (e) {
       this.$toast.danger('Something went wrong while ignoring this issue, please contact support')
-      this.logErrorForUser(e, 'Ignore Issue', {
+      this.logErrorForUser(e as Error, 'Ignore Issue', {
         method: 'Ignore Issue Test Files',
         ...params
       })

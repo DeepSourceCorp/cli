@@ -192,8 +192,7 @@ export default class OwnerSecurity extends mixins(ActiveUserMixin) {
   isConfirmModalOpen = false
   isDeleting = false
 
-  readonly SCIM_DOCS_LINK =
-    'https://deepsource.io/docs/enterprise-cloud/sso#setup-scim-provisioning'
+  readonly SCIM_DOCS_LINK = 'https://docs.deepsource.com/docs/sso#setup-scim-provisioning'
   isScimEnabled = false
   showScimToken = false
   isEnablingSCIM = false

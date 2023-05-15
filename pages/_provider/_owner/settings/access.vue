@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 space-y-6">
+  <div class="space-y-6 p-4">
     <h2 class="text-lg font-medium">Access control</h2>
     <form-group v-if="allowSyncAccessSettings" label="Provider Permissions">
       <toggle-input
@@ -12,7 +12,7 @@
             DeepSource allows some access settings to be synced automatically from
             {{ providerName }}.
             <a
-              href="https://deepsource.io/docs/access-control/team-members#automatic-sync-with-github"
+              href="https://docs.deepsource.com/docs/managing-members-in-your-team#automatic-sync-with-github"
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center text-juniper hover:underline focus:underline"

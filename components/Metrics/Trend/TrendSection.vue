@@ -128,7 +128,7 @@ export default class TrendSection extends Vue {
 
   readonly STAT_TYPE = StatType
   readonly AGGREGATE_METRIC_KEY = MetricType.aggregate
-  readonly METRICS_DOC = 'https://deepsource.io/docs/dashboard/repo-overview#the-metrics-tab'
+  readonly METRICS_DOC = 'https://docs.deepsource.com/docs/metrics-1'
 
   get trendStats() {
     const stats: Array<TrendStatPropsT | { type: 'blocker' }> = [

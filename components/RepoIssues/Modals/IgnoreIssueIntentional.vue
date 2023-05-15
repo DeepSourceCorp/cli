@@ -18,7 +18,7 @@
             in your source code so this occurrence does not repeat in the future. For help, please
             read the
             <a
-              href="https://deepsource.io/docs/setup-analysis#silencing-a-specific-issue"
+              href="https://docs.deepsource.com/docs/ignore-rules#silencing-a-specific-issue"
               target="_blank"
               rel="noopener noreferrer"
               class="text-juniper hover:underline"
@@ -95,7 +95,7 @@ export default class IgnoreIssueIntentional extends mixins(IssueDetailMixin, Act
       }
     } catch (e) {
       this.$toast.danger('Something went wrong while ignoring this issue')
-      this.logErrorForUser(e, 'Ignore Issue', {
+      this.logErrorForUser(e as Error, 'Ignore Issue', {
         method: 'Ignore issue intentional',
         shortcode: this.shortcode,
         checkIssueId: this.checkIssueId

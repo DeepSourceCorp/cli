@@ -123,8 +123,7 @@ export default class TrendTitle extends Vue {
   public currentFilterValue: number = 30
   readonly STAT_TYPE = StatType
   readonly AGGREGATE_METRIC_KEY = MetricType.aggregate
-  readonly METRICS_DOC =
-    'https://deepsource.io/docs/dashboard/repo-overview/#metric-aggregate-calculation'
+  readonly METRICS_DOC = 'https://docs.deepsource.com/docs/metrics-1#metric-aggregate-calculation'
 
   /**
    * Created hook for the component.

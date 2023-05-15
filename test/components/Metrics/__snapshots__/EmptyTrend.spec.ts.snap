@@ -21,7 +21,7 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
 
         </p>
       </div>
-      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\"><a href=\\"https://deepsource.io/docs/dashboard/repo-overview/#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-dashed border-slate-400 text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
+      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\"><a href=\\"https://docs.deepsource.com/docs/metrics-1#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-dashed border-slate-400 text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
           <zicon-stub icon=\\"help-circle\\" color=\\"vanilla-100\\" size=\\"small\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
         </a>
         <div class=\\"h-8 md:w-40\\">
@@ -83,7 +83,7 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
 
         </p>
       </div>
-      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\"><a href=\\"https://deepsource.io/docs/dashboard/repo-overview/#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-dashed border-slate-400 text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
+      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\"><a href=\\"https://docs.deepsource.com/docs/metrics-1#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-dashed border-slate-400 text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
           <zicon-stub icon=\\"help-circle\\" color=\\"vanilla-100\\" size=\\"small\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
         </a>
         <div class=\\"h-8 md:w-40\\">

@@ -26,7 +26,7 @@
                 </nuxt-link>
                 <z-button
                   button-type="secondary"
-                  to="https://deepsource.io/docs/concepts/#transformers"
+                  to="https://docs.deepsource.com/docs/transformers"
                   target="_blank"
                   rel="noopener noreferrer"
                   size="small"
