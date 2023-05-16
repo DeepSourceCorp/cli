@@ -170,7 +170,7 @@ export default class SsoConfiguration extends Vue {
   @Prop({ required: true })
   canSetupSso: boolean
 
-  readonly SSO_DOCS_LINK = 'https://deepsource.io/docs/enterprise-server/sso'
+  readonly SSO_DOCS_LINK = 'https://docs.deepsource.com/docs/sso'
 
   SSO_SETUP_STATES = SSO_SETUP_STATES
 

@@ -1,6 +1,6 @@
 <template>
   <stat-section :body-is-grid="false" :body-spacing="0">
-    <div class="p-4 space-y-4 border-b border-slate-400">
+    <div class="space-y-4 border-b border-slate-400 p-4">
       <div class="flex space-x-4">
         <z-avatar
           :image="viewer.avatar"
@@ -17,7 +17,7 @@
         v-if="viewer && viewer.dashboardContext && viewer.dashboardContext.length"
         class="space-y-2"
       >
-        <h6 class="text-xs font-medium tracking-wide uppercase text-vanilla-400">Your Teams</h6>
+        <h6 class="text-xs font-medium uppercase tracking-wide text-vanilla-400">Your Teams</h6>
         <div class="space-x-2">
           <nuxt-link
             v-for="ctx in viewer.dashboardContext"
@@ -37,15 +37,15 @@
     </div>
     <div>
       <div class="p-2 px-4">Recommended actions</div>
-      <div class="w-full h-px bg-ink-200">
+      <div class="h-px w-full bg-ink-200">
         <div
-          class="h-0.5 bg-juniper transform transition-all duration-100 ease-in-out"
+          class="h-0.5 transform bg-juniper transition-all duration-100 ease-in-out"
           :style="{
             width: `${completion}%`
           }"
         ></div>
       </div>
-      <div class="p-4 space-y-6">
+      <div class="space-y-6 p-4">
         <div v-for="(step, index) in steps" :key="index" class="flex items-start space-x-2">
           <z-checkbox
             class="mt-2"
@@ -56,7 +56,7 @@
             <h5
               class="leading-none"
               :class="{
-                'line-through text-vanilla-400': step.isComplete,
+                'text-vanilla-400 line-through': step.isComplete,
                 'text-vanilla-200': !step.isComplete
               }"
             >
@@ -196,7 +196,7 @@ export default class ViewerCard extends mixins(ActiveUserMixin) {
         description:
           'Get in touch with our engineering team, get your questions answered, give feedback.',
         isComplete: this.$localStore.get(this.storeKey, 'join-discuss') as boolean,
-        actionUrl: 'https://discuss.deepsource.io/',
+        actionUrl: 'https://discuss.deepsource.com/',
         actionLabel: 'Join DeepSource Discuss',
         actionIcon: 'message-square'
       },

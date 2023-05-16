@@ -1,12 +1,12 @@
 <template>
-  <div class="w-full flex relative">
+  <div class="relative flex w-full">
     <div
-      class="absolute w-1/2 -top-102 inset-x-1/4 rounded-full intermediate-page-gradient-layer"
+      class="intermediate-page-gradient-layer absolute inset-x-1/4 -top-102 w-1/2 rounded-full"
     ></div>
     <div
-      class="flex flex-col mx-auto justify-between min-h-screen pt-32 pb-24 text-sm text-center text-vanilla-400"
+      class="mx-auto flex min-h-screen flex-col justify-between pt-32 pb-24 text-center text-sm text-vanilla-400"
     >
-      <div class="flex items-center flex-grow">
+      <div class="flex flex-grow items-center">
         <slot>
           <empty-state
             :png-image-path="require('~/assets/images/ui-states/user-deleted.gif')"
@@ -16,7 +16,7 @@
             <template #title>
               <span class="text-base">Your {{ accountType }} has been deleted.</span></template
             >
-            <template #subtitle> Redirecting to deepsource.io... </template>
+            <template #subtitle> Redirecting to deepsource.com... </template>
           </empty-state>
         </slot>
       </div>

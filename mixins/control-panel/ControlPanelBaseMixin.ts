@@ -100,7 +100,7 @@ export default class ControlPanelBaseMixin extends Vue {
       title: ['Enterprise Help Center'],
       description:
         'Reach out to the DeepSource team to resolve issues or ask questions on a priority basis.',
-      href: 'https://deepsource.io/docs/'
+      href: 'https://docs.deepsource.com/docs'
     }
   ] as ControlPanelRouteT[]
 

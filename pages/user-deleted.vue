@@ -21,7 +21,7 @@ export default class UserDeleted extends mixins(AuthMixin) {
     this.purgeClientData()
 
     setTimeout(() => {
-      window.location.replace('https://deepsource.io')
+      window.location.replace('https://deepsource.com')
     }, 5000)
   }
 }

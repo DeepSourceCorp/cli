@@ -66,7 +66,7 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
           write more secure code. It is updated periodically to accommodate for the advancements and
           developments in application security. More information on OWASP® Top 10 can be found
           <a
-            href="https://deepsource.io/guides/owasp-top-10/"
+            href="https://deepsource.com/guides/owasp-top-10/"
             rel="nofollow noopener noreferrer"
             target="_blank"
             class="text-juniper-500 font-medium"

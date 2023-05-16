@@ -1,6 +1,7 @@
 # bifrost
-[![DeepSource](https://deepsource.io/gh/deepsourcelabs/bifrost.svg/?label=active+issues&show_trend=true&token=3nkERNaAYhpljn1V3cjYtHzg)](https://deepsource.io/gh/deepsourcelabs/bifrost/?ref=repository-badge)
-[![DeepSource](https://deepsource.io/gh/deepsourcelabs/bifrost.svg/?label=resolved+issues&show_trend=true&token=3nkERNaAYhpljn1V3cjYtHzg)](https://deepsource.io/gh/deepsourcelabs/bifrost/?ref=repository-badge)
+
+[![DeepSource](https://app.deepsource.com/gh/deepsourcelabs/bifrost.svg/?label=active+issues&show_trend=true&token=3nkERNaAYhpljn1V3cjYtHzg)](https://app.deepsource.com/gh/deepsourcelabs/bifrost/?ref=repository-badge)
+[![DeepSource](https://app.deepsource.com/gh/deepsourcelabs/bifrost.svg/?label=resolved+issues&show_trend=true&token=3nkERNaAYhpljn1V3cjYtHzg)](https://app.deepsource.com/gh/deepsourcelabs/bifrost/?ref=repository-badge)
 
 ## Build Setup
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col p-4 gap-y-2 max-w-2xl">
+  <div class="flex max-w-2xl flex-col gap-y-2 p-4">
     <page-title
       title="Badges"
       description-width-class="max-w-2xl"
@@ -8,11 +8,11 @@
       class="max-w-2xl"
     />
     <div class="flex flex-col gap-y-2">
-      <div class="max-w-2xl flex flex-col gap-y-2">
+      <div class="flex max-w-2xl flex-col gap-y-2">
         <label class="text-sm text-vanilla-100">Preview</label>
         <!-- Preview component -->
-        <div class="flex flex-col items-center h-40 p-2 border border-slate-400">
-          <div class="flex justify-center flex-1 item-center">
+        <div class="flex h-40 flex-col items-center border border-slate-400 p-2">
+          <div class="item-center flex flex-1 justify-center">
             <img :src="badgeImageURL" alt="badge" />
           </div>
           <z-input v-model="embedCode" class="self-end pr-0.5">
@@ -24,7 +24,7 @@
       </div>
       <!-- Badge type -->
       <form-group>
-        <div class="flex items-center max-w-2xl py-4">
+        <div class="flex max-w-2xl items-center py-4">
           <div class="flex-1 text-sm text-vanilla-100">Badge type</div>
           <z-radio-group v-model="badgeType" class="flex">
             <z-radio-button value="active issues" label="Active issues" />
@@ -46,9 +46,9 @@
           </template>
         </toggle-input>
         <!-- Format -->
-        <div class="flex items-center max-w-2xl py-4 border-t border-slate-400">
+        <div class="flex max-w-2xl items-center border-t border-slate-400 py-4">
           <div class="flex-1 text-sm text-vanilla-100">Format</div>
-          <div class="w-1/3 md:w-1/4 h-8">
+          <div class="h-8 w-1/3 md:w-1/4">
             <z-select v-model="selectedFormat" spacing="py-1 px-2" class="text-sm">
               <z-option
                 v-for="item in formats"
@@ -60,7 +60,7 @@
           </div>
         </div>
         <!-- Add referral -->
-        <div class="flex items-center max-w-2xl py-4 border-t border-slate-400">
+        <div class="flex max-w-2xl items-center border-t border-slate-400 py-4">
           <div class="flex-1 text-sm text-vanilla-100">Add referral to badge</div>
           <z-toggle v-model="addReferral" />
         </div>
@@ -106,13 +106,6 @@ export default class Badges extends Vue {
   @repoStore.State
   repository!: Repository
 
-  public issuesImage = {
-    active:
-      'https://deepsource.io/gh/deepsourcelabs/asgard.svg/?label=active+issues&amp;show_trend=true&amp;token=VvFWwfhCBRgW4yYOx66f2I6n',
-    resolved:
-      'https://deepsource.io/gh/deepsourcelabs/asgard.svg/?label=resolved+issues&show_trend=true&token=VvFWwfhCBRgW4yYOx66f2I6n'
-  }
-  public badge = 'Sed/a/tpha.re/trau.ltrfwvi/pha.re/trau.trau.lgarau.traggatrf...'
   public badgeType = 'active issues'
   public selectedFormat = 'markdown'
   public showTrend = true

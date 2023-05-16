@@ -2,14 +2,14 @@
   <div class="fixed inset-0 flex items-start justify-center pt-32">
     <div
       ref="command-k-wrapper"
-      class="w-full mx-auto overflow-hidden border rounded-lg outline-none sm:w-120 min-h-10 border-slate-400 shadow-double-dark bg-ink-300"
+      class="outline-none mx-auto min-h-10 w-full overflow-hidden rounded-lg border border-slate-400 bg-ink-300 shadow-double-dark sm:w-120"
     >
-      <div class="p-4 pb-0 border-slate-400" :class="{ 'border-b': commands.length }">
+      <div class="border-slate-400 p-4 pb-0" :class="{ 'border-b': commands.length }">
         <div class="space-x-2">
           <span
             v-for="crumb in breadcrumbs"
             :key="crumb"
-            class="px-2 py-1 text-xs leading-none rounded-md bg-ink-200 text-vanilla-300"
+            class="rounded-md bg-ink-200 px-2 py-1 text-xs leading-none text-vanilla-300"
           >
             {{ crumb }}
           </span>
@@ -21,19 +21,19 @@
           autoComplete="off"
           role="combobox"
           spellCheck="false"
-          class="w-full h-12 bg-transparent focus:outline-none placeholder-slate"
+          class="focus:outline-none h-12 w-full bg-transparent placeholder-slate"
           :value="searchCandidate"
           :placeholder="inputPlaceholder"
           @input="setSearchValue"
         />
       </div>
-      <div class="overflow-y-scroll max-h-92 hide-scroll">
+      <div class="hide-scroll max-h-92 overflow-y-scroll">
         <div v-for="(command, index) in commands" :key="command.id">
           <div
             v-if="command.commandType === 'divider'"
             :key="command.id"
             data-command-type="divider"
-            class="ml-0.5 first:mt-2 mt-4 px-3.5 py-2 font-semibold tracking-wider uppercase text-xxs text-vanilla-400"
+            class="ml-0.5 mt-4 px-3.5 py-2 text-xxs font-semibold uppercase tracking-wider text-vanilla-400 first:mt-2"
           >
             {{ command.label }}
           </div>
@@ -131,7 +131,7 @@ export default class Palette extends mixins(RepoListMixin, ActiveUserMixin) {
       Tab: this.wrapEvent(this._handleTab),
       ...this.fetchKeyBindingsFromCommands(),
       'j o i n d e e p s o u r c e': this.wrapEvent(() => {
-        window.open('https://deepsource.io/jobs/', '_blank')
+        window.open('https://deepsource.com/jobs/', '_blank')
       }),
       'w h o i s d u c k n o r r i s': this.wrapEvent(() =>
         window.open('https://www.youtube.com/watch?v=PSHM9Z7HIRQ', '_blank')
@@ -495,7 +495,7 @@ export default class Palette extends mixins(RepoListMixin, ActiveUserMixin) {
         label: `View Changelog`,
         icon: `hash`,
         action: () => {
-          window.open('https://roadmap.deepsource.io/changelog', '_blank')
+          window.open('https://deepsource.com/changelog/', '_blank')
         }
       }
     ])

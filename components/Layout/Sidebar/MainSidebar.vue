@@ -126,7 +126,7 @@
           }"
           :is-collapsed="isCollapsed"
           icon="resources"
-          to="https://docs.deepsource.io/"
+          to="https://docs.deepsource.com/docs"
           target="_blank"
           rel="noopener noreferrer"
         >

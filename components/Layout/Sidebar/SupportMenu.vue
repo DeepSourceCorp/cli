@@ -11,7 +11,7 @@
         <z-menu-item
           icon="book-open"
           as="a"
-          href="https://deepsource.io/docs"
+          href="https://docs.deepsource.com/docs"
           target="_blank"
           rel="noopener noreferrer"
           >Read documentation</z-menu-item
@@ -20,7 +20,7 @@
         <z-menu-item
           as="a"
           icon="bulb"
-          href="https://roadmap.deepsource.io/feature-requests"
+          href="https://roadmap.deepsource.com/feature-requests"
           target="_blank"
           rel="noopener noreferrer"
           >Create feature request</z-menu-item
@@ -28,7 +28,7 @@
         <z-menu-item
           as="a"
           icon="message-square"
-          href="https://discuss.deepsource.io/"
+          href="https://discuss.deepsource.com/"
           target="_blank"
           rel="noopener noreferrer"
           >Join DeepSource Discuss</z-menu-item

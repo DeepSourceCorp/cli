@@ -1,7 +1,7 @@
 <template>
   <!-- TODO the sidebar shouldn't need a z-index in lg+ screens but conflicts with zeal components block this  -->
   <div
-    class="fixed top-0 z-50 h-screen duration-200 lg:sticky lg:left-0 transition-width w-80 lg:w-72"
+    class="transition-width fixed top-0 z-50 h-screen w-80 duration-200 lg:sticky lg:left-0 lg:w-72"
     :class="isOpen ? 'left-0' : '-left-full'"
   >
     <sidebar-menu
@@ -13,44 +13,34 @@
       @close="closeModal()"
     >
       <template #header>
-        <section class="p-4 border-b border-slate-400">
+        <section class="border-b border-slate-400 p-4">
           <img
             src="~/assets/images/logo-wordmark-white.svg"
             alt="DeepSource"
-            class="w-auto h-5 mt-0.5 mb-px"
+            class="mt-0.5 mb-px h-5 w-auto"
           />
         </section>
       </template>
       <template #default>
         <div class="grid gap-2 text-sm">
-          <nuxt-link to="/me" class="flex items-center px-2 py-1 rounded-md hover:bg-ink-200"
+          <nuxt-link to="/me" class="flex items-center rounded-md px-2 py-1 hover:bg-ink-200"
             ><z-icon icon="dashboard" color="vanilla-300" class="mr-2.5" />
             <span>Dashboard</span></nuxt-link
           >
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://deepsource.io/docs/"
-            class="flex items-center px-2 py-1 rounded-md hover:bg-ink-200"
+            href="https://docs.deepsource.com/docs"
+            class="flex items-center rounded-md px-2 py-1 hover:bg-ink-200"
           >
             <z-icon icon="resources" color="vanilla-300" class="mr-2.5" />
             <span>Resources</span>
           </a>
-          <!-- TODO Enable when enterprise page from marketing is live  -->
-          <!-- <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://deepsource.io/docs/"
-            class="flex items-center px-2 py-1 rounded-md hover:bg-ink-200"
-          >
-            <z-icon icon="enterprise" color="vanilla-300" class="mr-2.5" />
-            <span>Enterprise</span>
-          </a> -->
           <a
             target="_blank"
             rel="noopener noreferrer"
             href="/pricing"
-            class="flex items-center px-2 py-1 rounded-md hover:bg-ink-200"
+            class="flex items-center rounded-md px-2 py-1 hover:bg-ink-200"
           >
             <z-icon icon="pricing" color="vanilla-300" class="mr-2.5" />
             <span>Pricing</span>
@@ -58,17 +48,17 @@
           <nuxt-link
             v-if="!$config.onPrem"
             to="/discover"
-            class="flex items-center px-2 py-1 rounded-md hover:bg-ink-200"
+            class="flex items-center rounded-md px-2 py-1 hover:bg-ink-200"
             ><z-icon icon="discover" color="vanilla-300" class="mr-2.5" />
             <span>Discover</span></nuxt-link
           >
-          <nuxt-link to="/directory" class="flex items-center px-2 py-1 rounded-md hover:bg-ink-200"
+          <nuxt-link to="/directory" class="flex items-center rounded-md px-2 py-1 hover:bg-ink-200"
             ><z-icon icon="book" color="vanilla-300" class="mr-2.5" />
             <span>Directory</span></nuxt-link
           >
           <nuxt-link
             to="/login"
-            class="flex items-center px-2 py-1 rounded-md hover:bg-ink-200 text-juniper"
+            class="flex items-center rounded-md px-2 py-1 text-juniper hover:bg-ink-200"
             ><z-icon icon="log-in" color="juniper" class="mr-2.5" /> <span>Log in</span></nuxt-link
           >
         </div>
@@ -79,7 +69,7 @@
           Find thousands of code security and quality issues in your codebase, before they end up in
           production.
         </p>
-        <z-button to="/signup" button-type="primary" class="w-full mt-4">Start now</z-button>
+        <z-button to="/signup" button-type="primary" class="mt-4 w-full">Start now</z-button>
       </template>
       <template #brand>
         <div class="flex justify-center space-x-3">

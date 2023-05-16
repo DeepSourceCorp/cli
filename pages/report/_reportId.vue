@@ -41,7 +41,7 @@
           <h2 class="text-lg font-semibold text-vanilla-100">About DeepSource</h2>
           <p>
             <a
-              href="https://deepsource.io"
+              href="https://deepsource.com"
               rel="nofollow noopener noreferrer"
               target="_blank"
               class="font-medium text-juniper-500"

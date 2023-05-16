@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders DeletedAccountState with all prop options: DeletedAccountState 1`] = `
-"<div class=\\"w-full flex relative\\">
-  <div class=\\"absolute w-1/2 -top-102 inset-x-1/4 rounded-full intermediate-page-gradient-layer\\"></div>
-  <div class=\\"flex flex-col mx-auto justify-between min-h-screen pt-32 pb-24 text-sm text-center text-vanilla-400\\">
-    <div class=\\"flex items-center flex-grow\\">
+"<div class=\\"relative flex w-full\\">
+  <div class=\\"intermediate-page-gradient-layer absolute inset-x-1/4 -top-102 w-1/2 rounded-full\\"></div>
+  <div class=\\"mx-auto flex min-h-screen flex-col justify-between pt-32 pb-24 text-center text-sm text-vanilla-400\\">
+    <div class=\\"flex flex-grow items-center\\">
       <section class=\\"w-full space-y-8 px-3.5 py-12 md:px-12 md:py-19\\">
         <empty-state-picture webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"\\"></empty-state-picture>
         <div class=\\"\\">
           <h3 class=\\"text-vanilla-100 mt-7 text-center text-lg font-semibold md:mt-5\\"><span class=\\"text-base\\">Your  has been deleted.</span></h3>
-          <p class=\\"text-sm text-vanilla-400 mx-auto mt-2 max-w-md text-center sm:mt-1\\"> Redirecting to deepsource.io... </p>
+          <p class=\\"text-sm text-vanilla-400 mx-auto mt-2 max-w-md text-center sm:mt-1\\"> Redirecting to deepsource.com... </p>
           <!---->
         </div>
       </section>
@@ -19,15 +19,15 @@ exports[`renders DeletedAccountState with all prop options: DeletedAccountState 
 `;
 
 exports[`renders DeletedAccountState with all prop options: DeletedAccountState 2`] = `
-"<div class=\\"w-full flex relative\\">
-  <div class=\\"absolute w-1/2 -top-102 inset-x-1/4 rounded-full intermediate-page-gradient-layer\\"></div>
-  <div class=\\"flex flex-col mx-auto justify-between min-h-screen pt-32 pb-24 text-sm text-center text-vanilla-400\\">
-    <div class=\\"flex items-center flex-grow\\">
+"<div class=\\"relative flex w-full\\">
+  <div class=\\"intermediate-page-gradient-layer absolute inset-x-1/4 -top-102 w-1/2 rounded-full\\"></div>
+  <div class=\\"mx-auto flex min-h-screen flex-col justify-between pt-32 pb-24 text-center text-sm text-vanilla-400\\">
+    <div class=\\"flex flex-grow items-center\\">
       <section class=\\"w-full space-y-8 px-3.5 py-12 md:px-12 md:py-19\\">
         <empty-state-picture webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"\\"></empty-state-picture>
         <div class=\\"\\">
           <h3 class=\\"text-vanilla-100 mt-7 text-center text-lg font-semibold md:mt-5\\"><span class=\\"text-base\\">Your team has been deleted.</span></h3>
-          <p class=\\"text-sm text-vanilla-400 mx-auto mt-2 max-w-md text-center sm:mt-1\\"> Redirecting to deepsource.io... </p>
+          <p class=\\"text-sm text-vanilla-400 mx-auto mt-2 max-w-md text-center sm:mt-1\\"> Redirecting to deepsource.com... </p>
           <!---->
         </div>
       </section>
@@ -37,15 +37,15 @@ exports[`renders DeletedAccountState with all prop options: DeletedAccountState 
 `;
 
 exports[`renders DeletedAccountState with all prop options: DeletedAccountState 3`] = `
-"<div class=\\"w-full flex relative\\">
-  <div class=\\"absolute w-1/2 -top-102 inset-x-1/4 rounded-full intermediate-page-gradient-layer\\"></div>
-  <div class=\\"flex flex-col mx-auto justify-between min-h-screen pt-32 pb-24 text-sm text-center text-vanilla-400\\">
-    <div class=\\"flex items-center flex-grow\\">
+"<div class=\\"relative flex w-full\\">
+  <div class=\\"intermediate-page-gradient-layer absolute inset-x-1/4 -top-102 w-1/2 rounded-full\\"></div>
+  <div class=\\"mx-auto flex min-h-screen flex-col justify-between pt-32 pb-24 text-center text-sm text-vanilla-400\\">
+    <div class=\\"flex flex-grow items-center\\">
       <section class=\\"w-full space-y-8 px-3.5 py-12 md:px-12 md:py-19\\">
         <empty-state-picture webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"\\"></empty-state-picture>
         <div class=\\"\\">
           <h3 class=\\"text-vanilla-100 mt-7 text-center text-lg font-semibold md:mt-5\\"><span class=\\"text-base\\">Your team has been deleted.</span></h3>
-          <p class=\\"text-sm text-vanilla-400 mx-auto mt-2 max-w-md text-center sm:mt-1\\"> Redirecting to deepsource.io... </p>
+          <p class=\\"text-sm text-vanilla-400 mx-auto mt-2 max-w-md text-center sm:mt-1\\"> Redirecting to deepsource.com... </p>
           <!---->
         </div>
       </section>
@@ -55,15 +55,15 @@ exports[`renders DeletedAccountState with all prop options: DeletedAccountState 
 `;
 
 exports[`renders DeletedAccountState with all prop options: DeletedAccountState 4`] = `
-"<div class=\\"w-full flex relative\\">
-  <div class=\\"absolute w-1/2 -top-102 inset-x-1/4 rounded-full intermediate-page-gradient-layer\\"></div>
-  <div class=\\"flex flex-col mx-auto justify-between min-h-screen pt-32 pb-24 text-sm text-center text-vanilla-400\\">
-    <div class=\\"flex items-center flex-grow\\">
+"<div class=\\"relative flex w-full\\">
+  <div class=\\"intermediate-page-gradient-layer absolute inset-x-1/4 -top-102 w-1/2 rounded-full\\"></div>
+  <div class=\\"mx-auto flex min-h-screen flex-col justify-between pt-32 pb-24 text-center text-sm text-vanilla-400\\">
+    <div class=\\"flex flex-grow items-center\\">
       <section class=\\"w-full space-y-8 px-3.5 py-12 md:px-12 md:py-19\\">
         <empty-state-picture webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"\\"></empty-state-picture>
         <div class=\\"\\">
           <h3 class=\\"text-vanilla-100 mt-7 text-center text-lg font-semibold md:mt-5\\"><span class=\\"text-base\\">Your account has been deleted.</span></h3>
-          <p class=\\"text-sm text-vanilla-400 mx-auto mt-2 max-w-md text-center sm:mt-1\\"> Redirecting to deepsource.io... </p>
+          <p class=\\"text-sm text-vanilla-400 mx-auto mt-2 max-w-md text-center sm:mt-1\\"> Redirecting to deepsource.com... </p>
           <!---->
         </div>
       </section>
