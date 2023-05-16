@@ -10,6 +10,9 @@ import { mocksGenerator, storeModulesGenerator } from '~/test/mocks'
 import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
 import { AutofixRunStatus } from '~/types/types'
 
+const today = new Date()
+const nineMonthsAgo = new Date(today.setMonth(today.getMonth() - 9)).toISOString()
+
 const autofixRun = {
   id: 'QXV0b2ZpeFJ1bjpicnZlZ3g=',
   errorsRendered: [],
@@ -22,7 +25,7 @@ const autofixRun = {
   pullRequestTitle: '',
   pullRequestNumber: null,
   status: 'PASS',
-  createdAt: '2022-07-31T12:57:40.152223+00:00',
+  createdAt: nineMonthsAgo,
   changeset: {
     'api/tests/types/test_analyzer.py': {
       patches: [
