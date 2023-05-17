@@ -131,6 +131,7 @@
 <script lang="ts">
 import { ZDivider, ZIcon, ZInput } from '@deepsource/zeal'
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
+import DummyAuditLog from './DummyAuditLog.vue'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 
@@ -144,7 +145,7 @@ import { FeatureType } from '~/types/features'
 
 @Component({
   name: 'AuditLogPage',
-  components: { ZDivider, ZIcon, ZInput }
+  components: { ZDivider, ZIcon, ZInput, DummyAuditLog }
 })
 export default class AuditLogPage extends mixins(ActiveUserMixin) {
   @Prop({ default: true, type: Boolean })

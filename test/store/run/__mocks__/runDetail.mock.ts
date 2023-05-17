@@ -32,6 +32,9 @@ export const RUN_DETAIL: Run = {
   commitOid: '38ca5bd8fe006eb246eb23f453d72b816ece20ba',
   finishedAt: '2020-07-06T12:09:30.685586+00:00',
   errorMeta: null,
+  issuesRaisedCount: 10,
+  issuesResolvedCount: 10,
+  issuesResolvedNum: 10,
   config: {
     version: 1,
     analyzers: [
@@ -76,6 +79,7 @@ export const CHECK: Check = {
   id: 'Q2hlY2s6Ym5qZGFn',
   checkSeq: 2,
   status: CheckStatus.Pass,
+  isRetryable: false,
   run: {
     id: 'UnVuOnpucnJveQ==',
     isForDefaultBranch: false,

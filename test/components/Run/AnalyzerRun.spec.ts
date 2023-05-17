@@ -6,7 +6,7 @@ import { VueConstructor } from 'vue'
 import Vuex, { Store } from 'vuex'
 
 import { AnalyzerRun } from '~/components/Run'
-import { cartesian, generateStringProps } from '~/test/utils'
+import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
 import { Issue } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
 
@@ -111,7 +111,9 @@ describe('[[ AnalyzerRun ]]', () => {
       false
     )
 
-    cartesian(statusOptions).forEach((propCombination) => {
+    const isRetryableOptions = generateBooleanProps('isRetryable')
+
+    cartesian(statusOptions, isRetryableOptions).forEach((propCombination) => {
       const props = propCombination
 
       const { html } = render(

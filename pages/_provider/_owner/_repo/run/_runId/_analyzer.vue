@@ -19,7 +19,7 @@
           <nuxt-link
             v-if="previousPageLink"
             :to="previousPageLink"
-            class="flex h-7 w-7 cursor-pointer items-center justify-center gap-x-2 rounded-md border border-slate-400 bg-ink-200 text-sm text-vanilla-400 hover:bg-ink-100 md:hidden"
+            class="flex h-7 w-7 cursor-pointer items-center justify-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 text-sm text-vanilla-400 hover:bg-ink-100 md:hidden"
             ><z-icon icon="arrow-left"
           /></nuxt-link>
           <z-breadcrumb :key="$route.path" separator="/" class="text-sm text-vanilla-100">
@@ -40,18 +40,79 @@
             </z-breadcrumb-item>
           </z-breadcrumb>
         </div>
-        <div class="flex h-full items-center">
+        <div class="flex h-full items-center gap-2">
+          <z-split-dropdown-button-v2
+            v-if="!isLoading && retryableChecks.length"
+            divider-height="h-7"
+            divider-color="slate-400"
+          >
+            <template #primary-button>
+              <button
+                :disabled="areAllChecksRetrying"
+                class="outline-none flex h-7 cursor-pointer items-center gap-x-2 rounded-l-3px border border-r-0 border-slate-400 bg-ink-200 px-2 text-xs text-vanilla-400 hover:bg-ink-100 focus:bg-ink-100 disabled:cursor-not-allowed disabled:border-opacity-40 disabled:bg-opacity-40"
+                @click="retryChecks(retryableAnalyzers)"
+              >
+                <z-icon
+                  :icon="areAllChecksRetrying ? 'spin-loader' : 'fast-forward'"
+                  size="x-small"
+                  :class="{ 'animate-spin': areAllChecksRetrying }"
+                />
+                <span class="hidden md:inline"> Retry all unsuccessful checks </span>
+              </button>
+            </template>
+            <template #menu>
+              <z-menu direction="left" width="small">
+                <template #trigger="{ toggle }">
+                  <button
+                    :disabled="areAllChecksRetrying"
+                    class="outline-none flex h-7 cursor-pointer items-center gap-x-2 rounded-r-3px border border-l-0 border-slate-400 bg-ink-200 px-2 text-vanilla-400 hover:bg-ink-100 focus:bg-ink-100 disabled:cursor-not-allowed disabled:border-opacity-40 disabled:bg-opacity-40"
+                    @click="toggle"
+                  >
+                    <z-icon icon="chevron-down" size="x-small" />
+                  </button>
+                </template>
+                <template #body>
+                  <z-menu-item
+                    v-for="retryableCheck in retryableChecks"
+                    :key="retryableCheck.id"
+                    :disabled="
+                      analyzersInRetry.has(
+                        (retryableCheck.analyzer && retryableCheck.analyzer.shortcode) || ''
+                      )
+                    "
+                    as="button"
+                    spacing="px-3 py-2"
+                    class="flex w-full items-center gap-x-2 truncate text-xs leading-4 text-vanilla-400 disabled:cursor-not-allowed disabled:border-opacity-40 disabled:bg-opacity-40"
+                    @click="retryChecks([retryableCheck.analyzer.shortcode])"
+                  >
+                    <z-icon
+                      v-if="
+                        analyzersInRetry.has(
+                          (retryableCheck.analyzer && retryableCheck.analyzer.shortcode) || ''
+                        )
+                      "
+                      icon="spin-loader"
+                      size="x-small"
+                      class="animate-spin"
+                    />
+                    <analyzer-logo v-else v-bind="retryableCheck.analyzer" size="x-small" />
+                    <span>{{ retryableCheck.analyzer.name }}</span>
+                  </z-menu-item>
+                </template>
+              </z-menu>
+            </template>
+          </z-split-dropdown-button-v2>
           <z-menu class="xl:hidden" direction="left">
             <template #trigger="{ toggle }">
               <button
-                class="flex h-7 cursor-pointer items-center gap-x-2 rounded-md border border-slate-400 bg-ink-200 px-2 text-sm text-vanilla-400 hover:bg-ink-100"
+                class="outline-none flex h-7 cursor-pointer items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 px-2 text-xs text-vanilla-400 hover:bg-ink-100 focus:bg-ink-100"
                 @click="toggle"
               >
                 All checks
               </button>
             </template>
             <template #body>
-              <z-menu-section :divider="false">
+              <z-menu-section :divider="false" class="hide-scroll max-h-56 overflow-y-auto">
                 <analyzer-selector
                   v-bind="run"
                   :checks="checks"
@@ -80,14 +141,18 @@
               v-bind="run"
               :checks="checks"
               :current-analyzer="$route.params.analyzer"
+              :check="check"
+              :is-retrying="isCurrentCheckRetrying"
+              :is-loading="isLoading"
               class="border-b border-ink-200 bg-ink-400"
+              @retry-current-check="retryChecks([check.analyzer.shortcode])"
             />
             <inferred-artifact
               v-if="checkHasInferredArtifacts && checkInferredArtifactsPr"
               v-bind="checkInferredArtifactsPr"
             />
           </div>
-          <nuxt-child />
+          <nuxt-child @is-fetching="(newIsLoading) => (isLoading = newIsLoading)" />
         </div>
       </div>
     </template>
@@ -113,6 +178,9 @@ import { toTitleCase } from '~/utils/string'
 import { PageRefetchStatusT, RunDetailActions } from '~/store/run/detail'
 import { Check, Pr, Run } from '~/types/types'
 import { RunTypes } from '~/types/run'
+
+import RetryChecksMutation from '@/apollo/mutations/repository/runs/retryChecks.gql'
+import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
 
 /**
  * Page that provides detailed information about generated issues for a specific analyzer run.
@@ -166,6 +234,8 @@ export default class AnalyzerDetails extends mixins(
   RunDetailMixin
 ) {
   public flashActiveAnalyzer = false
+  analyzersInRetryList: string[] = []
+  isLoading = false
 
   /**
    * Sets `flashActiveAnalyzer` to true for 1 second, and then resets it back to false
@@ -272,6 +342,64 @@ export default class AnalyzerDetails extends mixins(
     return !this.$route.params.issueId
   }
 
+  get retryableChecks(): Check[] {
+    return this.checks.filter((check) => check.isRetryable)
+  }
+
+  get retryableAnalyzers() {
+    return this.retryableChecks
+      .map((check) => check.analyzer?.shortcode)
+      .filter(Boolean) as string[]
+  }
+
+  get analyzersInRetry() {
+    return new Set(this.analyzersInRetryList)
+  }
+
+  set analyzersInRetry(value) {
+    this.analyzersInRetryList = Array.from(value)
+  }
+
+  get isCurrentCheckRetrying(): boolean {
+    return this.analyzersInRetry.has(this.check.analyzer?.shortcode || '')
+  }
+
+  get areAllChecksRetrying(): boolean {
+    return this.retryableChecks.every((check) =>
+      this.analyzersInRetry.has(check.analyzer?.shortcode || '')
+    )
+  }
+
+  async retryChecks(analyzerShortcodes: string[]): Promise<boolean> {
+    const analyzersToRetry = analyzerShortcodes.filter(
+      (shortcode) => !this.analyzersInRetry.has(shortcode)
+    )
+    this.analyzersInRetry = new Set([...Array.from(this.analyzersInRetry), ...analyzerShortcodes])
+    try {
+      if (analyzersToRetry.length) {
+        const response: GraphqlMutationResponse = await this.$applyGraphqlMutation(
+          RetryChecksMutation,
+          {
+            input: { runId: this.$route.params.runId, analyzers: analyzersToRetry }
+          }
+        )
+        if (response.data.retryChecksInRun?.ok) {
+          if (analyzerShortcodes.includes(this.$route.params.analyzer)) {
+            this.$root.$emit('refetchRunAndCheck', { run_id: this.$route.params.runId })
+          }
+          return true
+        }
+      }
+    } catch (e) {
+      const err = e as Error
+      this.$logErrorAndToast(err, err.message.replace('GraphQL error: ', '') as `${string}.`)
+      this.analyzersInRetry = new Set(
+        this.analyzersInRetryList.filter((analyzer) => !analyzerShortcodes.includes(analyzer))
+      )
+    }
+    return false
+  }
+
   /**
    * Function that returns `head` property to configure page metadata.
    *
@@ -306,6 +434,7 @@ export default class AnalyzerDetails extends mixins(
   );
 
   --run-check-title-height: 140px;
+  --run-check-title-height-with-retry: 201px;
 }
 
 /* height of RepoHeader + Breadcrumbs */
@@ -328,9 +457,15 @@ export default class AnalyzerDetails extends mixins(
   top: calc(var(--top-bar-offset) + var(--run-check-title-height));
 }
 
+/* offset for the check page parent element with retry option when sticky, accomodates the top bar and run header */
+.check-body-offset.has-retry {
+  top: calc(var(--top-bar-offset) + var(--run-check-title-height-with-retry));
+}
+
 @media (min-width: 640px) {
   .analyzer-page {
-    --run-check-title-height: 104px;
+    --run-check-title-height: 105px;
+    --run-check-title-height-with-retry: 165px;
   }
 }
 

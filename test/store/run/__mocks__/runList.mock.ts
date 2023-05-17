@@ -124,7 +124,10 @@ export const PR_LIST = {
           createdAt: 'day before yesterday',
           modifiedAt: 'day after tomorrow',
           checks: { pageInfo: { hasNextPage: false, hasPreviousPage: true }, edges: [] },
-          extraData: {}
+          extraData: {},
+          issuesRaisedCount: 15,
+          issuesResolvedCount: 4,
+          issuesResolvedNum: 4
         }
       },
       cursor: ''
@@ -150,7 +153,10 @@ export const PR_LIST = {
           createdAt: 'day before yesterdayy',
           modifiedAt: 'day after tomorroww',
           checks: { pageInfo: { hasNextPage: false, hasPreviousPage: true }, edges: [] },
-          extraData: {}
+          extraData: {},
+          issuesRaisedCount: 15,
+          issuesResolvedNum: 4,
+          issuesResolvedCount: 4
         }
       },
       cursor: ''

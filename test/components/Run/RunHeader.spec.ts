@@ -4,8 +4,8 @@ import { createLocalVue, RouterLinkStub, shallowMount } from '@vue/test-utils'
 import VTooltip from 'v-tooltip'
 import { VueConstructor } from 'vue'
 import { RunHeader } from '~/components/Run'
-import { cartesian, generateStringProps } from '~/test/utils'
-import { Check, RunConnection, RunEdge, RunStatus } from '~/types/types'
+import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
+import { Check, CheckStatus, RunConnection, RunStatus } from '~/types/types'
 import Vuex, { Store } from 'vuex'
 
 interface IRunHeader {
@@ -153,7 +153,20 @@ describe('[[ RunHeader ]]', () => {
       'https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef',
     vcsPrUrl: 'https://github.com/deepsourcelabs/demo-python/pull/77',
     pullRequestNumberDisplay: '#77',
-    currentAnalyzer: 'python'
+    currentAnalyzer: 'python',
+    check: {
+      id: 'Q2hlY2s6YnJnbnZq',
+      issuesRaisedCount: 23,
+      isRetryable: false,
+      status: CheckStatus.Timo,
+      analyzer: {
+        name: 'Python',
+        shortcode: 'python',
+        description: "DeepSource's Python analyzer.",
+        analyzerLogo:
+          'http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg'
+      }
+    }
   }
 
   const mocks = {
@@ -235,6 +248,50 @@ describe('[[ RunHeader ]]', () => {
     cartesian(statusOptions).forEach((propCombination) => {
       const props = {
         ...baseProps,
+        ...propCombination
+      }
+
+      const { html } = render(
+        RunHeader,
+        {
+          store,
+          mocks,
+          props,
+          stubs
+        },
+        (vue) => {
+          vue.use(VTooltip)
+          vue.use(Vuex)
+        }
+      )
+
+      expect(html()).toMatchSnapshot(JSON.stringify(props))
+    })
+  })
+
+  test('renders `RunHeader` with retry check options', () => {
+    const isRetryingOptions = generateBooleanProps('isRetrying')
+    const isLoadingOptions = generateBooleanProps('isLoading')
+    const updatedCheck = {
+      check: {
+        id: 'Q2hlY2s6YnJnbnZq',
+        issuesRaisedCount: 23,
+        isRetryable: true,
+        status: CheckStatus.Timo,
+        analyzer: {
+          name: 'Python',
+          shortcode: 'python',
+          description: "DeepSource's Python analyzer.",
+          analyzerLogo:
+            'http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg'
+        }
+      }
+    }
+
+    cartesian(isRetryingOptions, isLoadingOptions).forEach((propCombination) => {
+      const props = {
+        ...baseProps,
+        ...updatedCheck,
         ...propCombination
       }
 

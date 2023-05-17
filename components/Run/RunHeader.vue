@@ -1,178 +1,204 @@
 <template>
-  <div class="flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22">
-    <div class="flex flex-col gap-y-4 p-3">
-      <div class="flex items-start gap-x-2">
-        <analyzer-logo v-bind="currentCheck.analyzer" size="large" />
+  <div>
+    <div class="flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22">
+      <div class="flex flex-col gap-y-4 p-3">
+        <div class="flex items-start gap-x-2">
+          <analyzer-logo v-bind="currentCheck.analyzer" size="large" />
 
-        <div class="text-lg font-bold text-vanilla-100">
-          {{ currentCheck.analyzer.name }}
+          <div class="text-lg font-bold text-vanilla-100">
+            {{ currentCheck.analyzer.name }}
 
-          <span class="font-medium text-vanilla-400"
-            ><a v-if="vcsCommitUrl" :href="vcsCommitUrl" target="_blank" rel="noopener noreferrer"
-              >@{{ commitOid.slice(0, 7) }}</a
-            >
-          </span>
-        </div>
-
-        <z-tag class="hidden border border-slate-400 py-0.5 px-2 md:inline-flex" spacing="">
-          <div class="flex items-center gap-x-1">
-            <z-icon
-              :icon="getCheckStatusIcon(currentCheck.status)"
-              :color="getCheckStatusIconColor(currentCheck.status)"
-              class="flex-shrink-0"
-              :class="{ 'animate-spin': isCheckPending }"
-            />
-            <span
-              class="text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200"
-              >{{ tagLabel }}</span
-            >
-          </div>
-        </z-tag>
-      </div>
-      <div class="flex gap-x-3">
-        <div
-          class="flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100"
-        >
-          <z-icon
-            :icon="isForDefaultBranch ? 'z-git-branch' : 'git-pull-request'"
-            size="small"
-            class="flex-shrink-0"
-          />
-          <div class="text-sm text-vanilla-400 line-clamp-1">
-            <a
-              v-tooltip="vscLinkTooltip"
-              :href="isForDefaultBranch ? repository.vcsUrl : vcsPrUrl"
-              target="_blank"
-              rel="noopener noreferrer"
-              >{{ isForDefaultBranch ? branchName : pullRequestNumberDisplay }}
-            </a>
-          </div>
-        </div>
-        <z-menu v-if="runCount" width="2x-large">
-          <template #trigger="{ toggle, isOpen }">
-            <button
-              class="flex h-7 cursor-pointer items-center gap-x-2 rounded-3px border border-slate-400 px-2"
-              :class="[isOpen ? 'bg-ink-100' : 'bg-ink-200 hover:bg-ink-100']"
-              @click="toggle"
-            >
-              <div class="flex items-center gap-x-2 text-sm text-vanilla-400">
-                <z-icon icon="refresh-cw" size="small" />
-                <span> {{ countText }} </span>
-                <z-icon
-                  icon="chevron-down"
-                  size="small"
-                  class="transform transition-all duration-300"
-                  :class="(isOpen && 'rotate-180') || 'rotate-0'"
-                />
-              </div>
-            </button>
-          </template>
-          <template #body>
-            <z-menu-section
-              :divider="false"
-              class="hide-scroll max-h-96 divide-y divide-ink-200 overflow-y-auto rounded-md border border-slate-400"
-            >
-              <z-menu-item
-                v-for="run in branchRuns"
-                :key="run.runId"
-                :to="getRoute(run.runId)"
-                as="nuxt-link"
-                class="bg-ink-300 p-4"
+            <span class="font-medium text-vanilla-400"
+              ><a v-if="vcsCommitUrl" :href="vcsCommitUrl" target="_blank" rel="noopener noreferrer"
+                >@{{ commitOid.slice(0, 7) }}</a
               >
-                <div class="flex flex-col gap-y-2.5">
-                  <div class="flex items-center gap-x-1.5">
-                    <z-icon
-                      :icon="getStatusIcon(run.status)"
-                      :color="getStatusIconColor(run.status)"
-                      :class="{ 'motion-safe:animate-spin': run.status === 'PEND' }"
-                      class="mt-px"
-                    />
-                    <div class="max-w-xs truncate text-sm font-medium leading-6 text-vanilla-100">
-                      {{ run.commitMessage || run.branchName }}
+            </span>
+          </div>
+
+          <z-tag class="hidden border border-slate-400 py-0.5 px-2 md:inline-flex" spacing="">
+            <div class="flex items-center gap-x-1">
+              <z-icon
+                :icon="getCheckStatusIcon(currentCheck.status)"
+                :color="getCheckStatusIconColor(currentCheck.status)"
+                class="flex-shrink-0"
+                :class="{ 'animate-spin': isCheckPending }"
+              />
+              <span
+                class="text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200"
+                >{{ tagLabel }}</span
+              >
+            </div>
+          </z-tag>
+        </div>
+        <div class="flex gap-x-3">
+          <div
+            class="flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100"
+          >
+            <z-icon
+              :icon="isForDefaultBranch ? 'z-git-branch' : 'git-pull-request'"
+              size="small"
+              class="flex-shrink-0"
+            />
+            <div class="text-sm text-vanilla-400 line-clamp-1">
+              <a
+                v-tooltip="vscLinkTooltip"
+                :href="isForDefaultBranch ? repository.vcsUrl : vcsPrUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                >{{ isForDefaultBranch ? branchName : pullRequestNumberDisplay }}
+              </a>
+            </div>
+          </div>
+          <z-menu v-if="runCount" width="2x-large">
+            <template #trigger="{ toggle, isOpen }">
+              <button
+                class="flex h-7 cursor-pointer items-center gap-x-2 rounded-3px border border-slate-400 px-2"
+                :class="[isOpen ? 'bg-ink-100' : 'bg-ink-200 hover:bg-ink-100']"
+                @click="toggle"
+              >
+                <div class="flex items-center gap-x-2 text-sm text-vanilla-400">
+                  <z-icon icon="refresh-cw" size="small" />
+                  <span> {{ countText }} </span>
+                  <z-icon
+                    icon="chevron-down"
+                    size="small"
+                    class="transform transition-all duration-300"
+                    :class="(isOpen && 'rotate-180') || 'rotate-0'"
+                  />
+                </div>
+              </button>
+            </template>
+            <template #body>
+              <z-menu-section
+                :divider="false"
+                class="hide-scroll max-h-96 divide-y divide-ink-200 overflow-y-auto rounded-md border border-slate-400"
+              >
+                <z-menu-item
+                  v-for="run in branchRuns"
+                  :key="run.runId"
+                  :to="getRoute(run.runId)"
+                  as="nuxt-link"
+                  class="bg-ink-300 p-4"
+                >
+                  <div class="flex flex-col gap-y-2.5">
+                    <div class="flex items-center gap-x-1.5">
+                      <z-icon
+                        :icon="getStatusIcon(run.status)"
+                        :color="getStatusIconColor(run.status)"
+                        class="mt-px"
+                        :class="{ 'motion-safe:animate-spin': run.status === 'PEND' }"
+                      />
+                      <div class="max-w-xs truncate text-sm font-medium leading-6 text-vanilla-100">
+                        {{ run.commitMessage || run.branchName }}
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap gap-x-4 pl-6">
+                      <meta-data-item v-if="run.commitOid" icon="git-commit">
+                        {{ run.commitOid.slice(0, 7) }}
+                      </meta-data-item>
+                      <meta-data-item
+                        v-if="run.issuesRaisedCount"
+                        icon="double-exclamation"
+                        icon-color="cherry"
+                        size="small"
+                        spacing="space-x-0"
+                      >
+                        {{ shortenLargeNumber(run.issuesRaisedCount) }}
+                      </meta-data-item>
+                      <meta-data-item
+                        v-if="run.issuesResolvedCount"
+                        icon="double-check"
+                        icon-color="juniper"
+                        size="small"
+                        spacing="space-x-0.5"
+                        class="ml-1"
+                      >
+                        {{ shortenLargeNumber(run.issuesResolvedCount) }}
+                      </meta-data-item>
                     </div>
                   </div>
-                  <div class="flex flex-wrap gap-x-4 pl-6">
-                    <meta-data-item v-if="run.commitOid" icon="git-commit">
-                      {{ run.commitOid.slice(0, 7) }}
-                    </meta-data-item>
-                    <meta-data-item
-                      v-if="run.issuesRaisedCount"
-                      icon="double-exclamation"
-                      icon-color="cherry"
-                      size="small"
-                      spacing="space-x-0"
-                    >
-                      {{ shortenLargeNumber(run.issuesRaisedCount) }}
-                    </meta-data-item>
-                    <meta-data-item
-                      v-if="run.issuesResolvedCount"
-                      icon="double-check"
-                      icon-color="juniper"
-                      size="small"
-                      class="ml-1"
-                      spacing="space-x-0.5"
-                    >
-                      {{ shortenLargeNumber(run.issuesResolvedCount) }}
-                    </meta-data-item>
-                  </div>
-                </div>
-              </z-menu-item>
-            </z-menu-section>
-          </template>
-        </z-menu>
-      </div>
-      <div class="flex items-center sm:hidden">
-        <meta-data-item
-          v-if="issueMetaDataLabel"
-          :label="issueMetaDataLabel"
-          icon="flag"
-          text-size="text-sm"
-          class="md:hidden"
-        />
-      </div>
-    </div>
-    <div v-if="!isCheckInProgress" class="hidden p-3 sm:flex">
-      <div class="flex w-full items-center justify-center gap-x-6">
-        <!-- introduced issues -->
-        <div class="flex flex-col items-center">
-          <div
-            v-tooltip="
-              `${
-                currentCheck.issuesRaisedCount > 1000
-                  ? formatIntl(currentCheck.issuesRaisedCount)
-                  : ''
-              } issues introduced`
-            "
-            class="text-2xl font-semibold"
-            :class="currentCheck.issuesRaisedCount > 0 ? 'text-cherry' : 'text-vanilla-400'"
-          >
-            {{ shortenLargeNumber(currentCheck.issuesRaisedCount) }}
-          </div>
-          <div class="text-xs text-vanilla-400">introduced</div>
+                </z-menu-item>
+              </z-menu-section>
+            </template>
+          </z-menu>
         </div>
-        <!-- resolved issues -->
-        <div class="flex flex-col items-center">
-          <div
-            v-tooltip="
-              `${
-                currentCheck.issuesResolvedCount > 1000
-                  ? formatIntl(currentCheck.issuesResolvedCount)
-                  : ''
-              } issues resolved`
-            "
-            class="text-2xl font-semibold"
-            :class="currentCheck.issuesResolvedCount > 0 ? 'text-juniper' : 'text-vanilla-400'"
-          >
-            {{ shortenLargeNumber(currentCheck.issuesResolvedCount) }}
+        <div class="flex items-center sm:hidden">
+          <meta-data-item
+            v-if="issueMetaDataLabel"
+            :label="issueMetaDataLabel"
+            icon="flag"
+            text-size="text-sm"
+            class="md:hidden"
+          />
+        </div>
+      </div>
+      <div v-if="!isCheckInProgress" class="hidden p-3 sm:flex">
+        <div class="flex w-full items-center justify-center gap-x-6">
+          <!-- introduced issues -->
+          <div class="flex flex-col items-center">
+            <div
+              v-tooltip="
+                `${
+                  currentCheck.issuesRaisedCount > 1000
+                    ? formatIntl(currentCheck.issuesRaisedCount)
+                    : ''
+                } issues introduced`
+              "
+              class="text-2xl font-semibold"
+              :class="currentCheck.issuesRaisedCount > 0 ? 'text-cherry' : 'text-vanilla-400'"
+            >
+              {{ shortenLargeNumber(currentCheck.issuesRaisedCount) }}
+            </div>
+            <div class="text-xs text-vanilla-400">introduced</div>
           </div>
-          <div class="text-xs text-vanilla-400">resolved</div>
+          <!-- resolved issues -->
+          <div class="flex flex-col items-center">
+            <div
+              v-tooltip="
+                `${
+                  currentCheck.issuesResolvedCount > 1000
+                    ? formatIntl(currentCheck.issuesResolvedCount)
+                    : ''
+                } issues resolved`
+              "
+              class="text-2xl font-semibold"
+              :class="currentCheck.issuesResolvedCount > 0 ? 'text-juniper' : 'text-vanilla-400'"
+            >
+              {{ shortenLargeNumber(currentCheck.issuesResolvedCount) }}
+            </div>
+            <div class="text-xs text-vanilla-400">resolved</div>
+          </div>
         </div>
       </div>
     </div>
+    <z-alert v-if="!isLoading && check && check.isRetryable" type="warning" class="mx-3 mb-3">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-x-2">
+          <z-icon :icon="checkStatusIcon(check.status)" color="current" />
+          <span
+            >This check was <span class="lowercase">{{ checkStatusTagLabel(check.status) }}</span
+            >.</span
+          >
+        </div>
+        <div class="group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer">
+          <z-button
+            :disabled="isRetrying"
+            :is-loading="isRetrying"
+            icon="fast-forward"
+            button-type="ghost"
+            color="ink-400"
+            label="Retry check"
+            size="small"
+            class="group-hover:bg-honey-300"
+            @click="$emit('retry-current-check')"
+          />
+        </div>
+      </div>
+    </z-alert>
   </div>
 </template>
 <script lang="ts">
-import { ZIcon, ZTag, ZMenu, ZMenuItem, ZMenuSection } from '@deepsource/zeal'
+import { ZIcon, ZTag, ZMenu, ZMenuItem, ZMenuSection, ZAlert, ZButton } from '@deepsource/zeal'
 import { Component, namespace, Prop } from 'nuxt-property-decorator'
 
 import LinkToPrev from '@/components/LinkToPrev.vue'
@@ -204,11 +230,15 @@ const runListStore = namespace('run/list')
     ZMenu,
     ZMenuItem,
     ZMenuSection,
+    ZAlert,
+    ZButton,
     LinkToPrev
   },
   methods: {
     formatIntl,
-    shortenLargeNumber
+    shortenLargeNumber,
+    checkStatusIcon,
+    checkStatusTagLabel
   },
   layout: 'repository'
 })
@@ -267,6 +297,15 @@ export default class RunHeader extends RepoDetailMixin {
 
   @Prop({ default: '' })
   currentAnalyzer: string
+
+  @Prop({ required: true })
+  check: Check
+
+  @Prop({ default: false })
+  isRetrying: boolean
+
+  @Prop({ default: false })
+  isLoading: boolean
 
   /**
    * Fetch hook for this component.

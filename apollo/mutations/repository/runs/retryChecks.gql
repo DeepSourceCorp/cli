@@ -1,0 +1,5 @@
+mutation retryChecks($input: RetryChecksInRunInput!) {
+  retryChecksInRun(input: $input) {
+    ok
+  }
+}

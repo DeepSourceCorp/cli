@@ -4,17 +4,18 @@ query repositoryRunCheckDetails($checkId: ID!) {
     status
     checkSeq
     finishedInDisplay
+    filesAffectedByAutofix
+    errors
+    errorsRendered
+    issuesRaisedCount
+    issuesResolvedCount
+    isRetryable
     autofixableIssues {
       shortcode
       title
       category
       occurrenceCount
     }
-    filesAffectedByAutofix
-    errors
-    errorsRendered
-    issuesRaisedCount
-    issuesResolvedCount
     run {
       id
       isForDefaultBranch

@@ -31,8 +31,9 @@
 <script lang="ts">
 import { ZIcon } from '@deepsource/zeal'
 import { Component, Vue } from 'nuxt-property-decorator'
+import TimelineV2 from '../Common/TimelineV2.vue'
 
-@Component({ name: 'DummyAuditLog', components: { ZIcon } })
+@Component({ name: 'DummyAuditLog', components: { ZIcon, TimelineV2 } })
 export default class DummyAuditLog extends Vue {
   readonly dummyAuditLog = [
     {

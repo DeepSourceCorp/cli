@@ -21,6 +21,9 @@ describe('[[run utils]]', () => {
       status: RunStatus.Pass,
       createdAt: 'day before yesterday',
       modifiedAt: 'day after tomorrow',
+      issuesRaisedCount: 10,
+      issuesResolvedCount: 10,
+      issuesResolvedNum: 10,
       checks: { pageInfo: { hasNextPage: false, hasPreviousPage: true }, edges: [] },
       extraData: {}
     }
@@ -37,6 +40,7 @@ describe('[[run utils]]', () => {
     modifiedAt: 'day after tomorrow',
     issuesRaisedCount: 420,
     issuesResolvedCount: 101,
+    issuesResolvedNum: 10,
     status: RunStatus.Pass,
     commitMessage: 'feat: add yesterday',
     checks: { pageInfo: { hasNextPage: false, hasPreviousPage: true }, edges: [] },

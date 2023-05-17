@@ -514,6 +514,8 @@ type Check implements MaskPrimaryKeyNode {
   extraData: JSONString!
   errors: GenericScalar
   metrics: JSONString!
+  raisedCount: Int
+  resolvedCount: Int
   metricsCaptured: [RepositoryMetricValue]
   checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
   concreteIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, issueType: String, autofixAvailable: Boolean, auditRequired: Boolean, sort: String): IssueConnection
@@ -526,6 +528,7 @@ type Check implements MaskPrimaryKeyNode {
   filesAffectedByAutofix: Int
   hasInferredArtifacts: Boolean
   inferredArtifactsPr: PR
+  isRetryable: Boolean!
 }
 
 type CheckConnection {
@@ -1835,6 +1838,7 @@ type Mutation {
   addIdentityProvider(input: AddIdentityProviderInput!): AddIdentityProviderPayload
   deleteIdentityProvider(input: DeleteIdentityProviderInput!): DeleteIdentityProviderPayload
   updateIdentityProvider(input: UpdateIdentityProviderInput!): UpdateIdentityProviderPayload
+  retryChecksInRun(input: RetryChecksInRunInput!): RetryChecksInRunPayload
   updateEnterpriseInstallation(input: UpdateEnterpriseInstallationInput!): UpdateEnterpriseInstallationPayload
   createGroup(input: CreateGroupInput!): CreateGroupPayload
   updateGroup(input: UpdateGroupInput!): UpdateGroupPayload
@@ -2463,7 +2467,6 @@ type Repository implements MaskPrimaryKeyNode {
   userPermissionMeta: GenericScalar
   issueOccurrenceDistributionByProduct(recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): [IssueOccurrenceFrequency!]!
   issueOccurrenceDistributionByIssueType(recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): [IssueOccurrenceFrequency!]!
-  issueTypeDistribution(recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): [GenericScalar] @deprecated(reason: "Deprecated in favor of `issue_occurrence_distribution_by_issue_type`.")
   recommendedIssueCount: Int
   totalIssueCount: Int
   isStarred: Boolean
@@ -2668,6 +2671,17 @@ type ResetTeamInvitationLinkPayload {
   clientMutationId: String
 }
 
+input RetryChecksInRunInput {
+  runId: String!
+  analyzers: [String]!
+  clientMutationId: String
+}
+
+type RetryChecksInRunPayload {
+  ok: Boolean!
+  clientMutationId: String
+}
+
 input RevertSubscriptionCancellationInput {
   id: ID
   ownerId: Int
@@ -2707,6 +2721,8 @@ type Run implements MaskPrimaryKeyNode {
   finishedAt: DateTime
   errorMeta: JSONString
   config: GenericScalar
+  raisedCount: Int
+  resolvedCount: Int
   extraData: JSONString!
   pullRequest: PR
   checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
@@ -2714,9 +2730,9 @@ type Run implements MaskPrimaryKeyNode {
   vcsCommitUrl: String
   gitCompareDisplay: String
   pullRequestNumberDisplay: String
-  issuesRaisedCount: Int
-  issuesResolvedCount: Int
-  issuesResolvedNum: Int @deprecated(reason: "Removed in favor of `issues_resolved_count`")
+  issuesRaisedCount: Int!
+  issuesResolvedCount: Int!
+  issuesResolvedNum: Int! @deprecated(reason: "Removed in favor of `issues_resolved_count`")
   isForDefaultBranch: Boolean
   isForCrossRepoPr: Boolean
   branchRunCount: Int

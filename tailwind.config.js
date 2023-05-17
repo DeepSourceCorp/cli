@@ -47,10 +47,12 @@ module.exports = {
   variants: {
     extend: {
       translate: ['group-hover'],
-      cursor: ['hover'],
+      cursor: ['hover', 'disabled'],
       borderStyle: ['hover', 'focus'],
       animation: ['motion-safe'],
-      margin: ['first', 'hover', 'group-hover']
+      margin: ['first', 'hover', 'group-hover'],
+      backgroundOpacity: ['disabled'],
+      borderOpacity: ['disabled']
     }
   },
   theme: {

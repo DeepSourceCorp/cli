@@ -1,5 +1,5 @@
 <template>
-  <section class="min-height-for-offset flex flex-col">
+  <section class="min-height-for-offset flex flex-col" :class="{ 'has-retry': isRetryable }">
     <div
       v-if="issueCount || isFilterApplied"
       id="issue-filters"
@@ -108,6 +108,9 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
   })
   filters: FilterParams
 
+  @Prop({ default: false })
+  isRetryable: boolean
+
   public isAutofixOpen = false
   readonly CheckStatus = CheckStatus
 
@@ -153,6 +156,7 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
   );
 
   --run-check-title-height: 140px;
+  --run-check-title-height-with-retry: 201px;
 }
 /* offset for the filters container, to accomodate the top bar and run header */
 .check-filter-headers-offset {
@@ -164,9 +168,15 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
   min-height: calc(100vh - var(--top-bar-offset) - var(--run-check-title-height));
 }
 
+/* sets the min-height for the component wrapper, ensures that component height spans entire viewport height minus the top bar and run header */
+.min-height-for-offset.has-retry {
+  min-height: calc(100vh - var(--top-bar-offset) - var(--run-check-title-height-with-retry));
+}
+
 @media (min-width: 640px) {
   .analyzer-page {
-    --run-check-title-height: 104px;
+    --run-check-title-height: 105px;
+    --run-check-title-height-with-retry: 165px;
   }
 }
 

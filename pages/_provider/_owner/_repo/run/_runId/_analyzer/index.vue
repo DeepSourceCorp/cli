@@ -1,8 +1,13 @@
 <template>
-  <main class="check-body-offset pt-3 md:sticky md:pt-0">
+  <main
+    class="check-body-offset pt-3 md:sticky md:pt-0"
+    :class="{ 'has-retry': check.isRetryable }"
+  >
     <div v-if="!isLoading">
       <z-tabs>
-        <z-tab-list class="ml-2 w-full flex-row -space-x-2 text-center md:hidden">
+        <z-tab-list
+          class="custom-tab-selector-width ml-2 flex-row -space-x-2 overflow-hidden text-center md:hidden"
+        >
           <z-tab
             :is-active="activeTabIndex === 0"
             :action="() => updateActiveTabIndex(0)"
@@ -101,7 +106,10 @@
             </template>
           </analyzer-run>
           <section v-if="['FAIL', 'PASS'].includes(check.status)">
-            <div class="metrics-header-offset sticky hidden flex-col space-y-2 p-3 md:flex">
+            <div
+              class="metrics-header-offset sticky hidden flex-col space-y-2 p-3 md:flex"
+              :class="{ 'has-retry': check.isRetryable }"
+            >
               <div
                 v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
                 class="hide-scroll grid grid-cols-1 gap-3 overflow-y-auto"
@@ -427,6 +435,7 @@ export default class AnalyzerDetails extends mixins(
    * @returns {Promise<void>} A promise that resolves with no return on completion of fetch.
    */
   async fetch(): Promise<void> {
+    this.$emit('is-fetching', true)
     const { status, analyzer, runId, pageOffset } = this.pageRefetchStatus.runDetail
     const { analyzer: analyzerFromRouteParams, runId: runIdFromRouteParams } = this.$route.params
 
@@ -455,6 +464,7 @@ export default class AnalyzerDetails extends mixins(
         }
       })
     }
+    this.$emit('is-fetching', false)
   }
 
   /**
@@ -484,10 +494,12 @@ export default class AnalyzerDetails extends mixins(
     check_id?: string
   }): Promise<void> {
     if (this.$route.params.runId === run_id) {
-      Promise.all([
-        this.fetchCurrentRun(true),
-        this.refetchCheck(check_id || this.currentCheck?.id)
-      ])
+      if (check_id) {
+        await Promise.all([this.fetchCurrentRun(true), this.refetchCheck(check_id)])
+      } else {
+        await this.fetchCurrentRun(true)
+        await this.refetchCheck(this.currentCheck?.id)
+      }
     }
   }
 
@@ -531,6 +543,7 @@ export default class AnalyzerDetails extends mixins(
    */
   mounted(): void {
     this.$root.$on('refetchCheck', this.refetchCheck)
+    this.$root.$on('refetchRunAndCheck', this.refetchRunAndCheck)
     this.$socket.$on('repo-analysis-updated', this.refetchRunAndCheck)
     this.$socket.$on('autofixrun-fixes-ready', this.refetchRunAndCheck)
     this.handleResize()
@@ -546,6 +559,7 @@ export default class AnalyzerDetails extends mixins(
    */
   beforeDestroy(): void {
     this.$root.$off('refetchCheck', this.refetchCheck)
+    this.$root.$off('refetchRunAndCheck', this.refetchRunAndCheck)
     this.$socket.$off('repo-analysis-updated', this.refetchRunAndCheck)
     this.$socket.$off('autofixrun-fixes-ready', this.refetchRunAndCheck)
     window.removeEventListener('resize', this.handleResize)
@@ -786,7 +800,8 @@ export default class AnalyzerDetails extends mixins(
     var(--repo-header-height) + var(--breadcrumb-height) + var(--mobile-navbar-height)
   );
 
-  --run-check-title-height: 104px;
+  --run-check-title-height: 140px;
+  --run-check-title-height-with-retry: 201px;
 }
 
 /* offset for the metrics sidebar, to accomodate the top bar and run header */
@@ -794,9 +809,15 @@ export default class AnalyzerDetails extends mixins(
   top: calc(var(--top-bar-offset) + var(--run-check-title-height));
 }
 
+/* offset for the metrics sidebar, to accomodate the top bar and run header with retry button */
+.metrics-header-offset.has-retry {
+  top: calc(var(--top-bar-offset) + var(--run-check-title-height-with-retry));
+}
+
 @media (min-width: 640px) {
   .analyzer-page {
-    --run-check-title-height: 104px;
+    --run-check-title-height: 105px;
+    --run-check-title-height-with-retry: 165px;
   }
 }
 
@@ -819,5 +840,9 @@ export default class AnalyzerDetails extends mixins(
     --mobile-navbar-height: 0px;
     --repo-header-height: 96px;
   }
+}
+
+.custom-tab-selector-width {
+  width: calc(100vw - 8px);
 }
 </style>

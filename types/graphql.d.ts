@@ -791,6 +791,15 @@ declare module '*/ignoreCheckMetric.gql' {
 }
     
 
+declare module '*/retryChecks.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const retryChecks: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/deleteIgnoredRule.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

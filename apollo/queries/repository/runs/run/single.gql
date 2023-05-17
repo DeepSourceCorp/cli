@@ -18,6 +18,7 @@ query repositoryRunDetail(
             issuesRaisedCount
             issuesResolvedCount
             status
+            isRetryable
             analyzer {
               name
               shortcode

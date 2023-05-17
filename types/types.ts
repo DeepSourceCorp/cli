@@ -703,6 +703,8 @@ export type Check = MaskPrimaryKeyNode & {
   extraData: Scalars['JSONString'];
   errors?: Maybe<Scalars['GenericScalar']>;
   metrics: Scalars['JSONString'];
+  raisedCount?: Maybe<Scalars['Int']>;
+  resolvedCount?: Maybe<Scalars['Int']>;
   metricsCaptured?: Maybe<Array<Maybe<RepositoryMetricValue>>>;
   checkIssues: CheckIssueConnection;
   concreteIssues?: Maybe<IssueConnection>;
@@ -715,6 +717,7 @@ export type Check = MaskPrimaryKeyNode & {
   filesAffectedByAutofix?: Maybe<Scalars['Int']>;
   hasInferredArtifacts?: Maybe<Scalars['Boolean']>;
   inferredArtifactsPr?: Maybe<Pr>;
+  isRetryable: Scalars['Boolean'];
 };
 
 
@@ -2635,6 +2638,7 @@ export type Mutation = {
   addIdentityProvider?: Maybe<AddIdentityProviderPayload>;
   deleteIdentityProvider?: Maybe<DeleteIdentityProviderPayload>;
   updateIdentityProvider?: Maybe<UpdateIdentityProviderPayload>;
+  retryChecksInRun?: Maybe<RetryChecksInRunPayload>;
   updateEnterpriseInstallation?: Maybe<UpdateEnterpriseInstallationPayload>;
   createGroup?: Maybe<CreateGroupPayload>;
   updateGroup?: Maybe<UpdateGroupPayload>;
@@ -2816,6 +2820,11 @@ export type MutationDeleteIdentityProviderArgs = {
 
 export type MutationUpdateIdentityProviderArgs = {
   input: UpdateIdentityProviderInput;
+};
+
+
+export type MutationRetryChecksInRunArgs = {
+  input: RetryChecksInRunInput;
 };
 
 
@@ -4476,8 +4485,6 @@ export type Repository = MaskPrimaryKeyNode & {
   userPermissionMeta?: Maybe<Scalars['GenericScalar']>;
   issueOccurrenceDistributionByProduct: Array<IssueOccurrenceFrequency>;
   issueOccurrenceDistributionByIssueType: Array<IssueOccurrenceFrequency>;
-  /** @deprecated Deprecated in favor of `issue_occurrence_distribution_by_issue_type`. */
-  issueTypeDistribution?: Maybe<Array<Maybe<Scalars['GenericScalar']>>>;
   recommendedIssueCount?: Maybe<Scalars['Int']>;
   totalIssueCount?: Maybe<Scalars['Int']>;
   isStarred?: Maybe<Scalars['Boolean']>;
@@ -4794,20 +4801,6 @@ export type RepositoryIssueOccurrenceDistributionByIssueTypeArgs = {
   sort?: Maybe<Scalars['String']>;
 };
 
-
-export type RepositoryIssueTypeDistributionArgs = {
-  recommended?: Maybe<Scalars['Boolean']>;
-  issueType?: Maybe<Scalars['String']>;
-  analyzer?: Maybe<Scalars['String']>;
-  product?: Maybe<Scalars['String']>;
-  severity?: Maybe<Scalars['String']>;
-  severityIn?: Maybe<Array<Maybe<Scalars['String']>>>;
-  autofixAvailable?: Maybe<Scalars['Boolean']>;
-  auditRequired?: Maybe<Scalars['Boolean']>;
-  q?: Maybe<Scalars['String']>;
-  sort?: Maybe<Scalars['String']>;
-};
-
 export type RepositoryCollaborator = MaskPrimaryKeyNode & {
   __typename?: 'RepositoryCollaborator';
   createdAt: Scalars['DateTime'];
@@ -5048,6 +5041,18 @@ export type ResetTeamInvitationLinkPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type RetryChecksInRunInput = {
+  runId: Scalars['String'];
+  analyzers: Array<Maybe<Scalars['String']>>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type RetryChecksInRunPayload = {
+  __typename?: 'RetryChecksInRunPayload';
+  ok: Scalars['Boolean'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type RevertSubscriptionCancellationInput = {
   id?: Maybe<Scalars['ID']>;
   ownerId?: Maybe<Scalars['Int']>;
@@ -5091,6 +5096,8 @@ export type Run = MaskPrimaryKeyNode & {
   finishedAt?: Maybe<Scalars['DateTime']>;
   errorMeta?: Maybe<Scalars['JSONString']>;
   config?: Maybe<Scalars['GenericScalar']>;
+  raisedCount?: Maybe<Scalars['Int']>;
+  resolvedCount?: Maybe<Scalars['Int']>;
   extraData: Scalars['JSONString'];
   pullRequest?: Maybe<Pr>;
   checks: CheckConnection;
@@ -5098,10 +5105,10 @@ export type Run = MaskPrimaryKeyNode & {
   vcsCommitUrl?: Maybe<Scalars['String']>;
   gitCompareDisplay?: Maybe<Scalars['String']>;
   pullRequestNumberDisplay?: Maybe<Scalars['String']>;
-  issuesRaisedCount?: Maybe<Scalars['Int']>;
-  issuesResolvedCount?: Maybe<Scalars['Int']>;
+  issuesRaisedCount: Scalars['Int'];
+  issuesResolvedCount: Scalars['Int'];
   /** @deprecated Removed in favor of `issues_resolved_count` */
-  issuesResolvedNum?: Maybe<Scalars['Int']>;
+  issuesResolvedNum: Scalars['Int'];
   isForDefaultBranch?: Maybe<Scalars['Boolean']>;
   isForCrossRepoPr?: Maybe<Scalars['Boolean']>;
   branchRunCount?: Maybe<Scalars['Int']>;
@@ -8099,6 +8106,19 @@ export type IgnoreCheckMetricMutation = (
   & { ignoreCheckMetric?: Maybe<(
     { __typename?: 'IgnoreCheckMetricPayload' }
     & Pick<IgnoreCheckMetricPayload, 'ok'>
+  )> }
+);
+
+export type RetryChecksMutationVariables = Exact<{
+  input: RetryChecksInRunInput;
+}>;
+
+
+export type RetryChecksMutation = (
+  { __typename?: 'Mutation' }
+  & { retryChecksInRun?: Maybe<(
+    { __typename?: 'RetryChecksInRunPayload' }
+    & Pick<RetryChecksInRunPayload, 'ok'>
   )> }
 );
 
@@ -11371,7 +11391,7 @@ export type RepositoryRunCheckDetailsQuery = (
   { __typename?: 'Query' }
   & { check: (
     { __typename?: 'Check' }
-    & Pick<Check, 'id' | 'status' | 'checkSeq' | 'finishedInDisplay' | 'filesAffectedByAutofix' | 'errors' | 'errorsRendered' | 'issuesRaisedCount' | 'issuesResolvedCount'>
+    & Pick<Check, 'id' | 'status' | 'checkSeq' | 'finishedInDisplay' | 'filesAffectedByAutofix' | 'errors' | 'errorsRendered' | 'issuesRaisedCount' | 'issuesResolvedCount' | 'isRetryable'>
     & { autofixableIssues?: Maybe<Array<Maybe<(
       { __typename?: 'AutofixableIssueDetail' }
       & Pick<AutofixableIssueDetail, 'shortcode' | 'title' | 'category' | 'occurrenceCount'>
@@ -11412,7 +11432,7 @@ export type RepositoryGroupedRunsQuery = (
         { __typename?: 'RunEdge' }
         & { node?: Maybe<(
           { __typename?: 'Run' }
-          & Pick<Run, 'id' | 'config' | 'createdAt' | 'runId' | 'status' | 'branchName' | 'branchRunCount' | 'commitOid' | 'finishedIn' | 'vcsCommitUrl' | 'vcsPrUrl' | 'gitCompareDisplay' | 'pullRequestNumberDisplay' | 'issuesRaisedCount' | 'issuesResolvedNum'>
+          & Pick<Run, 'id' | 'config' | 'createdAt' | 'runId' | 'status' | 'branchName' | 'branchRunCount' | 'commitOid' | 'finishedIn' | 'vcsCommitUrl' | 'vcsPrUrl' | 'gitCompareDisplay' | 'pullRequestNumberDisplay' | 'issuesRaisedCount' | 'issuesResolvedCount'>
         )> }
       )>> }
     )> }
@@ -11440,7 +11460,7 @@ export type RepositoryRunsListQuery = (
         { __typename?: 'RunEdge' }
         & { node?: Maybe<(
           { __typename?: 'Run' }
-          & Pick<Run, 'id' | 'config' | 'createdAt' | 'runId' | 'status' | 'branchName' | 'commitOid' | 'finishedIn' | 'vcsCommitUrl' | 'gitCompareDisplay' | 'pullRequestNumberDisplay' | 'issuesRaisedCount' | 'issuesResolvedNum'>
+          & Pick<Run, 'id' | 'config' | 'createdAt' | 'runId' | 'status' | 'branchName' | 'commitOid' | 'finishedIn' | 'vcsCommitUrl' | 'gitCompareDisplay' | 'pullRequestNumberDisplay' | 'issuesRaisedCount' | 'issuesResolvedCount'>
         )> }
       )>> }
     )> }
@@ -11469,7 +11489,7 @@ export type RepositoryRunDetailQuery = (
           { __typename?: 'CheckEdge' }
           & { node?: Maybe<(
             { __typename?: 'Check' }
-            & Pick<Check, 'id' | 'issuesRaisedCount' | 'issuesResolvedCount' | 'status' | 'hasInferredArtifacts'>
+            & Pick<Check, 'id' | 'issuesRaisedCount' | 'issuesResolvedCount' | 'status' | 'isRetryable' | 'hasInferredArtifacts'>
             & { analyzer?: Maybe<(
               { __typename?: 'Analyzer' }
               & Pick<Analyzer, 'name' | 'shortcode' | 'description' | 'analyzerLogo'>
