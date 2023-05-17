@@ -1,5 +1,5 @@
-// Team Permission Levels: https://docs.deepsource.com/docs/managing-peoples-access-to-team-with-roles
-// Repository Permission Levels: https://docs.deepsource.com/docs/managing-access-to-your-teams-repositories
+// Team Permission Levels: https://docs.deepsource.com/docs/access-control-managing-peoples-access-to-team-with-roles#permission-levels-for-teams
+// Repository Permission Levels: https://docs.deepsource.com/docs/access-control-managing-access-to-your-teams-repositories
 
 import { Component, mixins } from 'nuxt-property-decorator'
 import RepoDetailMixin from './repoDetailMixin'

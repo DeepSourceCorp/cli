@@ -12,7 +12,7 @@
             DeepSource allows some access settings to be synced automatically from
             {{ providerName }}.
             <a
-              href="https://docs.deepsource.com/docs/managing-members-in-your-team#automatic-sync-with-github"
+              href="https://docs.deepsource.com/docs/access-control-managing-members-in-your-team#automatic-sync-with-github"
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center text-juniper hover:underline focus:underline"

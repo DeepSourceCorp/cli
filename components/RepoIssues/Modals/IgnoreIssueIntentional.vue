@@ -18,7 +18,7 @@
             in your source code so this occurrence does not repeat in the future. For help, please
             read the
             <a
-              href="https://docs.deepsource.com/docs/ignore-rules#silencing-a-specific-issue"
+              href="https://docs.deepsource.com/docs/issues-ignore-rules#silencing-a-specific-issue"
               target="_blank"
               rel="noopener noreferrer"
               class="text-juniper hover:underline"

@@ -1,7 +1,7 @@
 <template>
   <div class="pb-28 lg:pb-0">
     <sub-nav active="transforms" class="hidden lg:block" />
-    <div class="grid w-full grid-cols-1 p-4 gap-y-4">
+    <div class="grid w-full grid-cols-1 gap-y-4 p-4">
       <template v-if="transformRuns">
         <template v-if="transformRuns.length">
           <transform-branches v-for="run in transformRuns" :key="run.branchName" :run="run" />
@@ -40,9 +40,9 @@
         </template>
       </template>
       <template v-else>
-        <div v-for="key in 6" :key="key" class="space-y-2 animate-pulse">
-          <div class="w-24 h-8 rounded-md bg-ink-200"></div>
-          <div class="w-full h-24 rounded-md bg-ink-200"></div>
+        <div v-for="key in 6" :key="key" class="animate-pulse space-y-2">
+          <div class="h-8 w-24 rounded-md bg-ink-200"></div>
+          <div class="h-24 w-full rounded-md bg-ink-200"></div>
         </div>
       </template>
     </div>

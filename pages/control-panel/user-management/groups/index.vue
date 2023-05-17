@@ -32,7 +32,7 @@
           type="link"
           button-type="link"
           size="x-small"
-          href="https://docs.deepsource.com/docs/scim-provisioning-on-okta"
+          href="https://docs.deepsource.com/docs/sso-saml-sso-scim-okta"
           target="_blank"
           rel="noopener noreferrer"
           class="items-center text-vanilla-400"

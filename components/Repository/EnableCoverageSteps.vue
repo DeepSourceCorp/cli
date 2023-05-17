@@ -127,7 +127,7 @@
             </div>
 
             <a
-              href="https://docs.deepsource.com/docs/analyzer/test-coverage#setup-test-coverage"
+              href="https://docs.deepsource.com/docs/analyzers-test-coverage#setup-test-coverage"
               target="_blank"
               rel="noopener noreferrer"
               class="auxillary-link mt-3 h-7 w-max text-xs font-normal text-vanilla-400"

@@ -19,7 +19,7 @@
             </p>
             <p>
               <a
-                href="https://docs.deepsource.com/docs/test-coverage#setup-test-coverage"
+                href="https://docs.deepsource.com/docs/analyzers-test-coverage#setup-test-coverage"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center gap-x-0.5 hover:underline focus:underline"

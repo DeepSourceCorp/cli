@@ -81,7 +81,7 @@ exports[`renders EnableCoverageSteps with all prop options: {"dsn":"http://6f7d4
               ./bin/deepsource report --analyzer test-coverage --key &lt;key&gt; --value-file &lt;absolute-path-of-the-coverage report&gt;
             </code>
                 <unstyledcopybutton-stub value=\\"./bin/deepsource report --analyzer test-coverage --key <key> --value-file <absolute-path-of-the-coverage report>\\" icon-size=\\"x-small\\" class=\\"auxillary-button mt-1 text-xs text-vanilla-100\\"></unstyledcopybutton-stub>
-              </div> <a href=\\"https://docs.deepsource.com/docs/analyzer/test-coverage#setup-test-coverage\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"auxillary-link mt-3 h-7 w-max text-xs font-normal text-vanilla-400\\">
+              </div> <a href=\\"https://docs.deepsource.com/docs/analyzers-test-coverage#setup-test-coverage\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"auxillary-link mt-3 h-7 w-max text-xs font-normal text-vanilla-400\\">
                 Read full documentation
                 <zicon-stub icon=\\"arrow-up-right\\" size=\\"x-small\\" position=\\"\\" color=\\"current\\"></zicon-stub></a>
             </div>

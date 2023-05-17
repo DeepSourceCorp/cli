@@ -83,7 +83,7 @@
           <z-button
             icon="scroll"
             size="small"
-            to="https://docs.deepsource.com/docs/test-coverage#setup-test-coverage"
+            to="https://docs.deepsource.com/docs/analyzers-test-coverage#setup-test-coverage"
             target="_blank"
             rel="noopener noreferrer"
             label="Read the docs"

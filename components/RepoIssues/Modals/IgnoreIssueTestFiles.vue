@@ -6,15 +6,15 @@
           Ignore issue <span class="font-bold">{{ issueShortcode }}</span> for all test files
         </span>
       </template>
-      <div class="flex flex-col p-4 space-y-2">
+      <div class="flex flex-col space-y-2 p-4">
         <template v-if="repository.config && repository.config.test_patterns">
           <div class="text-sm leading-7 text-vanilla-400">
             On confirming, this issue will be ignored for all files that match the following test
             file patterns, as defined in your
-            <span class="inline bg-ink-200 px-1.5 pb-0.5 rounded-sm font-mono">deepsource.toml</span
+            <span class="inline rounded-sm bg-ink-200 px-1.5 pb-0.5 font-mono">deepsource.toml</span
             >.
           </div>
-          <div class="flex flex-col px-2 py-3 space-y-2 text-xs text-vanilla-100 bg-ink-400">
+          <div class="flex flex-col space-y-2 bg-ink-400 px-2 py-3 text-xs text-vanilla-100">
             <div v-for="pattern in repository.config.test_patterns" :key="pattern">
               {{ pattern }}
             </div>
@@ -22,7 +22,7 @@
         </template>
         <div v-else class="text-sm leading-7 text-vanilla-400">
           No test patterns are defined in this repository's
-          <span class="inline bg-ink-200 px-1.5 pb-0.5 rounded-sm font-mono">deepsource.toml</span
+          <span class="inline rounded-sm bg-ink-200 px-1.5 pb-0.5 font-mono">deepsource.toml</span
           ><br />
           You can look at the
           <a
@@ -36,9 +36,9 @@
         </div>
       </div>
       <template #footer>
-        <div class="px-3 py-3 space-x-2 text-right text-vanilla-100">
+        <div class="space-x-2 px-3 py-3 text-right text-vanilla-100">
           <z-button
-            class="flex items-center space-x-2 modal-primary-action"
+            class="modal-primary-action flex items-center space-x-2"
             spacing="px-2"
             button-type="primary"
             size="small"
