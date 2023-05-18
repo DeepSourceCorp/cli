@@ -10,6 +10,7 @@ export interface LoginOption {
   provider: string
   icon: string
   label: string
+  mobileLabel?: string
   bg: string
   iconColor?: string
   link?: string
@@ -142,6 +143,7 @@ export default class AuthMixin extends Vue {
           provider: 'gsr',
           icon: 'gsr-colored',
           label: 'Google Cloud Source',
+          mobileLabel: 'GCS',
           bg: 'bg-ink-200'
         })
       }
@@ -152,6 +154,7 @@ export default class AuthMixin extends Vue {
           provider: 'ads',
           icon: 'ads-colored',
           label: 'Azure DevOps Services',
+          mobileLabel: 'ADS',
           bg: 'bg-ink-200'
         })
       }

@@ -16,7 +16,10 @@
         :class="[`login-btn-${opt.icon}`]"
       >
         <z-icon :icon="opt.icon" size="base" />
-        <span>Continue with {{ opt.label }}</span>
+        <span
+          >Continue with <span class="hidden sm:inline">{{ opt.label }}</span
+          ><span class="inline sm:hidden">{{ opt.mobileLabel || opt.label }}</span></span
+        >
       </a>
     </div>
     <div v-else key="saml-login" class="mb-5 w-full">
