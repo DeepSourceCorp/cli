@@ -71,6 +71,25 @@
       <z-icon icon="arrow-left" />
       <span> Back to login </span>
     </button>
+    <p class="mt-6 text-sm leading-6 text-slate-200">
+      By continuing, you are agreeing to our
+      <a
+        href="https://deepsource.com/legal/terms"
+        class="text-vanilla-400 hover:text-vanilla-100 focus:text-vanilla-100"
+        >Terms of Service</a
+      >,
+      <a
+        href="https://deepsource.com/legal/msa"
+        class="text-vanilla-400 hover:text-vanilla-100 focus:text-vanilla-100"
+        >Master Subscription Agreement</a
+      >
+      and
+      <a
+        href="https://deepsource.com/legal/privacy"
+        class="text-vanilla-400 hover:text-vanilla-100 focus:text-vanilla-100"
+        >Privacy Policy</a
+      >.
+    </p>
     <!-- </template> -->
     <!-- </transition-group> -->
   </hero-layout>
