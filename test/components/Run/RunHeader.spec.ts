@@ -271,7 +271,7 @@ describe('[[ RunHeader ]]', () => {
 
   test('renders `RunHeader` with retry check options', () => {
     const isRetryingOptions = generateBooleanProps('isRetrying')
-    const isLoadingOptions = generateBooleanProps('isLoading')
+    const hideRetryOptions = generateBooleanProps('hideRetry')
     const updatedCheck = {
       check: {
         id: 'Q2hlY2s6YnJnbnZq',
@@ -288,7 +288,7 @@ describe('[[ RunHeader ]]', () => {
       }
     }
 
-    cartesian(isRetryingOptions, isLoadingOptions).forEach((propCombination) => {
+    cartesian(isRetryingOptions, hideRetryOptions).forEach((propCombination) => {
       const props = {
         ...baseProps,
         ...updatedCheck,

@@ -171,7 +171,7 @@
         </div>
       </div>
     </div>
-    <z-alert v-if="!isLoading && check && check.isRetryable" type="warning" class="mx-3 mb-3">
+    <z-alert v-if="!hideRetry && check && check.isRetryable" type="warning" class="mx-3 mb-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-x-2">
           <z-icon :icon="checkStatusIcon(check.status)" color="current" />
@@ -304,8 +304,8 @@ export default class RunHeader extends RepoDetailMixin {
   @Prop({ default: false })
   isRetrying: boolean
 
-  @Prop({ default: false })
-  isLoading: boolean
+  @Prop({ default: true })
+  hideRetry: boolean
 
   /**
    * Fetch hook for this component.

@@ -42,7 +42,7 @@
         </div>
         <div class="flex h-full items-center gap-2">
           <z-split-dropdown-button-v2
-            v-if="!isLoading && retryableChecks.length"
+            v-if="canRetryAnalysis && !isInitialLoad && retryableChecks.length"
             divider-height="h-7"
             divider-color="slate-400"
           >
@@ -143,7 +143,7 @@
               :current-analyzer="$route.params.analyzer"
               :check="check"
               :is-retrying="isCurrentCheckRetrying"
-              :is-loading="isLoading"
+              :hide-retry="isLoading || !canRetryAnalysis"
               class="border-b border-ink-200 bg-ink-400"
               @retry-current-check="retryChecks([check.analyzer.shortcode])"
             />
@@ -152,7 +152,7 @@
               v-bind="checkInferredArtifactsPr"
             />
           </div>
-          <nuxt-child @is-fetching="(newIsLoading) => (isLoading = newIsLoading)" />
+          <nuxt-child @is-fetching="handleLoading" />
         </div>
       </div>
     </template>
@@ -181,6 +181,7 @@ import { RunTypes } from '~/types/run'
 
 import RetryChecksMutation from '@/apollo/mutations/repository/runs/retryChecks.gql'
 import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
+import { RepoPerms } from '~/types/permTypes'
 
 /**
  * Page that provides detailed information about generated issues for a specific analyzer run.
@@ -236,6 +237,8 @@ export default class AnalyzerDetails extends mixins(
   public flashActiveAnalyzer = false
   analyzersInRetryList: string[] = []
   isLoading = false
+  // TODO remove in skip analysis PR as it doesn't work
+  isInitialLoad = true
 
   /**
    * Sets `flashActiveAnalyzer` to true for 1 second, and then resets it back to false
@@ -330,6 +333,10 @@ export default class AnalyzerDetails extends mixins(
     return links
   }
 
+  get canRetryAnalysis() {
+    return this.$gateKeeper.repo(RepoPerms.RETRY_ANALYSIS, this.repoPerms.permission)
+  }
+
   get currentAnalyzer(): string {
     return this.$route.params.analyzer
   }
@@ -370,6 +377,14 @@ export default class AnalyzerDetails extends mixins(
     )
   }
 
+  handleLoading(newLoading: boolean) {
+    this.isLoading = newLoading
+    if (this.isInitialLoad) {
+      this.isInitialLoad = newLoading
+    }
+  }
+
+  /** */
   async retryChecks(analyzerShortcodes: string[]): Promise<boolean> {
     const analyzersToRetry = analyzerShortcodes.filter(
       (shortcode) => !this.analyzersInRetry.has(shortcode)

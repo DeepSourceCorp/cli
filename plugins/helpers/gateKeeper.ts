@@ -194,6 +194,10 @@ const REPO_PERMS_MAP = {
   [RepoPerms.VIEW_CODE_COVERAGE_SETTINGS]: [
     RepositoryCollaboratorPermission.Admin,
     RepositoryCollaboratorPermission.Write
+  ],
+  [RepoPerms.RETRY_ANALYSIS]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write
   ]
 }
 

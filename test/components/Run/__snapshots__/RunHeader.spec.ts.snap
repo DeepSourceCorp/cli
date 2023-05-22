@@ -294,7 +294,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 </div>"
 `;
 
-exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"isLoading":false,"isRetrying":false} 1`] = `
+exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"hideRetry":false,"isRetrying":false} 1`] = `
 "<div>
   <div class=\\"flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22\\">
     <div class=\\"flex flex-col gap-y-4 p-3\\">
@@ -357,7 +357,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
 </div>"
 `;
 
-exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"isLoading":false,"isRetrying":null} 1`] = `
+exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"hideRetry":false,"isRetrying":null} 1`] = `
 "<div>
   <div class=\\"flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22\\">
     <div class=\\"flex flex-col gap-y-4 p-3\\">
@@ -420,7 +420,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
 </div>"
 `;
 
-exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"isLoading":false,"isRetrying":true} 1`] = `
+exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"hideRetry":false,"isRetrying":true} 1`] = `
 "<div>
   <div class=\\"flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22\\">
     <div class=\\"flex flex-col gap-y-4 p-3\\">
@@ -483,7 +483,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
 </div>"
 `;
 
-exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"isLoading":false} 1`] = `
+exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"hideRetry":false} 1`] = `
 "<div>
   <div class=\\"flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22\\">
     <div class=\\"flex flex-col gap-y-4 p-3\\">
@@ -546,7 +546,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
 </div>"
 `;
 
-exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"isLoading":null,"isRetrying":false} 1`] = `
+exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"hideRetry":null,"isRetrying":false} 1`] = `
 "<div>
   <div class=\\"flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22\\">
     <div class=\\"flex flex-col gap-y-4 p-3\\">
@@ -609,7 +609,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
 </div>"
 `;
 
-exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"isLoading":null,"isRetrying":null} 1`] = `
+exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"hideRetry":null,"isRetrying":null} 1`] = `
 "<div>
   <div class=\\"flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22\\">
     <div class=\\"flex flex-col gap-y-4 p-3\\">
@@ -672,7 +672,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
 </div>"
 `;
 
-exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"isLoading":null,"isRetrying":true} 1`] = `
+exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"hideRetry":null,"isRetrying":true} 1`] = `
 "<div>
   <div class=\\"flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22\\">
     <div class=\\"flex flex-col gap-y-4 p-3\\">
@@ -735,7 +735,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
 </div>"
 `;
 
-exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"isLoading":null} 1`] = `
+exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"hideRetry":null} 1`] = `
 "<div>
   <div class=\\"flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22\\">
     <div class=\\"flex flex-col gap-y-4 p-3\\">
@@ -798,7 +798,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
 </div>"
 `;
 
-exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"isLoading":true,"isRetrying":false} 1`] = `
+exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"hideRetry":true,"isRetrying":false} 1`] = `
 "<div>
   <div class=\\"flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22\\">
     <div class=\\"flex flex-col gap-y-4 p-3\\">
@@ -847,7 +847,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
 </div>"
 `;
 
-exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"isLoading":true,"isRetrying":null} 1`] = `
+exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"hideRetry":true,"isRetrying":null} 1`] = `
 "<div>
   <div class=\\"flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22\\">
     <div class=\\"flex flex-col gap-y-4 p-3\\">
@@ -896,7 +896,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
 </div>"
 `;
 
-exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"isLoading":true,"isRetrying":true} 1`] = `
+exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"hideRetry":true,"isRetrying":true} 1`] = `
 "<div>
   <div class=\\"flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22\\">
     <div class=\\"flex flex-col gap-y-4 p-3\\">
@@ -945,7 +945,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
 </div>"
 `;
 
-exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"isLoading":true} 1`] = `
+exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python","check":{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"isRetryable":true,"status":"TIMO","analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}},"hideRetry":true} 1`] = `
 "<div>
   <div class=\\"flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22\\">
     <div class=\\"flex flex-col gap-y-4 p-3\\">
@@ -1039,21 +1039,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
       </div>
     </div>
   </div>
-  <div class=\\"px-4 rounded-md mx-3 mb-3 bg-honey py-3.5 bg-opacity-10\\">
-    <div class=\\"flex items-center\\">
-      <div class=\\"flex-grow text-sm text-honey-400 -mb-px\\">
-        <div class=\\"flex items-center justify-between\\">
-          <div class=\\"flex items-center gap-x-2\\">
-            <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
-          </div>
-          <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap group-hover:bg-honey-300 text-ink-400 justify-center z-btn--ink-400 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\">
-              <zicon-stub icon=\\"fast-forward\\" size=\\"small\\" position=\\"\\" color=\\"ink-400\\" class=\\"mr-1.5\\"></zicon-stub>Retry check
-            </button></div>
-        </div>
-      </div>
-      <!---->
-    </div>
-  </div>
+  <!---->
 </div>"
 `;
 
@@ -1102,21 +1088,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
       </div>
     </div>
   </div>
-  <div class=\\"px-4 rounded-md mx-3 mb-3 bg-honey py-3.5 bg-opacity-10\\">
-    <div class=\\"flex items-center\\">
-      <div class=\\"flex-grow text-sm text-honey-400 -mb-px\\">
-        <div class=\\"flex items-center justify-between\\">
-          <div class=\\"flex items-center gap-x-2\\">
-            <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
-          </div>
-          <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap group-hover:bg-honey-300 text-ink-400 justify-center z-btn--ink-400 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\">
-              <zicon-stub icon=\\"fast-forward\\" size=\\"small\\" position=\\"\\" color=\\"ink-400\\" class=\\"mr-1.5\\"></zicon-stub>Retry check
-            </button></div>
-        </div>
-      </div>
-      <!---->
-    </div>
-  </div>
+  <!---->
 </div>"
 `;
 
@@ -1165,21 +1137,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
       </div>
     </div>
   </div>
-  <div class=\\"px-4 rounded-md mx-3 mb-3 bg-honey py-3.5 bg-opacity-10\\">
-    <div class=\\"flex items-center\\">
-      <div class=\\"flex-grow text-sm text-honey-400 -mb-px\\">
-        <div class=\\"flex items-center justify-between\\">
-          <div class=\\"flex items-center gap-x-2\\">
-            <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
-          </div>
-          <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\"><button href=\\"#\\" disabled=\\"disabled\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap group-hover:bg-honey-300 text-ink-400 justify-center z-btn--ink-400 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal opacity-50 cursor-not-allowed font-normal text-slate\\">
-              <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"ink-400\\" class=\\"mr-1.5 animate-spin\\"></zicon-stub>Retry check
-            </button></div>
-        </div>
-      </div>
-      <!---->
-    </div>
-  </div>
+  <!---->
 </div>"
 `;
 
@@ -1228,20 +1186,6 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
       </div>
     </div>
   </div>
-  <div class=\\"px-4 rounded-md mx-3 mb-3 bg-honey py-3.5 bg-opacity-10\\">
-    <div class=\\"flex items-center\\">
-      <div class=\\"flex-grow text-sm text-honey-400 -mb-px\\">
-        <div class=\\"flex items-center justify-between\\">
-          <div class=\\"flex items-center gap-x-2\\">
-            <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
-          </div>
-          <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap group-hover:bg-honey-300 text-ink-400 justify-center z-btn--ink-400 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\">
-              <zicon-stub icon=\\"fast-forward\\" size=\\"small\\" position=\\"\\" color=\\"ink-400\\" class=\\"mr-1.5\\"></zicon-stub>Retry check
-            </button></div>
-        </div>
-      </div>
-      <!---->
-    </div>
-  </div>
+  <!---->
 </div>"
 `;
