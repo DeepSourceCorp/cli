@@ -6,7 +6,6 @@ query($q: String) {
         shortcode
         name
         owner
-        descriptionRendered
         issuesCount
         autofixableIssuesCount
         updatedOn

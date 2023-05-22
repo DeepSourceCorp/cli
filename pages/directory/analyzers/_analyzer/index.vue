@@ -2,91 +2,72 @@
   <div class="mb-12">
     <directory-header :info-obj="analyzer" :is-loading="!fullyLoaded" />
     <directory-tabs :active-tab="0" :analyzer-url="analyzerUrl" />
-    <div class="px-4 py-6 border-b border-slate-400">
-      <div class="grid items-center max-w-4xl grid-cols-2 md:grid-cols-3 gap-y-6">
+    <div class="border-b border-slate-400 px-4 py-6">
+      <div class="grid max-w-4xl grid-cols-2 items-center gap-y-6 md:grid-cols-3">
         <div class="grid gap-y-1">
-          <p class="text-vanilla-400">Categories</p>
+          <h3 class="text-vanilla-400">Categories</h3>
           <div v-if="isPartiallyLoaded" class="h-8">
-            <z-tag spacing="px-2.5 py-1.5" text-size="xs">
+            <z-tag bg-color="ink-200" spacing="px-2.5 py-1.5" text-size="xs">
               {{ analyzer.category }}
             </z-tag>
           </div>
-          <div v-else class="h-6 rounded-full w-22 bg-ink-300 animate-pulse"></div>
+          <div v-else class="h-6 w-22 animate-pulse rounded-full bg-ink-300"></div>
         </div>
         <div class="grid gap-y-1">
-          <p class="text-vanilla-400">Latest version</p>
-          <div class="flex items-center h-8">
+          <h3 class="text-vanilla-400">Latest version</h3>
+          <div class="flex h-8 items-center">
             <p v-if="isPartiallyLoaded" class="mb-1 text-sm">
               {{ analyzer.version }}
             </p>
-            <div v-else class="h-6 w-14 bg-ink-300 animate-pulse"></div>
+            <div v-else class="h-6 w-14 animate-pulse bg-ink-300"></div>
           </div>
         </div>
         <div class="grid gap-y-1">
-          <p class="text-vanilla-400">Updated on</p>
-          <div class="flex items-center h-8">
+          <h3 class="text-vanilla-400">Updated on</h3>
+          <div class="flex h-8 items-center">
             <p v-if="isPartiallyLoaded" class="text-sm">
               {{ lastAnalyzerChangedDateText }}
             </p>
-            <div v-else class="w-16 h-6 bg-ink-300 animate-pulse"></div>
+            <div v-else class="h-6 w-16 animate-pulse bg-ink-300"></div>
           </div>
         </div>
       </div>
     </div>
     <div class="px-4 py-6">
-      <div class="grid max-w-4xl grid-cols-1 lg:grid-cols-3 min-h-28 auto-rows-min gap-y-6">
-        <div class="grid grid-cols-2 lg:grid-cols-1">
+      <div class="grid min-h-28 max-w-4xl auto-rows-min grid-cols-1 gap-y-6 lg:grid-cols-3">
+        <div class="grid grid-cols-2 self-start lg:grid-cols-1">
           <div>
-            <p class="text-vanilla-400">Issues</p>
+            <h3 class="text-vanilla-400">Total issues</h3>
             <p v-if="isPartiallyLoaded" class="text-1.5xl">{{ analyzer.issuesCount }}</p>
-            <div v-else class="h-8 w-17 bg-ink-300 animate-pulse"></div>
+            <div v-else class="h-8 w-17 animate-pulse bg-ink-300"></div>
           </div>
           <div v-if="isPartiallyLoaded && analyzer.autofixableIssuesCount">
-            <p class="text-vanilla-400 lg:mt-7">Autofix</p>
+            <h3 class="text-vanilla-400 lg:mt-7">Autofix</h3>
             <p class="text-1.5xl">
               {{ analyzer.autofixableIssuesCount }}
             </p>
           </div>
         </div>
         <div class="col-span-2">
-          <p
-            v-if="isPartiallyLoaded"
-            class="max-w-full text-lg font-medium prose"
-            v-html="analyzer.descriptionRendered"
-          ></p>
-          <div v-else class="w-full h-28 bg-ink-300 animate-pulse"></div>
-          <div v-if="!fullyLoaded" class="w-full h-4 mt-8 bg-ink-300 animate-pulse"></div>
-          <a
-            v-else-if="analyzer.documentationUrl"
-            :href="analyzer.documentationUrl"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center mt-5 text-sm text-vanilla-400 hover:underline focus:underline"
-          >
-            <span>Read full documentation</span>
-            <z-icon icon="arrow-up-right" color="vanilla-400" class="ml-0.5" />
-          </a>
+          <h3 class="mb-4 text-vanilla-400">Sample configuration</h3>
+          <toml-box-lite
+            v-if="fullyLoaded && analyzer.exampleConfig"
+            :toml="analyzer.exampleConfig"
+          />
+          <div v-else-if="!fullyLoaded" class="h-60 w-full animate-pulse bg-ink-300"></div>
+          <lazy-empty-state
+            v-else
+            show-border
+            title="No sample configuration found!"
+            padding="px-3.5 py-12"
+          />
         </div>
       </div>
     </div>
+
     <div class="max-w-4xl p-4">
       <div class="flex items-center space-x-3">
-        <h3 class="flex-shrink-0 text-sm font-medium tracking-wider uppercase text-vanilla-400">
-          Sample configuration
-        </h3>
-        <hr class="flex-grow border-slate-400" />
-      </div>
-      <toml-box-lite
-        v-if="fullyLoaded && analyzer.exampleConfig"
-        :toml="analyzer.exampleConfig"
-        class="mt-4"
-      />
-      <div v-else-if="!fullyLoaded" class="w-full h-40 mt-4 bg-ink-300 animate-pulse"></div>
-      <lazy-empty-state v-else title="No sample configuration found!" />
-    </div>
-    <div class="max-w-4xl p-4">
-      <div class="flex items-center space-x-3">
-        <h3 class="flex-shrink-0 text-sm font-medium tracking-wider uppercase text-vanilla-400">
+        <h3 class="flex-shrink-0 text-sm font-medium uppercase tracking-wider text-vanilla-400">
           Stats
         </h3>
         <hr class="flex-grow border-slate-400" />
@@ -106,13 +87,13 @@
     </div>
     <div v-if="starIssues.length" class="max-w-4xl p-4">
       <div class="flex items-center gap-x-2">
-        <h3 class="flex-shrink-0 text-sm font-medium tracking-wider uppercase text-vanilla-400">
+        <h3 class="flex-shrink-0 text-sm font-medium uppercase tracking-wider text-vanilla-400">
           Issues
         </h3>
         <hr class="flex-grow border-slate-400" />
         <nuxt-link
           :to="`/directory/analyzers/${analyzer.shortcode || $route.params.analyzer}/issues`"
-          class="flex items-center flex-shrink-0 px-2 py-1 text-sm leading-none text-vanilla-400 hover:bg-ink-300 rounded-xs"
+          class="rounded-xs flex flex-shrink-0 items-center px-2 py-1 text-sm leading-none text-vanilla-400 hover:bg-ink-300"
         >
           View all
           <z-icon icon="arrow-up-right" color="vanilla-400" class="ml-0.5" />
@@ -125,7 +106,7 @@
           :issue="issue"
           :issue-type-title="issueTypeTitles[issue.issueType]"
           :analyzer-url="analyzerUrl"
-          class="block mb-3"
+          class="mb-3 block"
         />
       </div>
     </div>

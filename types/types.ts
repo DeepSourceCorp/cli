@@ -8557,7 +8557,7 @@ export type Unnamed_78_Query = (
   { __typename?: 'Query' }
   & { analyzer?: Maybe<(
     { __typename?: 'Analyzer' }
-    & Pick<Analyzer, 'id' | 'name' | 'analyzerLogo' | 'description' | 'issueTypeDistribution' | 'category' | 'version' | 'updatedOn' | 'exampleConfig' | 'issuesCount' | 'autofixableIssuesCount' | 'documentationUrl' | 'discussUrl'>
+    & Pick<Analyzer, 'id' | 'name' | 'analyzerLogo' | 'issueTypeDistribution' | 'category' | 'version' | 'updatedOn' | 'exampleConfig' | 'issuesCount' | 'autofixableIssuesCount' | 'documentationUrl' | 'discussUrl'>
     & { starIssues: (
       { __typename?: 'IssueConnection' }
       & { edges: Array<Maybe<(
@@ -8659,7 +8659,7 @@ export type Unnamed_82_Query = (
       { __typename?: 'AnalyzerEdge' }
       & { node?: Maybe<(
         { __typename?: 'Analyzer' }
-        & Pick<Analyzer, 'id' | 'shortcode' | 'name' | 'owner' | 'descriptionRendered' | 'issuesCount' | 'autofixableIssuesCount' | 'updatedOn' | 'version' | 'category' | 'analyzerLogo' | 'publishedOn' | 'createdAt'>
+        & Pick<Analyzer, 'id' | 'shortcode' | 'name' | 'owner' | 'issuesCount' | 'autofixableIssuesCount' | 'updatedOn' | 'version' | 'category' | 'analyzerLogo' | 'publishedOn' | 'createdAt'>
       )> }
     )>> }
   )> }
