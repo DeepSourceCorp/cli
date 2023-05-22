@@ -69,7 +69,7 @@ Help:
 
 ## Documentation
 
-For complete documentation, refer to the [CLI Documentation](https://deepsource.io/docs/cli/usage)
+For complete documentation, refer to the [CLI Documentation](https://docs.deepsource.com/docs/cli)
 
 ## Feedback/Support
 
