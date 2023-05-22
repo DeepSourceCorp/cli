@@ -87,8 +87,5 @@
   },
   "graphql": {
     "schema": "./schema.graphql"
-  },
-  "resolutions": {
-    "parse-url": "^8.1.0"
   }
 }
