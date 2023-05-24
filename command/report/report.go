@@ -248,6 +248,7 @@ func (opts *ReportOptions) Run() int {
 		Data:              artifactValue,
 		AnalyzerShortcode: analyzerShortcode,
 		Metadata:          reportMeta,
+		Compression:       "zstd",
 	}
 
 	query := ReportQuery{Query: reportGraphqlQuery}
