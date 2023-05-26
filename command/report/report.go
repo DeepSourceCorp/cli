@@ -220,22 +220,25 @@ func (opts *ReportOptions) Run() int {
 			return 1
 		}
 
-		// Compress the byte array
-		var compressedBytes []byte
-		compressLevel := 20
-		compressedBytes, err = zstd.CompressLevel(compressedBytes, valueBytes, compressLevel)
-		if err != nil {
-			fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to compress value file:", reportCommandValueFile)
-			sentry.CaptureException(err)
-			return 1
-		}
-
-		// Base64 encode the compressed byte array
-		encodedBytes := make([]byte, base64.StdEncoding.EncodedLen(len(compressedBytes)))
-		base64.StdEncoding.Encode(encodedBytes, compressedBytes)
-
-		artifactValue = string(encodedBytes)
+		artifactValue = string(valueBytes)
 	}
+
+	// Compress the byte array
+	var compressedBytes []byte
+	compressLevel := 20
+	compressedBytes, err = zstd.CompressLevel(compressedBytes, []byte(artifactValue), compressLevel)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to compress value file:", reportCommandValueFile)
+		sentry.CaptureException(err)
+		return 1
+	}
+
+	// Base64 encode the compressed byte array
+	encodedBytes := make([]byte, base64.StdEncoding.EncodedLen(len(compressedBytes)))
+	base64.StdEncoding.Encode(encodedBytes, compressedBytes)
+
+	// Set the artifact value to the base64 encoded string
+	artifactValue = string(encodedBytes)
 
 	////////////////////
 	// Generate query //
