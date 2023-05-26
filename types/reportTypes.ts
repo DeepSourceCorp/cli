@@ -317,8 +317,8 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
     copyText: () => {
       return {
-        summary: ``,
-        intendedUse: ``
+        summary: '',
+        intendedUse: ''
       }
     }
   }

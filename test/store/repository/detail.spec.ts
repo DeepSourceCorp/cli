@@ -61,7 +61,7 @@ describe('[Store] Repository/Detail', () => {
   */
   describe('[[Actions]]', () => {
     describe(`Action "${RepositoryDetailActions.FETCH_WIDGETS}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -132,7 +132,7 @@ describe('[Store] Repository/Detail', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.repository)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -199,7 +199,7 @@ describe('[Store] Repository/Detail', () => {
     })
 
     describe(`Action "${RepositoryDetailActions.FETCH_REPOSITORY_ID}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -244,7 +244,7 @@ describe('[Store] Repository/Detail', () => {
           )
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -271,7 +271,7 @@ describe('[Store] Repository/Detail', () => {
           })
         })
 
-        test(`successfully invokes $logErrorAndToast plugin`, () => {
+        test('successfully invokes $logErrorAndToast plugin', () => {
           expect(localThis.$logErrorAndToast).toHaveBeenCalledWith(
             Error('ERR1'),
             'There was an error while fetching the repository id.'
@@ -281,7 +281,7 @@ describe('[Store] Repository/Detail', () => {
     })
 
     describe(`Action "${RepositoryDetailActions.FETCH_REPOSITORY_DETAIL}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -357,7 +357,7 @@ describe('[Store] Repository/Detail', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.repository)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -429,7 +429,7 @@ describe('[Store] Repository/Detail', () => {
     })
 
     describe(`Action "${RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_GENERAL}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -507,7 +507,7 @@ describe('[Store] Repository/Detail', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.repository)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -581,7 +581,7 @@ describe('[Store] Repository/Detail', () => {
     })
 
     describe(`Action "${RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_MANAGE_ACCESS}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -662,7 +662,7 @@ describe('[Store] Repository/Detail', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.repository)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -737,7 +737,7 @@ describe('[Store] Repository/Detail', () => {
     })
 
     describe(`Action "${RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_IGNORE_RULES}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -815,7 +815,7 @@ describe('[Store] Repository/Detail', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.repository)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -890,7 +890,7 @@ describe('[Store] Repository/Detail', () => {
     })
 
     describe(`Action "${RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_SSH}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -965,7 +965,7 @@ describe('[Store] Repository/Detail', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.repository)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -1035,7 +1035,7 @@ describe('[Store] Repository/Detail', () => {
     })
 
     describe(`Action "${RepositoryDetailActions.COMMIT_CONFIG_TO_VCS}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -1067,7 +1067,7 @@ describe('[Store] Repository/Detail', () => {
     })
 
     describe(`Action "${RepositoryDetailActions.FETCH_METRICS}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -1120,7 +1120,7 @@ describe('[Store] Repository/Detail', () => {
         })
       })
 
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(() => {
           localThis = {
             $providerMetaMap: {
@@ -1141,7 +1141,7 @@ describe('[Store] Repository/Detail', () => {
           spy = jest.spyOn(localThis, '$logErrorAndToast')
         })
 
-        test(`successfully throws an error`, async () => {
+        test('successfully throws an error', async () => {
           try {
             await actions[RepositoryDetailActions.FETCH_METRICS].call(localThis, actionCxt, {
               provider: 'gh',
@@ -1156,7 +1156,7 @@ describe('[Store] Repository/Detail', () => {
     })
 
     describe(`Action "${RepositoryDetailActions.FETCH_METRIC}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -1200,7 +1200,7 @@ describe('[Store] Repository/Detail', () => {
         })
       })
 
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(() => {
           localThis = {
             $providerMetaMap: {
@@ -1221,7 +1221,7 @@ describe('[Store] Repository/Detail', () => {
           spy = jest.spyOn(localThis, '$logErrorAndToast')
         })
 
-        test(`successfully throws an error`, async () => {
+        test('successfully throws an error', async () => {
           try {
             await actions[RepositoryDetailActions.FETCH_METRIC].call(localThis, actionCxt, {
               provider: 'gh',
@@ -1239,7 +1239,7 @@ describe('[Store] Repository/Detail', () => {
     })
 
     describe(`Action "${RepositoryDetailActions.SET_METRIC_THRESHOLD}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(() => {
           localThis = {
             $providerMetaMap: {
@@ -1286,7 +1286,7 @@ describe('[Store] Repository/Detail', () => {
         })
       })
 
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(() => {
           localThis = {
             $providerMetaMap: {
@@ -1306,7 +1306,7 @@ describe('[Store] Repository/Detail', () => {
           spy = jest.spyOn(localThis, '$applyGraphqlMutation')
         })
 
-        test(`successfully throws an error`, async () => {
+        test('successfully throws an error', async () => {
           try {
             await actions[RepositoryDetailActions.SET_METRIC_THRESHOLD].call(localThis, actionCxt, {
               metricShortcode: 'DCV',
@@ -1323,7 +1323,7 @@ describe('[Store] Repository/Detail', () => {
     })
 
     describe(`Action "${RepositoryDetailActions.REGENERATE_REPOSITORY_DSN}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {

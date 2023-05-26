@@ -64,7 +64,7 @@ describe('[Store] Run/List', () => {
   */
   describe('[[Actions]]', () => {
     describe(`Action "${RunListActions.FETCH_RUN_LIST}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -138,7 +138,7 @@ describe('[Store] Run/List', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.repository.runs)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -208,7 +208,7 @@ describe('[Store] Run/List', () => {
     })
 
     describe(`Action "${RunListActions.FETCH_GROUPED_RUN_LIST}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -282,7 +282,7 @@ describe('[Store] Run/List', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.repository.groupedRuns)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -352,7 +352,7 @@ describe('[Store] Run/List', () => {
     })
 
     describe(`Action "${RunListActions.FETCH_BRANCH_RUNS_LIST}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -432,7 +432,7 @@ describe('[Store] Run/List', () => {
           })
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -502,7 +502,7 @@ describe('[Store] Run/List', () => {
     })
 
     describe(`Action "${RunListActions.FETCH_PR_LIST}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -599,7 +599,7 @@ describe('[Store] Run/List', () => {
           expect(thirdCall[1]).toEqual(apiResponse.data.repository)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {

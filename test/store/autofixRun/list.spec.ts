@@ -55,7 +55,7 @@ describe('[Store] AutofixRun/List', () => {
   */
   describe('[[Actions]]', () => {
     describe(`Action "${AutofixRunListActions.FETCH_AUTOFIX_RUN_LIST}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -112,7 +112,7 @@ describe('[Store] AutofixRun/List', () => {
           expect(firstCall[1]).toEqual(apiResponse.data.repository.autofixRuns)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {

@@ -84,7 +84,7 @@ describe('[Store] Team/List', () => {
   */
   describe('[[Actions]]', () => {
     describe(`Action "${TeamActions.FETCH_TEAM_INFO}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           // Setting the global spy on `localThisSuccess.$fetchGraphqlData`
           spy = jest.spyOn(localThisSuccess, '$fetchGraphqlData')
@@ -141,7 +141,7 @@ describe('[Store] Team/List', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.team)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           // Setting the global spy on `localThis.$fetchGraphqlData`
           spy = jest.spyOn(localThisFailure, '$fetchGraphqlData')

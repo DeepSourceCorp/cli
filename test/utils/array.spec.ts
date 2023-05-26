@@ -9,27 +9,27 @@ import {
 
 describe('[[ Test parseArrayString ]]', () => {
   it('Parses a valid string', () => {
-    const validString = `["hello", "world", "this", "is", "array", "test"]`
+    const validString = '["hello", "world", "this", "is", "array", "test"]'
     const validResult = ['hello', 'world', 'this', 'is', 'array', 'test']
 
     expect(parseArrayString(validString)).toMatchObject(validResult)
   })
 
   it('Parses a valid string with multiple types', () => {
-    const validString = `["hello", "1", 1, false, "array", "test"]`
+    const validString = '["hello", "1", 1, false, "array", "test"]'
     const validResult = ['hello', '1', 1, false, 'array', 'test']
 
     expect(parseArrayString(validString)).toMatchObject(validResult)
   })
 
   it('Parses an invalid input', () => {
-    const validString = `["hello", "1", 1, false, "array", "test""]`
+    const validString = '["hello", "1", 1, false, "array", "test""]'
 
     expect(parseArrayString(validString)).toMatchObject([])
   })
 
   it('Parses an empty string', () => {
-    const validString = ``
+    const validString = ''
 
     expect(parseArrayString(validString)).toMatchObject([])
   })

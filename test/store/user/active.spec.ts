@@ -53,7 +53,7 @@ describe('[Store] User/Active', () => {
   */
   describe('[[Actions]]', () => {
     describe(`Action "${ActiveUserActions.FETCH_VIEWER_INFO}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -97,7 +97,7 @@ describe('[Store] User/Active', () => {
           expect(mutationCall[1]).toEqual(apiResponse.data.viewer)
         })
       })
-      describe(`Success with refetch`, () => {
+      describe('Success with refetch', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -143,7 +143,7 @@ describe('[Store] User/Active', () => {
           expect(mutationCall[1]).toEqual(apiResponse.data.viewer)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         let loggerFn: jest.SpyInstance
 
         beforeEach(async () => {
@@ -185,7 +185,7 @@ describe('[Store] User/Active', () => {
       })
     })
     describe(`Action "${ActiveUserActions.UPDATE_DEFAULT_CONTEXT}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $applyGraphqlMutation(): Promise<boolean> {
@@ -205,7 +205,7 @@ describe('[Store] User/Active', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         let loggerFn: jest.SpyInstance
 
         beforeEach(async () => {

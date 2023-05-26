@@ -56,7 +56,7 @@ describe('[Store] Issue/List', () => {
   */
   describe('[[Actions]]', () => {
     describe(`Action "${IssueListActions.FETCH_ISSUE_LIST}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -131,7 +131,7 @@ describe('[Store] Issue/List', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.repository.issues)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {

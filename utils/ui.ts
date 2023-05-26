@@ -97,7 +97,7 @@ export function generateColorFromTag(tagName: string): string {
  * @return {string}
  */
 export function newShade(hexColor: string, magnitude: number): string {
-  const stdHexColor = hexColor.replace(`#`, ``)
+  const stdHexColor = hexColor.replace('#', '')
   if (stdHexColor.length === 6) {
     const decimalColor = parseInt(stdHexColor, 16)
     let red = (decimalColor >> 16) + magnitude

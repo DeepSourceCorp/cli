@@ -14,12 +14,12 @@ import {
 
 describe('[[ Test toTitleCase ]]', () => {
   it('Accepts valid input', () => {
-    expect(toTitleCase(`hello-world`)).toBe('Hello World')
-    expect(toTitleCase(`hello-world-new_Story`)).toBe('Hello World New Story')
-    expect(toTitleCase(`Hello World`)).toBe('Hello World')
+    expect(toTitleCase('hello-world')).toBe('Hello World')
+    expect(toTitleCase('hello-world-new_Story')).toBe('Hello World New Story')
+    expect(toTitleCase('Hello World')).toBe('Hello World')
   })
   it('Accepts invalid input', () => {
-    expect(toTitleCase(``)).toBe('')
+    expect(toTitleCase('')).toBe('')
 
     // @ts-ignore
     expect(toTitleCase(null)).toBe('')
@@ -31,14 +31,14 @@ describe('[[ Test toTitleCase ]]', () => {
 
 describe('[[ Test toSentenceCase ]]', () => {
   it('Accepts valid input', () => {
-    expect(toSentenceCase(`hello-world`)).toBe('Hello world')
-    expect(toSentenceCase(`hello-world`, false)).toBe('Hello-world')
-    expect(toSentenceCase(`hello-world-new_Story`)).toBe('Hello world new story')
-    expect(toSentenceCase(`hello-world-new_Story`, false)).toBe('Hello-world-new_story')
-    expect(toSentenceCase(`Hello World`)).toBe('Hello world')
+    expect(toSentenceCase('hello-world')).toBe('Hello world')
+    expect(toSentenceCase('hello-world', false)).toBe('Hello-world')
+    expect(toSentenceCase('hello-world-new_Story')).toBe('Hello world new story')
+    expect(toSentenceCase('hello-world-new_Story', false)).toBe('Hello-world-new_story')
+    expect(toSentenceCase('Hello World')).toBe('Hello world')
   })
   it('Accepts invalid input', () => {
-    expect(toSentenceCase(``)).toBe('')
+    expect(toSentenceCase('')).toBe('')
 
     // @ts-ignore
     expect(toSentenceCase(null)).toBe('')
@@ -57,17 +57,17 @@ describe('[[ Test shortenLargeNumber ]]', () => {
     expect(shortenLargeNumber(100000)).toBe('100k')
   })
   it('Accepts valid string input', () => {
-    expect(shortenLargeNumber(`123212`)).toBe('120k')
-    expect(shortenLargeNumber(`100`)).toBe('100')
-    expect(shortenLargeNumber(`1000`)).toBe('1k')
-    expect(shortenLargeNumber(`10000`)).toBe('10k')
-    expect(shortenLargeNumber(`100000`)).toBe('100k')
+    expect(shortenLargeNumber('123212')).toBe('120k')
+    expect(shortenLargeNumber('100')).toBe('100')
+    expect(shortenLargeNumber('1000')).toBe('1k')
+    expect(shortenLargeNumber('10000')).toBe('10k')
+    expect(shortenLargeNumber('100000')).toBe('100k')
   })
   it('Accepts valid string input with percentage', () => {
-    expect(shortenLargeNumber(`123%`)).toBe('123%')
+    expect(shortenLargeNumber('123%')).toBe('123%')
   })
   it('Accepts invalid input', () => {
-    expect(shortenLargeNumber(``)).toBe('0')
+    expect(shortenLargeNumber('')).toBe('0')
 
     // @ts-ignore
     expect(shortenLargeNumber(null)).toBe('0')
@@ -184,38 +184,38 @@ test('[[ Test safeRenderBackticks ]]', () => {
 describe('[[ Test escapeHtml ]]', () => {
   it('Accepts valid input', () => {
     expect(escapeHtml(`<hello-world class="new-world" data-index='good'></hello-world>`)).toBe(
-      `&lt;hello-world class=&quot;new-world&quot; data-index=&#039;good&#039;&gt;&lt;/hello-world&gt;`
+      '&lt;hello-world class=&quot;new-world&quot; data-index=&#039;good&#039;&gt;&lt;/hello-world&gt;'
     )
   })
 })
 
 describe('[[ Test toWrappableString ]]', () => {
   it('Accepts valid input', () => {
-    expect(toWrappableString(`Amet occaecat fugiat do id labore laborum ad.`)).toBe(
-      `Amet occaecat fugiat do id labore laborum ad.`
+    expect(toWrappableString('Amet occaecat fugiat do id labore laborum ad.')).toBe(
+      'Amet occaecat fugiat do id labore laborum ad.'
     )
-    expect(toWrappableString(`Amet occaecat "fugiat" do id labore laborum ad.`)).toBe(
-      `Amet occaecat &quot;fugiat&quot; do id labore laborum ad.`
+    expect(toWrappableString('Amet occaecat "fugiat" do id labore laborum ad.')).toBe(
+      'Amet occaecat &quot;fugiat&quot; do id labore laborum ad.'
     )
   })
   it('Accepts valid input with custom length', () => {
-    expect(toWrappableString(`test/utils/string.spec.ts`, 5)).toBe(
-      `test<span>/utils</span><span>/string.spec.ts</span>`
+    expect(toWrappableString('test/utils/string.spec.ts', 5)).toBe(
+      'test<span>/utils</span><span>/string.spec.ts</span>'
     )
-    expect(toWrappableString(`test/utils/string.spec.ts`, 100)).toBe(`test/utils/string.spec.ts`)
-    expect(toWrappableString(`test/"utils"/string.spec.ts`, 5)).toBe(
-      `test<span>/&quot;utils&quot;</span><span>/string.spec.ts</span>`
+    expect(toWrappableString('test/utils/string.spec.ts', 100)).toBe('test/utils/string.spec.ts')
+    expect(toWrappableString('test/"utils"/string.spec.ts', 5)).toBe(
+      'test<span>/&quot;utils&quot;</span><span>/string.spec.ts</span>'
     )
   })
   it('Accepts valid input with custom length and separator', () => {
-    expect(toWrappableString(`test-utils-string.spec.ts`, 5, '-')).toBe(
-      `test<span>/utils</span><span>/string.spec.ts</span>`
+    expect(toWrappableString('test-utils-string.spec.ts', 5, '-')).toBe(
+      'test<span>/utils</span><span>/string.spec.ts</span>'
     )
-    expect(toWrappableString(`test-utils-string.spec.ts`, 100, '-')).toBe(
-      `test-utils-string.spec.ts`
+    expect(toWrappableString('test-utils-string.spec.ts', 100, '-')).toBe(
+      'test-utils-string.spec.ts'
     )
-    expect(toWrappableString(`test-"utils"-string.spec.ts`, 5, '-')).toBe(
-      `test<span>/&quot;utils&quot;</span><span>/string.spec.ts</span>`
+    expect(toWrappableString('test-"utils"-string.spec.ts', 5, '-')).toBe(
+      'test<span>/&quot;utils&quot;</span><span>/string.spec.ts</span>'
     )
   })
 })

@@ -57,7 +57,7 @@ describe('[Store] TransformerRun/List', () => {
   */
   describe('[[Actions]]', () => {
     describe(`Action "${TransformListActions.FETCH_TRANSFORMER_RUN_LIST}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -138,7 +138,7 @@ describe('[Store] TransformerRun/List', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.repository.groupedTransformerRuns)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {

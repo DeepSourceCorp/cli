@@ -114,7 +114,7 @@ describe('[Store] Owner/Details', () => {
   */
   describe('[[Actions]]', () => {
     describe(`Action "${OwnerDetailActions.FETCH_OWNER_ID}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -161,7 +161,7 @@ describe('[Store] Owner/Details', () => {
           )
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -186,14 +186,14 @@ describe('[Store] Owner/Details', () => {
           })
         })
 
-        test(`successfully invokes $logErrorAndToast plugin`, () => {
+        test('successfully invokes $logErrorAndToast plugin', () => {
           expect(localThis.$logErrorAndToast).toHaveBeenCalledWith(Error('ERR1'))
         })
       })
     })
 
     describe(`Action "${OwnerDetailActions.FETCH_OWNER_DETAILS}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -264,7 +264,7 @@ describe('[Store] Owner/Details', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.owner)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -331,7 +331,7 @@ describe('[Store] Owner/Details', () => {
     })
 
     describe(`Action "${OwnerDetailActions.FETCH_ISSUE_TYPE_SETTINGS}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -402,7 +402,7 @@ describe('[Store] Owner/Details', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.owner)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -469,7 +469,7 @@ describe('[Store] Owner/Details', () => {
     })
 
     describe(`Action "${OwnerDetailActions.FETCH_ISSUE_TRENDS}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -536,7 +536,7 @@ describe('[Store] Owner/Details', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.owner)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -598,7 +598,7 @@ describe('[Store] Owner/Details', () => {
     })
 
     describe(`Action "${OwnerDetailActions.FETCH_AUTOFIX_TRENDS}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -665,7 +665,7 @@ describe('[Store] Owner/Details', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.owner)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -732,7 +732,7 @@ describe('[Store] Owner/Details', () => {
     })
 
     describe(`Action "${OwnerDetailActions.FETCH_ACCOUNT_SETUP_STATUS}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -804,7 +804,7 @@ describe('[Store] Owner/Details', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.owner)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -865,7 +865,7 @@ describe('[Store] Owner/Details', () => {
     })
 
     describe(`Action "${OwnerDetailActions.FETCH_ACCOUNT_SETUP_STATUS}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -937,7 +937,7 @@ describe('[Store] Owner/Details', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.owner)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -998,7 +998,7 @@ describe('[Store] Owner/Details', () => {
     })
 
     describe(`Action "${OwnerDetailActions.FETCH_APP_CONFIG}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -1049,7 +1049,7 @@ describe('[Store] Owner/Details', () => {
           expect(firstCall[1]).toEqual(apiResponse.data.owner)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -1088,7 +1088,7 @@ describe('[Store] Owner/Details', () => {
     })
 
     describe(`Action "${OwnerDetailActions.FETCH_BILLING_DETAILS}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -1160,7 +1160,7 @@ describe('[Store] Owner/Details', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.owner)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -1221,7 +1221,7 @@ describe('[Store] Owner/Details', () => {
     })
 
     describe(`Action "${OwnerDetailActions.FETCH_SEATS_INFO}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -1272,7 +1272,7 @@ describe('[Store] Owner/Details', () => {
           expect(firstCall[1]).toEqual(apiResponse.data.owner)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -1311,7 +1311,7 @@ describe('[Store] Owner/Details', () => {
     })
 
     describe(`Action "${OwnerDetailActions.FETCH_BILLING_STATUS}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -1377,7 +1377,7 @@ describe('[Store] Owner/Details', () => {
           expect(secondCall[1]).toEqual(false)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -2191,7 +2191,7 @@ describe('[Store] Owner/Details', () => {
   })
 
   describe(`Action "${OwnerDetailActions.FETCH_SHOULD_TIMEOUT_DATA_TRIGGER}"`, () => {
-    describe(`Success`, () => {
+    describe('Success', () => {
       beforeEach(async () => {
         localThis = {
           $providerMetaMap: {
@@ -2244,7 +2244,7 @@ describe('[Store] Owner/Details', () => {
         expect(firstCall[1]).toEqual(apiResponse.data.owner.ownerSetting.shouldTimeoutDataTrigger)
       })
     })
-    describe(`Failure`, () => {
+    describe('Failure', () => {
       beforeEach(() => {
         localThis = {
           $providerMetaMap: {
@@ -2264,7 +2264,7 @@ describe('[Store] Owner/Details', () => {
         spy = jest.spyOn(localThis, '$fetchGraphqlData')
       })
 
-      test(`successfully throws an error`, async () => {
+      test('successfully throws an error', async () => {
         try {
           await actions[OwnerDetailActions.FETCH_SHOULD_TIMEOUT_DATA_TRIGGER].call(
             localThis,
@@ -2282,7 +2282,7 @@ describe('[Store] Owner/Details', () => {
   })
 
   describe(`Action "${OwnerDetailActions.FETCH_VCS_DATA}"`, () => {
-    describe(`Success`, () => {
+    describe('Success', () => {
       beforeEach(async () => {
         localThis = {
           $providerMetaMap: {
@@ -2339,7 +2339,7 @@ describe('[Store] Owner/Details', () => {
         expect(firstCall[1]).toEqual(apiResponse.data.owner)
       })
     })
-    describe(`Failure`, () => {
+    describe('Failure', () => {
       beforeEach(() => {
         localThis = {
           $providerMetaMap: {
@@ -2359,7 +2359,7 @@ describe('[Store] Owner/Details', () => {
         spy = jest.spyOn(localThis, '$fetchGraphqlData')
       })
 
-      test(`successfully throws an error`, async () => {
+      test('successfully throws an error', async () => {
         try {
           await actions[OwnerDetailActions.FETCH_VCS_DATA].call(localThis, actionCxt, {
             login: 'deepsourcelabs',
@@ -2373,7 +2373,7 @@ describe('[Store] Owner/Details', () => {
   })
 
   describe(`Action "${OwnerDetailActions.FETCH_OWNER_SSH_KEY}"`, () => {
-    describe(`Success`, () => {
+    describe('Success', () => {
       beforeEach(async () => {
         localThis = {
           $providerMetaMap: {
@@ -2422,7 +2422,7 @@ describe('[Store] Owner/Details', () => {
         expect(firstCall[1]).toEqual(apiResponse.data.owner.ownerSetting.publicKey)
       })
     })
-    describe(`Failure`, () => {
+    describe('Failure', () => {
       beforeEach(() => {
         localThis = {
           $providerMetaMap: {
@@ -2442,7 +2442,7 @@ describe('[Store] Owner/Details', () => {
         spy = jest.spyOn(localThis, '$fetchGraphqlData')
       })
 
-      test(`successfully throws an error`, async () => {
+      test('successfully throws an error', async () => {
         try {
           await actions[OwnerDetailActions.FETCH_OWNER_SSH_KEY].call(localThis, actionCxt, {
             login: 'deepsourcelabs',
@@ -2456,7 +2456,7 @@ describe('[Store] Owner/Details', () => {
   })
 
   describe(`Action "${OwnerDetailActions.GENERATE_OWNER_SSH_KEY}"`, () => {
-    describe(`Success`, () => {
+    describe('Success', () => {
       beforeEach(async () => {
         localThis = {
           $providerMetaMap: {
@@ -2515,7 +2515,7 @@ describe('[Store] Owner/Details', () => {
         expect(firstCall[1]).toEqual(apiResponse.data.generateKeyPairForOwner.publicKey)
       })
     })
-    describe(`Failure`, () => {
+    describe('Failure', () => {
       beforeEach(() => {
         localThis = {
           $providerMetaMap: {
@@ -2535,7 +2535,7 @@ describe('[Store] Owner/Details', () => {
         spy = jest.spyOn(localThis, '$applyGraphqlMutation')
       })
 
-      test(`successfully throws an error`, async () => {
+      test('successfully throws an error', async () => {
         try {
           await actions[OwnerDetailActions.GENERATE_OWNER_SSH_KEY].call(localThis, actionCxt, {
             ownerId: 'random-owner-id'
@@ -2545,7 +2545,7 @@ describe('[Store] Owner/Details', () => {
         }
       })
     })
-    describe(`Failure in key generation`, () => {
+    describe('Failure in key generation', () => {
       beforeEach(() => {
         localThis = {
           $providerMetaMap: {
@@ -2577,7 +2577,7 @@ describe('[Store] Owner/Details', () => {
         spy = jest.spyOn(localThis, '$applyGraphqlMutation')
       })
 
-      test(`successfully throws an error`, async () => {
+      test('successfully throws an error', async () => {
         try {
           await actions[OwnerDetailActions.GENERATE_OWNER_SSH_KEY].call(localThis, actionCxt, {
             ownerId: 'random-owner-id'
@@ -2597,7 +2597,7 @@ describe('[Store] Owner/Details', () => {
   })
 
   describe(`Action "${OwnerDetailActions.REMOVE_OWNER_SSH_KEY}"`, () => {
-    describe(`Success`, () => {
+    describe('Success', () => {
       beforeEach(async () => {
         localThis = {
           $providerMetaMap: {
@@ -2658,7 +2658,7 @@ describe('[Store] Owner/Details', () => {
         expect(firstCall[1]).toEqual('')
       })
     })
-    describe(`Failure`, () => {
+    describe('Failure', () => {
       beforeEach(() => {
         localThis = {
           $providerMetaMap: {
@@ -2678,7 +2678,7 @@ describe('[Store] Owner/Details', () => {
         spy = jest.spyOn(localThis, '$applyGraphqlMutation')
       })
 
-      test(`successfully throws an error`, async () => {
+      test('successfully throws an error', async () => {
         try {
           await actions[OwnerDetailActions.REMOVE_OWNER_SSH_KEY].call(localThis, actionCxt, {
             ownerId: 'random-owner-id'
@@ -2688,7 +2688,7 @@ describe('[Store] Owner/Details', () => {
         }
       })
     })
-    describe(`Failure in key deletion`, () => {
+    describe('Failure in key deletion', () => {
       beforeEach(() => {
         localThis = {
           $providerMetaMap: {
@@ -2720,7 +2720,7 @@ describe('[Store] Owner/Details', () => {
         spy = jest.spyOn(localThis, '$applyGraphqlMutation')
       })
 
-      test(`successfully throws an error`, async () => {
+      test('successfully throws an error', async () => {
         try {
           await actions[OwnerDetailActions.REMOVE_OWNER_SSH_KEY].call(localThis, actionCxt, {
             ownerId: 'random-owner-id'
@@ -2738,7 +2738,7 @@ describe('[Store] Owner/Details', () => {
   })
 
   describe(`Action "${OwnerDetailActions.DELETE_TEAM}"`, () => {
-    describe(`Success`, () => {
+    describe('Success', () => {
       beforeEach(async () => {
         localThis = {
           $providerMetaMap: {
@@ -2784,7 +2784,7 @@ describe('[Store] Owner/Details', () => {
         expect(apiResponse.data.deleteTeam.ok).toEqual(true)
       })
     })
-    describe(`Failure`, () => {
+    describe('Failure', () => {
       beforeEach(() => {
         localThis = {
           $providerMetaMap: {
@@ -2804,7 +2804,7 @@ describe('[Store] Owner/Details', () => {
         spy = jest.spyOn(localThis, '$applyGraphqlMutation')
       })
 
-      test(`successfully throws an error`, async () => {
+      test('successfully throws an error', async () => {
         try {
           await actions[OwnerDetailActions.DELETE_TEAM].call(localThis, actionCxt, {
             teamId: 'random-team-id'
@@ -2819,7 +2819,7 @@ describe('[Store] Owner/Details', () => {
   describe(`Action "${OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER}"`, () => {
     const dataTriggerVal = true
 
-    describe(`Success`, () => {
+    describe('Success', () => {
       beforeEach(async () => {
         localThis = {
           $providerMetaMap: {
@@ -2863,7 +2863,7 @@ describe('[Store] Owner/Details', () => {
         expect(apiResponse).toBe(true)
       })
     })
-    describe(`Failure`, () => {
+    describe('Failure', () => {
       beforeEach(() => {
         localThis = {
           $providerMetaMap: {
@@ -2885,7 +2885,7 @@ describe('[Store] Owner/Details', () => {
         spy = jest.spyOn(localThis, '$applyGraphqlMutation')
       })
 
-      test(`successfully throws an error`, async () => {
+      test('successfully throws an error', async () => {
         try {
           await actions[OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER].call(localThis, actionCxt, {
             ownerId: '123',
