@@ -1,6 +1,7 @@
 package report
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -229,7 +230,11 @@ func (opts *ReportOptions) Run() int {
 			return 1
 		}
 
-		artifactValue = string(compressedBytes)
+		// Base64 encode the compressed byte array
+		encodedBytes := make([]byte, base64.StdEncoding.EncodedLen(len(compressedBytes)))
+		base64.StdEncoding.Encode(encodedBytes, compressedBytes)
+
+		artifactValue = string(encodedBytes)
 	}
 
 	////////////////////
