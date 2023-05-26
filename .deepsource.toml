@@ -5,25 +5,19 @@ test_patterns = ["test/**"]
 exclude_patterns = ["plugins/services/*.js"]
 
 [[analyzers]]
+name = "docker"
+
+[[analyzers]]
 name = "test-coverage"
-enabled = true
 
 [[analyzers]]
 name = "secrets"
-enabled = true
 
 [[analyzers]]
 name = "javascript"
-enabled = true
 
   [analyzers.meta]
-  environment = [
-    "browser",
-    "jest"
-  ]
   plugins = ["vue"]
-  dialect = "typescript"
 
 [[transformers]]
 name = "prettier"
-enabled = true
