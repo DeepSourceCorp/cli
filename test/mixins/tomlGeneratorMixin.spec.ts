@@ -41,7 +41,7 @@ describe('Generate TOML from JSON', () => {
 
       testPatterns = ['example_string1', 'example_string2', 'example_string3']
       expect(fn(testPatterns)).toStrictEqual(
-        `test_patterns = [\n  "example_string1",\n  "example_string2",\n  "example_string3"\n]`
+        'test_patterns = [\n  "example_string1",\n  "example_string2",\n  "example_string3"\n]'
       )
     }
   })
@@ -60,7 +60,7 @@ describe('Generate TOML from JSON', () => {
 
       testPatterns = ['example_string1', 'example_string2', 'example_string3']
       expect(fn(testPatterns)).toStrictEqual(
-        `exclude_patterns = [\n  "example_string1",\n  "example_string2",\n  "example_string3"\n]`
+        'exclude_patterns = [\n  "example_string1",\n  "example_string2",\n  "example_string3"\n]'
       )
     }
   })
@@ -96,7 +96,7 @@ describe('Generate TOML from JSON', () => {
       ]
 
       expect(fn(testAnalyzers)).toStrictEqual(
-        `[[analyzers]]\nname = "python"\n\n  [analyzers.meta]\n  max_line_length = 100\n  skip_doc_coverage = [\n    "module",\n    "magic",\n    "class"\n  ]\n\n[[analyzers]]\nname = "test-coverage"\n\n[[analyzers]]\nname = "docker"`
+        '[[analyzers]]\nname = "python"\n\n  [analyzers.meta]\n  max_line_length = 100\n  skip_doc_coverage = [\n    "module",\n    "magic",\n    "class"\n  ]\n\n[[analyzers]]\nname = "test-coverage"\n\n[[analyzers]]\nname = "docker"'
       )
 
       testAnalyzers = [
@@ -113,7 +113,7 @@ describe('Generate TOML from JSON', () => {
       ]
 
       expect(fn(testAnalyzers)).toStrictEqual(
-        `[[analyzers]]\nname = "test-coverage"\n\n[[analyzers]]\nname = "docker"`
+        '[[analyzers]]\nname = "test-coverage"\n\n[[analyzers]]\nname = "docker"'
       )
     }
   })
@@ -147,7 +147,7 @@ describe('Generate TOML from JSON', () => {
         }
       ]
       expect(fn(transformersConfig)).toStrictEqual(
-        `[[transformers]]\nname = "black"\n\n[[transformers]]\nname = "prettier"\n\n[[transformers]]\nname = "yapf"\nenabled = false`
+        '[[transformers]]\nname = "black"\n\n[[transformers]]\nname = "prettier"\n\n[[transformers]]\nname = "yapf"\nenabled = false'
       )
     }
   })

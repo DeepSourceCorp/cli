@@ -83,7 +83,7 @@ describe('[Store] Account/Context', () => {
   */
   describe('[[Actions]]', () => {
     describe(`Action "${ContextActionTypes.FETCH_CONTEXT}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {

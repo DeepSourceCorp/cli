@@ -56,7 +56,7 @@ describe('[Store] Analyzer/List', () => {
   */
   describe('[[Actions]]', () => {
     describe(`Action "${AnalyzerListActions.FETCH_ANALYZER_LIST}"`, () => {
-      describe(`Success`, () => {
+      describe('Success', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -120,7 +120,7 @@ describe('[Store] Analyzer/List', () => {
           expect(secondCall[1]).toEqual(apiResponse.data.analyzers)
         })
       })
-      describe(`Failure`, () => {
+      describe('Failure', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {

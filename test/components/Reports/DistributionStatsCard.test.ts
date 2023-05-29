@@ -82,7 +82,7 @@ describe('[[ DistributionStatCard ]]', () => {
 
       const { slug: categorySlug } = props
       const validLinkWithSlug = `/gh/deepsourcelabs/bifrost/issues?category=${categorySlug}`
-      const validLinkWithoutSlug = `/gh/deepsourcelabs/bifrost/issues`
+      const validLinkWithoutSlug = '/gh/deepsourcelabs/bifrost/issues'
 
       // Test generateCategoryLink returns correct values
       expect(vm.generateCategoryLink(categorySlug)).toBe(validLinkWithSlug)
@@ -114,7 +114,7 @@ describe('[[ DistributionStatCard ]]', () => {
 
       const { slug: analyzerSlug } = analyzerProps
       const validLinkWithSlug = `/gh/deepsourcelabs/bifrost/issues?category=all&analyzer=${analyzerSlug}`
-      const validLinkWithoutSlug = `/gh/deepsourcelabs/bifrost/issues?category=all`
+      const validLinkWithoutSlug = '/gh/deepsourcelabs/bifrost/issues?category=all'
 
       // Test generateAnalyzerLink returns correct values
       expect(vm.generateAnalyzerLink(analyzerSlug)).toBe(validLinkWithSlug)

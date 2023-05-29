@@ -83,7 +83,7 @@ describe('[[ PublicReportSidebar ]]', () => {
 
     const wrapper = mount(
       {
-        template: `<div><PublicReportSidebar/></div>`,
+        template: '<div><PublicReportSidebar/></div>',
         components: { PublicReportSidebar }
       },
       {
