@@ -34,7 +34,8 @@ export const REPO_PERMS = {
   READ: {
     label: 'Read-only',
     value: RepositoryPermissionChoices.Read,
-    description: `Members will be able to only view the issues and metrics on private repositories they have access to, but won't be able to take any actions on issues or create Autofixes.`
+    description:
+      "Members will be able to only view the issues and metrics on private repositories they have access to, but won't be able to take any actions on issues or create Autofixes."
   }
 }
 

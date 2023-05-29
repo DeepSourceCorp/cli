@@ -64,7 +64,7 @@ export const getters: GetterTree<ActiveUserState, RootState> = {
 
     // if all fails, that means there's no owner associated to the user,
     // send them to installation page
-    return `/installation/providers`
+    return '/installation/providers'
   },
   [ActiveUserGetterTypes.GET_VIEWER]: (activeUserState) => {
     return activeUserState.viewer

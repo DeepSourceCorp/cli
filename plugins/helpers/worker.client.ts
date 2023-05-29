@@ -60,7 +60,7 @@ export default (context: Context, inject: Inject) => {
   ) {
     const csrfToken = $cookies.get('csrftoken')
 
-    const token = store?.getters[`account/auth/getJWT`]
+    const token = store?.getters['account/auth/getJWT']
     worker.postMessage({
       taskName,
       params,

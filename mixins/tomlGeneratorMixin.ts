@@ -115,7 +115,7 @@ export default class TomlGeneratorMixin extends Vue {
     // Returns a toml template string of transformers section
     return allTransformers
       .map((transformer: TransformerInterface) => {
-        const headerLines = [`[[transformers]]`, `name = ${JSON.stringify(transformer.name)}`]
+        const headerLines = ['[[transformers]]', `name = ${JSON.stringify(transformer.name)}`]
         if (!transformer.enabled) headerLines.push('enabled = false')
 
         return headerLines.join(NEWLINE)
