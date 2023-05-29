@@ -41,7 +41,7 @@ import { ContextGetterTypes } from '~/store/account/context'
 export default class PersonalDashboard extends mixins(ActiveUserMixin) {
   head(): Record<string, string> {
     return {
-      title: this.viewer.fullName ? `${this.viewer.fullName} • DeepSource` : `Me • DeepSource`,
+      title: this.viewer.fullName ? `${this.viewer.fullName} • DeepSource` : 'Me • DeepSource',
       description:
         'DeepSource is an automated code review tool that helps developers automatically find and fix issues in their code.'
     }

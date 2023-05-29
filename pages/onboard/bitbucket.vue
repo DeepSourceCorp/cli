@@ -9,7 +9,7 @@ export default Vue.extend({
   middleware: [
     function ({ redirect, route }: Context): void {
       const queryParams = route.query
-      redirect(302, `/installation/bb`, queryParams)
+      redirect(302, '/installation/bb', queryParams)
     }
   ]
 })

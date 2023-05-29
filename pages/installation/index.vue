@@ -7,7 +7,7 @@ export default Vue.extend({
     function ({ redirect, route }: Context): void {
       if (!route.params.provider) {
         const queryParams = route.query
-        redirect(302, `/installation/gh`, queryParams)
+        redirect(302, '/installation/gh', queryParams)
       }
     }
   ]
