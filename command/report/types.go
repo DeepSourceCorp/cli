@@ -11,7 +11,7 @@ type ReportQueryInput struct {
 	Data              string      `json:"data"`
 	AnalyzerShortcode string      `json:"analyzer"`
 	Metadata          interface{} `json:"metadata,omitempty"`
-	Compressed        bool        `json:"compression"`
+	Compressed        bool        `json:"compressed"`
 }
 
 // ReportQueryInput is the structure of artifacts report
