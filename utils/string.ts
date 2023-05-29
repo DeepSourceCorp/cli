@@ -53,7 +53,8 @@ function shortenLargeNumber(candidate: number | string): string {
   if (numberOfDigits <= 2) return String(number) // Return as is for a 3 digit number of less
   const unit = Math.floor(numberOfDigits / 3)
   const shortened =
-    Math.pow(10, numberOfDigits - unit * 3) * +(number / Math.pow(10, numberOfDigits)).toFixed(1)
+    Math.pow(10, numberOfDigits - unit * 3) *
+    Number((number / Math.pow(10, numberOfDigits)).toFixed(1))
 
   // Correct for floating point error upto 2 decimal places
   // skipcq: JS-0377

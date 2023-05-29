@@ -5,7 +5,11 @@ import OwnerDetailMixin from './ownerDetailMixin'
 import RepoDetailMixin from './repoDetailMixin'
 
 @Component
-export default class InstallAutofixMixin extends mixins(RepoDetailMixin, OwnerDetailMixin, ActiveUserMixin) {
+export default class InstallAutofixMixin extends mixins(
+  RepoDetailMixin,
+  OwnerDetailMixin,
+  ActiveUserMixin
+) {
   public installing = false
 
   // Will trigger a fail 5 seconds after window closing if autofix is not enabled
@@ -25,16 +29,15 @@ export default class InstallAutofixMixin extends mixins(RepoDetailMixin, OwnerDe
   public installWindow: Window | null = null
 
   get isRepoLevel(): boolean {
-    return !!this.baseRouteParams.name
+    return Boolean(this.baseRouteParams.name)
   }
 
-  get ownerParams(): { login: string, provider: string } {
+  get ownerParams(): { login: string; provider: string } {
     return { login: this.activeOwner, provider: this.activeProvider }
   }
 
   async fetch(): Promise<void> {
-    if (this.isRepoLevel)
-      await this.fetchRepoDetails(this.baseRouteParams)
+    if (this.isRepoLevel) await this.fetchRepoDetails(this.baseRouteParams)
     else {
       await this.fetchOwnerDetails(this.ownerParams)
     }
@@ -66,11 +69,11 @@ export default class InstallAutofixMixin extends mixins(RepoDetailMixin, OwnerDe
     this.installing = true
 
     // fetch installation url from repository
-    const installationUrl = this.isRepoLevel ?
-      this.repository.vcsProvider === 'GITHUB'
-        ? (this.repository.autofixGithubAppInstallationUrl)
-        : (this.repository.autofixBitbucketAddonInstallationUrl)
-      : (this.owner.autofixInstallationUrl)
+    const installationUrl = this.isRepoLevel
+      ? this.repository.vcsProvider === 'GITHUB'
+        ? this.repository.autofixGithubAppInstallationUrl
+        : this.repository.autofixBitbucketAddonInstallationUrl
+      : this.owner.autofixInstallationUrl
     if (installationUrl) {
       // open the window
       this.installWindow = window.open(installationUrl, '', 'resizable=no,width=1000,height=600')
@@ -123,8 +126,7 @@ export default class InstallAutofixMixin extends mixins(RepoDetailMixin, OwnerDe
   }
 
   async finish(): Promise<void> {
-    if (this.isRepoLevel)
-      await this.refetchRepo()
+    if (this.isRepoLevel) await this.refetchRepo()
 
     this.clearTimers()
     this.$socket.$off('autofix-installation-complete')
