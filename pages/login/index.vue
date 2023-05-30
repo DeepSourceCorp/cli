@@ -74,7 +74,7 @@
       <z-icon icon="arrow-left" />
       <span> Back to login </span>
     </button>
-    <p class="mt-6 text-sm leading-6 text-slate-200">
+    <p v-if="!$config.onPrem" class="mt-6 text-sm leading-6 text-slate-200">
       By continuing, you are agreeing to our
       <a
         href="https://deepsource.com/legal/terms"
