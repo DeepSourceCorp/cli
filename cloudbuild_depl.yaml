@@ -22,7 +22,7 @@ availableSecrets:
       env: 'STRIPE_PUBLISHABLE_KEY'
     - versionName: projects/66550703913/secrets/bifrost-source-map-sentry-token/versions/1
       env: 'SENTRY_AUTH_TOKEN'
-    - versionName: projects/66550703913/secrets/BIFROST_SENTRY_DSN/versions/1
+    - versionName: projects/66550703913/secrets/BIFROST_SENTRY_DSN/versions/2
       env: 'BIFROST_SENTRY_DSN'
 
 options:
