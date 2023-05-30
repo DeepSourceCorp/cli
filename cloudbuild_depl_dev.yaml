@@ -5,19 +5,25 @@ steps:
     args:
       - --destination=us.gcr.io/deepsource-dev/bifrost:$_IMAGE_TAG
       - --dockerfile=Dockerfile
-      - --build-arg=DISABLE_SENTRY=true
       - --build-arg=GOOGLE_ANALYTICS_ID=UA-XXXXXXXX-X
       - --build-arg=STRIPE_PUBLISHABLE_KEY
-      - --build-arg=NODE_ENV=staging
+      - --build-arg=NODE_ENV=production
+      - --build-arg=BIFROST_ENV=staging
       - --build-arg=DOMAIN=assets.deepsource.one
+      - --build-arg=SENTRY_AUTH_TOKEN
+      - --build-arg=BIFROST_SENTRY_DSN
+      - --build-arg=COMMIT_SHA=$COMMIT_SHA
       - --cache=true
-    secretEnv:
-      - 'STRIPE_PUBLISHABLE_KEY'
+    secretEnv: ['STRIPE_PUBLISHABLE_KEY', 'SENTRY_AUTH_TOKEN', 'BIFROST_SENTRY_DSN']
 
 availableSecrets:
   secretManager:
     - versionName: projects/821280794258/secrets/bifrost-stripe-test-publishable-key/versions/1
       env: 'STRIPE_PUBLISHABLE_KEY'
+    - versionName: projects/821280794258/secrets/bifrost-source-map-sentry-token/versions/1
+      env: 'SENTRY_AUTH_TOKEN'
+    - versionName: projects/821280794258/secrets/BIFROST_SENTRY_DSN/versions/1
+      env: 'BIFROST_SENTRY_DSN'
 
 options:
   machineType: 'E2_HIGHCPU_8'

@@ -6,6 +6,8 @@ steps:
       - --destination=us.gcr.io/deepsource-production/bifrost-enterprise:$TAG_NAME
       - --dockerfile=Dockerfile
       - --build-arg=ON_PREM=true
+      - --build-arg=NODE_ENV=production
+      - --build-arg=BIFROST_ENV=production
       - --cache=false
 
 options:

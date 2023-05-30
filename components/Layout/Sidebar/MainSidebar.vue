@@ -322,6 +322,11 @@ export default class Sidebar extends mixins(
       if (id && email) {
         const userId = Buffer.from(id, 'base64').toString().toLowerCase().replace('user:', '')
 
+        this.$sentry.setUser({
+          email,
+          id: userId
+        })
+
         // @ts-ignore
         this.$rudder?.identify(userId, {
           avatar,

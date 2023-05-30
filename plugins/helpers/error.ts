@@ -32,19 +32,22 @@ declare module 'vuex/types/index' {
   }
 }
 
-export default ({ app }: Context, inject: Inject): void => {
+export default ({ $config, $sentry, app }: Context, inject: Inject): void => {
   /**
    * Log error to reporting service and show a toast to the user
    *
-   * @param {Error} _error
+   * @param {Error} error
    * @param {string} toastMessage
-   * @param {User} _viewer
-   * @param {Object} _metadata
    *
    * @return {void}
    */
-  const logErrorAndToast: LogErrorAndToastT = function (_error, toastMessage, _viewer, _metadata) {
+  const logErrorAndToast: LogErrorAndToastT = function (error: Error, toastMessage?: string): void {
     // ?Integrate error reporting tool here
+
+    if (!$config.onPrem) {
+      $sentry?.captureException(error)
+    }
+
     if (process.client && toastMessage) {
       app.$toast.danger(toastMessage)
     }

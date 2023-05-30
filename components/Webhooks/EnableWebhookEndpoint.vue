@@ -85,7 +85,8 @@ export default class DeleteWebhookEndpoint extends mixins(WebhookMixin, ActiveUs
         )
       }
     } catch (e) {
-      this.$toast.danger(e.message.replace('GraphQL error: ', ''))
+      const err = e as Error
+      this.$toast.danger(`${err.message.replace('GraphQL error: ', '')}.`)
     } finally {
       this.enabling = false
     }

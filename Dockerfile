@@ -1,14 +1,20 @@
 FROM node:14-alpine AS builder
 
-ARG DISABLE_SENTRY
-
+# Add any env added here to the final build step too
 ARG STRIPE_PUBLISHABLE_KEY
+ARG BIFROST_SENTRY_DSN
+ARG SENTRY_AUTH_TOKEN
+ARG COMMIT_SHA
 ARG GOOGLE_ANALYTICS_ID
 ARG NODE_ENV
+ARG BIFROST_ENV
 ARG DOMAIN
 ARG ON_PREM
 
 ENV STRIPE_KEY=$STRIPE_PUBLISHABLE_KEY
+ENV BIFROST_ENV=$BIFROST_ENV
+ENV NODE_ENV=$NODE_ENV
+ENV DOMAIN=$DOMAIN
 
 RUN apk update && \
     apk add git make
@@ -17,15 +23,29 @@ COPY package.json yarn.lock /app/
 
 WORKDIR /app
 
-RUN yarn
+# First install dev dependencies too for nuxt build,
+# then run yarn install based on node_env (production for prod and dev)
+RUN yarn install --production=false
 
 COPY . /app
 
-RUN make build
+RUN make build && \
+    yarn
 
-FROM node:14.19-alpine AS node
+
+FROM node:14-alpine AS node
 
 FROM frolvlad/alpine-glibc:alpine-3.15_glibc-2.34
+
+ARG NODE_ENV
+ARG BIFROST_ENV
+ARG DOMAIN
+ARG ON_PREM
+
+ENV BIFROST_ENV=$BIFROST_ENV
+ENV NODE_ENV=$NODE_ENV
+ENV DOMAIN=$DOMAIN
+ENV ON_PREM=$ON_PREM
 
 ENV NUXT_HOST=0.0.0.0
 

@@ -164,6 +164,7 @@ export const actions: AuthModuleActions = {
       // reset rudder stack
       if (process.client) {
         this.$rudder?.reset(true)
+        this.$sentry.setUser(null)
       }
 
       // reset the apollo cache
@@ -182,17 +183,17 @@ export const actions: AuthModuleActions = {
         const databases = await indexedDB.databases()
 
         Promise.all(
-          // skipcq: JS-0372, JS-0295
-          // @ts-ignore
-          databases.map((db) => {
+          databases
             // skipcq: JS-0372, JS-0295
             // @ts-ignore
-            if (db.name) {
+            .filter((db) => Boolean(db.name))
+            // skipcq: JS-0372, JS-0295
+            // @ts-ignore
+            .map((db) => {
               // skipcq: JS-0372, JS-0295
               // @ts-ignore
               return indexedDB.deleteDatabase(db.name)
-            }
-          })
+            })
         )
       }
     } catch (e) {

@@ -22,9 +22,14 @@ function toBool(item) {
 }
 
 import { version } from './package.json'
-const IS_PRODUCTION = process.env.NODE_ENV === 'prod'
+
 const IS_ON_PREM = toBool(process.env.ON_PREM)
-const APP_DOMAIN = process.env.DEEPSOURCE_DOMAIN ?? 'deepsource.com'
+const IS_CLOUD_PRODUCTION =
+  !IS_ON_PREM && process.env.NODE_ENV === 'production' && process.env.BIFROST_ENV === 'production'
+const IS_STAGING =
+  !IS_ON_PREM && process.env.NODE_ENV === 'production' && process.env.BIFROST_ENV === 'staging'
+const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
+const APP_DOMAIN = process.env.DEEPSOURCE_DOMAIN ?? 'app.deepsource.com'
 const DEFAULT_PUBLIC_PATH = '/_nuxt/'
 
 export default {
@@ -100,7 +105,9 @@ export default {
     supportEmail: IS_ON_PREM ? 'enterprise-support@deepsource.io' : 'support@deepsource.io',
     domain: APP_DOMAIN,
     rudderWriteKey: IS_ON_PREM ? '' : process.env.RUDDER_WRITE_KEY,
-    rudderDataPlaneUrl: IS_ON_PREM ? '' : process.env.RUDDER_DATA_PLANE_URL
+    rudderDataPlaneUrl: IS_ON_PREM ? '' : process.env.RUDDER_DATA_PLANE_URL,
+    nodeEnv: process.env.NODE_ENV,
+    bifrostEnv: process.env.BIFROST_ENV
   },
 
   privateRuntimeConfig: {
@@ -183,11 +190,41 @@ export default {
     '@nuxt/content',
     'portal-vue/nuxt',
     ...(IS_ON_PREM ? [] : ['nuxt-stripe-module']),
-    ...(process.env.NODE_ENV !== 'development' && !IS_ON_PREM ? ['nuxt-prometheus-module'] : [])
+    ...(!IS_DEVELOPMENT && !IS_ON_PREM ? ['nuxt-prometheus-module'] : []),
+    ...(IS_CLOUD_PRODUCTION ? ['@nuxtjs/sentry'] : [])
   ],
 
+  sentry: {
+    dsn: process.env.BIFROST_SENTRY_DSN,
+    tracing: {
+      tracesSampleRate: 0.1,
+      vueOptions: {
+        trackComponents: true
+      }
+    },
+    disabled: IS_DEVELOPMENT,
+    logMockCalls: IS_DEVELOPMENT,
+    config: {
+      environment: process.env.BIFROST_ENV
+    },
+    publishRelease: IS_CLOUD_PRODUCTION
+      ? {
+          authToken: process.env.SENTRY_AUTH_TOKEN,
+          org: 'deepsource',
+          project: 'bifrost',
+          release: process.env.COMMIT_SHA,
+          include: '.nuxt/dist/',
+          setCommits: {
+            commit: process.env.COMMIT_SHA,
+            repo: 'deepsourcelabs/bifrost'
+          }
+        }
+      : false,
+    sourceMapStyle: 'hidden-source-map'
+  },
+
   'nuxt-prometheus-module': {
-    host: process.env.NODE_ENV === 'development' ? '127.0.0.1' : '0.0.0.0',
+    host: IS_DEVELOPMENT ? '127.0.0.1' : '0.0.0.0',
     port: 9100,
     metrics: {
       collectDefault: true,
@@ -284,27 +321,17 @@ export default {
     }
   },
 
+  modern: 'client',
+
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   // TODO: Remove this configuration
   // https://github.com/nuxt-community/tailwindcss-module/issues/79#issuecomment-609693459
   build: {
-    publicPath: IS_PRODUCTION ? process.env.CDN_URL : DEFAULT_PUBLIC_PATH,
-    parallel: true,
+    publicPath: IS_CLOUD_PRODUCTION ? process.env.CDN_URL : DEFAULT_PUBLIC_PATH,
+    devtools: IS_STAGING,
     cache: true,
     sourceMap: true,
-    extractCSS: process.env.NODE_ENV !== 'development',
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          styles: {
-            name: 'styles',
-            test: /\.(css|vue)$/,
-            chunks: 'all',
-            enforce: true
-          }
-        }
-      }
-    },
+    extractCSS: !IS_DEVELOPMENT,
     postcss: {
       preset: {
         features: {
@@ -312,8 +339,8 @@ export default {
         }
       }
     },
-    extend(config) {
-      if (process.env.NODE_ENV === 'development') {
+    extend(config, { isClient }) {
+      if (isClient) {
         config.devtool = 'source-map'
       }
 
@@ -321,6 +348,9 @@ export default {
         test: /\.(ogg|mp3|wav|mpe?g)$/i,
         loader: 'file-loader'
       })
+
+      config.performance.maxEntrypointSize = 8 * 1024 * 1024 // 8MB
+      config.performance.maxAssetSize = 4 * 1024 * 1024 // 4MB
     }
   },
 
@@ -334,7 +364,7 @@ export default {
   },
 
   googleFonts: {
-    download: process.env.NODE_ENV !== 'development',
+    download: !IS_DEVELOPMENT,
     families: {
       Inter: [100, 200, 300, 400, 500, 600, 700]
     }
@@ -342,7 +372,7 @@ export default {
 
   gtm: {
     id: 'GTM-K34VXB5',
-    enabled: IS_PRODUCTION && !IS_ON_PREM,
+    enabled: IS_CLOUD_PRODUCTION,
     pageTracking: true
   },
 

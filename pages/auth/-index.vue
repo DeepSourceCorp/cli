@@ -84,6 +84,12 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
 
       if (!this.$config.onPrem && id && email) {
         const userId = Buffer.from(id, 'base64').toString().toLowerCase().replace('user:', '')
+
+        this.$sentry.setUser({
+          email,
+          id: userId
+        })
+
         this.$rudder?.identify(userId, {
           avatar,
           createdAt,

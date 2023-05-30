@@ -7,6 +7,7 @@ module.exports = {
   parser: 'vue-eslint-parser',
   parserOptions: {
     ecmaVersion: 'latest',
+    sourceType: 'module',
     parser: {
       js: 'espree',
       jsx: 'espree',
