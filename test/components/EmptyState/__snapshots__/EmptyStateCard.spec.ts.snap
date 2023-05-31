@@ -6,6 +6,7 @@ exports[`[[ EmptyStateCard ]] renders empty state card pattern with content supp
   <div class=\\"text-left px-4 max-w-sm\\">
     <h3 class=\\"mt-4 text-base font-medium text-vanilla-100 md:mt-0\\">Test title</h3>
     <p class=\\"mt-2 text-sm leading-6 text-vanilla-400\\">Test subtitle</p>
+    <div class=\\"mt-6\\">Action on!</div>
   </div>
 </section>"
 `;
@@ -20,6 +21,7 @@ exports[`[[ EmptyStateCard ]] renders the empty state card pattern 1`] = `
     <p class=\\"mt-2 text-sm leading-6 text-vanilla-400\\">
       Test subtitle
     </p>
+    <!---->
   </div>
 </section>"
 `;

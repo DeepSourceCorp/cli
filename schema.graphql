@@ -514,16 +514,14 @@ type Check implements MaskPrimaryKeyNode {
   extraData: JSONString!
   errors: GenericScalar
   metrics: JSONString!
-  raisedCount: Int
-  resolvedCount: Int
   metricsCaptured: [RepositoryMetricValue]
   checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
   concreteIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, issueType: String, autofixAvailable: Boolean, auditRequired: Boolean, sort: String): IssueConnection
   finishedIn: Int
   finishedInDisplay: String
   errorsRendered: GenericScalar
-  issuesRaisedCount: Int
-  issuesResolvedCount: Int
+  issuesRaisedCount: Int!
+  issuesResolvedCount: Int!
   autofixableIssues: [AutofixableIssueDetail]
   filesAffectedByAutofix: Int
   hasInferredArtifacts: Boolean
@@ -599,6 +597,7 @@ enum CheckStatus {
   READ
   NEUT
   ATMO
+  SKIP
 }
 
 input ClearIntegrationRepositorySettingsInput {
@@ -2721,8 +2720,6 @@ type Run implements MaskPrimaryKeyNode {
   finishedAt: DateTime
   errorMeta: JSONString
   config: GenericScalar
-  raisedCount: Int
-  resolvedCount: Int
   extraData: JSONString!
   pullRequest: PR
   checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
@@ -2732,7 +2729,7 @@ type Run implements MaskPrimaryKeyNode {
   pullRequestNumberDisplay: String
   issuesRaisedCount: Int!
   issuesResolvedCount: Int!
-  issuesResolvedNum: Int! @deprecated(reason: "Removed in favor of `issues_resolved_count`")
+  issuesResolvedNum: Int @deprecated(reason: "Deprecated in favor of `issuesResolvedCount`.")
   isForDefaultBranch: Boolean
   isForCrossRepoPr: Boolean
   branchRunCount: Int
@@ -2758,6 +2755,7 @@ enum RunStatus {
   TIMO
   CNCL
   READ
+  SKIP
 }
 
 enum RunStatusChoice {
@@ -2767,6 +2765,7 @@ enum RunStatusChoice {
   STATUS_TIMEOUT
   STATUS_CANCEL
   STATUS_READY
+  STATUS_SKIPPED
 }
 
 type SilenceRule implements MaskPrimaryKeyNode {
@@ -3243,6 +3242,7 @@ enum TransformerRunStatus {
   TIMO
   FAIL
   STAL
+  SKIP
 }
 
 type TransformerTool implements MaskPrimaryKeyNode {

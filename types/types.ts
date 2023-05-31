@@ -703,16 +703,14 @@ export type Check = MaskPrimaryKeyNode & {
   extraData: Scalars['JSONString'];
   errors?: Maybe<Scalars['GenericScalar']>;
   metrics: Scalars['JSONString'];
-  raisedCount?: Maybe<Scalars['Int']>;
-  resolvedCount?: Maybe<Scalars['Int']>;
   metricsCaptured?: Maybe<Array<Maybe<RepositoryMetricValue>>>;
   checkIssues: CheckIssueConnection;
   concreteIssues?: Maybe<IssueConnection>;
   finishedIn?: Maybe<Scalars['Int']>;
   finishedInDisplay?: Maybe<Scalars['String']>;
   errorsRendered?: Maybe<Scalars['GenericScalar']>;
-  issuesRaisedCount?: Maybe<Scalars['Int']>;
-  issuesResolvedCount?: Maybe<Scalars['Int']>;
+  issuesRaisedCount: Scalars['Int'];
+  issuesResolvedCount: Scalars['Int'];
   autofixableIssues?: Maybe<Array<Maybe<AutofixableIssueDetail>>>;
   filesAffectedByAutofix?: Maybe<Scalars['Int']>;
   hasInferredArtifacts?: Maybe<Scalars['Boolean']>;
@@ -868,7 +866,8 @@ export enum CheckStatus {
   Cncl = 'CNCL',
   Read = 'READ',
   Neut = 'NEUT',
-  Atmo = 'ATMO'
+  Atmo = 'ATMO',
+  Skip = 'SKIP'
 }
 
 export type ClearIntegrationRepositorySettingsInput = {
@@ -5096,8 +5095,6 @@ export type Run = MaskPrimaryKeyNode & {
   finishedAt?: Maybe<Scalars['DateTime']>;
   errorMeta?: Maybe<Scalars['JSONString']>;
   config?: Maybe<Scalars['GenericScalar']>;
-  raisedCount?: Maybe<Scalars['Int']>;
-  resolvedCount?: Maybe<Scalars['Int']>;
   extraData: Scalars['JSONString'];
   pullRequest?: Maybe<Pr>;
   checks: CheckConnection;
@@ -5107,8 +5104,8 @@ export type Run = MaskPrimaryKeyNode & {
   pullRequestNumberDisplay?: Maybe<Scalars['String']>;
   issuesRaisedCount: Scalars['Int'];
   issuesResolvedCount: Scalars['Int'];
-  /** @deprecated Removed in favor of `issues_resolved_count` */
-  issuesResolvedNum: Scalars['Int'];
+  /** @deprecated Deprecated in favor of `issuesResolvedCount`. */
+  issuesResolvedNum?: Maybe<Scalars['Int']>;
   isForDefaultBranch?: Maybe<Scalars['Boolean']>;
   isForCrossRepoPr?: Maybe<Scalars['Boolean']>;
   branchRunCount?: Maybe<Scalars['Int']>;
@@ -5144,7 +5141,8 @@ export enum RunStatus {
   Fail = 'FAIL',
   Timo = 'TIMO',
   Cncl = 'CNCL',
-  Read = 'READ'
+  Read = 'READ',
+  Skip = 'SKIP'
 }
 
 export enum RunStatusChoice {
@@ -5153,7 +5151,8 @@ export enum RunStatusChoice {
   StatusFailure = 'STATUS_FAILURE',
   StatusTimeout = 'STATUS_TIMEOUT',
   StatusCancel = 'STATUS_CANCEL',
-  StatusReady = 'STATUS_READY'
+  StatusReady = 'STATUS_READY',
+  StatusSkipped = 'STATUS_SKIPPED'
 }
 
 export type SilenceRule = MaskPrimaryKeyNode & {
@@ -5737,7 +5736,8 @@ export enum TransformerRunStatus {
   Empt = 'EMPT',
   Timo = 'TIMO',
   Fail = 'FAIL',
-  Stal = 'STAL'
+  Stal = 'STAL',
+  Skip = 'SKIP'
 }
 
 export type TransformerTool = MaskPrimaryKeyNode & {

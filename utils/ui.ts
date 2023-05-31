@@ -154,7 +154,8 @@ export function checkStatusIcon(status: CheckStatus): string {
     [CheckStatus.Read]: 'circle-dot',
     [CheckStatus.Neut]: 'circle-dot',
     [CheckStatus.Atmo]: 'run-failed',
-    [CheckStatus.Wait]: 'alarm-clock'
+    [CheckStatus.Wait]: 'alarm-clock',
+    [CheckStatus.Skip]: 'circle-slash'
   }
   return types[status] ?? types[CheckStatus.Pass]
 }
@@ -175,7 +176,8 @@ export function checkStatusIconColor(status: CheckStatus): string {
     [CheckStatus.Read]: 'vanilla-400',
     [CheckStatus.Neut]: 'vanilla-400',
     [CheckStatus.Atmo]: 'vanilla-400',
-    [CheckStatus.Wait]: 'vanilla-400'
+    [CheckStatus.Wait]: 'vanilla-400',
+    [CheckStatus.Skip]: 'slate-200'
   }
   return types[status] ?? types[CheckStatus.Pass]
 }
@@ -196,7 +198,8 @@ export function checkStatusTagLabel(status: CheckStatus): string {
     [CheckStatus.Read]: 'Ready',
     [CheckStatus.Wait]: 'Waiting',
     [CheckStatus.Atmo]: 'Timed out',
-    [CheckStatus.Neut]: 'Ready'
+    [CheckStatus.Neut]: 'Ready',
+    [CheckStatus.Skip]: 'Skipped'
   }
   return types[status] ?? types[CheckStatus.Pass]
 }
@@ -214,7 +217,8 @@ export function runStatusIcon(status: RunStatus): string {
     [RunStatus.Pend]: 'spin-loader',
     [RunStatus.Timo]: 'timer',
     [RunStatus.Cncl]: 'alert-circle',
-    [RunStatus.Read]: 'circle-dot'
+    [RunStatus.Read]: 'circle-dot',
+    [RunStatus.Skip]: 'circle-slash'
   }
   return types[status] ?? types[RunStatus.Pass]
 }
@@ -232,7 +236,8 @@ export function runStatusIconColor(status: RunStatus): string {
     [RunStatus.Pend]: 'vanilla-100',
     [RunStatus.Timo]: 'honey',
     [RunStatus.Cncl]: 'honey',
-    [RunStatus.Read]: 'vanilla-400'
+    [RunStatus.Read]: 'vanilla-400',
+    [RunStatus.Skip]: 'slate-200'
   }
   return types[status] ?? types[RunStatus.Pass]
 }
@@ -250,7 +255,8 @@ export function runStatusTagLabel(status: RunStatus, forSentence = false): strin
     [RunStatus.Pend]: 'Running',
     [RunStatus.Timo]: 'Timed out',
     [RunStatus.Cncl]: 'Cancelled',
-    [RunStatus.Read]: 'Ready'
+    [RunStatus.Read]: 'Ready',
+    [RunStatus.Skip]: 'Skipped'
   }
 
   const sentenceTypes: Record<RunStatus, string> = {
@@ -259,7 +265,8 @@ export function runStatusTagLabel(status: RunStatus, forSentence = false): strin
     [RunStatus.Pend]: 'Analysis in progress',
     [RunStatus.Timo]: 'Timed out after',
     [RunStatus.Cncl]: 'Cancelled after',
-    [RunStatus.Read]: 'Completed in'
+    [RunStatus.Read]: 'Completed in',
+    [RunStatus.Skip]: 'Skipped'
   }
 
   if (forSentence) {

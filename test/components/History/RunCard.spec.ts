@@ -65,3 +65,25 @@ test('renders RunCard with pending', () => {
 
   expect(html()).toMatchSnapshot('RunCard Pending')
 })
+
+test('renders RunCard with skipped', () => {
+  const { html } = render(
+    RunCard,
+    {
+      props: generateProps({ status: RunStatus.Skip, title: undefined }),
+      stubs: {
+        ZIcon: true,
+        BaseCard: true,
+        NuxtLink: RouterLinkStub,
+        MetaDataItem: true
+      },
+      mocks: mocksGenerator(),
+      components: { BaseCard }
+    },
+    (vue) => {
+      vue.use(VTooltip)
+    }
+  )
+
+  expect(html()).toMatchSnapshot('RunCard Pending')
+})

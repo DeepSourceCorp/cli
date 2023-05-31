@@ -17,7 +17,7 @@ export const RUN_LIST: RunConnection = <RunConnection>{
       node: {
         createdAt: '2020-10-06T18:04:49.130974+00:00',
         runId: 'e9571778-2429-4c70-ae50-10aef6d9dc1b',
-        status: 'TIMO',
+        status: RunStatus.Timo,
         branchName: 'autofix-backend',
         commitOid: '2ee7bb5b5b4225f19f69ace7892fe484231981f4',
         finishedIn: 66,
@@ -49,7 +49,7 @@ export const RUN_LIST: RunConnection = <RunConnection>{
       node: {
         createdAt: '2020-10-06T18:04:49.130974+00:00',
         runId: '200cd792-bd43-49eb-8ad4-0ce9280b966d',
-        status: 'FAIL',
+        status: RunStatus.Fail,
         branchName: 'autofix-pr-frontend',
         commitOid: '8e24cc562a8f1cfec6d12e6ef2fac7a8088a3dd8',
         finishedIn: 219,
@@ -65,7 +65,7 @@ export const RUN_LIST: RunConnection = <RunConnection>{
       node: {
         createdAt: '2020-10-06T18:04:49.130974+00:00',
         runId: '9822ac4e-6584-4e25-a685-1f704208178d',
-        status: 'TIMO',
+        status: RunStatus.Timo,
         branchName: '654-rbac',
         commitOid: 'eaa4bc6bd07e52e64810a7e63d3443617c29b171',
         finishedIn: 161,
@@ -81,7 +81,7 @@ export const RUN_LIST: RunConnection = <RunConnection>{
       node: {
         createdAt: '2020-10-06T18:04:49.130974+00:00',
         runId: '25f3c276-5675-41df-946e-0104fb951a3c',
-        status: 'TIMO',
+        status: RunStatus.Timo,
         branchName: '654-rbac',
         commitOid: '35d7e86026fcae77f5d98dddbb7624aef94da44f',
         finishedIn: 130,
@@ -91,6 +91,22 @@ export const RUN_LIST: RunConnection = <RunConnection>{
         pullRequestNumberDisplay: '#1888',
         issuesRaisedCount: 7,
         issuesResolvedNum: 2
+      }
+    },
+    {
+      node: {
+        createdAt: '2020-10-06T18:04:49.130974+00:00',
+        runId: '25f3c276-5675-41df-946e-0104fb951a57',
+        status: RunStatus.Skip,
+        branchName: '234-rbac',
+        commitOid: '35d7e86026fcae77f5d98dddbb7624aef94da44f',
+        finishedIn: 0,
+        vcsCommitUrl:
+          'https://github.com/deepsourcelabs/asgard/commit/35d7e86026fcae77f5d98dddbb7624aef94da44f',
+        gitCompareDisplay: 'a8935a7..35d7e86',
+        pullRequestNumberDisplay: '#1888',
+        issuesRaisedCount: 0,
+        issuesResolvedNum: 0
       }
     }
   ]

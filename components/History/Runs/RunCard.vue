@@ -1,18 +1,26 @@
 <template>
-  <base-card :to="getRoute(runId)">
+  <base-card
+    v-bind="baseCardProps"
+    :class="{
+      'cursor-not-allowed rounded-lg border border-dashed border-ink-200 bg-ink-400': isRunSkipped
+    }"
+  >
     <template #left-section>
-      <div class="w-full grid grid-cols-fr-8 md:grid-cols-fr-16">
+      <div class="grid w-full grid-cols-fr-8 md:grid-cols-fr-16">
         <div class="gap-2 p-3">
-          <div class="flex flex-col flex-grow">
-            <section class="flex items-center text-xs gap-x-1 md:text-base">
+          <div class="flex flex-grow flex-col">
+            <section class="flex items-center gap-x-1 text-xs md:text-base">
               <z-icon
                 v-tooltip="tagLabel"
-                class="self-center flex-shrink-0 inline mt-0.5 mr-0.5"
                 :icon="icon"
                 :class="{ 'animate-spin': isPending }"
                 :color="iconColor"
+                class="mt-0.5 mr-0.5 inline flex-shrink-0 self-center"
               />
-              <h3 class="inline font-medium cursor-pointer text-vanilla-100 line-clamp-1">
+              <h3
+                class="inline font-medium text-vanilla-100 line-clamp-1"
+                :class="isRunSkipped ? 'cursor-not-allowed' : 'cursor-pointer'"
+              >
                 {{ title || branchName }}
               </h3>
               <span class="inline font-medium text-vanilla-400">
@@ -23,9 +31,13 @@
               </span>
             </section>
             <section
-              class="flex flex-wrap items-center flex-grow pl-px mt-1 leading-8 gap-x-4 gap-y-2"
+              class="mt-1 flex flex-grow flex-wrap items-center gap-x-4 gap-y-2 pl-px leading-8"
             >
-              <meta-data-item v-if="!isPending" :label="`Analyzed ${createdString}`" icon="clock" />
+              <meta-data-item
+                v-if="!isPending"
+                :label="`${isRunSkipped ? 'Skipped' : 'Analyzed'} ${createdString}`"
+                icon="clock"
+              />
               <meta-data-item v-else :label="statusText" icon="clock" />
               <meta-data-item
                 v-if="isSecondary && issueMetaDataLabel"
@@ -41,20 +53,20 @@
         </div>
         <!-- stats-->
         <div
-          v-if="issueStats.length && !isPending"
+          v-if="showIssueStats"
           class="border-l border-slate-400"
           :class="{ 'hidden md:block': isSecondary }"
         >
           <div
-            class="grid items-center justify-around flex-shrink-0 h-full grid-cols-1 divide-y md:grid-cols-2 md:gap-x-0 md:divide-y-0 divide-ink-200"
+            class="grid h-full flex-shrink-0 grid-cols-1 items-center justify-around divide-y divide-ink-200 md:grid-cols-2 md:gap-x-0 md:divide-y-0"
           >
             <div
               v-for="stat in issueStats"
               :key="stat.label"
-              class="grid w-full h-full p-2 text-center md:w-full place-content-center md:p-3"
+              class="grid h-full w-full place-content-center p-2 text-center md:w-full md:p-3"
             >
               <div
-                class="text-sm md:text-1.5xl font-semibold"
+                class="text-sm font-semibold md:text-1.5xl"
                 :class="{
                   'text-cherry': !stat.isPositive,
                   'text-juniper': stat.isPositive,
@@ -63,7 +75,7 @@
               >
                 {{ stat.value }}
               </div>
-              <div class="text-xxs md:text-xs text-vanilla-400">{{ stat.label }}</div>
+              <div class="text-xxs text-vanilla-400 md:text-xs">{{ stat.label }}</div>
             </div>
           </div>
         </div>
@@ -80,7 +92,7 @@ import { fromNow } from '@/utils/date'
 import { shortenLargeNumber } from '@/utils/string'
 import { RunStatus } from '~/types/types'
 import { runStatusIcon, runStatusIconColor, runStatusTagLabel } from '~/utils/ui'
-import { GeneralizedRunT } from '~/utils/runs'
+import { GeneralizedRunT, generalizeRunStatuses } from '~/utils/runs'
 
 @Component({
   components: {
@@ -139,10 +151,6 @@ export default class RunCard extends mixins(RepoDetailMixin) {
     return this.status === RunStatus.Pend
   }
 
-  getRoute(candidate: string): string {
-    return this.$generateRoute(['run', candidate])
-  }
-
   get issueStats(): { label: string; value: string; isPositive: boolean | null }[] {
     const stats = []
     stats.push({
@@ -172,6 +180,20 @@ export default class RunCard extends mixins(RepoDetailMixin) {
   get createdString(): string {
     // return '2mins'
     return fromNow(this.createdAt)
+  }
+
+  get isRunSkipped(): boolean {
+    return generalizeRunStatuses(this.status).status === RunStatus.Skip
+  }
+
+  get showIssueStats() {
+    return this.issueStats.length && !this.isPending && !this.isRunSkipped
+  }
+
+  get baseCardProps() {
+    return this.isRunSkipped
+      ? { removeDefaultStyle: true }
+      : { to: this.$generateRoute(['run', this.runId]) }
   }
 }
 </script>

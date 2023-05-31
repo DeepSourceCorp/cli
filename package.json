@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@deepsource/shifty": "^1.0.0",
-    "@deepsource/zeal": "^0.12.27",
+    "@deepsource/zeal": "^0.12.31",
     "@nuxt/content": "^1.11.1",
     "@nuxtjs/apollo": "^4.0.1-rc.4",
     "@nuxtjs/sentry": "^7.2.6",

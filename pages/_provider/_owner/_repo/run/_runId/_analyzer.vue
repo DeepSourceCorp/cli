@@ -3,8 +3,6 @@
     <!-- UI state corresponding to archived runs -->
     <lazy-empty-state-card
       v-if="showArchivedRunEmptyState"
-      :show-border="true"
-      :use-v2="true"
       :webp-image-path="require('~/assets/images/ui-states/runs/no-recent-autofixes.webp')"
       subtitle="We archive all older runs periodically to keep your dashboard lean, clean, and fast."
       title="This Analysis run has been archived"
@@ -42,7 +40,7 @@
         </div>
         <div class="flex h-full items-center gap-2">
           <z-split-dropdown-button-v2
-            v-if="canRetryAnalysis && !isInitialLoad && retryableChecks.length"
+            v-if="canRetryAnalysis && !isFreshLoad && retryableChecks.length"
             divider-height="h-7"
             divider-color="slate-400"
           >
@@ -132,9 +130,55 @@
             :checks="checks"
             :flash-active-analyzer="flashActiveAnalyzer"
           />
-          <run-summary v-bind="run" />
+          <run-summary v-if="!isCurrentCheckSkipped" v-bind="run" />
         </div>
-        <div>
+        <div v-if="isCurrentCheckSkipped" class="pt-40 pb-56">
+          <lazy-empty-state-card
+            :webp-image-path="require('~/assets/images/ui-states/runs/no-recent-autofixes.webp')"
+            title="This check was manually skipped"
+            class="max-w-sm md:max-w-xl"
+          >
+            <template #subtitle
+              >Analysis was manually skipped for commit
+              <code class="rounded-sm bg-ink-200 px-0.5 text-vanilla-100">{{
+                currectCheckCommitOid
+              }}</code
+              >. Check results of subsequent commits or run analysis for this commit.</template
+            >
+            <template #action>
+              <div class="flex items-center gap-x-6">
+                <run-selector v-if="branchRuns.length" :branch-runs="branchRuns">
+                  <template #trigger="{ isOpen, toggle, countText }">
+                    <button
+                      class="auxillary-button py-2"
+                      :class="isOpen ? 'bg-ink-100' : 'bg-ink-200 hover:bg-ink-100'"
+                      @click="toggle"
+                    >
+                      <div class="flex items-center gap-x-2 text-sm text-vanilla-400">
+                        <z-icon icon="refresh-cw" size="x-small" />
+                        <span> {{ countText }} </span>
+                        <z-icon
+                          icon="chevron-down"
+                          size="x-small"
+                          class="transform transition-all duration-300"
+                          :class="isOpen ? 'rotate-180' : 'rotate-0'"
+                        />
+                      </div>
+                    </button>
+                  </template>
+                </run-selector>
+                <a
+                  :href="SKIPPED_RUN_DOCS"
+                  class="inline-flex items-center gap-x-1 text-xs leading-3 text-vanilla-400 hover:text-vanilla-100 focus:text-vanilla-100"
+                >
+                  <span>Learn more</span>
+                  <z-icon icon="arrow-up-right" color="current" size="x-small" />
+                </a>
+              </div>
+            </template>
+          </lazy-empty-state-card>
+        </div>
+        <div v-else>
           <div class="top-bar-offset z-30 md:sticky">
             <run-header
               v-if="showRunHeader"
@@ -159,7 +203,7 @@
   </main>
 </template>
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
 import { RunHeader, AnalyzerRun, AnalyzerSelector, RunSummary } from '@/components/Run'
 import {
   ZMenu,
@@ -176,12 +220,16 @@ import RunDetailMixin from '~/mixins/runDetailMixin'
 import { ILinks } from '~/components/Common/BreadcrumbContainer.vue'
 import { toTitleCase } from '~/utils/string'
 import { PageRefetchStatusT, RunDetailActions } from '~/store/run/detail'
-import { Check, Pr, Run } from '~/types/types'
+import { Check, CheckStatus, Pr, Run, RunConnection } from '~/types/types'
 import { RunTypes } from '~/types/run'
 
 import RetryChecksMutation from '@/apollo/mutations/repository/runs/retryChecks.gql'
 import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
 import { RepoPerms } from '~/types/permTypes'
+import { resolveNodes } from '~/utils/array'
+import { RunListActions } from '~/store/run/list'
+
+const runListStore = namespace('run/list')
 
 /**
  * Page that provides detailed information about generated issues for a specific analyzer run.
@@ -234,11 +282,46 @@ export default class AnalyzerDetails extends mixins(
   RoleAccessMixin,
   RunDetailMixin
 ) {
+  @runListStore.State
+  branchRunList: Record<string, RunConnection>
+
+  @runListStore.Action(RunListActions.FETCH_BRANCH_RUNS_LIST)
+  fetchBranchRuns: (args: {
+    provider: string
+    owner: string
+    name: string
+    branchName: string
+    limit?: number
+    refetch?: boolean
+  }) => Promise<void>
+
   public flashActiveAnalyzer = false
   analyzersInRetryList: string[] = []
   isLoading = false
-  // TODO remove in skip analysis PR as it doesn't work
-  isInitialLoad = true
+  readonly SKIPPED_RUN_DOCS = ''
+
+  /**
+   * Fetch all runs on this branch
+   *
+   * @param {boolean} [refetch=true] refetch the query
+   * @returns {Promise<void>}
+   */
+  async fetchRuns(refetch = true): Promise<void> {
+    if (this.run.branchName) {
+      await this.fetchBranchRuns({
+        ...this.baseRouteParams,
+        branchName: this.run.branchName,
+        limit: 30,
+        refetch
+      })
+    }
+  }
+
+  async fetch() {
+    if (this.currentCheck?.status === CheckStatus.Skip) {
+      await this.fetchRuns()
+    }
+  }
 
   /**
    * Sets `flashActiveAnalyzer` to true for 1 second, and then resets it back to false
@@ -377,14 +460,48 @@ export default class AnalyzerDetails extends mixins(
     )
   }
 
-  handleLoading(newLoading: boolean) {
-    this.isLoading = newLoading
-    if (this.isInitialLoad) {
-      this.isInitialLoad = newLoading
-    }
+  get isCurrentCheckSkipped(): boolean {
+    return this.currentCheck?.status === CheckStatus.Skip
   }
 
-  /** */
+  get currectCheckCommitOid() {
+    return this.run.commitOid?.substring(0, 7)
+  }
+
+  /**
+   * Get the run nodes for all other runs on this branch
+   *
+   * @returns {Array<Run>}
+   */
+  get branchRuns() {
+    if (this.run.branchName) {
+      const resolvedRuns = resolveNodes(this.branchRunList[this.run.branchName]) as Run[]
+
+      return resolvedRuns.filter((run) => run.runId !== this.run.runId)
+    }
+    return []
+  }
+
+  get isFreshLoad() {
+    return this.$route.params.runId !== this.run.runId
+  }
+
+  /**
+   * Update value of @see{@link isLoading}
+   *
+   * @param {boolean} newLoading - Value to update to
+   * @returns {void}
+   */
+  handleLoading(newLoading: boolean) {
+    this.isLoading = newLoading
+  }
+
+  /**
+   * Retry given checks
+   *
+   * @param {string[]} analyzerShortcodes - shortcodes of analyzer to retry
+   * @returns {Promise<boolean>}
+   */
   async retryChecks(analyzerShortcodes: string[]): Promise<boolean> {
     const analyzersToRetry = analyzerShortcodes.filter(
       (shortcode) => !this.analyzersInRetry.has(shortcode)

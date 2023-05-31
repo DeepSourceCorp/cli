@@ -94,6 +94,7 @@ export const generalizeRunStatuses = (status: RunStatus | RunStatusChoice) => {
     [RunStatus.Pass]: { status: RunStatus.Pass, statusChoice: RunStatusChoice.StatusSuccess },
     [RunStatus.Pend]: { status: RunStatus.Pend, statusChoice: RunStatusChoice.StatusPending },
     [RunStatus.Read]: { status: RunStatus.Read, statusChoice: RunStatusChoice.StatusReady },
+    [RunStatus.Skip]: { status: RunStatus.Skip, statusChoice: RunStatusChoice.StatusSkipped },
     [RunStatusChoice.StatusCancel]: {
       status: RunStatus.Cncl,
       statusChoice: RunStatusChoice.StatusCancel
@@ -117,6 +118,10 @@ export const generalizeRunStatuses = (status: RunStatus | RunStatusChoice) => {
     [RunStatusChoice.StatusReady]: {
       status: RunStatus.Read,
       statusChoice: RunStatusChoice.StatusReady
+    },
+    [RunStatusChoice.StatusSkipped]: {
+      status: RunStatus.Skip,
+      statusChoice: RunStatusChoice.StatusSkipped
     }
   }
   return generalizedRunStatusesMap[status]

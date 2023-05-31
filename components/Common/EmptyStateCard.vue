@@ -25,6 +25,9 @@
           {{ subtitle }}
         </slot>
       </p>
+      <div v-if="$slots.action" class="mt-6">
+        <slot name="action"></slot>
+      </div>
     </div>
   </section>
 </template>

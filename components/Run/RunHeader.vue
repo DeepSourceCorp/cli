@@ -49,8 +49,8 @@
               </a>
             </div>
           </div>
-          <z-menu v-if="runCount" width="2x-large">
-            <template #trigger="{ toggle, isOpen }">
+          <run-selector v-if="runCount" :branch-runs="branchRuns">
+            <template #trigger="{ toggle, isOpen, countText }">
               <button
                 class="flex h-7 cursor-pointer items-center gap-x-2 rounded-3px border border-slate-400 px-2"
                 :class="[isOpen ? 'bg-ink-100' : 'bg-ink-200 hover:bg-ink-100']"
@@ -68,59 +68,7 @@
                 </div>
               </button>
             </template>
-            <template #body>
-              <z-menu-section
-                :divider="false"
-                class="hide-scroll max-h-96 divide-y divide-ink-200 overflow-y-auto rounded-md border border-slate-400"
-              >
-                <z-menu-item
-                  v-for="run in branchRuns"
-                  :key="run.runId"
-                  :to="getRoute(run.runId)"
-                  as="nuxt-link"
-                  class="bg-ink-300 p-4"
-                >
-                  <div class="flex flex-col gap-y-2.5">
-                    <div class="flex items-center gap-x-1.5">
-                      <z-icon
-                        :icon="getStatusIcon(run.status)"
-                        :color="getStatusIconColor(run.status)"
-                        class="mt-px"
-                        :class="{ 'motion-safe:animate-spin': run.status === 'PEND' }"
-                      />
-                      <div class="max-w-xs truncate text-sm font-medium leading-6 text-vanilla-100">
-                        {{ run.commitMessage || run.branchName }}
-                      </div>
-                    </div>
-                    <div class="flex flex-wrap gap-x-4 pl-6">
-                      <meta-data-item v-if="run.commitOid" icon="git-commit">
-                        {{ run.commitOid.slice(0, 7) }}
-                      </meta-data-item>
-                      <meta-data-item
-                        v-if="run.issuesRaisedCount"
-                        icon="double-exclamation"
-                        icon-color="cherry"
-                        size="small"
-                        spacing="space-x-0"
-                      >
-                        {{ shortenLargeNumber(run.issuesRaisedCount) }}
-                      </meta-data-item>
-                      <meta-data-item
-                        v-if="run.issuesResolvedCount"
-                        icon="double-check"
-                        icon-color="juniper"
-                        size="small"
-                        spacing="space-x-0.5"
-                        class="ml-1"
-                      >
-                        {{ shortenLargeNumber(run.issuesResolvedCount) }}
-                      </meta-data-item>
-                    </div>
-                  </div>
-                </z-menu-item>
-              </z-menu-section>
-            </template>
-          </z-menu>
+          </run-selector>
         </div>
         <div class="flex items-center sm:hidden">
           <meta-data-item
@@ -446,25 +394,6 @@ export default class RunHeader extends RepoDetailMixin {
     if (!this.branchRunList) return 0
     const totalCount = this.branchRunList[this.branchName]?.totalCount
     return totalCount ? totalCount - 1 : 0
-  }
-
-  /**
-   * Get the text label to be used for additional runs
-   *
-   * @returns {string}
-   */
-  get countText(): string {
-    if (this.runCount === 1) {
-      // singular
-      return `${this.runCount} more run`
-    } else if (this.runCount > 1 && this.runCount <= 30) {
-      // plural
-      return `${this.runCount} more runs`
-    } else if (this.runCount > 30) {
-      return `30 more runs`
-    } else {
-      return ''
-    }
   }
 
   /**

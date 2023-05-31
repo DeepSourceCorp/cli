@@ -1,9 +1,9 @@
 <template>
   <z-modal width="custom" title="Customize overview widgets" @onClose="$emit('close')">
-    <section class="p-4 space-y-2 overflow-y-auto sm:w-98 max-h-98 md:h-98 hide-scroll">
+    <section class="hide-scroll max-h-98 space-y-2 overflow-y-auto p-4 sm:w-98 md:h-98">
       <z-input
         v-model="searchCandidate"
-        class="flex-grow mb-4"
+        class="mb-4 flex-grow"
         size="small"
         :show-border="false"
         background-color="ink-200"
@@ -55,7 +55,7 @@
     </section>
     <template #footer="{ close }">
       <div
-        class="flex items-center justify-between px-4 py-3 space-x-4 border-t text-vanilla-100 border-slate-400"
+        class="flex items-center justify-between space-x-4 border-t border-slate-400 px-4 py-3 text-vanilla-100"
       >
         <span v-if="enabledWidgets.length < MIN_WIDGETS" class="text-xs font-medium text-honey">
           You need to select at least {{ MIN_WIDGETS }} widgets
@@ -117,7 +117,7 @@ export default class CustomizeWidgetsModal extends mixins(RepoDetailMixin) {
     'idp-widget': 'indirect-dependency',
     'lcv-widget': 'test-coverage-2',
     'bcv-widget': 'branch-coverage',
-    'dcv-widget': 'application-documentation-coverage',
+    'dcv-widget': 'documentation-coverage',
     'bug-risk-widget': 'bug-risk',
     'antipattern-widget': 'antipattern',
     'style-widget': 'style',

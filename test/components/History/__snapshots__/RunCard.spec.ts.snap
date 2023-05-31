@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders RunCard with all prop options: RunCard 1`] = `
-"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/run/4323412432\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
-  <div class=\\"w-full grid grid-cols-fr-8 md:grid-cols-fr-16\\">
+"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/run/4323412432\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\" class=\\"\\">
+  <div class=\\"grid w-full grid-cols-fr-8 md:grid-cols-fr-16\\">
     <div class=\\"gap-2 p-3\\">
-      <div class=\\"flex flex-col flex-grow\\">
-        <section class=\\"flex items-center text-xs gap-x-1 md:text-base\\">
-          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"self-center flex-shrink-0 inline mt-0.5 mr-0.5 has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
-          <h3 class=\\"inline font-medium cursor-pointer text-vanilla-100 line-clamp-1\\">
+      <div class=\\"flex flex-grow flex-col\\">
+        <section class=\\"flex items-center gap-x-1 text-xs md:text-base\\">
+          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"mt-0.5 mr-0.5 inline flex-shrink-0 self-center has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+          <h3 class=\\"inline font-medium text-vanilla-100 line-clamp-1 cursor-pointer\\">
             Base branch
           </h3> <span class=\\"inline font-medium text-vanilla-400\\"> @435432 </span>
         </section>
-        <section class=\\"flex flex-wrap items-center flex-grow pl-px mt-1 leading-8 gap-x-4 gap-y-2\\">
+        <section class=\\"mt-1 flex flex-grow flex-wrap items-center gap-x-4 gap-y-2 pl-px leading-8\\">
           <metadataitem-stub label=\\"Analyzed NaN years ago\\" icon=\\"clock\\"></metadataitem-stub>
           <metadataitem-stub label=\\"12 issues introduced, 13 issues resolved\\" icon=\\"flag\\" class=\\"md:hidden\\"></metadataitem-stub>
           <!---->
@@ -19,18 +19,18 @@ exports[`renders RunCard with all prop options: RunCard 1`] = `
       </div>
     </div>
     <div class=\\"border-l border-slate-400 hidden md:block\\">
-      <div class=\\"grid items-center justify-around flex-shrink-0 h-full grid-cols-1 divide-y md:grid-cols-2 md:gap-x-0 md:divide-y-0 divide-ink-200\\">
-        <div class=\\"grid w-full h-full p-2 text-center md:w-full place-content-center md:p-3\\">
-          <div class=\\"text-sm md:text-1.5xl font-semibold text-cherry\\">
+      <div class=\\"grid h-full flex-shrink-0 grid-cols-1 items-center justify-around divide-y divide-ink-200 md:grid-cols-2 md:gap-x-0 md:divide-y-0\\">
+        <div class=\\"grid h-full w-full place-content-center p-2 text-center md:w-full md:p-3\\">
+          <div class=\\"text-sm font-semibold md:text-1.5xl text-cherry\\">
             12
           </div>
-          <div class=\\"text-xxs md:text-xs text-vanilla-400\\">introduced</div>
+          <div class=\\"text-xxs text-vanilla-400 md:text-xs\\">introduced</div>
         </div>
-        <div class=\\"grid w-full h-full p-2 text-center md:w-full place-content-center md:p-3\\">
-          <div class=\\"text-sm md:text-1.5xl font-semibold text-juniper\\">
+        <div class=\\"grid h-full w-full place-content-center p-2 text-center md:w-full md:p-3\\">
+          <div class=\\"text-sm font-semibold md:text-1.5xl text-juniper\\">
             13
           </div>
-          <div class=\\"text-xxs md:text-xs text-vanilla-400\\">resolved</div>
+          <div class=\\"text-xxs text-vanilla-400 md:text-xs\\">resolved</div>
         </div>
       </div>
     </div>
@@ -39,18 +39,41 @@ exports[`renders RunCard with all prop options: RunCard 1`] = `
 `;
 
 exports[`renders RunCard with pending: RunCard Pending 1`] = `
-"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/run/4323412432\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
-  <div class=\\"w-full grid grid-cols-fr-8 md:grid-cols-fr-16\\">
+"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/run/4323412432\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\" class=\\"\\">
+  <div class=\\"grid w-full grid-cols-fr-8 md:grid-cols-fr-16\\">
     <div class=\\"gap-2 p-3\\">
-      <div class=\\"flex flex-col flex-grow\\">
-        <section class=\\"flex items-center text-xs gap-x-1 md:text-base\\">
-          <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"self-center flex-shrink-0 inline mt-0.5 mr-0.5 animate-spin has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
-          <h3 class=\\"inline font-medium cursor-pointer text-vanilla-100 line-clamp-1\\">
+      <div class=\\"flex flex-grow flex-col\\">
+        <section class=\\"flex items-center gap-x-1 text-xs md:text-base\\">
+          <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mt-0.5 mr-0.5 inline flex-shrink-0 self-center animate-spin has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+          <h3 class=\\"inline font-medium text-vanilla-100 line-clamp-1 cursor-pointer\\">
             base
           </h3> <span class=\\"inline font-medium text-vanilla-400\\"> @435432 </span>
         </section>
-        <section class=\\"flex flex-wrap items-center flex-grow pl-px mt-1 leading-8 gap-x-4 gap-y-2\\">
+        <section class=\\"mt-1 flex flex-grow flex-wrap items-center gap-x-4 gap-y-2 pl-px leading-8\\">
           <metadataitem-stub label=\\"Analysis in progress\\" icon=\\"clock\\"></metadataitem-stub>
+          <metadataitem-stub label=\\"12 issues introduced, 13 issues resolved\\" icon=\\"flag\\" class=\\"md:hidden\\"></metadataitem-stub>
+          <!---->
+        </section>
+      </div>
+    </div>
+    <!---->
+  </div>
+</basecard-stub>"
+`;
+
+exports[`renders RunCard with skipped: RunCard Pending 1`] = `
+"<basecard-stub showinfo=\\"true\\" to=\\"\\" title=\\"\\" description=\\"\\" removedefaultstyle=\\"true\\" custompadding=\\"p-3\\" class=\\"cursor-not-allowed rounded-lg border border-dashed border-ink-200 bg-ink-400\\">
+  <div class=\\"grid w-full grid-cols-fr-8 md:grid-cols-fr-16\\">
+    <div class=\\"gap-2 p-3\\">
+      <div class=\\"flex flex-grow flex-col\\">
+        <section class=\\"flex items-center gap-x-1 text-xs md:text-base\\">
+          <zicon-stub icon=\\"circle-slash\\" size=\\"small\\" position=\\"\\" color=\\"slate-200\\" class=\\"mt-0.5 mr-0.5 inline flex-shrink-0 self-center has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+          <h3 class=\\"inline font-medium text-vanilla-100 line-clamp-1 cursor-not-allowed\\">
+            base
+          </h3> <span class=\\"inline font-medium text-vanilla-400\\"> @435432 </span>
+        </section>
+        <section class=\\"mt-1 flex flex-grow flex-wrap items-center gap-x-4 gap-y-2 pl-px leading-8\\">
+          <metadataitem-stub label=\\"Skipped NaN years ago\\" icon=\\"clock\\"></metadataitem-stub>
           <metadataitem-stub label=\\"12 issues introduced, 13 issues resolved\\" icon=\\"flag\\" class=\\"md:hidden\\"></metadataitem-stub>
           <!---->
         </section>

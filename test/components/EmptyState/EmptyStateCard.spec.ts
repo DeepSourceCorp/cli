@@ -19,7 +19,7 @@ describe('[[ EmptyStateCard ]]', () => {
 
   test('renders empty state card pattern with content supplied via slots', () => {
     const { html } = render(EmptyStateCard, {
-      slots: propsData,
+      slots: { ...propsData, action: 'Action on!' },
       stubs
     })
 
