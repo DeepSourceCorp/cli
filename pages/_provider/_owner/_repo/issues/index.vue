@@ -90,13 +90,13 @@
       v-else
       class="flex flex-1 flex-grow flex-col gap-y-4 p-4 pb-10"
       :class="{
-        'lg:h-64': issueList.totalCount === 0,
-        'max-h-auto': issueList && issueList.totalCount && issueList.totalCount > 0
+        'lg:h-64': totalIssueCount === 0,
+        'max-h-auto': totalIssueCount > 0
       }"
     >
-      <template v-if="issueList.totalCount">
+      <template v-if="totalIssueCount">
         <issue-list-item
-          v-for="issue in resolveIssueNodes(issueList)"
+          v-for="issue in issueList"
           v-bind="issue"
           :key="issue.id"
           :show-autofix-button="allowAutofix && hasRepoReadAccess"
@@ -108,7 +108,7 @@
 
       <template v-else>
         <lazy-empty-state
-          v-if="issueCategoryDisabled && !hasIssuesCount"
+          v-if="issueCategoryDisabled"
           :use-v2="true"
           :webp-image-path="disabledStateImagePath.webp"
           :png-image-path="disabledStateImagePath.png"
@@ -189,15 +189,15 @@ import {
 import IssueListItem from '@/components/IssueListItem.vue'
 import { AutofixFileChooser } from '@/components/RepoIssues'
 
-// types
-import { RepositoryIssueConnection, Maybe, RepositoryIssue } from '~/types/types'
-
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import IssueListMixin from '~/mixins/issueListMixin'
-
-import { RepoPerms } from '~/types/permTypes'
 import RouteQueryMixin, { RouteQueryParamsT } from '~/mixins/routeQueryMixin'
+
+import RepositoryIssuesListGQLQuery from '~/apollo/queries/repository/issue/list.gql'
+
+import { RepositoryIssueConnection, Maybe, RepositoryIssue } from '~/types/types'
+import { RepoPerms } from '~/types/permTypes'
+
 import { resolveNodes } from '~/utils/array'
 
 import {
@@ -210,6 +210,7 @@ import {
   ProductTypeFilterMap,
   ProductTypeOptions
 } from '~/types/issues'
+import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
 const PAGE_SIZE = 25
 const VISIBLE_PAGES = 5
@@ -225,6 +226,24 @@ export interface IssueListFilters extends RouteQueryParamsT {
   all?: boolean
   recommended?: boolean
   auditRequired?: boolean
+}
+
+interface IssueListQueryParams {
+  provider: string
+  owner: string
+  name: string
+  limit: number
+  currentPageNumber?: number
+  issueType?: string
+  product?: string
+  analyzer?: string
+  sort?: string
+  q?: string
+  autofixAvailable?: boolean
+  all?: boolean
+  recommended?: boolean
+  auditRequired?: boolean
+  refetch?: boolean
 }
 
 /**
@@ -248,13 +267,9 @@ export interface IssueListFilters extends RouteQueryParamsT {
   },
   layout: 'repository'
 })
-export default class Issues extends mixins(
-  RepoDetailMixin,
-
-  IssueListMixin,
-  RoleAccessMixin,
-  RouteQueryMixin
-) {
+export default class Issues extends mixins(RepoDetailMixin, RoleAccessMixin, RouteQueryMixin) {
+  public issueList: Array<RepositoryIssue> = []
+  public totalIssueCount = 0
   public isAutofixOpen = false
   public isActivationModalOpen = false
   public isUpgradeAccountModalOpen = false
@@ -466,6 +481,54 @@ export default class Issues extends mixins(
   }
 
   /**
+   * Fetch list of repository issues
+   *
+   * @param {IssueListQueryParams} args — arguments for fetching repository issues
+   * @returns {Promise<void>}
+   */
+  async fetchIssueList({
+    provider,
+    owner,
+    name,
+    limit,
+    currentPageNumber,
+    issueType,
+    product,
+    analyzer,
+    sort,
+    q,
+    autofixAvailable,
+    all,
+    recommended,
+    auditRequired,
+    refetch
+  }: IssueListQueryParams): Promise<void> {
+    const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
+      RepositoryIssuesListGQLQuery,
+      {
+        provider: this.$providerMetaMap[provider].value,
+        owner: owner,
+        name: name,
+        after: this.$getGQLAfter(currentPageNumber || 1, limit),
+        limit: limit,
+        issueType: issueType,
+        product: product,
+        analyzer: analyzer,
+        sort: sort,
+        q: q,
+        autofixAvailable: autofixAvailable,
+        all: all,
+        recommended: recommended,
+        auditRequired: auditRequired
+      },
+      refetch
+    )
+
+    this.issueList = resolveNodes(response.data.repository?.issues) as RepositoryIssue[]
+    this.totalIssueCount = response.data.repository?.issues?.totalCount ?? 0
+  }
+
+  /**
    * Refetch repo details on websocket event
    *
    * @returns {Promise<void>}
@@ -578,8 +641,7 @@ export default class Issues extends mixins(
   }
 
   get pageCount(): number {
-    if (this.issueList.totalCount) return Math.ceil(this.issueList.totalCount / PAGE_SIZE)
-    return 0
+    return Math.ceil(this.totalIssueCount / PAGE_SIZE)
   }
 
   get totalVisible(): number {
@@ -619,11 +681,6 @@ export default class Issues extends mixins(
     )
 
     return match?.name || ''
-  }
-
-  get hasIssuesCount(): boolean {
-    const totalIssueCount = this.issueList?.totalCount ?? 0
-    return totalIssueCount > 0
   }
 
   get isDefinedCategory(): boolean {
@@ -671,16 +728,6 @@ export default class Issues extends mixins(
     }
 
     return (category || product || '') as string
-  }
-
-  /**
-   * Function to construct an array with the nodes alone
-   *
-   * @param {RepositoryIssueConnection} conn
-   * @returns {RepositoryIssue[]}
-   */
-  resolveIssueNodes(conn: RepositoryIssueConnection) {
-    return resolveNodes(conn) as RepositoryIssue[]
   }
 
   /**

@@ -102,7 +102,7 @@ import IssueDetailMixin from '~/mixins/issueDetailMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import { IssueLink } from '~/mixins/issueListMixin'
+import { IssueLink } from '~/types/issues'
 
 import { RunDetailMutations } from '~/store/run/detail'
 

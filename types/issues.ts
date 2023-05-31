@@ -190,3 +190,8 @@ export const ProductTypeFilterMap: Record<string, FilterOptions> = {
     auditRequired: true
   }
 }
+
+export interface IssueLink {
+  to: string
+  label: string
+}

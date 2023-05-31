@@ -172,7 +172,7 @@ import {
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import IntegrationsDetailMixin from '~/mixins/integrationsDetailMixin'
 import { AppFeatures } from '~/types/permTypes'
-import { IssueLink } from '~/mixins/issueListMixin'
+import { IssueLink } from '~/types/issues'
 
 export interface CreateIssueActionItem {
   id: string
