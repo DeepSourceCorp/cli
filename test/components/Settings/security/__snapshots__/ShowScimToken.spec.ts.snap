@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ ShowScimToken ]] renders correctly with all props 1`] = `
+"<zmodal-stub title=\\"SCIM token for lol\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+  <div class=\\"space-y-5 px-4 py-4.5\\"><label class=\\"space-y-2\\">
+      <div class=\\"text-xs leading-normal text-vanilla-100\\">
+        Use this token to set up SCIM with your identity provider
+      </div>
+      <zinput-stub name=\\"\\" value=\\"abc\\" label=\\"\\" type=\\"text\\" placeholder=\\"SCIM token\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" class=\\"border border-ink-200\\"></zinput-stub>
+    </label>
+    <zalert-stub type=\\"warning\\">
+      <div class=\\"flex gap-x-2 text-xs\\">
+        <zicon-stub icon=\\"solid-alert-circle\\" size=\\"x-small\\" position=\\"\\" color=\\"current\\" class=\\"mt-0.5 flex-shrink-0\\"></zicon-stub> <span>Make sure to copy your SCIM token now. You will not be able to see it again. You will
+          always be able to regenerate a new token.</span>
+      </div>
+    </zalert-stub>
+  </div>
+</zmodal-stub>"
+`;

@@ -50,7 +50,7 @@
             :disabled="verifyingDomain"
             :class="verifyingDomain ? 'cursor-not-allowed' : 'hover:bg-ink-200'"
             class="flex flex-shrink-0 items-center gap-x-1 bg-ink-300 p-3 text-xs leading-3 text-vanilla-100"
-            @click="$emit('verify-domain')"
+            @click="verifyDomain"
           >
             <z-icon
               :icon="verifyingDomain ? 'spin-loader' : 'link-2'"
@@ -80,7 +80,7 @@
       <div class="rounded-md border border-ink-200 bg-ink-300 p-4">
         <div
           :class="{ 'opacity-60': !isSAMLConfigurable }"
-          class="float-right border border-ink-50 bg-ink-200"
+          class="float-right rounded-sm border border-ink-50 bg-ink-200"
         >
           <z-button
             v-if="!isSAMLConfigured"
@@ -214,6 +214,12 @@ export default class SsoConfiguration extends Vue {
     return this.isSSOVerificationPending && this.isInProgress?.domainName
       ? this.isInProgress.domainName
       : 'Domain'
+  }
+
+  verifyDomain() {
+    this.domainInput
+      ? this.$emit('verify-domain')
+      : this.$toast.danger('Please enter a valid domain')
   }
 }
 </script>
