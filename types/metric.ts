@@ -22,4 +22,4 @@ export interface GroupedMetrics {
 
 export const NLCV_SHORTCODE = 'NLCV'
 
-export const DEFAULT_BR_COVERAGE_METRICS = ['BCV', 'CCV', 'LCV']
+export const DEFAULT_BR_COVERAGE_METRICS = ['BCV', 'CCV', 'LCV', 'CPCV']
