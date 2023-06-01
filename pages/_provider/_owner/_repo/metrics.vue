@@ -1,16 +1,16 @@
 <template>
   <div
     v-if="repository.metricsCaptured && repository.metricsCaptured.length"
-    class="grid grid-cols-1 lg:grid-cols-16-fr"
+    class="metrics-page-container grid grid-cols-1 lg:grid-cols-16-fr"
   >
     <nav
-      class="hidden border-b lg:block lg:sticky lg:border-r border-slate-400 lg:h-nav-sidebar top-10 lg:top-24 bg-ink-400"
+      class="lg:top-24.5 lg:h-metrics-sidebar top-10 hidden border-b border-slate-400 bg-ink-400 lg:sticky lg:block lg:border-r"
     >
-      <ul class="flex flex-col px-2 pt-2 overflow-x-auto gap-x-8 gap-y-1">
+      <ul class="flex flex-col gap-x-8 gap-y-1 overflow-x-auto px-2 pt-2">
         <li v-for="metric in navList" :key="metric.shortcode">
           <nuxt-link
             :to="metric.shortcode"
-            class="px-2 py-2.5 hover:bg-ink-300 lg:hover:text-vanilla-100 rounded-md max-w-full text-sm block"
+            class="block max-w-full rounded-md px-2 py-2.5 text-sm hover:bg-ink-300 lg:hover:text-vanilla-100"
             :class="isMetricActiveRoute(metric.shortcode) ? 'bg-ink-300' : 'text-vanilla-400'"
           >
             <div class="truncate">
@@ -25,13 +25,13 @@
 
     <floating-button-mobile :nav-items="navListForMobile" />
   </div>
-  <div v-else class="p-4 min-h-98">
+  <div v-else class="min-h-98 p-4">
     <lazy-empty-state
       :webp-image-path="require('~/assets/images/ui-states/metrics/no-data-found-136px.webp')"
       :png-image-path="require('~/assets/images/ui-states/metrics/no-data-found-136px.png')"
       title="Waiting for data"
       subtitle="We haven’t received any data to show this metric. Please create a new commit to the default branch to kick things off!"
-      class="flex flex-col justify-center h-full"
+      class="flex h-full flex-col justify-center"
     />
   </div>
 </template>
@@ -168,3 +168,21 @@ export default class MetricsPage extends Vue {
   }
 }
 </script>
+
+<style scoped lang="postcss">
+@tailwind utilities;
+
+.metrics-page-container {
+  --repo-header-height: 98px;
+}
+
+@media screen(lg) {
+  .lg\:top-24.5 {
+    top: var(--repo-header-height);
+  }
+
+  .lg\:h-metrics-sidebar {
+    height: calc(100vh - var(--repo-header-height));
+  }
+}
+</style>

@@ -151,7 +151,7 @@ export default class RunCard extends mixins(RepoDetailMixin) {
     return this.status === RunStatus.Pend
   }
 
-  get issueStats(): { label: string; value: string; isPositive: boolean | null }[] {
+  get issueStats(): { label: string; value: number | string; isPositive: boolean | null }[] {
     const stats = []
     stats.push({
       label: 'introduced',

@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ CustomizeWidgetsModalRow ]] renders the row corresponding to the dcv-widget in the modal to customize widgets 1`] = `
+"<li class=\\"drag-handler flex cursor-pointer items-center space-x-2 rounded-md border border-slate-400 p-2 bg-ink-200\\">
+  <zicon-stub icon=\\"drag\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"m-px flex-shrink-0 drag-handler cursor-move\\"></zicon-stub>
+  <zicon-stub icon=\\"documentation-coverage\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <label class=\\"flex-grow cursor-pointer overflow-hidden overflow-ellipsis whitespace-nowrap text-sm text-vanilla-400\\">
+    Documentation coverage
+  </label>
+  <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"dcv-widget\\" truevalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer py-1.5 font-semibold\\"></zcheckbox-stub>
+</li>"
+`;
+
+exports[`[[ CustomizeWidgetsModalRow ]] renders the row corresponding to the dcv-widget in the modal to customize widgets 2`] = `
+"<li class=\\"drag-handler flex cursor-pointer items-center space-x-2 rounded-md border border-slate-400 p-2 bg-ink-200\\">
+  <zicon-stub icon=\\"drag\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"m-px flex-shrink-0 drag-handler cursor-move\\"></zicon-stub>
+  <zicon-stub icon=\\"documentation-coverage\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <label class=\\"flex-grow cursor-pointer overflow-hidden overflow-ellipsis whitespace-nowrap text-sm text-vanilla-400\\">
+    Documentation coverage
+  </label>
+  <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"dcv-widget\\" truevalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer py-1.5 font-semibold\\"></zcheckbox-stub>
+</li>"
+`;
+
+exports[`[[ CustomizeWidgetsModalRow ]] renders the row corresponding to the dcv-widget in the modal to customize widgets 3`] = `
+"<li class=\\"drag-handler flex cursor-pointer items-center space-x-2 rounded-md border border-slate-400 p-2 ignore-element\\">
+  <zicon-stub icon=\\"drag\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"m-px flex-shrink-0 cursor-not-allowed\\"></zicon-stub>
+  <zicon-stub icon=\\"documentation-coverage\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <label class=\\"flex-grow cursor-pointer overflow-hidden overflow-ellipsis whitespace-nowrap text-sm text-vanilla-400\\">
+    Documentation coverage
+  </label>
+  <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"dcv-widget\\" truevalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer py-1.5 font-semibold\\"></zcheckbox-stub>
+</li>"
+`;
+
+exports[`[[ CustomizeWidgetsModalRow ]] renders the row corresponding to the dcv-widget in the modal to customize widgets 4`] = `
+"<li class=\\"drag-handler flex cursor-pointer items-center space-x-2 rounded-md border border-slate-400 p-2 ignore-element\\">
+  <zicon-stub icon=\\"drag\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"m-px flex-shrink-0 cursor-not-allowed\\"></zicon-stub>
+  <zicon-stub icon=\\"documentation-coverage\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <label class=\\"flex-grow cursor-pointer overflow-hidden overflow-ellipsis whitespace-nowrap text-sm text-vanilla-400\\">
+    Documentation coverage
+  </label>
+  <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"dcv-widget\\" truevalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer py-1.5 font-semibold\\"></zcheckbox-stub>
+</li>"
+`;

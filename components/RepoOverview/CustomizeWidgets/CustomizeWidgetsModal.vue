@@ -1,11 +1,10 @@
 <template>
   <z-modal width="custom" title="Customize overview widgets" @onClose="$emit('close')">
-    <section class="hide-scroll max-h-98 space-y-2 overflow-y-auto p-4 sm:w-98 md:h-98">
+    <section class="hide-scroll max-h-98 space-y-3 overflow-y-auto p-4 sm:w-98 md:h-98">
       <z-input
         v-model="searchCandidate"
-        class="mb-4 flex-grow"
-        size="small"
         :show-border="false"
+        size="small"
         background-color="ink-200"
         placeholder="Search for a widget..."
       >
@@ -13,68 +12,79 @@
           <z-icon icon="search" size="small" class="ml-1.5" />
         </template>
       </z-input>
-      <draggable
-        v-show="enabledWidgetsSearchResults.length"
-        key="enabled-widgets"
-        :list="enabledWidgets"
-        :animation="200"
-        ghost-class="bg-ink-300"
-        tag="ul"
-        class="grid grid-cols-1 gap-2"
-        filter=".ignore-element"
-        handle=".drag-handler"
-        @start="dragging = true"
-        @end="dragging = false"
+
+      <p
+        v-if="showWarning"
+        class="rounded-md border border-honey border-opacity-10 bg-honey bg-opacity-10 p-3 text-sm text-honey-400"
       >
-        <customize-widget-modal-row
-          v-for="widget in enabledWidgetsSearchResults"
-          :key="widget"
-          v-model="enabledWidgets"
-          :icon="WIDGET_ICON_MAP[widget]"
-          :widget-name="widget"
-          :title="repository.allWidgets[widget].title"
-        />
-      </draggable>
-      <ul class="grid grid-cols-1 gap-2">
-        <customize-widget-modal-row
-          v-for="widget in availableWidgetsSearchResults"
-          :key="widget"
-          v-model="enabledWidgets"
-          :icon="WIDGET_ICON_MAP[widget]"
-          :widget-name="widget"
-          :draggable="false"
-          :title="repository.allWidgets[widget].title"
-        />
-      </ul>
-      <empty-state
-        v-if="
-          enabledWidgetsSearchResults.length === 0 && availableWidgetsSearchResults.length === 0
-        "
-        subtitle="No widgets matched the search term"
-      />
+        You need to select {{ MAX_WIDGETS_COUNT }} widgets for the dashboard.
+      </p>
+
+      <div class="space-y-2">
+        <draggable
+          v-show="enabledWidgetsSearchResults.length"
+          key="enabled-widgets"
+          :list="enabledWidgets"
+          :animation="200"
+          ghost-class="bg-ink-300"
+          tag="ul"
+          filter=".ignore-element"
+          class="grid grid-cols-1 gap-2"
+          handle=".drag-handler"
+          @start="dragging = true"
+          @end="dragging = false"
+        >
+          <customize-widgets-modal-row
+            v-for="widget in enabledWidgetsSearchResults"
+            :key="widget"
+            v-model="enabledWidgets"
+            :icon="WIDGET_ICON_MAP[widget]"
+            :is-selected="true"
+            :widget-name="widget"
+            :title="repository.allWidgets[widget].title"
+          />
+        </draggable>
+
+        <ul class="grid grid-cols-1 gap-2">
+          <customize-widgets-modal-row
+            v-for="widget in availableWidgetsSearchResults"
+            :key="widget"
+            v-model="enabledWidgets"
+            :icon="WIDGET_ICON_MAP[widget]"
+            :widget-name="widget"
+            :draggable="false"
+            :title="repository.allWidgets[widget].title"
+          />
+        </ul>
+      </div>
+
+      <empty-state v-if="searchResultIsEmpty" subtitle="No widgets matched the search term" />
     </section>
+
     <template #footer="{ close }">
       <div
         class="flex items-center justify-between space-x-4 border-t border-slate-400 px-4 py-3 text-vanilla-100"
       >
-        <span v-if="enabledWidgets.length < MIN_WIDGETS" class="text-xs font-medium text-honey">
-          You need to select at least {{ MIN_WIDGETS }} widgets
-        </span>
         <span
-          v-else-if="enabledWidgets.length > MAX_WIDGETS"
+          v-if="enabledWidgets.length > MAX_WIDGETS_COUNT"
           class="text-xs font-medium text-honey"
         >
-          You can only select at most {{ MAX_WIDGETS }} widgets
+          You can only select {{ MAX_WIDGETS_COUNT }} widgets
         </span>
-        <span v-else class="text-xs font-medium text-juniper"
-          >{{ MAX_WIDGETS - enabledWidgets.length }} remaining</span
+
+        <span
+          v-else
+          class="text-xs font-medium"
+          :class="remainingCount <= 3 ? 'text-honey-400' : 'text-juniper'"
+          >{{ remainingCount }} remaining</span
         >
+
         <z-button
+          :disabled="enabledWidgets.length !== MAX_WIDGETS_COUNT"
+          :is-loading="savingPreferences"
           icon="check"
           size="small"
-          :is-loading="savingPreferences"
           loading-label="Updating Widgets"
-          :disabled="enabledWidgets.length > MAX_WIDGETS || enabledWidgets.length < MIN_WIDGETS"
           @click="savePreferences(close)"
         >
           Update widgets
@@ -84,49 +94,32 @@
   </z-modal>
 </template>
 <script lang="ts">
+import { ZButton, ZIcon, ZInput, ZModal } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZModal, ZTag, ZCheckbox, ZInput } from '@deepsource/zeal'
-import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import Draggable from 'vuedraggable'
 
-const MAX_WIDGETS = 8
-const MIN_WIDGETS = 4
+import RepoDetailMixin from '~/mixins/repoDetailMixin'
+
+import { WIDGET_ICON_MAP } from '~/utils/repository'
 
 @Component({
   components: {
     ZIcon,
     ZButton,
     ZModal,
-    ZTag,
-    ZCheckbox,
     ZInput,
     Draggable
   },
   layout: 'dashboard'
 })
 export default class CustomizeWidgetsModal extends mixins(RepoDetailMixin) {
-  public enabledWidgets: string[] = []
-  public dragging = false
-  public savingPreferences = false
-  public searchCandidate = ''
-  public MAX_WIDGETS = MAX_WIDGETS
-  public MIN_WIDGETS = MIN_WIDGETS
+  enabledWidgets: string[] = []
+  dragging = false
+  savingPreferences = false
+  searchCandidate = ''
+  readonly MAX_WIDGETS_COUNT = 6
 
-  WIDGET_ICON_MAP = {
-    'ddp-widget': 'direct-dependency',
-    'idp-widget': 'indirect-dependency',
-    'lcv-widget': 'test-coverage-2',
-    'bcv-widget': 'branch-coverage',
-    'dcv-widget': 'documentation-coverage',
-    'bug-risk-widget': 'bug-risk',
-    'antipattern-widget': 'antipattern',
-    'style-widget': 'style',
-    'security-widget': 'security',
-    'performance-widget': 'performance',
-    'doc-widget': 'doc',
-    'typecheck-widget': 'typecheck',
-    'coverage-widget': 'coverage'
-  }
+  WIDGET_ICON_MAP = WIDGET_ICON_MAP
 
   async fetch(): Promise<void> {
     await this.fetchWidgets(this.baseRouteParams)
@@ -171,12 +164,19 @@ export default class CustomizeWidgetsModal extends mixins(RepoDetailMixin) {
     return this.availableWidgets
   }
 
-  get allowPop(): boolean {
-    return this.enabledWidgets.length > this.MIN_WIDGETS
+  get remainingCount() {
+    return this.MAX_WIDGETS_COUNT - this.enabledWidgets.length
   }
 
-  get allowPush(): boolean {
-    return this.enabledWidgets.length < this.MAX_WIDGETS
+  get searchResultIsEmpty() {
+    return (
+      this.enabledWidgetsSearchResults.length === 0 &&
+      this.availableWidgetsSearchResults.length === 0
+    )
+  }
+
+  get showWarning() {
+    return this.enabledWidgets.length < this.MAX_WIDGETS_COUNT && !this.searchResultIsEmpty
   }
 
   async savePreferences(close: () => Promise<void>): Promise<void> {

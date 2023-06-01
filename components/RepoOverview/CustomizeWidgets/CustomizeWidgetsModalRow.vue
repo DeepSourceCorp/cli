@@ -1,19 +1,24 @@
 <template>
   <li
     :class="draggable ? 'bg-ink-200' : 'ignore-element'"
-    class="flex items-center p-2 space-x-2 border rounded-md cursor-pointer border-slate-400 drag-handler"
+    class="drag-handler flex cursor-pointer items-center space-x-2 rounded-md border border-slate-400 p-2"
     @click="updateRowCheck"
   >
     <z-icon
+      color="vanilla-400"
       icon="drag"
-      :color="draggable ? 'vanilla-200' : 'vanilla-400'"
       size="x-small"
-      class="flex-shrink-0 m-px"
+      class="m-px flex-shrink-0"
       :class="draggable ? 'drag-handler cursor-move' : 'cursor-not-allowed'"
     />
-    <z-icon :icon="icon" color="vanilla-100" class="flex-shrink-0" />
+    <z-icon
+      :icon="icon"
+      :color="isSelected ? 'vanilla-100' : 'vanilla-400'"
+      class="flex-shrink-0"
+    />
     <label
-      class="flex-grow overflow-hidden text-sm cursor-pointer whitespace-nowrap overflow-ellipsis vanilla-100"
+      class="flex-grow cursor-pointer overflow-hidden overflow-ellipsis whitespace-nowrap text-sm"
+      :class="isSelected ? 'text-vanilla-100' : 'text-vanilla-400'"
     >
       {{ toSentenceCase(title) }}
     </label>
@@ -48,6 +53,9 @@ export default class CustomizeWidgetsModalRow extends Vue {
 
   @Prop({ default: true })
   draggable: boolean
+
+  @Prop({ default: false })
+  isSelected: boolean
 
   @Prop({ required: true })
   widgetName: string

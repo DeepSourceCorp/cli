@@ -33,7 +33,7 @@ function formatIntl(val: number): string {
   return isFinite(val) ? formatter.format(val) : ''
 }
 
-function shortenLargeNumber(candidate: number | string): string {
+function shortenLargeNumber(candidate: number | string): number | string {
   let number = 0
 
   if (typeof candidate === 'number') {

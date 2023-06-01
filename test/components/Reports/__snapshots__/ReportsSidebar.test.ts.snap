@@ -2,21 +2,21 @@
 
 exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"showPublicReports":false,"level":"ENTERPRISE"} 1`] = `
 "<div class=\\"reports-nav-container\\">
-  <nav class=\\"lg:w-64 hidden lg:flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky border-b lg:border-b-0 lg:border-r border-slate-400 vertical-sidebar-repository-level\\">
-    <div class=\\"flex flex-shrink-0 gap-x-8 lg:flex-col lg:gap-y-1 pr-0 pl-4 lg:px-2\\">
-      <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+  <nav class=\\"hide-scroll hidden gap-x-8 overflow-x-auto border-b border-slate-400 pt-2 lg:sticky lg:flex lg:w-64 lg:flex-col lg:gap-y-4 lg:border-b-0 lg:border-r lg:pt-2 vertical-sidebar-repository-level\\">
+    <div class=\\"flex flex-shrink-0 gap-x-8 pr-0 pl-4 lg:flex-col lg:gap-y-1 lg:px-2\\">
+      <p class=\\"hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block\\">
         Security
-      </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">OWASP® Top 10</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">OWASP® Top 10</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">CWE/SANS Top 25</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">CWE/SANS Top 25</span></ztab-stub></a>
-      <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+      </p> <a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">OWASP® Top 10</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">OWASP® Top 10</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">CWE/SANS Top 25</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">CWE/SANS Top 25</span></ztab-stub></a>
+      <p class=\\"hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block\\">
         Insights
-      </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Code Health Trend</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Health Trend</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Code Coverage</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Coverage</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Prevented</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Autofixed</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Autofixed</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issue Distribution</span></ztab-stub></a>
+      </p> <a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Code Health Trend</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Code Health Trend</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Code Coverage</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Code Coverage</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issues Prevented</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issues Autofixed</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issues Autofixed</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issue Distribution</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issue Distribution</span></ztab-stub></a>
     </div>
     <!---->
   </nav>
@@ -26,21 +26,21 @@ exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"sh
 
 exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"showPublicReports":false,"level":"OWNER"} 1`] = `
 "<div class=\\"reports-nav-container\\">
-  <nav class=\\"lg:w-64 hidden lg:flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky border-b lg:border-b-0 lg:border-r border-slate-400 vertical-sidebar-owner-level\\">
-    <div class=\\"flex flex-shrink-0 gap-x-8 lg:flex-col lg:gap-y-1 pr-0 pl-4 lg:px-2\\">
-      <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+  <nav class=\\"hide-scroll hidden gap-x-8 overflow-x-auto border-b border-slate-400 pt-2 lg:sticky lg:flex lg:w-64 lg:flex-col lg:gap-y-4 lg:border-b-0 lg:border-r lg:pt-2 vertical-sidebar-owner-level\\">
+    <div class=\\"flex flex-shrink-0 gap-x-8 pr-0 pl-4 lg:flex-col lg:gap-y-1 lg:px-2\\">
+      <p class=\\"hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block\\">
         Security
-      </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">OWASP® Top 10</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">OWASP® Top 10</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">CWE/SANS Top 25</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">CWE/SANS Top 25</span></ztab-stub></a>
-      <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+      </p> <a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">OWASP® Top 10</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">OWASP® Top 10</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">CWE/SANS Top 25</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">CWE/SANS Top 25</span></ztab-stub></a>
+      <p class=\\"hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block\\">
         Insights
-      </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Code Health Trend</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Health Trend</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Code Coverage</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Coverage</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Prevented</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Autofixed</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Autofixed</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issue Distribution</span></ztab-stub></a>
+      </p> <a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Code Health Trend</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Code Health Trend</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Code Coverage</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Code Coverage</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issues Prevented</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issues Autofixed</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issues Autofixed</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issue Distribution</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issue Distribution</span></ztab-stub></a>
     </div>
     <!---->
   </nav>
@@ -50,21 +50,21 @@ exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"sh
 
 exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"showPublicReports":false,"level":"REPOSITORY"} 1`] = `
 "<div class=\\"reports-nav-container\\">
-  <nav class=\\"lg:w-64 hidden lg:flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky border-b lg:border-b-0 lg:border-r border-slate-400 vertical-sidebar-repository-level\\">
-    <div class=\\"flex flex-shrink-0 gap-x-8 lg:flex-col lg:gap-y-1 pr-0 pl-4 lg:px-2\\">
-      <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+  <nav class=\\"hide-scroll hidden gap-x-8 overflow-x-auto border-b border-slate-400 pt-2 lg:sticky lg:flex lg:w-64 lg:flex-col lg:gap-y-4 lg:border-b-0 lg:border-r lg:pt-2 vertical-sidebar-repository-level\\">
+    <div class=\\"flex flex-shrink-0 gap-x-8 pr-0 pl-4 lg:flex-col lg:gap-y-1 lg:px-2\\">
+      <p class=\\"hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block\\">
         Security
-      </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">OWASP® Top 10</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">OWASP® Top 10</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">CWE/SANS Top 25</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">CWE/SANS Top 25</span></ztab-stub></a>
-      <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+      </p> <a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">OWASP® Top 10</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">OWASP® Top 10</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">CWE/SANS Top 25</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">CWE/SANS Top 25</span></ztab-stub></a>
+      <p class=\\"hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block\\">
         Insights
-      </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Code Health Trend</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Health Trend</span></ztab-stub></a>
-      <!----><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Prevented</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Autofixed</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Autofixed</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issue Distribution</span></ztab-stub></a>
+      </p> <a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Code Health Trend</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Code Health Trend</span></ztab-stub></a>
+      <!----><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issues Prevented</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issues Autofixed</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issues Autofixed</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issue Distribution</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issue Distribution</span></ztab-stub></a>
     </div>
     <!---->
   </nav>
@@ -74,27 +74,27 @@ exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"sh
 
 exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"showPublicReports":true,"level":"ENTERPRISE"} 1`] = `
 "<div class=\\"reports-nav-container\\">
-  <nav class=\\"lg:w-64 hidden lg:flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky border-b lg:border-b-0 lg:border-r border-slate-400 vertical-sidebar-repository-level\\">
-    <div class=\\"flex flex-shrink-0 gap-x-8 lg:flex-col lg:gap-y-1 pr-0 pl-4 lg:px-2\\">
-      <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+  <nav class=\\"hide-scroll hidden gap-x-8 overflow-x-auto border-b border-slate-400 pt-2 lg:sticky lg:flex lg:w-64 lg:flex-col lg:gap-y-4 lg:border-b-0 lg:border-r lg:pt-2 vertical-sidebar-repository-level\\">
+    <div class=\\"flex flex-shrink-0 gap-x-8 pr-0 pl-4 lg:flex-col lg:gap-y-1 lg:px-2\\">
+      <p class=\\"hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block\\">
         Security
-      </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">OWASP® Top 10</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">OWASP® Top 10</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">CWE/SANS Top 25</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">CWE/SANS Top 25</span></ztab-stub></a>
-      <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+      </p> <a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">OWASP® Top 10</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">OWASP® Top 10</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">CWE/SANS Top 25</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">CWE/SANS Top 25</span></ztab-stub></a>
+      <p class=\\"hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block\\">
         Insights
-      </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Code Health Trend</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Health Trend</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Code Coverage</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Coverage</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Prevented</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Autofixed</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Autofixed</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issue Distribution</span></ztab-stub></a>
+      </p> <a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Code Health Trend</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Code Health Trend</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Code Coverage</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Code Coverage</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issues Prevented</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issues Autofixed</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issues Autofixed</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issue Distribution</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issue Distribution</span></ztab-stub></a>
     </div>
     <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\" class=\\"hidden lg:block\\"></zdivider-stub>
-    <div class=\\"flex-shrink-0 pl-0 pr-4 lg:px-2\\"><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:flex lg:items-center lg:gap-x-2 text-vanilla-400\\"><zicon-stub icon=\\"file-pie-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hover:text-vanilla-100\\"></zicon-stub>
+    <div class=\\"flex-shrink-0 pl-0 pr-4 lg:px-2\\"><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:flex lg:items-center lg:gap-x-2 text-vanilla-400\\"><zicon-stub icon=\\"file-pie-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hover:text-vanilla-100\\"></zicon-stub>
             Public Reports
           </span>
-        <ztab-stub icon=\\"file-pie-chart\\" borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Public Reports</span></ztab-stub></a></div>
+        <ztab-stub icon=\\"file-pie-chart\\" borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Public Reports</span></ztab-stub></a></div>
   </nav>
   <floating-button-mobile nav-items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"z-40\\"></floating-button-mobile>
 </div>"
@@ -102,27 +102,27 @@ exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"sh
 
 exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"showPublicReports":true,"level":"OWNER"} 1`] = `
 "<div class=\\"reports-nav-container\\">
-  <nav class=\\"lg:w-64 hidden lg:flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky border-b lg:border-b-0 lg:border-r border-slate-400 vertical-sidebar-owner-level\\">
-    <div class=\\"flex flex-shrink-0 gap-x-8 lg:flex-col lg:gap-y-1 pr-0 pl-4 lg:px-2\\">
-      <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+  <nav class=\\"hide-scroll hidden gap-x-8 overflow-x-auto border-b border-slate-400 pt-2 lg:sticky lg:flex lg:w-64 lg:flex-col lg:gap-y-4 lg:border-b-0 lg:border-r lg:pt-2 vertical-sidebar-owner-level\\">
+    <div class=\\"flex flex-shrink-0 gap-x-8 pr-0 pl-4 lg:flex-col lg:gap-y-1 lg:px-2\\">
+      <p class=\\"hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block\\">
         Security
-      </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">OWASP® Top 10</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">OWASP® Top 10</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">CWE/SANS Top 25</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">CWE/SANS Top 25</span></ztab-stub></a>
-      <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+      </p> <a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">OWASP® Top 10</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">OWASP® Top 10</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">CWE/SANS Top 25</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">CWE/SANS Top 25</span></ztab-stub></a>
+      <p class=\\"hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block\\">
         Insights
-      </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Code Health Trend</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Health Trend</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Code Coverage</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Coverage</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Prevented</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Autofixed</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Autofixed</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issue Distribution</span></ztab-stub></a>
+      </p> <a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Code Health Trend</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Code Health Trend</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Code Coverage</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Code Coverage</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issues Prevented</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issues Autofixed</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issues Autofixed</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issue Distribution</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issue Distribution</span></ztab-stub></a>
     </div>
     <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\" class=\\"hidden lg:block\\"></zdivider-stub>
-    <div class=\\"flex-shrink-0 pl-0 pr-4 lg:px-2\\"><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:flex lg:items-center lg:gap-x-2 text-vanilla-400\\"><zicon-stub icon=\\"file-pie-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hover:text-vanilla-100\\"></zicon-stub>
+    <div class=\\"flex-shrink-0 pl-0 pr-4 lg:px-2\\"><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:flex lg:items-center lg:gap-x-2 text-vanilla-400\\"><zicon-stub icon=\\"file-pie-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hover:text-vanilla-100\\"></zicon-stub>
             Public Reports
           </span>
-        <ztab-stub icon=\\"file-pie-chart\\" borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Public Reports</span></ztab-stub></a></div>
+        <ztab-stub icon=\\"file-pie-chart\\" borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Public Reports</span></ztab-stub></a></div>
   </nav>
   <floating-button-mobile nav-items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"z-40\\"></floating-button-mobile>
 </div>"
@@ -130,27 +130,27 @@ exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"sh
 
 exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"showPublicReports":true,"level":"REPOSITORY"} 1`] = `
 "<div class=\\"reports-nav-container\\">
-  <nav class=\\"lg:w-64 hidden lg:flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky border-b lg:border-b-0 lg:border-r border-slate-400 vertical-sidebar-repository-level\\">
-    <div class=\\"flex flex-shrink-0 gap-x-8 lg:flex-col lg:gap-y-1 pr-0 pl-4 lg:px-2\\">
-      <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+  <nav class=\\"hide-scroll hidden gap-x-8 overflow-x-auto border-b border-slate-400 pt-2 lg:sticky lg:flex lg:w-64 lg:flex-col lg:gap-y-4 lg:border-b-0 lg:border-r lg:pt-2 vertical-sidebar-repository-level\\">
+    <div class=\\"flex flex-shrink-0 gap-x-8 pr-0 pl-4 lg:flex-col lg:gap-y-1 lg:px-2\\">
+      <p class=\\"hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block\\">
         Security
-      </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">OWASP® Top 10</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">OWASP® Top 10</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">CWE/SANS Top 25</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">CWE/SANS Top 25</span></ztab-stub></a>
-      <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+      </p> <a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">OWASP® Top 10</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">OWASP® Top 10</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">CWE/SANS Top 25</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">CWE/SANS Top 25</span></ztab-stub></a>
+      <p class=\\"hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block\\">
         Insights
-      </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Code Health Trend</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Health Trend</span></ztab-stub></a>
-      <!----><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Prevented</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Autofixed</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Autofixed</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issue Distribution</span></ztab-stub></a>
+      </p> <a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Code Health Trend</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Code Health Trend</span></ztab-stub></a>
+      <!----><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issues Prevented</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issues Autofixed</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issues Autofixed</span></ztab-stub></a><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block text-vanilla-400\\">Issue Distribution</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Issue Distribution</span></ztab-stub></a>
     </div>
     <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\" class=\\"hidden lg:block\\"></zdivider-stub>
-    <div class=\\"flex-shrink-0 pl-0 pr-4 lg:px-2\\"><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:flex lg:items-center lg:gap-x-2 text-vanilla-400\\"><zicon-stub icon=\\"file-pie-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hover:text-vanilla-100\\"></zicon-stub>
+    <div class=\\"flex-shrink-0 pl-0 pr-4 lg:px-2\\"><a class=\\"flex-shrink-0 rounded-md text-sm\\"><span class=\\"hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:flex lg:items-center lg:gap-x-2 text-vanilla-400\\"><zicon-stub icon=\\"file-pie-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hover:text-vanilla-100\\"></zicon-stub>
             Public Reports
           </span>
-        <ztab-stub icon=\\"file-pie-chart\\" borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Public Reports</span></ztab-stub></a></div>
+        <ztab-stub icon=\\"file-pie-chart\\" borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"cursor-pointer text-sm\\">Public Reports</span></ztab-stub></a></div>
   </nav>
   <floating-button-mobile nav-items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"z-40\\"></floating-button-mobile>
 </div>"

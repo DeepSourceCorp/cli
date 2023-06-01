@@ -305,6 +305,7 @@ export const storeModulesGenerator = (overrides = {}) => {
           repository: {
             id: 'UmVwb3NpdG9yeTp6dmp2eXo=',
             vcsProvider: VcsProviderChoices.Github,
+            isActivated: true,
             issueTypeDistribution: [
               {
                 shortcode: 'all',

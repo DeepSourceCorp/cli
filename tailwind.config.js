@@ -52,7 +52,8 @@ module.exports = {
       animation: ['motion-safe'],
       margin: ['first', 'hover', 'group-hover'],
       backgroundOpacity: ['disabled'],
-      borderOpacity: ['disabled']
+      borderOpacity: ['disabled'],
+      visibility: ['group-hover']
     }
   },
   theme: {

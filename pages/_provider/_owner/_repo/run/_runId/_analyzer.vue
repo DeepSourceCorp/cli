@@ -557,13 +557,10 @@ export default class AnalyzerDetails extends mixins(
 <style scoped>
 /* all for mobiles */
 .analyzer-page {
-  --mobile-navbar-height: 40px;
-  --repo-header-height: 184px;
+  --repo-header-height: 98px;
   --breadcrumb-height: 72px;
 
-  --top-bar-offset: calc(
-    var(--repo-header-height) + var(--breadcrumb-height) + var(--mobile-navbar-height)
-  );
+  --top-bar-offset: calc(var(--repo-header-height) + var(--breadcrumb-height));
 
   --run-check-title-height: 140px;
   --run-check-title-height-with-retry: 201px;
@@ -581,7 +578,7 @@ export default class AnalyzerDetails extends mixins(
 
 /* offset for the breadcrumb container when sticky */
 .offset-for-breadcrumbs {
-  top: calc(var(--repo-header-height) + var(--mobile-navbar-height));
+  top: var(--repo-header-height);
 }
 
 /* offset for the check page parent element when sticky, accomodates the top bar and run header */
@@ -604,21 +601,6 @@ export default class AnalyzerDetails extends mixins(
 @media (min-width: 768px) {
   .analyzer-page {
     --breadcrumb-height: 52px;
-  }
-}
-
-/* all for tablets */
-@media (min-width: 1023px) {
-  .analyzer-page {
-    --mobile-navbar-height: 0px;
-    --repo-header-height: 167.5px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .analyzer-page {
-    --mobile-navbar-height: 0px;
-    --repo-header-height: 96px;
   }
 }
 </style>

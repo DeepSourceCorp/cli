@@ -1,23 +1,23 @@
 <template>
   <nuxt-link
     :to="path"
-    class="p-3 bg-ink-300 hover:bg-ink-200 flex flex-col justify-between space-y-2 rounded-md cursor-pointer min-h-28"
+    class="flex min-h-28 cursor-pointer flex-col justify-between space-y-2 rounded-md bg-ink-300 p-3 hover:bg-ink-200"
   >
     <div class="flex items-center justify-between">
-      <span class="text-sm font-normal text-vanilla-300 flex-1 leading-none">{{
+      <span class="flex-1 text-sm font-normal leading-none text-vanilla-300">{{
         analyzer.name
       }}</span>
       <analyzer-logo v-bind="analyzer" />
     </div>
     <h4
-      class="text-vanilla-400 font-normal text-lg overflow-ellipsis whitespace-nowrap overflow-x-hidden"
+      class="overflow-x-hidden overflow-ellipsis whitespace-nowrap text-lg font-normal text-vanilla-400"
     >
       <span class="font-bold text-vanilla-100">
         {{ count }} {{ issueCount > 1 ? 'issues' : 'issue' }}
       </span>
       in {{ files }} {{ filesAffected > 1 ? 'files' : 'file' }}
     </h4>
-    <div class="text-vanilla-400 flex space-x-2 items-center text-sm">
+    <div class="flex items-center space-x-2 text-sm text-vanilla-400">
       <z-icon icon="autofix" size="small" color="vanilla-400" />
       <span>Autofix</span>
       <z-icon icon="arrow-right" size="small" color="vanilla-400" />
@@ -50,11 +50,11 @@ export default class AutofixCard extends Vue {
     ])
   }
 
-  get count(): string {
+  get count(): number | string {
     return shortenLargeNumber(Number(this.issueCount))
   }
 
-  get files(): string {
+  get files(): number | string {
     return shortenLargeNumber(Number(this.filesAffected))
   }
 }

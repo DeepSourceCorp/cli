@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":false,"removeStyles":false,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -29,9 +29,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -40,9 +40,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":false,"removeStyles":false,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -68,9 +68,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -79,9 +79,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":false,"removeStyles":false,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -107,9 +107,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -118,9 +118,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":false,"removeStyles":false,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -146,9 +146,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -157,9 +157,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":false,"removeStyles":true,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -185,9 +185,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -196,9 +196,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":false,"removeStyles":true,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -224,9 +224,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -235,9 +235,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":false,"removeStyles":true,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -263,9 +263,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -274,9 +274,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":false,"removeStyles":true,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -302,9 +302,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -313,9 +313,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":true,"removeStyles":false,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -341,9 +341,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -352,9 +352,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":true,"removeStyles":false,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -380,9 +380,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -391,9 +391,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":true,"removeStyles":false,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -419,9 +419,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -430,9 +430,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":true,"removeStyles":false,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -458,9 +458,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -469,9 +469,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":true,"removeStyles":true,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -497,9 +497,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -508,9 +508,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":true,"removeStyles":true,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -536,9 +536,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -547,9 +547,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":true,"removeStyles":true,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -575,9 +575,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -586,9 +586,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","hintAsTooltip":true,"removeStyles":true,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -614,9 +614,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -625,9 +625,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":false,"removeStyles":false,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -653,9 +653,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -664,9 +664,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":false,"removeStyles":false,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -692,9 +692,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -703,9 +703,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":false,"removeStyles":false,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -731,9 +731,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -742,9 +742,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":false,"removeStyles":false,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -770,9 +770,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -781,9 +781,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":false,"removeStyles":true,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -809,9 +809,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -820,9 +820,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":false,"removeStyles":true,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -848,9 +848,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -859,9 +859,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":false,"removeStyles":true,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -887,9 +887,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -898,9 +898,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":false,"removeStyles":true,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -926,9 +926,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -937,9 +937,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":true,"removeStyles":false,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -965,9 +965,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -976,9 +976,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":true,"removeStyles":false,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1004,9 +1004,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1015,9 +1015,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":true,"removeStyles":false,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1043,9 +1043,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1054,9 +1054,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":true,"removeStyles":false,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1082,9 +1082,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1093,9 +1093,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":true,"removeStyles":true,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1121,9 +1121,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1132,9 +1132,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":true,"removeStyles":true,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1160,9 +1160,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1171,9 +1171,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":true,"removeStyles":true,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1199,9 +1199,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1210,9 +1210,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":false,"hintAsTooltip":true,"removeStyles":true,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1238,9 +1238,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1249,9 +1249,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":false,"removeStyles":false,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1277,9 +1277,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1288,9 +1288,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":false,"removeStyles":false,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1316,9 +1316,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1327,9 +1327,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":false,"removeStyles":false,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1355,9 +1355,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1366,9 +1366,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":false,"removeStyles":false,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1394,9 +1394,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1405,9 +1405,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":false,"removeStyles":true,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1433,9 +1433,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1444,9 +1444,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":false,"removeStyles":true,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1472,9 +1472,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1483,9 +1483,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":false,"removeStyles":true,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1511,9 +1511,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1522,9 +1522,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":false,"removeStyles":true,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1550,9 +1550,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1561,9 +1561,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":true,"removeStyles":false,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1589,9 +1589,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1600,9 +1600,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":true,"removeStyles":false,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1628,9 +1628,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1639,9 +1639,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":true,"removeStyles":false,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1667,9 +1667,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1678,9 +1678,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":true,"removeStyles":false,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1706,9 +1706,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1717,9 +1717,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":true,"removeStyles":true,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1745,9 +1745,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1756,9 +1756,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":true,"removeStyles":true,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1784,9 +1784,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1795,9 +1795,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":true,"removeStyles":true,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1823,9 +1823,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1834,9 +1834,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":null,"hintAsTooltip":true,"removeStyles":true,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1862,9 +1862,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1873,9 +1873,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":false,"removeStyles":false,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1901,9 +1901,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1912,9 +1912,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":false,"removeStyles":false,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1940,9 +1940,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1951,9 +1951,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":false,"removeStyles":false,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -1979,9 +1979,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1990,9 +1990,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":false,"removeStyles":false,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -2018,9 +2018,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2029,9 +2029,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":false,"removeStyles":true,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -2057,9 +2057,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2068,9 +2068,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":false,"removeStyles":true,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -2096,9 +2096,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2107,9 +2107,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":false,"removeStyles":true,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -2135,9 +2135,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2146,9 +2146,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":false,"removeStyles":true,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -2174,9 +2174,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2185,9 +2185,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":true,"removeStyles":false,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -2213,9 +2213,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2224,9 +2224,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":true,"removeStyles":false,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -2252,9 +2252,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2263,9 +2263,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":true,"removeStyles":false,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -2291,9 +2291,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2302,9 +2302,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":true,"removeStyles":false,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5 bg-ink-300 rounded-md min-h-26 p-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5 min-h-26 rounded-md bg-ink-300 p-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -2330,9 +2330,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2341,9 +2341,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":true,"removeStyles":true,"trendPositive":false,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -2369,9 +2369,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2380,9 +2380,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":true,"removeStyles":true,"trendPositive":false,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -2408,9 +2408,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2419,9 +2419,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":true,"removeStyles":true,"trendPositive":true,"trendDirection":"down"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -2447,9 +2447,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2458,9 +2458,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
 `;
 
 exports[`renders StatCard with all prop options: {"icon":"python","value":"2000","title":"Application documentation coverage","trendValue":300,"trendIcon":"threshold","subtitle":"hello-world","to":"/something/to/route/to","withTransition":true,"hintAsTooltip":true,"removeStyles":true,"trendPositive":true,"trendDirection":"up"} 1`] = `
-"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-col justify-between flex-grow space-y-5\\">
+"<transition-stub name=\\"flash\\" appear=\\"true\\" subtitle=\\"hello-world\\"><a class=\\"flex flex-grow flex-col justify-between space-y-5\\">
     <div class=\\"flex flex-row justify-between space-x-2\\">
-      <div class=\\"text-sm leading-6 flex items-start space-x-1.5\\">
+      <div class=\\"flex items-start space-x-1.5 text-sm leading-6\\">
         <h5 class=\\"font-medium text-vanilla-100\\">
           Application documentation coverage
         </h5>
@@ -2486,9 +2486,9 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
         </svg></div>
     </div>
     <div class=\\"flex flex-row space-x-2\\">
-      <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
+      <div class=\\"flex items-center space-x-2\\"><span class=\\"font-medium tracking-snug text-vanilla-100 text-1.5xl\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\"></ticker-stub>
         </div>
       </div>
       <!---->

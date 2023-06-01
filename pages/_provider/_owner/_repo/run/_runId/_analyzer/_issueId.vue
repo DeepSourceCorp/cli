@@ -561,13 +561,10 @@ export default class RunIssueDetails extends mixins(
 <style scoped>
 /* all for mobiles */
 .issue-page {
-  --mobile-navbar-height: 40px;
-  --repo-header-height: 184px;
+  --repo-header-height: 98px;
   --breadcrumb-height: 72px;
 
-  --top-bar-offset: calc(
-    var(--repo-header-height) + var(--breadcrumb-height) + var(--mobile-navbar-height)
-  );
+  --top-bar-offset: calc(var(--repo-header-height) + var(--breadcrumb-height));
 
   --issue-header-height: 90px;
 }
@@ -582,10 +579,7 @@ export default class RunIssueDetails extends mixins(
 }
 
 .offset-for-tabs {
-  top: calc(
-    var(--repo-header-height) + var(--mobile-navbar-height) + var(--breadcrumb-height) +
-      var(--issue-header-height)
-  );
+  top: calc(var(--repo-header-height) + var(--breadcrumb-height) + var(--issue-header-height));
 }
 
 @media (min-width: 768px) {
@@ -597,16 +591,12 @@ export default class RunIssueDetails extends mixins(
 /* all for tablets */
 @media (min-width: 1023px) {
   .issue-page {
-    --mobile-navbar-height: 0px;
-    --repo-header-height: 167.5px;
     --breadcrumb-height: 52px;
   }
 }
 
 @media (min-width: 1280px) {
   .issue-page {
-    --mobile-navbar-height: 0px;
-    --repo-header-height: 96px;
     --breadcrumb-height: 52px;
   }
 }

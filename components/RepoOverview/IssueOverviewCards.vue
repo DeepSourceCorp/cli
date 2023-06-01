@@ -1,76 +1,63 @@
 <template>
   <stat-section
-    :body-spacing="0"
-    :grid-spacing="0"
-    spacing-class="gap-px p-0"
-    header-spacing-class="py-2 pl-4 pr-2"
-    custom-grid-class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+    :show-border="false"
+    spacing-class="gap-3"
+    custom-grid-class="grid grid-cols-2 lg:grid-cols-3"
   >
-    <template #title>
-      <div class="flex items-center justify-between">
-        <div class="flex items-center h-full space-x-2">
-          <span class="text-base font-semibold tracking-snug">Codebase report</span>
-          <z-icon
-            v-tooltip="{
-              content: 'Overview of issues currently present',
-              delay: { show: 0, hide: 100 }
-            }"
-            color="vanilla-400"
-            icon="help"
-            class="stroke-1.5 transition-opacity duration-75 flex-shrink-0"
-          />
-        </div>
-        <z-button
-          v-if="canCustomizeWidgets"
-          button-type="secondary"
-          icon="sliders"
-          size="small"
-          class="stroke-1.5"
-          label="Customize"
-          @click="showCustomizeModal = true"
-        />
-      </div>
+    <template v-if="loading">
+      <div
+        v-for="idx in WIDGETS_COUNT"
+        :key="idx"
+        class="widget-skeleton-dimensions space-y-4 rounded-md bg-ink-300 p-3"
+      ></div>
     </template>
 
-    <template v-if="$fetchState.pending">
-      <div
-        v-for="idx in loaderCount"
-        :key="idx"
-        class="p-2 space-y-4 h-22 sm:h-24 outline-slate-400"
-      >
-        <div class="h-6 rounded-md bg-ink-300 w-36 animate-pulse"></div>
-        <div class="h-6 rounded-md bg-ink-300 w-14 animate-pulse"></div>
-      </div>
-    </template>
     <template v-else>
       <template v-for="widget in repository.widgets">
         <stat-card
           v-if="Object.keys(issueWidgets).includes(widget)"
           :key="widget"
           :to="issueWidgets[widget].link"
-          :hint-as-tooltip="false"
           :trend-direction="issueWidgets[widget].trend_direction"
           :trend-hint="issueWidgets[widget].trend_display"
           :trend-positive="isTrendPositive(issueWidgets[widget])"
           :trend-value="issueWidgets[widget].trend_value"
           :remove-styles="true"
-          class="p-3 outline-slate-400 hover:bg-ink-300"
-          :class="{
-            [issueWidgets[widget].value_display === '']:
-              'text-lg font-medium tracking-wider text-vanilla-400'
-          }"
+          value-text-size="text-base"
+          class="lg:text-border-b-transparent group h-22 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200 lg:h-26"
         >
           <template #title>
-            <h5 class="text-base font-medium text-vanilla-100">
-              {{ toSentenceCase(issueWidgets[widget].title) }}
-            </h5>
+            <div class="flex items-center gap-x-1.5">
+              <z-icon :icon="WIDGET_ICON_MAP[widget]" class="hidden self-start lg:block" />
+
+              <h5 class="widget-card-title text-sm font-medium text-vanilla-300">
+                {{ toSentenceCase(issueWidgets[widget].title) }}
+              </h5>
+            </div>
           </template>
+
+          <template v-if="canCustomizeWidgets" #icon>
+            <z-icon
+              color="current"
+              icon="edit-3"
+              size="small"
+              class="invisible flex-shrink-0 hover:cursor-pointer lg:group-hover:visible"
+              @click.stop.prevent="showCustomizeModal = true"
+            />
+          </template>
+
           <span
             v-tooltip="
               issueWidgets[widget].value_display > 1000
                 ? `${formatIntl(issueWidgets[widget].value_display)} ${issueWidgets[widget].title}`
                 : ''
             "
+            :class="[
+              issueWidgets[widget].value_display === ''
+                ? 'text-sm text-slate-200'
+                : 'text-vanilla-100',
+              { 'font-mono': Number.isFinite(issueWidgets[widget].value_display) }
+            ]"
           >
             <!-- value_display is returned as an empty string if not available, hence the exact check -->
             {{
@@ -82,6 +69,7 @@
         </stat-card>
       </template>
     </template>
+
     <portal to="modal">
       <customize-widgets-modal
         v-if="showCustomizeModal && canCustomizeWidgets"
@@ -91,13 +79,17 @@
   </stat-section>
 </template>
 <script lang="ts">
-import { Component, Watch, mixins } from 'nuxt-property-decorator'
 import { StatCard, StatSection } from '@/components/Metrics'
 import { ZButton, ZIcon, ZTicker } from '@deepsource/zeal'
+import { Component, mixins } from 'nuxt-property-decorator'
+
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
-import { formatIntl, shortenLargeNumber, toSentenceCase } from '~/utils/string'
-import { RepoPerms } from '~/types/permTypes'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
+
+import { RepoPerms } from '~/types/permTypes'
+
+import { formatIntl, shortenLargeNumber, toSentenceCase } from '~/utils/string'
+import { WIDGET_ICON_MAP } from '~/utils/repository'
 
 export interface Widget {
   title: string
@@ -129,7 +121,13 @@ export interface Widget {
   }
 })
 export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAccessMixin) {
-  public showCustomizeModal = false
+  loading = false
+  showCustomizeModal = false
+
+  timerId: ReturnType<typeof setTimeout>
+
+  readonly WIDGETS_COUNT = 6
+  readonly WIDGET_ICON_MAP = WIDGET_ICON_MAP
 
   /**
    * Check if the trend is positive or not
@@ -155,24 +153,6 @@ export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAcce
   }
 
   /**
-   * Set the loader count in localstore the generate loading states the next time
-   *
-   * @return {void}
-   */
-  @Watch('issueWidgets', { deep: true })
-  setLoaderCount(): void {
-    const { provider, owner, repo } = this.$route.params
-
-    if (process.client && this.issueWidgets) {
-      this.$localStore.set(
-        `${provider}-${owner}-${repo}`,
-        'issue-overview-loader-count',
-        Object.keys(this.issueWidgets).length
-      )
-    }
-  }
-
-  /**
    * Vue mounted hook to set the repo-analysis event
    *
    * @return {void}
@@ -188,6 +168,7 @@ export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAcce
    */
   beforeDestroy() {
     this.$socket.$off('repo-analysis-updated', this.refetchData)
+    clearInterval(this.timerId)
   }
 
   /**
@@ -219,23 +200,20 @@ export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAcce
    */
   async fetch(): Promise<void> {
     await this.fetchWidgets(this.baseRouteParams)
+
+    this.loading = false
+  }
+
+  created() {
+    this.timerId = setTimeout(() => {
+      if (this.$fetchState.pending) {
+        this.loading = true
+      }
+    }, 300)
   }
 
   get issueWidgets(): Record<string, Widget> {
     return this.repository.widgetsDisplay as Record<string, Widget>
-  }
-
-  get loaderCount(): number {
-    if (process.client) {
-      const { provider, owner, repo } = this.$route.params
-      const localCountFromStore = this.$localStore.get(
-        `${provider}-${owner}-${repo}`,
-        'issue-overview-loader-count'
-      ) as number
-      return localCountFromStore ?? 6
-    }
-
-    return 6
   }
 
   get canCustomizeWidgets(): boolean {
@@ -243,3 +221,31 @@ export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAcce
   }
 }
 </script>
+
+<style lang="postcss" scoped>
+.widget-skeleton-dimensions {
+  height: 88px;
+}
+
+@media screen and (width: 1024px) {
+  .widget-skeleton-dimensions {
+    height: 104px;
+    width: 136px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .widget-skeleton-dimensions {
+    height: 104px;
+    width: auto;
+  }
+}
+</style>
+
+<style lang="scss" scoped>
+@import '~/assets/css/default.scss';
+
+.widget-card-title {
+  @include lhCrop(1.25);
+}
+</style>

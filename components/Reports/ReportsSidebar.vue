@@ -1,12 +1,12 @@
 <template>
   <div class="reports-nav-container">
     <nav
-      class="lg:w-64 hidden lg:flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky border-b lg:border-b-0 lg:border-r border-slate-400"
+      class="hide-scroll hidden gap-x-8 overflow-x-auto border-b border-slate-400 pt-2 lg:sticky lg:flex lg:w-64 lg:flex-col lg:gap-y-4 lg:border-b-0 lg:border-r lg:pt-2"
       :class="atOwnerLevel ? 'vertical-sidebar-owner-level' : 'vertical-sidebar-repository-level'"
     >
-      <div class="flex flex-shrink-0 gap-x-8 lg:flex-col lg:gap-y-1 pr-0 pl-4 lg:px-2">
+      <div class="flex flex-shrink-0 gap-x-8 pr-0 pl-4 lg:flex-col lg:gap-y-1 lg:px-2">
         <!-- Compliance Items -->
-        <p class="hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block">
+        <p class="hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block">
           Security
         </p>
         <template v-for="item in complianceItems">
@@ -14,10 +14,10 @@
             v-if="showReport(item.key)"
             :key="item.key"
             :to="$generateRoute(item.link)"
-            class="flex-shrink-0 text-sm rounded-md"
+            class="flex-shrink-0 rounded-md text-sm"
           >
             <span
-              class="hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block"
+              class="hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block"
               :class="$route.name === `${rootPath}-${item.key}` ? 'bg-ink-300' : 'text-vanilla-400'"
               >{{ item.label }}</span
             >
@@ -26,13 +26,13 @@
               border-active-color="vanilla-400"
               class="lg:hidden"
             >
-              <span class="text-sm cursor-pointer">{{ item.label }}</span>
+              <span class="cursor-pointer text-sm">{{ item.label }}</span>
             </z-tab>
           </nuxt-link>
         </template>
 
         <!-- Insights items -->
-        <p class="hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block">
+        <p class="hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block">
           Insights
         </p>
         <template v-for="item in insightsItems">
@@ -40,10 +40,10 @@
             v-if="showReport(item.key)"
             :key="item.key"
             :to="$generateRoute(item.link)"
-            class="flex-shrink-0 text-sm rounded-md"
+            class="flex-shrink-0 rounded-md text-sm"
           >
             <span
-              class="hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block"
+              class="hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:block"
               :class="$route.name === `${rootPath}-${item.key}` ? 'bg-ink-300' : 'text-vanilla-400'"
               >{{ item.label }}</span
             >
@@ -52,7 +52,7 @@
               border-active-color="vanilla-400"
               class="lg:hidden"
             >
-              <span class="text-sm cursor-pointer">{{ item.label }}</span>
+              <span class="cursor-pointer text-sm">{{ item.label }}</span>
             </z-tab>
           </nuxt-link>
         </template>
@@ -65,10 +65,10 @@
           <nuxt-link
             :key="publicReportsItem.label"
             :to="$generateRoute(publicReportsItem.link)"
-            class="flex-shrink-0 text-sm rounded-md"
+            class="flex-shrink-0 rounded-md text-sm"
           >
             <span
-              class="hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:flex lg:items-center lg:gap-x-2"
+              class="hidden rounded-md p-2 hover:bg-ink-300 hover:text-vanilla-100 lg:flex lg:items-center lg:gap-x-2"
               :class="
                 $route.name === `${rootPath}-${publicReportsItem.key}`
                   ? 'bg-ink-300'
@@ -93,7 +93,7 @@
               border-active-color="vanilla-400"
               class="lg:hidden"
             >
-              <span class="text-sm cursor-pointer">{{ publicReportsItem.label }}</span>
+              <span class="cursor-pointer text-sm">{{ publicReportsItem.label }}</span>
             </z-tab>
           </nuxt-link>
         </div>
@@ -235,7 +235,7 @@ export default class ReportsSidebar extends Vue {
   /* The horizontal navbar as part of `dashboard`` layout */
   --horizontal-navbar-height: 44.5px;
 
-  --repository-header-height: 168px;
+  --repository-header-height: 98px;
 }
 
 @media screen and (min-width: 1024px) {
@@ -255,12 +255,6 @@ export default class ReportsSidebar extends Vue {
 
     top: var(--vertical-sidebar-top-offset);
     height: calc(100vh - var(--vertical-sidebar-top-offset));
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .vertical-sidebar-repository-level {
-    --vertical-sidebar-top-offset: 96px;
   }
 }
 </style>

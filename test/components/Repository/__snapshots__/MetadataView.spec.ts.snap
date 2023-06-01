@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ MetadataView ]] renders the metadata information to be shown next to issue overview cards on larger screens: {"loading":false} 1`] = `
+"<div class=\\"hidden w-96 space-y-5 divide-y divide-ink-200 rounded-md border border-ink-200 text-11px lg:block\\">
+  <div class=\\"grid grid-cols-2 p-4\\">
+    <div class=\\"space-y-5\\">
+      <div class=\\"flex flex-col gap-y-2\\"><span class=\\"font-semibold uppercase tracking-wider text-vanilla-400\\">
+          ACTIVE ISSUES
+        </span> <span class=\\"font-mono text-base font-medium text-vanilla-100\\">
+          22
+        </span></div>
+      <div class=\\"flex flex-col gap-y-2\\"><span class=\\"font-semibold uppercase tracking-wider text-vanilla-400\\">
+          DEFAULT BRANCH
+        </span>
+        <div class=\\"flex items-center gap-x-1.5\\">
+          <zicon-stub icon=\\"z-git-branch\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\"></zicon-stub> <span class=\\"text-sm font-medium text-vanilla-100\\">
+            master
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class=\\"space-y-5\\">
+      <div class=\\"flex flex-col gap-y-2\\"><span class=\\"font-semibold uppercase tracking-wider text-vanilla-400\\">
+          ISSUES PREVENTED
+        </span> <span class=\\"font-mono text-base font-medium text-vanilla-100\\">
+          0
+        </span></div>
+      <div class=\\"flex flex-col gap-y-2\\"><span class=\\"font-semibold uppercase tracking-wider text-vanilla-400\\"> ANALYZERS </span>
+        <analyzerlist-stub available-analyzers=\\"[object Object]\\"></analyzerlist-stub>
+      </div>
+    </div>
+  </div>
+  <div class=\\"p-4\\">
+    <lastruninfo-stub latest-analysis-run=\\"[object Object]\\" runs=\\"[object Object]\\"></lastruninfo-stub>
+  </div>
+</div>"
+`;
+
+exports[`[[ MetadataView ]] renders the metadata information to be shown next to issue overview cards on larger screens: {"loading":true} 1`] = `
+"<div class=\\"hidden w-96 space-y-5 divide-y divide-ink-200 rounded-md border border-ink-200 text-11px lg:block\\">
+  <div class=\\"grid grid-cols-2 p-4\\">
+    <div class=\\"space-y-5\\">
+      <div class=\\"flex flex-col gap-y-2\\"><span class=\\"font-semibold uppercase tracking-wider text-vanilla-400\\">
+          ACTIVE ISSUES
+        </span> <span class=\\"h-6 w-16 animate-pulse rounded-md bg-ink-300\\"></span></div>
+      <div class=\\"flex flex-col gap-y-2\\"><span class=\\"font-semibold uppercase tracking-wider text-vanilla-400\\">
+          DEFAULT BRANCH
+        </span>
+        <div class=\\"h-5 w-16 animate-pulse rounded-md bg-ink-300\\"></div>
+      </div>
+    </div>
+    <div class=\\"space-y-5\\">
+      <div class=\\"flex flex-col gap-y-2\\"><span class=\\"font-semibold uppercase tracking-wider text-vanilla-400\\">
+          ISSUES PREVENTED
+        </span> <span class=\\"h-6 w-16 animate-pulse rounded-md bg-ink-300\\"></span></div>
+      <div class=\\"flex flex-col gap-y-2\\"><span class=\\"font-semibold uppercase tracking-wider text-vanilla-400\\"> ANALYZERS </span>
+        <div class=\\"h-5 w-24 animate-pulse rounded-md bg-ink-300\\"></div>
+      </div>
+    </div>
+  </div>
+  <div class=\\"p-4\\">
+    <div class=\\"last-run-info-skeleton-dimensions h-5 animate-pulse rounded-md bg-ink-300\\"></div>
+  </div>
+</div>"
+`;

@@ -222,7 +222,7 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
 
 <style scoped>
 .repository-level-settings-page {
-  --repository-header-height: 168px;
+  --repository-header-height: 98px;
 }
 
 @media screen and (min-width: 1024px) {
@@ -231,12 +231,6 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
 
     top: var(--vertical-sidebar-top-offset);
     height: calc(100vh - var(--vertical-sidebar-top-offset));
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .vertical-sidebar {
-    --vertical-sidebar-top-offset: 96px;
   }
 }
 </style>

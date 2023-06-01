@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ CustomizeWidgetsModal ]] renders the modal to customize the issue widgets 1`] = `
+"<zmodal-stub title=\\"Customize overview widgets\\" width=\\"custom\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+  <section class=\\"hide-scroll max-h-98 space-y-3 overflow-y-auto p-4 sm:w-98 md:h-98\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for a widget...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-200\\" errorbordercolor=\\"cherry\\"></zinput-stub>
+    <p class=\\"rounded-md border border-honey border-opacity-10 bg-honey bg-opacity-10 p-3 text-sm text-honey-400\\">
+      You need to select 6 widgets for the dashboard.
+    </p>
+    <div class=\\"space-y-2\\">
+      <draggable-stub list=\\"\\" clone=\\"[Function]\\" element=\\"div\\" tag=\\"ul\\" animation=\\"200\\" ghost-class=\\"bg-ink-300\\" filter=\\".ignore-element\\" handle=\\".drag-handler\\" class=\\"grid grid-cols-1 gap-2\\" style=\\"display: none;\\"></draggable-stub>
+      <ul class=\\"grid grid-cols-1 gap-2\\">
+        <customizewidgetsmodalrow-stub icon=\\"antipattern\\" widget-name=\\"antipattern-widget\\" title=\\"Anti-patterns\\" value=\\"\\"></customizewidgetsmodalrow-stub>
+        <customizewidgetsmodalrow-stub icon=\\"z-git-branch\\" widget-name=\\"bcv-widget\\" title=\\"Branch Coverage\\" value=\\"\\"></customizewidgetsmodalrow-stub>
+        <customizewidgetsmodalrow-stub icon=\\"bug-risk\\" widget-name=\\"bug-risk-widget\\" title=\\"Bug risks\\" value=\\"\\"></customizewidgetsmodalrow-stub>
+        <customizewidgetsmodalrow-stub icon=\\"condition-coverage\\" widget-name=\\"ccv-widget\\" title=\\"Condition Coverage\\" value=\\"\\"></customizewidgetsmodalrow-stub>
+        <customizewidgetsmodalrow-stub icon=\\"coverage\\" widget-name=\\"coverage-widget\\" title=\\"Coverage Issues\\" value=\\"\\"></customizewidgetsmodalrow-stub>
+        <customizewidgetsmodalrow-stub icon=\\"composite-coverage\\" widget-name=\\"cpcv-widget\\" title=\\"Composite Coverage\\" value=\\"\\"></customizewidgetsmodalrow-stub>
+        <customizewidgetsmodalrow-stub icon=\\"documentation-coverage\\" widget-name=\\"dcv-widget\\" title=\\"Documentation Coverage\\" value=\\"\\"></customizewidgetsmodalrow-stub>
+        <customizewidgetsmodalrow-stub icon=\\"external-dependencies\\" widget-name=\\"ddp-widget\\" title=\\"External Dependencies\\" value=\\"\\"></customizewidgetsmodalrow-stub>
+        <customizewidgetsmodalrow-stub icon=\\"doc\\" widget-name=\\"doc-widget\\" title=\\"Documentation Issues\\" value=\\"\\"></customizewidgetsmodalrow-stub>
+        <customizewidgetsmodalrow-stub icon=\\"line-coverage\\" widget-name=\\"lcv-widget\\" title=\\"Line Coverage\\" value=\\"\\"></customizewidgetsmodalrow-stub>
+        <customizewidgetsmodalrow-stub icon=\\"performance\\" widget-name=\\"performance-widget\\" title=\\"Performance Issues\\" value=\\"\\"></customizewidgetsmodalrow-stub>
+        <customizewidgetsmodalrow-stub icon=\\"security\\" widget-name=\\"security-widget\\" title=\\"Security Issues\\" value=\\"\\"></customizewidgetsmodalrow-stub>
+        <customizewidgetsmodalrow-stub icon=\\"style\\" widget-name=\\"style-widget\\" title=\\"Style Issues\\" value=\\"\\"></customizewidgetsmodalrow-stub>
+        <customizewidgetsmodalrow-stub icon=\\"typecheck\\" widget-name=\\"typecheck-widget\\" title=\\"Type check Issues\\" value=\\"\\"></customizewidgetsmodalrow-stub>
+      </ul>
+    </div>
+    <!---->
+  </section>
+</zmodal-stub>"
+`;

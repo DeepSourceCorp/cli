@@ -3,20 +3,20 @@
     <component
       :is="to ? 'nuxt-link' : 'div'"
       :to="to"
-      class="flex flex-col justify-between flex-grow space-y-5"
-      :class="{ 'bg-ink-300 rounded-md min-h-26 p-5': !removeStyles }"
+      class="flex flex-grow flex-col justify-between space-y-5"
+      :class="{ 'min-h-26 rounded-md bg-ink-300 p-5': !removeStyles }"
     >
       <div class="flex flex-row justify-between space-x-2">
-        <div class="text-sm leading-6 flex items-start space-x-1.5">
-          <!-- <div v-if="color" class="flex w-1 h-3.5 mt-0.5 rounded-full" :class="`bg-${color}`"></div> -->
+        <div class="flex items-start space-x-1.5 text-sm leading-6">
           <slot name="title">
             <h5 class="font-medium text-vanilla-100">
               {{ title }}
             </h5>
           </slot>
         </div>
-        <div class="flex-shrink-0">
-          <template v-if="icon">
+
+        <slot name="icon">
+          <div v-if="icon" class="flex-shrink-0">
             <z-icon
               v-if="isIconShortcode"
               :icon="icon"
@@ -25,20 +25,20 @@
               class="float-right p-px"
             />
             <analyzer-logo v-else v-bind="icon" size="medium" />
-          </template>
-        </div>
+          </div>
+        </slot>
       </div>
       <div class="flex flex-row space-x-2">
         <div class="flex items-center space-x-2">
-          <span class="text-1.5xl font-medium tracking-snug text-vanilla-100">
+          <span class="font-medium tracking-snug text-vanilla-100" :class="valueTextSize">
             <slot> {{ value }} </slot>
           </span>
+
           <div class="space-y-1">
             <slot name="info">
               <ticker
                 v-if="trendValue"
                 v-tooltip="hintAsTooltip ? trendHint : ''"
-                class="hidden md:flex"
                 :icon="trendIcon"
                 :trend-direction="trendDirection"
                 :trend-hint="hintAsTooltip ? '' : trendHint"
@@ -50,7 +50,7 @@
         </div>
         <z-tag v-if="isPassing !== null" class="border border-slate-400">
           <z-icon :icon="isPassing ? 'metric-high' : 'metric-low'" :color="color" />
-          <span class="font-semibold text-xxs uppercase tracking-wider" :class="`text-${color}`">{{
+          <span class="text-xxs font-semibold uppercase tracking-wider" :class="`text-${color}`">{{
             thresholdLabel
           }}</span>
         </z-tag>
@@ -59,8 +59,9 @@
   </transition>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZIcon, ZTag } from '@deepsource/zeal'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+
 import Ticker from '~/components/Common/Ticker.vue'
 import { Analyzer } from '~/types/types'
 
@@ -113,6 +114,9 @@ export default class StatCard extends Vue {
 
   @Prop({ default: null })
   threshold: number | null
+
+  @Prop({ default: 'text-1.5xl', validator: (val: string) => val.startsWith('text-') })
+  valueTextSize: string
 
   get color(): string {
     return this.isPassing === false ? 'cherry' : 'juniper'

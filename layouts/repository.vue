@@ -1,12 +1,13 @@
 <template>
-  <div class="flex min-h-screen mx-auto bg-ink-400 text-vanilla-100">
-    <sidebar v-if="loggedIn" :is-palette-visible="showPalette" @show-palette="showPalette = true" />
+  <div class="mx-auto flex min-h-screen bg-ink-400 text-vanilla-100">
+    <main-sidebar
+      v-if="loggedIn"
+      :is-palette-visible="showPalette"
+      @show-palette="showPalette = true"
+    />
     <logged-out-sidebar v-else />
     <div class="w-full">
-      <mobile-nav
-        class="sticky top-0 z-30 w-full h-10 border-b lg:hidden bg-ink-300 border-slate-400"
-      />
-      <repo-header :key="repository.id" class="z-40 w-full md:sticky top-10 lg:top-0" />
+      <repo-header :key="repository.id" class="sticky top-0 z-40 w-full" />
       <!--
         if the repository is activated:
           - if there hasn't been at least one analysis: show the waiting state with an
@@ -36,7 +37,7 @@
           class="px-4 pt-4"
         >
           <z-alert v-if="repository.errorCode === 3007" type="danger" :dismissible="true">
-            <div class="mr-2 space-y-4 md:space-y-0 md:flex md:items-center md:justify-between">
+            <div class="mr-2 space-y-4 md:flex md:items-center md:justify-between md:space-y-0">
               <p class="font-medium" v-html="repository.renderedErrorMessage"></p>
               <div v-if="canEnableAutofix" class="bg-cherry bg-opacity-40" style="width: 168px">
                 <z-button
@@ -111,20 +112,12 @@
 
 <script lang="ts">
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
-import { RepoHeader, MobileNav, LoggedOutSidebar } from '@/components/Layout'
-import { Sidebar } from '@/components/Layout/Sidebar'
 import { ZAlert, ZButton, ZIcon, ZLabel } from '@deepsource/zeal'
+
 import AuthMixin from '@/mixins/authMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import PortalMixin from '@/mixins/portalMixin'
 
-import {
-  RepoEmpty,
-  RepoError,
-  RepoInactive,
-  RepoTimeout,
-  RepoWaiting
-} from '~/components/RepoStates'
 import { RunStatus } from '~/types/types'
 import InstallAutofixMixin from '~/mixins/installAutofixMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
@@ -135,15 +128,6 @@ import PaletteMixin from '~/mixins/paletteMixin'
  */
 @Component({
   components: {
-    Sidebar,
-    RepoHeader,
-    LoggedOutSidebar,
-    RepoEmpty,
-    RepoError,
-    RepoInactive,
-    RepoTimeout,
-    RepoWaiting,
-    MobileNav,
     ZAlert,
     ZButton,
     ZIcon,

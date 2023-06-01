@@ -1,128 +1,119 @@
 <template>
   <div>
     <div
-      class="grid-row-3 grid min-h-24 auto-rows-auto grid-cols-1 gap-2 border-b border-slate-400 bg-ink-300 lg:gap-0 xl:grid-cols-fr-fr-22 xl:grid-rows-2"
+      class="flex w-full items-center justify-between border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4"
     >
-      <div id="header" class="xl:col-span-2">
-        <div class="space-x-2 space-y-2 px-4 pt-3 xl:space-y-0">
-          <h2
-            class="flex flex-wrap items-center gap-3 text-lg font-medium leading-none text-vanilla-400 xl:text-xl"
-          >
-            <div class="space-x-0.5 md:space-x-1">
-              <nuxt-link
-                v-if="canReadTeamPage"
-                :to="['', provider, owner].join('/')"
-                class="inline cursor-pointer transition-colors duration-75 hover:text-vanilla-300"
-                >{{ $route.params.owner }}</nuxt-link
-              >
-              <span v-else class="inline">{{ $route.params.owner }}</span>
-              <span class="inline">/</span>
-              <nuxt-link :to="$generateRoute()" class="inline font-bold text-vanilla-100">
-                {{ $route.params.repo }}
-              </nuxt-link>
-            </div>
-            <z-button
-              v-if="allowStar"
-              v-tooltip="
-                repository.isStarred
-                  ? 'Click to remove from starred repositories'
-                  : 'Star this repository'
-              "
-              button-type="ghost"
-              icon="z-star"
-              size="x-small"
-              class="p-1"
-              :color="repository.isStarred ? 'juniper' : 'hover:text-slate'"
-              :class="repository.isStarred ? 'opacity-1' : 'opacity-40 hover:opacity-70'"
-              :icon-color="'current'"
-              @click.prevent="toggleStar(!repository.isStarred)"
-            />
-            <a
-              v-if="repository.vcsProvider"
-              :href="repository.vcsUrl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <z-tag
-                v-tooltip="`Open repo on ${$providerMetaMap[repository.vcsProvider].text}`"
-                class="border-2 border-slate-400"
-                spacing="p-0.5"
-                bg-color="ink-200"
-                size="base"
-                :icon-left="repoVCSIcon"
-              />
-            </a>
-
-            <template v-if="repository.errorCode">
-              <z-label
-                v-if="repository.errorCode === 3003"
-                class="inline-block select-none"
-                state="info"
-              >
-                Pending commit
-              </z-label>
-              <z-label v-else class="inline-block select-none" state="error"> Error </z-label>
-            </template>
-            <z-label
-              v-else-if="repository.isActivated === true"
-              class="inline-block select-none"
-              state="success"
-            >
-              Active
-            </z-label>
-            <z-label
-              v-else-if="repository.isActivated === false"
-              class="inline-block select-none"
-              state="warning"
-            >
-              Inactive
-            </z-label>
-          </h2>
-        </div>
-      </div>
-      <div v-if="repository && lastRun" id="info" class="xl:row-span-2">
-        <repo-header-info
-          :commit-id="lastRun.commitOid"
-          :run-id="lastRun.runId"
-          :analyzer="lastRun.config.analyzers[0].name"
-          :default-branch="repository.defaultBranchName"
-          :last-analyzed="lastRun.finishedAt"
-          :vcs-url="repository.vcsDefaultBranchUrl || repository.vcsUrl"
-          :vcs-commit-url="lastRun.vcsCommitUrl"
-          :currently-analysing="repository.runs && repository.runs.totalCount"
-          :can-change-branch="canChangeBranch"
-          class="flex h-full flex-col space-y-2 px-4 py-2 text-sm text-vanilla-400 md:px-3 xl:border-l xl:border-slate-400"
+      <div class="flex items-center gap-x-2.5">
+        <z-button
+          id="mobile-menu-toggle"
+          button-type="ghost"
+          color="vanilla-100"
+          icon="sidebar-toggle"
+          size="small"
+          class="lg:hidden"
+          @click="triggerExpand"
         />
-      </div>
-      <div id="tabs" class="flex xl:col-span-2">
-        <div class="hide-scroll flex flex-nowrap space-x-5 self-end overflow-auto px-4">
-          <template v-for="item in navItems">
-            <nuxt-link
-              v-if="isNavLinkVisible(item)"
-              :key="item.label"
-              :to="$generateRoute(item.link)"
-            >
-              <z-tab :icon="item.icon" :is-active="activeLink(item)">{{ item.label }}</z-tab>
-            </nuxt-link>
-          </template>
+
+        <h2
+          class="flex flex-wrap items-center gap-x-1 truncate text-base font-medium text-vanilla-400 lg:gap-x-1.5"
+        >
+          <z-icon icon="z-lock" class="hidden lg:inline-block" />
+
+          <nuxt-link v-if="canReadTeamPage" :to="teamPageUrl">{{ owner }}</nuxt-link>
+          <span v-else class="text-vanilla-400">{{ owner }}</span>
+
+          <span>/</span>
+
+          <span class="truncate text-vanilla-100">
+            {{ repo }}
+          </span>
+        </h2>
+
+        <!-- Desktop specific elements -->
+        <div class="hidden items-center gap-x-3 lg:flex">
+          <button
+            v-if="allowStar"
+            v-tooltip="
+              repository.isStarred
+                ? 'Click to remove from starred repositories'
+                : 'Star this repository'
+            "
+            class="rounded-sm p-1 hover:bg-ink-200"
+            @click.prevent="toggleStar(!repository.isStarred)"
+          >
+            <z-icon
+              :color="repository.isStarred ? 'juniper' : 'slate'"
+              :icon="repository.isStarred ? 'star-filled' : 'star-outline'"
+              :class="repository.isStarred ? 'opacity-1' : 'opacity-40 hover:opacity-70'"
+            />
+          </button>
+
+          <!-- Applying `flex` below that ensures vertical alignment isn't off since `ZTag` is another `flex` element -->
+          <a
+            :href="repository.vcsUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center"
+          >
+            <z-tag
+              v-tooltip="`Open repo on ${$providerMetaMap[repository.vcsProvider].text}`"
+              :icon-left="repoVCSIcon"
+              spacing="p-3px"
+              class="border border-slate-400"
+            />
+          </a>
+
+          <z-label :state="labelState" class="p-3px inline-block select-none">
+            {{ labelText }}
+          </z-label>
         </div>
       </div>
+
+      <!-- Mobile specific elements -->
+      <div class="flex items-center gap-x-5 lg:hidden">
+        <button
+          v-if="allowStar"
+          class="rounded-sm p-0.5 hover:bg-ink-200"
+          @click.prevent="toggleStar(!repository.isStarred)"
+        >
+          <z-icon
+            :color="repository.isStarred ? 'juniper' : 'vanilla-400'"
+            :icon="repository.isStarred ? 'star-filled' : 'star-outline'"
+          />
+        </button>
+
+        <button
+          v-if="allowStar"
+          class="rounded-sm p-0.5 hover:bg-ink-200"
+          @click="$root.$emit('toggle-metadata-view-dialog')"
+        >
+          <z-icon color="vanilla-400" icon="info-circle" size="small" />
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="hide-scroll flex gap-x-5 overflow-auto border-b border-slate-400 bg-ink-400 px-4 pt-4"
+    >
+      <template v-for="item in navItems">
+        <nuxt-link v-if="isNavLinkVisible(item)" :key="item.label" :to="$generateRoute(item.link)">
+          <z-tab :icon="item.icon" :is-active="activeLink(item)">{{ item.label }}</z-tab>
+        </nuxt-link>
+      </template>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { Run, Maybe } from '~/types/types'
-import RepoHeaderInfo from './RepoHeaderInfo.vue'
-import RouteParamsMixin from '@/mixins/routeParamsMixin'
+import { ZButton, ZIcon, ZLabel, ZTab, ZTag } from '@deepsource/zeal'
 
-import { ZLabel, ZButton, ZTab, ZTag, ZIcon } from '@deepsource/zeal'
-
+import ActiveUserMixin from '~/mixins/activeUserMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
+import RouteParamsMixin from '~/mixins/routeParamsMixin'
+
 import { AppFeatures, RepoPerms, TeamPerms } from '~/types/permTypes'
-import ActiveUserMixin from '~/mixins/activeUserMixin'
 
 interface TabLink {
   icon: string
@@ -136,80 +127,13 @@ interface TabLink {
   forBeta?: boolean
 }
 
-const navItems: TabLink[] = [
-  {
-    icon: 'tachometer-fast',
-    label: 'Overview',
-    pattern: new RegExp(/^provider-owner-repo$/)
-  },
-  {
-    icon: 'flag',
-    label: 'Issues',
-    link: 'issues',
-    pattern: new RegExp(/^provider-owner-repo-issue*/)
-  },
-  {
-    icon: 'autofix',
-    label: 'Autofix',
-    link: 'autofix',
-    pattern: new RegExp(/^provider-owner-repo-autofix*/),
-    loginRequired: true,
-    perms: [RepoPerms.READ_REPO],
-    gateFeature: [AppFeatures.AUTOFIX]
-  },
-  {
-    icon: 'bar-chart',
-    label: 'Metrics',
-    link: 'metrics',
-    pattern: new RegExp(/^provider-owner-repo-metrics-.*$/)
-  },
-  {
-    icon: 'pie-chart',
-    label: 'Reports',
-    link: 'reports/owasp-top-10',
-    loginRequired: true,
-    perms: [RepoPerms.VIEW_REPORTS],
-    pattern: new RegExp(/^provider-owner-repo-reports-*/)
-  },
-  {
-    icon: 'history',
-    label: 'History',
-    link: 'history/runs',
-    pattern: new RegExp(/^provider-owner-repo-(history|run|runs|transforms|transforms)/)
-  },
-  {
-    icon: 'wrench',
-    label: 'Settings',
-    link: 'settings/general',
-    loginRequired: true,
-    perms: [
-      RepoPerms.VIEW_DSN,
-      RepoPerms.GENERATE_SSH_KEY_PAIR,
-      RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH,
-      RepoPerms.CHANGE_ISSUE_TYPES_TO_REPORT,
-      RepoPerms.CHANGE_ISSUES_TO_TYPE_TO_BLOCK_PRS_ON,
-      RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY,
-      RepoPerms.ADD_REMOVE_MEMBERS,
-      RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS,
-      RepoPerms.VIEW_AUDIT_LOG
-    ],
-    pattern: new RegExp(/^provider-owner-repo-settings-*/)
-  }
-]
-
 @Component({
   components: {
-    ZTab,
-    ZTag,
+    ZButton,
     ZIcon,
     ZLabel,
-    ZButton,
-    RepoHeaderInfo
-  },
-  data() {
-    return {
-      navItems
-    }
+    ZTab,
+    ZTag
   }
 })
 export default class RepoHeader extends mixins(
@@ -218,7 +142,66 @@ export default class RepoHeader extends mixins(
   RoleAccessMixin,
   ActiveUserMixin
 ) {
-  navItems: TabLink[]
+  navItems: TabLink[] = [
+    {
+      icon: 'gauge',
+      label: 'Overview',
+      pattern: new RegExp(/^provider-owner-repo$/)
+    },
+    {
+      icon: 'flag',
+      label: 'Issues',
+      link: 'issues',
+      pattern: new RegExp(/^provider-owner-repo-issue*/)
+    },
+    {
+      icon: 'autofix',
+      label: 'Autofix',
+      link: 'autofix',
+      pattern: new RegExp(/^provider-owner-repo-autofix*/),
+      loginRequired: true,
+      perms: [RepoPerms.READ_REPO],
+      gateFeature: [AppFeatures.AUTOFIX]
+    },
+    {
+      icon: 'bar-chart',
+      label: 'Metrics',
+      link: 'metrics',
+      pattern: new RegExp(/^provider-owner-repo-metrics-.*$/)
+    },
+    {
+      icon: 'pie-chart',
+      label: 'Reports',
+      link: 'reports/owasp-top-10',
+      loginRequired: true,
+      perms: [RepoPerms.VIEW_REPORTS],
+      pattern: new RegExp(/^provider-owner-repo-reports-*/)
+    },
+    {
+      icon: 'history',
+      label: 'History',
+      link: 'history/runs',
+      pattern: new RegExp(/^provider-owner-repo-(history|run|runs|transforms|transforms)/)
+    },
+    {
+      icon: 'wrench',
+      label: 'Settings',
+      link: 'settings/general',
+      loginRequired: true,
+      perms: [
+        RepoPerms.VIEW_DSN,
+        RepoPerms.GENERATE_SSH_KEY_PAIR,
+        RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH,
+        RepoPerms.CHANGE_ISSUE_TYPES_TO_REPORT,
+        RepoPerms.CHANGE_ISSUES_TO_TYPE_TO_BLOCK_PRS_ON,
+        RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY,
+        RepoPerms.ADD_REMOVE_MEMBERS,
+        RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS,
+        RepoPerms.VIEW_AUDIT_LOG
+      ],
+      pattern: new RegExp(/^provider-owner-repo-settings-*/)
+    }
+  ]
 
   async fetch(): Promise<void> {
     // skipcq: TCV-001
@@ -258,12 +241,8 @@ export default class RepoHeader extends mixins(
     this.$socket.$off('repo-analysis-updated', this.refetchOnSocketEvent)
   }
 
-  get lastRun(): Maybe<Run> {
-    return this.repository?.latestAnalysisRun || null
-  }
-
   get canReadTeamPage(): boolean {
-    if (this.teamPerms.permission && this.activeOwner === this.$route.params.owner) {
+    if (this.teamPerms.permission && this.activeOwner === this.owner) {
       return this.$gateKeeper.team(TeamPerms.VIEW_TEAM_HOME, this.teamPerms.permission)
     }
     return false
@@ -272,6 +251,11 @@ export default class RepoHeader extends mixins(
   get repoVCSIcon(): string {
     const provider = this.repository.vcsProvider
     return this.$providerMetaMap[provider].icon ?? ''
+  }
+
+  get teamPageUrl(): string {
+    const { provider, owner } = this.$route.params
+    return ['', provider, owner].join('/')
   }
 
   async toggleStar(isStarred: boolean) {
@@ -302,16 +286,6 @@ export default class RepoHeader extends mixins(
     return false
   }
 
-  get canChangeBranch(): boolean {
-    if (this.loggedIn) {
-      return this.$gateKeeper.repo(
-        RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH,
-        this.repoPerms.permission
-      )
-    }
-    return false
-  }
-
   get allowStar(): boolean {
     if (this.loggedIn) {
       return this.$gateKeeper.repo(RepoPerms.ALLOW_STAR, this.repoPerms.permission)
@@ -319,15 +293,33 @@ export default class RepoHeader extends mixins(
     return false
   }
 
-  isNavLinkVisible(item: TabLink): boolean {
-    const { provider } = this.$route.params
+  get labelState() {
+    const { errorCode, isActivated } = this.repository
 
+    if (errorCode) {
+      return errorCode === 3003 ? 'info' : 'danger'
+    }
+
+    return isActivated ? 'success' : 'warning'
+  }
+
+  get labelText() {
+    const { errorCode, isActivated } = this.repository
+
+    if (errorCode) {
+      return errorCode === 3003 ? 'Pending commit' : 'Error'
+    }
+
+    return isActivated ? 'Active' : 'Inactive'
+  }
+
+  isNavLinkVisible(item: TabLink): boolean {
     if (item.loginRequired && !this.loggedIn) {
       return false
     }
 
     const allowedForProvider = item.gateFeature
-      ? this.$gateKeeper.provider(item.gateFeature, provider)
+      ? this.$gateKeeper.provider(item.gateFeature, this.provider)
       : true
 
     const allowedForRepo = item.perms
@@ -339,5 +331,15 @@ export default class RepoHeader extends mixins(
 
     return allowedForRepo && allowedForProvider && allowForbeta
   }
+
+  triggerExpand() {
+    this.$root.$emit('ui:show-sidebar-menu')
+  }
 }
 </script>
+
+<style scoped>
+.p-3px {
+  padding: 3px;
+}
+</style>

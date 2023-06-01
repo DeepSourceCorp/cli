@@ -23,12 +23,10 @@ interface RepoHeaderInterface extends Vue {
   updateStarredRepo: ReturnType<typeof jest.fn>
   refetchOnSocketEvent: () => void
   toggleStar: () => Promise<void>
-  canChangeBranch: boolean
 }
 
 const stubs = {
   NuxtLink: RouterLinkStub,
-  RepoHeaderInfo: true,
   ZLabel: true,
   ZButton: true,
   ZTab: true,
@@ -69,7 +67,6 @@ describe('[[ RepoHeader ]]', () => {
       {
         stubs: {
           NuxtLink: RouterLinkStub,
-          RepoHeaderInfo: true,
           ZLabel: true,
           ZButton: true,
           ZTab: true,
@@ -196,45 +193,6 @@ describe('[[ RepoHeader ]]', () => {
     vm.refetchOnSocketEvent()
   })
 
-  describe('[[ RepoHeader.canChangeBranch ]]', () => {
-    test('[[ logged in ]]', () => {
-      const wrapper = shallowMount(RepoHeader, {
-        stubs,
-        mocks,
-        store: new Vuex.Store({
-          modules: storeModulesGenerator()
-        }),
-        localVue
-      })
-
-      const vm = wrapper.vm as unknown as RepoHeaderInterface
-
-      expect(vm.canChangeBranch).toBe(true)
-    })
-
-    test('[[ logged out ]]', () => {
-      const wrapper = shallowMount(RepoHeader, {
-        stubs,
-        mocks,
-        store: new Vuex.Store({
-          modules: storeModulesGenerator({
-            'account/auth': {
-              namespaced: true,
-              state: {
-                loggedIn: false
-              }
-            }
-          })
-        }),
-        localVue
-      })
-
-      const vm = wrapper.vm as unknown as RepoHeaderInterface
-
-      expect(vm.canChangeBranch).toBe(false)
-    })
-  })
-
   describe('[[ RepoHeader.toggleStar ]]', () => {
     test('[[ success ]]', async () => {
       const wrapper = shallowMount(RepoHeader, {
@@ -288,7 +246,7 @@ describe('[[ RepoHeader ]]', () => {
       expect(vm.updateStarredRepo).toBeCalledTimes(1)
       expect(vm.updateRepositoryInStore).toBeCalledTimes(2)
 
-      // @ts-ignore
+      // @ts-expect-error - return value from `mocksGenerator` is typed `Record<string, unknown>`
       expect(mocks.$toast.danger).toBeCalledTimes(1)
       expect(vm.fetchBasicRepoDetails).toBeCalledWith({
         provider: 'gh',
