@@ -1,8 +1,9 @@
 <template>
   <base-card
-    v-bind="baseCardProps"
+    :to="$generateRoute(['run', runId])"
+    :remove-default-style="isRunSkipped"
     :class="{
-      'cursor-not-allowed rounded-lg border border-dashed border-ink-200 bg-ink-400': isRunSkipped
+      'rounded-lg border border-dashed border-ink-200 bg-ink-400 hover:border-ink-50': isRunSkipped
     }"
   >
     <template #left-section>
@@ -17,10 +18,7 @@
                 :color="iconColor"
                 class="mt-0.5 mr-0.5 inline flex-shrink-0 self-center"
               />
-              <h3
-                class="inline font-medium text-vanilla-100 line-clamp-1"
-                :class="isRunSkipped ? 'cursor-not-allowed' : 'cursor-pointer'"
-              >
+              <h3 class="inline cursor-pointer font-medium text-vanilla-100 line-clamp-1">
                 {{ title || branchName }}
               </h3>
               <span class="inline font-medium text-vanilla-400">
@@ -188,12 +186,6 @@ export default class RunCard extends mixins(RepoDetailMixin) {
 
   get showIssueStats() {
     return this.issueStats.length && !this.isPending && !this.isRunSkipped
-  }
-
-  get baseCardProps() {
-    return this.isRunSkipped
-      ? { removeDefaultStyle: true }
-      : { to: this.$generateRoute(['run', this.runId]) }
   }
 }
 </script>

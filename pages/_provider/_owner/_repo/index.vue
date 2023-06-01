@@ -158,6 +158,8 @@ export default class Overview extends mixins(PinnedReportsMixin, RepoDetailMixin
   }
 
   created() {
+    // This is to prevent showing skeleton loaders if hitting the cache
+    // `loading` data property is set to `true` only if `$fetchState.pending` is `true` after `300ms`
     this.timerId = setTimeout(() => {
       if (this.$fetchState.pending) {
         this.loading = true

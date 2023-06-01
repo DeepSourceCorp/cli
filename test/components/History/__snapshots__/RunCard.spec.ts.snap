@@ -7,7 +7,7 @@ exports[`renders RunCard with all prop options: RunCard 1`] = `
       <div class=\\"flex flex-grow flex-col\\">
         <section class=\\"flex items-center gap-x-1 text-xs md:text-base\\">
           <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"mt-0.5 mr-0.5 inline flex-shrink-0 self-center has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
-          <h3 class=\\"inline font-medium text-vanilla-100 line-clamp-1 cursor-pointer\\">
+          <h3 class=\\"inline cursor-pointer font-medium text-vanilla-100 line-clamp-1\\">
             Base branch
           </h3> <span class=\\"inline font-medium text-vanilla-400\\"> @435432 </span>
         </section>
@@ -45,7 +45,7 @@ exports[`renders RunCard with pending: RunCard Pending 1`] = `
       <div class=\\"flex flex-grow flex-col\\">
         <section class=\\"flex items-center gap-x-1 text-xs md:text-base\\">
           <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mt-0.5 mr-0.5 inline flex-shrink-0 self-center animate-spin has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
-          <h3 class=\\"inline font-medium text-vanilla-100 line-clamp-1 cursor-pointer\\">
+          <h3 class=\\"inline cursor-pointer font-medium text-vanilla-100 line-clamp-1\\">
             base
           </h3> <span class=\\"inline font-medium text-vanilla-400\\"> @435432 </span>
         </section>
@@ -62,13 +62,13 @@ exports[`renders RunCard with pending: RunCard Pending 1`] = `
 `;
 
 exports[`renders RunCard with skipped: RunCard Pending 1`] = `
-"<basecard-stub showinfo=\\"true\\" to=\\"\\" title=\\"\\" description=\\"\\" removedefaultstyle=\\"true\\" custompadding=\\"p-3\\" class=\\"cursor-not-allowed rounded-lg border border-dashed border-ink-200 bg-ink-400\\">
+"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/run/4323412432\\" title=\\"\\" description=\\"\\" removedefaultstyle=\\"true\\" custompadding=\\"p-3\\" class=\\"rounded-lg border border-dashed border-ink-200 bg-ink-400 hover:border-ink-50\\">
   <div class=\\"grid w-full grid-cols-fr-8 md:grid-cols-fr-16\\">
     <div class=\\"gap-2 p-3\\">
       <div class=\\"flex flex-grow flex-col\\">
         <section class=\\"flex items-center gap-x-1 text-xs md:text-base\\">
           <zicon-stub icon=\\"circle-slash\\" size=\\"small\\" position=\\"\\" color=\\"slate-200\\" class=\\"mt-0.5 mr-0.5 inline flex-shrink-0 self-center has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
-          <h3 class=\\"inline font-medium text-vanilla-100 line-clamp-1 cursor-not-allowed\\">
+          <h3 class=\\"inline cursor-pointer font-medium text-vanilla-100 line-clamp-1\\">
             base
           </h3> <span class=\\"inline font-medium text-vanilla-400\\"> @435432 </span>
         </section>

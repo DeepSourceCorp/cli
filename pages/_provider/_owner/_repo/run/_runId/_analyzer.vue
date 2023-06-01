@@ -167,13 +167,6 @@
                     </button>
                   </template>
                 </run-selector>
-                <a
-                  :href="SKIPPED_RUN_DOCS"
-                  class="inline-flex items-center gap-x-1 text-xs leading-3 text-vanilla-400 hover:text-vanilla-100 focus:text-vanilla-100"
-                >
-                  <span>Learn more</span>
-                  <z-icon icon="arrow-up-right" color="current" size="x-small" />
-                </a>
               </div>
             </template>
           </lazy-empty-state-card>
@@ -298,7 +291,6 @@ export default class AnalyzerDetails extends mixins(
   public flashActiveAnalyzer = false
   analyzersInRetryList: string[] = []
   isLoading = false
-  readonly SKIPPED_RUN_DOCS = ''
 
   /**
    * Fetch all runs on this branch
