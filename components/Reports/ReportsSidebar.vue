@@ -235,7 +235,7 @@ export default class ReportsSidebar extends Vue {
   /* The horizontal navbar as part of `dashboard`` layout */
   --horizontal-navbar-height: 44.5px;
 
-  --repository-header-height: 98px;
+  --repository-header-height: 97px;
 }
 
 @media screen and (min-width: 1024px) {

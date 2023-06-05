@@ -792,7 +792,7 @@ export default class AnalyzerDetails extends mixins(
 <style scoped>
 /* all for mobiles */
 .analyzer-page {
-  --repo-header-height: 98px;
+  --repo-header-height: 97px;
   --breadcrumb-height: 72px;
 
   --top-bar-offset: calc(var(--repo-header-height) + var(--breadcrumb-height));

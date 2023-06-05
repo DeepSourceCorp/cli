@@ -173,7 +173,7 @@ export default class MetricsPage extends Vue {
 @tailwind utilities;
 
 .metrics-page-container {
-  --repo-header-height: 98px;
+  --repo-header-height: 97px;
 }
 
 @media screen(lg) {

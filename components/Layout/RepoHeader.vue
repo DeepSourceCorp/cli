@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="flex w-full items-center justify-between border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4"
+      class="flex w-full items-center justify-between border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4 h-13"
     >
       <div class="flex items-center gap-x-2.5">
         <z-button
@@ -30,7 +30,7 @@
         </h2>
 
         <!-- Desktop specific elements -->
-        <div class="hidden items-center gap-x-3 lg:flex">
+        <div class="hidden items-center gap-x-2 lg:flex">
           <button
             v-if="allowStar"
             v-tooltip="
@@ -48,24 +48,26 @@
             />
           </button>
 
-          <!-- Applying `flex` below that ensures vertical alignment isn't off since `ZTag` is another `flex` element -->
-          <a
-            :href="repository.vcsUrl"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center"
-          >
-            <z-tag
-              v-tooltip="`Open repo on ${$providerMetaMap[repository.vcsProvider].text}`"
-              :icon-left="repoVCSIcon"
-              spacing="p-3px"
-              class="border border-slate-400"
-            />
-          </a>
+          <div class="flex items-center gap-x-3">
+            <!-- Applying `flex` below that ensures vertical alignment isn't off since `ZTag` is another `flex` element -->
+            <a
+              :href="repository.vcsUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center"
+            >
+              <z-tag
+                v-tooltip="`Open repo on ${$providerMetaMap[repository.vcsProvider].text}`"
+                :icon-left="repoVCSIcon"
+                spacing="p-3px"
+                class="border border-slate-400"
+              />
+            </a>
 
-          <z-label :state="labelState" class="p-3px inline-block select-none">
-            {{ labelText }}
-          </z-label>
+            <z-label :state="labelState" class="p-3px inline-block select-none">
+              {{ labelText }}
+            </z-label>
+          </div>
         </div>
       </div>
 
@@ -93,7 +95,7 @@
     </div>
 
     <div
-      class="hide-scroll flex gap-x-5 overflow-auto border-b border-slate-400 bg-ink-400 px-4 pt-4"
+      class="hide-scroll flex gap-x-5 overflow-auto border-b border-slate-400 bg-ink-400 px-3 pt-3"
     >
       <template v-for="item in navItems">
         <nuxt-link v-if="isNavLinkVisible(item)" :key="item.label" :to="$generateRoute(item.link)">
