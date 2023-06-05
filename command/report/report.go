@@ -255,7 +255,7 @@ func (opts *ReportOptions) Run() int {
 		Key:               artifactKey,
 		Data:              artifactValue,
 		AnalyzerShortcode: analyzerShortcode,
-		Compressed:        "True",
+		Compressed:        true,
 		Metadata:          reportMeta,
 	}
 
