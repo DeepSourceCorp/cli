@@ -10,7 +10,6 @@ type ReportQueryInput struct {
 	Key               string      `json:"key"`
 	Data              string      `json:"data"`
 	AnalyzerShortcode string      `json:"analyzer"`
-	Compressed        bool        `json:"compressed"`
 	Metadata          interface{} `json:"metadata,omitempty"`
 }
 

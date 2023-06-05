@@ -244,8 +244,9 @@ func (opts *ReportOptions) Run() int {
 	// Generate query //
 	////////////////////
 
-	reportMeta := make(map[string]string)
+	reportMeta := make(map[string]interface{})
 	reportMeta["workDir"] = currentDir
+	reportMeta["compressed"] = true
 
 	queryInput := ReportQueryInput{
 		AccessToken:       dsnAccessToken,
@@ -255,7 +256,6 @@ func (opts *ReportOptions) Run() int {
 		Key:               artifactKey,
 		Data:              artifactValue,
 		AnalyzerShortcode: analyzerShortcode,
-		Compressed:        true,
 		Metadata:          reportMeta,
 	}
 
