@@ -191,7 +191,7 @@ export default {
     'portal-vue/nuxt',
     ...(IS_ON_PREM ? [] : ['nuxt-stripe-module']),
     ...(!IS_DEVELOPMENT && !IS_ON_PREM ? ['nuxt-prometheus-module'] : []),
-    ...(IS_CLOUD_PRODUCTION ? ['@nuxtjs/sentry'] : [])
+    ...(IS_CLOUD_PRODUCTION || IS_DEVELOPMENT || IS_STAGING ? ['@nuxtjs/sentry'] : [])
   ],
 
   sentry: {
@@ -202,8 +202,8 @@ export default {
         trackComponents: true
       }
     },
-    disabled: IS_DEVELOPMENT,
-    logMockCalls: IS_DEVELOPMENT,
+    disabled: IS_DEVELOPMENT || IS_STAGING,
+    logMockCalls: IS_DEVELOPMENT || IS_STAGING,
     config: {
       environment: process.env.BIFROST_ENV
     },
@@ -321,7 +321,7 @@ export default {
     }
   },
 
-  modern: 'client',
+  modern: IS_DEVELOPMENT ? false : 'client',
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   // TODO: Remove this configuration
