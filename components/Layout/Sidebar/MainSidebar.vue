@@ -315,7 +315,7 @@ export default class Sidebar extends mixins(
     const params = { login, provider, refetch: true }
     await this.fetchMaxUsagePercentage(params)
 
-    if (process.client && this.isLoggedIn) {
+    if (!this.$config.onPrem && process.client && this.isLoggedIn) {
       // Identify the user via RudderStack
       const { avatar, dateJoined: createdAt, email, firstName, id, lastName } = this.viewer
 

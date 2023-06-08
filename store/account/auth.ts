@@ -156,13 +156,13 @@ export const actions: AuthModuleActions = {
     }
   },
 
-  async [AuthActionTypes.PURGE_CLIENT_DATA]() {
+  async [AuthActionTypes.PURGE_CLIENT_DATA](_, { onPrem }) {
     try {
       // resets the indexedDB
       await this.$resetLocalDB()
 
       // reset rudder stack
-      if (process.client) {
+      if (!onPrem && process.client) {
         this.$rudder?.reset(true)
         this.$sentry.setUser(null)
       }
@@ -176,6 +176,7 @@ export const actions: AuthModuleActions = {
       // purge all client accessible cookies
       this.$cookies.removeAll()
 
+      // skipcq: JS-0372, JS-0295
       // @ts-ignore
       if (process.client && window && typeof indexedDB.databases === 'function') {
         // skipcq: JS-0372, JS-0295
@@ -194,7 +195,9 @@ export const actions: AuthModuleActions = {
               // @ts-ignore
               return indexedDB.deleteDatabase(db.name)
             })
-        )
+        ).catch((e) => {
+          this.$logErrorAndToast(e as Error)
+        })
       }
     } catch (e) {
       if (process.env.NODE_ENV === 'development') {
@@ -204,11 +207,11 @@ export const actions: AuthModuleActions = {
     }
   },
 
-  async [AuthActionTypes.LOG_OUT]({ commit, dispatch }) {
+  async [AuthActionTypes.LOG_OUT]({ commit, dispatch }, { onPrem }) {
     try {
       commit(AuthMutationTypes.SET_LOGGED_OUT)
       await this.$applyGraphqlMutation(logoutMutation, {}, null, false)
-      dispatch(AuthActionTypes.PURGE_CLIENT_DATA)
+      dispatch(AuthActionTypes.PURGE_CLIENT_DATA, { onPrem })
     } catch (e) {
       if (process.env.NODE_ENV === 'development') {
         throw new Error('Something went wrong while logging you out.')

@@ -33,7 +33,7 @@ const publicReportPassList = [
 ]
 const passList = ['github', 'bitbucket', 'gitlab', 'ads', ...publicReportPassList]
 
-const authMiddleware: Middleware = async ({ app, store, route, redirect, error }) => {
+const authMiddleware: Middleware = async ({ app, store, route, redirect, error, $config }) => {
   let strict = false
   let redirectToLogin = false
 
@@ -58,15 +58,17 @@ const authMiddleware: Middleware = async ({ app, store, route, redirect, error }
       }
     })
 
-    strict = authPolicy.indexOf(true) > -1 ? true : false
-    redirectToLogin = redirectToLoginPolicy.indexOf(true) > -1 ? true : false
+    strict = authPolicy.includes(true)
+    redirectToLogin = redirectToLoginPolicy.includes(true)
 
     try {
       await store.dispatch(`account/auth/${AuthActionTypes.REFRESH}`)
     } catch (e) {
       if (process.client) {
         if (store.getters[`account/auth/${AuthGetterTypes.GET_LOGGED_IN}`]) {
-          await store.dispatch(`account/auth/${AuthActionTypes.LOG_OUT}`)
+          await store.dispatch(`account/auth/${AuthActionTypes.LOG_OUT}`, {
+            onPrem: $config.onPrem
+          })
         } else {
           await store.dispatch(`account/auth/${AuthActionTypes.PURGE_CLIENT_DATA}`)
         }

@@ -71,7 +71,7 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
 
     await Promise.all([this.fetchActiveUser(), this.fetchContext()])
 
-    if (this.loggedIn) {
+    if (!this.$config.onPrem && this.loggedIn) {
       // Identify the user via RudderStack
       const {
         avatar,
@@ -82,7 +82,7 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
         lastName
       } = this.$store.state.user.active.viewer
 
-      if (!this.$config.onPrem && id && email) {
+      if (id && email) {
         const userId = Buffer.from(id, 'base64').toString().toLowerCase().replace('user:', '')
 
         this.$sentry.setUser({
@@ -110,7 +110,7 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
       } = this.activeDashboardContext
 
       // Invoke `$rudder.group` only for team accounts
-      if (!this.$config.onPrem && groupId && team_name && type === 'team') {
+      if (groupId && team_name && type === 'team') {
         const stringifiedGroupId = String(groupId)
 
         this.$rudder?.group(stringifiedGroupId, {
