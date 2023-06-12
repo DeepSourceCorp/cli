@@ -70,7 +70,9 @@ const authMiddleware: Middleware = async ({ app, store, route, redirect, error, 
             onPrem: $config.onPrem
           })
         } else {
-          await store.dispatch(`account/auth/${AuthActionTypes.PURGE_CLIENT_DATA}`)
+          await store.dispatch(`account/auth/${AuthActionTypes.PURGE_CLIENT_DATA}`, {
+            onPrem: $config.onPrem
+          })
         }
       }
       if (strict) {

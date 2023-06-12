@@ -34,7 +34,7 @@ export default class AuthMixin extends Vue {
   logOutUser: (args: { onPrem: boolean }) => Promise<void>
 
   @authStore.Action(AuthActionTypes.PURGE_CLIENT_DATA)
-  purgeClientData: () => void
+  purgeClientData: (args: { onPrem: boolean }) => void
 
   @authStore.Action(AuthActionTypes.LOG_IN)
   logInUser: (args: { code: string; provider: string }) => Promise<void>

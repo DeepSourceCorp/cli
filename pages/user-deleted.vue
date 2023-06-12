@@ -18,7 +18,7 @@ export default class UserDeleted extends mixins(AuthMixin) {
    * @returns {void}
    */
   mounted(): void {
-    this.purgeClientData()
+    this.purgeClientData({ onPrem: this.$config.onPrem })
 
     setTimeout(() => {
       window.location.replace('https://deepsource.com')

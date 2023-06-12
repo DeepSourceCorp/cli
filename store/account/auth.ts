@@ -118,6 +118,13 @@ interface AuthModuleActions extends ActionTree<AuthModuleState, RootState> {
       onPrem: boolean
     }
   ) => void
+  [AuthActionTypes.PURGE_CLIENT_DATA]: (
+    this: Store<RootState>,
+    injectee: AuthActionContext,
+    args: {
+      onPrem: boolean
+    }
+  ) => void
 }
 
 // TODO: Add proper error handling.
