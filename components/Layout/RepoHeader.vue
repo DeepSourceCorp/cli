@@ -95,7 +95,7 @@
     </div>
 
     <div
-      class="hide-scroll flex gap-x-5 overflow-auto border-b border-slate-400 bg-ink-400 px-3 pt-3"
+      class="hide-scroll space-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3 h-nav-items-container"
     >
       <template v-for="item in navItems">
         <nuxt-link v-if="isNavLinkVisible(item)" :key="item.label" :to="$generateRoute(item.link)">
@@ -343,5 +343,9 @@ export default class RepoHeader extends mixins(
 <style scoped>
 .p-3px {
   padding: 3px;
+}
+
+.h-nav-items-container {
+  height: 45px;
 }
 </style>

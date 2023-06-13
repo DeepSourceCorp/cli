@@ -28,7 +28,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader for GSR: RepoHeader for GSR 1`] = `
         <zicon-stub icon=\\"info-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
       </button></div>
   </div>
-  <div class=\\"hide-scroll flex gap-x-5 overflow-auto border-b border-slate-400 bg-ink-400 px-3 pt-3\\"><a>
+  <div class=\\"hide-scroll space-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3 h-nav-items-container\\"><a>
       <ztab-stub isactive=\\"true\\" icon=\\"gauge\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
     </a><a>
       <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
@@ -72,7 +72,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader logged out: Default Repo Header Sna
       <!---->
     </div>
   </div>
-  <div class=\\"hide-scroll flex gap-x-5 overflow-auto border-b border-slate-400 bg-ink-400 px-3 pt-3\\"><a>
+  <div class=\\"hide-scroll space-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3 h-nav-items-container\\"><a>
       <ztab-stub isactive=\\"true\\" icon=\\"gauge\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
     </a><a>
       <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
@@ -116,7 +116,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader with all permission: Default Repo H
         <zicon-stub icon=\\"info-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
       </button></div>
   </div>
-  <div class=\\"hide-scroll flex gap-x-5 overflow-auto border-b border-slate-400 bg-ink-400 px-3 pt-3\\"><a>
+  <div class=\\"hide-scroll space-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3 h-nav-items-container\\"><a>
       <ztab-stub isactive=\\"true\\" icon=\\"gauge\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
     </a><a>
       <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
@@ -162,7 +162,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader without a matching activeLink: Repo
         <zicon-stub icon=\\"info-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
       </button></div>
   </div>
-  <div class=\\"hide-scroll flex gap-x-5 overflow-auto border-b border-slate-400 bg-ink-400 px-3 pt-3\\"><a>
+  <div class=\\"hide-scroll space-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3 h-nav-items-container\\"><a>
       <ztab-stub icon=\\"gauge\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
     </a><a>
       <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
@@ -208,7 +208,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader without perms: Repo Header withut p
         <zicon-stub icon=\\"info-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
       </button></div>
   </div>
-  <div class=\\"hide-scroll flex gap-x-5 overflow-auto border-b border-slate-400 bg-ink-400 px-3 pt-3\\"><a>
+  <div class=\\"hide-scroll space-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3 h-nav-items-container\\"><a>
       <ztab-stub isactive=\\"true\\" icon=\\"gauge\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
     </a><a>
       <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>

@@ -583,19 +583,6 @@ export default class RunIssueDetails extends mixins(
 }
 
 @media (min-width: 768px) {
-  .analyzer-page {
-    --breadcrumb-height: 52px;
-  }
-}
-
-/* all for tablets */
-@media (min-width: 1023px) {
-  .issue-page {
-    --breadcrumb-height: 52px;
-  }
-}
-
-@media (min-width: 1280px) {
   .issue-page {
     --breadcrumb-height: 52px;
   }

@@ -1,8 +1,8 @@
 <template>
-  <div class="grid grid-cols-1 pb-16 lg:grid-cols-16-fr lg:pb-0">
+  <div class="issues-page grid grid-cols-1 pb-16 lg:grid-cols-16-fr lg:pb-0">
     <!-- Analyzer Tab -->
     <div
-      class="analyzer-tab z-20 col-span-full flex flex-col justify-between space-y-2 border-b border-slate-400 bg-ink-400 py-2 pl-2 pr-4 lg:sticky lg:top-24 lg:flex-row lg:space-y-0 lg:space-x-2"
+      class="analyzer-tab z-20 col-span-full flex flex-col justify-between space-y-2 border-b border-slate-400 bg-ink-400 py-2 pl-2 pr-4 lg:sticky lg:flex-row lg:space-y-0 lg:space-x-2"
     >
       <issue-analyzer-selector
         :selected-analyzer="parsedParams.analyzer"
@@ -46,7 +46,6 @@
         :occurrence-counts="issueOccurrenceDistributionCounts"
         :active-sidebar-item="activeSidebarItem"
         class="category-sidebar sticky"
-        style="top: 147px"
         @update-category="updateCategory"
       >
         <template v-if="repository.errorCode === 3003 && hasRepoReadAccess" #cta>
@@ -746,7 +745,19 @@ export default class Issues extends mixins(RepoDetailMixin, RoleAccessMixin, Rou
 }
 </script>
 <style scoped>
+.issues-page {
+  --analyzer-tab-top-offset: 97px;
+  --category-sidebar-top-offset: 148px;
+}
+
+@media screen and (min-width: 1024px) {
+  .analyzer-tab {
+    top: var(--analyzer-tab-top-offset);
+  }
+}
+
 .category-sidebar {
-  height: calc(100vh - 147px);
+  height: calc(100vh - var(--category-sidebar-top-offset));
+  top: var(--category-sidebar-top-offset);
 }
 </style>
