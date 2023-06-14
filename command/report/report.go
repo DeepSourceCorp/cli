@@ -223,30 +223,72 @@ func (opts *ReportOptions) Run() int {
 		artifactValue = string(valueBytes)
 	}
 
-	// Compress the byte array
-	var compressedBytes []byte
-	compressLevel := 20
-	compressedBytes, err = zstd.CompressLevel(compressedBytes, []byte(artifactValue), compressLevel)
+	// Query DeepSource API to check if compression is supported
+	q := ReportQuery{Query: graphqlCheckCompressed}
+
+	qBytes, err := json.Marshal(q)
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to compress value file:", reportCommandValueFile)
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to marshal query:", err)
 		sentry.CaptureException(err)
 		return 1
 	}
 
-	// Base64 encode the compressed byte array
-	encodedBytes := make([]byte, base64.StdEncoding.EncodedLen(len(compressedBytes)))
-	base64.StdEncoding.Encode(encodedBytes, compressedBytes)
+	r, err := makeQuery(
+		dsnProtocol+"://"+dsnHost+"/graphql/cli/",
+		qBytes,
+		"application/json",
+		opts.SkipCertificateVerification,
+	)
 
-	// Set the artifact value to the base64 encoded string
-	artifactValue = string(encodedBytes)
+	// res is a struct to unmarshal the response to check if compression is supported
+	var res struct {
+		Data struct {
+			Type struct {
+				InputFields []struct {
+					Name string `json:"name"`
+				} `json:"inputFields"`
+			} `json:"__type"`
+		} `json:"data"`
+	}
+
+	err = json.Unmarshal(r, &res)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to unmarshal response:", err)
+		sentry.CaptureException(err)
+		return 1
+	}
+
+	reportMeta := make(map[string]interface{})
+	reportMeta["workDir"] = currentDir
+
+	// Compress the value if compression is supported
+	for _, inputField := range res.Data.Type.InputFields {
+		if inputField.Name == "compressed" {
+			// Compress the byte array
+			var compressedBytes []byte
+			compressLevel := 20
+			compressedBytes, err = zstd.CompressLevel(compressedBytes, []byte(artifactValue), compressLevel)
+			if err != nil {
+				fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to compress value file:", reportCommandValueFile)
+				sentry.CaptureException(err)
+				return 1
+			}
+
+			// Base64 encode the compressed byte array
+			encodedBytes := make([]byte, base64.StdEncoding.EncodedLen(len(compressedBytes)))
+			base64.StdEncoding.Encode(encodedBytes, compressedBytes)
+
+			// Set the artifact value to the base64 encoded string
+			artifactValue = string(encodedBytes)
+
+			// Set the compression flag
+			reportMeta["compressed"] = true
+		}
+	}
 
 	////////////////////
 	// Generate query //
 	////////////////////
-
-	reportMeta := make(map[string]interface{})
-	reportMeta["workDir"] = currentDir
-	reportMeta["compressed"] = true
 
 	queryInput := ReportQueryInput{
 		AccessToken:       dsnAccessToken,
