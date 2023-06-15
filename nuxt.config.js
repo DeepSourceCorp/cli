@@ -279,49 +279,49 @@ export default {
         path: '/accounts/github/login/callback/bifrost',
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
-        meta: { provider: 'GITHUB' }
+        meta: { provider: 'GITHUB', authProvider: 'github' }
       })
       routes.push({
         name: 'github-enterprise',
         path: '/accounts/github-enterprise/login/callback/bifrost',
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
-        meta: { provider: 'GITHUB_ENTERPRISE' }
+        meta: { provider: 'GITHUB_ENTERPRISE', authProvider: 'github-enterprise' }
       })
       routes.push({
         name: 'bitbucket',
         path: '/accounts/bitbucket_oauth2/login/callback/bifrost',
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
-        meta: { provider: 'BITBUCKET' }
+        meta: { provider: 'BITBUCKET', authProvider: 'bitbucket-oauth2' }
       })
       routes.push({
         name: 'gitlab',
         path: '/accounts/gitlab/login/callback/bifrost',
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
-        meta: { provider: 'GITLAB' }
+        meta: { provider: 'GITLAB', authProvider: 'gitlab' }
       })
       routes.push({
         name: 'gsr',
         path: '/accounts/google/login/callback/bifrost',
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
-        meta: { provider: 'GSR' }
+        meta: { provider: 'GSR', authProvider: 'google-oauth2' }
       })
       routes.push({
         name: 'ads',
         path: '/accounts/ads/login/callback/bifrost',
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
-        meta: { provider: 'ADS' }
+        meta: { provider: 'ADS', authProvider: 'ads-oauth2' }
       })
       routes.push({
         name: 'runner',
         path: '/accounts/runner/apps/:appId/login/callback/bifrost',
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
-        meta: { provider: 'runner' }
+        meta: { provider: 'runner', authProvider: 'runner' }
       })
     }
   },
