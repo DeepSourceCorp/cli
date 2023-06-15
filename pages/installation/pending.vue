@@ -52,7 +52,7 @@ export default class PendingPage extends mixins(ContextMixin, ActiveUserMixin) {
     }
     const provider = this.viewer.connectedVcsProviders?.[0]
     return provider
-      ? this.installationUrls[this.$providerMetaMap[provider].auth]
+      ? this.installationUrls[this.$providerMetaMap[provider].value]
       : '/installation/providers'
   }
 }

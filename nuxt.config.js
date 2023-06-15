@@ -279,42 +279,42 @@ export default {
         path: '/accounts/github/login/callback/bifrost',
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
-        meta: { provider: 'github' }
+        meta: { provider: 'GITHUB' }
       })
       routes.push({
         name: 'github-enterprise',
         path: '/accounts/github-enterprise/login/callback/bifrost',
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
-        meta: { provider: 'github-enterprise' }
+        meta: { provider: 'GITHUB_ENTERPRISE' }
       })
       routes.push({
         name: 'bitbucket',
         path: '/accounts/bitbucket_oauth2/login/callback/bifrost',
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
-        meta: { provider: 'bitbucket-oauth2' }
+        meta: { provider: 'BITBUCKET' }
       })
       routes.push({
         name: 'gitlab',
         path: '/accounts/gitlab/login/callback/bifrost',
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
-        meta: { provider: 'gitlab' }
+        meta: { provider: 'GITLAB' }
       })
       routes.push({
         name: 'gsr',
         path: '/accounts/google/login/callback/bifrost',
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
-        meta: { provider: 'google-oauth2' }
+        meta: { provider: 'GSR' }
       })
       routes.push({
         name: 'ads',
         path: '/accounts/ads/login/callback/bifrost',
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
-        meta: { provider: 'ads-oauth2' }
+        meta: { provider: 'ADS' }
       })
       routes.push({
         name: 'runner',

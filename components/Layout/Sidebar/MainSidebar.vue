@@ -516,7 +516,7 @@ export default class Sidebar extends mixins(
     }
     const provider = this.viewer.connectedVcsProviders?.[0]
     return provider
-      ? this.installationUrls[this.$providerMetaMap[provider].auth]
+      ? this.installationUrls[this.$providerMetaMap[provider].value]
       : '/installation/providers'
   }
 

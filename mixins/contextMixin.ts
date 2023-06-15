@@ -39,10 +39,10 @@ export default class ContextMixin extends Vue {
     const { bitbucket, ...remainderUrls } = this.context.installationUrls
     return {
       ...remainderUrls,
-      [this.$providerMetaMap[VcsProviderChoices.Bitbucket].auth]: bitbucket,
-      [this.$providerMetaMap[VcsProviderChoices.Gitlab].auth]: '/accounts/gitlab/login',
-      [this.$providerMetaMap[VcsProviderChoices.Gsr].auth]: '/accounts/gsr/projects',
-      [this.$providerMetaMap[VcsProviderChoices.Ads].auth]: '/accounts/ads/login'
+      [this.$providerMetaMap[VcsProviderChoices.Bitbucket].value]: bitbucket,
+      [this.$providerMetaMap[VcsProviderChoices.Gitlab].value]: '/accounts/gitlab/login',
+      [this.$providerMetaMap[VcsProviderChoices.Gsr].value]: '/accounts/gsr/projects',
+      [this.$providerMetaMap[VcsProviderChoices.Ads].value]: '/accounts/ads/login'
     }
   }
 }
