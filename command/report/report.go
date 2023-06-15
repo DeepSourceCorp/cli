@@ -240,6 +240,12 @@ func (opts *ReportOptions) Run() int {
 		opts.SkipCertificateVerification,
 	)
 
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to make query:", err)
+		sentry.CaptureException(err)
+		return 1
+	}
+
 	// res is a struct to unmarshal the response to check if compression is supported
 	var res struct {
 		Data struct {
