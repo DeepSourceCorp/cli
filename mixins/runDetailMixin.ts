@@ -7,7 +7,8 @@ import {
   CreatePullRequestInput,
   IssueConnection,
   Maybe,
-  Run
+  Run,
+  RunnerApp
 } from '~/types/types'
 import { PageRefetchStatusT, RunDetailActions } from '@/store/run/detail'
 import { resolveNodes } from '~/utils/array'
@@ -40,12 +41,16 @@ export default class RunDetailMixin extends Vue {
   @runDetailStore.State
   pageRefetchStatus: PageRefetchStatusT
 
+  @runDetailStore.State
+  runnerInfo: RunnerApp
+
   @runDetailStore.Action(RunDetailActions.FETCH_RUN)
   fetchRun: (args: {
     provider: string
     owner: string
     name: string
     runId: string
+    isRunner: boolean
     refetch?: boolean
   }) => Promise<Run | undefined>
 
@@ -58,6 +63,7 @@ export default class RunDetailMixin extends Vue {
     shortcode: string
     currentPageNumber: number
     limit: number
+    isRunner: boolean
     q?: Maybe<string>
     sort?: Maybe<string>
     refetch?: boolean

@@ -1,4 +1,4 @@
-query ($runId: String!) {
+query autofixRunDetail($runId: String!, $isRunner: Boolean!) {
   autofixRun(runId: $runId) {
     id
     errorsRendered
@@ -31,6 +31,16 @@ query ($runId: String!) {
       title
       issueType
       shortcode
+    }
+
+    repository @include(if: $isRunner) {
+      owner {
+        id
+        runnerApp {
+          id
+          patchSnippetUrl
+        }
+      }
     }
   }
 }

@@ -293,6 +293,12 @@ type AuditLogMeta {
   exportFormats: [String] @deprecated(reason: "Only CSV format is supported by default.")
 }
 
+type AuthUrl {
+  name: String!
+  url: String!
+  provider: VCSProviderChoices!
+}
+
 type AutoOnboardEvent implements MaskPrimaryKeyNode {
   id: ID!
   createdAt: DateTime!
@@ -356,6 +362,7 @@ type AutofixRun implements MaskPrimaryKeyNode {
   createdBy: User
   issue: Issue
   analyzer: Analyzer
+  repository: Repository!
   checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
   filesAffected: Int
   issuesAffected: Int
@@ -556,6 +563,7 @@ type CheckIssue implements MaskPrimaryKeyNode {
   beginColumn: Int!
   endLine: Int!
   endColumn: Int!
+  sourceCodeIdentifier: String
   extraData: JSONString!
   inRepositoryIssue(offset: Int, before: String, after: String, first: Int, last: Int, recommended: Boolean, issueType: String, analyzer: String, product: String, severity: String, severityIn: [String], autofixAvailable: Boolean, auditRequired: Boolean, q: String, sort: String): RepositoryIssueConnection!
   autofixRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String, status_In: [String], pullRequestStatus_In: [String]): AutofixRunConnection!
@@ -725,6 +733,8 @@ type Context {
   isTransformersLicensed: Boolean
   toOnboard: Boolean
   plans: GenericScalar
+  isRunner: Boolean
+  runnerBaseUrl: String
 }
 
 type CouponInfo {
@@ -1028,7 +1038,7 @@ type EnterpriseGroup implements MaskPrimaryKeyNode {
   scimExternalId: String
   scimDisplayName: String
   name: String
-  members(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseUserConnection
+  members(offset: Int, before: String, after: String, first: Int, last: Int, q: String, isSuperuser: Boolean): EnterpriseUserConnection
   teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseTeamConnection!
   invitationCode: String
   groupTeams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): GroupTeamMembershipConnection
@@ -1055,7 +1065,7 @@ type EnterpriseInstallationRoot {
   group(id: ID!): EnterpriseGroup
   groups(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseGroupConnection
   user(id: ID!): EnterpriseUser
-  users(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseUserConnection
+  users(offset: Int, before: String, after: String, first: Int, last: Int, q: String, isSuperuser: Boolean): EnterpriseUserConnection
   team(id: ID!): EnterpriseTeam
   teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseTeamConnection
   personalAccounts(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection
@@ -1852,7 +1862,7 @@ type Mutation {
   deleteUser(input: DeleteUserInput!): DeleteUserPayload
   acceptGroupInvite(input: AcceptGroupInviteInput!): AcceptGroupInvitePayload
   requestEnterprisePilotLicense(input: RequestEnterprisePilotLicenseInput!): RequestEnterprisePilotLicensePayload
-  socialAuth(code: String!, provider: String!): SocialAuthJWT
+  socialAuth(appId: String, code: String!, provider: String!): SocialAuthJWT
   revokeToken(refreshToken: String): Revoke
   deleteTokenCookie: DeleteJSONWebTokenCookie
   deleteRefreshTokenCookie: DeleteRefreshTokenCookie
@@ -1979,6 +1989,8 @@ type Owner implements MaskPrimaryKeyNode {
   primaryUser: User
   gsrSetupPending: Boolean!
   resourceSelector: OwnerResourceSelector
+  runner: Runner
+  runnerApp: RunnerApp
   features: GenericScalar
   analyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
   issuePriorities(offset: Int, before: String, after: String, first: Int, last: Int): IssuePriorityConnection!
@@ -2768,6 +2780,20 @@ enum RunStatusChoice {
   STATUS_SKIPPED
 }
 
+type Runner implements MaskPrimaryKeyNode {
+  baseUrl: String!
+  id: ID!
+}
+
+type RunnerApp implements MaskPrimaryKeyNode {
+  appId: String!
+  vcsProvider: VCSProviderChoices!
+  name: String!
+  id: ID!
+  codeSnippetUrl: String!
+  patchSnippetUrl: String!
+}
+
 type SilenceRule implements MaskPrimaryKeyNode {
   id: ID!
   createdAt: DateTime!
@@ -2807,7 +2833,7 @@ type SocialAuthJWT {
 }
 
 type SocialAuthURL {
-  socialUrls: GenericScalar
+  socialUrls: [AuthUrl]
 }
 
 scalar SocialCamelJSON
@@ -3838,6 +3864,7 @@ enum UserSocialConnectionChoices {
   GITHUB_ENTERPRISE
   GSR
   ADS
+  RUNNER
 }
 
 type UserSocialConnectionConnection {

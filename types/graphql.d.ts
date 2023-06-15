@@ -1867,6 +1867,7 @@ declare module '*/detail.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const RepoDetails: DocumentNode;
+export const autofixRunDetail: DocumentNode;
 export const repositoryRunCheckDetails: DocumentNode;
 export const activeUserInfo: DocumentNode;
 
@@ -1895,7 +1896,7 @@ declare module '*/isCommitPossible.gql' {
 declare module '*/issueChildren.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const issueChildren: DocumentNode;
 
   export default defaultDocument;
 }
@@ -2057,7 +2058,7 @@ declare module '*/autofixableIssues.gql' {
 declare module '*/checkIssue.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const checkIssues: DocumentNode;
 
   export default defaultDocument;
 }

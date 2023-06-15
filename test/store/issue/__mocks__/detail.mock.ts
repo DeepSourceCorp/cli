@@ -1,3 +1,4 @@
+import { IssueDetailModuleState } from '~/store/issue/detail'
 import {
   AnalyzerAnalyzerType,
   AnalyzerStatus,
@@ -5,9 +6,9 @@ import {
   CheckIssueConnection,
   Issue,
   IssueSeverity,
-  RepositoryIssue
+  RepositoryIssue,
+  VcsProviderChoices
 } from '~/types/types'
-import { IssueDetailModuleState } from '~/store/issue/detail'
 
 /**
  * Mock for issue.
@@ -237,5 +238,13 @@ export const mockIssueDetailState = (): IssueDetailModuleState => ({
   silenceRules: [],
   singleIssue: mockIssueSingleIssueDetail(),
   checkIssues: mockIssueCheckIssueDetail(),
-  issueDirDetails: mockIssueSingleIssueDetail()
+  issueDirDetails: mockIssueSingleIssueDetail(),
+  runnerInfo: {
+    name: 'test-name',
+    appId: 'test-app-id',
+    vcsProvider: VcsProviderChoices.Github,
+    id: 'test-id',
+    codeSnippetUrl: 'test-code-snippet-url',
+    patchSnippetUrl: 'test-patch-snippet-url'
+  }
 })

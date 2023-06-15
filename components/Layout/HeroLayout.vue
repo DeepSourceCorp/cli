@@ -2,11 +2,11 @@
   <div class="relative min-h-screen overflow-hidden">
     <div class="bg-hero-layout-gradient"></div>
     <div
-      class="flex flex-col h-full min-h-screen px-5 lg:px-10 py-6 lg:py-8 z-10 absolute inset-0 overflow-y-auto"
+      class="absolute inset-0 z-10 flex h-full min-h-screen flex-col overflow-y-auto px-5 py-6 lg:px-10 lg:py-8"
     >
       <div><slot name="header"></slot></div>
-      <div class="flex-grow flex items-center justify-center py-8">
-        <div class="flex flex-col items-center w-full sm:max-w-sm">
+      <div class="flex flex-grow items-center justify-center py-8">
+        <div class="flex w-full flex-col items-center sm:max-w-sm">
           <div class="deepsource-logo">
             <svg
               width="37"
@@ -23,11 +23,11 @@
               />
             </svg>
           </div>
-          <div class="mt-8 w-full text-center space-y-3">
-            <h1 :key="samlLogin" class="text-vanilla-100 text-lg font-medium leading-6">
+          <div class="mt-8 w-full space-y-3 text-center">
+            <h1 class="text-lg font-medium leading-6 text-vanilla-100">
               <slot name="title"></slot>
             </h1>
-            <div v-if="$slots.subtitle" class="text-vanilla-400 text-base leading-8">
+            <div v-if="$slots.subtitle" class="text-base leading-8 text-vanilla-400">
               <slot name="subtitle"></slot>
             </div>
           </div>

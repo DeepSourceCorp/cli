@@ -108,6 +108,7 @@ import AuthMixin, { LoginOption } from '~/mixins/authMixin'
 import ContextMixin from '~/mixins/contextMixin'
 import MetaMixin from '~/mixins/metaMixin'
 import { routerVcsMap } from '~/plugins/helpers/provider'
+import { VcsProviderChoices } from '~/types/types'
 import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
@@ -231,12 +232,18 @@ export default class InstallationProvider extends mixins(
     window.location.href = this.loginUrls[provider]
   }
 
-  get loginUrls(): Record<string, string> {
+  get loginUrls(): Record<VcsProviderChoices, string> {
     return {
       ...this.context.installationUrls,
-      gitlab: this.hasGitlabAccounts ? '/accounts/gitlab/login' : this.authUrls.gitlab,
-      gsr: this.hasGSRProjects ? '/accounts/gsr/projects' : this.authUrls.gsr,
-      ads: this.hasADSOrganizations ? '/accounts/ads/login' : this.authUrls.ads
+      [VcsProviderChoices.Gitlab]: this.hasGitlabAccounts
+        ? '/accounts/gitlab/login'
+        : this.authUrls.find(({ provider }) => provider === VcsProviderChoices.Gitlab)?.url,
+      [VcsProviderChoices.Gsr]: this.hasGSRProjects
+        ? '/accounts/gsr/projects'
+        : this.authUrls.find(({ provider }) => provider === VcsProviderChoices.Gsr)?.url,
+      [VcsProviderChoices.Ads]: this.hasADSOrganizations
+        ? '/accounts/ads/login'
+        : this.authUrls.find(({ provider }) => provider === VcsProviderChoices.Ads)?.url
     }
   }
 

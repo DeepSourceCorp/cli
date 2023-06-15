@@ -21,7 +21,7 @@
             :severity="singleIssue.severity"
             :first-seen="issue.firstSeen"
             :last-seen="issue.lastSeen"
-            :count="issueOccurrences.totalCount"
+            :count="checkIssues.totalCount"
             :issue-priority="issuePriority"
             :can-edit-priority="canEditPriority"
             @priority-edited="editPriority"
@@ -56,16 +56,18 @@
       </div>
       <div v-else class="grid grid-cols-3">
         <issue-list
-          v-bind="issueOccurrences"
-          :description="singleIssue.descriptionRendered"
-          :check-id="currentCheck ? currentCheck.id : ''"
-          :can-ignore-issues="canIgnoreIssues"
-          :page-size="pageSize"
-          :total-count="checkIssues.totalCount"
-          :start-page="queryParams.page"
-          :search-value="queryParams.q"
           :blob-url-root="run.blobUrlRoot"
+          :can-ignore-issues="canIgnoreIssues"
+          :check-id="currentCheck ? currentCheck.id : ''"
+          :description="singleIssue.descriptionRendered"
           :issue-index="issueIndex"
+          :issue-occurrences="issueOccurrences"
+          :page-size="pageSize"
+          :search-value="queryParams.q"
+          :snippets-fetch-errored="snippetsFetchErrored"
+          :snippets-loading="snippetsLoading"
+          :start-page="queryParams.page"
+          :total-count="checkIssues.totalCount"
           class="col-span-3 lg:col-span-2"
           @search="(val) => (searchCandidate = val)"
           @sort="(val) => (sort = val)"
@@ -78,39 +80,41 @@
 </template>
 
 <script lang="ts">
-import { Component, Watch, mixins } from 'nuxt-property-decorator'
+import { Component, mixins, Watch } from 'nuxt-property-decorator'
 
-import { ZTag, ZTabs, ZTabList, ZTabPane, ZTabPanes, ZTabItem, ZIcon } from '@deepsource/zeal'
+import { ZIcon, ZTabItem, ZTabList, ZTabPane, ZTabPanes, ZTabs, ZTag } from '@deepsource/zeal'
 
-import LinkToPrev from '@/components/LinkToPrev.vue'
-import { IssueDetailsHeader, IssueActions, IssueDescription } from '@/components/RepoIssues/index'
 import { SubNav } from '@/components/History/index'
+import LinkToPrev from '@/components/LinkToPrev.vue'
 import { IssueList } from '@/components/RepoIssues'
+import { IssueActions, IssueDescription, IssueDetailsHeader } from '@/components/RepoIssues/index'
 
 // Import State & Types
 import {
   Check,
-  Maybe,
   CheckEdge,
+  CheckIssue,
   IssuePriority,
   IssuePriorityLevel,
-  CheckIssueEdge,
-  CheckIssueConnection
+  Maybe
 } from '~/types/types'
-import RouteQueryMixin from '~/mixins/routeQueryMixin'
+
+import ContextMixin from '~/mixins/contextMixin'
 import IssueDetailMixin from '~/mixins/issueDetailMixin'
-import RunDetailMixin from '~/mixins/runDetailMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import { IssueLink } from '~/types/issues'
+import RouteQueryMixin from '~/mixins/routeQueryMixin'
+import RunDetailMixin from '~/mixins/runDetailMixin'
 
 import { RunDetailMutations } from '~/store/run/detail'
 
-import { fromNow } from '~/utils/date'
-
 import { IssuePriorityLevelVerbose } from '~/types/issuePriorityTypes'
+import { IssueLink, IssueTypeOptions } from '~/types/issues'
 import { RepoPerms, TeamPerms } from '~/types/permTypes'
-import { IssueTypeOptions } from '~/types/issues'
+
+import { resolveNodes } from '~/utils/array'
+import { fromNow } from '~/utils/date'
+import { AnalysisRequestBodyT, fetchSnippets } from '~/utils/runner'
 
 const PAGE_SIZE = 25
 
@@ -136,6 +140,7 @@ const PAGE_SIZE = 25
   }
 })
 export default class RunIssueDetails extends mixins(
+  ContextMixin,
   RouteQueryMixin,
   IssueDetailMixin,
   RunDetailMixin,
@@ -148,6 +153,11 @@ export default class RunIssueDetails extends mixins(
   public pageSize = PAGE_SIZE
   public loading = true
   public issuePriority: IssuePriority | null = null
+
+  codeSnippets = {} as Record<string, string>
+
+  snippetsLoading = false
+  snippetsFetchErrored = false
 
   @Watch('searchCandidate')
   @Watch('currentPage')
@@ -235,10 +245,14 @@ export default class RunIssueDetails extends mixins(
     const { runId, issueId } = this.$route.params
     if (!issueId) this.$nuxt.error({ statusCode: 404 })
 
+    if (!Object.keys(this.context).length) {
+      await this.fetchContext()
+    }
+
     await Promise.all([
       this.fetchBasicRepoDetails(this.baseRouteParams),
       this.fetchRepoPerms(this.baseRouteParams),
-      this.fetchRun({ ...this.baseRouteParams, runId })
+      this.fetchRun({ ...this.baseRouteParams, runId, isRunner: this.context.isRunner as boolean })
     ])
 
     await this.fetchCheck({ checkId: this.currentCheck.id })
@@ -256,6 +270,12 @@ export default class RunIssueDetails extends mixins(
     })
 
     this.loading = false
+
+    // Fetch run issue occurrence code snippets if in Runner context
+    // The use case here is that we need not wait till the source code snippets fetch to be resolved
+    // The issue titles and other information is fetched; hence it can be displayed in the UI
+    // Skeleton loaders show up just in place of the code snippets until the fetch is done
+    this.fetchRunnerCodeSnippets()
 
     if (refetch) {
       // Reset the state
@@ -306,9 +326,9 @@ export default class RunIssueDetails extends mixins(
   /**
    * Returns a list of checks on this run
    *
-   * @returns {Array<Check}
+   * @returns {Check[]}
    */
-  get checks(): Array<Check> {
+  get checks(): Check[] {
     if (this.run?.checks?.edges) {
       return this.run.checks.edges.map((edge: Maybe<CheckEdge>) => {
         return edge?.node as Check
@@ -338,7 +358,6 @@ export default class RunIssueDetails extends mixins(
 
   async fetchIssue() {
     const { issueId } = this.$route.params
-
     const issue = await this.fetchSingleIssue({ shortcode: issueId })
 
     if (!issue || !Object.keys(issue).length) {
@@ -362,6 +381,7 @@ export default class RunIssueDetails extends mixins(
       shortcode: this.$route.params.issueId,
       limit: this.pageSize,
       currentPageNumber: page as number,
+      isRunner: this.context.isRunner as boolean,
       q: q as string,
       sort: sort as string,
       refetch
@@ -369,20 +389,33 @@ export default class RunIssueDetails extends mixins(
   }
 
   /**
-   * Occurances of the current issue, filtered out from all issues raised in the check
+   * Occurrences of the current issue, filtered out from all issues raised in the check
    *
-   * @returns {ChechIssueConnection}
+   * @returns {CheckIssue[]}
    */
-  get issueOccurrences(): CheckIssueConnection {
-    const filteredIssueConnection = {} as CheckIssueConnection
-    if (!this.checkIssues.edges) return filteredIssueConnection
-    filteredIssueConnection.edges = this.checkIssues.edges.filter(
-      (issue: Maybe<CheckIssueEdge>) => {
-        return issue?.node?.shortcode === this.$route.params.issueId
+  get issueOccurrences(): CheckIssue[] {
+    const filteredIssueOccurrences = [] as CheckIssue[]
+
+    if (!this.checkIssues.edges) {
+      return filteredIssueOccurrences
+    }
+
+    let filteredCheckIssues = (resolveNodes(this.checkIssues) as CheckIssue[]).filter(
+      (issue: CheckIssue) => {
+        return issue.shortcode === this.$route.params.issueId
       }
     )
-    filteredIssueConnection.totalCount = filteredIssueConnection.edges.length
-    return filteredIssueConnection
+
+    if (this.context.isRunner) {
+      filteredCheckIssues = filteredCheckIssues.map((filteredCheckIssue: CheckIssue) => {
+        return {
+          ...filteredCheckIssue,
+          sourceCodeMarkup: this.codeSnippets[filteredCheckIssue.sourceCodeIdentifier as string]
+        }
+      })
+    }
+
+    return filteredCheckIssues
   }
 
   /**
@@ -554,6 +587,32 @@ export default class RunIssueDetails extends mixins(
       title: `${title || 'Run'} • ${owner}/${repo}`,
       description:
         'DeepSource is an automated code review tool that helps developers automatically find and fix issues in their code.'
+    }
+  }
+
+  // Fetch run issue occurrence code snippets if in Runner context
+  async fetchRunnerCodeSnippets() {
+    if (this.context.isRunner) {
+      this.snippetsLoading = true
+
+      const sourceCodeIdentifierEntries = this.issueOccurrences.map(
+        ({ sourceCodeIdentifier }) => sourceCodeIdentifier
+      ) as string[]
+
+      const endpointUrl = this.runnerInfo.codeSnippetUrl
+
+      const requestBody: AnalysisRequestBodyT = {
+        snippet_ids: sourceCodeIdentifierEntries
+      }
+
+      try {
+        const parsedResponse: Record<string, string> = await fetchSnippets(endpointUrl, requestBody)
+        this.codeSnippets = parsedResponse
+      } catch (_) {
+        this.snippetsFetchErrored = true
+      } finally {
+        this.snippetsLoading = false
+      }
     }
   }
 }

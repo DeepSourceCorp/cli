@@ -4,49 +4,49 @@
       :is-open="true"
       span-custom-height
       custom-max-height="max-h-full"
-      class="w-full border rounded-md border-slate-400"
+      class="w-full rounded-md border border-slate-400"
       :class="{
-        'opacity-60 pointer-events-none filter-grayscale transition transform-gpu duration-300 ease-in-out':
+        'pointer-events-none transform-gpu opacity-60 transition duration-300 ease-in-out filter-grayscale':
           isIgnored || (checkIssueIds.length && checkIssueIds.includes(id))
       }"
     >
       <!-- heading -->
       <template #title="{ open, toggleAccordion }">
         <div
-          class="p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-slate-400"
-          :class="open ? 'border-opacity-100 rounded-b-none' : 'border-opacity-0 delay-200'"
+          class="space-y-1 rounded-md border-b border-slate-400 bg-ink-300 p-3 transition-all duration-100"
+          :class="open ? 'rounded-b-none border-opacity-100' : 'border-opacity-0 delay-200'"
         >
           <div class="flex justify-between gap-x-2">
             <div
               v-tooltip="open ? 'Collapse code block' : 'Expand code block'"
-              class="w-full space-y-1 cursor-pointer"
+              class="w-full cursor-pointer space-y-1"
               @click="toggleAccordion"
             >
               <div class="flex flex-grow">
                 <span
-                  class="flex-grow text-base font-medium text-vanilla-100 break-all"
+                  class="flex-grow break-all text-base font-medium text-vanilla-100"
                   v-html="safeRenderBackticks(text)"
                 ></span>
               </div>
               <div
-                class="items-center block space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4"
+                class="block items-center space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4"
               >
                 <a
                   :href="blobUrl"
                   target="_blank"
                   rel="noreferrer noopener"
-                  class="flex items-baseline text-xs truncate gap-x-2 text-vanilla-400"
+                  class="flex items-baseline gap-x-2 truncate text-xs text-vanilla-400"
                 >
                   <span>
                     <z-icon
                       icon="file-text"
                       size="x-small"
                       color="vanilla-400"
-                      class="flex-shrink-0 -mb-0.5"
+                      class="-mb-0.5 flex-shrink-0"
                     />
                   </span>
                   <span
-                    class="flex flex-wrap items-baseline max-w-lg"
+                    class="flex max-w-lg flex-wrap items-baseline"
                     v-html="getWrappablePath(path)"
                   ></span>
                 </a>
@@ -54,7 +54,7 @@
             </div>
 
             <!-- hide the entire block if the user doesn't have permissions to ignore issues -->
-            <div v-if="canIgnoreIssues" class="flex justify-end w-12">
+            <div v-if="canIgnoreIssues" class="flex w-12 justify-end">
               <z-menu>
                 <template #trigger="{ isOpen, toggle }">
                   <z-button
@@ -64,7 +64,7 @@
                     icon="slash"
                     icon-color="vanilla-400"
                     size="small"
-                    class="-mt-1 -mr-1 focus:outline-none hover:bg-ink-200"
+                    class="focus:outline-none -mt-1 -mr-1 hover:bg-ink-200"
                     :class="{ 'bg-ink-200': isOpen }"
                     @click.prevent="toggle"
                   />
@@ -80,7 +80,7 @@
                   </z-menu-section>
                   <z-menu-section :divider="false" title="Other actions" class="text-left">
                     <z-menu-item @click="openIgnoreIssueModal('occurence')"
-                      ><span class="overflow-hidden leading-6 overflow-ellipsis"
+                      ><span class="overflow-hidden overflow-ellipsis leading-6"
                         >Ignore all occurrences in {{ path }}</span
                       ></z-menu-item
                     >
@@ -93,7 +93,23 @@
       </template>
       <template #default>
         <!-- Code -->
-        <div class="flex flex-col space-y-1">
+        <div v-if="snippetsLoading" class="h-32 animate-pulse bg-ink-300"></div>
+
+        <div
+          v-else-if="snippetsFetchErrored || !sourceCodeMarkup"
+          class="flex flex-col items-center justify-center gap-y-3 p-6"
+        >
+          <img
+            src="~/assets/images/ui-states/no-accounts.png"
+            alt="Fetching of source code snippets errored"
+            class="h-8 w-10"
+          />
+          <p class="max-w-sm text-center text-xs text-vanilla-400">
+            Could not load the source code snippet.
+          </p>
+        </div>
+
+        <div v-else class="flex flex-col space-y-1">
           <div class="text-xs xl:text-sm">
             <z-code :content="sourceCodeMarkup" />
           </div>
@@ -142,7 +158,6 @@ import {
   ZMenuSection,
   ZAccordionItem
 } from '@deepsource/zeal'
-import { fromNow } from '~/utils/date'
 import { safeRenderBackticks } from '~/utils/string'
 import { toWrappableString } from '~/utils/string'
 
@@ -196,6 +211,12 @@ export default class IssueEditor extends Vue {
 
   @Prop({ default: false })
   canIgnoreIssues: Boolean
+
+  @Prop({ default: false })
+  snippetsLoading: boolean
+
+  @Prop({ default: false })
+  snippetsFetchErrored: boolean
 
   isOpen = false
   currentComponent = ''

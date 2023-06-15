@@ -8,13 +8,14 @@ import { Context } from '@nuxt/types'
 /**
  * Returns Apollo server's url depending upon the environment that Bifrost is running in¸
  *
- * @param  {Context['$config']} config
+ * @param {Context['$config']} config
  * @returns string
  */
 export const getHttpUri = (config: Context['$config']): string => {
   if (process.env.NODE_ENV === 'development') {
     return 'http://localhost:8000/graphql/'
   }
+
   if (process.server) return config.apolloServerUri as string
   if (process.client) return config.apolloClientUri as string
   throw new Error('Both process.server and process.client are false')
@@ -54,16 +55,24 @@ export default ({
   //? When a request is handled via SSR, sentry and nginx receive the internal Bifrost pod's IP as client IP.
   //? The following middleware handles forwarding the IP of the actual client.
   const forwardHeadersMiddleware = new ApolloLink((operation, forward) => {
+    let additionalHeaders = {}
+
     if (process.server) {
       const clientIp =
-        (req.headers['x-forwarded-for'] as string)?.split(',').pop() || req.connection.remoteAddress
-      operation.setContext(({ headers = {} }) => ({
-        headers: {
-          ...headers,
-          'x-forwarded-for': clientIp
-        }
-      }))
+        (req.headers['x-forwarded-for'] as string)?.split(',').pop() || req.socket.remoteAddress
+
+      additionalHeaders = { 'x-forwarded-for': clientIp, 'x-forwarded-host': req.headers.host }
+    } else if (process.client) {
+      additionalHeaders = { 'x-forwarded-host': window.location.hostname }
     }
+
+    operation.setContext(({ headers = {} }) => ({
+      headers: {
+        ...headers,
+        ...additionalHeaders
+      }
+    }))
+
     return forward(operation)
   })
 

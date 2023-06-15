@@ -39,6 +39,8 @@
       "RepositoryMetricValue",
       "RepositorySetting",
       "Run",
+      "Runner",
+      "RunnerApp",
       "SilenceRule",
       "SourceableRepository",
       "Team",

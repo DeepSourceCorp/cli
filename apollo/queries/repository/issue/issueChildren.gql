@@ -1,4 +1,11 @@
-query($nodeId: ID!, $limit: Int, $after: String, $q: String, $sort: String) {
+query issueChildren(
+  $nodeId: ID!
+  $limit: Int
+  $after: String
+  $q: String
+  $sort: String
+  $isRunner: Boolean!
+) {
   node(id: $nodeId) {
     ... on RepositoryIssue {
       shortcode
@@ -18,7 +25,18 @@ query($nodeId: ID!, $limit: Int, $after: String, $q: String, $sort: String) {
             endLine
             endColumn
             sourceCodeMarkup
+            sourceCodeIdentifier
             createdAt
+          }
+        }
+      }
+
+      repositoryInstance {
+        owner @include(if: $isRunner) {
+          id
+          runnerApp {
+            id
+            codeSnippetUrl
           }
         }
       }

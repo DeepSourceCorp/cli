@@ -29,7 +29,8 @@ import { resolveNodes } from '~/utils/array'
         provider,
         owner,
         name: repo,
-        runId
+        runId,
+        isRunner: false // This is the top-level page. We don't require code snippets here, hence supplying `isRunner` as `false`. The fetch is done in the child view.
       })) as Run | undefined
 
       // Show the UI state corresponding to archived runs after checking against the error message
@@ -49,6 +50,7 @@ import { resolveNodes } from '~/utils/array'
         }
       }
 
+      // Show `404` page if the run doesn't exist
       error({ statusCode: 404, message: 'This page is not real' })
     }
   ],

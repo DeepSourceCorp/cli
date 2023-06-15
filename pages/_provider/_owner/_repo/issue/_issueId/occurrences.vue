@@ -32,6 +32,8 @@
               :blob-url-root="repository.blobUrlRoot"
               :check-issue-ids="issuesIgnored"
               :can-ignore-issues="canIgnoreIssues"
+              :snippets-fetch-errored="snippetsFetchErrored"
+              :snippets-loading="snippetsLoading"
               @ignoreIssues="ignoreIssues"
             />
           </div>
@@ -54,17 +56,18 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
 import { ZPagination } from '@deepsource/zeal'
-import { IssueDescription, IssueOccurrenceSection } from '@/components/RepoIssues/index'
+import { Component, mixins } from 'nuxt-property-decorator'
 
-import IssueDetailMixin from '@/mixins/issueDetailMixin'
-import RepoDetailMixin from '@/mixins/repoDetailMixin'
-
-import { CheckIssue } from '@/types/types'
+import ContextMixin from '~/mixins/contextMixin'
+import IssueDetailMixin from '~/mixins/issueDetailMixin'
+import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import { resolveNodes } from '~/utils/array'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
+
+import { CheckIssue } from '~/types/types'
+import { resolveNodes } from '~/utils/array'
+import { AnalysisRequestBodyT, fetchSnippets } from '~/utils/runner'
 import { makeSafeNumber } from '~/utils/string'
 
 const PAGE_SIZE = 5
@@ -72,28 +75,51 @@ const VISIBLE_PAGES = 3
 
 @Component({
   components: {
-    IssueOccurrenceSection,
-    IssueDescription,
     ZPagination
   },
   layout: 'repository',
   scrollToTop: true
 })
 export default class IssuesDetails extends mixins(
+  ContextMixin,
   IssueDetailMixin,
   RepoDetailMixin,
   RoleAccessMixin,
   RouteQueryMixin
 ) {
-  issuesIgnored: Array<string> = []
+  issuesIgnored: string[] = []
+
+  codeSnippets = {} as Record<string, string>
+
+  snippetsLoading = false
+  snippetsFetchErrored = false
 
   get currentPage(): number {
     return makeSafeNumber(this.queryParams.page as string, 1)
   }
 
   async fetch(): Promise<void> {
+    if (!Object.keys(this.context).length) {
+      await this.fetchContext()
+    }
+
     await this.fetchIssueData()
-    await this.fetchChildren()
+
+    try {
+      await this.fetchChildren()
+    } catch (err) {
+      const typedError = err as Error
+      const errMsg = `${typedError.message.replace('Graphql error: ', '')}.` as `${string}.`
+
+      this.$logErrorAndToast(typedError, errMsg)
+    }
+
+    // Fetch issue occurrence code snippets if in Runner context
+    // The use case here is that we need not wait till the source code snippets fetch to be resolved
+    // The issue titles and other information is fetched; hence it can be displayed in the UI
+    // Skeleton loaders show up just in place of the code snippets until the fetch is done
+    this.fetchRunnerCodeSnippets()
+
     await this.fetchRepoPerms(this.baseRouteParams)
   }
 
@@ -112,7 +138,8 @@ export default class IssuesDetails extends mixins(
       sort: this.queryParams.sort as string,
       q: this.queryParams.q as string,
       currentPageNumber: this.queryParams.page ? Number(this.queryParams.page) : 1,
-      limit: PAGE_SIZE
+      limit: PAGE_SIZE,
+      isRunner: this.context.isRunner as boolean
     })
   }
 
@@ -173,7 +200,15 @@ export default class IssuesDetails extends mixins(
   }
 
   get issuesInCheck(): CheckIssue[] {
-    return resolveNodes(this.checkIssues) as CheckIssue[]
+    const resolvedCheckIssues = resolveNodes(this.checkIssues) as CheckIssue[]
+
+    if (this.context.isRunner) {
+      resolvedCheckIssues.forEach((checkIssue) => {
+        checkIssue.sourceCodeMarkup = this.codeSnippets[checkIssue.sourceCodeIdentifier as string]
+      })
+    }
+
+    return resolvedCheckIssues
   }
 
   get canIgnoreIssues(): boolean {
@@ -187,6 +222,32 @@ export default class IssuesDetails extends mixins(
 
   get totalVisible(): number {
     return this.pageCount >= VISIBLE_PAGES ? VISIBLE_PAGES : this.pageCount
+  }
+
+  // Fetch issue occurrence code snippets if in Runner context
+  async fetchRunnerCodeSnippets() {
+    if (this.context.isRunner) {
+      this.snippetsLoading = true
+
+      const sourceCodeIdentifierEntries = this.issuesInCheck.map(
+        ({ sourceCodeIdentifier }) => sourceCodeIdentifier
+      ) as string[]
+
+      const endpointUrl = this.runnerInfo.codeSnippetUrl
+
+      const requestBody: AnalysisRequestBodyT = {
+        snippet_ids: sourceCodeIdentifierEntries
+      }
+
+      try {
+        const parsedResponse: Record<string, string> = await fetchSnippets(endpointUrl, requestBody)
+        this.codeSnippets = parsedResponse
+      } catch (_) {
+        this.snippetsFetchErrored = true
+      } finally {
+        this.snippetsLoading = false
+      }
+    }
   }
 }
 </script>

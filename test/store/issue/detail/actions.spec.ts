@@ -1,27 +1,30 @@
 import {
-  actions,
-  IssueDetailMutations,
-  IssueDetailModuleState,
   IssueDetailActionContext,
-  IssueDetailActions
+  IssueDetailActions,
+  IssueDetailModuleState,
+  IssueDetailMutations,
+  actions
 } from '~/store/issue/detail'
-import { mockIssueDetailState } from '../__mocks__/detail.mock'
-import { Repository, IgnoreCheckIssueActionChoice } from '~/types/types'
 import { GraphqlMutationResponse, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+import {
+  IgnoreCheckIssueActionChoice,
+  Issue,
+  Owner,
+  Repository,
+  RepositoryIssue,
+  SilenceRule,
+  VcsProviderChoices
+} from '~/types/types'
+import { mockIssueDetailState } from '../__mocks__/detail.mock'
+
+import { providerMetaMap } from '~/plugins/helpers/provider'
+import { resolveNodes } from '~/utils/array'
 
 let issueDetailState: IssueDetailModuleState
 let actionCxt: IssueDetailActionContext
 let spy: jest.SpyInstance
 let commit: jest.Mock
 let localThis: any
-
-const providerMetaMap = {
-  gh: {
-    text: 'Github',
-    shortcode: 'gh',
-    value: 'GITHUB'
-  }
-}
 
 describe('[Store] Issue/Detail', () => {
   beforeEach(() => {
@@ -299,6 +302,263 @@ describe('[Store] Issue/Detail', () => {
         test('successfully calls the api', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
+      })
+    })
+
+    describe(`Action "${IssueDetailActions.FETCH_ISSUE_CHILDREN}"`, () => {
+      beforeEach(async () => {
+        localThis = {
+          $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            return Promise.resolve({
+              data: {
+                node: {
+                  shortcode: 'python',
+                  checkIssues: issueDetailState.checkIssues,
+                  repositoryInstance: {
+                    owner: {
+                      id: 'test-owner-id',
+                      runnerApp: issueDetailState.runnerInfo
+                    } as Owner
+                  }
+                } as RepositoryIssue
+              }
+            })
+          },
+          $getGQLAfter: () => ''
+        }
+
+        // Setting the global spy on `localThis.$fetchGraphqlData`
+        spy = jest.spyOn(localThis, '$fetchGraphqlData')
+        await actions[IssueDetailActions.FETCH_ISSUE_CHILDREN].call(localThis, actionCxt, {
+          nodeId: 'test-node-id',
+          currentPageNumber: 1,
+          limit: 25,
+          isRunner: true
+        })
+      })
+
+      test('successfully calls the api', () => {
+        expect(spy).toHaveBeenCalledTimes(1)
+      })
+
+      test('commits the necessary mutations', () => {
+        expect(commit).toHaveBeenCalledTimes(2)
+
+        const {
+          mock: {
+            calls: [firstCall, secondCall]
+          }
+        } = commit
+
+        expect(firstCall[0]).toBe(IssueDetailMutations.SET_ISSUE_CHILDREN)
+        expect(firstCall[1]).toEqual(issueDetailState.checkIssues)
+
+        expect(secondCall[0]).toBe(IssueDetailMutations.SET_RUNNER_INFO)
+        expect(secondCall[1]).toEqual(issueDetailState.runnerInfo)
+      })
+    })
+
+    describe(`Action "${IssueDetailActions.FETCH_SINGLE_ISSUE}"`, () => {
+      describe('Success', () => {
+        beforeEach(async () => {
+          localThis = {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return Promise.resolve({
+                data: {
+                  issue: issueDetailState.singleIssue as Issue
+                }
+              })
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+          await actions[IssueDetailActions.FETCH_SINGLE_ISSUE].call(localThis, actionCxt, {
+            shortcode: 'python'
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+
+        test('commits the necessary mutations', () => {
+          expect(commit).toHaveBeenCalledTimes(3)
+
+          const {
+            mock: {
+              calls: [firstCall, secondCall, thirdCall]
+            }
+          } = commit
+
+          expect(firstCall[0]).toBe(IssueDetailMutations.SET_LOADING)
+          expect(firstCall[1]).toBe(true)
+
+          expect(secondCall[0]).toBe(IssueDetailMutations.SET_SINGLE_ISSUE)
+          expect(secondCall[1]).toEqual(issueDetailState.singleIssue)
+
+          expect(thirdCall[0]).toBe(IssueDetailMutations.SET_LOADING)
+          expect(thirdCall[1]).toBe(false)
+        })
+      })
+
+      describe('Failure', () => {
+        beforeEach(async () => {
+          localThis = {
+            $fetchGraphqlData(): Promise<Error> {
+              return Promise.reject(new Error())
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+          await actions[IssueDetailActions.FETCH_SINGLE_ISSUE].call(localThis, actionCxt, {
+            shortcode: 'python'
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+
+        test('commits the necessary mutations', () => {
+          expect(commit).toHaveBeenCalledTimes(3)
+
+          const {
+            mock: {
+              calls: [firstCall, secondCall, thirdCall]
+            }
+          } = commit
+
+          expect(firstCall[0]).toBe(IssueDetailMutations.SET_LOADING)
+          expect(firstCall[1]).toBe(true)
+
+          expect(secondCall[0]).toBe(IssueDetailMutations.SET_ERROR)
+          expect(secondCall[1]).toEqual(new Error())
+
+          expect(thirdCall[0]).toBe(IssueDetailMutations.SET_LOADING)
+          expect(thirdCall[1]).toBe(false)
+        })
+      })
+    })
+
+    describe(`Action "${IssueDetailActions.FETCH_SILENCE_RULES}"`, () => {
+      let result = [] as Array<SilenceRule>
+
+      const silenceRules = {
+        totalCount: 3,
+        edges: [
+          {
+            node: {
+              silenceLevel: 'RL',
+              id: 'U2lsZW5jZVJ1bGU6YmFkbXZr',
+              filePath: null,
+              createdAt: '2023-06-12T11:15:21.167286+00:00',
+              metadata: {
+                type: 'pattern',
+                glob_pattern: 'test.js'
+              },
+              issue: {
+                shortcode: 'JS-0111',
+                title: 'Unnecessary `return await` function found',
+                analyzer: {
+                  shortcode: 'javascript',
+                  __typename: 'Analyzer'
+                }
+              },
+              creator: {
+                firstName: 'James',
+                lastName: 'George',
+                email: 'james@deepsource.io',
+                avatar: 'https://static.deepsource.com/dashboard/images/empty-avatar.svg'
+              }
+            }
+          },
+          {
+            node: {
+              silenceLevel: 'FL',
+              id: 'U2lsZW5jZVJ1bGU6enh5cXdy',
+              filePath: 'src/commands/init/index.js',
+              createdAt: '2023-01-11T07:47:54.687550+00:00',
+              metadata: {
+                type: 'forever'
+              },
+              issue: {
+                shortcode: 'JS-C1003',
+                title: 'Avoid using wildcard imports',
+                analyzer: {
+                  shortcode: 'javascript'
+                }
+              },
+              creator: {
+                firstName: 'James',
+                lastName: 'George',
+                email: 'james@deepsource.io',
+                avatar: 'https://static.deepsource.com/dashboard/images/empty-avatar.svg'
+              }
+            }
+          },
+          {
+            node: {
+              silenceLevel: 'RL',
+              id: 'U2lsZW5jZVJ1bGU6emtxb3dk',
+              filePath: null,
+              createdAt: '2023-01-11T07:46:56.765677+00:00',
+              metadata: {
+                type: 'forever'
+              },
+              issue: {
+                shortcode: 'JS-0049',
+                title: 'Avoid square-bracket notation when accessing properties',
+                analyzer: {
+                  shortcode: 'javascript',
+                  __typename: 'Analyzer'
+                }
+              },
+              creator: {
+                firstName: 'James',
+                lastName: 'George',
+                email: 'james@deepsource.io',
+                avatar: 'https://static.deepsource.com/dashboard/images/empty-avatar.svg'
+              }
+            }
+          }
+        ]
+      }
+
+      beforeEach(async () => {
+        localThis = {
+          $providerMetaMap: providerMetaMap,
+          $fetchGraphqlData() {
+            return Promise.resolve({
+              data: {
+                repository: {
+                  id: 'UmVwb3NpdG9yeTp3eWxsdmc=',
+                  hasViewerEditAccess: true,
+                  silenceRules
+                }
+              }
+            })
+          },
+          $getGQLAfter: () => ''
+        }
+
+        // Setting the global spy on `localThis.$fetchGraphqlData`
+        spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+        result = await actions[IssueDetailActions.FETCH_SILENCE_RULES].call(localThis, actionCxt, {
+          provider: VcsProviderChoices.Github,
+          owner: 'deepsourcelabs',
+          name: 'test-repo'
+        })
+      })
+
+      test('successfully calls the api', () => {
+        expect(spy).toHaveBeenCalledTimes(1)
+      })
+
+      test('returns the silence rules as a flat array', () => {
+        expect(result).toEqual(resolveNodes(silenceRules))
       })
     })
   })

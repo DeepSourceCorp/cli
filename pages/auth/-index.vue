@@ -63,10 +63,12 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
   async mounted(): Promise<void> {
     const { provider } = this.$route.meta as Record<string, string>
     const { code } = this.$route.query
+    const { appId } = this.$route.params
 
     await this.logInUser({
       provider,
-      code: code as string
+      code: code as string,
+      appId: appId as string
     })
 
     await Promise.all([this.fetchActiveUser(), this.fetchContext()])

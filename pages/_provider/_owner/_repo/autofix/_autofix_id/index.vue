@@ -275,6 +275,8 @@
               :selected-files="selectedFiles"
               :is-read-only="isReadOnly"
               :selected-hunk-ids="selectedHunkIds"
+              :snippets-fetch-errored="snippetsFetchErrored"
+              :snippets-loading="snippetsLoading"
               @selectFile="selectFile"
               @selectFileIfAllHunksSelected="selectFileIfAllHunksSelected"
             />
@@ -346,10 +348,12 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
 
 import { fromNow } from '~/utils/date'
 import { isChristmasSeason } from '~/utils/easter'
+import { AutofixRequestBodyT, fetchSnippets } from '~/utils/runner'
 import { safeRenderBackticks } from '~/utils/string'
 
 import RepositoryAutofixRunGQLQuery from '~/apollo/queries/repository/runs/autofixRun/detail.gql'
 
+import ContextMixin from '~/mixins/contextMixin'
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 import { AUTOFIX_STATUS, COMMIT_STATUS, PULL_REQUEST_STATUS } from '~/types/autofix'
 import { AppFeatures, RepoPerms } from '~/types/permTypes'
@@ -389,13 +393,18 @@ const runStore = namespace('run/detail')
     isChristmasSeason
   }
 })
-export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin) {
+export default class Autofix extends mixins(ContextMixin, RoleAccessMixin, RepoDetailMixin) {
   public loadingOnPageVisit = false
   public isArchivedAutofixRun = false
   public isGroup = false
   public isReadOnly = false
   public showInstallModal = false
   public triggeringAutofix = false
+
+  patchSnippets = {} as Record<string, Record<string, unknown>>
+
+  snippetsLoading = false
+  snippetsFetchErrored = false
 
   public height = '1px'
 
@@ -411,9 +420,9 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin) {
     PRC: 'Pull-request closed'
   }
 
-  public selectedFiles: Array<string> = []
-  public selectedHunkIds: Array<number> = []
-  public selectedFileIdMapping: Record<string, Array<number>> = {}
+  public selectedFiles: string[] = []
+  public selectedHunkIds: number[] = []
+  public selectedFileIdMapping: Record<string, number[]> = {}
 
   @runStore.Action(RunDetailActions.CREATE_PR)
   createPR: (
@@ -467,21 +476,41 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin) {
    * Fetch Autofix run details
    *
    * @param {boolean} [refetch=true]
-   * @returns {Promise<AutofixRun>}
+   * @returns {Promise<void>}
    */
   async fetchAutofixRun(refetch = true): Promise<void> {
     try {
+      if (!Object.hasOwnProperty.call(this.context, 'isRunner')) {
+        await this.fetchContext()
+      }
+
       await this.fetchRepoPerms(this.baseRouteParams)
 
       const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
         RepositoryAutofixRunGQLQuery,
         {
-          runId: this.$route.params.autofix_id
+          runId: this.$route.params.autofix_id,
+          isRunner: this.context.isRunner
         },
         refetch
       )
 
       this.autofixRun = response.data.autofixRun as AutofixRun
+
+      // Fetch Autofix patch snippets if in Runner context
+      if (this.context.isRunner) {
+        const endpointUrl = this.autofixRun.repository.owner.runnerApp?.patchSnippetUrl
+
+        if (!endpointUrl) {
+          this.snippetsFetchErrored = true
+          return
+        }
+
+        // The use case here is that we need not wait till the source code snippets fetch to be resolved
+        // The issue titles and other information is fetched; hence it can be displayed in the UI
+        // Skeleton loaders show up just in place of the code snippets until the fetch is done
+        this.fetchRunnerPatchSnippets(endpointUrl)
+      }
     } catch (err) {
       if ((err as Error).message?.replace('GraphQL error: ', '') === RunTypes.ARCHIVED_RUN) {
         this.isArchivedAutofixRun = true
@@ -589,8 +618,8 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin) {
     return this.autofixRun.changeset ? Object.keys(this.autofixRun.changeset).length : 0
   }
 
-  get filesAffected(): Array<string> {
-    const files: Array<string> = []
+  get filesAffected(): string[] {
+    const files: string[] = []
     this.selectedHunkIds.forEach((id) => {
       for (const filePath in this.autofixRun.changeset) {
         if (Object.prototype.hasOwnProperty.call(this.autofixRun.changeset, filePath)) {
@@ -796,6 +825,58 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin) {
       }
     })
     await this.fetchAutofixRun()
+  }
+
+  // Fetch Autofix patch snippets if in Runner context
+  async fetchRunnerPatchSnippets(endpointUrl: string) {
+    this.snippetsLoading = true
+
+    const requestBody: AutofixRequestBodyT = {
+      run_id: this.$route.params.autofix_id,
+      shortcode: this.autofixRun.analyzer?.name as string,
+      snippet_ids: {} as Record<string, string[]>
+    }
+
+    // Populating `snippet_ids`
+    Object.keys(this.autofixRun.changeset).forEach((filePath) => {
+      requestBody['snippet_ids'][filePath] = []
+
+      this.autofixRun.changeset[filePath].patches.forEach(
+        ({ patch_identifier }: Record<string, unknown>) => {
+          requestBody['snippet_ids'][filePath].push(patch_identifier as string)
+        }
+      )
+    })
+
+    try {
+      const parsedResponse: Record<string, Record<string, unknown>> = await fetchSnippets(
+        endpointUrl,
+        requestBody
+      )
+
+      this.patchSnippets = parsedResponse
+
+      // Update the `autofixRun` data property with the patch snippets received from the API
+      Object.keys(this.autofixRun.changeset).forEach((filePath) => {
+        this.autofixRun.changeset[filePath] = {
+          ...this.autofixRun.changeset[filePath],
+          patches: this.autofixRun.changeset[filePath].patches.map(
+            (patch: Record<string, unknown>) => {
+              return {
+                ...patch,
+                before_html:
+                  this.patchSnippets[patch.patch_identifier as string]?.before_html || '',
+                after_html: this.patchSnippets[patch.patch_identifier as string]?.after_html || ''
+              }
+            }
+          )
+        }
+      })
+    } catch (_) {
+      this.snippetsFetchErrored = true
+    } finally {
+      this.snippetsLoading = false
+    }
   }
 }
 </script>

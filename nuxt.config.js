@@ -21,8 +21,6 @@ function toBool(item) {
   }
 }
 
-import { version } from './package.json'
-
 const IS_ON_PREM = toBool(process.env.ON_PREM)
 const IS_CLOUD_PRODUCTION =
   !IS_ON_PREM && process.env.NODE_ENV === 'production' && process.env.BIFROST_ENV === 'production'
@@ -317,6 +315,13 @@ export default {
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
         meta: { provider: 'ads-oauth2' }
+      })
+      routes.push({
+        name: 'runner',
+        path: '/accounts/runner/apps/:appId/login/callback/bifrost',
+        component: resolve(__dirname, 'pages/auth/-index.vue'),
+        chunkName: 'pages/auth',
+        meta: { provider: 'runner' }
       })
     }
   },

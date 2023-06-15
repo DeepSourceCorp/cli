@@ -4,14 +4,14 @@
     <div
       v-for="(change, name) in changeSet"
       :key="name"
-      class="relative flex flex-col border rounded-sm code border-slate-400"
+      class="code relative flex flex-col rounded-sm border border-slate-400"
     >
       <div
         v-if="isGroup"
-        class="absolute w-6 h-0.5 bg-juniper transform -translate-x-full top-4"
+        class="absolute top-4 h-0.5 w-6 -translate-x-full transform bg-juniper"
       ></div>
       <!-- title -->
-      <div class="flex items-center p-2 space-x-1 text-sm border-b bg-ink-300 border-slate-400">
+      <div class="flex items-center space-x-1 border-b border-slate-400 bg-ink-300 p-2 text-sm">
         <z-checkbox
           v-if="!isReadOnly"
           v-model="selectedFiles"
@@ -61,58 +61,89 @@
           </template>
         </span>
       </div>
-      <!-- Editor -->
+
+      <div v-if="snippetsLoading" class="h-44 animate-pulse bg-ink-300"></div>
+
       <div
-        v-for="(code, index) in change.patches"
-        :key="code.id"
-        class="flex w-full"
-        :class="{ 'border-b-2 border-slate-400': index !== change.patches.length - 1 }"
+        v-else-if="snippetsFetchErrored"
+        class="flex flex-col items-center justify-center gap-y-3 p-6"
       >
-        <div
-          class="flex items-start pt-4 bg-ink-300"
-          :class="{
-            'pl-2': !isReadOnly && code.action === 'modified' && code.action !== 'deleted'
-          }"
-        >
-          <z-checkbox
-            v-if="!isReadOnly && code.action === 'modified' && code.action !== 'deleted'"
-            v-model="selectedHunkIds"
-            :value="code.id"
-            size="small"
-            font-size="base"
-            spacing="4"
-            @change="selectFileIfAllHunksSelected(name, code.id)"
-          />
-        </div>
-        <template v-if="code.action === 'deleted'">
-          <div :class="{ 'bg-ink-300 opacity-20': !isHunkSelected(code.id) }">
-            <span v-if="autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.MERGED"
-              >This file was deleted</span
-            >
-            <span v-else>This file will be deleted</span>
-          </div>
-        </template>
-        <template v-else>
-          <div class="grid w-full grid-cols-2">
-            <div
-              class="col-span-1 border-r after_html border-slate-400"
-              :class="{
-                'bg-ink-300 opacity-20': !isHunkSelected(code.id)
-              }"
-            >
-              <z-code :content="code.before_html" />
-            </div>
-            <div
-              class="col-span-1 before_html"
-              :class="{
-                'bg-ink-300 opacity-20': !isHunkSelected(code.id)
-              }"
-            >
-              <z-code :content="code.after_html" />
-            </div>
-          </div>
-        </template>
+        <img
+          src="~/assets/images/ui-states/no-accounts.png"
+          alt="Fetching of source patch snippets errored"
+          class="h-8 w-10"
+        />
+        <p class="max-w-sm text-center text-xs text-vanilla-400">Could not load the patch.</p>
       </div>
+
+      <!-- Editor -->
+      <template v-else>
+        <div
+          v-for="(code, index) in change.patches"
+          :key="code.id"
+          class="flex w-full"
+          :class="{ 'border-b-2 border-slate-400': index !== change.patches.length - 1 }"
+        >
+          <div
+            class="flex items-start bg-ink-300 pt-4"
+            :class="{
+              'pl-2': !isReadOnly && code.action === 'modified' && code.action !== 'deleted'
+            }"
+          >
+            <z-checkbox
+              v-if="!isReadOnly && code.action === 'modified' && code.action !== 'deleted'"
+              v-model="selectedHunkIds"
+              :value="code.id"
+              size="small"
+              font-size="base"
+              spacing="4"
+              @change="selectFileIfAllHunksSelected(name, code.id)"
+            />
+          </div>
+
+          <template v-if="code.action === 'deleted'">
+            <div :class="{ 'bg-ink-300 opacity-20': !isHunkSelected(code.id) }">
+              <span v-if="autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.MERGED"
+                >This file was deleted</span
+              >
+              <span v-else>This file will be deleted</span>
+            </div>
+          </template>
+
+          <div
+            v-if="!code.before_html || !code.after_html"
+            class="flex flex-grow flex-col items-center justify-center gap-y-3 p-6"
+          >
+            <img
+              src="~/assets/images/ui-states/no-accounts.png"
+              alt="Fetching of source patch snippets errored"
+              class="h-8 w-10"
+            />
+            <p class="max-w-sm text-center text-xs text-vanilla-400">Could not load the patch.</p>
+          </div>
+
+          <template v-else>
+            <div class="grid w-full grid-cols-2">
+              <div
+                class="after_html col-span-1 border-r border-slate-400"
+                :class="{
+                  'bg-ink-300 opacity-20': !isHunkSelected(code.id)
+                }"
+              >
+                <z-code :content="code.before_html" />
+              </div>
+              <div
+                class="before_html col-span-1"
+                :class="{
+                  'bg-ink-300 opacity-20': !isHunkSelected(code.id)
+                }"
+              >
+                <z-code :content="code.after_html" />
+              </div>
+            </div>
+          </template>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -149,6 +180,12 @@ export default class AutofixCodeDiff extends Vue {
 
   @Prop()
   isGeneratedFromPr!: boolean
+
+  @Prop({ default: false })
+  snippetsLoading: boolean
+
+  @Prop({ default: false })
+  snippetsFetchErrored: boolean
 
   isChecked = false
 

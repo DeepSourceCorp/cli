@@ -10,7 +10,16 @@ import {
 } from '~/store/run/detail'
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
-import { IssueConnection, IssueEdge, Maybe, PageInfo, Repository, Run } from '~/types/types'
+import {
+  IssueConnection,
+  IssueEdge,
+  Maybe,
+  PageInfo,
+  Repository,
+  Run,
+  RunnerApp,
+  VcsProviderChoices
+} from '~/types/types'
 import {
   mockCheckDetail,
   mockCheckIssueList,
@@ -77,7 +86,16 @@ describe('[Store] Run/Detail', () => {
             },
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return Promise.resolve({
-                data: { repository: { id: 'hello', run: mockRunDetailState().run } as Repository }
+                data: {
+                  repository: {
+                    id: 'hello',
+                    run: mockRunDetailState().run,
+                    owner: {
+                      id: 'test-owner-id',
+                      runnerApp: mockRunDetailState().runnerInfo
+                    }
+                  } as Repository
+                }
               })
             }
           }
@@ -89,7 +107,8 @@ describe('[Store] Run/Detail', () => {
             provider: 'gh',
             owner: 'deepsourcelabs',
             name: 'demo-python',
-            runId: 'b2729b23-1126-4d84-a738-01d46da17978'
+            runId: 'b2729b23-1126-4d84-a738-01d46da17978',
+            isRunner: true
           })
         })
 
@@ -98,13 +117,13 @@ describe('[Store] Run/Detail', () => {
         })
 
         test('successfully commits mutations', () => {
-          expect(commit).toHaveBeenCalledTimes(4)
+          expect(commit).toHaveBeenCalledTimes(5)
         })
 
         test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
-              calls: [firstCall, , thirdCall]
+              calls: [firstCall, , , fourthCall]
             }
           } = commit
 
@@ -115,10 +134,10 @@ describe('[Store] Run/Detail', () => {
           expect(firstCall[1]).toEqual(true)
 
           // Assert if `RunDetailMutations.SET_LOADING` is being commited or not.
-          expect(thirdCall[0]).toEqual(RunDetailMutations.SET_LOADING)
+          expect(fourthCall[0]).toEqual(RunDetailMutations.SET_LOADING)
 
           // Assert if right data is passed to the mutation.
-          expect(thirdCall[1]).toEqual(false)
+          expect(fourthCall[1]).toEqual(false)
         })
 
         test(`successfully commits mutation ${RunDetailMutations.SET_RUN}`, async () => {
@@ -134,6 +153,21 @@ describe('[Store] Run/Detail', () => {
 
           // Assert if the response from api is same as the one passed to the mutation.
           expect(secondCall[1]).toEqual(apiResponse.data.repository.run)
+        })
+
+        test(`successfully commits mutation ${RunDetailMutations.SET_RUNNER_INFO}`, async () => {
+          const {
+            mock: {
+              calls: [, , thirdCall]
+            }
+          } = commit
+          const apiResponse = await localThis.$fetchGraphqlData()
+
+          // Assert if `RunDetailMutations.SET_RUNNER_INFO` is being commited or not.
+          expect(thirdCall[0]).toEqual(RunDetailMutations.SET_RUNNER_INFO)
+
+          // Assert if the response from api is same as the one passed to the mutation.
+          expect(thirdCall[1]).toEqual(apiResponse.data.repository.owner.runnerApp)
         })
       })
       describe('Failure', () => {
@@ -159,7 +193,8 @@ describe('[Store] Run/Detail', () => {
             provider: 'gh',
             owner: 'deepsourcelabs',
             name: 'demo-python',
-            runId: 'b2729b23-1126-4d84-a738-01d46da17978'
+            runId: 'b2729b23-1126-4d84-a738-01d46da17978',
+            isRunner: false
           })
         })
 
@@ -340,7 +375,8 @@ describe('[Store] Run/Detail', () => {
             checkId: 'string',
             shortcode: 'string',
             limit: 10,
-            currentPageNumber: 1
+            currentPageNumber: 1,
+            isRunner: false
           })
         })
 
@@ -403,7 +439,8 @@ describe('[Store] Run/Detail', () => {
             checkId: 'string',
             shortcode: 'string',
             limit: 10,
-            currentPageNumber: 1
+            currentPageNumber: 1,
+            isRunner: false
           })
         })
 
@@ -1138,6 +1175,26 @@ describe('[Store] Run/Detail', () => {
 
         mutations[RunDetailMutations.SET_PAGE_REFETCH_STATUS](runDetailState, newPageRefetchStatus)
         expect(runDetailState.pageRefetchStatus).toEqual(newPageRefetchStatus)
+      })
+    })
+
+    describe(`Mutation "${RunDetailMutations.SET_RUNNER_INFO}"`, () => {
+      beforeAll(() => {
+        runDetailState.runnerInfo = {} as RunnerApp
+      })
+
+      test('successfully adds runner related information to the state', () => {
+        const runnerInfo: RunnerApp = {
+          appId: 'test-app-id',
+          codeSnippetUrl: 'test-code-snippet-url',
+          id: 'test-id',
+          name: 'test-runner',
+          patchSnippetUrl: 'test-patch-snippet-url',
+          vcsProvider: VcsProviderChoices.Github
+        }
+
+        mutations[RunDetailMutations.SET_RUNNER_INFO](runDetailState, runnerInfo)
+        expect(runDetailState.runnerInfo).toEqual(runnerInfo)
       })
     })
   })

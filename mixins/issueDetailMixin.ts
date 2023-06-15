@@ -16,7 +16,8 @@ import {
   SilenceRule,
   IssuePriority,
   UpdateIssuePriorityInput,
-  IssuePriorityLevel
+  IssuePriorityLevel,
+  RunnerApp
 } from '~/types/types'
 
 const issueStore = namespace('issue/detail')
@@ -34,6 +35,9 @@ export default class IssueDetailMixin extends Vue {
 
   @issueStore.State
   checkIssues!: CheckIssueConnection
+
+  @issueStore.State
+  runnerInfo: RunnerApp
 
   // Queries
   @issueStore.Action(IssueDetailActions.FETCH_ISSUE)
@@ -64,6 +68,7 @@ export default class IssueDetailMixin extends Vue {
     q?: string
     currentPageNumber: number
     limit: number | null
+    isRunner: boolean
   }) => Promise<void>
 
   @issueStore.Action(IssueDetailActions.FETCH_ISSUE_PRIORITY)

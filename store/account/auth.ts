@@ -1,12 +1,12 @@
-import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
-import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
-import socialAuthUrlQuery from '@/apollo/queries/auth/socialAuthUrls.gql'
-import socialAuthMutation from '@/apollo/mutations/auth/socialAuth.gql'
 import logoutMutation from '@/apollo/mutations/auth/logout.gql'
 import refreshTokenMutation from '@/apollo/mutations/auth/refreshToken.gql'
+import socialAuthMutation from '@/apollo/mutations/auth/socialAuth.gql'
+import socialAuthUrlQuery from '@/apollo/queries/auth/socialAuthUrls.gql'
+import { ActionContext, ActionTree, GetterTree, MutationTree, Store } from 'vuex'
+import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
 import { RootState } from '~/store'
-import { SocialAuthUrl } from '~/types/types'
+import { AuthUrl, SocialAuthUrl } from '~/types/types'
 
 export enum AuthMutationTypes {
   SET_LOGGED_IN = 'setLoggedIn',
@@ -24,7 +24,6 @@ export enum AuthActionTypes {
 }
 
 export enum AuthGetterTypes {
-  GET_AUTH_URL = 'getAuthUrls',
   GET_LOGGED_IN = 'isLoggedIn',
   TOKEN = 'getJWT',
   EXPIRY = 'getJWTExpiry'
@@ -34,7 +33,7 @@ export interface AuthModuleState {
   token: string
   tokenExpiresIn: number
   loggedIn: boolean
-  authUrls: Record<string, string>
+  authUrls: Array<AuthUrl>
   error: Record<string, unknown>
 }
 
@@ -42,18 +41,13 @@ export const state = (): AuthModuleState => ({
   token: '',
   tokenExpiresIn: 0,
   loggedIn: false,
-  authUrls: {},
+  authUrls: [],
   error: {}
 })
 
 export type AuthActionContext = ActionContext<AuthModuleState, RootState>
 
 export const getters: GetterTree<AuthModuleState, RootState> = {
-  [AuthGetterTypes.GET_AUTH_URL]: (accountAuthState) => {
-    return (provider: string) => {
-      return provider in accountAuthState.authUrls ? accountAuthState.authUrls[provider] : ''
-    }
-  },
   [AuthGetterTypes.GET_LOGGED_IN]: (accountAuthState): boolean => {
     return accountAuthState.loggedIn
   },
@@ -76,7 +70,7 @@ interface AuthModuleMutations extends MutationTree<AuthModuleState> {
 
 export const mutations: AuthModuleMutations = {
   [AuthMutationTypes.SET_AUTH_URLS]: (accountAuthState, oauth: SocialAuthUrl) => {
-    accountAuthState.authUrls = oauth.socialUrls
+    accountAuthState.authUrls = oauth.socialUrls as Array<AuthUrl>
   },
   [AuthMutationTypes.SET_LOGGED_OUT]: (accountAuthState) => {
     accountAuthState.loggedIn = false
@@ -108,6 +102,7 @@ interface AuthModuleActions extends ActionTree<AuthModuleState, RootState> {
     args: {
       code: string
       provider: string
+      appId: string
     }
   ) => void
   [AuthActionTypes.REFRESH]: (this: Store<RootState>, injectee: AuthActionContext) => void
@@ -144,7 +139,8 @@ export const actions: AuthModuleActions = {
       socialAuthMutation,
       {
         provider: args.provider,
-        code: args.code
+        code: args.code,
+        appId: args.appId
       },
       null,
       false

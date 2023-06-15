@@ -1,5 +1,9 @@
 query {
   oauth {
-    socialUrls
+    socialUrls {
+      name
+      provider
+      url
+    }
   }
 }

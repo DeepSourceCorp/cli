@@ -1,5 +1,5 @@
-mutation SocialAuth($code: String!, $provider: String!) {
-  socialAuth(provider: $provider, code: $code) {
+mutation SocialAuth($code: String!, $provider: String!, $appId: String) {
+  socialAuth(provider: $provider, code: $code, appId: $appId) {
     token
     tokenExpiresIn
     refreshToken

@@ -1,13 +1,16 @@
-import { Component, Vue, namespace } from 'nuxt-property-decorator'
+import { Component, namespace, Vue } from 'nuxt-property-decorator'
 import { routerVcsMap } from '~/plugins/helpers/provider'
 
 import { AuthActionTypes } from '~/store/account/auth'
+import { ContextActionTypes } from '~/store/account/context'
+import { AuthUrl, Context, VcsProviderChoices } from '~/types/types'
 
 const authStore = namespace('account/auth')
+const contextStore = namespace('account/context')
 
 export interface LoginOption {
   shortcode: routerVcsMap
-  provider: string
+  provider: VcsProviderChoices
   icon: string
   label: string
   mobileLabel?: string
@@ -28,7 +31,10 @@ export default class AuthMixin extends Vue {
   token: string
 
   @authStore.State
-  authUrls: Record<string, string>
+  authUrls: Array<AuthUrl>
+
+  @contextStore.State
+  context: Context
 
   @authStore.Action(AuthActionTypes.LOG_OUT)
   logOutUser: (args: { onPrem: boolean }) => Promise<void>
@@ -37,7 +43,7 @@ export default class AuthMixin extends Vue {
   purgeClientData: (args: { onPrem: boolean }) => void
 
   @authStore.Action(AuthActionTypes.LOG_IN)
-  logInUser: (args: { code: string; provider: string }) => Promise<void>
+  logInUser: (args: { code: string; provider: string; appId: string }) => Promise<void>
 
   @authStore.Action(AuthActionTypes.FETCH_AUTH_URLS)
   fetchAuthUrls: () => Promise<void>
@@ -49,6 +55,10 @@ export default class AuthMixin extends Vue {
    */
   async fetch(): Promise<void> {
     await this.fetchAuthUrls()
+
+    if (!Object.hasOwnProperty.call(this.context, 'isRunner')) {
+      await this.$store.dispatch(`account/context/${ContextActionTypes.FETCH_CONTEXT}`)
+    }
   }
 
   /**
@@ -74,14 +84,67 @@ export default class AuthMixin extends Vue {
    * @returns {string}
    */
   buildUrl(provider: string): string {
-    if (provider in this.authUrls) {
-      return this.authUrls[provider]
-    }
-    return ''
+    const authUrlEntry = this.authUrls.find((authUrlEntry) => authUrlEntry.provider === provider)
+
+    return authUrlEntry?.url || ''
   }
 
-  get loginOptions(): LoginOption[] {
-    const options: LoginOption[] = []
+  get loginOptions(): Array<LoginOption> {
+    const options: Array<LoginOption> = []
+
+    const loginOptionsMap: Record<VcsProviderChoices, Omit<LoginOption, 'label'>> = {
+      [VcsProviderChoices.Github]: {
+        shortcode: routerVcsMap.gh,
+        provider: VcsProviderChoices.Github,
+        icon: 'github',
+        bg: 'bg-ink-200'
+      },
+      [VcsProviderChoices.GithubEnterprise]: {
+        shortcode: routerVcsMap.ghe,
+        provider: VcsProviderChoices.GithubEnterprise,
+        icon: 'github-enterprise',
+        bg: 'bg-ink-200'
+      },
+      [VcsProviderChoices.Gitlab]: {
+        shortcode: routerVcsMap.gl,
+        provider: VcsProviderChoices.Gitlab,
+        icon: 'gitlab',
+        bg: 'bg-gitlab'
+      },
+      [VcsProviderChoices.Bitbucket]: {
+        shortcode: routerVcsMap.bb,
+        provider: VcsProviderChoices.Bitbucket,
+        icon: 'bitbucket',
+        bg: 'bg-bitbucket'
+      },
+      [VcsProviderChoices.Gsr]: {
+        shortcode: routerVcsMap.gsr,
+        provider: VcsProviderChoices.Gsr,
+        icon: 'gsr-colored',
+        bg: 'bg-ink-200'
+      },
+      [VcsProviderChoices.Ads]: {
+        shortcode: routerVcsMap.ads,
+        provider: VcsProviderChoices.Ads,
+        icon: 'ads-colored',
+        bg: 'bg-ink-200'
+      }
+    }
+
+    if (this.context.isRunner) {
+      this.authUrls.forEach(({ name, provider }) => {
+        const label = `${name} on ${this.$providerMetaMap[provider].text}`
+
+        const loginOption = {
+          ...loginOptionsMap[provider],
+          label
+        }
+        options.push(loginOption)
+      })
+
+      return options
+    }
+
     const {
       onPrem,
       githubEnabled,
@@ -98,65 +161,51 @@ export default class AuthMixin extends Vue {
 
     if (!onPrem || !enableSaml || allowSocialAuth || onProvidersPage) {
       if (githubEnabled) {
-        options.push({
-          shortcode: routerVcsMap.gh,
-          provider: 'github',
-          icon: 'github',
-          label: 'GitHub',
-          bg: 'bg-ink-200'
-        })
+        const loginOption = {
+          ...loginOptionsMap[VcsProviderChoices.Github],
+          label: this.$providerMetaMap[VcsProviderChoices.Github].text
+        }
+        options.push(loginOption)
       }
 
       if (githubServerEnabled) {
-        options.push({
-          shortcode: routerVcsMap.ghe,
-          provider: 'github-enterprise',
-          icon: 'github-enterprise',
-          label: 'GitHub Enterprise',
-          bg: 'bg-ink-200'
-        })
+        const loginOption = {
+          ...loginOptionsMap[VcsProviderChoices.GithubEnterprise],
+          label: this.$providerMetaMap[VcsProviderChoices.GithubEnterprise].text
+        }
+        options.push(loginOption)
       }
 
       if (gitlabEnabled) {
-        options.push({
-          shortcode: routerVcsMap.gl,
-          provider: 'gitlab',
-          icon: 'gitlab',
-          label: 'GitLab',
-          bg: 'bg-gitlab'
-        })
+        const loginOption = {
+          ...loginOptionsMap[VcsProviderChoices.Gitlab],
+          label: this.$providerMetaMap[VcsProviderChoices.Gitlab].text
+        }
+        options.push(loginOption)
       }
 
       if (bitbucketEnabled) {
-        options.push({
-          shortcode: routerVcsMap.bb,
-          provider: 'bitbucket',
-          icon: 'bitbucket',
-          label: 'Bitbucket',
-          bg: 'bg-bitbucket'
-        })
+        const loginOption = {
+          ...loginOptionsMap[VcsProviderChoices.Bitbucket],
+          label: this.$providerMetaMap[VcsProviderChoices.Bitbucket].text
+        }
+        options.push(loginOption)
       }
 
       if (gsrEnabled) {
-        options.push({
-          shortcode: routerVcsMap.gsr,
-          provider: 'gsr',
-          icon: 'gsr-colored',
-          label: 'Google Cloud Source',
-          mobileLabel: 'GCS',
-          bg: 'bg-ink-200'
-        })
+        const loginOption = {
+          ...loginOptionsMap[VcsProviderChoices.Gsr],
+          label: 'Google Cloud Source'
+        }
+        options.push(loginOption)
       }
 
       if (adsEnabled) {
-        options.push({
-          shortcode: routerVcsMap.ads,
-          provider: 'ads',
-          icon: 'ads-colored',
-          label: 'Azure DevOps Services',
-          mobileLabel: 'ADS',
-          bg: 'bg-ink-200'
-        })
+        const loginOption = {
+          ...loginOptionsMap[VcsProviderChoices.Ads],
+          label: this.$providerMetaMap[VcsProviderChoices.Ads].text
+        }
+        options.push(loginOption)
       }
     }
 

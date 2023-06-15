@@ -30,10 +30,10 @@
       <div class="h-full flex-grow xl:min-w-80">
         <z-input
           v-model="searchValue"
+          :show-border="false"
           background-color="ink-300"
           size="small"
           placeholder="Search for issue title, file or issue code"
-          :show-border="false"
           @debounceInput="debounceSearch"
         >
           <template #left>
@@ -44,24 +44,26 @@
     </div>
 
     <!-- Issue list -->
-    <div v-if="edges && edges.length" class="flex flex-col gap-y-3.5">
+    <div v-if="issueOccurrences && issueOccurrences.length" class="flex flex-col gap-y-3.5">
       <issue-editor
-        v-for="edge in edges"
-        v-bind="edge.node"
-        :key="edge.node.id"
+        v-for="issueOccurrence in issueOccurrences"
+        v-bind="issueOccurrence"
+        :key="issueOccurrence.id"
+        :blob-url-root="blobUrlRoot"
+        :can-ignore-issues="canIgnoreIssues"
         :check-id="checkId"
         :check-issue-ids="issuesIgnored"
         :shortcode="$route.params.issueId"
-        :can-ignore-issues="canIgnoreIssues"
-        :blob-url-root="blobUrlRoot"
+        :snippets-fetch-errored="snippetsFetchErrored"
+        :snippets-loading="snippetsLoading"
         @ignoreIssues="ignoreIssues"
       />
       <z-pagination
         v-if="pageCount > 1"
-        class="flex justify-center"
         :total-pages="pageCount"
         :total-visible="5"
         :page="startPage"
+        class="flex justify-center"
         @selected="updatePage"
       />
     </div>
@@ -79,9 +81,8 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZIcon, ZInput, ZButton, ZMenu, ZMenuItem, ZPagination, ZAccordion } from '@deepsource/zeal'
-import IssueDescription from './IssueDescription.vue'
-import IssueEditor from './IssueEditor.vue'
-import { CheckIssueEdge } from '~/types/types'
+
+import { CheckIssue } from '~/types/types'
 import { RunDetailMutations } from '~/store/run/detail'
 
 const VISIBLE_PAGES = 5
@@ -93,8 +94,6 @@ const VISIBLE_PAGES = 5
     ZButton,
     ZMenu,
     ZMenuItem,
-    IssueDescription,
-    IssueEditor,
     ZPagination,
     ZAccordion
   }
@@ -125,10 +124,16 @@ export default class IssueList extends Vue {
   canIgnoreIssues: boolean
 
   @Prop({ required: true })
-  edges: Array<CheckIssueEdge>
+  issueOccurrences: CheckIssue[]
 
   @Prop({ required: true })
   issueIndex: number
+
+  @Prop({ default: false })
+  snippetsLoading: boolean
+
+  @Prop({ default: false })
+  snippetsFetchErrored: boolean
 
   issuesIgnored: string[] = []
 
@@ -218,7 +223,7 @@ export default class IssueList extends Vue {
     }
   }
 
-  private sortFilters: Array<Record<string, string | boolean>> = [
+  private sortFilters: Record<string, string | boolean>[] = [
     { label: 'First Seen', icon: 'first-seen', name: 'first-seen' },
     { label: 'Last Seen', icon: 'last-seen', name: 'last-seen' }
   ]

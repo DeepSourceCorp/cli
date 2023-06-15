@@ -1,21 +1,21 @@
 <template>
   <hero-card height-class="h-102">
-    <h1 class="text-2xl font-bold leading-snug text-center text-vanilla-100">Choose a project</h1>
-    <p class="mt-3 text-base text-center text-vanilla-400">
+    <h1 class="text-center text-2xl font-bold leading-snug text-vanilla-100">Choose a project</h1>
+    <p class="mt-3 text-center text-base text-vanilla-400">
       Select the project you wish to setup DeepSource on
     </p>
     <div
-      class="flex flex-col items-center my-5 space-y-4"
+      class="my-5 flex flex-col items-center space-y-4"
       :class="{
         'h-72': viewer.gsrProjects && viewer.gsrProjects.length > MAX_PROJECTS_ON_SCREEN
       }"
     >
       <template v-if="$fetchState.pending">
-        <div class="w-full h-10 rounded-md bg-ink-300 animate-pulse"></div>
+        <div class="h-10 w-full animate-pulse rounded-md bg-ink-300"></div>
         <div
           v-for="ii in 3"
           :key="ii"
-          class="w-full rounded-md h-13 bg-ink-300 animate-pulse"
+          class="h-13 w-full animate-pulse rounded-md bg-ink-300"
         ></div>
       </template>
       <template v-else>
@@ -30,10 +30,10 @@
             v-for="project in projectsInSearch"
             :key="project.login"
             :disabled="loading"
-            class="flex items-center w-full px-3 py-2 mt-2 space-x-2 rounded-md text-vanilla-100 group bg-ink-100"
+            class="group mt-2 flex w-full items-center space-x-2 rounded-md bg-ink-100 px-3 py-2 text-vanilla-100"
             @click="selectAccount(project)"
           >
-            <div class="flex-grow overflow-hidden text-left overflow-ellipsis">
+            <div class="flex-grow overflow-hidden overflow-ellipsis text-left">
               <div>{{ project.name || project.login }}</div>
               <p v-if="project.name" class="text-xs text-vanilla-400">
                 {{ project.login }}
@@ -60,7 +60,7 @@
               v-else
               icon="chevron-right"
               size="medium"
-              class="flex-shrink-0 duration-100 ease-linear transform group-hover:translate-x-1"
+              class="flex-shrink-0 transform duration-100 ease-linear group-hover:translate-x-1"
             />
           </button>
         </template>
@@ -71,7 +71,7 @@
         </empty-state>
       </template>
     </div>
-    <p class="mt-4 text-sm text-center text-vanilla-400">
+    <p class="mt-4 text-center text-sm text-vanilla-400">
       Need help? Write to us at <br />
       <a
         :href="`mailto:${$config.supportEmail}`"
@@ -90,7 +90,7 @@ import ContextMixin from '~/mixins/contextMixin'
 
 import GSRInstallation from '@/apollo/mutations/installation/gsrInstallationLanding.gql'
 import AuthMixin from '~/mixins/authMixin'
-import { GsrProject } from '~/types/types'
+import { GsrProject, VcsProviderChoices } from '~/types/types'
 import { Context } from '@nuxt/types'
 
 @Component({
@@ -160,14 +160,18 @@ export default class GSRProjectSelector extends mixins(ContextMixin, ActiveUserM
     try {
       const response = await this.$applyGraphqlMutation(GSRInstallation, { input: { login } })
       const { ok, reauth } = response.data.gsrInstallationLanding
-      if (reauth && this.authUrls.gsr) {
+
+      const authUrl =
+        this.authUrls.find(({ provider }) => provider === VcsProviderChoices.Gsr)?.url || ''
+
+      if (reauth && authUrl) {
         const expiry = new Date().getTime() + 5 * 60 * 1000 // 5 min life
 
         this.$nuxt.$cookies.set('bifrost-post-auth-redirect', nextUrl, {
           expires: new Date(expiry)
         })
 
-        window.location.href = this.authUrls.gsr
+        window.location.href = authUrl
         return
       }
       if (!ok) {

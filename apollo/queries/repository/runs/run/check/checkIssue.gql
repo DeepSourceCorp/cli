@@ -1,4 +1,12 @@
-query($checkId: ID!, $limit: Int, $after: String, $shortcode: String, $q: String, $sort: String) {
+query checkIssues(
+  $checkId: ID!
+  $limit: Int
+  $after: String
+  $shortcode: String
+  $q: String
+  $sort: String
+  $isRunner: Boolean!
+) {
   checkIssues(
     checkId: $checkId
     first: $limit
@@ -22,6 +30,8 @@ query($checkId: ID!, $limit: Int, $after: String, $shortcode: String, $q: String
         endColumn
         sourceCodeMarkup
         shortcode
+
+        sourceCodeIdentifier @include(if: $isRunner)
       }
     }
   }

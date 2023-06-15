@@ -28,7 +28,8 @@ import {
   SilenceRule,
   IssuePriority,
   UpdateIssuePriorityInput,
-  IssuePriorityLevel
+  IssuePriorityLevel,
+  RunnerApp
 } from '~/types/types'
 import { RootState } from '~/store'
 import { resolveNodes } from '~/utils/array'
@@ -56,7 +57,8 @@ export enum IssueDetailMutations {
   SET_SINGLE_ISSUE = 'setSingleIssue',
   SET_ISSUE = 'setIssue',
   SET_ISSUE_CHILDREN = 'setIssueChildren',
-  SET_ISSUE_DIR_DETAILS = 'setIssueDirDetails'
+  SET_ISSUE_DIR_DETAILS = 'setIssueDirDetails',
+  SET_RUNNER_INFO = 'setRunnerInfo'
 }
 
 export interface IssueDetailModuleState {
@@ -67,6 +69,7 @@ export interface IssueDetailModuleState {
   singleIssue: Issue
   checkIssues: CheckIssueConnection
   issueDirDetails: Issue
+  runnerInfo: RunnerApp
 }
 
 export const state = (): IssueDetailModuleState => ({
@@ -76,7 +79,8 @@ export const state = (): IssueDetailModuleState => ({
     issue: {},
     singleIssue: {},
     checkIssues: {},
-    issueDirDetails: {}
+    issueDirDetails: {},
+    runnerInfo: {}
   })
 })
 
@@ -96,6 +100,14 @@ interface IssueDetailModuleMutations extends MutationTree<IssueDetailModuleState
   [IssueDetailMutations.SET_ISSUE_DIR_DETAILS]: (
     state: IssueDetailModuleState,
     issue: Issue
+  ) => void
+  [IssueDetailMutations.SET_ISSUE_DIR_DETAILS]: (
+    state: IssueDetailModuleState,
+    issue: Issue
+  ) => void
+  [IssueDetailMutations.SET_RUNNER_INFO]: (
+    state: IssueDetailModuleState,
+    runnerInfo: RunnerApp
   ) => void
 }
 
@@ -121,6 +133,9 @@ export const mutations: IssueDetailModuleMutations = {
   },
   [IssueDetailMutations.SET_ISSUE_DIR_DETAILS]: (state, issue: Issue) => {
     state.issueDirDetails = Object.assign({}, state.issueDirDetails, issue)
+  },
+  [IssueDetailMutations.SET_RUNNER_INFO]: (state, runnerInfo: RunnerApp) => {
+    state.runnerInfo = runnerInfo
   }
 }
 
@@ -139,10 +154,11 @@ interface IssueDetailModuleActions extends ActionTree<IssueDetailModuleState, Ro
     injectee: IssueDetailActionContext,
     args: {
       nodeId: string
-      q: string
-      sort: string
+      q?: string
+      sort?: string
       currentPageNumber: number
       limit: number
+      isRunner: boolean
     }
   ) => Promise<void>
   [IssueDetailActions.FETCH_SINGLE_ISSUE]: (
@@ -311,25 +327,30 @@ export const actions: IssueDetailModuleActions = {
     return resolveNodes(response.data.repository?.silenceRules) as Array<SilenceRule>
   },
   async [IssueDetailActions.FETCH_ISSUE_CHILDREN]({ commit }, args) {
-    commit(IssueDetailMutations.SET_LOADING, true)
-    await this.$fetchGraphqlData(RepositoryNodeIssueDetailGQLQuery, {
-      nodeId: args.nodeId,
-      q: args.q,
-      sort: args.sort,
-      after: this.$getGQLAfter(args.currentPageNumber, args.limit),
-      limit: args.limit
-    })
-      .then((response: GraphqlQueryResponse) => {
-        commit(IssueDetailMutations.SET_LOADING, false)
-        commit(
-          IssueDetailMutations.SET_ISSUE_CHILDREN,
-          (response.data.node as RepositoryIssue).checkIssues
-        )
-      })
-      .catch((e: GraphqlError) => {
-        commit(IssueDetailMutations.SET_ERROR, e)
-        commit(IssueDetailMutations.SET_LOADING, false)
-      })
+    const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
+      RepositoryNodeIssueDetailGQLQuery,
+      {
+        nodeId: args.nodeId,
+        q: args.q,
+        sort: args.sort,
+        after: this.$getGQLAfter(args.currentPageNumber, args.limit),
+        limit: args.limit,
+        isRunner: args.isRunner
+      }
+    )
+
+    const topLevelNode = response.data.node as RepositoryIssue
+
+    commit(IssueDetailMutations.SET_ISSUE_CHILDREN, topLevelNode.checkIssues)
+
+    // The `runnerApp` field is conditionally queried based on `isRunner` arg
+    // Hence, conditionally committing it to the store
+    if (args.isRunner) {
+      commit(
+        IssueDetailMutations.SET_RUNNER_INFO,
+        topLevelNode.repositoryInstance.owner.runnerApp ?? {}
+      )
+    }
   },
   async [IssueDetailActions.IGNORE_ISSUE_FILE_PATTERN](_, args) {
     const response = await this.$applyGraphqlMutation(IgnoreIssueFilePatternMutation, args)
@@ -374,7 +395,7 @@ export const actions: IssueDetailModuleActions = {
       const issueResponse = await this.$fetchGraphqlData(IssueDirectoryDetailGQLQuery, {
         shortcode: args.shortcode
       })
-      if (issueResponse && issueResponse.data && issueResponse.data.issue) {
+      if (issueResponse?.data?.issue) {
         return issueResponse.data.issue as Issue
       }
       return undefined

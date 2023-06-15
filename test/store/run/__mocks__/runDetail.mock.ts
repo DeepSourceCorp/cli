@@ -7,8 +7,8 @@ import {
   CheckStatus,
   Analyzer,
   RunStatus,
-  CheckIssue,
-  CheckIssueEdge
+  CheckIssueEdge,
+  VcsProviderChoices
 } from '~/types/types'
 import { RunDetailModuleState } from '~/store/run/detail'
 
@@ -202,6 +202,14 @@ export const mockRunDetailState = (): RunDetailModuleState => ({
       runId: '',
       pageOffset: 0
     }
+  },
+  runnerInfo: {
+    name: 'test-name',
+    appId: 'test-app-id',
+    vcsProvider: VcsProviderChoices.Github,
+    id: 'test-id',
+    codeSnippetUrl: 'test-code-snippet-url',
+    patchSnippetUrl: 'test-patch-snippet-url'
   }
 })
 
@@ -250,6 +258,14 @@ export const mockRepositoryDetailStateForAutofixableIssues = (): RunDetailModule
       runId: '',
       pageOffset: 0
     }
+  },
+  runnerInfo: {
+    name: 'test-name',
+    appId: 'test-app-id',
+    vcsProvider: VcsProviderChoices.Github,
+    id: 'test-id',
+    codeSnippetUrl: 'test-code-snippet-url',
+    patchSnippetUrl: 'test-patch-snippet-url'
   }
 })
 
@@ -308,5 +324,13 @@ export const mockRunDetailStateForConcreteIssueList = (): RunDetailModuleState =
       runId: '',
       pageOffset: 0
     }
+  },
+  runnerInfo: {
+    name: 'test-name',
+    appId: 'test-app-id',
+    vcsProvider: VcsProviderChoices.Github,
+    id: 'test-id',
+    codeSnippetUrl: 'test-code-snippet-url',
+    patchSnippetUrl: 'test-patch-snippet-url'
   }
 })

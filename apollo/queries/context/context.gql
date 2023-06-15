@@ -19,5 +19,6 @@ query {
     isTransformersLicensed
     toOnboard
     plans
+    isRunner
   }
 }

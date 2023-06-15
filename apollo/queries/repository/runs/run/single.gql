@@ -3,6 +3,7 @@ query repositoryRunDetail(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!
+  $isRunner: Boolean!
 ) {
   repository(provider: $provider, owner: $owner, name: $name) {
     id
@@ -43,6 +44,14 @@ query repositoryRunDetail(
       vcsPrUrl
       pullRequestNumberDisplay
       isForDefaultBranch
+    }
+
+    owner @include(if: $isRunner) {
+      id
+      runnerApp {
+        id
+        codeSnippetUrl
+      }
     }
   }
 }

@@ -18,7 +18,8 @@ import {
   CheckIssueConnection,
   CreateAutofixRunForPullRequestInput,
   CreatePullRequestInput,
-  CreateAutofixRunForPullRequestPayload
+  CreateAutofixRunForPullRequestPayload,
+  RunnerApp
 } from '~/types/types'
 import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
 import {
@@ -59,7 +60,8 @@ export enum RunDetailMutations {
   SET_CHECK = 'setCheck',
   SET_CHECK_ISSUES = 'setCheckIssues',
   SET_CONCRETE_ISSUE_LIST = 'setConcreteIssueList',
-  SET_PAGE_REFETCH_STATUS = 'setPageRefetchStatus'
+  SET_PAGE_REFETCH_STATUS = 'setPageRefetchStatus',
+  SET_RUNNER_INFO = 'setRunnerInfo'
 }
 
 export const state = () => ({
@@ -85,7 +87,8 @@ export const state = () => ({
       issueId: '',
       page: 1
     } // run/_runId/_issueId
-  } as PageRefetchStatusT
+  } as PageRefetchStatusT,
+  runnerInfo: {} as RunnerApp
 })
 
 export type RunDetailModuleState = ReturnType<typeof state>
@@ -110,6 +113,7 @@ interface RunDetailModuleMutations extends MutationTree<RunDetailModuleState> {
     state: RunDetailModuleState,
     pageRefetchStatus: PageRefetchStatusT
   ) => void
+  [RunDetailMutations.SET_RUNNER_INFO]: (state: RunDetailModuleState, runnerInfo: RunnerApp) => void
 }
 
 export const mutations: RunDetailModuleMutations = {
@@ -139,6 +143,9 @@ export const mutations: RunDetailModuleMutations = {
       runDetailState.pageRefetchStatus,
       pageRefetchStatus
     )
+  },
+  [RunDetailMutations.SET_RUNNER_INFO]: (runDetailState, runnerInfo) => {
+    runDetailState.runnerInfo = runnerInfo
   }
 }
 
@@ -151,6 +158,7 @@ interface RunDetailModuleActions extends ActionTree<RunDetailModuleState, RootSt
       owner: string
       name: string
       runId: string
+      isRunner: boolean
       refetch?: boolean
     }
   ) => Promise<Run | undefined>
@@ -170,6 +178,7 @@ interface RunDetailModuleActions extends ActionTree<RunDetailModuleState, RootSt
       shortcode: string
       currentPageNumber: number
       limit: number
+      isRunner: boolean
       q?: Maybe<string>
       sort?: Maybe<string>
       refetch?: boolean
@@ -231,17 +240,25 @@ export const actions: RunDetailModuleActions = {
   async [RunDetailActions.FETCH_RUN]({ commit }, args) {
     commit(RunDetailMutations.SET_LOADING, true)
     try {
-      const response = await this.$fetchGraphqlData(
+      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
         RepositoryRunGQLQuery,
         {
           provider: this.$providerMetaMap[args.provider].value,
           owner: args.owner,
           name: args.name,
-          runId: args.runId
+          runId: args.runId,
+          isRunner: args.isRunner
         },
         args.refetch
       )
       commit(RunDetailMutations.SET_RUN, response.data.repository?.run)
+
+      // The `runnerApp` field is conditionally queried based on `isRunner` arg
+      // Hence, conditionally committing it to the store
+      if (args.isRunner) {
+        commit(RunDetailMutations.SET_RUNNER_INFO, response.data.repository?.owner.runnerApp ?? {})
+      }
+
       commit(RunDetailMutations.SET_LOADING, false)
       commit(RunDetailMutations.SET_ERROR, {})
       return response.data.repository?.run as Run
@@ -278,6 +295,7 @@ export const actions: RunDetailModuleActions = {
         shortcode: args.shortcode,
         limit: args.limit,
         after: this.$getGQLAfter(args.currentPageNumber, args.limit),
+        isRunner: args.isRunner,
         q: args.q,
         sort: args.sort
       },

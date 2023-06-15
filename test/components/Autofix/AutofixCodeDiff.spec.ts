@@ -89,29 +89,33 @@ describe('[[ AutofixCodeDiff ]]', () => {
     const isGroupOptions = generateBooleanProps('isGroup', false)
     const isReadOnlyOptions = generateBooleanProps('isReadOnly', false)
     const isGeneratedFromPrOptions = generateBooleanProps('isGeneratedFromPr', false)
+    const showEmptyPatchErrorStateOptions = generateBooleanProps('showEmptyPatchErrorState', false)
 
-    cartesian(isGroupOptions, isReadOnlyOptions, isGeneratedFromPrOptions).forEach(
-      (propCombination) => {
-        const propsData = {
-          ...baseProps,
-          ...propCombination
-        }
-
-        const { html } = render(
-          AutofixCodeDiff,
-          {
-            mocks,
-            propsData,
-            stubs
-          },
-          (vue) => {
-            vue.use(VTooltip)
-          }
-        )
-
-        expect(html()).toMatchSnapshot(JSON.stringify(propsData))
+    cartesian(
+      isGroupOptions,
+      isReadOnlyOptions,
+      isGeneratedFromPrOptions,
+      showEmptyPatchErrorStateOptions
+    ).forEach((propCombination) => {
+      const propsData = {
+        ...baseProps,
+        ...propCombination
       }
-    )
+
+      const { html } = render(
+        AutofixCodeDiff,
+        {
+          mocks,
+          propsData,
+          stubs
+        },
+        (vue) => {
+          vue.use(VTooltip)
+        }
+      )
+
+      expect(html()).toMatchSnapshot(JSON.stringify(propsData))
+    })
   })
 
   test('shows the remaining count when the issue codes exceed a count of 3', () => {

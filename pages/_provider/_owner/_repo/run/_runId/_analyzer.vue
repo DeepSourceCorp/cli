@@ -252,6 +252,7 @@ const runListStore = namespace('run/list')
         owner,
         name: repo,
         runId,
+        isRunner: false, // This is the top-level page. We don't require code snippets here, hence supplying `isRunner` as `false`. The fetch is done in the child view.
         refetch
       })) as Run | undefined
 

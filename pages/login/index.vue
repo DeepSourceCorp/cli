@@ -34,7 +34,7 @@
         <span>SSO is not set up for your domain.</span>
       </div>
     </div>
-    <template v-if="$config.enableSaml">
+    <template v-if="$config.enableSaml && !context.isRunner">
       <hr
         v-if="loginOptions.length && !samlLogin"
         :key="`hr-${loginOptions.length && !samlLogin}`"
@@ -109,6 +109,7 @@ import MetaMixin from '~/mixins/metaMixin'
 import { AuthActionTypes } from '~/store/account/auth'
 import cloudSamlQuery from '@/apollo/queries/auth/cloudSaml.gql'
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+import { AuthUrl } from '~/types/types'
 
 @Component({
   components: {
@@ -117,10 +118,10 @@ import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
   },
   middleware: [
     'redirectToHome',
-    async function ({ redirect, route, $config, store }: Context): Promise<void> {
+    async function ({ redirect, route, $config, $providerMetaMap, store }: Context): Promise<void> {
       const { provider } = route.query
       await store.dispatch(`account/auth/${AuthActionTypes.FETCH_AUTH_URLS}`)
-      const authUrls = store.state.account.auth.authUrls
+      const authUrls = store.state.account.auth.authUrls as Array<AuthUrl>
 
       const validProviders = [
         ...($config.githubEnabled ? ['github'] : []),
@@ -129,8 +130,13 @@ import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
       ]
 
       if (provider && typeof provider === 'string' && validProviders.includes(provider)) {
+        // Convert provider value from query param to a valid `VCSProviderChoices` entry
+        const vcsProviderChoice = $providerMetaMap[provider].value
+
+        const authUrl = authUrls.find((authUrl) => authUrl.provider === vcsProviderChoice)?.url
+
         // 307 is temporary redirect
-        redirect(307, authUrls[provider])
+        authUrl && redirect(307, authUrl)
       }
     }
   ]
