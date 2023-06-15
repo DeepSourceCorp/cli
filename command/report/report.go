@@ -287,7 +287,7 @@ func (opts *ReportOptions) Run() int {
 			artifactValue = string(encodedBytes)
 
 			// Set the compression flag
-			reportMeta["compressed"] = true
+			reportMeta["compressed"] = "True"
 		}
 	}
 
