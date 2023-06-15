@@ -239,7 +239,6 @@ func (opts *ReportOptions) Run() int {
 		"application/json",
 		opts.SkipCertificateVerification,
 	)
-
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to make query:", err)
 		sentry.CaptureException(err)
