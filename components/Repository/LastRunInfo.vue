@@ -1,12 +1,18 @@
 <template>
-  <div class="flex items-center" :class="currentlyAnalyzingRuns ? 'gap-x-1' : 'justify-between'">
+  <div
+    class="flex items-center text-xs lg:text-sm"
+    :class="currentlyAnalyzingRuns ? 'gap-x-1.5' : 'justify-between'"
+  >
     <template v-if="currentlyAnalyzingRuns">
       <z-icon color="juniper" icon="spin-loader" class="animate-spin" />
-      <span class="text-vanilla-400">Analyzing {{ currentlyAnalyzingRuns }} runs</span>
+      <span class="text-vanilla-400"
+        >Analyzing {{ currentlyAnalyzingRuns }}
+        {{ currentlyAnalyzingRuns === 1 ? 'run' : 'runs' }}</span
+      >
     </template>
 
     <template v-else>
-      <div v-if="lastRun" class="flex items-center gap-x-2 text-xs text-vanilla-400 lg:text-sm">
+      <div v-if="lastRun" class="flex items-center gap-x-1.5 text-vanilla-400">
         <z-icon color="cherry" icon="x" />
 
         <span class="truncate">Last analyzed</span>
@@ -20,11 +26,9 @@
         </nuxt-link>
       </div>
 
-      <span
-        v-if="lastRunFinishedAt"
-        class="whitespace-nowrap text-xs text-vanilla-400 lg:text-sm"
-        >{{ lastRunFinishedAt }}</span
-      >
+      <span v-if="lastRunFinishedAt" class="hidden whitespace-nowrap text-vanilla-400 lg:inline">{{
+        lastRunFinishedAt
+      }}</span>
     </template>
   </div>
 </template>

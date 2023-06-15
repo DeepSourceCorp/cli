@@ -12,7 +12,7 @@ exports[`[[ MetadataView ]] renders the metadata information to be shown next to
       <div class=\\"flex flex-col gap-y-2\\"><span class=\\"font-semibold uppercase tracking-wider text-vanilla-400\\">
           DEFAULT BRANCH
         </span>
-        <div class=\\"flex items-center gap-x-1.5\\">
+        <div class=\\"flex items-center gap-x-1.5 h-5\\">
           <zicon-stub icon=\\"z-git-branch\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\"></zicon-stub> <span class=\\"text-sm font-medium text-vanilla-100\\">
             master
           </span>
@@ -31,7 +31,7 @@ exports[`[[ MetadataView ]] renders the metadata information to be shown next to
     </div>
   </div>
   <div class=\\"p-4\\">
-    <lastruninfo-stub latest-analysis-run=\\"[object Object]\\" runs=\\"[object Object]\\"></lastruninfo-stub>
+    <lastruninfo-stub latest-analysis-run=\\"[object Object]\\" runs=\\"[object Object]\\" class=\\"h-5\\"></lastruninfo-stub>
   </div>
 </div>"
 `;

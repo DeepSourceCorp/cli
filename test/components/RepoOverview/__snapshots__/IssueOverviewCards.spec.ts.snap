@@ -4,28 +4,28 @@ exports[`[[ IssueOverviewCards ]] renders the issue overview widgets 1`] = `
 "<section class=\\"flex flex-col justify-between\\">
   <!---->
   <div class=\\"flex-grow gap-2 grid grid-cols-2 lg:grid-cols-3 gap-3\\">
-    <statcard-stub trendvalue=\\"2%\\" trenddirection=\\"down\\" trendhint=\\"since last week\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues/?category=antipattern\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-22 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200 lg:h-26\\"> <span class=\\"text-vanilla-100 font-mono\\">
+    <statcard-stub trendvalue=\\"2%\\" trenddirection=\\"down\\" trendhint=\\"since last week\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues/?category=antipattern\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-26 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200\\"> <span class=\\"text-vanilla-100 font-mono\\">
           308
         </span></statcard-stub>
-    <statcard-stub trendhint=\\"no change since last week\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues/?category=bug-risk\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-22 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200 lg:h-26\\"> <span class=\\"text-vanilla-100 font-mono\\">
+    <statcard-stub trendhint=\\"no change since last week\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues/?category=bug-risk\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-26 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200\\"> <span class=\\"text-vanilla-100 font-mono\\">
           10
         </span></statcard-stub>
-    <statcard-stub trendhint=\\"no change since last week\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues/?category=performance\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-22 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200 lg:h-26\\"> <span class=\\"text-vanilla-100 font-mono\\">
+    <statcard-stub trendhint=\\"no change since last week\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues/?category=performance\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-26 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200\\"> <span class=\\"text-vanilla-100 font-mono\\">
           27
         </span></statcard-stub>
-    <statcard-stub trendhint=\\"no change since last week\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues/?category=security\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-22 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200 lg:h-26\\"> <span class=\\"text-vanilla-100 font-mono\\">
+    <statcard-stub trendhint=\\"no change since last week\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues/?category=security\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-26 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200\\"> <span class=\\"text-vanilla-100 font-mono\\">
           32
         </span></statcard-stub>
-    <statcard-stub trendhint=\\"no change since last commit\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/metrics/LCV\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-22 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200 lg:h-26\\"> <span class=\\"text-vanilla-100\\">
+    <statcard-stub trendhint=\\"no change since last commit\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/metrics/LCV\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-26 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200\\"> <span class=\\"text-vanilla-100\\">
           65.5%
         </span></statcard-stub>
-    <statcard-stub trendhint=\\"no change since last commit\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/metrics/BCV\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-22 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200 lg:h-26\\"> <span class=\\"text-vanilla-100\\">
+    <statcard-stub trendhint=\\"no change since last commit\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/metrics/BCV\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-26 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200\\"> <span class=\\"text-vanilla-100\\">
           48.8%
         </span></statcard-stub>
-    <statcard-stub trendhint=\\"no change since last commit\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/metrics/CCV\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-22 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200 lg:h-26\\"> <span class=\\"text-vanilla-100\\">
+    <statcard-stub trendhint=\\"no change since last commit\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/metrics/CCV\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-26 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200\\"> <span class=\\"text-vanilla-100\\">
           50%
         </span></statcard-stub>
-    <statcard-stub trendhint=\\"no change since last commit\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/metrics/CPCV\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-22 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200 lg:h-26\\"> <span class=\\"text-vanilla-100\\">
+    <statcard-stub trendhint=\\"no change since last commit\\" trendpositive=\\"true\\" removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/metrics/CPCV\\" hintastooltip=\\"true\\" valuetextsize=\\"text-base\\" class=\\"lg:text-border-b-transparent group h-26 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200\\"> <span class=\\"text-vanilla-100\\">
           62.5%
         </span></statcard-stub>
     <portal-stub to=\\"modal\\">

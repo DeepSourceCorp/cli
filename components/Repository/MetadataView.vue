@@ -23,7 +23,7 @@
 
           <div v-if="loading" class="h-5 w-16 animate-pulse rounded-md bg-ink-300"></div>
 
-          <div v-else class="flex items-center gap-x-1.5">
+          <div v-else class="flex items-center gap-x-1.5 h-5">
             <z-icon icon="z-git-branch" color="vanilla-100" />
             <span class="text-sm font-medium text-vanilla-100">
               {{ defaultBranchName }}
@@ -61,7 +61,7 @@
         class="last-run-info-skeleton-dimensions h-5 animate-pulse rounded-md bg-ink-300"
       ></div>
 
-      <last-run-info v-else :latest-analysis-run="latestAnalysisRun" :runs="runs" />
+      <last-run-info v-else :latest-analysis-run="latestAnalysisRun" :runs="runs" class="h-5" />
     </div>
   </div>
 </template>
@@ -111,10 +111,6 @@ export default class MetadataView extends Vue {
 
   @Prop()
   runs: Maybe<RunConnection>
-
-  get currentlyAnalyzingRuns(): Maybe<number> | undefined {
-    return this.runs?.totalCount
-  }
 
   get totalIssueCount(): string | number {
     // The truthy check is required while navigating to the repository page

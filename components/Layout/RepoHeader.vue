@@ -1,31 +1,37 @@
 <template>
   <div>
     <div
-      class="flex w-full items-center justify-between border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4 h-13"
+      class="flex h-13 w-full items-center justify-between border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4"
     >
-      <div class="flex items-center gap-x-2.5">
+      <div class="flex items-center lg:gap-x-3">
         <z-button
           id="mobile-menu-toggle"
           button-type="ghost"
-          color="vanilla-100"
+          color="vanilla-400"
           icon="sidebar-toggle"
           size="small"
           class="lg:hidden"
           @click="triggerExpand"
         />
 
-        <h2
-          class="flex flex-wrap items-center gap-x-1 truncate text-base font-medium text-vanilla-400 lg:gap-x-1.5"
-        >
-          <z-icon icon="z-lock" class="hidden lg:inline-block" />
+        <h2 class="flex items-center gap-x-2 text-base font-medium text-vanilla-400">
+          <span class="hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block">
+            <z-icon
+              :icon="repository.isPrivate ? 'z-lock' : 'globe'"
+              color="vanilla-100"
+              class="mb-0.5"
+            />
+          </span>
 
-          <nuxt-link v-if="canReadTeamPage" :to="teamPageUrl">{{ owner }}</nuxt-link>
-          <span v-else class="text-vanilla-400">{{ owner }}</span>
+          <span class="line-clamp-1">
+            <nuxt-link v-if="canReadTeamPage" :to="teamPageUrl">{{ owner }}</nuxt-link>
+            <span v-else class="text-vanilla-400">{{ owner }}</span>
 
-          <span>/</span>
+            <span>/</span>
 
-          <span class="truncate text-vanilla-100">
-            {{ repo }}
+            <span class="text-vanilla-100">
+              {{ repo }}
+            </span>
           </span>
         </h2>
 
@@ -95,7 +101,7 @@
     </div>
 
     <div
-      class="hide-scroll space-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3 h-nav-items-container"
+      class="hide-scroll h-nav-items-container space-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3"
     >
       <template v-for="item in navItems">
         <nuxt-link v-if="isNavLinkVisible(item)" :key="item.label" :to="$generateRoute(item.link)">

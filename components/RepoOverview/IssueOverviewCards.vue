@@ -24,7 +24,7 @@
           :trend-value="issueWidgets[widget].trend_value"
           :remove-styles="true"
           value-text-size="text-base"
-          class="lg:text-border-b-transparent group h-22 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200 lg:h-26"
+          class="lg:text-border-b-transparent group h-26 cursor-auto rounded-md bg-ink-300 p-3 text-sm font-medium hover:bg-ink-200"
         >
           <template #title>
             <div class="flex items-center gap-x-1.5">
@@ -224,19 +224,17 @@ export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAcce
 
 <style lang="postcss" scoped>
 .widget-skeleton-dimensions {
-  height: 88px;
+  height: 104px;
 }
 
 @media screen and (width: 1024px) {
   .widget-skeleton-dimensions {
-    height: 104px;
     width: 136px;
   }
 }
 
 @media screen and (min-width: 1025px) {
   .widget-skeleton-dimensions {
-    height: 104px;
     width: auto;
   }
 }

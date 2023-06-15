@@ -1,18 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ LastRunInfo ]] renders the currently analyzing runs count in the metadata view footer 1`] = `
-"<div class=\\"flex items-center gap-x-1\\">
-  <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"animate-spin\\"></zicon-stub> <span class=\\"text-vanilla-400\\">Analyzing 2 runs</span>
+"<div class=\\"flex items-center text-xs lg:text-sm gap-x-1.5\\">
+  <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"animate-spin\\"></zicon-stub> <span class=\\"text-vanilla-400\\">Analyzing 2
+      runs</span>
 </div>"
 `;
 
 exports[`[[ LastRunInfo ]] renders the last run information shown in the metadata view footer 1`] = `
-"<div class=\\"flex items-center justify-between\\">
-  <div class=\\"flex items-center gap-x-2 text-xs text-vanilla-400 lg:text-sm\\">
+"<div class=\\"flex items-center text-xs lg:text-sm justify-between\\">
+  <div class=\\"flex items-center gap-x-1.5 text-vanilla-400\\">
     <zicon-stub icon=\\"x\\" size=\\"small\\" position=\\"\\" color=\\"cherry\\"></zicon-stub> <span class=\\"truncate\\">Last analyzed</span> <a class=\\"inline-flex cursor-pointer items-center gap-1 rounded-md bg-ink-200 px-1 font-mono\\">
       <zicon-stub icon=\\"git-commit\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
       cf64c72
     </a>
-  </div> <span class=\\"whitespace-nowrap text-xs text-vanilla-400 lg:text-sm\\">8 months ago</span>
+  </div> <span class=\\"hidden whitespace-nowrap text-vanilla-400 lg:inline\\">8 months ago</span>
 </div>"
 `;
