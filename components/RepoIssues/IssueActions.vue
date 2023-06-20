@@ -170,7 +170,7 @@ import {
 } from '@/components/RepoIssues/index'
 
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import IntegrationsDetailMixin from '~/mixins/integrationsDetailMixin'
+import IntegrationsDetailMixin, { IntegrationShortcodes } from '~/mixins/integrationsDetailMixin'
 import { AppFeatures } from '~/types/permTypes'
 import { IssueLink } from '~/types/issues'
 
@@ -255,7 +255,7 @@ export default class IssueActions extends mixins(RoleAccessMixin, IntegrationsDe
     if (this.isJiraEnabled) {
       options.push({
         id: 'create-issue-on-jira',
-        icon: 'jira',
+        icon: IntegrationShortcodes.JIRA,
         label: 'Create issue on Jira',
         action: this.createJiraIssue
       })
@@ -280,7 +280,7 @@ export default class IssueActions extends mixins(RoleAccessMixin, IntegrationsDe
     this.isActionLoading = true
     try {
       const { ok, issueCode, issueUrl } = await this.createIssueOnIntegration({
-        integrationShortcode: 'jira',
+        integrationShortcode: IntegrationShortcodes.JIRA,
         repositoryIssueId: this.issue.id
       })
 
@@ -311,7 +311,7 @@ export default class IssueActions extends mixins(RoleAccessMixin, IntegrationsDe
   }
 
   get isJiraEnabled(): boolean {
-    return (this.issueCreateIntegrations ?? []).includes('jira')
+    return (this.issueCreateIntegrations ?? []).includes(IntegrationShortcodes.JIRA)
   }
 
   /**

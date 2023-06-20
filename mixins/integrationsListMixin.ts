@@ -1,4 +1,5 @@
 import { Component, Vue, namespace } from 'nuxt-property-decorator'
+
 import { IntegrationsListActions } from '~/store/integrations/list'
 import { IntegrationProvider, IntegrationSettingsLevel } from '~/types/types'
 
@@ -20,19 +21,4 @@ export default class IntegrationsListMixin extends Vue {
     onlyInstalled?: boolean
     refetch?: boolean
   }) => Promise<void>
-
-  /**
-   * Method to fetch description corresponding to the given integration
-   *
-   * @param {string} shortcode
-   * @returns {void}
-   */
-  getIntegrationDescription(shortcode: string): string {
-    const descriptionMap = {
-      slack: 'Send event alerts to your channels',
-      jira: 'Create issues from DeepSource to Jira Cloud'
-    } as Record<string, string>
-
-    return descriptionMap[shortcode]
-  }
 }

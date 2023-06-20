@@ -347,7 +347,6 @@ type AutofixRun implements MaskPrimaryKeyNode {
   id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
-  alive: Boolean
   runId: UUID!
   commitOid: String
   status: AutofixRunStatus!
@@ -366,6 +365,7 @@ type AutofixRun implements MaskPrimaryKeyNode {
   checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
   filesAffected: Int
   issuesAffected: Int
+  affectedIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, issueType: String, autofixAvailable: Boolean, auditRequired: Boolean, sort: String): IssueConnection
   changeset: GenericScalar
   errorsRendered: GenericScalar
   finishedIn: Int
@@ -1298,6 +1298,7 @@ type GetBillingInfoPayload {
 
 input GetIntegrationInstallationURLInput {
   shortcode: String!
+  ownerId: ID!
   clientMutationId: String
 }
 

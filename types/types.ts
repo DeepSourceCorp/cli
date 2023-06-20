@@ -513,7 +513,6 @@ export type AutofixRun = MaskPrimaryKeyNode & {
   id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
   modifiedAt: Scalars['DateTime'];
-  alive?: Maybe<Scalars['Boolean']>;
   runId: Scalars['UUID'];
   commitOid?: Maybe<Scalars['String']>;
   status: AutofixRunStatus;
@@ -532,6 +531,7 @@ export type AutofixRun = MaskPrimaryKeyNode & {
   checkIssues: CheckIssueConnection;
   filesAffected?: Maybe<Scalars['Int']>;
   issuesAffected?: Maybe<Scalars['Int']>;
+  affectedIssues?: Maybe<IssueConnection>;
   changeset?: Maybe<Scalars['GenericScalar']>;
   errorsRendered?: Maybe<Scalars['GenericScalar']>;
   finishedIn?: Maybe<Scalars['Int']>;
@@ -552,6 +552,20 @@ export type AutofixRunCheckIssuesArgs = {
   last?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
   shortcode?: Maybe<Scalars['String']>;
+  sort?: Maybe<Scalars['String']>;
+};
+
+
+export type AutofixRunAffectedIssuesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  q?: Maybe<Scalars['String']>;
+  issueType?: Maybe<Scalars['String']>;
+  autofixAvailable?: Maybe<Scalars['Boolean']>;
+  auditRequired?: Maybe<Scalars['Boolean']>;
   sort?: Maybe<Scalars['String']>;
 };
 
@@ -1958,6 +1972,7 @@ export type GetBillingInfoPayload = {
 
 export type GetIntegrationInstallationUrlInput = {
   shortcode: Scalars['String'];
+  ownerId: Scalars['ID'];
   clientMutationId?: Maybe<Scalars['String']>;
 };
 

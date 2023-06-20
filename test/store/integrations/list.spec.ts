@@ -1,3 +1,4 @@
+import { IntegrationShortcodes } from '~/mixins/integrationsDetailMixin'
 import {
   actions,
   IntegrationsListActionContext,
@@ -9,14 +10,7 @@ import {
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 import { IntegrationSettingsLevel } from '~/types/types'
 
-const integrations = [{ shortcode: 'slack', installed: true }]
-const integrationsWithDetails = [
-  {
-    shortcode: 'slack',
-    settings: { channel: 'general' },
-    options: { channel: ['random', 'general', 'test'] }
-  }
-]
+const integrations = [{ shortcode: IntegrationShortcodes.SLACK, installed: true }]
 
 // Set `processs.client` to `true`
 Object.defineProperty(process, 'client', {

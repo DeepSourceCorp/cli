@@ -1,12 +1,12 @@
 <template>
-  <div class="max-w-4xl p-4 space-y-4">
+  <div class="max-w-4xl space-y-4 p-4">
     <h2 class="text-lg font-medium">Integrations</h2>
 
     <div v-if="$fetchState.pending" class="grid grid-cols-1 gap-4 md:grid-cols-3">
       <div
         v-for="ii in LOADER_COUNT"
         :key="ii"
-        class="bg-opacity-50 rounded-md h-36 animate-pulse bg-ink-200"
+        class="h-36 animate-pulse rounded-md bg-ink-200 bg-opacity-50"
       ></div>
     </div>
 
@@ -22,7 +22,6 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZIcon, ZTag } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import IntegrationsListMixin from '~/mixins/integrationsListMixin'
@@ -31,17 +30,12 @@ import ownerDetailMixin from '~/mixins/ownerDetailMixin'
 import { TeamPerms } from '~/types/permTypes'
 import { IntegrationSettingsLevel } from '~/types/types'
 
-const LOADER_COUNT = 2
+const LOADER_COUNT = 3
 
 /**
  * All integrations page
  */
 @Component({
-  components: {
-    ZButton,
-    ZIcon,
-    ZTag
-  },
   middleware: ['perm', 'teamOnly'],
   meta: {
     auth: {

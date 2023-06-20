@@ -21,6 +21,12 @@ import IntegrationsListMixin from './integrationsListMixin'
 
 const integrationsDetailStore = namespace('integrations/detail')
 
+export enum IntegrationShortcodes {
+  JIRA = 'jira',
+  SLACK = 'slack',
+  VANTA = 'vanta'
+}
+
 export enum JiraCookieKeys {
   PROVIDER = 'integration-jira-provider',
   OWNER = 'integration-jira-owner',
@@ -31,6 +37,12 @@ export enum SlackCookieKeys {
   PROVIDER = 'integration-slack-provider',
   OWNER = 'integration-slack-owner',
   OWNER_ID = 'integration-slack-owner-id'
+}
+
+export enum VantaCookieKeys {
+  PROVIDER = 'integration-vanta-provider',
+  OWNER = 'integration-vanta-owner',
+  OWNER_ID = 'integration-vanta-owner-id'
 }
 
 /**
@@ -73,34 +85,21 @@ export default class IntegrationsDetailMixin extends mixins(
    * @return {Promise<void>}
    */
   async fetchIntegrationData(shortcode: string): Promise<void> {
-    // Fetch owner Id from cookies if arriving after integration installation
-    let ownerId = ''
-
-    if (shortcode === 'jira') {
-      ownerId = this.$cookies.get(JiraCookieKeys.OWNER_ID)
-    } else if (shortcode === 'slack') {
-      ownerId = this.$cookies.get(SlackCookieKeys.OWNER_ID)
-    } else {
-      ownerId = this.$cookies.get(`integration-${shortcode}-owner-id`)
-    }
-
-    if (!this.owner.id) {
-      // Fetch owner ID if not available
-      const { provider, owner: login } = this.$route.params
-      await this.fetchOwnerID({ login, provider })
-    }
+    const ownerId = await this.getOwnerId(shortcode)
 
     // Fetch details specific to the integration
     await this.fetchIntegrationDetails({
       shortcode: shortcode,
       level: IntegrationSettingsLevel.Owner,
-      ownerId: this.owner.id || ownerId
+      ownerId
     })
 
-    if (shortcode === 'jira') {
+    if (shortcode === IntegrationShortcodes.JIRA) {
       this.$cookies.remove(JiraCookieKeys.OWNER_ID)
-    } else if (shortcode === 'slack') {
+    } else if (shortcode === IntegrationShortcodes.SLACK) {
       this.$cookies.remove(SlackCookieKeys.OWNER_ID)
+    } else if (shortcode === IntegrationShortcodes.VANTA) {
+      this.$cookies.remove(VantaCookieKeys.OWNER_ID)
     } else {
       this.$cookies.remove(`integration-${shortcode}-owner-id`)
     }
@@ -114,7 +113,9 @@ export default class IntegrationsDetailMixin extends mixins(
    * @return {Promise<string>}
    */
   async fetchInstallationUrl(shortcode: string): Promise<string> {
-    const { url } = await this.getIntegrationInstallationUrl({ shortcode })
+    const ownerId = await this.getOwnerId(shortcode)
+
+    const { url } = await this.getIntegrationInstallationUrl({ shortcode, ownerId })
     this.installationUrl = url ?? ''
     return this.installationUrl
   }
@@ -136,14 +137,18 @@ export default class IntegrationsDetailMixin extends mixins(
     // Set provider and owner information in cookies
     const { provider, owner } = this.$route.params
 
-    if (shortcode === 'jira') {
+    if (shortcode === IntegrationShortcodes.JIRA) {
       this.$cookies.set(JiraCookieKeys.PROVIDER, provider)
       this.$cookies.set(JiraCookieKeys.OWNER, owner)
       this.$cookies.set(JiraCookieKeys.OWNER_ID, this.owner.id)
-    } else if (shortcode === 'slack') {
+    } else if (shortcode === IntegrationShortcodes.SLACK) {
       this.$cookies.set(SlackCookieKeys.PROVIDER, provider)
       this.$cookies.set(SlackCookieKeys.OWNER, owner)
       this.$cookies.set(SlackCookieKeys.OWNER_ID, this.owner.id)
+    } else if (shortcode === IntegrationShortcodes.VANTA) {
+      this.$cookies.set(VantaCookieKeys.PROVIDER, provider)
+      this.$cookies.set(VantaCookieKeys.OWNER, owner)
+      this.$cookies.set(VantaCookieKeys.OWNER_ID, this.owner.id)
     } else {
       this.$cookies.set(`integration-${shortcode}-provider`, provider)
       this.$cookies.set(`integration-${shortcode}-owner`, owner)
@@ -157,6 +162,35 @@ export default class IntegrationsDetailMixin extends mixins(
       // The redirect didn't happen, reset the CTA state
       this.installingIntegration = false
     }
+  }
+
+  /**
+   * Check if owner ID exists in cookies, else trigger the query to fetch the same
+   *
+   * @param {string} shortcode
+   * @returns {Promise<void>}
+   */
+  async getOwnerId(shortcode: string) {
+    // Fetch owner Id from cookies if arriving after integration installation
+    let ownerIdFromCookies = ''
+
+    if (shortcode === IntegrationShortcodes.JIRA) {
+      ownerIdFromCookies = this.$cookies.get(JiraCookieKeys.OWNER_ID)
+    } else if (shortcode === IntegrationShortcodes.SLACK) {
+      ownerIdFromCookies = this.$cookies.get(SlackCookieKeys.OWNER_ID)
+    } else if (shortcode === IntegrationShortcodes.VANTA) {
+      ownerIdFromCookies = this.$cookies.get(VantaCookieKeys.OWNER_ID)
+    } else {
+      ownerIdFromCookies = this.$cookies.get(`integration-${shortcode}-owner-id`)
+    }
+
+    if (!ownerIdFromCookies && !this.owner.id) {
+      // Fetch owner ID if not available
+      const { provider, owner: login } = this.$route.params
+      await this.fetchOwnerID({ login, provider })
+    }
+
+    return ownerIdFromCookies || this.owner.id
   }
 
   /**

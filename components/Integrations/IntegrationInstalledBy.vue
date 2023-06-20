@@ -1,12 +1,12 @@
 <template>
-  <div class="flex items-center text-xs gap-x-1 text-vanilla-400 mb-7">
+  <div class="flex items-center gap-x-1 text-xs text-vanilla-400">
     <span>Installed by</span>
     <z-avatar
       :image="avatar"
       :user-name="userName"
       :fallback-image="getDefaultAvatar(email)"
       size="xs"
-      class="flex-shrink-0 leading-none rounded-full"
+      class="flex-shrink-0 rounded-full leading-none"
     />
     <span class="text-xs font-medium leading-none text-vanilla-100">{{ userName }}</span>
     <span>on {{ formatDate(enabledOn) }} </span>

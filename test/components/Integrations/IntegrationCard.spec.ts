@@ -3,12 +3,13 @@ import { render } from '@testing-library/vue'
 import { RouterLinkStub } from '@vue/test-utils'
 
 import IntegrationCard from '~/components/Integrations/IntegrationCard.vue'
+import { IntegrationShortcodes } from '~/mixins/integrationsDetailMixin'
 import { cartesian, generateBooleanProps } from '~/test/utils'
 
 describe('[[ IntegrationCard ]]', () => {
   test('renders the integration logo along with the name', () => {
     const baseProps = {
-      shortcode: 'slack',
+      shortcode: IntegrationShortcodes.SLACK,
       name: 'Slack',
       logo: 'https://static.deepsource.io/integration_logos/slack.svg',
       installed: true

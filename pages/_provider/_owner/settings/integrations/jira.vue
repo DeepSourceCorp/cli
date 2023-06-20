@@ -9,22 +9,22 @@
 
     <div v-if="$fetchState.pending" class="p-4 pb-32 md:max-w-2xl">
       <div class="grid grid-cols-3">
-        <div class="h-8 bg-opacity-50 rounded-md animate-pulse bg-ink-200"></div>
+        <div class="h-8 animate-pulse rounded-md bg-ink-200 bg-opacity-50"></div>
         <div></div>
-        <div class="h-8 bg-opacity-50 rounded-md animate-pulse bg-ink-200"></div>
+        <div class="h-8 animate-pulse rounded-md bg-ink-200 bg-opacity-50"></div>
       </div>
-      <z-divider class="opacity-50 animate-pulse" />
+      <z-divider class="animate-pulse opacity-50" />
       <div
         v-for="ii in 3"
         :key="ii"
-        class="mb-6 bg-opacity-50 rounded-md h-15 animate-pulse bg-ink-200"
+        class="mb-6 h-15 animate-pulse rounded-md bg-ink-200 bg-opacity-50"
       ></div>
-      <z-divider class="opacity-50 animate-pulse" />
-      <div class="mb-6 bg-opacity-50 rounded-md h-15 animate-pulse bg-ink-200"></div>
+      <z-divider class="animate-pulse opacity-50" />
+      <div class="mb-6 h-15 animate-pulse rounded-md bg-ink-200 bg-opacity-50"></div>
     </div>
 
-    <div v-else class="p-4 pb-32 space-y-4 md:max-w-2xl">
-      <div class="flex flex-col justify-between gap-4 mb-4 sm:flex-row">
+    <div v-else class="space-y-4 p-4 pb-32 md:max-w-2xl">
+      <div class="mb-4 flex flex-col justify-between gap-4 sm:flex-row">
         <integration-title :logo="integration.logo" name="Jira Cloud" />
         <integration-installed-on v-if="integration.installed" :installed-on="installedOn" />
         <z-button
@@ -47,16 +47,15 @@
         :user-name="userName"
         :email="email"
         :enabled-on="integration.enabledOn"
+        class="mb-7"
       />
 
-      <z-alert v-if="isAlertVisible" type="neutral" :dismissible="true" @dismiss="hideAlert">
-        <div class="space-y-2">
-          <h2 class="text-sm font-medium text-vanilla-100">How does it work?</h2>
-          <p class="text-xs leading-relaxed text-vanilla-400">
-            Create new Jira issues for issues detected by DeepSource on your codebase.
-          </p>
-        </div>
-      </z-alert>
+      <integration-info
+        v-if="isAlertVisible"
+        :dismissible="true"
+        :description="integrationDescription"
+        @hide-integration-info="hideAlert"
+      />
 
       <section v-if="integration.installed" class="space-y-8 sm:space-y-7">
         <select-input
@@ -131,7 +130,7 @@
         @onClose="showDeleteConfirmation = false"
       >
         <template #footer="{ close }">
-          <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
+          <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
             <z-button button-type="ghost" size="small" class="text-vanilla-100" @click="close">
               Cancel
             </z-button>
@@ -153,43 +152,25 @@
 </template>
 
 <script lang="ts">
-import {
-  ZAlert,
-  ZAvatar,
-  ZBreadcrumb,
-  ZBreadcrumbItem,
-  ZButton,
-  ZDivider,
-  ZIcon,
-  ZOption,
-  ZSelect,
-  ZTextarea,
-  ZConfirm
-} from '@deepsource/zeal'
-import { Component, Watch, mixins } from 'nuxt-property-decorator'
+import { ZButton, ZConfirm, ZDivider } from '@deepsource/zeal'
+import { Component, mixins, Watch } from 'nuxt-property-decorator'
+
+import { IntegrationShortcodes } from '~/mixins/integrationsDetailMixin'
 import JiraIntegrationMixin from '~/mixins/jiraIntegrationMixin'
 
 import { TeamPerms } from '~/types/permTypes'
 import { IntegrationSettingsLevel, UpdateIntegrationSettingsInput } from '~/types/types'
 
-const SHORTCODE = 'jira'
+const SHORTCODE = IntegrationShortcodes.JIRA
 
 /**
- * Owner-level integrations page specific to an app
+ * Owner-level integrations page for Jira
  */
 @Component({
   components: {
-    ZAlert,
-    ZAvatar,
     ZButton,
-    ZBreadcrumb,
-    ZBreadcrumbItem,
-    ZDivider,
-    ZIcon,
-    ZOption,
-    ZSelect,
-    ZTextarea,
-    ZConfirm
+    ZConfirm,
+    ZDivider
   },
   middleware: ['perm', 'teamOnly'],
   meta: {
@@ -203,6 +184,9 @@ const SHORTCODE = 'jira'
 export default class JiraIntegration extends mixins(JiraIntegrationMixin) {
   isAlertVisible = false
   updatingIntegration = false
+
+  integrationDescription = `Create new Jira issues for issues detected by DeepSource on your codebase.`
+
   /**
    * The fetch hook
    *
@@ -236,7 +220,7 @@ export default class JiraIntegration extends mixins(JiraIntegrationMixin) {
    * @returns {Promise<void>}
    */
   async uninstallIntegrationHandler(): Promise<void> {
-    this.uninstallIntegrationWrapper(SHORTCODE)
+    await this.uninstallIntegrationWrapper(SHORTCODE)
   }
 
   /**

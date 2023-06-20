@@ -19,25 +19,26 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZDivider, ZIcon, ZSelect, ZOption } from '@deepsource/zeal'
+import { ZDivider } from '@deepsource/zeal'
+import { Context } from '@nuxt/types'
 import { Component, mixins } from 'nuxt-property-decorator'
 
-import integrationsDetailMixin from '~/mixins/integrationsDetailMixin'
+import integrationsDetailMixin, {
+  IntegrationShortcodes,
+  SlackCookieKeys
+} from '~/mixins/integrationsDetailMixin'
+
 import { IntegrationsDetailActions } from '~/store/integrations/detail'
+
 import { TeamPerms } from '~/types/permTypes'
 import { IntegrationInstallationStep, IntegrationSettingsLevel } from '~/types/types'
-import { Context } from '@nuxt/types'
 
 /**
  * Intermediary page where the integration installation happens
  */
 @Component({
   components: {
-    ZButton,
-    ZDivider,
-    ZIcon,
-    ZSelect,
-    ZOption
+    ZDivider
   },
   middleware: [
     'perm',
@@ -46,9 +47,9 @@ import { Context } from '@nuxt/types'
       const { code, error, state } = route.query as Record<string, string>
 
       // Grab provider and owner information from cookies
-      const provider = $cookies.get('integration-slack-provider')
-      const owner = $cookies.get('integration-slack-owner')
-      const ownerId = $cookies.get('integration-slack-owner-id')
+      const provider = $cookies.get(SlackCookieKeys.PROVIDER)
+      const owner = $cookies.get(SlackCookieKeys.OWNER)
+      const ownerId = $cookies.get(SlackCookieKeys.OWNER_ID)
 
       // Redirect to the dashboard if any among provider, owner, or owner-id
       // is not set in cookies
@@ -67,7 +68,7 @@ import { Context } from '@nuxt/types'
       // Trigger the GQL mutation to install the integration
       await store.dispatch(`integrations/detail/${IntegrationsDetailActions.INSTALL_INTEGRATION}`, {
         step: IntegrationInstallationStep.Install,
-        shortcode: 'slack',
+        shortcode: IntegrationShortcodes.SLACK,
         ownerId,
         code,
         state
@@ -89,7 +90,7 @@ import { Context } from '@nuxt/types'
 
       await store.dispatch(
         `integrations/detail/${IntegrationsDetailActions.FETCH_INTEGRATION_LOGO_URL}`,
-        { shortcode: 'slack', level: IntegrationSettingsLevel.Owner, ownerId }
+        { shortcode: IntegrationShortcodes.SLACK, level: IntegrationSettingsLevel.Owner, ownerId }
       )
     }
   ],
@@ -98,8 +99,8 @@ import { Context } from '@nuxt/types'
       strict: true,
       teamPerms: [TeamPerms.MANAGE_INTEGRATIONS],
       metaDataHook: ({ $cookies }: Context) => {
-        const provider = $cookies?.get('integration-slack-provider') as string
-        const owner = $cookies?.get('integration-slack-owner') as string
+        const provider = $cookies?.get(SlackCookieKeys.PROVIDER) as string
+        const owner = $cookies?.get(SlackCookieKeys.OWNER) as string
         return { owner, provider }
       }
     }
@@ -128,7 +129,7 @@ export default class SlackIntermediaryInstallation extends mixins(integrationsDe
   }
 
   get ownerId(): string {
-    return this.$cookies.get('integration-slack-owner-id')
+    return this.$cookies.get(SlackCookieKeys.OWNER_ID)
   }
 
   /**
@@ -149,7 +150,7 @@ export default class SlackIntermediaryInstallation extends mixins(integrationsDe
     // Trigger the `installIntegration` GQL mutation with `CONFIG_REQD` as the step and the opted channel within `settings`
     await this.installIntegration({
       step: IntegrationInstallationStep.ConfigReqd,
-      shortcode: 'slack',
+      shortcode: IntegrationShortcodes.SLACK,
       ownerId: this.ownerId,
       code,
       state,
@@ -163,7 +164,7 @@ export default class SlackIntermediaryInstallation extends mixins(integrationsDe
     if (this.installIntegrationPayload.nextStep === IntegrationInstallationStep.Complete) {
       // Refetch integration details on successfully completing the installation
       await this.fetchIntegrationDetails({
-        shortcode: 'slack',
+        shortcode: IntegrationShortcodes.SLACK,
         level: IntegrationSettingsLevel.Owner,
         ownerId: this.ownerId,
         refetch: true
@@ -185,11 +186,11 @@ export default class SlackIntermediaryInstallation extends mixins(integrationsDe
    */
   redirectToIntegrationsPage(): void {
     // Grab provider and owner information from cookies
-    const provider = this.$cookies.get('integration-slack-provider')
-    this.$cookies.remove('integration-slack-provider')
+    const provider = this.$cookies.get(SlackCookieKeys.PROVIDER)
+    this.$cookies.remove(SlackCookieKeys.PROVIDER)
 
-    const owner = this.$cookies.get('integration-slack-owner')
-    this.$cookies.remove('integration-slack-owner')
+    const owner = this.$cookies.get(SlackCookieKeys.OWNER)
+    this.$cookies.remove(SlackCookieKeys.OWNER)
 
     // Redirect to the integrations page
     this.$nuxt.$router.push(`/${provider}/${owner}/settings/integrations/slack`)

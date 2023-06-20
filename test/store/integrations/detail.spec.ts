@@ -1,3 +1,4 @@
+import { IntegrationShortcodes } from '~/mixins/integrationsDetailMixin'
 import {
   actions,
   IntegrationsDetailActionContext,
@@ -16,7 +17,7 @@ import {
 
 // Mocks
 const integrationDetails = {
-  shortcode: 'slack',
+  shortcode: IntegrationShortcodes.SLACK,
   logo: 'http://dev-asgard-static.s3.us-east-1.amazonaws.com/integration_logos/slack.svg',
   status: IntegrationProviderStatus.ConfigRequired,
   installed: true,
@@ -111,7 +112,7 @@ describe('[Store] Integrations/Detail', () => {
         localThis as any,
         actionCxt,
         {
-          shortcode: 'slack',
+          shortcode: IntegrationShortcodes.SLACK,
           level: IntegrationSettingsLevel.Owner,
           ownerId: 'T3duZXI6cXpscnh6'
         }
@@ -141,7 +142,7 @@ describe('[Store] Integrations/Detail', () => {
         localThis as any,
         actionCxt,
         {
-          shortcode: 'slack',
+          shortcode: IntegrationShortcodes.SLACK,
           level: IntegrationSettingsLevel.Owner,
           ownerId: 'T3duZXI6cXpscnh6'
         }
@@ -176,7 +177,7 @@ describe('[Store] Integrations/Detail', () => {
         localThis as any,
         actionCxt,
         {
-          shortcode: 'slack',
+          shortcode: IntegrationShortcodes.SLACK,
           level: IntegrationSettingsLevel.Owner,
           ownerId: 'T3duZXI6cXpscnh6'
         }
@@ -206,7 +207,7 @@ describe('[Store] Integrations/Detail', () => {
         localThis as any,
         actionCxt,
         {
-          shortcode: 'slack',
+          shortcode: IntegrationShortcodes.SLACK,
           level: IntegrationSettingsLevel.Owner,
           ownerId: 'T3duZXI6cXpscnh6'
         }
@@ -241,7 +242,7 @@ describe('[Store] Integrations/Detail', () => {
         localThis as any,
         actionCxt,
         {
-          shortcode: 'slack',
+          shortcode: IntegrationShortcodes.SLACK,
           level: IntegrationSettingsLevel.Owner,
           repositoryId: 'T3duZXI6cXpscnh6'
         }
@@ -271,7 +272,7 @@ describe('[Store] Integrations/Detail', () => {
         localThis as any,
         actionCxt,
         {
-          shortcode: 'slack',
+          shortcode: IntegrationShortcodes.SLACK,
           level: IntegrationSettingsLevel.Owner,
           repositoryId: 'T3duZXI6cXpscnh6'
         }
@@ -318,7 +319,8 @@ describe('[Store] Integrations/Detail', () => {
       const { url } = await actions[
         IntegrationsDetailActions.GET_INTEGRATION_INSTALLATION_URL
       ].call(localThis as any, actionCxt, {
-        shortcode: 'slack'
+        shortcode: IntegrationShortcodes.SLACK,
+        ownerId: 'T3duZXI6cXpscnh6'
       })
 
       // Assertions
@@ -343,7 +345,8 @@ describe('[Store] Integrations/Detail', () => {
         localThis as any,
         actionCxt,
         {
-          shortcode: 'slack'
+          shortcode: IntegrationShortcodes.SLACK,
+          ownerId: 'T3duZXI6cXpscnh6'
         }
       )
 
@@ -382,7 +385,7 @@ describe('[Store] Integrations/Detail', () => {
         actionCxt,
         {
           step: IntegrationInstallationStep.Install,
-          shortcode: 'slack',
+          shortcode: IntegrationShortcodes.SLACK,
           ownerId: 'T3duZXI6cXpscnh6',
           code: '3008460848721.3360571871733.dba65df03a4bcb525d226ec2d4cdc171595e3554f69af70f00c3c7659ffe3470',
           state: 'OTy00JuBZpKagj6400e9smdyrCCoImxSoeVksXHufZk'
@@ -414,7 +417,7 @@ describe('[Store] Integrations/Detail', () => {
         actionCxt,
         {
           step: IntegrationInstallationStep.Install,
-          shortcode: 'slack',
+          shortcode: IntegrationShortcodes.SLACK,
           ownerId: 'T3duZXI6cXpscnh6',
           code: '3008460848721.3360571871733.dba65df03a4bcb525d226ec2d4cdc171595e3554f69af70f00c3c7659ffe3470',
           state: 'OTy00JuBZpKagj6400e9smdyrCCoImxSoeVksXHufZk'
@@ -447,7 +450,7 @@ describe('[Store] Integrations/Detail', () => {
         localThis as any,
         actionCxt,
         {
-          shortcode: 'slack',
+          shortcode: IntegrationShortcodes.SLACK,
           level: IntegrationSettingsLevel.Owner,
           ownerId: 'T3duZXI6cXpscnh6',
           settings: { channel: 'issues' }
@@ -459,7 +462,7 @@ describe('[Store] Integrations/Detail', () => {
       expect(actionCxt.dispatch).toHaveBeenCalledWith(
         IntegrationsDetailActions.FETCH_INTEGRATION_DETAILS,
         {
-          shortcode: 'slack',
+          shortcode: IntegrationShortcodes.SLACK,
           level: IntegrationSettingsLevel.Owner,
           ownerId: 'T3duZXI6cXpscnh6',
           refetch: true
@@ -485,7 +488,7 @@ describe('[Store] Integrations/Detail', () => {
         localThis as any,
         actionCxt,
         {
-          shortcode: 'slack',
+          shortcode: IntegrationShortcodes.SLACK,
           level: IntegrationSettingsLevel.Owner,
           ownerId: 'T3duZXI6cXpscnh6',
           settings: { channel: 'issues' }
@@ -518,7 +521,7 @@ describe('[Store] Integrations/Detail', () => {
         localThis as any,
         actionCxt,
         {
-          shortcode: 'slack',
+          shortcode: IntegrationShortcodes.SLACK,
           ownerId: 'T3duZXI6cXpscnh6'
         }
       )
@@ -528,7 +531,7 @@ describe('[Store] Integrations/Detail', () => {
       expect(actionCxt.dispatch).toHaveBeenCalledWith(
         IntegrationsDetailActions.FETCH_INTEGRATION_DETAILS,
         {
-          shortcode: 'slack',
+          shortcode: IntegrationShortcodes.SLACK,
           level: IntegrationSettingsLevel.Owner,
           ownerId: 'T3duZXI6cXpscnh6',
           refetch: true
@@ -553,7 +556,7 @@ describe('[Store] Integrations/Detail', () => {
 
       expect(
         actions[IntegrationsDetailActions.UNINSTALL_INTEGRATION].call(localThis as any, actionCxt, {
-          shortcode: 'slack',
+          shortcode: IntegrationShortcodes.SLACK,
           ownerId: 'T3duZXI6cXpscnh6'
         })
       ).rejects.toThrowError(new Error('Something went wrong'))
@@ -582,7 +585,7 @@ describe('[Store] Integrations/Detail', () => {
       const { ok, issueCode } = await actions[
         IntegrationsDetailActions.CREATE_ISSUE_ON_INTEGRATION
       ].call(localThis as any, actionCxt, {
-        integrationShortcode: 'jira',
+        integrationShortcode: IntegrationShortcodes.JIRA,
         repositoryIssueId: 'T3duZXI6cXpscnh6'
       })
 

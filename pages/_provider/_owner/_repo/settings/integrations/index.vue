@@ -26,15 +26,15 @@
       <!-- Loading state -->
       <div v-if="$fetchState.pending" class="3xl:grid-cols-3 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div
-          v-for="ii in 2"
+          v-for="ii in 3"
           :key="ii"
-          class="h-20 animate-pulse rounded-md bg-ink-200 bg-opacity-50"
+          class="integration-card-height animate-pulse rounded-md bg-ink-200 bg-opacity-50"
         ></div>
       </div>
 
       <div v-else class="3xl:grid-cols-3 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div v-for="integration in integrations" :key="integration.shortcode">
-          <integration-card v-bind="integration" />
+          <integration-card v-bind="integration" class="integration-card-height" />
         </div>
       </div>
     </template>
@@ -42,12 +42,13 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZIcon, ZTag } from '@deepsource/zeal'
+import { ZButton, ZIcon } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import IntegrationsDetailMixin from '~/mixins/integrationsDetailMixin'
 import IntegrationsListMixin from '~/mixins/integrationsListMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
+
 import { RepoPerms } from '~/types/permTypes'
 import { IntegrationSettingsLevel } from '~/types/types'
 
@@ -57,8 +58,7 @@ import { IntegrationSettingsLevel } from '~/types/types'
 @Component({
   components: {
     ZButton,
-    ZIcon,
-    ZTag
+    ZIcon
   },
   middleware: ['perm', 'teamOnly'],
   meta: {
@@ -87,3 +87,23 @@ export default class RepoLevelIntegrationsPage extends mixins(
   }
 }
 </script>
+
+<style scoped lang="postcss">
+@tailwind utilities;
+
+.integration-card-height {
+  height: 84px;
+}
+
+@media screen(lg) {
+  .integration-card-height {
+    height: 104px;
+  }
+}
+
+@media screen(xl) {
+  integration-card-height {
+    height: 84px;
+  }
+}
+</style>

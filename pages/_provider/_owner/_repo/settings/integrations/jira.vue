@@ -7,15 +7,15 @@
       ]"
     />
 
-    <div class="max-w-2xl p-4 pb-32 space-y-6">
-      <div class="flex flex-col justify-between gap-4 mb-4 sm:flex-row">
+    <div class="max-w-2xl space-y-6 p-4 pb-32">
+      <div class="mb-4 flex flex-col justify-between gap-4 sm:flex-row">
         <integration-title
           :logo="integration.logo"
           :pending="$fetchState.pending"
           name="Jira Cloud"
         />
         <div v-if="$fetchState.pending">
-          <div class="h-8 bg-opacity-50 rounded-md w-60 animate-pulse bg-ink-200"></div>
+          <div class="h-8 w-60 animate-pulse rounded-md bg-ink-200 bg-opacity-50"></div>
         </div>
         <integration-installed-on v-else :installed-on="installedOn" />
       </div>
@@ -80,12 +80,15 @@
 
 <script lang="ts">
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
+
+import { IntegrationShortcodes } from '~/mixins/integrationsDetailMixin'
 import JiraIntegrationMixin from '~/mixins/jiraIntegrationMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
+
 import { RepoPerms } from '~/types/permTypes'
 import { IntegrationSettingsLevel, UpdateIntegrationSettingsInput } from '~/types/types'
 
-const SHORTCODE = 'jira'
+const SHORTCODE = IntegrationShortcodes.JIRA
 
 /**
  * Repository level integrations page for Jira
@@ -96,7 +99,7 @@ const SHORTCODE = 'jira'
     strict: true,
     repoPerms: [RepoPerms.CHANGE_INTEGRATION_SETTINGS]
   },
-  layout: 'dashboard'
+  layout: 'repository'
 })
 export default class RepoLevelJiraIntegrationPage extends mixins(
   RepoDetailMixin,

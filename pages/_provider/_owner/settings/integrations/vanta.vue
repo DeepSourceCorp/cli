@@ -3,7 +3,7 @@
     <breadcrumb-container
       :links="[
         { label: 'Integrations', route: $generateRoute(['settings', 'integrations']) },
-        { label: 'Slack' }
+        { label: 'Vanta' }
       ]"
     />
 
@@ -15,7 +15,7 @@
 
     <div v-else class="p-4 pb-32 md:max-w-2xl">
       <div class="mb-4 flex flex-col justify-between gap-4 sm:flex-row">
-        <integration-title :logo="integration.logo" name="Slack" />
+        <integration-title :logo="integration.logo" name="Vanta" />
 
         <integration-installed-on
           v-if="integration.installed"
@@ -42,26 +42,12 @@
         :user-name="userName"
         :email="email"
         :enabled-on="integration.enabledOn"
-        class="mb-7"
-      />
-
-      <integration-info
-        v-if="showAlert"
-        :dismissible="true"
-        :description="integrationDescription"
-        :class="{ 'mb-4': integration.installed }"
-        @hide-integration-info="hideAlert"
-      />
-
-      <notification-channel-section
-        v-if="integration.installed"
-        v-model="channel"
-        :pending="$fetchState.pending"
+        class="mb-4"
       />
 
       <z-divider margin="my-4" />
 
-      <event-alerts-section />
+      <integration-info :description="integrationDescription" />
 
       <z-divider v-if="integration.installed" margin="my-4" />
 
@@ -72,7 +58,7 @@
         <div class="max-w-sm space-y-2">
           <h2 class="text-sm text-vanilla-300">Uninstall integration</h2>
           <p class="text-xs text-vanilla-400">
-            Uninstalling the Slack integration from your account would stop all alerts to your Slack
+            Uninstalling the Vanta integration will stop security issue reporting to your Vanta
             workspace.
           </p>
         </div>
@@ -81,7 +67,7 @@
           icon="x"
           button-type="danger"
           color="ink-300"
-          label="Uninstall Slack"
+          label="Uninstall Vanta"
           size="small"
           @click="showDeleteConfirmation = true"
         />
@@ -91,9 +77,7 @@
     <portal to="modal">
       <z-confirm
         v-if="showDeleteConfirmation"
-        title="Are you sure you want to uninstall Slack?"
-        subtitle="Uninstalling the Slack integration from your account would stop all alerts to your Slack
-            workspace."
+        title="Are you sure you want to uninstall Vanta?"
         @onClose="showDeleteConfirmation = false"
       >
         <template #footer="{ close }">
@@ -108,7 +92,7 @@
               size="small"
               class="modal-primary-action"
               @click="uninstallIntegrationHandler"
-              >Yes, uninstall Slack</z-button
+              >Yes, uninstall Vanta</z-button
             >
           </div>
         </template>
@@ -119,17 +103,16 @@
 
 <script lang="ts">
 import { ZButton, ZConfirm, ZDivider } from '@deepsource/zeal'
-import { Component, mixins, Watch } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 
 import IntegrationsDetailMixin, { IntegrationShortcodes } from '~/mixins/integrationsDetailMixin'
 
 import { TeamPerms } from '~/types/permTypes'
-import { IntegrationSettingsLevel, UpdateIntegrationSettingsInput } from '~/types/types'
 
-const SHORTCODE = IntegrationShortcodes.SLACK
+const SHORTCODE = IntegrationShortcodes.VANTA
 
 /**
- * Owner-level integrations page for Slack
+ * Owner-level integrations page for Vanta
  */
 @Component({
   components: {
@@ -146,13 +129,10 @@ const SHORTCODE = IntegrationShortcodes.SLACK
   },
   layout: 'dashboard'
 })
-export default class SlackIntegration extends mixins(IntegrationsDetailMixin) {
-  showAlert = false
-
-  channel = ''
-  integrationDescription = `Receive event updates, like analysis and Autofix results, in real-time to your Slack
-    workspace. Repository administrators can configure a different notification channel in their
-    respective repository’s settings.`
+export default class VantaIntegration extends mixins(IntegrationsDetailMixin) {
+  integrationDescription = `DeepSource periodically reports security issues found in the default branch of all your
+    repositories to Vanta, making it easier for you to keep track of your organization's source
+    code compliance.`
 
   /**
    * The fetch hook
@@ -161,73 +141,10 @@ export default class SlackIntegration extends mixins(IntegrationsDetailMixin) {
    */
   async fetch(): Promise<void> {
     await this.fetchIntegrationData(SHORTCODE)
-
-    // Set the channel preference if available
-    if (this.integration.installed) {
-      this.channel = this.integration.settings.channel
-    }
   }
 
-  /**
-   * Mounted hook
-   *
-   *
-   * @returns {void}
-   */
   mounted(): void {
-    const integrationSlackStore = localStorage['integration-slack']
-    if (integrationSlackStore) {
-      // Check if the `integration-slack` store includes a key by the name `is-alert-visible`
-      const isFirstTime = !Object.keys(JSON.parse(integrationSlackStore)).includes(
-        'is-alert-visible'
-      )
-
-      if (isFirstTime) {
-        // Set the value to `true` if for the first time
-        this.showAlert = true
-        this.$localStore.set('integration-slack', 'is-alert-visible', true)
-      } else {
-        // Grab the value from local storage
-        this.showAlert = this.$localStore.get('integration-slack', 'is-alert-visible') as boolean
-      }
-    } else {
-      // Fall back to `true` if the `integration-slack` is absent
-      this.showAlert = true
-    }
-
     this.fetchInstallationUrl(SHORTCODE)
-  }
-
-  /**
-   * Update Slack channel preference based on the selected option
-   *
-   * @param {string} newChannel - newly selected channel
-   * @param {string} oldChannel - old selection
-   *
-   * @returns {Promise<void>}
-   */
-  @Watch('channel')
-  async updateChannelPreference(newChannel: string, oldChannel: string): Promise<void> {
-    // Prevent immediate invocation
-    if (oldChannel === '') {
-      return
-    }
-
-    // Conditionally populate the GQL mutation arguments
-    const args = {
-      shortcode: IntegrationShortcodes.SLACK,
-      level: IntegrationSettingsLevel.Owner,
-      ownerId: this.owner.id,
-      settings: { channel: newChannel }
-    } as UpdateIntegrationSettingsInput
-
-    // Dispatch the Vuex action that invokes the GQL mutation aimed at updating integration settings
-    const { ok } = await this.updateIntegrationSettings(args)
-
-    // Show success toast on successfully updating the channel preference
-    if (ok) {
-      this.$toast.success(`Successfully updated the channel to ${newChannel}.`)
-    }
   }
 
   /**
@@ -247,15 +164,6 @@ export default class SlackIntegration extends mixins(IntegrationsDetailMixin) {
    */
   async uninstallIntegrationHandler(): Promise<void> {
     await this.uninstallIntegrationWrapper(SHORTCODE)
-  }
-
-  /**
-   * Set the value of `is-alert-visible` key to `false` within `integration-slack` store (local storage)
-   *
-   * @returns {void}
-   */
-  hideAlert(): void {
-    this.$localStore.set('integration-slack', 'is-alert-visible', false)
   }
 }
 </script>

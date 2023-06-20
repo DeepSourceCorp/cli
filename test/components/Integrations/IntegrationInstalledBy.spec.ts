@@ -14,15 +14,20 @@ describe('[[ IntegrationInstalledBy ]]', () => {
     )
     const userNameOptions = generateStringProps('userName', ['awalvie'], false)
 
-    cartesian(enabledOnOptions, avatarOptions, userNameOptions).forEach((props) => {
+    cartesian(enabledOnOptions, avatarOptions, userNameOptions).forEach((propCombination) => {
+      const propsData = {
+        ...propCombination,
+        email: 'johndoe@test.com'
+      }
+
       const { html } = render(IntegrationInstalledBy, {
-        props,
+        propsData,
         stubs: {
           ZAvatar: true
         }
       })
 
-      expect(html()).toMatchSnapshot(JSON.stringify(props))
+      expect(html()).toMatchSnapshot(JSON.stringify(propsData))
     })
   })
 })

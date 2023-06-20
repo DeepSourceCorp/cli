@@ -9,6 +9,7 @@ import { VueConstructor } from 'vue'
 import IssueActions from '~/components/RepoIssues/IssueActions.vue'
 import { cartesian, generateBooleanProps, generateGenericProps } from '~/test/utils'
 import { Maybe, RepositoryCollaboratorPermission } from '~/types/types'
+import { IntegrationShortcodes } from '~/mixins/integrationsDetailMixin'
 
 const BASE_PROPS = {
   issue: {
@@ -20,7 +21,7 @@ const BASE_PROPS = {
   },
   canCreateAutofix: true,
   isAutofixEnabled: true,
-  issueCreateIntegrations: ['jira'],
+  issueCreateIntegrations: [IntegrationShortcodes.JIRA],
   checkId: 'check-id-for-testing',
   shortcode: 'shortcode'
 }
@@ -154,7 +155,10 @@ describe('[[ IssueActions ]]', () => {
   test('renders the issue actions', () => {
     const canCreateAutofix = generateBooleanProps('canCreateAutofix', false)
     const isAutofixEnabled = generateBooleanProps('isAutofixEnabled', false)
-    const issueCreateIntegrations = generateGenericProps('issueCreateIntegrations', [['jira'], []])
+    const issueCreateIntegrations = generateGenericProps('issueCreateIntegrations', [
+      [IntegrationShortcodes.JIRA],
+      []
+    ])
 
     cartesian(canCreateAutofix, isAutofixEnabled, issueCreateIntegrations).forEach(
       (propsCombination) => {

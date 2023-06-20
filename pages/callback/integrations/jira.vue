@@ -8,7 +8,7 @@
     <template #notice>
       <notice class="h-8 gap-x-3">
         <template #indicator>
-          <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-honey"></span>
+          <span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-honey"></span>
         </template>
         <!-- Duck Norris lover Jira Aloo -->
         <p class="text-xs">Installing DeepSource for Jira Cloud</p>
@@ -48,18 +48,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Watch, mixins } from 'nuxt-property-decorator'
-
-import { JiraCookieKeys } from '~/mixins/integrationsDetailMixin'
-import { TeamPerms } from '~/types/permTypes'
 import { Context } from '@nuxt/types'
+import { Component, mixins, Watch } from 'nuxt-property-decorator'
+
+import { IntegrationShortcodes, JiraCookieKeys } from '~/mixins/integrationsDetailMixin'
+import JiraIntegrationMixin from '~/mixins/jiraIntegrationMixin'
+
 import { IntegrationsDetailActions } from '~/store/integrations/detail'
+
+import { TeamPerms } from '~/types/permTypes'
 import {
   InstallIntegrationPayload,
   IntegrationInstallationStep,
   IntegrationSettingsLevel
 } from '~/types/types'
-import JiraIntegrationMixin from '~/mixins/jiraIntegrationMixin'
 
 /**
  * Intermediary page where the integration installation happens
@@ -91,16 +93,15 @@ import JiraIntegrationMixin from '~/mixins/jiraIntegrationMixin'
       }
 
       // Trigger the GQL mutation to install the integration
-      const { nextStep, options } = (await store.dispatch(
-        `integrations/detail/${IntegrationsDetailActions.INSTALL_INTEGRATION}`,
-        {
-          step: IntegrationInstallationStep.Install,
-          shortcode: 'jira',
-          ownerId,
-          code,
-          state
-        }
-      )) as InstallIntegrationPayload
+      await store.dispatch(`integrations/detail/${IntegrationsDetailActions.INSTALL_INTEGRATION}`, {
+        step: IntegrationInstallationStep.Install,
+        shortcode: IntegrationShortcodes.JIRA,
+        ownerId,
+        code,
+        state
+      })
+
+      const { nextStep, options } = store.state.integrations.detail.installIntegrationPayload
 
       // Redirect to the integrations page for Jira if the user performs a full reload
       // Triggering `installIntegration` GQL mutation `INSTALL` step would fail
@@ -116,7 +117,7 @@ import JiraIntegrationMixin from '~/mixins/jiraIntegrationMixin'
 
       await store.dispatch(
         `integrations/detail/${IntegrationsDetailActions.FETCH_INTEGRATION_LOGO_URL}`,
-        { shortcode: 'jira', level: IntegrationSettingsLevel.Owner, ownerId }
+        { shortcode: IntegrationShortcodes.JIRA, level: IntegrationSettingsLevel.Owner, ownerId }
       )
     }
   ],
@@ -132,7 +133,7 @@ import JiraIntegrationMixin from '~/mixins/jiraIntegrationMixin'
     }
   }
 })
-export default class JiraCallback extends mixins(JiraIntegrationMixin) {
+export default class JiraIntermediaryInstallation extends mixins(JiraIntegrationMixin) {
   selectedCloudId = ''
   selectedProject = ''
   selectedIssueType = ''
@@ -180,7 +181,7 @@ export default class JiraCallback extends mixins(JiraIntegrationMixin) {
       this.validateJiraConfig()
       const response = await this.installIntegration({
         step: this.nextStep,
-        shortcode: 'jira',
+        shortcode: IntegrationShortcodes.JIRA,
         ownerId: this.ownerId,
         state,
         code,
@@ -198,7 +199,7 @@ export default class JiraCallback extends mixins(JiraIntegrationMixin) {
         if (response.nextStep === IntegrationInstallationStep.Complete) {
           // Refetch integration details on successfully completing the installation
           await this.fetchIntegrationDetails({
-            shortcode: 'jira',
+            shortcode: IntegrationShortcodes.JIRA,
             level: IntegrationSettingsLevel.Owner,
             ownerId: this.ownerId,
             refetch: true

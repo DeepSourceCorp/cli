@@ -1,16 +1,16 @@
 <template>
   <nuxt-link
     :to="$generateRoute(['settings', 'integrations', shortcode])"
-    class="flex flex-col p-4 text-left rounded-md bg-ink-300 hover:bg-ink-200 group"
+    class="group flex flex-col rounded-md bg-ink-300 p-4 text-left hover:bg-ink-200"
   >
     <div class="space-y-2" :class="{ 'mb-3': showInstallationStatus }">
       <div class="flex gap-x-3">
-        <img :src="logo" alt="logo" class="flex-shrink-0 w-5 h-5 mt-0.5" />
+        <img :src="logo" alt="logo" class="mt-0.5 h-5 w-5 flex-shrink-0" />
         <h2 class="text-base font-medium text-vanilla-100">
           {{ name }}
         </h2>
       </div>
-      <p class="mr-3 text-xs leading-6 text-vanilla-400 integration-description">
+      <p class="integration-description mr-3 text-xs leading-6 text-vanilla-400">
         {{ getIntegrationDescription(shortcode) }}
       </p>
     </div>
@@ -38,12 +38,13 @@
 </template>
 
 <script lang="ts">
-import { ZTag, ZIcon } from '@deepsource/zeal'
-import { Component, mixins, Prop } from 'nuxt-property-decorator'
+import { ZIcon, ZTag } from '@deepsource/zeal'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-import IntegrationsListMixin from '~/mixins/integrationsListMixin'
+import { IntegrationShortcodes } from '~/mixins/integrationsDetailMixin'
 
 @Component({
+  name: 'IntegrationCard',
   components: {
     ZTag,
     ZIcon
@@ -51,11 +52,11 @@ import IntegrationsListMixin from '~/mixins/integrationsListMixin'
 })
 
 /**
- * Component that is responsible to render `Event alerts` section on Slack integration detailed view
+ * Component that renders the integration cards in the list view
  */
-export default class IntegrationCard extends mixins(IntegrationsListMixin) {
+export default class IntegrationCard extends Vue {
   @Prop({ required: true })
-  shortcode: string
+  shortcode: IntegrationShortcodes
 
   @Prop({ required: true })
   logo: string
@@ -68,5 +69,21 @@ export default class IntegrationCard extends mixins(IntegrationsListMixin) {
 
   @Prop({ default: false })
   showInstallationStatus: boolean
+
+  /**
+   * Method to fetch description corresponding to the given integration
+   *
+   * @param {IntegrationShortcodes} shortcode
+   * @returns {void}
+   */
+  getIntegrationDescription(shortcode: IntegrationShortcodes): string {
+    const descriptionMap = {
+      [IntegrationShortcodes.SLACK]: 'Send event alerts to your channels.',
+      [IntegrationShortcodes.JIRA]: 'Create issues from DeepSource to Jira Cloud.',
+      [IntegrationShortcodes.VANTA]: 'Send code vulnerability data to Vanta.'
+    } as Record<IntegrationShortcodes, string>
+
+    return descriptionMap[shortcode]
+  }
 }
 </script>

@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ IntegrationInfo ]] renders a neutral alert widget with the title and description: {"description":"Test description","dismissible":false} 1`] = `
+"<div class=\\"px-4 rounded-md bg-ink-300 py-3.5\\">
+  <div class=\\"flex items-center\\">
+    <div class=\\"flex-grow text-sm text-vanilla-100 -mb-px\\">
+      <div class=\\"space-y-2\\">
+        <h2 class=\\"text-sm font-medium text-vanilla-100\\">
+          How does it work?
+        </h2>
+        <p class=\\"text-xs leading-relaxed text-vanilla-400\\">
+          Test description
+        </p>
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationInfo ]] renders a neutral alert widget with the title and description: {"description":"Test description","dismissible":true} 1`] = `
+"<div class=\\"px-4 rounded-md bg-ink-300 py-2\\">
+  <div class=\\"flex items-center\\">
+    <div class=\\"flex-grow text-sm text-vanilla-100 -mb-px\\">
+      <div class=\\"space-y-2\\">
+        <h2 class=\\"text-sm font-medium text-vanilla-100\\">
+          How does it work?
+        </h2>
+        <p class=\\"text-xs leading-relaxed text-vanilla-400\\">
+          Test description
+        </p>
+      </div>
+    </div><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap flex-shrink-0 hover:bg-opacity-0 place-self-start text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 w-8 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--x text-vanilla-100\\">
+        <line x1=\\"18\\" y1=\\"6\\" x2=\\"6\\" y2=\\"18\\"></line>
+        <line x1=\\"6\\" y1=\\"6\\" x2=\\"18\\" y2=\\"18\\"></line>
+      </svg></button>
+  </div>
+</div>"
+`;
