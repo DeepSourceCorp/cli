@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/vue'
 import { createLocalVue } from '@vue/test-utils'
+import dayjs from 'dayjs'
 import VTooltip from 'v-tooltip'
 import { VueConstructor } from 'vue'
 import Vuex from 'vuex'
@@ -9,9 +10,10 @@ import { AutofixListItem } from '~/components/Autofix'
 import { mocksGenerator, storeModulesGenerator } from '~/test/mocks'
 import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
 import { AutofixRunStatus } from '~/types/types'
+import { DurationTypeT, getDateFromXAgo } from '~/utils/date'
 
-const today = new Date()
-const nineMonthsAgo = new Date(today.setMonth(today.getMonth() - 9)).toISOString()
+const today = dayjs().format('YYYY-MM-DD')
+const nineMonthsAgo = getDateFromXAgo(today, DurationTypeT.months, 9)
 
 const autofixRun = {
   id: 'QXV0b2ZpeFJ1bjpicnZlZ3g=',

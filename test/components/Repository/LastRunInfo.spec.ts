@@ -1,9 +1,14 @@
 import { render } from '@testing-library/vue'
 import { RouterLinkStub } from '@vue/test-utils'
+import dayjs from 'dayjs'
 
 import LastRunInfo from '~/components/Repository/LastRunInfo.vue'
+import { DurationTypeT, getDateFromXAgo } from '~/utils/date'
 
 describe('[[ LastRunInfo ]]', () => {
+  const today = dayjs().format('YYYY-MM-DD')
+  const eightMonthsAgo = getDateFromXAgo(today, DurationTypeT.months, 8)
+
   const baseProps = {
     latestAnalysisRun: {
       id: 'UnVuOnpqeXh3dw==',
@@ -30,7 +35,7 @@ describe('[[ LastRunInfo ]]', () => {
       commitOid: 'cf64c729235234a4f59336a4005928ab2216846f',
       branchRunCount: null,
       status: 'FAIL',
-      finishedAt: '2022-10-03T10:49:47.035312+00:00'
+      finishedAt: eightMonthsAgo
     },
     runs: {
       totalCount: 0
