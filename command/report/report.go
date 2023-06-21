@@ -280,11 +280,7 @@ func (opts *ReportOptions) Run() int {
 			}
 
 			// Base64 encode the compressed byte array
-			encodedBytes := make([]byte, base64.StdEncoding.EncodedLen(len(compressedBytes)))
-			base64.StdEncoding.Encode(encodedBytes, compressedBytes)
-
-			// Set the artifact value to the base64 encoded string
-			artifactValue = string(encodedBytes)
+			artifactValue = base64.StdEncoding.EncodeToString(compressedBytes)
 
 			// Set the compression flag
 			reportMeta["compressed"] = "True"
