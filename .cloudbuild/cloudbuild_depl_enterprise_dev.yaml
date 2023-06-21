@@ -1,0 +1,14 @@
+timeout: 30m0s
+
+steps:
+  - name: 'gcr.io/kaniko-project/executor:v1.6.0-debug'
+    args:
+      - --destination=us.gcr.io/deepsource-dev/bifrost:$_IMAGE_TAG
+      - --dockerfile=Dockerfile
+      - --build-arg=ON_PREM=true
+      - --build-arg=NODE_ENV=production
+      - --build-arg=BIFROST_ENV=staging
+      - --cache=false
+
+options:
+  machineType: 'E2_HIGHCPU_8'
