@@ -55,7 +55,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
     <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-200 bg-opacity-30\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"90\\" type=\\"bar\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
+    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"90\\" type=\\"bar\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
   </div>
 </div>"
 `;
@@ -125,7 +125,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
     <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-300\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"90\\" type=\\"bar\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" class=\\"min-h-72\\"></zchart-stub>
+    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"90\\" type=\\"bar\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72\\"></zchart-stub>
   </div>
 </div>"
 `;
@@ -185,7 +185,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
     <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-200 bg-opacity-30\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"100\\" type=\\"bar\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
+    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"100\\" type=\\"bar\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
   </div>
 </div>"
 `;
@@ -255,7 +255,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
     <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-300\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"100\\" type=\\"bar\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" class=\\"min-h-72\\"></zchart-stub>
+    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"100\\" type=\\"bar\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72\\"></zchart-stub>
   </div>
 </div>"
 `;
@@ -315,7 +315,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
     <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-200 bg-opacity-30\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"117.5\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
+    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"117.5\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
   </div>
 </div>"
 `;
@@ -385,7 +385,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
     <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-300\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"117.5\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" class=\\"min-h-72\\"></zchart-stub>
+    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"117.5\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72\\"></zchart-stub>
   </div>
 </div>"
 `;
@@ -445,7 +445,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
     <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-200 bg-opacity-30\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"100\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
+    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"100\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
   </div>
 </div>"
 `;
@@ -515,7 +515,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
     <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-300\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"100\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" class=\\"min-h-72\\"></zchart-stub>
+    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"100\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72\\"></zchart-stub>
   </div>
 </div>"
 `;
