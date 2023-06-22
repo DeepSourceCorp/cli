@@ -1453,6 +1453,7 @@ export type EnterpriseInstallationRoot = {
   groups?: Maybe<EnterpriseGroupConnection>;
   user?: Maybe<EnterpriseUser>;
   users?: Maybe<EnterpriseUserConnection>;
+  superusers?: Maybe<EnterpriseUserConnection>;
   team?: Maybe<EnterpriseTeam>;
   teams?: Maybe<EnterpriseTeamConnection>;
   personalAccounts?: Maybe<OwnerConnection>;
@@ -1492,6 +1493,17 @@ export type EnterpriseInstallationRootUsersArgs = {
 };
 
 
+export type EnterpriseInstallationRootSuperusersArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  q?: Maybe<Scalars['String']>;
+  isSuperuser?: Maybe<Scalars['Boolean']>;
+};
+
+
 export type EnterpriseInstallationRootTeamArgs = {
   id: Scalars['ID'];
 };
@@ -1520,7 +1532,6 @@ export type EnterpriseInstallationSetup = MaskPrimaryKeyNode & {
   id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
   modifiedAt: Scalars['DateTime'];
-  alive?: Maybe<Scalars['Boolean']>;
   name: Scalars['String'];
   logo?: Maybe<Scalars['String']>;
 };
@@ -4456,8 +4467,8 @@ export type Repository = MaskPrimaryKeyNode & {
   prs?: Maybe<PrConnection>;
   watchedBy: UserPreferenceConnection;
   autofixRuns?: Maybe<AutofixRunConnection>;
-  transformerRuns?: Maybe<TransformerRunConnection>;
   onboardingEvents: AutoOnboardEventConnection;
+  transformerRuns?: Maybe<TransformerRunConnection>;
   runs?: Maybe<RunConnection>;
   sourcedInPublicReports: PublicReportConnection;
   publicReports?: Maybe<PublicReportConnection>;
@@ -4611,16 +4622,6 @@ export type RepositoryAutofixRunsArgs = {
 };
 
 
-export type RepositoryTransformerRunsArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  status?: Maybe<Scalars['String']>;
-};
-
-
 export type RepositoryOnboardingEventsArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -4628,6 +4629,16 @@ export type RepositoryOnboardingEventsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   owner?: Maybe<Scalars['ID']>;
+};
+
+
+export type RepositoryTransformerRunsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  status?: Maybe<Scalars['String']>;
 };
 
 
@@ -5294,6 +5305,7 @@ export type SubmitSupportTicketInput = {
   ccEmails?: Maybe<Scalars['String']>;
   subject: Scalars['String'];
   body: Scalars['String'];
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
   attachments?: Maybe<Array<Maybe<Attachment>>>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
@@ -9250,6 +9262,27 @@ export type Unnamed_102_Query = (
   )> }
 );
 
+export type SuperuserListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SuperuserListQuery = (
+  { __typename?: 'Query' }
+  & { enterprise?: Maybe<(
+    { __typename?: 'EnterpriseInstallationRoot' }
+    & { users?: Maybe<(
+      { __typename?: 'EnterpriseUserConnection' }
+      & Pick<EnterpriseUserConnection, 'totalCount'>
+      & { edges: Array<Maybe<(
+        { __typename?: 'EnterpriseUserEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'EnterpriseUser' }
+          & Pick<EnterpriseUser, 'id' | 'fullName' | 'email' | 'avatar'>
+        )> }
+      )>> }
+    )> }
+  )> }
+);
+
 export type IntegrationDetailQueryVariables = Exact<{
   shortcode: Scalars['String'];
   level?: Maybe<IntegrationSettingsLevel>;
@@ -12284,6 +12317,25 @@ export type ActiveUserInfoQuery = (
     )>, socialConnections: Array<(
       { __typename?: 'UserSocialConnection' }
       & Pick<UserSocialConnection, 'enabledOn' | 'provider'>
+    )> }
+  )> }
+);
+
+export type EnterpriseUserDetailQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type EnterpriseUserDetailQuery = (
+  { __typename?: 'Query' }
+  & { enterprise?: Maybe<(
+    { __typename?: 'EnterpriseInstallationRoot' }
+    & { installation?: Maybe<(
+      { __typename?: 'EnterpriseInstallationSetup' }
+      & Pick<EnterpriseInstallationSetup, 'logo'>
+    )>, user?: Maybe<(
+      { __typename?: 'EnterpriseUser' }
+      & Pick<EnterpriseUser, 'id' | 'isSuperuser'>
     )> }
   )> }
 );

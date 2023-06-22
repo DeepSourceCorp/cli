@@ -5,36 +5,39 @@
       class="absolute inset-0 z-10 flex h-full min-h-screen flex-col overflow-y-auto px-5 py-6 lg:px-10 lg:py-8"
     >
       <div><slot name="header"></slot></div>
+
       <div class="flex flex-grow items-center justify-center py-8">
-        <div class="flex w-full flex-col items-center sm:max-w-sm">
-          <div class="deepsource-logo">
-            <svg
-              width="37"
-              height="42"
-              viewBox="0 0 37 42"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M9.69967 11.9517H21.6017C22.607 11.9517 23.4445 12.7802 23.4445 13.7731C23.4445 14.7661 22.607 15.5945 21.6017 15.5945H9.69967V11.9517ZM9.69967 26.3561H24.2833C25.2885 26.3561 26.1273 27.1834 26.1273 28.1775C26.1273 29.1704 25.2885 29.9977 24.2833 29.9977H9.69967V26.3561ZM4.9646 37.449V4.54266H16.6976C20.3441 4.54266 23.4029 5.3288 25.9595 6.9434C28.4734 8.51688 30.4008 10.5862 31.6583 13.1103C32.9159 15.6356 33.5857 18.2843 33.5857 21.0165C33.5857 23.7897 32.9575 26.4383 31.6583 28.9225C30.4008 31.4467 28.4734 33.4749 25.9595 35.0894C23.4445 36.6617 20.3441 37.4902 16.6976 37.4902H7.14418C6.5148 37.449 5.00623 37.449 4.9646 37.449ZM9.69967 19.1539H17.9551C18.9616 19.1539 19.7992 19.9812 19.7992 20.9753C19.7992 21.9683 18.9616 22.7967 17.9551 22.7967H9.69967V19.1539Z"
-                fill="white"
-              />
-            </svg>
-          </div>
-          <div class="mt-8 w-full space-y-3 text-center">
-            <h1 class="text-lg font-medium leading-6 text-vanilla-100">
-              <slot name="title"></slot>
-            </h1>
-            <div v-if="$slots.subtitle" class="text-base leading-8 text-vanilla-400">
-              <slot name="subtitle"></slot>
+        <slot name="body">
+          <div class="flex w-full flex-col items-center sm:max-w-sm">
+            <div class="deepsource-logo">
+              <svg
+                width="37"
+                height="42"
+                viewBox="0 0 37 42"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M9.69967 11.9517H21.6017C22.607 11.9517 23.4445 12.7802 23.4445 13.7731C23.4445 14.7661 22.607 15.5945 21.6017 15.5945H9.69967V11.9517ZM9.69967 26.3561H24.2833C25.2885 26.3561 26.1273 27.1834 26.1273 28.1775C26.1273 29.1704 25.2885 29.9977 24.2833 29.9977H9.69967V26.3561ZM4.9646 37.449V4.54266H16.6976C20.3441 4.54266 23.4029 5.3288 25.9595 6.9434C28.4734 8.51688 30.4008 10.5862 31.6583 13.1103C32.9159 15.6356 33.5857 18.2843 33.5857 21.0165C33.5857 23.7897 32.9575 26.4383 31.6583 28.9225C30.4008 31.4467 28.4734 33.4749 25.9595 35.0894C23.4445 36.6617 20.3441 37.4902 16.6976 37.4902H7.14418C6.5148 37.449 5.00623 37.449 4.9646 37.449ZM9.69967 19.1539H17.9551C18.9616 19.1539 19.7992 19.9812 19.7992 20.9753C19.7992 21.9683 18.9616 22.7967 17.9551 22.7967H9.69967V19.1539Z"
+                  fill="white"
+                />
+              </svg>
+            </div>
+            <div class="mt-8 w-full space-y-3 text-center">
+              <h1 class="text-lg font-medium leading-6 text-vanilla-100">
+                <slot name="title"></slot>
+              </h1>
+              <div v-if="$slots.subtitle" class="text-base leading-8 text-vanilla-400">
+                <slot name="subtitle"></slot>
+              </div>
+            </div>
+            <div class="mt-9 w-full">
+              <slot></slot>
             </div>
           </div>
-          <div class="mt-9 w-full">
-            <slot></slot>
-          </div>
-        </div>
+        </slot>
       </div>
     </div>
   </div>

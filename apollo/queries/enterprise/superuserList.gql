@@ -1,0 +1,15 @@
+query superuserList {
+  enterprise {
+    superusers {
+      totalCount
+      edges {
+        node {
+          id
+          fullName
+          email
+          avatar
+        }
+      }
+    }
+  }
+}

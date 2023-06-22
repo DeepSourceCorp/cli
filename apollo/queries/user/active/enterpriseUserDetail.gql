@@ -1,0 +1,9 @@
+query enterpriseUserDetail {
+  enterprise {
+    installation {
+      logo
+    }
+  }
+
+  isViewerSuperadmin
+}

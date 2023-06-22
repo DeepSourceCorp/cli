@@ -1309,6 +1309,15 @@ declare module '*/watchedRepositoriesCount.gql' {
 }
     
 
+declare module '*/superuserList.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const superuserList: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/integrationDetail.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -2231,6 +2240,15 @@ declare module '*/accountInfo.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const activeUserAccountInfo: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/enterpriseUserDetail.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const enterpriseUserDetail: DocumentNode;
 
   export default defaultDocument;
 }

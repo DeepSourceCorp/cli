@@ -2,7 +2,7 @@
   <hero-layout>
     <template #header>
       <div class="flex justify-between">
-        <div class="flex flex-grow items-center justify-between gap-x-3 sm:flex-grow-0">
+        <div class="flex flex-grow items-center justify-between sm:flex-grow-0">
           <button
             class="flex items-center gap-x-2 text-sm leading-9 text-vanilla-400 hover:text-vanilla-100 focus:text-vanilla-100"
             @click="goBack"
@@ -10,63 +10,25 @@
             <z-icon icon="arrow-left" color="current" size="small" />
             <span>Back</span>
           </button>
-          <z-divider color="ink-200" direction="vertical" margin="m-0" class="hidden sm:block" />
+
+          <z-divider
+            color="ink-200"
+            direction="vertical"
+            margin="ml-3 mr-1.5"
+            class="hidden sm:block"
+          />
+
           <div
             v-if="$fetchState.pending"
-            class="-ml-1.5 flex h-6 w-44 animate-pulse items-center gap-x-2 rounded-md bg-ink-200"
+            class="flex h-6 w-44 animate-pulse items-center gap-x-2 rounded-md bg-ink-200"
           ></div>
-          <z-menu v-else-if="viewer">
-            <template #trigger="{ toggle }">
-              <button
-                class="-ml-1.5 flex items-center gap-x-2 rounded-md bg-opacity-60 p-1.5 text-sm leading-5 text-vanilla-400 hover:bg-ink-200 focus:bg-ink-200"
-                @click="toggle"
-              >
-                <z-avatar
-                  :image="viewer.avatar"
-                  :fallback-image="getDefaultAvatar(viewer.email)"
-                  :user-name="viewer.fullName"
-                  :loading="$fetchState.pending"
-                  size="xs"
-                  stroke=""
-                  type="div"
-                  class="flex-shrink-0"
-                />
-                <span>{{ viewer.email }}</span>
-              </button>
-            </template>
-            <template #body>
-              <z-menu-section :divider="false" class="py-2.5 text-left">
-                <z-menu-item
-                  spacing="px-3.5 py-2"
-                  class="border-l-2 border-juniper bg-ink-200 text-sm leading-4 text-vanilla-400"
-                >
-                  <z-avatar
-                    :image="viewer.avatar"
-                    :fallback-image="getDefaultAvatar(viewer.email)"
-                    :user-name="viewer.fullName"
-                    :loading="$fetchState.pending"
-                    size="xs"
-                    stroke=""
-                    type="div"
-                    class="flex-shrink-0"
-                  />
-                  <span>{{ viewer && viewer.email }}</span>
-                </z-menu-item>
-              </z-menu-section>
-              <z-divider color="ink-200" margin="m-0" />
-              <z-menu-section :divider="false">
-                <z-menu-item
-                  as="button"
-                  spacing="px-3.5 py-2.5"
-                  class="w-full justify-between text-sm leading-4 text-vanilla-400"
-                  @click="signOut"
-                >
-                  <span> Log out </span>
-                  <z-icon icon="arrow-right" color="current" size="small" />
-                </z-menu-item>
-              </z-menu-section>
-            </template>
-          </z-menu>
+
+          <logout-menu
+            v-else-if="viewer"
+            v-bind="logoutMenuProps"
+            :is-loading="$fetchState.pending"
+            @sign-out="signOut"
+          />
         </div>
         <a
           v-if="$config.supportEmail"
@@ -266,6 +228,16 @@ export default class InstallationProvider extends mixins(
   get hasADSOrganizations(): boolean {
     const { adsOrganizations } = this.viewer
     return Boolean(Array.isArray(adsOrganizations) && adsOrganizations.length)
+  }
+
+  get logoutMenuProps() {
+    const { avatar, email, fullName } = this.viewer
+    return {
+      avatar,
+      email,
+      fullName,
+      isLoading: this.$fetchState.pending
+    }
   }
 
   goBack() {

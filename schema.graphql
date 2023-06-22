@@ -1066,6 +1066,7 @@ type EnterpriseInstallationRoot {
   groups(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseGroupConnection
   user(id: ID!): EnterpriseUser
   users(offset: Int, before: String, after: String, first: Int, last: Int, q: String, isSuperuser: Boolean): EnterpriseUserConnection
+  superusers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, isSuperuser: Boolean): EnterpriseUserConnection
   team(id: ID!): EnterpriseTeam
   teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseTeamConnection
   personalAccounts(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection
@@ -1077,7 +1078,6 @@ type EnterpriseInstallationSetup implements MaskPrimaryKeyNode {
   id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
-  alive: Boolean
   name: String!
   logo: String
 }
@@ -2421,8 +2421,8 @@ type Repository implements MaskPrimaryKeyNode {
   prs(state: PRStateChoices, q: String, runStatus: RunStatusChoice, offset: Int, before: String, after: String, first: Int, last: Int, number: Int): PRConnection
   watchedBy(offset: Int, before: String, after: String, first: Int, last: Int): UserPreferenceConnection!
   autofixRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String, status_In: [String], pullRequestStatus_In: [String]): AutofixRunConnection
-  transformerRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection
   onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
+  transformerRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection
   runs(offset: Int, before: String, after: String, first: Int, last: Int, status: String): RunConnection
   sourcedInPublicReports(offset: Int, before: String, after: String, first: Int, last: Int, sort: String, q: String): PublicReportConnection!
   publicReports(offset: Int, before: String, after: String, first: Int, last: Int, sort: String, q: String): PublicReportConnection
@@ -2879,6 +2879,7 @@ input SubmitSupportTicketInput {
   ccEmails: String
   subject: String!
   body: String!
+  tags: [String]
   attachments: [Attachment]
   clientMutationId: String
 }
