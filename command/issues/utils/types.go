@@ -1,4 +1,4 @@
-package list
+package utils
 
 // custom types for JSON marshaling
 

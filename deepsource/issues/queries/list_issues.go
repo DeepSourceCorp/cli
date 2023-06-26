@@ -25,6 +25,7 @@ const fetchAllIssuesQuery = `query GetAllIssues(
                 path
                 beginLine
                 endLine
+				title
                 issue {
                   title
                   shortcode
@@ -66,6 +67,7 @@ type IssuesListResponse struct {
 								Path      string `json:"path"`
 								BeginLine int    `json:"beginLine"`
 								EndLine   int    `json:"endLine"`
+								Title     string `json:"title"`
 								Issue     struct {
 									Title         string `json:"title"`
 									Shortcode     string `json:"shortcode"`
@@ -113,8 +115,9 @@ func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.
 
 		for _, occurenceEdge := range edge.Node.Occurrences.Edges {
 			issueData = issues.Issue{
-				IssueText: occurenceEdge.Node.Issue.Title,
-				IssueCode: occurenceEdge.Node.Issue.Shortcode,
+				IssueText:  occurenceEdge.Node.Title,
+				IssueTitle: occurenceEdge.Node.Issue.Title,
+				IssueCode:  occurenceEdge.Node.Issue.Shortcode,
 				Location: issues.Location{
 					Path: occurenceEdge.Node.Path,
 					Position: issues.Position{

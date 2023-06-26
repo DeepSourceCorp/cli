@@ -1,4 +1,4 @@
-package list
+package utils
 
 import (
 	"fmt"
@@ -25,7 +25,7 @@ type Summary struct {
 ///////////////////////
 
 // Filters issues based on a path, works for both directories and files
-func filterIssuesByPath(path string, issuesData []issues.Issue) ([]issues.Issue, error) {
+func FilterIssuesByPath(path string, issuesData []issues.Issue) ([]issues.Issue, error) {
 	var filteredIssues []issues.Issue
 	for _, issue := range issuesData {
 		up := ".." + string(os.PathSeparator)
@@ -47,11 +47,11 @@ func filterIssuesByPath(path string, issuesData []issues.Issue) ([]issues.Issue,
 		}
 	}
 
-	return getUniqueIssues(filteredIssues), nil
+	return GetUniqueIssues(filteredIssues), nil
 }
 
 // Filters issues based on the analyzer shortcode.
-func filterIssuesByAnalyzer(analyzer []string, issuesData []issues.Issue) ([]issues.Issue, error) {
+func FilterIssuesByAnalyzer(analyzer []string, issuesData []issues.Issue) ([]issues.Issue, error) {
 	var filteredIssues []issues.Issue
 
 	// maintain a map of analyzer shortcodes
@@ -66,11 +66,11 @@ func filterIssuesByAnalyzer(analyzer []string, issuesData []issues.Issue) ([]iss
 		}
 	}
 
-	return getUniqueIssues(filteredIssues), nil
+	return GetUniqueIssues(filteredIssues), nil
 }
 
 // Returns de-duplicated issues.
-func getUniqueIssues(fetchedIssues []issues.Issue) []issues.Issue {
+func GetUniqueIssues(fetchedIssues []issues.Issue) []issues.Issue {
 	var uniqueIssues []issues.Issue
 
 	// inUnique is a map which is used for checking whether an issue exists already or not
@@ -92,7 +92,7 @@ func getUniqueIssues(fetchedIssues []issues.Issue) []issues.Issue {
 ///////////////////////
 
 // Converts issueData to a JSON-compatible struct
-func convertJSON(issueData []issues.Issue) ExportData {
+func ConvertJSON(issueData []issues.Issue) ExportData {
 	var occurences []IssueJSON
 	var issueExport ExportData
 
@@ -103,8 +103,8 @@ func convertJSON(issueData []issues.Issue) ExportData {
 		issueNew := IssueJSON{
 			Analyzer:       issue.Analyzer.Shortcode,
 			IssueCode:      issue.IssueCode,
-			IssueTitle:     issue.IssueText,
-			OccurenceTitle: issue.IssueText,
+			IssueTitle:     issue.IssueTitle,
+			OccurenceTitle: issue.IssueTitle,
 			IssueCategory:  "",
 			Location: LocationJSON{
 				Path: issue.Location.Path,
@@ -135,11 +135,11 @@ func convertJSON(issueData []issues.Issue) ExportData {
 }
 
 // Converts issueData to a CSV records
-func convertCSV(issueData []issues.Issue) [][]string {
+func ConvertCSV(issueData []issues.Issue) [][]string {
 	records := [][]string{{"analyzer", "issue_code", "issue_title", "occurence_title", "issue_category", "path", "begin_line", "begin_column", "end_line", "end_column"}}
 
 	for _, issue := range issueData {
-		issueNew := []string{issue.Analyzer.Shortcode, issue.IssueCode, issue.IssueText, issue.IssueText, "", issue.Location.Path, fmt.Sprint(issue.Location.Position.BeginLine), "0", fmt.Sprint(issue.Location.Position.EndLine), "0"}
+		issueNew := []string{issue.Analyzer.Shortcode, issue.IssueCode, issue.IssueTitle, issue.IssueTitle, "", issue.Location.Path, fmt.Sprint(issue.Location.Position.BeginLine), "0", fmt.Sprint(issue.Location.Position.EndLine), "0"}
 
 		records = append(records, issueNew)
 	}
@@ -148,7 +148,7 @@ func convertCSV(issueData []issues.Issue) [][]string {
 }
 
 // Converts issueData to a SARIF report
-func convertSARIF(issueData []issues.Issue) *sarif.Report {
+func ConvertSARIF(issueData []issues.Issue) *sarif.Report {
 	report, err := sarif.New(sarif.Version210)
 	if err != nil {
 		return nil
@@ -209,11 +209,11 @@ func convertSARIF(issueData []issues.Issue) *sarif.Report {
 			helpURI := "https://deepsource.io/directory/analyzers/" + string(issue.Analyzer.Shortcode) + "/issues/" + string(issue.IssueCode)
 
 			// add rule
-			runs[idx].AddRule(issue.IssueCode).WithName(issue.IssueText).WithFullDescription(&fullDescription).WithHelpURI(helpURI).WithProperties(pb.Properties)
+			runs[idx].AddRule(issue.IssueCode).WithName(issue.IssueTitle).WithFullDescription(&fullDescription).WithHelpURI(helpURI).WithProperties(pb.Properties)
 
 			// add result
 			runs[idx].CreateResultForRule(issue.IssueCode).WithLevel("error").WithKind("fail").WithMessage(sarif.NewTextMessage(
-				issue.IssueText,
+				issue.IssueTitle,
 			)).WithRuleIndex(idxMap[idx]).AddLocation(
 				sarif.NewLocationWithPhysicalLocation(
 					sarif.NewPhysicalLocation().WithArtifactLocation(

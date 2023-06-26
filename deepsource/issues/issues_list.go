@@ -15,8 +15,9 @@ type AnalyzerMeta struct {
 }
 
 type Issue struct {
-	IssueText string       `json:"issue_title"` // The describing heading of the issue
-	IssueCode string       `json:"issue_code"`  // DeepSource code for the issue reported
-	Location  Location     `json:"location"`    // The location data for the issue reported
-	Analyzer  AnalyzerMeta // The Analyzer which raised the issue
+	IssueText  string       `json:"issue_text"`  // The text related to a specific occurence of an issue
+	IssueTitle string       `json:"issue_title"` // The describing heading of the issue
+	IssueCode  string       `json:"issue_code"`  // DeepSource code for the issue reported
+	Location   Location     `json:"location"`    // The location data for the issue reported
+	Analyzer   AnalyzerMeta // The Analyzer which raised the issue
 }

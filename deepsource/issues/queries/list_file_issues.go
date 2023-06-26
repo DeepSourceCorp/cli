@@ -135,8 +135,8 @@ func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]iss
 			// Check if the path matches the one entered as a flag in the command
 			if occurenceEdge.Node.Path == f.Params.FilePath {
 				issueData = issues.Issue{
-					IssueText: occurenceEdge.Node.Issue.Title,
-					IssueCode: occurenceEdge.Node.Issue.Shortcode,
+					IssueTitle: occurenceEdge.Node.Issue.Title,
+					IssueCode:  occurenceEdge.Node.Issue.Shortcode,
 					Location: issues.Location{
 						Path: occurenceEdge.Node.Path,
 						Position: issues.Position{

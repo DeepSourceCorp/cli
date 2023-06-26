@@ -9,10 +9,11 @@ import (
 	"os"
 
 	"github.com/MakeNowJust/heredoc"
+	issue_utils "github.com/deepsourcelabs/cli/command/issues/utils"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
-	"github.com/deepsourcelabs/cli/utils"
+	ds_utils "github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -28,7 +29,7 @@ type IssuesListOptions struct {
 	JSONArg           bool
 	CSVArg            bool
 	SARIFArg          bool
-	SelectedRemote    *utils.RemoteData
+	SelectedRemote    *ds_utils.RemoteData
 	issuesData        []issues.Issue
 	ptermTable        [][]string
 }
@@ -66,7 +67,7 @@ func NewCmdIssuesList() *cobra.Command {
 
 		To export listed issues to a SARIF file, use the %[14]s flag:
 		%[15]s
-		`, utils.Cyan("deepsource issues list"), utils.Yellow("--repo"), utils.Cyan("deepsource issues list --repo repo_name"), utils.Yellow("--analyzer"), utils.Cyan("deepsource issues list --analyzer python"), utils.Yellow("--limit"), utils.Cyan("deepsource issues list --limit 100"), utils.Yellow("--output-file"), utils.Cyan("deepsource issues list --output-file file_name"), utils.Yellow("--json"), utils.Cyan("deepsource issues list --json --output-file example.json"), utils.Yellow("--csv"), utils.Cyan("deepsource issues list --csv --output-file example.csv"), utils.Yellow("--sarif"), utils.Cyan("deepsource issues list --sarif --output-file example.sarif"))
+		`, ds_utils.Cyan("deepsource issues list"), ds_utils.Yellow("--repo"), ds_utils.Cyan("deepsource issues list --repo repo_name"), ds_utils.Yellow("--analyzer"), ds_utils.Cyan("deepsource issues list --analyzer python"), ds_utils.Yellow("--limit"), ds_utils.Cyan("deepsource issues list --limit 100"), ds_utils.Yellow("--output-file"), ds_utils.Cyan("deepsource issues list --output-file file_name"), ds_utils.Yellow("--json"), ds_utils.Cyan("deepsource issues list --json --output-file example.json"), ds_utils.Yellow("--csv"), ds_utils.Cyan("deepsource issues list --csv --output-file example.csv"), ds_utils.Yellow("--sarif"), ds_utils.Cyan("deepsource issues list --sarif --output-file example.sarif"))
 
 	cmd := &cobra.Command{
 		Use:   "list",
@@ -122,7 +123,7 @@ func (opts *IssuesListOptions) Run() (err error) {
 	}
 
 	// Get the remote repository URL for which issues have to be listed
-	opts.SelectedRemote, err = utils.ResolveRemote(opts.RepoArg)
+	opts.SelectedRemote, err = ds_utils.ResolveRemote(opts.RepoArg)
 	if err != nil {
 		return err
 	}
@@ -173,7 +174,7 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 		var fetchedIssues []issues.Issue
 		for _, arg := range opts.FileArg {
 			// Filter issues for the valid directories/files
-			filteredIssues, err = filterIssuesByPath(arg, opts.issuesData)
+			filteredIssues, err = issue_utils.FilterIssuesByPath(arg, opts.issuesData)
 			if err != nil {
 				return err
 			}
@@ -181,21 +182,21 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 		}
 
 		// set fetched issues as issue data
-		opts.issuesData = getUniqueIssues(fetchedIssues)
+		opts.issuesData = issue_utils.GetUniqueIssues(fetchedIssues)
 	}
 
 	if len(opts.AnalyzerArg) != 0 {
 		var fetchedIssues []issues.Issue
 
 		// Filter issues based on the analyzer shortcode
-		filteredIssues, err = filterIssuesByAnalyzer(opts.AnalyzerArg, opts.issuesData)
+		filteredIssues, err = issue_utils.FilterIssuesByAnalyzer(opts.AnalyzerArg, opts.issuesData)
 		if err != nil {
 			return err
 		}
 		fetchedIssues = append(fetchedIssues, filteredIssues...)
 
 		// set fetched issues as issue data
-		opts.issuesData = getUniqueIssues(fetchedIssues)
+		opts.issuesData = issue_utils.GetUniqueIssues(fetchedIssues)
 	}
 
 	return nil
@@ -214,9 +215,12 @@ func (opts *IssuesListOptions) showIssues() {
 		issueLocation := fmt.Sprintf("%s:%d", filePath, beginLine)
 		analyzerShortcode := issue.Analyzer.Shortcode
 		issueCode := issue.IssueCode
-		issueTitle := issue.IssueText
+		issueText := issue.IssueText
+		if len(issueText) > 80 {
+			issueText = issue.IssueTitle
+		}
 
-		opts.ptermTable[index] = []string{issueLocation, analyzerShortcode, issueCode, issueTitle}
+		opts.ptermTable[index] = []string{issueLocation, analyzerShortcode, issueCode, issueText}
 	}
 	// Using pterm to render the list of list
 	pterm.DefaultTable.WithSeparator("\t").WithData(opts.ptermTable).Render()
@@ -224,7 +228,7 @@ func (opts *IssuesListOptions) showIssues() {
 
 // Handles exporting issues as JSON
 func (opts *IssuesListOptions) exportJSON(filename string) (err error) {
-	issueJSON := convertJSON(opts.issuesData)
+	issueJSON := issue_utils.ConvertJSON(opts.issuesData)
 	data, err := json.MarshalIndent(issueJSON, "", "	")
 	if err != nil {
 		return err
@@ -245,7 +249,7 @@ func (opts *IssuesListOptions) exportJSON(filename string) (err error) {
 
 // Handles exporting issues as CSV
 func (opts *IssuesListOptions) exportCSV(filename string) error {
-	records := convertCSV(opts.issuesData)
+	records := issue_utils.ConvertCSV(opts.issuesData)
 
 	if filename == "" {
 		// write to stdout
@@ -272,7 +276,7 @@ func (opts *IssuesListOptions) exportCSV(filename string) error {
 
 // Handles exporting issues as a SARIF file
 func (opts *IssuesListOptions) exportSARIF(filename string) (err error) {
-	report := convertSARIF(opts.issuesData)
+	report := issue_utils.ConvertSARIF(opts.issuesData)
 	if filename == "" {
 		err = report.PrettyWrite(os.Stdout)
 		if err != nil {
