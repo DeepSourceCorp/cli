@@ -1,6 +1,7 @@
 package report
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -8,6 +9,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/DataDog/zstd"
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/getsentry/sentry-go"
@@ -221,12 +223,73 @@ func (opts *ReportOptions) Run() int {
 		artifactValue = string(valueBytes)
 	}
 
+	// Query DeepSource API to check if compression is supported
+	q := ReportQuery{Query: graphqlCheckCompressed}
+
+	qBytes, err := json.Marshal(q)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to marshal query:", err)
+		sentry.CaptureException(err)
+		return 1
+	}
+
+	r, err := makeQuery(
+		dsnProtocol+"://"+dsnHost+"/graphql/cli/",
+		qBytes,
+		"application/json",
+		opts.SkipCertificateVerification,
+	)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to make query:", err)
+		sentry.CaptureException(err)
+		return 1
+	}
+
+	// res is a struct to unmarshal the response to check if compression is supported
+	var res struct {
+		Data struct {
+			Type struct {
+				InputFields []struct {
+					Name string `json:"name"`
+				} `json:"inputFields"`
+			} `json:"__type"`
+		} `json:"data"`
+	}
+
+	err = json.Unmarshal(r, &res)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to unmarshal response:", err)
+		sentry.CaptureException(err)
+		return 1
+	}
+
+	reportMeta := make(map[string]interface{})
+	reportMeta["workDir"] = currentDir
+
+	// Compress the value if compression is supported
+	for _, inputField := range res.Data.Type.InputFields {
+		if inputField.Name == "compressed" {
+			// Compress the byte array
+			var compressedBytes []byte
+			compressLevel := 20
+			compressedBytes, err = zstd.CompressLevel(compressedBytes, []byte(artifactValue), compressLevel)
+			if err != nil {
+				fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to compress value file:", reportCommandValueFile)
+				sentry.CaptureException(err)
+				return 1
+			}
+
+			// Base64 encode the compressed byte array
+			artifactValue = base64.StdEncoding.EncodeToString(compressedBytes)
+
+			// Set the compression flag
+			reportMeta["compressed"] = "True"
+		}
+	}
+
 	////////////////////
 	// Generate query //
 	////////////////////
-
-	reportMeta := make(map[string]string)
-	reportMeta["workDir"] = currentDir
 
 	queryInput := ReportQueryInput{
 		AccessToken:       dsnAccessToken,

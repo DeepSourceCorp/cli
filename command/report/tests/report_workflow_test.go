@@ -2,6 +2,8 @@ package tests
 
 import (
 	"bytes"
+	"encoding/base64"
+	"encoding/json"
 	"io"
 	"log"
 	"net/http"
@@ -9,6 +11,8 @@ import (
 	"os/exec"
 	"testing"
 
+	"github.com/DataDog/zstd"
+	"github.com/deepsourcelabs/cli/command/report"
 	"github.com/google/go-cmp/cmp"
 )
 
@@ -26,39 +30,97 @@ const (
 )
 
 func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
-	req, _ := io.ReadAll(r.Body)
-
-	// Read test graphql request body artifact file
-	requestBodyData, err := os.ReadFile("./golden_files/report_graphql_request_body.json")
+	// Read request request request body
+	req, err := io.ReadAll(r.Body)
 	if err != nil {
 		log.Println(err)
 		return
 	}
 
-	// Read test graphql success response body artifact file
-	successResponseBodyData, err := os.ReadFile("./golden_files/report_graphql_success_response_body.json")
-	if err != nil {
-		log.Println(err)
-		return
-	}
+	log.Println("Request body: ", string(req))
 
-	// Read test graphql error response body artifact file
-	errorResponseBodyData, err := os.ReadFile("./golden_files/report_graphql_error_response_body.json")
-	if err != nil {
-		log.Println(err)
-		return
-	}
+	// Check if the request has ArtifactMetadataInput in body
+	if bytes.Contains(req, []byte("ArtifactMetadataInput")) {
+		log.Println("ArtifactMetadataInput found in request body")
+		w.WriteHeader(http.StatusOK)
+		w.Header().Set("Content-Type", "application/json")
 
-	w.WriteHeader(http.StatusOK)
-	w.Header().Set("Content-Type", "application/json")
-
-	if want, got := string(requestBodyData), string(req); want == got {
-		w.Write([]byte(successResponseBodyData))
-	} else {
-		if want != got {
-			log.Printf("Mismatch found:\nDiff: %s\n", cmp.Diff(want, got))
+		successResponseBodyData, err := os.ReadFile("./golden_files/report_grqphql_artifactmetadatainput_response_success.json")
+		if err != nil {
+			log.Println(err)
+			return
 		}
-		w.Write([]byte(errorResponseBodyData))
+		w.Write([]byte(successResponseBodyData))
+
+	} else {
+
+		// Unmarshal request body into ReportQuery
+		var reportQuery report.ReportQuery
+		err = json.Unmarshal(req, &reportQuery)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+
+		requestData := reportQuery.Variables.Input.Data
+
+		// Decode base64 encoded data
+		decodedData, err := base64.StdEncoding.DecodeString(requestData)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+
+		// Decompress zstd compressed data
+		decompressedData, err := zstd.Decompress(nil, decodedData)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+
+		// Create new ReportQeury object with decompressed data
+		reportQuery.Variables.Input.Data = string(decompressedData)
+
+		// Read test graphql request body artifact file
+		requestBodyData, err := os.ReadFile("./golden_files/report_graphql_request_body.json")
+		if err != nil {
+			log.Println(err)
+			return
+		}
+
+		// Unmarshal request body into ReportQuery
+		var requestReportQuery report.ReportQuery
+		err = json.Unmarshal(requestBodyData, &requestReportQuery)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+
+		// Read test graphql success response body artifact file
+		successResponseBodyData, err := os.ReadFile("./golden_files/report_graphql_success_response_body.json")
+		if err != nil {
+			log.Println(err)
+			return
+		}
+
+		// Read test graphql error response body artifact file
+		errorResponseBodyData, err := os.ReadFile("./golden_files/report_graphql_error_response_body.json")
+		if err != nil {
+			log.Println(err)
+			return
+		}
+
+		w.WriteHeader(http.StatusOK)
+		w.Header().Set("Content-Type", "application/json")
+
+		if want, got := requestReportQuery, reportQuery; cmp.Equal(want, got) {
+			w.Write([]byte(successResponseBodyData))
+		} else {
+			if want != got {
+				log.Printf("Mismatch found:\nDiff: %s\n", cmp.Diff(want, got))
+			}
+			w.Write([]byte(errorResponseBodyData))
+		}
 	}
 }
 
