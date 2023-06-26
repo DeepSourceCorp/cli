@@ -1,8 +1,8 @@
 build:
-	cd cmd/deepsource && GOOS=linux GOARCH=amd64 go build -tags static_all -o ./deepsource
+	cd cmd/deepsource && GOOS=linux GOARCH=amd64 go build -tags static_all -o /tmp/deepsource
 
 build_local:
-	cd cmd/deepsource && go build -tags static_all -o ./deepsource
+	cd cmd/deepsource && go build -tags static_all -o /tmp/deepsource
 
 test:
 	CGO_ENABLED=1 go test -v ./command/report/tests/... -count=1

@@ -24,8 +24,13 @@ jobs:
           fetch-depth: 1
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - name: Private repo git config
+        run: git config --global url."https://${{ vars.SPOCK_USERNAME }}:${{ secrets.SPOCK_PAT }}@github.com".insteadOf "https://github.com"
+
       - name: Build the binary
         run: make build
+        env:
+          GOPRIVATE: github.com/deepsourcelabs
 
       - name: Setup tests
         run: make test_setup
