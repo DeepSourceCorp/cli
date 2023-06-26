@@ -81,6 +81,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/deepsourcelabs/graphql v0.2.2 h1:6CtKGvVSIY6Jnf72VyfXB77AaaoHATBzXsrh64irtVQ=
 github.com/deepsourcelabs/graphql v0.2.2/go.mod h1:2hqi4vS0LxP9wMjbkbMOdR/fap2zwDlzqGGO8WEgyBA=
+github.com/deepsourcelabs/marvin-secrets v0.7.1-0.20230623102322-43c1186a8585 h1:B0p8H5uC5mJt7lumKNUwhjXhLCSHA9/kxHJc+gVAY60=
+github.com/deepsourcelabs/marvin-secrets v0.7.1-0.20230623102322-43c1186a8585/go.mod h1:0kFh/grGSEG6YtCZFsbcRjsmWFh0+s1pTbiEnujxVwc=
 github.com/dgraph-io/badger v1.6.0/go.mod h1:zwt7syl517jmP8s94KqSxTlM6IMsdhYy6psNgSztDR4=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
 github.com/dgryski/go-farm v0.0.0-20190423205320-6a90982ecee2/go.mod h1:SqUrOPUnsFjfmXRMNPybcSiG0BgUW2AuFH8PAnS2iTw=
