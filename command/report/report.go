@@ -114,6 +114,8 @@ func (opts *ReportOptions) Run() int {
 		"csharp":     true,
 		"cxx":        true,
 		"rust":       true,
+		"swift":      true,
+		"kotlin":     true,
 	}
 
 	allowedKeys := func(m map[string]bool) []string {
