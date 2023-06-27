@@ -35,8 +35,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
           aws-s3-bucket: ${{ vars.AWS_S3_BUCKET }}
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.DS_ACTIONS_CACHE_MINIO_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.DS_ACTIONS_CACHE_MINIO_SECRET_KEY }}
           aws-region: ${{ vars.AWS_REGION }}
           aws-endpoint: ${{ vars.AWS_ENDPOINT }}
           aws-s3-bucket-endpoint: ${{ vars.AWS_S3_BUCKET_ENDPOINT }}
