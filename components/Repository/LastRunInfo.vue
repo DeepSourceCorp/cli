@@ -13,7 +13,7 @@
 
     <template v-else>
       <div v-if="lastRun" class="flex items-center gap-x-1.5 text-vanilla-400">
-        <z-icon color="cherry" icon="x" />
+        <z-icon :color="statusIconColor" :icon="statusIcon" />
 
         <span class="truncate">Last analyzed</span>
 
@@ -34,13 +34,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { ZIcon } from '@deepsource/zeal'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-import { Maybe, Run, RunConnection } from '~/types/types'
+import { Maybe, Run, RunConnection, RunStatus } from '~/types/types'
 
 import { fromNow } from '~/utils/date'
-import { toSentenceCase } from '~/utils/string'
+import { runStatusIcon, runStatusIconColor } from '~/utils/ui'
 
 @Component({ name: 'LastRunInfo', components: { ZIcon } })
 export default class LastRunInfo extends Vue {
@@ -63,7 +63,13 @@ export default class LastRunInfo extends Vue {
   }
 
   get lastRunFinishedAt(): string {
-    return toSentenceCase(fromNow(this.lastRun?.finishedAt))
+    const finishedAt = this.lastRun?.finishedAt
+
+    if (!finishedAt) {
+      return ''
+    }
+
+    return fromNow(finishedAt)
   }
 
   get runPagePath(): string {
@@ -72,6 +78,14 @@ export default class LastRunInfo extends Vue {
       this.lastRun?.runId,
       this.lastRun?.config?.analyzers[0].name
     ])
+  }
+
+  get statusIcon(): string {
+    return runStatusIcon(this.lastRun?.status as RunStatus)
+  }
+
+  get statusIconColor(): string {
+    return runStatusIconColor(this.lastRun?.status as RunStatus)
   }
 }
 </script>

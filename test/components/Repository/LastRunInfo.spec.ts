@@ -3,6 +3,8 @@ import { RouterLinkStub } from '@vue/test-utils'
 import dayjs from 'dayjs'
 
 import LastRunInfo from '~/components/Repository/LastRunInfo.vue'
+
+import { CheckStatus } from '~/types/types'
 import { DurationTypeT, getDateFromXAgo } from '~/utils/date'
 
 describe('[[ LastRunInfo ]]', () => {
@@ -34,7 +36,7 @@ describe('[[ LastRunInfo ]]', () => {
       },
       commitOid: 'cf64c729235234a4f59336a4005928ab2216846f',
       branchRunCount: null,
-      status: 'FAIL',
+      status: CheckStatus.Fail,
       finishedAt: eightMonthsAgo
     },
     runs: {
@@ -64,8 +66,63 @@ describe('[[ LastRunInfo ]]', () => {
     expect(html()).toMatchSnapshot()
   })
 
-  test('renders the last run information shown in the metadata view footer', () => {
-    const { html } = render(LastRunInfo, { mocks, propsData: baseProps, stubs })
-    expect(html()).toMatchSnapshot()
+  describe('renders the last run information shown in the metadata view footer', () => {
+    test('failed run', () => {
+      const { html } = render(LastRunInfo, { mocks, propsData: baseProps, stubs })
+      expect(html()).toMatchSnapshot()
+    })
+
+    test('timed out run', () => {
+      const propsData = {
+        latestAnalysisRun: {
+          id: 'UnVuOmJseWVhaw==',
+          runId: '975682ed-bb63-4a87-a835-6680b4b71f0c',
+          config: {
+            version: 1,
+            analyzers: [
+              {
+                meta: {
+                  import_root: 'github.com/CyberdyneHQ/<repository-name>'
+                },
+                name: 'go',
+                enabled: true
+              },
+              {
+                name: 'javascript',
+                enabled: true
+              },
+              {
+                name: 'secrets',
+                enabled: true
+              },
+              {
+                meta: {
+                  runtime_version: '3.x.x'
+                },
+                name: 'python',
+                enabled: true
+              }
+            ],
+            transformers: [
+              {
+                name: 'prettier',
+                enabled: true
+              },
+              {
+                name: 'black',
+                enabled: true
+              }
+            ]
+          },
+          commitOid: '12acb8dbac38949075479498a2411520077cb6a5',
+          branchRunCount: null,
+          status: CheckStatus.Timo,
+          finishedAt: null
+        }
+      }
+
+      const { html } = render(LastRunInfo, { mocks, propsData, stubs })
+      expect(html()).toMatchSnapshot()
+    })
   })
 })
