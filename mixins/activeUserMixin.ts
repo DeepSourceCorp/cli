@@ -4,6 +4,7 @@ import { ActiveUserActions, ActiveUserGetterTypes } from '~/store/user/active'
 
 import {
   DeleteRequestingUserInput,
+  SupportTierChoices,
   TeamMemberRoleChoices,
   UpdateDefaultDashboardContextForUserPayload,
   UpdateStarredRepositoryPayload,
@@ -50,6 +51,7 @@ export interface DashboardContext {
   team_name: string
   vcs_url: string
   subscribed_plan_info: SubscribedPlanInfo
+  support_tier: SupportTierChoices
 }
 @Component
 export default class ActiveUserMixin extends Vue {

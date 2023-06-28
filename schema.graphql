@@ -733,6 +733,7 @@ type Context {
   isTransformersLicensed: Boolean
   toOnboard: Boolean
   plans: GenericScalar
+  platformStatus: PlatformStatus
   isRunner: Boolean
   runnerBaseUrl: String
 }
@@ -2151,6 +2152,12 @@ input PinnedReportInput {
   metadata: GenericScalar
 }
 
+enum PlatformStatus {
+  OPERATIONAL
+  DEGRADED
+  DOWNTIME
+}
+
 enum ProductType {
   STATIC_ANALYSIS
   SAST
@@ -2923,6 +2930,12 @@ enum SubscriptionStatusChoice {
   TRIAL
   PAST_DUE
   SCA_REQUIRED
+}
+
+enum SupportTierChoices {
+  ENTERPRISE
+  STANDARD
+  COMMUNITY
 }
 
 input SwitchToAsgardInput {

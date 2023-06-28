@@ -1132,7 +1132,16 @@ declare module '*/socialAuthUrls.gql' {
 declare module '*/context.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const fetchContext: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/deepsourceStatus.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const fetchDeepSourceStatus: DocumentNode;
 
   export default defaultDocument;
 }

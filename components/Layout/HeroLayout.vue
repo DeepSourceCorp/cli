@@ -5,11 +5,10 @@
       class="absolute inset-0 z-10 flex h-full min-h-screen flex-col overflow-y-auto px-5 py-6 lg:px-10 lg:py-8"
     >
       <div><slot name="header"></slot></div>
-
-      <div class="flex flex-grow items-center justify-center py-8">
+      <div class="flex flex-grow justify-center py-8" :class="{ 'items-center': centerHero }">
         <slot name="body">
-          <div class="flex w-full flex-col items-center sm:max-w-sm">
-            <div class="deepsource-logo">
+          <div class="flex w-full flex-col items-center" :class="bodyMaxWidth">
+            <div v-if="!hideLogo" class="deepsource-logo">
               <svg
                 width="37"
                 height="42"
@@ -25,15 +24,15 @@
                 />
               </svg>
             </div>
-            <div class="mt-8 w-full space-y-3 text-center">
-              <h1 class="text-lg font-medium leading-6 text-vanilla-100">
+            <div v-if="$slots.title || $slots.subtitle" class="mt-8 w-full space-y-3 text-center">
+              <h1 v-if="$slots.title" class="text-lg font-medium leading-6 text-vanilla-100">
                 <slot name="title"></slot>
               </h1>
               <div v-if="$slots.subtitle" class="text-base leading-8 text-vanilla-400">
                 <slot name="subtitle"></slot>
               </div>
             </div>
-            <div class="mt-9 w-full">
+            <div class="w-full" :class="{ 'mt-9': $slots.title || $slots.subtitle }">
               <slot></slot>
             </div>
           </div>
@@ -49,7 +48,13 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
 @Component({})
 export default class HeroLayout extends Vue {
   @Prop({ default: false, type: Boolean })
-  hasTransition: boolean
+  hideLogo: boolean
+
+  @Prop({ default: 'sm:max-w-sm', type: String })
+  bodyMaxWidth: string
+
+  @Prop({ default: true, type: Boolean })
+  centerHero: boolean
 }
 </script>
 

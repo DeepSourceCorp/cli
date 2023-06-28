@@ -1,33 +1,56 @@
 <template>
-  <div>
-    <div class="sticky top-10 z-10 lg:top-0">
-      <div class="flex items-center bg-ink-300 px-4 py-4">
-        <!-- ! Need a custom icon to use -->
-        <!-- <z-icon icon="support" size="medium" color="vanilla-100" class="mr-2" /> -->
-        <h1 class="my-px text-xl font-semibold leading-none">Contact support</h1>
+  <hero-layout
+    hide-logo
+    :center-hero="supportPageStatus !== supportPageStatuses.default"
+    body-max-width="md:max-w-2xl"
+  >
+    <template #header>
+      <div class="-mx-5 -mt-6 border-b border-slate-400 bg-ink-300 px-4 py-3 lg:-mx-10 lg:-mt-8">
+        <div class="flex items-center">
+          <z-icon icon="mail" color="current" />
+          <span class="ml-2"
+            >Support
+            <span v-if="ticketAuthorWithoutOrg" class="hidden md:inline"
+              >— {{ ticketAuthorWithoutOrg }}</span
+            ></span
+          >
+          <z-tag-v2
+            v-if="supportTier"
+            :type="supportTierCopy[supportTier].variant"
+            class="ml-auto md:ml-3"
+          >
+            {{ supportTierCopy[supportTier].label }}
+          </z-tag-v2>
+        </div>
       </div>
-      <hr class="border-slate-400" />
-    </div>
-    <div class="max-w-7xl p-4 pt-0">
-      <form
-        novalidate
-        class="mt-4 grid gap-y-5"
-        @submit.prevent="createSupportTicket"
-        @reset.prevent="resetFormData"
-      >
-        <div class="max-w-lg space-y-1.5">
-          <label for="author-account" class="text-xs">Account or team</label>
-          <div>
-            <div
-              v-if="$fetchState.pending"
-              class="my-px animate-pulse rounded-sm bg-ink-300 py-5"
-            ></div>
+    </template>
+    <div v-if="supportPageStatus === supportPageStatuses.default" class="mt-16 space-y-5">
+      <div class="flex min-h-7 flex-wrap items-center justify-between gap-3">
+        <span class="pl-1">What can we help you with?</span>
+        <a
+          v-if="!$config.onPrem"
+          href="https://deepsourcestatus.com"
+          target="blank"
+          rel="noreferrer noopener"
+        >
+          <z-tag-v2
+            :type="platformStatus ? platformStatusCopy[platformStatus].variant : ''"
+            :class="{ 'animate-pulse': !platformStatus }"
+          >
+            {{ platformStatus ? platformStatusCopy[platformStatus].label : 'loading' }}
+          </z-tag-v2>
+        </a>
+      </div>
+      <div class="rounded-lg border border-slate-400 bg-ink-300 bg-opacity-60 backdrop-blur-xl">
+        <div class="space-y-3.5 p-6">
+          <support-form-label display-name="Account related to this support ticket">
             <z-select
-              v-else
               id="author-account"
+              :key="viewerContexts.length"
               v-model="ticketAuthorId"
               :selected="ticketAuthorId"
               :disabled="!isPartOfTeam"
+              background-class="bg-ink-400"
               spacing="px-4 py-2"
               text-size="text-sm"
             >
@@ -60,204 +83,150 @@
                 </div>
               </z-option>
             </z-select>
-          </div>
-          <p class="text-xs text-vanilla-400">
-            Select the workspace to which this support request is related.
-          </p>
+            <template v-if="supportTier" #helperText>
+              This team is on
+              <span class="rounded-sm bg-ink-200 p-0.5"
+                >{{ supportTierCopy[supportTier].label }} support</span
+              >
+            </template>
+          </support-form-label>
+          <best-effort-support
+            v-if="isCommunitySupport"
+            :support-tier-copy="supportTierCopy[supportTier].label"
+          />
         </div>
-        <div class="max-w-lg space-y-1.5">
-          <label for="author-email" class="text-xs">From</label>
-          <div>
-            <div
-              v-if="$fetchState.pending"
-              class="my-px animate-pulse rounded-sm bg-ink-300 py-5"
-            ></div>
+        <hr class="border-slate-400" />
+        <div class="space-y-6 p-6">
+          <support-form-label display-name="What do you need help with?">
             <z-select
-              v-else
-              id="author-email"
-              v-model="authorEmail"
-              :selected="authorEmail"
+              id="support-category"
+              v-model="supportCategory"
+              background-class="bg-ink-400"
               spacing="px-4 py-2"
               text-size="text-sm"
             >
               <z-option
-                :label="`${viewer.fullName} <${authorEmail}>`"
-                :value="authorEmail"
+                v-for="category in supportCategoryOptions"
+                :key="category.value"
+                :label="category.label"
+                :value="category.value"
                 text-size="text-sm"
               />
             </z-select>
-          </div>
-          <p class="text-xs text-vanilla-400">
-            We'll use this email as the primary point of contact for this support request.
-          </p>
-        </div>
-        <div class="max-w-lg space-y-1.5">
-          <label for="author-cc" class="text-xs">CC</label>
-          <z-input
-            id="author-cc"
-            v-model="authorCC"
-            :disabled="isFormSubmitting"
-            :validate-on-blur="false"
-            type="email"
-            padding="px-4"
-            placeholder=""
-            multiple
-          />
-          <p class="text-xs text-vanilla-400">
-            We'll keep these email addresses in CC when communicating to you about this ticket. Use
-            a comma to separate multiple emails.
-          </p>
-        </div>
-        <div class="max-w-lg space-y-1.5">
-          <label for="support-subject" class="text-xs">Subject</label>
-          <z-input
-            id="support-subject"
-            v-model="supportSubject"
-            :disabled="isFormSubmitting"
-            type="text"
-            max-length="250"
-            placeholder=""
-            padding="px-4"
+          </support-form-label>
+          <component
+            :is="supportComponent.componentToRender"
+            v-if="supportComponent"
+            v-bind="supportComponent.bind"
+            v-on="supportComponent.handlers"
           />
         </div>
-        <div class="max-w-lg space-y-2">
-          <div class="space-y-1.5">
-            <label id="support-description" class="text-xs">What is the issue?</label>
-
-            <div class="min-w-0">
-              <z-rich-text
-                v-model="supportHTML"
-                :disabled="isFormSubmitting"
-                :min-length="20"
-                :max-length="1024"
-                aria-labelledby="support-description"
-                min-length-err-msg="Please add at least 20 characters in the issue description."
-                placeholder=""
-                :class="{ 'cursor-not-allowed': isFormSubmitting }"
-              >
-                <template #left-toolbar>
-                  <z-file-input
-                    ref="fileUploader"
-                    :disabled="isFileProcessing || isFormSubmitting"
-                    label="Add files"
-                    multiple
-                    accept="video/mp4,video/quicktime,image/jpeg,image/png,text/plain,text/csv,application/rtf,text/rtf"
-                    @change="prepareFiles"
-                    @files-emptied="filesToUpload = []"
-                  >
-                    <template #activator="{ open }">
-                      <z-button
-                        v-tooltip="'Attach files'"
-                        :disabled="isFileProcessing || isFormSubmitting"
-                        :is-loading="isFileProcessing"
-                        icon="paperclip"
-                        size="x-small"
-                        button-type="ghost"
-                        icon-color="vanilla-400"
-                        type="button"
-                        :class="
-                          isFileProcessing || isFormSubmitting
-                            ? 'cursor-not-allowed'
-                            : 'cursor-pointer'
-                        "
-                        class="ml-1 opacity-60 hover:text-vanilla-100 hover:opacity-100"
-                        @click="open"
-                      />
-                    </template>
-                  </z-file-input>
-                </template>
-              </z-rich-text>
-            </div>
-            <p class="text-xs text-vanilla-400">
-              Please be as descriptive as possible. If you're reporting a bug, please list down the
-              steps you took. This will help us reproduce the behavior. You can attach images,
-              videos or text files up to 10 MB in size.
-            </p>
-          </div>
-          <div class="max-w-lg space-y-2 text-xs leading-none">
-            <div
-              v-for="(uploadedFile, index) in filesToUpload"
-              :key="index"
-              class="flex items-center justify-between rounded-sm bg-ink-300 px-4 py-2 text-vanilla-400"
-            >
-              <span>{{ uploadedFile.name }}</span>
-              <button
-                v-tooltip="'Remove file'"
-                :disabled="isFileProcessing || isFormSubmitting"
-                type="button"
-                :class="
-                  isFileProcessing || isFormSubmitting ? 'cursor-not-allowed' : 'cursor-pointer'
-                "
-                class="rounded-sm p-1 hover:bg-cherry-600 hover:bg-opacity-20 disabled:opacity-50"
-                @click="removeFile(index)"
-              >
-                <z-icon icon="trash-2" color="cherry" size="x-small" />
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="flex max-w-lg justify-end space-y-1.5">
-          <z-button
-            :disabled="isFileProcessing || isFormSubmitting"
-            :is-loading="isFormSubmitting"
-            type="submit"
-            icon="mail"
-            loading-label="Sending request"
-            label="Send request"
-            size="small"
-          />
-        </div>
-      </form>
-      <input ref="multiEmailInput" type="email" class="hidden" multiple />
+      </div>
     </div>
-  </div>
+    <div
+      v-else-if="
+        supportPageStatus === supportPageStatuses.success ||
+        supportPageStatus === supportPageStatuses.error
+      "
+      class="mx-auto max-w-md space-y-6 rounded-lg border border-slate-400 bg-ink-300 bg-opacity-60 p-4 text-center backdrop-blur-xl md:p-8"
+    >
+      <empty-state-picture
+        :webp-image-path="
+          supportPageStatus === supportPageStatuses.success
+            ? require('~/assets/images/ui-states/issues/no-issues-found-static-140px.webp')
+            : require('~/assets/images/ui-states/runs/no-recent-autofixes.webp')
+        "
+        :png-image-path="
+          supportPageStatus === supportPageStatuses.success
+            ? require('~/assets/images/ui-states/issues/no-issues-found-static-140px.png')
+            : require('~/assets/images/ui-states/runs/no-recent-autofixes.webp')
+        "
+        alt-text=""
+        width="w-22"
+      />
+      <div class="space-y-1.5">
+        <p class="text-base font-medium leading-6 text-vanilla-200">
+          {{
+            supportPageStatus === supportPageStatuses.success
+              ? 'Support request raised successfully'
+              : 'Something went wrong :/'
+          }}
+        </p>
+        <p class="text-sm leading-6 text-vanilla-400">
+          {{
+            supportPageStatus === supportPageStatuses.success
+              ? 'Thank you for writing to DeepSource Support. We will take a look at it soon and follow up on email. Keep an eye on your inbox!'
+              : 'We have alerted our team and they are looking into the problem. Please try filling up the form again.'
+          }}
+        </p>
+      </div>
+      <button
+        class="auxillary-button mx-auto bg-ink-200 px-3 py-2 text-xs leading-3"
+        @click="supportPageStatus = supportPageStatuses.default"
+      >
+        <span>{{
+          supportPageStatus === supportPageStatuses.success ? 'Raise another request' : 'Try again'
+        }}</span>
+        <z-icon icon="arrow-right" size="x-small" color="current" />
+      </button>
+    </div>
+  </hero-layout>
 </template>
 
 <script lang="ts">
-import {
-  ZAvatar,
-  ZButton,
-  ZConfirm,
-  ZFileInput,
-  ZIcon,
-  ZInput,
-  ZOption,
-  ZRichText,
-  ZSelect
-} from '@deepsource/zeal'
+import { ZAvatar, ZIcon, ZOption, ZSelect } from '@deepsource/zeal'
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
 
+import GetDeepSourceStatus from '~/apollo/queries/context/deepsourceStatus.gql'
 import SubmitSupportTicketMutation from '~/apollo/mutations/support/submitSupportTicket.gql'
 import ActiveUserMixin, { DashboardContext } from '~/mixins/activeUserMixin'
 import { AuthActionTypes, AuthGetterTypes } from '~/store/account/auth'
 
-import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
-import { SubmitSupportTicketInput, VcsProviderChoices } from '~/types/types'
+import { GraphqlMutationResponse, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+import {
+  PlatformStatus,
+  SubmitSupportTicketInput,
+  SupportTierChoices,
+  VcsProviderChoices
+} from '~/types/types'
 
 import { FileUploadContexts, FileUploadError, uploadFiles } from '~/utils/files'
 import { getDefaultAvatar } from '~/utils/ui'
-
-type SupportValidationData = {
-  ticketAuthor: string
-  authorEmail: string
-  authorCC: string
-  supportSubject: string
-  supportText: string
-}
+import {
+  SupportReqType,
+  SupportReqFormType,
+  SupportFormT,
+  SupportValidationData,
+  SupportPageStatusT
+} from '~/types/support'
+import {
+  SupportForm,
+  SupportSecurityWarning,
+  SupportFpInfo,
+  SupportFeatureInfo,
+  SupportIssueNotListed
+} from '~/components/Support'
 
 const authStore = namespace('account/auth')
 
+const STATUS_COPY = {
+  [PlatformStatus.Degraded]: { label: 'Services degraded', variant: 'honey' },
+  [PlatformStatus.Downtime]: { label: 'Brief downtime', variant: 'cherry' },
+  [PlatformStatus.Operational]: { label: 'All systems operational', variant: 'juniper' },
+  error: { label: 'Error', variant: 'cherry' }
+}
+
 @Component({
   components: {
-    ZInput,
-    ZRichText,
     ZSelect,
-    ZButton,
     ZOption,
     ZIcon,
     ZAvatar,
-    ZConfirm,
-    ZFileInput
+    SupportForm,
+    SupportSecurityWarning,
+    SupportFpInfo,
+    SupportFeatureInfo,
+    SupportIssueNotListed
   },
   meta: {
     auth: {
@@ -270,17 +239,18 @@ const authStore = namespace('account/auth')
 })
 export default class Support extends mixins(ActiveUserMixin) {
   private ticketAuthorId = ''
-  private supportHTML = ''
-  private supportSubject = ''
   private authorEmail = ''
-  private authorCC = ''
   private ownerLogin = ''
   private ownerVCSProvider = '' as VcsProviderChoices
   private viewerContexts = []
-  private isFileProcessing = false
+  private filesToUpload: File[] = []
   private isFormSubmitting = false
-  private filesToUpload = [] as File[]
   private readonly UPLOAD_ENDPOINT = this.$config.restClientUri
+  private supportCategory: SupportReqType | '' = ''
+  private supportPageStatus: SupportPageStatusT = SupportPageStatusT.default
+  supportPageStatuses = SupportPageStatusT
+  private platformStatus: keyof typeof STATUS_COPY | '' = ''
+  private isNotOnboarded = false
 
   @authStore.Getter(AuthGetterTypes.EXPIRY)
   tokenExpiry: number
@@ -288,29 +258,169 @@ export default class Support extends mixins(ActiveUserMixin) {
   @authStore.Action(AuthActionTypes.REFRESH)
   refreshToken: () => Promise<void>
 
-  get supportText(): string {
-    //? This line is responsible for simply getting textual characters from the HTML string that the rich text editor component provides.
-    //? Another way would be to use: new DOMParser().parseFromString(html,"text/html").documentElement.textContent
-    //? But the memory overhead of using such task isn't worth it, since its just a minor validation
-    //! Intentional ReDoS since better validation performed at backend
-    return this.supportHTML.replace(/<[^>]+>/g, '') || ''
+  readonly supportCategoryOptions = [
+    { value: SupportReqType.ACC_OR_BILL, label: 'Account and billing', tag: 'account' },
+    { value: SupportReqType.SECURITY, label: 'Report a security vulnerability', tag: 'others' },
+    { value: SupportReqType.FP, label: 'Report a false positive', tag: 'others' },
+    { value: SupportReqType.BUG, label: 'Report a bug', tag: 'bug' },
+    { value: SupportReqType.FEATURE, label: 'Request a feature', tag: 'others' },
+    { value: SupportReqType.FEEDBACK, label: 'Share feedback', tag: 'feedback' },
+    { value: SupportReqType.NOT_LISTED, label: 'My issue is not listed', tag: 'others' }
+  ]
+
+  readonly supportTierCopy = {
+    [SupportTierChoices.Community]: { label: 'Community', variant: 'robin' },
+    [SupportTierChoices.Standard]: { label: 'Standard', variant: 'aqua' },
+    [SupportTierChoices.Enterprise]: { label: 'Enterprise', variant: 'juniper' }
   }
 
-  get ticketAuthor(): string {
+  readonly platformStatusCopy = STATUS_COPY
+
+  get formBinds() {
+    return {
+      authorEmail: this.authorEmail,
+      isSubmittingForm: this.isFormSubmitting,
+      filesToUpload: this.filesToUpload
+    }
+  }
+
+  get formHandlers() {
+    return {
+      'files-change': this.setFilesToUpload,
+      submit: this.createSupportTicket
+    }
+  }
+
+  get listOfForm(): Record<SupportReqType, SupportFormT> {
+    return {
+      [SupportReqType.ACC_OR_BILL]: {
+        type: SupportReqFormType.COMMON,
+        componentToRender: 'SupportForm',
+        bind: this.formBinds,
+        handlers: this.formHandlers
+      },
+      [SupportReqType.SECURITY]: {
+        type: SupportReqFormType.COMMON,
+        componentToRender: 'SupportSecurityWarning',
+        bind: false,
+        handlers: false
+      },
+      [SupportReqType.FP]: {
+        type: SupportReqFormType.COMMON,
+        componentToRender: 'SupportFpInfo',
+        bind: false,
+        handlers: false
+      },
+      [SupportReqType.BUG]: {
+        type: SupportReqFormType.COMMON,
+        componentToRender: 'SupportForm',
+        bind: this.formBinds,
+        handlers: this.formHandlers
+      },
+      [SupportReqType.FEATURE]: {
+        type: SupportReqFormType.COMMON,
+        componentToRender: 'SupportFeatureInfo',
+        bind: false,
+        handlers: false
+      },
+      [SupportReqType.FEEDBACK]: {
+        type: SupportReqFormType.COMMON,
+        componentToRender: 'SupportForm',
+        bind: this.formBinds,
+        handlers: this.formHandlers
+      },
+      [SupportReqType.NOT_LISTED]: {
+        type: SupportReqFormType.PER_TYPE,
+        COMMUNITY: {
+          componentToRender: 'SupportIssueNotListed',
+          bind: {
+            supportTier: this.supportTier ? this.supportTierCopy[this.supportTier].label : ''
+          },
+          handlers: false
+        },
+        ENTERPRISE: {
+          componentToRender: 'SupportForm',
+          bind: this.formBinds,
+          handlers: this.formHandlers
+        },
+        STANDARD: {
+          componentToRender: 'SupportForm',
+          bind: this.formBinds,
+          handlers: this.formHandlers
+        }
+      }
+    }
+  }
+
+  get isCommunitySupport() {
+    return this.supportTier === SupportTierChoices.Community
+  }
+
+  get ticketAuthor() {
     const authorFinder = (context: DashboardContext | Record<string, string>) =>
       context.id.toString() === this.ticketAuthorId
-    const author = this.viewerContexts.find(authorFinder)
-    if (author) {
-      const authorContext = author as DashboardContext
-      return `${authorContext.team_name || authorContext.login} (${
-        authorContext.vcs_provider_display
-      } ${authorContext.type === 'user' ? 'Account' : 'Organization'})`
+    return this.viewerContexts.find(authorFinder) as DashboardContext | undefined
+  }
+
+  get supportTier() {
+    return this.isNotOnboarded
+      ? SupportTierChoices.Community
+      : this.ticketAuthor?.support_tier || ''
+  }
+
+  get supportComponent() {
+    if (this.supportCategory && this.supportTier) {
+      const supportComp = this.listOfForm[this.supportCategory]
+      return supportComp.type === SupportReqFormType.COMMON
+        ? {
+            componentToRender: supportComp.componentToRender,
+            bind: supportComp.bind,
+            handlers: supportComp.handlers
+          }
+        : {
+            componentToRender: supportComp[this.supportTier].componentToRender,
+            bind: supportComp[this.supportTier].bind,
+            handlers: supportComp[this.supportTier].handlers
+          }
+    }
+    return false
+  }
+
+  get ticketAuthorName() {
+    if (this.ticketAuthor) {
+      return `${this.ticketAuthorWithoutOrg} (${this.ticketAuthor.vcs_provider_display} ${
+        this.ticketAuthor.type === 'user' ? 'Account' : 'Organization'
+      })`
     }
     return ''
   }
 
+  get ticketAuthorWithoutOrg() {
+    return this.ticketAuthor?.team_name ?? this.ticketAuthor?.login ?? ''
+  }
+
   get isPartOfTeam(): boolean {
     return Boolean(this.viewerContexts?.length)
+  }
+
+  async fetchDeepSourceStatus() {
+    try {
+      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
+        GetDeepSourceStatus,
+        {},
+        true
+      )
+
+      if (response.data.context?.platformStatus) {
+        this.platformStatus = response.data.context?.platformStatus
+      }
+    } catch (err) {
+      this.platformStatus = 'error'
+      this.$logErrorAndToast(
+        err as Error,
+        'An error occurred while fetching DeepSource status. Please check our status on deepsourcestatus.com.'
+      )
+    }
   }
 
   /**
@@ -319,7 +429,16 @@ export default class Support extends mixins(ActiveUserMixin) {
    * @returns {Promise<void>}
    */
   async fetch(): Promise<void> {
-    await this.fetchActiveUser()
+    if (!this.$config.onPrem) {
+      this.fetchDeepSourceStatus()
+    }
+
+    if (!this.viewer.email || !this.viewer.dashboardContext) {
+      await this.fetchActiveUser()
+    }
+    if (!this.viewer.dashboardContext?.length) {
+      this.isNotOnboarded = true
+    }
     this.authorEmail = this.viewer.email
     this.viewerContexts = this.viewer.dashboardContext
     this.ticketAuthorId = this.activeDashboardContext.id.toString()
@@ -328,133 +447,8 @@ export default class Support extends mixins(ActiveUserMixin) {
       this.$providerMetaMap[this.activeDashboardContext?.vcs_provider].value || ''
   }
 
-  /**
-   * Validates file sizes for files
-   *
-   * @param {File[]} arrayOfFiles - Files whose sizes need to be validated.
-   *
-   * @returns boolean
-   */
-  validateFileSize(arrayOfFiles: File[]): boolean {
-    /**
-     * Function to add a given file's size to the given total number.
-     *
-     * @param {number} accumulator - Total size of files till now
-     * @param {File} currentFile - File whose size has to be added to the total
-     *
-     * @returns {number} new total size of files
-     */
-    const sizeConcatenator = (accumulator: number, currentFile: File): number =>
-      accumulator + currentFile.size
-
-    const totalFileSize = arrayOfFiles.reduce(sizeConcatenator, 0)
-    //? 10,485,760 = 10MB
-    if (totalFileSize > 10_485_760) {
-      this.$toast.danger('Total size of attachments should be less than 10 MB.')
-      this.isFileProcessing = false
-      return false
-    }
-    return true
-  }
-
-  /**
-   * Validates names for files
-   *
-   * @param {File[]} arrOfFiles - Files whose name has to validated
-   *
-   * @returns {boolean}
-   */
-  validateFileNames(arrOfFiles: File[]): boolean {
-    const validFilenameRegex = /^[^\:\/\\\<\>\"\|\?\*\^]{1,255}$/
-    const filenameChecker = (val: File) =>
-      validFilenameRegex.test(val.name) && val.name.length <= 255
-    if (!arrOfFiles.every(filenameChecker)) {
-      this.$toast.danger(
-        'File names must be 256 characters or less and cannot contain special characters.'
-      )
-      return false
-    }
-    return true
-  }
-
-  /**
-   * Validates input data and shows errors as required.
-   *
-   * @param {SupportValidationData} validationData - Data to validate
-   *
-   * @returns {boolean} - Whether data is valid (true) or not (false).
-   */
-  validateInputs(valdiationData: SupportValidationData): boolean {
-    if (!valdiationData.ticketAuthor && this.isPartOfTeam) {
-      this.$toast.danger('Select a valid DeepSource workspace for this support request.')
-      return false
-    }
-    if (!valdiationData.authorEmail) {
-      this.$toast.danger('A primary email address is required.')
-      return false
-    }
-    const multiEmailInput = this.$refs['multiEmailInput'] as HTMLInputElement
-    multiEmailInput.value = valdiationData.authorEmail
-    if (!multiEmailInput.checkValidity()) {
-      this.$toast.danger('The primary email address is invalid.')
-      multiEmailInput.value = ''
-      return false
-    }
-    multiEmailInput.value = ''
-    if (valdiationData.authorCC) {
-      multiEmailInput.value = valdiationData.authorCC
-      if (!multiEmailInput.checkValidity()) {
-        this.$toast.danger('One or more email addresses added in CC are invalid.')
-        multiEmailInput.value = ''
-        return false
-      }
-      multiEmailInput.value = ''
-    }
-    if (!valdiationData.supportSubject || valdiationData.supportSubject.length < 5) {
-      this.$toast.danger('Subject line should be 5 characters or more.')
-      return false
-    }
-    if (valdiationData.supportSubject.length > 250) {
-      this.$toast.danger('Subject line should be 250 characters or less.')
-      return false
-    }
-    if (!valdiationData.supportText.length || valdiationData.supportText.length < 20) {
-      this.$toast.danger('Description should be 20 characters or more.')
-      return false
-    }
-    return true
-  }
-
-  /**
-   * Validates and appends files to {@link filesToUpload} on `change` event of file input.
-   *
-   * @param {Event} event - Change event of a file
-   * @param {HTMLInputElement} target
-   * @returns {void}
-   */
-  prepareFiles({ target }: { target: HTMLInputElement }): void {
-    if (target.files) {
-      this.isFileProcessing = true
-      const arrayOfFiles = Array.from(target.files)
-      try {
-        if (this.validateFileSize(arrayOfFiles) && this.validateFileNames(arrayOfFiles))
-          this.filesToUpload = this.filesToUpload.concat(arrayOfFiles)
-      } catch (err) {
-        this.$toast.danger('An error occurred while processing files.')
-      } finally {
-        this.isFileProcessing = false
-      }
-    }
-  }
-
-  /**
-   * Deletes a given file via its index from {@link filesToUpload}
-   *
-   * @param {number} fileIndex - Index of the file to delete
-   * @returns {boolean}
-   */
-  removeFile(fileIndex: number): void {
-    this.filesToUpload.splice(fileIndex, 1)
+  setFilesToUpload(newFiles: File[]) {
+    this.filesToUpload = newFiles
   }
 
   /**
@@ -463,9 +457,7 @@ export default class Support extends mixins(ActiveUserMixin) {
    * @returns {void}
    */
   resetFormData(): void {
-    this.authorCC = ''
-    this.supportSubject = ''
-    this.supportHTML = ''
+    this.supportCategory = ''
     this.filesToUpload = []
   }
 
@@ -492,19 +484,10 @@ export default class Support extends mixins(ActiveUserMixin) {
           "We've successfully recorded your support ticket. Expect a response from our team via email shortly.",
         timeout: 5
       })
+      this.supportPageStatus = SupportPageStatusT.success
       this.resetFormData()
     } else {
-      this.$toast.show({
-        type: 'danger',
-        message:
-          'An error occurred while creating your support request. Please try submitting the form again. If the issue persists, email us at support@deepsource.io.',
-        timeout: 5
-      })
-
-      this.$logErrorAndToast(new Error('Ticket response not ok'), undefined, this.viewer, {
-        context: 'Support page',
-        params: formData as unknown as Record<string, unknown>
-      })
+      throw Error('Ticket response not ok')
     }
   }
 
@@ -525,30 +508,23 @@ export default class Support extends mixins(ActiveUserMixin) {
    *
    * @returns {Promise<void>}
    */
-  async createSupportTicket(): Promise<void> {
+  async createSupportTicket(validatedFormData: SupportValidationData): Promise<void> {
     this.isFormSubmitting = true
 
-    //? Validate form data
-    const dataToValidate: SupportValidationData = {
-      authorEmail: this.authorEmail,
-      authorCC: this.authorCC,
-      supportSubject: this.supportSubject,
-      supportText: this.supportText,
-      ticketAuthor: this.ticketAuthor
-    }
+    const { ccEmails, fromEmail, subject, supportHTML } = validatedFormData
 
-    if (!this.validateInputs(dataToValidate)) {
-      this.isFormSubmitting = false
-      return
-    }
+    const tag = this.supportCategoryOptions.find(
+      (option) => option.value === this.supportCategory
+    )?.tag
 
     const formData: SubmitSupportTicketInput = {
-      fromEmail: dataToValidate.authorEmail,
-      ccEmails: dataToValidate.authorCC,
-      subject: dataToValidate.supportSubject,
+      fromEmail,
+      ccEmails,
+      subject,
       body: `Account/Organization Name: ${
-        this.isPartOfTeam ? dataToValidate.ticketAuthor : 'Not part of any team'
-      } <br/> ${this.supportHTML}`
+        this.isPartOfTeam ? this.ticketAuthorName : 'Not part of any team'
+      } <br/> ${supportHTML}`,
+      tags: tag ? [tag] : null
     }
 
     try {
@@ -603,6 +579,7 @@ export default class Support extends mixins(ActiveUserMixin) {
             'An error occurred while creating your support request. Please try submitting the form again. If the issue persists, email us at support@deepsource.io.',
           timeout: 5
         })
+        this.supportPageStatus = SupportPageStatusT.error
       }
 
       this.$logErrorAndToast(tickerError, undefined, this.viewer, {
@@ -615,10 +592,3 @@ export default class Support extends mixins(ActiveUserMixin) {
   }
 }
 </script>
-
-<style lang="postcss">
-.z-rich-text .ProseMirror p.is-editor-empty:first-child::before {
-  content: attr(data-placeholder);
-  @apply pointer-events-none float-left h-0 text-slate;
-}
-</style>

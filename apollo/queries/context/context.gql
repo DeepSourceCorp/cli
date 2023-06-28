@@ -1,4 +1,4 @@
-query {
+query fetchContext {
   context {
     staticRoot
     apiRoot

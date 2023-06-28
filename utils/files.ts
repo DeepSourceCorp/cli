@@ -102,10 +102,50 @@ async function uploadFiles(
   )
 }
 
+/**
+ * Validates file sizes for files
+ *
+ * @param {File[]} arrayOfFiles - Files whose sizes need to be validated.
+ *
+ * @returns boolean
+ */
+function validateFileSize(arrayOfFiles: File[], sizeInBytes: number): boolean {
+  /**
+   * Function to add a given file's size to the given total number.
+   *
+   * @param {number} accumulator - Total size of files till now
+   * @param {File} currentFile - File whose size has to be added to the total
+   *
+   * @returns {number} new total size of files
+   */
+  const sizeConcatenator = (accumulator: number, currentFile: File): number =>
+    accumulator + currentFile.size
+
+  const totalFileSize = arrayOfFiles.reduce(sizeConcatenator, 0)
+
+  return totalFileSize <= sizeInBytes
+}
+
+/**
+ * Validates names for files
+ *
+ * @param {File[]} arrOfFiles - Files whose name has to validated
+ *
+ * @returns {boolean}
+ */
+function validateFileNames(arrOfFiles: File[]): boolean {
+  const validFilenameRegex = /^[^:/\\<>"|?*^]{1,255}$/
+  const filenameChecker = (val: File) => validFilenameRegex.test(val.name) && val.name.length <= 255
+
+  return arrOfFiles.every(filenameChecker)
+}
+
 export {
   uploadFiles,
   FileUploadContexts,
   FileUploadTokenT,
   FileUploadSuccessResponseT,
-  FileUploadError
+  FileUploadError,
+  validateFileNames,
+  validateFileSize
 }

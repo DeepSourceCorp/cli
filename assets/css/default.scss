@@ -188,6 +188,10 @@ button.auxillary-button {
   @apply flex cursor-pointer items-center gap-x-1.5 rounded-3px border border-ink-50 bg-ink-200 px-2 hover:bg-ink-100;
 }
 
+a.auxillary-button {
+  @apply inline-flex cursor-pointer items-center gap-x-1.5 rounded-3px border border-ink-50 bg-ink-200 px-2 hover:bg-ink-100;
+}
+
 .intermediate-page-gradient-layer {
   background: linear-gradient(
     180deg,
