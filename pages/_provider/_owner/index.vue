@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 space-y-4">
+  <div class="space-y-4 p-4">
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
       <recently-active-repo-list
         :class="
@@ -101,6 +101,13 @@ export default class TeamHome extends mixins(
 ) {
   LoadingConditions = LoadingConditions
   ReportLevel = ReportLevel
+  isFetchingAccountSetupStatus = false
+
+  async fetchAccSetupStatuses(args: { login: string; provider: string }) {
+    this.isFetchingAccountSetupStatus = true
+    await this.fetchAccountSetupStatus(args)
+    this.isFetchingAccountSetupStatus = false
+  }
 
   /**
    * The fetch hook
@@ -112,10 +119,11 @@ export default class TeamHome extends mixins(
     const { owner, provider } = this.$route.params
     const args = { login: owner, provider }
 
-    await this.fetchAccountSetupStatus(args)
-
-    // Fetch `viewer` information
-    await this.fetchActiveUser()
+    await Promise.allSettled([
+      this.fetchAccSetupStatuses(args),
+      // Fetch `viewer` information
+      this.fetchActiveUser()
+    ])
 
     // Fetch pinned reports list only if the user has the required perms
     if (this.canViewPinnedReports) {
@@ -173,6 +181,10 @@ export default class TeamHome extends mixins(
   }
 
   get steps(): Array<SetupStep> {
+    if (this.isFetchingAccountSetupStatus) {
+      return []
+    }
+
     const setupOptionsSupportStatus: Record<string, boolean> = {
       'activate-repository': true,
       'install-autofix': this.$gateKeeper.provider(AppFeatures.AUTOFIX, this.provider),
