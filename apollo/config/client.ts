@@ -66,7 +66,7 @@ export default ({
       additionalHeaders = { 'x-forwarded-host': window.location.hostname }
     }
 
-    if ("cf-connecting-ip" in req.headers) {
+    if ('cf-connecting-ip' in req.headers) {
       // @ts-ignore
       additionalHeaders['cf-connecting-ip'] = req.headers['cf-connecting-ip']
     }
