@@ -469,9 +469,9 @@ export default class Support extends mixins(ActiveUserMixin) {
    */
   async submitSupportData(formData: SubmitSupportTicketInput): Promise<void> {
     // Send owner `login` if not on prem
-    if (!this.$config.onPrem && this.ownerLogin && this.ownerVCSProvider) {
-      formData.ownerLogin = this.ownerLogin
-      formData.vcsProvider = this.ownerVCSProvider
+    if (!this.$config.onPrem && this.ticketAuthor?.login && this.ticketAuthor?.vcs_provider) {
+      formData.ownerLogin = this.ticketAuthor.login
+      formData.vcsProvider = this.$providerMetaMap[this.ticketAuthor.vcs_provider].value
     }
 
     const response = (await this.$applyGraphqlMutation(SubmitSupportTicketMutation, {
