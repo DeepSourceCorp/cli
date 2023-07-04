@@ -56,6 +56,7 @@ export default ({
   //? The following middleware handles forwarding the IP of the actual client.
   const forwardHeadersMiddleware = new ApolloLink((operation, forward) => {
     let additionalHeaders = {}
+
     if (process.server) {
       const clientIp =
         (req.headers['x-forwarded-for'] as string)?.split(',').pop() || req.socket.remoteAddress
@@ -65,16 +66,17 @@ export default ({
       additionalHeaders = { 'x-forwarded-host': window.location.hostname }
     }
 
-    operation.setContext(({ headers = {} }) => {
-      console.log('Request Headers: ', req.headers)
-      console.log('HEADERS: ', { headers, additionalHeaders })
-      return {
-        headers: {
-          ...headers,
-          ...additionalHeaders
-        }
+    if ("cf-connecting-ip" in req.headers) {
+      // @ts-ignore
+      additionalHeaders['cf-connecting-ip'] = req.headers['cf-connecting-ip']
+    }
+
+    operation.setContext(({ headers = {} }) => ({
+      headers: {
+        ...headers,
+        ...additionalHeaders
       }
-    })
+    }))
 
     return forward(operation)
   })
