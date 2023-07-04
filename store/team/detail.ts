@@ -342,7 +342,7 @@ export const actions: TeamModuleActions = {
         },
         refetch
       )
-      return resolveNodes(response.data.team?.members) as TeamMember[]
+      return resolveNodes(response.data.team?.teamMembers)
     } catch (e) {
       this.$logErrorAndToast(
         e as Error,

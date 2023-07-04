@@ -324,7 +324,7 @@ export const actions: IssueDetailModuleActions = {
       },
       args.refetch
     )
-    return resolveNodes(response.data.repository?.silenceRules) as Array<SilenceRule>
+    return resolveNodes(response.data.repository?.silenceRules)
   },
   async [IssueDetailActions.FETCH_ISSUE_CHILDREN]({ commit }, args) {
     const response: GraphqlQueryResponse = await this.$fetchGraphqlData(

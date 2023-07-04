@@ -254,7 +254,7 @@ export const mockRepositoryListState = (): RepositoryListModuleState => ({
   error: {},
   repositoryList: mockRepositoryList(),
   newRepos: mockRepositoryList(),
-  repoWithActiveAnalysis: resolveNodes(mockRepositoryList()) as Repository[],
+  repoWithActiveAnalysis: resolveNodes(mockRepositoryList()),
   repoWithActiveAnalysisWithAnalyzers: [] as Repository[],
   repoWithPendingAdhocRuns: [] as Repository[]
 })

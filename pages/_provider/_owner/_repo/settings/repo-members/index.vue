@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col max-w-2xl p-4 gap-y-2">
+  <div class="flex max-w-2xl flex-col gap-y-2 p-4">
     <!-- title -->
     <div class="mb-4 text-lg font-medium">Repository members</div>
     <div class="flex space-x-2">
@@ -93,14 +93,20 @@
         @onClose="isUpdateModalOpen = false"
         @primaryAction="updatePermission"
       >
-        <div class="flex items-center mb-2 text-base leading-relaxed text-vanilla-100">
+        <div class="mb-2 flex items-center text-base leading-relaxed text-vanilla-100">
           <z-icon icon="alert-circle" size="small" class="mr-2" /> Update member role to
-          {{ repoPerms[newMemberRole].label }}
+          {{ newMemberRoleLabel }}
         </div>
-        <p
-          class="text-sm leading-relaxed text-vanilla-400"
-          v-html="getRoleMessage(newMemberRole, member.user.fullName || member.user.email)"
-        ></p>
+        <p class="text-sm leading-relaxed text-vanilla-400">
+          <template v-if="newMemberRole === RepositoryPermissionChoices.Admin">
+            Are you sure you want to make {{ member.user.fullName || member.user.email }}
+            <b class="text-vanilla-100">{{ newMemberRoleLabel }}</b> of this repo?
+          </template>
+          <template v-else>
+            Are you sure you want to give {{ member.user.fullName || member.user.email }},
+            <b class="text-vanilla-100">{{ newMemberRoleLabel }}</b> access to this repo?
+          </template>
+        </p>
       </z-confirm>
       <z-confirm
         v-if="isRemoveModalOpen"
@@ -164,18 +170,9 @@ export default class RepositoryMembers extends mixins(ActiveUserMixin, RepoDetai
   public newMemberRole: Maybe<RepositoryPermissionChoices> = null
   public isRemoveModalOpen = false
 
-  private repoPerms = REPO_PERMS
-  private LIMIT = LIMIT
-
-  getRoleMessage(newRole: RepositoryPermissionChoices, name: string): string {
-    const role = this.repoPerms[newRole].label
-    // skipcq: JS-D009
-    if (newRole == 'ADMIN') {
-      return `Are you sure you want to make ${name} <b class="text-vanilla-100">${role}</b> of this repo?`
-    } else {
-      return `Are you sure you want to give ${name}, <b class="text-vanilla-100">${role}</b> access to this repo?`
-    }
-  }
+  readonly repoPerms = REPO_PERMS
+  readonly RepositoryPermissionChoices = RepositoryPermissionChoices
+  readonly LIMIT = LIMIT
 
   async fetch(): Promise<void> {
     await this.fetchRepoMembers(false)
@@ -209,7 +206,14 @@ export default class RepositoryMembers extends mixins(ActiveUserMixin, RepoDetai
   }
 
   get repoMembers() {
-    return (resolveNodes(this.repository.collaborators) as Array<RepositoryCollaborator>) ?? []
+    return resolveNodes(this.repository.collaborators) ?? []
+  }
+
+  get newMemberRoleLabel(): string {
+    if (!this.newMemberRole) {
+      return ''
+    }
+    return this.repoPerms[this.newMemberRole].label
   }
 
   async searchRepoMembers(): Promise<void> {

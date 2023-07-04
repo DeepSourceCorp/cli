@@ -64,7 +64,7 @@ export default class RecommendedIssues extends mixins(ActiveUserMixin) {
 
   get issueList(): Array<RepositoryIssue | null> {
     if (this.viewer?.recommendedIssues) {
-      return resolveNodes(this.viewer.recommendedIssues) as RepositoryIssue[]
+      return resolveNodes(this.viewer.recommendedIssues)
     }
     return []
   }

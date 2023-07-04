@@ -12108,7 +12108,7 @@ export type TeamMemberListQuery = (
   & { team?: Maybe<(
     { __typename?: 'Team' }
     & Pick<Team, 'id' | 'numMembersTotal' | 'invitationUrl'>
-    & { members: (
+    & { teamMembers: (
       { __typename?: 'TeamMemberConnection' }
       & Pick<TeamMemberConnection, 'totalCount'>
       & { edges: Array<Maybe<(
@@ -12138,7 +12138,7 @@ export type MembersBaseDetailsQuery = (
   & { team?: Maybe<(
     { __typename?: 'Team' }
     & Pick<Team, 'id'>
-    & { members: (
+    & { teamMembers: (
       { __typename?: 'TeamMemberConnection' }
       & Pick<TeamMemberConnection, 'totalCount'>
       & { edges: Array<Maybe<(

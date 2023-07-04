@@ -402,7 +402,7 @@ export default class RunHeader extends RepoDetailMixin {
    * @returns {Array<RunEdge>}
    */
   get branchRuns() {
-    const resolvedRuns = resolveNodes(this.branchRunList[this.branchName]) as Run[]
+    const resolvedRuns = resolveNodes(this.branchRunList[this.branchName])
 
     return resolvedRuns.filter((run) => run.runId !== this.runId)
   }

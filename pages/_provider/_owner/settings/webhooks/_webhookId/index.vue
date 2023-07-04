@@ -433,7 +433,7 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
   }
 
   get subscribedEvents(): WebhookEventTypes[] {
-    return resolveNodes(this.localEndpoint.eventsSubscribed) as WebhookEventTypes[]
+    return resolveNodes(this.localEndpoint.eventsSubscribed)
   }
 
   get allEventsList(): WebhookEventTypes[] {

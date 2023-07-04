@@ -187,7 +187,7 @@ export default class DeleteUser extends mixins(ActiveUserMixin, AuthMixin) {
   emailIsValid = true
 
   get teamOwnerships() {
-    return resolveNodes((this.viewer as AliasedUser).primaryTeamAccounts) as Array<Team>
+    return resolveNodes((this.viewer as AliasedUser).primaryTeamAccounts)
   }
 
   /**

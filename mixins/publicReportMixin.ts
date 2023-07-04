@@ -239,7 +239,7 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
         )) as GraphqlQueryResponse
 
         this.totalCount = response.data.owner?.publicReports?.totalCount ?? 0
-        this.reportsList = resolveNodes(response.data.owner?.publicReports) as Array<PublicReport>
+        this.reportsList = resolveNodes(response.data.owner?.publicReports)
       } catch (e) {
         this.$logErrorAndToast(
           e as Error,
@@ -269,9 +269,7 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
         )) as GraphqlQueryResponse
 
         this.totalCount = response.data.repository?.publicReports?.totalCount ?? 0
-        this.reportsList = resolveNodes(
-          response.data.repository?.publicReports
-        ) as Array<PublicReport>
+        this.reportsList = resolveNodes(response.data.repository?.publicReports)
       } catch (e) {
         this.$logErrorAndToast(
           e as Error,

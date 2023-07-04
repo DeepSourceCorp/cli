@@ -195,7 +195,7 @@ export default class OnboardRepositories extends mixins(
    * @return {Repository[]}
    */
   get repositoriesToOnboard(): Repository[] {
-    return resolveNodes(this.newRepos) as Repository[]
+    return resolveNodes(this.newRepos)
   }
 
   /**

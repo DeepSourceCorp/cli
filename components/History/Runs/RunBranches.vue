@@ -126,7 +126,7 @@ export default class RunBranches extends Vue {
   get runsInBranch(): Array<Run> {
     if (this.generalizedRun.branchName) {
       const runList = this.branchRunList[this.generalizedRun.branchName] || []
-      const branchRuns = resolveNodes(runList) as Run[]
+      const branchRuns = resolveNodes(runList)
 
       return branchRuns.filter((run) => run.runId !== this.generalizedRun.runId)
     }

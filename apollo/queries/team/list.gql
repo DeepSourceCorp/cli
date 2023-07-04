@@ -9,7 +9,7 @@ query teamMemberList(
     id
     numMembersTotal
     invitationUrl
-    members: teamMembers(first: $limit, after: $after, q: $query) {
+    teamMembers(first: $limit, after: $after, q: $query) {
       totalCount
       edges {
         node {

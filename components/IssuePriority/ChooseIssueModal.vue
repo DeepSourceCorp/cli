@@ -191,7 +191,7 @@ export default class ChooseIssueModal extends mixins(IssuePriorityListMixin, Pag
       refetch: true
     })
     this.totalCount = this.issuesWithPriority.totalCount || 0
-    this.issueList = resolveNodes(this.issuesWithPriority) as Issue[]
+    this.issueList = resolveNodes(this.issuesWithPriority)
   }
 
   /**

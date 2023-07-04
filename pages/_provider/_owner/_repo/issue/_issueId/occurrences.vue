@@ -200,7 +200,7 @@ export default class IssuesDetails extends mixins(
   }
 
   get issuesInCheck(): CheckIssue[] {
-    const resolvedCheckIssues = resolveNodes(this.checkIssues) as CheckIssue[]
+    const resolvedCheckIssues = resolveNodes(this.checkIssues)
 
     if (this.context.isRunner) {
       resolvedCheckIssues.forEach((checkIssue) => {

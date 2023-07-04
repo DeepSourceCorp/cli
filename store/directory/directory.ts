@@ -72,10 +72,10 @@ export type DirectoryActionContext = ActionContext<DirectoryModuleState, RootSta
 export const getters: GetterTree<DirectoryModuleState, RootState> = {
   //! Also used by Discover components
   [DirectoryGetters.DIRECTORY_ANALYZERS]: (state) => {
-    return resolveNodes(state.analyzerList) as Analyzer[]
+    return resolveNodes(state.analyzerList)
   },
   [DirectoryGetters.DIRECTORY_TRANSFORMERS]: (state) => {
-    return resolveNodes(state.transformerList) as TransformerTool[]
+    return resolveNodes(state.transformerList)
   }
 }
 interface DirectoryModuleMutations extends MutationTree<DirectoryModuleState> {

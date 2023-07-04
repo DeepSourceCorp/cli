@@ -523,7 +523,7 @@ export default class Issues extends mixins(RepoDetailMixin, RoleAccessMixin, Rou
       refetch
     )
 
-    this.issueList = resolveNodes(response.data.repository?.issues) as RepositoryIssue[]
+    this.issueList = resolveNodes(response.data.repository?.issues)
     this.totalIssueCount = response.data.repository?.issues?.totalCount ?? 0
   }
 

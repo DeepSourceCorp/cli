@@ -145,7 +145,7 @@ export default class UserManagementUserDetails extends mixins(
   }
 
   get groupUsers(): EnterpriseUser[] {
-    return resolveNodes(this.group.members) as EnterpriseUser[]
+    return resolveNodes(this.group.members)
   }
 
   refetchData(): void {

@@ -52,9 +52,7 @@ export enum AutoOnboardMutations {
 export const mutations: MutationTree<AutoOnboardState> = {
   [AutoOnboardMutations.SET_ONBOARDABLE_REPOS]: (state, value: RepositoryConnection) => {
     state.hasMoreReposToOnboard = value.pageInfo.hasNextPage
-    state.onboardableRepositories = state.onboardableRepositories.concat(
-      resolveNodes(value) as Repository[]
-    )
+    state.onboardableRepositories = state.onboardableRepositories.concat(resolveNodes(value))
   },
   [AutoOnboardMutations.RESET_ONBOARDABLE_REPO_LIST]: (state) => {
     state.hasMoreReposToOnboard = true
@@ -71,10 +69,10 @@ export const mutations: MutationTree<AutoOnboardState> = {
   },
   [AutoOnboardMutations.SET_CONFIG_TEMPLATE_LIST]: (state, value: ConfigTemplateConnection) => {
     state.totalTemplates = value.totalCount ?? 0
-    state.configTemplateList = resolveNodes(value) as ConfigTemplate[]
+    state.configTemplateList = resolveNodes(value)
   },
   [AutoOnboardMutations.SET_EVENT_LIST]: (state, value: AutoOnboardEventConnection) => {
-    state.autoOnboardEvents = resolveNodes(value) as AutoOnboardEvent[]
+    state.autoOnboardEvents = resolveNodes(value)
   }
 }
 

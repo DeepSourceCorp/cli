@@ -291,7 +291,7 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
     try {
       const response = (await this.$fetchGraphqlData(superuserList, {})) as GraphqlQueryResponse
 
-      this.superusers = resolveNodes(response.data.enterprise?.superusers) as Array<EnterpriseUser>
+      this.superusers = resolveNodes(response.data.enterprise?.superusers)
       this.totalSuperuserCount = response.data.enterprise?.superusers?.totalCount ?? 0
     } catch (e) {
       this.$logErrorAndToast(

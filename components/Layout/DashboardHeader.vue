@@ -217,11 +217,11 @@ export default class DashboardHeader extends mixins(ActiveUserMixin, ContextMixi
 
   // TODO: Enable once the avatar sizing inconsistency is fixed
   // get teamMembersCount(): number {
-  //   return this.teamDetails.members?.totalCount ?? this.teamMembersList.length
+  //   return this.teamDetails.teamMembers?.totalCount ?? this.teamMembersList.length
   // }
 
   // get teamMembersList(): TeamMember[] {
-  //   return resolveNodes(this.teamDetails.members) as TeamMember[]
+  //   return resolveNodes(this.teamDetails.teamMembers) as TeamMember[]
   // }
 
   /**

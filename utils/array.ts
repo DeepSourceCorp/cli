@@ -22,9 +22,9 @@ function getChangeFromTrend(trendData?: Trend, percentage = true): number {
   return percentage ? Math.round(((current - prev) / prev) * 100) : current - prev
 }
 
-function resolveNodes(
-  connection?: { edges: Array<Maybe<{ node?: Maybe<unknown> }>> } | null | undefined
-): unknown[] {
+function resolveNodes<T>(
+  connection?: { edges: Array<Maybe<{ node?: Maybe<T> }>> } | null | undefined
+): T[] {
   if (!connection || !connection.edges) {
     return []
   }
@@ -33,7 +33,7 @@ function resolveNodes(
     .map((edge) => {
       return edge?.node ? edge.node : null
     })
-    .filter(Boolean)
+    .filter((value): value is T => Boolean(value))
 }
 
 function parseArrayString(candidate?: string | null | undefined): unknown[] {

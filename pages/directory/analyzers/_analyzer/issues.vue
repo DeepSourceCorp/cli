@@ -140,7 +140,7 @@ export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
   }
 
   get analyzerIssues(): Issue[] {
-    return resolveNodes(this.analyzer.issues) as Issue[]
+    return resolveNodes(this.analyzer.issues)
   }
 
   get totalPageCount(): number {

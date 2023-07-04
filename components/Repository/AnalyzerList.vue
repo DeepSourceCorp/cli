@@ -47,7 +47,7 @@ export default class AnalyzerList extends Vue {
   readonly INITIAL_LIST_COUNT = 4
 
   get analyzers(): Array<Analyzer> {
-    return resolveNodes(this.availableAnalyzers) as Array<Analyzer>
+    return resolveNodes(this.availableAnalyzers)
   }
 
   get othersList() {

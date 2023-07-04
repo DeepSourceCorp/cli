@@ -148,8 +148,8 @@ export default class IssuePriorityFilter extends mixins(AnalyzerListMixin, RepoD
   get languageFilters(): Record<string, AnalyzerChoice> {
     const repoAnalyzers =
       this.level === IssuePriorityLevel.Repository
-        ? (resolveNodes(this.repository.availableAnalyzers) as Analyzer[])
-        : (resolveNodes(this.stateAnalyzerList) as Analyzer[])
+        ? resolveNodes(this.repository.availableAnalyzers)
+        : resolveNodes(this.stateAnalyzerList)
 
     const analyzerFilters: Record<string, AnalyzerChoice> = {}
     repoAnalyzers.forEach((repoAnalyzer) => {

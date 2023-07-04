@@ -119,7 +119,7 @@ import {
 
 import { OrgUsersGetters, OrgUsersActions } from '~/store/control-panel/users'
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
-import { EnterpriseUser, Team } from '~/types/types'
+import { EnterpriseTeam, EnterpriseUser } from '~/types/types'
 import { parseISODate, formatDate } from '~/utils/date'
 import { resolveNodes } from '~/utils/array'
 import PaginationMixin from '~/mixins/paginationMixin'
@@ -171,8 +171,8 @@ export default class UserManagementUserDetails extends mixins(
     this.refetch = false
   }
 
-  get userTeams(): Team[] {
-    return resolveNodes(this.orgUser.teams) as Team[]
+  get userTeams(): EnterpriseTeam[] {
+    return resolveNodes(this.orgUser.teams)
   }
 
   async deleteUser(userId: string) {

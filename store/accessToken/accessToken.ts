@@ -36,7 +36,7 @@ export const mutations: MutationTree<AccessTokenState> = {
   },
   [AccessTokenMutations.SET_ACCESS_TOKEN_LIST]: (state, value: AccessTokenConnection) => {
     state.totalUserAccessTokens = value.totalCount ?? 0
-    state.userAccessTokenList = resolveNodes(value) as AccessToken[]
+    state.userAccessTokenList = resolveNodes(value)
   }
 }
 // Actions ------------------------------------------

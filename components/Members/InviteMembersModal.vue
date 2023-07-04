@@ -349,10 +349,10 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBil
 
   get pendingInvites(): number {
     let count = 0
-    const invitees = resolveNodes(this.team.invites) as Invitee[]
+    const invitees = resolveNodes(this.team.invites)
     invitees.forEach((invitee) => {
       // no limit on CONTRIBUTORS, so we only count ADMINs & MEMBERs
-      if (invitee?.role !== 'CONTRIBUTOR') {
+      if (invitee?.role !== TeamMemberRoleChoices.Contributor) {
         count += 1
       }
     })

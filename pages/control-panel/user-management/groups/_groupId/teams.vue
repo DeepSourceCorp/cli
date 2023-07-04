@@ -233,7 +233,7 @@ export default class UserManagementUserDetails extends mixins(
   }
 
   get groupTeams(): GroupTeamMembership[] {
-    return resolveNodes(this.group.groupTeams) as GroupTeamMembership[]
+    return resolveNodes(this.group.groupTeams)
   }
 
   async search(q: string): Promise<void> {

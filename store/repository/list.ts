@@ -115,13 +115,13 @@ export const mutations: RepositoryListModuleMutations = {
     state.newRepos = Object.assign({}, state.repositoryList, repositoryList)
   },
   [RepoListMutations.SET_ACTIVE_REPOSITORY_LIST]: (state, repositoryList) => {
-    state.repoWithActiveAnalysis = resolveNodes(repositoryList) as Repository[]
+    state.repoWithActiveAnalysis = resolveNodes(repositoryList)
   },
   [RepoListMutations.SET_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS]: (state, repositoryList) => {
-    state.repoWithActiveAnalysisWithAnalyzers = resolveNodes(repositoryList) as Repository[]
+    state.repoWithActiveAnalysisWithAnalyzers = resolveNodes(repositoryList)
   },
   [RepoListMutations.SET_ADHOC_RUN_REPOS]: (state, repoConnect) => {
-    state.repoWithPendingAdhocRuns = resolveNodes(repoConnect) as Repository[]
+    state.repoWithPendingAdhocRuns = resolveNodes(repoConnect)
   }
 }
 

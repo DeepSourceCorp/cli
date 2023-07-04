@@ -151,7 +151,7 @@ export default class RepoSelector extends mixins(OwnerDetailMixin, RepoListMixin
   }
 
   get repositoriesToOnboard(): Repository[] {
-    return resolveNodes(this.newRepos) as Repository[]
+    return resolveNodes(this.newRepos)
   }
 
   getRepoCountText(): string {

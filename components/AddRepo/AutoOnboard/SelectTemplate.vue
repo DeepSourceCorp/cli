@@ -112,7 +112,7 @@ export default class SelectTemplate extends mixins(ActiveUserMixin, AutoOnboardM
       refetch: true
     })
 
-    this.currentTemplateList = resolveNodes(connection) as ConfigTemplate[]
+    this.currentTemplateList = resolveNodes(connection)
   }
 
   get settingsLink(): string {

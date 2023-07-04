@@ -161,9 +161,7 @@ export default class PublicReportRepoSection extends mixins(PaginationMixin) {
 
       this.totalCount = response.data.publicReport?.sourcedRepositories?.totalCount ?? 0
 
-      const newRepoList = resolveNodes(
-        response.data.publicReport?.sourcedRepositories
-      ) as Array<Repository>
+      const newRepoList = resolveNodes(response.data.publicReport?.sourcedRepositories)
 
       this.repositoryList = [...this.repositoryList, ...newRepoList]
     } catch (e) {

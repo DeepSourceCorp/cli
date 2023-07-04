@@ -224,7 +224,7 @@ export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin, Au
   }
 
   get autofixListItems(): AutofixRun[] {
-    return resolveNodes(this.autofixRunList) as AutofixRun[]
+    return resolveNodes(this.autofixRunList)
   }
 
   /**

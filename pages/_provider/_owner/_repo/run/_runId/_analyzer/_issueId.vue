@@ -400,11 +400,9 @@ export default class RunIssueDetails extends mixins(
       return filteredIssueOccurrences
     }
 
-    let filteredCheckIssues = (resolveNodes(this.checkIssues) as CheckIssue[]).filter(
-      (issue: CheckIssue) => {
-        return issue.shortcode === this.$route.params.issueId
-      }
-    )
+    let filteredCheckIssues = resolveNodes(this.checkIssues).filter((issue: CheckIssue) => {
+      return issue.shortcode === this.$route.params.issueId
+    })
 
     if (this.context.isRunner) {
       filteredCheckIssues = filteredCheckIssues.map((filteredCheckIssue: CheckIssue) => {

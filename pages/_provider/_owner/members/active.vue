@@ -149,7 +149,7 @@ export default class ActiveMembers extends mixins(TeamDetailMixin, OwnerBillingM
   }
 
   get teamMembersList(): TeamMember[] {
-    return resolveNodes(this.team.members) as TeamMember[]
+    return resolveNodes(this.team.teamMembers)
   }
 
   get allowTransfer(): boolean {
@@ -239,8 +239,8 @@ export default class ActiveMembers extends mixins(TeamDetailMixin, OwnerBillingM
 
   get totalPages(): number {
     let pages = 0
-    if (this.team?.members?.totalCount) {
-      pages = Math.ceil(this.team.members.totalCount / this.limit)
+    if (this.team?.teamMembers?.totalCount) {
+      pages = Math.ceil(this.team.teamMembers.totalCount / this.limit)
     }
     return pages > 1 ? pages : 0
   }

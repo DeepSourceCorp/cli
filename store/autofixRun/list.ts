@@ -70,7 +70,7 @@ export const mutations: AutofixRunListModuleMutations = {
     state.autofixRunList = Object.assign({}, state.autofixRunList, autofixRunList)
   },
   [AutofixRunListMutations.SET_PENDING_AUTOFIX_RUNS]: (state, autofixRunList) => {
-    state.pendingAutofixList = resolveNodes(autofixRunList) as AutofixRun[]
+    state.pendingAutofixList = resolveNodes(autofixRunList)
   }
 }
 

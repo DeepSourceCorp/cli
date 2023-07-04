@@ -61,7 +61,7 @@ export default class StarredRepoList extends mixins(ActiveUserMixin) {
 
   get starredRepos(): Array<Repository | null> {
     if (this.viewer?.preference?.starredRepositories) {
-      return resolveNodes(this.viewer.preference.starredRepositories) as Repository[]
+      return resolveNodes(this.viewer.preference.starredRepositories)
     }
     return []
   }

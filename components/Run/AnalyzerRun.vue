@@ -119,7 +119,7 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
   }
 
   get concreteIssues(): Issue[] {
-    return resolveNodes(this.concreteIssueList) as Issue[]
+    return resolveNodes(this.concreteIssueList)
   }
 
   get isFilterApplied(): boolean {

@@ -206,14 +206,10 @@ export const actions: AnalyzerListModuleActions = {
     return false
   },
   async [AnalyzerListActions.FETCH_ANALYZER_NAMES](_context, { categories }) {
-    const analyzerNamesResponse = resolveNodes(
-      ((await this.$fetchGraphqlData(AnalyzerNamesQuery, { categories })) as GraphqlQueryResponse)
-        .data.analyzers
-    )
+    const response = (await this.$fetchGraphqlData(AnalyzerNamesQuery, {
+      categories
+    })) as GraphqlQueryResponse
 
-    if (analyzerNamesResponse.length) {
-      return analyzerNamesResponse as Analyzer[]
-    }
-    return []
+    return resolveNodes(response.data.analyzers)
   }
 }

@@ -183,9 +183,7 @@ export default class OwnerCodeCoverage extends mixins(PaginationMixin, RouteQuer
 
       this.totalCount = response.data.owner?.repositoriesCoverageReport?.totalCount ?? 0
       this.codeCoverageReportList =
-        (resolveNodes(
-          response.data.owner?.repositoriesCoverageReport
-        ) as Array<RepositoryCoverageReportItem>) ?? []
+        resolveNodes(response.data.owner?.repositoriesCoverageReport) ?? []
 
       // Saves the latest list length in localstore
       if (

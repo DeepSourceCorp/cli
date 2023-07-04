@@ -43,7 +43,7 @@ import { resolveNodes } from '~/utils/array'
 
       if (runResponse) {
         const { checks } = runResponse
-        const code = (resolveNodes(checks) as Check[])?.[0].analyzer?.shortcode
+        const code = resolveNodes(checks)?.[0].analyzer?.shortcode
         if (code) {
           redirect(302, `${stripTrailingSlash(route.path)}/${code}`)
           return

@@ -184,7 +184,7 @@ export default class Workspaces extends Mixins(ActiveUserMixin, ContextMixin) {
    * @returns {Array<Owner>}
    */
   get personalAccounts() {
-    return (resolveNodes(this.viewer.personalAccounts) as Array<Owner>) ?? []
+    return resolveNodes(this.viewer.personalAccounts) ?? []
   }
 
   /**
@@ -193,7 +193,7 @@ export default class Workspaces extends Mixins(ActiveUserMixin, ContextMixin) {
    * @returns {Array<Owner>}
    */
   get teamAccounts() {
-    return (resolveNodes(this.viewer.teamAccounts) as Array<Owner>) ?? []
+    return resolveNodes(this.viewer.teamAccounts) ?? []
   }
 
   /**

@@ -185,18 +185,14 @@ export default class AuditLogMixin extends mixins(ActiveUserMixin) {
       if (this.level === AuditLogLevel.Team) {
         this.objectId = response.data.team?.id as string
 
-        this.auditLogItems = resolveNodes(
-          response?.data?.team?.logs as AuditLogConnection
-        ) as Array<AuditLog>
+        this.auditLogItems = resolveNodes(response?.data?.team?.logs as AuditLogConnection)
 
         this.totalCount =
           (response.data.team as CustomTeamLevelAuditLogQuery).fullLogs?.totalCount ?? 0
       } else {
         this.objectId = response.data.repository?.id as string
 
-        this.auditLogItems = resolveNodes(
-          response?.data?.repository?.logs as AuditLogConnection
-        ) as Array<AuditLog>
+        this.auditLogItems = resolveNodes(response?.data?.repository?.logs as AuditLogConnection)
 
         this.totalCount =
           (response.data.repository as CustomRepositoryLevelAuditLogQuery).fullLogs?.totalCount ?? 0

@@ -468,7 +468,7 @@ export default class AnalyzerDetails extends mixins(
    */
   get branchRuns() {
     if (this.run.branchName) {
-      const resolvedRuns = resolveNodes(this.branchRunList[this.run.branchName]) as Run[]
+      const resolvedRuns = resolveNodes(this.branchRunList[this.run.branchName])
 
       return resolvedRuns.filter((run) => run.runId !== this.run.runId)
     }

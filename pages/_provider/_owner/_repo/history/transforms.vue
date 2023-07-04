@@ -100,7 +100,7 @@ export default class Transforms extends mixins(RepoDetailMixin, RoleAccessMixin)
   }
 
   get transformRuns(): TransformerRun[] {
-    return resolveNodes(this.transformerRunList) as TransformerRun[]
+    return resolveNodes(this.transformerRunList)
   }
 
   mounted(): void {

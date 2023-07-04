@@ -7,7 +7,7 @@ import Vuex, { Store } from 'vuex'
 
 import { AnalyzerRun } from '~/components/Run'
 import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
-import { Issue } from '~/types/types'
+import { Issue, IssueConnection, IssueSeverity } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
 
 interface IAnalyzerRun {
@@ -17,7 +17,7 @@ interface IAnalyzerRun {
 
 describe('[[ AnalyzerRun ]]', () => {
   // Mocks
-  const concreteIssueList = {
+  const concreteIssueList: IssueConnection = {
     totalCount: 23,
     edges: [
       {
@@ -29,7 +29,7 @@ describe('[[ AnalyzerRun ]]', () => {
           title: 'Object of unsupported type raised',
           description:
             'Raising objects other than a class, an instance or a string can cause a `TypeError`.\n\nThere can be cases where the value being raised is dynamically set. One common example is setting the value to `None` originally, and then assigning other objects to it based on a condition. Doing so can affect readability, and is generally not recommended. In such cases, either re-write the block, or ignore the issue for this file.',
-          severity: 'CRITICAL',
+          severity: IssueSeverity.Critical,
           autofixAvailable: false,
           autofixTitle: null,
           occurrenceCount: 1,
@@ -46,7 +46,7 @@ describe('[[ AnalyzerRun ]]', () => {
           title: 'Dangerous default argument',
           description:
             'Do not use a mutable like `list` or `dictionary` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.',
-          severity: 'CRITICAL',
+          severity: IssueSeverity.Critical,
           autofixAvailable: true,
           autofixTitle: 'Fix dangerous default argument',
           occurrenceCount: 3,
@@ -55,7 +55,7 @@ describe('[[ AnalyzerRun ]]', () => {
         }
       }
     ]
-  }
+  } as IssueConnection
 
   const mocks = {
     $route: {

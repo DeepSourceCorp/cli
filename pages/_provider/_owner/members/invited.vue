@@ -1,16 +1,28 @@
 <template>
   <div class="space-y-4">
-    <template v-if="team.invites.edges.length > 0">
-      <transition-group class="duration-200 transform" tag="ul">
+    <div v-if="$fetchState.pending" class="flex flex-col space-y-2">
+      <div
+        v-for="loader in Array.from(Array(limit).keys())"
+        :key="loader"
+        class="flex w-full animate-pulse space-x-2"
+      >
+        <div class="h-8 w-8 rounded-md bg-ink-300"></div>
+        <div class="h-8 w-2/3 rounded-md bg-ink-300"></div>
+        <div class="h-8 flex-grow rounded-md bg-ink-300"></div>
+      </div>
+    </div>
+
+    <template v-else-if="teamInvites.length">
+      <transition-group class="transform duration-200" tag="ul">
         <invited-member-list-item
-          v-for="invite in team.invites.edges"
-          :key="invite.node.email"
-          v-bind="invite.node"
+          v-for="invite in teamInvites"
+          :key="invite.email"
+          v-bind="invite"
           @cancelInvite="confirmCancelInvite"
         />
       </transition-group>
       <z-pagination
-        v-if="totalPages"
+        v-if="totalPages > 1"
         v-model="currentPage"
         class="flex justify-center"
         :total-pages="totalPages"
@@ -18,17 +30,7 @@
         :hide-for-single-page="true"
       />
     </template>
-    <div v-else-if="$fetchState.pending" class="flex flex-col space-y-2">
-      <div
-        v-for="loader in Array.from(Array(limit).keys())"
-        :key="loader"
-        class="flex w-full space-x-2 animate-pulse"
-      >
-        <div class="w-8 h-8 rounded-md bg-ink-300"></div>
-        <div class="w-2/3 h-8 rounded-md bg-ink-300"></div>
-        <div class="flex-grow h-8 rounded-md bg-ink-300"></div>
-      </div>
-    </div>
+
     <empty-state
       v-else
       :webp-image-path="require('~/assets/images/ui-states/pending-invites-136px.webp')"
@@ -39,7 +41,7 @@
     />
     <portal to="modal">
       <z-confirm v-if="showCancelConfirm" @primaryAction="cancelInviteForMember" @onClose="close">
-        <div class="flex items-center mb-2 text-base leading-relaxed text-vanilla-100">
+        <div class="mb-2 flex items-center text-base leading-relaxed text-vanilla-100">
           <z-icon icon="alert-circle" size="small" class="mr-2" />
           Do you want to cancel this invite?
         </div>
@@ -48,14 +50,14 @@
           <b class="text-vanilla-100">This action cannot be reversed.</b>
         </p>
         <template #footer>
-          <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
+          <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
             <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close"
               >Cancel</z-button
             >
             <z-button
               button-type="danger"
               size="small"
-              class="inline-flex space-x-1.5 items-center"
+              class="inline-flex items-center space-x-1.5"
               @click="cancelInviteForMember"
             >
               <z-icon
@@ -90,6 +92,8 @@ import {
   ZConfirm
 } from '@deepsource/zeal'
 import { TeamPerms } from '~/types/permTypes'
+import { resolveNodes } from '~/utils/array'
+import { TeamMemberInvitation } from '~/types/types'
 
 @Component({
   components: {
@@ -137,12 +141,16 @@ export default class Invited extends mixins(TeamDetailMixin) {
     })
   }
 
+  get teamInvites(): Array<TeamMemberInvitation> {
+    return resolveNodes(this.team.invites)
+  }
+
   get totalPages(): number {
     let pages = 0
     if (this.team.invites?.totalCount) {
       pages = Math.ceil(this.team.invites?.totalCount / this.limit) || 0
     }
-    return pages > 1 ? pages : 0
+    return pages
   }
 
   confirmCancelInvite(email: string): void {

@@ -174,7 +174,7 @@ export default class UserManagementUserDetails extends mixins(
   }
 
   get userGroups(): EnterpriseGroup[] {
-    return resolveNodes(this.orgUser.scimGroups) as EnterpriseGroup[]
+    return resolveNodes(this.orgUser.scimGroups)
   }
 
   async search(q: string): Promise<void> {

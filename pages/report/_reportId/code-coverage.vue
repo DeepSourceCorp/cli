@@ -207,9 +207,7 @@ export default class PublicReportCodeCoverage extends mixins(
 
       this.totalCount = response.data.publicReport?.repositoriesCoverageReport?.totalCount ?? 0
       this.codeCoverageReportList =
-        (resolveNodes(
-          response.data.publicReport?.repositoriesCoverageReport
-        ) as Array<RepositoryCoverageReportItem>) ?? []
+        resolveNodes(response.data.publicReport?.repositoriesCoverageReport) ?? []
 
       // Saves the latest list length in localstore
       if (

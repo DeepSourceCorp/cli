@@ -13,6 +13,8 @@ import {
   Repository,
   RepositoryIssue,
   SilenceRule,
+  SilenceRuleConnection,
+  SilenceRuleSilenceLevel,
   VcsProviderChoices
 } from '~/types/types'
 import { mockIssueDetailState } from '../__mocks__/detail.mock'
@@ -445,12 +447,12 @@ describe('[Store] Issue/Detail', () => {
     describe(`Action "${IssueDetailActions.FETCH_SILENCE_RULES}"`, () => {
       let result = [] as Array<SilenceRule>
 
-      const silenceRules = {
+      const silenceRules: SilenceRuleConnection = {
         totalCount: 3,
         edges: [
           {
             node: {
-              silenceLevel: 'RL',
+              silenceLevel: SilenceRuleSilenceLevel.Rl,
               id: 'U2lsZW5jZVJ1bGU6YmFkbXZr',
               filePath: null,
               createdAt: '2023-06-12T11:15:21.167286+00:00',
@@ -476,7 +478,7 @@ describe('[Store] Issue/Detail', () => {
           },
           {
             node: {
-              silenceLevel: 'FL',
+              silenceLevel: SilenceRuleSilenceLevel.Fl,
               id: 'U2lsZW5jZVJ1bGU6enh5cXdy',
               filePath: 'src/commands/init/index.js',
               createdAt: '2023-01-11T07:47:54.687550+00:00',
@@ -500,7 +502,7 @@ describe('[Store] Issue/Detail', () => {
           },
           {
             node: {
-              silenceLevel: 'RL',
+              silenceLevel: SilenceRuleSilenceLevel.Rl,
               id: 'U2lsZW5jZVJ1bGU6emtxb3dk',
               filePath: null,
               createdAt: '2023-01-11T07:46:56.765677+00:00',
@@ -524,7 +526,7 @@ describe('[Store] Issue/Detail', () => {
             }
           }
         ]
-      }
+      } as SilenceRuleConnection
 
       beforeEach(async () => {
         localThis = {

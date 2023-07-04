@@ -352,7 +352,7 @@ const runStore = namespace('run/detail')
         name: repo,
         runId
       })
-      const checks = resolveNodes(store.state.run.detail.run.checks) as Check[]
+      const checks = resolveNodes<Check>(store.state.run.detail.run.checks)
       const runAnalyzers = checks
         .map((check) => (check.analyzer ? check.analyzer.shortcode : ''))
         .filter(Boolean)

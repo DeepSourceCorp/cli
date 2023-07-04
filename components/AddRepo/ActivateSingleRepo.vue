@@ -336,7 +336,7 @@ export default class ActivateSingleRepo extends mixins(
 
       if (response.data.owner?.repositories) {
         this.totalCount = response.data.owner.repositories.totalCount ?? 0
-        return resolveNodes(response.data.owner.repositories) as Repository[]
+        return resolveNodes(response.data.owner.repositories)
       }
     } catch (e) {
       this.$logErrorAndToast(

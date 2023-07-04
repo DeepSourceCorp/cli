@@ -289,7 +289,7 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   }
 
   get prListNodes(): Pr[] {
-    return resolveNodes(this.prList) as Pr[]
+    return resolveNodes(this.prList)
   }
 
   get openPrCount() {

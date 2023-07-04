@@ -213,7 +213,7 @@ export default class SettingsIssuePriority extends mixins(
       refetch: refetch
     })
     this.totalCount = this.issuesWithPriority.totalCount || 0
-    this.issueList = resolveNodes(this.issuesWithPriority) as Issue[]
+    this.issueList = resolveNodes(this.issuesWithPriority)
     this.isLoading = false
   }
 

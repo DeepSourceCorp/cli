@@ -109,7 +109,7 @@ async function syncRepoList(variables: any): Promise<void> {
       context
     })
 
-    repositories.push(...(resolveNodes(response.data.owner.repositories) as Repository[]))
+    repositories.push(...resolveNodes<Repository>(response.data.owner.repositories))
 
     // update loop index for the `after` param
     loopIndex = loopIndex + 1

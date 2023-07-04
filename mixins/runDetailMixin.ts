@@ -95,7 +95,7 @@ export default class RunDetailMixin extends Vue {
   createPullRequest: (args: { input: CreatePullRequestInput }) => Promise<void>
 
   get checks(): Check[] {
-    return resolveNodes(this.run.checks) as Check[]
+    return resolveNodes(this.run.checks)
   }
 
   getCurrentCheck(analyzerShortcode: string): Check | undefined {

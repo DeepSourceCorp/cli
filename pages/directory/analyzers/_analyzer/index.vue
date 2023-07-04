@@ -198,7 +198,7 @@ export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
   }
 
   get starIssues(): Issue[] {
-    return resolveNodes(this.analyzer.starIssues) as Issue[]
+    return resolveNodes(this.analyzer.starIssues)
   }
 
   get issueTypeTitles(): Record<string, string> {
