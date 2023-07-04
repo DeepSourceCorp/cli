@@ -47,9 +47,9 @@
           </p>
 
           <div
-            class="items-left flex flex-col space-y-4 rounded-md border border-slate-400 py-5 px-6 bg-ink-300 bg-opacity-60 text-vanilla-100"
+            class="items-left flex flex-col space-y-4 rounded-md border border-slate-400 bg-ink-300 bg-opacity-60 py-5 px-6 text-vanilla-100"
           >
-            <span class="text-xs font-medium uppercase text-slate-200 tracking-wide">
+            <span class="text-xs font-medium uppercase tracking-wide text-slate-200">
               The vs code extension would be able to:
             </span>
             <p class="flex items-center space-x-4">
@@ -67,7 +67,6 @@
           </div>
 
           <div
-            v-if="status !== ideAuthMap.EMPTY"
             class="mt-3 flex flex-col text-sm font-semibold"
             :class="
               [ideAuthMap.DENIED, ideAuthMap.PASSED].includes(status) ? 'visible' : 'invisible'
@@ -94,7 +93,7 @@
             class="flex flex-row space-x-2"
           >
             <button
-              class="flex flex-row items-center place-content-center space-x-1 auxillary-button bg-ink-200 hover:bg-ink-100 text-vanilla-400 hover:text-vanilla-100 w-1/2 h-12"
+              class="auxillary-button flex h-12 w-1/2 flex-row place-content-center items-center space-x-1 bg-ink-200 text-vanilla-400 hover:bg-ink-100 hover:text-vanilla-100"
               @click="denyIDE"
             >
               <z-icon icon="x" class="close-icon" height="30" />
