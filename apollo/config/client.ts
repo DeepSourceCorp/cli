@@ -66,14 +66,15 @@ export default ({
       additionalHeaders = { 'x-forwarded-host': window.location.hostname }
     }
 
-    console.log('HEADERS: ', { headers, additionalHeaders })
 
-    operation.setContext(({ headers = {} }) => ({
+    operation.setContext(({ headers = {} }) => {
+      console.log('HEADERS: ', { headers, additionalHeaders })
+      return {
       headers: {
         ...headers,
         ...additionalHeaders
       }
-    }))
+    }})
 
     return forward(operation)
   })
