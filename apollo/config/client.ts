@@ -65,7 +65,9 @@ export default ({
     } else if (process.client) {
       additionalHeaders = { 'x-forwarded-host': window.location.hostname }
     }
-
+    
+    console.log("HEADERS: ", {headers, additionalHeaders})
+    
     operation.setContext(({ headers = {} }) => ({
       headers: {
         ...headers,
