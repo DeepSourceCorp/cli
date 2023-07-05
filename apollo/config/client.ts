@@ -69,12 +69,12 @@ export default ({
 
       additionalHeaders['x-forwarded-for'] = clientIp
       additionalHeaders['x-forwarded-host'] = req.headers.host
+
+      if ('cf-connecting-ip' in req.headers) {
+        additionalHeaders['cf-connecting-ip'] = req.headers['cf-connecting-ip']
+      }
     } else if (process.client) {
       additionalHeaders['x-forwarded-host'] = window.location.hostname
-    }
-
-    if ('cf-connecting-ip' in req.headers) {
-      additionalHeaders['cf-connecting-ip'] = req.headers['cf-connecting-ip']
     }
 
     operation.setContext(({ headers = {} }) => ({
