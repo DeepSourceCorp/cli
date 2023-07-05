@@ -326,7 +326,7 @@ export default {
     }
   },
 
-  modern: IS_DEVELOPMENT || IS_STAGING ? false : 'client',
+  modern: IS_DEVELOPMENT ? false : 'client',
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   // TODO: Remove this configuration
