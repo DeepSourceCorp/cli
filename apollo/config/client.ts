@@ -1,9 +1,9 @@
-import { Context } from '@nuxt/types'
 import { InMemoryCache, InMemoryCacheConfig, NormalizedCacheObject } from 'apollo-cache-inmemory'
+import { createHttpLink } from 'apollo-link-http'
+import { onError } from 'apollo-link-error'
 import { ApolloClientOptions } from 'apollo-client'
 import { ApolloLink, from } from 'apollo-link'
-import { onError } from 'apollo-link-error'
-import { createHttpLink } from 'apollo-link-http'
+import { Context } from '@nuxt/types'
 
 type AdditionalHeadersT = {
   'cf-connecting-ip'?: string | string[]
