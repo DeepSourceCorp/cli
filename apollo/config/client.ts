@@ -1,9 +1,15 @@
+import { Context } from '@nuxt/types'
 import { InMemoryCache, InMemoryCacheConfig, NormalizedCacheObject } from 'apollo-cache-inmemory'
-import { createHttpLink } from 'apollo-link-http'
-import { onError } from 'apollo-link-error'
 import { ApolloClientOptions } from 'apollo-client'
 import { ApolloLink, from } from 'apollo-link'
-import { Context } from '@nuxt/types'
+import { onError } from 'apollo-link-error'
+import { createHttpLink } from 'apollo-link-http'
+
+type AdditionalHeadersT = {
+  'cf-connecting-ip'?: string | string[]
+  'x-forwarded-for'?: string
+  'x-forwarded-host'?: string
+}
 
 /**
  * Returns Apollo server's url depending upon the environment that Bifrost is running in¸
@@ -55,19 +61,19 @@ export default ({
   //? When a request is handled via SSR, sentry and nginx receive the internal Bifrost pod's IP as client IP.
   //? The following middleware handles forwarding the IP of the actual client.
   const forwardHeadersMiddleware = new ApolloLink((operation, forward) => {
-    let additionalHeaders = {}
+    const additionalHeaders: AdditionalHeadersT = {}
 
     if (process.server) {
       const clientIp =
         (req.headers['x-forwarded-for'] as string)?.split(',').pop() || req.socket.remoteAddress
 
-      additionalHeaders = { 'x-forwarded-for': clientIp, 'x-forwarded-host': req.headers.host }
+      additionalHeaders['x-forwarded-for'] = clientIp
+      additionalHeaders['x-forwarded-host'] = req.headers.host
     } else if (process.client) {
-      additionalHeaders = { 'x-forwarded-host': window.location.hostname }
+      additionalHeaders['x-forwarded-host'] = window.location.hostname
     }
 
     if ('cf-connecting-ip' in req.headers) {
-      // @ts-ignore
       additionalHeaders['cf-connecting-ip'] = req.headers['cf-connecting-ip']
     }
 
