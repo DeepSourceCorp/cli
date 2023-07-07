@@ -3,10 +3,11 @@
     <div class="flex w-full justify-between md:h-26 lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22">
       <div class="flex flex-col gap-y-4 p-3">
         <div class="flex items-start gap-x-2">
-          <analyzer-logo v-bind="currentCheck.analyzer" size="large" />
+          <analyzer-logo v-if="isCurrentCheckLoaded" v-bind="currentCheck.analyzer" size="large" />
+          <div v-else class="mb-1 h-7 w-7 animate-pulse bg-ink-300 py-px"></div>
 
-          <div class="text-lg font-bold text-vanilla-100">
-            {{ currentCheck.analyzer.name }}
+          <div v-if="isCurrentCheckLoaded" class="text-lg font-bold text-vanilla-100">
+            {{ currentCheck.analyzer && currentCheck.analyzer.name }}
 
             <span class="font-medium text-vanilla-400"
               ><a v-if="vcsCommitUrl" :href="vcsCommitUrl" target="_blank" rel="noopener noreferrer"
@@ -14,8 +15,13 @@
               >
             </span>
           </div>
+          <div v-else class="h-7 w-36 animate-pulse rounded-sm bg-ink-300 py-px"></div>
 
-          <z-tag class="hidden border border-slate-400 py-0.5 px-2 md:inline-flex" spacing="">
+          <z-tag
+            v-if="isCurrentCheckLoaded"
+            class="hidden border border-slate-400 py-0.5 px-2 md:inline-flex"
+            spacing=""
+          >
             <div class="flex items-center gap-x-1">
               <z-icon
                 :icon="getCheckStatusIcon(currentCheck.status)"
@@ -305,12 +311,17 @@ export default class RunHeader extends RepoDetailMixin {
   get transformersAllowed(): boolean {
     return this.$route.params.provider !== 'gsr'
   }
+
   /**
    * Get the current active check
-   * * @returns {Check}
+   * @returns {Check}
    */
-  get currentCheck(): Check | undefined {
-    return this.checks.find((check) => check.analyzer?.shortcode === this.currentAnalyzer)
+  get currentCheck(): Partial<Check> {
+    return this.checks.find((check) => check.analyzer?.shortcode === this.currentAnalyzer) ?? {}
+  }
+
+  get isCurrentCheckLoaded() {
+    return Boolean(Object.keys(this.currentCheck).length)
   }
 
   /**
@@ -417,7 +428,7 @@ export default class RunHeader extends RepoDetailMixin {
    * @param {Check|undefined} check
    * @return {string}
    */
-  getCheckStatsMeta(check: Check | undefined): string {
+  getCheckStatsMeta(check: Partial<Check>): string {
     let label = []
 
     if (check) {
