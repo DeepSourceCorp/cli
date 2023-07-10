@@ -100,3 +100,6 @@ yalc.lock
 
 jestcache
 static/worker/data.worker.js
+
+# Sentry Auth Token
+.env.sentry-build-plugin

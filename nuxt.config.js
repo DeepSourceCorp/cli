@@ -209,7 +209,7 @@ export default {
       ? {
           authToken: process.env.SENTRY_AUTH_TOKEN,
           org: 'deepsource',
-          project: 'bifrost',
+          project: 'bifrost-prod',
           release: process.env.COMMIT_SHA,
           include: '.nuxt/dist/',
           setCommits: {
