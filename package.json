@@ -1,6 +1,6 @@
 {
   "name": "bifrost",
-  "version": "3.53.0",
+  "version": "3.53.1",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -56,7 +56,7 @@
     "@nuxtjs/google-fonts": "^1.0.3",
     "@nuxtjs/gtm": "^2.4.0",
     "@nuxtjs/tailwindcss": "^4.2.1",
-    "@sentry/webpack-plugin": "^2.4.0",
+    "@sentry/webpack-plugin": "^1.20.1",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/vue": "^5.8.2",
     "@types/cookie-parser": "^1.4.2",
