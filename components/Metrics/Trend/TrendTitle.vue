@@ -120,7 +120,7 @@ export default class TrendTitle extends Vue {
     supportsAggregateThreshold?: Metric['supportsAggregateThreshold']
   }
 
-  public currentFilterValue: number = 30
+  public currentFilterValue = 30
   readonly STAT_TYPE = StatType
   readonly AGGREGATE_METRIC_KEY = MetricType.aggregate
   readonly METRICS_DOC =

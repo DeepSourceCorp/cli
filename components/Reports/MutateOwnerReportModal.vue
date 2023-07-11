@@ -321,7 +321,7 @@ export default class MutateOwnerReportModal extends Vue {
   isRestricted = false
   password = ''
   reportKeys: Array<ReportPageT> = []
-  shareHistoricalData: boolean = false
+  shareHistoricalData = false
   reportLabel = ''
   reportSource: ReportSource = ReportSource.SourceAll
 

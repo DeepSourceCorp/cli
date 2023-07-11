@@ -75,8 +75,8 @@ export default class GraphControl extends Vue {
   @Prop({ default: DurationTypeT.days })
   displayDurationType: DurationTypeT
 
-  public currentFilterValue: number = 30
-  public currentChartType: string = 'line'
+  public currentFilterValue = 30
+  public currentChartType = 'line'
 
   created() {
     this.currentFilterValue = this.filterValue

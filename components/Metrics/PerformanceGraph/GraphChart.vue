@@ -173,9 +173,9 @@ export default class GraphChart extends Vue {
 
   public newThresholdValue: number | null = null
   public currentThreshold: number | null = null
-  public thresholdInputError: boolean = false
-  public thresholdInputErrorMessage: string = ''
-  public showThresholdUpdate: boolean = false
+  public thresholdInputError = false
+  public thresholdInputErrorMessage = ''
+  public showThresholdUpdate = false
 
   /**
    * Mounted hook to set the threshold values

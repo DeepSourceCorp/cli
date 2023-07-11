@@ -67,7 +67,7 @@ export default class IgnoreRules extends mixins(RepoDetailMixin) {
     { label: 'First Seen', icon: 'first-seen', name: 'first-seen' },
     { label: 'Last Seen', icon: 'last-seen', name: 'last-seen' }
   ]
-  public deleteRuleId: string = ''
+  public deleteRuleId = ''
   public isDeleteModalOpen = false
 
   /**

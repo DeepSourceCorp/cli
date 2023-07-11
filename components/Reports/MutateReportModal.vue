@@ -244,7 +244,7 @@ export default class MutateReportModal extends Vue {
   isPasswordHidden = false
   password = ''
   reportKeys: Array<ReportPageT> = []
-  shareHistoricalData: boolean = false
+  shareHistoricalData = false
   reportLabel = ''
   showPasswordInput = false
 
