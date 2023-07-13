@@ -31,4 +31,6 @@ jobs:
           echo 'DEEPSOURCE_CLI_SENTRY_DSN=${{secrets.SENTRY_DSN}}' > .release-env
 
       - name: Publish Release
-        run: make release
+        run: |-
+          cat .release-env
+          make release
