@@ -67,6 +67,7 @@ builds:
 
   # windows-amd64
   - id: "windows-deepsource"
+    main: ./cmd/deepsource
     env:
       - CGO_ENABLED=1
       - CC=x86_64-w64-mingw32-gcc
@@ -84,8 +85,7 @@ builds:
 archives:
   -
     name_template: >-
-      {{ .ProjectName }}_
-      {{- title .Os }}_
+      deepsource_{{ .Version }}_{{ .Os }}_
       {{- if eq .Arch "amd64" }}x86_64
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
