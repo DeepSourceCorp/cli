@@ -11,9 +11,6 @@ builds:
     flags:
       - -tags=static_all
     goos:
-      - freebsd
-      - openbsd
-      - netbsd
       - linux
       - darwin
     goarch:
@@ -24,7 +21,7 @@ builds:
       - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
   - id: "windows-deepsource"
     env:
-      - CGO_ENABLED=0
+      - CGO_ENABLED=1
     flags:
       - -tags=static_all
     goos:
