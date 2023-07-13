@@ -36,7 +36,7 @@ sysroot-unpack:
 
 .PHONY: release-dry-run
 release-dry-run:
-	cd cmd/deepsource
+	pwd
 	@docker run \
 		--rm \
 		-e CGO_ENABLED=1 \
@@ -46,7 +46,7 @@ release-dry-run:
 		-v `pwd`/sysroot:/sysroot \
 		-w /go/src/$(PACKAGE_NAME) \
 		ghcr.io/goreleaser/goreleaser-cross:${GOLANG_CROSS_VERSION} \
-                release --clean --skip-publish --skip-validate --config ../../goreleaser.yaml
+                release --clean --skip-publish --skip-validate
 
 .PHONY: release
 release:
