@@ -6,5 +6,5 @@ mkdir completions
 
 # Generate completion using the in-built cobra completion command
 for shell in bash zsh fish; do
-  go run main.go completion "$shell" > "completions/deepsource.$shell"
+  go run cmd/deepsource/main.go completion "$shell" > "completions/deepsource.$shell"
 done

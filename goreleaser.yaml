@@ -1,6 +1,6 @@
 project_name: deepsource
 
-after:
+before:
   hooks:
     - scripts/gen-completions.sh
 
