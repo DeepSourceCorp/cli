@@ -26,9 +26,9 @@ jobs:
 
       - name: Setup environment variables
         run: |-
-          echo 'GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}}' > .release-env
-          echo 'HOMEBREW_TOKEN=${{secrets.DS_BOT_PAT}}' > .release-env
-          echo 'DEEPSOURCE_CLI_SENTRY_DSN=${{secrets.SENTRY_DSN}}' > .release-env
+          echo 'GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}}' >> .release-env
+          echo 'HOMEBREW_TOKEN=${{secrets.DS_BOT_PAT}}' >> .release-env
+          echo 'DEEPSOURCE_CLI_SENTRY_DSN=${{secrets.SENTRY_DSN}}' >> .release-env
 
       - name: Publish Release
         run: |-
