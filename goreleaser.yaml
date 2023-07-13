@@ -14,9 +14,6 @@ builds:
       - CXX=o64-clang++
     flags:
       - -tags=static_all
-      - "-mod={{ .Env.MOD }}"
-      - "-tags={{ .Env.BUILD_TAGS }}"
-      - -trimpath
     goos:
       - darwin
     goarch:
