@@ -36,9 +36,10 @@ jobs:
       #     HOMEBREW_TOKEN: ${{ secrets.DS_BOT_PAT }}
       #     DEEPSOURCE_CLI_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
 
-      - name: release publish
-        run: make release-dry-run
-        env:
+      - name: setup env
+        run: |-
           echo 'GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}}' > .release-env
           echo 'HOMEBREW_TOKEN=${{secrets.DS_BOT_PAT}}' > .release-env
           echo 'DEEPSOURCE_CLI_SENTRY_DSN=${{secrets.SENTRY_DSN}}' > .release-env
+      - name: release publish
+        run: make release-dry-run
