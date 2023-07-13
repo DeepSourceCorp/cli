@@ -1,4 +1,4 @@
-PACKAGE_NAME          := github.com/DeepSourceCorp/cli
+PACKAGE_NAME          := github.com/deepsourcelabs/cli
 GOLANG_CROSS_VERSION  ?= v1.19.5
 
 SYSROOT_DIR     ?= sysroots
@@ -36,7 +36,10 @@ sysroot-unpack:
 
 .PHONY: release-dry-run
 release-dry-run:
-	pwd
+	@if [ ! -f ".release-env" ]; then \
+		echo "\033[91m.release-env is required for release\033[0m";\
+		exit 1;\
+	fi
 	@docker run \
 		--rm \
 		-e CGO_ENABLED=1 \

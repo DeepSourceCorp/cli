@@ -1,4 +1,4 @@
-module github.com/DeepSourceCorp/cli
+module github.com/deepsourcelabs/cli
 
 go 1.18
 

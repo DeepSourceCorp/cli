@@ -2,12 +2,9 @@ project_name: deepsource
 env:
   - CGO_ENABLED=1
 
-before:
-  hooks:
-    - ../../scripts/gen-completions.sh
-
 builds:
   - id: deepsource-darwin-amd64
+    main: ./cmd/deepsource
     env:
       - CGO_ENABLED=1
       - CC=o64-clang
