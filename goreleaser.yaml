@@ -1,8 +1,7 @@
 project_name: deepsource
-env:
-  - CGO_ENABLED=1
 
 builds:
+  # darwin-amd64
   - id: deepsource-darwin-amd64
     main: ./cmd/deepsource
     env:
@@ -18,18 +17,69 @@ builds:
     ldflags:
       - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
 
-  # - id: "windows-deepsource"
-  #   env:
-  #     - CGO_ENABLED=1
-  #   flags:
-  #     - -tags=static_all
-  #   goos:
-  #     - windows
-  #   goarch:
-  #     - amd64
-  #   ldflags:
-  #     - buildmode=exe
-  #     - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
+  # darwin-arm64
+  - id: deepsource-darwin-arm64
+    main: ./cmd/deepsource
+    env:
+      - CGO_ENABLED=1
+      - CC=o64-clang
+      - CXX=o64-clang++
+    flags:
+      - -tags=static_all
+    goos:
+      - darwin
+    goarch:
+      - arm64
+    ldflags:
+      - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
+
+  # linux-amd64
+  - id: deepsource-linux-amd64
+    main: ./cmd/deepsource
+    env:
+      - CGO_ENABLED=1
+      - CC=x86_64-linux-gnu-gcc
+      - CXX=x86_64-linux-gnu-g++
+    flags:
+      - -tags=static_all
+    goos:
+      - linux
+    goarch:
+      - amd64
+    ldflags:
+      - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
+
+  # linux-arm64
+  - id: deepsource-linux-arm64
+    main: ./cmd/deepsource
+    env:
+      - CGO_ENABLED=1
+      - CC=aarch64-linux-gnu-gcc
+      - CXX=aarch64-linux-gnu-g++
+    flags:
+      - -tags=static_all
+    goos:
+      - linux
+    goarch:
+      - arm64
+    ldflags:
+      - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
+
+  # windows-amd64
+  - id: "windows-deepsource"
+    env:
+      - CGO_ENABLED=1
+      - CC=x86_64-w64-mingw32-gcc
+      - CXX=x86_64-w64-mingw32-g++
+    flags:
+      - -tags=static_all
+    goos:
+      - windows
+    goarch:
+      - amd64
+    ldflags:
+      - buildmode=exe
+      - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
 
 archives:
   -
