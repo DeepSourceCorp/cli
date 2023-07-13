@@ -1,5 +1,9 @@
 project_name: deepsource
 
+after:
+  hooks:
+    - scripts/gen-completions.sh
+
 builds:
   # darwin-amd64
   - id: deepsource-darwin-amd64

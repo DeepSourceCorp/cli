@@ -1,9 +1,14 @@
 name: goreleaser
 
+# on:
+#   push:
+#     tags:
+#       - '*'
 on:
+  pull_request:
   push:
-    tags:
-      - '*'
+    branches:
+      - master
 
 permissions:
   contents: write
@@ -30,4 +35,4 @@ jobs:
           echo 'DEEPSOURCE_CLI_SENTRY_DSN=${{secrets.SENTRY_DSN}}' > .release-env
 
       - name: Publish Release
-        run: make release
+        run: make release-dry-run
