@@ -1,5 +1,6 @@
 # Vendor files
 vendor
+.release-env
 
 # Executable
 cmd/deepsource/deepsource

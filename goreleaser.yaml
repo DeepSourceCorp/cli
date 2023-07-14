@@ -2,29 +2,80 @@ project_name: deepsource
 
 before:
   hooks:
-    - ../../scripts/gen-completions.sh
+    - scripts/gen-completions.sh
 
 builds:
-  -
+  # darwin-amd64
+  - id: deepsource-darwin-amd64
+    main: ./cmd/deepsource
     env:
-      - CGO_ENABLED=0
+      - CGO_ENABLED=1
+      - CC=o64-clang
+      - CXX=o64-clang++
     flags:
       - -tags=static_all
     goos:
-      - freebsd
-      - openbsd
-      - netbsd
-      - linux
       - darwin
     goarch:
-      - 386
       - amd64
+    ldflags:
+      - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
+
+  # darwin-arm64
+  - id: deepsource-darwin-arm64
+    main: ./cmd/deepsource
+    env:
+      - CGO_ENABLED=1
+      - CC=o64-clang
+      - CXX=o64-clang++
+    flags:
+      - -tags=static_all
+    goos:
+      - darwin
+    goarch:
       - arm64
     ldflags:
       - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
-  - id: "windows-deepsource"
+
+  # linux-amd64
+  - id: deepsource-linux-amd64
+    main: ./cmd/deepsource
     env:
-      - CGO_ENABLED=0
+      - CGO_ENABLED=1
+      - CC=x86_64-linux-gnu-gcc
+      - CXX=x86_64-linux-gnu-g++
+    flags:
+      - -tags=static_all
+    goos:
+      - linux
+    goarch:
+      - amd64
+    ldflags:
+      - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
+
+  # linux-arm64
+  - id: deepsource-linux-arm64
+    main: ./cmd/deepsource
+    env:
+      - CGO_ENABLED=1
+      - CC=aarch64-linux-gnu-gcc
+      - CXX=aarch64-linux-gnu-g++
+    flags:
+      - -tags=static_all
+    goos:
+      - linux
+    goarch:
+      - arm64
+    ldflags:
+      - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
+
+  # windows-amd64
+  - id: "windows-deepsource"
+    main: ./cmd/deepsource
+    env:
+      - CGO_ENABLED=1
+      - CC=x86_64-w64-mingw32-gcc
+      - CXX=x86_64-w64-mingw32-g++
     flags:
       - -tags=static_all
     goos:
@@ -38,8 +89,7 @@ builds:
 archives:
   -
     name_template: >-
-      {{ .ProjectName }}_
-      {{- title .Os }}_
+      deepsource_{{ .Version }}_{{ .Os }}_
       {{- if eq .Arch "amd64" }}x86_64
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
@@ -55,7 +105,7 @@ changelog:
 
 brews:
   - tap:
-      owner: deepsourcelabs
+      owner: DeepSourceCorp
       name: homebrew-cli
       branch: cli-release
       token: "{{ .Env.HOMEBREW_TOKEN }}"
