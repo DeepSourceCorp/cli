@@ -66,7 +66,7 @@
         Show next steps
       </z-button>
       <z-button button-type="secondary" class="w-full" @click="activateRepo">
-        I’ve added deepsource.toml, activate repo
+        I’ve added .deepsource.toml, activate repo
       </z-button>
     </template>
     <template v-else-if="canViewerUpgrade">
