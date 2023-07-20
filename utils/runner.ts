@@ -15,10 +15,11 @@ export const fetchSnippets = async (
   const requestHeaders = new Headers()
   requestHeaders.append('Content-Type', 'application/json')
 
-  const requestOptions = {
+  const requestOptions: Parameters<typeof fetch>[1] = {
     method: 'POST',
     headers: requestHeaders,
-    body: JSON.stringify(requestBody)
+    body: JSON.stringify(requestBody),
+    credentials: 'include'
   }
 
   const response = await fetch(endpointUrl, requestOptions)
