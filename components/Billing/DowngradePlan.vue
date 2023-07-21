@@ -78,7 +78,7 @@ export default class DowngradePlan extends mixins(PlanDetailMixin) {
 
   showConfirmDialog = false
   updating = false
-  message = `Your team will lose access to Autofix, Transformers, and other automation features.`
+  message = 'Your team will lose access to Autofix, Transformers, and other automation features.'
 
   async fetch() {
     await this.fetchContext()

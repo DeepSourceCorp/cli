@@ -77,7 +77,8 @@ export default class UpgradePlan extends mixins(PlanDetailMixin) {
 
   showConfirmDialog = false
   updating = false
-  message = `Upgrading will give your team access to features like Autofix, Transformers and more. You can dowgrade anytime you want just as easily.`
+  message =
+    'Upgrading will give your team access to features like Autofix, Transformers and more. You can dowgrade anytime you want just as easily.'
 
   async fetch() {
     await this.fetchContext()

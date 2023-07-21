@@ -64,13 +64,13 @@ export default class UpdateRoleModal extends Vue {
 
   get roleAccessMessage(): string {
     if (this.newRole === TeamMemberRoleChoices.Admin) {
-      return `This will give them full access to all repositories and the team, including billing, adding, or removing members.`
+      return 'This will give them full access to all repositories and the team, including billing, adding, or removing members.'
     }
     if (this.newRole === TeamMemberRoleChoices.Contributor) {
-      return `Contributors don't have any team level access or any access to change repo level settings.`
+      return "Contributors don't have any team level access or any access to change repo level settings."
     }
     if (this.newRole === TeamMemberRoleChoices.Member) {
-      return `Members have the ability to activate analysis on new repositories.`
+      return 'Members have the ability to activate analysis on new repositories.'
     }
     return 'Are you sure you want to update the role?'
   }

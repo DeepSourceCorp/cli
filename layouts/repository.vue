@@ -310,8 +310,8 @@ export default class RepositoryLayout extends mixins(
       [
         {
           id: 'open-repo-issues',
-          label: `Issues`,
-          icon: `flag`,
+          label: 'Issues',
+          icon: 'flag',
           scope: 'repo',
           condition: (route) => {
             return route.name ? !route.name?.startsWith('provider-owner-repo-issues') : true
@@ -323,8 +323,8 @@ export default class RepositoryLayout extends mixins(
         },
         {
           id: 'open-repo-autofix',
-          label: `Autofix`,
-          icon: `autofix`,
+          label: 'Autofix',
+          icon: 'autofix',
           keywords: ['autofix', 'fix'],
           scope: 'repo',
           condition: (route) => {
@@ -336,8 +336,8 @@ export default class RepositoryLayout extends mixins(
         },
         {
           id: 'open-repo-metrics',
-          label: `Metrics`,
-          icon: `bar-chart`,
+          label: 'Metrics',
+          icon: 'bar-chart',
           keywords: ['metrics', 'stats', 'numbers', 'charts'],
           scope: 'repo',
           condition: (route) => {
@@ -349,8 +349,8 @@ export default class RepositoryLayout extends mixins(
         },
         {
           id: 'open-repo-run-history',
-          label: `Analysis history`,
-          icon: `history`,
+          label: 'Analysis history',
+          icon: 'history',
           keywords: ['metrics', 'stats', 'numbers', 'charts'],
           scope: 'repo',
           condition: (route) => {
@@ -362,8 +362,8 @@ export default class RepositoryLayout extends mixins(
         },
         {
           id: 'open-repo-transforms-history',
-          label: `Transforms history`,
-          icon: `history`,
+          label: 'Transforms history',
+          icon: 'history',
           keywords: ['metrics', 'stats', 'numbers', 'charts'],
           scope: 'repo',
           condition: (route) => {
@@ -377,8 +377,8 @@ export default class RepositoryLayout extends mixins(
         },
         {
           id: 'open-repo-settings',
-          label: `Settings`,
-          icon: `settings`,
+          label: 'Settings',
+          icon: 'settings',
           shortkey: 'Alt+KeyS',
           keywords: ['settings', 'badges', 'audit', 'members', 'configuration'],
           scope: 'repo',

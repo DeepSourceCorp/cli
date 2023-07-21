@@ -47,10 +47,10 @@ export default class PasswordStrength extends Vue {
     return 'h-8 w-8'
   }
 
-  public hasLowerCaseAlphabets = new RegExp(`(?=.*[a-z])`)
-  public hasUpperCaseAlphabets = new RegExp(`(?=.*[A-Z])`)
-  public hasNumbers = new RegExp(`(?=.*?[0-9]).{8,}`)
-  public hasSpecialChars = new RegExp(`(?=.*?[!@#\$&*~])`)
+  public hasLowerCaseAlphabets = new RegExp('(?=.*[a-z])')
+  public hasUpperCaseAlphabets = new RegExp('(?=.*[A-Z])')
+  public hasNumbers = new RegExp('(?=.*?[0-9]).{8,}')
+  public hasSpecialChars = new RegExp('(?=.*?[!@#\$&*~])')
 
   get passwordScore(): number {
     if (!this.password) {

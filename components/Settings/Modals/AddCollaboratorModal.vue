@@ -137,7 +137,7 @@ export default class AddCollaboratorModal extends mixins(RepoDetailMixin) {
             `${this.selectedMember.user.fullName} successfully added as a collaborator.`
           )
         } else {
-          this.$toast.success(`Collaborator added successfully`)
+          this.$toast.success('Collaborator added successfully')
         }
         this.$emit('refetch')
         this.$emit('close')

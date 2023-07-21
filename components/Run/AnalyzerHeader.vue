@@ -105,7 +105,7 @@ export default class AnalyzerHeader extends Vue {
 
   get alertingMetricsMessage(): string {
     if (this.alertingMetricsCount === 1) {
-      return `1 metric is critically alerting`
+      return '1 metric is critically alerting'
     } else if (this.alertingMetricsCount > 1) {
       return `${this.alertingMetricsCount} metrics are critically alerting`
     }

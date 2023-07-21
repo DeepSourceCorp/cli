@@ -55,7 +55,7 @@ import { ZTab, ZTag, ZIcon } from '@deepsource/zeal'
   middleware: [
     function ({ redirect, route }: Context): void {
       if (route.name === 'settings') {
-        redirect(`/settings/account`)
+        redirect('/settings/account')
       }
     }
   ],
@@ -99,7 +99,7 @@ export default class UserSettings extends mixins(ActiveUserMixin, AccessTokenMix
     return {
       title: this.viewer.fullName
         ? `Settings • ${this.viewer.fullName} • DeepSource`
-        : `Settings • Me • DeepSource`,
+        : 'Settings • Me • DeepSource',
       description:
         'DeepSource is an automated code review tool that helps developers automatically find and fix issues in their code.'
     }

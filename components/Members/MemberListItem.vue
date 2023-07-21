@@ -143,7 +143,8 @@ const REPO_PERMS = {
   READ: {
     title: 'Read-only',
     value: 'READ',
-    description: `Members will be able to only view the issues and metrics on private repositories they have access to, but won't be able to take any actions on issues or create Autofixes.`
+    description:
+      "Members will be able to only view the issues and metrics on private repositories they have access to, but won't be able to take any actions on issues or create Autofixes."
   }
 }
 

@@ -46,7 +46,7 @@ export default class BranchList extends Vue {
       // plural
       return `${count} more runs on this branch`
     } else if (count > 30) {
-      return `30+ runs on this branch`
+      return '30+ runs on this branch'
     } else {
       return ''
     }

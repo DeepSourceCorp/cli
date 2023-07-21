@@ -120,7 +120,7 @@ export default class AnalyzersDirectory extends mixins(MetaMixin) {
   setCanonical = true
 
   created() {
-    this.metaTitle = `Directory • DeepSource`
+    this.metaTitle = 'Directory • DeepSource'
     this.metaDescription = 'Discover Analyzers and Transformers for your favorite technologies.'
     this.metaImage = require('~/assets/images/analyzer-dir/directory_meta_banner.png')
     this.metaImageAlt =
