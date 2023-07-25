@@ -101,12 +101,18 @@ export default class ADSAccountPickerPage extends mixins(ActiveUserMixin) {
   loading = false
   loadingOrganization = ''
 
+  timerId: ReturnType<typeof setTimeout>
+
   async fetch(): Promise<void> {
     try {
       await this.fetchActiveUserADSOrganizations()
     } catch (e) {
       this.$logErrorAndToast(e as Error, `${(e as Error).message}.` as `${string}.`, this.viewer)
     }
+  }
+
+  beforeDestroy() {
+    clearTimeout(this.timerId)
   }
 
   async selectOrganization({
@@ -134,7 +140,8 @@ export default class ADSAccountPickerPage extends mixins(ActiveUserMixin) {
     try {
       await this.$applyGraphqlMutation(ADSInstallationLandingGQLMutation, { input: { login } })
       this.$toast.success(`Successfully connected ${login} with DeepSource.`)
-      setTimeout(() => {
+
+      this.timerId = setTimeout(() => {
         this.$router.push(['', 'onboard', 'ads', login, 'repositories'].join('/'))
       }, 300)
     } catch (e) {

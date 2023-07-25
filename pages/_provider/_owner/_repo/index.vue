@@ -188,7 +188,7 @@ export default class Overview extends mixins(PinnedReportsMixin, RepoDetailMixin
     this.$root.$off('update-pinned-reports', this.updatePinnedReportsHandler)
     this.$root.$on('toggle-metadata-view-dialog', this.toggleMetadataViewDialog)
 
-    clearInterval(this.timerId)
+    clearTimeout(this.timerId)
   }
 
   get allowPinningReports(): boolean {

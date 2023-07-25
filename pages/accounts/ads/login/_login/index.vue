@@ -110,6 +110,8 @@ import { Component, Vue } from 'nuxt-property-decorator'
 import ActiveUserADSOrganizationInfo from '~/apollo/queries/user/active/userADSOrganizationInfo.gql'
 import ActiveUserADSOrgSettingsURL from '~/apollo/queries/user/active/userADSOrgSettingsUrl.gql'
 
+import ADSInstallationLandingGQLMutation from '@/apollo/mutations/installation/adsInstallationLanding.gql'
+
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
 @Component({
@@ -178,6 +180,8 @@ export default class ADSIntermediaryPage extends Vue {
     'https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/change-application-access-policies?view=azure-devops#manage-a-policy'
   orgSettingsUrl = ''
 
+  timerId: ReturnType<typeof setTimeout>
+
   async fetch(): Promise<void> {
     try {
       const { login } = this.$route.params
@@ -197,6 +201,10 @@ export default class ADSIntermediaryPage extends Vue {
     } catch (err) {
       this.$logErrorAndToast(err as Error)
     }
+  }
+
+  beforeDestroy() {
+    clearTimeout(this.timerId)
   }
 
   async validateAction(): Promise<void> {
@@ -229,7 +237,13 @@ export default class ADSIntermediaryPage extends Vue {
 
       // Proceed with the onboarding steps
       if (hasEnabledThirdPartyAccess) {
-        this.$router.push(['', 'onboard', 'ads', login, 'repositories'].join('/'))
+        await this.$applyGraphqlMutation(ADSInstallationLandingGQLMutation, { input: { login } })
+        this.$toast.success(`Successfully connected ${login} with DeepSource.`)
+
+        this.timerId = setTimeout(() => {
+          this.$router.push(['', 'onboard', 'ads', login, 'repositories'].join('/'))
+        }, 300)
+
         return
       }
 

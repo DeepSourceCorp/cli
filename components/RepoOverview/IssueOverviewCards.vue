@@ -168,7 +168,7 @@ export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAcce
    */
   beforeDestroy() {
     this.$socket.$off('repo-analysis-updated', this.refetchData)
-    clearInterval(this.timerId)
+    clearTimeout(this.timerId)
   }
 
   /**
