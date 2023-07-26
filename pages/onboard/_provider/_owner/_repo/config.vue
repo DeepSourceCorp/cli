@@ -1,6 +1,6 @@
 <template>
   <section class="relative space-y-4">
-    <div class="space-y-4 overflow-y-scroll pb-26 analyzer-selector-section hide-scroll">
+    <div class="analyzer-selector-section hide-scroll space-y-4 overflow-y-scroll pb-26">
       <analyzer-search
         ref="analyzer-search-component"
         :selected-analyzers="selectedAnalyzerNames"
@@ -13,15 +13,15 @@
         @closeSearch="showAnalyzerSearchList = false"
       />
       <div v-if="$fetchState.pending" class="grid grid-cols-1 gap-4">
-        <div class="h-48 bg-ink-300 animate-pulse"></div>
-        <div class="h-32 bg-ink-300 animate-pulse"></div>
+        <div class="h-48 animate-pulse bg-ink-300"></div>
+        <div class="h-32 animate-pulse bg-ink-300"></div>
       </div>
       <div
         v-else-if="selectedAnalyzers.length === 0"
-        class="flex flex-col items-center px-6 py-16 space-y-4 border-2 border-dashed rounded-lg border-slate-400"
+        class="flex flex-col items-center space-y-4 rounded-lg border-2 border-dashed border-slate-400 px-6 py-16"
       >
         <z-icon icon="analyzers" size="large" color="vanilla-300" />
-        <p class="max-w-sm mx-auto text-sm leading-relaxed text-center text-vanilla-300">
+        <p class="mx-auto max-w-sm text-center text-sm leading-relaxed text-vanilla-300">
           Analyzers scan your code and find code health issues. Start by adding one for a technology
           that you use in this repository.
         </p>
@@ -49,7 +49,7 @@
           @analyzersUpdated="syncAnalyzer"
         />
       </div>
-      <form-group label="All analyzers" class="flex-grow hidden w-full max-w-2xl">
+      <form-group label="All analyzers" class="hidden w-full max-w-2xl flex-grow">
         <div class="grid grid-cols-2 gap-2">
           <template v-for="analyzer in analyzerList">
             <analyzer-title-card
@@ -66,13 +66,13 @@
     </div>
     <div
       v-if="!actionDisabled"
-      class="absolute bottom-0 w-full pt-12 pb-0 bg-gradient-to-t from-ink-400 via-ink-400 to-transparent"
+      class="absolute bottom-0 w-full bg-gradient-to-t from-ink-400 via-ink-400 to-transparent pt-12 pb-0"
     >
       <z-button
         icon="zap"
-        class="w-full"
         :label="LABEL_MAP[nextStep]"
         :disabled="actionDisabled"
+        class="w-full"
         @click="triggerNextStep"
       />
     </div>
@@ -133,8 +133,6 @@ export default class OnboardConfig extends mixins(
   showAnalyzerSearchList = ''
   selectedAnalyzers: Array<AnalyzerInterface> = []
   showGSRActivationModal = false
-  gsrDefaultBranch = ''
-  commitLoading = false
 
   metaTitle = 'Activate analysis • DeepSource'
   metaDescription = 'Generate the config to run analysis on this repository'
@@ -291,17 +289,21 @@ export default class OnboardConfig extends mixins(
    * @return {Promise<void>}
    */
   async triggerAdHocOnboardingRun(): Promise<void> {
-    this.commitLoading = true
     const { provider, owner, repo } = this.$route.params
 
     // trigger the run
-    await this.triggerAdHocRun({ config: this.toml })
+    try {
+      await this.triggerAdHocRun({ config: this.toml })
 
-    this.$router.push({
-      path: `/onboard/${provider}/${owner}/${repo}/running`
-    })
+      this.$router.push({
+        path: `/onboard/${provider}/${owner}/${repo}/running`
+      })
+    } catch (err) {
+      const error = err as Error
+      const errMsg = `${error.message.replace('GraphQL error: ', '')}.` as `${string}.`
 
-    this.commitLoading = false
+      this.$logErrorAndToast(err as Error, errMsg)
+    }
   }
 
   public userConfig: RepoConfigInterface = {
