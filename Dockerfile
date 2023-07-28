@@ -1,4 +1,4 @@
-FROM node:14-alpine AS builder
+FROM node:16-alpine AS builder
 
 # Add any env added here to the final build step too
 ARG STRIPE_PUBLISHABLE_KEY
@@ -33,9 +33,9 @@ RUN make build && \
     yarn
 
 
-FROM node:14-alpine AS node
+FROM node:16-alpine AS node
 
-FROM frolvlad/alpine-glibc:alpine-3.15_glibc-2.34
+FROM frolvlad/alpine-glibc:alpine-3.17_glibc-2.34
 
 ARG NODE_ENV
 ARG BIFROST_ENV
