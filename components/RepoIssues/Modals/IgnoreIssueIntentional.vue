@@ -89,17 +89,23 @@ export default class IgnoreIssueIntentional extends mixins(IssueDetailMixin, Act
         checkIssueId: this.checkIssueId
       })
       if (response.ok) {
+        this.$toast.success(`Ignored the current occurrence of ${this.issueShortcode}.`)
+
         this.$emit('ignore', [this.checkIssueId])
       } else {
         throw new Error('Received a non-ok response for this check')
       }
     } catch (e) {
-      this.$toast.danger('Something went wrong while ignoring this issue')
-      this.logErrorForUser(e as Error, 'Ignore Issue', {
-        method: 'Ignore issue intentional',
-        shortcode: this.shortcode,
-        checkIssueId: this.checkIssueId
-      })
+      this.logErrorForUser(
+        e as Error,
+        'Ignore Issue',
+        {
+          method: 'Ignore issue intentional',
+          shortcode: this.shortcode,
+          checkIssueId: this.checkIssueId
+        },
+        'Something went wrong while ignoring this issue, please contact support.'
+      )
     } finally {
       this.isLoading = false
     }

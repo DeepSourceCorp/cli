@@ -124,13 +124,19 @@ export default class IgnoreIssueTestFiles extends mixins(
 
     try {
       const response = await this.ignoreIssueTestPattern(params)
+      this.$toast.success(`${this.issueShortcode} ignored for all test files.`)
+
       this.$emit('ignore', response.checkIssueIds)
     } catch (e) {
-      this.$toast.danger('Something went wrong while ignoring this issue, please contact support')
-      this.logErrorForUser(e as Error, 'Ignore Issue', {
-        method: 'Ignore Issue Test Files',
-        ...params
-      })
+      this.logErrorForUser(
+        e as Error,
+        'Ignore Issue',
+        {
+          method: 'Ignore Issue Test Files',
+          ...params
+        },
+        'Something went wrong while ignoring this issue, please contact support.'
+      )
     } finally {
       this.isLoading = false
     }

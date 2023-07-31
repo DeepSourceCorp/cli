@@ -85,18 +85,26 @@ export default class IgnoreIssueFalsePositive extends mixins(IssueDetailMixin, A
         comment: this.comment
       })
       if (response.ok) {
+        this.$toast.success(
+          `Reported the current occurrence of ${this.issueShortcode} as a false-positive.`
+        )
+
         this.$emit('ignore', [this.checkIssueId])
       } else {
         throw new Error('Received a non-ok response for this check')
       }
     } catch (e) {
-      this.$toast.danger('Something went wrong while reporting this false positive')
-      this.logErrorForUser(e, 'Ignore Issue', {
-        method: 'Report false positive',
-        shortcode: this.shortcode,
-        checkIssueId: this.checkIssueId,
-        comment: this.comment
-      })
+      this.logErrorForUser(
+        e as Error,
+        'Ignore Issue',
+        {
+          method: 'Report false positive',
+          shortcode: this.shortcode,
+          checkIssueId: this.checkIssueId,
+          comment: this.comment
+        },
+        'Something went wrong while reporting this false positive.'
+      )
     } finally {
       this.isLoading = false
     }

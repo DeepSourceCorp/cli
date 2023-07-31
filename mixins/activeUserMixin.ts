@@ -151,8 +151,13 @@ export default class ActiveUserMixin extends Vue {
    *
    * @return {void}
    */
-  public logErrorForUser(e: Error, context: string, params: Record<string, unknown>): void {
-    this.$logErrorAndToast(e, undefined, this.viewer, { context, params })
+  public logErrorForUser(
+    e: Error,
+    context: string,
+    params: Record<string, unknown>,
+    toastMessage?: `${string}.` | undefined
+  ): void {
+    this.$logErrorAndToast(e, toastMessage, this.viewer, { context, params })
   }
 
   async refetchUser(): Promise<void> {

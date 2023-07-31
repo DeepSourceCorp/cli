@@ -1,8 +1,34 @@
 <template>
   <div class="flex flex-col space-y-4">
     <div class="flex w-full flex-row-reverse gap-2 xl:flex-row">
-      <!-- Sort menu -->
-      <z-menu direction="right" width="x-small" class="text-vanilla-100">
+      <!-- Sort menu mobile -->
+      <z-menu direction="left" width="x-small" class="text-vanilla-100 xl:hidden">
+        <template #trigger="{ toggle }">
+          <z-button
+            type="button"
+            button-type="secondary"
+            icon="amount-down"
+            size="small"
+            @click="toggle"
+          >
+            Sort
+          </z-button>
+        </template>
+        <template #body>
+          <z-menu-item
+            v-for="filter in sortFilters"
+            :key="filter.name"
+            :icon="filter.icon"
+            direction="left"
+            @click="() => updateSort(filter.name)"
+          >
+            {{ filter.label }}
+          </z-menu-item>
+        </template>
+      </z-menu>
+
+      <!-- Sort menu desktop -->
+      <z-menu width="x-small" class="hidden text-vanilla-100 xl:inline-block">
         <template #trigger="{ toggle }">
           <z-button
             type="button"
@@ -80,7 +106,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZInput, ZButton, ZMenu, ZMenuItem, ZPagination, ZAccordion } from '@deepsource/zeal'
+import { ZIcon, ZInput, ZButton, ZMenu, ZMenuItem, ZPagination } from '@deepsource/zeal'
 
 import { CheckIssue } from '~/types/types'
 import { RunDetailMutations } from '~/store/run/detail'
@@ -94,8 +120,7 @@ const VISIBLE_PAGES = 5
     ZButton,
     ZMenu,
     ZMenuItem,
-    ZPagination,
-    ZAccordion
+    ZPagination
   }
 })
 export default class IssueList extends Vue {

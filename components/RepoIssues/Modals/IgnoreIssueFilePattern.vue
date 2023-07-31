@@ -6,7 +6,7 @@
           Ignore issue <span class="font-bold">{{ issueShortcode }}</span> for file pattern
         </span>
       </template>
-      <div class="flex flex-col p-4 space-y-2">
+      <div class="flex flex-col space-y-2 p-4">
         <div class="text-sm text-vanilla-400">Add file path pattern to ignore this issue for</div>
         <z-input
           v-model="pattern"
@@ -17,9 +17,9 @@
         />
       </div>
       <template #footer>
-        <div class="px-3 py-3 space-x-2 text-right border-t text-vanilla-100 border-slate-400">
+        <div class="space-x-2 border-t border-slate-400 px-3 py-3 text-right text-vanilla-100">
           <z-button
-            class="flex items-center space-x-2 modal-primary-action"
+            class="modal-primary-action flex items-center space-x-2"
             spacing="px-2"
             button-type="primary"
             size="small"
@@ -93,13 +93,19 @@ export default class IgnoreIssueFilePattern extends mixins(IssueDetailMixin, Act
 
     try {
       const response = await this.ignoreIssueFilePattern(params)
+      this.$toast.success(`${this.issueShortcode} ignored for the specified file pattern.`)
+
       this.$emit('ignore', response.checkIssueIds)
     } catch (e) {
-      this.$toast.danger('Something went wrong while ignoring this issue, please contact support')
-      this.logErrorForUser(e, 'Ignore Issue', {
-        method: 'Ignore Issue File Pattern',
-        ...params
-      })
+      this.logErrorForUser(
+        e as Error,
+        'Ignore Issue',
+        {
+          method: 'Ignore Issue File Pattern',
+          ...params
+        },
+        'Something went wrong while ignoring this issue, please contact support.'
+      )
     } finally {
       this.isLoading = false
     }

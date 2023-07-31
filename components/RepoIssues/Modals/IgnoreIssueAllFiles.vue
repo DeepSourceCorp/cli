@@ -7,7 +7,7 @@
           this repository?</span
         >
       </template>
-      <div class="flex p-4 space-x-2 text-vanilla-400">
+      <div class="flex space-x-2 p-4 text-vanilla-400">
         <z-icon icon="alert-circle" size="medium" color="vanilla-400" />
         <div class="text-sm leading-7 text-vanilla-400">
           Doing this will <span class="text-vanilla-100">remove all current occurrences</span> of
@@ -16,9 +16,9 @@
         </div>
       </div>
       <template #footer>
-        <div class="px-3 py-2 space-x-2 text-right border-t text-vanilla-100 border-slate-400">
+        <div class="space-x-2 border-t border-slate-400 px-3 py-2 text-right text-vanilla-100">
           <z-button
-            class="flex items-center space-x-2 modal-primary-action"
+            class="modal-primary-action flex items-center space-x-2"
             spacing="px-2"
             button-type="primary"
             size="small"
@@ -89,13 +89,19 @@ export default class IgnoreIssueAllFiles extends mixins(IssueDetailMixin, Active
 
     try {
       const response = await this.ignoreIssueRepository(params)
+      this.$toast.success(`${this.issueShortcode} ignored for all files in this repository.`)
+
       this.$emit('ignore', response.checkIssueIds)
     } catch (e) {
-      this.$toast.danger('Something went wrong while ignoring this issue, please contact support')
-      this.logErrorForUser(e, 'Ignore Issue', {
-        method: 'Ignore Issue All Files',
-        ...params
-      })
+      this.logErrorForUser(
+        e as Error,
+        'Ignore Issue',
+        {
+          method: 'Ignore Issue All Files',
+          ...params
+        },
+        'Something went wrong while ignoring this issue, please contact support.'
+      )
     } finally {
       this.isLoading = false
     }

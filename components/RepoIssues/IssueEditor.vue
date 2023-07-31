@@ -55,7 +55,7 @@
 
             <!-- hide the entire block if the user doesn't have permissions to ignore issues -->
             <div v-if="canIgnoreIssues" class="flex w-12 justify-end">
-              <z-menu>
+              <z-menu direction="left">
                 <template #trigger="{ isOpen, toggle }">
                   <z-button
                     v-tooltip="'Ignore this occurrence'"
