@@ -87,7 +87,7 @@
       </empty-state>
     </div>
     <add-repo-modal
-      :current-tab="2"
+      :default-active-tab="1"
       :show-modal="showAddRepoModal"
       @close="showAddRepoModal = false"
     />

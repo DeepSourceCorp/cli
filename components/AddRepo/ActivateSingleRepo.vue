@@ -1,6 +1,6 @@
 <template>
-  <z-tab-pane class="flex flex-col h-full">
-    <div class="p-4 pb-0 space-y-2">
+  <z-tab-pane class="flex h-full flex-col">
+    <div class="space-y-2 p-4 pb-0">
       <z-input
         ref="search-repo-input"
         v-focus
@@ -8,7 +8,7 @@
         :value="searchCandidate"
         background-color="ink-400"
         icon="search"
-        placeholder="Search repositories..."
+        :placeholder="`Search for ${listMonoreposOnly ? 'monorepos' : 'repositories'}...`"
         class="flex-grow"
         @input="debounceSearchRepo"
       >
@@ -18,72 +18,102 @@
       </z-input>
     </div>
     <div class="flex-grow overflow-x-hidden p-4">
-      <div v-if="reposListLoading" class="space-y-2 animate-pulse">
+      <div v-if="reposListLoading" class="animate-pulse space-y-2">
         <div
           v-for="loopIndex in 4"
           :key="loopIndex"
-          class="rounded-md opacity-50 h-17 bg-ink-200"
+          class="h-17 rounded-md bg-ink-200 opacity-50"
         ></div>
       </div>
-      <div v-else-if="reposToActivateList && reposToActivateList.length === 0" class="space-y-5">
-        <lazy-empty-state
-          :use-v2="true"
-          :show-border="true"
-          :title="
-            searchCandidate
-              ? `No results found for '${searchCandidate}'`
-              : 'We couldn’t find any repositories linked to this account.'
-          "
-          :subtitle="
-            owner.hasGrantedAllRepoAccess
-              ? `You can sync your repositories from ${activeProviderName}`
-              : 'Make sure to grant DeepSource access to the Git repositories you’d like to import.'
-          "
-          :webp-image-path="
-            searchCandidate
-              ? require('~/assets/images/ui-states/directory/empty-search.webp')
-              : undefined
-          "
-          :png-image-path="
-            searchCandidate
-              ? require('~/assets/images/ui-states/directory/empty-search.gif')
-              : undefined
-          "
-          class="border-ink-100"
+
+      <template v-else-if="reposToActivateList.length === 0">
+        <lazy-empty-state-card
+          v-if="listMonoreposOnly && !searchCandidate"
+          :webp-image-path="require('~/assets/images/ui-states/runs/no-recent-autofixes.webp')"
+          content-styles="md:text-left text-center px-4 max-w-sm"
+          image-classes="md:mx-auto px-4 md:px-0 mx-auto w-full md:w-auto md:-mt-16"
+          subtitle="You need to define a repository as a monorepo either from the repository settings or while activating a repository."
+          title="You don't have a monorepo yet"
+          class="h-full max-w-sm items-center md:max-w-xl"
         >
           <template #action>
-            <div class="flex gap-x-2 justify-center md:justify-start">
-              <z-button
-                v-if="!owner.hasGrantedAllRepoAccess && owner.appConfigurationUrl"
-                :to="owner.appConfigurationUrl"
-                label="Manage Permissions"
-                size="small"
-                target="_blank"
-                rel="noopener noreferrer"
-                icon="settings"
-                icon-color="vanilla-100"
-                class="bg-ink-200 hover:bg-ink-200 hover:opacity-80 text-vanilla-100"
-              />
-              <z-button
-                :is-loading="repoSyncLoading"
-                :disabled="repoSyncLoading"
-                label="Sync repositories"
-                icon="refresh-cw"
-                loading-label="Syncing repositories"
-                size="small"
-                @click="syncRepos"
-              />
-            </div>
+            <button
+              class="auxillary-button flex w-full items-center justify-center py-1.5 text-xs text-vanilla-400 hover:text-vanilla-100 md:w-auto"
+              @click="$router.push($generateRoute(['repos'], false))"
+            >
+              <span> Open a repository </span>
+              <z-icon icon="arrow-right" color="vanilla-400" />
+            </button>
           </template>
-        </lazy-empty-state>
+        </lazy-empty-state-card>
 
-        <sync-repo-alert
-          :initial-repo-name="repoToSync"
-          :loading="singleRepoSyncLoading"
-          :error-message="singleRepoSyncErrMsg"
-          @sync-repo="(repoName) => syncSingleRepo(repoName, owner.id)"
-        />
-      </div>
+        <div v-else :class="listMonoreposOnly ? 'h-full' : 'space-y-5'">
+          <lazy-empty-state
+            :use-v2="true"
+            :show-border="true"
+            :title="
+              searchCandidate
+                ? `No results found for '${searchCandidate}'`
+                : 'We couldn’t find any repositories linked to this account'
+            "
+            :subtitle="
+              owner.hasGrantedAllRepoAccess
+                ? `You can sync your repositories from ${activeProviderName}.`
+                : 'Make sure to grant DeepSource access to the Git repositories you’d like to import.'
+            "
+            :padding="
+              listMonoreposOnly ? 'px-3.5 md:px-12 py-19' : 'px-3.5 py-12 md:px-12 md:py-19'
+            "
+            :webp-image-path="
+              searchCandidate
+                ? require('~/assets/images/ui-states/directory/empty-search.webp')
+                : undefined
+            "
+            :png-image-path="
+              searchCandidate
+                ? require('~/assets/images/ui-states/directory/empty-search.gif')
+                : undefined
+            "
+            class="border-ink-100"
+            :class="{ 'h-full items-center': listMonoreposOnly }"
+          >
+            <template #action>
+              <div class="flex justify-center gap-x-2 md:justify-start">
+                <z-button
+                  v-if="!owner.hasGrantedAllRepoAccess && owner.appConfigurationUrl"
+                  :to="owner.appConfigurationUrl"
+                  label="Manage Permissions"
+                  size="small"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  icon="settings"
+                  icon-color="vanilla-100"
+                  class="bg-ink-200 text-vanilla-100 hover:bg-ink-200 hover:opacity-80"
+                />
+
+                <z-button
+                  v-if="!listMonoreposOnly"
+                  :is-loading="repoSyncLoading"
+                  :disabled="repoSyncLoading"
+                  label="Sync repositories"
+                  icon="refresh-cw"
+                  loading-label="Syncing repositories"
+                  size="small"
+                  @click="syncRepos"
+                />
+              </div>
+            </template>
+          </lazy-empty-state>
+
+          <sync-repo-alert
+            v-if="!listMonoreposOnly"
+            :initial-repo-name="repoToSync"
+            :loading="singleRepoSyncLoading"
+            :error-message="singleRepoSyncErrMsg"
+            @sync-repo="(repoName) => syncSingleRepo(repoName, owner.id)"
+          />
+        </div>
+      </template>
 
       <div v-else class="space-y-2">
         <repo-card
@@ -91,17 +121,19 @@
           :key="repo.id"
           v-bind="repo"
           :analyzer-shortcode="analyzerShortcode"
+          :is-exact-route="isMonorepo(repo.kind)"
           :remove-default-style="true"
+          :route="getRoute(repo)"
           :show-info="false"
+          :subrepo-count="repo.subRepos && repo.subRepos.totalCount"
           :transformer-shortcode="transformerShortcode"
-          route="generate-config"
           size="small"
-          class="border rounded-lg hover:bg-ink-200 border-slate-400"
+          class="rounded-lg border border-slate-400 hover:bg-ink-200"
         />
 
         <div
-          v-if="$route.params.provider === 'gl'"
-          class="flex flex-col items-center p-4 space-y-4"
+          v-if="!listMonoreposOnly && $route.params.provider === 'gl'"
+          class="flex flex-col items-center space-y-4 p-4"
         >
           <p class="text-sm font-normal text-vanilla-100">
             Can't find the repository that you're looking for?
@@ -131,7 +163,7 @@
         </div>
       </div>
 
-      <div v-if="totalPageCount > 1 && !reposListLoading" class="flex justify-center my-6 text-sm">
+      <div v-if="totalPageCount > 1 && !reposListLoading" class="my-6 flex justify-center text-sm">
         <z-pagination
           :page="currentPage"
           :total-pages="totalPageCount"
@@ -144,8 +176,8 @@
 </template>
 <script lang="ts">
 import { RepoCard } from '@/components/AddRepo'
-import { ZButton, ZIcon, ZInput, ZPagination, ZTabPane, ZAlert } from '@deepsource/zeal'
-import { Component, mixins, Prop } from 'nuxt-property-decorator'
+import { ZAlert, ZButton, ZIcon, ZInput, ZPagination, ZTabPane } from '@deepsource/zeal'
+import { Component, mixins, Prop, Watch } from 'nuxt-property-decorator'
 
 import RepositoriesActivationListQuery from '~/apollo/queries/repository/activateList.gql'
 
@@ -156,7 +188,11 @@ import RepoListMixin from '~/mixins/repoListMixin'
 import RepoSyncMixin from '~/mixins/repoSyncMixin'
 
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
-import { Repository, RepositoryToActivateListQueryVariables } from '~/types/types'
+import {
+  Repository,
+  RepositoryKindChoices,
+  RepositoryToActivateListQueryVariables
+} from '~/types/types'
 
 import { resolveNodes } from '~/utils/array'
 import { debounceAsync } from '~/utils/debounce'
@@ -173,7 +209,8 @@ import { debounceAsync } from '~/utils/debounce'
     ZPagination,
     ZAlert,
     RepoCard
-  }
+  },
+  name: 'ActivateSingleRepo'
 })
 export default class ActivateSingleRepo extends mixins(
   ActiveUserMixin,
@@ -188,6 +225,9 @@ export default class ActivateSingleRepo extends mixins(
   @Prop({ default: '' })
   transformerShortcode: string
 
+  @Prop({ default: false })
+  listMonoreposOnly: boolean
+
   reposToActivateList: Repository[] = []
   searchCandidate = ''
   perPageCount = 30
@@ -197,12 +237,35 @@ export default class ActivateSingleRepo extends mixins(
   debouncedSearchRepo = debounceAsync(this.searchRepo, 400)
 
   /**
+   * The fetch hook
+   *
+   * @returns {Promise<void>}
+   */
+  async fetch(): Promise<void> {
+    this.reposListLoading = true
+
+    await this.refetchData()
+  }
+
+  /**
    * Mounted hook for Vue component
    *
    * @returns {void}
    */
   mounted(): void {
     this.$socket.$on('vcs-installed-repos-updated', this.refetchData)
+  }
+
+  get repoKindInArg(): RepositoryKindChoices[] {
+    return this.listMonoreposOnly
+      ? [RepositoryKindChoices.Monorepo]
+      : [RepositoryKindChoices.Repo, RepositoryKindChoices.Subrepo]
+  }
+
+  // Ensures the re-fetch happens when switching between `Activate a repository` and `Monorepos` tabs
+  @Watch('listMonoreposOnly')
+  onTabChange() {
+    this.$fetch()
   }
 
   /**
@@ -243,7 +306,8 @@ export default class ActivateSingleRepo extends mixins(
         provider: this.$providerMetaMap[this.activeProvider].value,
         limit: this.perPageCount,
         offset: this.queryOffset,
-        query: this.searchCandidate ? this.searchCandidate : null
+        query: this.searchCandidate ? this.searchCandidate : null,
+        kindIn: this.repoKindInArg
       },
       true
     )
@@ -254,17 +318,6 @@ export default class ActivateSingleRepo extends mixins(
     if (searchBox) {
       searchBox.focus()
     }
-  }
-
-  /**
-   * The fetch hook
-   *
-   * @returns {Promise<void>}
-   */
-  async fetch(): Promise<void> {
-    this.reposListLoading = true
-
-    await this.refetchData(false)
   }
 
   /**
@@ -290,7 +343,8 @@ export default class ActivateSingleRepo extends mixins(
           provider: this.$providerMetaMap[this.activeProvider].value,
           limit: this.perPageCount,
           offset: this.queryOffset,
-          query: this.searchCandidate ? this.searchCandidate : null
+          query: this.searchCandidate ? this.searchCandidate : null,
+          kindIn: this.repoKindInArg
         },
         refetch
       ).then((response) => (this.reposToActivateList = response ?? [])),
@@ -348,6 +402,14 @@ export default class ActivateSingleRepo extends mixins(
         this.reposListLoading = false
       }, 300)
     }
+  }
+
+  isMonorepo(repoKind: RepositoryKindChoices): boolean {
+    return repoKind === RepositoryKindChoices.Monorepo
+  }
+
+  getRoute({ name, kind }: Repository) {
+    return this.isMonorepo(kind) ? this.$generateRoute([name], false) : 'generate-config'
   }
 }
 </script>

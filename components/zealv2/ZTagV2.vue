@@ -3,7 +3,9 @@
     class="box-border inline-flex items-center gap-x-2 rounded-full border px-2.5 py-px font-medium"
     :class="type"
   >
-    <span class="z-tag--circle h-1.5 w-1.5 rounded-full bg-current"></span>
+    <slot name="icon">
+      <span class="z-tag--circle h-1.5 w-1.5 rounded-full bg-current"></span>
+    </slot>
     <span class="z-tag--text text-xxs uppercase leading-6 tracking-wider"><slot></slot></span>
   </div>
 </template>

@@ -6,6 +6,7 @@ exports[`[[ Repo Status Components ]] RepoEmpty: RepoEmpty 1`] = `
     No code found in the repository
   </h1>
   <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\">
+
     This repository seems to be empty. Please add code and check back later.
   </div>
 </section>"
@@ -30,10 +31,8 @@ exports[`[[ Repo Status Components ]] RepoTimeout: RepoTimeout 1`] = `
   <p class=\\"max-w-xl\\">
     We were not able to finish the analysis in time. This can happen if there are too many files
     to analyze. Please give it another shot.
-  </p><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap mt-4 text-ink-400 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-juniper hover:bg-juniper-600\\" data-testid=\\"activate-analysis\\">
-    <zicon-stub icon=\\"repeat\\" size=\\"small\\" position=\\"\\" color=\\"ink-400\\" class=\\"mr-1.5\\"></zicon-stub>
-    Re-run analysis
-  </button>
+  </p>
+  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Re-run analysis\\" loadinglabel=\\"Triggering Run\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"repeat\\" class=\\"mt-4\\"></zbutton-stub>
 </emptystate-stub>"
 `;
 

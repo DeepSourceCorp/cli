@@ -1,70 +1,78 @@
-import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
+import { ActionContext, ActionTree, GetterTree, MutationTree, Store } from 'vuex'
 import { RootState } from '~/store'
 
-import RepositoryIDGQLQuery from '~/apollo/queries/repository/id.gql'
-import RepositoryDetailGQLQuery from '~/apollo/queries/repository/detail.gql'
-import RepositoryBaseDetailGQLQuery from '~/apollo/queries/repository/base.gql'
-import RepositoryIsCommitPossible from '~/apollo/queries/repository/isCommitPossible.gql'
-import RepositoryAnalyzerGQLQuery from '~/apollo/queries/repository/availableAnalyzers.gql'
-import RepositoryPermsGQLQuery from '~/apollo/queries/repository/perms.gql'
+import RepositoryAddableMembersGQLQuery from '~/apollo/queries/repository/addableMembers.gql'
 import RepositoryCurrentRunAnalysisQuery from '~/apollo/queries/repository/analysisRun.gql'
-import RepositoryIssueTrendsQuery from '~/apollo/queries/repository/issueTrends.gql'
-import RepositoryAutofixTrendsQuery from '~/apollo/queries/repository/autofixTrends.gql'
 import RepositoryAutofixStatsQuery from '~/apollo/queries/repository/autofixStats.gql'
+import RepositoryAutofixTrendsQuery from '~/apollo/queries/repository/autofixTrends.gql'
+import RepositoryAnalyzerGQLQuery from '~/apollo/queries/repository/availableAnalyzers.gql'
+import RepositoryBaseDetailGQLQuery from '~/apollo/queries/repository/base.gql'
+import RepositoryDetailGQLQuery from '~/apollo/queries/repository/detail.gql'
+import RepositoryIDGQLQuery from '~/apollo/queries/repository/id.gql'
+import RepositoryIsCommitPossible from '~/apollo/queries/repository/isCommitPossible.gql'
 import RepositoryIssueOccurrenceDistributionByIssueType from '~/apollo/queries/repository/issueOccurrenceDistributionByIssueType.gql'
 import RepositoryIssueOccurrenceDistributionByProduct from '~/apollo/queries/repository/issueOccurrenceDistributionByProduct.gql'
+import RepositoryIssueTrendsQuery from '~/apollo/queries/repository/issueTrends.gql'
 import RepositoryIssueTypeSettingsQuery from '~/apollo/queries/repository/issueTypeSettings.gql'
-import RepositoryWidgetsGQLQuery from '~/apollo/queries/repository/widgets.gql'
-import RepositoryMetricsGQLQuery from '~/apollo/queries/repository/metrics/metrics.gql'
 import RepositoryMetricGQLQuery from '~/apollo/queries/repository/metrics/metric.gql'
-import RepositorySettingsGeneralGQLQuery from '~/apollo/queries/repository/settings/general.gql'
-import RepositorySettingsSshGQLQuery from '~/apollo/queries/repository/settings/ssh.gql'
-import RepositorySettingsIgnoreRulesGQLQuery from '~/apollo/queries/repository/settings/ignoreRules.gql'
+import RepositoryMetricsGQLQuery from '~/apollo/queries/repository/metrics/metrics.gql'
+import RepositoryPermsGQLQuery from '~/apollo/queries/repository/perms.gql'
 import RepositorySettingsBadgesGQLQuery from '~/apollo/queries/repository/settings/badges.gql'
-import RepositorySettingsReportingGQLQuery from '~/apollo/queries/repository/settings/reporting.gql'
+import RepositorySettingsGeneralGQLQuery from '~/apollo/queries/repository/settings/general.gql'
+import RepositorySettingsIgnoreRulesGQLQuery from '~/apollo/queries/repository/settings/ignoreRules.gql'
 import RepositorySettingsManageAccessGQLQuery from '~/apollo/queries/repository/settings/manageAccess.gql'
-import RepositoryAddableMembersGQLQuery from '~/apollo/queries/repository/addableMembers.gql'
+import RepositorySettingsReportingGQLQuery from '~/apollo/queries/repository/settings/reporting.gql'
+import RepositorySettingsSshGQLQuery from '~/apollo/queries/repository/settings/ssh.gql'
 import RepoStatusPollQuery from '~/apollo/queries/repository/statusPoll.gql'
+import RepositoryWidgetsGQLQuery from '~/apollo/queries/repository/widgets.gql'
+import RepositoryKindGQLQuery from '~/apollo/queries/repository/kind.gql'
 
-import ToggleRepositoryActivationMutation from '~/apollo/mutations/repository/toggleRepositoryActivation.gql'
 import CommitConfigToVcsGQLMutation from '~/apollo/mutations/repository/commitConfigToVcs.gql'
-import UpdateRepoMetricThreshold from '~/apollo/mutations/repository/updateRepoMetricThreshold.gql'
+import convertToMonorepo from '~/apollo/mutations/repository/settings/convertToMonorepo.gql'
 import DeleteIgnoredRule from '~/apollo/mutations/repository/settings/deleteIgnoredRule.gql'
-import GenerateSSHKey from '~/apollo/mutations/repository/settings/generateSSHKey.gql'
 import DeleteSSHKey from '~/apollo/mutations/repository/settings/deleteSSHKey.gql'
-import UpdateRepositorySettings from '~/apollo/mutations/repository/settings/updateRepositorySettings.gql'
-import UpdatePermission from '~/apollo/mutations/repository/settings/updatePermission.gql'
-import RemoveCollaborator from '~/apollo/mutations/repository/settings/removeCollaborator.gql'
-import UpdateRepositoryWidgets from '~/apollo/mutations/repository/updateRepositoryWidgets.gql'
-import TriggerGSRRun from '~/apollo/mutations/repository/triggerGSRRun.gql'
-import triggerAdhocRunGQLMutation from '~/apollo/mutations/repository/triggerAdHocRun.gql'
+import GenerateSSHKey from '~/apollo/mutations/repository/settings/generateSSHKey.gql'
 import regenerateRepositoryDSN from '~/apollo/mutations/repository/settings/regenerateRepositoryDSN.gql'
+import RemoveCollaborator from '~/apollo/mutations/repository/settings/removeCollaborator.gql'
+import revertMonorepo from '~/apollo/mutations/repository/settings/revertMonorepo.gql'
+import UpdatePermission from '~/apollo/mutations/repository/settings/updatePermission.gql'
+import UpdateRepositorySettings from '~/apollo/mutations/repository/settings/updateRepositorySettings.gql'
+import ToggleRepositoryActivationMutation from '~/apollo/mutations/repository/toggleRepositoryActivation.gql'
+import triggerAdhocRunGQLMutation from '~/apollo/mutations/repository/triggerAdHocRun.gql'
+import TriggerGSRRun from '~/apollo/mutations/repository/triggerGSRRun.gql'
+import UpdateRepoMetricThreshold from '~/apollo/mutations/repository/updateRepoMetricThreshold.gql'
+import UpdateRepositoryWidgets from '~/apollo/mutations/repository/updateRepositoryWidgets.gql'
 
 import {
-  UpdateRepoMetricThresholdInput,
-  CommitConfigToVcsInput,
-  Repository,
-  ToggleRepositoryActivationInput,
-  UpdateRepositorySettingsInput,
-  RemoveRepositoryCollaboratorInput,
-  CommitConfigToVcsPayload,
-  UpdateRepositoryWidgetsInput,
-  UpdateRepositoryWidgetsPayload,
   ActivateGsrRepositoryInput,
-  UpdateRepositorySettingsPayload,
+  CommitConfigToVcsInput,
+  CommitConfigToVcsPayload,
+  DisableMonorepoModeInput,
+  EnableMonorepoModeInput,
   MetricTypeChoices,
   RegenerateRepositoryDsnPayload,
+  RemoveRepositoryCollaboratorInput,
+  Repository,
+  ToggleRepositoryActivationInput,
+  UpdateOrCreateRepositoryCollaboratorInput,
   UpdateOrCreateRepositoryCollaboratorPayload,
-  UpdateOrCreateRepositoryCollaboratorInput
+  UpdateRepoMetricThresholdInput,
+  UpdateRepositorySettingsInput,
+  UpdateRepositorySettingsPayload,
+  UpdateRepositoryWidgetsInput,
+  UpdateRepositoryWidgetsPayload
 } from '~/types/types'
+
 import { TransformerInterface } from '~/store/analyzer/list'
 import {
   GraphqlError,
   GraphqlMutationResponse,
   GraphqlQueryResponse
 } from '~/types/apollo-graphql-types'
-import type { LogErrorAndToastT } from '~/plugins/helpers/error'
 import { IssueOccurrenceDistributionType } from '~/types/issues'
+import { LogErrorAndToastT } from '~/plugins/helpers/error'
+import { RepoListActions } from './list'
+import provider from '~/plugins/helpers/provider'
 
 export type RepoSettingOptions = {
   settingType: keyof Repository
@@ -125,6 +133,7 @@ export enum RepositoryDetailActions {
   FETCH_CURRENT_RUN_COUNT = 'fetchCurrentRunCount',
   FETCH_ISSUE_TRENDS = 'fetchIssueTrends',
   FETCH_AUTOFIX_TRENDS = 'fetchAutofixTrends',
+  FETCH_REPOSITORY_KIND = 'fetchRepositoryKind',
 
   FETCH_ISSUE_OCCURRENCE_DISTRIBUTION_COUNTS = 'fetchIssueOccurrenceDistributionCounts',
   FETCH_ISSUE_TYPE_SETTINGS = 'fetchIssueTypeSettings',
@@ -149,20 +158,24 @@ export enum RepositoryDetailActions {
   TRIGGER_GSR_ACTIVATION = 'triggerGSRActivation',
   POLL_REPO_STATUS = 'pollRepoStatus',
   TRIGGER_ADHOC_RUN = 'triggerAdHocRun',
-  REGENERATE_REPOSITORY_DSN = 'regenerateRepositoryDSN'
+  REGENERATE_REPOSITORY_DSN = 'regenerateRepositoryDSN',
+  CONVERT_REPO_TO_MONOREPO = 'convertRepoToMonorepo',
+  REVERT_MONOREPO = 'revertMonorepo'
 }
 
 export enum RepositoryDetailMutations {
   SET_ERROR = 'setRepositoryDetailError',
   SET_LOADING = 'setRepositoryDetailLoading',
   SET_REPOSITORY = 'setRepositoryDetail',
-  SET_REPO_SETTING_VALUE = 'setRepoSetting'
+  SET_REPO_SETTING_VALUE = 'setRepoSetting',
+  SET_REPO_ID_MAP = 'setRepoIdMap'
 }
 
 export interface RepoDetailState {
   loading: boolean
   error: Record<string, unknown>
   repository: Repository
+  repoIdMap: Record<string, string>
 }
 
 /**
@@ -173,7 +186,8 @@ export interface RepoDetailState {
 export const state = (): RepoDetailState => ({
   loading: false,
   error: {},
-  repository: {} as Repository
+  repository: {} as Repository,
+  repoIdMap: {}
 })
 
 export type RepositoryDetailModuleState = ReturnType<typeof state>
@@ -199,6 +213,10 @@ interface RepositoryDetailModuleMutations extends MutationTree<RepositoryDetailM
   [RepositoryDetailMutations.SET_REPOSITORY]: (
     repoDetailState: RepositoryDetailModuleState,
     repository: Repository
+  ) => void
+  [RepositoryDetailMutations.SET_REPO_ID_MAP]: (
+    repoDetailState: RepositoryDetailModuleState,
+    repoIdMap: Record<string, string>
   ) => void
 }
 
@@ -229,6 +247,9 @@ export const mutations: RepositoryDetailModuleMutations = {
 
     const updatedSettings = { [settingType]: repoSettings }
     repoDetailState.repository = Object.assign({}, repoDetailState.repository, updatedSettings)
+  },
+  [RepositoryDetailMutations.SET_REPO_ID_MAP]: (repoDetailState, repoIdMap) => {
+    repoDetailState.repoIdMap = Object.assign({}, repoDetailState.repoIdMap, repoIdMap)
   }
 }
 
@@ -251,6 +272,7 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       owner: string
       name: string
       metricType?: MetricTypeChoices
+      fetchPerms?: boolean
       refetch?: boolean
     }
   ) => Promise<void>
@@ -409,7 +431,7 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
   [RepositoryDetailActions.TOGGLE_REPO_ACTIVATION]: (
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext,
-    args: ToggleRepositoryActivationInput
+    args: ToggleRepositoryActivationInput & { login: string; provider: string }
   ) => Promise<void>
   [RepositoryDetailActions.SET_METRIC_THRESHOLD]: (
     this: Store<RootState>,
@@ -543,6 +565,26 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext
   ) => Promise<void>
+  [RepositoryDetailActions.CONVERT_REPO_TO_MONOREPO]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext,
+    args: EnableMonorepoModeInput
+  ) => Promise<boolean>
+  [RepositoryDetailActions.REVERT_MONOREPO]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext,
+    args: DisableMonorepoModeInput
+  ) => Promise<boolean>
+  [RepositoryDetailActions.FETCH_REPOSITORY_KIND]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext,
+    args: {
+      provider: string
+      owner: string
+      name: string
+      refetch?: boolean
+    }
+  ) => Promise<void>
 }
 
 export const actions: RepositoryDetailModuleActions = {
@@ -559,6 +601,10 @@ export const actions: RepositoryDetailModuleActions = {
     )
       .then((response: GraphqlQueryResponse) => {
         commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+        commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+          [`${this.$providerMetaMap[args.provider].value}-${args.owner}-${args.name}`]:
+            response.data.repository?.id
+        })
         commit(RepositoryDetailMutations.SET_LOADING, false)
       })
       .catch((e: GraphqlError) => {
@@ -568,7 +614,14 @@ export const actions: RepositoryDetailModuleActions = {
   },
   async [RepositoryDetailActions.FETCH_METRICS](
     { commit },
-    { owner, name, provider, metricType = MetricTypeChoices.DefaultBranchOnly, refetch }
+    {
+      owner,
+      name,
+      provider,
+      metricType = MetricTypeChoices.DefaultBranchOnly,
+      fetchPerms = false,
+      refetch
+    }
   ) {
     try {
       const response = (await this.$fetchGraphqlData(
@@ -577,12 +630,16 @@ export const actions: RepositoryDetailModuleActions = {
           provider: this.$providerMetaMap[provider].value,
           owner,
           name,
+          fetchPerms,
           metricType
         },
         refetch
       )) as GraphqlQueryResponse
 
       commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+      commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+        [`${this.$providerMetaMap[provider].value}-${owner}-${name}`]: response.data.repository?.id
+      })
     } catch (e: unknown) {
       this.$logErrorAndToast(e as Error, 'An error occured while fetching repository metrics.')
     }
@@ -635,6 +692,10 @@ export const actions: RepositoryDetailModuleActions = {
       .then((response: GraphqlQueryResponse) => {
         // TODO: Toast("Successfully fetched widgets")
         commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+        commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+          [`${this.$providerMetaMap[args.provider].value}-${args.owner}-${args.name}`]:
+            response.data.repository?.id
+        })
         commit(RepositoryDetailMutations.SET_LOADING, false)
       })
       .catch((e: GraphqlError) => {
@@ -659,6 +720,10 @@ export const actions: RepositoryDetailModuleActions = {
       .then((response: GraphqlQueryResponse) => {
         // TODO: Toast("Successfully fetched widgets")
         commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+        commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+          [`${this.$providerMetaMap[args.provider].value}-${args.owner}-${args.name}`]:
+            response.data.repository?.id
+        })
         commit(RepositoryDetailMutations.SET_LOADING, false)
       })
       .catch((e: GraphqlError) => {
@@ -679,6 +744,10 @@ export const actions: RepositoryDetailModuleActions = {
       .then((response: GraphqlQueryResponse) => {
         // TODO: Toast("Successfully fetched widgets")
         commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+        commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+          [`${this.$providerMetaMap[args.provider].value}-${args.owner}-${args.name}`]:
+            response.data.repository?.id
+        })
         commit(RepositoryDetailMutations.SET_LOADING, false)
       })
       .catch((e: GraphqlError) => {
@@ -706,6 +775,10 @@ export const actions: RepositoryDetailModuleActions = {
       args.refetch
     )
     commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+    commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+      [`${this.$providerMetaMap[args.provider].value}-${args.owner}-${args.name}`]:
+        response.data.repository?.id
+    })
   },
   async [RepositoryDetailActions.FETCH_ISSUE_TYPE_SETTINGS]({ commit }, args) {
     const response = await this.$fetchGraphqlData(
@@ -718,6 +791,10 @@ export const actions: RepositoryDetailModuleActions = {
       args.refetch
     )
     commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+    commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+      [`${this.$providerMetaMap[args.provider].value}-${args.owner}-${args.name}`]:
+        response.data.repository?.id
+    })
   },
   async [RepositoryDetailActions.FETCH_REPOSITORY_ID](
     { commit },
@@ -735,6 +812,9 @@ export const actions: RepositoryDetailModuleActions = {
       )
 
       commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+      commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+        [`${this.$providerMetaMap[provider].value}-${owner}-${name}`]: response.data.repository?.id
+      })
     } catch (e) {
       this.$logErrorAndToast(e as Error, 'There was an error while fetching the repository id.')
     }
@@ -757,6 +837,10 @@ export const actions: RepositoryDetailModuleActions = {
       .then((response: GraphqlQueryResponse) => {
         // TODO: Toast("Successfully fetched repository detail")
         commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+        commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+          [`${this.$providerMetaMap[provider].value}-${owner}-${name}`]:
+            response.data.repository?.id
+        })
         commit(RepositoryDetailMutations.SET_LOADING, false)
       })
       .catch((e: GraphqlError) => {
@@ -775,6 +859,10 @@ export const actions: RepositoryDetailModuleActions = {
       .then((response: GraphqlQueryResponse) => {
         // TODO: Toast("Successfully fetched repository settings detail -- General")
         commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+        commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+          [`${this.$providerMetaMap[args.provider].value}-${args.owner}-${args.name}`]:
+            response.data.repository?.id
+        })
         commit(RepositoryDetailMutations.SET_LOADING, false)
       })
       .catch((e: GraphqlError) => {
@@ -800,6 +888,10 @@ export const actions: RepositoryDetailModuleActions = {
       .then((response: GraphqlQueryResponse) => {
         // TODO: Toast("Successfully fetched repository settings detail -- Manage Access")
         commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+        commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+          [`${this.$providerMetaMap[args.provider].value}-${args.owner}-${args.name}`]:
+            response.data.repository?.id
+        })
         commit(RepositoryDetailMutations.SET_LOADING, false)
       })
       .catch((e: GraphqlError) => {
@@ -824,6 +916,10 @@ export const actions: RepositoryDetailModuleActions = {
       .then((response: GraphqlQueryResponse) => {
         // TODO: Toast("Successfully fetched repository settings detail -- Ignore rules")
         commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+        commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+          [`${this.$providerMetaMap[args.provider].value}-${args.owner}-${args.name}`]:
+            response.data.repository?.id
+        })
         commit(RepositoryDetailMutations.SET_LOADING, false)
       })
       .catch((e: GraphqlError) => {
@@ -842,6 +938,10 @@ export const actions: RepositoryDetailModuleActions = {
       .then((response: GraphqlQueryResponse) => {
         // TODO: Toast("Successfully fetched repository settings detail -- Ignore rules")
         commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+        commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+          [`${this.$providerMetaMap[args.provider].value}-${args.owner}-${args.name}`]:
+            response.data.repository?.id
+        })
         commit(RepositoryDetailMutations.SET_LOADING, false)
       })
       .catch((e: GraphqlError) => {
@@ -863,6 +963,10 @@ export const actions: RepositoryDetailModuleActions = {
         args.refetch
       )
       commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+      commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+        [`${this.$providerMetaMap[args.provider].value}-${args.owner}-${args.name}`]:
+          response.data.repository?.id
+      })
       commit(RepositoryDetailMutations.SET_LOADING, false)
     } catch (e) {
       this.$logErrorAndToast(e as Error, 'Unable to fetch reporting configuration.', undefined, {
@@ -901,27 +1005,61 @@ export const actions: RepositoryDetailModuleActions = {
     return response.data.commitConfigToVcs
   },
   async [RepositoryDetailActions.TOGGLE_REPO_ACTIVATION](
-    { commit, state: repoDetailState },
-    { isActivated, id }
+    { commit, dispatch, state: repoDetailState },
+    { isActivated, id, login, provider }
   ) {
     try {
       const response = (await this.$applyGraphqlMutation(ToggleRepositoryActivationMutation, {
         input: { id, isActivated }
       })) as GraphqlMutationResponse
-      if (response?.data?.toggleRepositoryActivation) {
+
+      if (response.data.toggleRepositoryActivation) {
         commit(
           RepositoryDetailMutations.SET_REPOSITORY,
           response.data.toggleRepositoryActivation.repository
         )
+        commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+          [`${this.$providerMetaMap[provider].value}-${login}-${response.data.toggleRepositoryActivation.repository?.name}`]:
+            response.data.toggleRepositoryActivation.repository?.id
+        })
         if (response.data.toggleRepositoryActivation.repository?.isActivated)
           this.$toast.success(
             `Successfully activated ${repoDetailState.repository.name as string}.`
           )
       }
+
+      this.$localStore.set(`${provider}-${login}`, 'refetch-team-repo-list', true)
+
+      // Re-fetch the list of recently active repositories shown in the sidebar
+      dispatch(
+        `repository/list/${RepoListActions.FETCH_ACTIVE_REPOSITORY_LIST}`,
+        {
+          login,
+          provider,
+          limit: 5,
+          refetch: true
+        },
+        { root: true }
+      )
+
+      // Re-fetch the list of recently active repositories with Analyzers shown in team home
+      dispatch(
+        `repository/list/${RepoListActions.FETCH_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS}`,
+        {
+          login,
+          provider,
+          limit: 10,
+          refetch: true
+        },
+        { root: true }
+      )
     } catch (e) {
       this.$logErrorAndToast(
         e as Error,
-        (e as Error).message.replace('GraphQL error: ', '') as Parameters<LogErrorAndToastT>['1']
+        `${(e as Error).message.replace(
+          'GraphQL error: ',
+          ''
+        )}.` as Parameters<LogErrorAndToastT>['1']
       )
       commit(RepositoryDetailMutations.SET_ERROR, e)
     }
@@ -1029,6 +1167,9 @@ export const actions: RepositoryDetailModuleActions = {
         name
       })
       commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+      commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+        [`${this.$providerMetaMap[provider].value}-${owner}-${name}`]: response.data.repository?.id
+      })
     } catch (e) {
       commit(RepositoryDetailMutations.SET_ERROR, e)
     } finally {
@@ -1047,6 +1188,10 @@ export const actions: RepositoryDetailModuleActions = {
       refetch
     )
     commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+    commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+      [`${this.$providerMetaMap[args.provider].value}-${args.owner}-${args.name}`]:
+        response.data.repository?.id
+    })
   },
   async [RepositoryDetailActions.FETCH_REPOSITORY_AUTOFIX_STATS]({ commit }, args) {
     const { provider, owner, name, refetch } = args
@@ -1060,6 +1205,10 @@ export const actions: RepositoryDetailModuleActions = {
       refetch
     )
     commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+    commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+      [`${this.$providerMetaMap[args.provider].value}-${args.owner}-${args.name}`]:
+        response.data.repository?.id
+    })
   },
   async [RepositoryDetailActions.FETCH_REPOSITORY_COMMIT_POSSIBLE]({ commit }, args) {
     const response = await this.$fetchGraphqlData(
@@ -1072,6 +1221,10 @@ export const actions: RepositoryDetailModuleActions = {
       args.refetch
     )
     commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+    commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+      [`${this.$providerMetaMap[args.provider].value}-${args.owner}-${args.name}`]:
+        response.data.repository?.id
+    })
   },
   async [RepositoryDetailActions.FETCH_AVAILABLE_ANALYZERS](
     { commit },
@@ -1089,6 +1242,9 @@ export const actions: RepositoryDetailModuleActions = {
         refetch
       )
       commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+      commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+        [`${this.$providerMetaMap[provider].value}-${owner}-${name}`]: response.data.repository?.id
+      })
     } catch (e) {
       commit(RepositoryDetailMutations.SET_ERROR, e)
     } finally {
@@ -1103,6 +1259,10 @@ export const actions: RepositoryDetailModuleActions = {
         ...args
       })
       commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+      commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+        [`${this.$providerMetaMap[provider].value}-${args.owner}-${args.name}`]:
+          response.data.repository?.id
+      })
     } catch (e) {
       commit(RepositoryDetailMutations.SET_ERROR, e)
     } finally {
@@ -1136,6 +1296,10 @@ export const actions: RepositoryDetailModuleActions = {
       refetch
     )
     commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+    commit(RepositoryDetailMutations.SET_REPO_ID_MAP, {
+      [`${this.$providerMetaMap[args.provider].value}-${args.owner}-${args.name}`]:
+        response.data.repository?.id
+    })
   },
   async [RepositoryDetailActions.TRIGGER_ADHOC_RUN]({ state: repoDetailState }, args) {
     await this.$applyGraphqlMutation(triggerAdhocRunGQLMutation, {
@@ -1158,5 +1322,35 @@ export const actions: RepositoryDetailModuleActions = {
       ...repoDetailState.repository,
       dsn: data?.dsn
     })
+  },
+  async [RepositoryDetailActions.CONVERT_REPO_TO_MONOREPO](_, args) {
+    const response = (await this.$applyGraphqlMutation(convertToMonorepo, {
+      input: args
+    })) as GraphqlMutationResponse
+
+    // Any falsy value for response is anyways false for us
+    return response.data.enableMonorepoMode?.ok ?? false
+  },
+  async [RepositoryDetailActions.REVERT_MONOREPO](_, args) {
+    const response = (await this.$applyGraphqlMutation(revertMonorepo, {
+      input: args
+    })) as GraphqlMutationResponse
+
+    // Any falsy value for response is anyways false for us
+    return response.data.disableMonorepoMode?.ok ?? false
+  },
+  async [RepositoryDetailActions.FETCH_REPOSITORY_KIND]({ commit }, args) {
+    const { provider, owner, name, refetch } = args
+
+    const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
+      RepositoryKindGQLQuery,
+      {
+        provider: this.$providerMetaMap[provider].value,
+        owner,
+        name
+      },
+      refetch
+    )
+    commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
   }
 }

@@ -73,7 +73,7 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Activate Repo ]]: Snapshot: 
       </div>
     </div>
   </div>
-  <addrepomodal-stub currenttab=\\"0\\" showautoonboard=\\"true\\" analyzershortcode=\\"\\" transformershortcode=\\"\\" showmodal=\\"true\\"></addrepomodal-stub>
+  <addrepomodal-stub defaultactivetab=\\"0\\" showautoonboard=\\"true\\" showmonorepo=\\"true\\" analyzershortcode=\\"\\" transformershortcode=\\"\\" showmodal=\\"true\\"></addrepomodal-stub>
   <!---->
 </div>"
 `;
@@ -151,7 +151,7 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Install Autofix ]]: Snapshot
       </div>
     </div>
   </div>
-  <addrepomodal-stub currenttab=\\"0\\" showautoonboard=\\"true\\" analyzershortcode=\\"\\" transformershortcode=\\"\\"></addrepomodal-stub>
+  <addrepomodal-stub defaultactivetab=\\"0\\" showautoonboard=\\"true\\" showmonorepo=\\"true\\" analyzershortcode=\\"\\" transformershortcode=\\"\\"></addrepomodal-stub>
   <installautofixmodal-stub></installautofixmodal-stub>
 </div>"
 `;
@@ -265,7 +265,7 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Invite Member ]]: Snapshot: 
       </div>
     </div>
   </div>
-  <addrepomodal-stub currenttab=\\"0\\" showautoonboard=\\"true\\" analyzershortcode=\\"\\" transformershortcode=\\"\\"></addrepomodal-stub>
+  <addrepomodal-stub defaultactivetab=\\"0\\" showautoonboard=\\"true\\" showmonorepo=\\"true\\" analyzershortcode=\\"\\" transformershortcode=\\"\\"></addrepomodal-stub>
   <!---->
 </div>"
 `;
@@ -343,7 +343,7 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Start Transformers ]]: Snaps
       </div>
     </div>
   </div>
-  <addrepomodal-stub currenttab=\\"0\\" showautoonboard=\\"true\\" analyzershortcode=\\"\\" transformershortcode=\\"\\"></addrepomodal-stub>
+  <addrepomodal-stub defaultactivetab=\\"0\\" showautoonboard=\\"true\\" showmonorepo=\\"true\\" analyzershortcode=\\"\\" transformershortcode=\\"\\"></addrepomodal-stub>
   <!---->
 </div>"
 `;
@@ -421,7 +421,7 @@ exports[`[[ AccountSetupCard ]] renders AccountSetupCard 1`] = `
       </div>
     </div>
   </div>
-  <addrepomodal-stub currenttab=\\"0\\" showautoonboard=\\"true\\" analyzershortcode=\\"\\" transformershortcode=\\"\\"></addrepomodal-stub>
+  <addrepomodal-stub defaultactivetab=\\"0\\" showautoonboard=\\"true\\" showmonorepo=\\"true\\" analyzershortcode=\\"\\" transformershortcode=\\"\\"></addrepomodal-stub>
   <!---->
 </div>"
 `;

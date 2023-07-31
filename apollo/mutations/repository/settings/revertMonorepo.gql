@@ -1,0 +1,5 @@
+mutation revertMonorepo($input: DisableMonorepoModeInput!) {
+  disableMonorepoMode(input: $input) {
+    ok
+  }
+}

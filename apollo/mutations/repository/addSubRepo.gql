@@ -1,0 +1,9 @@
+mutation addSubRepo($input: AddSubRepoInput!) {
+  addSubRepo(input: $input) {
+    ok
+    repository {
+      id
+      name
+    }
+  }
+}

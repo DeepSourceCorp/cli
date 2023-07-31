@@ -1,8 +1,9 @@
-query fetchRepositoryMetricsCaptured (
+query fetchRepositoryMetricsCaptured(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!
   $metricType: MetricTypeChoices
+  $fetchPerms: Boolean!
 ) {
   repository(provider: $provider, owner: $owner, name: $name) {
     id
@@ -12,5 +13,6 @@ query fetchRepositoryMetricsCaptured (
       name
       category
     }
+    userPermissionMeta @include(if: $fetchPerms)
   }
 }

@@ -5,6 +5,7 @@ query repositoryToActivateList(
   $limit: Int
   $offset: Int
   $query: String
+  $kindIn: [RepositoryKindChoices]!
 ) {
   owner(login: $login, provider: $provider) {
     id
@@ -13,11 +14,14 @@ query repositoryToActivateList(
       first: $limit
       offset: $offset
       name_Icontains: $query
+      kindIn: $kindIn
     ) {
       totalCount
       edges {
         node {
           id
+          createdAt
+          displayName
           name
           vcsProvider
           ownerLogin
@@ -26,7 +30,12 @@ query repositoryToActivateList(
           latestCommitOid
           defaultBranchName
           lastAnalyzedAt
+          isActivated
+          kind
           supportedAnalyzers
+          subRepos {
+            totalCount
+          }
         }
       }
     }

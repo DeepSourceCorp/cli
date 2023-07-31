@@ -1,22 +1,22 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/vue'
+import { createLocalVue, mount } from '@vue/test-utils'
 import vuex from 'vuex'
-import RunCancelled from '~/components/Run/RunCancelled.vue'
-import RunTimeout from '~/components/Run/RunTimeout.vue'
+
+import { BaseState, RepoEmpty, RepoError, RepoTimeout, RepoWaiting } from '~/components/RepoStates'
+import RunFailed from '~/components/Run/RunFailed.vue'
 import RunLoading from '~/components/Run/RunLoading.vue'
 import RunNuked from '~/components/Run/RunNuked.vue'
 import RunPass from '~/components/Run/RunPass.vue'
+import RunTimeout from '~/components/Run/RunTimeout.vue'
 import RunWaiting from '~/components/Run/RunWaiting.vue'
-import RunFailed from '~/components/Run/RunFailed.vue'
-import { RepoTimeout, RepoEmpty, RepoError, RepoWaiting } from '~/components/RepoStates'
-import { createLocalVue, mount } from '@vue/test-utils'
-import { ZButton } from '@deepsource/zeal'
+import RunCancelled from '~/components/Run/RunCancelled.vue'
+
 import { storeModulesGenerator } from '~/test/mocks'
-import { VcsProviderChoices } from '~/types/types'
 
 const stubs = {
+  ZButton: true,
   ZIcon: true,
-  //ZButton: true,
   EmptyState: true,
   EmptyStatePicture: true
 }
@@ -63,7 +63,15 @@ describe('[[ Run Status Components ]]', () => {
 })
 
 describe('[[ Repo Status Components ]]', () => {
-  test('RepoTimeout', async () => {
+  const renderOptions = {
+    components: {
+      BaseState
+    },
+    props,
+    stubs
+  }
+
+  test('RepoTimeout', () => {
     const mocks = {
       $toast: {
         success: jest.fn()
@@ -80,7 +88,6 @@ describe('[[ Repo Status Components ]]', () => {
       propsData: props,
       localVue,
       attachTo: div,
-      //components: { ZButton },
       mocks,
       store: new vuex.Store({
         modules: storeModulesGenerator({
@@ -95,26 +102,20 @@ describe('[[ Repo Status Components ]]', () => {
     })
 
     expect(wrapper.html()).toMatchSnapshot('RepoTimeout')
-
-    interface RepoTimeoutT extends Vue {
-      activateAnalysis: () => Promise<void>
-    }
-
-    await (wrapper.vm as RepoTimeoutT).activateAnalysis()
-
-    expect(mocks.$toast.success).toBeCalledWith('Triggered run for asgard, this might take a while')
-    expect(wrapper.emitted('refetch'))
   })
+
   test('RepoEmpty', () => {
-    const { html } = render(RepoEmpty, { stubs, props })
+    const { html } = render(RepoEmpty, renderOptions)
     expect(html()).toMatchSnapshot('RepoEmpty')
   })
+
   test('RepoError', () => {
-    const { html } = render(RepoError, { stubs, props })
+    const { html } = render(RepoError, renderOptions)
     expect(html()).toMatchSnapshot('RepoError')
   })
+
   test('RepoWaiting', () => {
-    const { html } = render(RepoWaiting, { stubs, props })
+    const { html } = render(RepoWaiting, renderOptions)
     expect(html()).toMatchSnapshot('RepoWaiting')
   })
 })

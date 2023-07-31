@@ -68,9 +68,10 @@
           <repo-inactive
             v-if="repository.errorCode === 3001"
             :id="repository.id"
+            :activate-analysis-loading="activateAnalysisLoading"
+            :default-branch-name="repository.defaultBranchName"
             :name="repository.name"
-            :defaultBranchName="repository.defaultBranchName"
-            @refetch="refetchData"
+            @activate-analysis="activateAnalysis"
           />
           <repo-error v-else />
         </div>
@@ -80,8 +81,9 @@
           <repo-timeout
             v-else-if="hasLastRunTimedOut"
             :id="repository.id"
+            :activate-analysis-loading="activateAnalysisLoading"
             :name="repository.name"
-            @refetch="refetchData"
+            @activate-analysis="activateAnalysis"
           />
           <repo-waiting v-else />
         </div>
@@ -90,9 +92,10 @@
       <div v-else class="p-5">
         <repo-inactive
           :id="repository.id"
+          :activate-analysis-loading="activateAnalysisLoading"
+          :default-branch-name="repository.defaultBranchName"
           :name="repository.name"
-          :defaultBranchName="repository.defaultBranchName"
-          @refetch="refetchData"
+          @activate-analysis="activateAnalysis"
         />
       </div>
     </div>
@@ -111,17 +114,17 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins, Watch } from 'nuxt-property-decorator'
 import { ZAlert, ZButton, ZIcon, ZLabel } from '@deepsource/zeal'
+import { Component, mixins, Watch } from 'nuxt-property-decorator'
 
-import AuthMixin from '@/mixins/authMixin'
-import RepoDetailMixin from '~/mixins/repoDetailMixin'
-import PortalMixin from '@/mixins/portalMixin'
-
-import { RunStatus } from '~/types/types'
+import AuthMixin from '~/mixins/authMixin'
 import InstallAutofixMixin from '~/mixins/installAutofixMixin'
-import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import PaletteMixin from '~/mixins/paletteMixin'
+import PortalMixin from '~/mixins/portalMixin'
+import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import RoleAccessMixin from '~/mixins/roleAccessMixin'
+
+import { RepositoryKindChoices, RunStatus } from '~/types/types'
 
 /**
  * Layout file for `repository` views.
@@ -133,7 +136,7 @@ import PaletteMixin from '~/mixins/paletteMixin'
     ZIcon,
     ZLabel
   },
-  middleware: ['hidePrivateRepo'],
+  middleware: ['hidePrivateRepo', 'protectMonorepoRoutes'],
   head: {
     bodyAttrs: {
       class: 'antialiased stroke-2 hide-scroll'
@@ -149,6 +152,8 @@ export default class RepositoryLayout extends mixins(
   PaletteMixin
 ) {
   private pollingId = 0
+
+  activateAnalysisLoading = false
 
   /**
    * Fetch hook for the repository layout.
@@ -171,16 +176,12 @@ export default class RepositoryLayout extends mixins(
    * @returns {Promise<void>}
    */
   async refetchData(): Promise<void> {
-    await Promise.all([
-      this.fetchBasicRepoDetails({
-        ...this.baseRouteParams,
-        refetch: true
-      }),
-      this.fetchWidgets({
-        ...this.baseRouteParams,
-        refetch: true
-      })
-    ])
+    const args = {
+      ...this.baseRouteParams,
+      refetch: true
+    }
+
+    await Promise.all([this.fetchBasicRepoDetails(args), this.fetchWidgets(args)])
   }
 
   /**
@@ -234,6 +235,10 @@ export default class RepositoryLayout extends mixins(
   }
 
   get allowedOnBroken(): boolean {
+    if (this.repository.kind === RepositoryKindChoices.Monorepo) {
+      return true
+    }
+
     if (this.repository.errorCode === 3003) {
       // For ad-hoc runs
       return true
@@ -392,6 +397,23 @@ export default class RepositoryLayout extends mixins(
       ],
       'provider-owner-repo'
     )
+  }
+
+  async activateAnalysis({ showSuccessToast = false } = {}): Promise<void> {
+    this.activateAnalysisLoading = true
+    await this.toggleRepoActivation({
+      isActivated: true,
+      id: this.repository.id,
+      login: this.$route.params.owner,
+      provider: this.$route.params.provider
+    })
+    this.activateAnalysisLoading = false
+
+    if (showSuccessToast) {
+      this.$toast.success(`Triggered run for ${this.repository.name}, this might take a while.`)
+    }
+
+    this.refetchData()
   }
 }
 </script>

@@ -76,6 +76,8 @@
         v-bind="issueOccurrence"
         :key="issueOccurrence.id"
         :blob-url-root="blobUrlRoot"
+        :is-subrepo="isSubrepo"
+        :repo-path="repoPath"
         :can-ignore-issues="canIgnoreIssues"
         :check-id="checkId"
         :check-issue-ids="issuesIgnored"
@@ -159,6 +161,12 @@ export default class IssueList extends Vue {
 
   @Prop({ default: false })
   snippetsFetchErrored: boolean
+
+  @Prop({ default: false })
+  isSubrepo: boolean
+
+  @Prop({ default: '' })
+  repoPath: string
 
   issuesIgnored: string[] = []
 

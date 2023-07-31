@@ -1,0 +1,45 @@
+query ownerRepoList(
+  $login: String!
+  $provider: VCSProviderChoices!
+  $getSubrepoCount: Boolean!
+  $isActivated: Boolean
+  $kindIn: [RepositoryKindChoices]
+  $limit: Int
+  $after: String
+  $query: String
+) {
+  owner(login: $login, provider: $provider) {
+    id
+    repositories(
+      isActivated: $isActivated
+      kindIn: $kindIn
+      first: $limit
+      after: $after
+      name_Icontains: $query
+    ) {
+      totalCount
+      edges {
+        node {
+          id
+          name
+          displayName
+          kind
+          vcsProvider
+          ownerLogin
+          createdAt
+          modifiedAt
+          isActivated
+          isPrivate
+          latestCommitOid
+          defaultBranchName
+          lastAnalyzedAt
+          canBeActivated
+
+          subRepos @include(if: $getSubrepoCount) {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+}

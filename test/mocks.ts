@@ -1,5 +1,5 @@
 import { providerMetaMap } from '~/plugins/helpers/provider'
-import { VcsProviderChoices } from '~/types/types'
+import { RepositoryKindChoices, VcsProviderChoices } from '~/types/types'
 
 export const mocksGenerator: (overrides?: Record<string, unknown>) => Record<string, unknown> = (
   overrides = {}
@@ -306,6 +306,7 @@ export const storeModulesGenerator = (overrides = {}) => {
             id: 'UmVwb3NpdG9yeTp6dmp2eXo=',
             vcsProvider: VcsProviderChoices.Github,
             isActivated: true,
+            kind: RepositoryKindChoices.Repo,
             issueTypeDistribution: [
               {
                 shortcode: 'all',

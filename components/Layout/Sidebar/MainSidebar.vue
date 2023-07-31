@@ -3,7 +3,7 @@
   <aside
     v-outside-click="closeMenu"
     class="transition-width group fixed top-0 z-50 flex h-screen transform-gpu flex-col border-r border-slate-400 bg-ink-400 duration-200 lg:sticky lg:left-0"
-    :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
+    :class="[isOpen ? 'left-0' : '-left-full', isCollapsed ? 'w-14' : 'w-72']"
   >
     <template v-if="!toOnboard">
       <!-- Context switcher -->
@@ -27,7 +27,7 @@
           <z-icon icon="plus" size="small" color="vanilla-400" class="min-h-4 min-w-4" />
           <span v-show="!isCollapsed" class="text-sm font-medium">Activate new repository</span>
         </button>
-        <nav class="space-y-2">
+        <nav class="space-y-2" :class="{ 'w-full lg:w-56': !isCollapsed }">
           <sidebar-item
             v-tooltip="{
               content: isCollapsed ? 'Home' : '',

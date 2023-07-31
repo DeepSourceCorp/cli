@@ -128,6 +128,7 @@ export default {
     '~/plugins/helpers/error.ts',
     '~/plugins/helpers/storage.client.ts',
     '~/plugins/helpers/worker.client.ts',
+    '~/plugins/helpers/ownerFeatures.ts',
     '~/plugins/components/toasts.client.ts',
     '~/plugins/components/floatingVue.ts',
     '~/plugins/components/palette.client.ts'

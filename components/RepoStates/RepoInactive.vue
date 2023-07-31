@@ -2,15 +2,17 @@
   <base-state :title="noticeTitle">
     <template #hero>
       <img
-        class="mx-auto mb-4"
         :src="require('~/assets/images/ui-states/repo/inactive.svg')"
         alt="Repo Inactive"
+        class="mx-auto mb-4"
       />
     </template>
+
     <p>
       This repository is not activated, generate a new config or activate the repository directly if
       a <code class="font-medium text-vanilla-200">.deepsource.toml</code> already exists.
     </p>
+
     <div
       v-if="(repository.canBeActivated || repository.isActivated) && canActivateRepo"
       class="flex items-center justify-center space-x-5"
@@ -23,31 +25,34 @@
 
       <z-button
         v-if="!configNotAdded"
-        :is-loading="activateLoading"
-        :disabled="activateLoading"
+        :disabled="activateAnalysisLoading"
+        :is-loading="activateAnalysisLoading"
         loading-label="Activating Repository"
         icon="check-circle"
         size="small"
         class="mt-4"
-        @click="activateAnalysis"
+        @click="$emit('activate-analysis')"
       >
         Activate repository
       </z-button>
     </div>
+
     <div v-else-if="canViewerUpgrade">
-      <p class="max-w-xl mt-2">
+      <p class="mt-2 max-w-xl">
         You have reached the limit for the number of private repositories you can activate on this
         account, upgrade plan to activate this repository.
       </p>
+
       <nuxt-link
-        class="block"
         :to="['', $route.params.provider, $route.params.owner, 'settings', 'billing'].join('/')"
+        class="block"
       >
         <z-button icon="arrow-up" size="small" class="mt-4"> Upgrade Plan </z-button>
       </nuxt-link>
     </div>
+
     <div v-else-if="canRequestRepoActivation">
-      <p class="max-w-xl mt-2">
+      <p class="mt-2 max-w-xl">
         Please get in touch with the owner of your organization to activate analysis for this
         repository.
       </p>
@@ -55,34 +60,33 @@
   </base-state>
 </template>
 <script lang="ts">
-import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon } from '@deepsource/zeal'
-import { BaseState } from '.'
+import { ZButton } from '@deepsource/zeal'
+import { Component, mixins, Prop } from 'nuxt-property-decorator'
 
-import { Repository, TeamMemberRoleChoices } from '~/types/types'
 import { RepoPerms, TeamPerms } from '~/types/permTypes'
+import { Repository, TeamMemberRoleChoices } from '~/types/types'
 
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 
 @Component({
+  name: 'RepoInactive',
   components: {
-    BaseState,
-    ZButton,
-    ZIcon
+    ZButton
   }
 })
 export default class RepoInactive extends mixins(RepoDetailMixin, RoleAccessMixin) {
+  @Prop()
+  defaultBranchName: Repository['defaultBranchName']
+
   @Prop()
   id: Repository['id']
 
   @Prop()
   name: Repository['name']
 
-  @Prop()
-  defaultBranchName: Repository['defaultBranchName']
-
-  activateLoading = false
+  @Prop({ default: false })
+  activateAnalysisLoading: boolean
 
   get canViewerUpgrade(): boolean {
     return this.$gateKeeper.team(TeamPerms.CHANGE_PLAN, this.teamPerms.permission)
@@ -118,16 +122,6 @@ export default class RepoInactive extends mixins(RepoDetailMixin, RoleAccessMixi
 
   get canRequestRepoActivation(): boolean {
     return this.$gateKeeper.repo(RepoPerms.READ_REPO, this.repoPerms.permission)
-  }
-
-  async activateAnalysis(): Promise<void> {
-    this.activateLoading = true
-    await this.toggleRepoActivation({
-      isActivated: true,
-      id: this.id
-    })
-    this.activateLoading = false
-    this.$emit('refetch')
   }
 }
 </script>

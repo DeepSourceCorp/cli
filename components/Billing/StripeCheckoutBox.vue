@@ -1,7 +1,7 @@
 <template>
-  <div class="relative grid grid-cols-1 gap-4 p-3 rounded-md bg-ink-300 ph-no-capture">
+  <div class="ph-no-capture relative grid grid-cols-1 gap-4 rounded-md bg-ink-300 p-3">
     <div
-      class="absolute right-0 top-0 leading-none bg-ink-200 rounded-bl-md text-xs px-2 py-1.5 text-vanilla-400"
+      class="absolute right-0 top-0 rounded-bl-md bg-ink-200 px-2 py-1.5 text-xs leading-none text-vanilla-400"
     >
       Powered by
       <img class="inline" width="30" height="14" alt="stripe" src="~/assets/images/stripe.svg" />
@@ -29,7 +29,7 @@
       <label class="leading-loose">Credit card number</label>
       <stripe-card-input
         ref="checkout-box-stripe-input"
-        class="px-3 py-3 text-sm border bg-ink-400"
+        class="border bg-ink-400 px-3 py-3 text-sm"
         @change="handleStripeCardChange"
       />
     </fieldset>
@@ -264,7 +264,7 @@ export default class StripeCheckoutBox extends mixins(
           this.$toast.success(
             "🎉 Subscription activated! Let's activate a repository and get started."
           )
-          redirectRoute = this.$generateRoute(['all-repos'])
+          redirectRoute = this.$generateRoute(['repos'])
           setTimeout(() => {
             this.$router.push(redirectRoute)
           }, 1200)

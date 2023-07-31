@@ -79,7 +79,12 @@ export default class RepoSyncMixin extends mixins(OwnerDetailMixin, RepoListMixi
   async repoSyncCallback(data: { status: string; message?: string }): Promise<void> {
     // Show success/error toast if not syncing single repo.
     // Show err message text in UI if syncing single repo.
+
+    const { owner, provider } = this.$route.params
+
     if (data.status === 'success') {
+      this.$localStore.set(`${provider}-${owner}`, 'refetch-team-repo-list', true)
+
       await this.fetchReposAfterSync()
       this.repoToSync = ''
       this.singleRepoSyncErrMsg = ''

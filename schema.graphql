@@ -96,6 +96,19 @@ type AddIdentityProviderPayload {
   clientMutationId: String
 }
 
+input AddSubRepoInput {
+  monorepoId: ID!
+  defaultBranchName: String!
+  path: String!
+  clientMutationId: String
+}
+
+type AddSubRepoPayload {
+  ok: Boolean
+  repository: Repository
+  clientMutationId: String
+}
+
 input AddTeamToGroupInput {
   groupId: ID!
   teamId: ID!
@@ -977,6 +990,16 @@ type DeleteSilenceRulePayload {
   clientMutationId: String
 }
 
+input DeleteSubRepoInput {
+  subRepoId: ID!
+  clientMutationId: String
+}
+
+type DeleteSubRepoPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
 input DeleteTeamInput {
   teamId: ID!
   clientMutationId: String
@@ -1007,6 +1030,16 @@ type DeleteWebhookPayload {
   clientMutationId: String
 }
 
+input DisableMonorepoModeInput {
+  repositoryId: ID!
+  clientMutationId: String
+}
+
+type DisableMonorepoModePayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
 input DisableWebhookInput {
   webhookId: ID!
   clientMutationId: String
@@ -1020,6 +1053,16 @@ type DisableWebhookPayload {
 type Discount {
   coupon: CouponInfo
   credits: CreditsInfo
+}
+
+input EnableMonorepoModeInput {
+  repositoryId: ID!
+  clientMutationId: String
+}
+
+type EnableMonorepoModePayload {
+  ok: Boolean
+  clientMutationId: String
 }
 
 type EnterpriseBillingInfo {
@@ -1836,6 +1879,10 @@ enum MetricTypeChoices {
 }
 
 type Mutation {
+  enableMonorepoMode(input: EnableMonorepoModeInput!): EnableMonorepoModePayload
+  disableMonorepoMode(input: DisableMonorepoModeInput!): DisableMonorepoModePayload
+  addSubRepo(input: AddSubRepoInput!): AddSubRepoPayload
+  deleteSubRepo(input: DeleteSubRepoInput!): DeleteSubRepoPayload
   createWebhook(input: CreateWebhookInput!): CreateWebhookPayload
   testWebhook(input: TestWebhookInput!): TestWebhookPayload
   updateWebhook(input: UpdateWebhookInput!): UpdateWebhookPayload
@@ -1997,7 +2044,7 @@ type Owner implements MaskPrimaryKeyNode {
   analyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
   issuePriorities(offset: Int, before: String, after: String, first: Int, last: Int): IssuePriorityConnection!
   team: EnterpriseTeam
-  repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
+  repositories(kindIn: [RepositoryKindChoices], offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
   userSet(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   configTemplates(offset: Int, before: String, after: String, first: Int, last: Int, shortcode: String, title_Icontains: String): ConfigTemplateConnection
   onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
@@ -2041,6 +2088,7 @@ type Owner implements MaskPrimaryKeyNode {
   installedIntegrations(feature: IntegrationFeature): [IntegrationProvider]
   repositoriesCoverageReport(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String): RepositoryCoverageReportItemConnection
   activeRepositoryCount: Int
+  supportTier: SupportTierChoices!
 }
 
 type OwnerCacheKeys {
@@ -2422,6 +2470,7 @@ type Repository implements MaskPrimaryKeyNode {
   latestTrainedRun: Run
   primaryAnalyzer: Analyzer
   majorityAnalyzer: Analyzer
+  kind: RepositoryKindChoices!
   analyzer: Analyzer
   issuePriorities(offset: Int, before: String, after: String, first: Int, last: Int): IssuePriorityConnection!
   checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
@@ -2440,6 +2489,7 @@ type Repository implements MaskPrimaryKeyNode {
   lastAnalyzedAt: DateTime
   blobUrlRoot: String
   fullName: String
+  displayName: String!
   renderedErrorMessage: String
   issueTypeSettings: [IssueTypeSetting]
   issuePrioritySettings: [IssuePrioritySetting]
@@ -2494,6 +2544,8 @@ type Repository implements MaskPrimaryKeyNode {
   hasHacktoberfestEnabled: Boolean
   gitlabIntegrationUseStatus: Boolean
   setting: RepositorySetting
+  path: String
+  subRepos(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
 }
 
 type RepositoryCollaborator implements MaskPrimaryKeyNode {
@@ -2614,6 +2666,12 @@ enum RepositoryIssueSeverityChoices {
   CRITICAL
   MAJOR
   MINOR
+}
+
+enum RepositoryKindChoices {
+  REPO
+  MONOREPO
+  SUBREPO
 }
 
 type RepositoryMetricValue implements MaskPrimaryKeyNode {
@@ -2933,9 +2991,9 @@ enum SubscriptionStatusChoice {
 }
 
 enum SupportTierChoices {
+  COMMUNITY
   ENTERPRISE
   STANDARD
-  COMMUNITY
 }
 
 input SwitchToAsgardInput {

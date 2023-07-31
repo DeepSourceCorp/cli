@@ -1,0 +1,29 @@
+query subRepositoryList(
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $first: Int
+  $after: String
+  $name_Icontains: String
+) {
+  repository(provider: $provider, name: $name, owner: $owner) {
+    id
+    subRepos(first: $first, after: $after, name_Icontains: $name_Icontains) {
+      totalCount
+      edges {
+        node {
+          id
+          name
+          displayName
+          vcsProvider
+          isActivated
+          isPrivate
+          latestCommitOid
+          defaultBranchName
+          lastAnalyzedAt
+          kind
+        }
+      }
+    }
+  }
+}

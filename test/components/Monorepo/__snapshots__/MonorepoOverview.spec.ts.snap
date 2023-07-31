@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ MonorepoOverview ]] Empty states no activated sub-repositories 1`] = `
+"<div class=\\"space-y-4\\">
+  <div class=\\"monorepo-empty-state-card-shadow mx-auto mt-36 max-w-md space-y-6 rounded-md border border-ink-200 bg-ink-300 p-8 lg:mt-52 lg:max-w-lg\\">
+    <source srcset=\\"~/assets/images/ui-states/no-activated-sub-repositories-state.webp\\" type=\\"image/webp\\"> <img src=\\"~/assets/images/ui-states/no-activated-sub-repositories-state.png\\" alt=\\"No activated sub-repositories\\">
+    <div class=\\"space-y-2\\">
+      <h2 class=\\"text-base font-medium text-vanilla-100\\">Define a new sub-repository</h2>
+      <p class=\\"text-sm font-normal text-vanilla-400\\">
+        This monorepo has no activated sub-repositories yet. Define a new sub-repository to start
+        analyzing your code.
+      </p>
+    </div>
+    <!---->
+  </div>
+  <zpagination-stub page=\\"1\\" totalpages=\\"10\\" totalvisible=\\"5\\" hideforsinglepage=\\"true\\" class=\\"flex justify-center\\"></zpagination-stub>
+</div>"
+`;
+
+exports[`[[ MonorepoOverview ]] Empty states search query that does not yield a result 1`] = `
+"<div class=\\"space-y-4 max-w-3xl\\">
+  <div class=\\"flex gap-x-2\\">
+    <zinput-stub name=\\"\\" value=\\"test\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for a sub-repository\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"w-full\\"></zinput-stub>
+    <!---->
+  </div>
+  <lazyemptystate-stub png-image-path=\\"test-image-dir/test-image-file.png\\" title=\\"No results found for 'test'\\" webp-image-path=\\"test-image-dir/test-image-file.png\\" subtitle=\\"Please try changing your search query.\\"></lazyemptystate-stub>
+  <zpagination-stub page=\\"1\\" totalpages=\\"10\\" totalvisible=\\"5\\" hideforsinglepage=\\"true\\" class=\\"flex justify-center\\"></zpagination-stub>
+</div>"
+`;
+
+exports[`[[ MonorepoOverview ]] renders different states based on the \`loading\` and \`showAddSubRepositoryCta\` prop combinations: {"showAddSubRepositoryCta":false,"loading":false} 1`] = `
+"<div class=\\"space-y-4 max-w-3xl\\">
+  <div class=\\"flex gap-x-2\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for a sub-repository\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"w-full\\"></zinput-stub>
+    <!---->
+  </div>
+  <div class=\\"space-y-3\\">
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-1\\" show-inactive-tag=\\"true\\" size=\\"small\\" id=\\"test-id-1\\" name=\\"sub-repository-1\\" vcsprovider=\\"GITHUB\\" isprivate=\\"true\\" latestcommitoid=\\"test-commit-oid-1\\" defaultbranchname=\\"main\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-2\\" show-inactive-tag=\\"true\\" size=\\"small\\" id=\\"test-id-2\\" name=\\"sub-repository-2\\" vcsprovider=\\"GITHUB\\" isprivate=\\"true\\" latestcommitoid=\\"test-commit-oid-2\\" defaultbranchname=\\"main\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-3\\" show-inactive-tag=\\"true\\" size=\\"small\\" id=\\"test-id-3\\" name=\\"sub-repository-3\\" vcsprovider=\\"GITHUB\\" isprivate=\\"true\\" latestcommitoid=\\"test-commit-oid-3\\" defaultbranchname=\\"main\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-4\\" show-inactive-tag=\\"true\\" size=\\"small\\" id=\\"test-id-4\\" name=\\"sub-repository-4\\" vcsprovider=\\"GITHUB\\" isprivate=\\"true\\" latestcommitoid=\\"test-commit-oid-4\\" defaultbranchname=\\"main\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-5\\" show-inactive-tag=\\"true\\" size=\\"small\\" id=\\"test-id-5\\" name=\\"sub-repository-5\\" vcsprovider=\\"GITHUB\\" isprivate=\\"true\\" latestcommitoid=\\"test-commit-oid-5\\" defaultbranchname=\\"main\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-6\\" show-inactive-tag=\\"true\\" size=\\"small\\" id=\\"test-id-6\\" name=\\"sub-repository-6\\" vcsprovider=\\"GITHUB\\" latestcommitoid=\\"test-commit-oid-6\\" defaultbranchname=\\"main\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-7\\" size=\\"small\\" id=\\"test-id-7\\" name=\\"sub-repository-7\\" vcsprovider=\\"GITHUB\\" isactivated=\\"true\\" latestcommitoid=\\"test-commit-oid-7\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-8\\" size=\\"small\\" id=\\"test-id-8\\" name=\\"sub-repository-8\\" vcsprovider=\\"GITHUB\\" isactivated=\\"true\\" latestcommitoid=\\"test-commit-oid-8\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-9\\" size=\\"small\\" id=\\"test-id-9\\" name=\\"sub-repository-9\\" vcsprovider=\\"GITHUB\\" isactivated=\\"true\\" latestcommitoid=\\"test-commit-oid-9\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-10\\" size=\\"small\\" id=\\"test-id-10\\" name=\\"sub-repository-10\\" vcsprovider=\\"GITHUB\\" isactivated=\\"true\\" latestcommitoid=\\"test-commit-oid-10\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+  </div>
+  <zpagination-stub page=\\"1\\" totalpages=\\"10\\" totalvisible=\\"5\\" hideforsinglepage=\\"true\\" class=\\"flex justify-center\\"></zpagination-stub>
+</div>"
+`;
+
+exports[`[[ MonorepoOverview ]] renders different states based on the \`loading\` and \`showAddSubRepositoryCta\` prop combinations: {"showAddSubRepositoryCta":false,"loading":true} 1`] = `
+"<div class=\\"space-y-4 max-w-3xl\\">
+  <div class=\\"h-8 animate-pulse bg-ink-300\\"></div>
+  <div class=\\"space-y-3\\">
+    <div class=\\"h-18 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"h-18 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"h-18 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"h-18 animate-pulse bg-ink-300\\"></div>
+  </div>
+  <zpagination-stub page=\\"1\\" totalpages=\\"10\\" totalvisible=\\"5\\" hideforsinglepage=\\"true\\" class=\\"flex justify-center\\"></zpagination-stub>
+</div>"
+`;
+
+exports[`[[ MonorepoOverview ]] renders different states based on the \`loading\` and \`showAddSubRepositoryCta\` prop combinations: {"showAddSubRepositoryCta":true,"loading":false} 1`] = `
+"<div class=\\"space-y-4 max-w-3xl\\">
+  <div class=\\"flex gap-x-2\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for a sub-repository\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"w-full\\"></zinput-stub>
+    <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"folder-plus\\">New sub-repository</zbutton-stub>
+  </div>
+  <div class=\\"space-y-3\\">
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-1\\" show-inactive-tag=\\"true\\" size=\\"small\\" id=\\"test-id-1\\" name=\\"sub-repository-1\\" vcsprovider=\\"GITHUB\\" isprivate=\\"true\\" latestcommitoid=\\"test-commit-oid-1\\" defaultbranchname=\\"main\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-2\\" show-inactive-tag=\\"true\\" size=\\"small\\" id=\\"test-id-2\\" name=\\"sub-repository-2\\" vcsprovider=\\"GITHUB\\" isprivate=\\"true\\" latestcommitoid=\\"test-commit-oid-2\\" defaultbranchname=\\"main\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-3\\" show-inactive-tag=\\"true\\" size=\\"small\\" id=\\"test-id-3\\" name=\\"sub-repository-3\\" vcsprovider=\\"GITHUB\\" isprivate=\\"true\\" latestcommitoid=\\"test-commit-oid-3\\" defaultbranchname=\\"main\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-4\\" show-inactive-tag=\\"true\\" size=\\"small\\" id=\\"test-id-4\\" name=\\"sub-repository-4\\" vcsprovider=\\"GITHUB\\" isprivate=\\"true\\" latestcommitoid=\\"test-commit-oid-4\\" defaultbranchname=\\"main\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-5\\" show-inactive-tag=\\"true\\" size=\\"small\\" id=\\"test-id-5\\" name=\\"sub-repository-5\\" vcsprovider=\\"GITHUB\\" isprivate=\\"true\\" latestcommitoid=\\"test-commit-oid-5\\" defaultbranchname=\\"main\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-6\\" show-inactive-tag=\\"true\\" size=\\"small\\" id=\\"test-id-6\\" name=\\"sub-repository-6\\" vcsprovider=\\"GITHUB\\" latestcommitoid=\\"test-commit-oid-6\\" defaultbranchname=\\"main\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-7\\" size=\\"small\\" id=\\"test-id-7\\" name=\\"sub-repository-7\\" vcsprovider=\\"GITHUB\\" isactivated=\\"true\\" latestcommitoid=\\"test-commit-oid-7\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-8\\" size=\\"small\\" id=\\"test-id-8\\" name=\\"sub-repository-8\\" vcsprovider=\\"GITHUB\\" isactivated=\\"true\\" latestcommitoid=\\"test-commit-oid-8\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-9\\" size=\\"small\\" id=\\"test-id-9\\" name=\\"sub-repository-9\\" vcsprovider=\\"GITHUB\\" isactivated=\\"true\\" latestcommitoid=\\"test-commit-oid-9\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+    <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-10\\" size=\\"small\\" id=\\"test-id-10\\" name=\\"sub-repository-10\\" vcsprovider=\\"GITHUB\\" isactivated=\\"true\\" latestcommitoid=\\"test-commit-oid-10\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
+  </div>
+  <zpagination-stub page=\\"1\\" totalpages=\\"10\\" totalvisible=\\"5\\" hideforsinglepage=\\"true\\" class=\\"flex justify-center\\"></zpagination-stub>
+</div>"
+`;
+
+exports[`[[ MonorepoOverview ]] renders different states based on the \`loading\` and \`showAddSubRepositoryCta\` prop combinations: {"showAddSubRepositoryCta":true,"loading":true} 1`] = `
+"<div class=\\"space-y-4 max-w-3xl\\">
+  <div class=\\"h-8 animate-pulse bg-ink-300\\"></div>
+  <div class=\\"space-y-3\\">
+    <div class=\\"h-18 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"h-18 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"h-18 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"h-18 animate-pulse bg-ink-300\\"></div>
+  </div>
+  <zpagination-stub page=\\"1\\" totalpages=\\"10\\" totalvisible=\\"5\\" hideforsinglepage=\\"true\\" class=\\"flex justify-center\\"></zpagination-stub>
+</div>"
+`;

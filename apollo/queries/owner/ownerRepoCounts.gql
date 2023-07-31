@@ -1,0 +1,14 @@
+query ownerRepoCounts($login: String!, $provider: VCSProviderChoices!) {
+  owner(login: $login, provider: $provider) {
+    id
+    activeRepoCount: repositories(isActivated: true, kindIn: [REPO, SUBREPO]) {
+      totalCount
+    }
+    inactiveRepoCount: repositories(isActivated: false, kindIn: [REPO, SUBREPO]) {
+      totalCount
+    }
+    monorepoCount: repositories(isActivated: false, kindIn: [MONOREPO]) {
+      totalCount
+    }
+  }
+}

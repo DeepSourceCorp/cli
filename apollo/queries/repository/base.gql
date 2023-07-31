@@ -5,9 +5,11 @@ query BaseRepoQuery($provider: VCSProviderChoices!, $owner: String!, $name: Stri
     isActivated
     isPrivate
     isStarred
+    kind
     errorCode
     renderedErrorMessage
     fullName
+    displayName
     defaultBranchName
     vcsProvider
     vcsDefaultBranchUrl
@@ -15,6 +17,7 @@ query BaseRepoQuery($provider: VCSProviderChoices!, $owner: String!, $name: Stri
     canBeActivated
     isAutofixEnabled
     blobUrlRoot
+    path
     lastRun {
       id
       runId

@@ -3,7 +3,7 @@
     <template #trigger="{ toggle, isOpen }">
       <button
         type="button"
-        class="flex items-center w-full p-1 space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none"
+        class="flex items-center w-full p-1 space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none truncate"
         :class="getTriggerButtonStyle(isOpen)"
         @click="() => handleToggle(toggle)"
       >

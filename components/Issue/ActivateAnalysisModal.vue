@@ -10,7 +10,7 @@
               : `create a ${pullLabel} request with the following`
           }}
           configuration in a <span class="font-mono text-vanilla-200">.deepsource.toml</span> file.
-          <div class="p-3 my-3 text-xs rounded-md bg-ink-200">
+          <div class="my-3 rounded-md bg-ink-200 p-3 text-xs">
             <highlightjs language="toml" :code="toml" />
           </div>
         </div>
@@ -22,7 +22,7 @@
         </p>
       </section>
       <template #footer="{ close }">
-        <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
+        <div class="space-x-4 border-slate-400 p-4 text-right text-vanilla-100">
           <z-button
             v-if="repository.isCommitPossible"
             :is-loading="triggeringActivation"
@@ -94,7 +94,6 @@ export default class ActivateAnalysisModal extends mixins(
     await this.fetchActiveAnalysisRepoList({
       login: owner,
       provider,
-      limit: 10,
       refetch: true
     })
 

@@ -61,7 +61,9 @@ export enum RepoPerms {
   PIN_REPORTS = 'pinReports',
   REGENERATE_DSN = 'regenerateDSN',
   VIEW_CODE_COVERAGE_SETTINGS = 'viewCodeCoverageSettings',
-  RETRY_ANALYSIS = 'retryAnalysis'
+  RETRY_ANALYSIS = 'retryAnalysis',
+  TOGGLE_MONOREPO_MODE = 'toggleMonorepoMode',
+  ADD_SUB_REPOSITORY = 'addSubRepository'
 }
 
 export enum AppFeatures {
@@ -70,5 +72,6 @@ export enum AppFeatures {
   WEBHOOKS = 'webhooks',
   AUTO_ONBOARD = 'autoOnboard',
   SYNC_ACCESS_SETTINGS = 'syncAccessSettings',
-  CREATE_ISSUE_ON_VCS = 'createIssueOnVCS'
+  CREATE_ISSUE_ON_VCS = 'createIssueOnVCS',
+  MONOREPO = 'monorepo'
 }

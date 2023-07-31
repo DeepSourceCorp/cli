@@ -176,6 +176,7 @@
       v-if="showAddRepoModal"
       :show-modal="showAddRepoModal"
       :show-auto-onboard="false"
+      :show-monorepo="false"
       :analyzer-shortcode="isAnalyzer ? shortcode : analyzerShortcode"
       :transformer-shortcode="isAnalyzer ? '' : shortcode"
       @close="showAddRepoModal = false"

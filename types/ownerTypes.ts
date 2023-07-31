@@ -5,5 +5,6 @@ export interface OwnerFeature {
 }
 
 export enum OwnerFeatureType {
-  AUDIT_LOG = 'audit_log'
+  AUDIT_LOG = 'audit_log',
+  MONOREPO = 'monorepo'
 }

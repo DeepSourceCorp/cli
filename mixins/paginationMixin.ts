@@ -11,6 +11,10 @@ export default class PaginationMixin extends Vue {
   public currentPage = 1
   public totalCount = 0
 
+  get queryAfter(): string {
+    return this.$getGQLAfter(this.currentPage, this.perPageCount)
+  }
+
   get queryOffset(): number {
     return (this.currentPage - 1) * this.perPageCount
   }

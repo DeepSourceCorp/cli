@@ -31,7 +31,7 @@
                 :color="repo.isActive ? 'juniper' : ''"
                 class="min-h-4 min-w-4"
               />
-              <div class="text-sm">{{ repo.name }}</div>
+              <div class="text-sm">{{ repo.displayName }}</div>
             </div>
           </z-menu-item>
         </z-menu-section>
@@ -71,7 +71,7 @@
           :to="buildRoute(repo)"
           :class="isCollapsed ? 'hidden' : 'block'"
         >
-          {{ repo.name }}
+          {{ repo.displayName }}
         </sidebar-item>
       </div>
     </template>
@@ -83,6 +83,7 @@ import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZTag } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
+import { Repository, RepositoryKindChoices } from '~/types/types'
 
 @Component({
   components: {
@@ -119,12 +120,11 @@ export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoL
     this.$socket.$off('repo-onboarding-completed')
   }
 
-  async fetchRepos(refetch?: boolean): Promise<void> {
+  async fetchRepos(refetch = false): Promise<void> {
     await this.fetchActiveAnalysisRepoList({
       login: this.activeOwner,
       provider: this.activeProvider,
-      limit: 5,
-      refetch: refetch
+      refetch
     })
   }
 
@@ -147,21 +147,34 @@ export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoL
 
   get repoList(): Array<Record<string, unknown>> {
     if (this.repoWithActiveAnalysis) {
-      return this.repoWithActiveAnalysis.map((repo) => {
-        return {
-          name: repo.name,
-          id: repo.id,
-          owner: repo.ownerLogin,
-          icon: repo.isPrivate ? 'z-lock' : 'globe',
-          isActive: false
+      return this.repoWithActiveAnalysis.map(
+        ({ id, displayName, isPrivate, kind, name, ownerLogin }) => {
+          const icon = this.getIcon({ isPrivate, kind })
+
+          return {
+            id,
+            displayName,
+            name,
+            owner: ownerLogin,
+            icon,
+            isActive: false
+          }
         }
-      })
+      )
     }
     return []
   }
 
   buildRoute(repo: Record<string, unknown>): string {
     return `/${this.activeProvider}/${repo.owner ?? this.activeOwner}/${repo.name}`
+  }
+
+  getIcon({ isPrivate, kind }: Pick<Repository, 'isPrivate' | 'kind'>): string {
+    if (kind === RepositoryKindChoices.Subrepo) {
+      return isPrivate ? 'folder-locked' : 'folder-globe'
+    }
+
+    return isPrivate ? 'z-lock' : 'globe'
   }
 
   toggleDropdown(): void {

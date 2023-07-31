@@ -4,6 +4,7 @@ import { render } from '@testing-library/vue'
 import ActivateSingleRepo from '~/components/AddRepo/ActivateSingleRepo.vue'
 
 import { mocksGenerator, storeModulesGenerator } from '~/test/mocks'
+import { RepositoryKindChoices } from '~/types/types'
 
 describe('[[ ActivateSingleRepo ]]', () => {
   const baseProps = {
@@ -46,6 +47,8 @@ describe('[[ ActivateSingleRepo ]]', () => {
               latestCommitOid: 'a8935a7125356db4cff400415f7061b2e5491591',
               defaultBranchName: 'master',
               lastAnalyzedAt: '2020-07-09T08:56:51.012793+00:00',
+              isActivated: true,
+              kind: RepositoryKindChoices.Repo,
               supportedAnalyzers: ['python', 'docker', 'javascript']
             },
             {
@@ -58,6 +61,8 @@ describe('[[ ActivateSingleRepo ]]', () => {
               latestCommitOid: 'fc773cf6b1b0c2f5d3bef0ad78eaf8f3c991cdf5',
               defaultBranchName: 'master',
               lastAnalyzedAt: '2020-06-10T10:21:17.241934+00:00',
+              isActivated: true,
+              kind: RepositoryKindChoices.Repo,
               supportedAnalyzers: ['go', 'python', 'docker']
             },
             {
@@ -70,6 +75,8 @@ describe('[[ ActivateSingleRepo ]]', () => {
               latestCommitOid: '211d079e3b315af822c0eaddc5668df5ac270b96',
               defaultBranchName: 'master',
               lastAnalyzedAt: '2020-06-09T08:39:31.291147+00:00',
+              isActivated: true,
+              kind: RepositoryKindChoices.Repo,
               supportedAnalyzers: ['go', 'docker']
             }
           ]

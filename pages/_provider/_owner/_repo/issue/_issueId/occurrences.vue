@@ -34,6 +34,8 @@
               :can-ignore-issues="canIgnoreIssues"
               :snippets-fetch-errored="snippetsFetchErrored"
               :snippets-loading="snippetsLoading"
+              :is-subrepo="isSubrepo"
+              :repo-path="repoPath"
               @ignoreIssues="ignoreIssues"
             />
           </div>
@@ -65,7 +67,7 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 
-import { CheckIssue } from '~/types/types'
+import { CheckIssue, RepositoryKindChoices } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
 import { AnalysisRequestBodyT, fetchSnippets } from '~/utils/runner'
 import { makeSafeNumber } from '~/utils/string'
@@ -109,7 +111,7 @@ export default class IssuesDetails extends mixins(
       await this.fetchChildren()
     } catch (err) {
       const typedError = err as Error
-      const errMsg = `${typedError.message.replace('Graphql error: ', '')}.` as `${string}.`
+      const errMsg = `${typedError.message.replace('GraphQL error: ', '')}.` as `${string}.`
 
       this.$logErrorAndToast(typedError, errMsg)
     }
@@ -222,6 +224,14 @@ export default class IssuesDetails extends mixins(
 
   get totalVisible(): number {
     return this.pageCount >= VISIBLE_PAGES ? VISIBLE_PAGES : this.pageCount
+  }
+
+  get isSubrepo(): boolean {
+    return this.repository.kind === RepositoryKindChoices.Subrepo
+  }
+
+  get repoPath(): string {
+    return this.repository.path ?? ''
   }
 
   // Fetch issue occurrence code snippets if in Runner context

@@ -15,56 +15,42 @@
         to analyze. Please give it another shot.
       </p>
     </template>
+
     <template #action>
       <z-button
-        v-if="!activateLoading"
+        :is-loading="activateAnalysisLoading"
+        :disabled="activateAnalysisLoading"
         icon="repeat"
+        label="Re-run analysis"
+        loading-label="Triggering Run"
         size="small"
         class="mt-4"
-        data-testid="activate-analysis"
-        @click="activateAnalysis"
-      >
-        Re-run analysis
-      </z-button>
-      <z-button v-else size="small" class="mt-4">
-        <z-icon class="animate-spin" icon="spin-loader" color="ink" />
-        <span>Triggering Run</span>
-      </z-button>
+        @click="$emit('activate-analysis', { showSuccessToast: true })"
+      />
     </template>
   </empty-state>
 </template>
 <script lang="ts">
-import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon } from '@deepsource/zeal'
-import { BaseState } from '.'
-import { Repository } from '~/types/types'
+import { ZButton } from '@deepsource/zeal'
+import { Component, mixins, Prop } from 'nuxt-property-decorator'
+
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import { Repository } from '~/types/types'
 
 @Component({
+  name: 'RepoTimeout',
   components: {
-    BaseState,
-    ZButton,
-    ZIcon
+    ZButton
   }
 })
-export default class RepoInactive extends mixins(RepoDetailMixin) {
+export default class RepoTimeout extends mixins(RepoDetailMixin) {
   @Prop()
   id: Repository['id']
 
   @Prop()
   name: Repository['name']
 
-  activateLoading = false
-
-  async activateAnalysis(): Promise<void> {
-    this.activateLoading = true
-    await this.toggleRepoActivation({
-      isActivated: true,
-      id: this.id
-    })
-    this.activateLoading = false
-    this.$toast.success(`Triggered run for ${this.name}, this might take a while`)
-    this.$emit('refetch')
-  }
+  @Prop({ default: false })
+  activateAnalysisLoading: boolean
 }
 </script>

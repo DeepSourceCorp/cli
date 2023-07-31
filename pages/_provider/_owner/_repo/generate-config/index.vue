@@ -1,8 +1,11 @@
 <template>
   <!-- Title -->
   <div>
-    <div class="flex items-center justify-between p-4 border-b border-slate-400">
-      <h4 class="flex items-center space-x-2 text-md text-vanilla-400">
+    <div class="flex h-13 items-center justify-between border-b border-slate-400 bg-ink-300 p-4">
+      <h4
+        class="text-md flex flex-grow items-center gap-x-2 text-vanilla-400"
+        :class="{ 'border-r border-ink-200': showMonorepoSection }"
+      >
         <z-icon :icon="repository.isPrivate ? 'z-lock' : 'globe'" size="small" />
         <span>
           <nuxt-link :to="['', $route.params.provider, owner].join('/')">{{ owner }}</nuxt-link>
@@ -10,14 +13,36 @@
           <b class="text-vanilla-100">{{ repo }}</b>
         </span>
       </h4>
+
+      <z-button
+        v-if="showMonorepoSection"
+        :loading="enablingMonorepoMode"
+        :disabled="enablingMonorepoMode"
+        button-type="ghost"
+        size="x-small"
+        color="vanilla-400"
+        class="ml-3 h-7 gap-x-0.5 hover:text-vanilla-100"
+        @click="triggerEnableMonorepo"
+      >
+        <z-icon
+          :icon="enablingMonorepoMode ? 'spin-loader' : 'monorepo'"
+          size="x-small"
+          color="current"
+          :class="{ 'animate-spin': enablingMonorepoMode }"
+        />
+        <span class="text-xs"
+          >{{ enablingMonorepoMode ? 'Onboarding' : 'Onboard' }} as a Monorepo</span
+        >
+        <z-icon icon="arrow-right" size="x-small" color="current" />
+      </z-button>
     </div>
-    <div class="grid max-w-6xl grid-cols-9 p-4 space-x-4">
+    <div class="grid max-w-6xl grid-cols-9 space-x-4 p-4">
       <!-- Steps -->
-      <z-stepper align="vertical" :show-numbers="true" class="w-full col-span-5">
+      <z-stepper align="vertical" :show-numbers="true" class="col-span-5 w-full">
         <z-step class="w-full">
           <template #title>
             <div
-              class="mt-1 text-xs font-medium leading-snug tracking-wider uppercase text-vanilla-400"
+              class="mt-1 text-xs font-medium uppercase leading-snug tracking-wider text-vanilla-400"
             >
               Analyzers
             </div>
@@ -38,7 +63,7 @@
         <z-step class="w-full">
           <template #title>
             <div
-              class="flex items-center mt-1 text-xs font-medium leading-snug tracking-wider uppercase text-vanilla-400"
+              class="mt-1 flex items-center text-xs font-medium uppercase leading-snug tracking-wider text-vanilla-400"
             >
               Patterns
               <z-tag text-size="xxs" spacing="py-1 px-3" class="ml-2 text-vanilla-400"
@@ -52,7 +77,7 @@
               :vcs-url="repository.vcsUrl"
               :test-patterns="userConfig.test_patterns || []"
               :exclude-patterns="userConfig.exclude_patterns || []"
-              class="grid grid-cols-1 gap-4 mt-2"
+              class="mt-2 grid grid-cols-1 gap-4"
               @updatePatterns="updatePatternsConfig"
             />
           </template>
@@ -64,12 +89,13 @@
           :toml="toml"
           :repo-id="repository.id"
           :is-commit-possible="repository.isCommitPossible"
-          :action-disabled="actionDisabled"
+          :primary-action-disabled="actionDisabled || enablingMonorepoMode"
+          :secondary-action-disabled="enablingMonorepoMode"
           :is-autofix-enabled="repository.isAutofixEnabled"
           :can-be-activated="repository.canBeActivated"
           :is-activated="repository.isActivated"
           :can-viewer-upgrade="canViewerUpgrade"
-          class="sticky space-y-2 top-32"
+          class="sticky top-32 space-y-2"
           @activateRepo="activateRepo"
           @toggleNextSteps="showNextStepsModal"
           @commitConfig="commitConfig"
@@ -77,7 +103,7 @@
         >
           <template #message>
             You'll be adding a
-            <span class="font-mono bg-ink-100 rounded-md text-vanilla-100 p-0.5"
+            <span class="rounded-md bg-ink-100 p-0.5 font-mono text-vanilla-100"
               >.deepsource.toml</span
             >
             file in the repository's root folder.
@@ -128,9 +154,10 @@ import { TransformerInterface } from '~/store/analyzer/list'
 import { DirectoryGetters } from '~/store/directory/directory'
 import { RepoConfigInterface, RepoConfigAnalyzerMeta } from '~/store/repository/detail'
 
-import { RepoPerms, TeamPerms } from '~/types/permTypes'
-import { Analyzer, TransformerTool } from '~/types/types'
+import { AppFeatures, RepoPerms, TeamPerms } from '~/types/permTypes'
+import { Analyzer, RepositoryKindChoices, TransformerTool } from '~/types/types'
 import AnalyzerListMixin from '~/mixins/analyzerListMixin'
+import { OwnerFeatureType } from '~/types/ownerTypes'
 
 const directoryStore = namespace('directory/directory')
 
@@ -206,6 +233,9 @@ export default class GenerateConfig extends mixins(
   isProcessing = false
   disableAnalyzerCardActions = false
 
+  enablingMonorepoMode = false
+  monorepoFeatureAllowed = false
+
   showNextStepsModal() {
     const selector = this.$refs['analyzer-selector'] as AnalyzerSelector
     const isConfigValid = selector.validateConfig(false)
@@ -223,8 +253,15 @@ export default class GenerateConfig extends mixins(
     await Promise.all([
       this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true }),
       this.fetchIsCommitPossible(this.baseRouteParams),
-      this.fetchRepoDetails(this.baseRouteParams)
+      this.fetchRepoDetails(this.baseRouteParams),
+      this.fetchOwnerFeatures(),
+      this.repoPerms.permission ? Promise.resolve() : this.fetchRepoPerms(this.baseRouteParams)
     ])
+
+    if (this.repository.kind === RepositoryKindChoices.Monorepo) {
+      return this.$nuxt.error({ statusCode: 404 })
+    }
+
     // create a deep copy, this is safe enough for now
     // deep copy to avoid mutating the state directly
     this.userConfig = Object.assign(
@@ -287,9 +324,27 @@ export default class GenerateConfig extends mixins(
   async activateRepo(): Promise<void> {
     await this.toggleRepoActivation({
       id: this.repository.id,
-      isActivated: true
+      isActivated: true,
+      login: this.$route.params.owner,
+      provider: this.$route.params.provider
     })
-    await this.routeToRepoHome()
+
+    // The re-fetch of recently active repositories happens in the above Vuex action source
+    await this.routeToRepoHome({ fetchRecentlyActiveRepoList: false })
+  }
+
+  async fetchOwnerFeatures() {
+    try {
+      this.monorepoFeatureAllowed = await this.$isFeatureAvailable(OwnerFeatureType.MONOREPO, {
+        login: this.$route.params.owner,
+        provider: this.$providerMetaMap[this.$route.params.provider].value
+      })
+    } catch (error) {
+      this.$logErrorAndToast(
+        error as Error,
+        'Unable to fetch details about the team. Please contact support.'
+      )
+    }
   }
 
   showSuccessToast(): void {
@@ -383,7 +438,7 @@ export default class GenerateConfig extends mixins(
     }
   }
 
-  async routeToRepoHome(): Promise<void> {
+  async routeToRepoHome({ fetchRecentlyActiveRepoList = true } = {}): Promise<void> {
     await this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
     this.fetchRepoDetails({
       ...this.baseRouteParams,
@@ -392,12 +447,13 @@ export default class GenerateConfig extends mixins(
 
     const { owner, provider } = this.$route.params
 
-    this.fetchActiveAnalysisRepoList({
-      login: owner,
-      provider,
-      limit: 10,
-      refetch: true
-    })
+    if (fetchRecentlyActiveRepoList) {
+      this.fetchActiveAnalysisRepoList({
+        login: owner,
+        provider,
+        refetch: true
+      })
+    }
 
     this.$router.push(this.$generateRoute(['issues']))
   }
@@ -428,6 +484,21 @@ export default class GenerateConfig extends mixins(
 
   get canViewerUpgrade(): boolean {
     return this.$gateKeeper.team(TeamPerms.CHANGE_PLAN, this.teamPerms.permission)
+  }
+
+  get isSubRepository(): boolean {
+    return this.repository.kind === RepositoryKindChoices.Subrepo
+  }
+
+  get showMonorepoSection(): boolean {
+    const { provider } = this.$route.params
+
+    return (
+      this.monorepoFeatureAllowed &&
+      !this.isSubRepository &&
+      this.$gateKeeper.provider(AppFeatures.MONOREPO, provider) &&
+      this.$gateKeeper.repo(RepoPerms.TOGGLE_MONOREPO_MODE, this.repoPerms.permission)
+    )
   }
 
   updateAnalyzerConfig(newConfig: RepoConfigAnalyzerMeta): void {
@@ -482,9 +553,42 @@ export default class GenerateConfig extends mixins(
   updatePatternsConfig(patterns: Record<string, string[]>): void {
     Object.assign(this.userConfig, patterns)
   }
+
+  async triggerEnableMonorepo(): Promise<void> {
+    const { provider, owner, repo } = this.$route.params
+
+    this.enablingMonorepoMode = true
+
+    try {
+      const success = await this.convertRepoToMonorepo({ repositoryId: this.repository.id })
+
+      if (success) {
+        await this.fetchRepoDetails({
+          provider,
+          owner,
+          name: repo,
+          refetch: true
+        })
+        this.$router.push(`/${provider}/${owner}/${repo}`)
+      } else {
+        const errMessage = 'Unable to convert repository to monorepo. Please contact support.'
+        throw new Error(errMessage)
+      }
+    } catch (e) {
+      const err = e as Error
+
+      const errMsg: `${string}.` = err.message
+        ? (`${err.message.replace('GraphQL error: ', '')}.` as `${string}.`)
+        : 'Unable to convert repository to monorepo. Please contact support.'
+
+      this.$logErrorAndToast(err, errMsg)
+    } finally {
+      this.enablingMonorepoMode = false
+    }
+  }
 }
 </script>
-<style>
+<style lang="postcss">
 .z-step__main {
   @apply w-full;
 }

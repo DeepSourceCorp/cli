@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ ContextSwitcher ]] renders ContextSwitcher with all prop options: {"isCollapsed":false} 1`] = `
-"<span class=\\"relative z-menu w-full\\"><div class=\\"leading-none\\"><button type=\\"button\\" class=\\"flex items-center w-full p-1 space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none hover:bg-ink-200\\"><zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span>deepsourcelabs</span></button></div>
+"<span class=\\"relative z-menu w-full\\"><div class=\\"leading-none\\"><button type=\\"button\\" class=\\"flex items-center w-full p-1 space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none truncate hover:bg-ink-200\\"><zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span>deepsourcelabs</span></button></div>
 <!----></span>"
 `;
 
 exports[`[[ ContextSwitcher ]] renders ContextSwitcher with all prop options: {"isCollapsed":true} 1`] = `
-"<span class=\\"relative z-menu w-full\\"><div class=\\"leading-none\\"><button type=\\"button\\" class=\\"flex items-center w-full p-1 space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none hover:opacity-75 px-0\\"><zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0 mx-auto\\"></zavatar-stub> <span style=\\"display: none;\\">deepsourcelabs</span></button></div>
+"<span class=\\"relative z-menu w-full\\"><div class=\\"leading-none\\"><button type=\\"button\\" class=\\"flex items-center w-full p-1 space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none truncate hover:opacity-75 px-0\\"><zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0 mx-auto\\"></zavatar-stub> <span style=\\"display: none;\\">deepsourcelabs</span></button></div>
 <!----></span>"
 `;

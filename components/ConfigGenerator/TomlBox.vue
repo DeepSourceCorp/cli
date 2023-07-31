@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="overflow-x-scroll text-sm rounded-md toml-box hide-scroll bg-ink-300">
-      <div class="sticky top-0 left-0 flex items-start p-3 space-x-2 bg-ink-200">
+    <div class="toml-box hide-scroll overflow-x-scroll rounded-md bg-ink-300 text-sm">
+      <div class="sticky top-0 left-0 flex items-start space-x-2 bg-ink-200 p-3">
         <p v-if="$slots.message" class="text-vanilla-400">
           <slot name="message"></slot>
         </p>
@@ -12,23 +12,22 @@
             delay: { show: 700, hide: 100 },
             classes: 'shadow-lg'
           }"
+          button-type="ghost"
           :value="toml"
           :disabled="!toml"
-          button-type="ghost"
           :icon-only="true"
           class="hover:bg-vanilla-400 hover:bg-opacity-5"
         />
       </div>
-      <div class="p-3 text-sm min-h-44 bg-ink-300">
+      <div class="min-h-44 bg-ink-300 p-3 text-sm">
         <highlightjs language="toml" :code="toml" />
       </div>
     </div>
     <template v-if="$route.params.provider === 'gsr'">
       <z-button
-        button-type="primary"
-        class="w-full"
+        :disabled="primaryActionDisabled"
         icon="zap"
-        :disabled="actionDisabled"
+        class="w-full"
         @click="commitGSRConfigToVCS"
       >
         Add configuration and start analysis
@@ -37,57 +36,57 @@
     <template v-else-if="canBeActivated || isActivated">
       <z-button
         v-if="isCommitPossible"
-        button-type="primary"
-        class="w-full"
+        :disabled="primaryActionDisabled"
         icon="zap"
-        :disabled="actionDisabled"
+        class="w-full"
         @click="commitConfigToVCS(false)"
       >
         Add configuration and start analysis
       </z-button>
       <z-button
         v-else-if="isAutofixEnabled"
-        button-type="primary"
-        class="w-full"
+        :disabled="primaryActionDisabled"
         icon="git-pull-request"
-        :disabled="actionDisabled"
+        class="w-full"
         @click="commitConfigToVCS(true)"
       >
         Create {{ $route.params.provider === 'gl' ? 'merge' : 'pull' }} request with config
       </z-button>
       <z-button
         v-else
-        button-type="primary"
-        class="w-full"
+        :disabled="primaryActionDisabled"
         icon="arrow-up-right"
-        :disabled="actionDisabled"
+        class="w-full"
         @click="toggleNextSteps()"
       >
         Show next steps
       </z-button>
-      <z-button button-type="secondary" class="w-full" @click="activateRepo">
+      <z-button
+        :disabled="secondaryActionDisabled"
+        button-type="secondary"
+        class="w-full"
+        @click="activateRepo"
+      >
         I’ve added .deepsource.toml, activate repo
       </z-button>
     </template>
     <template v-else-if="canViewerUpgrade">
       <nuxt-link
-        class="block"
         :to="['', $route.params.provider, $route.params.owner, 'settings', 'billing'].join('/')"
+        class="block"
       >
-        <z-button icon="arrow-up" button-type="primary" class="w-full">
-          Upgrade to Activate this Repo
-        </z-button>
+        <z-button icon="arrow-up" class="w-full"> Upgrade to Activate this Repo </z-button>
       </nuxt-link>
-      <p class="text-sm text-center text-vanilla-400">
+      <p class="text-center text-sm text-vanilla-400">
         You have reached the limit for the number of private repositories you can activate on this
         account, please upgrade to start analysis on this repository.
       </p>
     </template>
     <template v-else>
-      <z-button button-type="secondary" class="w-full" :disabled="true">
+      <z-button :disabled="true" button-type="secondary" class="w-full">
         Unavailable in current plan
       </z-button>
-      <p class="text-sm text-center text-vanilla-400">
+      <p class="text-center text-sm text-vanilla-400">
         You have reached the limit for the number of private repositories you can activate on this
         account, please upgrade to start analysis on this repository.
       </p>
@@ -109,7 +108,10 @@ export default class TomlBox extends Vue {
   toml: string
 
   @Prop({ default: false })
-  actionDisabled: boolean
+  primaryActionDisabled: boolean
+
+  @Prop({ default: false })
+  secondaryActionDisabled: boolean
 
   @Prop({ default: false })
   isActivated: boolean

@@ -36,13 +36,13 @@
         v-for="repo in repoWithActiveAnalysisWithAnalyzers"
         :key="repo.id"
         :to="generateLink(repo)"
-        :icon="repo.isPrivate ? 'z-lock' : 'globe'"
+        :icon="getIcon(repo)"
         class="px-4 py-3"
       >
         <template #label>
-          <div class="flex items-center space-x-3">
+          <div class="flex items-center gap-x-3 truncate">
             <span>
-              {{ repo.name }}
+              {{ repo.displayName }}
             </span>
             <span
               v-if="repo.availableAnalyzers && repo.availableAnalyzers.edges"
@@ -93,7 +93,7 @@ import { AddRepoModal } from '@/components/AddRepo'
 import AnalyzerLogo from '@/components/AnalyzerLogo.vue'
 
 // types
-import { TeamMemberRoleChoices, Repository } from '~/types/types'
+import { TeamMemberRoleChoices, Repository, RepositoryKindChoices } from '~/types/types'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
 import { TeamPerms } from '~/types/permTypes'
@@ -117,8 +117,7 @@ export default class RecentlyActiveRepoList extends mixins(ActiveUserMixin, Repo
 
     await this.fetchActiveAnalysisRepoListWithAnalyzers({
       login: this.$route.params.owner,
-      provider: this.$route.params.provider,
-      limit: 10
+      provider: this.$route.params.provider
     })
 
     if (process.client)
@@ -144,6 +143,14 @@ export default class RecentlyActiveRepoList extends mixins(ActiveUserMixin, Repo
 
   generateLink({ vcsProvider, ownerLogin, name }: Repository): string {
     return ['', this.$providerMetaMap[vcsProvider].shortcode, ownerLogin, name].join('/')
+  }
+
+  getIcon({ isPrivate, kind }: Repository): string {
+    if (kind === RepositoryKindChoices.Subrepo) {
+      return isPrivate ? 'folder-locked' : 'folder-globe'
+    }
+
+    return isPrivate ? 'z-lock' : 'globe'
   }
 }
 </script>

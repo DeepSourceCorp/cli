@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ AddSubRepositoryModal ]] renders various states of the add sub repository modal: {"primaryActionLoading":false,"showError":false} 1`] = `
+"<zmodal-stub title=\\"New sub-repository\\" width=\\"narrow\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+  <div class=\\"space-y-4 p-4\\">
+    <div class=\\"space-y-2\\"><label for=\\"git-branch\\" class=\\"text-xs font-normal text-vanilla-400\\">Enter your branch</label>
+      <zinput-stub name=\\"git-branch\\" value=\\"main\\" label=\\"\\" type=\\"text\\" placeholder=\\"main\\" debouncedelay=\\"350\\" icon=\\"z-git-branch\\" size=\\"small\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" class=\\"border border-ink-50 focus-within:border-vanilla-400\\"></zinput-stub>
+    </div>
+    <div class=\\"space-y-2\\"><label for=\\"sub-repository-path\\" class=\\"text-xs font-normal text-vanilla-400\\">Enter sub-repository path</label>
+      <zinputgroup-stub prefix=\\"\\" addonbgcolor=\\"bg-ink-200\\" icon=\\"z-git-branch\\" name=\\"sub-repository-path\\" placeholder=\\"Enter relative path\\" size=\\"small\\" value=\\"\\"></zinputgroup-stub>
+    </div>
+    <!---->
+    <div class=\\"w-full gap-x-1 text-right\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\">
+        <div class=\\"inline-flex items-center gap-x-1\\"><span>Next</span>
+          <zicon-stub icon=\\"arrow-right\\" size=\\"small\\" position=\\"\\" color=\\"current\\" class=\\"\\"></zicon-stub>
+        </div>
+      </zbutton-stub>
+    </div>
+  </div>
+</zmodal-stub>"
+`;
+
+exports[`[[ AddSubRepositoryModal ]] renders various states of the add sub repository modal: {"primaryActionLoading":false,"showError":true} 1`] = `
+"<zmodal-stub title=\\"New sub-repository\\" width=\\"narrow\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+  <div class=\\"space-y-4 p-4\\">
+    <div class=\\"space-y-2\\"><label for=\\"git-branch\\" class=\\"text-xs font-normal text-vanilla-400\\">Enter your branch</label>
+      <zinput-stub name=\\"git-branch\\" value=\\"main\\" label=\\"\\" type=\\"text\\" placeholder=\\"main\\" debouncedelay=\\"350\\" icon=\\"z-git-branch\\" size=\\"small\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" class=\\"border border-ink-50 focus-within:border-vanilla-400\\"></zinput-stub>
+    </div>
+    <div class=\\"space-y-2\\"><label for=\\"sub-repository-path\\" class=\\"text-xs font-normal text-vanilla-400\\">Enter sub-repository path</label>
+      <zinputgroup-stub prefix=\\"\\" addonbgcolor=\\"bg-ink-200\\" icon=\\"z-git-branch\\" name=\\"sub-repository-path\\" placeholder=\\"Enter relative path\\" size=\\"small\\" value=\\"\\"></zinputgroup-stub>
+    </div>
+    <div class=\\"px-4 rounded-md bg-cherry py-3.5 bg-opacity-10\\">
+      <div class=\\"flex items-center\\">
+        <div class=\\"flex-grow text-sm text-cherry-400 -mb-px\\">Something went wrong while creating the sub-repository.</div>
+        <!---->
+      </div>
+    </div>
+    <div class=\\"w-full gap-x-1 text-right\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\">
+        <div class=\\"inline-flex items-center gap-x-1\\"><span>Next</span>
+          <zicon-stub icon=\\"arrow-right\\" size=\\"small\\" position=\\"\\" color=\\"current\\" class=\\"\\"></zicon-stub>
+        </div>
+      </zbutton-stub>
+    </div>
+  </div>
+</zmodal-stub>"
+`;
+
+exports[`[[ AddSubRepositoryModal ]] renders various states of the add sub repository modal: {"primaryActionLoading":true,"showError":false} 1`] = `
+"<zmodal-stub title=\\"New sub-repository\\" width=\\"narrow\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+  <div class=\\"space-y-4 p-4\\">
+    <div class=\\"space-y-2\\"><label for=\\"git-branch\\" class=\\"text-xs font-normal text-vanilla-400\\">Enter your branch</label>
+      <zinput-stub name=\\"git-branch\\" value=\\"main\\" label=\\"\\" type=\\"text\\" placeholder=\\"main\\" debouncedelay=\\"350\\" icon=\\"z-git-branch\\" size=\\"small\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" class=\\"border border-ink-50 focus-within:border-vanilla-400\\"></zinput-stub>
+    </div>
+    <div class=\\"space-y-2\\"><label for=\\"sub-repository-path\\" class=\\"text-xs font-normal text-vanilla-400\\">Enter sub-repository path</label>
+      <zinputgroup-stub prefix=\\"\\" addonbgcolor=\\"bg-ink-200\\" icon=\\"z-git-branch\\" name=\\"sub-repository-path\\" placeholder=\\"Enter relative path\\" size=\\"small\\" value=\\"\\"></zinputgroup-stub>
+    </div>
+    <!---->
+    <div class=\\"w-full gap-x-1 text-right\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\">
+        <div class=\\"inline-flex items-center gap-x-1\\"><span>Next</span>
+          <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"current\\" class=\\"animate-spin\\"></zicon-stub>
+        </div>
+      </zbutton-stub>
+    </div>
+  </div>
+</zmodal-stub>"
+`;
+
+exports[`[[ AddSubRepositoryModal ]] renders various states of the add sub repository modal: {"primaryActionLoading":true,"showError":true} 1`] = `
+"<zmodal-stub title=\\"New sub-repository\\" width=\\"narrow\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+  <div class=\\"space-y-4 p-4\\">
+    <div class=\\"space-y-2\\"><label for=\\"git-branch\\" class=\\"text-xs font-normal text-vanilla-400\\">Enter your branch</label>
+      <zinput-stub name=\\"git-branch\\" value=\\"main\\" label=\\"\\" type=\\"text\\" placeholder=\\"main\\" debouncedelay=\\"350\\" icon=\\"z-git-branch\\" size=\\"small\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" class=\\"border border-ink-50 focus-within:border-vanilla-400\\"></zinput-stub>
+    </div>
+    <div class=\\"space-y-2\\"><label for=\\"sub-repository-path\\" class=\\"text-xs font-normal text-vanilla-400\\">Enter sub-repository path</label>
+      <zinputgroup-stub prefix=\\"\\" addonbgcolor=\\"bg-ink-200\\" icon=\\"z-git-branch\\" name=\\"sub-repository-path\\" placeholder=\\"Enter relative path\\" size=\\"small\\" value=\\"\\"></zinputgroup-stub>
+    </div>
+    <div class=\\"px-4 rounded-md bg-cherry py-3.5 bg-opacity-10\\">
+      <div class=\\"flex items-center\\">
+        <div class=\\"flex-grow text-sm text-cherry-400 -mb-px\\">Something went wrong while creating the sub-repository.</div>
+        <!---->
+      </div>
+    </div>
+    <div class=\\"w-full gap-x-1 text-right\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\">
+        <div class=\\"inline-flex items-center gap-x-1\\"><span>Next</span>
+          <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"current\\" class=\\"animate-spin\\"></zicon-stub>
+        </div>
+      </zbutton-stub>
+    </div>
+  </div>
+</zmodal-stub>"
+`;

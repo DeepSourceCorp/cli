@@ -55,7 +55,7 @@ export default class RepoListMixin extends Vue {
   fetchActiveAnalysisRepoList: (params: {
     login: string
     provider: string
-    limit: number
+    limit?: number
     refetch?: boolean
   }) => Promise<void>
 
@@ -63,7 +63,7 @@ export default class RepoListMixin extends Vue {
   fetchActiveAnalysisRepoListWithAnalyzers: (params: {
     login: string
     provider: string
-    limit: number
+    limit?: number
     refetch?: boolean
   }) => Promise<void>
 }

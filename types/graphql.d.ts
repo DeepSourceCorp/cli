@@ -773,6 +773,15 @@ declare module '*/verifyPasswordForPublicReport.gql' {
 }
     
 
+declare module '*/addSubRepo.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const addSubRepo: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/commitConfigToVcs.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -795,6 +804,15 @@ declare module '*/retryChecks.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const retryChecks: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/convertToMonorepo.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const convertToMonorepo: DocumentNode;
 
   export default defaultDocument;
 }
@@ -840,6 +858,15 @@ declare module '*/removeCollaborator.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/revertMonorepo.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const revertMonorepo: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1535,6 +1562,24 @@ declare module '*/ownerInstalledIntegration.gql' {
 }
     
 
+declare module '*/ownerRepoCounts.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ownerRepoCounts: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/ownerRepoList.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ownerRepoList: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/pinnedReports.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1974,6 +2019,15 @@ declare module '*/issueTypeSettings.gql' {
 }
     
 
+declare module '*/kind.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const repositoryKind: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/listAdHocPending.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -2031,16 +2085,7 @@ declare module '*/publicReportListRepo.gql' {
 declare module '*/recentlyActiveRepoList.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/recentlyActiveRepoListWithAnalyzer.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
+  export const recentlyActiveRepoList: DocumentNode;
 
   export default defaultDocument;
 }
@@ -2186,6 +2231,15 @@ declare module '*/statusPoll.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const RepoStatusPollQuery: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/subRepositoryList.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const subRepositoryList: DocumentNode;
 
   export default defaultDocument;
 }

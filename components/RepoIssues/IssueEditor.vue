@@ -160,6 +160,7 @@ import {
 } from '@deepsource/zeal'
 import { safeRenderBackticks } from '~/utils/string'
 import { toWrappableString } from '~/utils/string'
+import { VcsProviderChoices } from '~/types/types'
 
 @Component({
   components: {
@@ -218,6 +219,12 @@ export default class IssueEditor extends Vue {
   @Prop({ default: false })
   snippetsFetchErrored: boolean
 
+  @Prop({ default: false })
+  isSubrepo: boolean
+
+  @Prop({ default: '' })
+  repoPath: string
+
   isOpen = false
   currentComponent = ''
   isIgnored = false
@@ -266,17 +273,19 @@ export default class IssueEditor extends Vue {
   }
 
   get blobUrl(): string {
-    /*
-        Return the URL for this file with the lines highlighted on the repository's page on the VCS provider.
-      */
+    //? Return the URL for this file with the lines highlighted on the repository's page on the VCS provider.
 
-    let provider = this.$providerMetaMap[this.$route.params.provider].value
-    if (provider === 'GITHUB') {
-      return `${this.blobUrlRoot}${this.path}#L${this.beginLine}-L${this.endLine}`
-    } else if (provider === 'GITLAB') {
-      return `${this.blobUrlRoot}${this.path}#L${this.beginLine}-${this.endLine}`
-    } else if (provider === 'BITBUCKET') {
-      return `${this.blobUrlRoot}${this.path}#lines-${this.beginLine}:${this.endLine}`
+    const basePath = this.isSubrepo ? `${this.blobUrlRoot}${this.repoPath}/` : this.blobUrlRoot
+    const provider = this.$providerMetaMap[this.$route.params.provider].value
+
+    if (provider === VcsProviderChoices.Github) {
+      return `${basePath}${this.path}#L${this.beginLine}-L${this.endLine}`
+    }
+    if (provider === VcsProviderChoices.Gitlab) {
+      return `${basePath}${this.path}#L${this.beginLine}-${this.endLine}`
+    }
+    if (provider === VcsProviderChoices.Bitbucket) {
+      return `${basePath}${this.path}#lines-${this.beginLine}:${this.endLine}`
     }
     return ''
   }

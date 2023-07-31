@@ -13,6 +13,7 @@ query repositoryList(
       edges {
         node {
           id
+          displayName
           name
           vcsProvider
           ownerLogin
@@ -24,6 +25,7 @@ query repositoryList(
           latestCommitOid
           defaultBranchName
           lastAnalyzedAt
+          kind
           availableAnalyzers {
             edges {
               node {

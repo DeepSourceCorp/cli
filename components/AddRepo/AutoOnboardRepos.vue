@@ -1,5 +1,5 @@
 <template>
-  <z-tab-pane class="h-full flex flex-col">
+  <z-tab-pane class="flex h-full flex-col">
     <template v-if="!loadingAutoOnboardData">
       <install-autofix-for-auto-onboard v-if="!owner.isAutofixEnabled" @refetch="refetch" />
       <template v-else>
@@ -23,28 +23,28 @@
     </template>
     <div
       v-else-if="currentStage === stages.SELECT_REPO"
-      class="p-4 space-y-3 animate-pulse opacity-50"
+      class="animate-pulse space-y-3 p-4 opacity-50"
     >
-      <div class="w-full h-10 bg-ink-200 rounded-md"></div>
-      <div class="w-full h-10 bg-ink-200 rounded-md"></div>
+      <div class="h-10 w-full rounded-md bg-ink-200"></div>
+      <div class="h-10 w-full rounded-md bg-ink-200"></div>
       <div class="space-y-2">
-        <div v-for="ii in 10" :key="ii" class="w-full h-6 bg-ink-200 rounded-md"></div>
+        <div v-for="ii in 10" :key="ii" class="h-6 w-full rounded-md bg-ink-200"></div>
       </div>
     </div>
     <div
       v-else-if="currentStage === stages.SELECT_TEMPLATE"
-      class="p-4 space-y-4 animate-pulse opacity-50"
+      class="animate-pulse space-y-4 p-4 opacity-50"
     >
-      <div class="w-full h-10 bg-ink-200 rounded-md"></div>
-      <div class="w-full h-10 bg-ink-200 rounded-md"></div>
+      <div class="h-10 w-full rounded-md bg-ink-200"></div>
+      <div class="h-10 w-full rounded-md bg-ink-200"></div>
       <div class="space-y-3">
-        <div v-for="ii in 3" :key="ii" class="w-full h-20 bg-ink-200 rounded-md"></div>
+        <div v-for="ii in 3" :key="ii" class="h-20 w-full rounded-md bg-ink-200"></div>
       </div>
     </div>
-    <div v-else class="p-4 space-y-4 animate-pulse opacity-50">
-      <div class="w-full h-64 bg-ink-200 rounded-md"></div>
-      <div class="w-full h-20 bg-ink-200 rounded-md"></div>
-      <div class="w-full h-20 bg-ink-200 rounded-md"></div>
+    <div v-else class="animate-pulse space-y-4 p-4 opacity-50">
+      <div class="h-64 w-full rounded-md bg-ink-200"></div>
+      <div class="h-20 w-full rounded-md bg-ink-200"></div>
+      <div class="h-20 w-full rounded-md bg-ink-200"></div>
     </div>
   </z-tab-pane>
 </template>
@@ -73,7 +73,8 @@ export enum Stages {
     ZTabPane,
     ZDivider,
     RepoCard
-  }
+  },
+  name: 'AutoOnboardRepos'
 })
 export default class AutoOnboardRepos extends mixins(
   ActiveUserMixin,

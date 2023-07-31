@@ -57,6 +57,8 @@
       <div v-else class="grid grid-cols-3">
         <issue-list
           :blob-url-root="run.blobUrlRoot"
+          :is-subrepo="isSubrepo"
+          :repo-path="repoPath"
           :can-ignore-issues="canIgnoreIssues"
           :check-id="currentCheck ? currentCheck.id : ''"
           :description="singleIssue.descriptionRendered"
@@ -96,7 +98,8 @@ import {
   CheckIssue,
   IssuePriority,
   IssuePriorityLevel,
-  Maybe
+  Maybe,
+  RepositoryKindChoices
 } from '~/types/types'
 
 import ContextMixin from '~/mixins/contextMixin'
@@ -570,6 +573,14 @@ export default class RunIssueDetails extends mixins(
         : this.$gateKeeper.repo(RepoPerms.CHANGE_ISSUE_PRIORITY, this.repoPerms.permission)
     }
     return false
+  }
+
+  get isSubrepo(): boolean {
+    return this.repository.kind === RepositoryKindChoices.Subrepo
+  }
+
+  get repoPath(): string {
+    return this.repository.path ?? ''
   }
 
   head(): Record<string, string> {

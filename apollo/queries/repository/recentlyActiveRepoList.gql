@@ -1,8 +1,9 @@
-query(
+query recentlyActiveRepoList(
   $login: String!
   $provider: VCSProviderChoices!
   $limit: Int
   $after: String
+  $fetchAnalyzers: Boolean!
 ) {
   owner(login: $login, provider: $provider) {
     id
@@ -11,6 +12,7 @@ query(
       edges {
         node {
           id
+          displayName
           name
           vcsProvider
           ownerLogin
@@ -18,6 +20,17 @@ query(
           isFork
           isPrivate
           lastAnalyzedAt
+          kind
+          availableAnalyzers @include(if: $fetchAnalyzers) {
+            edges {
+              node {
+                id
+                name
+                shortcode
+                analyzerLogo
+              }
+            }
+          }
         }
       }
     }

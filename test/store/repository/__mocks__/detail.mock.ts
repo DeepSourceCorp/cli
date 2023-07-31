@@ -36,7 +36,8 @@ export const mockRepositoryDetail = (): Repository => REPOSITORY_DETAIL
 export const mockRepositoryDetailState = (): RepositoryDetailModuleState => ({
   loading: false as boolean,
   error: {},
-  repository: mockRepositoryDetail()
+  repository: mockRepositoryDetail(),
+  repoIdMap: {}
 })
 
 /*
@@ -146,7 +147,8 @@ export const mockRepositoryDetailForWidgets = (): Repository => REPOSITORY_DETAI
 export const mockRepositoryDetailStateForWidgets = (): RepositoryDetailModuleState => ({
   loading: false as boolean,
   error: {},
-  repository: mockRepositoryDetailForWidgets()
+  repository: mockRepositoryDetailForWidgets(),
+  repoIdMap: {}
 })
 
 /*
@@ -268,7 +270,8 @@ export const mockRepositoryDetailForSettingsGeneral = (): Repository =>
 export const mockRepositoryDetailStateForSettingsGeneral = (): RepositoryDetailModuleState => ({
   loading: false as boolean,
   error: {},
-  repository: mockRepositoryDetailForSettingsGeneral()
+  repository: mockRepositoryDetailForSettingsGeneral(),
+  repoIdMap: {}
 })
 
 /*
@@ -339,7 +342,8 @@ export const mockRepositoryDetailStateForSettingsManageAccess =
   (): RepositoryDetailModuleState => ({
     loading: false as boolean,
     error: {},
-    repository: mockRepositoryDetailForSettingsManageAccess()
+    repository: mockRepositoryDetailForSettingsManageAccess(),
+    repoIdMap: {}
   })
 
 /*
@@ -417,7 +421,8 @@ export const mockRepositoryDetailForSettingsIgnoreRules = (): Repository =>
 export const mockRepositoryDetailStateForSettingsIgnoreRules = (): RepositoryDetailModuleState => ({
   loading: false as boolean,
   error: {},
-  repository: mockRepositoryDetailForSettingsIgnoreRules()
+  repository: mockRepositoryDetailForSettingsIgnoreRules(),
+  repoIdMap: {}
 })
 
 /*
@@ -447,7 +452,8 @@ export const mockRepositoryDetailForSettingsSsh = (): Repository =>
 export const mockRepositoryDetailStateForSettingsSsh = (): RepositoryDetailModuleState => ({
   loading: false as boolean,
   error: {},
-  repository: mockRepositoryDetailForSettingsSsh()
+  repository: mockRepositoryDetailForSettingsSsh(),
+  repoIdMap: {}
 })
 
 /*
@@ -702,5 +708,6 @@ export const mockRepositoryDetailForMetrics = (): Repository => REPOSITORY_DETAI
 export const mockRepositoryDetailStateForMetrics = (): RepositoryDetailModuleState => ({
   loading: false as boolean,
   error: {},
-  repository: mockRepositoryDetailForMetrics()
+  repository: mockRepositoryDetailForMetrics(),
+  repoIdMap: {}
 })

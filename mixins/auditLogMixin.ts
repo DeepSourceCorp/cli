@@ -1,6 +1,5 @@
 import { Component, mixins } from 'nuxt-property-decorator'
 
-import OwnerFeaturesGQLQuery from '~/apollo/queries/owner/features.gql'
 import RepositoryLevelAuditLogGQLQuery from '~/apollo/queries/repository/settings/auditLog.gql'
 import TeamLevelAuditLogGQLQuery from '~/apollo/queries/team/auditLog.gql'
 
@@ -22,8 +21,8 @@ import {
 import { resolveNodes } from '~/utils/array'
 import { dateRangeOptions, getDateRange } from '~/utils/reports'
 
+import { OwnerFeatureType } from '~/types/ownerTypes'
 import ActiveUserMixin from './activeUserMixin'
-import { OwnerFeature, OwnerFeatureType } from '~/types/ownerTypes'
 
 // Refers to the `apollo/queries/repository/settings/auditLog.gql` GQL query
 interface CustomRepositoryLevelAuditLogQuery extends Repository {
@@ -134,18 +133,10 @@ export default class AuditLogMixin extends mixins(ActiveUserMixin) {
 
   async fetchOwnerFeatures() {
     try {
-      const response = await this.$fetchGraphqlData(OwnerFeaturesGQLQuery, {
+      this.auditLogEnabled = await this.$isFeatureAvailable(OwnerFeatureType.AUDIT_LOG, {
         login: this.$route.params.owner,
         provider: this.$providerMetaMap[this.$route.params.provider].value
       })
-
-      const features = response.data.owner.features as OwnerFeature[]
-
-      const auditLogFeature = features.find(
-        (feature) => feature.shortcode === OwnerFeatureType.AUDIT_LOG
-      )
-
-      this.auditLogEnabled = auditLogFeature?.enabled ?? false
     } catch (error) {
       this.$logErrorAndToast(
         error as Error,

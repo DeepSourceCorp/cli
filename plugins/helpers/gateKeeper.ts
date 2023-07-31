@@ -198,7 +198,9 @@ const REPO_PERMS_MAP = {
   [RepoPerms.RETRY_ANALYSIS]: [
     RepositoryCollaboratorPermission.Admin,
     RepositoryCollaboratorPermission.Write
-  ]
+  ],
+  [RepoPerms.TOGGLE_MONOREPO_MODE]: [RepositoryCollaboratorPermission.Admin],
+  [RepoPerms.ADD_SUB_REPOSITORY]: [RepositoryCollaboratorPermission.Admin]
 }
 
 const FEATURES_PROVIDER_MAP = {
@@ -230,7 +232,8 @@ const FEATURES_PROVIDER_MAP = {
     VcsProviderChoices.Github,
     VcsProviderChoices.GithubEnterprise,
     VcsProviderChoices.Gitlab
-  ]
+  ],
+  [AppFeatures.MONOREPO]: [VcsProviderChoices.Github, VcsProviderChoices.GithubEnterprise]
 }
 
 export default ({ $providerMetaMap, route }: Context, inject: Inject): void => {

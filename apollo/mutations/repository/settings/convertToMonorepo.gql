@@ -1,0 +1,5 @@
+mutation convertToMonorepo($input: EnableMonorepoModeInput!) {
+  enableMonorepoMode(input: $input) {
+    ok
+  }
+}

@@ -1,11 +1,14 @@
-import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
-import { RootState } from '~/store'
-import { RepositoryConnection, PageInfo, Maybe, Scalars, Owner, Repository } from '~/types/types'
+import { ActionContext, ActionTree, GetterTree, MutationTree, Store } from 'vuex'
+
 import RepositoryListGQLQuery from '~/apollo/queries/repository/list.gql'
-import RecentlyActiveRepoList from '~/apollo/queries/repository/recentlyActiveRepoList.gql'
-import recentlyActiveRepoListWithAnalyzer from '~/apollo/queries/repository/recentlyActiveRepoListWithAnalyzer.gql'
 import RepositoryAdHocPending from '~/apollo/queries/repository/listAdHocPending.gql'
+import RecentlyActiveRepoList from '~/apollo/queries/repository/recentlyActiveRepoList.gql'
+
+import { RootState } from '~/store'
+
 import { GraphqlError } from '~/types/apollo-graphql-types'
+import { Maybe, Owner, PageInfo, Repository, RepositoryConnection, Scalars } from '~/types/types'
+
 import { resolveNodes } from '~/utils/array'
 
 export interface RepoInterface {
@@ -164,7 +167,17 @@ interface RepositoryListModuleActions extends ActionTree<RepositoryListModuleSta
     variables: {
       login: string
       provider: string
-      limit: number
+      limit?: number
+      refetch?: boolean
+    }
+  ) => Promise<void>
+  [RepoListActions.FETCH_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS]: (
+    this: Store<RootState>,
+    injectee: RepositoryListActionContext,
+    variables: {
+      login: string
+      provider: string
+      limit?: number
       refetch?: boolean
     }
   ) => Promise<void>
@@ -256,7 +269,8 @@ export const actions: RepositoryListModuleActions = {
         {
           login: variables.login,
           provider: this.$providerMetaMap[variables.provider].value,
-          limit: variables.limit
+          limit: variables.limit ?? 5,
+          fetchAnalyzers: false
         },
         variables.refetch
       )
@@ -272,32 +286,12 @@ export const actions: RepositoryListModuleActions = {
   async [RepoListActions.FETCH_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS]({ commit }, variables) {
     try {
       const response: { data: { owner: Owner } } = await this.$fetchGraphqlData(
-        recentlyActiveRepoListWithAnalyzer,
+        RecentlyActiveRepoList,
         {
           login: variables.login,
           provider: this.$providerMetaMap[variables.provider].value,
-          limit: variables.limit
-        },
-        variables.refetch
-      )
-
-      commit(
-        RepoListMutations.SET_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS,
-        response.data.owner.repositories
-      )
-    } catch (e) {
-      const error = e as GraphqlError
-      commit(RepoListMutations.SET_ERROR, error)
-    }
-  },
-  async [RepoListActions.FETCH_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS]({ commit }, variables) {
-    try {
-      const response: { data: { owner: Owner } } = await this.$fetchGraphqlData(
-        recentlyActiveRepoListWithAnalyzer,
-        {
-          login: variables.login,
-          provider: this.$providerMetaMap[variables.provider].value,
-          limit: variables.limit
+          limit: variables.limit ?? 10,
+          fetchAnalyzers: true
         },
         variables.refetch
       )

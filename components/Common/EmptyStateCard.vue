@@ -10,7 +10,6 @@
       :alt-text="altText"
       :height="imageWidth ? false : 'h-17 md:h-20'"
       :image-classes="imageClasses"
-      class="w-full md:w-auto"
     />
 
     <div :class="contentStyles">
@@ -43,7 +42,7 @@ export default class EmptyStateCard extends Vue {
   @Prop({ default: 'text-left px-4 max-w-sm', type: String })
   contentStyles: string
 
-  @Prop({ default: 'md:mx-auto px-4 md:px-0', type: String })
+  @Prop({ default: 'md:mx-auto px-4 md:px-0 w-full md:w-auto', type: String })
   imageClasses: string
 
   @Prop()

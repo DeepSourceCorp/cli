@@ -8,21 +8,25 @@
     @click.native="$emit('click')"
   >
     <template #title>
-      <div class="inline-flex items-center gap-x-2">
-        <z-icon
-          :icon="isPrivate ? 'z-lock' : 'globe'"
-          :size="size === 'small' ? 'x-small' : 'small'"
-        />
+      <div class="inline-flex items-baseline gap-x-2">
+        <z-icon :icon="icon" :size="size === 'small' ? 'x-small' : 'small'" class="flex-shrink-0" />
+
         <div
           class="font-normal text-vanilla-100"
           :class="{
-            'text-base': size === 'small',
-            'gap-x-1': size === 'base'
+            'text-base': size === 'small'
           }"
         >
-          <span>{{ ownerLogin }}</span>
-          <span>/</span>
-          <span>{{ name }}</span>
+          {{ title }}
+        </div>
+
+        <!-- Currently the inactive status is only shown for subrepos -->
+        <!-- Not using `ZTag` since it doesn't support custom font color -->
+        <div
+          v-if="showInactiveTag"
+          class="text-8px inline-flex items-center justify-evenly space-x-2 rounded-full bg-honey-500 py-0.5 px-2 text-ink-400 md:self-center"
+        >
+          INACTIVE
         </div>
       </div>
       <template v-if="allowStar">
@@ -64,32 +68,18 @@
           'text-sm font-normal': size == 'base'
         }"
       >
-        <div
-          v-if="lastAnalyzedAt"
-          v-tooltip="`Last analyzed at`"
-          class="inline-flex items-center gap-x-2"
-        >
-          <z-icon icon="clock" size="x-small" color="vanilla-400" />
-          <span>Analyzed {{ lastAnalyzedAtString }}</span>
-        </div>
-        <!-- Created -->
-        <div
-          v-if="defaultBranchName"
-          v-tooltip="`Default branch name`"
-          class="inline-flex items-center gap-x-2"
-        >
-          <z-icon icon="z-git-branch" size="x-small" color="vanilla-400" />
-          <span class="text-vanilla-400">{{ defaultBranchName }}</span>
-        </div>
-        <!-- Analyzer Type -->
-        <div
-          v-if="latestCommitOid"
-          v-tooltip="`Latest commit hash`"
-          class="inline-flex items-center gap-x-2"
-        >
-          <z-icon icon="git-commit" size="x-small" />
-          <span>{{ latestCommitOid.slice(0, 7) }}</span>
-        </div>
+        <template v-for="config in repoDescConfig">
+          <div
+            v-if="config.condition"
+            :key="config.icon"
+            v-tooltip="config.tooltipText || ''"
+            class="inline-flex items-center gap-x-2"
+          >
+            <z-icon :icon="config.icon" size="x-small" />
+            <span>{{ config.text }}</span>
+          </div>
+        </template>
+
         <!-- Supported Analyzers -->
         <div
           v-if="showAnalyzers && Array.isArray(supportedAnalyzers) && supportedAnalyzers.length"
@@ -109,19 +99,25 @@
   </base-card>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop, Watch, mixins } from 'nuxt-property-decorator'
 import { ZIcon } from '@deepsource/zeal'
-import { BaseCard } from '@/components/History'
-import { fromNow } from '~/utils/date'
+import { Component, mixins, Prop, Watch } from 'nuxt-property-decorator'
+
 import AnalyzerListMixin from '~/mixins/analyzerListMixin'
-import { Analyzer } from '~/types/types'
+import { Analyzer, RepositoryKindChoices } from '~/types/types'
+import { fromNow } from '~/utils/date'
+
+type RepoDescConfigT = {
+  condition?: boolean
+  icon: string
+  text: string
+  tooltipText?: string
+}
 
 /**
  * Repo card component
  */
 @Component({
   components: {
-    BaseCard,
     ZIcon
   }
 })
@@ -145,9 +141,12 @@ export default class RepoCard extends mixins(AnalyzerListMixin) {
   name: string
 
   @Prop({ required: true })
-  vcsProvider: string
+  displayName: string
 
   @Prop({ required: true })
+  vcsProvider: string
+
+  @Prop()
   ownerLogin: string
 
   @Prop()
@@ -179,6 +178,21 @@ export default class RepoCard extends mixins(AnalyzerListMixin) {
 
   @Prop({ default: false })
   showAnalyzers: boolean
+
+  @Prop({ required: true })
+  kind: RepositoryKindChoices
+
+  @Prop({ default: false })
+  showInactiveTag: boolean
+
+  @Prop({ default: false })
+  isExactRoute: boolean
+
+  @Prop({ default: 0 })
+  subrepoCount: number
+
+  @Prop({ default: '' })
+  createdAt: string
 
   /**
    * Watcher to toggle the internal starred state based on
@@ -220,8 +234,61 @@ export default class RepoCard extends mixins(AnalyzerListMixin) {
 
   internalStarredState = false
 
-  get lastAnalyzedAtString(): string {
+  get lastAnalyzedAtFromNow(): string {
     return fromNow(this.lastAnalyzedAt)
+  }
+
+  get createdAtFromNow(): string {
+    return fromNow(this.createdAt)
+  }
+
+  get repoDescConfig(): RepoDescConfigT[] {
+    if (this.kind === RepositoryKindChoices.Monorepo) {
+      return [
+        {
+          condition: Boolean(this.createdAt),
+          icon: 'clock',
+          text: `Created ${this.createdAtFromNow}`
+        },
+        {
+          condition: Boolean(this.defaultBranchName),
+          icon: 'z-git-branch',
+          text: this.defaultBranchName,
+          tooltipText: 'Default branch name'
+        },
+        {
+          condition: Number.isFinite(this.subrepoCount),
+          icon: 'folder-closed',
+          text: `${this.subrepoCount} ${
+            this.subrepoCount === 1 ? 'sub-repository' : 'sub-repositories'
+          }`
+        }
+      ]
+    }
+
+    return [
+      // Display `createdAt` information if `lastAnalyzedAt` information is not available
+      {
+        condition: Boolean(this.lastAnalyzedAt) || Boolean(this.createdAt),
+        icon: 'clock',
+        text: this.lastAnalyzedAt
+          ? `Analyzed ${this.lastAnalyzedAtFromNow}`
+          : `Created ${this.createdAtFromNow}`,
+        tooltipText: this.lastAnalyzedAt ? 'Last Analyzed at' : ''
+      },
+      {
+        condition: Boolean(this.defaultBranchName),
+        icon: 'z-git-branch',
+        text: this.defaultBranchName,
+        tooltipText: 'Default branch name'
+      },
+      {
+        condition: Boolean(this.latestCommitOid),
+        icon: 'git-commit',
+        text: this.latestCommitOid?.slice(0, 7),
+        tooltipText: 'Last commit hash'
+      }
+    ]
   }
 
   get supportedAnalyzersLogos(): Analyzer[] {
@@ -234,6 +301,11 @@ export default class RepoCard extends mixins(AnalyzerListMixin) {
     if (!this.isLink) {
       return ''
     }
+
+    if (this.isExactRoute) {
+      return this.route
+    }
+
     const { provider, owner } = this.$route.params
     const route = ['']
 
@@ -266,13 +338,37 @@ export default class RepoCard extends mixins(AnalyzerListMixin) {
 
     return routeToRepo.concat(queryParams)
   }
+
+  get icon() {
+    if (this.isSubRepository) {
+      return this.isPrivate ? 'folder-locked' : 'folder-globe'
+    }
+
+    if (this.kind === RepositoryKindChoices.Repo) {
+      return this.isPrivate ? 'z-lock' : 'globe'
+    }
+
+    return 'monorepo'
+  }
+
+  get isSubRepository(): boolean {
+    return this.kind === RepositoryKindChoices.Subrepo
+  }
+
+  get title(): string {
+    return `${this.ownerLogin} / ${this.displayName}`
+  }
 }
 </script>
-<style>
+<style lang="postcss">
 .ribbon:after {
   @apply absolute top-10 left-0 h-0 w-0 border-slate-400 content;
   border-left-width: 16px;
   border-right-width: 16px;
   border-bottom: 10px solid transparent;
+}
+
+.text-8px {
+  font-size: 8px;
 }
 </style>

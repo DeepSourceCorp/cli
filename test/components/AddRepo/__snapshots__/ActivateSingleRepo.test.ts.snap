@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ ActivateSingleRepo ]] renders an input widget with a list of repositories that can be activated 1`] = `
-"<ztabpane-stub class=\\"flex flex-col h-full\\">
-  <div class=\\"p-4 pb-0 space-y-2\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search repositories...\\" debouncedelay=\\"350\\" icon=\\"search\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow\\"></zinput-stub>
+"<ztabpane-stub class=\\"flex h-full flex-col\\">
+  <div class=\\"space-y-2 p-4 pb-0\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for repositories...\\" debouncedelay=\\"350\\" icon=\\"search\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow\\"></zinput-stub>
   </div>
   <div class=\\"flex-grow overflow-x-hidden p-4\\">
     <div class=\\"space-y-2\\">
-      <repocard-stub removedefaultstyle=\\"true\\" size=\\"small\\" id=\\"UmVwb3NpdG9yeTp6dmp2eXo=\\" name=\\"asgard\\" vcsprovider=\\"GITHUB\\" ownerlogin=\\"deepsourcelabs\\" isprivate=\\"true\\" latestcommitoid=\\"a8935a7125356db4cff400415f7061b2e5491591\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2020-07-09T08:56:51.012793+00:00\\" supportedanalyzers=\\"python,docker,javascript\\" route=\\"generate-config\\" islink=\\"true\\" analyzershortcode=\\"test-analyzer\\" transformershortcode=\\"test-transformer\\" class=\\"border rounded-lg hover:bg-ink-200 border-slate-400\\"></repocard-stub>
-      <repocard-stub removedefaultstyle=\\"true\\" size=\\"small\\" id=\\"UmVwb3NpdG9yeTp6a2V4cno=\\" name=\\"marvin\\" vcsprovider=\\"GITHUB\\" ownerlogin=\\"deepsourcelabs\\" isprivate=\\"true\\" latestcommitoid=\\"fc773cf6b1b0c2f5d3bef0ad78eaf8f3c991cdf5\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2020-06-10T10:21:17.241934+00:00\\" supportedanalyzers=\\"go,python,docker\\" route=\\"generate-config\\" islink=\\"true\\" analyzershortcode=\\"test-analyzer\\" transformershortcode=\\"test-transformer\\" class=\\"border rounded-lg hover:bg-ink-200 border-slate-400\\"></repocard-stub>
-      <repocard-stub removedefaultstyle=\\"true\\" size=\\"small\\" id=\\"UmVwb3NpdG9yeTp6bXh2eWI=\\" name=\\"marvin-go\\" vcsprovider=\\"GITHUB\\" ownerlogin=\\"deepsourcelabs\\" isprivate=\\"true\\" latestcommitoid=\\"211d079e3b315af822c0eaddc5668df5ac270b96\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2020-06-09T08:39:31.291147+00:00\\" supportedanalyzers=\\"go,docker\\" route=\\"generate-config\\" islink=\\"true\\" analyzershortcode=\\"test-analyzer\\" transformershortcode=\\"test-transformer\\" class=\\"border rounded-lg hover:bg-ink-200 border-slate-400\\"></repocard-stub>
+      <repocard-stub removedefaultstyle=\\"true\\" size=\\"small\\" id=\\"UmVwb3NpdG9yeTp6dmp2eXo=\\" name=\\"asgard\\" vcsprovider=\\"GITHUB\\" ownerlogin=\\"deepsourcelabs\\" isprivate=\\"true\\" latestcommitoid=\\"a8935a7125356db4cff400415f7061b2e5491591\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2020-07-09T08:56:51.012793+00:00\\" supportedanalyzers=\\"python,docker,javascript\\" route=\\"generate-config\\" islink=\\"true\\" analyzershortcode=\\"test-analyzer\\" transformershortcode=\\"test-transformer\\" kind=\\"REPO\\" subrepocount=\\"0\\" createdat=\\"\\" isactivated=\\"true\\" class=\\"rounded-lg border border-slate-400 hover:bg-ink-200\\"></repocard-stub>
+      <repocard-stub removedefaultstyle=\\"true\\" size=\\"small\\" id=\\"UmVwb3NpdG9yeTp6a2V4cno=\\" name=\\"marvin\\" vcsprovider=\\"GITHUB\\" ownerlogin=\\"deepsourcelabs\\" isprivate=\\"true\\" latestcommitoid=\\"fc773cf6b1b0c2f5d3bef0ad78eaf8f3c991cdf5\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2020-06-10T10:21:17.241934+00:00\\" supportedanalyzers=\\"go,python,docker\\" route=\\"generate-config\\" islink=\\"true\\" analyzershortcode=\\"test-analyzer\\" transformershortcode=\\"test-transformer\\" kind=\\"REPO\\" subrepocount=\\"0\\" createdat=\\"\\" isactivated=\\"true\\" class=\\"rounded-lg border border-slate-400 hover:bg-ink-200\\"></repocard-stub>
+      <repocard-stub removedefaultstyle=\\"true\\" size=\\"small\\" id=\\"UmVwb3NpdG9yeTp6bXh2eWI=\\" name=\\"marvin-go\\" vcsprovider=\\"GITHUB\\" ownerlogin=\\"deepsourcelabs\\" isprivate=\\"true\\" latestcommitoid=\\"211d079e3b315af822c0eaddc5668df5ac270b96\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2020-06-09T08:39:31.291147+00:00\\" supportedanalyzers=\\"go,docker\\" route=\\"generate-config\\" islink=\\"true\\" analyzershortcode=\\"test-analyzer\\" transformershortcode=\\"test-transformer\\" kind=\\"REPO\\" subrepocount=\\"0\\" createdat=\\"\\" isactivated=\\"true\\" class=\\"rounded-lg border border-slate-400 hover:bg-ink-200\\"></repocard-stub>
       <!---->
     </div>
     <!---->
@@ -18,13 +18,13 @@ exports[`[[ ActivateSingleRepo ]] renders an input widget with a list of reposit
 `;
 
 exports[`[[ ActivateSingleRepo ]] renders an input widget with an empty state if there are no repositories that can be activated 1`] = `
-"<ztabpane-stub class=\\"flex flex-col h-full\\">
-  <div class=\\"p-4 pb-0 space-y-2\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search repositories...\\" debouncedelay=\\"350\\" icon=\\"search\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow\\"></zinput-stub>
+"<ztabpane-stub class=\\"flex h-full flex-col\\">
+  <div class=\\"space-y-2 p-4 pb-0\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for repositories...\\" debouncedelay=\\"350\\" icon=\\"search\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow\\"></zinput-stub>
   </div>
   <div class=\\"flex-grow overflow-x-hidden p-4\\">
     <div class=\\"space-y-5\\">
-      <lazyemptystate-stub use-v2=\\"true\\" show-border=\\"true\\" title=\\"We couldn’t find any repositories linked to this account.\\" subtitle=\\"Make sure to grant DeepSource access to the Git repositories you’d like to import.\\" class=\\"border-ink-100\\"></lazyemptystate-stub>
+      <lazyemptystate-stub use-v2=\\"true\\" show-border=\\"true\\" title=\\"We couldn’t find any repositories linked to this account\\" subtitle=\\"Make sure to grant DeepSource access to the Git repositories you’d like to import.\\" padding=\\"px-3.5 py-12 md:px-12 md:py-19\\" class=\\"border-ink-100\\"></lazyemptystate-stub>
       <syncrepoalert-stub initial-repo-name=\\"\\" error-message=\\"\\"></syncrepoalert-stub>
     </div>
     <!---->

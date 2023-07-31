@@ -6,7 +6,7 @@ import Vuex from 'vuex'
 
 import RepoHeader from '~/components/Layout/RepoHeader.vue'
 import { dashboardContextGenerator, mocksGenerator, storeModulesGenerator } from '~/test/mocks'
-import { VcsProviderChoices } from '~/types/types'
+import { Repository, RepositoryKindChoices, VcsProviderChoices } from '~/types/types'
 
 import VTooltip from 'v-tooltip'
 
@@ -21,40 +21,74 @@ interface RepoHeaderInterface extends Vue {
   fetchBasicRepoDetails: ReturnType<typeof jest.fn>
   updateRepositoryInStore: ReturnType<typeof jest.fn>
   updateStarredRepo: ReturnType<typeof jest.fn>
-  refetchOnSocketEvent: () => void
   toggleStar: () => Promise<void>
 }
 
 const stubs = {
   NuxtLink: RouterLinkStub,
-  ZLabel: true,
   ZButton: true,
+  ZIcon: true,
+  ZLabel: true,
   ZTab: true,
   ZTag: true,
-  ZIcon: true
+  ZTagV2: true
 }
 
 describe('[[ RepoHeader ]]', () => {
   let localVue: VueConstructor<Vue>
-  let storeMock: Record<string, unknown>
 
   beforeEach(() => {
     localVue = createLocalVue()
     localVue.use(Vuex)
     localVue.use(VTooltip)
+  })
 
-    storeMock = {
-      modules: storeModulesGenerator()
+  const getRepositoryDetailMock = (overrides: Partial<Repository> = {}) => ({
+    'repository/detail': {
+      namespaced: true,
+      state: {
+        repository: {
+          id: 'UmVwb3NpdG9yeTp6dmp2eXo=',
+          displayName: 'bifrost',
+          vcsProvider: VcsProviderChoices.Github,
+          isActivated: true,
+          kind: RepositoryKindChoices.Repo,
+          ...overrides
+        }
+      }
     }
   })
 
+  test('renders RepoHeader with all repository kind options', () => {
+    Object.values(RepositoryKindChoices).forEach((repoKind) => {
+      const repositoryDetailMock = getRepositoryDetailMock({ kind: repoKind })
+
+      const { html } = render(
+        RepoHeader,
+        {
+          stubs,
+          mocks,
+          store: new Vuex.Store({
+            modules: storeModulesGenerator(repositoryDetailMock)
+          })
+        },
+        (vue) => vue.use(VTooltip)
+      )
+      expect(html()).toMatchSnapshot(repoKind)
+    })
+  })
+
   test('renders RepoHeader with all permission', () => {
+    const repositoryDetailMock = getRepositoryDetailMock()
+
     const { html } = render(
       RepoHeader,
       {
         stubs,
         mocks,
-        store: new Vuex.Store(storeMock)
+        store: new Vuex.Store({
+          modules: storeModulesGenerator(repositoryDetailMock)
+        })
       },
       (vue) => vue.use(VTooltip)
     )
@@ -62,17 +96,12 @@ describe('[[ RepoHeader ]]', () => {
   })
 
   test('renders RepoHeader logged out', () => {
+    const repositoryDetailMock = getRepositoryDetailMock()
+
     const { html } = render(
       RepoHeader,
       {
-        stubs: {
-          NuxtLink: RouterLinkStub,
-          ZLabel: true,
-          ZButton: true,
-          ZTab: true,
-          ZTag: true,
-          ZIcon: true
-        },
+        stubs,
         mocks,
         store: new Vuex.Store({
           modules: storeModulesGenerator({
@@ -81,7 +110,8 @@ describe('[[ RepoHeader ]]', () => {
               state: {
                 loggedIn: false
               }
-            }
+            },
+            ...repositoryDetailMock
           })
         })
       },
@@ -91,6 +121,8 @@ describe('[[ RepoHeader ]]', () => {
   })
 
   test('renders RepoHeader without perms', () => {
+    const repositoryDetailMock = getRepositoryDetailMock()
+
     const { html } = render(
       RepoHeader,
       {
@@ -109,7 +141,8 @@ describe('[[ RepoHeader ]]', () => {
                   ]
                 }
               }
-            }
+            },
+            ...repositoryDetailMock
           })
         })
       },
@@ -119,23 +152,15 @@ describe('[[ RepoHeader ]]', () => {
   })
 
   test('renders RepoHeader for GSR', () => {
+    const repositoryDetailMock = getRepositoryDetailMock({ isActivated: false })
+
     const { html } = render(
       RepoHeader,
       {
         stubs,
         mocks,
         store: new Vuex.Store({
-          modules: storeModulesGenerator({
-            'repository/detail': {
-              namespaced: true,
-              state: {
-                repository: {
-                  id: 'UmVwb3NpdG9yeTp6dmp2eXo=',
-                  vcsProvider: VcsProviderChoices.Gsr
-                }
-              }
-            }
-          })
+          modules: storeModulesGenerator(repositoryDetailMock)
         })
       },
       (vue) => vue.use(VTooltip)
@@ -144,6 +169,8 @@ describe('[[ RepoHeader ]]', () => {
   })
 
   test('renders RepoHeader without a matching activeLink', () => {
+    const repositoryDetailMock = getRepositoryDetailMock({ isActivated: false })
+
     const { html } = render(
       RepoHeader,
       {
@@ -160,37 +187,12 @@ describe('[[ RepoHeader ]]', () => {
           $config: { onPrem: false }
         }),
         store: new Vuex.Store({
-          modules: storeModulesGenerator({
-            'repository/detail': {
-              namespaced: true,
-              state: {
-                repository: {
-                  id: 'UmVwb3NpdG9yeTp6dmp2eXo=',
-                  vcsProvider: VcsProviderChoices.Gsr
-                }
-              }
-            }
-          })
+          modules: storeModulesGenerator(repositoryDetailMock)
         })
       },
       (vue) => vue.use(VTooltip)
     )
     expect(html()).toMatchSnapshot('RepoHeader without a matching activeLink Snap')
-  })
-
-  test('[[ RepoHeader.refetchOnSocketEvent ]]', () => {
-    const wrapper = shallowMount(RepoHeader, {
-      stubs,
-      mocks,
-      store: new Vuex.Store({
-        modules: storeModulesGenerator()
-      }),
-      localVue
-    })
-
-    const vm = wrapper.vm as unknown as RepoHeaderInterface
-
-    vm.refetchOnSocketEvent()
   })
 
   describe('[[ RepoHeader.toggleStar ]]', () => {

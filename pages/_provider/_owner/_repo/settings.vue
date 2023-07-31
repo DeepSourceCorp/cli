@@ -26,12 +26,14 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
 import { ZTab } from '@deepsource/zeal'
+import { Component, mixins } from 'nuxt-property-decorator'
 
-import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import { AppFeatures, RepoPerms } from '~/types/permTypes'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import RoleAccessMixin from '~/mixins/roleAccessMixin'
+
+import { AppFeatures, RepoPerms } from '~/types/permTypes'
+import { RepositoryKindChoices } from '~/types/types'
 
 interface TabLink {
   label: string
@@ -41,6 +43,7 @@ interface TabLink {
   forTeams?: boolean
   gateFeature?: AppFeatures[]
   disableOnPrem?: boolean
+  repoKindChoices: RepositoryKindChoices[]
 }
 
 @Component({
@@ -87,18 +90,28 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
       label: 'General',
       link: ['settings', 'general'],
       icon: 'settings',
-      perms: [RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH, RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY]
+      perms: [
+        RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH,
+        RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY
+      ],
+      repoKindChoices: [
+        RepositoryKindChoices.Repo,
+        RepositoryKindChoices.Monorepo,
+        RepositoryKindChoices.Subrepo
+      ]
     },
     {
       label: 'Configuration',
       icon: 'sliders',
-      link: ['settings', 'config']
+      link: ['settings', 'config'],
+      repoKindChoices: [RepositoryKindChoices.Repo, RepositoryKindChoices.Subrepo]
     },
     {
       label: 'Code Coverage',
       icon: 'test-coverage',
       link: ['settings', 'code-coverage'],
-      perms: [RepoPerms.VIEW_CODE_COVERAGE_SETTINGS]
+      perms: [RepoPerms.VIEW_CODE_COVERAGE_SETTINGS],
+      repoKindChoices: [RepositoryKindChoices.Repo, RepositoryKindChoices.Subrepo]
     },
     {
       label: 'Reporting',
@@ -110,48 +123,69 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
         RepoPerms.CHANGE_ISSUES_TO_TYPE_TO_BLOCK_PRS_ON,
         RepoPerms.CHANGE_PRIORITY_SETTINGS_TO_REPORT,
         RepoPerms.CHANGE_PRIORITY_SETTINGS_TO_BLOCK_PRS_ON
-      ]
+      ],
+      repoKindChoices: [RepositoryKindChoices.Repo, RepositoryKindChoices.Subrepo]
     },
     {
       label: 'Issue priority',
       icon: 'flag',
       link: ['settings', 'issue-priority'],
-      perms: [RepoPerms.CHANGE_ISSUE_PRIORITY]
+      perms: [RepoPerms.CHANGE_ISSUE_PRIORITY],
+      repoKindChoices: [RepositoryKindChoices.Repo, RepositoryKindChoices.Subrepo]
     },
-    { label: 'Badges', icon: 'droplet', link: ['settings', 'badges'] },
+    {
+      label: 'Badges',
+      icon: 'droplet',
+      link: ['settings', 'badges'],
+      repoKindChoices: [RepositoryKindChoices.Repo, RepositoryKindChoices.Subrepo]
+    },
     {
       label: 'Autofix settings',
       link: ['settings', 'autofix'],
       icon: 'autofix',
       perms: [RepoPerms.INSTALL_AUTOFIX_APP, RepoPerms.CREATE_AUTOFIXES],
-      gateFeature: [AppFeatures.AUTOFIX]
+      gateFeature: [AppFeatures.AUTOFIX],
+      repoKindChoices: [RepositoryKindChoices.Repo, RepositoryKindChoices.Monorepo]
     },
-    { label: 'Ignore rules', link: ['settings', 'ignore-rules'], icon: 'list' },
+    {
+      label: 'Ignore rules',
+      link: ['settings', 'ignore-rules'],
+      icon: 'list',
+      repoKindChoices: [RepositoryKindChoices.Repo, RepositoryKindChoices.Subrepo]
+    },
     {
       label: 'SSH access',
       link: ['settings', 'ssh-access'],
       icon: 'key',
-      perms: [RepoPerms.GENERATE_SSH_KEY_PAIR]
+      perms: [RepoPerms.GENERATE_SSH_KEY_PAIR],
+      repoKindChoices: [RepositoryKindChoices.Repo, RepositoryKindChoices.Monorepo]
     },
     {
       label: 'Audit log',
       icon: 'list',
       link: ['settings', 'audit-log'],
-      perms: [RepoPerms.VIEW_AUDIT_LOG]
+      perms: [RepoPerms.VIEW_AUDIT_LOG],
+      repoKindChoices: [
+        RepositoryKindChoices.Repo,
+        RepositoryKindChoices.Monorepo,
+        RepositoryKindChoices.Subrepo
+      ]
     },
     {
       label: 'Repository members',
       icon: 'users',
       link: ['settings', 'repo-members'],
       perms: [RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS],
-      forTeams: true
+      forTeams: true,
+      repoKindChoices: [RepositoryKindChoices.Repo, RepositoryKindChoices.Monorepo]
     },
     {
       label: 'Integrations',
       icon: 'list',
       link: ['settings', 'integrations'],
       perms: [RepoPerms.CHANGE_INTEGRATION_SETTINGS],
-      forTeams: true
+      forTeams: true,
+      repoKindChoices: [RepositoryKindChoices.Repo, RepositoryKindChoices.Subrepo]
     }
   ]
 
@@ -196,6 +230,12 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
    * @return {boolean}
    */
   isNavLinkVisible(item: TabLink): boolean {
+    const isItemValidForRepoKind = item.repoKindChoices.includes(this.repository.kind)
+
+    if (!isItemValidForRepoKind) {
+      return false
+    }
+
     if (Array.isArray(item.gateFeature)) {
       return this.$gateKeeper.provider(item.gateFeature)
     }
@@ -215,6 +255,7 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
 
       return allowedMap.indexOf(true) > -1 ? true : false
     }
+
     return true
   }
 }

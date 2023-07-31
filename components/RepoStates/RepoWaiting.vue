@@ -15,6 +15,7 @@
         />
       </video>
     </template>
+
     <p class="max-w-lg">
       This is the first analysis for this repository. We're analyzing all the files, so it can take
       a while.
@@ -24,14 +25,6 @@
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 
-import { BaseState } from '.'
-import { ZIcon } from '@deepsource/zeal'
-
-@Component({
-  components: {
-    BaseState,
-    ZIcon
-  }
-})
+@Component({ name: 'RepoWaiting' })
 export default class RepoWaiting extends Vue {}
 </script>

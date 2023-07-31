@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="flex h-13 w-full items-center justify-between border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4"
+      class="flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4"
     >
       <div class="flex items-center lg:gap-x-3">
         <z-button
@@ -16,11 +16,7 @@
 
         <h2 class="flex items-center gap-x-2 text-base font-medium text-vanilla-400">
           <span class="hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block">
-            <z-icon
-              :icon="repository.isPrivate ? 'z-lock' : 'globe'"
-              color="vanilla-100"
-              class="mb-0.5"
-            />
+            <z-icon :icon="icon" color="vanilla-100" class="mb-0.5" />
           </span>
 
           <span class="line-clamp-1">
@@ -29,8 +25,18 @@
 
             <span>/</span>
 
-            <span class="text-vanilla-100">
-              {{ repo }}
+            <template v-if="isSubRepository">
+              <nuxt-link :to="$generateRoute(monorepoName, false)" class="text-vanilla-400">
+                {{ monorepoName }}
+              </nuxt-link>
+              <span class="text-vanilla-100">/</span>
+              <span class="text-vanilla-100">
+                {{ subRepositoryPath }}
+              </span>
+            </template>
+
+            <span v-else class="text-vanilla-100">
+              {{ repository.displayName }}
             </span>
           </span>
         </h2>
@@ -70,9 +76,13 @@
               />
             </a>
 
-            <z-label :state="labelState" class="p-3px inline-block select-none">
-              {{ labelText }}
-            </z-label>
+            <z-tag-v2 :type="tagState">
+              <template v-if="isMonorepo" #icon>
+                <z-icon color="aqua" icon="monorepo" />
+              </template>
+
+              {{ tagText }}
+            </z-tag-v2>
           </div>
         </div>
       </div>
@@ -91,7 +101,7 @@
         </button>
 
         <button
-          v-if="allowStar"
+          v-if="repository.isActivated"
           class="rounded-sm p-0.5 hover:bg-ink-200"
           @click="$root.$emit('toggle-metadata-view-dialog')"
         >
@@ -101,7 +111,7 @@
     </div>
 
     <div
-      class="hide-scroll h-nav-items-container space-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3"
+      class="hide-scroll h-nav-items-container flex gap-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3"
     >
       <template v-for="item in navItems">
         <nuxt-link v-if="isNavLinkVisible(item)" :key="item.label" :to="$generateRoute(item.link)">
@@ -122,6 +132,7 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import RouteParamsMixin from '~/mixins/routeParamsMixin'
 
 import { AppFeatures, RepoPerms, TeamPerms } from '~/types/permTypes'
+import { RepositoryKindChoices } from '~/types/types'
 
 interface TabLink {
   icon: string
@@ -133,6 +144,7 @@ interface TabLink {
   pattern?: RegExp
   gateFeature?: AppFeatures[]
   forBeta?: boolean
+  repoKindChoices: RepositoryKindChoices[]
 }
 
 @Component({
@@ -150,80 +162,14 @@ export default class RepoHeader extends mixins(
   RoleAccessMixin,
   ActiveUserMixin
 ) {
-  navItems: TabLink[] = [
-    {
-      icon: 'gauge',
-      label: 'Overview',
-      pattern: new RegExp(/^provider-owner-repo$/)
-    },
-    {
-      icon: 'flag',
-      label: 'Issues',
-      link: 'issues',
-      pattern: new RegExp(/^provider-owner-repo-issue*/)
-    },
-    {
-      icon: 'autofix',
-      label: 'Autofix',
-      link: 'autofix',
-      pattern: new RegExp(/^provider-owner-repo-autofix*/),
-      loginRequired: true,
-      perms: [RepoPerms.READ_REPO],
-      gateFeature: [AppFeatures.AUTOFIX]
-    },
-    {
-      icon: 'bar-chart',
-      label: 'Metrics',
-      link: 'metrics',
-      pattern: new RegExp(/^provider-owner-repo-metrics-.*$/)
-    },
-    {
-      icon: 'pie-chart',
-      label: 'Reports',
-      link: 'reports/owasp-top-10',
-      loginRequired: true,
-      perms: [RepoPerms.VIEW_REPORTS],
-      pattern: new RegExp(/^provider-owner-repo-reports-*/)
-    },
-    {
-      icon: 'history',
-      label: 'History',
-      link: 'history/runs',
-      pattern: new RegExp(/^provider-owner-repo-(history|run|runs|transforms|transforms)/)
-    },
-    {
-      icon: 'wrench',
-      label: 'Settings',
-      link: 'settings/general',
-      loginRequired: true,
-      perms: [
-        RepoPerms.VIEW_DSN,
-        RepoPerms.GENERATE_SSH_KEY_PAIR,
-        RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH,
-        RepoPerms.CHANGE_ISSUE_TYPES_TO_REPORT,
-        RepoPerms.CHANGE_ISSUES_TO_TYPE_TO_BLOCK_PRS_ON,
-        RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY,
-        RepoPerms.ADD_REMOVE_MEMBERS,
-        RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS,
-        RepoPerms.VIEW_AUDIT_LOG
-      ],
-      pattern: new RegExp(/^provider-owner-repo-settings-*/)
-    }
-  ]
-
   async fetch(): Promise<void> {
-    // skipcq: TCV-001
-    await Promise.all([
-      this.fetchRepoPerms(this.baseRouteParams),
-      this.fetchBasicRepoDetails(this.baseRouteParams),
-      this.fetchMetrics({ ...this.baseRouteParams })
-    ])
+    await this.fetchRepoPerms(this.baseRouteParams)
 
-    // skipcq: TCV-001
-    this.fetchRepoRunCount({
-      ...this.baseRouteParams,
-      status: 'pend'
-    })
+    if (this.isMonorepo) {
+      return
+    }
+
+    await this.fetchMetrics({ ...this.baseRouteParams, fetchPerms: true })
 
     //? Pre-load first link of metric
     const firstMetric = this.repository.metricsCaptured?.[0]
@@ -233,22 +179,6 @@ export default class RepoHeader extends mixins(
     }
   }
 
-  refetchOnSocketEvent(): void {
-    this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
-    this.fetchRepoRunCount({
-      ...this.baseRouteParams,
-      status: 'pend'
-    })
-  }
-
-  mounted(): void {
-    this.$socket.$on('repo-analysis-updated', this.refetchOnSocketEvent)
-  }
-
-  beforeDestroy(): void {
-    this.$socket.$off('repo-analysis-updated', this.refetchOnSocketEvent)
-  }
-
   get canReadTeamPage(): boolean {
     if (this.teamPerms.permission && this.activeOwner === this.owner) {
       return this.$gateKeeper.team(TeamPerms.VIEW_TEAM_HOME, this.teamPerms.permission)
@@ -256,9 +186,121 @@ export default class RepoHeader extends mixins(
     return false
   }
 
+  get icon() {
+    const { isPrivate } = this.repository
+
+    if (this.isSubRepository) {
+      return isPrivate ? 'folder-locked' : 'folder-globe'
+    }
+
+    if (this.repoKind === RepositoryKindChoices.Repo) {
+      return isPrivate ? 'z-lock' : 'globe'
+    }
+
+    return 'monorepo'
+  }
+
+  get isMonorepo(): boolean {
+    return this.repoKind === RepositoryKindChoices.Monorepo
+  }
+
+  get isSubRepository(): boolean {
+    return this.repoKind === RepositoryKindChoices.Subrepo
+  }
+
+  get monorepoName(): string {
+    return this.repository.displayName.split('/')[0].trim()
+  }
+
+  get navItems(): TabLink[] {
+    return [
+      {
+        icon: this.isMonorepo ? 'folder-tree' : 'gauge',
+        label: this.isMonorepo ? 'Sub-repositories' : 'Overview',
+        pattern: new RegExp(/^provider-owner-repo$/),
+        repoKindChoices: [
+          RepositoryKindChoices.Repo,
+          RepositoryKindChoices.Monorepo,
+          RepositoryKindChoices.Subrepo
+        ]
+      },
+      {
+        icon: 'flag',
+        label: 'Issues',
+        link: 'issues',
+        pattern: new RegExp(/^provider-owner-repo-issue*/),
+        repoKindChoices: [RepositoryKindChoices.Repo, RepositoryKindChoices.Subrepo]
+      },
+      {
+        icon: 'autofix',
+        label: 'Autofix',
+        link: 'autofix',
+        pattern: new RegExp(/^provider-owner-repo-autofix*/),
+        loginRequired: true,
+        perms: [RepoPerms.READ_REPO],
+        gateFeature: [AppFeatures.AUTOFIX],
+        repoKindChoices: [RepositoryKindChoices.Repo, RepositoryKindChoices.Subrepo]
+      },
+      {
+        icon: 'bar-chart',
+        label: 'Metrics',
+        link: 'metrics',
+        pattern: new RegExp(/^provider-owner-repo-metrics-.*$/),
+        repoKindChoices: [RepositoryKindChoices.Repo, RepositoryKindChoices.Subrepo]
+      },
+      {
+        icon: 'pie-chart',
+        label: 'Reports',
+        link: 'reports/owasp-top-10',
+        loginRequired: true,
+        perms: [RepoPerms.VIEW_REPORTS],
+        pattern: new RegExp(/^provider-owner-repo-reports-*/),
+        repoKindChoices: [RepositoryKindChoices.Repo, RepositoryKindChoices.Subrepo]
+      },
+      {
+        icon: 'history',
+        label: 'History',
+        link: 'history/runs',
+        pattern: new RegExp(/^provider-owner-repo-(history|run|runs|transforms|transforms)/),
+        repoKindChoices: [RepositoryKindChoices.Repo, RepositoryKindChoices.Subrepo]
+      },
+      {
+        icon: 'wrench',
+        label: 'Settings',
+        link: 'settings/general',
+        loginRequired: true,
+        perms: [
+          RepoPerms.VIEW_DSN,
+          RepoPerms.GENERATE_SSH_KEY_PAIR,
+          RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH,
+          RepoPerms.CHANGE_ISSUE_TYPES_TO_REPORT,
+          RepoPerms.CHANGE_ISSUES_TO_TYPE_TO_BLOCK_PRS_ON,
+          RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY,
+          RepoPerms.ADD_REMOVE_MEMBERS,
+          RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS,
+          RepoPerms.VIEW_AUDIT_LOG
+        ],
+        pattern: new RegExp(/^provider-owner-repo-settings-*/),
+        repoKindChoices: [
+          RepositoryKindChoices.Repo,
+          RepositoryKindChoices.Monorepo,
+          RepositoryKindChoices.Subrepo
+        ]
+      }
+    ]
+  }
+
+  get repoKind(): RepositoryKindChoices {
+    return this.repository.kind
+  }
+
   get repoVCSIcon(): string {
     const provider = this.repository.vcsProvider
     return this.$providerMetaMap[provider].icon ?? ''
+  }
+
+  get subRepositoryPath(): string {
+    return this.repository.displayName.split('/').slice(1).join(' / ')
   }
 
   get teamPageUrl(): string {
@@ -301,17 +343,25 @@ export default class RepoHeader extends mixins(
     return false
   }
 
-  get labelState() {
+  get tagState(): string {
+    if (this.isMonorepo) {
+      return 'aqua'
+    }
+
     const { errorCode, isActivated } = this.repository
 
     if (errorCode) {
-      return errorCode === 3003 ? 'info' : 'danger'
+      return errorCode === 3003 ? 'aqua' : 'cherry'
     }
 
-    return isActivated ? 'success' : 'warning'
+    return isActivated ? 'juniper' : 'honey'
   }
 
-  get labelText() {
+  get tagText() {
+    if (this.isMonorepo) {
+      return 'MONOREPO'
+    }
+
     const { errorCode, isActivated } = this.repository
 
     if (errorCode) {
@@ -321,7 +371,17 @@ export default class RepoHeader extends mixins(
     return isActivated ? 'Active' : 'Inactive'
   }
 
+  get repoName() {
+    return this.isSubRepository ? this.repository.displayName : this.repo
+  }
+
   isNavLinkVisible(item: TabLink): boolean {
+    const isItemValidForRepoKind = item.repoKindChoices.includes(this.repoKind)
+
+    if (!isItemValidForRepoKind) {
+      return false
+    }
+
     if (item.loginRequired && !this.loggedIn) {
       return false
     }

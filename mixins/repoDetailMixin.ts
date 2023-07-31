@@ -13,7 +13,10 @@ import {
   CommitConfigToVcsPayload,
   UpdateRepositoryWidgetsInput,
   UpdateRepositoryWidgetsPayload,
-  ActivateGsrRepositoryInput
+  ActivateGsrRepositoryInput,
+  EnableMonorepoModeInput,
+  DisableMonorepoModeInput,
+  MetricTypeChoices
 } from '~/types/types'
 
 const repoStore = namespace('repository/detail')
@@ -46,6 +49,9 @@ export const REPO_PERMS = {
 export default class RepoDetailMixin extends Vue {
   @repoStore.State
   repository!: Repository
+
+  @repoStore.State
+  repoIdMap!: Record<string, string>
 
   @repoStore.State('loading')
   repoStoreLoading: boolean
@@ -187,7 +193,13 @@ export default class RepoDetailMixin extends Vue {
   }) => Promise<void>
 
   @repoStore.Action(RepositoryDetailActions.FETCH_METRICS)
-  fetchMetrics: (args: { provider: string; owner: string; name: string }) => Promise<void>
+  fetchMetrics: (args: {
+    provider: string
+    owner: string
+    name: string
+    metricType?: MetricTypeChoices
+    fetchPerms?: boolean
+  }) => Promise<void>
 
   // Mutations
   @repoStore.Action(RepositoryDetailActions.COMMIT_CONFIG_TO_VCS)
@@ -203,7 +215,9 @@ export default class RepoDetailMixin extends Vue {
   deleteSSHKey: (args: { repositoryId: string }) => Promise<void>
 
   @repoStore.Action(RepositoryDetailActions.TOGGLE_REPO_ACTIVATION)
-  toggleRepoActivation: (args: ToggleRepositoryActivationInput) => Promise<void>
+  toggleRepoActivation: (
+    args: ToggleRepositoryActivationInput & { login: string; provider: string }
+  ) => Promise<void>
 
   @repoStore.Action(RepositoryDetailActions.UPDATE_REPO_SETTINGS)
   updateRepoSettings: (args: { input: UpdateRepositorySettingsInput }) => Promise<void>
@@ -274,6 +288,12 @@ export default class RepoDetailMixin extends Vue {
 
   @repoStore.Action(RepositoryDetailActions.REGENERATE_REPOSITORY_DSN)
   regenerateRepositoryDSN: () => Promise<void>
+
+  @repoStore.Action(RepositoryDetailActions.CONVERT_REPO_TO_MONOREPO)
+  convertRepoToMonorepo: (args: EnableMonorepoModeInput) => Promise<boolean>
+
+  @repoStore.Action(RepositoryDetailActions.REVERT_MONOREPO)
+  revertMonorepo: (args: DisableMonorepoModeInput) => Promise<boolean>
 
   get baseRouteParams(): { name: string; provider: string; owner: string } {
     const { provider, owner, repo } = this.$route.params

@@ -1,16 +1,16 @@
 <template>
-  <div class="flex min-h-screen mx-auto bg-ink-400 text-vanilla-100 dashboard-layout">
+  <div class="dashboard-layout mx-auto flex min-h-screen bg-ink-400 text-vanilla-100">
     <sidebar v-if="loggedIn" @show-palette="showPalette = true" />
     <logged-out-sidebar v-else />
     <div class="w-full">
       <mobile-nav
-        class="sticky top-0 z-30 w-full h-10 border-b lg:hidden bg-ink-300 border-slate-400"
+        class="sticky top-0 z-30 h-10 w-full border-b border-slate-400 bg-ink-300 lg:hidden"
       />
       <dashboard-header class="z-30 w-full md:sticky md:top-10 lg:top-0" />
 
       <!-- Tabs list -->
       <div
-        class="sticky z-30 flex px-3 pt-3 overflow-x-scroll border-b border-slate-400 gap-x-5 bg-ink-400 hide-scroll tabs-list-container"
+        class="hide-scroll tabs-list-container sticky z-30 flex gap-x-5 overflow-x-scroll border-b border-slate-400 bg-ink-400 px-3 pt-3"
       >
         <template v-for="tab in tabsList">
           <nuxt-link
@@ -39,10 +39,10 @@
     <client-only>
       <palette
         v-if="showPalette && allowPalette"
+        class="z-1000"
         @close="showPalette = false"
         @toggle="showPalette = !showPalette"
-        class="z-1000"
-      ></palette>
+      />
     </client-only>
   </div>
 </template>
@@ -97,7 +97,7 @@ export default class DashboardLayout extends mixins(
       {
         label: 'Repositories',
         icon: 'layers',
-        link: this.getLink('all-repos')
+        link: this.getLink('repos')
       },
       {
         label: 'Reports',

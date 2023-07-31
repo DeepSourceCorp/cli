@@ -1,14 +1,14 @@
 <template>
   <section
     :class="isWidget ? 'max-h-92 overflow-y-scroll' : 'rounded-md border border-slate-400'"
-    class="overflow-x-auto leading-normal hide-scroll"
+    class="hide-scroll overflow-x-auto leading-normal"
   >
     <table class="w-full table-fixed cursor">
       <thead class="border-b border-slate-400">
         <tr class="text-xs font-semibold uppercase text-vanilla-400">
           <th
             :class="isWidget ? 'pl-5' : 'pl-4 sm:w-auto'"
-            class="py-2.5 text-left w-48 font-semibold"
+            class="w-48 py-2.5 text-left font-semibold"
           >
             Repository
           </th>
@@ -39,15 +39,20 @@
             :key="repoCoverage.id"
             :class="{ 'hover:bg-ink-300': linkedRows }"
           >
-            <td class="text-sm text-left truncate">
+            <td class="truncate text-left text-sm">
               <component
                 :is="linkedRows ? 'nuxt-link' : 'div'"
                 :to="$generateRoute([repoCoverage.name, 'metrics', 'LCV'])"
                 :class="isWidget ? 'pl-5' : 'pl-4'"
                 class="block py-2.5"
               >
-                <span v-tooltip="{ content: repoCoverage.name, delay: { show: 200, hide: 100 } }">
-                  {{ repoCoverage.name }}
+                <span
+                  v-tooltip="{
+                    content: getFormattedRepoName(repoCoverage.name),
+                    delay: { show: 200, hide: 100 }
+                  }"
+                >
+                  {{ getFormattedRepoName(repoCoverage.name) }}
                 </span>
               </component>
             </td>
@@ -145,6 +150,10 @@ export default class CodeCoverageTable extends Vue {
     Object.keys(this.lcvSortFilters).forEach(
       (key) => ((this.lcvSortFilters[key as CoverageSortT] as FilterChoice).label = 'LINE')
     )
+  }
+
+  getFormattedRepoName(repoName: string) {
+    return repoName.replace(/:/g, ' / ')
   }
 }
 </script>

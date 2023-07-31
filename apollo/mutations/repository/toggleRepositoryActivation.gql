@@ -1,6 +1,8 @@
 mutation($input: ToggleRepositoryActivationInput!) {
   toggleRepositoryActivation(input: $input) {
     repository {
+      id
+      name
       isActivated
     }
   }

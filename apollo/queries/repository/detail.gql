@@ -4,6 +4,7 @@ query RepoDetails($provider: VCSProviderChoices!, $owner: String!, $name: String
     name
     isPrivate
     isStarred
+    kind
     canBeActivated
     fullName
     errorCode
