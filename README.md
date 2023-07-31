@@ -3,13 +3,13 @@
 </p>
 
 <p align="center">
-  <a href="https://deepsource.io/docs">Documentation</a> |
-  <a href="https://deepsource.io/signup">Get Started</a> |
-  <a href="https://discuss.deepsource.io/">Discuss</a>
+  <a href="https://docs.deepsource.com">Documentation</a> |
+  <a href="https://deepsource.com">Get Started</a> |
+  <a href="https://discuss.deepsource.com/">Community</a>
 </p>
 
 <p align="center">
-  DeepSource helps you ship good quality code.
+  The Code Health Platform
 </p>
 
 </p>
@@ -19,10 +19,6 @@
 # CLI
 
 Command line interface to DeepSource
-
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/deepsourcelabs/cli)
-[![DeepSource](https://deepsource.io/gh/deepsourcelabs/cli.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/deepsourcelabs/cli/?ref=repository-badge)
-[![DeepSource](https://deepsource.io/gh/deepsourcelabs/cli.svg/?label=resolved+issues&show_trend=true&token=j4U3e5C2BSIdTefFeY7uXNT6)](https://deepsource.io/gh/deepsourcelabs/cli/?ref=repository-badge)
 
 ## Installation
 
@@ -74,12 +70,7 @@ For complete documentation, refer to the [CLI Documentation](https://docs.deepso
 ## Feedback/Support
 
 Want to share any feedback or need any help regarding the CLI? Feel free to
-reach out to us at [support@deepsource.io](mailto:support@deepsource.io) or at
-our [Discord server](https://deepsource.io/discord).
-
-## Community
-
-Interested in DeepSource and want to chat with the community? Feel free to join our [Discord server](http://deepsource.io/discord).
+open a discussion in the [community forum](https://discuss.deepsource.com)
 
 ## License
 
