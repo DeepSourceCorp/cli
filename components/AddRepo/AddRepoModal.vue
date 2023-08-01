@@ -164,6 +164,13 @@ export default class AddNewRepo extends mixins(AutoOnboardMixin, ActiveUserMixin
     }
   }
 
+  // We need to refetch owner features when the active owner/provider changes
+  @Watch('activeProvider')
+  @Watch('activeOwner')
+  refetchDataOnChange(): void {
+    this.$fetch()
+  }
+
   @Watch('$route.path')
   closeModal(): void {
     this.selectTemplateToOnboard(undefined)
