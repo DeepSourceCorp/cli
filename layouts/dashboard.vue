@@ -161,7 +161,10 @@ export default class DashboardLayout extends mixins(
       }
 
       const role = this.activeDashboardContext.role as TeamMemberRoleChoices
-      return this.$gateKeeper.team(TeamPerms.MANAGE_TEAM_MEMEBERS, role)
+      return this.$gateKeeper.team(
+        [TeamPerms.MANAGE_TEAM_MEMBERS, TeamPerms.VIEW_TEAM_MEMBERS],
+        role
+      )
     }
     return false
   }
@@ -181,7 +184,7 @@ export default class DashboardLayout extends mixins(
             TeamPerms.CHANGE_PLAN,
             TeamPerms.UPDATE_SEATS,
             TeamPerms.UPDATE_BILLING_DETAILS,
-            TeamPerms.MANAGE_TEAM_MEMEBERS,
+            TeamPerms.MANAGE_TEAM_MEMBERS,
             TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD,
             TeamPerms.DELETE_TEAM_ACCOUNT,
             TeamPerms.VIEW_TEAM_GENERAL_SETTINGS

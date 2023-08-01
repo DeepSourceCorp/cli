@@ -135,6 +135,7 @@ export enum OwnerDetailMutations {
   SET_ERROR = 'setOwnerDetailError',
   SET_LOADING = 'setOwnerDetailLoading',
   SET_OWNER = 'setOwner',
+  SET_OWNER_BILLING_INFO = 'setOwnerBillingInfo',
   SET_OWNER_AUTOFIX_TREND = 'setOwnerAutofixTrend',
   SET_OWNER_ISSUES_TREND = 'setOwnerIssuesTrend',
   SET_OWNER_RESOLVED_ISSUES_TREND = 'setOwnerResolvedIssuesTrend',
@@ -152,7 +153,16 @@ export const mutations: MutationTree<OwnerDetailModuleState> = {
     state.error = Object.assign({}, state.error, error)
   },
   [OwnerDetailMutations.SET_OWNER]: (state, owner) => {
-    state.owner = Object.assign({}, state.owner, owner)
+    if (state.owner.id && owner?.id && state.owner.id !== owner.id) {
+      state.owner = owner
+    }
+    // ? Gracefully merge current and new `billingInfo` if they are for the same owner
+    else if (owner.billingInfo && state.owner.id && state.owner.id === owner?.id) {
+      const newBillingInfo = Object.assign({}, state.owner.billingInfo, owner.billingInfo)
+      state.owner = Object.assign({}, state.owner, owner, { billingInfo: newBillingInfo })
+    } else {
+      state.owner = Object.assign({}, state.owner, owner)
+    }
   },
   [OwnerDetailMutations.SET_OWNER_AUTOFIX_TREND]: (state, owner: Owner) => {
     state.autofixTrend = owner.autofixedIssueTrend
@@ -352,7 +362,7 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
     this: Store<RootState>,
     injectee: OwnerDetailModuleActionContext,
     args: { billingEmail: string; billingAddress: string; login: string; provider: string }
-  ) => Promise<void>
+  ) => Promise<GraphqlMutationResponse>
 
   [OwnerDetailActions.GET_BILLING_INFO]: (
     this: Store<RootState>,
@@ -830,8 +840,15 @@ export const actions: OwnerDetailModuleActions = {
         fetchPolicy: 'network-only'
       }
 
-      const response = await this.$applyGraphqlMutation(UpdateBillingInfo, args, refetchQueries)
-      commit(OwnerDetailMutations.SET_OWNER, response.data.updateBillingInfo)
+      const response: GraphqlMutationResponse = await this.$applyGraphqlMutation(
+        UpdateBillingInfo,
+        args,
+        refetchQueries
+      )
+      if (response.data.updateBillingInfo) {
+        const { billingAddress, billingEmail } = response.data.updateBillingInfo
+        commit(OwnerDetailMutations.SET_OWNER, { billingAddress, billingEmail })
+      }
       return response
     } catch (e) {
       commit(OwnerDetailMutations.SET_ERROR, e)

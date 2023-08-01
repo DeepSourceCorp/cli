@@ -1,16 +1,17 @@
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-16-fr members-page">
+  <div class="members-page grid grid-cols-1 lg:grid-cols-16-fr">
     <nav
-      class="hidden px-4 pt-2 overflow-x-auto border-b gap-x-8 hide-scroll border-slate-400 lg:sticky lg:flex lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r vertical-sidebar"
+      class="hide-scroll vertical-sidebar hidden gap-x-8 overflow-x-auto border-slate-400 px-4 pt-2 lg:sticky lg:flex lg:flex-col lg:gap-y-1 lg:border-r lg:p-2"
     >
       <template v-for="item in navItems">
         <nuxt-link
+          v-if="item.show"
           :key="item.label"
           :to="item.link"
-          class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300"
+          class="group flex-shrink-0 rounded-md text-sm hover:bg-ink-300"
         >
           <span
-            class="flex items-center justify-between p-2 rounded-md group-hover:text-vanilla-100"
+            class="flex items-center justify-between rounded-md p-2 group-hover:text-vanilla-100"
             :class="
               $route.path.startsWith(item.link) ? 'bg-ink-300 text-vanilla-100' : 'text-vanilla-400'
             "
@@ -28,46 +29,72 @@
       </template>
     </nav>
 
-    <div class="max-w-3xl p-4 space-y-8">
-      <div class="space-y-4 mb-28">
-        <div v-if="pageHeading" class="flex justify-between">
-          <h2 class="text-lg font-medium">{{ pageHeading }}</h2>
-          <invite-members-modal @inviteSuccess="inviteSuccess" />
+    <div class="max-w-3xl space-y-4 p-4 pb-28">
+      <div>
+        <h2 class="text-base font-medium leading-8">{{ pageData.title }}</h2>
+        <p class="text-sm leading-6 text-vanilla-400">{{ pageData.subtitle }}</p>
+        <div class="mt-3 flex gap-2">
+          <z-input
+            :value="searchCandidate"
+            :show-border="false"
+            background-color="ink-300"
+            placeholder="Search..."
+            size="small"
+            class="p-2"
+            @debounceInput="(newValue) => (searchCandidate = newValue)"
+          >
+            <template #left>
+              <z-icon icon="search" class="ml-1.5" />
+            </template>
+          </z-input>
+          <!-- TODO migrate Add seats modal here and then enable -->
+          <!-- <nuxt-link-button
+            v-if="$route.name === 'provider-owner-members-active'"
+            :to="{ path: $generateRoute(['settings', 'billing']), query: { 'add-seats': true } }"
+            button-type="secondary"
+            class="flex-1"
+          >
+            <z-icon icon="rocking-chair" color="current" size="small" />
+            <span>Add seats</span>
+          </nuxt-link-button> -->
+          <invite-members-modal
+            v-if="canInviteMembers"
+            class="flex-1 flex-shrink-0"
+            @inviteSuccess="inviteSuccess"
+          />
         </div>
-
-        <nuxt-child />
       </div>
+      <nuxt-child :search-candidate="searchCandidate" />
     </div>
 
     <floating-button-mobile :nav-items="navItemsForMobile" />
   </div>
 </template>
 <script lang="ts">
-import { ZButton, ZIcon, ZModal, ZTab, ZTag } from '@deepsource/zeal'
+import { ZIcon, ZTag, ZInput } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
-import { InviteMembersModal } from '@/components/Members'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 import TeamDetailMixin from '@/mixins/teamDetailMixin'
+import ActiveUserMixin from '~/mixins/activeUserMixin'
+import { TeamPerms } from '~/types/permTypes'
 
 /**
  * Team members parent page
  */
 @Component({
   components: {
-    ZTab,
-    ZButton,
     ZIcon,
-    InviteMembersModal,
-    ZModal,
-    ZTag
+    ZTag,
+    ZInput
   },
   middleware: ['validateProvider'],
   layout: 'dashboard',
   scrollToTop: true
 })
-export default class Members extends mixins(TeamDetailMixin, OwnerBillingMixin) {
+export default class Members extends mixins(TeamDetailMixin, OwnerBillingMixin, ActiveUserMixin) {
   showInviteModal = false
+  searchCandidate = ''
 
   async fetch(): Promise<void> {
     const { owner, provider } = this.$route.params
@@ -85,13 +112,15 @@ export default class Members extends mixins(TeamDetailMixin, OwnerBillingMixin) 
       {
         label: 'My team',
         routeName: 'provider-owner-members-active',
-        link: this.getRoute('active')
+        link: this.getRoute('active'),
+        show: this.$gateKeeper.team(TeamPerms.VIEW_TEAM_MEMBERS, this.teamPerms.permission)
       },
       {
         label: 'Pending invites',
         routeName: 'provider-owner-members-invited',
         link: this.getRoute('invited'),
-        count: this.pendingInvitesCount
+        count: this.pendingInvitesCount,
+        show: this.$gateKeeper.team(TeamPerms.MANAGE_TEAM_MEMBERS, this.teamPerms.permission)
       }
     ]
   }
@@ -105,13 +134,17 @@ export default class Members extends mixins(TeamDetailMixin, OwnerBillingMixin) 
     })
   }
 
+  get canInviteMembers(): boolean {
+    return this.$gateKeeper.team(TeamPerms.MANAGE_TEAM_MEMBERS, this.teamPerms.permission)
+  }
+
   async fetchInvitedMembers(): Promise<void> {
     const { owner, provider } = this.$route.params
     await this.fetchInvitedUsers({
       login: owner,
       provider,
       currentPage: 1,
-      limit: 10
+      limit: 20
     })
   }
 
@@ -137,12 +170,15 @@ export default class Members extends mixins(TeamDetailMixin, OwnerBillingMixin) 
     return this.$generateRoute(['members', candidate])
   }
 
-  get pageHeading(): string | false {
+  get pageData(): { title: string; subtitle: string } | false {
     if (this.$route.path == this.getRoute('active')) {
-      return 'My team'
+      return { title: 'My team', subtitle: 'Manage who has access to your workspace.' }
     }
     if (this.$route.path == this.getRoute('invited')) {
-      return 'Pending invites'
+      return {
+        title: 'Pending invites',
+        subtitle: 'View who are yet to accept your workspace invitation.'
+      }
     }
     return false
   }

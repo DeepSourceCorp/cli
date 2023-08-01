@@ -4,7 +4,7 @@ const TEAM_PERMS = {
   [TeamMemberRoleChoices.Admin]: {
     title: 'Administrator',
     description:
-      'Full access to all repositories and the team, including billing, adding, or removing members.'
+      'Full access to all repositories and the team, including billing, adding and removing members.'
   },
   [TeamMemberRoleChoices.Member]: {
     title: 'Member',
@@ -13,7 +13,7 @@ const TEAM_PERMS = {
   [TeamMemberRoleChoices.Contributor]: {
     title: 'Contributor',
     description:
-      "Contributors don't have any team level access or any access to change repo level settings."
+      "Contributors only have access to public repositories and don't count against your seat quota."
   }
 }
 

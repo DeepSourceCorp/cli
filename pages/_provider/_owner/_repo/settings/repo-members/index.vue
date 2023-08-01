@@ -39,6 +39,7 @@
         <member-list-item
           v-for="(member, index) in repoMembers"
           :key="member.id"
+          v-bind="member.user"
           :is-repo="true"
           :role="member.permission"
           :is-perm-from-vcs="member.isPermFromVcs"
@@ -46,8 +47,7 @@
           :login="activeDashboardContext.login"
           :account-type="activeDashboardContext.type"
           :vcs-provider="activeDashboardContext.vcs_provider"
-          :is-last-list-item="index === repoMembers.length - 1"
-          v-bind="member.user"
+          :hide-border="index === repoMembers.length - 1"
           @updateRole="({ role, newRole }) => triggerUpdateRole(member, role, newRole)"
           @removeMember="() => triggerRemoveMember(member)"
         />
@@ -78,7 +78,12 @@
       />
     </template>
     <div v-else class="flex flex-col">
-      <member-list-item-loading v-for="loader in LIMIT" :key="loader" />
+      <member-list-item-loading
+        v-for="loader in LIMIT"
+        :key="loader"
+        :hide-border="loader === LIMIT"
+        class="first:pt-0"
+      />
     </div>
     <portal to="modal">
       <add-collaborator-modal

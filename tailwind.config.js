@@ -50,10 +50,11 @@ module.exports = {
       cursor: ['hover', 'disabled'],
       borderStyle: ['hover', 'focus'],
       animation: ['motion-safe'],
-      margin: ['first', 'hover', 'group-hover'],
+      margin: ['first', 'hover', 'group-hover', 'last'],
       backgroundOpacity: ['disabled'],
       borderOpacity: ['disabled'],
-      visibility: ['group-hover']
+      visibility: ['group-hover'],
+      padding: ['first', 'last']
     }
   },
   theme: {
@@ -86,7 +87,8 @@ module.exports = {
         84: '21rem',
         88: '22rem',
         92: '23rem',
-        98: '27rem'
+        98: '27rem',
+        '3px': '3px'
       },
       gridTemplateColumns: {
         support: '5fr 7fr',

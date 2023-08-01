@@ -1,22 +1,20 @@
 <template>
   <div class="space-y-4">
-    <div v-if="$fetchState.pending" class="flex flex-col space-y-2">
-      <div
-        v-for="loader in Array.from(Array(limit).keys())"
+    <div v-if="$fetchState.pending">
+      <member-list-item-loading
+        v-for="loader in limit"
         :key="loader"
-        class="flex w-full animate-pulse space-x-2"
-      >
-        <div class="h-8 w-8 rounded-md bg-ink-300"></div>
-        <div class="h-8 w-2/3 rounded-md bg-ink-300"></div>
-        <div class="h-8 flex-grow rounded-md bg-ink-300"></div>
-      </div>
+        :hide-border="loader === limit"
+        class="first:pt-0"
+      />
     </div>
 
     <template v-else-if="teamInvites.length">
       <transition-group class="transform duration-200" tag="ul">
         <invited-member-list-item
-          v-for="invite in teamInvites"
+          v-for="(invite, index) in teamInvites"
           :key="invite.email"
+          :hide-border="index === teamInvites.length - 1"
           v-bind="invite"
           @cancelInvite="confirmCancelInvite"
         />
@@ -77,51 +75,36 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Watch, mixins } from 'nuxt-property-decorator'
+import { Component, Watch, mixins, Prop } from 'nuxt-property-decorator'
+import { ZButton, ZIcon, ZPagination, ZConfirm } from '@deepsource/zeal'
 import TeamDetailMixin from '@/mixins/teamDetailMixin'
-import { InvitedMemberListItem, UpdateRoleModal, RemoveMemberModal } from '@/components/Members'
-import {
-  ZInput,
-  ZButton,
-  ZIcon,
-  ZMenu,
-  ZMenuItem,
-  ZMenuSection,
-  ZAvatar,
-  ZPagination,
-  ZConfirm
-} from '@deepsource/zeal'
 import { TeamPerms } from '~/types/permTypes'
 import { resolveNodes } from '~/utils/array'
 import { TeamMemberInvitation } from '~/types/types'
 
 @Component({
   components: {
-    ZInput,
     ZButton,
     ZIcon,
-    ZMenu,
-    ZMenuItem,
-    ZMenuSection,
-    ZAvatar,
-    InvitedMemberListItem,
     ZPagination,
-    ZConfirm,
-    UpdateRoleModal,
-    RemoveMemberModal
+    ZConfirm
   },
   middleware: ['teamOnly', 'perm', 'validateProvider'],
   meta: {
     auth: {
       strict: true,
-      teamPerms: [TeamPerms.MANAGE_TEAM_MEMEBERS]
+      teamPerms: [TeamPerms.MANAGE_TEAM_MEMBERS]
     }
   },
   layout: 'dashboard'
 })
 export default class Invited extends mixins(TeamDetailMixin) {
+  @Prop({ type: String, default: '' })
+  searchCandidate: string
+
+  test = true
   private currentPage = 1
-  private limit = 10
+  private limit = 20
   private invitedEmailToCancel = ''
   public showCancelConfirm = false
   public inviteLoading = false
@@ -130,6 +113,7 @@ export default class Invited extends mixins(TeamDetailMixin) {
     await this.fetchTeamMembers()
   }
 
+  @Watch('searchCandidate')
   @Watch('currentPage')
   async fetchTeamMembers(): Promise<void> {
     const { owner, provider } = this.$route.params
@@ -137,7 +121,8 @@ export default class Invited extends mixins(TeamDetailMixin) {
       login: owner,
       provider,
       currentPage: this.currentPage,
-      limit: this.limit
+      limit: this.limit,
+      q: this.searchCandidate
     })
   }
 

@@ -9,18 +9,18 @@
     />
 
     <div
-      :class="{ 'border-b border-b-ink-300': !isLastListItem }"
-      class="flex flex-col flex-grow gap-y-0.5 py-4"
+      :class="{ 'border-b border-b-ink-300': !hideBorder }"
+      class="flex flex-grow flex-col gap-y-0.5 py-4"
     >
       <div class="flex justify-between">
-        <p class="text-vanilla-100 font-medium text-sm leading-6">
+        <p class="text-sm font-medium leading-6 text-vanilla-100">
           {{ fullName || email }}
         </p>
 
         <template v-if="showRoleOptions">
           <div
             v-if="isPrimaryUser && !isRepo && !showOwnerMenu"
-            class="text-xs font-medium tracking-wider uppercase text-vanilla-400 leading-6"
+            class="text-xxs font-medium uppercase leading-6 tracking-wide text-vanilla-400"
           >
             Owner
           </div>
@@ -30,11 +30,11 @@
               <button
                 type="button"
                 data-testid="show-role-menu"
-                class="flex items-center gap-x-2 leading-6"
+                class="flex items-center gap-x-1 leading-6"
                 @click="toggle"
               >
                 <span
-                  class="text-xs font-medium tracking-wider uppercase"
+                  class="text-xxs font-medium uppercase leading-6 tracking-wide"
                   :class="isOpen ? 'text-vanilla-100' : 'text-vanilla-400'"
                 >
                   {{ isPrimaryUser && !isRepo && showOwnerMenu ? 'Owner' : roles[role].title }}
@@ -52,65 +52,106 @@
             <template #body>
               <z-menu-item
                 v-if="isPrimaryUser && !isRepo && showOwnerMenu"
+                as="button"
+                spacing="px-2.5 py-3.5"
                 data-testid="transfer-ownership"
-                class="text-sm"
+                class="w-full text-xs leading-none"
                 @click="transferOwnership"
               >
-                <div class="inline-flex items-center w-full">
-                  <z-icon icon="users" class="mr-1" />
-                  Transfer ownership
+                <div class="inline-flex w-full items-center gap-x-2">
+                  <z-icon icon="users" color="current" size="x-small" />
+                  <span>Transfer ownership</span>
                 </div>
               </z-menu-item>
 
               <template v-else>
-                <z-menu-section class="text-left">
-                  <z-menu-item v-for="(opt, key) in roles" :key="key" class="text-sm">
-                    <div :data-testid="`${key}-button`" @click="updateRole(key)">
-                      <div class="flex items-center space-x-2">
-                        <span :class="key === role ? 'font-semibold' : ''">{{ opt.title }}</span>
-                        <z-icon v-if="key === role" size="small" icon="check" color="vanilla-100" />
+                <z-menu-section :divider="false" class="text-left text-xs text-vanilla-400">
+                  <z-menu-item
+                    v-for="(opt, key) in roles"
+                    :key="key"
+                    as="button"
+                    spacing="px-2.5 py-3 first:pt-3.5 last:pb-3.5"
+                    :data-testid="`${key}-button`"
+                    class="w-full text-left text-xs"
+                    @click="updateRole(key)"
+                  >
+                    <div class="flex gap-x-2">
+                      <z-icon
+                        v-if="key === role"
+                        size="x-small"
+                        icon="check"
+                        color="vanilla-100"
+                        class="mt-3px flex-shrink-0"
+                      />
+                      <div v-else class="h-3 w-3 flex-shrink-0"></div>
+                      <div class="flex-grow space-y-1">
+                        <div
+                          class="text-xxs font-medium uppercase leading-5 tracking-wide"
+                          :class="{ 'text-vanilla-100': key === role }"
+                        >
+                          {{ opt.title }}
+                        </div>
+                        <p class="text-xs leading-normal text-vanilla-400">
+                          {{ opt.description }}
+                        </p>
                       </div>
-                      <p class="mt-1 text-xs leading-snug text-vanilla-400">
-                        {{ opt.description }}
-                      </p>
                     </div>
                   </z-menu-item>
                 </z-menu-section>
+                <hr class="w-full border-ink-100" />
                 <z-menu-section :divider="false">
                   <z-menu-item
-                    icon="alert-triangle"
+                    as="button"
+                    spacing="px-2.5 py-3.5"
                     data-testid="remove-team-member"
-                    class="text-cherry"
+                    class="w-full text-xs leading-none text-cherry"
                     @click="removeMember"
-                    >Remove from {{ isRepo ? 'repository' : 'team' }}</z-menu-item
                   >
+                    <z-icon
+                      size="x-small"
+                      icon="alert-circle"
+                      color="current"
+                      class="flex-shrink-0"
+                    />
+                    <span>Remove from {{ isRepo ? 'repository' : 'team' }}</span>
+                  </z-menu-item>
                 </z-menu-section>
               </template>
             </template>
           </z-menu>
         </template>
 
-        <div v-else class="text-xs font-medium tracking-wider uppercase text-vanilla-400 leading-6">
+        <div v-else class="text-xxs font-medium uppercase leading-6 tracking-wide text-vanilla-400">
           {{ isPrimaryUser ? 'Owner' : roles[role].title }}
         </div>
       </div>
 
-      <div class="flex flex-wrap gap-x-5 gap-y-1 text-xs text-vanilla-400">
-        <div v-if="email" class="inline-flex items-center gap-x-1">
-          <z-icon icon="mail" size="x-small" /> {{ email }}
+      <div
+        class="flex flex-col flex-wrap gap-x-5 gap-y-1 text-xs leading-5 text-vanilla-400 sm:flex-row"
+      >
+        <div
+          v-if="email"
+          class="inline-flex items-center gap-x-1 lg:w-full lg:max-w-3xs lg:flex-grow"
+        >
+          <z-icon icon="mail" size="x-small" class="flex-shrink-0" />
+          <span class="lg:truncate">{{ email }}</span>
         </div>
 
         <div v-if="isPermFromVcs" class="inline-flex items-center gap-x-1">
-          <z-icon :icon="providerMeta.icon" size="x-small" /> Synced from {{ providerMeta.text }}
+          <z-icon :icon="providerMeta.icon" size="x-small" class="flex-shrink-0" /> Synced from
+          {{ providerMeta.text }}
         </div>
 
         <div v-else class="inline-flex items-center gap-x-1">
-          <z-icon icon="logo" size="x-small" /> Added on DeepSource
+          <z-icon icon="logo" size="x-small" class="flex-shrink-0" /> Added on DeepSource
         </div>
 
         <!-- Every child element needs to be spaced out by 20px, except the last element, which needs to be right aligned.
         Hence, the ml-auto. -->
-        <span v-if="!isRepo && joining" class="sm:ml-auto">since {{ joining }}</span>
+        <span v-if="!isRepo && joining" class="inline-flex items-center gap-x-1 sm:ml-auto">
+          <z-icon icon="calendar" size="x-small" class="flex-shrink-0 sm:hidden sm:lowercase" />
+          Since {{ joining }}
+        </span>
       </div>
     </div>
   </li>
@@ -190,7 +231,7 @@ export default class MemberListItem extends mixins(OwnerDetailMixin) {
   isPermFromVcs: boolean
 
   @Prop({ default: false })
-  isLastListItem: boolean
+  hideBorder: boolean
 
   @Prop()
   teamAvatarUrl: string

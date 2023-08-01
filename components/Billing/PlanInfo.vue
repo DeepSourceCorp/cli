@@ -1,15 +1,15 @@
 <template>
   <section class="space-y-2">
-    <div class="flex flex-wrap max-w-2xl md:flex-nowrap">
+    <div class="flex max-w-2xl flex-wrap md:flex-nowrap">
       <div class="flex-grow">
         <div v-if="Object.keys(currentPlan)">
           <div
-            class="flex items-center h-16 space-x-2 text-lg tracking-wider font-medium leading-none"
+            class="flex h-16 items-center space-x-2 text-lg font-medium leading-none tracking-wider"
           >
-            <div v-if="currentPlan.name" class="px-2 py-1.5 uppercase rounded-md bg-ink-200">
+            <div v-if="currentPlan.name" class="rounded-md bg-ink-200 px-2 py-1.5 uppercase">
               <span>{{ currentPlan.name }}</span>
             </div>
-            <div v-else class="w-24 h-8 rounded-md bg-ink-300 animate-pulse"></div>
+            <div v-else class="h-8 w-24 animate-pulse rounded-md bg-ink-300"></div>
             <div>Plan</div>
           </div>
         </div>
@@ -20,24 +20,24 @@
           >
             {{ ownerBillingInfo.seatsUsed }} of {{ ownerBillingInfo.seatsTotal }} seats used
           </div>
-          <div v-else class="w-32 h-4 bg-ink-300 animate-pulse"></div>
+          <div v-else class="h-4 w-32 animate-pulse bg-ink-300"></div>
           <usage-info :completion="completion" />
         </div>
       </div>
-      <div class="flex justify-between w-full mt-4 md:mt-0 md:block md:justify-start md:w-auto">
+      <div class="mt-4 flex w-full justify-between md:mt-0 md:block md:w-auto md:justify-start">
         <div v-if="!isBilledManually && Object.keys(currentPlan)" class="mt-1.5">
           <div v-if="currentPlan.amount" class="flex justify-end space-x-1">
             <div class="flex space-x-1">
               <div class="text-2xl">$</div>
               <div class="text-3xl font-semibold leading-none md:text-4xl">{{ monthlyAmount }}</div>
             </div>
-            <div class="self-end mb-1 text-sm">/user/month</div>
+            <div class="mb-1 self-end text-sm">/user/month</div>
           </div>
           <div v-else class="flex justify-end">
-            <div class="h-16 rounded-md w-44 bg-ink-300 animate-pulse"></div>
+            <div class="h-16 w-44 animate-pulse rounded-md bg-ink-300"></div>
           </div>
         </div>
-        <div class="pt-1 mt-1 text-right">
+        <div class="mt-1 pt-1 text-right">
           <z-button
             v-if="ownerBillingInfo && !ownerBillingInfo.cancelAtPeriodEnd && isBilledByStripe"
             button-type="primary"
@@ -47,7 +47,7 @@
           >
             <div class="flex items-center">
               Add more seats
-              <z-icon icon="arrow-right" size="x-small" color="ink-400" class="stroke-2 ml-1.5" />
+              <z-icon icon="arrow-right" size="x-small" color="ink-400" class="ml-1.5 stroke-2" />
             </div>
           </z-button>
         </div>
@@ -61,7 +61,7 @@
         @onClose="showUpdateSeatsModal = false"
       >
         <template #default="{ close }">
-          <div class="flex flex-col p-4 space-y-3">
+          <div class="flex flex-col space-y-3 p-4">
             <div class="flex justify-between">
               <label for="seats-count" class="text-sm text-vanilla-400">
                 New number of seats in total
@@ -82,7 +82,7 @@
               <p>Remove or demote admins/members to contributor to reduce seats further.</p>
               <nuxt-link
                 :to="$generateRoute(['members'])"
-                class="inline-flex items-center space-x-2 mt-3 cursor-pointer"
+                class="mt-3 inline-flex cursor-pointer items-center space-x-2"
               >
                 <span class="hover:underline">Manage members</span>
                 <z-icon color="honey-400" icon="arrow-right" class="mt-1" />
@@ -102,7 +102,7 @@
             <z-button
               label="Update seats"
               icon="check-circle"
-              class="ml-auto modal-primary-action w-36"
+              class="modal-primary-action ml-auto w-36"
               button-type="primary"
               size="small"
               :disabled="!isValid || loading"

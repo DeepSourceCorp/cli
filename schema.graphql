@@ -1175,7 +1175,7 @@ type EnterpriseTeam implements MaskPrimaryKeyNode {
   numMembersTotal: Int
   isViewerPrimaryUser: Boolean
   teamMembers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String], isAddedFromVcs: Boolean, isRoleFromVcs: Boolean): TeamMemberConnection!
-  invites(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection
+  invites(offset: Int, before: String, after: String, first: Int, last: Int, q: String, status: String): TeamMemberInvitationConnection
   invitationUrl: String
   logs(offset: Int, before: String, after: String, first: Int, last: Int, actorIn: [String], eventIn: [String], ipAddressIn: [String], createdAtGte: Date, createdAtLte: Date, q: String): AuditLogConnection
   auditLogMeta: AuditLogMeta
@@ -3065,7 +3065,7 @@ type Team implements MaskPrimaryKeyNode {
   numMembersTotal: Int
   isViewerPrimaryUser: Boolean
   teamMembers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String], isAddedFromVcs: Boolean, isRoleFromVcs: Boolean): TeamMemberConnection!
-  invites(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection
+  invites(offset: Int, before: String, after: String, first: Int, last: Int, q: String, status: String): TeamMemberInvitationConnection
   invitationUrl: String
   logs(offset: Int, before: String, after: String, first: Int, last: Int, actorIn: [String], eventIn: [String], ipAddressIn: [String], createdAtGte: Date, createdAtLte: Date, q: String): AuditLogConnection
   auditLogMeta: AuditLogMeta

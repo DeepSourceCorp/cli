@@ -216,7 +216,7 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Invite Member ]]: Snapshot: 
                           <line x1=\\"18\\" y1=\\"6\\" x2=\\"6\\" y2=\\"18\\"></line>
                           <line x1=\\"6\\" y1=\\"6\\" x2=\\"18\\" y2=\\"18\\"></line>
                         </svg></button></div>
-                    <div class=\\"p-4 space-y-4 text-sm font-normal\\">
+                    <div class=\\"space-y-4 p-4 text-sm font-normal\\">
                       <!---->
                       <!---->
                       <div class=\\"space-y-2\\">

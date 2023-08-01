@@ -1249,7 +1249,7 @@ declare module '*/groups.gql' {
 declare module '*/invites.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const teamInvites: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1501,7 +1501,7 @@ declare module '*/autofixTrends.gql' {
 declare module '*/billing.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const billing: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1547,7 +1547,7 @@ declare module '*/issueTrends.gql' {
 declare module '*/maxUsagePercentage.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const maxUsagePercentage: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1602,7 +1602,7 @@ declare module '*/publicReportListOwner.gql' {
 declare module '*/seatsInfo.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const ownerSeatsInfo: DocumentNode;
+  export const seatsInfo: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1630,15 +1630,6 @@ declare module '*/publicKey.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const ownerPublicKey: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/statusCheck.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
 
   export default defaultDocument;
 }
@@ -2258,6 +2249,15 @@ declare module '*/inviteUrl.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/memberRoleCount.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const memberRoleCount: DocumentNode;
 
   export default defaultDocument;
 }

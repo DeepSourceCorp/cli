@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="overflow-x-auto border-b bg-ink-300 border-slate-400">
+    <div class="overflow-x-auto border-b border-slate-400 bg-ink-300">
       <div id="header" class="flex items-center p-3">
         <h2 class="inline-flex items-center space-x-3 font-medium text-vanilla-100">
           <nuxt-link
-            class="inline-flex items-center flex-shrink-0 space-x-2"
+            class="inline-flex flex-shrink-0 items-center space-x-2"
             :to="$generateRoute()"
           >
             <!-- account avatar -->
@@ -24,7 +24,7 @@
             />
 
             <!-- account display name -->
-            <span class="text-base font-medium cursor-pointer">{{
+            <span class="cursor-pointer text-base font-medium">{{
               activeDashboardContext.team_name || activeDashboardContext.login
             }}</span>
           </nuxt-link>
@@ -38,7 +38,7 @@
               :href="activeDashboardContext.vcs_url"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center h-6"
+              class="flex h-6 items-center"
             >
               <z-tag
                 v-if="activeDashboardContext.vcs_provider_display"
@@ -62,7 +62,7 @@
                   bg-color="ink-200"
                   spacing="px-2.5"
                   text-size="xs"
-                  class="py-1 gap-x-1 font-medium leading-none border border-slate-400"
+                  class="gap-x-1 border border-slate-400 py-1 font-medium leading-none"
                 >
                   {{ planName }}
                 </z-tag>
@@ -73,7 +73,7 @@
                   bg-color="ink-200"
                   spacing="px-2.5"
                   text-size="xs"
-                  class="h-6 font-semibold leading-none tracking-wider text-center uppercase border border-slate-400 text-vanilla-300 hover:text-vanilla-100 hover:bg-ink-100"
+                  class="h-6 border border-slate-400 text-center font-semibold uppercase leading-none tracking-wider text-vanilla-300 hover:bg-ink-100 hover:text-vanilla-100"
                 >
                   <span>Upgrade</span></z-tag
                 >
@@ -192,7 +192,7 @@ export default class DashboardHeader extends mixins(ActiveUserMixin, ContextMixi
 
   // TODO: Enable once the avatar sizing inconsistency is fixed
   // get canInviteTeamMembers(): boolean {
-  //   return this.$gateKeeper.team(TeamPerms.MANAGE_TEAM_MEMEBERS, this.teamPerms.permission)
+  //   return this.$gateKeeper.team(TeamPerms.MANAGE_TEAM_MEMBERS, this.teamPerms.permission)
   // }
 
   get canVisitBillingPage(): boolean {

@@ -1,0 +1,8 @@
+query memberRoleCount($login: String!, $provider: VCSProviderChoices!, $query: String) {
+  team(login: $login, provider: $provider) {
+    id
+    adminCount: teamMembers(role: ["admin"], q: $query) {
+      totalCount
+    }
+  }
+}

@@ -42,6 +42,7 @@ export default class TeamDetailMixin extends Vue {
     provider: string
     limit: number
     currentPage: number
+    q?: string
   }) => Promise<void>
 
   @teamStore.Action(TeamActions.UPDATE_MEMBER_ROLE)

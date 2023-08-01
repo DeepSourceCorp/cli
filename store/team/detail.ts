@@ -155,6 +155,7 @@ export interface TeamModuleActions extends ActionTree<TeamState, RootState> {
       provider: string
       limit: number
       currentPage: number
+      q?: string
     }
   ) => Promise<void>
   [TeamActions.UPDATE_MEMBER_ROLE]: (
@@ -352,14 +353,15 @@ export const actions: TeamModuleActions = {
     return undefined
   },
 
-  async [TeamActions.FETCH_INVITED_USERS]({ commit }, { login, provider, limit, currentPage }) {
+  async [TeamActions.FETCH_INVITED_USERS]({ commit }, { login, provider, limit, currentPage, q }) {
     try {
       commit(TeamMutations.SET_LOADING, true)
       const response: GraphqlQueryResponse = await this.$fetchGraphqlData(InvitedUsersListQuery, {
         provider: this.$providerMetaMap[provider].value,
         after: this.$getGQLAfter(currentPage, limit),
         login,
-        limit
+        limit,
+        q
       })
       commit(TeamMutations.SET_TEAM, response.data.team)
       commit(TeamMutations.SET_LOADING, false)

@@ -1,8 +1,8 @@
 <template>
   <div>
     <slot :open="openInviteModal" name="trigger">
-      <z-button size="small" icon="user-plus" @click="openInviteModal">
-        Invite new member
+      <z-button size="small" icon="plus" class="w-full" @click="openInviteModal">
+        Invite <span class="hidden md:inline">new member</span>
       </z-button>
     </slot>
 
@@ -13,7 +13,7 @@
         title="Invite new members"
         @onClose="close"
       >
-        <div class="p-4 space-y-4 text-sm font-normal">
+        <div class="space-y-4 p-4 text-sm font-normal">
           <div v-if="$config.emailEnabled" class="space-y-2">
             <div>
               <h3 class="text-base font-medium text-vanilla-100">Invite via email</h3>
@@ -22,13 +22,13 @@
               </p>
             </div>
 
-            <div v-if="$fetchState.pending" class="rounded-md h-28 animate-pulse bg-ink-200"></div>
+            <div v-if="$fetchState.pending" class="h-28 animate-pulse rounded-md bg-ink-200"></div>
 
             <template v-else>
               <div
                 v-for="member in membersToInvite"
                 :key="member.index"
-                class="grid gap-2 grid-cols-fr-10"
+                class="grid grid-cols-fr-10 gap-2"
               >
                 <z-input
                   :id="member.index"

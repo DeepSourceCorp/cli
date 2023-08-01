@@ -1,8 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders MemberListItemLoading 1`] = `
-"<div class=\\"flex w-full my-4 gap-x-2.5 animate-pulse\\">
-  <div class=\\"rounded-full w-8 h-8 bg-ink-300\\"></div>
-  <div class=\\"flex-grow h-10 rounded-md bg-ink-300\\"></div>
+"<div class=\\"flex w-full gap-x-2.5 pt-4\\">
+  <div class=\\"h-9 w-9 animate-pulse rounded-full bg-ink-300\\"></div>
+  <div class=\\"flex-grow pb-4 border-b border-ink-300\\">
+    <div class=\\"h-10 animate-pulse rounded-md bg-ink-300\\"></div>
+  </div>
 </div>"
 `;

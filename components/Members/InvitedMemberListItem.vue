@@ -1,66 +1,85 @@
 <template>
-  <li class="flex items-center py-2 space-x-3 text-sm border-b border-slate-400">
-    <div class="items-center w-1/2 space-y-2 leading-none text-vanilla-100">
-      <div>{{ email }}</div>
-      <z-button
-        button-type="ghost"
-        size="x-small"
-        class="text-xs cursor-pointer text-cherry"
-        @click="cancelInvite"
-      >
-        Cancel Invite
-      </z-button>
-    </div>
-    <div class="flex items-center justify-end w-1/2">
+  <li class="flex items-start gap-x-2.5 first:-mt-4">
+    <z-avatar
+      :image="getDefaultAvatar(email)"
+      :user-name="email"
+      type="span"
+      class="mt-4 flex-shrink-0"
+    />
+    <div
+      class="flex w-full justify-between gap-x-3 py-4 text-sm"
+      :class="{ 'border-b border-ink-300': !hideBorder }"
+    >
+      <div class="items-center space-y-0.5 leading-none text-vanilla-100">
+        <div class="text-sm leading-6">{{ email }}</div>
+        <div v-if="createdAt" class="flex items-center gap-x-1 text-xs leading-6 text-vanilla-400">
+          <z-icon icon="calendar" color="current" size="x-small" />
+          <span class="leading-5">invited on {{ joining }}</span>
+        </div>
+      </div>
+
       <div class="space-y-2 text-right">
-        <!-- z-menu>
-          <template slot="trigger">
-            <div class="flex items-center space-x-2">
-              <span>{{ roles[role].title }}</span>
-              <z-icon size="small" icon="chevron-down"></z-icon>
-            </div>
+        <z-menu direction="left">
+          <template #trigger="{ toggle, isOpen }">
+            <button
+              type="button"
+              data-testid="show-role-menu"
+              class="flex items-center gap-x-1 leading-6"
+              @click="toggle"
+            >
+              <span
+                class="text-xxs font-medium uppercase leading-6 tracking-wide"
+                :class="isOpen ? 'text-vanilla-100' : 'text-vanilla-400'"
+              >
+                {{ roles[role].title }}
+              </span>
+              <z-icon
+                size="x-small"
+                icon="chevron-down"
+                class="transform duration-150"
+                :class="{
+                  'rotate-180': isOpen
+                }"
+              />
+            </button>
           </template>
-          <template slot="body">
-            <z-menu-item v-for="(opt, key) in roles" :key="key" class="text-sm text-left">
-              <div @click="updateRole(key)">
-                <div class="flex items-center space-x-2">
-                  <span>{{ opt.title }}</span>
-                  <z-icon v-if="key == role" size="small" icon="check"></z-icon>
-                </div>
-                <p class="mt-1 text-xs leading-snug text-vanilla-400">{{ opt.description }}</p>
+          <template #body>
+            <z-menu-item
+              as="button"
+              spacing="px-2.5 py-3.5"
+              data-testid="transfer-ownership"
+              class="w-full text-xs text-cherry"
+              @click="cancelInvite"
+            >
+              <div class="inline-flex w-full items-center gap-x-2">
+                <z-icon icon="x" color="current" size="x-small" />
+                <span>Cancel invite</span>
               </div>
             </z-menu-item>
           </template>
-        </z-menu -->
-        <span>{{ roles[role].title }}</span>
-        <div v-if="createdAt" class="text-xs text-vanilla-400">invited on {{ joining }}</div>
+        </z-menu>
       </div>
     </div>
-    <!-- div class="flex items-center justify-end w-1/3">
-      <z-button size="small" buttonType="secondary" class="border-none whitespace-nowrap">
-        <div class="flex items-center space-x-2">
-          <z-icon icon="mail" size="small"></z-icon>
-          <span>Send Reminder</span>
-        </div>
-      </z-button>
-    </div -->
   </li>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZButton } from '@deepsource/zeal'
+import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar } from '@deepsource/zeal'
 import { formatDate, parseISODate } from '@/utils/date'
+import { getDefaultAvatar } from '@/utils/ui'
+
 import { TeamMemberRoleChoices } from '~/types/types'
 
 @Component({
-  components: { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZButton },
+  components: { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar },
+  methods: { getDefaultAvatar },
   layout: 'dashboard'
 })
 export default class MemberListItem extends Vue {
-  @Prop()
+  @Prop({ required: true })
   role!: string
 
-  @Prop()
+  @Prop({ required: true })
   email: string
 
   @Prop()
@@ -68,6 +87,9 @@ export default class MemberListItem extends Vue {
 
   @Prop()
   id: string
+
+  @Prop({ default: false })
+  hideBorder: boolean
 
   private roles = {
     [TeamMemberRoleChoices.Admin]: {

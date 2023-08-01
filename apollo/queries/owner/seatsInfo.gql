@@ -1,4 +1,4 @@
-query ownerSeatsInfo($login: String!, $provider: VCSProviderChoices!) {
+query seatsInfo($login: String!, $provider: VCSProviderChoices!) {
   owner(login: $login, provider: $provider) {
     id
     billingInfo {
