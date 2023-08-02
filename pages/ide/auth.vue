@@ -140,8 +140,7 @@ import { getDefaultAvatar } from '~/utils/ui'
       strict: true,
       redirectToLogin: true
     }
-  },
-  middleware: ['betaOnly']
+  }
 })
 export default class IDEAuth extends mixins(ContextMixin, ActiveUserMixin, AuthMixin) {
   status = IDEAuthActionTypes.EMPTY
