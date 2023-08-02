@@ -132,6 +132,10 @@ export default class AddNewRepo extends mixins(AutoOnboardMixin, ActiveUserMixin
     )
   }
 
+  get refetchKeyForRouteChange(): string {
+    return `${this.activeProvider}-${this.activeOwner}`
+  }
+
   async fetch() {
     if (this.showMonorepo) {
       //? For some reason, activeUser (and hence activeOwner and activeProvider) was unavailable
@@ -165,8 +169,7 @@ export default class AddNewRepo extends mixins(AutoOnboardMixin, ActiveUserMixin
   }
 
   // We need to refetch owner features when the active owner/provider changes
-  @Watch('activeProvider')
-  @Watch('activeOwner')
+  @Watch('refetchKeyForRouteChange')
   refetchDataOnChange(): void {
     this.$fetch()
   }
