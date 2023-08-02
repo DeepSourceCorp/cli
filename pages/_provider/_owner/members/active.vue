@@ -210,7 +210,7 @@ export default class ActiveMembers extends mixins(
       }
     }
 
-    if (this.adminCount === 1) {
+    if (this.canManageMembers && this.adminCount === 1) {
       return AdminNoticeTypes.oneAdmin
     }
 
