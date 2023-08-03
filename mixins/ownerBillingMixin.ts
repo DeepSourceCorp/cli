@@ -132,9 +132,10 @@ export default class OwnerBillingMixin extends mixins(OwnerDetailMixin, ContextM
           return { ...planInfo, name: 'Enterprise' }
         }
 
-        return planInfo
+        return planInfo ?? {}
       }
     }
+
     return {}
   }
 
