@@ -57,10 +57,9 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZIcon, ZModal } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-@Component({ name: 'ExportLogsSuccessModal', components: { ZButton, ZIcon, ZModal } })
+@Component({ name: 'ExportLogsSuccessModal' })
 export default class ExportLogsSuccessModal extends Vue {
   @Prop({ default: false, type: Boolean })
   disabled: boolean

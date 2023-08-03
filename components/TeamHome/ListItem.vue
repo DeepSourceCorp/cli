@@ -3,10 +3,10 @@
     :is="to ? 'nuxt-link' : 'li'"
     :to="to"
     tag="li"
-    class="flex space-x-2 hover:bg-ink-300 cursor-pointer border-b border-slate-400 last:border-none p-2"
+    class="flex cursor-pointer space-x-2 border-b border-slate-400 p-2 last:border-none hover:bg-ink-300"
   >
-    <div class="w-2/3 flex items-center text-sm">
-      <div class="w-8 flex items-center">
+    <div class="flex w-2/3 items-center text-sm">
+      <div class="flex w-8 items-center">
         <slot name="avatar">
           <z-icon :icon="icon" size="small" />
         </slot>
@@ -15,7 +15,7 @@
         {{ label }}
       </slot>
     </div>
-    <div class="w-1/3 text-right self-center text-sm text-vanilla-400">
+    <div class="w-1/3 self-center text-right text-sm text-vanilla-400">
       <slot name="info">
         {{ info }}
       </slot>
@@ -24,11 +24,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 
-@Component({
-  components: { ZIcon }
-})
+@Component({})
 export default class ListItem extends Vue {
   @Prop({ default: undefined })
   icon: string

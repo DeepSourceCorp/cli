@@ -152,7 +152,6 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZConfirm, ZDivider } from '@deepsource/zeal'
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 
 import { IntegrationShortcodes } from '~/mixins/integrationsDetailMixin'
@@ -167,11 +166,6 @@ const SHORTCODE = IntegrationShortcodes.JIRA
  * Owner-level integrations page for Jira
  */
 @Component({
-  components: {
-    ZButton,
-    ZConfirm,
-    ZDivider
-  },
   middleware: ['perm', 'teamOnly'],
   meta: {
     auth: {

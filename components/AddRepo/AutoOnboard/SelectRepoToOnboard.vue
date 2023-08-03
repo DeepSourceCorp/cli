@@ -1,11 +1,11 @@
 <template>
-  <section class="flex flex-col space-y-4 h-full">
-    <div class="px-4 py-3 border-b border-slate-400 flex flex-row items-center">
+  <section class="flex h-full flex-col space-y-4">
+    <div class="flex flex-row items-center border-b border-slate-400 px-4 py-3">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
-        <z-breadcrumb-item v-if="hasAutoOnboardEvents" class="text-vanilla-400 cursor-pointer">
+        <z-breadcrumb-item v-if="hasAutoOnboardEvents" class="cursor-pointer text-vanilla-400">
           <span @click="$emit('backToStart')">Auto Onboard</span>
         </z-breadcrumb-item>
-        <z-breadcrumb-item class="text-vanilla-400 cursor-pointer">
+        <z-breadcrumb-item class="cursor-pointer text-vanilla-400">
           <span @click="$emit('back')">All templates</span>
         </z-breadcrumb-item>
         <z-breadcrumb-item>Select repositories</z-breadcrumb-item>
@@ -26,12 +26,12 @@
         </template>
       </z-input>
     </div>
-    <div class="overflow-scroll flex-grow px-5">
+    <div class="flex-grow overflow-scroll px-5">
       <template v-if="fetchingData">
         <div
           v-for="ii in 20"
           :key="ii"
-          class="h-7 animate-pulse w-full rounded-md my-0.5 bg-ink-200 bg-opacity-50"
+          class="my-0.5 h-7 w-full animate-pulse rounded-md bg-ink-200 bg-opacity-50"
         ></div>
       </template>
       <template v-if="onboardableRepositories.length">
@@ -40,7 +40,7 @@
           size="small"
           class="cursor-pointer py-1.5 font-semibold"
           :class="{
-            'hover:text-vanilla-100 opacity-50': !selectAll,
+            'opacity-50 hover:text-vanilla-100': !selectAll,
             'text-vanilla-100': selectAll
           }"
           :disabled="onboardableRepositories.length === 0"
@@ -67,7 +67,7 @@
       </template>
       <div
         v-else-if="!fetchingData"
-        class="flex flex-col items-center justify-center p-2 gap-y-5 text-center"
+        class="flex flex-col items-center justify-center gap-y-5 p-2 text-center"
       >
         <img
           v-if="searchCandidate"
@@ -78,7 +78,7 @@
           :alt="searchCandidate"
         />
         <div>
-          <p class="text-vanilla-100 font-semibold">
+          <p class="font-semibold text-vanilla-100">
             {{
               searchCandidate
                 ? `No results found for '${searchCandidate}'`
@@ -86,7 +86,7 @@
             }}
           </p>
 
-          <p class="max-w-md mt-1 text-sm text-vanilla-400">
+          <p class="mt-1 max-w-md text-sm text-vanilla-400">
             {{
               owner.hasGrantedAllRepoAccess
                 ? `You can sync your repositories from ${activeProviderName}`
@@ -104,7 +104,7 @@
             rel="noopener noreferrer"
             icon="settings"
             icon-color="vanilla-100"
-            class="bg-ink-200 hover:bg-ink-200 hover:opacity-80 text-vanilla-100"
+            class="bg-ink-200 text-vanilla-100 hover:bg-ink-200 hover:opacity-80"
           />
           <z-button
             label="Sync repositories"
@@ -130,22 +130,12 @@
 </template>
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
-import { ZInput, ZIcon, ZCheckbox, ZBreadcrumb, ZBreadcrumbItem, ZButton } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 
-@Component({
-  components: {
-    ZInput,
-    ZIcon,
-    ZCheckbox,
-    ZBreadcrumb,
-    ZBreadcrumbItem,
-    ZButton
-  }
-})
+@Component({})
 export default class SelectReposToOnboard extends mixins(
   ActiveUserMixin,
   AutoOnboardMixin,
@@ -244,7 +234,7 @@ export default class SelectReposToOnboard extends mixins(
         this.$toast.danger(
           'Something went wrong while onboarding these repositories, contact support'
         )
-        this.logErrorForUser(e, 'Onboarding repositories using auto onboard', {
+        this.logErrorForUser(e as Error, 'Onboarding repositories using auto onboard', {
           shortcode: this.selectedTemplate.shortcode,
           repoIds: this.selectedRepos.join(', ')
         })

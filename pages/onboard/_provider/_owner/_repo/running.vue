@@ -1,13 +1,13 @@
 <template>
   <section class="space-y-4">
-    <div class="border rounded-md bg-ink-400 border-slate-400">
-      <div class="p-5 font-medium border-slate-400">Your first analysis is running...</div>
+    <div class="rounded-md border border-slate-400 bg-ink-400">
+      <div class="border-slate-400 p-5 font-medium">Your first analysis is running...</div>
       <div
         v-for="(stage, index) in stages"
         :key="stage.title"
         class="flex items-center justify-between px-5 py-5 text-sm"
         :class="{
-          'bg-ink-300 border-t border-slate-400': stage.status === 'in-progress',
+          'border-t border-slate-400 bg-ink-300': stage.status === 'in-progress',
           'border-t border-slate-400': index === 0,
           'border-b': stage.status === 'in-progress' && index !== stages.length - 1,
           'border-b-0': index === stages.length - 1
@@ -24,7 +24,7 @@
         </div>
         <div
           v-if="stage.status === 'complete'"
-          class="flex items-center justify-center w-4 h-4 rounded-full bg-juniper"
+          class="flex h-4 w-4 items-center justify-center rounded-full bg-juniper"
         >
           <z-icon icon="check" color="ink-400" class="stroke-2.5" size="x-small" />
         </div>
@@ -42,7 +42,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import { WSRepoAnalysisUpdatedPayload } from '~/types/websockets'
 import { RunStatus } from '~/types/types'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
@@ -61,9 +60,6 @@ export enum STATUS {
  * for the repository being onboarded
  */
 @Component({
-  components: {
-    ZIcon
-  },
   middleware: ['restrictOnboarding'],
   meta: {
     auth: {

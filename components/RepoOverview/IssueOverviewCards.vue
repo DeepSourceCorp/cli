@@ -30,7 +30,7 @@
             <div class="flex items-center gap-x-1.5">
               <z-icon :icon="WIDGET_ICON_MAP[widget]" class="hidden self-start lg:block" />
 
-              <h5 class="widget-card-title text-sm font-medium text-vanilla-300">
+              <h5 class="text-sm font-medium text-vanilla-300 before:lh-crop-6">
                 {{ toSentenceCase(issueWidgets[widget].title) }}
               </h5>
             </div>
@@ -80,7 +80,6 @@
 </template>
 <script lang="ts">
 import { StatCard, StatSection } from '@/components/Metrics'
-import { ZButton, ZIcon, ZTicker } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
@@ -108,10 +107,7 @@ export interface Widget {
 @Component({
   components: {
     StatSection,
-    StatCard,
-    ZButton,
-    ZIcon,
-    ZTicker
+    StatCard
   },
   layout: 'repository',
   methods: {
@@ -237,13 +233,5 @@ export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAcce
   .widget-skeleton-dimensions {
     width: auto;
   }
-}
-</style>
-
-<style lang="scss" scoped>
-@import '~/assets/css/default.scss';
-
-.widget-card-title {
-  @include lhCrop(1.25);
 }
 </style>

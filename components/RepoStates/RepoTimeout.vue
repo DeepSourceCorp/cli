@@ -31,17 +31,12 @@
   </empty-state>
 </template>
 <script lang="ts">
-import { ZButton } from '@deepsource/zeal'
-import { Component, mixins, Prop } from 'nuxt-property-decorator'
-
-import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import { Repository } from '~/types/types'
+import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
 @Component({
-  name: 'RepoTimeout',
-  components: {
-    ZButton
-  }
+  name: 'RepoTimeout'
 })
 export default class RepoTimeout extends mixins(RepoDetailMixin) {
   @Prop()

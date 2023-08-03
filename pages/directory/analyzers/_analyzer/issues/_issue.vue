@@ -12,7 +12,7 @@
       <div class="max-w-prose">
         <h1 v-if="isLoaded" class="text-2xl font-semibold">
           <span v-html="safeRenderBackticks(issue.title)"></span>
-          <span class="ml-3 text-lg font-normal text-vanilla-400 whitespace-nowrap">{{
+          <span class="ml-3 whitespace-nowrap text-lg font-normal text-vanilla-400">{{
             issue.shortcode
           }}</span>
         </h1>
@@ -63,7 +63,6 @@
 
 <script lang="ts">
 import { Component, namespace, Prop, mixins, Watch } from 'nuxt-property-decorator'
-import { ZBreadcrumb, ZBreadcrumbItem, ZIcon } from '@deepsource/zeal'
 
 import { IssueDetailActions } from '~/store/issue/detail'
 import { Analyzer, Issue } from '~/types/types'
@@ -78,7 +77,6 @@ const issueDetailStore = namespace('issue/detail')
  * Issue details page under analyzer directory
  */
 @Component({
-  components: { ZBreadcrumb, ZBreadcrumbItem, ZIcon },
   layout: 'sidebar-only',
   methods: {
     deslugifyTag,

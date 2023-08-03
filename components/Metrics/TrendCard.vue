@@ -1,13 +1,13 @@
 <template>
   <div
-    class="flex flex-row w-full overflow-hidden"
+    class="flex w-full flex-row overflow-hidden"
     :class="{
       'rounded-md': roundedCorners
     }"
   >
     <div v-if="showAccent" :class="`w-1 bg-${color}`"></div>
     <div
-      class="flex flex-col flex-grow px-3 py-2 space-y-2"
+      class="flex flex-grow flex-col space-y-2 px-3 py-2"
       :class="{
         'border border-slate-400': showBorder,
         'border-l-0': showAccent && showBorder,
@@ -23,7 +23,7 @@
         </h5>
         <z-icon v-if="icon" :icon="icon" />
       </div>
-      <div class="flex flex-col justify-between flex-grow space-y-1">
+      <div class="flex flex-grow flex-col justify-between space-y-1">
         <span class="text-xs text-vanilla-400">
           <slot name="trend"></slot>
         </span>
@@ -36,13 +36,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 export default class TrendCard extends Vue {
   @Prop()
   icon!: string

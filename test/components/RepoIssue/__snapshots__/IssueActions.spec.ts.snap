@@ -3,223 +3,223 @@
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":false,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
+  <zbutton-stub icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" button-type=\\"secondary\\" size=\\"small\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
 </div>"
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":false,"issueCreateIntegrations":["jira"],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zsplitbuttondropdown-stub size=\\"small\\" icon=\\"jira\\" button-type=\\"secondary\\"></zsplitbuttondropdown-stub>
+  <zsplitbuttondropdown-stub icon=\\"jira\\" button-type=\\"secondary\\" size=\\"small\\"></zsplitbuttondropdown-stub>
 </div>"
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":false,"issueCreateIntegrations":[],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
+  <zbutton-stub icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" button-type=\\"secondary\\" size=\\"small\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
 </div>"
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":false,"issueCreateIntegrations":null,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
+  <zbutton-stub icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" button-type=\\"secondary\\" size=\\"small\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
 </div>"
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":true,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
-    <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
+  <zbutton-stub button-type=\\"primary\\" size=\\"small\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\" disabled=\\"true\\">
+    <zicon-stub icon=\\"autofix\\" size=\\"small\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
+  <zbutton-stub icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" button-type=\\"secondary\\" size=\\"small\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
 </div>"
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":true,"issueCreateIntegrations":["jira"],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
-    <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
+  <zbutton-stub button-type=\\"primary\\" size=\\"small\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\" disabled=\\"true\\">
+    <zicon-stub icon=\\"autofix\\" size=\\"small\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zsplitbuttondropdown-stub size=\\"small\\" icon=\\"jira\\" button-type=\\"secondary\\"></zsplitbuttondropdown-stub>
+  <zsplitbuttondropdown-stub icon=\\"jira\\" button-type=\\"secondary\\" size=\\"small\\"></zsplitbuttondropdown-stub>
 </div>"
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":true,"issueCreateIntegrations":[],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
-    <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
+  <zbutton-stub button-type=\\"primary\\" size=\\"small\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\" disabled=\\"true\\">
+    <zicon-stub icon=\\"autofix\\" size=\\"small\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
+  <zbutton-stub icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" button-type=\\"secondary\\" size=\\"small\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
 </div>"
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":false,"isAutofixEnabled":true,"issueCreateIntegrations":null,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
-    <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
+  <zbutton-stub button-type=\\"primary\\" size=\\"small\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\" disabled=\\"true\\">
+    <zicon-stub icon=\\"autofix\\" size=\\"small\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
+  <zbutton-stub icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" button-type=\\"secondary\\" size=\\"small\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
 </div>"
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":false,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
+  <zbutton-stub icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" button-type=\\"secondary\\" size=\\"small\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
 </div>"
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":false,"issueCreateIntegrations":["jira"],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zsplitbuttondropdown-stub size=\\"small\\" icon=\\"jira\\" button-type=\\"secondary\\"></zsplitbuttondropdown-stub>
+  <zsplitbuttondropdown-stub icon=\\"jira\\" button-type=\\"secondary\\" size=\\"small\\"></zsplitbuttondropdown-stub>
 </div>"
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":false,"issueCreateIntegrations":[],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
+  <zbutton-stub icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" button-type=\\"secondary\\" size=\\"small\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
 </div>"
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":false,"issueCreateIntegrations":null,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
   <!---->
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
+  <zbutton-stub icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" button-type=\\"secondary\\" size=\\"small\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
 </div>"
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":true,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
-    <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
+  <zbutton-stub button-type=\\"primary\\" size=\\"small\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
+    <zicon-stub icon=\\"autofix\\" size=\\"small\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
+  <zbutton-stub icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" button-type=\\"secondary\\" size=\\"small\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
 </div>"
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":true,"issueCreateIntegrations":["jira"],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
-    <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
+  <zbutton-stub button-type=\\"primary\\" size=\\"small\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
+    <zicon-stub icon=\\"autofix\\" size=\\"small\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zsplitbuttondropdown-stub size=\\"small\\" icon=\\"jira\\" button-type=\\"secondary\\"></zsplitbuttondropdown-stub>
+  <zsplitbuttondropdown-stub icon=\\"jira\\" button-type=\\"secondary\\" size=\\"small\\"></zsplitbuttondropdown-stub>
 </div>"
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":true,"issueCreateIntegrations":[],"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
-    <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
+  <zbutton-stub button-type=\\"primary\\" size=\\"small\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
+    <zicon-stub icon=\\"autofix\\" size=\\"small\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
+  <zbutton-stub icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" button-type=\\"secondary\\" size=\\"small\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
 </div>"
 `;
 
 exports[`[[ IssueActions ]] renders the issue actions: {"issue":{"id":"issue-id-for-testing","autofixAvailable":true,"newVcsIssueUrl":"vcs-url-for-testing","shortcode":"PYL-TEST-2342","raisedInFiles":["file1.py","file2.py"]},"canCreateAutofix":true,"isAutofixEnabled":true,"issueCreateIntegrations":null,"checkId":"check-id-for-testing","shortcode":"shortcode"} 1`] = `
 "<div class=\\"flex flex-auto items-center justify-end space-x-2\\">
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
-    <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
+  <zbutton-stub button-type=\\"primary\\" size=\\"small\\" custom-classes=\\"hidden xl:flex items-center space-x-2\\">
+    <zicon-stub icon=\\"autofix\\" size=\\"small\\" color=\\"ink-300\\"></zicon-stub> <span>Autofix</span>
   </zbutton-stub>
-  <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100\\"></zmenu-stub>
+  <zmenu-stub direction=\\"left\\" class=\\"text-vanilla-100\\"></zmenu-stub>
   <!---->
   <!---->
   <!---->
   <!---->
   <!---->
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
+  <zbutton-stub icon=\\"github\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" button-type=\\"secondary\\" size=\\"small\\"><span class=\\"hidden sm:flex\\">Create issue on GitHub</span></zbutton-stub>
 </div>"
 `;

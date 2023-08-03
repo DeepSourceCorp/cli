@@ -1,6 +1,6 @@
 <template>
-  <div class="p-4 space-y-5">
-    <div v-for="i in cardCount" :key="i" class="h-17 bg-ink-300 animate-pulse"></div>
+  <div class="space-y-5 p-4">
+    <div v-for="i in cardCount" :key="i" class="h-17 animate-pulse bg-ink-300"></div>
   </div>
 </template>
 

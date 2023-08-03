@@ -1,14 +1,14 @@
 <template>
   <form-group label="Usage details" class="mt-5">
     <!-- Skeleton loader -->
-    <div v-if="isLoading" class="bg-ink-300 animate-pulse skeleton-loader w-full"></div>
+    <div v-if="isLoading" class="skeleton-loader w-full animate-pulse bg-ink-300"></div>
 
     <div
       v-else
-      class="grid w-full grid-cols-1 border rounded-md md:grid-cols-2 bg-ink-400 border-slate-400"
+      class="grid w-full grid-cols-1 rounded-md border border-slate-400 bg-ink-400 md:grid-cols-2"
     >
-      <div v-if="owner.featureUsage" class="p-4 space-y-4 border-r border-slate-400">
-        <h5 class="text-xs font-medium leading-none tracking-wider uppercase text-vanilla-400">
+      <div v-if="owner.featureUsage" class="space-y-4 border-r border-slate-400 p-4">
+        <h5 class="text-xs font-medium uppercase leading-none tracking-wider text-vanilla-400">
           Usage this month
         </h5>
         <ul class="space-y-4">
@@ -24,7 +24,7 @@
         </ul>
       </div>
 
-      <div v-if="features" class="p-4 space-y-4">
+      <div v-if="features" class="space-y-4 p-4">
         <h5 class="text-xs font-medium leading-none tracking-wider text-vanilla-400">FEATURES</h5>
         <ul class="space-y-3">
           <li
@@ -32,7 +32,7 @@
             :key="id"
             class="flex items-start space-x-2 text-sm"
           >
-            <span class="inline-flex items-center flex-shrink-0 h-5">
+            <span class="inline-flex h-5 flex-shrink-0 items-center">
               <z-icon
                 :icon="feature.enabled ? 'check' : 'x'"
                 :color="feature.enabled ? 'juniper' : 'vanilla-400'"
@@ -63,17 +63,11 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon } from '@deepsource/zeal'
 
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import PlanDetailMixin from '~/mixins/planDetailMixin'
 
-@Component({
-  components: {
-    ZButton,
-    ZIcon
-  }
-})
+@Component({})
 export default class UsageDetails extends mixins(OwnerDetailMixin, PlanDetailMixin) {
   isLoading = false
 

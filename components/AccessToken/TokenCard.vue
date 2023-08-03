@@ -47,7 +47,7 @@
       </p>
     </template>
     <template #info>
-      <div class="flex items-center justify-end h-full pr-3.5">
+      <div class="flex h-full items-center justify-end pr-3.5">
         <z-button v-tooltip="'Delete token'" button-type="ghost" @click="$emit('delete', id)">
           <z-icon icon="trash-2" color="cherry opacity-75" />
         </z-button>
@@ -59,15 +59,11 @@
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import ActiveUserMixin from '@/mixins/activeUserMixin'
-import { ZButton, ZIcon } from '@deepsource/zeal'
+
 import { parseISODate, formatDate, getDateDiffInDays } from '~/utils/date'
 import { AccessTokenExpirationStatus } from '~/types/types'
 
 @Component({
-  components: {
-    ZButton,
-    ZIcon
-  },
   meta: {
     auth: {
       strict: true,

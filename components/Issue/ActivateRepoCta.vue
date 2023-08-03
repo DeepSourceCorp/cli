@@ -1,10 +1,10 @@
 <template>
-  <div class="p-px rounded-md bg-gradient-dawn">
-    <div class="p-3 rounded-md bg-ink-300 from-ink-200 to-ink-400 via-ink-300">
+  <div class="rounded-md p-px bg-gradient-dawn">
+    <div class="rounded-md bg-ink-300 from-ink-200 via-ink-300 to-ink-400 p-3">
       <h4 class="font-medium leading-tight">Activate continuous analysis</h4>
       <p class="mt-2 text-xs font-medium leading-snug">
         <span
-          class="text-opacity-60 bg-clip-text text-vanilla-100 bg-gradient-to-br from-ink-200 to-ink-400 via-ink-300"
+          class="bg-gradient-to-br from-ink-200 via-ink-300 to-ink-400 bg-clip-text text-vanilla-100 text-opacity-60"
         >
           To run analysis on every commit automatically, commit the configuration to your
           repository.
@@ -14,7 +14,7 @@
         v-if="repository.isCommitPossible || repository.isAutofixEnabled"
         size="small"
         icon="play-circle"
-        class="w-full mt-4 bg-robin hover:bg-robin-600"
+        class="mt-4 w-full bg-robin hover:bg-robin-600"
         color="vanilla-200"
         label="Activate analysis"
         @click="isActivationModalOpen = true"
@@ -23,7 +23,7 @@
         <z-button
           size="small"
           icon="play-circle"
-          class="w-full mt-4 bg-robin hover:bg-robin-600"
+          class="mt-4 w-full bg-robin hover:bg-robin-600"
           color="vanilla-200"
           label="Activate analysis"
         />
@@ -35,13 +35,12 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { ZButton } from '@deepsource/zeal'
 import { Repository } from '~/types/types'
 
 /**
  * Component to add CTA to activate repository with pending .toml commit (adhoc run)
  */
-@Component({ components: { ZButton }, name: 'ActivateRepoCta' })
+@Component({ name: 'ActivateRepoCta' })
 export default class ActivateRepoCta extends Vue {
   @Prop({ required: true })
   repository: Repository

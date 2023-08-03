@@ -1,6 +1,6 @@
 <template>
   <div class="flex space-x-2">
-    <div class="flex-grow h-8 lg:flex-grow-0 lg:w-56">
+    <div class="h-8 flex-grow lg:w-56 lg:flex-grow-0">
       <z-select
         v-model="currentFilterValue"
         background-class="bg-ink-300"
@@ -20,7 +20,7 @@
     <div v-if="allowChartTypeToggle" class="flex space-x-2">
       <div
         :class="currentChartType == 'bar' ? 'bg-ink-200' : 'hover:bg-ink-300'"
-        class="flex items-center justify-center w-8 h-8 rounded-sm cursor-pointer"
+        class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-sm"
         @click="toggleChart('bar')"
       >
         <z-icon
@@ -31,7 +31,7 @@
       </div>
       <div
         :class="currentChartType == 'line' ? 'bg-ink-200' : 'hover:bg-ink-300'"
-        class="flex items-center justify-center w-8 h-8 cursor-pointer rounded-s"
+        class="rounded-s flex h-8 w-8 cursor-pointer items-center justify-center"
         @click="toggleChart('line')"
       >
         <z-icon
@@ -45,18 +45,9 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'nuxt-property-decorator'
-import { ZIcon, ZDivider, ZChart, ZSelect, ZOption } from '@deepsource/zeal'
-
 import { createDuration, DurationTypeT } from '~/utils/date'
 
 @Component({
-  components: {
-    ZIcon,
-    ZDivider,
-    ZChart,
-    ZSelect,
-    ZOption
-  },
   layout: 'repository'
 })
 export default class GraphControl extends Vue {

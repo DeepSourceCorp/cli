@@ -1,13 +1,13 @@
 <template>
   <z-modal title="Create new template" width="wide" @onClose="$emit('close')">
-    <div class="overflow-y-scroll h-102">
-      <fieldset class="p-4 space-y-4">
+    <div class="h-102 overflow-y-scroll">
+      <fieldset class="space-y-4 p-4">
         <div>
-          <label for="title" class="mb-2 text-sm sr-only text-vanilla-200">Template name</label>
+          <label for="title" class="sr-only mb-2 text-sm text-vanilla-200">Template name</label>
           <z-input id="Title" v-model="title" placeholder="Template name" required="true" />
         </div>
         <div>
-          <label for="desc" class="mb-2 text-sm sr-only text-vanilla-200">Description</label>
+          <label for="desc" class="sr-only mb-2 text-sm text-vanilla-200">Description</label>
           <textarea
             v-model="description"
             name="desc"
@@ -16,7 +16,7 @@
             autocorrect="off"
             autocapitalize="off"
             spellcheck="false"
-            class="w-full h-full p-2 text-sm border rounded-sm outline-none resize-none bg-ink-400 min-h-20 border-slate-400 focus:border-vanilla-400 text-vanilla-200"
+            class="h-full min-h-20 w-full resize-none rounded-sm border border-slate-400 bg-ink-400 p-2 text-sm text-vanilla-200 outline-none focus:border-vanilla-400"
             placeholder="Add a short description of this template to explain where it can be used."
           ></textarea>
         </div>
@@ -52,17 +52,17 @@
           <div
             v-for="loopIndex in 3"
             :key="loopIndex"
-            class="h-10 p-3 space-y-3 border-2 border-current border-dashed text-ink-100"
+            class="h-10 space-y-3 border-2 border-dashed border-current p-3 text-ink-100"
           ></div>
         </div>
       </section>
     </div>
     <template #footer="{ close }">
-      <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
+      <div class="space-x-4 border-slate-400 p-4 text-right text-vanilla-100">
         <z-button
           :icon="savingConfig ? 'spin-loader' : 'autofix'"
           :icon-color="savingConfig ? 'ink animate-spin' : ''"
-          class="w-48 modal-primary-action"
+          class="modal-primary-action w-48"
           button-type="primary"
           size="small"
           :disabled="savingConfig"
@@ -76,20 +76,14 @@
 </template>
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
-import { ZModal, ZInput, ZButton } from '@deepsource/zeal'
+
 import ConfigGeneratorMixin from '~/mixins/configGeneratorMixin'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 import { RepoConfigAnalyzerMeta, RepoConfigInterface } from '~/store/repository/detail'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 
-@Component({
-  components: {
-    ZModal,
-    ZInput,
-    ZButton
-  }
-})
+@Component({})
 export default class NewOnboardingTemplateModal extends mixins(
   ConfigGeneratorMixin,
   OwnerDetailMixin,
@@ -144,7 +138,7 @@ export default class NewOnboardingTemplateModal extends mixins(
       this.$toast.danger(
         'There was a problem saving this config, please check your config for errors or contact support.'
       )
-      this.logErrorForUser(e, 'Auto Onboard template creation', this.baseConfig)
+      this.logErrorForUser(e as Error, 'Auto Onboard template creation', this.baseConfig)
     } finally {
       this.savingConfig = false
     }

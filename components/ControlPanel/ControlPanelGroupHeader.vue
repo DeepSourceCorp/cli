@@ -1,6 +1,6 @@
 <template>
-  <div class="p-4 border-b border-slate-400 pb-7">
-    <div class="flex flex-col md:flex-row gap-y-0.5">
+  <div class="border-b border-slate-400 p-4 pb-7">
+    <div class="flex flex-col gap-y-0.5 md:flex-row">
       <div>
         <div class="flex items-center gap-x-4">
           <okta-icon-wrapper
@@ -10,12 +10,12 @@
           >
             <z-avatar :user-name="group.name" size="lg" :loading="loading" class="flex-shrink-0" />
           </okta-icon-wrapper>
-          <div v-if="loading" class="w-56 h-10 py-px bg-ink-300 animate-pulse"></div>
+          <div v-if="loading" class="h-10 w-56 animate-pulse bg-ink-300 py-px"></div>
           <div v-else>
             <p class="font-medium">
               {{ group.name }}
             </p>
-            <div class="flex flex-wrap items-center md:flex-nowrap gap-x-3 text-vanilla-400">
+            <div class="flex flex-wrap items-center gap-x-3 text-vanilla-400 md:flex-nowrap">
               <div
                 v-if="group.membersCount && group.membersCount.totalCount"
                 class="flex items-center gap-x-1.5"
@@ -49,7 +49,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-wrap items-center gap-3 mt-4">
+    <div class="mt-4 flex flex-wrap items-center gap-3">
       <control-panel-add-team-to-group-modal
         :group-id="$route.params.groupId"
         @refetch="refetchData"
@@ -70,13 +70,11 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZAvatar, ZIcon } from '@deepsource/zeal'
 
 import { EnterpriseGroup } from '~/types/types'
 import { formatDate, parseISODate } from '~/utils/date'
 
 @Component({
-  components: { ZButton, ZAvatar, ZIcon },
   name: 'ControlPanelUserHeader',
   methods: {
     parseISODate,

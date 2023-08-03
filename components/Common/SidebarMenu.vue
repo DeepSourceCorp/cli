@@ -2,30 +2,30 @@
   <div v-outside-click="closeSidebar" class="sidebar-menu">
     <!-- Sidebar modal -->
     <div
-      class="absolute top-0 z-30 flex flex-col h-screen duration-200 cursor-pointer transition-width group bg-ink-400 sidebar-menu border-slate-400 text-vanilla-100"
+      class="transition-width sidebar-menu group absolute top-0 z-30 flex h-screen cursor-pointer flex-col border-slate-400 bg-ink-400 text-vanilla-100 duration-200"
       :class="[modalWidth, directionClasses, borderClasses, isOpen && 'shadow-black']"
     >
       <!-- Hover Gradient border -->
       <div
         v-if="collapsible"
-        class="absolute top-0 hidden w-px h-full lg:group-hover:block -right-px bg-gradient-juniper"
+        class="absolute -right-px top-0 hidden h-full w-px bg-gradient-juniper lg:group-hover:block"
       ></div>
       <header v-if="$scopedSlots.header" class="relative w-full">
         <slot name="header" :is-collapsed="isCollapsed"></slot>
         <div
           v-if="collapsible"
-          class="relative hidden p-1 -translate-y-1/2 rounded-full lg:group-hover:block bg-juniper lg:absolute top-full transform-gpu"
+          class="relative top-full hidden -translate-y-1/2 transform-gpu rounded-full bg-juniper p-1 lg:absolute lg:group-hover:block"
           :class="[hoverStyle]"
           @click.stop="collapseSidebar()"
         >
           <z-icon :icon="arrow" size="small" color="ink-400" box-width="16" />
         </div>
       </header>
-      <div class="flex justify-center w-full px-2">
+      <div class="flex w-full justify-center px-2">
         <slot name="subHeader" :is-collapsed="isCollapsed"></slot>
       </div>
       <div
-        class="flex-1 w-full px-2 pt-2 pb-4 sidebar-items"
+        class="sidebar-items w-full flex-1 px-2 pb-4 pt-2"
         :class="{
           'custom-y-scroll': !isCollapsed
         }"
@@ -34,14 +34,14 @@
       </div>
       <footer
         v-if="$scopedSlots.footer"
-        class="w-full p-3 border-t border-solid border-slate-400 bg-gradient-dark-dawn backdrop-blur-xl"
+        class="w-full border-t border-solid border-slate-400 p-3 backdrop-blur-xl bg-gradient-dark-dawn"
         :class="footerClass"
       >
         <slot name="footer" :is-collapsed="isCollapsed"></slot>
       </footer>
       <footer
         v-if="$scopedSlots.brand"
-        class="w-full px-2 py-4 border-t border-solid border-slate-400"
+        class="w-full border-t border-solid border-slate-400 px-2 py-4"
         :class="footerBrandClass"
       >
         <slot name="brand" :is-collapsed="isCollapsed"></slot>
@@ -49,7 +49,7 @@
     </div>
     <!-- Overlay -->
     <div
-      :class="{ 'fixed w-full h-screen bg-ink-400 opacity-50 left-0 top-0 z-20': isOpen }"
+      :class="{ 'fixed left-0 top-0 z-20 h-screen w-full bg-ink-400 opacity-50': isOpen }"
       @click="toggleClose()"
     ></div>
   </div>
@@ -57,14 +57,9 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import { containsElement } from '~/utils/ui'
 
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 export default class SidebarMenu extends Vue {
   @Prop({ default: 'lg:w-64' })
   width!: string

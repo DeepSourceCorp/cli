@@ -87,10 +87,7 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon } from '@deepsource/zeal'
 import { getHumanizedTimeFromNow, formatDate } from '@/utils/date'
-import { AddRepoModal } from '@/components/AddRepo'
-import AnalyzerLogo from '@/components/AnalyzerLogo.vue'
 
 // types
 import { TeamMemberRoleChoices, Repository, RepositoryKindChoices } from '~/types/types'
@@ -99,7 +96,6 @@ import RepoListMixin from '~/mixins/repoListMixin'
 import { TeamPerms } from '~/types/permTypes'
 
 @Component({
-  components: { ZButton, ZIcon, AddRepoModal, AnalyzerLogo },
   methods: { getHumanizedTimeFromNow, formatDate }
 })
 export default class RecentlyActiveRepoList extends mixins(ActiveUserMixin, RepoListMixin) {

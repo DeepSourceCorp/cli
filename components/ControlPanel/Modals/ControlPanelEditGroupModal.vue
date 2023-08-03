@@ -19,14 +19,14 @@
         class="shadow-double-dark"
         @onClose="showEditGroupModal = false"
       >
-        <div class="p-4 text-sm text-vanilla-400 min-h-20">
+        <div class="min-h-20 p-4 text-sm text-vanilla-400">
           <label>
-            <div class="text-xs mb-1.5">Group name<span class="text-cherry">*</span></div>
+            <div class="mb-1.5 text-xs">Group name<span class="text-cherry">*</span></div>
             <z-input v-model="groupName" placeholder="Group name..." size="small" class="w-full" />
           </label>
         </div>
         <template #footer="{ close }">
-          <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
+          <div class="space-x-4 border-slate-400 p-4 text-right text-vanilla-100">
             <z-button
               v-if="editingGroup"
               disabled
@@ -56,14 +56,12 @@
 
 <script lang="ts">
 import { Component, Vue, namespace, Prop, Watch } from 'nuxt-property-decorator'
-import { ZButton, ZModal, ZIcon, ZInput } from '@deepsource/zeal'
 import { OrgGroupsActions } from '~/store/control-panel/groups'
 import { EnterpriseGroup } from '~/types/types'
 
 const groupManagementStore = namespace('control-panel/groups')
 
 @Component({
-  components: { ZButton, ZModal, ZIcon, ZInput },
   name: 'ControlPanelEditGroupModal'
 })
 export default class ControlPanelEditGroupModal extends Vue {

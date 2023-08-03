@@ -87,7 +87,6 @@
 
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZConfirm, ZIcon } from '@deepsource/zeal'
 
 import { CheckInput, FormGroup, RadioGroupInput, ToggleInput } from '~/components/Form'
 
@@ -107,10 +106,7 @@ import { GraphqlQueryResponse } from '~/types/apolloTypes'
     CheckInput,
     FormGroup,
     RadioGroupInput,
-    ToggleInput,
-    ZButton,
-    ZConfirm,
-    ZIcon
+    ToggleInput
   },
   middleware: ['teamOnly', 'perm', 'validateProvider'],
   meta: {

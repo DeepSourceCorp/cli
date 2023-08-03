@@ -321,7 +321,7 @@
                   :type="isDSNHidden ? 'password' : 'text'"
                   class="mt-2 border-ink-200"
                 />
-                <div class="absolute top-1 right-1 flex gap-x-1 bg-ink-400">
+                <div class="absolute right-1 top-1 flex gap-x-1 bg-ink-400">
                   <z-button
                     v-tooltip="isDSNHidden ? 'Reveal DSN' : 'Hide DSN'"
                     :icon="isDSNHidden ? 'eye' : 'eye-off'"
@@ -392,22 +392,6 @@
 
 <script lang="ts">
 import { mixins, Component, namespace } from 'nuxt-property-decorator'
-import {
-  ZDivider,
-  ZInput,
-  ZIcon,
-  ZButton,
-  ZTable,
-  ZTableCell,
-  ZTableRow,
-  ZCheckbox,
-  ZRadioGroup,
-  ZRadio,
-  ZMenu,
-  ZMenuSection,
-  ZMenuItem,
-  ZConfirm
-} from '@deepsource/zeal'
 import { Tooltip } from 'floating-vue'
 
 import { RepositoryDetailMutations, RepoSettingOptions } from '~/store/repository/detail'
@@ -436,20 +420,6 @@ export enum InputTypes {
 
 @Component({
   components: {
-    ZDivider,
-    ZInput,
-    ZIcon,
-    ZButton,
-    ZTable,
-    ZTableCell,
-    ZTableRow,
-    ZCheckbox,
-    ZRadioGroup,
-    ZRadio,
-    ZMenu,
-    ZMenuSection,
-    ZMenuItem,
-    ZConfirm,
     Tooltip
   },
   layout: 'repository',

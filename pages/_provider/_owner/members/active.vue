@@ -81,13 +81,6 @@ import { Component, Watch, mixins, Prop } from 'nuxt-property-decorator'
 import TeamDetailMixin from '@/mixins/teamDetailMixin'
 import PlanDetailMixin from '~/mixins/planDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
-import {
-  MemberListItem,
-  UpdateRoleModal,
-  RemoveMemberModal,
-  TransferOwnershipModal
-} from '@/components/Members'
-import { ZPagination } from '@deepsource/zeal'
 
 import MemberRoleCountQuery from '@/apollo/queries/team/memberRoleCount.gql'
 import { User, TeamMember } from '~/types/types'
@@ -100,13 +93,6 @@ import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
  * Active team members page
  */
 @Component({
-  components: {
-    ZPagination,
-    MemberListItem,
-    UpdateRoleModal,
-    RemoveMemberModal,
-    TransferOwnershipModal
-  },
   middleware: ['teamOnly', 'perm', 'validateProvider'],
   meta: {
     auth: {

@@ -66,7 +66,7 @@
     </div>
     <div
       v-if="!actionDisabled"
-      class="absolute bottom-0 w-full bg-gradient-to-t from-ink-400 via-ink-400 to-transparent pt-12 pb-0"
+      class="absolute bottom-0 w-full bg-gradient-to-t from-ink-400 via-ink-400 to-transparent pb-0 pt-12"
     >
       <z-button
         icon="zap"
@@ -89,7 +89,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon } from '@deepsource/zeal'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import { AnalyzerInterface } from '~/store/analyzer/list'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
@@ -110,11 +109,6 @@ export enum NextActions {
  * Config generator page for onboarding
  **/
 @Component({
-  components: {
-    ZInput,
-    ZButton,
-    ZIcon
-  },
   middleware: ['restrictOnboarding'],
   meta: {
     auth: {

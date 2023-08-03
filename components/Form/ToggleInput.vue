@@ -20,13 +20,11 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import InputWrapper from './InputWrapper.vue'
-import { ZToggle } from '@deepsource/zeal'
 import { ModelSync } from 'vue-property-decorator'
 
 @Component({
   components: {
-    InputWrapper,
-    ZToggle
+    InputWrapper
   }
 })
 export default class ToggleInput extends Vue {

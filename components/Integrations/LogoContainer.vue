@@ -1,18 +1,13 @@
 <template>
-  <div class="p-1 rounded-sm bg-ink-300">
+  <div class="rounded-sm bg-ink-300 p-1">
     <img :src="logo" alt="Integration logo" :class="['flex-shrink-0', dimensions]" />
   </div>
 </template>
 
 <script lang="ts">
-import { ZIcon } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 
 /**
  * Component that is responsible to render integration logo container on detailed view

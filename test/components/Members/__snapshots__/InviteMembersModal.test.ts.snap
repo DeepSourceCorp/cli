@@ -2,10 +2,10 @@
 
 exports[`[[ InviteMembersModal ]] renders invite members modal with the trigger button 1`] = `
 "<div>
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"plus\\" class=\\"w-full\\">
+  <zbutton-stub size=\\"small\\" icon=\\"plus\\" class=\\"w-full\\">
     Invite <span class=\\"hidden md:inline\\">new member</span></zbutton-stub>
   <portal-stub to=\\"modal\\">
-    <zmodal-stub title=\\"Invite new members\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactionlabel=\\"\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+    <zmodal-stub primary-action-label=\\"\\" title=\\"Invite new members\\">
       <div class=\\"space-y-4 p-4 text-sm font-normal\\">
         <div class=\\"space-y-2\\">
           <div>
@@ -15,15 +15,15 @@ exports[`[[ InviteMembersModal ]] renders invite members modal with the trigger 
             </p>
           </div>
           <div class=\\"flex justify-between\\">
-            <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"link\\" type=\\"button\\" size=\\"small\\" to=\\"\\" spacing=\\"px-0\\">+ Add more emails</zbutton-stub>
-            <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" spacing=\\"px-2\\">
+            <zbutton-stub button-type=\\"link\\" spacing=\\"px-0\\" size=\\"small\\">+ Add more emails</zbutton-stub>
+            <zbutton-stub disabled=\\"true\\" button-type=\\"primary\\" size=\\"small\\" spacing=\\"px-2\\">
               <div class=\\"flex items-center space-x-2\\">
-                <zicon-stub icon=\\"send\\" size=\\"small\\" position=\\"\\" color=\\"ink-400\\"></zicon-stub> <span>Send invite</span>
+                <zicon-stub icon=\\"send\\" size=\\"small\\" color=\\"ink-400\\"></zicon-stub> <span>Send invite</span>
               </div>
             </zbutton-stub>
           </div>
         </div>
-        <zdivider-stub direction=\\"horizontal\\" color=\\"ink-200\\"></zdivider-stub>
+        <zdivider-stub></zdivider-stub>
         <div class=\\"space-y-2\\">
           <div class=\\"flex items-start justify-between\\">
             <div>
@@ -33,12 +33,12 @@ exports[`[[ InviteMembersModal ]] renders invite members modal with the trigger 
               </p>
             </div>
             <div>
-              <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"refresh-cw\\">
+              <zbutton-stub button-type=\\"secondary\\" icon=\\"refresh-cw\\" size=\\"small\\">
                 Reset Link
               </zbutton-stub>
             </div>
           </div>
-          <zinput-stub name=\\"\\" value=\\"https://deepsource.icu/invitation/5cnHJHRUdbbpts2ZeiBa-20oabC_W_/\\" label=\\"\\" type=\\"text\\" placeholder=\\"Enter a value\\" disabled=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" showborder=\\"true\\" errorbordercolor=\\"cherry\\"></zinput-stub>
+          <zinput-stub disabled=\\"true\\" show-border=\\"true\\" value=\\"https://deepsource.icu/invitation/5cnHJHRUdbbpts2ZeiBa-20oabC_W_/\\"></zinput-stub>
         </div>
       </div>
     </zmodal-stub>

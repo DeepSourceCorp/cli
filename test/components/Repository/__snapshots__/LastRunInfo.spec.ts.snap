@@ -2,7 +2,7 @@
 
 exports[`[[ LastRunInfo ]] renders the currently analyzing runs count in the metadata view footer 1`] = `
 "<div class=\\"flex items-center text-xs lg:text-sm gap-x-1.5\\">
-  <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"animate-spin\\"></zicon-stub> <span class=\\"text-vanilla-400\\">Analyzing 2
+  <zicon-stub color=\\"juniper\\" icon=\\"spin-loader\\" class=\\"animate-spin\\"></zicon-stub> <span class=\\"text-vanilla-400\\">Analyzing 2
       runs</span>
 </div>"
 `;
@@ -10,8 +10,8 @@ exports[`[[ LastRunInfo ]] renders the currently analyzing runs count in the met
 exports[`[[ LastRunInfo ]] renders the last run information shown in the metadata view footer failed run 1`] = `
 "<div class=\\"flex items-center text-xs lg:text-sm justify-between\\">
   <div class=\\"flex items-center gap-x-1.5 text-vanilla-400\\">
-    <zicon-stub icon=\\"x\\" size=\\"small\\" position=\\"\\" color=\\"cherry\\"></zicon-stub> <span class=\\"truncate\\">Last analyzed</span> <a class=\\"inline-flex cursor-pointer items-center gap-1 rounded-md bg-ink-200 px-1 font-mono\\">
-      <zicon-stub icon=\\"git-commit\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+    <zicon-stub color=\\"cherry\\" icon=\\"x\\"></zicon-stub> <span class=\\"truncate\\">Last analyzed</span> <a class=\\"inline-flex cursor-pointer items-center gap-1 rounded-md bg-ink-200 px-1 font-mono\\">
+      <zicon-stub icon=\\"git-commit\\" size=\\"x-small\\"></zicon-stub>
       cf64c72
     </a>
   </div> <span class=\\"hidden whitespace-nowrap text-vanilla-400 lg:inline\\">8 months ago</span>
@@ -21,8 +21,8 @@ exports[`[[ LastRunInfo ]] renders the last run information shown in the metadat
 exports[`[[ LastRunInfo ]] renders the last run information shown in the metadata view footer timed out run 1`] = `
 "<div class=\\"flex items-center text-xs lg:text-sm justify-between\\">
   <div class=\\"flex items-center gap-x-1.5 text-vanilla-400\\">
-    <zicon-stub icon=\\"timer\\" size=\\"small\\" position=\\"\\" color=\\"honey\\"></zicon-stub> <span class=\\"truncate\\">Last analyzed</span> <a class=\\"inline-flex cursor-pointer items-center gap-1 rounded-md bg-ink-200 px-1 font-mono\\">
-      <zicon-stub icon=\\"git-commit\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+    <zicon-stub color=\\"honey\\" icon=\\"timer\\"></zicon-stub> <span class=\\"truncate\\">Last analyzed</span> <a class=\\"inline-flex cursor-pointer items-center gap-1 rounded-md bg-ink-200 px-1 font-mono\\">
+      <zicon-stub icon=\\"git-commit\\" size=\\"x-small\\"></zicon-stub>
       12acb8d
     </a>
   </div>

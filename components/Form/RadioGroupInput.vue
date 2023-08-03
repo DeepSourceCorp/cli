@@ -22,7 +22,7 @@
               bg-color="ink-100"
               text-size="xs"
               spacing="px-2 py-1"
-              class="font-semibold leading-none tracking-wider uppercase text-vanilla-200"
+              class="font-semibold uppercase leading-none tracking-wider text-vanilla-200"
             >
               {{ opt.badgeText }}
             </z-tag>
@@ -40,15 +40,11 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import InputWrapper from './InputWrapper.vue'
-import { ZRadioGroup, ZRadio, ZTag } from '@deepsource/zeal'
 import { ModelSync } from 'vue-property-decorator'
 
 @Component({
   components: {
-    InputWrapper,
-    ZRadioGroup,
-    ZRadio,
-    ZTag
+    InputWrapper
   }
 })
 export default class RadioGroupInput extends Vue {

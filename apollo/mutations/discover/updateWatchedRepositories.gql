@@ -1,4 +1,4 @@
-mutation($repoId: ID!, $action: ActionChoice!) {
+mutation ($repoId: ID!, $action: ActionChoice!) {
   updateWatchedRepository(input: { repoId: $repoId, action: $action }) {
     ok
   }

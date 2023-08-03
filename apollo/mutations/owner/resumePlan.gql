@@ -1,4 +1,4 @@
-mutation($id: ID!) {
+mutation ($id: ID!) {
   revertSubscriptionCancellation(input: { id: $id }) {
     ok
   }

@@ -8,7 +8,7 @@
       @primaryAction="triggerTransferOwnership"
     >
       <div class="flex flex-col space-y-6">
-        <div class="flex items-center mb-0 text-base font-medium leading-relaxed text-vanilla-100">
+        <div class="mb-0 flex items-center text-base font-medium leading-relaxed text-vanilla-100">
           Transfer ownership of
           {{ activeDashboardContext.team_name }}
         </div>
@@ -18,7 +18,7 @@
               icon="alert-circle"
               color="honey-400"
               size="large"
-              class="pt-px mr-3 -mt-1 stroke-2"
+              class="-mt-1 mr-3 stroke-2 pt-px"
             />
             Please make sure you’ve thought this through! Transferring ownership is immediate and
             you cannot undo this.
@@ -29,7 +29,7 @@
             <span class="text-sm text-vanilla-100">New owner of this team</span>
             <div
               v-if="newOwner"
-              class="flex flex-row justify-between h-10 px-3 space-x-2 border rounded-md shadow-inner bg-ink-200 border-slate-400"
+              class="flex h-10 flex-row justify-between space-x-2 rounded-md border border-slate-400 bg-ink-200 px-3 shadow-inner"
             >
               <div class="flex flex-row space-x-2">
                 <div class="my-auto h-7">
@@ -70,12 +70,12 @@
               </z-input>
               <div
                 v-if="showSearchResults"
-                class="absolute z-10 w-full mt-1 overflow-y-auto border rounded-md shadow-double-dark max-h-44 sm:max-h-80 border-slate-400"
+                class="absolute z-10 mt-1 max-h-44 w-full overflow-y-auto rounded-md border border-slate-400 shadow-double-dark sm:max-h-80"
                 tabindex="-1"
               >
                 <div
                   v-if="searchResults.length"
-                  class="flex flex-col w-full divide-y divide-ink-100"
+                  class="flex w-full flex-col divide-y divide-ink-100"
                   tabindex="-1"
                 >
                   <div
@@ -83,7 +83,7 @@
                     :key="member.id"
                     :ref="`searchResult${index}`"
                     tabindex="-1"
-                    class="p-3 w-full leading-none cursor-pointer bg-ink-300 hover:bg-ink-200 space-y-1.5 focus:bg-ink-200 focus:outline-none"
+                    class="w-full cursor-pointer space-y-1.5 bg-ink-300 p-3 leading-none hover:bg-ink-200 focus:bg-ink-200 focus:outline-none"
                     @click="() => setNewOwner(member)"
                     @focus="() => setItemInFocus(index)"
                     @blur="clearItemInFocus"
@@ -99,7 +99,7 @@
                 </div>
                 <div
                   v-else
-                  class="w-full px-3 py-6 font-medium text-center text-vanilla-400 bg-ink-300"
+                  class="w-full bg-ink-300 px-3 py-6 text-center font-medium text-vanilla-400"
                 >
                   <span class="text-base">No results found</span>
                 </div>
@@ -135,7 +135,7 @@
         </div>
       </div>
       <template #footer>
-        <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
+        <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
           <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close"
             >Cancel</z-button
           >
@@ -154,16 +154,16 @@
     </z-confirm>
     <z-dialog-generic v-else @onClose="close">
       <template #default="{ close }">
-        <div class="relative p-6 sm:p-8 sm:w-100" @click.stop>
+        <div class="relative p-6 sm:w-100 sm:p-8" @click.stop>
           <slot>
-            <div class="absolute cursor-pointer top-4 right-4" @click="close">
+            <div class="absolute right-4 top-4 cursor-pointer" @click="close">
               <z-icon icon="x" />
             </div>
             <empty-state title="Ownership transferred">
               <template #subtitle>
                 <div class="mt-2.5">
                   If you did not intend on transferring ownership, reach out to us at
-                  <a href="mailto:support@deepsource.io" class="underline text-juniper"
+                  <a href="mailto:support@deepsource.io" class="text-juniper underline"
                     >support@deepsource.io</a
                   >
                 </div>
@@ -181,18 +181,7 @@
 
 <script lang="ts">
 import { Component, Prop, mixins, namespace } from 'nuxt-property-decorator'
-import {
-  ZAlert,
-  ZAvatar,
-  ZIcon,
-  ZConfirm,
-  ZSelect,
-  ZOption,
-  ZInput,
-  ZDialogGeneric,
-  ZButton,
-  ZCheckbox
-} from '@deepsource/zeal'
+
 import { TeamMember } from '~/types/types'
 import TeamDetailMixin from '@/mixins/teamDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
@@ -202,18 +191,6 @@ import { getDefaultAvatar } from '~/utils/ui'
 const teamStore = namespace('team/detail')
 
 @Component({
-  components: {
-    ZAlert,
-    ZAvatar,
-    ZIcon,
-    ZConfirm,
-    ZSelect,
-    ZOption,
-    ZInput,
-    ZDialogGeneric,
-    ZButton,
-    ZCheckbox
-  },
   methods: { getDefaultAvatar },
   layout: 'dashboard'
 })

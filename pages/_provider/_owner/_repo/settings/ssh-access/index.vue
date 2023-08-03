@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col max-w-2xl p-4 gap-y-2">
+  <div class="flex max-w-2xl flex-col gap-y-2 p-4">
     <!-- title -->
     <page-title
       class="max-w-2xl"
@@ -9,23 +9,23 @@
     />
 
     <!-- Skeleton loader -->
-    <div v-if="$fetchState.pending" class="w-full h-40 bg-ink-300 animate-pulse"></div>
+    <div v-if="$fetchState.pending" class="h-40 w-full animate-pulse bg-ink-300"></div>
 
     <!-- Public key description -->
     <section v-else-if="repository.encPublicKey">
       <div
-        class="p-3 font-mono text-sm break-all border rounded-md border-slate-400 text-vanilla-400"
+        class="break-all rounded-md border border-slate-400 p-3 font-mono text-sm text-vanilla-400"
       >
         {{ repository.encPublicKey }}
       </div>
 
-      <div class="flex flex-col md:flex-row justify-between gap-2 mt-2">
+      <div class="mt-2 flex flex-col justify-between gap-2 md:flex-row">
         <copy-button
           :value="repository.encPublicKey"
           :disabled="!repository.encPublicKey"
           class="w-full md:w-28"
         />
-        <div class="flex flex-wrap md:flex-nowrap gap-2">
+        <div class="flex flex-wrap gap-2 md:flex-nowrap">
           <z-button
             button-type="secondary"
             size="small"
@@ -79,7 +79,7 @@
         @onClose="isGenerateSSHConfirmModalOpen = false"
       >
         <template #footer="{ close }">
-          <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
+          <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
             <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               Cancel
             </z-button>
@@ -103,7 +103,7 @@
         @onClose="isRemoveSSHConfirmModalOpen = false"
       >
         <template #footer="{ close }">
-          <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
+          <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
             <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               Cancel
             </z-button>
@@ -127,7 +127,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZTextarea, ZConfirm } from '@deepsource/zeal'
 import { RepositoryDetailActions } from '~/store/repository/detail'
 import { InfoBanner } from '@/components/Settings/index'
 import { RepoPerms } from '~/types/permTypes'
@@ -135,10 +134,6 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
 @Component({
   components: {
-    ZIcon,
-    ZButton,
-    ZTextarea,
-    ZConfirm,
     InfoBanner
   },
   layout: 'repository',

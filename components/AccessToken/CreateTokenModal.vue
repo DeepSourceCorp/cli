@@ -78,7 +78,7 @@
 </template>
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
-import { ZModal, ZInput, ZButton, ZAlert, ZSelect, ZOption } from '@deepsource/zeal'
+
 import AccessTokenMixin, { CreatedAccessToken } from '~/mixins/accessTokenMixin'
 import { formatDate, parseISODate } from '~/utils/date'
 import dayjs from 'dayjs'
@@ -86,16 +86,7 @@ import dayjs from 'dayjs'
 /**
  * Create user PAT modal
  */
-@Component({
-  components: {
-    ZModal,
-    ZInput,
-    ZButton,
-    ZAlert,
-    ZSelect,
-    ZOption
-  }
-})
+@Component({})
 export default class CreateTokenModal extends mixins(AccessTokenMixin) {
   public expiry = 7
   public label = ''

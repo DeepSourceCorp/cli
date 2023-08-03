@@ -1,6 +1,6 @@
 <template>
-  <div class="p-4 border-b border-slate-400" :class="{ 'lg:pb-7': !orgUser.scimEnabled }">
-    <div class="flex flex-col md:flex-row gap-y-0.5">
+  <div class="border-b border-slate-400 p-4" :class="{ 'lg:pb-7': !orgUser.scimEnabled }">
+    <div class="flex flex-col gap-y-0.5 md:flex-row">
       <div class="flex items-center gap-x-4">
         <okta-icon-wrapper
           dimensions="w-5 h-5"
@@ -16,12 +16,12 @@
             class="flex-shrink-0"
           />
         </okta-icon-wrapper>
-        <div v-if="loading" class="w-56 h-10 py-px bg-ink-300 animate-pulse"></div>
+        <div v-if="loading" class="h-10 w-56 animate-pulse bg-ink-300 py-px"></div>
         <div v-else>
           <p class="font-medium">
             {{ orgUser.fullName || orgUser.email }}
           </p>
-          <div class="flex flex-wrap items-center md:flex-nowrap gap-x-3 gap-y-1 text-vanilla-400">
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-vanilla-400 md:flex-nowrap">
             <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
               <z-tag
                 icon-left="solid-circle"
@@ -30,7 +30,7 @@
                 size="x-small"
                 spacing="px-1.5 py-1"
                 :icon-color="orgUser.isActive ? 'juniper' : 'honey'"
-                class="font-semibold leading-none tracking-wide uppercase text-vanilla-400 gap-x-1"
+                class="gap-x-1 font-semibold uppercase leading-none tracking-wide text-vanilla-400"
               >
                 {{ orgUser.isActive ? 'Active' : 'Inactive' }}
               </z-tag>
@@ -42,7 +42,7 @@
                 size="x-small"
                 spacing="px-1.5 py-1"
                 icon-color="robin"
-                class="font-semibold leading-none tracking-wide uppercase text-vanilla-400 gap-x-1"
+                class="gap-x-1 font-semibold uppercase leading-none tracking-wide text-vanilla-400"
               >
                 Superuser
               </z-tag>
@@ -73,7 +73,7 @@
         </div>
       </div>
     </div>
-    <div v-if="!orgUser.scimEnabled" class="flex flex-wrap items-center gap-3 mt-4">
+    <div v-if="!orgUser.scimEnabled" class="mt-4 flex flex-wrap items-center gap-3">
       <nuxt-link-button to="/control-panel/user-management/invites">
         <z-icon icon="plus" color="current" size="small" class="mr-0.5" />
         <span>Add to group</span>
@@ -86,14 +86,12 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZAvatar, ZIcon, ZTag } from '@deepsource/zeal'
 
 import { EnterpriseUser } from '~/types/types'
 import { formatDate, parseISODate } from '~/utils/date'
 import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
-  components: { ZButton, ZAvatar, ZIcon, ZTag },
   name: 'ControlPanelUserHeader',
   methods: {
     getDefaultAvatar,

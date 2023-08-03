@@ -14,9 +14,9 @@
         <z-icon icon="search" size="small" class="ml-1.5" />
       </template>
     </z-input>
-    <div class="grid grid-cols-1 gap-4 pb-20 overflow-y-scroll max-h-102">
+    <div class="grid max-h-102 grid-cols-1 gap-4 overflow-y-scroll pb-20">
       <template v-if="$fetchState.pending || searching">
-        <div v-for="ii in 5" :key="ii" class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
+        <div v-for="ii in 5" :key="ii" class="h-20 animate-pulse rounded-md bg-ink-300"></div>
       </template>
       <template v-else-if="repositoriesToOnboard && repositoriesToOnboard.length">
         <repo-card
@@ -35,7 +35,7 @@
       </template>
       <empty-state
         v-else
-        class="border-2 border-dashed rounded-md border-slate-400"
+        class="rounded-md border-2 border-dashed border-slate-400"
         :use-v2="true"
         :webp-image-path="
           searchCandidate
@@ -80,13 +80,13 @@
       </empty-state>
     </div>
     <div
-      class="absolute bottom-0 w-full pt-12 pb-0 bg-gradient-to-t from-ink-400 via-ink-400 to-transparent"
+      class="absolute bottom-0 w-full bg-gradient-to-t from-ink-400 via-ink-400 to-transparent pb-0 pt-12"
     >
       <z-alert v-if="providerIsAds" type="neutral">
         <div class="inline-flex gap-x-2">
-          <z-icon icon="solid-alert-circle" class="self-start mt-0.5" />
+          <z-icon icon="solid-alert-circle" class="mt-0.5 self-start" />
 
-          <p class="text-vanilla-400 text-sm leading-">
+          <p class="leading- text-sm text-vanilla-400">
             DeepSource supports only git-based repositories. If your workspace has TFVC-based
             repositories, they won't be synced.
           </p>
@@ -97,7 +97,6 @@
 </template>
 
 <script lang="ts">
-import { ZAlert, ZButton, ZIcon, ZInput } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import { RepoCard } from '~/components/AddRepo'
@@ -115,10 +114,6 @@ import { resolveNodes } from '~/utils/array'
  */
 @Component({
   components: {
-    ZAlert,
-    ZButton,
-    ZIcon,
-    ZInput,
     RepoCard
   },
   middleware: ['restrictOnboarding'],

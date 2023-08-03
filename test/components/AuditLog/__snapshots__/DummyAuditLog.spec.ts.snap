@@ -4,8 +4,8 @@ exports[`[[ DummyAuditLog ]] renders a dummy list of Audit log events 1`] = `
 "<div class=\\"space-y-4\\">
   <div class=\\"flex items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-medium leading-5 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"page-context-text max-w-2xs break-words border-b-vanilla-400 text-sm font-medium leading-5 md:max-w-xs lg:max-w-sm\\">
         Logs for Last 3 months Jan 6, 2023 - Apr 6, 2023
       </p>
     </div>

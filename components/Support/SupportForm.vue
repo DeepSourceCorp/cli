@@ -57,14 +57,14 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon } from '@deepsource/zeal'
 
+import ZInput from '../zeal/ZInput'
 import SupportDescription from './SupportDescription.vue'
 import { SupportValidationData } from '~/types/support'
 
 @Component({
   name: 'SupportForm',
-  components: { ZInput, ZButton, ZIcon, SupportDescription }
+  components: { SupportDescription, ZInput }
 })
 export default class SupportForm extends Vue {
   @Prop({ type: String, required: true })

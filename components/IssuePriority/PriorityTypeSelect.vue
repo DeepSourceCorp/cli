@@ -4,7 +4,7 @@
       <slot name="trigger" :toggle="toggle">
         <button
           v-tooltip="{ content: tooltipCopy, delay: { show: 200, hide: 100 }, classes: 'w-64' }"
-          class="flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none"
+          class="flex cursor-pointer items-center gap-x-1 rounded-full bg-ink-200 focus:outline-none"
           :class="pillPadding"
           @click="toggle"
         >
@@ -27,7 +27,7 @@
               labelFontSize,
               {
                 'min-w-20': currentPriority === 'noop' && size !== 'small',
-                'font-medium tracking-wide uppercase': currentPriority
+                'font-medium uppercase tracking-wide': currentPriority
               }
             ]"
           >
@@ -36,7 +36,7 @@
           <z-icon
             :size="iconSize"
             icon="chevron-down"
-            class="transition-all duration-300 transform -ml-0.5"
+            class="-ml-0.5 transform transition-all duration-300"
             :class="(open && 'rotate-180') || 'rotate-0'"
           />
         </button>
@@ -55,14 +55,14 @@
         >
           <span
             v-if="badgeType(option.value)"
-            class="h-2 rounded-full w-2"
+            class="h-2 w-2 rounded-full"
             :class="badgeType(option.value)"
           ></span>
           <!-- Min. height & width allowed for z-icon are h-3 & w-3, but the badge circle
           has w-2 & h-2, messing with alignment. Hence -ve margins needed -->
           <z-icon v-else icon="ellipsis-small" size="x-small" class="-mx-0.5" />
           <span
-            class="text-xxs tracking-wide font-medium"
+            class="text-xxs font-medium tracking-wide"
             :class="currentPriority === option.value ? 'text-vanilla-200' : 'text-vanilla-400'"
             >{{ option.label }}</span
           >
@@ -71,11 +71,11 @@
       <z-menu-section v-if="showFooter" :divider="false">
         <z-menu-item
           :disabled="true"
-          class="py-2 items-stretch leading-snug"
+          class="items-stretch py-2 leading-snug"
           style="cursor: default"
         >
           <z-icon icon="info" size="x-small" />
-          <span class="text-vanilla-400 text-xxs -my-px -ml-px">
+          <span class="-my-px -ml-px text-xxs text-vanilla-400">
             Priority will be updated in {{ prioritySourceVerbose }}.</span
           >
         </z-menu-item>
@@ -85,7 +85,6 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZIcon, ZMenu, ZMenuItem, ZMenuSection } from '@deepsource/zeal'
 import {
   IssuePriorityLevelVerbose,
   IssuePriorityTypes,
@@ -97,13 +96,7 @@ import { IssuePriorityLevel } from '~/types/types'
  * Component to select priority level for an issue.
  */
 @Component({
-  name: 'PriorityTypeSelect',
-  components: {
-    ZIcon,
-    ZMenu,
-    ZMenuItem,
-    ZMenuSection
-  }
+  name: 'PriorityTypeSelect'
 })
 export default class PriorityTypeSelect extends Vue {
   @Prop({ default: '', required: true })

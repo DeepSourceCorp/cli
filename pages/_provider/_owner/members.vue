@@ -71,7 +71,6 @@
   </div>
 </template>
 <script lang="ts">
-import { ZIcon, ZTag, ZInput } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
@@ -83,11 +82,6 @@ import { TeamPerms } from '~/types/permTypes'
  * Team members parent page
  */
 @Component({
-  components: {
-    ZIcon,
-    ZTag,
-    ZInput
-  },
   middleware: ['validateProvider'],
   layout: 'dashboard',
   scrollToTop: true

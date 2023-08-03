@@ -45,7 +45,9 @@
             v-for="filter in sortFilters"
             :key="filter.name"
             :icon="filter.icon"
+            as="button"
             direction="left"
+            class="w-full"
             @click="() => updateSort(filter.name)"
           >
             {{ filter.label }}
@@ -108,23 +110,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZInput, ZButton, ZMenu, ZMenuItem, ZPagination } from '@deepsource/zeal'
 
 import { CheckIssue } from '~/types/types'
 import { RunDetailMutations } from '~/store/run/detail'
 
 const VISIBLE_PAGES = 5
 
-@Component({
-  components: {
-    ZIcon,
-    ZInput,
-    ZButton,
-    ZMenu,
-    ZMenuItem,
-    ZPagination
-  }
-})
+@Component({})
 export default class IssueList extends Vue {
   @Prop()
   totalCount: number

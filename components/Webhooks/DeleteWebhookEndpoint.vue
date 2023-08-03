@@ -12,7 +12,7 @@
       </template>
       <template #description>
         Deleting this endpoint will disable all events and will delete all event logs.
-        <span class="text-vanilla-200 font-medium">This action is not reversible.</span>
+        <span class="font-medium text-vanilla-200">This action is not reversible.</span>
       </template>
     </button-input>
     <portal to="modal">
@@ -23,7 +23,7 @@
         @onClose="showConfirmDelete = false"
       >
         <template #footer="{ close }">
-          <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
+          <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
             <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               Cancel
             </z-button>
@@ -44,17 +44,11 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZConfirm, ZButton } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import WebhookMixin from '~/mixins/webhookMixin'
 
-@Component({
-  components: {
-    ZConfirm,
-    ZButton
-  }
-})
+@Component({})
 export default class DeleteWebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixin) {
   @Prop()
   webhookId!: string

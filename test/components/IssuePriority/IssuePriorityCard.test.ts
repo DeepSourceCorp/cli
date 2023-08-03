@@ -1,8 +1,8 @@
-import { fireEvent, getByTestId, render } from '@testing-library/vue'
+import { fireEvent, render } from '@testing-library/vue'
 import { IssuePriorityCard } from '~/components/IssuePriority'
 import { BaseCard } from '~/components/History'
 import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 
 test('renders IssuePriorityCard with all prop options', () => {
   const baseProps = {

@@ -1,11 +1,11 @@
 <template>
   <!-- Header -->
-  <div class="flex flex-1 w-full rounded-sm min-h-24">
+  <div class="flex min-h-24 w-full flex-1 rounded-sm">
     <!-- Left Section -->
-    <div class="flex flex-col w-3/5 py-4 gap-y-3 md:gap-y-2 md:w-4/5">
+    <div class="flex w-3/5 flex-col gap-y-3 py-4 md:w-4/5 md:gap-y-2">
       <!-- heading -->
       <div
-        class="flex items-center space-x-2 text-xs font-normal lg:text-lg lg:leading-9 text-vanilla-400"
+        class="flex items-center space-x-2 text-xs font-normal text-vanilla-400 lg:text-lg lg:leading-9"
       >
         <!-- Issue title -->
         <z-icon :icon="icon" size="small" color="transparent" />
@@ -24,9 +24,9 @@
           <span v-else class="text-sm text-vanilla-400">{{ statusDescription }} </span>
         </div>
         <!-- Issue type -->
-        <div v-if="alertingMetricsCount" class="items-center hidden space-x-2 md:flex">
+        <div v-if="alertingMetricsCount" class="hidden items-center space-x-2 md:flex">
           <z-icon icon="bar-chart" size="small" color="honey" />
-          <span class="text-xs sm:text-sm text-vanilla-400">{{ alertingMetricsMessage }}</span>
+          <span class="text-xs text-vanilla-400 sm:text-sm">{{ alertingMetricsMessage }}</span>
         </div>
       </div>
     </div>
@@ -65,7 +65,6 @@
 </template>
 
 <script lang="ts">
-import { ZIcon } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import { RunStatus } from '~/types/types'
@@ -73,9 +72,6 @@ import { formatIntl, shortenLargeNumber } from '~/utils/string'
 import { runStatusIcon, runStatusIconColor, runStatusTagLabel } from '~/utils/ui'
 
 @Component({
-  components: {
-    ZIcon
-  },
   methods: {
     formatIntl,
     shortenLargeNumber

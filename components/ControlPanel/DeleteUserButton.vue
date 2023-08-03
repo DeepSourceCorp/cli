@@ -18,7 +18,7 @@
         @onClose="showDeleteUserConfirm = false"
       >
         <template #footer="{ close }">
-          <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
+          <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
             <z-button
               button-type="ghost"
               :disabled="isDeletingUser"
@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import { Component, Vue, namespace, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZConfirm, ZIcon } from '@deepsource/zeal'
+
 import { OrgUsersActions } from '~/store/control-panel/users'
 import { EnterpriseUser } from '~/types/types'
 import MutationFailedError from '~/utils/mutationFailedError'
@@ -56,7 +56,6 @@ import MutationFailedError from '~/utils/mutationFailedError'
 const userManagementStore = namespace('control-panel/users')
 
 @Component({
-  components: { ZButton, ZConfirm, ZIcon },
   name: 'DeleteUserButton'
 })
 export default class DeleteUserButton extends Vue {

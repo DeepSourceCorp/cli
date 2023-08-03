@@ -38,17 +38,12 @@
 </template>
 
 <script lang="ts">
-import { ZIcon, ZTag } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import { IntegrationShortcodes } from '~/mixins/integrationsDetailMixin'
 
 @Component({
-  name: 'IntegrationCard',
-  components: {
-    ZTag,
-    ZIcon
-  }
+  name: 'IntegrationCard'
 })
 
 /**

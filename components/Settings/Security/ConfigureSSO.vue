@@ -1,6 +1,6 @@
 <template>
   <z-modal title="Configure SSO Identity Provider" @onClose="$emit('close')">
-    <div class="px-4 py-3 space-y-5">
+    <div class="space-y-5 px-4 py-3">
       <label class="block space-y-2">
         <div class="text-xs leading-5">Domain name</div>
         <z-input
@@ -37,7 +37,7 @@
     <template #footer="{ close }">
       <hr class="border-ink-200" />
       <div
-        class="px-4 py-3.5 flex items-center justify-end space-x-1.5 text-right text-vanilla-100"
+        class="flex items-center justify-end space-x-1.5 px-4 py-3.5 text-right text-vanilla-100"
       >
         <div class="group bg-ink-200">
           <z-button
@@ -68,11 +68,10 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZInput, ZModal } from '@deepsource/zeal'
 
 import { Maybe, VerifiableDomain } from '~/types/types'
 
-@Component({ components: { ZButton, ZIcon, ZInput, ZModal } })
+@Component({})
 export default class ConfigureSSO extends Vue {
   @Prop({ required: true })
   verifiableDomain: Maybe<VerifiableDomain>

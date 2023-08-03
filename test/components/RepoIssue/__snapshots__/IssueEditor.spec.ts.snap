@@ -2,32 +2,7 @@
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 1`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\" openaccordion=\\"true\\">
-  <div class=\\"z-accordion-item w-full rounded-md border border-slate-400 text-vanilla-200\\">
-    <div class=\\"space-y-1 rounded-md border-b border-slate-400 bg-ink-300 p-3 transition-all duration-100 rounded-b-none border-opacity-100\\">
-      <div class=\\"flex justify-between gap-x-2\\">
-        <div class=\\"w-full cursor-pointer space-y-1 has-tooltip\\" data-original-title=\\"null\\">
-          <div class=\\"flex flex-grow\\"><span class=\\"flex-grow break-all text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
-          <div class=\\"block items-center space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4\\"><a href=\\"https://github.com/deepsourcelabs/asgard/blob/a8935a7125356db4cff400415f7061b2e5491591/Dockerfile#L17-L17\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" class=\\"flex items-baseline gap-x-2 truncate text-xs text-vanilla-400\\"><span><zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mb-0.5 flex-shrink-0\\"></zicon-stub></span> <span class=\\"flex max-w-lg flex-wrap items-baseline\\">Dockerfile</span></a></div>
-        </div>
-        <div class=\\"flex w-12 justify-end\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"focus:outline-none -mt-1 -mr-1 hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
-      </div>
-    </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
-      <div class=\\"flex flex-col space-y-1\\">
-        <div class=\\"text-xs xl:text-sm\\">
-          <div class=\\"z-code\\">
-            <div class=\\"highlight\\"><pre><span class=\\"ln\\">14</span><span class=\\"err\\"></span><span class=\\"c\\"># Disable virtualenv creation</span><span class=\\"err\\"></span>
-<span class=\\"ln\\">15</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> poetry config virtualenvs.create false<span class=\\"err\\"></span>
-<span class=\\"ln\\">16</span><span class=\\"err\\"></span><span class=\\"err\\"></span>
-<span class=\\"hl\\"><span class=\\"ln\\">17</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> apt-get update <span class=\\"o\\">&amp;&amp;</span> apt-get install -qq -y <span class=\\"se\\"></span></span><span class=\\"ln\\">18</span><span class=\\"se\\"></span>  build-essential git libpq-dev curl cron --no-install-recommends <span class=\\"se\\"></span>
-<span class=\\"ln\\">19</span><span class=\\"se\\"></span>  <span class=\\"o\\">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span class=\\"err\\"></span>
-<span class=\\"ln\\">20</span><span class=\\"err\\"></span><span class=\\"err\\"></span></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <z-accordion-item is-open=\\"true\\" span-custom-height=\\"\\" custom-max-height=\\"max-h-full\\" class=\\"w-full rounded-md border border-slate-400\\"></z-accordion-item>
   <!---->
   <!---->
   <!---->
@@ -36,32 +11,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 1`] = `
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 2`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\" openaccordion=\\"true\\">
-  <div class=\\"z-accordion-item w-full rounded-md border border-slate-400 text-vanilla-200\\">
-    <div class=\\"space-y-1 rounded-md border-b border-slate-400 bg-ink-300 p-3 transition-all duration-100 rounded-b-none border-opacity-100\\">
-      <div class=\\"flex justify-between gap-x-2\\">
-        <div class=\\"w-full cursor-pointer space-y-1 has-tooltip\\" data-original-title=\\"null\\">
-          <div class=\\"flex flex-grow\\"><span class=\\"flex-grow break-all text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
-          <div class=\\"block items-center space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4\\"><a href=\\"https://github.com/deepsourcelabs/asgard/blob/a8935a7125356db4cff400415f7061b2e5491591/Dockerfile#L17-L17\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" class=\\"flex items-baseline gap-x-2 truncate text-xs text-vanilla-400\\"><span><zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mb-0.5 flex-shrink-0\\"></zicon-stub></span> <span class=\\"flex max-w-lg flex-wrap items-baseline\\">Dockerfile</span></a></div>
-        </div>
-        <div class=\\"flex w-12 justify-end\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"focus:outline-none -mt-1 -mr-1 hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
-      </div>
-    </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
-      <div class=\\"flex flex-col space-y-1\\">
-        <div class=\\"text-xs xl:text-sm\\">
-          <div class=\\"z-code\\">
-            <div class=\\"highlight\\"><pre><span class=\\"ln\\">14</span><span class=\\"err\\"></span><span class=\\"c\\"># Disable virtualenv creation</span><span class=\\"err\\"></span>
-<span class=\\"ln\\">15</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> poetry config virtualenvs.create false<span class=\\"err\\"></span>
-<span class=\\"ln\\">16</span><span class=\\"err\\"></span><span class=\\"err\\"></span>
-<span class=\\"hl\\"><span class=\\"ln\\">17</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> apt-get update <span class=\\"o\\">&amp;&amp;</span> apt-get install -qq -y <span class=\\"se\\"></span></span><span class=\\"ln\\">18</span><span class=\\"se\\"></span>  build-essential git libpq-dev curl cron --no-install-recommends <span class=\\"se\\"></span>
-<span class=\\"ln\\">19</span><span class=\\"se\\"></span>  <span class=\\"o\\">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span class=\\"err\\"></span>
-<span class=\\"ln\\">20</span><span class=\\"err\\"></span><span class=\\"err\\"></span></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <z-accordion-item is-open=\\"true\\" span-custom-height=\\"\\" custom-max-height=\\"max-h-full\\" class=\\"w-full rounded-md border border-slate-400\\"></z-accordion-item>
   <!---->
   <!---->
   <!---->
@@ -70,32 +20,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 2`] = `
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 3`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
-  <div class=\\"z-accordion-item w-full rounded-md border border-slate-400 text-vanilla-200\\">
-    <div class=\\"space-y-1 rounded-md border-b border-slate-400 bg-ink-300 p-3 transition-all duration-100 rounded-b-none border-opacity-100\\">
-      <div class=\\"flex justify-between gap-x-2\\">
-        <div class=\\"w-full cursor-pointer space-y-1 has-tooltip\\" data-original-title=\\"null\\">
-          <div class=\\"flex flex-grow\\"><span class=\\"flex-grow break-all text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
-          <div class=\\"block items-center space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4\\"><a href=\\"https://github.com/deepsourcelabs/asgard/blob/a8935a7125356db4cff400415f7061b2e5491591/Dockerfile#L17-L17\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" class=\\"flex items-baseline gap-x-2 truncate text-xs text-vanilla-400\\"><span><zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mb-0.5 flex-shrink-0\\"></zicon-stub></span> <span class=\\"flex max-w-lg flex-wrap items-baseline\\">Dockerfile</span></a></div>
-        </div>
-        <div class=\\"flex w-12 justify-end\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"focus:outline-none -mt-1 -mr-1 hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
-      </div>
-    </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
-      <div class=\\"flex flex-col space-y-1\\">
-        <div class=\\"text-xs xl:text-sm\\">
-          <div class=\\"z-code\\">
-            <div class=\\"highlight\\"><pre><span class=\\"ln\\">14</span><span class=\\"err\\"></span><span class=\\"c\\"># Disable virtualenv creation</span><span class=\\"err\\"></span>
-<span class=\\"ln\\">15</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> poetry config virtualenvs.create false<span class=\\"err\\"></span>
-<span class=\\"ln\\">16</span><span class=\\"err\\"></span><span class=\\"err\\"></span>
-<span class=\\"hl\\"><span class=\\"ln\\">17</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> apt-get update <span class=\\"o\\">&amp;&amp;</span> apt-get install -qq -y <span class=\\"se\\"></span></span><span class=\\"ln\\">18</span><span class=\\"se\\"></span>  build-essential git libpq-dev curl cron --no-install-recommends <span class=\\"se\\"></span>
-<span class=\\"ln\\">19</span><span class=\\"se\\"></span>  <span class=\\"o\\">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span class=\\"err\\"></span>
-<span class=\\"ln\\">20</span><span class=\\"err\\"></span><span class=\\"err\\"></span></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <z-accordion-item is-open=\\"true\\" span-custom-height=\\"\\" custom-max-height=\\"max-h-full\\" class=\\"w-full rounded-md border border-slate-400\\"></z-accordion-item>
   <!---->
   <!---->
   <!---->
@@ -104,32 +29,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 3`] = `
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 4`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
-  <div class=\\"z-accordion-item w-full rounded-md border border-slate-400 text-vanilla-200\\">
-    <div class=\\"space-y-1 rounded-md border-b border-slate-400 bg-ink-300 p-3 transition-all duration-100 rounded-b-none border-opacity-100\\">
-      <div class=\\"flex justify-between gap-x-2\\">
-        <div class=\\"w-full cursor-pointer space-y-1 has-tooltip\\" data-original-title=\\"null\\">
-          <div class=\\"flex flex-grow\\"><span class=\\"flex-grow break-all text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
-          <div class=\\"block items-center space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4\\"><a href=\\"https://github.com/deepsourcelabs/asgard/blob/a8935a7125356db4cff400415f7061b2e5491591/Dockerfile#L17-L17\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" class=\\"flex items-baseline gap-x-2 truncate text-xs text-vanilla-400\\"><span><zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mb-0.5 flex-shrink-0\\"></zicon-stub></span> <span class=\\"flex max-w-lg flex-wrap items-baseline\\">Dockerfile</span></a></div>
-        </div>
-        <div class=\\"flex w-12 justify-end\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"focus:outline-none -mt-1 -mr-1 hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
-      </div>
-    </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
-      <div class=\\"flex flex-col space-y-1\\">
-        <div class=\\"text-xs xl:text-sm\\">
-          <div class=\\"z-code\\">
-            <div class=\\"highlight\\"><pre><span class=\\"ln\\">14</span><span class=\\"err\\"></span><span class=\\"c\\"># Disable virtualenv creation</span><span class=\\"err\\"></span>
-<span class=\\"ln\\">15</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> poetry config virtualenvs.create false<span class=\\"err\\"></span>
-<span class=\\"ln\\">16</span><span class=\\"err\\"></span><span class=\\"err\\"></span>
-<span class=\\"hl\\"><span class=\\"ln\\">17</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> apt-get update <span class=\\"o\\">&amp;&amp;</span> apt-get install -qq -y <span class=\\"se\\"></span></span><span class=\\"ln\\">18</span><span class=\\"se\\"></span>  build-essential git libpq-dev curl cron --no-install-recommends <span class=\\"se\\"></span>
-<span class=\\"ln\\">19</span><span class=\\"se\\"></span>  <span class=\\"o\\">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span class=\\"err\\"></span>
-<span class=\\"ln\\">20</span><span class=\\"err\\"></span><span class=\\"err\\"></span></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <z-accordion-item is-open=\\"true\\" span-custom-height=\\"\\" custom-max-height=\\"max-h-full\\" class=\\"w-full rounded-md border border-slate-400\\"></z-accordion-item>
   <!---->
   <!---->
   <!---->
@@ -138,32 +38,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 4`] = `
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 5`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\" openaccordion=\\"true\\">
-  <div class=\\"z-accordion-item w-full rounded-md border border-slate-400 text-vanilla-200\\">
-    <div class=\\"space-y-1 rounded-md border-b border-slate-400 bg-ink-300 p-3 transition-all duration-100 rounded-b-none border-opacity-100\\">
-      <div class=\\"flex justify-between gap-x-2\\">
-        <div class=\\"w-full cursor-pointer space-y-1 has-tooltip\\" data-original-title=\\"null\\">
-          <div class=\\"flex flex-grow\\"><span class=\\"flex-grow break-all text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
-          <div class=\\"block items-center space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4\\"><a href=\\"https://github.com/deepsourcelabs/asgard/blob/a8935a7125356db4cff400415f7061b2e5491591/Dockerfile#L17-L17\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" class=\\"flex items-baseline gap-x-2 truncate text-xs text-vanilla-400\\"><span><zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mb-0.5 flex-shrink-0\\"></zicon-stub></span> <span class=\\"flex max-w-lg flex-wrap items-baseline\\">Dockerfile</span></a></div>
-        </div>
-        <!---->
-      </div>
-    </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
-      <div class=\\"flex flex-col space-y-1\\">
-        <div class=\\"text-xs xl:text-sm\\">
-          <div class=\\"z-code\\">
-            <div class=\\"highlight\\"><pre><span class=\\"ln\\">14</span><span class=\\"err\\"></span><span class=\\"c\\"># Disable virtualenv creation</span><span class=\\"err\\"></span>
-<span class=\\"ln\\">15</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> poetry config virtualenvs.create false<span class=\\"err\\"></span>
-<span class=\\"ln\\">16</span><span class=\\"err\\"></span><span class=\\"err\\"></span>
-<span class=\\"hl\\"><span class=\\"ln\\">17</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> apt-get update <span class=\\"o\\">&amp;&amp;</span> apt-get install -qq -y <span class=\\"se\\"></span></span><span class=\\"ln\\">18</span><span class=\\"se\\"></span>  build-essential git libpq-dev curl cron --no-install-recommends <span class=\\"se\\"></span>
-<span class=\\"ln\\">19</span><span class=\\"se\\"></span>  <span class=\\"o\\">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span class=\\"err\\"></span>
-<span class=\\"ln\\">20</span><span class=\\"err\\"></span><span class=\\"err\\"></span></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <z-accordion-item is-open=\\"true\\" span-custom-height=\\"\\" custom-max-height=\\"max-h-full\\" class=\\"w-full rounded-md border border-slate-400\\"></z-accordion-item>
   <!---->
   <!---->
   <!---->
@@ -172,32 +47,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 5`] = `
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 6`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\" openaccordion=\\"true\\">
-  <div class=\\"z-accordion-item w-full rounded-md border border-slate-400 text-vanilla-200\\">
-    <div class=\\"space-y-1 rounded-md border-b border-slate-400 bg-ink-300 p-3 transition-all duration-100 rounded-b-none border-opacity-100\\">
-      <div class=\\"flex justify-between gap-x-2\\">
-        <div class=\\"w-full cursor-pointer space-y-1 has-tooltip\\" data-original-title=\\"null\\">
-          <div class=\\"flex flex-grow\\"><span class=\\"flex-grow break-all text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
-          <div class=\\"block items-center space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4\\"><a href=\\"https://github.com/deepsourcelabs/asgard/blob/a8935a7125356db4cff400415f7061b2e5491591/Dockerfile#L17-L17\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" class=\\"flex items-baseline gap-x-2 truncate text-xs text-vanilla-400\\"><span><zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mb-0.5 flex-shrink-0\\"></zicon-stub></span> <span class=\\"flex max-w-lg flex-wrap items-baseline\\">Dockerfile</span></a></div>
-        </div>
-        <!---->
-      </div>
-    </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
-      <div class=\\"flex flex-col space-y-1\\">
-        <div class=\\"text-xs xl:text-sm\\">
-          <div class=\\"z-code\\">
-            <div class=\\"highlight\\"><pre><span class=\\"ln\\">14</span><span class=\\"err\\"></span><span class=\\"c\\"># Disable virtualenv creation</span><span class=\\"err\\"></span>
-<span class=\\"ln\\">15</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> poetry config virtualenvs.create false<span class=\\"err\\"></span>
-<span class=\\"ln\\">16</span><span class=\\"err\\"></span><span class=\\"err\\"></span>
-<span class=\\"hl\\"><span class=\\"ln\\">17</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> apt-get update <span class=\\"o\\">&amp;&amp;</span> apt-get install -qq -y <span class=\\"se\\"></span></span><span class=\\"ln\\">18</span><span class=\\"se\\"></span>  build-essential git libpq-dev curl cron --no-install-recommends <span class=\\"se\\"></span>
-<span class=\\"ln\\">19</span><span class=\\"se\\"></span>  <span class=\\"o\\">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span class=\\"err\\"></span>
-<span class=\\"ln\\">20</span><span class=\\"err\\"></span><span class=\\"err\\"></span></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <z-accordion-item is-open=\\"true\\" span-custom-height=\\"\\" custom-max-height=\\"max-h-full\\" class=\\"w-full rounded-md border border-slate-400\\"></z-accordion-item>
   <!---->
   <!---->
   <!---->
@@ -206,32 +56,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 6`] = `
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 7`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
-  <div class=\\"z-accordion-item w-full rounded-md border border-slate-400 text-vanilla-200\\">
-    <div class=\\"space-y-1 rounded-md border-b border-slate-400 bg-ink-300 p-3 transition-all duration-100 rounded-b-none border-opacity-100\\">
-      <div class=\\"flex justify-between gap-x-2\\">
-        <div class=\\"w-full cursor-pointer space-y-1 has-tooltip\\" data-original-title=\\"null\\">
-          <div class=\\"flex flex-grow\\"><span class=\\"flex-grow break-all text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
-          <div class=\\"block items-center space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4\\"><a href=\\"https://github.com/deepsourcelabs/asgard/blob/a8935a7125356db4cff400415f7061b2e5491591/Dockerfile#L17-L17\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" class=\\"flex items-baseline gap-x-2 truncate text-xs text-vanilla-400\\"><span><zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mb-0.5 flex-shrink-0\\"></zicon-stub></span> <span class=\\"flex max-w-lg flex-wrap items-baseline\\">Dockerfile</span></a></div>
-        </div>
-        <!---->
-      </div>
-    </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
-      <div class=\\"flex flex-col space-y-1\\">
-        <div class=\\"text-xs xl:text-sm\\">
-          <div class=\\"z-code\\">
-            <div class=\\"highlight\\"><pre><span class=\\"ln\\">14</span><span class=\\"err\\"></span><span class=\\"c\\"># Disable virtualenv creation</span><span class=\\"err\\"></span>
-<span class=\\"ln\\">15</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> poetry config virtualenvs.create false<span class=\\"err\\"></span>
-<span class=\\"ln\\">16</span><span class=\\"err\\"></span><span class=\\"err\\"></span>
-<span class=\\"hl\\"><span class=\\"ln\\">17</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> apt-get update <span class=\\"o\\">&amp;&amp;</span> apt-get install -qq -y <span class=\\"se\\"></span></span><span class=\\"ln\\">18</span><span class=\\"se\\"></span>  build-essential git libpq-dev curl cron --no-install-recommends <span class=\\"se\\"></span>
-<span class=\\"ln\\">19</span><span class=\\"se\\"></span>  <span class=\\"o\\">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span class=\\"err\\"></span>
-<span class=\\"ln\\">20</span><span class=\\"err\\"></span><span class=\\"err\\"></span></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <z-accordion-item is-open=\\"true\\" span-custom-height=\\"\\" custom-max-height=\\"max-h-full\\" class=\\"w-full rounded-md border border-slate-400\\"></z-accordion-item>
   <!---->
   <!---->
   <!---->
@@ -240,32 +65,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 7`] = `
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 8`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
-  <div class=\\"z-accordion-item w-full rounded-md border border-slate-400 text-vanilla-200\\">
-    <div class=\\"space-y-1 rounded-md border-b border-slate-400 bg-ink-300 p-3 transition-all duration-100 rounded-b-none border-opacity-100\\">
-      <div class=\\"flex justify-between gap-x-2\\">
-        <div class=\\"w-full cursor-pointer space-y-1 has-tooltip\\" data-original-title=\\"null\\">
-          <div class=\\"flex flex-grow\\"><span class=\\"flex-grow break-all text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
-          <div class=\\"block items-center space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4\\"><a href=\\"https://github.com/deepsourcelabs/asgard/blob/a8935a7125356db4cff400415f7061b2e5491591/Dockerfile#L17-L17\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" class=\\"flex items-baseline gap-x-2 truncate text-xs text-vanilla-400\\"><span><zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mb-0.5 flex-shrink-0\\"></zicon-stub></span> <span class=\\"flex max-w-lg flex-wrap items-baseline\\">Dockerfile</span></a></div>
-        </div>
-        <!---->
-      </div>
-    </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
-      <div class=\\"flex flex-col space-y-1\\">
-        <div class=\\"text-xs xl:text-sm\\">
-          <div class=\\"z-code\\">
-            <div class=\\"highlight\\"><pre><span class=\\"ln\\">14</span><span class=\\"err\\"></span><span class=\\"c\\"># Disable virtualenv creation</span><span class=\\"err\\"></span>
-<span class=\\"ln\\">15</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> poetry config virtualenvs.create false<span class=\\"err\\"></span>
-<span class=\\"ln\\">16</span><span class=\\"err\\"></span><span class=\\"err\\"></span>
-<span class=\\"hl\\"><span class=\\"ln\\">17</span><span class=\\"err\\"></span><span class=\\"k\\">RUN</span> apt-get update <span class=\\"o\\">&amp;&amp;</span> apt-get install -qq -y <span class=\\"se\\"></span></span><span class=\\"ln\\">18</span><span class=\\"se\\"></span>  build-essential git libpq-dev curl cron --no-install-recommends <span class=\\"se\\"></span>
-<span class=\\"ln\\">19</span><span class=\\"se\\"></span>  <span class=\\"o\\">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span class=\\"err\\"></span>
-<span class=\\"ln\\">20</span><span class=\\"err\\"></span><span class=\\"err\\"></span></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <z-accordion-item is-open=\\"true\\" span-custom-height=\\"\\" custom-max-height=\\"max-h-full\\" class=\\"w-full rounded-md border border-slate-400\\"></z-accordion-item>
   <!---->
   <!---->
   <!---->

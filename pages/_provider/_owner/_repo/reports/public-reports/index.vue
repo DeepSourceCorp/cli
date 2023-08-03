@@ -4,7 +4,7 @@
     <page-title
       :title="publicReportMeta.title"
       :description="publicReportMeta.description"
-      class="flex-col md:flex-row gap-y-4"
+      class="flex-col gap-y-4 md:flex-row"
     >
       <template v-if="hasEditAccess" #actions>
         <z-button
@@ -16,7 +16,7 @@
         />
       </template>
     </page-title>
-    <div v-show="showCtaAndControls" class="flex gap-x-2 justify-between mb-5 mt-1">
+    <div v-show="showCtaAndControls" class="mb-5 mt-1 flex justify-between gap-x-2">
       <public-report-sort v-model="sort" @updateSortFilter="handleSortChange" />
       <z-input
         :value="q"
@@ -41,7 +41,7 @@
         <div
           v-for="idx in 5"
           :key="idx"
-          class="relative z-0 rounded-md h-20 bg-ink-300 animate-pulse"
+          class="relative z-0 h-20 animate-pulse rounded-md bg-ink-300"
         ></div>
       </div>
     </template>
@@ -61,7 +61,7 @@
       v-else-if="q.length"
       :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
       :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
-      class="border border-dashed rounded-lg border-slate-400 py-20"
+      class="rounded-lg border border-dashed border-slate-400 py-20"
     >
       <template #title>
         <span class="break-words">No results found for '{{ q }}'</span>
@@ -72,7 +72,7 @@
       v-else
       title="No public reports found"
       subtitle="No public report has been created for this repository yet."
-      class="border border-dashed rounded-lg border-slate-400 py-20"
+      class="rounded-lg border border-dashed border-slate-400 py-20"
     >
       <template v-if="hasEditAccess" #action>
         <div class="flex justify-around">
@@ -86,7 +86,7 @@
       </template>
     </lazy-empty-state>
 
-    <div v-if="totalPageCount > 1" class="flex justify-center text-sm my-6">
+    <div v-if="totalPageCount > 1" class="my-6 flex justify-center text-sm">
       <z-pagination
         :page="currentPage"
         :total-pages="totalPageCount"
@@ -132,7 +132,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZInput, ZButton, ZPagination, ZConfirm } from '@deepsource/zeal'
 
 import updateRepoPublicReport from '@/apollo/mutations/reports/updateRepoPublicReport.gql'
 
@@ -148,7 +147,6 @@ import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
  */
 @Component({
   layout: 'repository',
-  components: { ZIcon, ZInput, ZButton, ZPagination, ZConfirm },
   middleware: ['perm'],
   meta: {
     auth: {

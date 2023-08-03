@@ -7,10 +7,10 @@
     @onClose="onModalClose"
     @primaryAction="$emit('issues-selected')"
   >
-    <section class="flex flex-col p-4 pb-0 gap-y-3">
+    <section class="flex flex-col gap-y-3 p-4 pb-0">
       <!-- Search & filter tab -->
       <div class="flex justify-between">
-        <div class="flex mr-2 gap-x-2">
+        <div class="mr-2 flex gap-x-2">
           <issue-priority-filter
             v-model="analyzerType"
             :level="level"
@@ -42,12 +42,12 @@
         </z-input>
       </div>
 
-      <div class="flex flex-col overflow-y-auto border rounded-md border-slate-400 h-96 2xl:h-102">
+      <div class="flex h-96 flex-col overflow-y-auto rounded-md border border-slate-400 2xl:h-102">
         <template v-if="$fetchState.pending">
           <div
             v-for="index in 10"
             :key="index"
-            class="p-8 border-b opacity-50 bg-ink-200 animate-pulse border-slate-400"
+            class="animate-pulse border-b border-slate-400 bg-ink-200 p-8 opacity-50"
           ></div>
         </template>
 
@@ -63,31 +63,31 @@
             <template #title>
               <p class="text-sm font-semibold text-vanilla-300">
                 <span v-html="safeRenderBackticks(issue.title)"></span>
-                <span class="ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap"
+                <span class="ml-1 whitespace-nowrap text-xs font-normal text-vanilla-400"
                   >{{ issue.shortcode }}
                 </span>
               </p>
             </template>
             <template #description>
-              <div class="flex flex-wrap text-xs gap-x-4">
+              <div class="flex flex-wrap gap-x-4 text-xs">
                 <!-- Analyzer type -->
                 <div class="flex items-center gap-x-1.5">
                   <analyzer-logo v-bind="issue.analyzer" :hide-tooltip="true" size="small" />
-                  <span class="text-sm tracking-wide capitalize text-vanilla-400">
+                  <span class="text-sm capitalize tracking-wide text-vanilla-400">
                     {{ issue.analyzer.name }}
                   </span>
                 </div>
                 <!-- Issue type -->
                 <div class="flex items-center gap-x-1.5">
                   <z-icon :icon="issue.issueType" size="x-small" color="vanilla-400" />
-                  <span class="tracking-wide capitalize text-vanilla-400">
+                  <span class="capitalize tracking-wide text-vanilla-400">
                     {{ issue.issueType }}
                   </span>
                 </div>
               </div>
             </template>
             <template #info>
-              <div class="flex justify-end pt-3 pr-3">
+              <div class="flex justify-end pr-3 pt-3">
                 <priority-type-select
                   :priority="issue.priority"
                   direction="left"
@@ -108,7 +108,7 @@
         />
         <lazy-empty-state v-else title="No issues found" />
 
-        <div v-if="totalPageCount > 1" class="flex justify-center my-6 text-sm">
+        <div v-if="totalPageCount > 1" class="my-6 flex justify-center text-sm">
           <z-pagination
             :page="currentPage"
             :total-pages="totalPageCount"
@@ -122,7 +122,6 @@
 </template>
 <script lang="ts">
 import { Component, Watch, mixins, Prop } from 'nuxt-property-decorator'
-import { ZModal, ZInput, ZButton, ZIcon, ZPagination } from '@deepsource/zeal'
 import PriorityTypeSelect from './PriorityTypeSelect.vue'
 import IssuePrioritySort from './IssuePrioritySort.vue'
 import IssuePriorityFilter from './IssuePriorityFilter.vue'
@@ -139,11 +138,6 @@ import { Issue, IssuePriorityLevel } from '~/types/types'
  */
 @Component({
   components: {
-    ZModal,
-    ZInput,
-    ZButton,
-    ZIcon,
-    ZPagination,
     AnalyzerLogo,
     PriorityTypeSelect,
     IssuePrioritySort,

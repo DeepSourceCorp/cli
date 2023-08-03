@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center px-2 py-2 border-b border-slate-400 cursor-pointer gap-x-2 hover:bg-ink-300 hover:border-0 hover:rounded-md"
+    class="flex cursor-pointer items-center gap-x-2 border-b border-slate-400 px-2 py-2 hover:rounded-md hover:border-0 hover:bg-ink-300"
     @click="handleClick"
   >
     <z-icon :icon="icon" size="small" />
@@ -12,14 +12,9 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import { Analyzer } from '~/types/types'
 
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 export default class RepoListItem extends Vue {
   @Prop({ default: 'z-lock' })
   icon!: string

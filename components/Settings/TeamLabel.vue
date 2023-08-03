@@ -1,7 +1,7 @@
 <template>
   <nuxt-link
     :to="settingsLink"
-    class="bg-vanilla-100 bg-opacity-10 px-1 rounded-sm text-cherry-150"
+    class="rounded-sm bg-vanilla-100 bg-opacity-10 px-1 text-cherry-150"
     >{{ login }}</nuxt-link
   >
 </template>

@@ -44,7 +44,7 @@
 
         <div
           v-if="Array.isArray(issueType.subCategories) && issueType.subCategories.length"
-          class="mt-1 ml-4 space-y-1 border-l border-slate-300 pl-3"
+          class="ml-4 mt-1 space-y-1 border-l border-slate-300 pl-3"
         >
           <div
             v-for="subCategory in issueType.subCategories"
@@ -67,7 +67,6 @@
   </div>
 </template>
 <script lang="ts">
-import { ZIcon, ZTag } from '@deepsource/zeal'
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
 import { IssueFilterChoice } from '~/types/issues'
@@ -77,10 +76,6 @@ import { shortenLargeNumber } from '~/utils/string'
  * Component to add issue filtering based on category for a repo
  */
 @Component({
-  components: {
-    ZIcon,
-    ZTag
-  },
   methods: {
     shortenLargeNumber
   }

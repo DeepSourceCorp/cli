@@ -11,14 +11,14 @@
             ></span
           >
         </div>
-        <span v-if="namespace.trend" class="font-normal text-2.5xl tracking-snug">
+        <span v-if="namespace.trend" class="text-2.5xl font-normal tracking-snug">
           {{ trendValueForLegend }}
         </span>
       </div>
-      <div v-if="currentThreshold" class="text-sm text-right text-vanilla-200">
+      <div v-if="currentThreshold" class="text-right text-sm text-vanilla-200">
         <span class="text-xs text-vanilla-400">Threshold</span>
         <span
-          class="inline px-1.5 py-1 text-sm font-medium leading-5 rounded-md font-base bg-ink-300"
+          class="font-base inline rounded-md bg-ink-300 px-1.5 py-1 text-sm font-medium leading-5"
         >
           {{ isNumberType ? currentThreshold : `${currentThreshold}%` }}
         </span>
@@ -29,18 +29,28 @@
             </button>
           </template>
           <template #body>
-            <z-menu-item class="text-sm" icon="edit-2" @click="showThresholdUpdate = true">
+            <z-menu-item
+              as="button"
+              icon="edit-2"
+              class="w-full text-sm"
+              @click="showThresholdUpdate = true"
+            >
               Update Threshold
             </z-menu-item>
-            <z-menu-item class="text-sm text-cherry" icon="trash-2" @click="deleteThreshold">
+            <z-menu-item
+              as="button"
+              icon="trash-2"
+              class="w-full text-sm text-cherry"
+              @click="deleteThreshold"
+            >
               Delete Threshold
             </z-menu-item>
           </template>
         </z-menu>
       </div>
-      <div v-else class="flex justify-end text-sm text-right text-vanilla-200">
+      <div v-else class="flex justify-end text-right text-sm text-vanilla-200">
         <button
-          class="flex items-center h-8 px-2 py-1 space-x-2 text-sm border border-dashed rounded-md border-slate-400 hover:border-slate-400 text-vanilla-400 hover:text-vanilla-200"
+          class="flex h-8 items-center space-x-2 rounded-md border border-dashed border-slate-400 px-2 py-1 text-sm text-vanilla-400 hover:border-slate-400 hover:text-vanilla-200"
           @click="showThresholdUpdate = true"
         >
           <z-icon size="small" icon="plus" />
@@ -115,7 +125,6 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Inject, Watch } from 'nuxt-property-decorator'
-import { ZChart, ZIcon, ZMenu, ZMenuItem, ZInput, ZModal, ZButton } from '@deepsource/zeal'
 import { Metrics, MetricsNamespace } from '~/store/repository/detail'
 import { formatIntl } from '@/utils/string'
 
@@ -127,15 +136,6 @@ const NUMBER_TYPES = ['IDP', 'DDP']
  * Chart component for the metrics page
  */
 @Component({
-  components: {
-    ZChart,
-    ZIcon,
-    ZMenu,
-    ZMenuItem,
-    ZInput,
-    ZModal,
-    ZButton
-  },
   methods: {
     formatIntl
   }

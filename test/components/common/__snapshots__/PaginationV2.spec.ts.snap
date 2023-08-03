@@ -5,10 +5,10 @@ exports[`[[ PaginationV2 ]] renders the new pagination pattern 1`] = `
   <p class=\\"mr-2 text-sm text-vanilla-400\\">
     1 - 30 <span class=\\"text-slate-200\\">of</span> 250
   </p>
-  <zdivider-stub direction=\\"vertical\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub> <button class=\\"h-6 w-6 rounded-sm cursor-not-allowed text-slate-200\\">
-    <zicon-stub icon=\\"chevron-left\\" size=\\"small\\" position=\\"\\" color=\\"current\\" class=\\"mx-auto\\"></zicon-stub>
+  <zdivider-stub direction=\\"vertical\\" margin=\\"m-0\\"></zdivider-stub> <button class=\\"h-6 w-6 rounded-sm cursor-not-allowed text-slate-200\\">
+    <zicon-stub color=\\"current\\" icon=\\"chevron-left\\" class=\\"mx-auto\\"></zicon-stub>
   </button> <button class=\\"h-6 w-6 rounded-sm text-vanilla-400 hover:bg-ink-200\\">
-    <zicon-stub icon=\\"chevron-right\\" size=\\"small\\" position=\\"\\" color=\\"current\\" class=\\"mx-auto\\"></zicon-stub>
+    <zicon-stub color=\\"current\\" icon=\\"chevron-right\\" class=\\"mx-auto\\"></zicon-stub>
   </button>
 </div>"
 `;

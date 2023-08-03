@@ -2,7 +2,7 @@
   <div class="mx-auto min-h-screen w-full lg:max-w-6xl 2xl:max-w-7xl">
     <div
       v-if="publicReport && publicReport.owner"
-      class="sticky top-0 left-0 z-30 w-full border-b border-slate-400 bg-ink-400 lg:hidden"
+      class="sticky left-0 top-0 z-30 w-full border-b border-slate-400 bg-ink-400 lg:hidden"
     >
       <z-button
         id="mobile-sidebar-toggle"
@@ -24,7 +24,7 @@
       />
 
       <div
-        class="w-screen border-t border-slate-400 px-4 pt-6 pb-10 text-sm sm:w-auto md:border-t-0 md:px-6 md:text-base lg:pt-26"
+        class="w-screen border-t border-slate-400 px-4 pb-10 pt-6 text-sm sm:w-auto md:border-t-0 md:px-6 md:text-base lg:pt-26"
       >
         <nuxt-child
           :share-historical-data="publicReport.shareHistoricalData"
@@ -36,7 +36,7 @@
 
         <section
           id="about"
-          class="scroll-mt-8 mt-14 space-y-4 border-b border-slate-400 pb-14 leading-8 text-vanilla-400"
+          class="mt-14 scroll-mt-8 space-y-4 border-b border-slate-400 pb-14 leading-8 text-vanilla-400"
         >
           <h2 class="text-lg font-semibold text-vanilla-100">About DeepSource</h2>
           <p>
@@ -92,7 +92,7 @@
                 class="rounded-md border-slate-400"
                 @input="clearPasswordError"
               />
-              <div class="absolute top-1 right-1 flex gap-x-1 bg-ink-400">
+              <div class="absolute right-1 top-1 flex gap-x-1 bg-ink-400">
                 <z-button
                   v-tooltip="isPasswordHidden ? 'Reveal password' : 'Hide password'"
                   button-type="secondary"
@@ -131,7 +131,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZDivider, ZTag, ZButton, ZInput } from '@deepsource/zeal'
 import { Context } from '@nuxt/types'
 import gql from 'graphql-tag'
 
@@ -145,13 +144,6 @@ import { PublicReportErrors } from '~/types/reportTypes'
  * Public Report parent page
  */
 @Component({
-  components: {
-    ZIcon,
-    ZDivider,
-    ZTag,
-    ZButton,
-    ZInput
-  },
   methods: {
     formatDate,
     parseISODate

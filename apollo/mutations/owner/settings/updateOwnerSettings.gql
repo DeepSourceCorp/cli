@@ -1,4 +1,4 @@
-mutation($input: UpdateOwnerSettingsInput!) {
+mutation ($input: UpdateOwnerSettingsInput!) {
   updateOwnerSettings(input: $input) {
     ok
   }

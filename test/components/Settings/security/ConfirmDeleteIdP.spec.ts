@@ -3,7 +3,7 @@ import { shallowMount } from '@vue/test-utils'
 
 import ConfirmDeleteIdP from '~/components/Settings/Security/ConfirmDeleteIdP.vue'
 
-import { focusDirective } from '~/plugins/helpers/directives.client'
+import focusDirective from '~/utils/directives/focus'
 
 import { ACTIVE_USER_DETAIL } from '~/test/store/user/__mocks__/active.mock'
 import { cartesian, generateBooleanProps } from '~/test/utils'

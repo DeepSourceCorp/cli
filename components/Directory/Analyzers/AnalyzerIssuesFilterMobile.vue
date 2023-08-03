@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div class="fixed z-20 flex justify-center w-screen p-3 pb-8 lg:hidden filter-wrapper">
+    <div class="filter-wrapper fixed z-20 flex w-screen justify-center p-3 pb-8 lg:hidden">
       <z-button
         button-type="primary"
-        class="flex items-center min-w-48"
+        class="flex min-w-48 items-center"
         @click="isModalOpen = true"
       >
-        <div class="inline-flex items-center w-full leading-tight gap-x-2">
+        <div class="inline-flex w-full items-center gap-x-2 leading-tight">
           <z-icon :icon="activeFilter || 'list'" size="small" color="ink-400" class="mr-0.5" />
           <span class="text-sm leading-none">{{ activeFilterTitle || 'All issues' }}</span>
           <div class="flex-grow"></div>
-          <div class="px-2 py-1 text-sm leading-none rounded-full place-self-end bg-juniper-400">
+          <div class="place-self-end rounded-full bg-juniper-400 px-2 py-1 text-sm leading-none">
             {{ shortenLargeNumber(totalIssueCount) }}
           </div>
         </div>
@@ -29,14 +29,14 @@
               class="w-full hover:bg-opacity-0"
               @click="updateFilter('')"
             >
-              <div class="inline-flex leading-tight items-center w-full gap-x-0.5">
+              <div class="inline-flex w-full items-center gap-x-0.5 leading-tight">
                 <z-icon icon="list" size="small" color="current" class="mr-2" />
-                <span class="flex-grow-0 overflow-x-hidden text-xs text-left overflow-ellipsis">
+                <span class="flex-grow-0 overflow-x-hidden overflow-ellipsis text-left text-xs">
                   All issues
                 </span>
                 <div class="flex-grow"></div>
                 <div
-                  class="px-2 py-1 text-xs leading-none rounded-full place-self-end"
+                  class="place-self-end rounded-full px-2 py-1 text-xs leading-none"
                   :class="activeFilter === '' ? 'bg-juniper-400' : 'bg-ink-100'"
                 >
                   {{ shortenLargeNumber(allFilterCount) }}
@@ -60,19 +60,19 @@
               class="w-full hover:bg-opacity-0"
               @click="updateFilter(issueType.shortcode)"
             >
-              <div class="inline-flex leading-tight items-center w-full gap-x-0.5">
+              <div class="inline-flex w-full items-center gap-x-0.5 leading-tight">
                 <z-icon
                   :icon="issueType.shortcode"
                   size="small"
                   color="current"
-                  class="flex-shrink-0 mr-2"
+                  class="mr-2 flex-shrink-0"
                 />
-                <span class="flex-grow-0 overflow-x-hidden text-xs text-left overflow-ellipsis">{{
+                <span class="flex-grow-0 overflow-x-hidden overflow-ellipsis text-left text-xs">{{
                   issueType.title
                 }}</span>
                 <div class="flex-grow"></div>
                 <div
-                  class="px-2 py-1 text-xs leading-none rounded-full place-self-end"
+                  class="place-self-end rounded-full px-2 py-1 text-xs leading-none"
                   :class="activeFilter === issueType.shortcode ? 'bg-juniper-400' : 'bg-ink-100'"
                 >
                   {{ shortenLargeNumber(issueType.count) }}
@@ -87,7 +87,6 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZModal } from '@deepsource/zeal'
 
 import { shortenLargeNumber } from '~/utils/string'
 import IssueTypeT from '~/types/issueDistribution'
@@ -96,7 +95,6 @@ import IssueTypeT from '~/types/issueDistribution'
  * Component for filtering issues by category in analyzer directory
  */
 @Component({
-  components: { ZButton, ZIcon, ZModal },
   methods: { shortenLargeNumber },
   name: 'AnalyzerIssuesFilterMobile'
 })

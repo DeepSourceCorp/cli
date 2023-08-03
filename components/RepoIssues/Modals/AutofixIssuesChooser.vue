@@ -7,7 +7,7 @@
     >
       <div class="flex space-x-2 py-4 text-vanilla-400">
         <div
-          class="text-vanilla-400 default-scroll min-h-40 max-h-102 text-sm leading-7 w-full flex flex-col space-y-2"
+          class="default-scroll flex max-h-102 min-h-40 w-full flex-col space-y-2 text-sm leading-7 text-vanilla-400"
         >
           <div class="px-4">
             <z-input
@@ -16,13 +16,13 @@
               background-color="ink-400"
               :show-border="false"
               placeholder="Search for issues"
-              class="py-1.5 leading-6 px-2"
+              class="px-2 py-1.5 leading-6"
             >
               <template #left><z-icon icon="search" size="small" class="ml-2" /></template>
             </z-input>
           </div>
           <div class="flex flex-col gap-y-2 overflow-y-auto">
-            <label class="flex gap-x-0.5 px-4 cursor-pointer">
+            <label class="flex cursor-pointer gap-x-0.5 px-4">
               <z-checkbox
                 v-model="selectAll"
                 :true-value="true"
@@ -37,14 +37,14 @@
               <div
                 v-for="issue in searchedIssues"
                 :key="issue.shortcode"
-                class="flex flex-col w-full"
+                class="flex w-full flex-col"
                 :class="{
                   'bg-ink-200': isIssueSelected(selectedIssues, issue),
                   'bg-transparent': !isIssueSelected(selectedIssues, issue)
                 }"
               >
                 <label
-                  class="w-full flex space-x-1 items-center leading-7 py-2 px-4 cursor-pointer"
+                  class="flex w-full cursor-pointer items-center space-x-1 px-4 py-2 leading-7"
                 >
                   <z-checkbox
                     v-model="selectedIssues"
@@ -56,10 +56,10 @@
                   />
                   <div class="flex w-full space-x-2">
                     <span class="flex-grow">
-                      <span class="text-vanilla-300 mr-1.5">{{ issue.title }}</span>
+                      <span class="mr-1.5 text-vanilla-300">{{ issue.title }}</span>
                       <span class="text-vanilla-400">{{ issue.shortcode }}</span>
                     </span>
-                    <span class="text-vanilla-400 flex space-x-1">
+                    <span class="flex space-x-1 text-vanilla-400">
                       <span class="text-xs">×</span>
                       <span>{{ issue.occurrenceCount }}</span>
                     </span>
@@ -69,7 +69,7 @@
             </div>
             <div
               v-if="!searchedIssues.length"
-              class="h-24 px-4 w-full flex flex-col space-y-1 justify-center items-center"
+              class="flex h-24 w-full flex-col items-center justify-center space-y-1 px-4"
             >
               <h2 class="text-md font-bold">No matching issues found</h2>
               <p class="text-md">Try changing the search query.</p>
@@ -79,7 +79,7 @@
       </div>
       <template #footer="{ close }">
         <div
-          class="p-4 space-x-4 text-right text-vanilla-100 border-t border-slate-400 flex items-center justify-end"
+          class="flex items-center justify-end space-x-4 border-t border-slate-400 p-4 text-right text-vanilla-100"
         >
           <z-button button-type="secondary" size="small" @click="close">Cancel</z-button>
           <z-button
@@ -103,7 +103,6 @@
 
 <script lang="ts">
 import { Component, Prop, Watch, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZModal, ZButton, ZCheckbox, ZList, ZListItem, ZInput } from '@deepsource/zeal'
 import IssueType from '@/components/Repository/IssueType.vue'
 
 import RunDetailMixin from '~/mixins/runDetailMixin'
@@ -114,13 +113,6 @@ import RunDetailMixin from '~/mixins/runDetailMixin'
 @Component({
   name: 'AutofixIssuesChooser',
   components: {
-    ZIcon,
-    ZModal,
-    ZButton,
-    ZCheckbox,
-    ZList,
-    ZListItem,
-    ZInput,
     IssueType
   }
 })

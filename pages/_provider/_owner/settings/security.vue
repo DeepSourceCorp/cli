@@ -136,7 +136,6 @@
 
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import { ZAlert, ZButton, ZConfirm, ZIcon } from '@deepsource/zeal'
 import Shifty from '@deepsource/shifty'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
@@ -165,7 +164,7 @@ const activeUserStore = namespace('user/active')
 
 @Component({
   layout: 'dashboard',
-  components: { ZAlert, ZButton, ZConfirm, ZIcon, ConfigureSSO, ConfirmDeleteIdP }
+  components: { ConfigureSSO, ConfirmDeleteIdP }
 })
 export default class OwnerSecurity extends mixins(ActiveUserMixin) {
   @teamStore.State

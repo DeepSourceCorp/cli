@@ -2,20 +2,20 @@
   <aside
     v-outside-click="closeSidebar"
     data-testid="public-report-sidebar"
-    class="fixed top-0 z-50 flex-shrink-0 w-64 h-screen overflow-y-auto px-6 py-6 duration-200 border-r hide-scroll lg:sticky space-y-7 md:pt-20 lg:pt-26 lg:px-4 transform-gpu bg-ink-400 border-slate-400 lg:border-none"
+    class="hide-scroll fixed top-0 z-50 h-screen w-64 flex-shrink-0 transform-gpu space-y-7 overflow-y-auto border-r border-slate-400 bg-ink-400 px-6 py-6 duration-200 md:pt-20 lg:sticky lg:border-none lg:px-4 lg:pt-26"
     :class="[isOpen ? 'left-0' : '-left-full']"
   >
     <div class="space-y-4">
-      <div class="w-15 p-2.5 bg-ink-200 rounded-sm">
+      <div class="w-15 rounded-sm bg-ink-200 p-2.5">
         <img :src="ownerLogo" :alt="`${ownerLogin} logo`" width="42" />
       </div>
-      <h1 class="text-vanilla-200 text-1.5xl font-semibold break-words">
+      <h1 class="break-words text-1.5xl font-semibold text-vanilla-200">
         {{ ownerLogin }}
       </h1>
     </div>
 
     <div class="flex flex-col gap-y-3">
-      <span class="text-xs font-semibold tracking-wider uppercase text-slate">Reports</span>
+      <span class="text-xs font-semibold uppercase tracking-wider text-slate">Reports</span>
       <template v-for="report in reports">
         <nuxt-link
           v-if="report in ReportMeta"
@@ -33,7 +33,7 @@
 
     <z-divider color="ink-200" margin="my-0" />
 
-    <div class="flex flex-col text-sm gap-y-3 text-slate">
+    <div class="flex flex-col gap-y-3 text-sm text-slate">
       <a
         v-for="sidebarLink in sidebarLinks"
         :key="sidebarLink.link"
@@ -54,14 +54,13 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 
-import { ZDivider } from '@deepsource/zeal'
 import { ReportPageT, ReportMeta } from '~/types/reportTypes'
 import { containsElement } from '~/utils/ui'
 
 /**
  * Sidebar component for public report page
  */
-@Component({ components: { ZDivider } })
+@Component({})
 export default class PublicReportSidebar extends Vue {
   @Prop({ required: true })
   reports: Array<ReportPageT>

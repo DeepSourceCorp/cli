@@ -15,7 +15,7 @@
           <div class="flex justify-between gap-x-2">
             <distribution-switch
               v-model="activeFilter"
-              class="hidden sm:grid grid-cols-2"
+              class="hidden grid-cols-2 sm:grid"
               @change="fetchDistributionData"
             />
 
@@ -30,7 +30,7 @@
         <template v-if="shareHistoricalData">
           <div
             v-if="historicalValuesLoading"
-            class="h-report-chart mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
+            class="h-report-chart mx-5 my-1.5 animate-pulse rounded-lg bg-ink-300"
           ></div>
           <div v-else>
             <template v-if="shouldChartBeShown">
@@ -67,7 +67,7 @@
 
         <distribution-switch
           v-model="activeFilter"
-          class="grid grid-cols-2 px-5 mt-4 sm:hidden"
+          class="mt-4 grid grid-cols-2 px-5 sm:hidden"
           @change="fetchDistributionData"
         />
       </chart-container>
@@ -92,7 +92,6 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZChart } from '@deepsource/zeal'
 
 import PublicReportMixin from '~/mixins/publicReportMixin'
 import DistributionReportMixin from '~/mixins/distributionReportMixin'
@@ -105,9 +104,6 @@ import { shortenLargeNumber } from '~/utils/string'
  * Public Report Child page
  */
 @Component({
-  components: {
-    ZChart
-  },
   methods: {
     shortenLargeNumber
   },

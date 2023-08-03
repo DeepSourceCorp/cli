@@ -1,9 +1,9 @@
 <template>
   <div class="container mx-auto">
     <div
-      class="flex flex-col justify-between min-h-screen pt-32 pb-24 text-sm text-center text-vanilla-400"
+      class="flex min-h-screen flex-col justify-between pb-24 pt-32 text-center text-sm text-vanilla-400"
     >
-      <div class="flex items-center flex-grow">
+      <div class="flex flex-grow items-center">
         <empty-state
           :png-image-path="require('~/assets/images/ui-states/autofix/autofix-installed.png')"
           :webp-image-path="require('~/assets/images/ui-states/autofix/autofix-installed.webp')"

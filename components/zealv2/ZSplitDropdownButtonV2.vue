@@ -13,9 +13,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZDivider } from '@deepsource/zeal'
 
-@Component({ components: { ZDivider } })
+@Component({})
 export default class ZSplitDropdownButtonV2 extends Vue {
   @Prop({ default: 'slate-400' })
   dividerColor: string

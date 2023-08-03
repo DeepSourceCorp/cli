@@ -1,7 +1,7 @@
 interface IssueTypeT {
-  title: string,
-  description: string | null,
-  shortcode: string,
+  title: string
+  description: string | null
+  shortcode: string
   count: number
 }
 

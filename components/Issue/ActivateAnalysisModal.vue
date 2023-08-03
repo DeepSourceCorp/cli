@@ -54,21 +54,12 @@
 </template>
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
-import { ZModal, ZInput, ZCheckbox, ZToggle, ZButton } from '@deepsource/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import TomlGeneratorMixin from '~/mixins/tomlGeneratorMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
 
-@Component({
-  components: {
-    ZModal,
-    ZInput,
-    ZCheckbox,
-    ZToggle,
-    ZButton
-  }
-})
+@Component({})
 export default class ActivateAnalysisModal extends mixins(
   RepoDetailMixin,
   TomlGeneratorMixin,

@@ -9,14 +9,14 @@ exports[`renders IssueDetailsHeader with all props 1`] = `
       <!---->
       <!---->
       <div class=\\"flex items-center space-x-2\\">
-        <zicon-stub icon=\\"clock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">2 years ago</span>
+        <zicon-stub icon=\\"clock\\" size=\\"x-small\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400\\"><span class=\\"v-popper--has-tooltip\\">2 years ago</span>
         —
-        <span data-original-title=\\"null\\" class=\\" has-tooltip\\">2 years old</span></span>
+        <span class=\\"v-popper--has-tooltip\\">2 years old</span></span>
       </div>
       <prioritytypeselect-stub width=\\"small\\" priority=\\"high\\" source=\\"REPOSITORY\\" verbose-title=\\"true\\" show-tooltip=\\"true\\" show-footer=\\"true\\"></prioritytypeselect-stub>
-      <div class=\\"flex items-center justify-between gap-x-1\\"><a class=\\"flex items-center gap-x-1 rounded-full border border-slate-400 px-1.5 py-1 uppercase has-tooltip\\" data-original-title=\\"null\\"><span class=\\"h-2 w-2 rounded-full\\" style=\\"background: rgb(234, 88, 12);\\"></span> <span class=\\"text-xxs font-medium tracking-wide text-vanilla-400\\">
+      <div class=\\"flex items-center justify-between gap-x-1\\"><a class=\\"flex items-center gap-x-1 rounded-full border border-slate-400 px-1.5 py-1 uppercase v-popper--has-tooltip\\"><span class=\\"h-2 w-2 rounded-full\\" style=\\"background: rgb(234, 88, 12);\\"></span> <span class=\\"text-xxs font-medium tracking-wide text-vanilla-400\\">
             a01
-          </span></a><a class=\\"flex items-center gap-x-1 rounded-full border border-slate-400 px-1.5 py-1 uppercase has-tooltip\\" data-original-title=\\"null\\"><span class=\\"h-2 w-2 rounded-full\\" style=\\"background: rgb(234, 88, 12);\\"></span> <span class=\\"text-xxs font-medium tracking-wide text-vanilla-400\\">
+          </span></a><a class=\\"flex items-center gap-x-1 rounded-full border border-slate-400 px-1.5 py-1 uppercase v-popper--has-tooltip\\"><span class=\\"h-2 w-2 rounded-full\\" style=\\"background: rgb(234, 88, 12);\\"></span> <span class=\\"text-xxs font-medium tracking-wide text-vanilla-400\\">
             owasp top 10
           </span></a></div>
     </div>

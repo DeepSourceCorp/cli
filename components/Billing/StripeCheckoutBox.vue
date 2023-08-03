@@ -87,7 +87,6 @@
 
 <script lang="ts">
 import { Component, mixins, Prop, Ref } from 'nuxt-property-decorator'
-import { ZButton, ZInput, ZIcon } from '@deepsource/zeal'
 import SubscriptionMixin from '~/mixins/subscriptionMixin'
 
 import { StripeCardElement, StripeCardElementChangeEvent } from '@stripe/stripe-js'
@@ -100,11 +99,6 @@ import ActiveUserMixin from '~/mixins/activeUserMixin'
  * Checkout component built with Stripe for handling payments.
  */
 @Component({
-  components: {
-    ZButton,
-    ZInput,
-    ZIcon
-  },
   name: 'StripeCheckoutBox'
 })
 export default class StripeCheckoutBox extends mixins(

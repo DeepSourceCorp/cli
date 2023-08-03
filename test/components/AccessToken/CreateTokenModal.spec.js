@@ -5,7 +5,7 @@ import { shallowMount } from '@vue/test-utils'
 import { AccessTokenExpirationStatus } from '~/types/types'
 
 import CreateTokenModal from '~/components/AccessToken/CreateTokenModal.vue'
-import { focusDirective } from '~/plugins/helpers/directives.client'
+import focusDirective from '~/utils/directives/focus'
 
 describe('[[ CreateTokenModal ]]', () => {
   test('Renders CreateTokenModal', () => {

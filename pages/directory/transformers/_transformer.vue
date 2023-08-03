@@ -1,8 +1,8 @@
 <template>
   <div class="mb-12">
     <directory-header :info-obj="transformer" :is-loading="!fullyLoaded" type="transformer" />
-    <div class="px-4 py-6 border-b border-slate-400">
-      <div class="grid items-center max-w-4xl grid-cols-2 md:grid-cols-3 gap-y-6">
+    <div class="border-b border-slate-400 px-4 py-6">
+      <div class="grid max-w-4xl grid-cols-2 items-center gap-y-6 md:grid-cols-3">
         <div class="grid gap-y-1">
           <p class="text-vanilla-400">Language</p>
           <div v-if="isPartiallyLoaded" class="h-8">
@@ -10,24 +10,24 @@
               {{ transformer.language }}
             </z-tag>
           </div>
-          <div v-else class="h-6 rounded-full w-22 bg-ink-300 animate-pulse"></div>
+          <div v-else class="h-6 w-22 animate-pulse rounded-full bg-ink-300"></div>
         </div>
         <div class="grid gap-y-1">
           <p class="text-vanilla-400">Latest version</p>
-          <div class="flex items-center h-8">
+          <div class="flex h-8 items-center">
             <p v-if="isPartiallyLoaded" class="mb-1 text-sm">
               {{ transformer.version }}
             </p>
-            <div v-else class="h-6 w-14 bg-ink-300 animate-pulse"></div>
+            <div v-else class="h-6 w-14 animate-pulse bg-ink-300"></div>
           </div>
         </div>
         <div class="grid gap-y-1">
           <p class="text-vanilla-400">Updated on</p>
-          <div class="flex items-center h-8">
+          <div class="flex h-8 items-center">
             <p v-if="isPartiallyLoaded" class="text-sm">
               {{ lastTransformerChangedDateText }}
             </p>
-            <div v-else class="w-16 h-6 bg-ink-300 animate-pulse"></div>
+            <div v-else class="h-6 w-16 animate-pulse bg-ink-300"></div>
           </div>
         </div>
       </div>
@@ -35,17 +35,17 @@
     <div class="max-w-4xl px-4 py-6">
       <p
         v-if="isPartiallyLoaded"
-        class="text-lg font-medium prose"
+        class="prose text-lg font-medium"
         v-html="transformer.descriptionRendered"
       ></p>
-      <div v-else class="w-full h-28 bg-ink-300 animate-pulse"></div>
-      <div v-if="!fullyLoaded" class="w-full h-4 mt-8 bg-ink-300 animate-pulse"></div>
+      <div v-else class="h-28 w-full animate-pulse bg-ink-300"></div>
+      <div v-if="!fullyLoaded" class="mt-8 h-4 w-full animate-pulse bg-ink-300"></div>
       <a
         v-else-if="transformer.documentationUrl"
         :href="transformer.documentationUrl"
         target="_blank"
         rel="noopener noreferrer"
-        class="flex items-center mt-5 text-sm text-vanilla-400 hover:underline focus:underline"
+        class="mt-5 flex items-center text-sm text-vanilla-400 hover:underline focus:underline"
       >
         <span>Read the documentation and full reference</span>
         <z-icon icon="arrow-up-right" color="vanilla-400" class="ml-0.5" />
@@ -53,7 +53,7 @@
     </div>
     <div class="max-w-4xl p-4">
       <div class="flex items-center space-x-3">
-        <h3 class="flex-shrink-0 text-sm font-medium tracking-wider uppercase text-vanilla-400">
+        <h3 class="flex-shrink-0 text-sm font-medium uppercase tracking-wider text-vanilla-400">
           Sample configuration
         </h3>
         <hr class="flex-grow border-slate-400" />
@@ -63,7 +63,7 @@
         :toml="transformer.exampleConfig"
         class="mt-4"
       />
-      <div v-else-if="!fullyLoaded" class="w-full h-40 mt-4 bg-ink-300 animate-pulse"></div>
+      <div v-else-if="!fullyLoaded" class="mt-4 h-40 w-full animate-pulse bg-ink-300"></div>
       <lazy-empty-state v-else title="No sample configuration found!" />
     </div>
     <!-- <div class="max-w-4xl p-4">
@@ -81,8 +81,6 @@
 <script lang="ts">
 import { Component, namespace, mixins } from 'nuxt-property-decorator'
 
-import { ZButton, ZTag, ZIcon, ZChart } from '@deepsource/zeal'
-
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
 import { TransformerTool } from '~/types/types'
 import { parseISODate, formatDate } from '~/utils/date'
@@ -91,7 +89,6 @@ import MetaMixin from '~/mixins/metaMixin'
 const directoryStore = namespace('directory/directory')
 
 @Component({
-  components: { ZButton, ZTag, ZIcon, ZChart },
   layout: 'sidebar-only',
   scrollToTop: true
 })

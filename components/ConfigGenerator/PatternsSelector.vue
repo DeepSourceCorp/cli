@@ -5,7 +5,7 @@
         <label for="test-file-pattern" class="text-sm font-medium text-vanilla-100"
           >Tests file patterns</label
         >
-        <p class="pr-0 text-xs font-medium text-vanilla-400 xl:pr-10 lg:pr-8 md:pr-5">
+        <p class="pr-0 text-xs font-medium text-vanilla-400 md:pr-5 lg:pr-8 xl:pr-10">
           Glob patterns of the test files. This helps us reduce false positives.
           <a
             v-if="vcsUrl"
@@ -25,7 +25,7 @@
           autocorrect="off"
           autocapitalize="off"
           spellcheck="false"
-          class="w-full font-mono h-full p-2 text-xs bg-transparent border outline-none resize-none min-h-20 border-slate-400 text-vanilla-200"
+          class="h-full min-h-20 w-full resize-none border border-slate-400 bg-transparent p-2 font-mono text-xs text-vanilla-200 outline-none"
           placeholder="test/**
 integration_tests/tests_*.py
 **/*_test.go"
@@ -37,7 +37,7 @@ integration_tests/tests_*.py
         <label for="exlude-file-pattern" class="text-sm font-medium text-vanilla-100"
           >Excluded file patterns</label
         >
-        <p class="pr-0 text-xs font-medium text-vanilla-400 xl:pr-10 lg:pr-8 md:pr-5">
+        <p class="pr-0 text-xs font-medium text-vanilla-400 md:pr-5 lg:pr-8 xl:pr-10">
           Glob patterns of files that should not be analyzed such as auto-generated files,
           migrations, compatibility files.
         </p>
@@ -50,7 +50,7 @@ integration_tests/tests_*.py
           autocorrect="off"
           autocapitalize="off"
           spellcheck="false"
-          class="w-full font-mono h-full p-2 text-xs bg-transparent border outline-none resize-none min-h-20 border-slate-400 text-vanilla-200"
+          class="h-full min-h-20 w-full resize-none border border-slate-400 bg-transparent p-2 font-mono text-xs text-vanilla-200 outline-none"
           placeholder="migrations/**
 /dist/*min.js"
         ></textarea>

@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/vue'
 import { RouterLinkStub } from '@vue/test-utils'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 
 import BreadcrumbContainer from '~/components/Common/BreadcrumbContainer.vue'
 

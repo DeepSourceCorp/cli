@@ -1,5 +1,5 @@
 <template>
-  <div v-outside-click="outsideClickHandler" class="box-content relative z-20">
+  <div v-outside-click="outsideClickHandler" class="relative z-20 box-content">
     <z-input
       v-if="!disabled"
       v-model="searchCandidate"
@@ -8,7 +8,7 @@
       background-color="ink-300"
       :show-border="false"
       :placeholder="isProcessing ? 'Processing preset...' : 'Search Analyzers...'"
-      class="flex-grow p-2 rounded-md"
+      class="flex-grow rounded-md p-2"
       @focus="toggleAnalyzerList"
       @click="toggleAnalyzerList"
     >
@@ -23,18 +23,18 @@
     </z-input>
     <div
       v-if="searchCandidate || showAnalyzerList || toggleSearch"
-      class="absolute inline-block w-full mt-1 shadow-double-dark"
+      class="absolute mt-1 inline-block w-full shadow-double-dark"
       :class="dropdownBgClass"
     >
       <ul v-if="searchAnalyzers.length" class="grid grid-cols-3 gap-2 p-2">
         <li
           v-for="analyzer in searchAnalyzers"
           :key="analyzer.name"
-          class="flex items-center justify-between px-2 py-2 rounded-md cursor-pointer hover:bg-ink-200"
+          class="flex cursor-pointer items-center justify-between rounded-md px-2 py-2 hover:bg-ink-200"
           :class="selectedAnalyzers.includes(analyzer.name) ? 'bg-ink-200' : 'bg-ink-400'"
           @click="toggleAnalyzer(analyzer)"
         >
-          <span class="flex items-center w-full space-x-2">
+          <span class="flex w-full items-center space-x-2">
             <analyzer-logo v-bind="analyzer" :hide-tooltip="true" />
             <span>{{ analyzer.label }}</span>
             <z-tag
@@ -42,31 +42,30 @@
               text-size="xxs"
               spacing="py-1 px-3"
               bg-color="ink-200"
-              class="font-thin leading-none tracking-wider uppercase text-xxs"
+              class="text-xxs font-thin uppercase leading-none tracking-wider"
               >Beta</z-tag
             >
           </span>
           <span
             v-show="selectedAnalyzers.includes(analyzer.name)"
-            class="flex items-center justify-center p-0.5 rounded-full"
+            class="flex items-center justify-center rounded-full p-0.5"
           >
             <z-icon icon="check" size="small" class="stroke-2" color="vanilla-100" />
           </span>
         </li>
       </ul>
-      <div v-else-if="searchCandidate" class="flex items-center justify-center h-24">
+      <div v-else-if="searchCandidate" class="flex h-24 items-center justify-center">
         <div>
           No matches found for "<b>{{ searchCandidate }}</b
           >"
         </div>
       </div>
-      <div v-else class="flex items-center justify-center h-24">No Analyzers found</div>
+      <div v-else class="flex h-24 items-center justify-center">No Analyzers found</div>
     </div>
   </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZInput, ZTag, ZButton } from '@deepsource/zeal'
 import Analyzer from './Analyzer.vue'
 
 import { AnalyzerInterface } from '~/store/analyzer/list'
@@ -77,10 +76,6 @@ import AnalyzerListMixin from '~/mixins/analyzerListMixin'
  */
 @Component({
   components: {
-    ZIcon,
-    ZInput,
-    ZTag,
-    ZButton,
     Analyzer
   }
 })

@@ -1,17 +1,17 @@
 <template>
   <z-modal title="Update card" @onClose="$emit('close')">
-    <fieldset class="p-4 space-y-1 text-sm">
+    <fieldset class="space-y-1 p-4 text-sm">
       <label class="leading-loose">Credit card details</label>
       <stripe-card-input
         ref="card-modal-stripe-input"
-        class="px-3 py-3 text-sm border rounded-md bg-ink-400"
+        class="rounded-md border bg-ink-400 px-3 py-3 text-sm"
         @change="handleStripeCardChange"
       />
     </fieldset>
     <template #footer="{ close }">
-      <div class="flex justify-between p-4 space-x-4 text-vanilla-100 border-slate-400">
+      <div class="flex justify-between space-x-4 border-slate-400 p-4 text-vanilla-100">
         <div class="flex items-end">
-          <span class="leading-none bg-ink-200 rounded-bl-md text-xs px-2 py-1.5 text-vanilla-400">
+          <span class="rounded-bl-md bg-ink-200 px-2 py-1.5 text-xs leading-none text-vanilla-400">
             Powered by
             <img
               class="inline"
@@ -39,7 +39,6 @@
 
 <script lang="ts">
 import { Component, Ref, mixins } from 'nuxt-property-decorator'
-import { ZModal, ZButton, ZInput, ZIcon } from '@deepsource/zeal'
 import SubscriptionMixin from '~/mixins/subscriptionMixin'
 
 import { StripeCardElement, StripeCardElementChangeEvent } from '@stripe/stripe-js'
@@ -47,14 +46,7 @@ import { UpdatePaymentActionChoice } from '~/types/types'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 import StripeCardInput from '../StripeCardInput.vue'
 
-@Component({
-  components: {
-    ZModal,
-    ZButton,
-    ZInput,
-    ZIcon
-  }
-})
+@Component({})
 export default class UpdateCardModal extends mixins(SubscriptionMixin, OwnerBillingMixin) {
   public cardDetails = ''
   public validCardDetails = false

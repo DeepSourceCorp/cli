@@ -79,7 +79,6 @@
 
 <script lang="ts">
 import { Component, namespace, mixins } from 'nuxt-property-decorator'
-import { ZPagination } from '@deepsource/zeal'
 // Components
 import { SubNav, RunBranches } from '@/components/History'
 // Store & Types
@@ -110,8 +109,7 @@ const VISIBLE_PAGES = 5
 @Component({
   components: {
     RunBranches,
-    SubNav,
-    ZPagination
+    SubNav
   },
   layout: 'repository',
   scrollToTop: true,

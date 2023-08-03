@@ -1,4 +1,4 @@
-mutation($groupId: ID!) {
+mutation ($groupId: ID!) {
   resetGroupInvitationLink(input: { groupId: $groupId }) {
     invitationUrl
   }

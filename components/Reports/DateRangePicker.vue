@@ -1,5 +1,5 @@
 <template>
-  <div class="h-8 md:w-40 z-20">
+  <div class="z-20 h-8 md:w-40">
     <z-select
       v-model="modelValue"
       :disabled="disabled"
@@ -25,19 +25,12 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, ModelSync } from 'nuxt-property-decorator'
-import { ZIcon, ZSelect, ZOption } from '@deepsource/zeal'
 import { DateRangeOptionT } from '~/types/reportTypes'
 
 /**
  * Component to show date range options for reports.
  */
-@Component({
-  components: {
-    ZIcon,
-    ZSelect,
-    ZOption
-  }
-})
+@Component({})
 export default class DateRangePicker extends Vue {
   @ModelSync('selectedFilter', 'change', { type: String, default: '' })
   readonly modelValue: string

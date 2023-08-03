@@ -1,6 +1,6 @@
 import { render } from '@testing-library/vue'
 import { createLocalVue, shallowMount } from '@vue/test-utils'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 import Vuex, { Store } from 'vuex'
 
 import { InviteMembersModal } from '~/components/Members'

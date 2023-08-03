@@ -1,4 +1,4 @@
-mutation($silenceRuleId: ID!) {
+mutation ($silenceRuleId: ID!) {
   deleteSilenceRule(input: { silenceRuleId: $silenceRuleId }) {
     ok
   }

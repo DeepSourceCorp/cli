@@ -1,4 +1,4 @@
-mutation($groupName: String!) {
+mutation ($groupName: String!) {
   createGroup(input: { name: $groupName }) {
     group {
       id

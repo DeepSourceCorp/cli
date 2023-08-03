@@ -1,17 +1,17 @@
 <template>
-  <div class="border border-slate-400 rounded-md">
-    <div class="p-3 grid grid-cols-6 text-sm">
+  <div class="rounded-md border border-slate-400">
+    <div class="grid grid-cols-6 p-3 text-sm">
       <span> Status </span>
       <span class="col-span-3"> Event name </span>
       <span class="col-span-1 text-right"> Created </span>
       <span class="col-span-1 text-right"> Finished in </span>
     </div>
     <ul
-      class="divide-y divide-ink-200 border-t border-slate-400 max-h-96 overflow-scroll default-scroll"
+      class="default-scroll max-h-96 divide-y divide-ink-200 overflow-scroll border-t border-slate-400"
     >
       <webhook-log-list-item v-for="event in endpointDeliveries" :key="event.id" v-bind="event" />
     </ul>
-    <div v-if="pageCount > 1" class="p-3 flex justify-center border-t border-slate-400">
+    <div v-if="pageCount > 1" class="flex justify-center border-t border-slate-400 p-3">
       <z-pagination
         :total-pages="pageCount"
         :total-visible="5"
@@ -24,18 +24,13 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZPagination } from '@deepsource/zeal'
 
 import { WebhookEventDelivery } from '~/types/types'
 
 /**
  * Component representing the webhook logs list
  */
-@Component({
-  components: {
-    ZPagination
-  }
-})
+@Component({})
 export default class WebhookLogList extends Vue {
   @Prop({ required: true })
   endpointDeliveries: Array<WebhookEventDelivery>

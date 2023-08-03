@@ -2,7 +2,7 @@ import { render } from '@testing-library/vue'
 
 import MonorepoOverview from '~/components/Monorepo/MonorepoOverview.vue'
 
-import { focusDirective } from '~/plugins/helpers/directives.client'
+import focusDirective from '~/utils/directives/focus'
 
 import { cartesian, generateBooleanProps } from '~/test/utils'
 import { RepositoryKindChoices, VcsProviderChoices } from '~/types/types'

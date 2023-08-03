@@ -1,9 +1,9 @@
 import { render } from '@testing-library/vue'
 import { TrendSection, TrendStat, TrendTitle } from '~/components/Metrics'
-import { VTooltip } from 'v-tooltip'
+import { VTooltip } from 'floating-vue'
 import { VueConstructor } from 'vue'
 import { MetricType } from '~/types/metric'
-import { cartesian, generateBooleanProps, generateGenericProps } from '~/test/utils'
+import { cartesian, generateGenericProps } from '~/test/utils'
 import { shallowMount } from '@vue/test-utils'
 
 const injectDirective = (vue: VueConstructor) => vue.directive('tooltip', VTooltip)

@@ -63,7 +63,7 @@
         <z-icon icon="list-end" class="flex-shrink-0 self-start" />
 
         <p
-          class="page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm"
+          class="max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm"
         >
           {{ pageContextText }}
         </p>
@@ -129,7 +129,6 @@
 </template>
 
 <script lang="ts">
-import { ZDivider, ZIcon, ZInput } from '@deepsource/zeal'
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
 import DummyAuditLog from './DummyAuditLog.vue'
 
@@ -145,7 +144,7 @@ import { FeatureType } from '~/types/features'
 
 @Component({
   name: 'AuditLogPage',
-  components: { ZDivider, ZIcon, ZInput, DummyAuditLog }
+  components: { DummyAuditLog }
 })
 export default class AuditLogPage extends mixins(ActiveUserMixin) {
   @Prop({ default: true, type: Boolean })
@@ -250,11 +249,3 @@ export default class AuditLogPage extends mixins(ActiveUserMixin) {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '~/assets/css/default.scss';
-
-.page-context-text {
-  @include lhCrop(1.125);
-}
-</style>

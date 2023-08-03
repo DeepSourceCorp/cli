@@ -67,7 +67,6 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZAvatar, ZIcon } from '@deepsource/zeal'
 
 import { getDefaultAvatar } from '~/utils/ui'
 
@@ -79,10 +78,6 @@ import { EnterpriseUser } from '~/types/types'
  */
 @Component({
   name: 'RequestAccess',
-  components: {
-    ZAvatar,
-    ZIcon
-  },
   methods: {
     getDefaultAvatar
   }

@@ -16,7 +16,7 @@
         @onClose="showConfirmDelete = false"
       >
         <template #footer="{ close }">
-          <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
+          <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
             <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               Cancel
             </z-button>
@@ -37,17 +37,11 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZConfirm, ZButton } from '@deepsource/zeal'
 
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 
-@Component({
-  components: {
-    ZConfirm,
-    ZButton
-  }
-})
+@Component({})
 export default class SaveTemplateConfig extends mixins(AutoOnboardMixin, ActiveUserMixin) {
   @Prop()
   title: string
@@ -73,7 +67,7 @@ export default class SaveTemplateConfig extends mixins(AutoOnboardMixin, ActiveU
       }
     } catch (e) {
       this.$toast.danger('There was a problem deleting this config')
-      this.logErrorForUser(e, 'Auto Onboard template deletion', {
+      this.logErrorForUser(e as Error, 'Auto Onboard template deletion', {
         shortcode
       })
     } finally {

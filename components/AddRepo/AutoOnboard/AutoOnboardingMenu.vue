@@ -1,9 +1,9 @@
 <template>
   <section :class="hasAutoOnboardEvents ? 'p-4' : 'px-4'">
-    <div v-if="hasAutoOnboardEvents" class="p-3 border rounded-md border-slate-400 -mx-1">
-      <div class="flex justify-between items-center" :class="isCollapsed ? 'pb-0' : 'pb-3'">
+    <div v-if="hasAutoOnboardEvents" class="-mx-1 rounded-md border border-slate-400 p-3">
+      <div class="flex items-center justify-between" :class="isCollapsed ? 'pb-0' : 'pb-3'">
         <div class="flex items-center space-x-1.5">
-          <span class="text-vanilla-300 text-sm font-medium leading-none">
+          <span class="text-sm font-medium leading-none text-vanilla-300">
             Pending {{ activeProvider === 'gl' ? 'merge' : 'pull' }}-requests
           </span>
           <z-tag
@@ -11,7 +11,7 @@
             bg-color="ink-400 border border-slate-400"
             text-size="xxs"
             spacing="px-2 py-0.5"
-            class="tracking-wider font-semibold"
+            class="font-semibold tracking-wider"
           >
             <template v-if="openCount">{{ openCount }} OPEN</template>
             <template v-if="openCount && pendingCount">·</template>
@@ -29,14 +29,14 @@
           />
         </button>
       </div>
-      <div v-if="!isCollapsed" class="max-h-64 overflow-scroll default-scroll">
+      <div v-if="!isCollapsed" class="default-scroll max-h-64 overflow-scroll">
         <transition-group move-class="duration-200 transform" tag="ul" class="space-y-2">
           <li
             v-for="event in sortedEvents"
             :key="event.id"
-            class="border border-slate-400 flex items-center justify-between p-1.5 pl-3.5 rounded-md group"
+            class="group flex items-center justify-between rounded-md border border-slate-400 p-1.5 pl-3.5"
           >
-            <span class="text-vanilla-200 group-hover:text-vanilla-100 flex items-center space-x-2">
+            <span class="flex items-center space-x-2 text-vanilla-200 group-hover:text-vanilla-100">
               <z-icon :icon="event.repository.isPrivate ? 'z-lock' : 'globe'" />
               <span class="text-sm leading-none">
                 <template v-if="event.repository.owner && event.repository.owner.login">
@@ -101,7 +101,6 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon, ZTabPane, ZTag } from '@deepsource/zeal'
 import { RepoCard } from '@/components/AddRepo'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
@@ -109,11 +108,6 @@ import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 
 @Component({
   components: {
-    ZInput,
-    ZButton,
-    ZIcon,
-    ZTabPane,
-    ZTag,
     RepoCard
   }
 })

@@ -7,7 +7,6 @@
 
 <script lang="ts">
 import { Vue, Component, ModelSync, Prop } from 'nuxt-property-decorator'
-import { ZBadge } from '@deepsource/zeal'
 
 export interface FilterChoice {
   name: string
@@ -18,11 +17,7 @@ export interface FilterChoice {
 /**
  * Common filter component to filter items.
  */
-@Component({
-  components: {
-    ZBadge
-  }
-})
+@Component({})
 export default class FilterGeneric extends Vue {
   @ModelSync('selectedFilter', 'updateFilter', { type: String })
   readonly modelValue: string

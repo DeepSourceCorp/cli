@@ -1,6 +1,6 @@
 import { render } from '@testing-library/vue'
 import RunFilters from '~/components/History/Runs/RunFilters.vue'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 import { mocksGenerator } from '~/test/mocks'
 import { PrStateChoices, RunStatus } from '~/types/types'
 import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'

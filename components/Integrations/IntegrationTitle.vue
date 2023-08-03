@@ -3,7 +3,7 @@
     <!-- Loading state for integration logo -->
     <div
       v-if="pending"
-      :class="[loadingStateDimensions, 'bg-opacity-50 rounded-md animate-pulse bg-ink-200']"
+      :class="[loadingStateDimensions, 'animate-pulse rounded-md bg-ink-200 bg-opacity-50']"
     ></div>
     <logo-container v-else :logo="logo" />
 

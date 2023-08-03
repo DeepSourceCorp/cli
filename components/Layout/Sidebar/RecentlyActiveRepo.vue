@@ -7,7 +7,7 @@
       <template #trigger="{ toggle }">
         <button
           type="button"
-          class="outline-none focus:outline-none flex h-8 min-w-8 items-center justify-center space-x-2 rounded-sm py-1 text-sm hover:bg-ink-300"
+          class="flex h-8 min-w-8 items-center justify-center space-x-2 rounded-sm py-1 text-sm outline-none hover:bg-ink-300 focus:outline-none"
           @click="toggle"
         >
           <z-icon icon="repositories" size="small" class="min-h-4 min-w-4" />
@@ -41,7 +41,7 @@
     <template v-else>
       <button
         type="button"
-        class="outline-none focus:outline-none flex w-full items-center justify-between px-2 py-1 text-sm"
+        class="flex w-full items-center justify-between px-2 py-1 text-sm outline-none focus:outline-none"
         :class="[
           isActive && !(repoWithPendingAdhocRuns && repoWithPendingAdhocRuns.length)
             ? 'text-vanilla-100'
@@ -78,22 +78,13 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Prop, mixins, Watch } from 'nuxt-property-decorator'
-import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZTag } from '@deepsource/zeal'
+import { Prop, mixins, Watch, Component } from 'nuxt-property-decorator'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
 import { Repository, RepositoryKindChoices } from '~/types/types'
 
-@Component({
-  components: {
-    ZIcon,
-    ZMenuItem,
-    ZMenu,
-    ZMenuSection,
-    ZTag
-  }
-})
+@Component({})
 export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoListMixin) {
   @Prop({ default: false })
   isCollapsed: boolean

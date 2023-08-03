@@ -1,5 +1,8 @@
 import { render } from '@testing-library/vue'
-import { ZAccordion, ZAccordionItem, ZStepper, ZStep } from '@deepsource/zeal'
+import ZAccordion from '@/components/zeal/ZAccordion'
+import ZAccordionItem from '@/components/zeal/ZAccordionItem'
+import ZStepper from '@/components/zeal/ZStepper'
+import ZStep from '@/components/zeal/ZStep'
 
 import { EnableCoverageSteps } from '~/components/Repository'
 

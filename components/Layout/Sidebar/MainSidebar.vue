@@ -203,15 +203,15 @@
             class="self-end text-xs text-vanilla-300 transition-all"
             :class="{
               'hidden opacity-0 delay-300': isCollapsed,
-              'opacity-1 delay-0 flex': !isCollapsed
+              'opacity-1 flex delay-0': !isCollapsed
             }"
             >© {{ currentYear }} DeepSource Corp.</span
           >
         </div>
       </div>
-      <div class="absolute -top-2.5 -right-2.5 hidden md:group-hover:block">
+      <div class="absolute -right-2.5 -top-2.5 hidden md:group-hover:block">
         <button
-          class="focus:outline-none group flex h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-ink-100 hover:bg-slate"
+          class="group flex h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-ink-100 hover:bg-slate focus:outline-none"
           @click="toggleSidebarCollapse"
         >
           <z-icon
@@ -229,7 +229,6 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZIcon, ZTag } from '@deepsource/zeal'
 import { Component, mixins, namespace, Watch } from 'nuxt-property-decorator'
 
 import ContextMixin from '@/mixins/contextMixin'
@@ -253,11 +252,6 @@ const authStore = namespace('account/auth')
  * Primary sidebar containing information and navigation for a user and the currently active owner.
  */
 @Component({
-  components: {
-    ZButton,
-    ZIcon,
-    ZTag
-  },
   methods: {
     isChristmasSeason
   }

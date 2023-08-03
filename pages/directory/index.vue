@@ -88,8 +88,6 @@
 <script lang="ts">
 import { Component, namespace, mixins } from 'nuxt-property-decorator'
 
-import { ZIcon, ZInput } from '@deepsource/zeal'
-
 import MetaMixin from '~/mixins/metaMixin'
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
 import { Analyzer, TransformerTool } from '~/types/types'
@@ -97,7 +95,6 @@ import { Analyzer, TransformerTool } from '~/types/types'
 const directoryStore = namespace('directory/directory')
 
 @Component({
-  components: { ZIcon, ZInput },
   layout: 'sidebar-only',
   scrollToTop: true
 })

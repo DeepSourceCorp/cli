@@ -2,11 +2,11 @@
   <!-- TODO the sidebar shouldn't need a z-index in lg+ screens but conflicts with zeal components block this  -->
   <nav
     v-outside-click="closeMenu"
-    class="fixed top-0 z-50 flex flex-col h-screen duration-200 border-r lg:sticky lg:left-0 transition-width transform-gpu border-slate-400 group bg-ink-400"
+    class="transition-width group fixed top-0 z-50 flex h-screen transform-gpu flex-col border-r border-slate-400 bg-ink-400 duration-200 lg:sticky lg:left-0"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
-    <section class="p-3 border-b border-slate-400">
-      <nuxt-link to="/control-panel" class="cursor-pointer flex items-center gap-0.5 rounded-sm">
+    <section class="border-b border-slate-400 p-3">
+      <nuxt-link to="/control-panel" class="flex cursor-pointer items-center gap-0.5 rounded-sm">
         <img
           src="~/assets/images/deepsource-only-logo-white.svg"
           alt="DeepSource's logo"
@@ -15,7 +15,7 @@
         <span v-if="!isCollapsed" class="text-sm capitalize">Enterprise Control Panel</span>
       </nuxt-link>
     </section>
-    <section class="p-2.5 space-y-2.5" :class="isCollapsed ? '' : 'overflow-y-auto'">
+    <section class="space-y-2.5 p-2.5" :class="isCollapsed ? '' : 'overflow-y-auto'">
       <sidebar-item
         v-for="cpItem in mainControlPanelMenus"
         :key="getPageTitle(cpItem.title)"
@@ -30,8 +30,8 @@
         {{ getPageTitle(cpItem.title) }}
       </sidebar-item>
     </section>
-    <section class="relative w-full group">
-      <div class="p-2.5 border-t border-slate-400 space-y-2">
+    <section class="group relative w-full">
+      <div class="space-y-2 border-t border-slate-400 p-2.5">
         <sidebar-item
           v-for="cpItem in secondaryControlPanelMenus"
           :key="getPageTitle(cpItem.title)"
@@ -45,16 +45,16 @@
           {{ getPageTitle(cpItem.title) }}
         </sidebar-item>
       </div>
-      <div class="absolute -top-2.5 -right-2.5 md:group-hover:block hidden">
+      <div class="absolute -right-2.5 -top-2.5 hidden md:group-hover:block">
         <button
-          class="flex items-center justify-center w-5 h-5 rounded-full cursor-pointer bg-ink-100 hover:bg-slate group focus:outline-none"
+          class="group flex h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-ink-100 hover:bg-slate focus:outline-none"
           @click="toggleSidebarCollapse"
         >
           <z-icon
             icon="chevron-left"
             size="small"
             color="vanilla-400"
-            class="transition-transform duration-300 transform-gpu"
+            class="transform-gpu transition-transform duration-300"
             :class="isCollapsed ? 'rotate-180' : ''"
           />
         </button>
@@ -65,18 +65,12 @@
 
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZTag } from '@deepsource/zeal'
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
 
 import { ControlPanelRouteT } from '~/types/control-panel'
 import { containsElement } from '~/utils/ui'
 
-@Component({
-  components: {
-    ZIcon,
-    ZTag
-  }
-})
+@Component({})
 export default class Sidebar extends mixins(ControlPanelBaseMixin) {
   public isCollapsed = false
   public collapsedSidebar = false

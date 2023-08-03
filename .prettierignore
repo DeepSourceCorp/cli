@@ -5,4 +5,22 @@ types/fragmentTypes.ts
 schema.graphql
 
 # yarn
+node_modules
 yarn.lock
+
+# tests
+coverage
+jestcache
+
+# nuxt
+.nuxt
+
+# vscode
+.vscode
+
+# yalc
+.yalc
+yalc.lock
+
+# auto-generated
+icons/icons.json

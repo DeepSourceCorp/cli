@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ ConfirmDeleteIdP ]] renders correctly with all props 1`] = `
-"<zmodal-stub title=\\"Delete identity provider configuration\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Delete identity provider configuration\\">
   <div class=\\"p-4\\">
     <p class=\\"text-sm leading-5 text-vanilla-100\\">
       Are you sure you want to delete your identity provider configuration? Deleting your
@@ -10,19 +10,19 @@ exports[`[[ ConfirmDeleteIdP ]] renders correctly with all props 1`] = `
     <ul class=\\"mt-3 space-y-3 text-sm leading-5 text-vanilla-100\\">
       <li class=\\"flex items-baseline gap-x-1.5\\">
         <div>
-          <zicon-stub icon=\\"alert-circle\\" size=\\"small\\" position=\\"\\" color=\\"cherry\\" class=\\"-mb-1 flex-shrink-0\\"></zicon-stub>
+          <zicon-stub icon=\\"alert-circle\\" color=\\"cherry\\" size=\\"small\\" class=\\"-mb-1 flex-shrink-0\\"></zicon-stub>
         </div> <span> Prevent your team members from signing-in via SAML SSO. </span>
       </li>
       <li class=\\"flex items-baseline gap-x-1.5\\">
         <div>
-          <zicon-stub icon=\\"alert-circle\\" size=\\"small\\" position=\\"\\" color=\\"cherry\\" class=\\"-mb-1 flex-shrink-0\\"></zicon-stub>
+          <zicon-stub icon=\\"alert-circle\\" color=\\"cherry\\" size=\\"small\\" class=\\"-mb-1 flex-shrink-0\\"></zicon-stub>
         </div> <span> Delete your SCIM token. </span>
       </li>
     </ul>
     <div class=\\"mt-7 text-right\\">
-      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"danger\\" type=\\"button\\" size=\\"small\\" to=\\"\\">
+      <zbutton-stub button-type=\\"danger\\" size=\\"small\\">
         <div class=\\"inline-flex items-center gap-x-1.5\\"><span>I understand, continue to delete</span>
-          <zicon-stub icon=\\"arrow-right\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub>
+          <zicon-stub icon=\\"arrow-right\\" color=\\"current\\" size=\\"small\\"></zicon-stub>
         </div>
       </zbutton-stub>
     </div>
@@ -31,7 +31,7 @@ exports[`[[ ConfirmDeleteIdP ]] renders correctly with all props 1`] = `
 `;
 
 exports[`[[ ConfirmDeleteIdP ]] renders correctly with all props 2`] = `
-"<zmodal-stub title=\\"Delete identity provider configuration\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Delete identity provider configuration\\">
   <div class=\\"p-4\\">
     <p class=\\"text-sm leading-5 text-vanilla-100\\">
       Are you sure you want to delete your identity provider configuration? Deleting your
@@ -40,19 +40,19 @@ exports[`[[ ConfirmDeleteIdP ]] renders correctly with all props 2`] = `
     <ul class=\\"mt-3 space-y-3 text-sm leading-5 text-vanilla-100\\">
       <li class=\\"flex items-baseline gap-x-1.5\\">
         <div>
-          <zicon-stub icon=\\"alert-circle\\" size=\\"small\\" position=\\"\\" color=\\"cherry\\" class=\\"-mb-1 flex-shrink-0\\"></zicon-stub>
+          <zicon-stub icon=\\"alert-circle\\" color=\\"cherry\\" size=\\"small\\" class=\\"-mb-1 flex-shrink-0\\"></zicon-stub>
         </div> <span> Prevent your team members from signing-in via SAML SSO. </span>
       </li>
       <li class=\\"flex items-baseline gap-x-1.5\\">
         <div>
-          <zicon-stub icon=\\"alert-circle\\" size=\\"small\\" position=\\"\\" color=\\"cherry\\" class=\\"-mb-1 flex-shrink-0\\"></zicon-stub>
+          <zicon-stub icon=\\"alert-circle\\" color=\\"cherry\\" size=\\"small\\" class=\\"-mb-1 flex-shrink-0\\"></zicon-stub>
         </div> <span> Delete your SCIM token. </span>
       </li>
     </ul>
     <div class=\\"mt-7 text-right\\">
-      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"danger\\" type=\\"button\\" size=\\"small\\" to=\\"\\">
+      <zbutton-stub button-type=\\"danger\\" size=\\"small\\">
         <div class=\\"inline-flex items-center gap-x-1.5\\"><span>I understand, continue to delete</span>
-          <zicon-stub icon=\\"arrow-right\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub>
+          <zicon-stub icon=\\"arrow-right\\" color=\\"current\\" size=\\"small\\"></zicon-stub>
         </div>
       </zbutton-stub>
     </div>

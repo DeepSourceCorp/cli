@@ -12,23 +12,19 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
               Daft Punk
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
-            <zicon-stub icon=\\"metric-high\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\"></zicon-stub><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span>
-            <!---->
-          </div>
+          <z-tag icon-left=\\"metric-high\\" icon-color=\\"juniper\\" size=\\"x-small\\" spacing=\\"px-2 py-0\\" class=\\"border border-slate-400\\"><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span></z-tag>
         </div>
         <p class=\\"text-sm leading-6 text-vanilla-400\\">
 
         </p>
       </div>
-      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\"><a href=\\"https://docs.deepsource.com/docs/repository-view-metrics#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-dashed border-slate-400 text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
-          <zicon-stub icon=\\"help-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
-        </a>
+      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\">
+        <z-button button-type=\\"ghost\\" to=\\"https://docs.deepsource.com/docs/repository-view-metrics#metric-aggregate-calculation\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" icon=\\"help-circle\\" size=\\"small\\" color=\\"vanilla-100\\" class=\\"border border-dashed border-slate-400\\">How’s this calculated?</z-button>
         <div class=\\"h-8 md:w-40\\">
-          <zselect-stub selected=\\"30\\" tabindex=\\"0\\" placeholder=\\"Duration filter\\" spacing=\\"px-2 py-1\\" borderclass=\\"border-slate-400\\" borderradius=\\"rounded-sm\\" backgroundclass=\\"bg-ink-200\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\">
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 is-selected bg-ink-200 text-xs\\">Last 30 days</div>
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
+          <zselect-stub background-class=\\"bg-ink-200\\" border-class=\\"border-slate-400\\" border-radius=\\"rounded-sm\\" spacing=\\"px-2 py-1\\" placeholder=\\"Duration filter\\" value=\\"30\\">
+            <z-option label=\\"Last 30 days\\" value=\\"30\\"></z-option>
+            <z-option label=\\"Last 60 days\\" value=\\"60\\"></z-option>
+            <z-option label=\\"Last 90 days\\" value=\\"90\\"></z-option>
           </zselect-stub>
         </div>
       </div>
@@ -52,10 +48,10 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
       <!---->
       <!---->
     </div>
-    <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
+    <div class=\\"mx-5 min-h-72 pb-2 pt-4\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-200 bg-opacity-30\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"90\\" type=\\"bar\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
+    <zchart-stub height=\\"288\\" colors=\\"juniper-500\\" type=\\"bar\\" tooltip-options=\\"[object Object]\\" axis-options=\\"[object Object]\\" y-axis-max=\\"90\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" datasets=\\"[object Object]\\" ymarkers=\\"[object Object]\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
   </div>
 </div>"
 `;
@@ -72,10 +68,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
               javascript
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
-            <zicon-stub icon=\\"metric-high\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\"></zicon-stub><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span>
-            <!---->
-          </div>
+          <z-tag icon-left=\\"metric-high\\" icon-color=\\"juniper\\" size=\\"x-small\\" spacing=\\"px-2 py-0\\" class=\\"border border-slate-400\\"><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span></z-tag>
         </div>
         <!---->
       </div>
@@ -96,9 +89,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
           <!---->
         </div>
       </div>
-      <div class=\\"hidden h-full md:block relative z-divider inline-block w-px h-4 m-0 align-middle bg-ink-200\\">
-        <!---->
-      </div>
+      <z-divider color=\\"ink-200\\" direction=\\"vertical\\" margin=\\"m-0\\" class=\\"hidden h-full md:block\\"></z-divider>
       <div class=\\"flex flex-col gap-y-2.5\\">
         <div class=\\"flex flex-grow items-end\\">
           <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
@@ -117,15 +108,15 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
             New code threshold
           </p>
         </div>
-        <div><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-dashed border-slate-400 text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-6 px-2 py-0.5 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\">
-            <zicon-stub icon=\\"plus\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mr-0.5\\"></zicon-stub>Add threshold
-          </button></div>
+        <div>
+          <z-button button-type=\\"ghost\\" icon=\\"plus\\" size=\\"x-small\\" icon-size=\\"x-small\\" color=\\"vanilla-100\\" label=\\"Add threshold\\" class=\\"border border-dashed border-slate-400\\"></z-button>
+        </div>
       </div>
     </div>
-    <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
+    <div class=\\"mx-5 min-h-72 pb-2 pt-4\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-300\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"90\\" type=\\"bar\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72\\"></zchart-stub>
+    <zchart-stub height=\\"288\\" colors=\\"juniper-500\\" type=\\"bar\\" tooltip-options=\\"[object Object]\\" axis-options=\\"[object Object]\\" y-axis-max=\\"90\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" datasets=\\"[object Object]\\" ymarkers=\\"[object Object]\\" class=\\"min-h-72\\"></zchart-stub>
   </div>
 </div>"
 `;
@@ -142,23 +133,19 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
               Daft Punk
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
-            <zicon-stub icon=\\"metric-high\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\"></zicon-stub><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span>
-            <!---->
-          </div>
+          <z-tag icon-left=\\"metric-high\\" icon-color=\\"juniper\\" size=\\"x-small\\" spacing=\\"px-2 py-0\\" class=\\"border border-slate-400\\"><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span></z-tag>
         </div>
         <p class=\\"text-sm leading-6 text-vanilla-400\\">
 
         </p>
       </div>
-      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\"><a href=\\"https://docs.deepsource.com/docs/repository-view-metrics#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-dashed border-slate-400 text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
-          <zicon-stub icon=\\"help-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
-        </a>
+      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\">
+        <z-button button-type=\\"ghost\\" to=\\"https://docs.deepsource.com/docs/repository-view-metrics#metric-aggregate-calculation\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" icon=\\"help-circle\\" size=\\"small\\" color=\\"vanilla-100\\" class=\\"border border-dashed border-slate-400\\">How’s this calculated?</z-button>
         <div class=\\"h-8 md:w-40\\">
-          <zselect-stub selected=\\"30\\" tabindex=\\"0\\" placeholder=\\"Duration filter\\" spacing=\\"px-2 py-1\\" borderclass=\\"border-slate-400\\" borderradius=\\"rounded-sm\\" backgroundclass=\\"bg-ink-200\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\">
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 is-selected bg-ink-200 text-xs\\">Last 30 days</div>
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
+          <zselect-stub background-class=\\"bg-ink-200\\" border-class=\\"border-slate-400\\" border-radius=\\"rounded-sm\\" spacing=\\"px-2 py-1\\" placeholder=\\"Duration filter\\" value=\\"30\\">
+            <z-option label=\\"Last 30 days\\" value=\\"30\\"></z-option>
+            <z-option label=\\"Last 60 days\\" value=\\"60\\"></z-option>
+            <z-option label=\\"Last 90 days\\" value=\\"90\\"></z-option>
           </zselect-stub>
         </div>
       </div>
@@ -182,10 +169,10 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
       <!---->
       <!---->
     </div>
-    <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
+    <div class=\\"mx-5 min-h-72 pb-2 pt-4\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-200 bg-opacity-30\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"100\\" type=\\"bar\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
+    <zchart-stub height=\\"288\\" colors=\\"juniper-500\\" type=\\"bar\\" tooltip-options=\\"[object Object]\\" axis-options=\\"[object Object]\\" y-axis-max=\\"100\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" datasets=\\"[object Object]\\" ymarkers=\\"[object Object]\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
   </div>
 </div>"
 `;
@@ -202,10 +189,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
               javascript
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
-            <zicon-stub icon=\\"metric-high\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\"></zicon-stub><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span>
-            <!---->
-          </div>
+          <z-tag icon-left=\\"metric-high\\" icon-color=\\"juniper\\" size=\\"x-small\\" spacing=\\"px-2 py-0\\" class=\\"border border-slate-400\\"><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span></z-tag>
         </div>
         <!---->
       </div>
@@ -226,9 +210,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
           <!---->
         </div>
       </div>
-      <div class=\\"hidden h-full md:block relative z-divider inline-block w-px h-4 m-0 align-middle bg-ink-200\\">
-        <!---->
-      </div>
+      <z-divider color=\\"ink-200\\" direction=\\"vertical\\" margin=\\"m-0\\" class=\\"hidden h-full md:block\\"></z-divider>
       <div class=\\"flex flex-col gap-y-2.5\\">
         <div class=\\"flex flex-grow items-end\\">
           <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
@@ -247,15 +229,15 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
             New code threshold
           </p>
         </div>
-        <div><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-dashed border-slate-400 text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-6 px-2 py-0.5 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\">
-            <zicon-stub icon=\\"plus\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mr-0.5\\"></zicon-stub>Add threshold
-          </button></div>
+        <div>
+          <z-button button-type=\\"ghost\\" icon=\\"plus\\" size=\\"x-small\\" icon-size=\\"x-small\\" color=\\"vanilla-100\\" label=\\"Add threshold\\" class=\\"border border-dashed border-slate-400\\"></z-button>
+        </div>
       </div>
     </div>
-    <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
+    <div class=\\"mx-5 min-h-72 pb-2 pt-4\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-300\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"100\\" type=\\"bar\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72\\"></zchart-stub>
+    <zchart-stub height=\\"288\\" colors=\\"juniper-500\\" type=\\"bar\\" tooltip-options=\\"[object Object]\\" axis-options=\\"[object Object]\\" y-axis-max=\\"100\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" datasets=\\"[object Object]\\" ymarkers=\\"[object Object]\\" class=\\"min-h-72\\"></zchart-stub>
   </div>
 </div>"
 `;
@@ -272,23 +254,19 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
               Daft Punk
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
-            <zicon-stub icon=\\"metric-high\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\"></zicon-stub><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span>
-            <!---->
-          </div>
+          <z-tag icon-left=\\"metric-high\\" icon-color=\\"juniper\\" size=\\"x-small\\" spacing=\\"px-2 py-0\\" class=\\"border border-slate-400\\"><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span></z-tag>
         </div>
         <p class=\\"text-sm leading-6 text-vanilla-400\\">
 
         </p>
       </div>
-      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\"><a href=\\"https://docs.deepsource.com/docs/repository-view-metrics#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-dashed border-slate-400 text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
-          <zicon-stub icon=\\"help-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
-        </a>
+      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\">
+        <z-button button-type=\\"ghost\\" to=\\"https://docs.deepsource.com/docs/repository-view-metrics#metric-aggregate-calculation\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" icon=\\"help-circle\\" size=\\"small\\" color=\\"vanilla-100\\" class=\\"border border-dashed border-slate-400\\">How’s this calculated?</z-button>
         <div class=\\"h-8 md:w-40\\">
-          <zselect-stub selected=\\"30\\" tabindex=\\"0\\" placeholder=\\"Duration filter\\" spacing=\\"px-2 py-1\\" borderclass=\\"border-slate-400\\" borderradius=\\"rounded-sm\\" backgroundclass=\\"bg-ink-200\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\">
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 is-selected bg-ink-200 text-xs\\">Last 30 days</div>
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
+          <zselect-stub background-class=\\"bg-ink-200\\" border-class=\\"border-slate-400\\" border-radius=\\"rounded-sm\\" spacing=\\"px-2 py-1\\" placeholder=\\"Duration filter\\" value=\\"30\\">
+            <z-option label=\\"Last 30 days\\" value=\\"30\\"></z-option>
+            <z-option label=\\"Last 60 days\\" value=\\"60\\"></z-option>
+            <z-option label=\\"Last 90 days\\" value=\\"90\\"></z-option>
           </zselect-stub>
         </div>
       </div>
@@ -312,10 +290,10 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
       <!---->
       <!---->
     </div>
-    <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
+    <div class=\\"mx-5 min-h-72 pb-2 pt-4\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-200 bg-opacity-30\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"117.5\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
+    <zchart-stub height=\\"288\\" colors=\\"juniper-500\\" type=\\"line\\" tooltip-options=\\"[object Object]\\" axis-options=\\"[object Object]\\" y-axis-max=\\"117.5\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" datasets=\\"[object Object]\\" ymarkers=\\"[object Object]\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
   </div>
 </div>"
 `;
@@ -332,10 +310,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
               javascript
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
-            <zicon-stub icon=\\"metric-high\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\"></zicon-stub><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span>
-            <!---->
-          </div>
+          <z-tag icon-left=\\"metric-high\\" icon-color=\\"juniper\\" size=\\"x-small\\" spacing=\\"px-2 py-0\\" class=\\"border border-slate-400\\"><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span></z-tag>
         </div>
         <!---->
       </div>
@@ -356,9 +331,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
           <!---->
         </div>
       </div>
-      <div class=\\"hidden h-full md:block relative z-divider inline-block w-px h-4 m-0 align-middle bg-ink-200\\">
-        <!---->
-      </div>
+      <z-divider color=\\"ink-200\\" direction=\\"vertical\\" margin=\\"m-0\\" class=\\"hidden h-full md:block\\"></z-divider>
       <div class=\\"flex flex-col gap-y-2.5\\">
         <div class=\\"flex flex-grow items-end\\">
           <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
@@ -377,15 +350,15 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
             New code threshold
           </p>
         </div>
-        <div><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-dashed border-slate-400 text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-6 px-2 py-0.5 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\">
-            <zicon-stub icon=\\"plus\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mr-0.5\\"></zicon-stub>Add threshold
-          </button></div>
+        <div>
+          <z-button button-type=\\"ghost\\" icon=\\"plus\\" size=\\"x-small\\" icon-size=\\"x-small\\" color=\\"vanilla-100\\" label=\\"Add threshold\\" class=\\"border border-dashed border-slate-400\\"></z-button>
+        </div>
       </div>
     </div>
-    <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
+    <div class=\\"mx-5 min-h-72 pb-2 pt-4\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-300\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"117.5\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72\\"></zchart-stub>
+    <zchart-stub height=\\"288\\" colors=\\"juniper-500\\" type=\\"line\\" tooltip-options=\\"[object Object]\\" axis-options=\\"[object Object]\\" y-axis-max=\\"117.5\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" datasets=\\"[object Object]\\" ymarkers=\\"[object Object]\\" class=\\"min-h-72\\"></zchart-stub>
   </div>
 </div>"
 `;
@@ -402,23 +375,19 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
               Daft Punk
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
-            <zicon-stub icon=\\"metric-high\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\"></zicon-stub><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span>
-            <!---->
-          </div>
+          <z-tag icon-left=\\"metric-high\\" icon-color=\\"juniper\\" size=\\"x-small\\" spacing=\\"px-2 py-0\\" class=\\"border border-slate-400\\"><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span></z-tag>
         </div>
         <p class=\\"text-sm leading-6 text-vanilla-400\\">
 
         </p>
       </div>
-      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\"><a href=\\"https://docs.deepsource.com/docs/repository-view-metrics#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-dashed border-slate-400 text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
-          <zicon-stub icon=\\"help-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
-        </a>
+      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\">
+        <z-button button-type=\\"ghost\\" to=\\"https://docs.deepsource.com/docs/repository-view-metrics#metric-aggregate-calculation\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" icon=\\"help-circle\\" size=\\"small\\" color=\\"vanilla-100\\" class=\\"border border-dashed border-slate-400\\">How’s this calculated?</z-button>
         <div class=\\"h-8 md:w-40\\">
-          <zselect-stub selected=\\"30\\" tabindex=\\"0\\" placeholder=\\"Duration filter\\" spacing=\\"px-2 py-1\\" borderclass=\\"border-slate-400\\" borderradius=\\"rounded-sm\\" backgroundclass=\\"bg-ink-200\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\">
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 is-selected bg-ink-200 text-xs\\">Last 30 days</div>
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
+          <zselect-stub background-class=\\"bg-ink-200\\" border-class=\\"border-slate-400\\" border-radius=\\"rounded-sm\\" spacing=\\"px-2 py-1\\" placeholder=\\"Duration filter\\" value=\\"30\\">
+            <z-option label=\\"Last 30 days\\" value=\\"30\\"></z-option>
+            <z-option label=\\"Last 60 days\\" value=\\"60\\"></z-option>
+            <z-option label=\\"Last 90 days\\" value=\\"90\\"></z-option>
           </zselect-stub>
         </div>
       </div>
@@ -442,10 +411,10 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
       <!---->
       <!---->
     </div>
-    <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
+    <div class=\\"mx-5 min-h-72 pb-2 pt-4\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-200 bg-opacity-30\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"100\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
+    <zchart-stub height=\\"288\\" colors=\\"juniper-500\\" type=\\"line\\" tooltip-options=\\"[object Object]\\" axis-options=\\"[object Object]\\" y-axis-max=\\"100\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" datasets=\\"[object Object]\\" ymarkers=\\"[object Object]\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
   </div>
 </div>"
 `;
@@ -462,10 +431,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
               javascript
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
-            <zicon-stub icon=\\"metric-high\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\"></zicon-stub><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span>
-            <!---->
-          </div>
+          <z-tag icon-left=\\"metric-high\\" icon-color=\\"juniper\\" size=\\"x-small\\" spacing=\\"px-2 py-0\\" class=\\"border border-slate-400\\"><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span></z-tag>
         </div>
         <!---->
       </div>
@@ -486,9 +452,7 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
           <!---->
         </div>
       </div>
-      <div class=\\"hidden h-full md:block relative z-divider inline-block w-px h-4 m-0 align-middle bg-ink-200\\">
-        <!---->
-      </div>
+      <z-divider color=\\"ink-200\\" direction=\\"vertical\\" margin=\\"m-0\\" class=\\"hidden h-full md:block\\"></z-divider>
       <div class=\\"flex flex-col gap-y-2.5\\">
         <div class=\\"flex flex-grow items-end\\">
           <p class=\\"text-xs font-semibold uppercase leading-7 tracking-wider text-vanilla-400\\">
@@ -507,15 +471,15 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
             New code threshold
           </p>
         </div>
-        <div><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-dashed border-slate-400 text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-6 px-2 py-0.5 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\">
-            <zicon-stub icon=\\"plus\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mr-0.5\\"></zicon-stub>Add threshold
-          </button></div>
+        <div>
+          <z-button button-type=\\"ghost\\" icon=\\"plus\\" size=\\"x-small\\" icon-size=\\"x-small\\" color=\\"vanilla-100\\" label=\\"Add threshold\\" class=\\"border border-dashed border-slate-400\\"></z-button>
+        </div>
       </div>
     </div>
-    <div class=\\"mx-5 min-h-72 pt-4 pb-2\\" style=\\"display: none;\\">
+    <div class=\\"mx-5 min-h-72 pb-2 pt-4\\" style=\\"display: none;\\">
       <div class=\\"h-full animate-pulse rounded-lg bg-ink-300\\"></div>
     </div>
-    <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"100\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" humanizetooltips=\\"true\\" class=\\"min-h-72\\"></zchart-stub>
+    <zchart-stub height=\\"288\\" colors=\\"juniper-500\\" type=\\"line\\" tooltip-options=\\"[object Object]\\" axis-options=\\"[object Object]\\" y-axis-max=\\"100\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" datasets=\\"[object Object]\\" ymarkers=\\"[object Object]\\" class=\\"min-h-72\\"></zchart-stub>
   </div>
 </div>"
 `;

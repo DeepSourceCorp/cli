@@ -69,7 +69,6 @@
 </template>
 
 <script lang="ts">
-import { ZIcon, ZInput, ZTabItem, ZTabList, ZTabPane, ZTabPanes, ZTabs } from '@deepsource/zeal'
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
 
 import EditorsPick from '@/components/Discover/EditorsPick.vue'
@@ -86,13 +85,6 @@ const discoverRepositoriesStore = namespace('discover/repositories')
 
 @Component({
   components: {
-    ZInput,
-    ZIcon,
-    ZTabs,
-    ZTabList,
-    ZTabPane,
-    ZTabPanes,
-    ZTabItem,
     EditorsPick,
     Trending
   },
@@ -146,7 +138,9 @@ export default class Discover extends mixins(MetaMixin) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
+@tailwind utilities;
+
 .discover-mobile-hero {
   background-image: linear-gradient(rgba(18, 19, 23, 0), rgba(18, 19, 23, 0.9)),
     url('~assets/images/discover/discover-mobile-bg.svg');
@@ -170,7 +164,7 @@ export default class Discover extends mixins(MetaMixin) {
   }
 }
 
-@responsive {
+@layer utilities {
   .discover-hero {
     background-image: linear-gradient(rgba(18, 19, 23, 0), rgba(18, 19, 23, 0.9)),
       url('~assets/images/discover/discover-bg.svg');

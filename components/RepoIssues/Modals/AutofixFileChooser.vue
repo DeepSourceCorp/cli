@@ -1,22 +1,22 @@
 <template>
   <portal to="modal">
     <z-modal v-if="isOpen" title="Choose files you want to run Autofix on" @onClose="close">
-      <div class="flex p-4 space-x-2 text-vanilla-400">
+      <div class="flex space-x-2 p-4 text-vanilla-400">
         <div
-          class="flex flex-col w-full space-y-2 text-sm leading-7 text-vanilla-400 custom-y-scroll min-h-40 max-h-102"
+          class="custom-y-scroll flex max-h-102 min-h-40 w-full flex-col space-y-2 text-sm leading-7 text-vanilla-400"
         >
           <z-input
             v-model="searchCandidate"
             spacing="tight"
             background-color="ink-400"
             placeholder="Search for files"
-            class="py-1.5 leading-6 px-2"
+            class="px-2 py-1.5 leading-6"
           >
             <template #left>
               <z-icon icon="search" size="small" class="w-6 pl-2" />
             </template>
           </z-input>
-          <z-list class="flex flex-col px-1 space-y-2">
+          <z-list class="flex flex-col space-y-2 px-1">
             <z-list-item>
               <div class="flex space-x-0.5">
                 <z-checkbox
@@ -27,7 +27,7 @@
                   size="small"
                   @change="updateSelectAll"
                 />
-                <span class="text-vanilla-400 cursor" @click="selectAll = !selectAll">
+                <span class="cursor text-vanilla-400" @click="selectAll = !selectAll">
                   Select all
                 </span>
               </div>
@@ -43,16 +43,16 @@
                   size="small"
                   :disabled="selectedFiles.length >= maxFilesAutofixRun"
                 />
-                <span class="text-vanilla-300 cursor" @click="file.isSelected = !file.isSelected">
+                <span class="cursor text-vanilla-300" @click="file.isSelected = !file.isSelected">
                   {{ file.fileName }}
                 </span>
               </div>
             </z-list-item>
             <div
               v-if="!searchResults.length"
-              class="flex flex-col items-center justify-center w-full h-24 space-y-1"
+              class="flex h-24 w-full flex-col items-center justify-center space-y-1"
             >
-              <h2 class="font-bold text-md">No matching files found</h2>
+              <h2 class="text-md font-bold">No matching files found</h2>
               <p class="text-md">Try changing the search query.</p>
             </div>
           </z-list>
@@ -60,10 +60,10 @@
       </div>
       <template #footer="{ close }">
         <div
-          class="p-2 space-x-1 leading-none text-right border-t text-vanilla-100 border-slate-400"
+          class="space-x-1 border-t border-slate-400 p-2 text-right leading-none text-vanilla-100"
         >
           <button
-            class="inline-flex items-center justify-center h-8 px-4 py-1 space-x-1 text-xs font-medium leading-loose transition-colors duration-300 ease-in-out rounded-sm bg-ink-200 focus:outline-none whitespace-nowrap text-vanilla-100 hover:bg-ink-100"
+            class="inline-flex h-8 items-center justify-center space-x-1 whitespace-nowrap rounded-sm bg-ink-200 px-4 py-1 text-xs font-medium leading-loose text-vanilla-100 transition-colors duration-300 ease-in-out hover:bg-ink-100 focus:outline-none"
             @click="close()"
           >
             <span> Cancel </span>
@@ -72,7 +72,7 @@
             :disabled="selectedFiles.length < 1 || autofixLoading"
             :is-loading="autofixLoading"
             loading-label="Creating Autofix"
-            class="flex items-center space-x-2 modal-primary-action"
+            class="modal-primary-action flex items-center space-x-2"
             spacing="px-2"
             button-type="primary"
             size="small"
@@ -91,7 +91,6 @@
 
 <script lang="ts">
 import { Component, Prop, Watch, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZModal, ZButton, ZCheckbox, ZList, ZListItem, ZInput } from '@deepsource/zeal'
 
 // types
 import { AutofixRunStatus, Maybe } from '~/types/types'
@@ -104,16 +103,7 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
  * Modal component that allows selecting files to create autofixes for a specified issue.
  */
 @Component({
-  name: 'AutofixFileChooser',
-  components: {
-    ZIcon,
-    ZModal,
-    ZButton,
-    ZCheckbox,
-    ZList,
-    ZListItem,
-    ZInput
-  }
+  name: 'AutofixFileChooser'
 })
 export default class AutofixFileChooser extends mixins(
   ActiveUserMixin,

@@ -9,7 +9,7 @@
         <div class="flex justify-between gap-x-2">
           <distribution-switch
             v-model="activeFilter"
-            class="hidden sm:grid grid-cols-2"
+            class="hidden grid-cols-2 sm:grid"
             @change="fetchDistributionData"
           />
 
@@ -22,7 +22,7 @@
       </template>
       <div
         v-if="historicalValuesLoading"
-        class="h-report-chart mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
+        class="h-report-chart mx-5 my-1.5 animate-pulse rounded-lg bg-ink-300"
       ></div>
       <div v-else>
         <template v-if="shouldChartBeShown">
@@ -58,7 +58,7 @@
 
       <distribution-switch
         v-model="activeFilter"
-        class="grid grid-cols-2 px-5 mt-4 sm:hidden"
+        class="mt-4 grid grid-cols-2 px-5 sm:hidden"
         @change="fetchDistributionData"
       />
     </chart-container>
@@ -76,7 +76,6 @@
 </template>
 
 <script lang="ts">
-import { ZChart } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import DistributionReportMixin from '~/mixins/distributionReportMixin'
@@ -90,10 +89,7 @@ import { IssueDistributionT, ReportMeta, ReportPageT } from '~/types/reportTypes
  * Page for displaying issue distribution by analyzer and category type
  */
 @Component({
-  layout: 'dashboard',
-  components: {
-    ZChart
-  }
+  layout: 'dashboard'
 })
 export default class IssueDistributionPage extends mixins(
   DistributionReportMixin,

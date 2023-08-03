@@ -1,9 +1,9 @@
 <template>
   <chart-container :is-widget="true" class="gap-y-2" @mouseleave.native="hideReportControls">
     <template #report-header>
-      <div class="inline-flex items-center justify-between w-full h-8">
+      <div class="inline-flex h-8 w-full items-center justify-between">
         <h3
-          class="inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap"
+          class="inline-flex items-center gap-x-2 whitespace-nowrap text-sm font-normal text-vanilla-100"
           :class="{ 'overflow-hidden': revealReportControls }"
         >
           <span>
@@ -15,20 +15,20 @@
             v-tooltip="{ content: helpText, delay: { show: 0, hide: 100 } }"
             icon="help"
             color="vanilla-400"
-            class="hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0"
+            class="hidden flex-shrink-0 stroke-1.5 transition-opacity duration-75 lg:inline"
           />
 
           <template v-if="isComplianceReport">
             <div
               v-if="loadingValue.status && typeof compliancePassing === 'undefined'"
-              class="w-19 h-7 animate-pulse bg-ink-300 rounded-full hidden xs:flex lg:hidden"
+              class="hidden h-7 w-19 animate-pulse rounded-full bg-ink-300 xs:flex lg:hidden"
             ></div>
 
             <compliance-status
               v-else-if="typeof compliancePassing === 'boolean'"
               :compliance-passed="compliancePassing"
               text-size="text-xxs md:text-xs"
-              class="border border-ink-200 rounded-full px-2 hidden xs:flex lg:hidden"
+              class="hidden rounded-full border border-ink-200 px-2 xs:flex lg:hidden"
             />
           </template>
         </h3>
@@ -46,7 +46,7 @@
 
         <!-- Report controls section for larger screens -->
         <div
-          class="hidden lg:block h-8 relative"
+          class="relative hidden h-8 lg:block"
           :class="[
             reportControlsWidth,
             {
@@ -59,7 +59,7 @@
             <div
               v-if="!revealReportControls"
               :key="1"
-              class="w-full h-full inline-flex items-center justify-end absolute top-0 left-0"
+              class="absolute left-0 top-0 inline-flex h-full w-full items-center justify-end"
             >
               <z-icon icon="more-horizontal" />
             </div>
@@ -67,7 +67,7 @@
             <div
               v-else
               :key="2"
-              class="w-full h-full inline-flex items-center justify-end gap-x-2 absolute top-0 left-0"
+              class="absolute left-0 top-0 inline-flex h-full w-full items-center justify-end gap-x-2"
             >
               <z-button
                 v-tooltip="'View full report'"
@@ -111,32 +111,32 @@
       </div>
     </template>
 
-    <div class="inline-flex justify-between px-5 mt-3.5 w-full">
+    <div class="mt-3.5 inline-flex w-full justify-between px-5">
       <div
         v-if="loadingValue.status && (isReportWidgetDataFetch || isReportGettingSwapped)"
-        class="h-7 w-52 bg-ink-300 animate-pulse"
+        class="h-7 w-52 animate-pulse bg-ink-300"
       ></div>
 
       <template v-else>
         <div
           :class="{ 'items-center': isComplianceReport }"
-          class="inline-flex gap-x-3 truncate self-start lg:leading-3"
+          class="inline-flex gap-x-3 self-start truncate lg:leading-3"
         >
           <compliance-status
             v-if="isComplianceReport && typeof compliancePassing === 'boolean'"
             :compliance-passed="compliancePassing"
             text-size="text-xs"
-            class="border border-ink-200 rounded-full px-2 hidden lg:flex"
+            class="hidden rounded-full border border-ink-200 px-2 lg:flex"
           />
 
           <div
             v-if="typeof value === 'number' && valueLabel"
-            class="inline-flex items-center lg:items-start truncate gap-x-1 text-sm"
+            class="inline-flex items-center gap-x-1 truncate text-sm lg:items-start"
           >
             <z-icon icon="activity" />
 
             <span v-tooltip="value > 1000 ? `${value}` : ''">{{ shortenLargeNumber(value) }}</span>
-            <span class="text-vanilla-400 truncate">{{ valueLabel }}</span>
+            <span class="truncate text-vanilla-400">{{ valueLabel }}</span>
           </div>
         </div>
 
@@ -153,7 +153,7 @@
 
     <div
       v-if="loadingValue.status"
-      class="chart-skeleton-loader mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
+      class="chart-skeleton-loader mx-5 my-1.5 animate-pulse rounded-lg bg-ink-300"
     ></div>
 
     <template v-else>
@@ -180,7 +180,6 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZChart, ZIcon, ZTag } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import {
@@ -236,7 +235,6 @@ interface IEmptyChartProps {
  */
 @Component({
   name: 'PinnedChartReport',
-  components: { ZButton, ZChart, ZIcon, ZTag },
   methods: { shortenLargeNumber }
 })
 export default class PinnedChartReport extends Vue {

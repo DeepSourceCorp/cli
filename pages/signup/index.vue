@@ -88,7 +88,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZDivider, ZIcon, ZCarousel, ZSlide, ZCard } from '@deepsource/zeal'
 import AuthMixin from '~/mixins/authMixin'
 import MetaMixin from '~/mixins/metaMixin'
 
@@ -121,14 +120,6 @@ const TESTIMONIALS: Testimonial[] = [
 ]
 
 @Component({
-  components: {
-    ZButton,
-    ZDivider,
-    ZIcon,
-    ZCarousel,
-    ZSlide,
-    ZCard
-  },
   middleware: [
     'redirectToHome',
     ({ $config, redirect, route }) => {

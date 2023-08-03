@@ -371,7 +371,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { ZAlert, ZButton, ZIcon, ZInput, ZTextarea, ZSelect, ZOption } from '@deepsource/zeal'
 
 import { Context } from '@nuxt/types'
 
@@ -415,17 +414,7 @@ type FormFieldsInfoT = Array<{
   errors: Array<FormFieldsErrorT>
 }>
 
-@Component({
-  components: {
-    ZAlert,
-    ZButton,
-    ZIcon,
-    ZInput,
-    ZTextarea,
-    ZSelect,
-    ZOption
-  }
-})
+@Component({})
 export default class RequestPilotLicense extends Vue {
   step = 0
 

@@ -1,8 +1,11 @@
 import { render } from '@testing-library/vue'
 import { EditThresholdModal } from '~/components/Metrics'
-import { VTooltip } from 'v-tooltip'
+import { VTooltip } from 'floating-vue'
 import { VueConstructor } from 'vue'
-import { ZInput, ZButton, ZModal } from '@deepsource/zeal'
+import ZInput from '@/components/zeal/ZInput'
+import ZButton from '@/components/zeal/ZButton'
+import ZModal from '@/components/zeal/ZModal'
+
 import { shallowMount } from '@vue/test-utils'
 import { cartesian, generateStringProps } from '~/test/utils'
 import { MetricType } from '~/types/metric'

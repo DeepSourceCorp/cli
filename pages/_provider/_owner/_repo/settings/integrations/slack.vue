@@ -27,7 +27,6 @@
 </template>
 
 <script lang="ts">
-import { ZDivider } from '@deepsource/zeal'
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 
 import IntegrationsDetailMixin, { IntegrationShortcodes } from '~/mixins/integrationsDetailMixin'
@@ -43,12 +42,9 @@ import { IntegrationSettingsLevel, UpdateIntegrationSettingsInput } from '~/type
  * Repository level integrations page for Slack
  */
 @Component({
-  components: {
-    ZDivider
-  },
   middleware: [
     // Restrict access if the integration is not installed
-    async ({ error, route, store }) => {
+    async function ({ error, route, store }) {
       const { provider, owner, repo } = route.params
 
       const {
@@ -80,7 +76,8 @@ import { IntegrationSettingsLevel, UpdateIntegrationSettingsInput } from '~/type
       const isInstalled = integrations.detail.integration.installed
 
       if (!isInstalled) {
-        return error({ statusCode: 404 })
+        error({ statusCode: 404 })
+        return
       }
     },
     'perm',

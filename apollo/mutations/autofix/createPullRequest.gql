@@ -1,4 +1,4 @@
-mutation($input: CreatePullRequestInput!) {
+mutation ($input: CreatePullRequestInput!) {
   createdPullRequest(input: $input) {
     ok
   }

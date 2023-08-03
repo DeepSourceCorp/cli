@@ -56,7 +56,6 @@
 </template>
 
 <script lang="ts">
-import { ZAvatar, ZButton, ZIcon } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
@@ -65,11 +64,6 @@ import { getDefaultAvatar } from '~/utils/ui'
 import GitlabMutation from '@/apollo/mutations/installation/gitlabInstallationLanding.gql'
 
 @Component({
-  components: {
-    ZButton,
-    ZAvatar,
-    ZIcon
-  },
   meta: {
     auth: {
       strict: true,

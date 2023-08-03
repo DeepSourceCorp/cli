@@ -2,7 +2,7 @@
 
 exports[`[[ FormField ]] renders a form field with an error block based on the condition: {"errCondition":false} 1`] = `
 "<div class=\\"space-y-2\\">
-  <div class=\\"space-y-1.5\\"><label for=\\"test-id\\" class=\\"text-sm text-vanilla-400 font-medium md:text-base\\">test-label <span class=\\"text-cherry-500\\">*</span></label> </div>
+  <div class=\\"space-y-1.5\\"><label for=\\"test-id\\" class=\\"text-sm font-medium text-vanilla-400 md:text-base\\">test-label <span class=\\"text-cherry-500\\">*</span></label> </div>
   <transition-stub name=\\"fade\\">
     <!---->
   </transition-stub>
@@ -11,10 +11,10 @@ exports[`[[ FormField ]] renders a form field with an error block based on the c
 
 exports[`[[ FormField ]] renders a form field with an error block based on the condition: {"errCondition":true} 1`] = `
 "<div class=\\"space-y-2\\">
-  <div class=\\"space-y-1.5\\"><label for=\\"test-id\\" class=\\"text-sm text-vanilla-400 font-medium md:text-base\\">test-label <span class=\\"text-cherry-500\\">*</span></label> </div>
+  <div class=\\"space-y-1.5\\"><label for=\\"test-id\\" class=\\"text-sm font-medium text-vanilla-400 md:text-base\\">test-label <span class=\\"text-cherry-500\\">*</span></label> </div>
   <transition-stub name=\\"fade\\">
     <p class=\\"inline-flex items-center gap-x-2 text-xs text-cherry-500 md:text-sm\\">
-      <zicon-stub icon=\\"alert-circle\\" size=\\"x-small\\" position=\\"\\" color=\\"cherry\\"></zicon-stub> This is a required field.
+      <zicon-stub icon=\\"alert-circle\\" color=\\"cherry\\" size=\\"x-small\\"></zicon-stub> This is a required field.
     </p>
   </transition-stub>
 </div>"

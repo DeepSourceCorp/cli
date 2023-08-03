@@ -10,8 +10,8 @@
       >
         <source src="~/assets/images/ui-states/owner/invite-sent-136px.webm" type="video/webm" />
       </video>
-      <span class="font-semibold text-vanilla-100 text-center">Invitation sent successfully!</span>
-      <p class="max-w-sm mt-4 text-sm leading-6 text-center text-vanilla-400">
+      <span class="text-center font-semibold text-vanilla-100">Invitation sent successfully!</span>
+      <p class="mt-4 max-w-sm text-center text-sm leading-6 text-vanilla-400">
         We've sent an email to your team member(s) with a link to join the team. You can ask them to
         check their inbox.
       </p>
@@ -22,17 +22,11 @@
   </z-modal>
 </template>
 <script lang="ts">
-import { ZModal, ZButton } from '@deepsource/zeal'
 import { Vue, Component } from 'nuxt-property-decorator'
 
 /**
  * Invite members success modal
  */
-@Component({
-  components: {
-    ZModal,
-    ZButton
-  }
-})
+@Component({})
 export default class InviteMembersSuccessModal extends Vue {}
 </script>

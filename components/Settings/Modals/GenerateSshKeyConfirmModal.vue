@@ -12,16 +12,9 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZConfirm, ZButton, ZCheckbox } from '@deepsource/zeal'
 
 @Component({
-  name: 'GenerateSshKeyConfirmModal',
-  components: {
-    ZIcon,
-    ZConfirm,
-    ZButton,
-    ZCheckbox
-  }
+  name: 'GenerateSshKeyConfirmModal'
 })
 export default class GenerateSshKeyConfirmModal extends Vue {
   @Prop({ default: false })

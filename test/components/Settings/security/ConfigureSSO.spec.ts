@@ -3,7 +3,7 @@ import { shallowMount } from '@vue/test-utils'
 
 import ConfigureSSO from '~/components/Settings/Security/ConfigureSSO.vue'
 
-import { focusDirective } from '~/plugins/helpers/directives.client'
+import focusDirective from '~/utils/directives/focus'
 import { VERIFIABLE_DOMAIN_MOCK } from './__mocks__/verifiableDomain.mock'
 
 interface ConfigureSSOT extends Vue {

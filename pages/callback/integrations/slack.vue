@@ -19,7 +19,6 @@
 </template>
 
 <script lang="ts">
-import { ZDivider } from '@deepsource/zeal'
 import { Context } from '@nuxt/types'
 import { Component, mixins } from 'nuxt-property-decorator'
 
@@ -37,9 +36,6 @@ import { IntegrationInstallationStep, IntegrationSettingsLevel } from '~/types/t
  * Intermediary page where the integration installation happens
  */
 @Component({
-  components: {
-    ZDivider
-  },
   middleware: [
     'perm',
     async function ({ redirect, route, store, $cookies }) {

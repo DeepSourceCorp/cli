@@ -69,9 +69,8 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 
-@Component({ name: 'EnterpriseInstallationLogo', components: { ZIcon } })
+@Component({ name: 'EnterpriseInstallationLogo' })
 export default class EnterpriseInstallationLogo extends Vue {
   @Prop({ default: '' })
   installationLogo: string
@@ -86,7 +85,8 @@ export default class EnterpriseInstallationLogo extends Vue {
   --angle: 0deg;
   padding: 10.6667px;
   border: theme('spacing.px') solid theme('colors.transparent');
-  background: linear-gradient(theme(colors.ink.200), theme(colors.ink.200)) padding-box,
+  background:
+    linear-gradient(theme(colors.ink.200), theme(colors.ink.200)) padding-box,
     linear-gradient(var(--angle), rgba(255, 255, 255, 0.2) 14.99%, rgba(255, 255, 255, 0.02) 77.27%)
       border-box;
   backdrop-filter: blur(21.3333px);

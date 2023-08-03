@@ -8,20 +8,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -34,20 +36,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -60,20 +64,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -86,20 +92,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -112,20 +120,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -138,20 +148,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -164,20 +176,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -190,20 +204,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -216,20 +232,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -242,20 +260,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -268,20 +288,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -294,20 +316,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -320,20 +344,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -346,20 +372,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -372,20 +400,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -398,20 +428,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -424,20 +456,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -450,20 +484,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -476,20 +512,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -502,20 +540,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -528,20 +568,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -554,20 +596,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -580,20 +624,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -606,20 +652,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -632,20 +680,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -658,20 +708,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -684,20 +736,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -710,20 +764,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -736,20 +792,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -762,20 +820,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -788,20 +848,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -814,20 +876,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -840,20 +904,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -866,20 +932,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -892,20 +960,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -918,20 +988,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -944,20 +1016,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -970,20 +1044,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -996,20 +1072,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1022,20 +1100,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1048,20 +1128,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1074,20 +1156,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1100,20 +1184,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1126,20 +1212,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1152,20 +1240,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1178,20 +1268,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1204,20 +1296,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1230,20 +1324,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1256,20 +1352,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1282,20 +1380,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1308,20 +1408,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1334,20 +1436,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1360,20 +1464,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1386,20 +1492,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1412,20 +1520,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;
@@ -1438,20 +1548,22 @@ exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options
     </div>
   </div>
   <div>
-    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+    <z-radio-group id=\\"test-input-id\\" disabled=\\"true\\" class=\\"space-y-5\\">
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 1\\" label=\\"Label 1\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
       <div class=\\"space-y-1 text-sm\\">
-        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+        <div class=\\"inline-flex gap-x-2\\">
+          <z-radio value=\\"Value 2\\" label=\\"Label 2\\"></z-radio>
           <!---->
         </div>
         <!---->
       </div>
-    </div>
+    </z-radio-group>
   </div>
 </div>"
 `;

@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-12 space-y-3">
-    <p class="event-description break-words leading-5 text-vanilla-100 hyphens-auto">
+    <p class="hyphens-auto break-words leading-5 text-vanilla-100 before:lh-crop-5">
       {{ eventDescription }}
     </p>
 
@@ -33,17 +33,12 @@
 </template>
 
 <script lang="ts">
-import { ZAvatar, ZIcon } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import { formatDate, fromNow, parseISODate } from '@/utils/date'
 import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
-  components: {
-    ZAvatar,
-    ZIcon
-  },
   methods: {
     getDefaultAvatar
   }
@@ -97,11 +92,3 @@ export default class Log extends Vue {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '~/assets/css/default.scss';
-
-.event-description {
-  @include lhCrop(1.125);
-}
-</style>

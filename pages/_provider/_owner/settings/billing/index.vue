@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 space-y-5">
+  <div class="space-y-5 p-4">
     <template v-if="activeDashboardContext.has_premium_plan">
       <h2 class="text-lg font-medium">Billing</h2>
       <div class="max-w-2xl">
@@ -99,7 +99,6 @@
 <script lang="ts">
 import { mixins, Component } from 'nuxt-property-decorator'
 import { parseISODate, formatDate } from '~/utils/date'
-import { ZRadioGroup, ZRadioButton } from '@deepsource/zeal'
 
 import { TeamPerms } from '~/types/permTypes'
 import { getHumanizedTimeFromNow } from '~/utils/date'
@@ -108,10 +107,6 @@ import ActiveUserMixin from '~/mixins/activeUserMixin'
 import PlanDetailMixin from '~/mixins/planDetailMixin'
 
 @Component({
-  components: {
-    ZRadioGroup,
-    ZRadioButton
-  },
   middleware: ['teamOnly', 'perm', 'validateProvider'],
   meta: {
     auth: {

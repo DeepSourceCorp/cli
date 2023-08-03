@@ -9,9 +9,8 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 
-@Component({ name: 'UnstyledCopyButton', components: { ZIcon } })
+@Component({ name: 'UnstyledCopyButton' })
 export default class UnstyledCopyButton extends Vue {
   @Prop({ required: true })
   value: string

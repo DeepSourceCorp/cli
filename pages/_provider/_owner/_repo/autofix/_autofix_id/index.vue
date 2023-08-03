@@ -55,7 +55,7 @@
       <!-- banner -->
       <div
         v-if="isAutofixConcluded"
-        class="flex items-center space-x-4 border-t border-b border-slate-400 bg-ink-300 px-4 py-3"
+        class="flex items-center space-x-4 border-b border-t border-slate-400 bg-ink-300 px-4 py-3"
       >
         <div class="flex flex-1 items-center space-x-6">
           <div class="flex items-center space-x-2">
@@ -283,7 +283,7 @@
           </div>
           <div
             v-if="isGroup"
-            class="absolute top-6 left-6 w-0.5 bg-juniper"
+            class="absolute left-6 top-6 w-0.5 bg-juniper"
             :style="{ height: height, zIndex: -1 }"
           ></div>
         </div>
@@ -338,7 +338,6 @@
 
 <script lang="ts">
 import { AutofixCard, AutofixCodeDiff, AutofixListItem, Info } from '@/components/Autofix/index'
-import { ZBreadcrumb, ZBreadcrumbItem, ZButton, ZCheckbox, ZDivider, ZIcon } from '@deepsource/zeal'
 import { Component, mixins, namespace, Watch } from 'nuxt-property-decorator'
 
 import { RunDetailActions } from '~/store/run/detail'
@@ -368,12 +367,6 @@ const runStore = namespace('run/detail')
  */
 @Component({
   components: {
-    ZIcon,
-    ZButton,
-    ZCheckbox,
-    ZBreadcrumb,
-    ZBreadcrumbItem,
-    ZDivider,
     Info,
     AutofixCard,
     AutofixListItem,

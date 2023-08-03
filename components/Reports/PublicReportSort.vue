@@ -3,11 +3,11 @@
     <z-menu v-if="!sortApplied" direction="right" width="small" class="text-vanilla-100">
       <template #trigger="{ toggle }">
         <z-button
+          :button-type="buttonType"
           size="small"
           label="Sort"
           icon="amount-down"
-          class="outline-none focus:outline-none text-vanilla-100"
-          :class="buttonBackground"
+          class="text-vanilla-100 outline-none focus:outline-none"
           @click="toggle"
         />
       </template>
@@ -17,6 +17,8 @@
           v-for="filter in sortFilters"
           :key="filter.name"
           :icon="filter.icon"
+          as="button"
+          class="w-full"
           @click="modelValue = filter.name"
         >
           {{ filter.label }}
@@ -26,9 +28,9 @@
 
     <z-button
       v-else
+      :button-type="buttonType"
       size="small"
-      class="outline-none focus:outline-none text-vanilla-100"
-      :class="buttonBackground"
+      class="text-vanilla-100 outline-none focus:outline-none"
       @click="modelValue = ''"
     >
       <div class="flex items-center gap-x-2">
@@ -44,7 +46,6 @@
 
 <script lang="ts">
 import { Vue, Component, ModelSync, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZMenu, ZMenuItem, ZBadge } from '@deepsource/zeal'
 import { ReportSortT } from '~/types/reportTypes'
 
 export interface SortChoice {
@@ -56,21 +57,13 @@ export interface SortChoice {
 /**
  * Component to sort issues based on inc & dec priority.
  */
-@Component({
-  components: {
-    ZIcon,
-    ZButton,
-    ZMenu,
-    ZMenuItem,
-    ZBadge
-  }
-})
+@Component({})
 export default class PublicReportSort extends Vue {
   @ModelSync('selectedSortFilter', 'updateSortFilter', { type: String })
   readonly modelValue: ReportSortT
 
-  @Prop({ default: 'bg-ink-300 hover:bg-ink-200' })
-  buttonBackground: string
+  @Prop({ default: 'secondary' })
+  buttonType: string
 
   private sortFilters: Record<ReportSortT, SortChoice> = {
     'first-created': { label: 'First created', icon: 'first-seen', name: 'first-created' },

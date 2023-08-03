@@ -1,6 +1,6 @@
 <template>
   <list-section v-if="starredRepos.length" title="Starred repositories">
-    <ul class="overflow-y-scroll hide-scroll divide-y divide-solid divide-ink-300 max-h-52">
+    <ul class="hide-scroll max-h-52 divide-y divide-solid divide-ink-300 overflow-y-scroll">
       <list-item
         v-for="repo in starredRepos"
         :key="repo.id"
@@ -15,7 +15,7 @@
             </span>
             <span
               v-if="repo.availableAnalyzers && repo.availableAnalyzers.edges"
-              class="space-x-3 hidden xs:flex"
+              class="hidden space-x-3 xs:flex"
             >
               <analyzer-logo
                 v-for="edge in repo.availableAnalyzers.edges"
@@ -38,7 +38,6 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { ListSection } from '@/components/TeamHome'
-import { ZIcon } from '@deepsource/zeal'
 import { getHumanizedTimeFromNow, formatDate } from '@/utils/date'
 
 import { Repository } from '~/types/types'
@@ -47,8 +46,7 @@ import { resolveNodes } from '~/utils/array'
 
 @Component({
   components: {
-    ListSection,
-    ZIcon
+    ListSection
   },
   methods: { getHumanizedTimeFromNow, formatDate }
 })

@@ -3,7 +3,7 @@
     :class="isWidget ? 'max-h-92 overflow-y-scroll' : 'rounded-md border border-slate-400'"
     class="hide-scroll overflow-x-auto leading-normal"
   >
-    <table class="w-full table-fixed cursor">
+    <table class="cursor w-full table-fixed">
       <thead class="border-b border-slate-400">
         <tr class="text-xs font-semibold uppercase text-vanilla-400">
           <th
@@ -78,8 +78,6 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, ModelSync } from 'nuxt-property-decorator'
-import CodeCoverageSort from './CodeCoverageSort.vue'
-import CodeCoverageTableCell from './CodeCoverageTableCell.vue'
 
 import { CodeCoverageT, CoverageSortT } from '~/types/reportTypes'
 import { RepositoryCoverageReportItem } from '~/types/types'
@@ -88,9 +86,7 @@ import { FilterChoice } from '../Common/FilterGeneric.vue'
 /**
  * Table component for code coverage report
  */
-@Component({
-  components: { CodeCoverageSort, CodeCoverageTableCell }
-})
+@Component({})
 export default class CodeCoverageTable extends Vue {
   @ModelSync('selectedSortFilter', 'sort-filter-updated', { type: String })
   readonly activeSortFilter: CodeCoverageT | ''

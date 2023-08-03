@@ -1,9 +1,9 @@
 <template>
   <div>
-    <p class="w-full text-base text-left text-vanilla-300">
+    <p class="w-full text-left text-base text-vanilla-300">
       Pick the repository that you would like to run your first analysis on.
     </p>
-    <div class="flex flex-col w-full h-auto md:h-full gap-y-3">
+    <div class="flex h-auto w-full flex-col gap-y-3 md:h-full">
       <z-input
         v-model="searchCandidate"
         icon="search"
@@ -23,14 +23,14 @@
       </div>
       <!-- Repo list -->
       <div
-        class="flex flex-col overflow-scroll h-96 md:h-72"
+        class="flex h-96 flex-col overflow-scroll md:h-72"
         :class="repoCount === 0 ? 'space-y-3 pr-0' : 'pr-3'"
       >
         <template v-if="repoCount">
           <repo-list-item
             v-for="(repo, index) in repositoriesToOnboard"
             :key="index"
-            class="p-1 px-2 rounded-sm"
+            class="rounded-sm p-1 px-2"
             :handle-name="repo.ownerLogin"
             :language="repo.supportedAnalyzers ? repo.supportedAnalyzers[0] : ''"
             :analyzer="repo.primaryAnalyzer"
@@ -41,7 +41,7 @@
         </template>
         <div
           v-else
-          class="flex flex-col items-center justify-center flex-1 w-full p-6 text-sm text-center border border-dashed rounded-md text-vanilla-400 border-slate-400"
+          class="flex w-full flex-1 flex-col items-center justify-center rounded-md border border-dashed border-slate-400 p-6 text-center text-sm text-vanilla-400"
         >
           <div v-if="loading" class="flex flex-col items-center space-y-2">
             <z-icon class="animate-spin" icon="spin-loader" />
@@ -60,7 +60,7 @@
               <z-button
                 v-if="repoSyncLoading"
                 size="small"
-                class="flex items-center w-48"
+                class="flex w-48 items-center"
                 :disabled="true"
               >
                 <z-icon icon="spin-loader" class="mr-2 animate-spin" size="small" color="ink-400" />
@@ -86,7 +86,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZInput, ZDivider, ZIcon } from '@deepsource/zeal'
 import { RepoListItem } from '.'
 
 // types
@@ -100,10 +99,6 @@ import RepoSyncMixin from '~/mixins/repoSyncMixin'
 
 @Component({
   components: {
-    ZButton,
-    ZInput,
-    ZDivider,
-    ZIcon,
     RepoListItem
   },
   model: {

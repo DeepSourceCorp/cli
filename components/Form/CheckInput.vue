@@ -7,7 +7,7 @@
   >
     <!-- TODO: Fix this magic component. -->
     <houdini :id="inputId" v-model="modelValue" class="space-y-5" @change="$emit('change')">
-      <div v-for="opt in options" :key="opt.value" class="text-sm space-y-1">
+      <div v-for="opt in options" :key="opt.value" class="space-y-1 text-sm">
         <z-checkbox
           v-model="modelValue[opt.value]"
           :value="opt.value"
@@ -17,7 +17,7 @@
         />
         <p
           v-if="opt.description"
-          class="text-xs text-vanilla-400 ml-6 leading-5"
+          class="ml-6 text-xs leading-5 text-vanilla-400"
           v-html="opt.description"
         ></p>
       </div>
@@ -27,13 +27,11 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import InputWrapper from './InputWrapper.vue'
-import { ZCheckbox } from '@deepsource/zeal'
 import { ModelSync } from 'vue-property-decorator'
 
 @Component({
   components: {
-    InputWrapper,
-    ZCheckbox
+    InputWrapper
   }
 })
 export default class CheckInput extends Vue {

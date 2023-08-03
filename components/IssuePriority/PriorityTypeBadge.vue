@@ -1,18 +1,17 @@
 <template>
   <div
     v-tooltip="{ content: tooltipCopy, delay: { show: 200, hide: 100 }, classes: 'w-64' }"
-    class="flex items-center gap-x-1 uppercase bg-ink-200 rounded-full px-1.5 py-1 cursor"
+    class="cursor flex items-center gap-x-1 rounded-full bg-ink-200 px-1.5 py-1 uppercase"
   >
-    <span v-if="badgeType" class="h-2 rounded-full w-2" :class="badgeType"></span>
+    <span v-if="badgeType" class="h-2 w-2 rounded-full" :class="badgeType"></span>
     <z-icon v-else icon="ellipsis-small" size="x-small" class="-mx-0.5" />
-    <span class="text-xxs text-vanilla-400 tracking-wide font-medium">
+    <span class="text-xxs font-medium tracking-wide text-vanilla-400">
       {{ priorityLabel }}
     </span>
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import { IssuePriorityTypes, IssuePriorityTypesVerbose } from '~/types/issuePriorityTypes'
 import { IssuePriorityLevel } from '~/types/types'
 
@@ -20,10 +19,7 @@ import { IssuePriorityLevel } from '~/types/types'
  * Component to show priority level for an issue.
  */
 @Component({
-  name: 'PriorityTypeBadge',
-  components: {
-    ZIcon
-  }
+  name: 'PriorityTypeBadge'
 })
 export default class PriorityTypeBadge extends Vue {
   @Prop({ default: '' })

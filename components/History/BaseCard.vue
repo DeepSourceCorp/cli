@@ -2,24 +2,24 @@
   <component
     :is="to ? 'nuxt-link' : 'div'"
     :to="to"
-    class="block group"
+    class="group block"
     :class="{
-      'border rounded-lg border-slate-400': !removeDefaultStyle,
+      'rounded-lg border border-slate-400': !removeDefaultStyle,
       'bg-ink-400 hover:bg-ink-300': to && !removeDefaultStyle
     }"
     @click="$emit('click')"
   >
     <div
       v-if="$slots.header"
-      class="p-3 text-sm border-b border-slate-400 group-hover:border-slate-400 text-vanilla-400"
+      class="border-b border-slate-400 p-3 text-sm text-vanilla-400 group-hover:border-slate-400"
     >
       <slot name="header"></slot>
     </div>
-    <div class="flex flex-wrap flex-1 w-full">
+    <div class="flex w-full flex-1 flex-wrap">
       <!-- Left Section -->
       <slot name="left-section">
         <div
-          class="space-y-1 text-sm border-slate-400 text-vanilla-400"
+          class="space-y-1 border-slate-400 text-sm text-vanilla-400"
           :class="[{ 'w-full md:w-4/5': showInfo }, customPadding]"
         >
           <div class="flex items-center space-x-2 text-base font-semibold text-vanilla-200">
@@ -33,7 +33,7 @@
         v-if="showInfo"
         class="hidden w-full md:block md:w-1/5"
         :class="{
-          'sm:border-l border-slate-400 group-hover:border-slate-400': !removeDefaultStyle
+          'border-slate-400 group-hover:border-slate-400 sm:border-l': !removeDefaultStyle
         }"
       >
         <slot name="info"></slot>

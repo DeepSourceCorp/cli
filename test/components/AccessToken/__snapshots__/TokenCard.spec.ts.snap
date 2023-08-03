@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders TokenCard with all props 1`] = `
-"<div to=\\"\\" class=\\"block group\\">
+"<div to=\\"\\" class=\\"group block\\">
   <!---->
-  <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"space-y-1 text-sm border-slate-400 text-vanilla-400 w-full md:w-4/5 p-3\\">
+  <div class=\\"flex w-full flex-1 flex-wrap\\">
+    <div class=\\"space-y-1 border-slate-400 text-sm text-vanilla-400 w-full md:w-4/5 p-3\\">
       <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base font-medium\\">mock-description</span></div>
-      <p class=\\"flex items-center space-x-4 text-sm\\"><span class=\\"flex items-center space-x-1.5 has-tooltip\\" data-original-title=\\"null\\"><zicon-stub icon=\\"alert-triangle\\" size=\\"x-small\\" position=\\"\\" color=\\"honey\\"></zicon-stub> <span class=\\"text-honey\\">
+      <p class=\\"flex items-center space-x-4 text-sm\\"><span class=\\"flex items-center space-x-1.5 v-popper--has-tooltip\\"><zicon-stub icon=\\"alert-triangle\\" size=\\"x-small\\" color=\\"honey\\"></zicon-stub> <span class=\\"text-honey\\">
               Token expires in -5 days
-            </span></span> <span class=\\"flex items-center space-x-2 has-tooltip\\" data-original-title=\\"null\\"><zicon-stub icon=\\"trending-up\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Last used on Feb 7, 2054</span></span></p>
+            </span></span> <span class=\\"flex items-center space-x-2 v-popper--has-tooltip\\"><zicon-stub icon=\\"trending-up\\" size=\\"x-small\\" color=\\"vanilla-400\\"></zicon-stub> <span>Last used on Feb 7, 2054</span></span></p>
     </div>
     <div class=\\"hidden w-full md:block md:w-1/5\\">
-      <div class=\\"flex items-center justify-end h-full pr-3.5\\">
-        <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"medium\\" to=\\"\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">
-          <zicon-stub icon=\\"trash-2\\" size=\\"small\\" position=\\"\\" color=\\"cherry opacity-75\\"></zicon-stub>
+      <div class=\\"flex h-full items-center justify-end pr-3.5\\">
+        <zbutton-stub button-type=\\"ghost\\" class=\\"v-popper--has-tooltip\\">
+          <zicon-stub icon=\\"trash-2\\" color=\\"cherry opacity-75\\"></zicon-stub>
         </zbutton-stub>
       </div>
     </div>
@@ -22,19 +22,19 @@ exports[`renders TokenCard with all props 1`] = `
 `;
 
 exports[`renders TokenCard with all props 2`] = `
-"<div to=\\"\\" class=\\"block group\\">
+"<div to=\\"\\" class=\\"group block\\">
   <!---->
-  <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"space-y-1 text-sm border-slate-400 text-vanilla-400 w-full md:w-4/5 p-3\\">
+  <div class=\\"flex w-full flex-1 flex-wrap\\">
+    <div class=\\"space-y-1 border-slate-400 text-sm text-vanilla-400 w-full md:w-4/5 p-3\\">
       <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base font-medium\\">mock-description</span></div>
-      <p class=\\"flex items-center space-x-4 text-sm\\"><span class=\\"flex items-center space-x-1.5 has-tooltip\\" data-original-title=\\"null\\"><zicon-stub icon=\\"alert-triangle\\" size=\\"x-small\\" position=\\"\\" color=\\"honey\\"></zicon-stub> <span class=\\"text-honey\\">
+      <p class=\\"flex items-center space-x-4 text-sm\\"><span class=\\"flex items-center space-x-1.5 v-popper--has-tooltip\\"><zicon-stub icon=\\"alert-triangle\\" size=\\"x-small\\" color=\\"honey\\"></zicon-stub> <span class=\\"text-honey\\">
               Token expires in -5 days
-            </span></span> <span class=\\"flex items-center space-x-2 has-tooltip\\" data-original-title=\\"null\\"><zicon-stub icon=\\"trending-up\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Last used on Feb 7, 2054</span></span></p>
+            </span></span> <span class=\\"flex items-center space-x-2 v-popper--has-tooltip\\"><zicon-stub icon=\\"trending-up\\" size=\\"x-small\\" color=\\"vanilla-400\\"></zicon-stub> <span>Last used on Feb 7, 2054</span></span></p>
     </div>
     <div class=\\"hidden w-full md:block md:w-1/5\\">
-      <div class=\\"flex items-center justify-end h-full pr-3.5\\">
-        <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"medium\\" to=\\"\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">
-          <zicon-stub icon=\\"trash-2\\" size=\\"small\\" position=\\"\\" color=\\"cherry opacity-75\\"></zicon-stub>
+      <div class=\\"flex h-full items-center justify-end pr-3.5\\">
+        <zbutton-stub button-type=\\"ghost\\" class=\\"v-popper--has-tooltip\\">
+          <zicon-stub icon=\\"trash-2\\" color=\\"cherry opacity-75\\"></zicon-stub>
         </zbutton-stub>
       </div>
     </div>
@@ -43,17 +43,17 @@ exports[`renders TokenCard with all props 2`] = `
 `;
 
 exports[`renders TokenCard with all props 3`] = `
-"<div to=\\"\\" class=\\"block group\\">
+"<div to=\\"\\" class=\\"group block\\">
   <!---->
-  <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"space-y-1 text-sm border-slate-400 text-vanilla-400 w-full md:w-4/5 p-3\\">
+  <div class=\\"flex w-full flex-1 flex-wrap\\">
+    <div class=\\"space-y-1 border-slate-400 text-sm text-vanilla-400 w-full md:w-4/5 p-3\\">
       <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base font-medium\\">mock-description</span></div>
-      <p class=\\"flex items-center space-x-4 text-sm\\"><span class=\\"flex items-center space-x-1.5 has-tooltip\\" data-original-title=\\"null\\"><zicon-stub icon=\\"alert-circle\\" size=\\"x-small\\" position=\\"\\" color=\\"cherry\\"></zicon-stub> <span class=\\"text-cherry\\">Token expired on Feb 7, 2055</span></span> <span class=\\"flex items-center space-x-2 has-tooltip\\" data-original-title=\\"null\\"><zicon-stub icon=\\"trending-up\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Last used on Feb 7, 2054</span></span></p>
+      <p class=\\"flex items-center space-x-4 text-sm\\"><span class=\\"flex items-center space-x-1.5 v-popper--has-tooltip\\"><zicon-stub icon=\\"alert-circle\\" size=\\"x-small\\" color=\\"cherry\\"></zicon-stub> <span class=\\"text-cherry\\">Token expired on Feb 7, 2055</span></span> <span class=\\"flex items-center space-x-2 v-popper--has-tooltip\\"><zicon-stub icon=\\"trending-up\\" size=\\"x-small\\" color=\\"vanilla-400\\"></zicon-stub> <span>Last used on Feb 7, 2054</span></span></p>
     </div>
     <div class=\\"hidden w-full md:block md:w-1/5\\">
-      <div class=\\"flex items-center justify-end h-full pr-3.5\\">
-        <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"medium\\" to=\\"\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">
-          <zicon-stub icon=\\"trash-2\\" size=\\"small\\" position=\\"\\" color=\\"cherry opacity-75\\"></zicon-stub>
+      <div class=\\"flex h-full items-center justify-end pr-3.5\\">
+        <zbutton-stub button-type=\\"ghost\\" class=\\"v-popper--has-tooltip\\">
+          <zicon-stub icon=\\"trash-2\\" color=\\"cherry opacity-75\\"></zicon-stub>
         </zbutton-stub>
       </div>
     </div>

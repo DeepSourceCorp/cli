@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-2">
     <div class="space-y-1.5">
-      <label :for="id" class="text-sm text-vanilla-400 font-medium md:text-base"
+      <label :for="id" class="text-sm font-medium text-vanilla-400 md:text-base"
         >{{ label }} <span class="text-cherry-500">*</span></label
       >
 
@@ -20,15 +20,10 @@
 </template>
 
 <script lang="ts">
-import { ZIcon, ZInput } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 @Component({
-  name: 'FormField',
-  components: {
-    ZIcon,
-    ZInput
-  }
+  name: 'FormField'
 })
 export default class FormField extends Vue {
   @Prop({ required: true })

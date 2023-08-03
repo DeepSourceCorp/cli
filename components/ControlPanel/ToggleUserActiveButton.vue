@@ -27,7 +27,7 @@
         @onClose="showToggleUserActiveButton = false"
       >
         <template #footer="{ close }">
-          <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
+          <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
             <z-button
               button-type="ghost"
               :disabled="isTogglingUser"
@@ -57,14 +57,13 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, namespace } from 'nuxt-property-decorator'
-import { ZButton, ZConfirm } from '@deepsource/zeal'
 import { OrgUsersActions } from '~/store/control-panel/users'
 import MutationFailedError from '~/utils/mutationFailedError'
 import { EnterpriseUser } from '~/types/types'
 
 const userManagementStore = namespace('control-panel/users')
 
-@Component({ components: { ZButton, ZConfirm }, name: 'ToggleUserActiveButton' })
+@Component({ name: 'ToggleUserActiveButton' })
 export default class ToggleUserActiveButton extends Vue {
   @userManagementStore.Action(OrgUsersActions.TOGGLE_USER_ACTIVE)
   toggleUserActive: (args: { userId: string; isActive: boolean }) => Promise<boolean>

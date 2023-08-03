@@ -5,7 +5,7 @@
         We are processing your payment for the
         <span class="font-semibold"> {{ currentPlanName }}</span> plan.
       </p>
-      <ul class="mt-2 space-y-1 list-disc">
+      <ul class="mt-2 list-disc space-y-1">
         <li class="ml-4">
           If you have already authorized the payment, please wait while we confirm it.
         </li>
@@ -23,14 +23,10 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { parseISODate, formatDate } from '~/utils/date'
-import { ZButton } from '@deepsource/zeal'
 import { BillingInfo } from '~/types/types'
 
 @Component({
-  name: 'StripeScaPendingAlert',
-  components: {
-    ZButton
-  }
+  name: 'StripeScaPendingAlert'
 })
 export default class StripeScaPendingAlert extends Vue {
   @Prop({ required: true })

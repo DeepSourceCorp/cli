@@ -14,7 +14,7 @@
         v-if="!$config.onPrem"
         as="nuxt-link"
         to="/discover"
-        class="w-full flex items-center"
+        class="flex w-full items-center"
         @click.native="close"
       >
         <z-icon icon="discover" color="vanilla-300" class="mr-2.5" />
@@ -23,7 +23,7 @@
       <z-menu-item
         as="nuxt-link"
         to="/directory"
-        class="w-full flex items-center"
+        class="flex w-full items-center"
         @click.native="close"
       >
         <z-icon icon="book" color="vanilla-300" class="mr-2.5" />
@@ -35,14 +35,11 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import { ZMenu, ZMenuItem, ZButton, ZIcon } from '@deepsource/zeal'
-
 /**
  * Extra sub menu shown beside the `Dashboard` link in sidebar
  */
 @Component({
-  name: 'ExtrasMenu',
-  components: { ZMenu, ZMenuItem, ZButton, ZIcon }
+  name: 'ExtrasMenu'
 })
 export default class ExtrasMenu extends Vue {}
 </script>

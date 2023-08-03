@@ -1,17 +1,17 @@
 <template>
-  <section class="grid max-w-3xl grid-cols-1 p-4 pb-12 gap-5">
+  <section class="grid max-w-3xl grid-cols-1 gap-5 p-4 pb-12">
     <div class="flex justify-between text-left">
       <div class="space-y-1">
         <h2 class="font-medium">Account</h2>
-        <p class="text-vanilla-400 text-sm">Manage your account settings.</p>
+        <p class="text-sm text-vanilla-400">Manage your account settings.</p>
       </div>
     </div>
 
     <user-profile />
 
     <div class="divide-y divide-ink-200 rounded-md border border-ink-200 bg-ink-300">
-      <div class="flex items-center w-full justify-between p-4">
-        <span class="font-medium text-xs uppercase text-vanilla-400 tracking-wider"
+      <div class="flex w-full items-center justify-between p-4">
+        <span class="text-xs font-medium uppercase tracking-wider text-vanilla-400"
           >login connections</span
         >
         <nuxt-link :to="context.installationProvidersUrl">
@@ -19,20 +19,20 @@
         </nuxt-link>
       </div>
 
-      <div v-if="isLoading" class="bg-ink-300 animate-pulse h-14"></div>
+      <div v-if="isLoading" class="h-14 animate-pulse bg-ink-300"></div>
 
       <template v-else>
         <div
           v-for="(connection, idx) in viewer.socialConnections"
           :key="idx"
-          class="flex w-full justify-between items-center p-4"
+          class="flex w-full items-center justify-between p-4"
         >
           <div class="flex items-center gap-2 text-sm">
             <z-icon :icon="providerData(connection.provider).icon" size="base" />
             <span>{{ providerData(connection.provider).name }}</span>
           </div>
 
-          <div class="text-vanilla-400 text-sm">{{ enabledOnDisplay(connection.enabledOn) }}</div>
+          <div class="text-sm text-vanilla-400">{{ enabledOnDisplay(connection.enabledOn) }}</div>
         </div>
       </template>
     </div>
@@ -40,18 +40,18 @@
     <div class="grid grid-cols-2 gap-5">
       <nuxt-link
         to="/settings/workspaces"
-        class="border border-ink-200 rounded-md bg-ink-300 hover:bg-ink-200 p-4 space-y-1 group"
+        class="group space-y-1 rounded-md border border-ink-200 bg-ink-300 p-4 hover:bg-ink-200"
       >
-        <div class="flex gap-x-2 items-center">
+        <div class="flex items-center gap-x-2">
           <z-icon icon="layout" />
-          <span class="text-vanilla-100 text-sm">Workspaces</span>
+          <span class="text-sm text-vanilla-100">Workspaces</span>
         </div>
         <div class="space-y-6 pl-6">
-          <div class="text-vanilla-400 text-sm">Manage your workspaces</div>
+          <div class="text-sm text-vanilla-400">Manage your workspaces</div>
 
           <div
             v-if="isLoading"
-            class="animate-pulse bg-ink-400 rounded-full h-7 w-26 py-1 px-4"
+            class="h-7 w-26 animate-pulse rounded-full bg-ink-400 px-4 py-1"
           ></div>
           <z-tag
             v-else
@@ -64,14 +64,14 @@
 
       <nuxt-link
         to="/settings/tokens"
-        class="border border-ink-200 rounded-md bg-ink-300 hover:bg-ink-200 p-4 space-y-1 group"
+        class="group space-y-1 rounded-md border border-ink-200 bg-ink-300 p-4 hover:bg-ink-200"
       >
-        <div class="flex gap-x-2 items-center">
+        <div class="flex items-center gap-x-2">
           <z-icon icon="coins" />
-          <span class="text-vanilla-100 text-sm">Tokens</span>
+          <span class="text-sm text-vanilla-100">Tokens</span>
         </div>
         <div class="space-y-6 pl-6">
-          <div class="text-vanilla-400 text-sm">Manage your personal access tokens</div>
+          <div class="text-sm text-vanilla-400">Manage your personal access tokens</div>
           <z-tag
             bg-color="ink-400 group-hover:bg-ink-300"
             class="border border-ink-200 group-hover:border-ink-100"
@@ -85,7 +85,6 @@
   </section>
 </template>
 <script lang="ts">
-import { ZButton, ZIcon, ZTag } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import { fromNow } from '@/utils/date'
@@ -103,10 +102,7 @@ import ContextMixin from '~/mixins/contextMixin'
 @Component({
   components: {
     UserProfile,
-    DeleteUser,
-    ZIcon,
-    ZTag,
-    ZButton
+    DeleteUser
   },
   meta: {
     auth: {

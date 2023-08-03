@@ -27,17 +27,11 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZModal } from '@deepsource/zeal'
 
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import PlanDetailMixin from '~/mixins/planDetailMixin'
 
-@Component({
-  components: {
-    ZButton,
-    ZModal
-  }
-})
+@Component({})
 export default class UpgradeAccountModal extends mixins(OwnerDetailMixin, PlanDetailMixin) {
   @Prop({ required: true })
   login: string

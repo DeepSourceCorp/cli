@@ -2,16 +2,16 @@
   <!-- TODO the sidebar shouldn't need a z-index in lg+ screens but conflicts with zeal components block this  -->
   <aside
     v-outside-click="closeMenu"
-    class="fixed top-0 z-50 flex flex-col h-screen duration-200 border-r lg:sticky lg:left-0 transition-width transform-gpu border-slate-400 group bg-ink-400"
+    class="transition-width group fixed top-0 z-50 flex h-screen transform-gpu flex-col border-r border-slate-400 bg-ink-400 duration-200 lg:sticky lg:left-0"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
-    <section class="p-4 border-b border-slate-400">
+    <section class="border-b border-slate-400 p-4">
       <nuxt-link :to="homeUrl">
-        <img class="h-5 mt-0.5" src="~/assets/images/logo-wordmark-white.svg" alt="DeepSource" />
+        <img class="mt-0.5 h-5" src="~/assets/images/logo-wordmark-white.svg" alt="DeepSource" />
       </nuxt-link>
     </section>
     <section
-      class="flex flex-col justify-between flex-grow h-full p-3 space-y-3 overflow-y-scroll hide-scroll border-slate-400"
+      class="hide-scroll flex h-full flex-grow flex-col justify-between space-y-3 overflow-y-scroll border-slate-400 p-3"
     >
       <div class="space-y-2">
         <nuxt-link
@@ -19,10 +19,10 @@
           icon="add-watchlist"
           :active="$route.name === 'discover-watchlist'"
           to="/discover/watchlist"
-          class="flex items-center w-full p-2 gap-x-2 text-sm leading-none border rounded-sm bg-ink-300 border-slate-400 hover:bg-ink-200"
+          class="flex w-full items-center gap-x-2 rounded-sm border border-slate-400 bg-ink-300 p-2 text-sm leading-none hover:bg-ink-200"
         >
-          <z-icon icon="plus" size="small" color="vanilla-400" class="min-w-4 min-h-4" />
-          <span class="flex justify-between w-full">
+          <z-icon icon="plus" size="small" color="vanilla-400" class="min-h-4 min-w-4" />
+          <span class="flex w-full justify-between">
             <span>Watchlist</span>
             <z-tag
               v-if="watchedRepositoriesCount"
@@ -50,20 +50,20 @@
 
         <div class="ml-2">
           <span
-            class="ml-0.5 text-xs leading-none font-medium tracking-wider uppercase text-vanilla-400"
+            class="ml-0.5 text-xs font-medium uppercase leading-none tracking-wider text-vanilla-400"
           >
             Filter by technology
           </span>
-          <div class="flex flex-wrap gap-1.5 mt-2">
+          <div class="mt-2 flex flex-wrap gap-1.5">
             <template v-for="analyzer in analyzerList">
               <nuxt-link
                 v-if="!['test-coverage', 'secrets'].includes(analyzer.shortcode)"
                 :key="analyzer.id"
-                class="inline-flex items-center justify-center pr-2 pl-1 py-1 mb-0.5 mr-0.5 space-x-1 text-sm rounded-full cursor-pointer"
+                class="mb-0.5 mr-0.5 inline-flex cursor-pointer items-center justify-center space-x-1 rounded-full py-1 pl-1 pr-2 text-sm"
                 :class="[
                   $route.params.lang === analyzer.shortcode
                     ? 'bg-robin'
-                    : 'bg-ink-200 hover:bg-ink-100 bg-opacity-80 text-vanilla-400'
+                    : 'bg-ink-200 bg-opacity-80 text-vanilla-400 hover:bg-ink-100'
                 ]"
                 :to="
                   $route.params.lang === analyzer.shortcode
@@ -106,8 +106,8 @@
       </div>
     </section>
 
-    <section class="relative self-end w-full border-t border-slate-400 justify-self-end group">
-      <div v-if="loggedIn" class="p-2.5 space-y-2">
+    <section class="group relative w-full self-end justify-self-end border-t border-slate-400">
+      <div v-if="loggedIn" class="space-y-2 p-2.5">
         <div class="lg:flex">
           <support-menu :is-collapsed="isCollapsed" />
         </div>
@@ -123,8 +123,8 @@
           <extras-menu />
         </div>
         <div
-          class="items-center hidden lg:flex"
-          :class="[isCollapsed ? 'w-8' : 'lg:space-x-1 w-full justify-between']"
+          class="hidden items-center lg:flex"
+          :class="[isCollapsed ? 'w-8' : 'w-full justify-between lg:space-x-1']"
         >
           <user-menu :is-collapsed="isCollapsed" />
         </div>
@@ -132,7 +132,7 @@
 
       <footer
         v-else
-        class="w-full p-3 border-solid border-slate-400 bg-gradient-dark-dawn backdrop-blur-xl"
+        class="w-full border-solid border-slate-400 p-3 backdrop-blur-xl bg-gradient-dark-dawn"
       >
         <h3 class="text-lg font-semibold">Run your first analysis.</h3>
         <p class="mt-2 text-sm text-vanilla-400">
@@ -140,7 +140,7 @@
           production.
         </p>
         <nuxt-link to="/signup">
-          <z-button button-type="primary" class="w-full mt-4">Start now</z-button>
+          <z-button button-type="primary" class="mt-4 w-full">Start now</z-button>
         </nuxt-link>
       </footer>
       <div
@@ -153,19 +153,19 @@
             v-tooltip="`'Tis the season`"
             src="~/assets/images/christmas-logo.svg"
             alt="Deepsource logo"
-            class="flex-shrink-0 cursor-pointer min-w-4 min-h-4"
+            class="min-h-4 min-w-4 flex-shrink-0 cursor-pointer"
           />
           <z-icon
             v-else
             icon="logo"
             size="small"
             color="vanilla-100"
-            class="flex-shrink-0 cursor-pointer min-w-4 min-h-4"
+            class="min-h-4 min-w-4 flex-shrink-0 cursor-pointer"
           />
           <span
-            class="self-end text-xs transition-all text-vanilla-300"
+            class="self-end text-xs text-vanilla-300 transition-all"
             :class="{
-              'opacity-0 hidden delay-300': isCollapsed,
+              'hidden opacity-0 delay-300': isCollapsed,
               'opacity-1 flex delay-0': !isCollapsed
             }"
             >© {{ currentYear }} DeepSource Corp.</span
@@ -188,7 +188,6 @@
 
 <script lang="ts">
 import { Component, mixins, namespace, Watch } from 'nuxt-property-decorator'
-import { ZButton, ZConfirm, ZIcon, ZTag } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AuthMixin from '~/mixins/authMixin'
@@ -203,12 +202,6 @@ const directoryStore = namespace('directory/directory')
 const discoverUserStore = namespace('discover/user')
 
 @Component({
-  components: {
-    ZButton,
-    ZConfirm,
-    ZIcon,
-    ZTag
-  },
   methods: {
     isChristmasSeason
   }

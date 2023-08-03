@@ -1,4 +1,4 @@
-mutation($groupId: ID!, $userId: ID!) {
+mutation ($groupId: ID!, $userId: ID!) {
   removeUserFromGroup(input: { groupId: $groupId, userId: $userId }) {
     ok
   }

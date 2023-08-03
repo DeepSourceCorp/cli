@@ -1,9 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ UpdateSubscriptionModal ]] renders UpdateSubscriptionModal 1`] = `
-"<div class=\\"fixed inset-0 flex items-end bg-opacity-60 bg-ink-400 z-dialog-backdrop sm:items-center z-modal-backdrop\\">
-  <transition-stub enterclass=\\"translate-y-full sm:translate-y-0 sm:scale-95 sm:opacity-0\\" leavetoclass=\\"translate-y-full sm:translate-y-0 sm:scale-105 sm:opacity-0\\" enteractiveclass=\\"transition-all duration-100 ease-in-out\\" leaveactiveclass=\\"transition-all duration-100 ease-in-out\\">
-    <!---->
-  </transition-stub>
-</div>"
+"<z-modal title=\\"Confirm updates to your subscription\\">
+  <div class=\\"space-y-4 p-4\\">
+    <div class=\\"flex items-center space-x-2\\">
+      <z-avatar image=\\"https://static.deepsource.io/avatars/avatar.png\\" fallback-image=\\"test-image-dir/test-image-file.png\\" user-name=\\"deepsourcelabs\\" size=\\"lg\\"></z-avatar>
+      <ul>
+        <li class=\\"text-base font-medium\\">
+          deepsourcelabs
+        </li>
+        <li class=\\"text-sm text-vanilla-400\\">
+          Currently on plan ($ /
+          year ×
+          32
+          seat)
+        </li>
+      </ul>
+    </div>
+    <section class=\\"w-full space-y-3\\">
+      <div class=\\"flex items-center justify-between\\"><span class=\\"text-sm text-vanilla-400\\">New plan</span> <span class=\\"font-semibold\\">Business</span></div>
+      <div class=\\"flex items-center justify-between\\"><span class=\\"text-sm text-vanilla-400\\">Billing interval</span> <span>Monthly</span></div>
+      <div class=\\"flex items-center justify-between\\"><span class=\\"text-sm text-vanilla-400\\">
+          New monthly total
+          
+            (for 9 seat)
+          </span> <span>
+          $270.00
+          <span class=\\"text-sm\\"> / month </span></span></div>
+      <!---->
+      <div class=\\"border-t border-slate-400 pt-3\\">
+        <div class=\\"flex items-center justify-between\\"><span class=\\"text-base font-semibold\\">Due today</span> <span class=\\"text-lg text-juniper\\">
+            $0.00
+          </span></div>
+        <div class=\\"mt-1 block max-w-sm text-sm text-vanilla-400\\"><span>
+            $4,850.00 will be adjusted via proration.
+          </span> <span>
+            Remaining $4,850.00 will be added to your account
+            credits, to be used in subsequent billing cycles.
+          </span></div>
+      </div>
+    </section>
+  </div>
+</z-modal>"
 `;

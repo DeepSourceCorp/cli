@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="isGridLayout ? 'grid custom-grid-cols' : 'flex flex-wrap'"
-    class="gap-x-7 gap-y-3 leading-3 text-vanilla-400 text-xs"
+    :class="isGridLayout ? 'custom-grid-cols grid' : 'flex flex-wrap'"
+    class="gap-x-7 gap-y-3 text-xs leading-3 text-vanilla-400"
   >
     <template v-for="(dataset, idx) in datasets">
       <div
@@ -11,7 +11,7 @@
         :class="{ 'col-start-2': datasets.length === 3 && idx === 2 && !othersDatasetNames.length }"
         class="flex items-center gap-x-2 truncate"
       >
-        <span :class="dataset.bgColor" class="w-2 h-2 rounded-sm flex-shrink-0"></span>
+        <span :class="dataset.bgColor" class="h-2 w-2 flex-shrink-0 rounded-sm"></span>
         {{ datasetNameFormatter(dataset.name) }}
       </div>
 
@@ -25,19 +25,19 @@
       >
         <template #trigger="{ toggle }">
           <button
-            class="flex items-center gap-x-2 leading-3 cursor-pointer hover:text-vanilla-100 focus:text-vanilla-100"
+            class="flex cursor-pointer items-center gap-x-2 leading-3 hover:text-vanilla-100 focus:text-vanilla-100"
             @click="toggle"
           >
-            <span :class="dataset.bgColor" class="w-2 h-2 rounded-sm"></span> Others
+            <span :class="dataset.bgColor" class="h-2 w-2 rounded-sm"></span> Others
           </button>
         </template>
         <template #body>
-          <ul class="py-2.5 px-3 space-y-3">
+          <ul class="space-y-3 px-3 py-2.5">
             <p
               v-for="name in othersDatasetNames"
               :key="name"
               :icon="name"
-              class="flex items-center gap-x-2.5 cursor"
+              class="cursor flex items-center gap-x-2.5"
             >
               <z-icon :icon="name" size="x-small" />{{ datasetNameFormatter(name) }}
             </p>
@@ -50,7 +50,6 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZMenu, ZIcon } from '@deepsource/zeal'
 import { Dataset } from '~/types/reportTypes'
 import { toSentenceCase } from '~/utils/string'
 import { issueCategoryMap } from '~/utils/reports'
@@ -58,10 +57,6 @@ import { issueCategoryMap } from '~/utils/reports'
  * Legends component for reports charts
  */
 @Component({
-  components: {
-    ZMenu,
-    ZIcon
-  },
   methods: {
     toSentenceCase
   }

@@ -24,7 +24,7 @@
         <template v-if="shareHistoricalData">
           <div
             v-if="historicalValuesLoading"
-            class="h-report-chart mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
+            class="h-report-chart mx-5 my-1.5 animate-pulse rounded-lg bg-ink-300"
           ></div>
           <div v-else>
             <template v-if="shouldChartBeShown">
@@ -67,7 +67,6 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZChart } from '@deepsource/zeal'
 
 import PublicReportMixin from '~/mixins/publicReportMixin'
 
@@ -80,9 +79,6 @@ import { getFormattedIssuesAutofixedChartData } from '~/utils/reports'
  * Public Report page for issues autofixed report
  */
 @Component({
-  components: {
-    ZChart
-  },
   methods: {
     shortenLargeNumber
   }

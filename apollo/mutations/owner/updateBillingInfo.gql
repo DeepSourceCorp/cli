@@ -1,4 +1,4 @@
-mutation($ownerId: ID!, $billingEmail: String, $billingAddress: String) {
+mutation ($ownerId: ID!, $billingEmail: String, $billingAddress: String) {
   updateBillingInfo(
     input: { id: $ownerId, billingEmail: $billingEmail, billingAddress: $billingAddress }
   ) {

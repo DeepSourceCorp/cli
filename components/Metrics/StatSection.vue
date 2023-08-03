@@ -2,38 +2,38 @@
   <section
     class="flex flex-col justify-between"
     :class="{
-      'border rounded-md border-slate-400': showBorder
+      'rounded-md border border-slate-400': showBorder
     }"
   >
     <div
       v-if="title || $slots.controls || $slots.title"
       class="grid grid-cols-1 gap-2"
       :class="{
-        'md:gap-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5': fullWidth,
-        'xl:gap-0 xl:grid-cols-2': !fullWidth,
+        'md:grid-cols-2 md:gap-0 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5': fullWidth,
+        'xl:grid-cols-2 xl:gap-0': !fullWidth,
         'border-b border-slate-400 px-4': showBorder,
         'py-2': $slots.controls && showBorder && !headerSpacingClass,
         'py-3': !$slots.controls && showBorder && !headerSpacingClass,
-        'pt-0 pb-2': $slots.controls && !showBorder && !headerSpacingClass,
-        'pt-0 pb-3': !$slots.controls && !showBorder && !headerSpacingClass,
+        'pb-2 pt-0': $slots.controls && !showBorder && !headerSpacingClass,
+        'pb-3 pt-0': !$slots.controls && !showBorder && !headerSpacingClass,
         [headerSpacingClass]: headerSpacingClass
       }"
     >
       <div
-        class="text-vanilla-100 col-span-full"
+        class="col-span-full text-vanilla-100"
         :class="{
           'sm:col-span-1 md:col-span-1 xl:col-span-2': fullWidth && $slots.controls,
           'xl:col-span-1': !fullWidth && $slots.controls
         }"
       >
         <slot name="title">
-          <div class="flex items-center h-full space-x-2">
+          <div class="flex h-full items-center space-x-2">
             <span class="text-base font-semibold tracking-snug">{{ title }}</span>
             <z-icon
               v-if="helpText"
               v-tooltip="{ content: helpText, delay: { show: 0, hide: 100 } }"
               icon="help"
-              class="stroke-1.5 transition-opacity duration-75 flex-shrink-0"
+              class="flex-shrink-0 stroke-1.5 transition-opacity duration-75"
               color="vanilla-400"
             />
           </div>
@@ -75,17 +75,12 @@
 <script lang="ts">
 // Internals
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 
 /**
  * A wrapper with a header to encapsulate
  * multiple type of sections for the various pages
  */
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 export default class StatSection extends Vue {
   @Prop()
   title: string

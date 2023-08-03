@@ -17,7 +17,7 @@
           <img
             src="~/assets/images/logo-wordmark-white.svg"
             alt="DeepSource"
-            class="mt-0.5 mb-px h-5 w-auto"
+            class="mb-px mt-0.5 h-5 w-auto"
           />
         </section>
       </template>
@@ -105,14 +105,8 @@
 
 <script lang="ts">
 import { Vue, Component, Watch } from 'nuxt-property-decorator'
-import { ZIcon, ZButton } from '@deepsource/zeal'
 
-@Component({
-  components: {
-    ZIcon,
-    ZButton
-  }
-})
+@Component({})
 export default class LoggedOutSidebar extends Vue {
   public isOpen = false
 

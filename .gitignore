@@ -100,3 +100,6 @@ yalc.lock
 
 jestcache
 static/worker/data.worker.js
+
+assets/css/fonts.css
+assets/fonts/Inter-*

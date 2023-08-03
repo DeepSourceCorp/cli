@@ -40,22 +40,12 @@
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 import { ModelSync } from 'vue-property-decorator'
-import { ZIcon, ZButton, ZInput, ZMenu, ZMenuItem, ZBadge } from '@deepsource/zeal'
 import { IssueTypeOptions, IssueFilterChoice } from '~/types/issues'
 
 /**
  * Issue category filter
  */
-@Component({
-  components: {
-    ZIcon,
-    ZButton,
-    ZInput,
-    ZMenu,
-    ZMenuItem,
-    ZBadge
-  }
-})
+@Component({})
 export default class IssueCategoryFilter extends Vue {
   @ModelSync('selectedCategory', 'updateCategory', { type: String })
   readonly modelValue: string

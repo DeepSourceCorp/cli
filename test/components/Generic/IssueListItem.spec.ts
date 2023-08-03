@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/vue'
 import { createLocalVue, shallowMount } from '@vue/test-utils'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 
 import IssueListItem from '~/components/IssueListItem.vue'
 import { cartesian, generateBooleanProps } from '~/test/utils'

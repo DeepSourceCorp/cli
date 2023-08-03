@@ -8,13 +8,13 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"http://localhost/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-link\\" value=\\"http://localhost/report/123456\\" read-only=\\"true\\" placeholder=\\"Report URL\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
 Link - http://localhost/report/123456\\" class=\\"float-left pl-1 hover:text-vanilla-100 hover:no-underline\\"></copybutton-stub>
-      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+      <zbutton-stub icon=\\"check\\" size=\\"small\\" label=\\"Done\\" class=\\"float-right\\"></zbutton-stub>
     </div>
   </div>
 </zdialoggeneric-stub>"
@@ -28,13 +28,13 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"http://localhost/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-link\\" value=\\"http://localhost/report/123456\\" read-only=\\"true\\" placeholder=\\"Report URL\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
 Link - http://localhost/report/123456\\" class=\\"float-left pl-1 hover:text-vanilla-100 hover:no-underline\\"></copybutton-stub>
-      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+      <zbutton-stub icon=\\"check\\" size=\\"small\\" label=\\"Done\\" class=\\"float-right\\"></zbutton-stub>
     </div>
   </div>
 </zdialoggeneric-stub>"
@@ -48,13 +48,13 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"http://localhost/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-link\\" value=\\"http://localhost/report/123456\\" read-only=\\"true\\" placeholder=\\"Report URL\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
 Link - http://localhost/report/123456\\" class=\\"float-left pl-1 hover:text-vanilla-100 hover:no-underline\\"></copybutton-stub>
-      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+      <zbutton-stub icon=\\"check\\" size=\\"small\\" label=\\"Done\\" class=\\"float-right\\"></zbutton-stub>
     </div>
   </div>
 </zdialoggeneric-stub>"
@@ -68,21 +68,21 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <zalert-stub type=\\"warning\\" class=\\"pt-2.5\\">
       <p class=\\"inline-flex items-start gap-x-2.5 leading-6 tracking-snug\\">
-        <zicon-stub icon=\\"solid-alert-circle\\" size=\\"base\\" position=\\"\\" color=\\"honey-500\\"></zicon-stub>
+        <zicon-stub icon=\\"solid-alert-circle\\" color=\\"honey-500\\" size=\\"base\\"></zicon-stub>
         Please make sure you've copied the password. You would not be able to see it again!
       </p>
     </zalert-stub> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"http://localhost/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-link\\" value=\\"http://localhost/report/123456\\" read-only=\\"true\\" placeholder=\\"Report URL\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label> <label for=\\"report-password\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Password</p>
-      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-password\\" value=\\"deepsource\\" read-only=\\"true\\" placeholder=\\"Report password\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
 Link - http://localhost/report/123456
 Password - deepsource\\" class=\\"float-left pl-1 hover:text-vanilla-100 hover:no-underline\\"></copybutton-stub>
-      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+      <zbutton-stub icon=\\"check\\" size=\\"small\\" label=\\"Done\\" class=\\"float-right\\"></zbutton-stub>
     </div>
   </div>
 </zdialoggeneric-stub>"
@@ -96,21 +96,21 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <zalert-stub type=\\"warning\\" class=\\"pt-2.5\\">
       <p class=\\"inline-flex items-start gap-x-2.5 leading-6 tracking-snug\\">
-        <zicon-stub icon=\\"solid-alert-circle\\" size=\\"base\\" position=\\"\\" color=\\"honey-500\\"></zicon-stub>
+        <zicon-stub icon=\\"solid-alert-circle\\" color=\\"honey-500\\" size=\\"base\\"></zicon-stub>
         Please make sure you've copied the password. You would not be able to see it again!
       </p>
     </zalert-stub> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"http://localhost/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-link\\" value=\\"http://localhost/report/123456\\" read-only=\\"true\\" placeholder=\\"Report URL\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label> <label for=\\"report-password\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Password</p>
-      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-password\\" value=\\"deepsource\\" read-only=\\"true\\" placeholder=\\"Report password\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
 Link - http://localhost/report/123456
 Password - deepsource\\" class=\\"float-left pl-1 hover:text-vanilla-100 hover:no-underline\\"></copybutton-stub>
-      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+      <zbutton-stub icon=\\"check\\" size=\\"small\\" label=\\"Done\\" class=\\"float-right\\"></zbutton-stub>
     </div>
   </div>
 </zdialoggeneric-stub>"
@@ -124,21 +124,21 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <zalert-stub type=\\"warning\\" class=\\"pt-2.5\\">
       <p class=\\"inline-flex items-start gap-x-2.5 leading-6 tracking-snug\\">
-        <zicon-stub icon=\\"solid-alert-circle\\" size=\\"base\\" position=\\"\\" color=\\"honey-500\\"></zicon-stub>
+        <zicon-stub icon=\\"solid-alert-circle\\" color=\\"honey-500\\" size=\\"base\\"></zicon-stub>
         Please make sure you've copied the password. You would not be able to see it again!
       </p>
     </zalert-stub> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"http://localhost/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-link\\" value=\\"http://localhost/report/123456\\" read-only=\\"true\\" placeholder=\\"Report URL\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label> <label for=\\"report-password\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Password</p>
-      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-password\\" value=\\"deepsource\\" read-only=\\"true\\" placeholder=\\"Report password\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
 Link - http://localhost/report/123456
 Password - deepsource\\" class=\\"float-left pl-1 hover:text-vanilla-100 hover:no-underline\\"></copybutton-stub>
-      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+      <zbutton-stub icon=\\"check\\" size=\\"small\\" label=\\"Done\\" class=\\"float-right\\"></zbutton-stub>
     </div>
   </div>
 </zdialoggeneric-stub>"
@@ -152,21 +152,21 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <zalert-stub type=\\"warning\\" class=\\"pt-2.5\\">
       <p class=\\"inline-flex items-start gap-x-2.5 leading-6 tracking-snug\\">
-        <zicon-stub icon=\\"solid-alert-circle\\" size=\\"base\\" position=\\"\\" color=\\"honey-500\\"></zicon-stub>
+        <zicon-stub icon=\\"solid-alert-circle\\" color=\\"honey-500\\" size=\\"base\\"></zicon-stub>
         Please make sure you've copied the password. You would not be able to see it again!
       </p>
     </zalert-stub> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"http://localhost/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-link\\" value=\\"http://localhost/report/123456\\" read-only=\\"true\\" placeholder=\\"Report URL\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label> <label for=\\"report-password\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Password</p>
-      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-password\\" value=\\"deepsource\\" read-only=\\"true\\" placeholder=\\"Report password\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
 Link - http://localhost/report/123456
 Password - deepsource\\" class=\\"float-left pl-1 hover:text-vanilla-100 hover:no-underline\\"></copybutton-stub>
-      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+      <zbutton-stub icon=\\"check\\" size=\\"small\\" label=\\"Done\\" class=\\"float-right\\"></zbutton-stub>
     </div>
   </div>
 </zdialoggeneric-stub>"
@@ -180,13 +180,13 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"http://localhost/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-link\\" value=\\"http://localhost/report/123456\\" read-only=\\"true\\" placeholder=\\"Report URL\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
 Link - http://localhost/report/123456\\" class=\\"float-left pl-1 hover:text-vanilla-100 hover:no-underline\\"></copybutton-stub>
-      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+      <zbutton-stub icon=\\"check\\" size=\\"small\\" label=\\"Done\\" class=\\"float-right\\"></zbutton-stub>
     </div>
   </div>
 </zdialoggeneric-stub>"
@@ -200,13 +200,13 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"http://localhost/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-link\\" value=\\"http://localhost/report/123456\\" read-only=\\"true\\" placeholder=\\"Report URL\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
 Link - http://localhost/report/123456\\" class=\\"float-left pl-1 hover:text-vanilla-100 hover:no-underline\\"></copybutton-stub>
-      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+      <zbutton-stub icon=\\"check\\" size=\\"small\\" label=\\"Done\\" class=\\"float-right\\"></zbutton-stub>
     </div>
   </div>
 </zdialoggeneric-stub>"
@@ -220,13 +220,13 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"http://localhost/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-link\\" value=\\"http://localhost/report/123456\\" read-only=\\"true\\" placeholder=\\"Report URL\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
 Link - http://localhost/report/123456\\" class=\\"float-left pl-1 hover:text-vanilla-100 hover:no-underline\\"></copybutton-stub>
-      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+      <zbutton-stub icon=\\"check\\" size=\\"small\\" label=\\"Done\\" class=\\"float-right\\"></zbutton-stub>
     </div>
   </div>
 </zdialoggeneric-stub>"
@@ -240,13 +240,13 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"http://localhost/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-link\\" value=\\"http://localhost/report/123456\\" read-only=\\"true\\" placeholder=\\"Report URL\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
 Link - http://localhost/report/123456\\" class=\\"float-left pl-1 hover:text-vanilla-100 hover:no-underline\\"></copybutton-stub>
-      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+      <zbutton-stub icon=\\"check\\" size=\\"small\\" label=\\"Done\\" class=\\"float-right\\"></zbutton-stub>
     </div>
   </div>
 </zdialoggeneric-stub>"
@@ -260,13 +260,13 @@ exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop opt
     </h3>
     <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
       <p class=\\"text-xs font-normal leading-5 text-vanilla-100\\">Report URL</p>
-      <zinput-stub name=\\"\\" value=\\"http://localhost/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"report-link\\" value=\\"http://localhost/report/123456\\" read-only=\\"true\\" placeholder=\\"Report URL\\" class=\\"border border-ink-200\\"></zinput-stub>
     </label>
     <!---->
     <div>
       <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
 Link - http://localhost/report/123456\\" class=\\"float-left pl-1 hover:text-vanilla-100 hover:no-underline\\"></copybutton-stub>
-      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+      <zbutton-stub icon=\\"check\\" size=\\"small\\" label=\\"Done\\" class=\\"float-right\\"></zbutton-stub>
     </div>
   </div>
 </zdialoggeneric-stub>"

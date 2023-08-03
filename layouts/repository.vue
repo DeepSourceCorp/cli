@@ -62,7 +62,7 @@
           </z-alert>
         </div>
         <!-- Check if the repository has been analyzed or not -->
-        <Nuxt ref="page" v-if="isAnalyzed || allowedOnBroken || $fetchState.pending" />
+        <Nuxt v-if="isAnalyzed || allowedOnBroken || $fetchState.pending" ref="page" />
         <!-- If not analyzed and an error code is present -->
         <div v-else-if="repository.errorCode" class="p-5">
           <repo-inactive
@@ -105,16 +105,15 @@
     <client-only>
       <palette
         v-if="showPalette && allowPalette"
+        class="z-1000"
         @close="showPalette = false"
         @toggle="showPalette = !showPalette"
-        class="z-1000"
-      ></palette>
+      />
     </client-only>
   </div>
 </template>
 
 <script lang="ts">
-import { ZAlert, ZButton, ZIcon, ZLabel } from '@deepsource/zeal'
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 
 import AuthMixin from '~/mixins/authMixin'
@@ -130,12 +129,6 @@ import { RepositoryKindChoices, RunStatus } from '~/types/types'
  * Layout file for `repository` views.
  */
 @Component({
-  components: {
-    ZAlert,
-    ZButton,
-    ZIcon,
-    ZLabel
-  },
   middleware: ['hidePrivateRepo', 'protectMonorepoRoutes'],
   head: {
     bodyAttrs: {

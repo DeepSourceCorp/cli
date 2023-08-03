@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-ink-300 px-4 py-3 text-vanilla-400 text-sm flex gap-x-2 items-center rounded-sm">
+  <div class="flex items-center gap-x-2 rounded-sm bg-ink-300 px-4 py-3 text-sm text-vanilla-400">
     <slot name="indicator">
       <span
-        class="w-2 h-2 rounded-full flex-shrink-0"
+        class="h-2 w-2 flex-shrink-0 rounded-full"
         :class="[enabled ? 'bg-juniper' : 'bg-slate']"
       ></span>
     </slot>

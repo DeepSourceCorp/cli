@@ -23,12 +23,11 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import { BaseState } from '@/components/RepoStates'
 
 /**
  * ? Waiting empty state for Test Analyzer runs.
  */
-@Component({ components: { ZIcon, BaseState } })
+@Component({ components: { BaseState } })
 export default class RunWaiting extends Vue {}
 </script>

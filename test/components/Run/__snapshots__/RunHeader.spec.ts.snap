@@ -10,16 +10,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -31,13 +31,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -59,16 +59,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -80,13 +80,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -108,16 +108,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -129,13 +129,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -157,16 +157,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -178,13 +178,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -206,16 +206,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -227,13 +227,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -255,16 +255,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -276,13 +276,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -304,16 +304,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -325,13 +325,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -339,21 +339,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
       </div>
     </div>
   </div>
-  <div class=\\"px-4 rounded-md mx-3 mb-3 bg-honey py-3.5 bg-opacity-10\\">
-    <div class=\\"flex items-center\\">
-      <div class=\\"flex-grow text-sm text-honey-400 -mb-px\\">
-        <div class=\\"flex items-center justify-between\\">
-          <div class=\\"flex items-center gap-x-2\\">
-            <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
-          </div>
-          <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap group-hover:bg-honey-300 text-ink-400 justify-center z-btn--ink-400 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\">
-              <zicon-stub icon=\\"fast-forward\\" size=\\"small\\" position=\\"\\" color=\\"ink-400\\" class=\\"mr-1.5\\"></zicon-stub>Retry check
-            </button></div>
-        </div>
+  <z-alert type=\\"warning\\" class=\\"mx-3 mb-3\\">
+    <div class=\\"flex items-center justify-between\\">
+      <div class=\\"flex items-center gap-x-2\\">
+        <zicon-stub icon=\\"timer-reset\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
       </div>
-      <!---->
+      <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\">
+        <z-button icon=\\"fast-forward\\" button-type=\\"ghost\\" color=\\"ink-400\\" label=\\"Retry check\\" size=\\"small\\" class=\\"group-hover:bg-honey-300\\"></z-button>
+      </div>
     </div>
-  </div>
+  </z-alert>
 </div>"
 `;
 
@@ -367,16 +362,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -388,13 +383,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -402,21 +397,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
       </div>
     </div>
   </div>
-  <div class=\\"px-4 rounded-md mx-3 mb-3 bg-honey py-3.5 bg-opacity-10\\">
-    <div class=\\"flex items-center\\">
-      <div class=\\"flex-grow text-sm text-honey-400 -mb-px\\">
-        <div class=\\"flex items-center justify-between\\">
-          <div class=\\"flex items-center gap-x-2\\">
-            <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
-          </div>
-          <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap group-hover:bg-honey-300 text-ink-400 justify-center z-btn--ink-400 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\">
-              <zicon-stub icon=\\"fast-forward\\" size=\\"small\\" position=\\"\\" color=\\"ink-400\\" class=\\"mr-1.5\\"></zicon-stub>Retry check
-            </button></div>
-        </div>
+  <z-alert type=\\"warning\\" class=\\"mx-3 mb-3\\">
+    <div class=\\"flex items-center justify-between\\">
+      <div class=\\"flex items-center gap-x-2\\">
+        <zicon-stub icon=\\"timer-reset\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
       </div>
-      <!---->
+      <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\">
+        <z-button icon=\\"fast-forward\\" button-type=\\"ghost\\" color=\\"ink-400\\" label=\\"Retry check\\" size=\\"small\\" class=\\"group-hover:bg-honey-300\\"></z-button>
+      </div>
     </div>
-  </div>
+  </z-alert>
 </div>"
 `;
 
@@ -430,16 +420,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -451,13 +441,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -465,21 +455,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
       </div>
     </div>
   </div>
-  <div class=\\"px-4 rounded-md mx-3 mb-3 bg-honey py-3.5 bg-opacity-10\\">
-    <div class=\\"flex items-center\\">
-      <div class=\\"flex-grow text-sm text-honey-400 -mb-px\\">
-        <div class=\\"flex items-center justify-between\\">
-          <div class=\\"flex items-center gap-x-2\\">
-            <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
-          </div>
-          <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\"><button href=\\"#\\" disabled=\\"disabled\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap group-hover:bg-honey-300 text-ink-400 justify-center z-btn--ink-400 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal opacity-50 cursor-not-allowed font-normal text-slate\\">
-              <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"ink-400\\" class=\\"mr-1.5 animate-spin\\"></zicon-stub>Retry check
-            </button></div>
-        </div>
+  <z-alert type=\\"warning\\" class=\\"mx-3 mb-3\\">
+    <div class=\\"flex items-center justify-between\\">
+      <div class=\\"flex items-center gap-x-2\\">
+        <zicon-stub icon=\\"timer-reset\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
       </div>
-      <!---->
+      <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\">
+        <z-button disabled=\\"true\\" is-loading=\\"true\\" icon=\\"fast-forward\\" button-type=\\"ghost\\" color=\\"ink-400\\" label=\\"Retry check\\" size=\\"small\\" class=\\"group-hover:bg-honey-300\\"></z-button>
+      </div>
     </div>
-  </div>
+  </z-alert>
 </div>"
 `;
 
@@ -493,16 +478,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -514,13 +499,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -528,21 +513,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
       </div>
     </div>
   </div>
-  <div class=\\"px-4 rounded-md mx-3 mb-3 bg-honey py-3.5 bg-opacity-10\\">
-    <div class=\\"flex items-center\\">
-      <div class=\\"flex-grow text-sm text-honey-400 -mb-px\\">
-        <div class=\\"flex items-center justify-between\\">
-          <div class=\\"flex items-center gap-x-2\\">
-            <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
-          </div>
-          <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap group-hover:bg-honey-300 text-ink-400 justify-center z-btn--ink-400 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\">
-              <zicon-stub icon=\\"fast-forward\\" size=\\"small\\" position=\\"\\" color=\\"ink-400\\" class=\\"mr-1.5\\"></zicon-stub>Retry check
-            </button></div>
-        </div>
+  <z-alert type=\\"warning\\" class=\\"mx-3 mb-3\\">
+    <div class=\\"flex items-center justify-between\\">
+      <div class=\\"flex items-center gap-x-2\\">
+        <zicon-stub icon=\\"timer-reset\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
       </div>
-      <!---->
+      <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\">
+        <z-button icon=\\"fast-forward\\" button-type=\\"ghost\\" color=\\"ink-400\\" label=\\"Retry check\\" size=\\"small\\" class=\\"group-hover:bg-honey-300\\"></z-button>
+      </div>
     </div>
-  </div>
+  </z-alert>
 </div>"
 `;
 
@@ -556,16 +536,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -577,13 +557,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -591,21 +571,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
       </div>
     </div>
   </div>
-  <div class=\\"px-4 rounded-md mx-3 mb-3 bg-honey py-3.5 bg-opacity-10\\">
-    <div class=\\"flex items-center\\">
-      <div class=\\"flex-grow text-sm text-honey-400 -mb-px\\">
-        <div class=\\"flex items-center justify-between\\">
-          <div class=\\"flex items-center gap-x-2\\">
-            <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
-          </div>
-          <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap group-hover:bg-honey-300 text-ink-400 justify-center z-btn--ink-400 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\">
-              <zicon-stub icon=\\"fast-forward\\" size=\\"small\\" position=\\"\\" color=\\"ink-400\\" class=\\"mr-1.5\\"></zicon-stub>Retry check
-            </button></div>
-        </div>
+  <z-alert type=\\"warning\\" class=\\"mx-3 mb-3\\">
+    <div class=\\"flex items-center justify-between\\">
+      <div class=\\"flex items-center gap-x-2\\">
+        <zicon-stub icon=\\"timer-reset\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
       </div>
-      <!---->
+      <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\">
+        <z-button icon=\\"fast-forward\\" button-type=\\"ghost\\" color=\\"ink-400\\" label=\\"Retry check\\" size=\\"small\\" class=\\"group-hover:bg-honey-300\\"></z-button>
+      </div>
     </div>
-  </div>
+  </z-alert>
 </div>"
 `;
 
@@ -619,16 +594,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -640,13 +615,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -654,21 +629,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
       </div>
     </div>
   </div>
-  <div class=\\"px-4 rounded-md mx-3 mb-3 bg-honey py-3.5 bg-opacity-10\\">
-    <div class=\\"flex items-center\\">
-      <div class=\\"flex-grow text-sm text-honey-400 -mb-px\\">
-        <div class=\\"flex items-center justify-between\\">
-          <div class=\\"flex items-center gap-x-2\\">
-            <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
-          </div>
-          <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap group-hover:bg-honey-300 text-ink-400 justify-center z-btn--ink-400 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\">
-              <zicon-stub icon=\\"fast-forward\\" size=\\"small\\" position=\\"\\" color=\\"ink-400\\" class=\\"mr-1.5\\"></zicon-stub>Retry check
-            </button></div>
-        </div>
+  <z-alert type=\\"warning\\" class=\\"mx-3 mb-3\\">
+    <div class=\\"flex items-center justify-between\\">
+      <div class=\\"flex items-center gap-x-2\\">
+        <zicon-stub icon=\\"timer-reset\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
       </div>
-      <!---->
+      <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\">
+        <z-button icon=\\"fast-forward\\" button-type=\\"ghost\\" color=\\"ink-400\\" label=\\"Retry check\\" size=\\"small\\" class=\\"group-hover:bg-honey-300\\"></z-button>
+      </div>
     </div>
-  </div>
+  </z-alert>
 </div>"
 `;
 
@@ -682,16 +652,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -703,13 +673,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -717,21 +687,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
       </div>
     </div>
   </div>
-  <div class=\\"px-4 rounded-md mx-3 mb-3 bg-honey py-3.5 bg-opacity-10\\">
-    <div class=\\"flex items-center\\">
-      <div class=\\"flex-grow text-sm text-honey-400 -mb-px\\">
-        <div class=\\"flex items-center justify-between\\">
-          <div class=\\"flex items-center gap-x-2\\">
-            <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
-          </div>
-          <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\"><button href=\\"#\\" disabled=\\"disabled\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap group-hover:bg-honey-300 text-ink-400 justify-center z-btn--ink-400 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal opacity-50 cursor-not-allowed font-normal text-slate\\">
-              <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"ink-400\\" class=\\"mr-1.5 animate-spin\\"></zicon-stub>Retry check
-            </button></div>
-        </div>
+  <z-alert type=\\"warning\\" class=\\"mx-3 mb-3\\">
+    <div class=\\"flex items-center justify-between\\">
+      <div class=\\"flex items-center gap-x-2\\">
+        <zicon-stub icon=\\"timer-reset\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
       </div>
-      <!---->
+      <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\">
+        <z-button disabled=\\"true\\" is-loading=\\"true\\" icon=\\"fast-forward\\" button-type=\\"ghost\\" color=\\"ink-400\\" label=\\"Retry check\\" size=\\"small\\" class=\\"group-hover:bg-honey-300\\"></z-button>
+      </div>
     </div>
-  </div>
+  </z-alert>
 </div>"
 `;
 
@@ -745,16 +710,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -766,13 +731,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -780,21 +745,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
       </div>
     </div>
   </div>
-  <div class=\\"px-4 rounded-md mx-3 mb-3 bg-honey py-3.5 bg-opacity-10\\">
-    <div class=\\"flex items-center\\">
-      <div class=\\"flex-grow text-sm text-honey-400 -mb-px\\">
-        <div class=\\"flex items-center justify-between\\">
-          <div class=\\"flex items-center gap-x-2\\">
-            <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
-          </div>
-          <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap group-hover:bg-honey-300 text-ink-400 justify-center z-btn--ink-400 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\">
-              <zicon-stub icon=\\"fast-forward\\" size=\\"small\\" position=\\"\\" color=\\"ink-400\\" class=\\"mr-1.5\\"></zicon-stub>Retry check
-            </button></div>
-        </div>
+  <z-alert type=\\"warning\\" class=\\"mx-3 mb-3\\">
+    <div class=\\"flex items-center justify-between\\">
+      <div class=\\"flex items-center gap-x-2\\">
+        <zicon-stub icon=\\"timer-reset\\" color=\\"current\\"></zicon-stub> <span>This check was <span class=\\"lowercase\\">Timed out</span>.</span>
       </div>
-      <!---->
+      <div class=\\"group -my-3 -mr-2 rounded-sm bg-honey hover:cursor-pointer\\">
+        <z-button icon=\\"fast-forward\\" button-type=\\"ghost\\" color=\\"ink-400\\" label=\\"Retry check\\" size=\\"small\\" class=\\"group-hover:bg-honey-300\\"></z-button>
+      </div>
     </div>
-  </div>
+  </z-alert>
 </div>"
 `;
 
@@ -808,16 +768,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -829,13 +789,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -857,16 +817,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -878,13 +838,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -906,16 +866,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -927,13 +887,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -955,16 +915,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -976,13 +936,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -1004,16 +964,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -1025,13 +985,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -1053,16 +1013,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -1074,13 +1034,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -1102,16 +1062,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -1123,13 +1083,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>
@@ -1151,16 +1111,16 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
           Python
 
           <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-        <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"hidden border border-slate-400 py-0.5 px-2 md:inline-flex\\">
+        <ztag-stub spacing=\\"\\" class=\\"hidden border border-slate-400 px-2 py-0.5 md:inline-flex\\">
           <div class=\\"flex items-center gap-x-1\\">
-            <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
+            <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-xxs font-semibold uppercase leading-7 tracking-wider text-vanilla-200\\">Running</span>
           </div>
         </ztag-stub>
       </div>
       <div class=\\"flex gap-x-3\\">
         <div class=\\"flex h-7 items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 pl-2 pr-3 hover:bg-ink-100\\">
-          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-          <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
+          <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" class=\\"flex-shrink-0\\"></zicon-stub>
+          <div class=\\"line-clamp-1 text-sm text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"v-popper--has-tooltip\\">#77
             </a></div>
         </div>
         <!---->
@@ -1172,13 +1132,13 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with retry check options: {"branc
     <div class=\\"hidden p-3 sm:flex\\">
       <div class=\\"flex w-full items-center justify-center gap-x-6\\">
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-cherry v-popper--has-tooltip\\">
             23
           </div>
           <div class=\\"text-xs text-vanilla-400\\">introduced</div>
         </div>
         <div class=\\"flex flex-col items-center\\">
-          <div class=\\"text-2xl font-semibold text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          <div class=\\"text-2xl font-semibold text-vanilla-400 v-popper--has-tooltip\\">
             0
           </div>
           <div class=\\"text-xs text-vanilla-400\\">resolved</div>

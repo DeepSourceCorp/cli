@@ -87,7 +87,7 @@
             </div>
           </div>
           <div
-            class="mt-1 ml-12 flex gap-x-2 justify-self-start md:ml-0 md:mt-0 md:justify-self-end"
+            class="ml-12 mt-1 flex gap-x-2 justify-self-start md:ml-0 md:mt-0 md:justify-self-end"
           >
             <delete-group-button
               v-if="!group.scimEnabled"
@@ -120,7 +120,6 @@
 
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon, ZAvatar, ZModal, ZPagination } from '@deepsource/zeal'
 
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
 import { OrgGroupsActions, OrgGroupsGetters } from '~/store/control-panel/groups'
@@ -131,7 +130,6 @@ import PaginationMixin from '~/mixins/paginationMixin'
 const groupManagementStore = namespace('control-panel/groups')
 
 @Component({
-  components: { ZInput, ZButton, ZIcon, ZAvatar, ZModal, ZPagination },
   methods: { parseISODate, formatDate },
   layout: 'control-panel'
 })

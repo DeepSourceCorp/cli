@@ -4,7 +4,7 @@
       <template #trigger="{ toggle }">
         <button
           type="button"
-          class="outline-none focus:outline-none flex h-8 min-w-8 items-center justify-center space-x-2 rounded-sm py-1 text-sm hover:bg-ink-300"
+          class="flex h-8 min-w-8 items-center justify-center space-x-2 rounded-sm py-1 text-sm outline-none hover:bg-ink-300 focus:outline-none"
           @click="toggle"
         >
           <z-icon icon="plus-circle" size="small" class="min-h-4 min-w-4" />
@@ -35,7 +35,7 @@
     </z-menu>
 
     <template v-else>
-      <div class="flex items-center space-x-2 py-1 px-2 text-sm text-vanilla-400">
+      <div class="flex items-center space-x-2 px-2 py-1 text-sm text-vanilla-400">
         <z-icon icon="plus-circle" />
         <span>Commit pending</span>
       </div>
@@ -55,7 +55,6 @@
 </template>
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZMenu, ZMenuItem, ZMenuSection } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
@@ -64,13 +63,6 @@ import RepoListMixin from '~/mixins/repoListMixin'
  * Sidebar component for repos that are in `PENDING` state post adhoc run.
  */
 @Component({
-  components: {
-    ZIcon,
-    ZButton,
-    ZMenuItem,
-    ZMenu,
-    ZMenuSection
-  },
   name: 'SidebarPendingAdhocRepos'
 })
 export default class SidebarPendingAdhocRepos extends mixins(ActiveUserMixin, RepoListMixin) {

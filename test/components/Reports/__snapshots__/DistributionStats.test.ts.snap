@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders DistributionStats with and without loading state: {"loading":false} 1`] = `
-"<section class=\\"grid gap-3 grid-cols-2 xs:grid-cols-repeat-10\\">
+"<section class=\\"grid grid-cols-2 gap-3 xs:grid-cols-repeat-10\\">
   <distributionstatcard-stub stat-type=\\"category\\" slug=\\"security\\" name=\\"Security\\" value=\\"7\\"></distributionstatcard-stub>
   <distributionstatcard-stub stat-type=\\"category\\" slug=\\"antipattern\\" name=\\"Anti-pattern\\" value=\\"2\\"></distributionstatcard-stub>
   <distributionstatcard-stub stat-type=\\"category\\" slug=\\"style\\" name=\\"Style\\" value=\\"67\\"></distributionstatcard-stub>
@@ -11,7 +11,7 @@ exports[`renders DistributionStats with and without loading state: {"loading":fa
 `;
 
 exports[`renders DistributionStats with and without loading state: {"loading":null} 1`] = `
-"<section class=\\"grid gap-3 grid-cols-2 xs:grid-cols-repeat-10\\">
+"<section class=\\"grid grid-cols-2 gap-3 xs:grid-cols-repeat-10\\">
   <distributionstatcard-stub stat-type=\\"category\\" slug=\\"security\\" name=\\"Security\\" value=\\"7\\"></distributionstatcard-stub>
   <distributionstatcard-stub stat-type=\\"category\\" slug=\\"antipattern\\" name=\\"Anti-pattern\\" value=\\"2\\"></distributionstatcard-stub>
   <distributionstatcard-stub stat-type=\\"category\\" slug=\\"style\\" name=\\"Style\\" value=\\"67\\"></distributionstatcard-stub>
@@ -21,36 +21,36 @@ exports[`renders DistributionStats with and without loading state: {"loading":nu
 `;
 
 exports[`renders DistributionStats with and without loading state: {"loading":true} 1`] = `
-"<section class=\\"grid gap-3 grid-cols-2 xs:grid-cols-repeat-10\\">
-  <div class=\\"flex flex-col gap-y-3 p-3 bg-ink-300 rounded-md\\">
-    <div class=\\"h-4 w-32 bg-ink-200 animate-pulse\\"></div>
-    <div class=\\"h-5 w-10 bg-ink-200 animate-pulse\\"></div>
+"<section class=\\"grid grid-cols-2 gap-3 xs:grid-cols-repeat-10\\">
+  <div class=\\"flex flex-col gap-y-3 rounded-md bg-ink-300 p-3\\">
+    <div class=\\"h-4 w-32 animate-pulse bg-ink-200\\"></div>
+    <div class=\\"h-5 w-10 animate-pulse bg-ink-200\\"></div>
   </div>
-  <div class=\\"flex flex-col gap-y-3 p-3 bg-ink-300 rounded-md\\">
-    <div class=\\"h-4 w-32 bg-ink-200 animate-pulse\\"></div>
-    <div class=\\"h-5 w-10 bg-ink-200 animate-pulse\\"></div>
+  <div class=\\"flex flex-col gap-y-3 rounded-md bg-ink-300 p-3\\">
+    <div class=\\"h-4 w-32 animate-pulse bg-ink-200\\"></div>
+    <div class=\\"h-5 w-10 animate-pulse bg-ink-200\\"></div>
   </div>
-  <div class=\\"flex flex-col gap-y-3 p-3 bg-ink-300 rounded-md\\">
-    <div class=\\"h-4 w-32 bg-ink-200 animate-pulse\\"></div>
-    <div class=\\"h-5 w-10 bg-ink-200 animate-pulse\\"></div>
+  <div class=\\"flex flex-col gap-y-3 rounded-md bg-ink-300 p-3\\">
+    <div class=\\"h-4 w-32 animate-pulse bg-ink-200\\"></div>
+    <div class=\\"h-5 w-10 animate-pulse bg-ink-200\\"></div>
   </div>
-  <div class=\\"flex flex-col gap-y-3 p-3 bg-ink-300 rounded-md\\">
-    <div class=\\"h-4 w-32 bg-ink-200 animate-pulse\\"></div>
-    <div class=\\"h-5 w-10 bg-ink-200 animate-pulse\\"></div>
+  <div class=\\"flex flex-col gap-y-3 rounded-md bg-ink-300 p-3\\">
+    <div class=\\"h-4 w-32 animate-pulse bg-ink-200\\"></div>
+    <div class=\\"h-5 w-10 animate-pulse bg-ink-200\\"></div>
   </div>
-  <div class=\\"flex flex-col gap-y-3 p-3 bg-ink-300 rounded-md\\">
-    <div class=\\"h-4 w-32 bg-ink-200 animate-pulse\\"></div>
-    <div class=\\"h-5 w-10 bg-ink-200 animate-pulse\\"></div>
+  <div class=\\"flex flex-col gap-y-3 rounded-md bg-ink-300 p-3\\">
+    <div class=\\"h-4 w-32 animate-pulse bg-ink-200\\"></div>
+    <div class=\\"h-5 w-10 animate-pulse bg-ink-200\\"></div>
   </div>
-  <div class=\\"flex flex-col gap-y-3 p-3 bg-ink-300 rounded-md\\">
-    <div class=\\"h-4 w-32 bg-ink-200 animate-pulse\\"></div>
-    <div class=\\"h-5 w-10 bg-ink-200 animate-pulse\\"></div>
+  <div class=\\"flex flex-col gap-y-3 rounded-md bg-ink-300 p-3\\">
+    <div class=\\"h-4 w-32 animate-pulse bg-ink-200\\"></div>
+    <div class=\\"h-5 w-10 animate-pulse bg-ink-200\\"></div>
   </div>
 </section>"
 `;
 
 exports[`renders DistributionStats with and without loading state: {} 1`] = `
-"<section class=\\"grid gap-3 grid-cols-2 xs:grid-cols-repeat-10\\">
+"<section class=\\"grid grid-cols-2 gap-3 xs:grid-cols-repeat-10\\">
   <distributionstatcard-stub stat-type=\\"category\\" slug=\\"security\\" name=\\"Security\\" value=\\"7\\"></distributionstatcard-stub>
   <distributionstatcard-stub stat-type=\\"category\\" slug=\\"antipattern\\" name=\\"Anti-pattern\\" value=\\"2\\"></distributionstatcard-stub>
   <distributionstatcard-stub stat-type=\\"category\\" slug=\\"style\\" name=\\"Style\\" value=\\"67\\"></distributionstatcard-stub>

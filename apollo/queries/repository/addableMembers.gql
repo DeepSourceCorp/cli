@@ -1,4 +1,4 @@
-query($name: String!, $owner: String!, $provider: VCSProviderChoices!, $q: String!) {
+query ($name: String!, $owner: String!, $provider: VCSProviderChoices!, $q: String!) {
   repository(name: $name, owner: $owner, provider: $provider) {
     id
     addableMembers(q: $q) {

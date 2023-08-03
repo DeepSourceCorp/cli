@@ -1,4 +1,4 @@
-mutation($id: ID!, $token: String!, $action: UpdatePaymentActionChoice!) {
+mutation ($id: ID!, $token: String!, $action: UpdatePaymentActionChoice!) {
   updateDefaultPaymentSource(input: { id: $id, token: $token, action: $action }) {
     ok
   }

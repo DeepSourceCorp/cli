@@ -1,4 +1,4 @@
-mutation($input: CreateAutofixRunInput!) {
+mutation ($input: CreateAutofixRunInput!) {
   createAutofixRun(input: $input) {
     runId
   }

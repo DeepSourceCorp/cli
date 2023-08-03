@@ -20,7 +20,7 @@
         @onClose="showRemoveTeamFromGroupConfirm = false"
       >
         <template #footer="{ close }">
-          <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
+          <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
             <z-button
               button-type="ghost"
               :disabled="isRemovingTeam"
@@ -50,7 +50,7 @@
 
 <script lang="ts">
 import { Component, Vue, namespace, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZConfirm, ZIcon } from '@deepsource/zeal'
+
 import { EnterpriseGroup, Owner } from '~/types/types'
 import { OrgGroupsActions } from '~/store/control-panel/groups'
 import MutationFailedError from '~/utils/mutationFailedError'
@@ -58,7 +58,6 @@ import MutationFailedError from '~/utils/mutationFailedError'
 const groupManagementStore = namespace('control-panel/groups')
 
 @Component({
-  components: { ZButton, ZConfirm, ZIcon },
   name: 'RemoveTeamFromGroupButton'
 })
 export default class RemoveTeamFromGroupButton extends Vue {

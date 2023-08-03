@@ -1,5 +1,5 @@
 <template>
-  <div class="items-center space-y-1 md:flex md:space-y-0 md:space-x-4 text-vanilla-400">
+  <div class="items-center space-y-1 text-vanilla-400 md:flex md:space-x-4 md:space-y-0">
     <!-- Issue title -->
     <div class="flex items-center space-x-2">
       <z-icon
@@ -12,7 +12,7 @@
       />
       <span
         v-if="title"
-        class="inline mr-1 overflow-hidden text-xl font-bold leading-9 whitespace-pre text-vanilla-100 overflow-ellipsis"
+        class="mr-1 inline overflow-hidden overflow-ellipsis whitespace-pre text-xl font-bold leading-9 text-vanilla-100"
         v-html="title.trim()"
       >
       </span>
@@ -37,7 +37,7 @@
           <z-tag
             target="_blank"
             rel="noopener noreferrer"
-            class="inline leading-none md:flex hover:bg-ink-200"
+            class="inline leading-none hover:bg-ink-200 md:flex"
             spacing="p-2"
           >
             {{ $route.params.provider == 'gl' ? 'MR' : 'PR' }}{{ vcsPrNumber }}
@@ -50,13 +50,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZTag } from '@deepsource/zeal'
-@Component({
-  components: {
-    ZIcon,
-    ZTag
-  }
-})
+@Component({})
 export default class GistCardTitle extends Vue {
   @Prop({ required: true })
   icon: string

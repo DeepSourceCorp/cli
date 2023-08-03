@@ -2,7 +2,7 @@
   <z-modal title="Confirm and sync access settings" @onClose="$emit('close-sync-modal')">
     <div class="px-4 pt-5">
       <div class="mb-6">
-        <p class="text-sm leading-6 mb-2.5 text-vanilla-300">
+        <p class="mb-2.5 text-sm leading-6 text-vanilla-300">
           This operation will sync your team's access control settings and member permissions from
           {{ providerName }}. This has the following side-effects:
         </p>
@@ -38,12 +38,12 @@
         v-model="overrideChanges"
         label="Override manual changes to roles and permissions on DeepSource"
         size="small"
-        class="cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t"
+        class="cursor-pointer border-t border-ink-200 pt-3 text-vanilla-400"
       />
     </div>
 
     <template #footer="{ close }">
-      <div class="p-4 flex justify-end gap-x-2.5">
+      <div class="flex justify-end gap-x-2.5 p-4">
         <z-button
           label="Cancel"
           button-type="ghost"
@@ -68,19 +68,11 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZModal, ZIcon, ZButton, ZCheckbox, ZAlert } from '@deepsource/zeal'
 
 import { shortenLargeNumber } from '~/utils/string'
 
 // Modal to confirm manual syncing
 @Component({
-  components: {
-    ZModal,
-    ZIcon,
-    ZButton,
-    ZCheckbox,
-    ZAlert
-  },
   methods: {
     shortenLargeNumber
   }

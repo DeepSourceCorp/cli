@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-between w-full p-2">
+  <div class="flex w-full items-center justify-between p-2">
     <z-button
       id="mobile-menu-toggle"
       icon="menu"
@@ -14,13 +14,8 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import { ZButton } from '@deepsource/zeal'
 
-@Component({
-  components: {
-    ZButton
-  }
-})
+@Component({})
 export default class MobileNav extends Vue {
   triggerExpand() {
     this.$root.$emit('ui:show-sidebar-menu')

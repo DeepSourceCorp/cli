@@ -1,4 +1,4 @@
-mutation($input: GitlabInstallationLandingInput!) {
+mutation ($input: GitlabInstallationLandingInput!) {
   gitlabInstallationLanding(input: $input) {
     ok
   }

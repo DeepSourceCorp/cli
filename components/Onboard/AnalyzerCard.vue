@@ -1,10 +1,10 @@
 <template>
   <div
-    class="box-border relative flex flex-col p-2 space-y-3 overflow-scroll rounded-md h-72 min-h-1/2 md:h-44 bg-ink-400 md:min-w-1/2 md:w-1/2"
-    :class="{ 'justify-center items-center space-y-2': !configItems.length }"
+    class="relative box-border flex h-72 min-h-1/2 flex-col space-y-3 overflow-scroll rounded-md bg-ink-400 p-2 md:h-44 md:w-1/2 md:min-w-1/2"
+    :class="{ 'items-center justify-center space-y-2': !configItems.length }"
   >
     <!-- Header -->
-    <div v-if="configItems.length > 0" class="flex items-center w-full space-x-2">
+    <div v-if="configItems.length > 0" class="flex w-full items-center space-x-2">
       <analyzer-logo
         :analyzer-logo="analyzerLogo"
         :shortcode="icon"
@@ -22,7 +22,7 @@
     <!-- Config Section -->
     <template v-for="config in configItems">
       <div :key="config.title" class="flex flex-col space-y-2">
-        <div class="text-xs tracking-wide uppercase text-slate">
+        <div class="text-xs uppercase tracking-wide text-slate">
           {{ config.title }}
         </div>
         <template v-if="config.type == 'string'">
@@ -82,7 +82,7 @@
     </template>
     <!-- No Config Data Section -->
     <template v-if="configItems.length == 0">
-      <div class="absolute cursor-pointer top-2 right-2" @click="onClose">
+      <div class="absolute right-2 top-2 cursor-pointer" @click="onClose">
         <z-icon icon="x" size="small" color="vanilla-200" />
       </div>
       <z-icon :icon="icon" color="pink" size="large" />
@@ -93,19 +93,9 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'nuxt-property-decorator'
-import { ZIcon, ZInput, ZCheckbox, ZOption, ZRadioGroup, ZRadio } from '@deepsource/zeal'
 import { AnalyzerMetaInterface } from '~/store/analyzer/list'
 
-@Component({
-  components: {
-    ZIcon,
-    ZInput,
-    ZCheckbox,
-    ZOption,
-    ZRadioGroup,
-    ZRadio
-  }
-})
+@Component({})
 export default class AnalyzerCard extends Vue {
   @Prop({ default: 'z-lock' })
   icon!: string

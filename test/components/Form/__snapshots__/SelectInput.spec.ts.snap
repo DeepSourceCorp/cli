@@ -9,9 +9,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -28,9 +28,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -47,9 +47,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -66,9 +66,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -85,9 +85,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -104,9 +104,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -123,9 +123,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -142,9 +142,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -161,9 +161,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -180,9 +180,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -199,9 +199,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -218,9 +218,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -237,9 +237,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -256,9 +256,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -275,12 +275,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -296,12 +296,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -317,12 +317,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -338,12 +338,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -359,12 +359,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -380,12 +380,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -401,12 +401,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -422,12 +422,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -443,12 +443,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -464,12 +464,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -485,12 +485,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -506,12 +506,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -527,12 +527,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -548,12 +548,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -569,9 +569,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -588,9 +588,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -607,9 +607,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -626,9 +626,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -645,9 +645,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -664,9 +664,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -683,9 +683,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -702,9 +702,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -721,9 +721,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -740,9 +740,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -759,9 +759,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -778,9 +778,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -797,9 +797,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -816,9 +816,9 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
     <!---->
@@ -835,12 +835,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -856,12 +856,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -877,12 +877,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -898,12 +898,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -919,12 +919,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -940,12 +940,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -961,12 +961,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -982,12 +982,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -1003,12 +1003,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -1024,12 +1024,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -1045,12 +1045,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -1066,12 +1066,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -1087,12 +1087,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>
@@ -1108,12 +1108,12 @@ exports[`[[ SelectInput ]] renders \`SelectInput\` with all prop options: {"labe
   </div>
   <div>
     <div class=\\"h-8\\">
-      <zselect-stub tabindex=\\"0\\" placeholder=\\"test-placeholder\\" spacing=\\"py-1 px-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" disabled=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 1</div>
-        <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 truncate text-xs\\">Label 2</div>
+      <zselect-stub placeholder=\\"test-placeholder\\" disabled=\\"true\\" spacing=\\"py-1 px-2\\" class=\\"text-sm\\">
+        <z-option label=\\"Label 1\\" value=\\"Value 1\\" class=\\"truncate\\"></z-option>
+        <z-option label=\\"Label 2\\" value=\\"Value 2\\" class=\\"truncate\\"></z-option>
       </zselect-stub>
     </div>
-    <p class=\\"mt-1 ml-0.5 text-xs text-cherry\\">
+    <p class=\\"ml-0.5 mt-1 text-xs text-cherry\\">
       test-error-message
     </p>
   </div>

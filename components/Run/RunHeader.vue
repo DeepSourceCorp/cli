@@ -19,7 +19,7 @@
 
           <z-tag
             v-if="isCurrentCheckLoaded"
-            class="hidden border border-slate-400 py-0.5 px-2 md:inline-flex"
+            class="hidden border border-slate-400 px-2 py-0.5 md:inline-flex"
             spacing=""
           >
             <div class="flex items-center gap-x-1">
@@ -45,7 +45,7 @@
               size="small"
               class="flex-shrink-0"
             />
-            <div class="text-sm text-vanilla-400 line-clamp-1">
+            <div class="line-clamp-1 text-sm text-vanilla-400">
               <a
                 v-tooltip="vscLinkTooltip"
                 :href="isForDefaultBranch ? repository.vcsUrl : vcsPrUrl"
@@ -152,7 +152,6 @@
   </div>
 </template>
 <script lang="ts">
-import { ZIcon, ZTag, ZMenu, ZMenuItem, ZMenuSection, ZAlert, ZButton } from '@deepsource/zeal'
 import { Component, namespace, Prop } from 'nuxt-property-decorator'
 
 import LinkToPrev from '@/components/LinkToPrev.vue'
@@ -179,13 +178,6 @@ const runListStore = namespace('run/list')
  */
 @Component({
   components: {
-    ZIcon,
-    ZTag,
-    ZMenu,
-    ZMenuItem,
-    ZMenuSection,
-    ZAlert,
-    ZButton,
     LinkToPrev
   },
   methods: {

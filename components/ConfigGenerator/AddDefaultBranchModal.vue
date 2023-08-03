@@ -3,7 +3,7 @@
     <template #title>
       <span class="text-base text-vanilla-100"> Activate analysis </span>
     </template>
-    <div class="flex flex-col p-4 space-y-3">
+    <div class="flex flex-col space-y-3 p-4">
       <label class="space-y-2 text-sm">
         <span>Enter default branch name</span>
         <z-input v-model="gsrDefaultBranch" placeholder="main" />
@@ -18,7 +18,7 @@
       </p>
     </div>
     <template #footer="{ close }">
-      <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
+      <div class="space-x-4 border-slate-400 p-4 text-right text-vanilla-100">
         <z-button
           icon="zap"
           class="w-48"
@@ -37,16 +37,10 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZModal, ZInput } from '@deepsource/zeal'
 
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
 @Component({
-  components: {
-    ZButton,
-    ZInput,
-    ZModal
-  },
   meta: {
     auth: {
       strict: true

@@ -37,7 +37,6 @@
   </div>
 </template>
 <script lang="ts">
-import { ZTab, ZTag } from '@deepsource/zeal'
 import { Context } from '@nuxt/types'
 import { Component, mixins } from 'nuxt-property-decorator'
 
@@ -56,10 +55,6 @@ export interface LinkOptions {
 }
 
 @Component({
-  components: {
-    ZTab,
-    ZTag
-  },
   layout: 'dashboard',
   middleware: [
     'perm',

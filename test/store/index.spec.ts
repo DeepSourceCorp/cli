@@ -1,4 +1,4 @@
-import { state } from '~/store/index';
+import { state } from '~/store/index'
 
 describe('[Store] Root', () => {
   /*
@@ -9,7 +9,7 @@ describe('[Store] Root', () => {
   describe('[[State]]', () => {
     test('has the right initial data', () => {
       const initState = state()
-      expect(initState).toEqual({});
+      expect(initState).toEqual({})
     })
   })
-});
+})

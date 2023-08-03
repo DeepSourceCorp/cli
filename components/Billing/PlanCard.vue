@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="border rounded-md border-slate-400 min-h-24 group">
+    <div class="group min-h-24 rounded-md border border-slate-400">
       <div
-        class="p-5 space-y-8"
+        class="space-y-8 p-5"
         :class="{
           'bg-ink-300': isPrimary,
           'border-b border-slate-400': features.length
@@ -10,7 +10,7 @@
       >
         <div class="space-y-5">
           <div>
-            <h4 class="font-medium text-1.5xl leading-none mb-2">{{ planName }}</h4>
+            <h4 class="mb-2 text-1.5xl font-medium leading-none">{{ planName }}</h4>
             <p class="text-sm text-vanilla-400">{{ description }}</p>
           </div>
           <template v-if="monthlyAmount">
@@ -28,12 +28,12 @@
               <img
                 src="~/assets/images/payments/sparkles.svg"
                 alt="sparkles"
-                class="block group-hover:hidden -my-5"
+                class="-my-5 block group-hover:hidden"
               />
               <img
                 src="~/assets/images/payments/sparkles-glitter.svg"
                 alt="sparkles"
-                class="hidden group-hover:block -my-5"
+                class="-my-5 hidden group-hover:block"
               />
             </div>
             <p class="text-sm text-vanilla-400">
@@ -63,10 +63,10 @@
           </z-button>
         </div>
       </div>
-      <div v-if="features.length" class="p-5 space-y-5">
+      <div v-if="features.length" class="space-y-5 p-5">
         <ul class="space-y-2">
           <li v-for="feature in features" :key="feature" class="flex items-start space-x-2 text-sm">
-            <span class="inline-flex items-center flex-shrink-0 h-5">
+            <span class="inline-flex h-5 flex-shrink-0 items-center">
               <z-icon icon="check" color="juniper" />
             </span>
             <span class="text-sm leading-6 text-vanilla-400">{{ feature }}</span>
@@ -75,7 +75,7 @@
         <a
           v-if="allFeaturesLink"
           :href="allFeaturesLink"
-          class="flex text-juniper cursor-pointer hover:underline"
+          class="flex cursor-pointer text-juniper hover:underline"
           >See all features</a
         >
       </div>
@@ -85,12 +85,9 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZIcon } from '@deepsource/zeal'
 import PlanDetailMixin from '~/mixins/planDetailMixin'
 
-@Component({
-  components: { ZButton, ZIcon }
-})
+@Component({})
 export default class PlanCard extends mixins(PlanDetailMixin) {
   @Prop({ default: false })
   isPrimary: boolean

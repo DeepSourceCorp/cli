@@ -10,43 +10,43 @@
         :class="{ 'motion-safe:animate-spin': isPending }"
       />
       <h3
-        class="text-vanilla-100 cursor-pointer whitespace-nowrap overflow-ellipsis overflow-hidden"
+        class="cursor-pointer overflow-hidden overflow-ellipsis whitespace-nowrap text-vanilla-100"
       >
         {{ branchName }}
       </h3>
-      <span class="text-sm text-vanilla-400 font-normal inline md:flex flex-shrink-0"
+      <span class="inline flex-shrink-0 text-sm font-normal text-vanilla-400 md:flex"
         >@{{ commitOid.slice(0, 7) }}</span
       >
     </template>
     <template #description>
-      <div class="space-y-1 md:space-y-0 md:flex md:flex-wrap md:items-center md:gap-x-4 mt-2 ml-6">
+      <div class="ml-6 mt-2 space-y-1 md:flex md:flex-wrap md:items-center md:gap-x-4 md:space-y-0">
         <div v-if="!isPending" class="flex items-center space-x-1.5">
           <z-icon icon="clock" size="x-small" color="vanilla-400" />
-          <span class="text-sm sm:text-sm text-vanilla-400">Transformed {{ createdString }}</span>
+          <span class="text-sm text-vanilla-400 sm:text-sm">Transformed {{ createdString }}</span>
         </div>
         <div v-else class="flex items-center space-x-1.5">
           <z-icon icon="clock" size="x-small" color="vanilla-400" />
-          <span class="text-sm sm:text-sm text-vanilla-400">Transform in progress</span>
+          <span class="text-sm text-vanilla-400 sm:text-sm">Transform in progress</span>
         </div>
         <!-- Issue type -->
-        <div class="items-center hidden space-x-1.5 md:flex">
+        <div class="hidden items-center space-x-1.5 md:flex">
           <z-icon icon="git-commit" size="x-small" color="vanilla-400" />
-          <span class="text-sm sm:text-sm text-vanilla-400">{{ gitCompareDisplay }}</span>
+          <span class="text-sm text-vanilla-400 sm:text-sm">{{ gitCompareDisplay }}</span>
         </div>
         <!-- Created -->
-        <div v-if="!isPending" class="items-center hidden space-x-1.5 md:flex">
+        <div v-if="!isPending" class="hidden items-center space-x-1.5 md:flex">
           <z-icon icon="clock" size="x-small" color="vanilla-400" />
-          <span class="text-sm sm:text-sm text-vanilla-400">
+          <span class="text-sm text-vanilla-400 sm:text-sm">
             {{ statusText }} {{ finishedString }}
           </span>
         </div>
         <!-- files transformed -->
-        <div v-if="changedFilesCount !== null" class="items-center flex space-x-1.5 md:hidden">
+        <div v-if="changedFilesCount !== null" class="flex items-center space-x-1.5 md:hidden">
           <z-icon icon="code" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400"> {{ changedFilesCount }} files transformed </span>
         </div>
       </div>
-      <div class="items-center flex space-x-2 mt-2.5 ml-4">
+      <div class="ml-4 mt-2.5 flex items-center space-x-2">
         <z-tag
           v-for="tool in tools"
           :key="tool.shortcode"
@@ -61,7 +61,7 @@
     <template #info>
       <div
         v-if="changedFilesCount !== null"
-        class="flex justify-around items-center space-x-2 h-full"
+        class="flex h-full items-center justify-around space-x-2"
       >
         <div class="flex flex-col items-center">
           <div
@@ -81,7 +81,6 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZTag } from '@deepsource/zeal'
 import { BaseCard } from '../'
 
 import { fromNow, formatSeconds } from '@/utils/date'
@@ -89,9 +88,7 @@ import { TransformerRunStatus } from '~/types/types'
 
 @Component({
   components: {
-    BaseCard,
-    ZIcon,
-    ZTag
+    BaseCard
   }
 })
 export default class TransformCard extends Vue {

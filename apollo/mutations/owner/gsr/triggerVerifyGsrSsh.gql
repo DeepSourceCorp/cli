@@ -1,4 +1,4 @@
-mutation($ownerId: ID!) {
+mutation ($ownerId: ID!) {
   triggerVerifyGsrSsh(input: { ownerId: $ownerId }) {
     status
   }

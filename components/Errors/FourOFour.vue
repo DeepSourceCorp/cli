@@ -1,7 +1,7 @@
 <template>
-  <div class="relative h-screen-dynamic four-o-four">
+  <div class="h-screen-dynamic four-o-four relative">
     <!-- Planet on top for Mobile -->
-    <picture class="absolute top-0 right-0 lg:hidden">
+    <picture class="absolute right-0 top-0 lg:hidden">
       <source
         :srcset="require('~/assets/images/errors/404/planet-top-mobile.webp')"
         type="image/webp"
@@ -14,7 +14,7 @@
     </picture>
 
     <!-- Planet on top for Desktop -->
-    <picture class="hidden absolute top-0 right-0 lg:inline">
+    <picture class="absolute right-0 top-0 hidden lg:inline">
       <source
         :srcset="require('~/assets/images/errors/404/planet-top-desktop.webp')"
         type="image/webp"
@@ -30,9 +30,9 @@
       />
     </picture>
 
-    <div class="flex flex-col items-center justify-center h-full p-4 lg:p-0">
-      <div class="p-6 space-y-5 max-w-sm text-container z-30 lg:p-8 lg:max-w-lg xl:max-w-2xl">
-        <h1 class="text-2.5xl leading-none font-bold text-vanilla-100">
+    <div class="flex h-full flex-col items-center justify-center p-4 lg:p-0">
+      <div class="text-container z-30 max-w-sm space-y-5 p-6 lg:max-w-lg lg:p-8 xl:max-w-2xl">
+        <h1 class="text-2.5xl font-bold leading-none text-vanilla-100">
           <span class="text-vanilla-400"> 404 </span>
           Not Found
         </h1>
@@ -42,13 +42,13 @@
             This dimension doesn't exist...
           </h2>
 
-          <p class="text-sm text-vanilla-400 font-medium lg:text-base">
+          <p class="text-sm font-medium text-vanilla-400 lg:text-base">
             We couldn’t find a page at the URL you’re on. You can try
-            <span class="text-juniper-400 font-semibold"
+            <span class="font-semibold text-juniper-400"
               ><nuxt-link :to="loginUrl">logging in</nuxt-link></span
             >
             or going back to the
-            <span class="text-juniper-400 font-semibold"><a href="/">homepage</a></span
+            <span class="font-semibold text-juniper-400"><a href="/">homepage</a></span
             >.
           </p>
         </div>
@@ -80,7 +80,7 @@
     </picture>
 
     <!-- Cloud on the bottom left only shows up on Desktop -->
-    <picture class="hidden absolute bottom-0 z-20 lg:block">
+    <picture class="absolute bottom-0 z-20 hidden lg:block">
       <source
         :srcset="require('~/assets/images/errors/404/cloud-bottom-left-desktop.webp')"
         type="image/webp"
@@ -94,12 +94,12 @@
 
     <div class="absolute bottom-0 w-screen overflow-hidden">
       <div class="flex items-end">
-        <div class="max-h-screen-dynamic mx-auto z-10 foreground"></div>
+        <div class="max-h-screen-dynamic foreground z-10 mx-auto"></div>
 
         <img
           :src="require('~/assets/images/errors/404/smoke.gif')"
           alt=""
-          class="hidden absolute max-h-screen-dynamic mx-auto right-1/2 smoke lg:inline"
+          class="max-h-screen-dynamic smoke absolute right-1/2 mx-auto hidden lg:inline"
         />
       </div>
     </div>
@@ -108,14 +108,11 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import { ZButton } from '@deepsource/zeal'
 
 /**
  * 404 Error Page
  */
-@Component({
-  components: { ZButton }
-})
+@Component({})
 export default class FourOFour extends Vue {
   get loginUrl(): string {
     return this.$route.name?.startsWith('provider-owner')
@@ -125,7 +122,7 @@ export default class FourOFour extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .four-o-four {
   background: #01010f;
   background-size: cover;

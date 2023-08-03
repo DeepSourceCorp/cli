@@ -1,4 +1,4 @@
-mutation($ownerPk: ID!, $email: String!) {
+mutation ($ownerPk: ID!, $email: String!) {
   removeTeamMember(input: { ownerPk: $ownerPk, memberEmail: $email }) {
     ok
   }

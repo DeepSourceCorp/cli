@@ -26,7 +26,7 @@
         <template v-if="shareHistoricalData">
           <div
             v-if="historicalValuesLoading"
-            class="h-72 mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
+            class="mx-5 my-1.5 h-72 animate-pulse rounded-lg bg-ink-300"
           ></div>
           <div v-else>
             <template v-if="shouldChartBeShown">
@@ -57,37 +57,37 @@
         :loading="recentStatsLoading"
       />
 
-      <div class="overflow-x-auto border rounded-lg border-slate-400">
-        <z-table class="border-none text-vanilla-100 cursor">
+      <div class="overflow-x-auto rounded-lg border border-slate-400">
+        <z-table class="cursor border-none text-vanilla-100">
           <template #head>
-            <z-table-row class="text-xs font-semibold tracking-wider uppercase text-vanilla-400">
-              <z-table-cell class="flex-none w-16 text-left"> Rank </z-table-cell>
-              <z-table-cell class="flex-none w-20 text-left sm:w-28"> Id </z-table-cell>
+            <z-table-row class="text-xs font-semibold uppercase tracking-wider text-vanilla-400">
+              <z-table-cell class="w-16 flex-none text-left"> Rank </z-table-cell>
+              <z-table-cell class="w-20 flex-none text-left sm:w-28"> Id </z-table-cell>
               <z-table-cell class="text-left"> Name </z-table-cell>
               <z-table-cell class="text-right"> Occurrences </z-table-cell>
             </z-table-row>
           </template>
           <template #body>
             <template v-if="complianceIssuesLoading">
-              <z-table-row v-for="index in 25" :key="index" class="text-sm gap-x-4 mb-2 h-10 px-2">
-                <z-table-cell class="flex-none w-14 text-left">
+              <z-table-row v-for="index in 25" :key="index" class="mb-2 h-10 gap-x-4 px-2 text-sm">
+                <z-table-cell class="w-14 flex-none text-left">
                   <div
-                    class="h-full opacity-50 bg-ink-300 animate-pulse border-slate-400 w-12 -mx-2"
+                    class="-mx-2 h-full w-12 animate-pulse border-slate-400 bg-ink-300 opacity-50"
                   ></div>
                 </z-table-cell>
-                <z-table-cell class="flex-none w-16 text-left sm:w-24">
+                <z-table-cell class="w-16 flex-none text-left sm:w-24">
                   <div
-                    class="h-full opacity-50 bg-ink-300 animate-pulse border-slate-400 -mx-5"
+                    class="-mx-5 h-full animate-pulse border-slate-400 bg-ink-300 opacity-50"
                   ></div>
                 </z-table-cell>
                 <z-table-cell class="text-left">
                   <div
-                    class="h-full w-64 sm:max-w-sm opacity-50 bg-ink-300 animate-pulse border-slate-400 -mx-5"
+                    class="-mx-5 h-full w-64 animate-pulse border-slate-400 bg-ink-300 opacity-50 sm:max-w-sm"
                   ></div>
                 </z-table-cell>
-                <z-table-cell class="ml-20 xl:ml-22 text-right sm:flex-initial">
+                <z-table-cell class="ml-20 text-right sm:flex-initial xl:ml-22">
                   <div
-                    class="h-full opacity-50 bg-ink-300 animate-pulse border-slate-400 -mx-5"
+                    class="-mx-5 h-full animate-pulse border-slate-400 bg-ink-300 opacity-50"
                   ></div>
                 </z-table-cell>
               </z-table-row>
@@ -99,18 +99,18 @@
                 :key="issue.issueId"
                 class="text-sm text-vanilla-100"
               >
-                <z-table-cell class="flex-none w-16 font-semibold text-left text-vanilla-400">
+                <z-table-cell class="w-16 flex-none text-left font-semibold text-vanilla-400">
                   {{ issue.rank }}
                 </z-table-cell>
                 <z-table-cell
-                  class="flex-none w-20 font-semibold text-left sm:w-28 text-vanilla-400 whitespace-nowrap"
+                  class="w-20 flex-none whitespace-nowrap text-left font-semibold text-vanilla-400 sm:w-28"
                 >
                   {{ issue.issueId }}
                 </z-table-cell>
-                <z-table-cell class="font-normal text-left whitespace-nowrap sm:whitespace-normal">
+                <z-table-cell class="whitespace-nowrap text-left font-normal sm:whitespace-normal">
                   <p class="leading-8">{{ issue.title }}</p>
                 </z-table-cell>
-                <z-table-cell class="ml-20 xl:ml-22 font-semibold text-right sm:flex-initial">
+                <z-table-cell class="ml-20 text-right font-semibold sm:flex-initial xl:ml-22">
                   {{ issue.occurrence.total }}
                 </z-table-cell>
               </z-table-row>
@@ -124,7 +124,6 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZDivider, ZTag, ZChart, ZTable, ZTableCell, ZTableRow } from '@deepsource/zeal'
 
 import PublicReportMixin from '~/mixins/publicReportMixin'
 import ComplianceReportMixin from '~/mixins/complianceReportMixin'
@@ -136,17 +135,7 @@ import { getFormattedComplianceChartData } from '~/utils/reports'
 /**
  * Public Report Child page
  */
-@Component({
-  components: {
-    ZIcon,
-    ZDivider,
-    ZTag,
-    ZChart,
-    ZTable,
-    ZTableCell,
-    ZTableRow
-  }
-})
+@Component({})
 export default class PublicReportSans extends mixins(PublicReportMixin, ComplianceReportMixin) {
   @Prop()
   shareHistoricalData: boolean

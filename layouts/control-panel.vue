@@ -1,15 +1,15 @@
 <template>
-  <div class="flex mx-auto bg-ink-400 text-vanilla-100">
+  <div class="mx-auto flex bg-ink-400 text-vanilla-100">
     <control-panel-sidebar />
-    <div class="flex flex-col w-full">
+    <div class="flex w-full flex-col">
       <mobile-nav
-        class="sticky top-0 z-30 w-full h-10 border-b lg:hidden bg-ink-300 border-slate-400"
+        class="sticky top-0 z-30 h-10 w-full border-b border-slate-400 bg-ink-300 lg:hidden"
       />
       <div
-        class="sticky flex flex-row items-center justify-between border-b top-10 lg:top-0 border-slate-400 px-3.5 py-2.5 z-10 bg-ink-400"
+        class="sticky top-10 z-10 flex flex-row items-center justify-between border-b border-slate-400 bg-ink-400 px-3.5 py-2.5 lg:top-0"
       >
         <div class="flex items-center gap-x-2">
-          <div class="flex-shrink-0 w-6 h-6 rounded-sm bg-ink-200">
+          <div class="h-6 w-6 flex-shrink-0 rounded-sm bg-ink-200">
             <img :src="orgInfo.logo" :alt="orgInfo.name && `${orgInfo.name}'s logo`" />
           </div>
           <!-- The key attribute is a hack to force z-breadcrumb to re-render till they become dynamic -->
@@ -25,7 +25,7 @@
               v-for="(titleElem, index) in activeRouteInfo.title"
               :key="titleElem"
               :class="{
-                'hidden lg:block text-vanilla-400': activeRouteInfo.title.length - 1 !== index
+                'hidden text-vanilla-400 lg:block': activeRouteInfo.title.length - 1 !== index
               }"
               ><component
                 :is="isSubroute && index < 1 ? 'nuxt-link' : 'span'"
@@ -48,7 +48,7 @@
         :class="pageSubroutes.length ? 'grid-cols-1 lg:grid-cols-sidebar' : 'grid-cols-1'"
       >
         <div
-          class="sticky z-10 flex gap-5 px-4 pt-3 overflow-auto border-b control-panel-sub-sidebar-offset lg:hidden flex-nowrap border-slate-400 bg-ink-400"
+          class="control-panel-sub-sidebar-offset sticky z-10 flex flex-nowrap gap-5 overflow-auto border-b border-slate-400 bg-ink-400 px-4 pt-3 lg:hidden"
         >
           <z-tab
             v-for="cpItem in pageSubroutes"
@@ -64,7 +64,7 @@
         </div>
         <nav
           v-if="pageSubroutes.length"
-          class="control-panel-sub-sidebar sticky border-r border-slate-400 p-2.5 space-y-2.5 hidden lg:block"
+          class="control-panel-sub-sidebar sticky hidden space-y-2.5 border-r border-slate-400 p-2.5 lg:block"
         >
           <sidebar-item
             v-for="cpItem in pageSubroutes"
@@ -92,7 +92,6 @@ import { MobileNav } from '@/components/Layout'
 import AuthMixin from '@/mixins/authMixin'
 import PortalMixin from '@/mixins/portalMixin'
 
-import { ZButton, ZBreadcrumb, ZBreadcrumbItem, ZTab } from '@deepsource/zeal'
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
 import { stripTrailingSlash } from '~/utils/string'
 import { ControlPanelRouteT } from '~/types/control-panel'
@@ -102,11 +101,7 @@ import { ControlPanelRouteT } from '~/types/control-panel'
  */
 @Component({
   components: {
-    MobileNav,
-    ZButton,
-    ZBreadcrumb,
-    ZBreadcrumbItem,
-    ZTab
+    MobileNav
   },
   head: {
     bodyAttrs: {

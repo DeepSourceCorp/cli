@@ -2,17 +2,17 @@
 
 exports[`renders OccurrenceTags with all prop options: {"high":1,"medium":2,"low":3,"total":6} 1`] = `
 "<div class=\\"flex items-center gap-x-3\\">
-  <div class=\\"hidden sm:flex items-center gap-x-1 pr-3 border-r border-r-ink-200\\">
-    <ztag-stub state=\\"default\\" iconleft=\\"issue-minor\\" size=\\"x-small\\" bgcolor=\\"transparent\\" textsize=\\"xs\\" spacing=\\"py-0 px-2\\" iconcolor=\\"current\\" class=\\"border border-slate-400 gap-x-1 has-tooltip\\" data-original-title=\\"null\\">
+  <div class=\\"hidden items-center gap-x-1 border-r border-r-ink-200 pr-3 sm:flex\\">
+    <ztag-stub bg-color=\\"transparent\\" size=\\"x-small\\" spacing=\\"py-0 px-2\\" icon-left=\\"issue-minor\\" text-size=\\"xs\\" class=\\"gap-x-1 border border-slate-400 v-popper--has-tooltip\\">
       3
     </ztag-stub>
-    <ztag-stub state=\\"default\\" iconleft=\\"issue-major\\" size=\\"x-small\\" bgcolor=\\"transparent\\" textsize=\\"xs\\" spacing=\\"py-0 px-2\\" iconcolor=\\"honey\\" class=\\"border border-slate-400 gap-x-1 has-tooltip\\" data-original-title=\\"null\\">
+    <ztag-stub bg-color=\\"transparent\\" size=\\"x-small\\" spacing=\\"py-0 px-2\\" icon-left=\\"issue-major\\" icon-color=\\"honey\\" text-size=\\"xs\\" class=\\"gap-x-1 border border-slate-400 v-popper--has-tooltip\\">
       2
     </ztag-stub>
-    <ztag-stub state=\\"default\\" iconleft=\\"issue-critical\\" size=\\"x-small\\" bgcolor=\\"transparent\\" textsize=\\"xs\\" spacing=\\"py-0 px-2\\" iconcolor=\\"cherry\\" class=\\"border border-slate-400 gap-x-1 has-tooltip\\" data-original-title=\\"null\\">
+    <ztag-stub bg-color=\\"transparent\\" size=\\"x-small\\" spacing=\\"py-0 px-2\\" icon-left=\\"issue-critical\\" icon-color=\\"cherry\\" text-size=\\"xs\\" class=\\"gap-x-1 border border-slate-400 v-popper--has-tooltip\\">
       1
     </ztag-stub>
-  </div> <span class=\\"text-vanilla-100 text-sm font-semibold text-right min-w-10\\">
+  </div> <span class=\\"min-w-10 text-right text-sm font-semibold text-vanilla-100\\">
     6
   </span>
 </div>"

@@ -119,7 +119,6 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZModal, ZNumberInput } from '@deepsource/zeal'
 import ContextMixin from '@/mixins/contextMixin'
 
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
@@ -132,7 +131,6 @@ interface ZModalInterface extends Vue {
  * Plan information component with information for plan type, seats used, per seat price and `Add more seats` CTA.
  */
 @Component({
-  components: { ZButton, ZIcon, ZModal, ZNumberInput },
   layout: 'dashboard'
 })
 export default class PlanInfo extends mixins(ContextMixin, OwnerBillingMixin) {
@@ -250,6 +248,6 @@ input[type='number'].hide-input-spinners::-webkit-outer-spin-button {
 }
 
 input[type='number'].hide-input-spinners {
-  -moz-appearance: textfield; /*For FireFox*/
+  -moz-appearance: textfield; /* For FireFox */
 }
 </style>

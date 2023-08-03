@@ -2,28 +2,28 @@
 
 exports[`[[ UnstyledCopyButton ]] renders \`UnstyledCopyButton\` with all props: {"value":"text to copy","disabled":false,"iconOnly":false} 1`] = `
 "<button>
-  <zicon-stub icon=\\"copy\\" size=\\"base\\" position=\\"\\" color=\\"current\\"></zicon-stub>
+  <zicon-stub icon=\\"copy\\" size=\\"base\\" color=\\"current\\"></zicon-stub>
   Copy
 </button>"
 `;
 
 exports[`[[ UnstyledCopyButton ]] renders \`UnstyledCopyButton\` with all props: {"value":"text to copy","disabled":false,"iconOnly":true} 1`] = `
 "<button>
-  <zicon-stub icon=\\"copy\\" size=\\"base\\" position=\\"\\" color=\\"current\\"></zicon-stub>
+  <zicon-stub icon=\\"copy\\" size=\\"base\\" color=\\"current\\"></zicon-stub>
 
 </button>"
 `;
 
 exports[`[[ UnstyledCopyButton ]] renders \`UnstyledCopyButton\` with all props: {"value":"text to copy","disabled":true,"iconOnly":false} 1`] = `
 "<button disabled=\\"disabled\\">
-  <zicon-stub icon=\\"copy\\" size=\\"base\\" position=\\"\\" color=\\"current\\"></zicon-stub>
+  <zicon-stub icon=\\"copy\\" size=\\"base\\" color=\\"current\\"></zicon-stub>
   Copy
 </button>"
 `;
 
 exports[`[[ UnstyledCopyButton ]] renders \`UnstyledCopyButton\` with all props: {"value":"text to copy","disabled":true,"iconOnly":true} 1`] = `
 "<button disabled=\\"disabled\\">
-  <zicon-stub icon=\\"copy\\" size=\\"base\\" position=\\"\\" color=\\"current\\"></zicon-stub>
+  <zicon-stub icon=\\"copy\\" size=\\"base\\" color=\\"current\\"></zicon-stub>
 
 </button>"
 `;

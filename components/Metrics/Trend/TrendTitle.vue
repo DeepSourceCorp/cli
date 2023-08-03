@@ -76,8 +76,6 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
 
-import { ZTag, ZSelect, ZOption, ZButton, ZIcon } from '@deepsource/zeal'
-
 import { createDuration, DurationTypeT } from '~/utils/date'
 import { StatType, MetricType } from '~/types/metric'
 import { formatIntl } from '~/utils/string'
@@ -88,13 +86,6 @@ import { Metric, MetricNamespaceTrend } from '~/types/types'
  */
 @Component({
   name: 'TrendTitle',
-  components: {
-    ZTag,
-    ZSelect,
-    ZOption,
-    ZButton,
-    ZIcon
-  },
   methods: {
     formatIntl
   }

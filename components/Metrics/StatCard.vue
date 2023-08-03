@@ -59,19 +59,11 @@
   </transition>
 </template>
 <script lang="ts">
-import { ZIcon, ZTag } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-import Ticker from '~/components/Common/Ticker.vue'
 import { Analyzer } from '~/types/types'
 
-@Component({
-  components: {
-    ZIcon,
-    ZTag,
-    Ticker
-  }
-})
+@Component({})
 export default class StatCard extends Vue {
   @Prop()
   icon: string | Analyzer
@@ -136,10 +128,14 @@ export default class StatCard extends Vue {
 
 <style scoped lang="postcss">
 .flash-leave-active {
-  transition: background-color 0.5s ease-in-out, transform 0.5s ease;
+  transition:
+    background-color 0.5s ease-in-out,
+    transform 0.5s ease;
 }
 .flash-enter-active {
-  transition: background-color 0.5s ease-in-out, transform 0.5s ease;
+  transition:
+    background-color 0.5s ease-in-out,
+    transform 0.5s ease;
   transition-delay: 0.5s;
 }
 .flash-enter,

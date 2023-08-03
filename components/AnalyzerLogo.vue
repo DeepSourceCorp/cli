@@ -3,7 +3,7 @@
     <img
       v-if="analyzerLogo"
       v-tooltip="hideTooltip ? '' : name"
-      class="flex-shrink-0 w-auto"
+      class="w-auto flex-shrink-0"
       :class="sizeStyle"
       :src="analyzerLogo"
       :alt="name"
@@ -19,13 +19,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 export default class AnalyzerLogo extends Vue {
   @Prop({ default: '' })
   analyzerLogo!: string

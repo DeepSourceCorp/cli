@@ -1,11 +1,11 @@
 <template>
-  <div v-if="!isLoading && groupInvites.length" class="flex justify-center items-center p-4 pb-6">
+  <div v-if="!isLoading && groupInvites.length" class="flex items-center justify-center p-4 pb-6">
     <div class="max-w-lg">
       <img src="~/assets/images/ui-states/control-panel/group-invite.svg" alt="" class="mx-auto" />
-      <p class="mt-4 text-sm max-w-md mx-auto text-center">
+      <p class="mx-auto mt-4 max-w-md text-center text-sm">
         Share the invite link to onboard new users to your DeepSource Enterprise Installation.
       </p>
-      <div class="space-y-4 mt-6">
+      <div class="mt-6 space-y-4">
         <div v-if="!groupId">
           <z-select
             :key="selectedGroup"
@@ -42,12 +42,12 @@
       </div>
     </div>
   </div>
-  <div v-else-if="isLoading" class="flex flex-col justify-center items-center p-4 pb-6 gap-y-4">
-    <div class="h-24 w-24 rounded-full bg-ink-300 animate-pulse"></div>
-    <div class="h-11 w-full max-w-lg bg-ink-300 animate-pulse mt-2"></div>
-    <div class="h-13 w-full max-w-lg bg-ink-300 animate-pulse"></div>
-    <div class="h-13 w-full max-w-lg bg-ink-300 animate-pulse"></div>
-    <div class="h-10 w-36 bg-ink-300 animate-pulse"></div>
+  <div v-else-if="isLoading" class="flex flex-col items-center justify-center gap-y-4 p-4 pb-6">
+    <div class="h-24 w-24 animate-pulse rounded-full bg-ink-300"></div>
+    <div class="mt-2 h-11 w-full max-w-lg animate-pulse bg-ink-300"></div>
+    <div class="h-13 w-full max-w-lg animate-pulse bg-ink-300"></div>
+    <div class="h-13 w-full max-w-lg animate-pulse bg-ink-300"></div>
+    <div class="h-10 w-36 animate-pulse bg-ink-300"></div>
   </div>
   <div v-else class="p-4">
     <lazy-empty-state
@@ -69,7 +69,6 @@
 
 <script lang="ts">
 import { Component, mixins, namespace, Prop } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon, ZSelect, ZOption } from '@deepsource/zeal'
 
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
 import { OrgGroupsActions, OrgGroupsGetters } from '~/store/control-panel/groups'
@@ -78,7 +77,6 @@ import { EnterpriseGroup } from '~/types/types'
 const groupManagementStore = namespace('control-panel/groups')
 
 @Component({
-  components: { ZInput, ZButton, ZIcon, ZSelect, ZOption },
   name: 'ControlPanelInvite'
 })
 export default class ControlPanelInvite extends mixins(ControlPanelBaseMixin) {

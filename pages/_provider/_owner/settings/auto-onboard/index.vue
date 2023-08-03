@@ -1,6 +1,6 @@
 <template>
   <section class="max-w-3xl p-4">
-    <div class="flex justify-between mb-4">
+    <div class="mb-4 flex justify-between">
       <h2 class="text-lg font-medium">Auto Onboard</h2>
       <z-button
         v-if="configTemplateList.length && allowCrud"
@@ -21,7 +21,7 @@
     <z-input
       v-model="searchCandidate"
       icon="search"
-      class="p-2 mb-4"
+      class="mb-4 p-2"
       :show-border="false"
       background-color="ink-300"
       placeholder="Search templates..."
@@ -33,7 +33,7 @@
     </z-input>
     <div class="grid grid-cols-1 gap-2">
       <template v-if="templatesLoading">
-        <div v-for="index in 3" :key="index" class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
+        <div v-for="index in 3" :key="index" class="h-20 animate-pulse rounded-md bg-ink-300"></div>
       </template>
       <template v-else-if="configTemplateList.length">
         <config-template-card
@@ -96,19 +96,12 @@
 
 <script lang="ts">
 import { mixins, Component, Watch } from 'nuxt-property-decorator'
-import { ZInput, ZIcon, ZButton, ZPagination } from '@deepsource/zeal'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 import { ConfigTemplate } from '~/types/types'
 import { AppFeatures, TeamPerms } from '~/types/permTypes'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 
 @Component({
-  components: {
-    ZInput,
-    ZIcon,
-    ZButton,
-    ZPagination
-  },
   middleware: ['perm', 'teamOnly', 'validateProvider', 'featureGate'],
   meta: {
     auth: {

@@ -12,7 +12,7 @@ exports[`[[ EnterpriseInstallationLogo ]] renders EnterpriseInstallationLogo wit
         </clipPath>
       </defs>
     </svg></div>
-  <zicon-stub icon=\\"move-horizontal\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+  <zicon-stub icon=\\"move-horizontal\\"></zicon-stub>
   <div class=\\"logo-glow-bg my-auto\\"><svg width=\\"48\\" height=\\"48\\" viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\">
       <rect width=\\"14.4\\" height=\\"14.4\\" rx=\\"1.2\\" transform=\\"matrix(1 0 0 -1 0 39.6001)\\" fill=\\"#6784E2\\"></rect>
       <rect width=\\"14.4\\" height=\\"14.4\\" rx=\\"1.2\\" transform=\\"matrix(1 0 0 -1 16.7998 39.6001)\\" fill=\\"#6784E2\\"></rect>
@@ -34,7 +34,7 @@ exports[`[[ EnterpriseInstallationLogo ]] renders EnterpriseInstallationLogo wit
         </clipPath>
       </defs>
     </svg></div>
-  <zicon-stub icon=\\"move-horizontal\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+  <zicon-stub icon=\\"move-horizontal\\"></zicon-stub>
   <div class=\\"logo-glow-bg my-auto\\"><img src=\\"https://local-asgard-static.s3.us-east-1.amazonaws.com/dashboard/images/empty-avatar.svg\\" class=\\"h-12\\"></div>
 </div>"
 `;
@@ -51,7 +51,7 @@ exports[`[[ EnterpriseInstallationLogo ]] renders EnterpriseInstallationLogo wit
         </clipPath>
       </defs>
     </svg></div>
-  <zicon-stub icon=\\"move-horizontal\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+  <zicon-stub icon=\\"move-horizontal\\"></zicon-stub>
   <div class=\\"logo-glow-bg my-auto\\"><svg width=\\"48\\" height=\\"48\\" viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\">
       <rect width=\\"14.4\\" height=\\"14.4\\" rx=\\"1.2\\" transform=\\"matrix(1 0 0 -1 0 39.6001)\\" fill=\\"#6784E2\\"></rect>
       <rect width=\\"14.4\\" height=\\"14.4\\" rx=\\"1.2\\" transform=\\"matrix(1 0 0 -1 16.7998 39.6001)\\" fill=\\"#6784E2\\"></rect>
@@ -73,7 +73,7 @@ exports[`[[ EnterpriseInstallationLogo ]] renders EnterpriseInstallationLogo wit
         </clipPath>
       </defs>
     </svg></div>
-  <zicon-stub icon=\\"move-horizontal\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+  <zicon-stub icon=\\"move-horizontal\\"></zicon-stub>
   <div class=\\"logo-glow-bg my-auto\\"><svg width=\\"48\\" height=\\"48\\" viewBox=\\"0 0 48 48\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\">
       <rect width=\\"14.4\\" height=\\"14.4\\" rx=\\"1.2\\" transform=\\"matrix(1 0 0 -1 0 39.6001)\\" fill=\\"#6784E2\\"></rect>
       <rect width=\\"14.4\\" height=\\"14.4\\" rx=\\"1.2\\" transform=\\"matrix(1 0 0 -1 16.7998 39.6001)\\" fill=\\"#6784E2\\"></rect>

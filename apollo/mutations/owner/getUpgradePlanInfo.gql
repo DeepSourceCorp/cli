@@ -1,4 +1,4 @@
-mutation($id: ID!, $planSlug: String!) {
+mutation ($id: ID!, $planSlug: String!) {
   planInfo: getUpgradeCodeQualitySubscriptionPlanInfo(input: { id: $id, planSlug: $planSlug }) {
     endingBalance
     upcomingBillAmount

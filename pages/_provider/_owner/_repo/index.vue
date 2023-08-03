@@ -87,6 +87,9 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 
+import PinnedChartReport from '~/components/Reports/PinnedChartReport.vue'
+import PinnedCodeCoverageReport from '~/components/Reports/PinnedCodeCoverageReport.vue'
+
 import PinnedReportsMixin from '~/mixins/pinnedReportsMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
@@ -136,7 +139,11 @@ type MetadataViewPropsT = Partial<Repository> & {
  * Repo home page
  */
 @Component({
-  layout: 'repository'
+  layout: 'repository',
+  components: {
+    PinnedChartReport,
+    PinnedCodeCoverageReport
+  }
 })
 export default class Overview extends mixins(PaginationMixin, PinnedReportsMixin, RepoDetailMixin) {
   LoadingConditions = LoadingConditions

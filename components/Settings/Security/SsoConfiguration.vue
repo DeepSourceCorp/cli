@@ -62,7 +62,7 @@
           </button>
         </div>
         <template v-if="isSAMLConfigurable">
-          <hr class="-mx-4 mt-4 mb-3 border-ink-200" />
+          <hr class="-mx-4 mb-3 mt-4 border-ink-200" />
           <div class="-mb-1 flex flex-wrap items-center justify-between">
             <p class="text-xs leading-4 text-vanilla-400">
               Please contact us to update your team's domain.
@@ -110,7 +110,7 @@
         </z-alert>
         <template v-if="isSAMLConfigured">
           <div class="mt-2 rounded-md border border-slate-400">
-            <div class="grid grid-cols-2 content-between px-4 pt-2 pb-3 lg:grid-cols-4">
+            <div class="grid grid-cols-2 content-between px-4 pb-3 pt-2 lg:grid-cols-4">
               <div>
                 <p class="text-xxs uppercase leading-7 tracking-wider text-vanilla-400">
                   Domain name
@@ -145,12 +145,11 @@
 
 <script lang="ts">
 import { Component, ModelSync, Prop, Vue } from 'nuxt-property-decorator'
-import { ZAlert, ZButton, ZIcon, ZInput } from '@deepsource/zeal'
 
 import { LocalStoreDomainVerification, SSO_SETUP_STATES } from '~/types/cloudSso'
 import { IdentityProvider, Maybe, VerifiableDomain } from '~/types/types'
 
-@Component({ components: { ZAlert, ZButton, ZIcon, ZInput } })
+@Component({})
 export default class SsoConfiguration extends Vue {
   @Prop({ required: true })
   verifiableDomain: Maybe<VerifiableDomain>

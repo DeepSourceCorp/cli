@@ -1,10 +1,10 @@
 <template>
-  <div class="flex min-h-screen mx-auto bg-ink-400 text-vanilla-100">
+  <div class="mx-auto flex min-h-screen bg-ink-400 text-vanilla-100">
     <!-- Discover page uses a different sidebar -->
     <discover-sidebar />
     <div ref="scrolling-div" class="w-full">
       <mobile-nav
-        class="sticky top-0 z-30 w-full h-10 border-b lg:hidden bg-ink-300 border-slate-400"
+        class="sticky top-0 z-30 h-10 w-full border-b border-slate-400 bg-ink-300 lg:hidden"
       />
       <Nuxt />
     </div>

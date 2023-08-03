@@ -2,8 +2,8 @@
   <div class="flex flex-col gap-y-4">
     <chart-container>
       <template #report-stats>
-        <div class="flex flex-wrap gap-y-6 gap-x-8">
-          <div class="flex flex-wrap gap-y-6 gap-x-12">
+        <div class="flex flex-wrap gap-x-8 gap-y-6">
+          <div class="flex flex-wrap gap-x-12 gap-y-6">
             <chart-stat title="Status" :loading="reportsDataLoading">
               <compliance-status v-if="!reportsDataLoading" :compliance-passed="compliancePassed" />
             </chart-stat>
@@ -31,12 +31,12 @@
         v-if="complianceIssuesSeverityMap"
         v-bind="complianceIssuesSeverityMap"
         :loading="complianceIssuesLoading"
-        class="px-5 mt-6 md:hidden lg:flex xl:hidden"
+        class="mt-6 px-5 md:hidden lg:flex xl:hidden"
       />
 
       <div
         v-if="historicalValuesLoading"
-        class="h-72 mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
+        class="mx-5 my-1.5 h-72 animate-pulse rounded-lg bg-ink-300"
       ></div>
       <div v-else>
         <template v-if="shouldChartBeShown">
@@ -62,11 +62,11 @@
 
     <recent-stats :current-val="currentVal" :stats="recentStats" :loading="recentStatsLoading" />
 
-    <div class="overflow-x-auto border rounded-lg border-slate-400">
+    <div class="overflow-x-auto rounded-lg border border-slate-400">
       <z-table class="border-none text-vanilla-100">
         <template #head>
-          <z-table-row class="text-xs font-semibold tracking-wider uppercase text-vanilla-400">
-            <z-table-cell class="flex-initial w-12 mr-6 text-left"> Id </z-table-cell>
+          <z-table-row class="text-xs font-semibold uppercase tracking-wider text-vanilla-400">
+            <z-table-cell class="mr-6 w-12 flex-initial text-left"> Id </z-table-cell>
             <z-table-cell class="text-left"> Name </z-table-cell>
             <z-table-cell class="text-right"> Occurrences </z-table-cell>
           </z-table-row>
@@ -78,21 +78,21 @@
                 v-for="index in 9"
                 :key="index"
                 :class="{ 'mb-2': index < 8 }"
-                class="text-sm text-vanilla-100 hover:bg-ink-300 gap-x-4 h-10 px-2"
+                class="h-10 gap-x-4 px-2 text-sm text-vanilla-100 hover:bg-ink-300"
               >
-                <z-table-cell class="flex-none w-12 mr-6 text-left">
+                <z-table-cell class="mr-6 w-12 flex-none text-left">
                   <div
-                    class="h-full opacity-50 bg-ink-300 animate-pulse border-slate-400 w-12 -mx-2"
+                    class="-mx-2 h-full w-12 animate-pulse border-slate-400 bg-ink-300 opacity-50"
                   ></div>
                 </z-table-cell>
                 <z-table-cell class="text-left">
                   <div
-                    class="h-full max-w-sm opacity-50 bg-ink-300 animate-pulse border-slate-400 -mx-6"
+                    class="-mx-6 h-full max-w-sm animate-pulse border-slate-400 bg-ink-300 opacity-50"
                   ></div>
                 </z-table-cell>
-                <z-table-cell class="ml-8 sm:max-w-2xs text-right">
+                <z-table-cell class="ml-8 text-right sm:max-w-2xs">
                   <div
-                    class="h-full opacity-50 bg-ink-300 animate-pulse border-slate-400 -mr-2"
+                    class="-mr-2 h-full animate-pulse border-slate-400 bg-ink-300 opacity-50"
                   ></div>
                 </z-table-cell>
               </z-table-row>
@@ -105,10 +105,10 @@
               :to="issueRoute(issue.issueId)"
             >
               <z-table-row class="text-vanilla-100 hover:bg-ink-300">
-                <z-table-cell class="flex-initial w-12 mr-6 text-sm font-semibold text-vanilla-400">
+                <z-table-cell class="mr-6 w-12 flex-initial text-sm font-semibold text-vanilla-400">
                   {{ issue.issueId }}
                 </z-table-cell>
-                <z-table-cell class="text-sm font-normal whitespace-nowrap text-vanilla-100">
+                <z-table-cell class="whitespace-nowrap text-sm font-normal text-vanilla-100">
                   {{ issue.title }}
                 </z-table-cell>
                 <z-table-cell>
@@ -125,7 +125,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZChart, ZTable, ZTableCell, ZTableRow } from '@deepsource/zeal'
 
 import ComplianceReportMixin from '~/mixins/complianceReportMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
@@ -138,8 +137,7 @@ import { getFormattedComplianceChartData } from '~/utils/reports'
  * Page for displaying the current and historical data of OWASP-top-10 issues.
  */
 @Component({
-  layout: 'repository',
-  components: { ZChart, ZTable, ZTableCell, ZTableRow }
+  layout: 'repository'
 })
 export default class Owasp extends mixins(RepoDetailMixin, ComplianceReportMixin) {
   /**

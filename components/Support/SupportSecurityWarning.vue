@@ -39,8 +39,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { ZIcon, ZButton } from '@deepsource/zeal'
 
-@Component({ name: 'SupportSecurityWarning', components: { ZIcon, ZButton } })
+@Component({ name: 'SupportSecurityWarning' })
 export default class SupportSecurityWarning extends Vue {}
 </script>

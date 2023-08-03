@@ -34,7 +34,6 @@
 </template>
 
 <script lang="ts">
-import { ZIcon } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import { Maybe, Run, RunConnection, RunStatus } from '~/types/types'
@@ -42,7 +41,7 @@ import { Maybe, Run, RunConnection, RunStatus } from '~/types/types'
 import { fromNow } from '~/utils/date'
 import { runStatusIcon, runStatusIconColor } from '~/utils/ui'
 
-@Component({ name: 'LastRunInfo', components: { ZIcon } })
+@Component({ name: 'LastRunInfo' })
 export default class LastRunInfo extends Vue {
   @Prop()
   latestAnalysisRun: Maybe<Run>

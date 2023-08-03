@@ -1,12 +1,12 @@
 <template>
-  <div class="flex justify-center pt-26 animate-glow-bg">
-    <div class="max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-slate-400">
+  <div class="flex animate-glow-bg justify-center pt-26">
+    <div class="max-w-2xl space-y-6 rounded-md border border-slate-400 bg-ink-400 pb-4 pt-6">
       <div class="flex items-center justify-center gap-x-2">
-        <div class="p-1.5 pr-1 rounded-sm bg-ink-300">
+        <div class="rounded-sm bg-ink-300 p-1.5 pr-1">
           <img
             src="~/assets/images/deepsource-logo-centered.svg"
             alt="DeepSource"
-            class="flex-shrink-0 w-8 h-8"
+            class="h-8 w-8 flex-shrink-0"
           />
         </div>
         <z-icon icon="arrow-left-right" />
@@ -17,7 +17,7 @@
         <slot name="notice">
           <notice class="h-8 gap-x-3">
             <template #indicator>
-              <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-honey"></span>
+              <span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-honey"></span>
             </template>
             <p class="text-xs">
               Installing on
@@ -41,7 +41,7 @@
           loading-label="Installing integration"
           icon="play-circle"
           size="small"
-          class="mb-2.5 place-self-end w-44"
+          class="mb-2.5 w-44 place-self-end"
           @click="$emit('triggerInstall')"
         />
       </div>
@@ -50,21 +50,12 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZDivider, ZIcon, ZSelect, ZOption } from '@deepsource/zeal'
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
 /**
  * Intermediary page where the integration installation happens
  */
-@Component({
-  components: {
-    ZButton,
-    ZDivider,
-    ZIcon,
-    ZSelect,
-    ZOption
-  }
-})
+@Component({})
 export default class IntegrationCallbackWrapper extends Vue {
   @Prop({ required: true })
   integrationLogo: string

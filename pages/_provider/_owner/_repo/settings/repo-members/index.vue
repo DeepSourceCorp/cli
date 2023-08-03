@@ -129,7 +129,6 @@
 
 <script lang="ts">
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
-import { ZInput, ZIcon, ZPagination, ZConfirm, ZModal, ZButton } from '@deepsource/zeal'
 import { MemberListItem } from '@/components/Members'
 import {
   Maybe,
@@ -147,12 +146,6 @@ const LIMIT = 15
 
 @Component({
   components: {
-    ZInput,
-    ZConfirm,
-    ZModal,
-    ZIcon,
-    ZPagination,
-    ZButton,
     MemberListItem,
     AddCollaboratorModal
   },

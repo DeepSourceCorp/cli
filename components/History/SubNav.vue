@@ -16,13 +16,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZTab } from '@deepsource/zeal'
 
-@Component({
-  components: {
-    ZTab
-  }
-})
+@Component({})
 export default class SubNav extends Vue {
   @Prop({ default: 'runs' })
   public active: string

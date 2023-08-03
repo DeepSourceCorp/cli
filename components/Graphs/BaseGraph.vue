@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 min-h-40 col-span-full">
+  <div class="col-span-full grid min-h-40 grid-cols-1">
     <z-chart
       ref="base-graph-chart"
       :data-sets="datasets"
@@ -20,13 +20,10 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZChart } from '@deepsource/zeal'
+
 import { formatIntl } from '@/utils/string'
 
 @Component({
-  components: {
-    ZChart
-  },
   methods: {
     formatIntl
   },

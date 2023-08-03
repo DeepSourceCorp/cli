@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="px-4 py-3.5 min-h-13 border-b border-slate-400 flex flex-row items-center">
+    <div class="flex min-h-13 flex-row items-center border-b border-slate-400 px-4 py-3.5">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="text-vanilla-400">
           <nuxt-link :to="$generateRoute(['settings', 'auto-onboard'])">All templates</nuxt-link>
@@ -8,12 +8,12 @@
         <z-breadcrumb-item>{{ title }}</z-breadcrumb-item>
       </z-breadcrumb>
     </div>
-    <div v-if="fetchingTemplate" class="animate-pulse max-w-3xl p-4 space-y-5">
+    <div v-if="fetchingTemplate" class="max-w-3xl animate-pulse space-y-5 p-4">
       <div class="grid grid-cols-4 gap-2">
-        <div class="h-8 bg-ink-300 col-span-2"></div>
+        <div class="col-span-2 h-8 bg-ink-300"></div>
         <div></div>
         <div class="h-8 bg-ink-300"></div>
-        <div class="h-16 bg-ink-300 col-span-2"></div>
+        <div class="col-span-2 h-16 bg-ink-300"></div>
       </div>
       <div class="grid grid-cols-1 gap-4">
         <div class="h-8 bg-ink-300"></div>
@@ -21,7 +21,7 @@
         <div class="h-32 bg-ink-300"></div>
       </div>
     </div>
-    <div v-else :key="$route.fullPath" class="w-full max-w-3xl p-4 mb-10">
+    <div v-else :key="$route.fullPath" class="mb-10 w-full max-w-3xl p-4">
       <page-title :title="title" :description="description">
         <template #actions>
           <template v-if="readOnly">
@@ -118,7 +118,6 @@
 
 <script lang="ts">
 import { Component, mixins, Provide } from 'nuxt-property-decorator'
-import { ZIcon, ZInput, ZButton, ZBreadcrumb, ZBreadcrumbItem } from '@deepsource/zeal'
 import { Analyzer } from '@/components/ConfigGenerator'
 
 import { RepoConfigAnalyzerMeta, RepoConfigInterface } from '~/store/repository/detail'
@@ -130,11 +129,6 @@ import { AppFeatures, TeamPerms } from '~/types/permTypes'
 
 @Component({
   components: {
-    ZIcon,
-    ZInput,
-    ZButton,
-    ZBreadcrumb,
-    ZBreadcrumbItem,
     Analyzer
   },
   middleware: ['perm', 'teamOnly', 'validateProvider', 'featureGate'],

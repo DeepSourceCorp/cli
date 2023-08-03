@@ -1,9 +1,10 @@
 import '@testing-library/jest-dom'
 import { render, fireEvent } from '@testing-library/vue'
 import dayjs from 'dayjs'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 import TokenCard from '~/components/AccessToken/TokenCard.vue'
 import { BaseCard } from '~/components/History'
+import ZButton from '~/components/zeal/ZButton'
 import { cartesian, generateStringProps } from '~/test/utils'
 import { AccessTokenExpirationStatus } from '~/types/types'
 
@@ -57,6 +58,7 @@ test('Emits delete event', async () => {
         id,
         description: 'mock-description'
       },
+      components: { ZButton },
       stubs: {
         ZIcon: true,
         BaseCard

@@ -9,16 +9,16 @@
         :color="statusColor"
       />
       <h3
-        class="overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis"
+        class="cursor-pointer overflow-hidden overflow-ellipsis whitespace-nowrap text-vanilla-100"
         v-html="safeRenderBackticks(pullRequestTitle.trim() || (issue && issue.title))"
       ></h3>
 
-      <span v-if="issue" class="flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex">
+      <span v-if="issue" class="inline flex-shrink-0 text-sm font-normal text-vanilla-400 md:flex">
         {{ issue.shortcode }}
       </span>
     </template>
     <template #description>
-      <div class="items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex">
+      <div class="ml-6 mt-2 items-center gap-x-4 gap-y-1 md:flex md:flex-wrap">
         <!-- Issue type -->
         <div class="flex space-x-5">
           <issue-type v-if="issue" :issue-type="issue.issueType" />
@@ -34,7 +34,7 @@
           <span class="text-sm text-vanilla-400">Created {{ formatDuration }}</span>
         </div>
         <!-- Avatar -->
-        <div class="hidden sm:flex items-center space-x-1.5 text-sm">
+        <div class="hidden items-center space-x-1.5 text-sm sm:flex">
           <z-avatar
             size="xs"
             :image="createdBy.avatar"
@@ -48,7 +48,7 @@
       </div>
     </template>
     <template #info>
-      <div class="flex items-center justify-around h-full space-x-2">
+      <div class="flex h-full items-center justify-around space-x-2">
         <div class="flex flex-col items-center">
           <div
             class="text-2xl font-medium"
@@ -66,7 +66,6 @@
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import { BaseCard } from '@/components/History'
-import { ZIcon, ZButton, ZAvatar } from '@deepsource/zeal'
 import { fromNow } from '@/utils/date'
 import { safeRenderBackticks } from '~/utils/string'
 import { AutofixRunStatus } from '~/types/types'
@@ -75,10 +74,7 @@ import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
   components: {
-    BaseCard,
-    ZIcon,
-    ZButton,
-    ZAvatar
+    BaseCard
   },
   methods: {
     getDefaultAvatar,

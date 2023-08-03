@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-layout mx-auto flex min-h-screen bg-ink-400 text-vanilla-100">
-    <sidebar v-if="loggedIn" @show-palette="showPalette = true" />
+    <main-sidebar v-if="loggedIn" @show-palette="showPalette = true" />
     <logged-out-sidebar v-else />
     <div class="w-full">
       <mobile-nav
@@ -48,11 +48,8 @@
 </template>
 
 <script lang="ts">
-import { ZTab } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
-import { DashboardHeader, LoggedOutSidebar, MobileNav } from '~/components/Layout'
-import { Sidebar } from '~/components/Layout/Sidebar'
 import AuthMixin from '~/mixins/authMixin'
 import ContextMixin from '~/mixins/contextMixin'
 import PaletteMixin from '~/mixins/paletteMixin'
@@ -68,13 +65,6 @@ interface ITabsList {
 }
 
 @Component({
-  components: {
-    Sidebar,
-    DashboardHeader,
-    LoggedOutSidebar,
-    MobileNav,
-    ZTab
-  },
   head: {
     bodyAttrs: {
       class: 'antialiased stroke-2 hide-scroll'

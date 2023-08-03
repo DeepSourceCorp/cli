@@ -158,7 +158,6 @@
 </template>
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar } from '@deepsource/zeal'
 import { formatDate } from '@/utils/date'
 import TEAM_PERMS from '~/utils/teamPerms'
 
@@ -190,7 +189,6 @@ const REPO_PERMS = {
 }
 
 @Component({
-  components: { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar },
   methods: { getDefaultAvatar }
 })
 export default class MemberListItem extends mixins(OwnerDetailMixin) {

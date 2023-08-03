@@ -16,7 +16,7 @@ exports[`[[ IntegrationTitle ]] renders the integration logo along with the name
 
 exports[`[[ IntegrationTitle ]] renders the integration logo along with the name: {"logo":"https://static.deepsource.io/integration_logos/slack.svg","name":"Slack","pending":true} 1`] = `
 "<div class=\\"inline-flex items-center gap-x-2\\">
-  <div class=\\"w-6 h-6 bg-opacity-50 rounded-md animate-pulse bg-ink-200\\"></div>
+  <div class=\\"w-6 h-6 animate-pulse rounded-md bg-ink-200 bg-opacity-50\\"></div>
   <h2 class=\\"text-base font-medium text-vanilla-100\\">Slack</h2>
 </div>"
 `;

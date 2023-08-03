@@ -47,7 +47,7 @@
             <template #primary-button>
               <button
                 :disabled="areAllChecksRetrying"
-                class="outline-none flex h-7 cursor-pointer items-center gap-x-2 rounded-l-3px border border-r-0 border-slate-400 bg-ink-200 px-2 text-xs text-vanilla-400 hover:bg-ink-100 focus:bg-ink-100 disabled:cursor-not-allowed disabled:border-opacity-40 disabled:bg-opacity-40"
+                class="flex h-7 cursor-pointer items-center gap-x-2 rounded-l-3px border border-r-0 border-slate-400 bg-ink-200 px-2 text-xs text-vanilla-400 outline-none hover:bg-ink-100 focus:bg-ink-100 disabled:cursor-not-allowed disabled:border-opacity-40 disabled:bg-opacity-40"
                 @click="retryChecks(retryableAnalyzers)"
               >
                 <z-icon
@@ -63,7 +63,7 @@
                 <template #trigger="{ toggle }">
                   <button
                     :disabled="areAllChecksRetrying"
-                    class="outline-none flex h-7 cursor-pointer items-center gap-x-2 rounded-r-3px border border-l-0 border-slate-400 bg-ink-200 px-2 text-vanilla-400 hover:bg-ink-100 focus:bg-ink-100 disabled:cursor-not-allowed disabled:border-opacity-40 disabled:bg-opacity-40"
+                    class="flex h-7 cursor-pointer items-center gap-x-2 rounded-r-3px border border-l-0 border-slate-400 bg-ink-200 px-2 text-vanilla-400 outline-none hover:bg-ink-100 focus:bg-ink-100 disabled:cursor-not-allowed disabled:border-opacity-40 disabled:bg-opacity-40"
                     @click="toggle"
                   >
                     <z-icon icon="chevron-down" size="x-small" />
@@ -103,7 +103,7 @@
           <z-menu class="xl:hidden" direction="left">
             <template #trigger="{ toggle }">
               <button
-                class="outline-none flex h-7 cursor-pointer items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 px-2 text-xs text-vanilla-400 hover:bg-ink-100 focus:bg-ink-100"
+                class="flex h-7 cursor-pointer items-center gap-x-2 rounded-3px border border-slate-400 bg-ink-200 px-2 text-xs text-vanilla-400 outline-none hover:bg-ink-100 focus:bg-ink-100"
                 @click="toggle"
               >
                 All checks
@@ -132,7 +132,7 @@
           />
           <run-summary v-if="!isCurrentCheckSkipped" v-bind="run" />
         </div>
-        <div v-if="isCurrentCheckSkipped" class="pt-40 pb-56">
+        <div v-if="isCurrentCheckSkipped" class="pb-56 pt-40">
           <lazy-empty-state-card
             :webp-image-path="require('~/assets/images/ui-states/runs/no-recent-autofixes.webp')"
             title="This check was manually skipped"
@@ -198,15 +198,6 @@
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
 import { RunHeader, AnalyzerRun, AnalyzerSelector, RunSummary } from '@/components/Run'
-import {
-  ZMenu,
-  ZMenuSection,
-  ZMenuItem,
-  ZIcon,
-  ZButton,
-  ZBreadcrumb,
-  ZBreadcrumbItem
-} from '@deepsource/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'
@@ -232,14 +223,7 @@ const runListStore = namespace('run/list')
     AnalyzerRun,
     RunHeader,
     AnalyzerSelector,
-    RunSummary,
-    ZMenu,
-    ZMenuSection,
-    ZMenuItem,
-    ZIcon,
-    ZButton,
-    ZBreadcrumb,
-    ZBreadcrumbItem
+    RunSummary
   },
   layout: 'repository',
   middleware: [

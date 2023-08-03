@@ -1,11 +1,11 @@
 <template>
-  <section class="flex flex-col space-y-4 h-full">
+  <section class="flex h-full flex-col space-y-4">
     <div
       v-if="hasAutoOnboardEvents"
-      class="px-4 py-3 border-b border-slate-400 flex flex-row items-center"
+      class="flex flex-row items-center border-b border-slate-400 px-4 py-3"
     >
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
-        <z-breadcrumb-item class="text-vanilla-400 cursor-pointer">
+        <z-breadcrumb-item class="cursor-pointer text-vanilla-400">
           <span @click="$emit('back')">Auto Onboard</span>
         </z-breadcrumb-item>
         <z-breadcrumb-item>All templates</z-breadcrumb-item>
@@ -26,12 +26,12 @@
         </template>
       </z-input>
     </div>
-    <div class="overflow-scroll flex-grow space-y-2 px-4 pb-4">
+    <div class="flex-grow space-y-2 overflow-scroll px-4 pb-4">
       <template v-if="$fetchState.pending">
         <div
           v-for="index in 3"
           :key="index"
-          class="h-20 bg-ink-300 animate-pulse opacity-50 rounded-md"
+          class="h-20 animate-pulse rounded-md bg-ink-300 opacity-50"
         ></div>
       </template>
       <template v-else-if="currentTemplateList.length">
@@ -52,17 +52,17 @@
           </template>
         </base-card>
       </template>
-      <div v-else-if="searchCandidate" class="grid place-content-center h-full">
+      <div v-else-if="searchCandidate" class="grid h-full place-content-center">
         <div class="text-center">
-          <h4 class="text-vanilla-400 text-base mb-5">
+          <h4 class="mb-5 text-base text-vanilla-400">
             Found no templates matching name "{{ searchCandidate }}"
           </h4>
         </div>
       </div>
-      <div v-else-if="!$fetchState.pending" class="grid place-content-center h-full">
+      <div v-else-if="!$fetchState.pending" class="grid h-full place-content-center">
         <div class="text-center">
-          <h4 class="text-vanilla-300 text-base">No Auto Onboard templates found.</h4>
-          <p class="text-vanilla-400 text-sm mb-5">
+          <h4 class="text-base text-vanilla-300">No Auto Onboard templates found.</h4>
+          <p class="mb-5 text-sm text-vanilla-400">
             You can create new templates in the Auto Onboard settings.
           </p>
           <nuxt-link :to="settingsLink">
@@ -77,23 +77,13 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon, ZTabPane, ZBreadcrumb, ZBreadcrumbItem } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 import { ConfigTemplate } from '../../../types/types'
 import { resolveNodes } from '~/utils/array'
 
-@Component({
-  components: {
-    ZInput,
-    ZButton,
-    ZIcon,
-    ZTabPane,
-    ZBreadcrumb,
-    ZBreadcrumbItem
-  }
-})
+@Component({})
 export default class SelectTemplate extends mixins(ActiveUserMixin, AutoOnboardMixin) {
   public currentTemplateList: ConfigTemplate[] = []
   public searchCandidate = ''

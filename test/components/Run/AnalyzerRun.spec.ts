@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/vue'
 import { createLocalVue, shallowMount } from '@vue/test-utils'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 import { VueConstructor } from 'vue'
 import Vuex, { Store } from 'vuex'
 

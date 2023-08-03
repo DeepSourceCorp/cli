@@ -15,7 +15,7 @@
       <h3 class="text-base">{{ urlHost }}</h3>
     </template>
     <template #description>
-      <div class="items-center mt-2 space-y-1 md:space-y-0 md:flex md:space-x-4">
+      <div class="mt-2 items-center space-y-1 md:flex md:space-x-4 md:space-y-0">
         <div class="flex items-center space-x-1.5">
           <z-icon icon="calendar" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400">
@@ -42,15 +42,10 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZButton } from '@deepsource/zeal'
 import { WebhookEventTypesConnection } from '~/types/types'
 import { getHumanizedTimeFromNow } from '~/utils/date'
 
 @Component({
-  components: {
-    ZIcon,
-    ZButton
-  },
   methods: {
     ghtf: getHumanizedTimeFromNow
   }

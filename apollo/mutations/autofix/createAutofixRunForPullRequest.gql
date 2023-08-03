@@ -1,4 +1,4 @@
-mutation($input: CreateAutofixRunForPullRequestInput!) {
+mutation ($input: CreateAutofixRunForPullRequestInput!) {
   createAutofixRunForPullRequest(input: $input) {
     autofixRunId
   }

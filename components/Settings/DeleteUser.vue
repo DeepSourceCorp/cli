@@ -1,31 +1,31 @@
 <template>
-  <z-accordion class="text-vanilla-100 border border-ink-200 rounded-md bg-ink-300">
+  <z-accordion class="rounded-md border border-ink-200 bg-ink-300 text-vanilla-100">
     <z-accordion-item title="Delete account" class="p-3" @isOpen="isOpenHandler">
       <template #title="{ toggleAccordion }">
-        <div class="flex items-center cursor-pointer gap-1" @click="toggleAccordion">
+        <div class="flex cursor-pointer items-center gap-1" @click="toggleAccordion">
           <z-icon icon="chevron-right" :class="chevronIconAnimateClass" class="transform" />
-          <span class="font-medium text-xs uppercase text-vanilla-400 tracking-wider"
+          <span class="text-xs font-medium uppercase tracking-wider text-vanilla-400"
             >Advanced settings</span
           >
         </div>
       </template>
       <div
-        class="grid border border-cherry border-opacity-20 bg-cherry bg-opacity-5 rounded-md divide-y divide-cherry divide-opacity-20 mt-4"
+        class="mt-4 grid divide-y divide-cherry divide-opacity-20 rounded-md border border-cherry border-opacity-20 bg-cherry bg-opacity-5"
       >
         <div class="flex gap-12 p-4">
           <div class="space-y-1.5">
-            <span class="text-cherry text-sm">Delete account</span>
-            <div v-if="deleteAllowed" class="text-cherry-300 text-xs leading-6">
+            <span class="text-sm text-cherry">Delete account</span>
+            <div v-if="deleteAllowed" class="text-xs leading-6 text-cherry-300">
               Permanently remove your personal account and all of its contents from the DeepSource
               platform.
             </div>
-            <div v-else-if="teamOwnerships.length === 1" class="text-cherry-300 text-xs leading-6">
+            <div v-else-if="teamOwnerships.length === 1" class="text-xs leading-6 text-cherry-300">
               You cannot delete your account as you are the owner of
               <team-label v-bind="teamOwnerships[0]" />
               . Transfer the ownership of the team to another team member OR delete your team first
               to safely delete your account.
             </div>
-            <div v-else class="text-cherry-300 text-xs leading-6">
+            <div v-else class="text-xs leading-6 text-cherry-300">
               You cannot delete your account as you are the owner of
               <span v-for="(team, index) in teamOwnerships.slice(0, -1)" :key="index">
                 <team-label v-bind="team" /><span v-if="index < teamOwnerships.slice(0, -2).length"
@@ -50,7 +50,7 @@
         <nuxt-link
           v-if="teamOwnerships.length === 1"
           :to="teamSettingsLink(teamOwnerships[0])"
-          class="text-cherry-300 text-xs leading-6 p-4"
+          class="p-4 text-xs leading-6 text-cherry-300"
         >
           Go to
           <team-label v-bind="teamOwnerships[0]" />
@@ -66,11 +66,11 @@
         primary-action-label="I understand, continue to delete ->"
         @onClose="handleDialogClose"
       >
-        <div class="text-sm p-4">
+        <div class="p-4 text-sm">
           <!-- Delete Step 1-->
           <div v-if="deleteStep === 0" class="space-y-3">
             <div>Are you sure you want to delete your account? Deleting your account would:</div>
-            <div class="flex items-start gap-2 w-full">
+            <div class="flex w-full items-start gap-2">
               <z-icon
                 icon="alert-circle"
                 color="cherry"
@@ -80,13 +80,13 @@
 
               <div>
                 Remove all data associated with
-                <span class="bg-vanilla-100 bg-opacity-10 rounded-sm px-0.5">{{
+                <span class="rounded-sm bg-vanilla-100 bg-opacity-10 px-0.5">{{
                   viewer.email
                 }}</span
                 >. This includes all repositories and analyses runs in the past.
               </div>
             </div>
-            <div class="flex items-start gap-2 w-full">
+            <div class="flex w-full items-start gap-2">
               <z-icon
                 icon="alert-circle"
                 color="cherry"
@@ -98,9 +98,9 @@
             </div>
           </div>
           <!-- Delete Step 2-->
-          <div v-else-if="deleteStep === 1" class="flex flex-col gap-y-4 w-full">
+          <div v-else-if="deleteStep === 1" class="flex w-full flex-col gap-y-4">
             <div
-              class="p-2 text-cherry-400 bg-cherry bg-opacity-10 rounded-md flex items-center gap-2"
+              class="flex items-center gap-2 rounded-md bg-cherry bg-opacity-10 p-2 text-cherry-400"
             >
               <z-icon icon="solid-alert-circle" color="cherry" />This action is irreversible and
               cannot be undone.
@@ -118,7 +118,7 @@
           </div>
         </div>
         <template #footer>
-          <div class="flex items-center justify-end p-4 gap-x-4 text-right text-vanilla-100">
+          <div class="flex items-center justify-end gap-x-4 p-4 text-right text-vanilla-100">
             <z-button
               v-if="deleteStep === 0"
               button-type="danger"
@@ -150,34 +150,13 @@
 import { Component, mixins } from 'nuxt-property-decorator'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AuthMixin from '~/mixins/authMixin'
-import {
-  ZIcon,
-  ZTag,
-  ZAccordion,
-  ZAccordionItem,
-  ZButton,
-  ZModal,
-  ZAlert,
-  ZInput
-} from '@deepsource/zeal'
 
 import { resolveNodes } from '~/utils/array'
 import { Owner, Team, TeamConnection, User } from '~/types/types'
 
 type AliasedUser = User & { primaryTeamAccounts: TeamConnection }
 
-@Component({
-  components: {
-    ZIcon,
-    ZTag,
-    ZAccordion,
-    ZAccordionItem,
-    ZButton,
-    ZModal,
-    ZAlert,
-    ZInput
-  }
-})
+@Component({})
 export default class DeleteUser extends mixins(ActiveUserMixin, AuthMixin) {
   chevronIconAnimateClass = ''
   showDeleteDialog = false

@@ -1,7 +1,7 @@
 import { render } from '@testing-library/vue'
 import { createLocalVue, mount, RouterLinkStub } from '@vue/test-utils'
-import { outsideClickDirective } from '@deepsource/zeal'
-import VTooltip from 'v-tooltip'
+import outsideClickDirective from '~/utils/directives/outsideClick'
+import VTooltip from 'floating-vue'
 
 import { PublicReportSidebar } from '~/components/Reports'
 import { ReportMeta, ReportPageT } from '~/types/reportTypes'

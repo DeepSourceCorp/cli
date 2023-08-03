@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="fixed z-10 flex items-center w-full px-4 py-4 border-b border-slate-400 top-10 lg:top-0 bg-ink-400"
+      class="fixed top-10 z-10 flex w-full items-center border-b border-slate-400 bg-ink-400 px-4 py-4 lg:top-0"
     >
       <z-breadcrumb separator="/" class="py-px text-sm text-vanilla-100">
         <z-breadcrumb-item
@@ -21,17 +21,17 @@
         >
       </z-breadcrumb>
     </div>
-    <div ref="analyzer-dir-header" class="px-4 border-b py-7 border-slate-400 mt-14">
+    <div ref="analyzer-dir-header" class="mt-14 border-b border-slate-400 px-4 py-7">
       <div class="flex items-center space-x-5">
         <div
-          class="flex flex-shrink-0 p-4 rounded-md h-26 w-26 place-items-center bg-ink-300"
+          class="flex h-26 w-26 flex-shrink-0 place-items-center rounded-md bg-ink-300 p-4"
           :class="{ 'animate-pulse': isLoading }"
         >
           <img
             v-if="infoObj.analyzerLogo || infoObj.logo"
             :src="isAnalyzer ? infoObj.analyzerLogo : infoObj.logo"
             :alt="infoObj.name"
-            class="w-20 h-auto"
+            class="h-auto w-20"
           />
           <img v-else src="~/assets/images/analyzer-dir/placeholder.svg" class="opacity-40" />
         </div>
@@ -43,10 +43,10 @@
           >
             {{ infoObj.name }}
           </component>
-          <div v-else class="w-40 h-8 bg-ink-300 animate-pulse"></div>
+          <div v-else class="h-8 w-40 animate-pulse bg-ink-300"></div>
           <p v-if="infoObj.owner" class="pl-px text-sm text-vanilla-400">By {{ infoObj.owner }}</p>
-          <div v-else class="w-24 h-4 mt-2 bg-ink-300 animate-pulse"></div>
-          <div class="flex flex-wrap gap-2 mt-4 lg:flex-nowrap">
+          <div v-else class="mt-2 h-4 w-24 animate-pulse bg-ink-300"></div>
+          <div class="mt-4 flex flex-wrap gap-2 lg:flex-nowrap">
             <z-button
               v-if="loggedIn"
               icon="play"
@@ -58,7 +58,7 @@
             <nuxt-link
               v-else
               :to="{ path: '/login', query: { next: `${$route.path}?use-action=true` } }"
-              class="inline-flex items-center justify-center h-8 p-0 px-4 py-1 space-x-1 text-xs font-medium leading-loose transition-colors duration-300 ease-in-out rounded-sm focus:outline-none whitespace-nowrap text-ink-400 bg-juniper hover:bg-juniper-600"
+              class="inline-flex h-8 items-center justify-center space-x-1 whitespace-nowrap rounded-sm bg-juniper p-0 px-4 py-1 text-xs font-medium leading-loose text-ink-400 transition-colors duration-300 ease-in-out hover:bg-juniper-600 focus:outline-none"
             >
               <z-icon icon="play" color="current" size="small" class="mr-1.5" />
               Use {{ isAnalyzer ? 'Analyzer' : 'Transformer' }}
@@ -97,7 +97,7 @@
                     target="_blank"
                     rel="noreferrer noopener"
                     :disabled="isLoading"
-                    class="flex items-center w-full py-3"
+                    class="flex w-full items-center py-3"
                   >
                     <span>Docs</span>
                   </z-menu-item>
@@ -109,7 +109,7 @@
                     target="_blank"
                     rel="noreferrer noopener"
                     :disabled="isLoading"
-                    class="flex items-center w-full py-3"
+                    class="flex w-full items-center py-3"
                   >
                     <span>Discuss</span>
                   </z-menu-item>
@@ -119,7 +119,7 @@
                     color="vanilla-300"
                     icon="feather"
                     :disabled="isLoading"
-                    class="flex items-center w-full py-3 mb-3"
+                    class="mb-3 flex w-full items-center py-3"
                     @click="
                       () => {
                         showAnalyzerFeedbackModal = true
@@ -135,7 +135,7 @@
           </div>
         </div>
         <div class="hidden md:block md:flex-grow"></div>
-        <div class="hidden md:flex md:gap-2 place-content-end place-items-end place-self-end">
+        <div class="hidden place-content-end place-items-end place-self-end md:flex md:gap-2">
           <z-button
             v-if="infoObj.discussUrl"
             as="link"
@@ -188,15 +188,12 @@
 <script lang="ts">
 import { Component, Vue, Prop, mixins } from 'nuxt-property-decorator'
 
-import { ZButton, ZBreadcrumb, ZBreadcrumbItem, ZMenu, ZMenuItem, ZIcon } from '@deepsource/zeal'
-
 import { Analyzer, TransformerTool } from '~/types/types'
 import AuthMixin from '~/mixins/authMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 
 @Component({
-  components: { ZButton, ZBreadcrumb, ZBreadcrumbItem, ZMenu, ZMenuItem, ZIcon },
   name: 'DirectoryHeader'
 })
 export default class DirectoryHeader extends mixins(AuthMixin, OwnerDetailMixin, ActiveUserMixin) {

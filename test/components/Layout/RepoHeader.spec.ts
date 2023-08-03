@@ -8,7 +8,7 @@ import RepoHeader from '~/components/Layout/RepoHeader.vue'
 import { dashboardContextGenerator, mocksGenerator, storeModulesGenerator } from '~/test/mocks'
 import { Repository, RepositoryKindChoices, VcsProviderChoices } from '~/types/types'
 
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 
 const mocks = mocksGenerator({
   fetchRepoPerms: jest.fn(),

@@ -1,4 +1,4 @@
-mutation($input: ToggleRepositoryActivationInput!) {
+mutation ($input: ToggleRepositoryActivationInput!) {
   toggleRepositoryActivation(input: $input) {
     repository {
       id

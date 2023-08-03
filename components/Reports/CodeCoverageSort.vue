@@ -19,7 +19,6 @@
 
 <script lang="ts">
 import { Vue, Component, ModelSync, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZIcon } from '@deepsource/zeal'
 
 import FilterGeneric from '~/components/Common/FilterGeneric.vue'
 
@@ -31,9 +30,7 @@ import { CodeCoverageT, CoverageSortT } from '~/types/reportTypes'
  */
 @Component({
   components: {
-    FilterGeneric,
-    ZButton,
-    ZIcon
+    FilterGeneric
   }
 })
 export default class CodeCoverageSort extends Vue {

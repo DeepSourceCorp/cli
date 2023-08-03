@@ -1,52 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders PriorityTypeBadge with all prop options: {"verboseTitle":false,"priority":"high"} 1`] = `
-"<div class=\\"flex items-center gap-x-1 uppercase bg-ink-200 rounded-full px-1.5 py-1 cursor\\"><span class=\\"h-2 rounded-full w-2 bg-cherry\\"></span> <span class=\\"text-xxs text-vanilla-400 tracking-wide font-medium\\">
+"<div class=\\"cursor flex items-center gap-x-1 rounded-full bg-ink-200 px-1.5 py-1 uppercase\\"><span class=\\"h-2 w-2 rounded-full bg-cherry\\"></span> <span class=\\"text-xxs font-medium tracking-wide text-vanilla-400\\">
     high
   </span></div>"
 `;
 
 exports[`renders PriorityTypeBadge with all prop options: {"verboseTitle":false,"priority":"low"} 1`] = `
-"<div class=\\"flex items-center gap-x-1 uppercase bg-ink-200 rounded-full px-1.5 py-1 cursor\\"><span class=\\"h-2 rounded-full w-2 bg-vanilla-400\\"></span> <span class=\\"text-xxs text-vanilla-400 tracking-wide font-medium\\">
+"<div class=\\"cursor flex items-center gap-x-1 rounded-full bg-ink-200 px-1.5 py-1 uppercase\\"><span class=\\"h-2 w-2 rounded-full bg-vanilla-400\\"></span> <span class=\\"text-xxs font-medium tracking-wide text-vanilla-400\\">
     low
   </span></div>"
 `;
 
 exports[`renders PriorityTypeBadge with all prop options: {"verboseTitle":false,"priority":"medium"} 1`] = `
-"<div class=\\"flex items-center gap-x-1 uppercase bg-ink-200 rounded-full px-1.5 py-1 cursor\\"><span class=\\"h-2 rounded-full w-2 bg-honey\\"></span> <span class=\\"text-xxs text-vanilla-400 tracking-wide font-medium\\">
+"<div class=\\"cursor flex items-center gap-x-1 rounded-full bg-ink-200 px-1.5 py-1 uppercase\\"><span class=\\"h-2 w-2 rounded-full bg-honey\\"></span> <span class=\\"text-xxs font-medium tracking-wide text-vanilla-400\\">
     medium
   </span></div>"
 `;
 
 exports[`renders PriorityTypeBadge with all prop options: {"verboseTitle":false,"priority":"noop"} 1`] = `
-"<div class=\\"flex items-center gap-x-1 uppercase bg-ink-200 rounded-full px-1.5 py-1 cursor\\">
-  <zicon-stub icon=\\"ellipsis-small\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-xxs text-vanilla-400 tracking-wide font-medium\\">
+"<div class=\\"cursor flex items-center gap-x-1 rounded-full bg-ink-200 px-1.5 py-1 uppercase\\">
+  <zicon-stub icon=\\"ellipsis-small\\" size=\\"x-small\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-xxs font-medium tracking-wide text-vanilla-400\\">
     no priority
   </span>
 </div>"
 `;
 
 exports[`renders PriorityTypeBadge with all prop options: {"verboseTitle":true,"priority":"high"} 1`] = `
-"<div class=\\"flex items-center gap-x-1 uppercase bg-ink-200 rounded-full px-1.5 py-1 cursor\\"><span class=\\"h-2 rounded-full w-2 bg-cherry\\"></span> <span class=\\"text-xxs text-vanilla-400 tracking-wide font-medium\\">
+"<div class=\\"cursor flex items-center gap-x-1 rounded-full bg-ink-200 px-1.5 py-1 uppercase\\"><span class=\\"h-2 w-2 rounded-full bg-cherry\\"></span> <span class=\\"text-xxs font-medium tracking-wide text-vanilla-400\\">
     high priority
   </span></div>"
 `;
 
 exports[`renders PriorityTypeBadge with all prop options: {"verboseTitle":true,"priority":"low"} 1`] = `
-"<div class=\\"flex items-center gap-x-1 uppercase bg-ink-200 rounded-full px-1.5 py-1 cursor\\"><span class=\\"h-2 rounded-full w-2 bg-vanilla-400\\"></span> <span class=\\"text-xxs text-vanilla-400 tracking-wide font-medium\\">
+"<div class=\\"cursor flex items-center gap-x-1 rounded-full bg-ink-200 px-1.5 py-1 uppercase\\"><span class=\\"h-2 w-2 rounded-full bg-vanilla-400\\"></span> <span class=\\"text-xxs font-medium tracking-wide text-vanilla-400\\">
     low priority
   </span></div>"
 `;
 
 exports[`renders PriorityTypeBadge with all prop options: {"verboseTitle":true,"priority":"medium"} 1`] = `
-"<div class=\\"flex items-center gap-x-1 uppercase bg-ink-200 rounded-full px-1.5 py-1 cursor\\"><span class=\\"h-2 rounded-full w-2 bg-honey\\"></span> <span class=\\"text-xxs text-vanilla-400 tracking-wide font-medium\\">
+"<div class=\\"cursor flex items-center gap-x-1 rounded-full bg-ink-200 px-1.5 py-1 uppercase\\"><span class=\\"h-2 w-2 rounded-full bg-honey\\"></span> <span class=\\"text-xxs font-medium tracking-wide text-vanilla-400\\">
     medium priority
   </span></div>"
 `;
 
 exports[`renders PriorityTypeBadge with all prop options: {"verboseTitle":true,"priority":"noop"} 1`] = `
-"<div class=\\"flex items-center gap-x-1 uppercase bg-ink-200 rounded-full px-1.5 py-1 cursor\\">
-  <zicon-stub icon=\\"ellipsis-small\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-xxs text-vanilla-400 tracking-wide font-medium\\">
+"<div class=\\"cursor flex items-center gap-x-1 rounded-full bg-ink-200 px-1.5 py-1 uppercase\\">
+  <zicon-stub icon=\\"ellipsis-small\\" size=\\"x-small\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-xxs font-medium tracking-wide text-vanilla-400\\">
     no priority
   </span>
 </div>"

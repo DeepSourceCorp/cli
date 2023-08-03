@@ -4,8 +4,8 @@
     title="Follow these steps to start the analysis"
     @onClose="$emit('close')"
   >
-    <div class="text-sm font-normal space-y-4">
-      <div class="flex space-x-2 items-start p-4">
+    <div class="space-y-4 text-sm font-normal">
+      <div class="flex items-start space-x-2 p-4">
         <div class="flex-grow text-vanilla-400">
           <p>
             The default branch on this repository has branch protection enabled, so we're not able
@@ -17,7 +17,7 @@
       <z-stepper align="vertical" :show-numbers="true" class="w-full px-4">
         <z-step v-for="step in steps" :key="step.title" class="w-full">
           <template #title>
-            <h3 class="text-vanilla-100 font-base uppercase tracking-wide text-xs font-semibold">
+            <h3 class="font-base text-xs font-semibold uppercase tracking-wide text-vanilla-100">
               {{ step.title }}
             </h3>
           </template>
@@ -28,7 +28,7 @@
       </z-stepper>
     </div>
     <template #footer>
-      <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
+      <div class="space-x-4 border-slate-400 p-4 text-right text-vanilla-100">
         <z-button
           class="modal-primary-action"
           size="small"
@@ -43,17 +43,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZModal, ZButton, ZStep, ZStepper, ZDivider } from '@deepsource/zeal'
 
 @Component({
-  components: {
-    ZIcon,
-    ZModal,
-    ZButton,
-    ZStep,
-    ZStepper,
-    ZDivider
-  },
   layout: 'dashboard'
 })
 export default class NextStepsModal extends Vue {

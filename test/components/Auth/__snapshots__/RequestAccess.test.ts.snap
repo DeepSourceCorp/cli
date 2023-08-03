@@ -22,22 +22,22 @@ exports[`[[ RequestAccess ]] renders request access component 1`] = `
     </h3>
     <div class=\\"space-y-7\\"><a href=\\"mailto:sourya@deepsource.io\\" class=\\"flex justify-between text-slate-200 hover:text-vanilla-100\\">
         <div class=\\"inline-flex items-start gap-x-2.5 text-vanilla-100\\">
-          <zavatar-stub type=\\"span\\" image=\\"https://local-asgard-static.s3.us-east-1.amazonaws.com/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Sourya Vatsyayan\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\" alt=\\"avatar for Sourya Vatsyayan\\"></zavatar-stub>
+          <zavatar-stub image=\\"https://local-asgard-static.s3.us-east-1.amazonaws.com/dashboard/images/empty-avatar.svg\\" alt=\\"avatar for Sourya Vatsyayan\\" user-name=\\"Sourya Vatsyayan\\" fallback-image=\\"test-image-dir/test-image-file.png\\" type=\\"span\\"></zavatar-stub>
           <div>
             <p class=\\"text-sm font-medium leading-6\\">Sourya Vatsyayan</p>
             <p class=\\"text-xs leading-5 text-vanilla-400\\">sourya@deepsource.io</p>
           </div>
         </div>
-        <zicon-stub icon=\\"mail\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub>
+        <zicon-stub icon=\\"mail\\" color=\\"current\\"></zicon-stub>
       </a><a href=\\"mailto:aseem@deepsource.io\\" class=\\"flex justify-between text-slate-200 hover:text-vanilla-100\\">
         <div class=\\"inline-flex items-start gap-x-2.5 text-vanilla-100\\">
-          <zavatar-stub type=\\"span\\" image=\\"https://local-asgard-static.s3.us-east-1.amazonaws.com/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Aseem Manna\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\" alt=\\"avatar for Aseem Manna\\"></zavatar-stub>
+          <zavatar-stub image=\\"https://local-asgard-static.s3.us-east-1.amazonaws.com/dashboard/images/empty-avatar.svg\\" alt=\\"avatar for Aseem Manna\\" user-name=\\"Aseem Manna\\" fallback-image=\\"test-image-dir/test-image-file.png\\" type=\\"span\\"></zavatar-stub>
           <div>
             <p class=\\"text-sm font-medium leading-6\\">Aseem Manna</p>
             <p class=\\"text-xs leading-5 text-vanilla-400\\">aseem@deepsource.io</p>
           </div>
         </div>
-        <zicon-stub icon=\\"mail\\" size=\\"small\\" position=\\"\\" color=\\"current\\"></zicon-stub>
+        <zicon-stub icon=\\"mail\\" color=\\"current\\"></zicon-stub>
       </a></div>
   </div>
 </div>"

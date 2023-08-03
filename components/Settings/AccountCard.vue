@@ -1,8 +1,8 @@
 <template>
-  <nuxt-link :to="workspaceLink" class="flex items-center w-full gap-2 p-3 hover:bg-ink-300">
+  <nuxt-link :to="workspaceLink" class="flex w-full items-center gap-2 p-3 hover:bg-ink-300">
     <z-avatar :image="avatar" :fallback-image="getDefaultAvatar(login, false)" :user-name="login" />
     <div class="space-y-1.5">
-      <div class="leading-6 flex items-center gap-x-2">
+      <div class="flex items-center gap-x-2 leading-6">
         {{ login }}
         <z-tag v-if="showRoleTag" :bg-color="tagBgColor" spacing="px-2 h-4"
           ><span :class="tagTextColor" class="text-8px font-semibold tracking-wider">{{
@@ -13,20 +13,20 @@
       <div class="flex items-center gap-4">
         <div v-if="numMembersTotal" class="flex items-center gap-1">
           <z-icon icon="users" size="x-small" />
-          <span class="text-vanilla-400 text-sm"
+          <span class="text-sm text-vanilla-400"
             >{{ numMembersTotal }} {{ numMembersTotal === 1 ? 'member' : 'members' }}</span
           >
         </div>
         <div class="flex items-center gap-1">
           <z-icon icon="globe" size="x-small" />
-          <span class="text-vanilla-400 text-sm"
+          <span class="text-sm text-vanilla-400"
             >{{ activeRepositoryCount }} active
             {{ activeRepositoryCount === 1 ? 'respository' : 'repositories' }}</span
           >
         </div>
         <div class="flex items-center gap-1">
           <z-icon :icon="vcsProviderIcon" size="x-small" />
-          <span class="text-vanilla-400 text-sm">{{ vcsProviderName }}</span>
+          <span class="text-sm text-vanilla-400">{{ vcsProviderName }}</span>
         </div>
       </div>
     </div>
@@ -34,7 +34,6 @@
 </template>
 
 <script lang="ts">
-import { ZAvatar, ZIcon, ZTag } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import { getDefaultAvatar } from '~/utils/ui'
@@ -43,11 +42,6 @@ import { getDefaultAvatar } from '~/utils/ui'
  * Card to display account (workspace) details. Works for team and personal accounts
  */
 @Component({
-  components: {
-    ZAvatar,
-    ZIcon,
-    ZTag
-  },
   methods: {
     getDefaultAvatar
   }

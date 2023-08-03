@@ -1,4 +1,4 @@
-mutation(
+mutation (
   $email: String!
   $name: String!
   $token: String!

@@ -16,7 +16,6 @@
   </div>
 </template>
 <script lang="ts">
-import { ZChart } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import { Dataset } from '~/types/reportTypes'
@@ -28,9 +27,7 @@ const BASE_COLOR = '#1035ad'
 /**
  * Component to show empty chart
  */
-@Component({
-  components: { ZChart }
-})
+@Component({})
 export default class EmptyChart extends Vue {
   @Prop({ default: 'Not enough data to show a trend. Please come back later.' })
   subtitle: string

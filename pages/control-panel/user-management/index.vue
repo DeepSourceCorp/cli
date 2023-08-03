@@ -1,10 +1,10 @@
 <template>
   <div>
     <div
-      class="px-4 py-3.5 flex flex-col lg:items-center lg:flex-row gap-4 justify-between border-b border-slate-400"
+      class="flex flex-col justify-between gap-4 border-b border-slate-400 px-4 py-3.5 lg:flex-row lg:items-center"
     >
       <h1 class="text-lg font-medium leading-none">All users</h1>
-      <div class="flex items-center justify-end w-full max-w-lg gap-x-2">
+      <div class="flex w-full max-w-lg items-center justify-end gap-x-2">
         <z-input
           placeholder="Search for a name or email..."
           size="small"
@@ -36,12 +36,12 @@
     <control-panel-cards-skeleton v-if="$fetchState.pending" :card-count="7" />
     <!-- HOTFIX: Nuxt SSR adds ghost a tags into dom during SSR -->
     <client-only v-else-if="orgUsers.length">
-      <div class="p-4 space-y-4">
+      <div class="space-y-4 p-4">
         <nuxt-link
           v-for="orgUser in orgUsers"
           :key="orgUser.id"
           :to="`/control-panel/user-management/users/${orgUser.id}`"
-          class="grid items-center grid-cols-1 p-4 border rounded-md md:grid-cols-3 gap-x-4 gap-y-1 border-slate-400 hover:bg-ink-300"
+          class="grid grid-cols-1 items-center gap-x-4 gap-y-1 rounded-md border border-slate-400 p-4 hover:bg-ink-300 md:grid-cols-3"
         >
           <control-panel-user-card-info
             :org-user="orgUser"
@@ -51,7 +51,7 @@
           <div class="ml-12 md:ml-0 md:justify-self-end">
             <span
               v-if="resolveNodes(orgUser.teams).length"
-              class="flex items-center text-sm text-vanilla-400 gap-x-2"
+              class="flex items-center gap-x-2 text-sm text-vanilla-400"
             >
               <z-icon icon="building" size="x-small" class="flex-shrink-0" />
               <p>
@@ -66,7 +66,7 @@
             </span>
           </div>
         </nuxt-link>
-        <div class="flex justify-center mt-6 text-sm">
+        <div class="mt-6 flex justify-center text-sm">
           <z-pagination
             v-if="totalPageCount > 1"
             :page="currentPage"
@@ -89,7 +89,6 @@
 
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon, ZPagination } from '@deepsource/zeal'
 
 import { OrgUsersGetters, OrgUsersActions } from '~/store/control-panel/users'
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
@@ -100,7 +99,6 @@ import { resolveNodes } from '~/utils/array'
 const userManagementStore = namespace('control-panel/users')
 
 @Component({
-  components: { ZInput, ZButton, ZIcon, ZPagination },
   layout: 'control-panel',
   methods: {
     resolveNodes

@@ -55,14 +55,12 @@
 
 <script lang="ts">
 import { Vue, Prop, Component } from 'nuxt-property-decorator'
-import { ZIcon, ZAvatar, ZDivider, ZMenu, ZMenuItem, ZMenuSection } from '@deepsource/zeal'
 
 import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
   name: 'LogoutMenu',
-  methods: { getDefaultAvatar },
-  components: { ZIcon, ZAvatar, ZDivider, ZMenu, ZMenuItem, ZMenuSection }
+  methods: { getDefaultAvatar }
 })
 export default class LogoutMenu extends Vue {
   @Prop({ required: true })

@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ NotificationChannelSection ]] Falls back to the channel list passed via \`availableChannels\` prop 1`] = `
-"<div class=\\"flex flex-col md:justify-between md:flex-row gap-y-4 md:gap-y-0\\"><label class=\\"text-sm md:place-self-center text-vanilla-100\\"> Notification channel </label>
-  <div class=\\"w-full h-8 md:w-48\\">
-    <zselect-stub selected=\\"general\\" tabindex=\\"0\\" placeholder=\\"general\\" spacing=\\"pl-2.5 pr-2 py-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" truncate=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-      <zoption-stub value=\\"dev-testing\\" textsize=\\"text-xs\\">
+"<div class=\\"flex flex-col gap-y-4 md:flex-row md:justify-between md:gap-y-0\\"><label class=\\"text-sm text-vanilla-100 md:place-self-center\\"> Notification channel </label>
+  <div class=\\"h-8 w-full md:w-48\\">
+    <zselect-stub placeholder=\\"general\\" truncate=\\"true\\" spacing=\\"pl-2.5 pr-2 py-2\\" value=\\"general\\" class=\\"text-sm\\">
+      <zoption-stub value=\\"dev-testing\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> dev-testing </span></div>
       </zoption-stub>
-      <zoption-stub value=\\"general\\" textsize=\\"text-xs\\">
+      <zoption-stub value=\\"general\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> general </span></div>
       </zoption-stub>
-      <zoption-stub value=\\"random\\" textsize=\\"text-xs\\">
+      <zoption-stub value=\\"random\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> random </span></div>
       </zoption-stub>
     </zselect-stub>
@@ -19,16 +19,16 @@ exports[`[[ NotificationChannelSection ]] Falls back to the channel list passed 
 `;
 
 exports[`[[ NotificationChannelSection ]] renders the notification channel section: {"channel":"general","pending":false} 1`] = `
-"<div class=\\"flex flex-col md:justify-between md:flex-row gap-y-4 md:gap-y-0\\"><label class=\\"text-sm md:place-self-center text-vanilla-100\\"> Notification channel </label>
-  <div class=\\"w-full h-8 md:w-48\\">
-    <zselect-stub selected=\\"general\\" tabindex=\\"0\\" placeholder=\\"general\\" spacing=\\"pl-2.5 pr-2 py-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" truncate=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-      <zoption-stub value=\\"dev-testing\\" textsize=\\"text-xs\\">
+"<div class=\\"flex flex-col gap-y-4 md:flex-row md:justify-between md:gap-y-0\\"><label class=\\"text-sm text-vanilla-100 md:place-self-center\\"> Notification channel </label>
+  <div class=\\"h-8 w-full md:w-48\\">
+    <zselect-stub placeholder=\\"general\\" truncate=\\"true\\" spacing=\\"pl-2.5 pr-2 py-2\\" value=\\"general\\" class=\\"text-sm\\">
+      <zoption-stub value=\\"dev-testing\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> dev-testing </span></div>
       </zoption-stub>
-      <zoption-stub value=\\"general\\" textsize=\\"text-xs\\">
+      <zoption-stub value=\\"general\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> general </span></div>
       </zoption-stub>
-      <zoption-stub value=\\"random\\" textsize=\\"text-xs\\">
+      <zoption-stub value=\\"random\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> random </span></div>
       </zoption-stub>
     </zselect-stub>
@@ -37,16 +37,16 @@ exports[`[[ NotificationChannelSection ]] renders the notification channel secti
 `;
 
 exports[`[[ NotificationChannelSection ]] renders the notification channel section: {"channel":"general","pending":null} 1`] = `
-"<div class=\\"flex flex-col md:justify-between md:flex-row gap-y-4 md:gap-y-0\\"><label class=\\"text-sm md:place-self-center text-vanilla-100\\"> Notification channel </label>
-  <div class=\\"w-full h-8 md:w-48\\">
-    <zselect-stub selected=\\"general\\" tabindex=\\"0\\" placeholder=\\"general\\" spacing=\\"pl-2.5 pr-2 py-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" truncate=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-      <zoption-stub value=\\"dev-testing\\" textsize=\\"text-xs\\">
+"<div class=\\"flex flex-col gap-y-4 md:flex-row md:justify-between md:gap-y-0\\"><label class=\\"text-sm text-vanilla-100 md:place-self-center\\"> Notification channel </label>
+  <div class=\\"h-8 w-full md:w-48\\">
+    <zselect-stub placeholder=\\"general\\" truncate=\\"true\\" spacing=\\"pl-2.5 pr-2 py-2\\" value=\\"general\\" class=\\"text-sm\\">
+      <zoption-stub value=\\"dev-testing\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> dev-testing </span></div>
       </zoption-stub>
-      <zoption-stub value=\\"general\\" textsize=\\"text-xs\\">
+      <zoption-stub value=\\"general\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> general </span></div>
       </zoption-stub>
-      <zoption-stub value=\\"random\\" textsize=\\"text-xs\\">
+      <zoption-stub value=\\"random\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> random </span></div>
       </zoption-stub>
     </zselect-stub>
@@ -55,24 +55,24 @@ exports[`[[ NotificationChannelSection ]] renders the notification channel secti
 `;
 
 exports[`[[ NotificationChannelSection ]] renders the notification channel section: {"channel":"general","pending":true} 1`] = `
-"<div class=\\"flex flex-col md:justify-between md:flex-row gap-y-4 md:gap-y-0\\"><label class=\\"text-sm md:place-self-center text-vanilla-100\\"> Notification channel </label>
-  <div class=\\"w-full h-8 md:w-48\\">
-    <div class=\\"h-8 rounded-md bg-ink-300 animate-pulse\\"></div>
+"<div class=\\"flex flex-col gap-y-4 md:flex-row md:justify-between md:gap-y-0\\"><label class=\\"text-sm text-vanilla-100 md:place-self-center\\"> Notification channel </label>
+  <div class=\\"h-8 w-full md:w-48\\">
+    <div class=\\"h-8 animate-pulse rounded-md bg-ink-300\\"></div>
   </div>
 </div>"
 `;
 
 exports[`[[ NotificationChannelSection ]] renders the notification channel section: {"channel":"general"} 1`] = `
-"<div class=\\"flex flex-col md:justify-between md:flex-row gap-y-4 md:gap-y-0\\"><label class=\\"text-sm md:place-self-center text-vanilla-100\\"> Notification channel </label>
-  <div class=\\"w-full h-8 md:w-48\\">
-    <zselect-stub selected=\\"general\\" tabindex=\\"0\\" placeholder=\\"general\\" spacing=\\"pl-2.5 pr-2 py-2\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" truncate=\\"true\\" maxheight=\\"max-h-64\\" class=\\"text-sm\\">
-      <zoption-stub value=\\"dev-testing\\" textsize=\\"text-xs\\">
+"<div class=\\"flex flex-col gap-y-4 md:flex-row md:justify-between md:gap-y-0\\"><label class=\\"text-sm text-vanilla-100 md:place-self-center\\"> Notification channel </label>
+  <div class=\\"h-8 w-full md:w-48\\">
+    <zselect-stub placeholder=\\"general\\" truncate=\\"true\\" spacing=\\"pl-2.5 pr-2 py-2\\" value=\\"general\\" class=\\"text-sm\\">
+      <zoption-stub value=\\"dev-testing\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> dev-testing </span></div>
       </zoption-stub>
-      <zoption-stub value=\\"general\\" textsize=\\"text-xs\\">
+      <zoption-stub value=\\"general\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> general </span></div>
       </zoption-stub>
-      <zoption-stub value=\\"random\\" textsize=\\"text-xs\\">
+      <zoption-stub value=\\"random\\">
         <div class=\\"inline-flex flex-row gap-x-1\\"><span> # </span><span> random </span></div>
       </zoption-stub>
     </zselect-stub>

@@ -1,5 +1,5 @@
 mutation {
-  logout(input: {}){
-  	ok
+  logout(input: {}) {
+    ok
   }
 }

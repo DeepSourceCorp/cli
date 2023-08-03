@@ -119,7 +119,6 @@
   </div>
 </template>
 <script lang="ts">
-import { ZButton, ZDivider, ZIcon, ZInput, ZModal, ZOption, ZSelect } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
@@ -178,15 +177,6 @@ const ROLES = [
  * Invite members modal
  */
 @Component({
-  components: {
-    ZIcon,
-    ZModal,
-    ZInput,
-    ZButton,
-    ZDivider,
-    ZSelect,
-    ZOption
-  },
   layout: 'dashboard'
 })
 export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBillingMixin) {

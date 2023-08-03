@@ -3,11 +3,11 @@
     <z-menu v-if="!filterApplied" direction="right" width="small" class="text-vanilla-100">
       <template #trigger="{ toggle }">
         <z-button
+          :button-type="buttonType"
           size="small"
           label="Filter"
           icon="z-filter"
-          class="outline-none focus:outline-none text-vanilla-100"
-          :class="buttonBackground"
+          class="text-vanilla-100 outline-none focus:outline-none"
           @click="toggle"
         />
       </template>
@@ -28,9 +28,9 @@
 
     <z-button
       v-else
+      :button-type="buttonType"
       size="small"
-      class="outline-none focus:outline-none text-vanilla-100"
-      :class="buttonBackground"
+      class="text-vanilla-100 outline-none focus:outline-none"
       @click="modelValue = ''"
     >
       <div class="flex items-center gap-x-2">
@@ -57,9 +57,8 @@
 <script lang="ts">
 import { Component, mixins, namespace, Prop } from 'nuxt-property-decorator'
 import { ModelSync } from 'vue-property-decorator'
-import { ZIcon, ZButton, ZInput, ZMenu, ZMenuItem, ZBadge } from '@deepsource/zeal'
 import AnalyzerLogo from '~/components/AnalyzerLogo.vue'
-import { Analyzer, AnalyzerConnection, IssuePriorityLevel } from '~/types/types'
+import { AnalyzerConnection, IssuePriorityLevel } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
 
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
@@ -78,12 +77,6 @@ export interface AnalyzerChoice {
  */
 @Component({
   components: {
-    ZIcon,
-    ZButton,
-    ZInput,
-    ZMenu,
-    ZMenuItem,
-    ZBadge,
     AnalyzerLogo
   }
 })
@@ -91,8 +84,8 @@ export default class IssuePriorityFilter extends mixins(AnalyzerListMixin, RepoD
   @ModelSync('selectedAnalyzer', 'updateAnalyzer', { type: String })
   readonly modelValue: string
 
-  @Prop({ default: 'bg-ink-300 hover:bg-ink-200' })
-  buttonBackground: string
+  @Prop({ default: 'secondary' })
+  buttonType: string
 
   @Prop({ default: IssuePriorityLevel.Repository })
   level: IssuePriorityLevel

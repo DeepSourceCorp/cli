@@ -1,29 +1,29 @@
 <template>
   <portal to="floating-nav">
     <div
-      class="lg:hidden fixed bottom-0 left-0 right-0 w-screen px-4 pb-5 font-medium bg-gradient-to-t from-ink-400 to-transparent"
+      class="fixed bottom-0 left-0 right-0 w-screen bg-gradient-to-t from-ink-400 to-transparent px-4 pb-5 font-medium lg:hidden"
     >
       <Menu
         :triggers="['click', 'touch']"
         placement="top"
         theme="deepsource-dropdown"
-        class="bottom-0 w-full text-center border-0"
+        class="bottom-0 w-full border-0 text-center"
         @apply-show="onShow"
         @apply-hide="onHide"
       >
         <template #default="{ shown }">
           <button
-            class="flex items-center justify-between w-64 px-4 py-3 mx-auto text-sm divide-x rounded-lg shadow-lg ds-mobile-menu-trigger bg-ink-300 text-vanilla-100 divide-ink-100"
+            class="ds-mobile-menu-trigger mx-auto flex w-64 items-center justify-between divide-x divide-ink-100 rounded-lg bg-ink-300 px-4 py-3 text-sm text-vanilla-100 shadow-lg"
           >
             <span class="truncate">
               {{ currentSelection }}
             </span>
-            <span class="pl-4 border-slate-400">
+            <span class="border-slate-400 pl-4">
               <z-icon
                 button-type="secondary"
                 size="small"
                 icon="chevron-up"
-                class="flex-shrink-0 duration-150 transform"
+                class="flex-shrink-0 transform duration-150"
                 :class="{ 'rotate-180': shown }"
               />
             </span>
@@ -31,7 +31,7 @@
         </template>
 
         <template #popper="{ hide }">
-          <nav class="w-64 py-1 rounded-sm bg-ink-300">
+          <nav class="w-64 rounded-sm bg-ink-300 py-1">
             <template v-for="item in navItems">
               <nuxt-link
                 :key="item.label"
@@ -55,7 +55,6 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZDivider, ZIcon } from '@deepsource/zeal'
 import { Menu } from 'floating-vue'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
@@ -68,7 +67,7 @@ interface INavItem {
 /**
  * The floating button component introduced in the new team home layout
  */
-@Component({ name: 'FloatingButtonMobile', components: { Menu, ZButton, ZDivider, ZIcon } })
+@Component({ name: 'FloatingButtonMobile', components: { Menu } })
 export default class FloatingButtonMobile extends Vue {
   @Prop({ required: true })
   navItems: INavItem[]

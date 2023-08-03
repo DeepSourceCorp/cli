@@ -13,13 +13,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZConfirm } from '@deepsource/zeal'
 
 @Component({
-  components: {
-    ZIcon,
-    ZConfirm
-  },
   layout: 'dashboard'
 })
 export default class RemoveMemberModal extends Vue {

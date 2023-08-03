@@ -1,4 +1,4 @@
-mutation($repoIssueId: ID, $checkId: ID, $filePath: String, $issueShortcode: String) {
+mutation ($repoIssueId: ID, $checkId: ID, $filePath: String, $issueShortcode: String) {
   ignoreIssueForRepository(
     input: {
       repoIssueId: $repoIssueId

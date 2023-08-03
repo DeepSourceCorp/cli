@@ -67,7 +67,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZInput, ZIcon, ZPagination } from '@deepsource/zeal'
 
 import PaginationMixin from '~/mixins/paginationMixin'
 import RouteQueryMixin, { RouteQueryParamsT } from '~/mixins/routeQueryMixin'
@@ -90,12 +89,7 @@ export interface CodeCoverageFilters extends RouteQueryParamsT {
  * Page for displaying the code coverage report.
  */
 @Component({
-  layout: 'dashboard',
-  components: {
-    ZInput,
-    ZIcon,
-    ZPagination
-  }
+  layout: 'dashboard'
 })
 export default class OwnerCodeCoverage extends mixins(PaginationMixin, RouteQueryMixin) {
   codeCoverageReportList: Array<RepositoryCoverageReportItem> = []

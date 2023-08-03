@@ -1,21 +1,21 @@
 <template>
   <z-modal title="Delete team" @onClose="handleDialogClose">
-    <div class="text-sm text-vanilla-300 p-4">
+    <div class="p-4 text-sm text-vanilla-300">
       <!-- Delete Step 1-->
       <div v-if="deleteStep === 0" class="space-y-3">
         <div>Are you sure you want to delete your team? Deleting your team would:</div>
-        <div class="flex items-start gap-2 w-full">
+        <div class="flex w-full items-start gap-2">
           <z-icon icon="alert-circle" color="cherry" size="x-small" class="mt-1 flex-shrink-0" />
 
           <div>
             Remove all data associated with
-            <span class="bg-vanilla-100 bg-opacity-10 rounded-sm px-1 py-0.5 text-xs">{{
+            <span class="rounded-sm bg-vanilla-100 bg-opacity-10 px-1 py-0.5 text-xs">{{
               teamName
             }}</span
             >. This includes all repositories and analyses runs in the past.
           </div>
         </div>
-        <div class="flex items-start gap-2 w-full">
+        <div class="flex w-full items-start gap-2">
           <z-icon icon="alert-circle" color="cherry" size="x-small" class="mt-1 flex-shrink-0" />
 
           <span>Remove all members of the team.</span>
@@ -23,15 +23,15 @@
       </div>
 
       <!-- Delete Step 2-->
-      <div v-else-if="deleteStep === 1" class="flex flex-col gap-y-4 w-full">
-        <div class="p-2 text-cherry-400 bg-cherry bg-opacity-10 rounded-md flex items-center gap-2">
+      <div v-else-if="deleteStep === 1" class="flex w-full flex-col gap-y-4">
+        <div class="flex items-center gap-2 rounded-md bg-cherry bg-opacity-10 p-2 text-cherry-400">
           <z-icon icon="solid-alert-circle" color="cherry" />
           <span>This action is irreversible and cannot be undone.</span>
         </div>
         <label>
           <div class="mb-2">
             Please type
-            <span class="bg-vanilla-100 bg-opacity-10 rounded-sm px-1 py-0.5 text-xs">{{
+            <span class="rounded-sm bg-vanilla-100 bg-opacity-10 px-1 py-0.5 text-xs">{{
               teamName
             }}</span>
             to confirm deletion
@@ -49,7 +49,7 @@
       </div>
     </div>
     <template #footer="{ close }">
-      <div class="flex items-center justify-end p-4 gap-x-4 text-right text-vanilla-100">
+      <div class="flex items-center justify-end gap-x-4 p-4 text-right text-vanilla-100">
         <z-button
           v-if="deleteStep === 0"
           button-type="danger"
@@ -79,16 +79,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZModal, ZInput } from '@deepsource/zeal'
 
-@Component({
-  components: {
-    ZIcon,
-    ZButton,
-    ZModal,
-    ZInput
-  }
-})
+@Component({})
 export default class DeleteTeamConfirm extends Vue {
   @Prop({ required: true })
   teamName: string

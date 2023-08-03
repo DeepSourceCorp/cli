@@ -1,10 +1,10 @@
 <template>
-  <section class="grid gap-4 max-w-3xl grid-cols-1 p-4">
+  <section class="grid max-w-3xl grid-cols-1 gap-4 p-4">
     <div class="flex justify-between">
       <div class="w-full space-y-0.5">
         <h2 class="font-medium">Tokens</h2>
         <div class="text-sm text-vanilla-400">Manage your Personal Access Tokens (PAT).</div>
-        <div v-if="userAccessTokenList.length" class="pt-3 w-full flex items-center gap-x-2">
+        <div v-if="userAccessTokenList.length" class="flex w-full items-center gap-x-2 pt-3">
           <z-input
             v-model="searchCandidate"
             :show-border="false"
@@ -47,7 +47,7 @@
           @onClose="showDeleteConfirm = false"
         >
           <template #footer="{ close }">
-            <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
+            <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
               <z-button
                 :is-loading="deletingToken"
                 icon="trash-2"
@@ -70,7 +70,7 @@
           @onClose="showDeleteAllConfirmation = false"
         >
           <template #footer="{ close }">
-            <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
+            <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
               <z-button
                 :is-loading="deletingToken"
                 icon="trash-2"
@@ -91,7 +91,7 @@
       class="grid grid-cols-1 divide-y divide-ink-200 rounded-md"
     >
       <template v-if="$fetchState.pending">
-        <div v-for="index in 3" :key="index" class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
+        <div v-for="index in 3" :key="index" class="h-20 animate-pulse rounded-md bg-ink-300"></div>
       </template>
       <template v-else-if="filteredTokens.length">
         <token-card
@@ -122,37 +122,37 @@
       v-if="totalPageCount > 1"
       :total-pages="totalPageCount"
       :total-visible="5"
-      class="flex justify-center mb-4"
+      class="mb-4 flex justify-center"
       @selected="fetchTokens"
     />
     <z-accordion
       v-if="filteredTokens.length && !searchCandidate"
-      class="text-vanilla-100 border border-ink-200 rounded-md bg-ink-300"
+      class="rounded-md border border-ink-200 bg-ink-300 text-vanilla-100"
     >
       <z-accordion-item title="Advanced settings" class="p-3">
         <template #title="{ open, toggleAccordion }">
-          <div class="flex items-center cursor-pointer gap-1" @click="toggleAccordion">
+          <div class="flex cursor-pointer items-center gap-1" @click="toggleAccordion">
             <z-icon
               icon="chevron-right"
               size="small"
               :class="
                 open
-                  ? 'animate-first-quarter-spin rotate-90'
-                  : 'animate-reverse-quarter-spin rotate-0'
+                  ? 'rotate-90 animate-first-quarter-spin'
+                  : 'rotate-0 animate-reverse-quarter-spin'
               "
               class="transform"
             />
-            <span class="font-medium text-xs uppercase text-vanilla-400 tracking-wider"
+            <span class="text-xs font-medium uppercase tracking-wider text-vanilla-400"
               >Advanced settings</span
             >
           </div>
         </template>
         <div
-          class="mt-4 flex gap-9 border border-cherry border-opacity-20 bg-cherry bg-opacity-5 rounded-md p-4"
+          class="mt-4 flex gap-9 rounded-md border border-cherry border-opacity-20 bg-cherry bg-opacity-5 p-4"
         >
           <div class="space-y-1.5">
-            <span class="text-cherry text-sm">Delete all tokens</span>
-            <div class="text-cherry-300 text-xs leading-6">
+            <span class="text-sm text-cherry">Delete all tokens</span>
+            <div class="text-xs leading-6 text-cherry-300">
               All applications using the tokens would no longer be granted access to DeepSource
               data. This operation cannot be undone.
             </div>
@@ -172,7 +172,6 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZConfirm, ZInput, ZIcon, ZAccordion, ZAccordionItem } from '@deepsource/zeal'
 import AccessTokenMixin from '~/mixins/accessTokenMixin'
 import PaginationMixin from '~/mixins/paginationMixin'
 
@@ -190,14 +189,6 @@ interface EmptyStatePropsT {
  * Personal access tokens page
  */
 @Component({
-  components: {
-    ZButton,
-    ZConfirm,
-    ZInput,
-    ZIcon,
-    ZAccordion,
-    ZAccordionItem
-  },
   meta: {
     auth: {
       strict: true,

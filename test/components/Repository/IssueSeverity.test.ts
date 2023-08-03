@@ -2,7 +2,7 @@ import { render } from '@testing-library/vue'
 import { IssueSeverityTag } from '~/components/Repository'
 import { cartesian, generateStringProps } from '~/test/utils'
 import { IssueSeverity } from '~/types/types'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 
 test('renders IssueSeverityTag with all prop options', () => {
   const severityOpts = generateStringProps(

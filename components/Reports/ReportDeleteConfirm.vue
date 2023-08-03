@@ -3,7 +3,7 @@
     subtitle="Once deleted, you won't be able to restore this report"
     @onClose="$emit('close-confirm')"
   >
-    <div class="mb-2 text-base leading-relaxed font-medium text-vanilla-100">
+    <div class="mb-2 text-base font-medium leading-relaxed text-vanilla-100">
       Are you sure you want to delete this report?
     </div>
     <div class="text-sm leading-relaxed text-vanilla-400">
@@ -12,7 +12,7 @@
       >. Once deleted, you won’t be able to restore the report.
     </div>
     <template #footer="{ close }">
-      <div class="mt-6 text-right text-vanilla-100 flex items-center justify-end gap-x-2">
+      <div class="mt-6 flex items-center justify-end gap-x-2 text-right text-vanilla-100">
         <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
           Cancel
         </z-button>
@@ -34,17 +34,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZConfirm, ZButton } from '@deepsource/zeal'
 
 /**
  * Confirm report delete modal
  */
-@Component({
-  components: {
-    ZConfirm,
-    ZButton
-  }
-})
+@Component({})
 export default class ReportDeleteConfirm extends Vue {
   @Prop({ required: true })
   reportLabel: boolean

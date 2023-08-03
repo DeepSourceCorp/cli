@@ -10,9 +10,9 @@
     <div
       v-if="active"
       :class="classToastAll"
-      class="w-full max-w-sm mb-4 overflow-hidden rounded-lg shadow-lg pointer-events-auto"
+      class="pointer-events-auto mb-4 w-full max-w-sm overflow-hidden rounded-lg shadow-lg"
     >
-      <div :class="classToastAll" class="overflow-hidden rounded-lg shadow-xs z-100">
+      <div :class="classToastAll" class="z-100 overflow-hidden rounded-lg shadow-xs">
         <div
           class="flex items-center p-2 leading-none"
           :class="{
@@ -20,17 +20,17 @@
           }"
         >
           <div class="flex-shrink-0">
-            <div v-if="type === 'success'" class="p-1 rounded-full">
+            <div v-if="type === 'success'" class="rounded-full p-1">
               <z-icon icon="check-circle" size="small" color="juniper" />
             </div>
-            <div v-else-if="type === 'danger'" class="p-1 rounded-full">
+            <div v-else-if="type === 'danger'" class="rounded-full p-1">
               <z-icon icon="alert-circle" size="small" color="vanilla-100" />
             </div>
-            <div v-else-if="type === 'info'" class="p-1 rounded-full">
+            <div v-else-if="type === 'info'" class="rounded-full p-1">
               <z-icon icon="alert-circle" size="small" color="vanilla-400" />
             </div>
           </div>
-          <div class="w-0 flex-1 px-2 mt-0.5">
+          <div class="mt-0.5 w-0 flex-1 px-2">
             <slot>
               <p
                 v-if="message"
@@ -43,11 +43,11 @@
           <div class="flex flex-shrink-0">
             <button
               v-if="primary.label"
-              class="inline-flex p-2 text-sm transition duration-150 ease-in-out rounded-sm cursor-pointer text-vanilla-100 focus:outline-none"
+              class="inline-flex cursor-pointer rounded-sm p-2 text-sm text-vanilla-100 transition duration-150 ease-in-out focus:outline-none"
               :class="
                 type === 'danger'
                   ? 'bg-cherry-600 hover:bg-cherry-400'
-                  : 'bg-ink-400 hover:bg-ink-500'
+                  : 'hover:bg-ink-500 bg-ink-400'
               "
               @click="primaryAction()"
             >
@@ -61,7 +61,6 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 
 interface PrimaryAction {
   label: string
@@ -69,11 +68,7 @@ interface PrimaryAction {
   action: Function
 }
 
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 export default class Toast extends Vue {
   @Prop({ default: '' })
   message!: string

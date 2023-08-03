@@ -28,7 +28,7 @@
         <password-strength
           v-if="modelValue && showStrength && !(disabled || readOnly)"
           size="small"
-          class="absolute top-1 right-1 bg-ink-400 pl-0.5"
+          class="absolute right-1 top-1 bg-ink-400 pl-0.5"
           :password="modelValue"
         />
       </slot>
@@ -38,13 +38,11 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import InputWrapper from './InputWrapper.vue'
-import { ZInput } from '@deepsource/zeal'
 import { ModelSync } from 'vue-property-decorator'
 
 @Component({
   components: {
-    InputWrapper,
-    ZInput
+    InputWrapper
   },
   name: 'PasswordInput'
 })

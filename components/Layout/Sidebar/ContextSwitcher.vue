@@ -3,7 +3,7 @@
     <template #trigger="{ toggle, isOpen }">
       <button
         type="button"
-        class="flex items-center w-full p-1 space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none truncate"
+        class="flex w-full items-center space-x-2 truncate rounded-sm p-1 text-sm text-vanilla-200 outline-none transition-all duration-75 focus:outline-none"
         :class="getTriggerButtonStyle(isOpen)"
         @click="() => handleToggle(toggle)"
       >
@@ -41,7 +41,7 @@
           </template>
         </z-input>
       </z-menu-section>
-      <div class="overflow-y-auto max-h-80 hide-scroll">
+      <div class="hide-scroll max-h-80 overflow-y-auto">
         <lazy-empty-state
           v-if="contextsByType.length === 0 && searchCandidate"
           :webp-image-path="require('~/assets/images/ui-states/no-accounts.webp')"
@@ -59,7 +59,7 @@
         >
           <div
             v-if="!searchCandidate"
-            class="px-3 mt-2.5 mb-2 text-11px font-semibold tracking-wider uppercase text-slate"
+            class="mb-2 mt-2.5 px-3 text-11px font-semibold uppercase tracking-wider text-slate"
           >
             {{ contextType.type }}
           </div>
@@ -72,7 +72,7 @@
             :class="{
               'border-l-2 border-juniper bg-ink-200': isActive(context)
             }"
-            class="flex items-center w-full gap-x-1"
+            class="flex w-full items-center gap-x-1"
             @click.native="close"
           >
             <z-avatar
@@ -83,7 +83,7 @@
               stroke="bg-ink-100 p-0.5"
               type="span"
             />
-            <div class="flex-col flex-1 truncate">
+            <div class="flex-1 flex-col truncate">
               <span
                 :class="isActive(context) ? 'text-vanilla-100' : 'text-vanilla-400'"
                 class="text-sm font-medium leading-4"
@@ -94,7 +94,7 @@
               <z-icon
                 v-tooltip="context.vcs_provider_display"
                 :icon="providerIcon(context.vcs_provider)"
-                class="min-w-4 min-h-4"
+                class="min-h-4 min-w-4"
               />
             </div>
           </z-menu-item>
@@ -121,7 +121,6 @@
 </template>
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZAvatar, ZIcon, ZInput, ZMenu, ZMenuItem, ZMenuSection, ZDivider } from '@deepsource/zeal'
 
 // types
 import ActiveUserMixin, { DashboardContext } from '~/mixins/activeUserMixin'
@@ -132,15 +131,6 @@ import { getDefaultAvatar } from '~/utils/ui'
  * Context switcher component
  */
 @Component({
-  components: {
-    ZAvatar,
-    ZIcon,
-    ZMenu,
-    ZMenuItem,
-    ZMenuSection,
-    ZInput,
-    ZDivider
-  },
   methods: {
     getDefaultAvatar
   }

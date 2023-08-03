@@ -1,4 +1,4 @@
-mutation($teamId: ID!, $syncPermissionsWithVcs: Boolean) {
+mutation ($teamId: ID!, $syncPermissionsWithVcs: Boolean) {
   updateAccessControlSettings(
     input: { teamId: $teamId, syncPermissionsWithVcs: $syncPermissionsWithVcs }
   ) {

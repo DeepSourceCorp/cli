@@ -134,7 +134,6 @@
 
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import { ZIcon, ZStepper, ZStep, ZInput, ZTag, ZButton } from '@deepsource/zeal'
 import { TomlBox, AnalyzerSelector, PatternsSelector } from '@/components/ConfigGenerator'
 import InstallAutofixModal from '@/components/Autofix/Modals/InstallAutofixModal.vue'
 import { NextStepsModal } from '@/components/ConfigGenerator'
@@ -185,17 +184,7 @@ const directoryStore = namespace('directory/directory')
 
 @Component({
   components: {
-    ZIcon,
-    ZStepper,
-    ZStep,
-    ZInput,
-    ZTag,
-    ZButton,
-    TomlBox,
-    AnalyzerSelector,
-    PatternsSelector,
-    InstallAutofixModal,
-    NextStepsModal
+    AnalyzerSelector
   },
   middleware: ['perm'],
   meta: {
@@ -259,7 +248,8 @@ export default class GenerateConfig extends mixins(
     ])
 
     if (this.repository.kind === RepositoryKindChoices.Monorepo) {
-      return this.$nuxt.error({ statusCode: 404 })
+      this.$nuxt.error({ statusCode: 404 })
+      return
     }
 
     // create a deep copy, this is safe enough for now

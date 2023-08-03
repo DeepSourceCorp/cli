@@ -2,12 +2,12 @@
   <div>
     <section-header title="Projects" />
 
-    <div v-if="$fetchState.pending" class="grid gap-4 md:w-2/3 animate-pulse">
+    <div v-if="$fetchState.pending" class="grid animate-pulse gap-4 md:w-2/3">
       <div v-for="ii in 5" :key="ii" class="h-32 rounded-md bg-ink-300"></div>
     </div>
 
     <div v-else-if="resolveNodes(watchedRepositories).length" class="grid gap-4 md:w-2/3">
-      <repo-card
+      <discover-repo-card
         v-for="(edge, key) in watchedRepositories.edges"
         :key="key"
         :repo-info="edge.node"
@@ -20,7 +20,7 @@
             Updated {{ fromNow(edge.node.modifiedAt) }}
           </span>
         </template>
-      </repo-card>
+      </discover-repo-card>
     </div>
     <div v-else>
       <lazy-empty-state title="No projects found" />
@@ -29,7 +29,6 @@
 </template>
 
 <script lang="ts">
-import { ZIcon } from '@deepsource/zeal'
 import { Component, namespace, Vue } from 'nuxt-property-decorator'
 
 import { resolveNodes } from '@/utils/array'
@@ -37,15 +36,9 @@ import { fromNow } from '@/utils/date'
 import { DiscoverUserActions, DiscoverUserGetters } from '~/store/discover/user'
 import { RepositoryConnection } from '~/types/types'
 
-import RepoCard from './RepoCard.vue'
-
 const discoverUserStore = namespace('discover/user')
 
 @Component({
-  components: {
-    RepoCard,
-    ZIcon
-  },
   methods: { fromNow, resolveNodes }
 })
 export default class WatchedRepoFeed extends Vue {

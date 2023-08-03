@@ -21,7 +21,7 @@
       </template>
 
       <template #body>
-        <ul class="space-y-3 py-2.5 px-3">
+        <ul class="space-y-3 px-3 py-2.5">
           <li v-for="analyzer in othersList" :key="analyzer.id" class="flex items-center gap-x-2.5">
             <z-icon :icon="analyzer.shortcode" size="x-small" />
             <span>{{ analyzer.name }}</span>
@@ -33,13 +33,12 @@
 </template>
 
 <script lang="ts">
-import { ZIcon, ZMenu, ZTag } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import { Analyzer, AnalyzerConnection } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
 
-@Component({ name: 'AnalyzerList', components: { ZIcon, ZMenu, ZTag } })
+@Component({ name: 'AnalyzerList' })
 export default class AnalyzerList extends Vue {
   @Prop()
   availableAnalyzers: AnalyzerConnection

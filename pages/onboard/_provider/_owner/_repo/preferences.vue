@@ -1,12 +1,12 @@
 <template>
   <section class="space-y-4">
     <label class="text-base font-medium">What type of issues are important to you?</label>
-    <div class="grid grid-cols-1 gap-4 overflow-y-scroll lg:grid-cols-2 max-h-102">
+    <div class="grid max-h-102 grid-cols-1 gap-4 overflow-y-scroll lg:grid-cols-2">
       <div
         v-for="issue in issueTypes"
         :key="issue.name"
-        class="p-5 transition-all duration-100 border rounded-md cursor-pointer"
-        :class="issue.isChecked ? 'bg-ink-300 border-slate-400' : 'bg-ink-400 border-slate-400'"
+        class="cursor-pointer rounded-md border p-5 transition-all duration-100"
+        :class="issue.isChecked ? 'border-slate-400 bg-ink-300' : 'border-slate-400 bg-ink-400'"
         @click.prevent="issue.isChecked = !issue.isChecked"
       >
         <div class="space-y-2">
@@ -32,7 +32,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZInput, ZIcon, ZCheckbox, ZButton } from '@deepsource/zeal'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import { IssueTypeSetting } from '~/types/types'
 import MetaMixin from '~/mixins/metaMixin'
@@ -109,12 +108,6 @@ const ISSUE_TYPES: Record<string, Issue> = {
  * Onboarding page, for the user to select issue preferences
  */
 @Component({
-  components: {
-    ZInput,
-    ZIcon,
-    ZCheckbox,
-    ZButton
-  },
   middleware: ['restrictOnboarding'],
   meta: {
     auth: {

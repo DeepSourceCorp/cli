@@ -42,9 +42,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 
-@Component({ name: 'SupportFpInfo', components: { ZIcon } })
+@Component({ name: 'SupportFpInfo' })
 export default class SupportFpInfo extends Vue {}
 </script>
 <style scoped>

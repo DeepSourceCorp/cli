@@ -5,14 +5,9 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import { toTitleCase } from '@/utils/string'
 
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 export default class IssueType extends Vue {
   @Prop({ default: '' })
   issueType!: string

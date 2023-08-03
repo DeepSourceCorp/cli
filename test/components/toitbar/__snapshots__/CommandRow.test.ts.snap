@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":false,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <!---->
@@ -9,7 +9,7 @@ exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","ima
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":false,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <!---->
@@ -17,7 +17,7 @@ exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","ima
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":false,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
@@ -25,7 +25,7 @@ exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","ima
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":false,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
@@ -33,615 +33,615 @@ exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","ima
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":false,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":false,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":true,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":true,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":true,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":true,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":true,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":true,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":false,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":false,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":false,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":false,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":false,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":false,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":true,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":true,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":true,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":true,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":true,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":true,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":false,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <!---->
@@ -649,7 +649,7 @@ exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"",
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":false,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <!---->
@@ -657,7 +657,7 @@ exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"",
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":false,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
@@ -665,7 +665,7 @@ exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"",
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":false,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
@@ -673,608 +673,608 @@ exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"",
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":false,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":false,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":true,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":true,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":true,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":true,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":true,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":true,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <!---->
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
   <div class=\\"text-xs text-vanilla-400\\">hint</div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":false,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":false,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":false,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":false,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":false,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":false,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":true,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":true,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":true,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":true,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
   <!----> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":true,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":true,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":false,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none text-vanilla-400 px-4 py-2\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none px-4 py-2 text-vanilla-400\\">
   <!---->
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-400\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-400\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zavatar-stub type=\\"link\\" image=\\"https://deepsource.io/example.png\\" fallbackimage=\\"hello-world\\" username=\\"hello\\" size=\\"xs\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zavatar-stub size=\\"xs\\" image=\\"https://deepsource.io/example.png\\" user-name=\\"hello\\" fallback-image=\\"hello-world\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\">hello</span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":""} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"
 `;
 
 exports[`renders CommandRow with all prop options: {"hint":"hint","shortkey":"Alt+KeyO","image":"https://deepsource.io/example.png","active":true,"icon":"arrow-up","labelHTML":"<b>hello</b>","label":"hello"} 1`] = `
-"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex items-center w-full h-10 space-x-3 focus:outline-none bg-ink-300 text-vanilla-100 pr-4\\">
-  <div class=\\"w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper\\"></div>
-  <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
-  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+"<li tabindex=\\"-1\\" role=\\"option\\" class=\\"flex h-10 w-full items-center space-x-3 focus:outline-none bg-ink-300 pr-4 text-vanilla-100\\">
+  <div class=\\"-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper\\"></div>
+  <zicon-stub icon=\\"arrow-up\\"></zicon-stub> <span class=\\"flex-grow text-sm font-medium\\"><b>hello</b></span>
+  <div class=\\"flex space-x-1\\"><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       Alt
-    </span><span class=\\"flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200 text-vanilla-100\\">
+    </span><span class=\\"flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none text-vanilla-100\\">
       O
     </span></div>
 </li>"

@@ -2,13 +2,13 @@
   <component
     :is="linkCards ? 'nuxt-link' : 'div'"
     :to="cardLink"
-    class="flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md"
+    class="flex flex-col gap-y-3 rounded-md bg-ink-300 p-3 text-vanilla-100"
     :class="{ 'hover:bg-ink-200': linkCards }"
   >
-    <h5 class="flex items-center text-sm leading-4 font-medium gap-x-2">
+    <h5 class="flex items-center gap-x-2 text-sm font-medium leading-4">
       <img
         v-if="logoUrl"
-        class="hidden sm:inline-block flex-shrink-0 w-4 h-4"
+        class="hidden h-4 w-4 flex-shrink-0 sm:inline-block"
         :src="logoUrl"
         :alt="name"
       />
@@ -17,7 +17,7 @@
     </h5>
     <div
       v-tooltip="value > 1000 ? `${formatIntl(value)} ${name}` : ''"
-      class="font-semibold text-base leading-6"
+      class="text-base font-semibold leading-6"
     >
       {{ shortenLargeNumber(value) }}
     </div>
@@ -26,15 +26,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import { formatIntl, shortenLargeNumber, toSentenceCase } from '~/utils/string'
 import { IssueDistributionT } from '~/types/reportTypes'
 
 // Card component for distribution stats
 @Component({
-  components: {
-    ZIcon
-  },
   methods: {
     shortenLargeNumber,
     formatIntl,

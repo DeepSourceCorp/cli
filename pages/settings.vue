@@ -1,7 +1,7 @@
 <template>
   <main>
-    <div id="tabs" class="flex xl:col-span-2 pt-2.5 pb-0 border-b border-slate-400">
-      <div class="flex self-end px-2 space-x-5 overflow-auto md:px-4 flex-nowrap">
+    <div id="tabs" class="flex border-b border-slate-400 pb-0 pt-2.5 xl:col-span-2">
+      <div class="flex flex-nowrap space-x-5 self-end overflow-auto px-2 md:px-4">
         <template v-for="settings in settingsOptions">
           <nuxt-link :key="settings.name" :to="settings.route">
             <z-tab
@@ -21,7 +21,7 @@
                 "
                 text-size="xxs"
                 spacing="px-2 py-1"
-                class="font-semibold leading-none tracking-wider text-current uppercase"
+                class="font-semibold uppercase leading-none tracking-wider text-current"
               >
                 Beta
               </z-tag>
@@ -39,13 +39,11 @@ import { Component, mixins } from 'nuxt-property-decorator'
 import ActiveUserMixin from '@/mixins/activeUserMixin'
 import AccessTokenMixin from '~/mixins/accessTokenMixin'
 import { Context } from '@nuxt/types'
-import { ZTab, ZTag, ZIcon } from '@deepsource/zeal'
 
 /**
  * User settings page
  */
 @Component({
-  components: { ZTab, ZTag, ZIcon },
   meta: {
     auth: {
       strict: true,

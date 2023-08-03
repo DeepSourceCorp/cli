@@ -1,4 +1,4 @@
-mutation($id: ID!) {
+mutation ($id: ID!) {
   cancelCodeQualitySubscription(input: { id: $id }) {
     ok
   }

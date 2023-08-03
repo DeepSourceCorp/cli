@@ -155,7 +155,7 @@
             icon="refresh-cw"
             icon-color="vanilla-100"
             size="small"
-            class="bg-ink-200 text-vanilla-100 hover:bg-opacity-80"
+            class="bg-ink-200 text-vanilla-100 hover:bg-ink-200/80"
             @click="syncRepos"
           >
             Sync repositories
@@ -175,8 +175,6 @@
   </z-tab-pane>
 </template>
 <script lang="ts">
-import { RepoCard } from '@/components/AddRepo'
-import { ZAlert, ZButton, ZIcon, ZInput, ZPagination, ZTabPane } from '@deepsource/zeal'
 import { Component, mixins, Prop, Watch } from 'nuxt-property-decorator'
 
 import RepositoriesActivationListQuery from '~/apollo/queries/repository/activateList.gql'
@@ -201,15 +199,6 @@ import { debounceAsync } from '~/utils/debounce'
  * Component to activate new repositories
  */
 @Component({
-  components: {
-    ZInput,
-    ZButton,
-    ZIcon,
-    ZTabPane,
-    ZPagination,
-    ZAlert,
-    RepoCard
-  },
   name: 'ActivateSingleRepo'
 })
 export default class ActivateSingleRepo extends mixins(

@@ -1,12 +1,12 @@
 <template>
   <div class="min-h-screen">
-    <nav class="sticky top-0 z-50 border-b col-span-full border-slate-400 h-14 bg-ink-400">
-      <section class="grid h-full max-w-5xl grid-cols-2 px-4 py-2.5 mx-auto">
+    <nav class="sticky top-0 z-50 col-span-full h-14 border-b border-slate-400 bg-ink-400">
+      <section class="mx-auto grid h-full max-w-5xl grid-cols-2 px-4 py-2.5">
         <div class="flex items-center">
           <component
             :is="isAnalysisRunning ? 'div' : 'nuxt-link'"
             :to="isAnalysisRunning ? null : repoSelectorRoute"
-            class="flex items-center h-full pr-2 border-r md:pr-5 border-slate-400"
+            class="flex h-full items-center border-r border-slate-400 pr-2 md:pr-5"
           >
             <img
               src="~/assets/images/logo-wordmark-white.svg"
@@ -19,7 +19,7 @@
               alt="DeepSource word mark"
             />
           </component>
-          <span class="flex items-center pl-5 space-x-2">
+          <span class="flex items-center space-x-2 pl-5">
             <z-avatar
               :image="activeDashboardContext.avatar_url"
               :user-name="activeDashboardContext.login"
@@ -30,7 +30,7 @@
                 )
               "
               size="sm"
-              class="flex-shrink-0 leading-none rounded-full"
+              class="flex-shrink-0 rounded-full leading-none"
             />
             <span class="text-sm font-normal text-vanilla-200">
               {{ activeDashboardContext.team_name || activeDashboardContext.login }}
@@ -50,7 +50,7 @@
         </div>
       </section>
     </nav>
-    <main class="grid max-w-5xl grid-cols-5 gap-5 px-4 py-5 mx-auto sm:py-12">
+    <main class="mx-auto grid max-w-5xl grid-cols-5 gap-5 px-4 py-5 sm:py-12">
       <div class="hidden sm:block">
         <div
           class="sticky top-26"
@@ -59,7 +59,7 @@
           "
         >
           <client-only>
-            <z-stepper align="vertical" :show-numbers="false" class="w-full mb-2">
+            <z-stepper align="vertical" :show-numbers="false" class="mb-2 w-full">
               <z-step
                 v-for="(step, index) in steps"
                 :key="step.route"
@@ -99,7 +99,7 @@
           </client-only>
         </div>
       </div>
-      <div class="hidden col-span-1 sm:block"></div>
+      <div class="col-span-1 hidden sm:block"></div>
       <nuxt-child class="col-span-full sm:col-span-3" />
     </main>
   </div>
@@ -108,7 +108,6 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
-import { ZAvatar, ZIcon, ZButton, ZStepper, ZStep } from '@deepsource/zeal'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { Context } from '@nuxt/types'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
@@ -120,13 +119,6 @@ import { getDefaultAvatar } from '~/utils/ui'
  * this has the sidebar with all the actions and the navbar
  */
 @Component({
-  components: {
-    ZAvatar,
-    ZIcon,
-    ZButton,
-    ZStepper,
-    ZStep
-  },
   middleware: [
     'restrictOnboarding',
     function ({ redirect, route, $config }: Context): void {

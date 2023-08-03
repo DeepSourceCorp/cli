@@ -1,4 +1,4 @@
-mutation(
+mutation (
   $productSlug: String!
   $planSlug: String!
   $quantity: Int!

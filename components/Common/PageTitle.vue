@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-start justify-between mb-2">
+  <div class="mb-2 flex items-start justify-between">
     <div class="space-y-1">
       <div class="flex items-center space-x-2">
         <h2 class="text-lg font-medium">

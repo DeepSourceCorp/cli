@@ -1,8 +1,7 @@
 import { render } from '@testing-library/vue'
 import { RouterLinkStub } from '@vue/test-utils'
-import { RunCard } from '~/components/History'
-import VTooltip from 'v-tooltip'
-import { BaseCard } from '~/components/History'
+import { RunCard, BaseCard } from '~/components/History'
+import VTooltip from 'floating-vue'
 import { mocksGenerator } from '~/test/mocks'
 import { RunStatus } from '~/types/types'
 

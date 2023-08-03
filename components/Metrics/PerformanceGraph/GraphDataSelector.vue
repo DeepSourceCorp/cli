@@ -1,20 +1,20 @@
 <template>
   <div
-    class="flex p-2 overflow-x-scroll border-b sm:block sm:border-0 border-slate-400 hide-scroll sm:space-y-2"
+    class="hide-scroll flex overflow-x-scroll border-b border-slate-400 p-2 sm:block sm:space-y-2 sm:border-0"
   >
     <div
       v-for="(metric, index) in dataPoints"
       :key="metric.shortcode"
       :class="index == selectedIndex ? 'bg-ink-300' : 'cursor-pointer hover:bg-ink-300'"
-      class="flex flex-col rounded-md p-2 space-y-4"
+      class="flex flex-col space-y-4 rounded-md p-2"
       @click="toggleMetric(index)"
     >
-      <div class="flex flex-row items-center justify-between flex-grow space-x-2">
+      <div class="flex flex-grow flex-row items-center justify-between space-x-2">
         <h5
-          class="block overflow-hidden text-sm leading mb-px whitespace-nowrap overflow-ellipsis tracking-snug"
+          class="leading mb-px block overflow-hidden overflow-ellipsis whitespace-nowrap text-sm tracking-snug"
           :class="{
             'text-vanilla-400': index !== selectedIndex,
-            'text-vanilla-200 text-base font-semibold': index === selectedIndex
+            'text-base font-semibold text-vanilla-200': index === selectedIndex
           }"
         >
           {{ metric.name }}
@@ -28,12 +28,12 @@
       </div>
       <div
         v-if="index == selectedIndex"
-        class="flex-row items-end justify-between hidden mt-2 sm:flex"
+        class="mt-2 hidden flex-row items-end justify-between sm:flex"
       >
         <span class="text-lg font-bold leading-none text-vanilla-100">
           {{ metric.display }}
         </span>
-        <div class="text-xs text-vanilla-400 space-x-0.5 text-right hidden sm:block">
+        <div class="hidden space-x-0.5 text-right text-xs text-vanilla-400 sm:block">
           <z-icon
             v-for="namespace in metric.namespaces.slice(0, 2)"
             :key="namespace.shortcode"
@@ -53,13 +53,7 @@
 import { Vue, Component, Prop, Model } from 'nuxt-property-decorator'
 import { Metrics } from '~/store/repository/detail'
 
-import { ZIcon } from '@deepsource/zeal'
-
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 export default class GraphDataSelector extends Vue {
   @Prop({ default: () => [] })
   dataPoints: Array<Metrics>

@@ -25,15 +25,17 @@
         <template #body>
           <z-menu-section :divider="false" class="text-left">
             <z-menu-item
+              as="button"
               icon="edit-2"
-              class="text-sm"
+              class="w-full text-sm"
               @click="$emit('openUpdateThresholdModal', metric.shortcode)"
             >
               Update Threshold
             </z-menu-item>
             <z-menu-item
+              as="button"
               icon="trash-2"
-              class="text-sm text-cherry"
+              class="w-full text-sm text-cherry"
               @click="$emit('deleteThreshold', metric.shortcode)"
             >
               Delete Threshold
@@ -60,7 +62,6 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-import { ZButton, ZMenu, ZMenuItem, ZMenuSection, ZIcon } from '@deepsource/zeal'
 import { StatType } from '~/types/metric'
 import { Metric, MetricNamespaceTrend } from '~/types/types'
 
@@ -79,8 +80,7 @@ export interface TrendStatProps {
  * Displays the trend metric of a page and adds components for updating threshold if required.
  */
 @Component({
-  name: 'TrendStat',
-  components: { ZButton, ZMenu, ZMenuItem, ZMenuSection, ZIcon }
+  name: 'TrendStat'
 })
 export default class TrendStat extends Vue {
   @Prop()

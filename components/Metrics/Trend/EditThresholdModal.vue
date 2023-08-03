@@ -44,7 +44,6 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
 
-import { ZModal, ZInput, ZButton } from '@deepsource/zeal'
 import { Maybe, Metric, MetricNamespace, MetricNamespaceTrend, Repository } from '~/types/types'
 import { MetricType } from '~/types/metric'
 
@@ -52,8 +51,7 @@ import { MetricType } from '~/types/metric'
  * Modal component that is used to edit the threshold of a Metric namespace.
  */
 @Component({
-  name: 'EditThresholdModal',
-  components: { ZModal, ZInput, ZButton }
+  name: 'EditThresholdModal'
 })
 export default class EditThresholdModal extends Vue {
   @Prop()

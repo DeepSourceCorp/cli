@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { render } from '@testing-library/vue'
 import { createLocalVue } from '@vue/test-utils'
 import dayjs from 'dayjs'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 import { VueConstructor } from 'vue'
 import Vuex from 'vuex'
 

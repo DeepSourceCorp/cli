@@ -57,10 +57,11 @@
 </template>
 
 <script lang="ts">
-import { ZIcon, ZTag } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import { AccountSetupCard, RecentlyActiveRepoList } from '@/components/TeamHome'
+import PinnedChartReport from '~/components/Reports/PinnedChartReport.vue'
+import PinnedCodeCoverageReport from '~/components/Reports/PinnedCodeCoverageReport.vue'
 
 import ActiveUserMixin, { DashboardContext } from '~/mixins/activeUserMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
@@ -83,8 +84,8 @@ interface SetupStep {
   components: {
     RecentlyActiveRepoList,
     AccountSetupCard,
-    ZIcon,
-    ZTag
+    PinnedChartReport,
+    PinnedCodeCoverageReport
   },
   middleware: ['validateProvider', 'perm'],
   meta: {

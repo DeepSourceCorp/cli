@@ -1,65 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ DashboardHeader ]] renders DashboardHeader 1`] = `
-"<div>
-  <div class=\\"overflow-x-auto border-b border-slate-400 bg-ink-300\\">
-    <div id=\\"header\\" class=\\"flex items-center p-3\\">
-      <h2 class=\\"inline-flex items-center space-x-3 font-medium text-vanilla-100\\"><a class=\\"inline-flex flex-shrink-0 items-center space-x-2\\">
-          <zavatar-stub type=\\"link\\" image=\\"https://static.deepsource.io/avatars/14ce08c1-6b0d-4502-9a03-576af9a06f9d.png\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"cursor-pointer text-base font-medium\\">deepsourcelabs</span>
-        </a> <span class=\\"inline-flex items-center space-x-3\\"><a href=\\"https://github.com/deepsourcelabs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex h-6 items-center has-tooltip\\" data-original-title=\\"null\\"><ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"p-0.5\\" iconcolor=\\"current\\" class=\\"border border-slate-400\\"></ztag-stub></a> <a><ztag-stub state=\\"default\\" iconleft=\\"star\\" size=\\"small\\" bgcolor=\\"ink-200\\" textsize=\\"xs\\" spacing=\\"px-2.5\\" iconcolor=\\"current\\" class=\\"h-6 border border-slate-400 text-center font-semibold uppercase leading-none tracking-wider text-vanilla-300 hover:bg-ink-100 hover:text-vanilla-100 has-tooltip\\" data-original-title=\\"null\\"><span>Upgrade</span></ztag-stub></a></span></h2>
-    </div>
+"<div class=\\"overflow-x-auto border-b border-slate-400 bg-ink-300\\">
+  <div id=\\"header\\" class=\\"flex items-center gap-x-3 p-3\\">
+    <h2 class=\\"inline-flex items-center gap-x-3 font-medium text-vanilla-100\\"><a class=\\"inline-flex flex-shrink-0 items-center gap-x-2\\">
+        <client-only>
+          <zavatar-stub image=\\"https://static.deepsource.io/avatars/14ce08c1-6b0d-4502-9a03-576af9a06f9d.png\\" user-name=\\"deepsourcelabs\\" fallback-image=\\"test-image-dir/test-image-file.png\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0\\"></zavatar-stub>
+        </client-only> <span class=\\"cursor-pointer text-base font-medium\\">deepsourcelabs</span>
+      </a></h2> <span class=\\"inline-flex items-center space-x-3\\"><a href=\\"https://github.com/deepsourcelabs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex h-6 items-center v-popper--has-tooltip\\"><ztag-stub icon-left=\\"github\\" spacing=\\"p-0.5\\" bg-color=\\"ink-200\\" class=\\"border border-slate-400\\"></ztag-stub></a> <a><ztag-stub icon-left=\\"star\\" bg-color=\\"ink-200\\" spacing=\\"px-2.5\\" text-size=\\"xs\\" class=\\"h-6 border border-slate-400 text-center font-semibold uppercase leading-none tracking-wider text-vanilla-300 hover:bg-ink-100 hover:text-vanilla-100 v-popper--has-tooltip\\"><span>Upgrade</span></ztag-stub></a></span>
   </div>
 </div>"
 `;
 
 exports[`[[ DashboardHeader ]] renders DashboardHeader on Prem 1`] = `
-"<div>
-  <div class=\\"overflow-x-auto border-b border-slate-400 bg-ink-300\\">
-    <div id=\\"header\\" class=\\"flex items-center p-3\\">
-      <h2 class=\\"inline-flex items-center space-x-3 font-medium text-vanilla-100\\"><a class=\\"inline-flex flex-shrink-0 items-center space-x-2\\">
-          <zavatar-stub type=\\"link\\" image=\\"https://static.deepsource.io/avatars/14ce08c1-6b0d-4502-9a03-576af9a06f9d.png\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"cursor-pointer text-base font-medium\\">deepsourcelabs</span>
-        </a> <span class=\\"inline-flex items-center space-x-3\\"><a href=\\"https://github.com/deepsourcelabs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex h-6 items-center has-tooltip\\" data-original-title=\\"null\\"><ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"p-0.5\\" iconcolor=\\"current\\" class=\\"border border-slate-400\\"></ztag-stub></a> <!----></span></h2>
-    </div>
+"<div class=\\"overflow-x-auto border-b border-slate-400 bg-ink-300\\">
+  <div id=\\"header\\" class=\\"flex items-center gap-x-3 p-3\\">
+    <h2 class=\\"inline-flex items-center gap-x-3 font-medium text-vanilla-100\\"><a class=\\"inline-flex flex-shrink-0 items-center gap-x-2\\">
+        <client-only>
+          <zavatar-stub image=\\"https://static.deepsource.io/avatars/14ce08c1-6b0d-4502-9a03-576af9a06f9d.png\\" user-name=\\"deepsourcelabs\\" fallback-image=\\"test-image-dir/test-image-file.png\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0\\"></zavatar-stub>
+        </client-only> <span class=\\"cursor-pointer text-base font-medium\\">deepsourcelabs</span>
+      </a></h2> <span class=\\"inline-flex items-center space-x-3\\"><a href=\\"https://github.com/deepsourcelabs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex h-6 items-center v-popper--has-tooltip\\"><ztag-stub icon-left=\\"github\\" spacing=\\"p-0.5\\" bg-color=\\"ink-200\\" class=\\"border border-slate-400\\"></ztag-stub></a> <!----></span>
   </div>
 </div>"
 `;
 
 exports[`[[ DashboardHeader ]] renders DashboardHeader with different vcs 1`] = `
-"<div>
-  <div class=\\"overflow-x-auto border-b border-slate-400 bg-ink-300\\">
-    <div id=\\"header\\" class=\\"flex items-center p-3\\">
-      <h2 class=\\"inline-flex items-center space-x-3 font-medium text-vanilla-100\\"><a class=\\"inline-flex flex-shrink-0 items-center space-x-2\\">
-          <zavatar-stub type=\\"link\\" image=\\"https://static.deepsource.io/avatars/14ce08c1-6b0d-4502-9a03-576af9a06f9d.png\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"cursor-pointer text-base font-medium\\">deepsourcelabs</span>
-        </a> <span class=\\"inline-flex items-center space-x-3\\"><a href=\\"https://github.com/deepsourcelabs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex h-6 items-center has-tooltip\\" data-original-title=\\"null\\"><ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"p-0.5\\" iconcolor=\\"current\\" class=\\"border border-slate-400\\"></ztag-stub></a> <a><ztag-stub state=\\"default\\" iconleft=\\"star\\" size=\\"small\\" bgcolor=\\"ink-200\\" textsize=\\"xs\\" spacing=\\"px-2.5\\" iconcolor=\\"current\\" class=\\"h-6 border border-slate-400 text-center font-semibold uppercase leading-none tracking-wider text-vanilla-300 hover:bg-ink-100 hover:text-vanilla-100 has-tooltip\\" data-original-title=\\"null\\"><span>Upgrade</span></ztag-stub></a></span></h2>
-    </div>
+"<div class=\\"overflow-x-auto border-b border-slate-400 bg-ink-300\\">
+  <div id=\\"header\\" class=\\"flex items-center gap-x-3 p-3\\">
+    <h2 class=\\"inline-flex items-center gap-x-3 font-medium text-vanilla-100\\"><a class=\\"inline-flex flex-shrink-0 items-center gap-x-2\\">
+        <client-only>
+          <zavatar-stub image=\\"https://static.deepsource.io/avatars/14ce08c1-6b0d-4502-9a03-576af9a06f9d.png\\" user-name=\\"deepsourcelabs\\" fallback-image=\\"test-image-dir/test-image-file.png\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0\\"></zavatar-stub>
+        </client-only> <span class=\\"cursor-pointer text-base font-medium\\">deepsourcelabs</span>
+      </a></h2> <span class=\\"inline-flex items-center space-x-3\\"><a href=\\"https://github.com/deepsourcelabs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex h-6 items-center v-popper--has-tooltip\\"><ztag-stub icon-left=\\"github\\" spacing=\\"p-0.5\\" bg-color=\\"ink-200\\" class=\\"border border-slate-400\\"></ztag-stub></a> <a><ztag-stub icon-left=\\"star\\" bg-color=\\"ink-200\\" spacing=\\"px-2.5\\" text-size=\\"xs\\" class=\\"h-6 border border-slate-400 text-center font-semibold uppercase leading-none tracking-wider text-vanilla-300 hover:bg-ink-100 hover:text-vanilla-100 v-popper--has-tooltip\\"><span>Upgrade</span></ztag-stub></a></span>
   </div>
 </div>"
 `;
 
 exports[`[[ DashboardHeader ]] renders DashboardHeader with paid plan 1`] = `
-"<div>
-  <div class=\\"overflow-x-auto border-b border-slate-400 bg-ink-300\\">
-    <div id=\\"header\\" class=\\"flex items-center p-3\\">
-      <h2 class=\\"inline-flex items-center space-x-3 font-medium text-vanilla-100\\"><a class=\\"inline-flex flex-shrink-0 items-center space-x-2\\">
-          <zavatar-stub type=\\"link\\" image=\\"https://static.deepsource.io/avatars/14ce08c1-6b0d-4502-9a03-576af9a06f9d.png\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"cursor-pointer text-base font-medium\\">deepsourcelabs</span>
-        </a> <span class=\\"inline-flex items-center space-x-3\\"><a href=\\"https://github.com/deepsourcelabs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex h-6 items-center has-tooltip\\" data-original-title=\\"null\\"><ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"p-0.5\\" iconcolor=\\"current\\" class=\\"border border-slate-400\\"></ztag-stub></a> <a><ztag-stub state=\\"default\\" iconleft=\\"zap\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"xs\\" spacing=\\"px-2.5\\" iconcolor=\\"current\\" class=\\"gap-x-1 border border-slate-400 py-1 font-medium leading-none has-tooltip\\" data-original-title=\\"null\\">
-                Business
-              </ztag-stub></a></span></h2>
-    </div>
+"<div class=\\"overflow-x-auto border-b border-slate-400 bg-ink-300\\">
+  <div id=\\"header\\" class=\\"flex items-center gap-x-3 p-3\\">
+    <h2 class=\\"inline-flex items-center gap-x-3 font-medium text-vanilla-100\\"><a class=\\"inline-flex flex-shrink-0 items-center gap-x-2\\">
+        <client-only>
+          <zavatar-stub image=\\"https://static.deepsource.io/avatars/14ce08c1-6b0d-4502-9a03-576af9a06f9d.png\\" user-name=\\"deepsourcelabs\\" fallback-image=\\"test-image-dir/test-image-file.png\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0\\"></zavatar-stub>
+        </client-only> <span class=\\"cursor-pointer text-base font-medium\\">deepsourcelabs</span>
+      </a></h2> <span class=\\"inline-flex items-center space-x-3\\"><a href=\\"https://github.com/deepsourcelabs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex h-6 items-center v-popper--has-tooltip\\"><ztag-stub icon-left=\\"github\\" spacing=\\"p-0.5\\" bg-color=\\"ink-200\\" class=\\"border border-slate-400\\"></ztag-stub></a> <a><ztag-stub icon-left=\\"zap\\" size=\\"x-small\\" bg-color=\\"ink-200\\" spacing=\\"px-2.5\\" text-size=\\"xs\\" class=\\"gap-x-1 border border-slate-400 py-1 font-medium leading-none v-popper--has-tooltip\\">
+          Business
+        </ztag-stub></a></span>
   </div>
 </div>"
 `;
 
 exports[`[[ DashboardHeader ]] renders DashboardHeader with paid plan but no perms 1`] = `
-"<div>
-  <div class=\\"overflow-x-auto border-b border-slate-400 bg-ink-300\\">
-    <div id=\\"header\\" class=\\"flex items-center p-3\\">
-      <h2 class=\\"inline-flex items-center space-x-3 font-medium text-vanilla-100\\"><a class=\\"inline-flex flex-shrink-0 items-center space-x-2\\">
-          <zavatar-stub type=\\"link\\" image=\\"https://static.deepsource.io/avatars/14ce08c1-6b0d-4502-9a03-576af9a06f9d.png\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span class=\\"cursor-pointer text-base font-medium\\">deepsourcelabs</span>
-        </a> <span class=\\"inline-flex items-center space-x-3\\"><a href=\\"https://github.com/deepsourcelabs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex h-6 items-center has-tooltip\\" data-original-title=\\"null\\"><ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"p-0.5\\" iconcolor=\\"current\\" class=\\"border border-slate-400\\"></ztag-stub></a> <span><ztag-stub state=\\"default\\" iconleft=\\"zap\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"xs\\" spacing=\\"px-2.5\\" iconcolor=\\"current\\" class=\\"gap-x-1 border border-slate-400 py-1 font-medium leading-none has-tooltip\\" data-original-title=\\"null\\">
-                Business
-              </ztag-stub></span></span></h2>
-    </div>
+"<div class=\\"overflow-x-auto border-b border-slate-400 bg-ink-300\\">
+  <div id=\\"header\\" class=\\"flex items-center gap-x-3 p-3\\">
+    <h2 class=\\"inline-flex items-center gap-x-3 font-medium text-vanilla-100\\"><a class=\\"inline-flex flex-shrink-0 items-center gap-x-2\\">
+        <client-only>
+          <zavatar-stub image=\\"https://static.deepsource.io/avatars/14ce08c1-6b0d-4502-9a03-576af9a06f9d.png\\" user-name=\\"deepsourcelabs\\" fallback-image=\\"test-image-dir/test-image-file.png\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0\\"></zavatar-stub>
+        </client-only> <span class=\\"cursor-pointer text-base font-medium\\">deepsourcelabs</span>
+      </a></h2> <span class=\\"inline-flex items-center space-x-3\\"><a href=\\"https://github.com/deepsourcelabs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex h-6 items-center v-popper--has-tooltip\\"><ztag-stub icon-left=\\"github\\" spacing=\\"p-0.5\\" bg-color=\\"ink-200\\" class=\\"border border-slate-400\\"></ztag-stub></a> <span><ztag-stub icon-left=\\"zap\\" size=\\"x-small\\" bg-color=\\"ink-200\\" spacing=\\"px-2.5\\" text-size=\\"xs\\" class=\\"gap-x-1 border border-slate-400 py-1 font-medium leading-none v-popper--has-tooltip\\">
+          Business
+        </ztag-stub></span></span>
   </div>
 </div>"
 `;

@@ -4,7 +4,7 @@
     :close-after-primary-action="false"
     @onClose="$emit('close')"
   >
-    <div class="p-4 text-sm text-vanilla-400 min-h-20">
+    <div class="min-h-20 p-4 text-sm text-vanilla-400">
       <p v-if="paymentDate">
         You will have access to the current plan until
         <span class="font-semibold text-vanilla-300">{{ paymentDate }}</span
@@ -32,21 +32,21 @@
         v-model="userEnteredOwner"
         :disabled="updating"
         :read-only="updating"
-        class="px-2 mt-3"
+        class="mt-3 px-2"
         size="small"
         placeholder="Organization name"
       />
     </div>
     <template #footer="{ close }">
       <div
-        class="flex items-center justify-end p-4 space-x-4 text-right text-vanilla-100 border-slate-400"
+        class="flex items-center justify-end space-x-4 border-slate-400 p-4 text-right text-vanilla-100"
       >
         <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
           I've changed my mind
         </z-button>
         <z-button
           v-if="updating"
-          class="flex items-center w-48"
+          class="flex w-48 items-center"
           button-type="danger"
           size="small"
           :disabled="true"
@@ -57,7 +57,7 @@
         <z-button
           v-else
           icon="x-circle"
-          class="w-48 modal-primary-action"
+          class="modal-primary-action w-48"
           button-type="danger"
           size="small"
           :disabled="owner.login && userEnteredOwner.toLowerCase() !== owner.login.toLowerCase()"
@@ -71,20 +71,13 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZModal, ZButton, ZInput } from '@deepsource/zeal'
 
 import SubscriptionMixin from '~/mixins/subscriptionMixin'
 import { parseISODate, formatDate } from '~/utils/date'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 @Component({
-  name: 'CancelPlanModal',
-  components: {
-    ZIcon,
-    ZModal,
-    ZButton,
-    ZInput
-  }
+  name: 'CancelPlanModal'
 })
 export default class CancelPlanModal extends mixins(OwnerBillingMixin, SubscriptionMixin) {
   private updating = false

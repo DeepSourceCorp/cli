@@ -1,23 +1,23 @@
 <template>
   <div class="p-4">
     <h1 class="text-lg font-medium">License overview</h1>
-    <div class="grid grid-cols-1 gap-4 mt-4 md:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       <div
-        class="border border-slate-400 rounded-md py-3 px-3.5 bg-ink-300 flex flex-col justify-between min-h-23"
+        class="flex min-h-23 flex-col justify-between rounded-md border border-slate-400 bg-ink-300 px-3.5 py-3"
       >
-        <p class="text-sm font-medium tracking-wider uppercase text-vanilla-400">Total seats</p>
+        <p class="text-sm font-medium uppercase tracking-wider text-vanilla-400">Total seats</p>
         <span class="text-xl font-semibold">{{ orgLicenseData.seatsTotal }}</span>
       </div>
       <div
-        class="border border-slate-400 rounded-md py-3 px-3.5 bg-ink-300 flex flex-col justify-between min-h-23"
+        class="flex min-h-23 flex-col justify-between rounded-md border border-slate-400 bg-ink-300 px-3.5 py-3"
       >
-        <p class="text-sm font-medium tracking-wider uppercase text-vanilla-400">Seats used</p>
+        <p class="text-sm font-medium uppercase tracking-wider text-vanilla-400">Seats used</p>
         <span class="text-xl font-semibold">{{ orgLicenseData.seatsUsed }}</span>
       </div>
       <div
-        class="border border-slate-400 rounded-md py-3 px-3.5 bg-ink-300 flex flex-col justify-between min-h-23"
+        class="flex min-h-23 flex-col justify-between rounded-md border border-slate-400 bg-ink-300 px-3.5 py-3"
       >
-        <p class="text-sm font-medium tracking-wider uppercase text-vanilla-400">Valid till</p>
+        <p class="text-sm font-medium uppercase tracking-wider text-vanilla-400">Valid till</p>
         <span class="text-xl font-semibold">{{
           formatDate(parseISODate(orgLicenseData.licenseExpiry))
         }}</span>
@@ -33,20 +33,20 @@
     >
       <template #controls>
         <graph-control
-          class="float-right w-full h-8 xl:w-auto"
+          class="float-right h-8 w-full xl:w-auto"
           :filter-value="lastDays"
           :day-options="[180, 240, 360]"
           :display-duration-type="DurationTypeMonths"
           @updateFilter="updateLastDays"
         />
       </template>
-      <div class="flex items-center gap-x-6 px-7 ml-0.5 pt-4 text-vanilla-400">
+      <div class="ml-0.5 flex items-center gap-x-6 px-7 pt-4 text-vanilla-400">
         <div class="flex items-center gap-x-2">
-          <div class="w-2 h-2 rounded-full bg-vanilla-400"></div>
+          <div class="h-2 w-2 rounded-full bg-vanilla-400"></div>
           <p class="text-sm">Seats remaining</p>
         </div>
         <div class="flex items-center gap-x-2">
-          <div class="w-2 h-2 rounded-full bg-robin-500"></div>
+          <div class="h-2 w-2 rounded-full bg-robin-500"></div>
           <p class="text-sm">Seats used</p>
         </div>
       </div>
@@ -67,7 +67,6 @@
 
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import { ZIcon, ZButton } from '@deepsource/zeal'
 
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
 import { OrgLicenseActions, OrgLicenseGetters } from '~/store/control-panel/license'
@@ -78,7 +77,6 @@ import { formatDate, parseISODate, DurationTypeT } from '~/utils/date'
 const licenseStore = namespace('control-panel/license')
 
 @Component({
-  components: { ZIcon, ZButton },
   layout: 'control-panel',
   methods: { formatDate, parseISODate }
 })

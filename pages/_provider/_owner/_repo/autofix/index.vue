@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full p-4 space-y-6">
+  <div class="w-full space-y-6 p-4">
     <!-- Available Autofixes -->
     <install-autofix-notice v-if="!repository.isAutofixEnabled && canEnableAutofix" />
     <stat-section
@@ -19,14 +19,14 @@
         <div
           v-for="idx in loaderCount"
           :key="idx"
-          class="flex flex-col justify-between p-2 space-y-2 rounded-md h-28 bg-ink-300"
+          class="flex h-28 flex-col justify-between space-y-2 rounded-md bg-ink-300 p-2"
         >
           <div class="flex justify-between space-x-2">
-            <div class="w-48 h-5 rounded-md bg-ink-200 animate-pulse"></div>
-            <div class="w-5 h-5 rounded-md bg-ink-200 animate-pulse"></div>
+            <div class="h-5 w-48 animate-pulse rounded-md bg-ink-200"></div>
+            <div class="h-5 w-5 animate-pulse rounded-md bg-ink-200"></div>
           </div>
-          <div class="w-40 h-8 rounded-md bg-ink-200 animate-pulse"></div>
-          <div class="w-16 h-4 rounded-md bg-ink-200 animate-pulse"></div>
+          <div class="h-8 w-40 animate-pulse rounded-md bg-ink-200"></div>
+          <div class="h-4 w-16 animate-pulse rounded-md bg-ink-200"></div>
         </div>
       </template>
       <template v-else-if="showAvailableAutofixes">
@@ -37,7 +37,7 @@
         />
       </template>
       <!-- TODO: Empty state -->
-      <div v-else class="flex items-center justify-center w-full h-full p-2">
+      <div v-else class="flex h-full w-full items-center justify-center p-2">
         No Autofixes available
       </div>
     </stat-section>
@@ -45,14 +45,14 @@
     <autofix-issues-graph />
     <!-- Recent Autofixes -->
     <div v-if="$fetchState.pending">
-      <div class="grid gap-2 grid-cols-12-fr">
-        <div class="h-12 rounded-md bg-ink-300 animate-pulse col-span-full"></div>
-        <div class="rounded-md bg-ink-300 animate-pulse"></div>
-        <div class="flex flex-col w-full h-full space-y-2">
-          <div class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
-          <div class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
-          <div class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
-          <div class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
+      <div class="grid grid-cols-12-fr gap-2">
+        <div class="col-span-full h-12 animate-pulse rounded-md bg-ink-300"></div>
+        <div class="animate-pulse rounded-md bg-ink-300"></div>
+        <div class="flex h-full w-full flex-col space-y-2">
+          <div class="h-20 animate-pulse rounded-md bg-ink-300"></div>
+          <div class="h-20 animate-pulse rounded-md bg-ink-300"></div>
+          <div class="h-20 animate-pulse rounded-md bg-ink-300"></div>
+          <div class="h-20 animate-pulse rounded-md bg-ink-300"></div>
         </div>
       </div>
     </div>
@@ -61,11 +61,11 @@
       custom-grid-class="grid grid-cols-12-fr"
       :grid-spacing="2"
     >
-      <div class="grid grid-cols-3 col-span-2 gap-1 md:space-y-2 md:col-span-1 md:block">
+      <div class="col-span-2 grid grid-cols-3 gap-1 md:col-span-1 md:block md:space-y-2">
         <div
           v-for="opt in options"
           :key="opt.name"
-          class="p-2 space-y-2 text-center rounded-md cursor-pointer hover:bg-ink-300 md:text-left"
+          class="cursor-pointer space-y-2 rounded-md p-2 text-center hover:bg-ink-300 md:text-left"
           :class="{
             'bg-ink-300': selectedRun.name == opt.name
           }"
@@ -78,7 +78,7 @@
         <template v-if="selectedRun.name == 'Action needed'">
           <div
             v-if="pendingAutofixList && pendingAutofixList.length > 0"
-            class="flex flex-col w-full space-y-3"
+            class="flex w-full flex-col space-y-3"
           >
             <autofix-list-item
               v-for="run in pendingAutofixList"
@@ -92,7 +92,7 @@
         <template v-else-if="selectedRun.name == 'History'">
           <div
             v-if="autofixListItems && autofixListItems.length > 0"
-            class="flex flex-col w-full space-y-3"
+            class="flex w-full flex-col space-y-3"
           >
             <autofix-list-item
               v-for="run in autofixListItems"
@@ -109,7 +109,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import { AutofixCard, AutofixListItem } from '@/components/Autofix/index'
 import { AutofixRun, AutofixRunStatus } from '~/types/types'
 import { AutofixIssuesGraph } from '@/components/Graphs'
@@ -124,7 +123,6 @@ import { resolveNodes } from '~/utils/array'
  */
 @Component({
   components: {
-    ZIcon,
     AutofixCard,
     AutofixListItem,
     AutofixIssuesGraph

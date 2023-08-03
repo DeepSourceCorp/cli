@@ -11,7 +11,7 @@
     />
 
     <!-- Layout for larger screens -->
-    <div class="grid gap-4 px-4 mt-4 text-vanilla-100 md:mt-0">
+    <div class="mt-4 grid gap-4 px-4 text-vanilla-100 md:mt-0">
       <!-- Discover repo feed -->
       <watched-repo-feed />
     </div>
@@ -41,7 +41,9 @@ export default class Watchlist extends mixins(MetaMixin) {
 }
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
+@tailwind utilities;
+
 .watchlist-mobile-hero {
   background-image: url('~assets/images/discover/discover-mobile-bg.svg');
   background-position: center;
@@ -49,7 +51,7 @@ export default class Watchlist extends mixins(MetaMixin) {
   background-size: cover;
 }
 
-@responsive {
+@layer utilities {
   .watchlist-hero {
     background-image: url('~assets/images/discover/watchlist-bg.svg');
     background-position: bottom;

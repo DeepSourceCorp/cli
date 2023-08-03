@@ -40,7 +40,6 @@
 import { Component, Vue, namespace } from 'nuxt-property-decorator'
 
 // Components
-import { ZTab } from '@deepsource/zeal'
 
 // Store, Queries & Type Imports
 import { Context } from '@nuxt/types'
@@ -56,9 +55,6 @@ const repoStore = namespace('repository/detail')
  * and acts as a safety middleware for automatically determining an available metric.
  */
 @Component({
-  components: {
-    ZTab
-  },
   layout: 'repository',
   middleware: [
     async function ({

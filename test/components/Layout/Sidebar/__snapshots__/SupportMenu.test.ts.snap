@@ -1,57 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders SupportMenu with all props: {"isCollapsed":false} 1`] = `
-"<zmenu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"w-full\\">
+"<zmenu-stub placement=\\"top\\" class=\\"w-full\\">
   <sidebaritem-stub icon=\\"help-circle\\">
     Help and support
   </sidebaritem-stub>
   <zmenusection-stub title=\\"Help and support\\">
-    <zmenuitem-stub as=\\"a\\" icon=\\"book-open\\" closeonclick=\\"true\\" spacing=\\"p-3\\" href=\\"https://docs.deepsource.com/docs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Read documentation</zmenuitem-stub>
-    <zmenuitem-stub as=\\"nuxt-link\\" icon=\\"support\\" closeonclick=\\"true\\" spacing=\\"p-3\\" to=\\"/support\\">Contact support</zmenuitem-stub>
-    <zmenuitem-stub as=\\"a\\" icon=\\"bulb\\" closeonclick=\\"true\\" spacing=\\"p-3\\" href=\\"https://roadmap.deepsource.com/feature-requests\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Create feature request</zmenuitem-stub>
-    <zmenuitem-stub as=\\"a\\" icon=\\"message-square\\" closeonclick=\\"true\\" spacing=\\"p-3\\" href=\\"https://discuss.deepsource.com/\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Join DeepSource Discuss</zmenuitem-stub>
+    <zmenuitem-stub icon=\\"book-open\\" as=\\"a\\" href=\\"https://docs.deepsource.com/docs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Read documentation</zmenuitem-stub>
+    <zmenuitem-stub icon=\\"support\\" as=\\"nuxt-link\\" to=\\"/support\\">Contact support</zmenuitem-stub>
+    <zmenuitem-stub as=\\"a\\" icon=\\"bulb\\" href=\\"https://roadmap.deepsource.com/feature-requests\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Create feature request</zmenuitem-stub>
+    <zmenuitem-stub as=\\"a\\" icon=\\"message-square\\" href=\\"https://discuss.deepsource.com/\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Join DeepSource Discuss</zmenuitem-stub>
   </zmenusection-stub>
 </zmenu-stub>"
 `;
 
 exports[`renders SupportMenu with all props: {"isCollapsed":null} 1`] = `
-"<zmenu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"w-full\\">
+"<zmenu-stub placement=\\"top\\" class=\\"w-full\\">
   <sidebaritem-stub icon=\\"help-circle\\">
     Help and support
   </sidebaritem-stub>
   <zmenusection-stub title=\\"Help and support\\">
-    <zmenuitem-stub as=\\"a\\" icon=\\"book-open\\" closeonclick=\\"true\\" spacing=\\"p-3\\" href=\\"https://docs.deepsource.com/docs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Read documentation</zmenuitem-stub>
-    <zmenuitem-stub as=\\"nuxt-link\\" icon=\\"support\\" closeonclick=\\"true\\" spacing=\\"p-3\\" to=\\"/support\\">Contact support</zmenuitem-stub>
-    <zmenuitem-stub as=\\"a\\" icon=\\"bulb\\" closeonclick=\\"true\\" spacing=\\"p-3\\" href=\\"https://roadmap.deepsource.com/feature-requests\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Create feature request</zmenuitem-stub>
-    <zmenuitem-stub as=\\"a\\" icon=\\"message-square\\" closeonclick=\\"true\\" spacing=\\"p-3\\" href=\\"https://discuss.deepsource.com/\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Join DeepSource Discuss</zmenuitem-stub>
+    <zmenuitem-stub icon=\\"book-open\\" as=\\"a\\" href=\\"https://docs.deepsource.com/docs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Read documentation</zmenuitem-stub>
+    <zmenuitem-stub icon=\\"support\\" as=\\"nuxt-link\\" to=\\"/support\\">Contact support</zmenuitem-stub>
+    <zmenuitem-stub as=\\"a\\" icon=\\"bulb\\" href=\\"https://roadmap.deepsource.com/feature-requests\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Create feature request</zmenuitem-stub>
+    <zmenuitem-stub as=\\"a\\" icon=\\"message-square\\" href=\\"https://discuss.deepsource.com/\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Join DeepSource Discuss</zmenuitem-stub>
   </zmenusection-stub>
 </zmenu-stub>"
 `;
 
 exports[`renders SupportMenu with all props: {"isCollapsed":true} 1`] = `
-"<zmenu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"w-full\\">
+"<zmenu-stub placement=\\"top\\" class=\\"w-full\\">
   <sidebaritem-stub is-collapsed=\\"true\\" icon=\\"help-circle\\">
     Help and support
   </sidebaritem-stub>
   <zmenusection-stub title=\\"Help and support\\">
-    <zmenuitem-stub as=\\"a\\" icon=\\"book-open\\" closeonclick=\\"true\\" spacing=\\"p-3\\" href=\\"https://docs.deepsource.com/docs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Read documentation</zmenuitem-stub>
-    <zmenuitem-stub as=\\"nuxt-link\\" icon=\\"support\\" closeonclick=\\"true\\" spacing=\\"p-3\\" to=\\"/support\\">Contact support</zmenuitem-stub>
-    <zmenuitem-stub as=\\"a\\" icon=\\"bulb\\" closeonclick=\\"true\\" spacing=\\"p-3\\" href=\\"https://roadmap.deepsource.com/feature-requests\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Create feature request</zmenuitem-stub>
-    <zmenuitem-stub as=\\"a\\" icon=\\"message-square\\" closeonclick=\\"true\\" spacing=\\"p-3\\" href=\\"https://discuss.deepsource.com/\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Join DeepSource Discuss</zmenuitem-stub>
+    <zmenuitem-stub icon=\\"book-open\\" as=\\"a\\" href=\\"https://docs.deepsource.com/docs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Read documentation</zmenuitem-stub>
+    <zmenuitem-stub icon=\\"support\\" as=\\"nuxt-link\\" to=\\"/support\\">Contact support</zmenuitem-stub>
+    <zmenuitem-stub as=\\"a\\" icon=\\"bulb\\" href=\\"https://roadmap.deepsource.com/feature-requests\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Create feature request</zmenuitem-stub>
+    <zmenuitem-stub as=\\"a\\" icon=\\"message-square\\" href=\\"https://discuss.deepsource.com/\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Join DeepSource Discuss</zmenuitem-stub>
   </zmenusection-stub>
 </zmenu-stub>"
 `;
 
 exports[`renders SupportMenu with all props: {} 1`] = `
-"<zmenu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"w-full\\">
+"<zmenu-stub placement=\\"top\\" class=\\"w-full\\">
   <sidebaritem-stub icon=\\"help-circle\\">
     Help and support
   </sidebaritem-stub>
   <zmenusection-stub title=\\"Help and support\\">
-    <zmenuitem-stub as=\\"a\\" icon=\\"book-open\\" closeonclick=\\"true\\" spacing=\\"p-3\\" href=\\"https://docs.deepsource.com/docs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Read documentation</zmenuitem-stub>
-    <zmenuitem-stub as=\\"nuxt-link\\" icon=\\"support\\" closeonclick=\\"true\\" spacing=\\"p-3\\" to=\\"/support\\">Contact support</zmenuitem-stub>
-    <zmenuitem-stub as=\\"a\\" icon=\\"bulb\\" closeonclick=\\"true\\" spacing=\\"p-3\\" href=\\"https://roadmap.deepsource.com/feature-requests\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Create feature request</zmenuitem-stub>
-    <zmenuitem-stub as=\\"a\\" icon=\\"message-square\\" closeonclick=\\"true\\" spacing=\\"p-3\\" href=\\"https://discuss.deepsource.com/\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Join DeepSource Discuss</zmenuitem-stub>
+    <zmenuitem-stub icon=\\"book-open\\" as=\\"a\\" href=\\"https://docs.deepsource.com/docs\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Read documentation</zmenuitem-stub>
+    <zmenuitem-stub icon=\\"support\\" as=\\"nuxt-link\\" to=\\"/support\\">Contact support</zmenuitem-stub>
+    <zmenuitem-stub as=\\"a\\" icon=\\"bulb\\" href=\\"https://roadmap.deepsource.com/feature-requests\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Create feature request</zmenuitem-stub>
+    <zmenuitem-stub as=\\"a\\" icon=\\"message-square\\" href=\\"https://discuss.deepsource.com/\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">Join DeepSource Discuss</zmenuitem-stub>
   </zmenusection-stub>
 </zmenu-stub>"
 `;

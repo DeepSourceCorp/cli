@@ -4,9 +4,9 @@
       <button
         ref="username"
         type="button"
-        class="outline-none focus:outline-none flex max-w-3xs items-center space-x-2 rounded-sm py-1 text-sm hover:bg-ink-300"
+        class="flex max-w-3xs items-center space-x-2 rounded-sm py-1 text-sm outline-none hover:bg-ink-300 focus:outline-none"
         :class="{
-          'pr-2 pl-1': !isCollapsed,
+          'pl-1 pr-2': !isCollapsed,
           'px-1': isCollapsed
         }"
         @click="toggle"
@@ -38,7 +38,9 @@
       <z-menu-section :divider="false">
         <z-menu-item icon="settings" as="nuxt-link" to="/settings">Settings</z-menu-item>
         <z-menu-item icon="dashboard" as="nuxt-link" to="/me">Dashboard</z-menu-item>
-        <z-menu-item icon="log-out" @click="() => signOut()">Sign out</z-menu-item>
+        <z-menu-item icon="log-out" as="button" class="w-full" @click="() => signOut()"
+          >Sign out</z-menu-item
+        >
       </z-menu-section>
     </template>
   </z-menu>
@@ -46,7 +48,6 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZAvatar, ZMenu, ZMenuItem, ZMenuSection } from '@deepsource/zeal'
 
 // mixins
 import ActiveUserMixin from '~/mixins/activeUserMixin'
@@ -55,12 +56,6 @@ import AuthMixin from '~/mixins/authMixin'
 import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
-  components: {
-    ZAvatar,
-    ZMenuItem,
-    ZMenu,
-    ZMenuSection
-  },
   methods: { getDefaultAvatar }
 })
 export default class UserMenu extends mixins(ActiveUserMixin, AuthMixin) {

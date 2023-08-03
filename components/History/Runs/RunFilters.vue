@@ -1,19 +1,19 @@
 <template>
-  <div class="flex flex-wrap sm:flex-nowrap gap-2">
+  <div class="flex flex-wrap gap-2 sm:flex-nowrap">
     <div v-if="loading">
-      <div class="min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm">
-        <div class="bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2">
-          <div class="bg-ink-100 animate-pulse w-full h-4 rounded-md"></div>
+      <div class="grid h-8 min-w-52 grid-cols-2 rounded-sm border border-slate-400">
+        <div class="flex items-center justify-center border-r border-slate-400 bg-ink-200 px-2">
+          <div class="h-4 w-full animate-pulse rounded-md bg-ink-100"></div>
         </div>
-        <div class="flex justify-center items-center px-2">
-          <div class="bg-ink-300 animate-pulse w-full h-4 rounded-md"></div>
+        <div class="flex items-center justify-center px-2">
+          <div class="h-4 w-full animate-pulse rounded-md bg-ink-300"></div>
         </div>
       </div>
     </div>
     <z-radio-group
       v-else
       :model-value="prStatus"
-      class="grid grid-cols-2 min-w-52 h-8 font-medium text-vanilla-100 w-full sm:w-auto flex-grow sm:flex-grow-0"
+      class="grid h-8 w-full min-w-52 flex-grow grid-cols-2 font-medium text-vanilla-100 sm:w-auto sm:flex-grow-0"
       @change="(value) => $emit('runs-filter-update', { prState: value })"
     >
       <z-radio-button
@@ -22,7 +22,7 @@
         }"
         :value="PR_STATE_CHOICES.Open"
         spacing="w-full h-full pt-1"
-        class="text-center space-x-2"
+        class="space-x-2 text-center"
       >
         <z-icon icon="git-pull-request" class="inline" />
         <span class="w-full text-xs capitalize">{{ shortenLargeNumber(openCount) }} Open</span>
@@ -33,7 +33,7 @@
         }"
         :value="PR_STATE_CHOICES.Closed"
         spacing="w-full h-full pt-1"
-        class="text-center space-x-2"
+        class="space-x-2 text-center"
       >
         <z-icon icon="check" class="inline" />
         <span class="w-full text-xs capitalize">{{ shortenLargeNumber(closedCount) }} Closed</span>
@@ -64,7 +64,7 @@
             as="button"
             :icon="runStatusIcon(runStat)"
             :icon-color="runStatusIconColor(runStat)"
-            class="flex items-center w-full"
+            class="flex w-full items-center"
             @click="
               () => {
                 $emit('runs-filter-update', { runStatus: runStat })
@@ -107,16 +107,6 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-import {
-  ZRadioGroup,
-  ZRadioButton,
-  ZIcon,
-  ZMenu,
-  ZMenuItem,
-  ZButton,
-  ZInput,
-  ZBadge
-} from '@deepsource/zeal'
 import { runStatusTagLabel, runStatusIcon, runStatusIconColor, prCopyText } from '~/utils/ui'
 import { PrStateChoices, RunStatus } from '~/types/types'
 import { shortenLargeNumber } from '~/utils/string'
@@ -125,7 +115,6 @@ import { shortenLargeNumber } from '~/utils/string'
  * Component for filtering list of PRs based on their status, status of runs and search text on title or PR number
  */
 @Component({
-  components: { ZRadioGroup, ZRadioButton, ZIcon, ZMenu, ZMenuItem, ZButton, ZInput, ZBadge },
   methods: { runStatusIcon, runStatusTagLabel, runStatusIconColor, shortenLargeNumber }
 })
 export default class RunFilters extends Vue {

@@ -59,7 +59,7 @@
       <label>
         <div class="mb-1.5 text-xs">Email</div>
         <div
-          class="flex h-8 w-full items-center space-x-2 space-x-1 rounded-sm border border-ink-200 bg-ink-300 py-1 px-2 text-xs leading-loose text-vanilla-400"
+          class="flex h-8 w-full items-center space-x-1 space-x-2 rounded-sm border border-ink-200 bg-ink-300 px-2 py-1 text-xs leading-loose text-vanilla-400"
         >
           <span class="flex-grow">{{ viewer.email }}</span>
           <z-icon icon="z-lock" size="x-small" />
@@ -92,16 +92,9 @@ import Component, { mixins } from 'vue-class-component'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AuthMixin from '~/mixins/authMixin'
 import { getDefaultAvatar } from '~/utils/ui'
-import { ZAvatar, ZIcon, ZInput, ZButton } from '@deepsource/zeal'
 import { FileUploadContexts, FileUploadTokenT, uploadFiles } from '~/utils/files'
 
 @Component({
-  components: {
-    ZAvatar,
-    ZIcon,
-    ZInput,
-    ZButton
-  },
   methods: { getDefaultAvatar }
 })
 export default class UserProfile extends mixins(ActiveUserMixin, AuthMixin) {

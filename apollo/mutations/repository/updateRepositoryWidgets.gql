@@ -1,4 +1,4 @@
-mutation($input: UpdateRepositoryWidgetsInput!) {
+mutation ($input: UpdateRepositoryWidgetsInput!) {
   updateRepositoryWidgets(input: $input) {
     widgetCodes
   }

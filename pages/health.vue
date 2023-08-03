@@ -1,42 +1,42 @@
 <template>
-  <main class="relative flex flex-col min-h-screen">
+  <main class="relative flex min-h-screen flex-col">
     <img
-      class="w-auto h-6 mx-auto my-12 md:my-24"
+      class="mx-auto my-12 h-6 w-auto md:my-24"
       src="~/assets/images/logo-wordmark-white.svg"
       alt="DeepSource"
     />
-    <div class="relative grid items-start justify-center flex-grow">
+    <div class="relative grid flex-grow items-start justify-center">
       <div
-        class="max-w-lg p-6 mx-2 space-y-5 border rounded-lg w-120 bg-ink-400 border-slate-400 sm:p-10 sm:mx-0"
+        class="mx-2 w-120 max-w-lg space-y-5 rounded-lg border border-slate-400 bg-ink-400 p-6 sm:mx-0 sm:p-10"
       >
         <h1 class="text-2xl font-bold leading-snug text-vanilla-100">Frontend health report</h1>
         <div class="flex items-center justify-between">
           <span>Frontend</span>
-          <div class="p-px rounded-full bg-juniper">
+          <div class="rounded-full bg-juniper p-px">
             <z-icon icon="check" class="stroke-2.5" color="ink-400" />
           </div>
         </div>
         <div class="flex items-center justify-between">
           <span>GraphQL client</span>
           <div v-if="$fetchState.pending" class="p-px">
-            <z-icon icon="spin-loader" class="stroke-2.5 animate-spin" color="ink-400" />
+            <z-icon icon="spin-loader" class="animate-spin stroke-2.5" color="ink-400" />
           </div>
           <div
             v-else-if="isApolloClientUp && isApolloConnectionWorking"
-            class="p-px rounded-full bg-juniper"
+            class="rounded-full bg-juniper p-px"
           >
             <z-icon icon="check" class="stroke-2.5" color="ink-400" />
           </div>
-          <div v-else class="p-px rounded-full bg-cherry">
+          <div v-else class="rounded-full bg-cherry p-px">
             <z-icon icon="x" class="stroke-2.5" color="ink-400" />
           </div>
         </div>
         <div class="flex items-center justify-between">
           <span>Websocket connection</span>
-          <div v-if="isWebsocketUp" class="p-px rounded-full bg-juniper">
+          <div v-if="isWebsocketUp" class="rounded-full bg-juniper p-px">
             <z-icon icon="check" class="stroke-2.5" color="ink-400" />
           </div>
-          <div v-else class="p-px rounded-full bg-cherry">
+          <div v-else class="rounded-full bg-cherry p-px">
             <z-icon icon="x" class="stroke-2.5" color="ink-400" />
           </div>
         </div>
@@ -47,7 +47,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import gql from 'graphql-tag'
 import { Context } from '@nuxt/types'
 
@@ -55,9 +54,6 @@ import { Context } from '@nuxt/types'
  * Health Probe Page
  */
 @Component({
-  components: {
-    ZIcon
-  },
   middleware: [
     async function ({ error, $fetchGraphqlData }: Context): Promise<void> {
       try {

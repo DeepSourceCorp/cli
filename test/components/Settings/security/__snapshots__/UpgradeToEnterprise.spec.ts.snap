@@ -8,6 +8,6 @@ exports[`[[ UpgradeToEnterprise ]] renders correctly with all props 1`] = `
       Upgrade to Enterprise to access security features like configuring SSO for your workspace.
     </p>
   </div>
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Update plan\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"/schedule-demo/\\" icon=\\"zap\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\"></zbutton-stub>
+  <zbutton-stub button-type=\\"primary\\" icon=\\"zap\\" label=\\"Update plan\\" size=\\"small\\" to=\\"/schedule-demo/\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\"></zbutton-stub>
 </div>"
 `;

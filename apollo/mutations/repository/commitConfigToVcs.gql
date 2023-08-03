@@ -1,4 +1,4 @@
-mutation($input: CommitConfigToVCSInput!) {
+mutation ($input: CommitConfigToVCSInput!) {
   commitConfigToVcs(input: $input) {
     ok
   }

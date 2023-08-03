@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="p-4 border-b border-slate-400">
+    <div class="border-b border-slate-400 p-4">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="cursor-pointer text-vanilla-400">
           <nuxt-link to="/control-panel/user-management">All users</nuxt-link>
@@ -13,8 +13,8 @@
       :loading="$fetchState.pending"
       @refetch="refetchData"
     />
-    <div class="flex items-center justify-between px-4 border-b border-slate-400">
-      <div class="flex gap-5 pt-3 overflow-auto flex-nowrap">
+    <div class="flex items-center justify-between border-b border-slate-400 px-4">
+      <div class="flex flex-nowrap gap-5 overflow-auto pt-3">
         <nuxt-link :to="`/control-panel/user-management/users/${$route.params.userId}`">
           <z-tab icon="building"> Groups </z-tab>
         </nuxt-link>
@@ -39,11 +39,11 @@
     <control-panel-cards-skeleton v-if="$fetchState.pending" />
     <!-- HOTFIX: Nuxt SSR adds ghost a tags into dom during SSR -->
     <client-only v-else-if="userTeams.length">
-      <div class="p-4 space-y-4">
+      <div class="space-y-4 p-4">
         <div
           v-for="team in userTeams"
           :key="team.id"
-          class="grid items-center grid-cols-1 p-4 border rounded-md md:grid-cols-2 gap-x-10 gap-y-2 border-slate-400"
+          class="grid grid-cols-1 items-center gap-x-10 gap-y-2 rounded-md border border-slate-400 p-4 md:grid-cols-2"
         >
           <div class="flex items-center gap-x-3">
             <z-avatar
@@ -53,7 +53,7 @@
               class="flex-shrink-0"
             />
             <div>
-              <p class="overflow-hidden text-sm w-44 overflow-ellipsis">
+              <p class="w-44 overflow-hidden overflow-ellipsis text-sm">
                 {{ team.name || team.login }}
               </p>
               <div class="flex items-center gap-x-3">
@@ -73,7 +73,7 @@
           </div>
           <div
             v-if="team.isDirectMember"
-            class="flex flex-wrap justify-start gap-2 mt-1 ml-12 md:flex-nowrap md:justify-self-end md:ml-0 md:mt-0"
+            class="ml-12 mt-1 flex flex-wrap justify-start gap-2 md:ml-0 md:mt-0 md:flex-nowrap md:justify-self-end"
           >
             <remove-user-from-team-button
               v-if="team.isDirectMember"
@@ -83,7 +83,7 @@
             />
           </div>
         </div>
-        <div class="flex justify-center mt-6 text-sm">
+        <div class="mt-6 flex justify-center text-sm">
           <z-pagination
             v-if="totalPageCount > 1"
             :page="currentPage"
@@ -106,16 +106,6 @@
 
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import {
-  ZInput,
-  ZButton,
-  ZIcon,
-  ZAvatar,
-  ZBreadcrumb,
-  ZBreadcrumbItem,
-  ZTab,
-  ZPagination
-} from '@deepsource/zeal'
 
 import { OrgUsersGetters, OrgUsersActions } from '~/store/control-panel/users'
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
@@ -128,7 +118,6 @@ import { getDefaultAvatar } from '~/utils/ui'
 const userManagementStore = namespace('control-panel/users')
 
 @Component({
-  components: { ZInput, ZButton, ZIcon, ZAvatar, ZBreadcrumb, ZBreadcrumbItem, ZTab, ZPagination },
   methods: { parseISODate, formatDate, getDefaultAvatar },
   layout: 'control-panel'
 })

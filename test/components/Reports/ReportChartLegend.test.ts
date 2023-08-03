@@ -1,5 +1,5 @@
 import { render } from '@testing-library/vue'
-import { ZMenu } from '@deepsource/zeal'
+import ZMenu from '@/components/zeal/ZMenu'
 
 import { ReportChartLegend } from '~/components/Reports'
 import { shallowMount } from '@vue/test-utils'

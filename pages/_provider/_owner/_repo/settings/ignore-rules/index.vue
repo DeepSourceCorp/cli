@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-col max-w-2xl p-4 gap-y-2">
+  <div class="flex max-w-2xl flex-col gap-y-2 p-4">
     <!-- title -->
     <h2 class="mb-4 text-lg font-medium">Ignored rules</h2>
     <!-- List of Ignored rules -->
     <div v-if="loadingRules" class="space-y-2">
-      <div v-for="idx in 3" :key="idx" class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
+      <div v-for="idx in 3" :key="idx" class="h-20 animate-pulse rounded-md bg-ink-300"></div>
     </div>
     <div
       v-else-if="repository.silenceRules && repository.silenceRules.totalCount > 0"
@@ -22,7 +22,7 @@
       v-else
       title="No ignored rules"
       subtitle="Ignored rules help you teach DeepSource which issues are not important to you and should be removed. Create a new rule from an issue to see it here."
-      class="py-20 border-2 border-dashed rounded-lg border-slate-400"
+      class="rounded-lg border-2 border-dashed border-slate-400 py-20"
     />
     <ignored-rule-delete-modal
       :is-open="isDeleteModalOpen"
@@ -37,7 +37,6 @@
 import { Component, namespace, mixins } from 'nuxt-property-decorator'
 import { IgnoredRule } from '@/components/Repository/index'
 import { IgnoredRuleDeleteModal } from '@/components/Settings/index'
-import { ZDivider, ZInput, ZMenu, ZMenuItem, ZIcon } from '@deepsource/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
 const repoStore = namespace('repository/detail')
@@ -49,12 +48,7 @@ const repoStore = namespace('repository/detail')
 @Component({
   components: {
     IgnoredRule,
-    IgnoredRuleDeleteModal,
-    ZDivider,
-    ZInput,
-    ZMenu,
-    ZMenuItem,
-    ZIcon
+    IgnoredRuleDeleteModal
   },
   layout: 'repository'
 })

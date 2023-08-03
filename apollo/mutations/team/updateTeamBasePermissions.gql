@@ -1,4 +1,4 @@
-mutation updateTeamBasePermissions (
+mutation updateTeamBasePermissions(
   $teamId: ID!
   $defaultRepositoryPermission: DefaultRepositoryPermissionChoices
   $canMembersIgnoreIssues: Boolean

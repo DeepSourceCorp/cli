@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sticky z-10 flex px-4 pt-3 border-b border-slate-400 gap-x-5 top-23 lg:top-14 bg-ink-400"
+    class="sticky top-23 z-10 flex gap-x-5 border-b border-slate-400 bg-ink-400 px-4 pt-3 lg:top-14"
   >
     <nuxt-link v-for="(tab, id) in tabList" :key="tab.label" :to="tab.link">
       <z-tab :icon="tab.icon" :is-active="id === activeTab" border-active-color="vanilla-100">
@@ -12,8 +12,6 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
-import { ZTab } from '@deepsource/zeal'
-
 interface TabListT {
   label: string
   link: string
@@ -21,7 +19,6 @@ interface TabListT {
 }
 
 @Component({
-  components: { ZTab },
   name: 'DirectoryTabs'
 })
 export default class DirectoryTabs extends Vue {

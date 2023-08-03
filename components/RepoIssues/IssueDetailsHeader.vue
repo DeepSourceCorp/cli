@@ -69,7 +69,6 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import dayjs from 'dayjs'
 
 import { formatDate } from '@/utils/date'
@@ -78,9 +77,6 @@ import { safeRenderBackticks } from '~/utils/string'
 import { deslugifyTag, generateColorFromTag } from '~/utils/ui'
 
 @Component({
-  components: {
-    ZIcon
-  },
   layout: 'repository',
   methods: {
     deslugifyTag,

@@ -1,13 +1,13 @@
 <template>
   <main>
-    <header class="space-y-4 md:space-y-1 border-b border-slate-400 pb-8">
-      <h1 class="text-lg md:text-2xl font-semibold">{{ label }}</h1>
-      <p class="text-vanilla-400 tracking-wide text-xs md:text-sm font-medium">
+    <header class="space-y-4 border-b border-slate-400 pb-8 md:space-y-1">
+      <h1 class="text-lg font-semibold md:text-2xl">{{ label }}</h1>
+      <p class="text-xs font-medium tracking-wide text-vanilla-400 md:text-sm">
         Created on {{ createdAt }}
       </p>
     </header>
 
-    <section class="space-y-14 mt-8 leading-8">
+    <section class="mt-8 space-y-14 leading-8">
       <!-- Unsanitized v-html because copy text is in bifrost -->
       <div
         v-if="copyText.summary"
@@ -20,7 +20,7 @@
         v-html="copyText.intendedUse"
       ></div>
       <div class="space-y-4 text-vanilla-400">
-        <h1 id="continuous-code-health" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">
+        <h1 id="continuous-code-health" class="scroll-mt-8 text-lg font-semibold text-vanilla-100">
           Continuous Code Health
         </h1>
         <p>

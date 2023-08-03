@@ -12,23 +12,19 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
               Daft Punk
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
-            <zicon-stub icon=\\"metric-high\\" color=\\"juniper\\" size=\\"x-small\\"></zicon-stub><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span>
-            <!---->
-          </div>
+          <z-tag icon-left=\\"metric-high\\" icon-color=\\"juniper\\" size=\\"x-small\\" spacing=\\"px-2 py-0\\" class=\\"border border-slate-400\\"><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span></z-tag>
         </div>
         <p class=\\"text-sm leading-6 text-vanilla-400\\">
 
         </p>
       </div>
-      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\"><a href=\\"https://docs.deepsource.com/docs/repository-view-metrics#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-dashed border-slate-400 text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
-          <zicon-stub icon=\\"help-circle\\" color=\\"vanilla-100\\" size=\\"small\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
-        </a>
+      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\">
+        <z-button button-type=\\"ghost\\" to=\\"https://docs.deepsource.com/docs/repository-view-metrics#metric-aggregate-calculation\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" icon=\\"help-circle\\" size=\\"small\\" color=\\"vanilla-100\\" class=\\"border border-dashed border-slate-400\\">How’s this calculated?</z-button>
         <div class=\\"h-8 md:w-40\\">
           <zselect-stub background-class=\\"bg-ink-200\\" border-class=\\"border-slate-400\\" border-radius=\\"rounded-sm\\" spacing=\\"px-2 py-1\\" placeholder=\\"Duration filter\\" value=\\"30\\">
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 30 days</div>
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
+            <z-option label=\\"Last 30 days\\" value=\\"30\\"></z-option>
+            <z-option label=\\"Last 60 days\\" value=\\"60\\"></z-option>
+            <z-option label=\\"Last 90 days\\" value=\\"90\\"></z-option>
           </zselect-stub>
         </div>
       </div>
@@ -49,10 +45,7 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
               javascript
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
-            <zicon-stub icon=\\"metric-high\\" color=\\"juniper\\" size=\\"x-small\\"></zicon-stub><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span>
-            <!---->
-          </div>
+          <z-tag icon-left=\\"metric-high\\" icon-color=\\"juniper\\" size=\\"x-small\\" spacing=\\"px-2 py-0\\" class=\\"border border-slate-400\\"><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span></z-tag>
         </div>
         <!---->
       </div>
@@ -74,23 +67,19 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
               Daft Punk
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
-            <zicon-stub icon=\\"metric-high\\" color=\\"juniper\\" size=\\"x-small\\"></zicon-stub><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span>
-            <!---->
-          </div>
+          <z-tag icon-left=\\"metric-high\\" icon-color=\\"juniper\\" size=\\"x-small\\" spacing=\\"px-2 py-0\\" class=\\"border border-slate-400\\"><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span></z-tag>
         </div>
         <p class=\\"text-sm leading-6 text-vanilla-400\\">
 
         </p>
       </div>
-      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\"><a href=\\"https://docs.deepsource.com/docs/repository-view-metrics#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-dashed border-slate-400 text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
-          <zicon-stub icon=\\"help-circle\\" color=\\"vanilla-100\\" size=\\"small\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
-        </a>
+      <div class=\\"flex flex-grow flex-wrap items-center justify-between gap-2 md:flex-grow-0 md:flex-nowrap md:justify-start\\">
+        <z-button button-type=\\"ghost\\" to=\\"https://docs.deepsource.com/docs/repository-view-metrics#metric-aggregate-calculation\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" icon=\\"help-circle\\" size=\\"small\\" color=\\"vanilla-100\\" class=\\"border border-dashed border-slate-400\\">How’s this calculated?</z-button>
         <div class=\\"h-8 md:w-40\\">
           <zselect-stub background-class=\\"bg-ink-200\\" border-class=\\"border-slate-400\\" border-radius=\\"rounded-sm\\" spacing=\\"px-2 py-1\\" placeholder=\\"Duration filter\\" value=\\"30\\">
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 30 days</div>
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
-            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
+            <z-option label=\\"Last 30 days\\" value=\\"30\\"></z-option>
+            <z-option label=\\"Last 60 days\\" value=\\"60\\"></z-option>
+            <z-option label=\\"Last 90 days\\" value=\\"90\\"></z-option>
           </zselect-stub>
         </div>
       </div>
@@ -111,10 +100,7 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
               javascript
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
-            <zicon-stub icon=\\"metric-high\\" color=\\"juniper\\" size=\\"x-small\\"></zicon-stub><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span>
-            <!---->
-          </div>
+          <z-tag icon-left=\\"metric-high\\" icon-color=\\"juniper\\" size=\\"x-small\\" spacing=\\"px-2 py-0\\" class=\\"border border-slate-400\\"><span class=\\"py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-juniper\\">Threshold passing</span></z-tag>
         </div>
         <!---->
       </div>

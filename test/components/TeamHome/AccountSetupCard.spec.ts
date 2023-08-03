@@ -2,7 +2,7 @@ import { render, RenderResult } from '@testing-library/vue'
 import { createLocalVue } from '@vue/test-utils'
 import { mocksGenerator, storeModulesGenerator } from '~/test/mocks'
 
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 import { VueConstructor } from 'vue'
 import Vuex from 'vuex'
 

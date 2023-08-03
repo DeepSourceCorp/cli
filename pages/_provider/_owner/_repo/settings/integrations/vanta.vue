@@ -25,7 +25,6 @@
 </template>
 
 <script lang="ts">
-import { ZDivider } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import IntegrationsDetailMixin, { IntegrationShortcodes } from '~/mixins/integrationsDetailMixin'
@@ -35,18 +34,15 @@ import { IntegrationsDetailActions } from '~/store/integrations/detail'
 import { RepositoryDetailActions } from '~/store/repository/detail'
 
 import { RepoPerms } from '~/types/permTypes'
-import { IntegrationSettingsLevel } from '~/types/types'
+import { Context, IntegrationSettingsLevel } from '~/types/types'
 
 /**
  * Repository level integrations page for Vanta
  */
 @Component({
-  components: {
-    ZDivider
-  },
   middleware: [
     // Restrict access if the integration is not installed
-    async ({ error, route, store }) => {
+    async function ({ error, route, store }) {
       const { provider, owner, repo } = route.params
 
       const {
@@ -78,7 +74,8 @@ import { IntegrationSettingsLevel } from '~/types/types'
       const isInstalled = integrations.detail.integration.installed
 
       if (!isInstalled) {
-        return error({ statusCode: 404 })
+        error({ statusCode: 404 })
+        return
       }
     },
     'perm',

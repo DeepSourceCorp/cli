@@ -27,12 +27,11 @@
 </template>
 
 <script lang="ts">
-import { ZButton } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import { featureMap, FeatureType } from '~/types/features'
 
-@Component({ components: { ZButton } })
+@Component({})
 export default class UpgradeFeature extends Vue {
   @Prop({ required: true, type: String })
   featureShortcode: FeatureType

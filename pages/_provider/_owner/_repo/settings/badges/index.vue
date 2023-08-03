@@ -70,17 +70,6 @@
 </template>
 
 <script lang="ts">
-import {
-  ZButton,
-  ZDivider,
-  ZIcon,
-  ZInput,
-  ZOption,
-  ZRadioButton,
-  ZRadioGroup,
-  ZSelect,
-  ZToggle
-} from '@deepsource/zeal'
 import { Component, namespace, Vue } from 'nuxt-property-decorator'
 
 import { RepositoryDetailActions } from '~/store/repository/detail'
@@ -89,17 +78,6 @@ import { Repository } from '~/types/types'
 const repoStore = namespace('repository/detail')
 
 @Component({
-  components: {
-    ZInput,
-    ZIcon,
-    ZButton,
-    ZRadioGroup,
-    ZRadioButton,
-    ZDivider,
-    ZSelect,
-    ZOption,
-    ZToggle
-  },
   layout: 'repository'
 })
 export default class Badges extends Vue {

@@ -1,4 +1,4 @@
-mutation($input: ActivateGSRRepositoryInput!) {
+mutation ($input: ActivateGSRRepositoryInput!) {
   activateGsrRepository(input: $input) {
     ok
   }

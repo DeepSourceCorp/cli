@@ -1,6 +1,6 @@
 <template>
   <z-modal title="Confirm updates to your subscription" @onClose="$emit('close')">
-    <div class="p-4 space-y-4">
+    <div class="space-y-4 p-4">
       <div class="flex items-center space-x-2">
         <z-avatar
           :image="owner.avatar"
@@ -25,7 +25,7 @@
           <span class="text-sm text-vanilla-400">New plan</span>
           <span
             v-if="$fetchState.pending"
-            class="w-16 h-5 rounded-md bg-ink-200 animate-pulse"
+            class="h-5 w-16 animate-pulse rounded-md bg-ink-200"
           ></span>
           <span v-else class="font-semibold">{{ newPlan.name }}</span>
         </div>
@@ -33,7 +33,7 @@
           <span class="text-sm text-vanilla-400">Billing interval</span>
           <span
             v-if="$fetchState.pending"
-            class="h-5 rounded-md w-14 bg-ink-200 animate-pulse"
+            class="h-5 w-14 animate-pulse rounded-md bg-ink-200"
           ></span>
           <span v-else>
             <template v-if="newPlan.mode === MODE.MONTHLY">Monthly</template>
@@ -49,7 +49,7 @@
           </span>
           <span
             v-if="$fetchState.pending"
-            class="w-24 h-5 rounded-md bg-ink-200 animate-pulse"
+            class="h-5 w-24 animate-pulse rounded-md bg-ink-200"
           ></span>
           <span v-else>
             {{ formatUSD(newPlan.amount * planInfo.quantity) }}
@@ -58,7 +58,7 @@
         </div>
         <div
           v-if="!$fetchState.pending && !planInfo.billedImmediately && planInfo.upcomingBillDate"
-          class="flex items-baseline justify-between pt-3 border-t border-slate-400"
+          class="flex items-baseline justify-between border-t border-slate-400 pt-3"
         >
           <div>
             <span class="text-sm font-semibold">
@@ -72,12 +72,12 @@
             {{ formatUSD(planInfo.upcomingBillAmount) }}
           </span>
         </div>
-        <div class="pt-3 border-t border-slate-400">
+        <div class="border-t border-slate-400 pt-3">
           <div class="flex items-center justify-between">
             <span class="text-base font-semibold">Due today</span>
             <span
               v-if="$fetchState.pending"
-              class="w-20 h-6 rounded-md bg-ink-200 animate-pulse"
+              class="h-6 w-20 animate-pulse rounded-md bg-ink-200"
             ></span>
             <span
               v-else-if="planInfo.billedImmediately"
@@ -87,7 +87,7 @@
               {{ formatUSD(planInfo.upcomingBillAmount) }}
             </span>
           </div>
-          <div v-if="!$fetchState.pending" class="block max-w-sm mt-1 text-sm text-vanilla-400">
+          <div v-if="!$fetchState.pending" class="mt-1 block max-w-sm text-sm text-vanilla-400">
             <span v-if="planInfo.prorationAmount">
               {{ formatUSD(planInfo.prorationAmount) }} will be adjusted via proration.
             </span>
@@ -100,9 +100,9 @@
       </section>
     </div>
     <template #footer="{ close }">
-      <div class="flex justify-between p-4 text-vanilla-100 border-slate-400">
-        <div class="items-end hidden md:flex">
-          <span class="leading-none bg-ink-200 rounded-bl-md text-xs px-2 py-1.5 text-vanilla-400">
+      <div class="flex justify-between border-slate-400 p-4 text-vanilla-100">
+        <div class="hidden items-end md:flex">
+          <span class="rounded-bl-md bg-ink-200 px-2 py-1.5 text-xs leading-none text-vanilla-400">
             Powered by
             <img
               class="inline"
@@ -129,7 +129,6 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZModal, ZButton, ZAvatar } from '@deepsource/zeal'
 
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 import { GetUpgradeCodeQualitySubscriptionPlanInfoPayload } from '~/types/types'
@@ -138,11 +137,6 @@ import { formatDate, parseISODate } from '~/utils/date'
 import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
-  components: {
-    ZModal,
-    ZButton,
-    ZAvatar
-  },
   methods: {
     getDefaultAvatar,
     parseISODate,

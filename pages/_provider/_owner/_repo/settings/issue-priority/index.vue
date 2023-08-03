@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col max-w-2xl p-4 gap-y-2">
+  <div class="flex max-w-2xl flex-col gap-y-2 p-4">
     <!-- title -->
     <page-title
       class="max-w-2xl items-center"
@@ -20,7 +20,7 @@
 
     <!-- Search & filter tab -->
     <div v-show="showCtaAndControls" class="flex justify-between">
-      <div class="flex gap-x-2 mr-2">
+      <div class="mr-2 flex gap-x-2">
         <issue-priority-sort v-model="sortType" />
         <issue-priority-filter v-model="analyzerType" :level="repoLevel" />
       </div>
@@ -54,10 +54,10 @@
       <div
         v-for="index in 5"
         :key="index"
-        class="bg-ink-300 animate-pulse opacity-50 rounded-md p-8"
+        class="animate-pulse rounded-md bg-ink-300 p-8 opacity-50"
       ></div>
     </template>
-    <section v-else-if="issueList.length > 0" class="flex flex-col mt-1">
+    <section v-else-if="issueList.length > 0" class="mt-1 flex flex-col">
       <issue-priority-card
         v-for="(issue, position) in issueList"
         :key="issue.shortcode"
@@ -83,7 +83,7 @@
       :use-v2="true"
       title="No priority assignments found"
       subtitle="You haven't assigned priorities to any issues yet."
-      class="border border-dashed rounded-lg border-2 border-slate-400 py-20"
+      class="rounded-lg border-2 border-dashed border-slate-400 py-20"
     >
       <template #action>
         <div class="flex">
@@ -99,7 +99,7 @@
       </template>
     </lazy-empty-state>
 
-    <div v-if="totalPageCount > 1" class="flex justify-center my-6 text-sm">
+    <div v-if="totalPageCount > 1" class="my-6 flex justify-center text-sm">
       <z-pagination
         :page="currentPage"
         :total-pages="totalPageCount"
@@ -123,7 +123,6 @@
 <script lang="ts">
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 
-import { ZIcon, ZButton, ZInput, ZBadge, ZPagination } from '@deepsource/zeal'
 import {
   IssuePrioritySort,
   ChooseIssueModal,
@@ -146,11 +145,6 @@ import { resolveNodes } from '~/utils/array'
  */
 @Component({
   components: {
-    ZIcon,
-    ZButton,
-    ZInput,
-    ZBadge,
-    ZPagination,
     IssuePrioritySort,
     IssuePriorityFilter,
     ChooseIssueModal,

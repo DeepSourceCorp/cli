@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ Repo Status Components ]] RepoEmpty: RepoEmpty 1`] = `
-"<section class=\\"grid border border-dashed rounded-md border-slate-400 place-content-center min-h-92 max-h-screen p-12\\" id=\\"UmVwb3NpdG9yeTp6dmp2eXo=\\" name=\\"asgard\\" defaultbranchname=\\"master\\"><img src=\\"timeout.svg\\" alt=\\"Repo Empty\\" class=\\"mx-auto mb-4\\">
-  <h1 class=\\"text-base font-semibold text-center text-vanilla-100 mt-6\\">
+"<section class=\\"grid place-content-center rounded-md border border-dashed border-slate-400 min-h-92 max-h-screen p-12\\" id=\\"UmVwb3NpdG9yeTp6dmp2eXo=\\" name=\\"asgard\\" defaultbranchname=\\"master\\"><img src=\\"timeout.svg\\" alt=\\"Repo Empty\\" class=\\"mx-auto mb-4\\">
+  <h1 class=\\"text-center text-base font-semibold text-vanilla-100 mt-6\\">
     No code found in the repository
   </h1>
-  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\">
+  <div class=\\"mt-2 max-w-xl text-center text-sm text-vanilla-400\\">
 
     This repository seems to be empty. Please add code and check back later.
   </div>
@@ -13,11 +13,11 @@ exports[`[[ Repo Status Components ]] RepoEmpty: RepoEmpty 1`] = `
 `;
 
 exports[`[[ Repo Status Components ]] RepoError: RepoError 1`] = `
-"<section class=\\"grid border border-dashed rounded-md border-slate-400 place-content-center min-h-92 max-h-screen p-12\\" id=\\"UmVwb3NpdG9yeTp6dmp2eXo=\\" name=\\"asgard\\" defaultbranchname=\\"master\\"><img src=\\"timeout.svg\\" alt=\\"Repo Error\\" class=\\"mx-auto mb-4\\">
-  <h1 class=\\"text-base font-semibold text-center text-vanilla-100 mt-6\\">
+"<section class=\\"grid place-content-center rounded-md border border-dashed border-slate-400 min-h-92 max-h-screen p-12\\" id=\\"UmVwb3NpdG9yeTp6dmp2eXo=\\" name=\\"asgard\\" defaultbranchname=\\"master\\"><img src=\\"timeout.svg\\" alt=\\"Repo Error\\" class=\\"mx-auto mb-4\\">
+  <h1 class=\\"text-center text-base font-semibold text-vanilla-100 mt-6\\">
     Analysis has been halted
   </h1>
-  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\">
+  <div class=\\"mt-2 max-w-xl text-center text-sm text-vanilla-400\\">
     <p>
       We have been unable to analyze the code due to issues with analysis configuration. These
       issues must be resolved before we can continue.
@@ -32,17 +32,17 @@ exports[`[[ Repo Status Components ]] RepoTimeout: RepoTimeout 1`] = `
     We were not able to finish the analysis in time. This can happen if there are too many files
     to analyze. Please give it another shot.
   </p>
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Re-run analysis\\" loadinglabel=\\"Triggering Run\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"repeat\\" class=\\"mt-4\\"></zbutton-stub>
+  <zbutton-stub icon=\\"repeat\\" label=\\"Re-run analysis\\" loading-label=\\"Triggering Run\\" size=\\"small\\" class=\\"mt-4\\"></zbutton-stub>
 </emptystate-stub>"
 `;
 
 exports[`[[ Repo Status Components ]] RepoWaiting: RepoWaiting 1`] = `
-"<section class=\\"grid border border-dashed rounded-md border-slate-400 place-content-center min-h-92 max-h-screen p-12\\" id=\\"UmVwb3NpdG9yeTp6dmp2eXo=\\" name=\\"asgard\\" defaultbranchname=\\"master\\"><video poster=\\"timeout.svg\\" autoplay=\\"autoplay\\" loop=\\"loop\\" disablepictureinpicture=\\"\\" muted=\\"muted\\" class=\\"mx-auto w-26\\">
+"<section class=\\"grid place-content-center rounded-md border border-dashed border-slate-400 min-h-92 max-h-screen p-12\\" id=\\"UmVwb3NpdG9yeTp6dmp2eXo=\\" name=\\"asgard\\" defaultbranchname=\\"master\\"><video poster=\\"timeout.svg\\" autoplay=\\"autoplay\\" loop=\\"loop\\" disablepictureinpicture=\\"\\" muted=\\"muted\\" class=\\"mx-auto w-26\\">
     <source src=\\"timeout.svg\\" type=\\"video/webm\\"></video>
-  <h1 class=\\"text-base font-semibold text-center text-vanilla-100 mt-6\\">
+  <h1 class=\\"text-center text-base font-semibold text-vanilla-100 mt-6\\">
     Waiting for results
   </h1>
-  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\">
+  <div class=\\"mt-2 max-w-xl text-center text-sm text-vanilla-400\\">
     <p class=\\"max-w-lg\\">
       This is the first analysis for this repository. We're analyzing all the files, so it can take
       a while.
@@ -52,32 +52,32 @@ exports[`[[ Repo Status Components ]] RepoWaiting: RepoWaiting 1`] = `
 `;
 
 exports[`[[ Run Status Components ]] RunCancelled: RunCancelled 1`] = `
-"<section class=\\"grid border border-dashed rounded-md border-slate-400 place-content-center min-h-92 max-h-screen p-12\\">
+"<section class=\\"grid place-content-center rounded-md border border-dashed border-slate-400 min-h-92 max-h-screen p-12\\">
   <emptystatepicture-stub webp-image-path=\\"timeout.svg\\" png-image-path=\\"timeout.svg\\" width=\\"w-26\\" alt-text=\\"Analysis cancelled\\" class=\\"mx-auto mb-4\\"></emptystatepicture-stub>
-  <h1 class=\\"text-base font-semibold text-center text-vanilla-100 mt-6\\">
+  <h1 class=\\"text-center text-base font-semibold text-vanilla-100 mt-6\\">
     Analysis cancelled
   </h1>
-  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\"> <span class=\\"text-vanilla-400\\">This analysis run did not complete and was cancelled due to an error.</span></div>
+  <div class=\\"mt-2 max-w-xl text-center text-sm text-vanilla-400\\"> <span class=\\"text-vanilla-400\\">This analysis run did not complete and was cancelled due to an error.</span></div>
 </section>"
 `;
 
 exports[`[[ Run Status Components ]] RunFailed: RunFailed 1`] = `
-"<section class=\\"grid border border-dashed rounded-md border-slate-400 place-content-center min-h-92 max-h-screen p-12\\">
+"<section class=\\"grid place-content-center rounded-md border border-dashed border-slate-400 min-h-92 max-h-screen p-12\\">
   <emptystatepicture-stub webp-image-path=\\"timeout.svg\\" png-image-path=\\"timeout.svg\\" width=\\"w-26\\" alt-text=\\"Run failed\\" class=\\"mx-auto mb-4\\"></emptystatepicture-stub>
-  <h1 class=\\"text-base font-semibold text-center text-vanilla-100 mt-6\\">
+  <h1 class=\\"text-center text-base font-semibold text-vanilla-100 mt-6\\">
     Run failed because of a failing metric
   </h1>
-  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\"></div>
+  <div class=\\"mt-2 max-w-xl text-center text-sm text-vanilla-400\\"></div>
 </section>"
 `;
 
 exports[`[[ Run Status Components ]] RunLoading: RunLoading 1`] = `
-"<section class=\\"grid border border-dashed rounded-md border-slate-400 place-content-center min-h-92 max-h-screen p-12\\"><video poster=\\"timeout.svg\\" autoplay=\\"autoplay\\" loop=\\"loop\\" disablepictureinpicture=\\"\\" muted=\\"muted\\" class=\\"mx-auto w-26\\">
+"<section class=\\"grid place-content-center rounded-md border border-dashed border-slate-400 min-h-92 max-h-screen p-12\\"><video poster=\\"timeout.svg\\" autoplay=\\"autoplay\\" loop=\\"loop\\" disablepictureinpicture=\\"\\" muted=\\"muted\\" class=\\"mx-auto w-26\\">
     <source src=\\"timeout.svg\\" type=\\"video/webm\\"></video>
-  <h1 class=\\"text-base font-semibold text-center text-vanilla-100 mt-6\\">
+  <h1 class=\\"text-center text-base font-semibold text-vanilla-100 mt-6\\">
     Waiting for results
   </h1>
-  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\">
+  <div class=\\"mt-2 max-w-xl text-center text-sm text-vanilla-400\\">
     <p class=\\"max-w-md\\">
       We're currently analyzing the branch, it usually takes a few minutes to fetch the results.
     </p>
@@ -92,12 +92,12 @@ exports[`[[ Run Status Components ]] RunPass: RunPass 1`] = `"<emptystate-stub w
 exports[`[[ Run Status Components ]] RunTimeout: RunTimeout 1`] = `"<emptystate-stub webp-image-path=\\"timeout.svg\\" png-image-path=\\"timeout.svg\\" title=\\"Analysis timed out\\" subtitle=\\"We had to cancel this analysis as it took too long to finish. Try making another commit on this branch to retry.\\"></emptystate-stub>"`;
 
 exports[`[[ Run Status Components ]] RunWaiting: RunWaiting 1`] = `
-"<section class=\\"grid border border-dashed rounded-md border-slate-400 place-content-center min-h-92 max-h-screen p-12\\"><video poster=\\"timeout.svg\\" autoplay=\\"autoplay\\" loop=\\"loop\\" disablepictureinpicture=\\"\\" muted=\\"muted\\" class=\\"mx-auto w-26\\">
+"<section class=\\"grid place-content-center rounded-md border border-dashed border-slate-400 min-h-92 max-h-screen p-12\\"><video poster=\\"timeout.svg\\" autoplay=\\"autoplay\\" loop=\\"loop\\" disablepictureinpicture=\\"\\" muted=\\"muted\\" class=\\"mx-auto w-26\\">
     <source src=\\"timeout.svg\\" type=\\"video/webm\\"></video>
-  <h1 class=\\"text-base font-semibold text-center text-vanilla-100 mt-6\\">
+  <h1 class=\\"text-center text-base font-semibold text-vanilla-100 mt-6\\">
     Waiting to receive artifacts
   </h1>
-  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\">
+  <div class=\\"mt-2 max-w-xl text-center text-sm text-vanilla-400\\">
     <p>
       The analysis will begin as soon as we receive additional artifacts or reports required by the
       Analyzer.

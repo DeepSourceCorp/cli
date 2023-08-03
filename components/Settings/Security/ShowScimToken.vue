@@ -38,9 +38,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZAlert, ZButton, ZIcon, ZInput, ZModal } from '@deepsource/zeal'
 
-@Component({ components: { ZAlert, ZButton, ZIcon, ZInput, ZModal } })
+@Component({})
 export default class ShowScimToken extends Vue {
   @Prop({ required: true })
   token: string

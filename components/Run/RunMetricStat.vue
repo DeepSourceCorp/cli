@@ -1,7 +1,7 @@
 <template>
   <div class="grid content-between gap-4 px-3 py-4" :class="{ aggregate: isMetricAggregate }">
-    <div v-if="isMetricAggregate" class="flex items-center justify-between w-full">
-      <div class="flex items-center justify-between w-full gap-x-2">
+    <div v-if="isMetricAggregate" class="flex w-full items-center justify-between">
+      <div class="flex w-full items-center justify-between gap-x-2">
         <div class="flex items-center gap-x-2">
           <z-icon icon="aggregate" />
           <span class="text-sm leading-normal text-vanilla-100">Aggregate</span>
@@ -17,7 +17,7 @@
             custom-bg-class="bg-ink-100"
             :class="[trendPositive ? 'text-juniper' : 'text-cherry']"
           />
-          <span class="font-semibold leading-snug stat-value text-vanilla-100">
+          <span class="stat-value font-semibold leading-snug text-vanilla-100">
             {{ metric.valueDisplay }}</span
           >
         </div>
@@ -26,7 +26,7 @@
 
     <div v-else class="space-y-4">
       <div class="flex justify-between">
-        <div class="flex items-center text-sm leading-normal gap-x-2 text-vanilla-100">
+        <div class="flex items-center gap-x-2 text-sm leading-normal text-vanilla-100">
           <lazy-analyzer-logo
             :name="metric.namespace.key"
             :shortcode="metric.namespace.analyzer_shortcode"
@@ -46,7 +46,7 @@
             custom-bg-class="bg-ink-100"
             :class="[trendPositive ? 'text-juniper' : 'text-cherry']"
           />
-          <span class="font-semibold leading-snug stat-value text-vanilla-100">
+          <span class="stat-value font-semibold leading-snug text-vanilla-100">
             {{ metric.valueDisplay }}</span
           >
         </div>
@@ -55,22 +55,22 @@
 
     <div
       v-if="metricThresholdRelation || showMetricSuppressButton"
-      class="flex justify-between w-full gap-x-2"
+      class="flex w-full justify-between gap-x-2"
     >
-      <div v-if="metricThresholdRelation" class="flex items-center justify-between w-full">
+      <div v-if="metricThresholdRelation" class="flex w-full items-center justify-between">
         <div
           v-if="metric.isSuppressed"
-          class="inline-flex items-center px-2 space-x-2 rounded-md justify-evenly text-vanilla-100 bg-ink-100"
+          class="inline-flex items-center justify-evenly space-x-2 rounded-md bg-ink-100 px-2 text-vanilla-100"
         >
           <z-icon icon="minus-circle" size="x-small" />
           <span
-            class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400"
+            class="py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider text-vanilla-400"
             >{{ metricThresholdRelation }}</span
           >
         </div>
         <div
           v-else
-          class="inline-flex items-center px-2 space-x-2 rounded-md justify-evenly text-vanilla-100 bg-ink-100"
+          class="inline-flex items-center justify-evenly space-x-2 rounded-md bg-ink-100 px-2 text-vanilla-100"
         >
           <z-icon
             :icon="metricThresholdRelationIcon"
@@ -78,7 +78,7 @@
             size="x-small"
           />
           <span
-            class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5"
+            class="py-1.5 text-xxs font-semibold uppercase leading-none tracking-wider"
             :class="metric.isPassing ? 'text-juniper' : 'text-cherry'"
             >{{ metricThresholdRelation }}</span
           >
@@ -86,7 +86,7 @@
       </div>
       <button
         v-if="showMetricSuppressButton"
-        class="flex items-center px-2 text-xs border rounded-md cursor-pointer gap-x-1 text-vanilla-400 bg-ink-100 hover:bg-ink-50 border-slate-400"
+        class="flex cursor-pointer items-center gap-x-1 rounded-md border border-slate-400 bg-ink-100 px-2 text-xs text-vanilla-400 hover:bg-ink-50"
         @click="$emit('confirmMetricSuppression', metric)"
       >
         <z-icon icon="minus-circle" size="x-small" />
@@ -98,7 +98,6 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZIcon, ZTag, ZButton } from '@deepsource/zeal'
 import { RepositoryMetricValue } from '~/types/types'
 import { MetricType } from '~/types/metric'
 
@@ -117,13 +116,7 @@ const ICON_VALUE_STATE = {
  * Renders the card for a single `RepositoryMetricValue` within a grouped set of metrics with `RunMetricCard`
  * Includes the metric's namespace or aggregagte label, value, trend, threshold and indicator / button to suppress the metric
  */
-@Component({
-  components: {
-    ZIcon,
-    ZTag,
-    ZButton
-  }
-})
+@Component({})
 export default class RunMetricStat extends Vue {
   @Prop({ required: true })
   metric: RepositoryMetricValue

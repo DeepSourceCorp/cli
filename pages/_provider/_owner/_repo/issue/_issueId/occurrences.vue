@@ -58,7 +58,6 @@
   </div>
 </template>
 <script lang="ts">
-import { ZPagination } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import ContextMixin from '~/mixins/contextMixin'
@@ -76,9 +75,6 @@ const PAGE_SIZE = 5
 const VISIBLE_PAGES = 3
 
 @Component({
-  components: {
-    ZPagination
-  },
   layout: 'repository',
   scrollToTop: true
 })

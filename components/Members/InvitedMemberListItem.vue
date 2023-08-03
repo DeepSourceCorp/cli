@@ -64,14 +64,12 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar } from '@deepsource/zeal'
 import { formatDate, parseISODate } from '@/utils/date'
 import { getDefaultAvatar } from '@/utils/ui'
 
 import { TeamMemberRoleChoices } from '~/types/types'
 
 @Component({
-  components: { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar },
   methods: { getDefaultAvatar },
   layout: 'dashboard'
 })

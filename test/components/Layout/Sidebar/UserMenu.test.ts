@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom'
-import { createLocalVue, mount, shallowMount } from '@vue/test-utils'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
 import Vuex from 'vuex'
 import UserMenu from '~/components/Layout/Sidebar/UserMenu.vue'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 import { cartesian, generateBooleanProps } from '~/test/utils'
 
 describe('[[ UserMenu ]]', () => {

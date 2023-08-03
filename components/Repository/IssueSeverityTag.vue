@@ -5,22 +5,17 @@
     :class="[spacing]"
   >
     <z-icon :icon="iconType" size="x-small" :color="iconColor" />
-    <span class="text-sm text-vanilla-400 tracking-wide capitalize">{{ label }}</span>
+    <span class="text-sm capitalize tracking-wide text-vanilla-400">{{ label }}</span>
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import { IssueSeverity } from '~/types/types'
 
 /**
  * Component to severity wise tag
  */
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 export default class IssueSeverityTag extends Vue {
   @Prop()
   severity: IssueSeverity

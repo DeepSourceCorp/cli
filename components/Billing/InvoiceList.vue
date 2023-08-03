@@ -7,7 +7,7 @@
         :href="inv.url"
         target="blank"
         rel="noopener noreferrer"
-        class="flex items-center w-full p-4 space-x-4 border rounded-md cursor-pointer group border-slate-400 border-opacity-70 hover:bg-ink-300 hover:border-slate-400 text-vanilla-400 hover:text-vanilla-100"
+        class="group flex w-full cursor-pointer items-center space-x-4 rounded-md border border-slate-400 border-opacity-70 p-4 text-vanilla-400 hover:border-slate-400 hover:bg-ink-300 hover:text-vanilla-100"
       >
         <!-- Replace with PDF -->
         <z-icon icon="file-text" size="base" color="current" />
@@ -22,7 +22,7 @@
 
       <div
         v-if="invoices.length !== billing.invoices.length"
-        class="flex items-center justify-center w-full space-x-2"
+        class="flex w-full items-center justify-center space-x-2"
       >
         <z-divider color="ink-300" class="border-dashed" />
         <z-button button-type="secondary" size="small" @click="itemsCount += 5">
@@ -36,7 +36,7 @@
       <div
         v-for="idx in 6"
         :key="idx"
-        class="w-full rounded-md h-14 bg-ink-300 animate-pulse"
+        class="h-14 w-full animate-pulse rounded-md bg-ink-300"
       ></div>
     </template>
   </form-group>
@@ -45,13 +45,12 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { FormGroup } from '~/components/Form'
-import { ZButton, ZDivider, ZIcon } from '@deepsource/zeal'
 import { parseISODate, formatDate } from '~/utils/date'
 import { BillingInfo } from '~/types/types'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 @Component({
-  components: { FormGroup, ZButton, ZDivider, ZIcon },
+  components: { FormGroup },
   layout: 'dashboard',
   methods: {
     parseISODate,

@@ -1,12 +1,12 @@
-  overwrite: true
-  schema: "schema.graphql"
-  documents: "apollo/**/*.gql"
-  generates:
-    types/graphql.d.ts:
-      - typescript-graphql-files-modules
-    types/types.ts:
-      - typescript
-      - typescript-operations
-    types/fragmentTypes.ts:
-      plugins:
-        - fragment-matcher
+overwrite: true
+schema: 'schema.graphql'
+documents: 'apollo/**/*.gql'
+generates:
+  types/graphql.d.ts:
+    - typescript-graphql-files-modules
+  types/types.ts:
+    - typescript
+    - typescript-operations
+  types/fragmentTypes.ts:
+    plugins:
+      - fragment-matcher

@@ -41,20 +41,11 @@
 </template>
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZModal, ZButton, ZCheckbox, ZTextarea } from '@deepsource/zeal'
 
 import IssueDetailMixin from '~/mixins/issueDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 
-@Component({
-  components: {
-    ZIcon,
-    ZModal,
-    ZButton,
-    ZCheckbox,
-    ZTextarea
-  }
-})
+@Component({})
 export default class IgnoreIssueFalsePositive extends mixins(IssueDetailMixin, ActiveUserMixin) {
   @Prop({ default: '' })
   checkIssueId!: string

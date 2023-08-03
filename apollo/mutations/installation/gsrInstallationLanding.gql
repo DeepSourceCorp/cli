@@ -1,4 +1,4 @@
-mutation($input: GSRInstallationLandingInput!) {
+mutation ($input: GSRInstallationLandingInput!) {
   gsrInstallationLanding(input: $input) {
     ok
     reauth

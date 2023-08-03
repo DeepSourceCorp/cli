@@ -1,12 +1,12 @@
 <template>
   <div class="flex items-center gap-x-1.5 leading-8">
     <span
-      class="w-1.5 h-1.5 rounded-full"
+      class="h-1.5 w-1.5 rounded-full"
       :class="compliancePassed ? 'bg-juniper' : 'bg-cherry'"
     ></span>
     <span
       :class="[compliancePassed ? 'text-juniper' : 'text-cherry', textSize]"
-      class="font-semibold tracking-wider uppercase"
+      class="font-semibold uppercase tracking-wider"
     >
       {{ compliancePassed ? 'Passing' : 'Failing' }}
     </span>

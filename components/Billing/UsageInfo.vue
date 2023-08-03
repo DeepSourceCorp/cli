@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full h-2 mt-1 rounded-full bg-ink-200">
+  <div class="mt-1 h-2 w-full rounded-full bg-ink-200">
     <div
-      class="h-2 transition-all duration-200 ease-in-out transform rounded-full"
+      class="h-2 transform rounded-full transition-all duration-200 ease-in-out"
       :class="{
         'bg-juniper': 50 >= completion,
         'bg-honey': 80 >= completion && completion > 50,

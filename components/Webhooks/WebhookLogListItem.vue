@@ -2,7 +2,7 @@
   <nuxt-link
     :to="$generateRoute(['settings', 'webhooks', $route.params.webhookId, 'log', id])"
     as="li"
-    class="grid items-center h-12 grid-cols-6 px-3 text-sm hover:bg-ink-300"
+    class="grid h-12 grid-cols-6 items-center px-3 text-sm hover:bg-ink-300"
   >
     <span>
       <z-tag
@@ -10,7 +10,7 @@
         bg-color="ink-400 bg-opacity-20"
         text-size="xs"
         spacing="px-2 py-0.5"
-        class="font-semibold tracking-wider border"
+        class="border font-semibold tracking-wider"
         :class="{
           'border-juniper': httpStatusCode >= 200 && httpStatusCode < 300,
           'border-honey': httpStatusCode >= 300 && httpStatusCode < 400,
@@ -28,7 +28,7 @@
         {{ id }}
       </template>
     </code>
-    <span v-tooltip="createdAt" class="col-span-2 leading-none text-right text-vanilla-400">
+    <span v-tooltip="createdAt" class="col-span-2 text-right leading-none text-vanilla-400">
       {{ fromNow(createdAt) }}
     </span>
     <span v-if="finishedIn" class="col-span-1 text-right text-vanilla-400">
@@ -38,14 +38,10 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZTag } from '@deepsource/zeal'
 import { WebhookEventTypes } from '~/types/types'
 import { fromNow } from '~/utils/date'
 
 @Component({
-  components: {
-    ZTag
-  },
   methods: { fromNow }
 })
 export default class WebhookLogListItem extends Vue {

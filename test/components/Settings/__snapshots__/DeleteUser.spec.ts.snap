@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ DeleteUser ]] renders DeleteUser for multiple team ownerships 1`] = `
-"<zaccordion-stub allowmultiple=\\"true\\" class=\\"text-vanilla-100 border border-ink-200 rounded-md bg-ink-300\\">
-  <zaccordionitem-stub title=\\"Delete account\\" icon=\\"down\\" custommaxheight=\\"max-h-screen\\" class=\\"p-3\\">
-    <div class=\\"grid border border-cherry border-opacity-20 bg-cherry bg-opacity-5 rounded-md divide-y divide-cherry divide-opacity-20 mt-4\\">
+"<zaccordion-stub class=\\"rounded-md border border-ink-200 bg-ink-300 text-vanilla-100\\">
+  <zaccordionitem-stub title=\\"Delete account\\" class=\\"p-3\\">
+    <div class=\\"mt-4 grid divide-y divide-cherry divide-opacity-20 rounded-md border border-cherry border-opacity-20 bg-cherry bg-opacity-5\\">
       <div class=\\"flex gap-12 p-4\\">
-        <div class=\\"space-y-1.5\\"><span class=\\"text-cherry text-sm\\">Delete account</span>
-          <div class=\\"text-cherry-300 text-xs leading-6\\">
+        <div class=\\"space-y-1.5\\"><span class=\\"text-sm text-cherry\\">Delete account</span>
+          <div class=\\"text-xs leading-6 text-cherry-300\\">
             Permanently remove your personal account and all of its contents from the DeepSource
             platform.
           </div>
         </div>
-        <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"danger\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"trash-2\\">
+        <zbutton-stub size=\\"small\\" button-type=\\"danger\\" icon=\\"trash-2\\">
           Delete account
         </zbutton-stub>
       </div>
@@ -25,17 +25,17 @@ exports[`[[ DeleteUser ]] renders DeleteUser for multiple team ownerships 1`] = 
 `;
 
 exports[`[[ DeleteUser ]] renders DeleteUser for no team ownerships 1`] = `
-"<zaccordion-stub allowmultiple=\\"true\\" class=\\"text-vanilla-100 border border-ink-200 rounded-md bg-ink-300\\">
-  <zaccordionitem-stub title=\\"Delete account\\" icon=\\"down\\" custommaxheight=\\"max-h-screen\\" class=\\"p-3\\">
-    <div class=\\"grid border border-cherry border-opacity-20 bg-cherry bg-opacity-5 rounded-md divide-y divide-cherry divide-opacity-20 mt-4\\">
+"<zaccordion-stub class=\\"rounded-md border border-ink-200 bg-ink-300 text-vanilla-100\\">
+  <zaccordionitem-stub title=\\"Delete account\\" class=\\"p-3\\">
+    <div class=\\"mt-4 grid divide-y divide-cherry divide-opacity-20 rounded-md border border-cherry border-opacity-20 bg-cherry bg-opacity-5\\">
       <div class=\\"flex gap-12 p-4\\">
-        <div class=\\"space-y-1.5\\"><span class=\\"text-cherry text-sm\\">Delete account</span>
-          <div class=\\"text-cherry-300 text-xs leading-6\\">
+        <div class=\\"space-y-1.5\\"><span class=\\"text-sm text-cherry\\">Delete account</span>
+          <div class=\\"text-xs leading-6 text-cherry-300\\">
             Permanently remove your personal account and all of its contents from the DeepSource
             platform.
           </div>
         </div>
-        <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"danger\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"trash-2\\">
+        <zbutton-stub size=\\"small\\" button-type=\\"danger\\" icon=\\"trash-2\\">
           Delete account
         </zbutton-stub>
       </div>
@@ -49,17 +49,17 @@ exports[`[[ DeleteUser ]] renders DeleteUser for no team ownerships 1`] = `
 `;
 
 exports[`[[ DeleteUser ]] renders DeleteUser for single team ownership 1`] = `
-"<zaccordion-stub allowmultiple=\\"true\\" class=\\"text-vanilla-100 border border-ink-200 rounded-md bg-ink-300\\">
-  <zaccordionitem-stub title=\\"Delete account\\" icon=\\"down\\" custommaxheight=\\"max-h-screen\\" class=\\"p-3\\">
-    <div class=\\"grid border border-cherry border-opacity-20 bg-cherry bg-opacity-5 rounded-md divide-y divide-cherry divide-opacity-20 mt-4\\">
+"<zaccordion-stub class=\\"rounded-md border border-ink-200 bg-ink-300 text-vanilla-100\\">
+  <zaccordionitem-stub title=\\"Delete account\\" class=\\"p-3\\">
+    <div class=\\"mt-4 grid divide-y divide-cherry divide-opacity-20 rounded-md border border-cherry border-opacity-20 bg-cherry bg-opacity-5\\">
       <div class=\\"flex gap-12 p-4\\">
-        <div class=\\"space-y-1.5\\"><span class=\\"text-cherry text-sm\\">Delete account</span>
-          <div class=\\"text-cherry-300 text-xs leading-6\\">
+        <div class=\\"space-y-1.5\\"><span class=\\"text-sm text-cherry\\">Delete account</span>
+          <div class=\\"text-xs leading-6 text-cherry-300\\">
             Permanently remove your personal account and all of its contents from the DeepSource
             platform.
           </div>
         </div>
-        <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"danger\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"trash-2\\">
+        <zbutton-stub size=\\"small\\" button-type=\\"danger\\" icon=\\"trash-2\\">
           Delete account
         </zbutton-stub>
       </div>

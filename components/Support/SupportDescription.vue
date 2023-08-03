@@ -1,42 +1,44 @@
 <template>
   <div>
-    <z-rich-text
-      :disabled="disabled"
-      :max-length="1024"
-      aria-labelled-by="label-description"
-      placeholder="Describe the issue you’re facing, along with any relevant information. Please be as detailed and specific as possible."
-      class="bg-ink-400"
-      @input="(...emits) => $emit('input', ...emits)"
-      @invalid="(...emits) => $emit('invalid', ...emits)"
-    >
-      <template #left-toolbar>
-        <z-file-input
-          ref="fileUploader"
-          :disabled="isProcessingFiles || disabled"
-          label="Add files"
-          multiple
-          accept="video/mp4,video/quicktime,image/jpeg,image/png,text/plain,text/csv,application/rtf,text/rtf"
-          @change="prepareFiles"
-          @files-emptied="$emit('files-change', [])"
-        >
-          <template #activator="{ open }">
-            <z-button
-              v-tooltip="'Attach files'"
-              :disabled="isProcessingFiles || disabled"
-              :is-loading="isProcessingFiles"
-              icon="paperclip"
-              size="x-small"
-              button-type="ghost"
-              icon-color="vanilla-400"
-              type="button"
-              class="ml-1 opacity-60 hover:text-vanilla-100 hover:opacity-100"
-              :class="isProcessingFiles || disabled ? 'cursor-not-allowed' : 'cursor-pointer'"
-              @click="open"
-            />
-          </template>
-        </z-file-input>
-      </template>
-    </z-rich-text>
+    <client-only>
+      <z-rich-text
+        :disabled="disabled"
+        :max-length="1024"
+        aria-labelled-by="label-description"
+        placeholder="Describe the issue you’re facing, along with any relevant information. Please be as detailed and specific as possible."
+        class="bg-ink-400"
+        @input="(...emits) => $emit('input', ...emits)"
+        @invalid="(...emits) => $emit('invalid', ...emits)"
+      >
+        <template #left-toolbar>
+          <z-file-input
+            ref="fileUploader"
+            :disabled="isProcessingFiles || disabled"
+            label="Add files"
+            multiple
+            accept="video/mp4,video/quicktime,image/jpeg,image/png,text/plain,text/csv,application/rtf,text/rtf"
+            @change="prepareFiles"
+            @files-emptied="$emit('files-change', [])"
+          >
+            <template #activator="{ open }">
+              <z-button
+                v-tooltip="'Attach files'"
+                :disabled="isProcessingFiles || disabled"
+                :is-loading="isProcessingFiles"
+                icon="paperclip"
+                size="x-small"
+                button-type="ghost"
+                icon-color="vanilla-400"
+                type="button"
+                class="ml-1 opacity-60 hover:text-vanilla-100 hover:opacity-100"
+                :class="isProcessingFiles || disabled ? 'cursor-not-allowed' : 'cursor-pointer'"
+                @click="open"
+              />
+            </template>
+          </z-file-input>
+        </template>
+      </z-rich-text>
+    </client-only>
     <div class="mt-2 text-xs leading-8 text-vanilla-400">
       You can attach images, videos, and text files up to 10MB in size.
     </div>
@@ -45,11 +47,10 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZRichText, ZFileInput, ZButton } from '@deepsource/zeal'
 
 import { validateFileNames, validateFileSize } from '~/utils/files'
 
-@Component({ name: 'SupportDescription', components: { ZRichText, ZFileInput, ZButton } })
+@Component({ name: 'SupportDescription' })
 export default class SupportDescription extends Vue {
   @Prop({ type: Boolean, default: false })
   disabled: boolean

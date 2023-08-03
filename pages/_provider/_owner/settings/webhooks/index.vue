@@ -1,6 +1,6 @@
 <template>
   <section class="max-w-3xl p-4">
-    <div class="flex justify-between mb-4">
+    <div class="mb-4 flex justify-between">
       <h2 class="text-lg font-medium">Endpoints</h2>
       <z-button
         v-if="webhookEndpoints.length"
@@ -17,7 +17,7 @@
     </div>
     <div class="grid grid-cols-1 gap-2">
       <template v-if="endpointsLoading">
-        <div v-for="index in 3" :key="index" class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
+        <div v-for="index in 3" :key="index" class="h-20 animate-pulse rounded-md bg-ink-300"></div>
       </template>
       <template v-else-if="totalWebhookEndpoints">
         <webhook-card v-for="endpoint in webhookEndpoints" :key="endpoint.id" v-bind="endpoint" />
@@ -50,17 +50,11 @@
 
 <script lang="ts">
 import { mixins, Component } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZPagination } from '@deepsource/zeal'
 import { TeamPerms } from '~/types/permTypes'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import WebhookMixin from '~/mixins/webhookMixin'
 
 @Component({
-  components: {
-    ZIcon,
-    ZButton,
-    ZPagination
-  },
   meta: {
     auth: {
       teamPerms: [TeamPerms.MANAGE_WEBHOOKS]

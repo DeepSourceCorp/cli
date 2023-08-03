@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ MutateReportModal ]] renders MutateReportModal in create report mode: {"editMode":false,"level":"REPOSITORY"} 1`] = `
-"<zmodal-stub title=\\"Share report\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
-  <fieldset class=\\"p-4 flex flex-col gap-y-7\\"><label for=\\"report-title\\" class=\\"space-y-2 text-sm text-vanilla-200 w-full\\">
+"<zmodal-stub title=\\"Share report\\">
+  <fieldset class=\\"flex flex-col gap-y-7 p-4\\"><label for=\\"report-title\\" class=\\"w-full space-y-2 text-sm text-vanilla-200\\">
       <p class=\\"text-sm font-medium text-vanilla-100\\">Label</p>
-      <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"What’s this report for?\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" required=\\"true\\" id=\\"report-title\\"></zinput-stub>
-      <p class=\\"text-vanilla-400 text-xs\\">This is used for internal reference only</p>
+      <zinput-stub id=\\"report-title\\" required=\\"true\\" placeholder=\\"What’s this report for?\\" size=\\"small\\" value=\\"\\"></zinput-stub>
+      <p class=\\"text-xs text-vanilla-400\\">This is used for internal reference only</p>
     </label>
     <!---->
     <div class=\\"space-y-3\\">
@@ -14,9 +14,9 @@ exports[`[[ MutateReportModal ]] renders MutateReportModal in create report mode
     </div>
     <div class=\\"grid grid-cols-2\\">
       <div class=\\"flex flex-col gap-y-2\\">
-        <p class=\\"text-xs uppercase text-vanilla-400 font-medium tracking-wider\\">Security</p>
-        <zcheckbox-stub label=\\"OWASP® Top 10\\" name=\\"\\" value=\\"owasp-top-10\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
-        <zcheckbox-stub label=\\"CWE/SANS Top 25\\" name=\\"\\" value=\\"sans-top-25\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <p class=\\"text-xs font-medium uppercase tracking-wider text-vanilla-400\\">Security</p>
+        <zcheckbox-stub value=\\"\\" label=\\"OWASP® Top 10\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub value=\\"\\" label=\\"CWE/SANS Top 25\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <!---->
         <!---->
         <!---->
@@ -25,13 +25,13 @@ exports[`[[ MutateReportModal ]] renders MutateReportModal in create report mode
         <!---->
       </div>
       <div class=\\"flex flex-col gap-y-2\\">
-        <p class=\\"text-xs uppercase text-vanilla-400 font-medium tracking-wider\\">Insights</p>
+        <p class=\\"text-xs font-medium uppercase tracking-wider text-vanilla-400\\">Insights</p>
         <!---->
         <!---->
-        <zcheckbox-stub label=\\"Code Health Trend\\" name=\\"\\" value=\\"code-health-trend\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
-        <zcheckbox-stub label=\\"Issue Distribution\\" name=\\"\\" value=\\"issue-distribution\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
-        <zcheckbox-stub label=\\"Issues Prevented\\" name=\\"\\" value=\\"issues-prevented\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
-        <zcheckbox-stub label=\\"Issues Autofixed\\" name=\\"\\" value=\\"issues-autofixed\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub value=\\"\\" label=\\"Code Health Trend\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub value=\\"\\" label=\\"Issue Distribution\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub value=\\"\\" label=\\"Issues Prevented\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub value=\\"\\" label=\\"Issues Autofixed\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <!---->
         <!---->
       </div>
@@ -42,14 +42,14 @@ exports[`[[ MutateReportModal ]] renders MutateReportModal in create report mode
 `;
 
 exports[`[[ MutateReportModal ]] renders MutateReportModal in edit report mode: {"editMode":false,"level":"REPOSITORY","isRestrictedOld":true,"reportIdOld":"aa183352-4b5e-427a-ac8d-95c47c52b6a1","reportKeysOld":["owasp-top-10","sans-top-25"],"reportLabelOld":"Sample Report","shareHistoricalDataOld":true} 1`] = `
-"<zmodal-stub title=\\"Share report\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
-  <fieldset class=\\"p-4 flex flex-col gap-y-7\\"><label for=\\"report-title\\" class=\\"space-y-2 text-sm text-vanilla-200 w-full\\">
+"<zmodal-stub title=\\"Share report\\">
+  <fieldset class=\\"flex flex-col gap-y-7 p-4\\"><label for=\\"report-title\\" class=\\"w-full space-y-2 text-sm text-vanilla-200\\">
       <p class=\\"text-sm font-medium text-vanilla-100\\">Label</p>
-      <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"What’s this report for?\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" required=\\"true\\" id=\\"report-title\\"></zinput-stub>
-      <p class=\\"text-vanilla-400 text-xs\\">This is used for internal reference only</p>
-    </label> <label for=\\"report-link\\" class=\\"space-y-2 text-sm text-vanilla-200 w-full\\">
+      <zinput-stub id=\\"report-title\\" required=\\"true\\" placeholder=\\"What’s this report for?\\" size=\\"small\\" value=\\"\\"></zinput-stub>
+      <p class=\\"text-xs text-vanilla-400\\">This is used for internal reference only</p>
+    </label> <label for=\\"report-link\\" class=\\"w-full space-y-2 text-sm text-vanilla-200\\">
       <p class=\\"text-sm font-medium text-vanilla-100\\">Shareable link</p>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/aa183352-4b5e-427a-ac8d-95c47c52b6a1\\" label=\\"\\" type=\\"text\\" placeholder=\\"What’s this report for?\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\"></zinput-stub>
+      <zinput-stub id=\\"report-link\\" value=\\"https://deepsource.io/report/aa183352-4b5e-427a-ac8d-95c47c52b6a1\\" read-only=\\"true\\" placeholder=\\"What’s this report for?\\"></zinput-stub>
     </label>
     <div class=\\"space-y-3\\">
       <toggleinput-stub input-width=\\"xx-small\\" label=\\"Restrict report access\\" input-id=\\"toggle-password-protection\\" remove-y-padding=\\"true\\" class=\\"font-medium\\"></toggleinput-stub>
@@ -57,9 +57,9 @@ exports[`[[ MutateReportModal ]] renders MutateReportModal in edit report mode: 
     </div>
     <div class=\\"grid grid-cols-2\\">
       <div class=\\"flex flex-col gap-y-2\\">
-        <p class=\\"text-xs uppercase text-vanilla-400 font-medium tracking-wider\\">Security</p>
-        <zcheckbox-stub label=\\"OWASP® Top 10\\" name=\\"\\" value=\\"owasp-top-10\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
-        <zcheckbox-stub label=\\"CWE/SANS Top 25\\" name=\\"\\" value=\\"sans-top-25\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <p class=\\"text-xs font-medium uppercase tracking-wider text-vanilla-400\\">Security</p>
+        <zcheckbox-stub value=\\"\\" label=\\"OWASP® Top 10\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub value=\\"\\" label=\\"CWE/SANS Top 25\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <!---->
         <!---->
         <!---->
@@ -68,13 +68,13 @@ exports[`[[ MutateReportModal ]] renders MutateReportModal in edit report mode: 
         <!---->
       </div>
       <div class=\\"flex flex-col gap-y-2\\">
-        <p class=\\"text-xs uppercase text-vanilla-400 font-medium tracking-wider\\">Insights</p>
+        <p class=\\"text-xs font-medium uppercase tracking-wider text-vanilla-400\\">Insights</p>
         <!---->
         <!---->
-        <zcheckbox-stub label=\\"Code Health Trend\\" name=\\"\\" value=\\"code-health-trend\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
-        <zcheckbox-stub label=\\"Issue Distribution\\" name=\\"\\" value=\\"issue-distribution\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
-        <zcheckbox-stub label=\\"Issues Prevented\\" name=\\"\\" value=\\"issues-prevented\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
-        <zcheckbox-stub label=\\"Issues Autofixed\\" name=\\"\\" value=\\"issues-autofixed\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub value=\\"\\" label=\\"Code Health Trend\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub value=\\"\\" label=\\"Issue Distribution\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub value=\\"\\" label=\\"Issues Prevented\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub value=\\"\\" label=\\"Issues Autofixed\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <!---->
         <!---->
       </div>

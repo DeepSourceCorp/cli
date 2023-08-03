@@ -32,7 +32,6 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZAlert, ZButton, ZIcon } from '@deepsource/zeal'
 
 export enum AdminNoticeTypes {
   addMoreSeats,
@@ -41,7 +40,7 @@ export enum AdminNoticeTypes {
   oneAdmin
 }
 
-@Component({ name: 'AdminNotices', components: { ZAlert, ZButton, ZIcon } })
+@Component({ name: 'AdminNotices' })
 export default class AdminNotices extends Vue {
   @Prop({ type: [Number, String], required: true })
   type: AdminNoticeTypes

@@ -13,25 +13,25 @@ exports[`[[ MonorepoOverview ]] Empty states no activated sub-repositories 1`] =
     </div>
     <!---->
   </div>
-  <zpagination-stub page=\\"1\\" totalpages=\\"10\\" totalvisible=\\"5\\" hideforsinglepage=\\"true\\" class=\\"flex justify-center\\"></zpagination-stub>
+  <zpagination-stub page=\\"1\\" total-pages=\\"10\\" total-visible=\\"5\\" class=\\"flex justify-center\\"></zpagination-stub>
 </div>"
 `;
 
 exports[`[[ MonorepoOverview ]] Empty states search query that does not yield a result 1`] = `
 "<div class=\\"space-y-4 max-w-3xl\\">
   <div class=\\"flex gap-x-2\\">
-    <zinput-stub name=\\"\\" value=\\"test\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for a sub-repository\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"w-full\\"></zinput-stub>
+    <zinput-stub value=\\"test\\" background-color=\\"ink-300\\" size=\\"small\\" placeholder=\\"Search for a sub-repository\\" class=\\"w-full\\"></zinput-stub>
     <!---->
   </div>
   <lazyemptystate-stub png-image-path=\\"test-image-dir/test-image-file.png\\" title=\\"No results found for 'test'\\" webp-image-path=\\"test-image-dir/test-image-file.png\\" subtitle=\\"Please try changing your search query.\\"></lazyemptystate-stub>
-  <zpagination-stub page=\\"1\\" totalpages=\\"10\\" totalvisible=\\"5\\" hideforsinglepage=\\"true\\" class=\\"flex justify-center\\"></zpagination-stub>
+  <zpagination-stub page=\\"1\\" total-pages=\\"10\\" total-visible=\\"5\\" class=\\"flex justify-center\\"></zpagination-stub>
 </div>"
 `;
 
 exports[`[[ MonorepoOverview ]] renders different states based on the \`loading\` and \`showAddSubRepositoryCta\` prop combinations: {"showAddSubRepositoryCta":false,"loading":false} 1`] = `
 "<div class=\\"space-y-4 max-w-3xl\\">
   <div class=\\"flex gap-x-2\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for a sub-repository\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"w-full\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" size=\\"small\\" placeholder=\\"Search for a sub-repository\\" class=\\"w-full\\"></zinput-stub>
     <!---->
   </div>
   <div class=\\"space-y-3\\">
@@ -46,7 +46,7 @@ exports[`[[ MonorepoOverview ]] renders different states based on the \`loading\
     <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-9\\" size=\\"small\\" id=\\"test-id-9\\" name=\\"sub-repository-9\\" vcsprovider=\\"GITHUB\\" isactivated=\\"true\\" latestcommitoid=\\"test-commit-oid-9\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
     <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-10\\" size=\\"small\\" id=\\"test-id-10\\" name=\\"sub-repository-10\\" vcsprovider=\\"GITHUB\\" isactivated=\\"true\\" latestcommitoid=\\"test-commit-oid-10\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
   </div>
-  <zpagination-stub page=\\"1\\" totalpages=\\"10\\" totalvisible=\\"5\\" hideforsinglepage=\\"true\\" class=\\"flex justify-center\\"></zpagination-stub>
+  <zpagination-stub page=\\"1\\" total-pages=\\"10\\" total-visible=\\"5\\" class=\\"flex justify-center\\"></zpagination-stub>
 </div>"
 `;
 
@@ -59,15 +59,15 @@ exports[`[[ MonorepoOverview ]] renders different states based on the \`loading\
     <div class=\\"h-18 animate-pulse bg-ink-300\\"></div>
     <div class=\\"h-18 animate-pulse bg-ink-300\\"></div>
   </div>
-  <zpagination-stub page=\\"1\\" totalpages=\\"10\\" totalvisible=\\"5\\" hideforsinglepage=\\"true\\" class=\\"flex justify-center\\"></zpagination-stub>
+  <zpagination-stub page=\\"1\\" total-pages=\\"10\\" total-visible=\\"5\\" class=\\"flex justify-center\\"></zpagination-stub>
 </div>"
 `;
 
 exports[`[[ MonorepoOverview ]] renders different states based on the \`loading\` and \`showAddSubRepositoryCta\` prop combinations: {"showAddSubRepositoryCta":true,"loading":false} 1`] = `
 "<div class=\\"space-y-4 max-w-3xl\\">
   <div class=\\"flex gap-x-2\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for a sub-repository\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"w-full\\"></zinput-stub>
-    <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"folder-plus\\">New sub-repository</zbutton-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" size=\\"small\\" placeholder=\\"Search for a sub-repository\\" class=\\"w-full\\"></zinput-stub>
+    <zbutton-stub button-type=\\"primary\\" size=\\"small\\" icon=\\"folder-plus\\">New sub-repository</zbutton-stub>
   </div>
   <div class=\\"space-y-3\\">
     <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-1\\" show-inactive-tag=\\"true\\" size=\\"small\\" id=\\"test-id-1\\" name=\\"sub-repository-1\\" vcsprovider=\\"GITHUB\\" isprivate=\\"true\\" latestcommitoid=\\"test-commit-oid-1\\" defaultbranchname=\\"main\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
@@ -81,7 +81,7 @@ exports[`[[ MonorepoOverview ]] renders different states based on the \`loading\
     <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-9\\" size=\\"small\\" id=\\"test-id-9\\" name=\\"sub-repository-9\\" vcsprovider=\\"GITHUB\\" isactivated=\\"true\\" latestcommitoid=\\"test-commit-oid-9\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
     <repocard-stub is-exact-route=\\"true\\" owner-login=\\"deepsourcelabs\\" route=\\"sub-repository-10\\" size=\\"small\\" id=\\"test-id-10\\" name=\\"sub-repository-10\\" vcsprovider=\\"GITHUB\\" isactivated=\\"true\\" latestcommitoid=\\"test-commit-oid-10\\" defaultbranchname=\\"master\\" lastanalyzedat=\\"2022-11-20T00:00:00+05:30\\" kind=\\"SUBREPO\\"></repocard-stub>
   </div>
-  <zpagination-stub page=\\"1\\" totalpages=\\"10\\" totalvisible=\\"5\\" hideforsinglepage=\\"true\\" class=\\"flex justify-center\\"></zpagination-stub>
+  <zpagination-stub page=\\"1\\" total-pages=\\"10\\" total-visible=\\"5\\" class=\\"flex justify-center\\"></zpagination-stub>
 </div>"
 `;
 
@@ -94,6 +94,6 @@ exports[`[[ MonorepoOverview ]] renders different states based on the \`loading\
     <div class=\\"h-18 animate-pulse bg-ink-300\\"></div>
     <div class=\\"h-18 animate-pulse bg-ink-300\\"></div>
   </div>
-  <zpagination-stub page=\\"1\\" totalpages=\\"10\\" totalvisible=\\"5\\" hideforsinglepage=\\"true\\" class=\\"flex justify-center\\"></zpagination-stub>
+  <zpagination-stub page=\\"1\\" total-pages=\\"10\\" total-visible=\\"5\\" class=\\"flex justify-center\\"></zpagination-stub>
 </div>"
 `;

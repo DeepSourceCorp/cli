@@ -4,7 +4,7 @@
       class="intermediate-page-gradient-layer absolute inset-x-1/4 -top-102 w-1/2 rounded-full"
     ></div>
     <div
-      class="mx-auto flex min-h-screen flex-col justify-between pt-32 pb-24 text-center text-sm text-vanilla-400"
+      class="mx-auto flex min-h-screen flex-col justify-between pb-24 pt-32 text-center text-sm text-vanilla-400"
     >
       <div class="flex flex-grow items-center">
         <slot>

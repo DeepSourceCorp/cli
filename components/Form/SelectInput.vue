@@ -14,7 +14,7 @@
     </template>
     <div>
       <div class="h-8">
-        <div v-if="isLoading" class="h-8 bg-opacity-50 rounded-md animate-pulse bg-ink-200"></div>
+        <div v-if="isLoading" class="h-8 animate-pulse rounded-md bg-ink-200 bg-opacity-50"></div>
         <z-select
           v-else
           ref="select-input"
@@ -34,7 +34,7 @@
           />
         </z-select>
       </div>
-      <p v-if="isInvalid && errorMessage && !isLoading" class="mt-1 ml-0.5 text-xs text-cherry">
+      <p v-if="isInvalid && errorMessage && !isLoading" class="ml-0.5 mt-1 text-xs text-cherry">
         {{ errorMessage }}
       </p>
     </div>
@@ -43,7 +43,6 @@
 <script lang="ts">
 import { Vue, Component, Prop, Ref, Watch } from 'nuxt-property-decorator'
 import InputWrapper from './InputWrapper.vue'
-import { ZSelect, ZOption, ZIcon } from '@deepsource/zeal'
 import { ModelSync } from 'vue-property-decorator'
 
 export interface SelectComponent extends Vue {
@@ -52,10 +51,7 @@ export interface SelectComponent extends Vue {
 
 @Component({
   components: {
-    InputWrapper,
-    ZSelect,
-    ZOption,
-    ZIcon
+    InputWrapper
   }
 })
 export default class TextInput extends Vue {

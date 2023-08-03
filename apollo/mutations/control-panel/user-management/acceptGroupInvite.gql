@@ -1,4 +1,4 @@
-mutation($invitationCode: String!) {
+mutation ($invitationCode: String!) {
   acceptGroupInvite(input: { invitationCode: $invitationCode }) {
     ok
   }

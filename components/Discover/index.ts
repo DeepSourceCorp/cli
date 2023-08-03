@@ -1,3 +1,3 @@
-import RepoCard from './RepoCard.vue'
+import DiscoverRepoCard from './DiscoverRepoCard.vue'
 
-export { RepoCard }
+export { DiscoverRepoCard }

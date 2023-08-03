@@ -76,19 +76,12 @@
 </template>
 <script lang="ts">
 import { Component, Watch, mixins, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZPagination, ZConfirm } from '@deepsource/zeal'
 import TeamDetailMixin from '@/mixins/teamDetailMixin'
 import { TeamPerms } from '~/types/permTypes'
 import { resolveNodes } from '~/utils/array'
 import { TeamMemberInvitation } from '~/types/types'
 
 @Component({
-  components: {
-    ZButton,
-    ZIcon,
-    ZPagination,
-    ZConfirm
-  },
   middleware: ['teamOnly', 'perm', 'validateProvider'],
   meta: {
     auth: {

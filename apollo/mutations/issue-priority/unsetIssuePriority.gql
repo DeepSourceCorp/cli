@@ -1,4 +1,4 @@
-mutation($input: UnsetIssuePriorityInput!) {
+mutation ($input: UnsetIssuePriorityInput!) {
   unsetIssuePriority(input: $input) {
     ok
   }

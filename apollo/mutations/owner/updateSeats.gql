@@ -1,4 +1,4 @@
-mutation($id: ID!, $seats: Int!) {
+mutation ($id: ID!, $seats: Int!) {
   updateCodeQualitySubscriptionSeats(input: { id: $id, seats: $seats }) {
     ok
     totalSeats

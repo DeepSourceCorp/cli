@@ -3,7 +3,7 @@
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -12,14 +12,14 @@ exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":fals
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"isPassing":null,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -29,7 +29,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":fals
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"isWidget":false,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -38,14 +38,14 @@ exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":fals
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"isWidget":false,"isPassing":null,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"isWidget":false,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -54,14 +54,14 @@ exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":fals
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"isWidget":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"isWidget":null,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -70,14 +70,14 @@ exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":fals
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"isWidget":null,"isPassing":null,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"isWidget":null,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -86,14 +86,14 @@ exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":fals
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"isWidget":null,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"isWidget":true,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -102,14 +102,14 @@ exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":fals
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"isWidget":true,"isPassing":null,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"isWidget":true,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -118,29 +118,29 @@ exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":fals
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"isWidget":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
 `;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -148,70 +148,70 @@ exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":false,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
 `;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":false,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":false,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":false,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
 `;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":false,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":false,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":null,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
 `;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":null,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":null,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":null,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
 `;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":true,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
 `;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":true,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":true,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":true,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
 `;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":true,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"isWidget":true,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"linkedCell":true,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":false,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -229,7 +229,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":false,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -239,7 +239,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":false,"isWidget":false,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -257,7 +257,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":false,"isWidget":false,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -275,7 +275,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":false,"isWidget":null,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -293,7 +293,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":false,"isWidget":null,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -311,7 +311,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":false,"isWidget":true,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -329,7 +329,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":false,"isWidget":true,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -354,7 +354,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":true,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -368,7 +368,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":true,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -376,7 +376,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":true,"isWidget":false,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -390,7 +390,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":true,"isWidget":false,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -404,7 +404,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":true,"isWidget":null,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -418,7 +418,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":true,"isWidget":null,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -432,7 +432,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":true,"isWidget":true,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -446,7 +446,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linkedCell":true,"isWidget":true,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -467,7 +467,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"","linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":false,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"72.12%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -485,7 +485,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":false,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"72.12%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -495,7 +495,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":false,"isWidget":false,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"72.12%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -513,7 +513,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":false,"isWidget":false,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"72.12%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -531,7 +531,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":false,"isWidget":null,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"72.12%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -549,7 +549,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":false,"isWidget":null,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"72.12%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -567,7 +567,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":false,"isWidget":true,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"72.12%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -585,7 +585,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":false,"isWidget":true,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"72.12%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -610,7 +610,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":true,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"72.12%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -624,7 +624,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":true,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"72.12%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -632,7 +632,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":true,"isWidget":false,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"72.12%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -646,7 +646,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":true,"isWidget":false,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"72.12%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -660,7 +660,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":true,"isWidget":null,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"72.12%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -674,7 +674,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":true,"isWidget":null,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"72.12%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -688,7 +688,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":true,"isWidget":true,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"72.12%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -702,7 +702,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","linkedCell":true,"isWidget":true,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"72.12%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -723,7 +723,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":"72.12","
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":false,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"56%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -741,7 +741,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":false,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"56%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -751,7 +751,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":false,"isWidget":false,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"56%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -769,7 +769,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":false,"isWidget":false,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"56%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -787,7 +787,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":false,"isWidget":null,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"56%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -805,7 +805,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":false,"isWidget":null,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"56%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -823,7 +823,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":false,"isWidget":true,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"56%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -841,7 +841,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":false,"isWidget":true,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"56%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -866,7 +866,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":true,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"56%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -880,7 +880,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":true,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"56%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -888,7 +888,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":true,"isWidget":false,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"56%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -902,7 +902,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":true,"isWidget":false,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"56%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -916,7 +916,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":true,"isWidget":null,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"56%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -930,7 +930,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":true,"isWidget":null,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"56%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -944,7 +944,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":true,"isWidget":true,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"56%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -958,7 +958,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linkedCell":true,"isWidget":true,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"56%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -979,7 +979,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":56,"linke
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -988,14 +988,14 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"lin
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"isPassing":null,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -1005,7 +1005,7 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"lin
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"isWidget":false,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -1014,14 +1014,14 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"lin
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"isWidget":false,"isPassing":null,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"isWidget":false,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -1030,14 +1030,14 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"lin
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"isWidget":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"isWidget":null,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -1046,14 +1046,14 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"lin
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"isWidget":null,"isPassing":null,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"isWidget":null,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -1062,14 +1062,14 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"lin
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"isWidget":null,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"isWidget":true,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -1078,14 +1078,14 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"lin
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"isWidget":true,"isPassing":null,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"isWidget":true,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
   <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </div>
@@ -1094,29 +1094,29 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"lin
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"isWidget":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-5\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\">
-  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></div>
+  <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></div>
 </td>"
 `;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
 `;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
@@ -1124,62 +1124,62 @@ exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"lin
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":false,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
 `;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":false,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":false,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":false,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
 `;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":false,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":false,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":null,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
 `;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":null,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":null,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":null,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
 `;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":true,"isPassing":false,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-low\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
 `;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":true,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":true,"isPassing":null,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;
 
 exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":true,"isPassing":true,"repoName":"asgard"} 1`] = `
 "<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\">
-    <div class=\\"flex font-medium justify-end\\">
+    <div class=\\"flex justify-end font-medium\\">
       <ticker-stub icon-size=\\"x-small\\" icon=\\"metric-high\\" trend-positive=\\"true\\" trend-value=\\"null%\\" class=\\"cursor-pointer v-popper--has-tooltip\\"></ticker-stub>
     </div>
   </a></td>"
 `;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":true,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"isWidget":true,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-5\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;
 
-exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"text-slate pr-1.5\\">—</span></a></td>"`;
+exports[`renders CodeCoverageTableCell with all prop options: {"value":null,"linkedCell":true,"repoName":"asgard"} 1`] = `"<td class=\\"text-right text-xs font-medium\\"><a class=\\"block py-2.5 pr-4\\"><span class=\\"pr-1.5 text-slate\\">—</span></a></td>"`;

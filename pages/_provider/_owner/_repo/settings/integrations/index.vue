@@ -42,7 +42,6 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZIcon } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import IntegrationsDetailMixin from '~/mixins/integrationsDetailMixin'
@@ -56,10 +55,6 @@ import { IntegrationSettingsLevel } from '~/types/types'
  * Repository level integrations page for smaller screens
  */
 @Component({
-  components: {
-    ZButton,
-    ZIcon
-  },
   middleware: ['perm', 'teamOnly'],
   meta: {
     strict: true,

@@ -123,7 +123,6 @@
 
 <script lang="ts">
 import { TransformHeader } from '@/components/Transform'
-import { ZButton, ZCode, ZDivider, ZIcon, ZTag } from '@deepsource/zeal'
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
 
 // Import State & Types
@@ -139,11 +138,6 @@ const transformDetailStore = namespace('transformerRun/detail')
 
 @Component({
   components: {
-    ZIcon,
-    ZButton,
-    ZTag,
-    ZDivider,
-    ZCode,
     TransformHeader
   },
   middleware: ['validateProvider', 'featureGate'],

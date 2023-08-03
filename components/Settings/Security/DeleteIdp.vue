@@ -23,8 +23,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { ZAlert, ZButton, ZIcon } from '@deepsource/zeal'
 
-@Component({ components: { ZAlert, ZButton, ZIcon } })
+@Component({})
 export default class DeleteIdp extends Vue {}
 </script>

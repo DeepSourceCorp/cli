@@ -2,7 +2,7 @@ import { render } from '@testing-library/vue'
 import { CodeCoverageTable } from '~/components/Reports'
 import { RouterLinkStub } from '@vue/test-utils'
 
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 import { mocksGenerator } from '~/test/mocks'
 import { cartesian, generateBooleanProps } from '~/test/utils'
 

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ ToggleMonorepoConfirm ]] renders various states of the toggle monorepo confirm modal: {"togglingMonorepoMode":false,"isMonorepo":false} 1`] = `
-"<zmodal-stub title=\\"Convert to monorepo\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Convert to monorepo\\">
   <div class=\\"space-y-5 p-4 text-xs text-vanilla-100\\">
     <p>
       Converting <span class=\\"highlight-name\\">test-repo</span> to a monorepo on
@@ -9,12 +9,12 @@ exports[`[[ ToggleMonorepoConfirm ]] renders various states of the toggle monore
       would :
     </p>
     <div class=\\"flex w-full items-start gap-2\\">
-      <zicon-stub icon=\\"alert-circle\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper-500\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
+      <zicon-stub color=\\"juniper-500\\" icon=\\"alert-circle\\" size=\\"x-small\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
         Erase all data related to this repository. Fresh analysis would be triggered for projects inside the monorepo.
       </span>
     </div>
     <div class=\\"flex w-full items-start gap-2\\">
-      <zicon-stub icon=\\"alert-circle\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper-500\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
+      <zicon-stub color=\\"juniper-500\\" icon=\\"alert-circle\\" size=\\"x-small\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
         The repository will be marked as a monorepo and you would be able to mark folders inside the repository as Projects.
       </span>
     </div>
@@ -23,14 +23,14 @@ exports[`[[ ToggleMonorepoConfirm ]] renders various states of the toggle monore
         <span class=\\"highlight-name\\">test-org/test-repo</span>
         to confirm this action
       </label>
-      <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"test-org/test-repo\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"monorepo-validation-text\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"monorepo-validation-text\\" placeholder=\\"test-org/test-repo\\" value=\\"\\" class=\\"border border-ink-200\\"></zinput-stub>
     </div>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ToggleMonorepoConfirm ]] renders various states of the toggle monorepo confirm modal: {"togglingMonorepoMode":false,"isMonorepo":true} 1`] = `
-"<zmodal-stub title=\\"Disable monorepo mode\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Disable monorepo mode\\">
   <div class=\\"space-y-5 p-4 text-xs text-vanilla-100\\">
     <p>
       Converting <span class=\\"highlight-name\\">test-repo</span> to a monorepo on
@@ -38,12 +38,12 @@ exports[`[[ ToggleMonorepoConfirm ]] renders various states of the toggle monore
       would :
     </p>
     <div class=\\"flex w-full items-start gap-2\\">
-      <zicon-stub icon=\\"alert-circle\\" size=\\"x-small\\" position=\\"\\" color=\\"cherry-500\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
+      <zicon-stub color=\\"cherry-500\\" icon=\\"alert-circle\\" size=\\"x-small\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
         Switch your monorepo to a normal repository and all the data related to your projects would be deleted.
       </span>
     </div>
     <div class=\\"flex w-full items-start gap-2\\">
-      <zicon-stub icon=\\"alert-circle\\" size=\\"x-small\\" position=\\"\\" color=\\"cherry-500\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
+      <zicon-stub color=\\"cherry-500\\" icon=\\"alert-circle\\" size=\\"x-small\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
         A new analysis run will be triggered for the repository.
       </span>
     </div>
@@ -52,14 +52,14 @@ exports[`[[ ToggleMonorepoConfirm ]] renders various states of the toggle monore
         <span class=\\"highlight-name\\">test-org/test-repo</span>
         to confirm this action
       </label>
-      <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"test-org/test-repo\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"monorepo-validation-text\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"monorepo-validation-text\\" placeholder=\\"test-org/test-repo\\" value=\\"\\" class=\\"border border-ink-200\\"></zinput-stub>
     </div>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ToggleMonorepoConfirm ]] renders various states of the toggle monorepo confirm modal: {"togglingMonorepoMode":true,"isMonorepo":false} 1`] = `
-"<zmodal-stub title=\\"Convert to monorepo\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Convert to monorepo\\">
   <div class=\\"space-y-5 p-4 text-xs text-vanilla-100\\">
     <p>
       Converting <span class=\\"highlight-name\\">test-repo</span> to a monorepo on
@@ -67,12 +67,12 @@ exports[`[[ ToggleMonorepoConfirm ]] renders various states of the toggle monore
       would :
     </p>
     <div class=\\"flex w-full items-start gap-2\\">
-      <zicon-stub icon=\\"alert-circle\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper-500\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
+      <zicon-stub color=\\"juniper-500\\" icon=\\"alert-circle\\" size=\\"x-small\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
         Erase all data related to this repository. Fresh analysis would be triggered for projects inside the monorepo.
       </span>
     </div>
     <div class=\\"flex w-full items-start gap-2\\">
-      <zicon-stub icon=\\"alert-circle\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper-500\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
+      <zicon-stub color=\\"juniper-500\\" icon=\\"alert-circle\\" size=\\"x-small\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
         The repository will be marked as a monorepo and you would be able to mark folders inside the repository as Projects.
       </span>
     </div>
@@ -81,14 +81,14 @@ exports[`[[ ToggleMonorepoConfirm ]] renders various states of the toggle monore
         <span class=\\"highlight-name\\">test-org/test-repo</span>
         to confirm this action
       </label>
-      <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"test-org/test-repo\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"monorepo-validation-text\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"monorepo-validation-text\\" placeholder=\\"test-org/test-repo\\" value=\\"\\" class=\\"border border-ink-200\\"></zinput-stub>
     </div>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ToggleMonorepoConfirm ]] renders various states of the toggle monorepo confirm modal: {"togglingMonorepoMode":true,"isMonorepo":true} 1`] = `
-"<zmodal-stub title=\\"Disable monorepo mode\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Disable monorepo mode\\">
   <div class=\\"space-y-5 p-4 text-xs text-vanilla-100\\">
     <p>
       Converting <span class=\\"highlight-name\\">test-repo</span> to a monorepo on
@@ -96,12 +96,12 @@ exports[`[[ ToggleMonorepoConfirm ]] renders various states of the toggle monore
       would :
     </p>
     <div class=\\"flex w-full items-start gap-2\\">
-      <zicon-stub icon=\\"alert-circle\\" size=\\"x-small\\" position=\\"\\" color=\\"cherry-500\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
+      <zicon-stub color=\\"cherry-500\\" icon=\\"alert-circle\\" size=\\"x-small\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
         Switch your monorepo to a normal repository and all the data related to your projects would be deleted.
       </span>
     </div>
     <div class=\\"flex w-full items-start gap-2\\">
-      <zicon-stub icon=\\"alert-circle\\" size=\\"x-small\\" position=\\"\\" color=\\"cherry-500\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
+      <zicon-stub color=\\"cherry-500\\" icon=\\"alert-circle\\" size=\\"x-small\\" class=\\"mt-1 flex-shrink-0\\"></zicon-stub> <span>
         A new analysis run will be triggered for the repository.
       </span>
     </div>
@@ -110,7 +110,7 @@ exports[`[[ ToggleMonorepoConfirm ]] renders various states of the toggle monore
         <span class=\\"highlight-name\\">test-org/test-repo</span>
         to confirm this action
       </label>
-      <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"test-org/test-repo\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"monorepo-validation-text\\" class=\\"border border-ink-200\\"></zinput-stub>
+      <zinput-stub id=\\"monorepo-validation-text\\" placeholder=\\"test-org/test-repo\\" value=\\"\\" class=\\"border border-ink-200\\"></zinput-stub>
     </div>
   </div>
 </zmodal-stub>"

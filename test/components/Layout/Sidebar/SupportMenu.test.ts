@@ -4,6 +4,10 @@ import SupportMenu from '~/components/Layout/Sidebar/SupportMenu.vue'
 import SidebarItem from '~/components/Layout/Sidebar/SidebarItem.vue'
 import { cartesian, generateBooleanProps } from '~/test/utils'
 
+import ZMenu from '@/components/zeal/ZMenu'
+import ZMenuItem from '@/components/zeal/ZMenu/ZMenuItem'
+import ZMenuSection from '@/components/zeal/ZMenu/ZMenuSection'
+
 test('renders SupportMenu with all props', () => {
   const showBorderOptions = generateBooleanProps('isCollapsed')
 
@@ -29,6 +33,11 @@ test('Support Menu title toggles on collapsible', async () => {
     },
     stubs: {
       SidebarItem
+    },
+    components: {
+      ZMenu,
+      ZMenuItem,
+      ZMenuSection
     },
     props: { isCollapsed: false }
   })

@@ -1,10 +1,10 @@
 <template>
   <!-- Description -->
-  <div class="hidden lg:block space-y-3">
-    <div class="px-4 text-sm font-medium tracking-wider uppercase text-vanilla-100">
+  <div class="hidden space-y-3 lg:block">
+    <div class="px-4 text-sm font-medium uppercase tracking-wider text-vanilla-100">
       Description
     </div>
-    <div class="px-4 prose-issue-description break-words">
+    <div class="prose-issue-description break-words px-4">
       <p v-html="description"></p>
     </div>
   </div>

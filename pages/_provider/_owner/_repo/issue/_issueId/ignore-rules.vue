@@ -1,7 +1,7 @@
 <template>
-  <div class="relative top-0 p-4 w-4/6 flex flex-col space-y-0 xl:space-y-4">
+  <div class="relative top-0 flex w-4/6 flex-col space-y-0 p-4 xl:space-y-4">
     <div v-if="isListLoading" class="space-y-2">
-      <div v-for="idx in 3" :key="idx" class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
+      <div v-for="idx in 3" :key="idx" class="h-20 animate-pulse rounded-md bg-ink-300"></div>
     </div>
 
     <div v-else-if="ignoreRules && ignoreRules.length" class="flex flex-col space-y-2">
@@ -13,7 +13,7 @@
       />
     </div>
 
-    <div v-else class="w-full h-72 flex items-center justify-center text-vanilla-400">
+    <div v-else class="flex h-72 w-full items-center justify-center text-vanilla-400">
       <empty-state title="No ignore rules found" />
     </div>
 

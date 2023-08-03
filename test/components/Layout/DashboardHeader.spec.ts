@@ -1,9 +1,8 @@
 import { render } from '@testing-library/vue'
-import { createLocalVue } from '@vue/test-utils'
+import { createLocalVue, RouterLinkStub } from '@vue/test-utils'
 import { dashboardContextGenerator, mocksGenerator, storeModulesGenerator } from '~/test/mocks'
-import { RouterLinkStub } from '@vue/test-utils'
 
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 import { VueConstructor } from 'vue'
 import Vuex from 'vuex'
 

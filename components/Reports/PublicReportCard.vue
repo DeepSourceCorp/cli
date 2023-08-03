@@ -50,17 +50,12 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZButton, ZIcon } from '@deepsource/zeal'
 import { formatDate, parseISODate } from '@/utils/date'
 
 /**
  * Card component for public reports
  */
 @Component({
-  components: {
-    ZButton,
-    ZIcon
-  },
   methods: {
     formatDate,
     parseISODate

@@ -40,22 +40,13 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Watch, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZDialogGeneric, ZTab } from '@deepsource/zeal'
-
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 
 import { AppFeatures, TeamPerms } from '~/types/permTypes'
 import { OwnerFeatureType } from '~/types/ownerTypes'
 
-@Component({
-  components: {
-    ZButton,
-    ZIcon,
-    ZTab,
-    ZDialogGeneric
-  }
-})
+@Component({})
 export default class AddNewRepo extends mixins(AutoOnboardMixin, ActiveUserMixin) {
   @Prop({ default: false })
   showModal: boolean

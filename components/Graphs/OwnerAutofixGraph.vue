@@ -9,7 +9,7 @@
   >
     <template #controls>
       <graph-control
-        class="float-right w-full h-8 xl:w-auto"
+        class="float-right h-8 w-full xl:w-auto"
         :filter-value="lastDays"
         @updateFilter="updateLastDays"
       />
@@ -25,7 +25,7 @@
       />
     </div>
     <div v-if="isLoading" class="p-4">
-      <div style="height: 258px" class="rounded-md bg-ink-300 animate-pulse"></div>
+      <div style="height: 258px" class="animate-pulse rounded-md bg-ink-300"></div>
     </div>
     <base-graph
       v-else-if="autofixTrend.values && autofixTrend.values.length"

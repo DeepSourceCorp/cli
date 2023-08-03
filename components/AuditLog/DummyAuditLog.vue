@@ -5,7 +5,7 @@
         <z-icon icon="list-end" class="flex-shrink-0 self-start" />
 
         <p
-          class="page-context-text max-w-2xs break-words text-sm font-medium leading-5 border-b-vanilla-400 md:max-w-xs lg:max-w-sm"
+          class="page-context-text max-w-2xs break-words border-b-vanilla-400 text-sm font-medium leading-5 md:max-w-xs lg:max-w-sm"
         >
           Logs for Last 3 months Jan 6, 2023 - Apr 6, 2023
         </p>
@@ -29,11 +29,10 @@
 </template>
 
 <script lang="ts">
-import { ZIcon } from '@deepsource/zeal'
 import { Component, Vue } from 'nuxt-property-decorator'
 import TimelineV2 from '../Common/TimelineV2.vue'
 
-@Component({ name: 'DummyAuditLog', components: { ZIcon, TimelineV2 } })
+@Component({ name: 'DummyAuditLog', components: { TimelineV2 } })
 export default class DummyAuditLog extends Vue {
   readonly dummyAuditLog = [
     {

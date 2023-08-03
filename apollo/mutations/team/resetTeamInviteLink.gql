@@ -1,4 +1,4 @@
-mutation($input: ResetTeamInvitationLinkInput!) {
+mutation ($input: ResetTeamInvitationLinkInput!) {
   resetInvitationLink(input: $input) {
     invitationUrl
   }

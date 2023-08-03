@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col max-w-2xl p-4 gap-y-2">
+  <div class="flex max-w-2xl flex-col gap-y-2 p-4">
     <!-- title -->
     <page-title
       class="max-w-2xl"
@@ -27,14 +27,12 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { Notice } from '@/components/Settings/index'
-import { ZButton } from '@deepsource/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { AppFeatures, RepoPerms } from '~/types/permTypes'
 
 @Component({
   components: {
-    Notice,
-    ZButton
+    Notice
   },
   layout: 'repository',
   middleware: ['perm', 'validateProvider', 'featureGate'],

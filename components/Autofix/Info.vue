@@ -1,5 +1,5 @@
 <template>
-  <div class="items-center hidden space-x-1 text-sm sm:flex">
+  <div class="hidden items-center space-x-1 text-sm sm:flex">
     <slot>
       <z-icon :icon="icon" size="x-small" :color="color" />
       <span class="text-sm" :class="[`text-${color}`]">{{ title }}</span>
@@ -8,13 +8,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 export default class Info extends Vue {
   @Prop({ default: '' })
   title!: string

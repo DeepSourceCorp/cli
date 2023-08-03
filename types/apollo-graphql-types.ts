@@ -1,5 +1,5 @@
-import { Mutation, Query } from "./types"
-import { GraphQLFormattedError } from "graphql"
+import { Mutation, Query } from './types'
+import { GraphQLFormattedError } from 'graphql'
 
 export type GraphqlMutationResponse = {
   data: {

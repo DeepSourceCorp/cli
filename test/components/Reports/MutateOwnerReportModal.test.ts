@@ -5,8 +5,8 @@ import { VueConstructor } from 'vue'
 import { MutateOwnerReportModal } from '~/components/Reports'
 import CopyButton from '~/components/CopyButton.vue'
 
-import VTooltip from 'v-tooltip'
-import { focusDirective } from '~/plugins/helpers/directives.client'
+import VTooltip from 'floating-vue'
+import focusDirective from '~/utils/directives/focus'
 
 import { ReportLevel, ReportSource } from '~/types/types'
 import { ReportPageT } from '~/types/reportTypes'

@@ -101,7 +101,6 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { Context } from '@nuxt/types'
-import { ZInput, ZIcon } from '@deepsource/zeal'
 
 // Import State & Types
 import AuthMixin from '~/mixins/authMixin'
@@ -112,10 +111,6 @@ import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 import { AuthUrl } from '~/types/types'
 
 @Component({
-  components: {
-    ZInput,
-    ZIcon
-  },
   middleware: [
     'redirectToHome',
     async function ({ redirect, route, $config, $providerMetaMap, store }: Context): Promise<void> {
@@ -226,58 +221,69 @@ export default class SignIn extends mixins(AuthMixin, MetaMixin) {
 
 .login-btn {
   border: theme('spacing.px') solid theme('colors.transparent');
-  background: linear-gradient(theme(colors.ink.200), theme(colors.ink.200)) padding-box,
+  background:
+    linear-gradient(theme(colors.ink.200), theme(colors.ink.200)) padding-box,
     linear-gradient(113.04deg, #393c43 14.99%, #282b33 77.27%) border-box;
 }
 
 .login-btn:hover {
-  background: linear-gradient(#303540, #303540) padding-box,
+  background:
+    linear-gradient(#303540, #303540) padding-box,
     linear-gradient(113.04deg, #454a54 14.99%, #454a54 77.27%) border-box;
 }
 
 .login-btn-no-hover:hover {
   border: theme('spacing.px') solid theme('colors.transparent');
-  background: linear-gradient(theme(colors.ink.200), theme(colors.ink.200)) padding-box,
+  background:
+    linear-gradient(theme(colors.ink.200), theme(colors.ink.200)) padding-box,
     linear-gradient(113.04deg, #393c43 14.99%, #282b33 77.27%) border-box;
 }
 
 .login-btn-github {
-  background: linear-gradient(theme(colors.ink.200), theme(colors.ink.200)) padding-box,
+  background:
+    linear-gradient(theme(colors.ink.200), theme(colors.ink.200)) padding-box,
     linear-gradient(113.04deg, #393c43 14.99%, #282b33 77.27%) border-box;
 }
 
 .login-btn-github:hover {
-  background: linear-gradient(#303540, #303540) padding-box,
+  background:
+    linear-gradient(#303540, #303540) padding-box,
     linear-gradient(113.04deg, #454a54 14.99%, #454a54 77.27%) border-box;
 }
 
 .login-btn-gitlab {
-  background: linear-gradient(90.54deg, #1b1928 2.76%, #1b1928 99.43%) padding-box,
+  background:
+    linear-gradient(90.54deg, #1b1928 2.76%, #1b1928 99.43%) padding-box,
     linear-gradient(113.04deg, #2a2740 14.99%, #1f1b2f 77.27%) border-box;
 }
 
 .login-btn-gitlab:hover {
-  background: linear-gradient(#282246, #282246) padding-box,
+  background:
+    linear-gradient(#282246, #282246) padding-box,
     linear-gradient(113.04deg, #352e59 14.99%, #352e59 77.27%) border-box;
 }
 
 .login-btn-bitbucket {
-  background: linear-gradient(#1c243e, #1c243e) padding-box,
+  background:
+    linear-gradient(#1c243e, #1c243e) padding-box,
     linear-gradient(113.04deg, #313a52 14.99%, #1f2943 77.27%) border-box;
 }
 
 .login-btn-bitbucket:hover {
-  background: linear-gradient(#1c2a58, #1c2a58) padding-box,
+  background:
+    linear-gradient(#1c2a58, #1c2a58) padding-box,
     linear-gradient(113.04deg, #37446c 14.99%, #37446c 77.27%) border-box;
 }
 
 .login-btn-gsr {
-  background: linear-gradient(theme(colors.ink.200), theme(colors.ink.200)) padding-box,
+  background:
+    linear-gradient(theme(colors.ink.200), theme(colors.ink.200)) padding-box,
     linear-gradient(113.04deg, #393c43 14.99%, #282b33 77.27%) border-box;
 }
 
 .login-btn-gsr:hover {
-  background: linear-gradient(#303540, #303540) padding-box,
+  background:
+    linear-gradient(#303540, #303540) padding-box,
     linear-gradient(113.04deg, #454a54 14.99%, #454a54 77.27%) border-box;
 }
 </style>

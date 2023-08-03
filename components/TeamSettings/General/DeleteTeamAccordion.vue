@@ -2,20 +2,20 @@
   <z-accordion>
     <z-accordion-item class="p-4" @isOpen="isOpenHandler">
       <template #title="{ toggleAccordion }">
-        <div class="flex items-center cursor-pointer gap-1" @click="toggleAccordion">
+        <div class="flex cursor-pointer items-center gap-1" @click="toggleAccordion">
           <z-icon icon="chevron-right" :class="chevronIconAnimateClass" class="transform" />
-          <span class="font-medium text-xs uppercase text-vanilla-400 tracking-wider">
+          <span class="text-xs font-medium uppercase tracking-wider text-vanilla-400">
             Advanced settings
           </span>
         </div>
       </template>
 
       <div
-        class="flex gap-8 flex-col sm:flex-row items-start justify-between bg-cherry bg-opacity-5 rounded-md border border-cherry border-opacity-20 p-4 mt-4"
+        class="mt-4 flex flex-col items-start justify-between gap-8 rounded-md border border-cherry border-opacity-20 bg-cherry bg-opacity-5 p-4 sm:flex-row"
       >
         <div>
-          <p class="text-sm leading-4 text-cherry-500 tracking-wide">Delete team</p>
-          <p class="text-xs text-cherry-300 leading-6 mt-1.5">
+          <p class="text-sm leading-4 tracking-wide text-cherry-500">Delete team</p>
+          <p class="mt-1.5 text-xs leading-6 text-cherry-300">
             Permanently remove your team and all of its contents from the DeepSource platform.
           </p>
         </div>
@@ -34,16 +34,7 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 
-import { ZIcon, ZAccordion, ZAccordionItem, ZButton } from '@deepsource/zeal'
-
-@Component({
-  components: {
-    ZIcon,
-    ZAccordion,
-    ZAccordionItem,
-    ZButton
-  }
-})
+@Component({})
 export default class DeleteTeamAccordion extends Vue {
   chevronIconAnimateClass = ''
 

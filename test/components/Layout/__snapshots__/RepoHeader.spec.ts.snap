@@ -2,17 +2,17 @@
 
 exports[`[[ RepoHeader ]] renders RepoHeader for GSR: RepoHeader for GSR 1`] = `
 "<div>
-  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4\\">
+  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:px-4 lg:py-3\\">
     <div class=\\"flex items-center lg:gap-x-3\\">
-      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"sidebar-toggle\\" id=\\"mobile-menu-toggle\\" class=\\"lg:hidden\\"></zbutton-stub>
-      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"globe\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><a>deepsourcelabs</a> <span>/</span> <span class=\\"text-vanilla-100\\">
+      <zbutton-stub id=\\"mobile-menu-toggle\\" button-type=\\"ghost\\" color=\\"vanilla-400\\" icon=\\"sidebar-toggle\\" size=\\"small\\" class=\\"lg:hidden\\"></zbutton-stub>
+      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"globe\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><a>deepsourcelabs</a> <span>/</span> <span class=\\"text-vanilla-100\\">
             bifrost
           </span></span></h2>
-      <div class=\\"hidden items-center gap-x-2 lg:flex\\"><button class=\\"rounded-sm p-1 hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\">
-          <zicon-stub icon=\\"star-outline\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"opacity-40 hover:opacity-70\\"></zicon-stub>
+      <div class=\\"hidden items-center gap-x-2 lg:flex\\"><button class=\\"rounded-sm p-1 hover:bg-ink-200 v-popper--has-tooltip\\">
+          <zicon-stub color=\\"slate\\" icon=\\"star-outline\\" class=\\"opacity-40 hover:opacity-70\\"></zicon-stub>
         </button>
         <div class=\\"flex items-center gap-x-3\\"><a target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex items-center\\">
-            <ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"p-3px\\" iconcolor=\\"current\\" class=\\"border border-slate-400 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
+            <ztag-stub icon-left=\\"github\\" spacing=\\"p-3px\\" class=\\"border border-slate-400 v-popper--has-tooltip\\"></ztag-stub>
           </a>
           <ztagv2-stub type=\\"honey\\">
 
@@ -22,41 +22,41 @@ exports[`[[ RepoHeader ]] renders RepoHeader for GSR: RepoHeader for GSR 1`] = `
       </div>
     </div>
     <div class=\\"flex items-center gap-x-5 lg:hidden\\"><button class=\\"rounded-sm p-0.5 hover:bg-ink-200\\">
-        <zicon-stub icon=\\"star-outline\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+        <zicon-stub color=\\"vanilla-400\\" icon=\\"star-outline\\"></zicon-stub>
       </button>
       <!---->
     </div>
   </div>
   <div class=\\"hide-scroll h-nav-items-container flex gap-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3\\"><a>
-      <ztab-stub isactive=\\"true\\" icon=\\"gauge\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
+      <ztab-stub icon=\\"gauge\\" is-active=\\"true\\">Overview</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
+      <ztab-stub icon=\\"flag\\">Issues</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"autofix\\" borderactivecolor=\\"juniper\\">Autofix</ztab-stub>
+      <ztab-stub icon=\\"autofix\\">Autofix</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
+      <ztab-stub icon=\\"bar-chart\\">Metrics</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"pie-chart\\" borderactivecolor=\\"juniper\\">Reports</ztab-stub>
+      <ztab-stub icon=\\"pie-chart\\">Reports</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+      <ztab-stub icon=\\"history\\">History</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"wrench\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
+      <ztab-stub icon=\\"wrench\\">Settings</ztab-stub>
     </a></div>
 </div>"
 `;
 
 exports[`[[ RepoHeader ]] renders RepoHeader logged out: Default Repo Header Snap Logged Out 1`] = `
 "<div>
-  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4\\">
+  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:px-4 lg:py-3\\">
     <div class=\\"flex items-center lg:gap-x-3\\">
-      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"sidebar-toggle\\" id=\\"mobile-menu-toggle\\" class=\\"lg:hidden\\"></zbutton-stub>
-      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"globe\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><a>deepsourcelabs</a> <span>/</span> <span class=\\"text-vanilla-100\\">
+      <zbutton-stub id=\\"mobile-menu-toggle\\" button-type=\\"ghost\\" color=\\"vanilla-400\\" icon=\\"sidebar-toggle\\" size=\\"small\\" class=\\"lg:hidden\\"></zbutton-stub>
+      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"globe\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><a>deepsourcelabs</a> <span>/</span> <span class=\\"text-vanilla-100\\">
             bifrost
           </span></span></h2>
       <div class=\\"hidden items-center gap-x-2 lg:flex\\">
         <!---->
         <div class=\\"flex items-center gap-x-3\\"><a target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex items-center\\">
-            <ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"p-3px\\" iconcolor=\\"current\\" class=\\"border border-slate-400 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
+            <ztag-stub icon-left=\\"github\\" spacing=\\"p-3px\\" class=\\"border border-slate-400 v-popper--has-tooltip\\"></ztag-stub>
           </a>
           <ztagv2-stub type=\\"juniper\\">
 
@@ -67,19 +67,19 @@ exports[`[[ RepoHeader ]] renders RepoHeader logged out: Default Repo Header Sna
     </div>
     <div class=\\"flex items-center gap-x-5 lg:hidden\\">
       <!----> <button class=\\"rounded-sm p-0.5 hover:bg-ink-200\\">
-        <zicon-stub icon=\\"info-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+        <zicon-stub color=\\"vanilla-400\\" icon=\\"info-circle\\" size=\\"small\\"></zicon-stub>
       </button></div>
   </div>
   <div class=\\"hide-scroll h-nav-items-container flex gap-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3\\"><a>
-      <ztab-stub isactive=\\"true\\" icon=\\"gauge\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
+      <ztab-stub icon=\\"gauge\\" is-active=\\"true\\">Overview</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
+      <ztab-stub icon=\\"flag\\">Issues</ztab-stub>
     </a>
     <!----><a>
-      <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
+      <ztab-stub icon=\\"bar-chart\\">Metrics</ztab-stub>
     </a>
     <!----><a>
-      <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+      <ztab-stub icon=\\"history\\">History</ztab-stub>
     </a>
     <!---->
   </div>
@@ -88,17 +88,17 @@ exports[`[[ RepoHeader ]] renders RepoHeader logged out: Default Repo Header Sna
 
 exports[`[[ RepoHeader ]] renders RepoHeader with all permission: Default Repo Header Snap 1`] = `
 "<div>
-  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4\\">
+  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:px-4 lg:py-3\\">
     <div class=\\"flex items-center lg:gap-x-3\\">
-      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"sidebar-toggle\\" id=\\"mobile-menu-toggle\\" class=\\"lg:hidden\\"></zbutton-stub>
-      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"globe\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><a>deepsourcelabs</a> <span>/</span> <span class=\\"text-vanilla-100\\">
+      <zbutton-stub id=\\"mobile-menu-toggle\\" button-type=\\"ghost\\" color=\\"vanilla-400\\" icon=\\"sidebar-toggle\\" size=\\"small\\" class=\\"lg:hidden\\"></zbutton-stub>
+      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"globe\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><a>deepsourcelabs</a> <span>/</span> <span class=\\"text-vanilla-100\\">
             bifrost
           </span></span></h2>
-      <div class=\\"hidden items-center gap-x-2 lg:flex\\"><button class=\\"rounded-sm p-1 hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\">
-          <zicon-stub icon=\\"star-outline\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"opacity-40 hover:opacity-70\\"></zicon-stub>
+      <div class=\\"hidden items-center gap-x-2 lg:flex\\"><button class=\\"rounded-sm p-1 hover:bg-ink-200 v-popper--has-tooltip\\">
+          <zicon-stub color=\\"slate\\" icon=\\"star-outline\\" class=\\"opacity-40 hover:opacity-70\\"></zicon-stub>
         </button>
         <div class=\\"flex items-center gap-x-3\\"><a target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex items-center\\">
-            <ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"p-3px\\" iconcolor=\\"current\\" class=\\"border border-slate-400 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
+            <ztag-stub icon-left=\\"github\\" spacing=\\"p-3px\\" class=\\"border border-slate-400 v-popper--has-tooltip\\"></ztag-stub>
           </a>
           <ztagv2-stub type=\\"juniper\\">
 
@@ -108,42 +108,42 @@ exports[`[[ RepoHeader ]] renders RepoHeader with all permission: Default Repo H
       </div>
     </div>
     <div class=\\"flex items-center gap-x-5 lg:hidden\\"><button class=\\"rounded-sm p-0.5 hover:bg-ink-200\\">
-        <zicon-stub icon=\\"star-outline\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+        <zicon-stub color=\\"vanilla-400\\" icon=\\"star-outline\\"></zicon-stub>
       </button> <button class=\\"rounded-sm p-0.5 hover:bg-ink-200\\">
-        <zicon-stub icon=\\"info-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+        <zicon-stub color=\\"vanilla-400\\" icon=\\"info-circle\\" size=\\"small\\"></zicon-stub>
       </button></div>
   </div>
   <div class=\\"hide-scroll h-nav-items-container flex gap-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3\\"><a>
-      <ztab-stub isactive=\\"true\\" icon=\\"gauge\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
+      <ztab-stub icon=\\"gauge\\" is-active=\\"true\\">Overview</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
+      <ztab-stub icon=\\"flag\\">Issues</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"autofix\\" borderactivecolor=\\"juniper\\">Autofix</ztab-stub>
+      <ztab-stub icon=\\"autofix\\">Autofix</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
+      <ztab-stub icon=\\"bar-chart\\">Metrics</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"pie-chart\\" borderactivecolor=\\"juniper\\">Reports</ztab-stub>
+      <ztab-stub icon=\\"pie-chart\\">Reports</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+      <ztab-stub icon=\\"history\\">History</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"wrench\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
+      <ztab-stub icon=\\"wrench\\">Settings</ztab-stub>
     </a></div>
 </div>"
 `;
 
 exports[`[[ RepoHeader ]] renders RepoHeader with all repository kind options: MONOREPO 1`] = `
 "<div>
-  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4\\">
+  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:px-4 lg:py-3\\">
     <div class=\\"flex items-center lg:gap-x-3\\">
-      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"sidebar-toggle\\" id=\\"mobile-menu-toggle\\" class=\\"lg:hidden\\"></zbutton-stub>
-      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"monorepo\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><a>deepsourcelabs</a> <span>/</span> <span class=\\"text-vanilla-100\\">
+      <zbutton-stub id=\\"mobile-menu-toggle\\" button-type=\\"ghost\\" color=\\"vanilla-400\\" icon=\\"sidebar-toggle\\" size=\\"small\\" class=\\"lg:hidden\\"></zbutton-stub>
+      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"monorepo\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><a>deepsourcelabs</a> <span>/</span> <span class=\\"text-vanilla-100\\">
             bifrost
           </span></span></h2>
-      <div class=\\"hidden items-center gap-x-2 lg:flex\\"><button class=\\"rounded-sm p-1 hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\">
-          <zicon-stub icon=\\"star-outline\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"opacity-40 hover:opacity-70\\"></zicon-stub>
+      <div class=\\"hidden items-center gap-x-2 lg:flex\\"><button class=\\"rounded-sm p-1 hover:bg-ink-200 v-popper--has-tooltip\\">
+          <zicon-stub color=\\"slate\\" icon=\\"star-outline\\" class=\\"opacity-40 hover:opacity-70\\"></zicon-stub>
         </button>
         <div class=\\"flex items-center gap-x-3\\"><a target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex items-center\\">
-            <ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"p-3px\\" iconcolor=\\"current\\" class=\\"border border-slate-400 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
+            <ztag-stub icon-left=\\"github\\" spacing=\\"p-3px\\" class=\\"border border-slate-400 v-popper--has-tooltip\\"></ztag-stub>
           </a>
           <ztagv2-stub type=\\"aqua\\">
 
@@ -153,37 +153,37 @@ exports[`[[ RepoHeader ]] renders RepoHeader with all repository kind options: M
       </div>
     </div>
     <div class=\\"flex items-center gap-x-5 lg:hidden\\"><button class=\\"rounded-sm p-0.5 hover:bg-ink-200\\">
-        <zicon-stub icon=\\"star-outline\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+        <zicon-stub color=\\"vanilla-400\\" icon=\\"star-outline\\"></zicon-stub>
       </button> <button class=\\"rounded-sm p-0.5 hover:bg-ink-200\\">
-        <zicon-stub icon=\\"info-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+        <zicon-stub color=\\"vanilla-400\\" icon=\\"info-circle\\" size=\\"small\\"></zicon-stub>
       </button></div>
   </div>
   <div class=\\"hide-scroll h-nav-items-container flex gap-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3\\"><a>
-      <ztab-stub isactive=\\"true\\" icon=\\"folder-tree\\" borderactivecolor=\\"juniper\\">Sub-repositories</ztab-stub>
+      <ztab-stub icon=\\"folder-tree\\" is-active=\\"true\\">Sub-repositories</ztab-stub>
     </a>
     <!---->
     <!---->
     <!---->
     <!---->
     <!----><a>
-      <ztab-stub icon=\\"wrench\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
+      <ztab-stub icon=\\"wrench\\">Settings</ztab-stub>
     </a></div>
 </div>"
 `;
 
 exports[`[[ RepoHeader ]] renders RepoHeader with all repository kind options: REPO 1`] = `
 "<div>
-  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4\\">
+  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:px-4 lg:py-3\\">
     <div class=\\"flex items-center lg:gap-x-3\\">
-      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"sidebar-toggle\\" id=\\"mobile-menu-toggle\\" class=\\"lg:hidden\\"></zbutton-stub>
-      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"globe\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><a>deepsourcelabs</a> <span>/</span> <span class=\\"text-vanilla-100\\">
+      <zbutton-stub id=\\"mobile-menu-toggle\\" button-type=\\"ghost\\" color=\\"vanilla-400\\" icon=\\"sidebar-toggle\\" size=\\"small\\" class=\\"lg:hidden\\"></zbutton-stub>
+      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"globe\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><a>deepsourcelabs</a> <span>/</span> <span class=\\"text-vanilla-100\\">
             bifrost
           </span></span></h2>
-      <div class=\\"hidden items-center gap-x-2 lg:flex\\"><button class=\\"rounded-sm p-1 hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\">
-          <zicon-stub icon=\\"star-outline\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"opacity-40 hover:opacity-70\\"></zicon-stub>
+      <div class=\\"hidden items-center gap-x-2 lg:flex\\"><button class=\\"rounded-sm p-1 hover:bg-ink-200 v-popper--has-tooltip\\">
+          <zicon-stub color=\\"slate\\" icon=\\"star-outline\\" class=\\"opacity-40 hover:opacity-70\\"></zicon-stub>
         </button>
         <div class=\\"flex items-center gap-x-3\\"><a target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex items-center\\">
-            <ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"p-3px\\" iconcolor=\\"current\\" class=\\"border border-slate-400 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
+            <ztag-stub icon-left=\\"github\\" spacing=\\"p-3px\\" class=\\"border border-slate-400 v-popper--has-tooltip\\"></ztag-stub>
           </a>
           <ztagv2-stub type=\\"juniper\\">
 
@@ -193,44 +193,44 @@ exports[`[[ RepoHeader ]] renders RepoHeader with all repository kind options: R
       </div>
     </div>
     <div class=\\"flex items-center gap-x-5 lg:hidden\\"><button class=\\"rounded-sm p-0.5 hover:bg-ink-200\\">
-        <zicon-stub icon=\\"star-outline\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+        <zicon-stub color=\\"vanilla-400\\" icon=\\"star-outline\\"></zicon-stub>
       </button> <button class=\\"rounded-sm p-0.5 hover:bg-ink-200\\">
-        <zicon-stub icon=\\"info-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+        <zicon-stub color=\\"vanilla-400\\" icon=\\"info-circle\\" size=\\"small\\"></zicon-stub>
       </button></div>
   </div>
   <div class=\\"hide-scroll h-nav-items-container flex gap-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3\\"><a>
-      <ztab-stub isactive=\\"true\\" icon=\\"gauge\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
+      <ztab-stub icon=\\"gauge\\" is-active=\\"true\\">Overview</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
+      <ztab-stub icon=\\"flag\\">Issues</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"autofix\\" borderactivecolor=\\"juniper\\">Autofix</ztab-stub>
+      <ztab-stub icon=\\"autofix\\">Autofix</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
+      <ztab-stub icon=\\"bar-chart\\">Metrics</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"pie-chart\\" borderactivecolor=\\"juniper\\">Reports</ztab-stub>
+      <ztab-stub icon=\\"pie-chart\\">Reports</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+      <ztab-stub icon=\\"history\\">History</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"wrench\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
+      <ztab-stub icon=\\"wrench\\">Settings</ztab-stub>
     </a></div>
 </div>"
 `;
 
 exports[`[[ RepoHeader ]] renders RepoHeader with all repository kind options: SUBREPO 1`] = `
 "<div>
-  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4\\">
+  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:px-4 lg:py-3\\">
     <div class=\\"flex items-center lg:gap-x-3\\">
-      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"sidebar-toggle\\" id=\\"mobile-menu-toggle\\" class=\\"lg:hidden\\"></zbutton-stub>
-      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"folder-globe\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><a>deepsourcelabs</a> <span>/</span> <a class=\\"text-vanilla-400\\">
+      <zbutton-stub id=\\"mobile-menu-toggle\\" button-type=\\"ghost\\" color=\\"vanilla-400\\" icon=\\"sidebar-toggle\\" size=\\"small\\" class=\\"lg:hidden\\"></zbutton-stub>
+      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"folder-globe\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><a>deepsourcelabs</a> <span>/</span> <a class=\\"text-vanilla-400\\">
           bifrost
         </a> <span class=\\"text-vanilla-100\\">/</span> <span class=\\"text-vanilla-100\\">
 
             </span></span></h2>
-      <div class=\\"hidden items-center gap-x-2 lg:flex\\"><button class=\\"rounded-sm p-1 hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\">
-          <zicon-stub icon=\\"star-outline\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"opacity-40 hover:opacity-70\\"></zicon-stub>
+      <div class=\\"hidden items-center gap-x-2 lg:flex\\"><button class=\\"rounded-sm p-1 hover:bg-ink-200 v-popper--has-tooltip\\">
+          <zicon-stub color=\\"slate\\" icon=\\"star-outline\\" class=\\"opacity-40 hover:opacity-70\\"></zicon-stub>
         </button>
         <div class=\\"flex items-center gap-x-3\\"><a target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex items-center\\">
-            <ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"p-3px\\" iconcolor=\\"current\\" class=\\"border border-slate-400 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
+            <ztag-stub icon-left=\\"github\\" spacing=\\"p-3px\\" class=\\"border border-slate-400 v-popper--has-tooltip\\"></ztag-stub>
           </a>
           <ztagv2-stub type=\\"juniper\\">
 
@@ -240,42 +240,42 @@ exports[`[[ RepoHeader ]] renders RepoHeader with all repository kind options: S
       </div>
     </div>
     <div class=\\"flex items-center gap-x-5 lg:hidden\\"><button class=\\"rounded-sm p-0.5 hover:bg-ink-200\\">
-        <zicon-stub icon=\\"star-outline\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+        <zicon-stub color=\\"vanilla-400\\" icon=\\"star-outline\\"></zicon-stub>
       </button> <button class=\\"rounded-sm p-0.5 hover:bg-ink-200\\">
-        <zicon-stub icon=\\"info-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+        <zicon-stub color=\\"vanilla-400\\" icon=\\"info-circle\\" size=\\"small\\"></zicon-stub>
       </button></div>
   </div>
   <div class=\\"hide-scroll h-nav-items-container flex gap-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3\\"><a>
-      <ztab-stub isactive=\\"true\\" icon=\\"gauge\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
+      <ztab-stub icon=\\"gauge\\" is-active=\\"true\\">Overview</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
+      <ztab-stub icon=\\"flag\\">Issues</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"autofix\\" borderactivecolor=\\"juniper\\">Autofix</ztab-stub>
+      <ztab-stub icon=\\"autofix\\">Autofix</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
+      <ztab-stub icon=\\"bar-chart\\">Metrics</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"pie-chart\\" borderactivecolor=\\"juniper\\">Reports</ztab-stub>
+      <ztab-stub icon=\\"pie-chart\\">Reports</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+      <ztab-stub icon=\\"history\\">History</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"wrench\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
+      <ztab-stub icon=\\"wrench\\">Settings</ztab-stub>
     </a></div>
 </div>"
 `;
 
 exports[`[[ RepoHeader ]] renders RepoHeader without a matching activeLink: RepoHeader without a matching activeLink Snap 1`] = `
 "<div>
-  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4\\">
+  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:px-4 lg:py-3\\">
     <div class=\\"flex items-center lg:gap-x-3\\">
-      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"sidebar-toggle\\" id=\\"mobile-menu-toggle\\" class=\\"lg:hidden\\"></zbutton-stub>
-      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"globe\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><a>deepsourcelabs</a> <span>/</span> <span class=\\"text-vanilla-100\\">
+      <zbutton-stub id=\\"mobile-menu-toggle\\" button-type=\\"ghost\\" color=\\"vanilla-400\\" icon=\\"sidebar-toggle\\" size=\\"small\\" class=\\"lg:hidden\\"></zbutton-stub>
+      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"globe\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><a>deepsourcelabs</a> <span>/</span> <span class=\\"text-vanilla-100\\">
             bifrost
           </span></span></h2>
-      <div class=\\"hidden items-center gap-x-2 lg:flex\\"><button class=\\"rounded-sm p-1 hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\">
-          <zicon-stub icon=\\"star-outline\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"opacity-40 hover:opacity-70\\"></zicon-stub>
+      <div class=\\"hidden items-center gap-x-2 lg:flex\\"><button class=\\"rounded-sm p-1 hover:bg-ink-200 v-popper--has-tooltip\\">
+          <zicon-stub color=\\"slate\\" icon=\\"star-outline\\" class=\\"opacity-40 hover:opacity-70\\"></zicon-stub>
         </button>
         <div class=\\"flex items-center gap-x-3\\"><a target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex items-center\\">
-            <ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"p-3px\\" iconcolor=\\"current\\" class=\\"border border-slate-400 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
+            <ztag-stub icon-left=\\"github\\" spacing=\\"p-3px\\" class=\\"border border-slate-400 v-popper--has-tooltip\\"></ztag-stub>
           </a>
           <ztagv2-stub type=\\"honey\\">
 
@@ -285,42 +285,42 @@ exports[`[[ RepoHeader ]] renders RepoHeader without a matching activeLink: Repo
       </div>
     </div>
     <div class=\\"flex items-center gap-x-5 lg:hidden\\"><button class=\\"rounded-sm p-0.5 hover:bg-ink-200\\">
-        <zicon-stub icon=\\"star-outline\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+        <zicon-stub color=\\"vanilla-400\\" icon=\\"star-outline\\"></zicon-stub>
       </button>
       <!---->
     </div>
   </div>
   <div class=\\"hide-scroll h-nav-items-container flex gap-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3\\"><a>
-      <ztab-stub icon=\\"gauge\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
+      <ztab-stub icon=\\"gauge\\">Overview</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
+      <ztab-stub icon=\\"flag\\">Issues</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"autofix\\" borderactivecolor=\\"juniper\\">Autofix</ztab-stub>
+      <ztab-stub icon=\\"autofix\\">Autofix</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
+      <ztab-stub icon=\\"bar-chart\\">Metrics</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"pie-chart\\" borderactivecolor=\\"juniper\\">Reports</ztab-stub>
+      <ztab-stub icon=\\"pie-chart\\">Reports</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+      <ztab-stub icon=\\"history\\">History</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"wrench\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
+      <ztab-stub icon=\\"wrench\\">Settings</ztab-stub>
     </a></div>
 </div>"
 `;
 
 exports[`[[ RepoHeader ]] renders RepoHeader without perms: Repo Header withut perms 1`] = `
 "<div>
-  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4\\">
+  <div class=\\"flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:px-4 lg:py-3\\">
     <div class=\\"flex items-center lg:gap-x-3\\">
-      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"sidebar-toggle\\" id=\\"mobile-menu-toggle\\" class=\\"lg:hidden\\"></zbutton-stub>
-      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"globe\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><span class=\\"text-vanilla-400\\">deepsourcelabs</span> <span>/</span> <span class=\\"text-vanilla-100\\">
+      <zbutton-stub id=\\"mobile-menu-toggle\\" button-type=\\"ghost\\" color=\\"vanilla-400\\" icon=\\"sidebar-toggle\\" size=\\"small\\" class=\\"lg:hidden\\"></zbutton-stub>
+      <h2 class=\\"flex items-center gap-x-2 text-base font-medium text-vanilla-400\\"><span class=\\"hidden rounded-lg bg-ink-200 p-1 pb-0.5 lg:inline-block\\"><zicon-stub icon=\\"globe\\" color=\\"vanilla-100\\" class=\\"mb-0.5\\"></zicon-stub></span> <span class=\\"line-clamp-1\\"><span class=\\"text-vanilla-400\\">deepsourcelabs</span> <span>/</span> <span class=\\"text-vanilla-100\\">
             bifrost
           </span></span></h2>
-      <div class=\\"hidden items-center gap-x-2 lg:flex\\"><button class=\\"rounded-sm p-1 hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\">
-          <zicon-stub icon=\\"star-outline\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"opacity-40 hover:opacity-70\\"></zicon-stub>
+      <div class=\\"hidden items-center gap-x-2 lg:flex\\"><button class=\\"rounded-sm p-1 hover:bg-ink-200 v-popper--has-tooltip\\">
+          <zicon-stub color=\\"slate\\" icon=\\"star-outline\\" class=\\"opacity-40 hover:opacity-70\\"></zicon-stub>
         </button>
         <div class=\\"flex items-center gap-x-3\\"><a target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"flex items-center\\">
-            <ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"p-3px\\" iconcolor=\\"current\\" class=\\"border border-slate-400 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
+            <ztag-stub icon-left=\\"github\\" spacing=\\"p-3px\\" class=\\"border border-slate-400 v-popper--has-tooltip\\"></ztag-stub>
           </a>
           <ztagv2-stub type=\\"juniper\\">
 
@@ -330,25 +330,25 @@ exports[`[[ RepoHeader ]] renders RepoHeader without perms: Repo Header withut p
       </div>
     </div>
     <div class=\\"flex items-center gap-x-5 lg:hidden\\"><button class=\\"rounded-sm p-0.5 hover:bg-ink-200\\">
-        <zicon-stub icon=\\"star-outline\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+        <zicon-stub color=\\"vanilla-400\\" icon=\\"star-outline\\"></zicon-stub>
       </button> <button class=\\"rounded-sm p-0.5 hover:bg-ink-200\\">
-        <zicon-stub icon=\\"info-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+        <zicon-stub color=\\"vanilla-400\\" icon=\\"info-circle\\" size=\\"small\\"></zicon-stub>
       </button></div>
   </div>
   <div class=\\"hide-scroll h-nav-items-container flex gap-x-5 overflow-x-auto border-b border-slate-400 bg-ink-400 px-3 pt-3\\"><a>
-      <ztab-stub isactive=\\"true\\" icon=\\"gauge\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
+      <ztab-stub icon=\\"gauge\\" is-active=\\"true\\">Overview</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
+      <ztab-stub icon=\\"flag\\">Issues</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"autofix\\" borderactivecolor=\\"juniper\\">Autofix</ztab-stub>
+      <ztab-stub icon=\\"autofix\\">Autofix</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
+      <ztab-stub icon=\\"bar-chart\\">Metrics</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"pie-chart\\" borderactivecolor=\\"juniper\\">Reports</ztab-stub>
+      <ztab-stub icon=\\"pie-chart\\">Reports</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+      <ztab-stub icon=\\"history\\">History</ztab-stub>
     </a><a>
-      <ztab-stub icon=\\"wrench\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
+      <ztab-stub icon=\\"wrench\\">Settings</ztab-stub>
     </a></div>
 </div>"
 `;

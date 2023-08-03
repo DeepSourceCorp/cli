@@ -1,20 +1,20 @@
 <template>
   <hero-card width="md" :show-background="true" :show-glow="false" custom-class="md:mb-24">
     <template v-if="dataState !== 'errored' && acceptInviteState !== 'errored'">
-      <h1 class="text-base font-bold leading-snug text-center text-vanilla-100">
+      <h1 class="text-center text-base font-bold leading-snug text-vanilla-100">
         Join {{ details.name }} on DeepSource
       </h1>
-      <div class="flex items-center w-full p-2 mt-4 space-x-2 rounded-md bg-ink-100 bg-opacity-30">
+      <div class="mt-4 flex w-full items-center space-x-2 rounded-md bg-ink-100 bg-opacity-30 p-2">
         <z-avatar :user-name="details.name" :loading="dataState === 'fetching'" />
         <div>
           <h4 class="font-semibold text-vanilla-100">{{ details.name }}</h4>
         </div>
       </div>
-      <p class="mt-12 text-sm text-center text-vanilla-400">
+      <p class="mt-12 text-center text-sm text-vanilla-400">
         Connect with your organization's group.
       </p>
       <button
-        class="flex items-center w-full px-3 py-2 mt-2 space-x-2 rounded-md bg-ink-200 hover:bg-ink-300 text-vanilla-100 group"
+        class="group mt-2 flex w-full items-center space-x-2 rounded-md bg-ink-200 px-3 py-2 text-vanilla-100 hover:bg-ink-300"
         @click="confirm"
       >
         <z-avatar
@@ -25,16 +25,16 @@
           :loading="dataState === 'fetching'"
           class="flex-shrink-0"
         />
-        <div class="flex-1 block overflow-hidden text-left overflow-ellipsis whitespace-nowrap">
+        <div class="block flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap text-left">
           Continue as {{ viewer.firstName || viewer.email }}
         </div>
         <z-icon
           icon="chevron-right"
           size="medium"
-          class="flex-shrink-0 duration-100 ease-linear transform group-hover:translate-x-1"
+          class="flex-shrink-0 transform duration-100 ease-linear group-hover:translate-x-1"
         />
       </button>
-      <p class="mt-4 text-sm text-center text-vanilla-400">
+      <p class="mt-4 text-center text-sm text-vanilla-400">
         Need help? Write to us at
         <a
           :href="`mailto:${$config.supportEmail}`"
@@ -45,11 +45,11 @@
     </template>
     <template v-else>
       <template v-if="acceptInviteState === 'errored'">
-        <h1 class="text-lg font-bold leading-snug text-center text-vanilla-100">
+        <h1 class="text-center text-lg font-bold leading-snug text-vanilla-100">
           Couldn't join group
         </h1>
-        <p class="mt-4 text-sm text-center text-vanilla-400">{{ error }}</p>
-        <p class="mt-8 text-sm text-center">
+        <p class="mt-4 text-center text-sm text-vanilla-400">{{ error }}</p>
+        <p class="mt-8 text-center text-sm">
           <nuxt-link to="/me" class="text-sm text-juniper hover:underline">
             <z-button label="Dashboard ->" size="small" @click="$router.push('/me')"
           /></nuxt-link>
@@ -64,10 +64,10 @@
         </p>
       </template>
       <template v-else-if="dataState === 'errored'">
-        <h1 class="text-lg font-bold leading-snug text-center text-vanilla-100">
+        <h1 class="text-center text-lg font-bold leading-snug text-vanilla-100">
           Invalid invite code
         </h1>
-        <p class="mt-4 text-sm text-center text-vanilla-400">
+        <p class="mt-4 text-center text-sm text-vanilla-400">
           The invitation code is invalid, please contact an admin of the organization for a new one.
         </p>
         <p class="mt-4 text-sm text-vanilla-400">
@@ -85,7 +85,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZAvatar, ZIcon } from '@deepsource/zeal'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 
 import GetGroupInviteInfoQuery from '@/apollo/queries/control-panel/user-management/getGroupInviteInfo.gql'
@@ -102,11 +101,6 @@ export enum REQUEST_STATES {
 }
 
 @Component({
-  components: {
-    ZButton,
-    ZAvatar,
-    ZIcon
-  },
   meta: {
     auth: { strict: true, redirectToLogin: true }
   },

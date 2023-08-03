@@ -44,12 +44,10 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import InputWrapper from './InputWrapper.vue'
-import { ZButton } from '@deepsource/zeal'
 
 @Component({
   components: {
-    InputWrapper,
-    ZButton
+    InputWrapper
   }
 })
 export default class ButtonInput extends Vue {

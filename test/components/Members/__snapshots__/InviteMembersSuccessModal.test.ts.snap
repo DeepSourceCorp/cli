@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ InviteMembersSuccessModal ]] renders InviteMembersSuccessModal 1`] = `
-"<zmodal-stub title=\\"Invitation sent\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Invitation sent\\">
   <div class=\\"flex flex-col items-center px-4 py-8\\"><video autoplay=\\"autoplay\\" muted=\\"muted\\" disablepictureinpicture=\\"\\" poster=\\"test-image-dir/test-image-file.png\\" class=\\"mx-auto max-h-84\\">
-      <source src=\\"~/assets/images/ui-states/owner/invite-sent-136px.webm\\" type=\\"video/webm\\"></video> <span class=\\"font-semibold text-vanilla-100 text-center\\">Invitation sent successfully!</span>
-    <p class=\\"max-w-sm mt-4 text-sm leading-6 text-center text-vanilla-400\\">
+      <source src=\\"~/assets/images/ui-states/owner/invite-sent-136px.webm\\" type=\\"video/webm\\"></video> <span class=\\"text-center font-semibold text-vanilla-100\\">Invitation sent successfully!</span>
+    <p class=\\"mt-4 max-w-sm text-center text-sm leading-6 text-vanilla-400\\">
       We've sent an email to your team member(s) with a link to join the team. You can ask them to
       check their inbox.
     </p>
-    <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"user-plus\\" class=\\"mt-6\\">
+    <zbutton-stub size=\\"small\\" icon=\\"user-plus\\" class=\\"mt-6\\">
       Invite new member
     </zbutton-stub>
   </div>

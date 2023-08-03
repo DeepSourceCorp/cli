@@ -26,14 +26,9 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import { shortenLargeNumber } from '@/utils/string'
 
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 export default class AutofixCard extends Vue {
   @Prop()
   analyzer!: Record<string, string>

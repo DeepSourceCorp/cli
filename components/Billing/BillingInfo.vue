@@ -2,12 +2,12 @@
   <form-group label="Billing Information" :divide="false" body-class="space-y-4" class="mt-5">
     <div v-if="isBilledByStripe || isBilledManually">
       <div
-        class="grid w-full grid-cols-1 border rounded-md border-opacity-70 md:grid-cols-2 border-slate-400"
+        class="grid w-full grid-cols-1 rounded-md border border-slate-400 border-opacity-70 md:grid-cols-2"
       >
-        <div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 bg-ink-300">
+        <div class="grid grid-cols-1 gap-4 bg-ink-300 p-4 md:grid-cols-2">
           <div v-if="ownerBillingInfo.upcomingPaymentDate">
             <label class="text-sm leading-none tracking-wide text-vanilla-300"> Renews on </label>
-            <div class="text-lg font-medium text-vanilla-100 tracking-snug">
+            <div class="text-lg font-medium tracking-snug text-vanilla-100">
               {{ formatDate(parseISODate(ownerBillingInfo.upcomingPaymentDate)) }}
             </div>
           </div>
@@ -15,7 +15,7 @@
             <label class="text-sm leading-none tracking-wide text-vanilla-300">
               Renewal amount
             </label>
-            <div class="text-lg font-medium text-vanilla-100 tracking-snug">
+            <div class="text-lg font-medium tracking-snug text-vanilla-100">
               {{ formatUSD(ownerBillingInfo.upcomingBillAmount) }}
             </div>
           </div>
@@ -23,7 +23,7 @@
             v-if="ownerBillingInfo.outstandingCredits && ownerBillingInfo.outstandingCredits >= 0"
           >
             <label class="text-sm leading-none tracking-wide text-vanilla-300"> Credits </label>
-            <div class="text-lg font-medium text-juniper tracking-snug">
+            <div class="text-lg font-medium tracking-snug text-juniper">
               {{ formatUSD(ownerBillingInfo.outstandingCredits) }}
             </div>
           </div>
@@ -32,12 +32,12 @@
               Billing interval
             </label>
             <div class="flex items-baseline space-x-2">
-              <div class="text-lg font-medium text-vanilla-100 tracking-snug">
+              <div class="text-lg font-medium tracking-snug text-vanilla-100">
                 <template v-if="currentPlan.mode === MODE.MONTHLY"> Monthly </template>
                 <template v-else-if="currentPlan.mode === MODE.ANNUAL"> Yearly </template>
               </div>
               <button
-                class="text-xs hover:text-vanilla-100 text-vanilla-400"
+                class="text-xs text-vanilla-400 hover:text-vanilla-100"
                 @click="togglePlanChange"
               >
                 (switch to
@@ -47,33 +47,33 @@
           </div>
         </div>
         <div class="flex flex-col justify-between p-4">
-          <div class="space-y-2.5 flex-grow">
+          <div class="flex-grow space-y-2.5">
             <div v-if="owner.billingEmail !== undefined" class="flex items-center justify-between">
               <label class="w-1/3 text-sm text-vanilla-300">Billing email</label>
               <span
                 v-if="owner.billingEmail && !showBillingDetailsLoading"
-                class="w-2/3 text-sm text-right text-vanilla-400"
+                class="w-2/3 text-right text-sm text-vanilla-400"
                 >{{ owner.billingEmail }}</span
               >
             </div>
-            <div v-else class="flex items-center justify-between animate-pulse">
-              <div class="float-right h-4 rounded-md w-22 bg-ink-200 animate-pulse"></div>
-              <div class="float-right w-40 h-4 rounded-md bg-ink-200 animate-pulse"></div>
+            <div v-else class="flex animate-pulse items-center justify-between">
+              <div class="float-right h-4 w-22 animate-pulse rounded-md bg-ink-200"></div>
+              <div class="float-right h-4 w-40 animate-pulse rounded-md bg-ink-200"></div>
             </div>
             <div
               v-if="owner.billingAddress !== undefined && !showBillingDetailsLoading"
               class="flex items-start justify-between"
             >
               <label class="w-1/3 text-sm text-vanilla-300">Billing address</label>
-              <span class="w-2/3 text-sm text-right text-vanilla-400">{{
+              <span class="w-2/3 text-right text-sm text-vanilla-400">{{
                 owner.billingAddress
               }}</span>
             </div>
-            <div v-else class="flex items-start justify-between animate-pulse">
-              <div class="float-right h-4 rounded-md w-22 bg-ink-200 animate-pulse"></div>
+            <div v-else class="flex animate-pulse items-start justify-between">
+              <div class="float-right h-4 w-22 animate-pulse rounded-md bg-ink-200"></div>
               <div class="space-y-2">
-                <div class="float-right w-40 h-4 rounded-md bg-ink-200 animate-pulse"></div>
-                <div class="float-right w-32 h-4 rounded-md bg-ink-200 animate-pulse"></div>
+                <div class="float-right h-4 w-40 animate-pulse rounded-md bg-ink-200"></div>
+                <div class="float-right h-4 w-32 animate-pulse rounded-md bg-ink-200"></div>
               </div>
             </div>
             <div v-if="ownerBillingInfo.couponApplied" class="flex items-center justify-between">
@@ -81,7 +81,7 @@
               <div class="w-2/3 text-right">
                 <span
                   v-if="ownerBillingInfo.couponApplied"
-                  class="text-sm tracking-wide uppercase text-vanilla-400"
+                  class="text-sm uppercase tracking-wide text-vanilla-400"
                 >
                   {{ ownerBillingInfo.couponApplied.code }}
                 </span>
@@ -92,7 +92,7 @@
             <z-button
               size="x-small"
               button-type="secondary"
-              class="uppercase bg-ink-400 text-vanilla-400"
+              class="bg-ink-400 uppercase text-vanilla-400"
               @click="toggleBillingDetailUpdateModal"
             >
               <z-icon icon="edit" size="x-small" class="mr-1.5" />
@@ -105,7 +105,7 @@
     <div v-else-if="isBilledByGitHub">
       <alert-box bg-color="bg-robin" text-color="text-robin-150">
         <div
-          class="flex flex-col items-start space-y-4 md:flex-row md:space-y-0 md:space-x-10 md:justify-between"
+          class="flex flex-col items-start space-y-4 md:flex-row md:justify-between md:space-x-10 md:space-y-0"
         >
           <div>
             <p class="mb-2 text-base font-medium leading-none">
@@ -117,7 +117,7 @@
             </p>
           </div>
           <span
-            class="rounded-sm bg-robin bg-opacity-20 hover:bg-opacity-40 focus-within:bg-opacity-40"
+            class="rounded-sm bg-robin bg-opacity-20 focus-within:bg-opacity-40 hover:bg-opacity-40"
           >
             <z-button
               type="button"
@@ -136,18 +136,18 @@
         </div>
       </alert-box>
     </div>
-    <div v-else class="w-full rounded-md h-36 bg-ink-300 animate-pulse"></div>
+    <div v-else class="h-36 w-full animate-pulse rounded-md bg-ink-300"></div>
     <div v-if="isBilledManually">
       <alert-box bg-color="bg-robin" text-color="text-robin-150">
         <div
-          class="flex flex-col items-start space-y-4 md:flex-row md:space-y-0 md:space-x-10 md:justify-between"
+          class="flex flex-col items-start space-y-4 md:flex-row md:justify-between md:space-x-10 md:space-y-0"
         >
           <div>
             <p class="mb-2 text-base font-medium leading-none">Your billing is managed manually.</p>
             <p>Please contact support for more updates and to make changes to your plan.</p>
           </div>
           <span
-            class="rounded-sm bg-robin bg-opacity-20 hover:bg-opacity-40 focus-within:bg-opacity-40"
+            class="rounded-sm bg-robin bg-opacity-20 focus-within:bg-opacity-40 hover:bg-opacity-40"
           >
             <nuxt-link to="/support">
               <z-button
@@ -186,8 +186,6 @@ import { Component, mixins } from 'nuxt-property-decorator'
 
 import { FormGroup } from '~/components/Form'
 import UpdateBillingDetailsModal from './Modals/UpdateBillingDetailsModal.vue'
-import { ZButton, ZIcon } from '@deepsource/zeal'
-
 import { parseISODate, formatDate } from '~/utils/date'
 import { formatUSD } from '~/utils/string'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
@@ -200,8 +198,6 @@ import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 @Component({
   components: {
     FormGroup,
-    ZButton,
-    ZIcon,
     UpdateBillingDetailsModal
   },
   layout: 'dashboard',

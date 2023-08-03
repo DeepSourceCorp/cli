@@ -60,8 +60,7 @@
   </base-state>
 </template>
 <script lang="ts">
-import { ZButton } from '@deepsource/zeal'
-import { Component, mixins, Prop } from 'nuxt-property-decorator'
+import { Component, Prop, mixins } from 'nuxt-property-decorator'
 
 import { RepoPerms, TeamPerms } from '~/types/permTypes'
 import { Repository, TeamMemberRoleChoices } from '~/types/types'
@@ -70,10 +69,7 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 
 @Component({
-  name: 'RepoInactive',
-  components: {
-    ZButton
-  }
+  name: 'RepoInactive'
 })
 export default class RepoInactive extends mixins(RepoDetailMixin, RoleAccessMixin) {
   @Prop()

@@ -1,11 +1,11 @@
 <template>
   <section>
     <section-header title="Recommended projects" />
-    <div v-if="loading" class="grid gap-4 animate-pulse">
+    <div v-if="loading" class="grid animate-pulse gap-4">
       <div v-for="ii in 5" :key="ii" class="h-32 rounded-md bg-ink-300"></div>
     </div>
     <div v-else-if="resolveNodes(discoverRepositories).length" class="grid gap-4">
-      <repo-card
+      <discover-repo-card
         v-for="edge in discoverRepositories.edges"
         :key="edge.node.id"
         :repo-info="edge.node"
@@ -18,7 +18,7 @@
             Updated {{ fromNow(edge.node.modifiedAt) }}
           </span>
         </template>
-      </repo-card>
+      </discover-repo-card>
     </div>
     <div v-else>
       <lazy-empty-state
@@ -32,24 +32,19 @@
 
 <script lang="ts">
 import { Component, Prop, namespace, Vue } from 'nuxt-property-decorator'
-import { ZDivider, ZIcon } from '@deepsource/zeal'
 
 import { resolveNodes } from '@/utils/array'
 import { fromNow } from '@/utils/date'
 import { DiscoverRepoGetters } from '~/store/discover/repositories'
 import { Maybe, RepositoryConnection } from '~/types/types'
 
-import RepoCard from './RepoCard.vue'
 import SectionHeader from './SectionHeader.vue'
 
 const discoverRepositoriesStore = namespace('discover/repositories')
 
 @Component({
   components: {
-    RepoCard,
-    SectionHeader,
-    ZDivider,
-    ZIcon
+    SectionHeader
   },
   methods: { fromNow, resolveNodes }
 })

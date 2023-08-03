@@ -34,6 +34,8 @@
           v-for="filter in sortFilters"
           :key="filter.name"
           :icon="filter.icon"
+          as="button"
+          class="w-full"
           @click="sortIssues(filter.name)"
         >
           {{ filter.label }}
@@ -48,8 +50,8 @@
           icon="amount-down"
           type="button"
           size="small"
-          class="text-sm"
           button-type="secondary"
+          class="w-full text-sm"
           @click="toggle"
         >
           Sort
@@ -74,6 +76,7 @@
           v-for="filter in sortFilters"
           :key="filter.name"
           :icon="filter.icon"
+          as="button"
           @click="sortIssues(filter.name)"
         >
           {{ filter.label }}
@@ -112,7 +115,6 @@
 
 <script lang="ts">
 import { Vue, Component, namespace } from 'nuxt-property-decorator'
-import { ZIcon, ZInput, ZButton, ZMenu, ZMenuItem } from '@deepsource/zeal'
 import IssueEditor from './IssueEditor.vue'
 
 // types
@@ -123,11 +125,6 @@ const issueStore = namespace('issue/detail')
 
 @Component({
   components: {
-    ZIcon,
-    ZInput,
-    ZButton,
-    ZMenu,
-    ZMenuItem,
     IssueEditor
   }
 })

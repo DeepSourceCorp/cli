@@ -1,4 +1,4 @@
-query($shortcode: String!, $objectId: ID!, $level: IssuePriorityLevel!) {
+query ($shortcode: String!, $objectId: ID!, $level: IssuePriorityLevel!) {
   issue(shortcode: $shortcode) {
     id
     issuePriority(level: $level, objectId: $objectId) {

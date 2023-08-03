@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ ConfigureSSO ]] renders correctly with all props 1`] = `
-"<zmodal-stub title=\\"Configure SSO Identity Provider\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
-  <div class=\\"px-4 py-3 space-y-5\\"><label class=\\"block space-y-2\\">
+"<zmodal-stub title=\\"Configure SSO Identity Provider\\">
+  <div class=\\"space-y-5 px-4 py-3\\"><label class=\\"block space-y-2\\">
       <div class=\\"text-xs leading-5\\">Domain name</div>
-      <zinput-stub name=\\"\\" value=\\"https://deepsource.io\\" label=\\"\\" type=\\"text\\" placeholder=\\"\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-400\\" showborder=\\"true\\" errorbordercolor=\\"cherry\\"></zinput-stub>
+      <zinput-stub read-only=\\"true\\" value=\\"https://deepsource.io\\" placeholder=\\"\\" size=\\"small\\"></zinput-stub>
     </label>
     <div class=\\"space-y-2\\"><label class=\\"space-y-2\\">
         <div class=\\"text-xs leading-5\\">XML Metadata URL</div>
-        <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-400\\" showborder=\\"true\\" errorbordercolor=\\"cherry\\"></zinput-stub>
+        <zinput-stub size=\\"small\\" placeholder=\\"\\" value=\\"\\"></zinput-stub>
       </label>
       <!---->
     </div>
@@ -17,14 +17,14 @@ exports[`[[ ConfigureSSO ]] renders correctly with all props 1`] = `
 `;
 
 exports[`[[ ConfigureSSO ]] renders correctly without all props 1`] = `
-"<zmodal-stub title=\\"Configure SSO Identity Provider\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
-  <div class=\\"px-4 py-3 space-y-5\\"><label class=\\"block space-y-2\\">
+"<zmodal-stub title=\\"Configure SSO Identity Provider\\">
+  <div class=\\"space-y-5 px-4 py-3\\"><label class=\\"block space-y-2\\">
       <div class=\\"text-xs leading-5\\">Domain name</div>
-      <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-400\\" showborder=\\"true\\" errorbordercolor=\\"cherry\\"></zinput-stub>
+      <zinput-stub read-only=\\"true\\" value=\\"\\" placeholder=\\"\\" size=\\"small\\"></zinput-stub>
     </label>
     <div class=\\"space-y-2\\"><label class=\\"space-y-2\\">
         <div class=\\"text-xs leading-5\\">XML Metadata URL</div>
-        <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-400\\" showborder=\\"true\\" errorbordercolor=\\"cherry\\"></zinput-stub>
+        <zinput-stub size=\\"small\\" placeholder=\\"\\" value=\\"\\"></zinput-stub>
       </label>
       <!---->
     </div>

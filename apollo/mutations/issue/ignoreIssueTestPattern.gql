@@ -1,4 +1,4 @@
-mutation($repoIssueId: ID, $checkId: ID, $issueShortcode: String) {
+mutation ($repoIssueId: ID, $checkId: ID, $issueShortcode: String) {
   ignoreIssueForTestPatternsInRepository(
     input: { repoIssueId: $repoIssueId, checkId: $checkId, issueShortcode: $issueShortcode }
   ) {

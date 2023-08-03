@@ -64,22 +64,31 @@
                     icon="slash"
                     icon-color="vanilla-400"
                     size="small"
-                    class="focus:outline-none -mt-1 -mr-1 hover:bg-ink-200"
+                    class="-mr-1 -mt-1 hover:bg-ink-200 focus:outline-none"
                     :class="{ 'bg-ink-200': isOpen }"
                     @click.prevent="toggle"
                   />
                 </template>
                 <template #body>
                   <z-menu-section>
-                    <z-menu-item @click="openIgnoreIssueModal('intentional')"
+                    <z-menu-item
+                      as="button"
+                      class="w-full"
+                      @click="openIgnoreIssueModal('intentional')"
                       >This is intentional</z-menu-item
                     >
-                    <z-menu-item @click="openIgnoreIssueModal('falsePositive')"
+                    <z-menu-item
+                      as="button"
+                      class="w-full"
+                      @click="openIgnoreIssueModal('falsePositive')"
                       ><span class="text-cherry">This is a false-positive</span></z-menu-item
                     >
                   </z-menu-section>
                   <z-menu-section :divider="false" title="Other actions" class="text-left">
-                    <z-menu-item @click="openIgnoreIssueModal('occurence')"
+                    <z-menu-item
+                      as="button"
+                      class="w-full text-left"
+                      @click="openIgnoreIssueModal('occurence')"
                       ><span class="overflow-hidden overflow-ellipsis leading-6"
                         >Ignore all occurrences in {{ path }}</span
                       ></z-menu-item
@@ -149,29 +158,12 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import {
-  ZIcon,
-  ZButton,
-  ZCode,
-  ZMenu,
-  ZMenuItem,
-  ZMenuSection,
-  ZAccordionItem
-} from '@deepsource/zeal'
+
 import { safeRenderBackticks } from '~/utils/string'
 import { toWrappableString } from '~/utils/string'
 import { VcsProviderChoices } from '~/types/types'
 
 @Component({
-  components: {
-    ZIcon,
-    ZButton,
-    ZCode,
-    ZMenu,
-    ZMenuItem,
-    ZMenuSection,
-    ZAccordionItem
-  },
   methods: {
     safeRenderBackticks
   }

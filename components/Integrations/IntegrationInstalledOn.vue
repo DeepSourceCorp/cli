@@ -1,6 +1,6 @@
 <template>
   <notice class="h-8">
-    <p class="text-xs truncate">
+    <p class="truncate text-xs">
       Installed <template v-if="installedOn">on</template>
       <span v-if="installedOn" class="font-medium text-vanilla-100">{{ installedOn }}</span>
     </p>

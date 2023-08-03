@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-full bg-ink-400">
+  <div class="flex min-h-full flex-col bg-ink-400">
     <directory-header
       :info-obj="analyzer"
       :heading-level="isIssuesPage ? 'h1' : 'h2'"
@@ -10,7 +10,7 @@
     <div class="lg:flex lg:flex-grow">
       <div
         v-if="analyzer && analyzer.issues"
-        class="hidden w-full p-4 text-sm border-r max-w-min border-slate-400 lg:block"
+        class="hidden w-full max-w-min border-r border-slate-400 p-4 text-sm lg:block"
       >
         <analyzer-issues-filter
           :active-filter="issueCategory"
@@ -28,7 +28,7 @@
         :total-issue-count="analyzer.issues.totalCount"
         @selected="filterByIssueType"
       />
-      <div class="flex-grow w-screen pb-12 bg-ink-400 lg:w-auto">
+      <div class="w-screen flex-grow bg-ink-400 pb-12 lg:w-auto">
         <nuxt-child
           :analyzer="analyzer"
           :is-loaded="isLoaded"
@@ -46,8 +46,6 @@
 
 <script lang="ts">
 import { Component, namespace, Watch, mixins } from 'nuxt-property-decorator'
-
-import { ZButton, ZInput, ZIcon, ZPagination } from '@deepsource/zeal'
 
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
 import { Analyzer, Issue } from '~/types/types'
@@ -67,7 +65,6 @@ interface IssuesFilterT {
 }
 
 @Component({
-  components: { ZButton, ZIcon, ZInput, ZPagination },
   layout: 'sidebar-only',
   scrollToTop: true
 })

@@ -3,14 +3,14 @@
     <template #title>
       <p class="text-sm font-semibold text-vanilla-300">
         <span v-html="safeRenderBackticks(title)"></span>
-        <span class="ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap"
+        <span class="ml-1 whitespace-nowrap text-xs font-normal text-vanilla-400"
           >{{ shortcode }}
         </span>
       </p>
     </template>
 
     <template #description>
-      <div class="flex flex-wrap text-xs gap-x-4">
+      <div class="flex flex-wrap gap-x-4 text-xs">
         <!-- Priority type -->
         <priority-type-select
           v-if="canChangePriority"
@@ -22,7 +22,7 @@
         <!-- Analyzer type -->
         <div class="flex items-center gap-x-1.5">
           <analyzer-logo v-bind="analyzer" :hide-tooltip="true" size="small" />
-          <span class="text-sm tracking-wide capitalize text-vanilla-400">
+          <span class="text-sm capitalize tracking-wide text-vanilla-400">
             {{ analyzer.name }}
           </span>
         </div>
@@ -33,7 +33,7 @@
     </template>
 
     <template v-if="canChangePriority" #info>
-      <div class="flex justify-end h-full mt-1">
+      <div class="mt-1 flex h-full justify-end">
         <z-button
           v-tooltip="`Remove priority assignment`"
           size="small"
@@ -55,7 +55,6 @@ import PriorityTypeSelect from './PriorityTypeSelect.vue'
 import PriorityTypeBadge from './PriorityTypeBadge.vue'
 import AnalyzerLogo from '~/components/AnalyzerLogo.vue'
 import IssueType from '@/components/Repository/IssueType.vue'
-import { ZTag, ZIcon, ZButton } from '@deepsource/zeal'
 import { safeRenderBackticks } from '~/utils/string'
 import { Analyzer } from '~/types/types'
 
@@ -66,9 +65,6 @@ import { Analyzer } from '~/types/types'
   name: 'IssuePriorityCard',
   components: {
     BaseCard,
-    ZTag,
-    ZIcon,
-    ZButton,
     PriorityTypeSelect,
     PriorityTypeBadge,
     IssueType,

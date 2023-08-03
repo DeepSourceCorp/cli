@@ -1,6 +1,6 @@
 import { render } from '@testing-library/vue'
 import { RouterLinkStub } from '@vue/test-utils'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 
 import { BaseCard } from '~/components/History'
 import { PublicReportCard } from '~/components/Reports'

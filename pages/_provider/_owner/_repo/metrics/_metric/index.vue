@@ -123,7 +123,6 @@ import {
 } from '~/types/types'
 
 //Zeal
-import { ZButton, ZIcon } from '@deepsource/zeal'
 
 const repoStore = namespace('repository/detail')
 
@@ -131,8 +130,7 @@ const repoStore = namespace('repository/detail')
  * Metric detail page for a Repository metric.
  */
 @Component({
-  layout: 'repository',
-  components: { ZButton, ZIcon }
+  layout: 'repository'
 })
 export default class MetricPage extends Vue {
   @Prop({ required: true })

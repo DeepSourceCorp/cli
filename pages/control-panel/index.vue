@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="px-4 border-b border-b-ink-200 bg-ink-400">
-      <div class="sticky top-0 z-10 flex items-center justify-between max-w-6xl py-4 mx-auto">
+    <div class="border-b border-b-ink-200 bg-ink-400 px-4">
+      <div class="sticky top-0 z-10 mx-auto flex max-w-6xl items-center justify-between py-4">
         <div class="flex items-center gap-x-5">
           <img class="h-5" src="~/assets/images/logo-wordmark-white.svg" alt="DeepSource" />
           <div class="hidden h-5 border-l border-l-ink-200 md:block"></div>
@@ -19,14 +19,14 @@
       </div>
     </div>
     <div class="p-4">
-      <div class="max-w-6xl mx-auto">
+      <div class="mx-auto max-w-6xl">
         <div v-if="!$fetchState.pending" class="flex items-center gap-x-4">
-          <div class="rounded-sm h-11 w-11 bg-ink-200">
+          <div class="h-11 w-11 rounded-sm bg-ink-200">
             <img :src="orgInfo.logo" :alt="orgInfo.name && `${orgInfo.name}'s logo`" />
           </div>
           <h1 class="text-1.5xl font-medium leading-none">{{ orgInfo.name }}</h1>
         </div>
-        <div class="grid grid-cols-1 gap-4 mt-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           <component
             :is="getCardType(card)"
             v-for="card in CONTROL_PANELS"
@@ -35,9 +35,9 @@
             :href="card.href ? card.href : managementConsoleUrl ? managementConsoleUrl : null"
             :target="card.to ? false : '_blank'"
             :rel="card.to ? false : 'noopener noreferrer'"
-            class="p-4 border rounded-md cursor-pointer border-slate-400 hover:bg-ink-300"
+            class="cursor-pointer rounded-md border border-slate-400 p-4 hover:bg-ink-300"
           >
-            <div class="flex items-center justify-center w-12 h-12 rounded-sm bg-ink-200">
+            <div class="flex h-12 w-12 items-center justify-center rounded-sm bg-ink-200">
               <z-icon :icon="card.icon" size="large" />
             </div>
             <div class="mt-4">
@@ -58,12 +58,10 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton } from '@deepsource/zeal'
 
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
 
 @Component({
-  components: { ZIcon, ZButton },
   middleware: ['restrictControlPanelAccess'],
   meta: {
     auth: { strict: true }

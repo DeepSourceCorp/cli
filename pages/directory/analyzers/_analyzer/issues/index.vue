@@ -89,8 +89,6 @@
 <script lang="ts">
 import { Component, Prop, mixins, Watch } from 'nuxt-property-decorator'
 
-import { ZButton, ZInput, ZIcon, ZPagination } from '@deepsource/zeal'
-
 import { Analyzer, Issue } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
 import MetaMixin from '~/mixins/metaMixin'
@@ -99,7 +97,6 @@ import MetaMixin from '~/mixins/metaMixin'
  * Issues page for a particular analyzer in analyzer directory.
  */
 @Component({
-  components: { ZButton, ZIcon, ZInput, ZPagination },
   layout: 'sidebar-only',
   scrollToTop: true
 })

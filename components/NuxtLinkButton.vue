@@ -1,25 +1,7 @@
 <template>
   <nuxt-link
     :to="to"
-    class="
-      z-btn
-      inline-flex
-      items-center
-      justify-center
-      font-medium
-      transition-colors
-      duration-300
-      ease-in-out
-      rounded-sm
-      focus:outline-none
-      whitespace-nowrap
-      h-8
-      px-4
-      py-1
-      text-xs
-      space-x-1
-      leading-loose
-    "
+    class="z-btn inline-flex h-8 items-center justify-center space-x-1 whitespace-nowrap rounded-sm px-4 py-1 text-xs font-medium leading-loose transition-colors duration-300 ease-in-out focus:outline-none"
     :class="[colors]"
   >
     <slot></slot>

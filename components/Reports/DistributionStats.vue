@@ -1,13 +1,13 @@
 <template>
-  <section class="grid gap-3 grid-cols-2 xs:grid-cols-repeat-10">
+  <section class="grid grid-cols-2 gap-3 xs:grid-cols-repeat-10">
     <template v-if="loading">
       <div
         v-for="idx in loaderCount"
         :key="idx"
-        class="flex flex-col gap-y-3 p-3 bg-ink-300 rounded-md"
+        class="flex flex-col gap-y-3 rounded-md bg-ink-300 p-3"
       >
-        <div class="h-4 w-32 bg-ink-200 animate-pulse"></div>
-        <div class="h-5 w-10 bg-ink-200 animate-pulse"></div>
+        <div class="h-4 w-32 animate-pulse bg-ink-200"></div>
+        <div class="h-5 w-10 animate-pulse bg-ink-200"></div>
       </div>
     </template>
     <template v-else>

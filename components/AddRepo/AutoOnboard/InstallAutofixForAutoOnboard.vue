@@ -1,13 +1,13 @@
 <template>
-  <div class="grid place-content-center h-full">
+  <div class="grid h-full place-content-center">
     <div class="text-center">
-      <h4 class="text-vanilla-400 text-base mb-5 px-12">
+      <h4 class="mb-5 px-12 text-base text-vanilla-400">
         To use auto-onboard you will have to install the Autofix app for your organization with
         permissions to all the repositories you wish to run DeepSource analysis on.
       </h4>
       <z-button
         v-if="installing"
-        class="flex items-center w-48"
+        class="flex w-48 items-center"
         button-type="primary"
         size="small"
         :disabled="true"
@@ -18,7 +18,7 @@
       <z-button
         v-else
         icon="autofix"
-        class="w-48 modal-primary-action"
+        class="modal-primary-action w-48"
         button-type="primary"
         size="small"
         @click="openAutofixInstallationUrl"
@@ -29,17 +29,12 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton } from '@deepsource/zeal'
 import InstallAutofixMixin from '~/mixins/installAutofixMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 
 @Component({
-  name: 'InstallAutofixModal',
-  components: {
-    ZIcon,
-    ZButton
-  }
+  name: 'InstallAutofixModal'
 })
 export default class InstallAutofixForAutoOnboard extends mixins(
   InstallAutofixMixin,

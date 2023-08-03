@@ -1,4 +1,4 @@
-mutation($input: UpdateRepoMetricThresholdInput!) {
+mutation ($input: UpdateRepoMetricThresholdInput!) {
   updateRepoMetricThreshold(input: $input) {
     ok
   }

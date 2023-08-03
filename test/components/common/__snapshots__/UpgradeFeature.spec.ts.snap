@@ -11,7 +11,7 @@ exports[`[[ UpgradeFeature ]] renders a section asking to upgrade to the require
       repositories.
     </p>
   </div> <a>
-    <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Upgrade plan\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"zap\\" class=\\"w-full xs:w-auto\\"></zbutton-stub>
+    <zbutton-stub button-type=\\"primary\\" icon=\\"zap\\" label=\\"Upgrade plan\\" size=\\"small\\" class=\\"w-full xs:w-auto\\"></zbutton-stub>
   </a>
 </div>"
 `;

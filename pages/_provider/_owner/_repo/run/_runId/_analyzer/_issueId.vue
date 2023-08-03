@@ -28,13 +28,13 @@
           />
           <div class="flex items-start justify-end gap-x-1.5">
             <issue-actions
-              class="ml-4"
               :issue="singleIssue"
               :check-id="currentCheck ? currentCheck.id : ''"
               :shortcode="$route.params.issueId"
               :repository="repository"
               :next-issue="nextIssue"
               :previous-issue="previousIssue"
+              class="ml-4"
               @ignoreIssues="ignoreIssues"
             />
           </div>
@@ -84,8 +84,6 @@
 <script lang="ts">
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 
-import { ZIcon, ZTabItem, ZTabList, ZTabPane, ZTabPanes, ZTabs, ZTag } from '@deepsource/zeal'
-
 import { SubNav } from '@/components/History/index'
 import LinkToPrev from '@/components/LinkToPrev.vue'
 import { IssueList } from '@/components/RepoIssues'
@@ -123,13 +121,6 @@ const PAGE_SIZE = 25
 
 @Component({
   components: {
-    ZTag,
-    ZTabs,
-    ZTabList,
-    ZTabPane,
-    ZTabPanes,
-    ZTabItem,
-    ZIcon,
     LinkToPrev,
     IssueDetailsHeader,
     SubNav,

@@ -13,10 +13,9 @@
 </template>
 
 <script lang="ts">
-import { ZAlert } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-@Component({ components: { ZAlert }, name: 'IntegrationInfo' })
+@Component({ name: 'IntegrationInfo' })
 export default class IntegrationInfo extends Vue {
   @Prop({ required: true })
   description: boolean

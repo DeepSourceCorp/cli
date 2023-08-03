@@ -1,8 +1,8 @@
 <template>
   <z-modal title="Add new endpoint" @onClose="onModalClose">
-    <fieldset class="p-4 space-y-4">
+    <fieldset class="space-y-4 p-4">
       <label for="title" class="block text-sm font-medium text-vanilla-400">
-        <span class="mb-2 sr-only">Endpoint URL</span>
+        <span class="sr-only mb-2">Endpoint URL</span>
         <z-input id="Title" v-model="url" placeholder="URL of the endpoint" :required="true" />
       </label>
       <toggle-input
@@ -18,7 +18,7 @@
         </template>
       </toggle-input>
       <label for="secret" class="block text-sm font-medium text-vanilla-400">
-        <span class="mb-2 sr-only">Secret</span>
+        <span class="sr-only mb-2">Secret</span>
         <div class="relative">
           <z-input
             id="Title"
@@ -29,7 +29,7 @@
             :disabled="!enableApiSigning"
             placeholder="A randomly generated secret with at least 16 characters"
           />
-          <div class="absolute flex top-1 right-1 gap-x-1 bg-ink-400">
+          <div class="absolute right-1 top-1 flex gap-x-1 bg-ink-400">
             <z-button
               v-tooltip="isSecretHidden ? 'Reveal secret' : 'Hide secret'"
               button-type="secondary"
@@ -55,21 +55,21 @@
         </div>
       </label>
     </fieldset>
-    <section class="p-4 pt-0 space-y-2">
+    <section class="space-y-2 p-4 pt-0">
       <h4 class="text-sm font-medium text-vanilla-400">Select events</h4>
       <!-- h-52 is the height of 3 cards (we had 3 cards at the time) -->
-      <div class="space-y-2 overflow-y-scroll max-h-52">
+      <div class="max-h-52 space-y-2 overflow-y-scroll">
         <label
           v-for="event in webhookEventTypes"
           :key="event.shortcode"
-          class="block p-3 border rounded-md cursor-pointer"
+          class="block cursor-pointer rounded-md border p-3"
           :class="
             selectedEvents.includes(event.shortcode)
               ? 'border-slate-400 bg-ink-200'
               : 'border-slate-400'
           "
         >
-          <div class="flex items-center mb-1">
+          <div class="mb-1 flex items-center">
             <z-checkbox
               v-model="selectedEvents"
               :value="event.shortcode"
@@ -83,7 +83,7 @@
       </div>
     </section>
     <template #footer="{ close }">
-      <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
+      <div class="space-x-4 border-slate-400 p-4 text-right text-vanilla-100">
         <z-button
           :is-loading="savingWebhookEndpoint"
           :disabled="savingWebhookEndpoint || selectedEvents.length === 0"
@@ -101,21 +101,12 @@
 </template>
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
-import { ZModal, ZInput, ZCheckbox, ZToggle, ZButton } from '@deepsource/zeal'
 import WebhookMixin from '~/mixins/webhookMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import Shifty from '@deepsource/shifty'
 
-@Component({
-  components: {
-    ZModal,
-    ZInput,
-    ZCheckbox,
-    ZToggle,
-    ZButton
-  }
-})
+@Component({})
 export default class CreateWebhookModal extends mixins(
   WebhookMixin,
   ActiveUserMixin,

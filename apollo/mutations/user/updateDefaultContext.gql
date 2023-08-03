@@ -1,4 +1,4 @@
-mutation($contextOwnerId: Int!) {
+mutation ($contextOwnerId: Int!) {
   updateDefaultDashboardContextForUser(input: { contextOwnerId: $contextOwnerId }) {
     contexts
   }

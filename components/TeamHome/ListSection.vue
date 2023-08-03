@@ -3,21 +3,21 @@
     <template #controls>
       <slot name="controls"></slot>
     </template>
-    <div class="h-full flex flex-col justify-between">
+    <div class="flex h-full flex-col justify-between">
       <div class="flex-grow">
         <slot></slot>
       </div>
     </div>
     <template #footer>
-      <div v-if="footerLink" class="border-t border-slate-400 flex justify-center">
+      <div v-if="footerLink" class="flex justify-center border-t border-slate-400">
         <z-button
           :to="footerLink"
           button-type="ghost"
           size="medium"
-          class="text-vanilla-400 h-10"
+          class="h-10 text-vanilla-400"
           :full-width="true"
         >
-          <div class="text-xs flex items-center leading-none">
+          <div class="flex items-center text-xs leading-none">
             {{ footerLinkLabel }}
             <z-icon
               class="transform-gpu duration-100 group-hover:translate-x-0.5"
@@ -27,8 +27,8 @@
           </div>
         </z-button>
       </div>
-      <div v-if="allowLoadMore" class="border-t border-slate-400 p-2 flex justify-center">
-        <div class="group flex items-center space-x-2 cursor-pointer text-vanilla-400 text-sm">
+      <div v-if="allowLoadMore" class="flex justify-center border-t border-slate-400 p-2">
+        <div class="group flex cursor-pointer items-center space-x-2 text-sm text-vanilla-400">
           Load more
           <z-icon icon="chevron-down" size="small" />
         </div>
@@ -38,11 +38,10 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZIcon } from '@deepsource/zeal'
 import { StatSection } from '@/components/Metrics'
 
 @Component({
-  components: { ZButton, ZIcon, StatSection }
+  components: { StatSection }
 })
 export default class ListSection extends Vue {
   @Prop({ default: false })

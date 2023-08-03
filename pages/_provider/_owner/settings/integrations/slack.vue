@@ -118,7 +118,6 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZConfirm, ZDivider } from '@deepsource/zeal'
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 
 import IntegrationsDetailMixin, { IntegrationShortcodes } from '~/mixins/integrationsDetailMixin'
@@ -132,11 +131,6 @@ const SHORTCODE = IntegrationShortcodes.SLACK
  * Owner-level integrations page for Slack
  */
 @Component({
-  components: {
-    ZButton,
-    ZConfirm,
-    ZDivider
-  },
   middleware: ['perm', 'teamOnly'],
   meta: {
     auth: {

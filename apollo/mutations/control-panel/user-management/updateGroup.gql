@@ -1,4 +1,4 @@
-mutation($groupId: ID!, $groupName: String!) {
+mutation ($groupId: ID!, $groupName: String!) {
   updateGroup(input: { groupId: $groupId, name: $groupName }) {
     ok
   }

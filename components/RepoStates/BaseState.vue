@@ -1,18 +1,18 @@
 <template>
   <section
-    class="grid border border-dashed rounded-md border-slate-400 place-content-center"
+    class="grid place-content-center rounded-md border border-dashed border-slate-400"
     :class="[heightClass, spacingClass]"
   >
     <slot name="hero"></slot>
     <slot name="title">
       <h1
-        class="text-base font-semibold text-center text-vanilla-100"
+        class="text-center text-base font-semibold text-vanilla-100"
         :class="{ 'mt-6': $slots.hero }"
       >
         {{ title }}
       </h1>
     </slot>
-    <div class="max-w-xl mt-2 text-center text-vanilla-400 text-sm">
+    <div class="mt-2 max-w-xl text-center text-sm text-vanilla-400">
       <slot></slot>
     </div>
   </section>

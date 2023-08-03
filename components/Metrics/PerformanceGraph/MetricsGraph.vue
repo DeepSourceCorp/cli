@@ -6,9 +6,9 @@
     :grid-spacing="0"
   >
     <template #controls>
-      <div class="flex justify-end h-full">
+      <div class="flex h-full justify-end">
         <graph-control
-          class="flex space-x-2 w-full sm:w-auto"
+          class="flex w-full space-x-2 sm:w-auto"
           :day-options="pageLengthOptions"
           :filter-value="pageLength"
           @updateFilter="updatePageLength"
@@ -21,7 +21,7 @@
       :data-points="sortedData"
     />
     <div
-      class="col-span-1 border-l lg:col-span-2 xl:col-span-3 2xl:col-span-4 border-slate-400 divide-y divide-ink-300"
+      class="col-span-1 divide-y divide-ink-300 border-l border-slate-400 lg:col-span-2 xl:col-span-3 2xl:col-span-4"
     >
       <div v-for="ns in namespaces" :key="ns">
         <graph-chart
@@ -39,8 +39,6 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Inject } from 'nuxt-property-decorator'
-
-import { ZChart, ZIcon } from '@deepsource/zeal'
 
 import { StatSection } from '@/components/Metrics'
 import { GraphDataSelector, GraphChart } from '.'
@@ -65,9 +63,7 @@ const coverageStats = [
     StatSection,
     GraphControl,
     GraphDataSelector,
-    GraphChart,
-    ZChart,
-    ZIcon
+    GraphChart
   }
 })
 export default class MetricsGraph extends Vue {

@@ -1,4 +1,4 @@
-mutation($input: UpdateTechnologyPreferenceInput!) {
+mutation ($input: UpdateTechnologyPreferenceInput!) {
   updateTechnologyPreference(input: $input) {
     ok
   }

@@ -77,7 +77,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZAvatar, ZDivider, ZMenu, ZMenuItem, ZMenuSection } from '@deepsource/zeal'
 
 import type { apiObject } from 'rudder-sdk-js'
 
@@ -111,14 +110,6 @@ import { resolveNodes } from '~/utils/array'
       }
     }
   ],
-  components: {
-    ZIcon,
-    ZAvatar,
-    ZDivider,
-    ZMenu,
-    ZMenuItem,
-    ZMenuSection
-  },
   methods: {
     getDefaultAvatar
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 border-b border-slate-400">
+  <div class="border-b border-slate-400 p-4">
     <z-breadcrumb separator="/" class="mb-px text-sm text-vanilla-100">
       <z-breadcrumb-item
         v-for="link in links"
@@ -15,19 +15,12 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZBreadcrumb, ZBreadcrumbItem } from '@deepsource/zeal'
-
 export interface ILinks {
   label: string
   route?: string
 }
 
-@Component({
-  components: {
-    ZBreadcrumb,
-    ZBreadcrumbItem
-  }
-})
+@Component({})
 
 /**
  * Container component to render breadcrumb items

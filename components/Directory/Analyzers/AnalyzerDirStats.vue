@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-wrap lg:flex-nowrap">
-    <div v-if="isLoading" class="w-80 h-80 -m-5 mb-0 flex justify-center items-center">
-      <div class="w-56 h-56 bg-ink-300 animate-pulse rounded-full"></div>
+    <div v-if="isLoading" class="-m-5 mb-0 flex h-80 w-80 items-center justify-center">
+      <div class="h-56 w-56 animate-pulse rounded-full bg-ink-300"></div>
     </div>
-    <div v-show="!isLoading" class="w-full lg:w-80 -ml-3 lg:-ml-10">
+    <div v-show="!isLoading" class="-ml-3 w-full lg:-ml-10 lg:w-80">
       <z-chart
         v-if="chartLabels.length && chartData.length"
         type="donut"
@@ -14,21 +14,21 @@
     </div>
     <div
       v-if="isLoading"
-      class="flex-grow grid grid-cols-3 auto-rows-min items-center py-2 lg:ml-4"
+      class="grid flex-grow auto-rows-min grid-cols-3 items-center py-2 lg:ml-4"
     >
-      <div v-for="id in 7" :key="id" class="max-h-14 my-4 pl-2">
-        <div class="h-10 w-20 bg-ink-300 animate-pulse m-2"></div>
+      <div v-for="id in 7" :key="id" class="my-4 max-h-14 pl-2">
+        <div class="m-2 h-10 w-20 animate-pulse bg-ink-300"></div>
       </div>
     </div>
-    <div v-else class="flex-grow grid grid-cols-3 auto-rows-min items-center py-2 lg:ml-4">
+    <div v-else class="grid flex-grow auto-rows-min grid-cols-3 items-center py-2 lg:ml-4">
       <div
         v-for="(issueType, id) in availableIssueDistribution"
         :key="issueType.shortcode"
-        class="max-h-14 my-4 pl-2"
+        class="my-4 max-h-14 pl-2"
       >
         <p class="mb-1.5">{{ issueType.title }}</p>
         <div
-          class="w-12 h-1 rounded-sm my-1"
+          class="my-1 h-1 w-12 rounded-sm"
           :style="{ 'background-color': chartColors[id] }"
         ></div>
         <p>
@@ -40,14 +40,10 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZChart } from '@deepsource/zeal'
 
 import IssueTypeT from 'types/issueDistribution'
 
 @Component({
-  components: {
-    ZChart
-  },
   name: 'AnalyzerDirStats'
 })
 export default class AnalyzerDirStats extends Vue {

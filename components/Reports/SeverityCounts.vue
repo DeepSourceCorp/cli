@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-x-12 font-semibold text-xs">
+  <div class="flex gap-x-12 text-xs font-semibold">
     <chart-stat
       v-for="severity in severityList"
       :key="severity.title"
@@ -15,7 +15,6 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import { shortenLargeNumber } from '~/utils/string'
 
 interface SeverityT {
@@ -28,7 +27,7 @@ interface SeverityT {
 /**
  * Component to show total severity levels
  */
-@Component({ components: { ZIcon }, methods: { shortenLargeNumber } })
+@Component({ methods: { shortenLargeNumber } })
 export default class SeverityCounts extends Vue {
   @Prop({ default: 0 })
   high: number

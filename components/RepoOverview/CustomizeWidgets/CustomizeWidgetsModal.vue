@@ -94,7 +94,6 @@
   </z-modal>
 </template>
 <script lang="ts">
-import { ZButton, ZIcon, ZInput, ZModal } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 import Draggable from 'vuedraggable'
 
@@ -104,10 +103,6 @@ import { WIDGET_ICON_MAP } from '~/utils/repository'
 
 @Component({
   components: {
-    ZIcon,
-    ZButton,
-    ZModal,
-    ZInput,
     Draggable
   },
   layout: 'dashboard'

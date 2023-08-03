@@ -13,7 +13,7 @@
       <z-modal v-if="isSaveModalVisible" title="Confirm save" @onClose="isSaveModalVisible = false">
         <fieldset class="space-y-4 p-4">
           <div class="space-y-2">
-            <label for="title" class="text-vanilla-200 text-sm">Template name</label>
+            <label for="title" class="text-sm text-vanilla-200">Template name</label>
             <z-input
               id="Title"
               v-model="internalTitle"
@@ -22,7 +22,7 @@
             />
           </div>
           <div class="space-y-2">
-            <label for="desc" class="text-vanilla-200 text-sm">Description</label>
+            <label for="desc" class="text-sm text-vanilla-200">Description</label>
             <textarea
               v-model="internalDescription"
               name="desc"
@@ -31,13 +31,13 @@
               autocorrect="off"
               autocapitalize="off"
               spellcheck="false"
-              class="w-full h-full p-2 text-sm rounded-sm bg-ink-400 border outline-none resize-none min-h-20 border-slate-400 focus:border-vanilla-400 text-vanilla-200"
+              class="h-full min-h-20 w-full resize-none rounded-sm border border-slate-400 bg-ink-400 p-2 text-sm text-vanilla-200 outline-none focus:border-vanilla-400"
               placeholder="Description for this template can include the analyzers available in this and the projects this template is best suited for"
             ></textarea>
           </div>
         </fieldset>
         <template #footer="{ close }">
-          <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
+          <div class="space-x-4 border-slate-400 p-4 text-right text-vanilla-100">
             <z-button
               :icon="savingConfig ? 'animate-spin' : 'autofix'"
               :icon-color="savingConfig ? 'ink animate-spin' : ''"
@@ -58,21 +58,13 @@
 
 <script lang="ts">
 import { Component, Prop, mixins, Watch, Inject } from 'nuxt-property-decorator'
-import { ZInput, ZTextarea, ZButton, ZModal } from '@deepsource/zeal'
 
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { RepoConfigInterface } from '~/store/repository/detail'
 
-@Component({
-  components: {
-    ZInput,
-    ZModal,
-    ZTextarea,
-    ZButton
-  }
-})
+@Component({})
 export default class SaveTemplateConfig extends mixins(
   AutoOnboardMixin,
   ActiveUserMixin,
@@ -141,7 +133,7 @@ export default class SaveTemplateConfig extends mixins(
       this.$toast.danger(
         'There was a problem updating this config, please check your config for errors or contact support.'
       )
-      this.logErrorForUser(e, 'Auto Onboard template update', this.baseConfig)
+      this.logErrorForUser(e as Error, 'Auto Onboard template update', this.baseConfig)
     } finally {
       this.savingConfig = false
     }

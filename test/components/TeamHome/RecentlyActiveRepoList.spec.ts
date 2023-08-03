@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { createLocalVue, shallowMount } from '@vue/test-utils'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 import Vuex from 'vuex'
 import { RecentlyActiveRepoList } from '~/components/TeamHome'
 

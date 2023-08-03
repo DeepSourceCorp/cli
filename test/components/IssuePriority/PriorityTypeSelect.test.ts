@@ -2,7 +2,7 @@ import { render } from '@testing-library/vue'
 import { shallowMount } from '@vue/test-utils'
 import { PriorityTypeSelect } from '~/components/IssuePriority'
 import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 
 test('renders PriorityTypeSelect with all prop options', () => {
   const priorityOptions = generateStringProps(

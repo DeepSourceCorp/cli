@@ -7,7 +7,7 @@
     @click="isErrorsBlockExpanded = true"
   >
     <button
-      class="absolute p-1 top-4 right-4 focus:outline-none"
+      class="absolute right-4 top-4 p-1 focus:outline-none"
       @click.stop="isErrorsBlockExpanded = !isErrorsBlockExpanded"
     >
       <z-icon
@@ -24,20 +24,20 @@
           </z-label>
           <ul class="mt-4 space-y-2">
             <template v-for="(error, index) in errors">
-              <li v-if="error.message" :key="index" class="flex items-start ml-1 space-x-2">
+              <li v-if="error.message" :key="index" class="ml-1 flex items-start space-x-2">
                 <span
-                  class="h-5 w-5 rounded-full grid place-content-center bg-ink-300 text-xs mt-0.5 select-none"
+                  class="mt-0.5 grid h-5 w-5 flex-shrink-0 select-none place-content-center rounded-full bg-ink-300 text-xs"
                 >
                   {{ index + 1 }}
                 </span>
-                <p class="max-w-4xl prose-sm prose prose-indigo" v-html="error.message"></p>
+                <p class="prose-issue-description max-w-4xl" v-html="error.message"></p>
               </li>
             </template>
           </ul>
         </div>
       </template>
     </div>
-    <div v-else class="flex items-center p-4 space-x-1 text-sm font-medium text-vanilla-100">
+    <div v-else class="flex items-center space-x-1 p-4 text-sm font-medium text-vanilla-100">
       <z-label v-if="runErrors.error.length" class="inline-block select-none" state="error">
         {{ getErrorTypeLabel('error') }}
       </z-label>
@@ -53,7 +53,6 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZLabel, ZButton } from '@deepsource/zeal'
 
 export interface RunError {
   level: number
@@ -62,11 +61,6 @@ export interface RunError {
 }
 
 @Component({
-  components: {
-    ZIcon,
-    ZLabel,
-    ZButton
-  },
   layout: 'repository'
 })
 export default class RunErrorBox extends Vue {

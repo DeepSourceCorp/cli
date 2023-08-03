@@ -1,16 +1,16 @@
 <template>
-  <div class="bg-ink-300 border border-ink-200 rounded-md py-4">
-    <p class="uppercase px-4 pb-4 text-vanilla-400 text-xs leading-5 tracking-wider">
+  <div class="rounded-md border border-ink-200 bg-ink-300 py-4">
+    <p class="px-4 pb-4 text-xs uppercase leading-5 tracking-wider text-vanilla-400">
       VCS provider connections
     </p>
     <div
       :class="autofixAvailable && autofixEnabled ? 'py-4' : 'pt-4'"
-      class="flex justify-between px-4 border-t border-ink-200"
+      class="flex justify-between border-t border-ink-200 px-4"
     >
       <component
         :is="vcsInstallationUrl ? 'a' : 'div'"
         :href="vcsInstallationUrl || false"
-        class="flex gap-x-2.5 items-center group"
+        class="group flex items-center gap-x-2.5"
       >
         <z-icon :icon="vcsProviderIcon" />
         <div class="text-sm">
@@ -28,22 +28,22 @@
         :is="vcsInstallationUrl ? 'a' : 'div'"
         :href="vcsInstallationUrl || false"
         :class="{ 'hover:opacity-80': vcsInstallationUrl }"
-        class="flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2"
+        class="flex items-center gap-x-1 rounded-sm border border-ink-50 bg-ink-200 px-2"
       >
         <z-icon icon="check" />
-        <span class="text-vanilla-400 text-sm">Installed</span>
+        <span class="text-sm text-vanilla-400">Installed</span>
       </component>
     </div>
 
     <!-- TODO: add install autofix CTA -->
     <div
       v-if="autofixAvailable && autofixEnabled"
-      class="flex justify-between px-4 pt-4 border-t border-ink-200"
+      class="flex justify-between border-t border-ink-200 px-4 pt-4"
     >
       <component
         :is="autofixInstallationUrl ? 'a' : 'div'"
         :href="autofixInstallationUrl || false"
-        class="flex gap-x-2.5 items-center group"
+        class="group flex items-center gap-x-2.5"
       >
         <z-icon icon="autofix" color="juniper" />
 
@@ -63,23 +63,18 @@
         v-if="autofixEnabled"
         :href="autofixInstallationUrl || false"
         :class="{ 'hover:opacity-80': autofixInstallationUrl }"
-        class="flex items-center gap-x-1 bg-ink-200 border border-ink-50 rounded-sm px-2"
+        class="flex items-center gap-x-1 rounded-sm border border-ink-50 bg-ink-200 px-2"
       >
         <z-icon icon="check" />
-        <span class="text-vanilla-400 text-sm">Installed</span>
+        <span class="text-sm text-vanilla-400">Installed</span>
       </component>
     </div>
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 export default class VcsConnections extends Vue {
   @Prop({ required: true })
   vcsInstallationUrl: string

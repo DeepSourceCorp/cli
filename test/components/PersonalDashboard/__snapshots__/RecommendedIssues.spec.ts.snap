@@ -2,9 +2,9 @@
 
 exports[`[[ RecommendedIssues ]] renders \`RecommendedIssues\` with all prop combinations 1`] = `
 "<section class=\\"flex flex-col justify-between\\">
-  <div class=\\"grid grid-cols-1 gap-2 md:gap-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 pt-0 pb-3\\">
-    <div class=\\"text-vanilla-100 col-span-full\\">
-      <div class=\\"flex items-center h-full space-x-2\\"><span class=\\"text-base font-semibold tracking-snug\\">Recommended issues</span>
+  <div class=\\"grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-0 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 pb-3 pt-0\\">
+    <div class=\\"col-span-full text-vanilla-100\\">
+      <div class=\\"flex h-full items-center space-x-2\\"><span class=\\"text-base font-semibold tracking-snug\\">Recommended issues</span>
         <!---->
       </div>
     </div>

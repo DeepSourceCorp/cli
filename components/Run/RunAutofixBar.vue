@@ -4,10 +4,10 @@
       :is-open="isAccordionOpen"
       :span-custom-height="true"
       custom-max-height="max-h-item"
-      class="bg-ink-300 rounded-md border border-slate-400"
+      class="rounded-md border border-slate-400 bg-ink-300"
     >
       <template #title>
-        <div class="flex items-center justify-between px-4 py-2 text-sm bg-ink-300 rounded-md">
+        <div class="flex items-center justify-between rounded-md bg-ink-300 px-4 py-2 text-sm">
           <div class="flex space-x-1">
             <z-checkbox
               v-model="selectAll"
@@ -18,7 +18,7 @@
               @change="updateSelectAll"
             />
             <button
-              class="text-vanilla-100 text-sm font-semibold flex items-center gap-x-1"
+              class="flex items-center gap-x-1 text-sm font-semibold text-vanilla-100"
               @click="toggleAccordion"
             >
               {{ autofixableIssues.length }}
@@ -31,7 +31,7 @@
               </span>
               <z-icon
                 icon="chevron-down"
-                class="transition-all duration-300 transform ml-1 my-auto stroke-2"
+                class="my-auto ml-1 transform stroke-2 transition-all duration-300"
                 :class="{ 'rotate-180': isAccordionOpen }"
               />
             </button>
@@ -62,9 +62,9 @@
             <div
               v-for="issue in autofixableIssues"
               :key="issue.shortcode"
-              class="flex flex-col w-full bg-ink-400"
+              class="flex w-full flex-col bg-ink-400"
             >
-              <div class="w-full flex gap-x-1 items-center leading-7 py-2 px-4">
+              <div class="flex w-full items-center gap-x-1 px-4 py-2 leading-7">
                 <z-checkbox
                   v-model="selectedIssues"
                   :value="issue.shortcode"
@@ -87,13 +87,13 @@
                       "
                     >
                       <span
-                        class="text-vanilla-300 mr-1.5"
+                        class="mr-1.5 text-vanilla-300"
                         v-html="safeRenderBackticks(issue.title)"
                       ></span>
                     </nuxt-link>
                     <span class="text-slate">{{ issue.shortcode }}</span>
                   </span>
-                  <span class="text-vanilla-400 flex space-x-1">
+                  <span class="flex space-x-1 text-vanilla-400">
                     <span class="text-xs">×</span>
                     <span>{{ issue.occurrenceCount }}</span>
                   </span>
@@ -103,7 +103,7 @@
           </div>
           <div
             v-if="!autofixableIssues.length"
-            class="h-24 px-4 w-full flex flex-col gap-y-1 justify-center items-center"
+            class="flex h-24 w-full flex-col items-center justify-center gap-y-1 px-4"
           >
             <h2 class="text-md font-bold">No matching issues found</h2>
             <p class="text-md">Try changing the search query.</p>
@@ -116,7 +116,6 @@
 
 <script lang="ts">
 import { Component, Prop, Watch, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZAccordion, ZAccordionItem, ZCheckbox, ZIcon } from '@deepsource/zeal'
 import { safeRenderBackticks } from '~/utils/string'
 import RunDetailMixin from '~/mixins/runDetailMixin'
 import { checkArrayEquality } from '~/utils/array'
@@ -130,13 +129,6 @@ export interface RunError {
  * Bar to show autofix counts and button to trigger it
  */
 @Component({
-  components: {
-    ZButton,
-    ZAccordion,
-    ZAccordionItem,
-    ZCheckbox,
-    ZIcon
-  },
   methods: {
     safeRenderBackticks
   }

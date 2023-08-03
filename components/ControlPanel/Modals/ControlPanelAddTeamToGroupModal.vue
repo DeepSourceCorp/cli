@@ -10,7 +10,7 @@
         class="shadow-double-dark"
         @onClose="showAddTeamModal = false"
       >
-        <div class="p-4 space-y-4 overflow-y-auto text-sm text-vanilla-400 min-h-20 max-h-98">
+        <div class="max-h-98 min-h-20 space-y-4 overflow-y-auto p-4 text-sm text-vanilla-400">
           <div>
             <z-input
               :value="addTeamSearchCandidate"
@@ -24,7 +24,7 @@
           <div
             v-for="team in teamsToAdd"
             :key="team.id"
-            class="grid items-center grid-cols-2 p-4 border rounded-md border-slate-400 bg-ink-300"
+            class="grid grid-cols-2 items-center rounded-md border border-slate-400 bg-ink-300 p-4"
           >
             <div class="flex items-center gap-x-3">
               <z-avatar
@@ -34,7 +34,7 @@
                 class="flex-shrink-0"
               />
               <div>
-                <p class="overflow-hidden text-sm w-44 overflow-ellipsis">
+                <p class="w-44 overflow-hidden overflow-ellipsis text-sm">
                   {{ team.name || team.login }}
                 </p>
                 <div class="flex items-center gap-x-3">
@@ -113,23 +113,12 @@
 
 <script lang="ts">
 import { Component, Prop, Watch, mixins } from 'nuxt-property-decorator'
-import {
-  ZAvatar,
-  ZButton,
-  ZModal,
-  ZIcon,
-  ZInput,
-  ZMenu,
-  ZMenuSection,
-  ZMenuItem
-} from '@deepsource/zeal'
 import AddTeamToGroupMixin from '~/mixins/addTeamToGroupMixin'
 import { formatDate, parseISODate } from '~/utils/date'
 import { resolveNodes } from '~/utils/array'
 import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
-  components: { ZAvatar, ZButton, ZModal, ZIcon, ZInput, ZMenu, ZMenuSection, ZMenuItem },
   name: 'ControlPanelAddTeamToGroupModal',
   methods: {
     parseISODate,

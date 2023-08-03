@@ -1,4 +1,4 @@
-mutation($input: CommitChangesToPRInput!) {
+mutation ($input: CommitChangesToPRInput!) {
   commitChangesToPr(input: $input) {
     ok
   }

@@ -1,25 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ComplianceStatus with all prop options: {"compliancePassed":false} 1`] = `
-"<div class=\\"flex items-center gap-x-1.5 leading-8\\"><span class=\\"w-1.5 h-1.5 rounded-full bg-cherry\\"></span> <span class=\\"font-semibold tracking-wider uppercase text-cherry text-13px\\">
+"<div class=\\"flex items-center gap-x-1.5 leading-8\\"><span class=\\"h-1.5 w-1.5 rounded-full bg-cherry\\"></span> <span class=\\"font-semibold uppercase tracking-wider text-cherry text-13px\\">
     Failing
   </span></div>"
 `;
 
 exports[`renders ComplianceStatus with all prop options: {"compliancePassed":null} 1`] = `
-"<div class=\\"flex items-center gap-x-1.5 leading-8\\"><span class=\\"w-1.5 h-1.5 rounded-full bg-cherry\\"></span> <span class=\\"font-semibold tracking-wider uppercase text-cherry text-13px\\">
+"<div class=\\"flex items-center gap-x-1.5 leading-8\\"><span class=\\"h-1.5 w-1.5 rounded-full bg-cherry\\"></span> <span class=\\"font-semibold uppercase tracking-wider text-cherry text-13px\\">
     Failing
   </span></div>"
 `;
 
 exports[`renders ComplianceStatus with all prop options: {"compliancePassed":true} 1`] = `
-"<div class=\\"flex items-center gap-x-1.5 leading-8\\"><span class=\\"w-1.5 h-1.5 rounded-full bg-juniper\\"></span> <span class=\\"font-semibold tracking-wider uppercase text-juniper text-13px\\">
+"<div class=\\"flex items-center gap-x-1.5 leading-8\\"><span class=\\"h-1.5 w-1.5 rounded-full bg-juniper\\"></span> <span class=\\"font-semibold uppercase tracking-wider text-juniper text-13px\\">
     Passing
   </span></div>"
 `;
 
 exports[`renders ComplianceStatus with all prop options: {} 1`] = `
-"<div class=\\"flex items-center gap-x-1.5 leading-8\\"><span class=\\"w-1.5 h-1.5 rounded-full bg-cherry\\"></span> <span class=\\"font-semibold tracking-wider uppercase text-cherry text-13px\\">
+"<div class=\\"flex items-center gap-x-1.5 leading-8\\"><span class=\\"h-1.5 w-1.5 rounded-full bg-cherry\\"></span> <span class=\\"font-semibold uppercase tracking-wider text-cherry text-13px\\">
     Failing
   </span></div>"
 `;

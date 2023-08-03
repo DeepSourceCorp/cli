@@ -23,7 +23,7 @@
 
           <div v-if="loading" class="h-5 w-16 animate-pulse rounded-md bg-ink-300"></div>
 
-          <div v-else class="flex items-center gap-x-1.5 h-5">
+          <div v-else class="flex h-5 items-center gap-x-1.5">
             <z-icon icon="z-git-branch" color="vanilla-100" />
             <span class="text-sm font-medium text-vanilla-100">
               {{ defaultBranchName }}
@@ -67,7 +67,6 @@
 </template>
 
 <script lang="ts">
-import { ZIcon } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import {
@@ -83,9 +82,6 @@ import { shortenLargeNumber } from '~/utils/string'
 
 @Component({
   name: 'MetadataView',
-  components: {
-    ZIcon
-  },
   methods: {
     fromNow
   }

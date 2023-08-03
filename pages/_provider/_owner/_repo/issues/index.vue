@@ -2,7 +2,7 @@
   <div class="issues-page grid grid-cols-1 pb-16 lg:grid-cols-16-fr lg:pb-0">
     <!-- Analyzer Tab -->
     <div
-      class="analyzer-tab z-20 col-span-full flex flex-col justify-between space-y-2 border-b border-slate-400 bg-ink-400 py-2 pl-2 pr-4 lg:sticky lg:flex-row lg:space-y-0 lg:space-x-2"
+      class="analyzer-tab z-20 col-span-full flex flex-col justify-between space-y-2 border-b border-slate-400 bg-ink-400 py-2 pl-2 pr-4 lg:sticky lg:flex-row lg:space-x-2 lg:space-y-0"
     >
       <issue-analyzer-selector
         :selected-analyzer="parsedParams.analyzer"
@@ -177,7 +177,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZTag, ZPagination, ZRadioGroup, ZRadioButton } from '@deepsource/zeal'
 import {
   IssueAnalyzerSelector,
   IssueCategorySelector,
@@ -250,12 +249,6 @@ interface IssueListQueryParams {
  */
 @Component({
   components: {
-    ZTag,
-    ZIcon,
-    ZButton,
-    ZPagination,
-    ZRadioGroup,
-    ZRadioButton,
     IssueAnalyzerSelector,
     IssueListItem,
     IssueCategorySelector,

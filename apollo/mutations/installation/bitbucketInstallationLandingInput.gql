@@ -1,4 +1,4 @@
-mutation($input: BitbucketInstallationLandingInput!) {
+mutation ($input: BitbucketInstallationLandingInput!) {
   bitbucketInstallationLanding(input: $input) {
     nextAction
     message

@@ -1,11 +1,11 @@
 <template>
   <z-modal
-    class="shadow-double-dark z-1000"
+    class="z-1000 shadow-double-dark"
     title="Send feedback"
     :close-after-primary-action="false"
     @onClose="$emit('close')"
   >
-    <div class="p-4 text-sm text-vanilla-400 min-h-20">
+    <div class="min-h-20 p-4 text-sm text-vanilla-400">
       <div>
         <label>
           <span class="text-sm text-vanilla-400">
@@ -18,12 +18,12 @@
             name="directory-feedback"
             :readonly="isLoading"
             required
-            class="w-full h-full p-2 mt-2 text-sm border outline-none bg-ink-400 min-h-28 max-h-44 lg:max-h-60 text-vanilla-100 focus:border-vanilla-100"
+            class="mt-2 h-full max-h-44 min-h-28 w-full border bg-ink-400 p-2 text-sm text-vanilla-100 outline-none focus:border-vanilla-100 lg:max-h-60"
           >
           </textarea>
         </label>
       </div>
-      <div class="flex mt-5">
+      <div class="mt-5 flex">
         <z-checkbox
           v-model="okToContact"
           label="It is okay for DeepSource to contact me about this feedback."
@@ -34,7 +34,7 @@
       </div>
     </div>
     <template #footer="{ close }">
-      <div class="p-4 space-x-3 text-right text-vanilla-100 border-slate-400">
+      <div class="space-x-3 border-slate-400 p-4 text-right text-vanilla-100">
         <z-button
           icon="check-circle"
           :is-loading="isLoading"
@@ -52,14 +52,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import { ZModal, ZButton, ZCheckbox } from '@deepsource/zeal'
 
 @Component({
-  components: {
-    ZModal,
-    ZButton,
-    ZCheckbox
-  },
   name: 'DirectoryFeedbackModal'
 })
 export default class DirectoryFeedbackModal extends Vue {

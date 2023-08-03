@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:py-3 lg:px-4"
+      class="flex h-13 w-full items-center justify-between gap-x-2 border-b border-slate-400 bg-ink-300 p-2 lg:px-4 lg:py-3"
     >
       <div class="flex items-center lg:gap-x-3">
         <z-button
@@ -124,7 +124,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZLabel, ZTab, ZTag } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
@@ -147,15 +146,7 @@ interface TabLink {
   repoKindChoices: RepositoryKindChoices[]
 }
 
-@Component({
-  components: {
-    ZButton,
-    ZIcon,
-    ZLabel,
-    ZTab,
-    ZTag
-  }
-})
+@Component({})
 export default class RepoHeader extends mixins(
   RouteParamsMixin,
   RepoDetailMixin,

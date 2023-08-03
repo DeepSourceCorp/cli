@@ -23,23 +23,20 @@ From MDN: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions
 */
 
 export default (context: Context, inject: Inject): void => {
-  inject(
-    'copyToClipboard',
-    async (candidate: string): Promise<void> => {
-      try {
-        // try the clipboard API
-        // https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API
-        // This will fail in Firefox
-        await navigator.clipboard.writeText(candidate)
-      } catch (e) {
-        // fallback for firefox
-        // Always run inside click event
-        const el = document.createElement('input')
-        el.value = candidate
-        el.select()
-        document.execCommand('copy')
-        el.remove()
-      }
+  inject('copyToClipboard', async (candidate: string): Promise<void> => {
+    try {
+      // try the clipboard API
+      // https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API
+      // This will fail in Firefox
+      await navigator.clipboard.writeText(candidate)
+    } catch (e) {
+      // fallback for firefox
+      // Always run inside click event
+      const el = document.createElement('input')
+      el.value = candidate
+      el.select()
+      document.execCommand('copy')
+      el.remove()
     }
-  )
+  })
 }

@@ -59,16 +59,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZModal, ZInput } from '@deepsource/zeal'
 
-@Component({
-  components: {
-    ZButton,
-    ZIcon,
-    ZInput,
-    ZModal
-  }
-})
+@Component({})
 export default class ToggleMonorepoConfirm extends Vue {
   @Prop({ required: true })
   isMonorepo: boolean

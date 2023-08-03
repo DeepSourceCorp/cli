@@ -14,7 +14,6 @@
 </template>
 
 <script lang="ts">
-import { ZAvatar } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { formatDate } from '~/utils/date'
 import { getDefaultAvatar } from '~/utils/ui'
@@ -23,7 +22,6 @@ import { getDefaultAvatar } from '~/utils/ui'
  * Component that is responsible to render the integration logo and name on detailed view
  */
 @Component({
-  components: { ZAvatar },
   methods: {
     getDefaultAvatar,
     formatDate

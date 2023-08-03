@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="toml-box hide-scroll overflow-x-scroll rounded-md bg-ink-300 text-sm">
-      <div class="sticky top-0 left-0 flex items-start space-x-2 bg-ink-200 p-3">
+      <div class="sticky left-0 top-0 flex items-start space-x-2 bg-ink-200 p-3">
         <p v-if="$slots.message" class="text-vanilla-400">
           <slot name="message"></slot>
         </p>
@@ -95,14 +95,8 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZButton, ZIcon } from '@deepsource/zeal'
 
-@Component({
-  components: {
-    ZButton,
-    ZIcon
-  }
-})
+@Component({})
 export default class TomlBox extends Vue {
   @Prop({ required: true })
   toml: string

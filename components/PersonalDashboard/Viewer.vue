@@ -78,7 +78,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZAvatar, ZCheckbox, ZButton } from '@deepsource/zeal'
 import { AddRepoModal } from '@/components/AddRepo'
 import ActiveUserMixin from '@/mixins/activeUserMixin'
 import { getDefaultAvatar } from '~/utils/ui'
@@ -98,9 +97,6 @@ export interface Step {
 @Component({
   components: {
     StatSection,
-    ZAvatar,
-    ZCheckbox,
-    ZButton,
     AddRepoModal
   },
   methods: { getDefaultAvatar }

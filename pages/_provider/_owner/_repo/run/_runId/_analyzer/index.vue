@@ -303,18 +303,6 @@ import { RunHeader, AnalyzerRun } from '@/components/Run'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'
-import {
-  ZIcon,
-  ZTabs,
-  ZTabList,
-  ZTabPane,
-  ZTabPanes,
-  ZTab,
-  ZPagination,
-  ZButton,
-  ZTag,
-  ZConfirm
-} from '@deepsource/zeal'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import PaginationMixin from '~/mixins/paginationMixin'
 
@@ -330,17 +318,7 @@ const runStore = namespace('run/detail')
 @Component({
   components: {
     AnalyzerRun,
-    RunHeader,
-    ZIcon,
-    ZTabs,
-    ZTabList,
-    ZTabPane,
-    ZTabPanes,
-    ZTab,
-    ZPagination,
-    ZButton,
-    ZTag,
-    ZConfirm
+    RunHeader
   },
   middleware: [
     async function ({ store, route, redirect }) {

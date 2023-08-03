@@ -9,7 +9,7 @@
       <z-icon icon="alert-circle" size="small" class="mr-2" /> Update {{ ROLES[role] }} role to
       {{ ROLES[newRole] }}
     </div>
-    <p class="blur text-sm leading-relaxed text-vanilla-400">
+    <p class="text-sm leading-relaxed text-vanilla-400 blur">
       Are you sure you want to make <span class="text-vanilla-100">{{ userName }}</span>
       {{ formattedArticle }} <span class="text-vanilla-100">{{ ROLES[newRole] }}</span
       >? {{ roleAccessMessage }}
@@ -18,14 +18,9 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZConfirm } from '@deepsource/zeal'
 import { TeamMemberRoleChoices } from '~/types/types'
 
 @Component({
-  components: {
-    ZIcon,
-    ZConfirm
-  },
   layout: 'dashboard'
 })
 export default class UpdateRoleModal extends Vue {

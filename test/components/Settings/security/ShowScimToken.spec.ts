@@ -1,7 +1,7 @@
 import { render } from '@testing-library/vue'
 
 import ShowScimToken from '~/components/Settings/Security/ShowScimToken.vue'
-import { focusDirective } from '~/plugins/helpers/directives.client'
+import focusDirective from '~/utils/directives/focus'
 
 describe('[[ ShowScimToken ]]', () => {
   test('renders correctly with all props', async () => {

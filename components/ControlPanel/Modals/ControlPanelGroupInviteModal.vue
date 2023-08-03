@@ -24,13 +24,11 @@
 
 <script lang="ts">
 import { Component, Vue, namespace, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZModal } from '@deepsource/zeal'
 import { OrgGroupsActions } from '~/store/control-panel/groups'
 
 const groupManagementStore = namespace('control-panel/groups')
 
 @Component({
-  components: { ZButton, ZModal },
   name: 'ControlPanelGroupInviteModal'
 })
 export default class ControlPanelGroupInviteModal extends Vue {

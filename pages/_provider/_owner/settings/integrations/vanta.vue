@@ -102,7 +102,6 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZConfirm, ZDivider } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import IntegrationsDetailMixin, { IntegrationShortcodes } from '~/mixins/integrationsDetailMixin'
@@ -115,11 +114,6 @@ const SHORTCODE = IntegrationShortcodes.VANTA
  * Owner-level integrations page for Vanta
  */
 @Component({
-  components: {
-    ZButton,
-    ZConfirm,
-    ZDivider
-  },
   middleware: ['perm', 'teamOnly'],
   meta: {
     auth: {

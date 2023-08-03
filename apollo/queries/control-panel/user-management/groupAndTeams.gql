@@ -1,4 +1,4 @@
-query($id: ID!, $q: String, $first: Int, $offset: Int) {
+query ($id: ID!, $q: String, $first: Int, $offset: Int) {
   enterprise {
     group(id: $id) {
       id

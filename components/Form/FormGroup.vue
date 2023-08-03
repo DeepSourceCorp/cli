@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="label" class="flex items-center space-x-4">
-      <h5 class="text-sm uppercase font-medium tracking-wider block whitespace-nowrap">
+      <h5 class="block whitespace-nowrap text-sm font-medium uppercase tracking-wider">
         {{ label }}
       </h5>
       <div class="flex-grow">
@@ -15,11 +15,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZDivider } from '@deepsource/zeal'
 
-@Component({
-  components: { ZDivider }
-})
+@Component({})
 export default class FormGroup extends Vue {
   @Prop({})
   label: boolean

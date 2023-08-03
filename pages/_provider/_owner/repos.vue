@@ -84,7 +84,6 @@
 
 <script lang="ts">
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
-import { ZTag, ZInput, ZButton, ZIcon, ZPagination } from '@deepsource/zeal'
 
 import PaginationMixin from '~/mixins/paginationMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
@@ -122,13 +121,6 @@ export interface RepoTypeConfigData {
 }
 
 @Component({
-  components: {
-    ZTag,
-    ZInput,
-    ZButton,
-    ZIcon,
-    ZPagination
-  },
   middleware: [
     'validateProvider',
     async function ({ route, redirect }) {

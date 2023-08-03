@@ -33,16 +33,10 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZDivider, ZIcon } from '@deepsource/zeal'
 import { Component, ModelSync, Prop, Vue } from 'nuxt-property-decorator'
 
 @Component({
-  name: 'PaginationV2',
-  components: {
-    ZButton,
-    ZDivider,
-    ZIcon
-  }
+  name: 'PaginationV2'
 })
 export default class PaginationV2 extends Vue {
   @ModelSync('pageNumber', 'change', { type: Number })

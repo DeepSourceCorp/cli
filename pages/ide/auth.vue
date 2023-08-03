@@ -47,7 +47,7 @@
           </p>
 
           <div
-            class="items-left flex flex-col space-y-4 rounded-md border border-slate-400 bg-ink-300 bg-opacity-60 py-5 px-6 text-vanilla-100"
+            class="items-left flex flex-col space-y-4 rounded-md border border-slate-400 bg-ink-300 bg-opacity-60 px-6 py-5 text-vanilla-100"
           >
             <span class="text-xs font-medium uppercase tracking-wide text-slate-200">
               The vs code extension would be able to:
@@ -110,7 +110,6 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZCard, ZDivider, ZIcon } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import VerifyDeviceMutation from '~/apollo/mutations/cli/verifyDevice.gql'
@@ -123,12 +122,6 @@ import { IDEAuthActionTypes } from '~/store/account/ide'
 import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
-  components: {
-    ZButton,
-    ZCard,
-    ZIcon,
-    ZDivider
-  },
   data() {
     return {
       ideAuthMap: IDEAuthActionTypes

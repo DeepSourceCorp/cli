@@ -1,4 +1,4 @@
-mutation($input: TriggerAdHocRunInput!) {
+mutation ($input: TriggerAdHocRunInput!) {
   triggerAdhocRun(input: $input) {
     ok
   }

@@ -84,7 +84,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZAvatar, ZIcon, ZInput } from '@deepsource/zeal'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import ContextMixin from '~/mixins/contextMixin'
 
@@ -94,12 +93,6 @@ import { GsrProject, VcsProviderChoices } from '~/types/types'
 import { Context } from '@nuxt/types'
 
 @Component({
-  components: {
-    ZButton,
-    ZAvatar,
-    ZIcon,
-    ZInput
-  },
   middleware: [
     function ({ $config, error }: Context): void {
       if (!$config.gsrEnabled) {

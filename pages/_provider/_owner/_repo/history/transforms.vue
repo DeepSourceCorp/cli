@@ -67,7 +67,6 @@ import { Component, namespace, mixins } from 'nuxt-property-decorator'
 
 // Components
 import { SubNav, TransformBranches } from '@/components/History'
-import { ZButton } from '@deepsource/zeal'
 // Store & Types
 import { TransformListActions } from '@/store/transformerRun/list'
 import { TransformerRun, TransformerRunConnection } from '~/types/types'
@@ -81,8 +80,7 @@ const transformRunListStore = namespace('transformerRun/list')
 @Component({
   components: {
     TransformBranches,
-    SubNav,
-    ZButton
+    SubNav
   },
   middleware: ['validateProvider', 'featureGate'],
   meta: {

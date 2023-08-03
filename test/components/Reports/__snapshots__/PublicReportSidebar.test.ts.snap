@@ -1,22 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ PublicReportSidebar ]] renders PublicReportSidebar with all prop options: {"ownerLogin":"deepsourcelabs","reportId":"123456","ownerLogo":"https://static.deepsource.io/dashboard/images/empty-avatar.svg","reports":["owasp-top-10","sans-top-25","issue-distribution"]} 1`] = `
-"<aside data-testid=\\"public-report-sidebar\\" class=\\"fixed top-0 z-50 flex-shrink-0 w-64 h-screen overflow-y-auto px-6 py-6 duration-200 border-r hide-scroll lg:sticky space-y-7 md:pt-20 lg:pt-26 lg:px-4 transform-gpu bg-ink-400 border-slate-400 lg:border-none -left-full\\" data-outside-click-index=\\"0\\">
+"<aside data-testid=\\"public-report-sidebar\\" class=\\"hide-scroll fixed top-0 z-50 h-screen w-64 flex-shrink-0 transform-gpu space-y-7 overflow-y-auto border-r border-slate-400 bg-ink-400 px-6 py-6 duration-200 md:pt-20 lg:sticky lg:border-none lg:px-4 lg:pt-26 -left-full\\" data-outside-click-index=\\"0\\">
   <div class=\\"space-y-4\\">
-    <div class=\\"w-15 p-2.5 bg-ink-200 rounded-sm\\"><img src=\\"https://static.deepsource.io/dashboard/images/empty-avatar.svg\\" alt=\\"deepsourcelabs logo\\" width=\\"42\\"></div>
-    <h1 class=\\"text-vanilla-200 text-1.5xl font-semibold break-words\\">
+    <div class=\\"w-15 rounded-sm bg-ink-200 p-2.5\\"><img src=\\"https://static.deepsource.io/dashboard/images/empty-avatar.svg\\" alt=\\"deepsourcelabs logo\\" width=\\"42\\"></div>
+    <h1 class=\\"break-words text-1.5xl font-semibold text-vanilla-200\\">
       deepsourcelabs
     </h1>
   </div>
-  <div class=\\"flex flex-col gap-y-3\\"><span class=\\"text-xs font-semibold tracking-wider uppercase text-slate\\">Reports</span> <a class=\\"text-sm font-medium hover:text-vanilla-100 text-vanilla-400\\">
+  <div class=\\"flex flex-col gap-y-3\\"><span class=\\"text-xs font-semibold uppercase tracking-wider text-slate\\">Reports</span> <a class=\\"text-sm font-medium hover:text-vanilla-100 text-vanilla-400\\">
       OWASP® Top 10
     </a><a class=\\"text-sm font-medium hover:text-vanilla-100 text-vanilla-400\\">
       CWE/SANS Top 25
     </a><a class=\\"text-sm font-medium hover:text-vanilla-100 text-vanilla-400\\">
       Issue Distribution
     </a></div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\"></zdivider-stub>
-  <div class=\\"flex flex-col text-sm gap-y-3 text-slate\\"><a href=\\"#summary\\" class=\\"hover:text-vanilla-100 text-vanilla-400\\">
+  <zdivider-stub color=\\"ink-200\\" margin=\\"my-0\\"></zdivider-stub>
+  <div class=\\"flex flex-col gap-y-3 text-sm text-slate\\"><a href=\\"#summary\\" class=\\"hover:text-vanilla-100 text-vanilla-400\\">
       — Summary
     </a><a href=\\"#intended-use\\" class=\\"hover:text-vanilla-100 text-vanilla-400\\">
       — Intended use
@@ -25,7 +25,7 @@ exports[`[[ PublicReportSidebar ]] renders PublicReportSidebar with all prop opt
     </a><a href=\\"#about\\" class=\\"hover:text-vanilla-100 text-vanilla-400\\">
       — About DeepSource
     </a></div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <zdivider-stub color=\\"ink-200\\" margin=\\"my-0\\"></zdivider-stub>
   <publicreportreposection-stub token=\\"\\" report-id=\\"123456\\"></publicreportreposection-stub>
 </aside>"
 `;

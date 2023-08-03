@@ -19,7 +19,7 @@
 
       <div
         v-if="historicalValuesLoading"
-        class="h-report-chart mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
+        class="h-report-chart mx-5 my-1.5 animate-pulse rounded-lg bg-ink-300"
       ></div>
       <div v-else>
         <template v-if="shouldChartBeShown">
@@ -62,7 +62,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZChart } from '@deepsource/zeal'
 
 import { shortenLargeNumber } from '~/utils/string'
 
@@ -78,7 +77,6 @@ import { getFormattedCodeHealthChartData } from '~/utils/reports'
  */
 @Component({
   layout: 'repository',
-  components: { ZChart },
   methods: {
     shortenLargeNumber
   }

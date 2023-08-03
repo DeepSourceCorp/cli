@@ -9,7 +9,7 @@
 
     <main class="space-y-7">
       <div class="space-y-5">
-        <z-alert type="info" class="border border-robin border-opacity-10 bg-opacity-5 pt-2 pb-3">
+        <z-alert type="info" class="border border-robin border-opacity-10 bg-opacity-5 pb-3 pt-2">
           <div class="space-y-2 text-xs font-medium text-robin-400">
             <p class="text-sm leading-8">How does it work?</p>
             <p class="font-normal leading-6 text-robin-150">
@@ -64,7 +64,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { ZAlert, ZIcon } from '@deepsource/zeal'
 
 import repositoryId from '~/apollo/queries/repository/id.gql'
 import codeCoverage from '~/apollo/queries/repository/settings/codeCoverage.gql'
@@ -81,7 +80,6 @@ import {
 
 @Component({
   layout: 'repository',
-  components: { ZAlert, ZIcon },
   middleware: ['perm'],
   meta: {
     auth: {

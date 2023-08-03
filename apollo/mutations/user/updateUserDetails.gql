@@ -1,4 +1,4 @@
-mutation($input: UpdateUserDetailsInput!) {
+mutation ($input: UpdateUserDetailsInput!) {
   updateUserDetails(input: $input) {
     viewer {
       fullName

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/vue'
 import { OccurrenceTags } from '~/components/Reports'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 
 test('renders OccurrenceTags with all prop options', () => {
   const props = {

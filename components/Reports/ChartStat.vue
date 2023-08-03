@@ -1,15 +1,15 @@
 <template>
-  <div class="text-xs sm:h-14 flex flex-col justify-between">
-    <p class="text-vanilla-400 mb-2 font-semibold uppercase tracking-wider leading-7">
+  <div class="flex flex-col justify-between text-xs sm:h-14">
+    <p class="mb-2 font-semibold uppercase leading-7 tracking-wider text-vanilla-400">
       <slot name="title">{{ title }}</slot>
     </p>
 
     <slot>
-      <div v-if="loading" class="h-6 mt-px rounded-sm bg-ink-300 animate-pulse"></div>
+      <div v-if="loading" class="mt-px h-6 animate-pulse rounded-sm bg-ink-300"></div>
       <p
         v-else
         v-tooltip="value > 1000 ? `${value}` : ''"
-        class="text-base text-vanilla-100 font-semibold leading-8"
+        class="text-base font-semibold leading-8 text-vanilla-100"
       >
         {{ shortenLargeNumber(value) }}
       </p>

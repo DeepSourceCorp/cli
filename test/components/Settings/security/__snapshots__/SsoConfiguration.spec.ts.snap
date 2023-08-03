@@ -10,17 +10,17 @@ exports[`[[ SsoConfiguration ]] renders configured IDP data correctly 1`] = `
         When configured, users whose email address ends in the specified domain would be allowed
         to sign in using your SSO provider.
         <a href=\\"https://docs.deepsource.com/docs/sso\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"inline-flex items-center gap-x-0.5 text-vanilla-100\\"><span>Learn more</span>
-          <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"current\\"></zicon-stub></a></p>
+          <zicon-stub icon=\\"arrow-right\\" color=\\"current\\" size=\\"x-small\\"></zicon-stub></a></p>
       <div class=\\"mt-3 flex w-full items-stretch divide-x divide-ink-200 rounded-sm border border-ink-200 bg-ink-400\\">
-        <zinput-stub name=\\"\\" value=\\"asdf\\" label=\\"\\" type=\\"text\\" padding=\\"p-0 px-3\\" placeholder=\\"yourdomain.com\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow text-xs leading-5\\"></zinput-stub> <button class=\\"flex flex-shrink-0 items-center gap-x-1 bg-ink-300 p-3 text-xs leading-3 text-vanilla-100 hover:bg-ink-200\\">
-          <zicon-stub icon=\\"link-2\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"\\"></zicon-stub> <span>Request verification</span>
+        <zinput-stub padding=\\"p-0 px-3\\" placeholder=\\"yourdomain.com\\" value=\\"asdf\\" class=\\"flex-grow text-xs leading-5\\"></zinput-stub> <button class=\\"flex flex-shrink-0 items-center gap-x-1 bg-ink-300 p-3 text-xs leading-3 text-vanilla-100 hover:bg-ink-200\\">
+          <zicon-stub icon=\\"link-2\\" color=\\"vanilla-100\\" size=\\"x-small\\" class=\\"\\"></zicon-stub> <span>Request verification</span>
         </button>
       </div>
       <!---->
     </div>
     <div class=\\"rounded-md border border-ink-200 bg-ink-300 p-4\\">
       <div class=\\"float-right rounded-sm border border-ink-50 bg-ink-200 opacity-60\\">
-        <zbutton-stub color=\\"vanilla-100\\" iconcolor=\\"\\" label=\\"Configure\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"sliders\\" iconsize=\\"x-small\\"></zbutton-stub>
+        <zbutton-stub disabled=\\"true\\" button-type=\\"ghost\\" color=\\"vanilla-100\\" icon=\\"sliders\\" icon-size=\\"x-small\\" label=\\"Configure\\" size=\\"small\\"></zbutton-stub>
       </div>
       <p class=\\"text-sm leading-4 tracking-wide text-vanilla-300\\">Identity provider</p>
       <p class=\\"mt-1.5 text-xs leading-5 text-vanilla-400\\">
@@ -28,7 +28,7 @@ exports[`[[ SsoConfiguration ]] renders configured IDP data correctly 1`] = `
       </p>
       <zalert-stub type=\\"info\\" class=\\"mt-3\\">
         <div class=\\"flex items-center gap-x-2\\">
-          <zicon-stub icon=\\"solid-alert-circle\\" size=\\"small\\" position=\\"\\" color=\\"robin-400\\"></zicon-stub> <span>You need to first verify your domain to configure SAML Single Sign-On.</span>
+          <zicon-stub icon=\\"solid-alert-circle\\" color=\\"robin-400\\"></zicon-stub> <span>You need to first verify your domain to configure SAML Single Sign-On.</span>
         </div>
       </zalert-stub>
       <!---->
@@ -47,17 +47,17 @@ exports[`[[ SsoConfiguration ]] renders correctly with all SSO setup states 1`] 
         When configured, users whose email address ends in the specified domain would be allowed
         to sign in using your SSO provider.
         <a href=\\"https://docs.deepsource.com/docs/sso\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"inline-flex items-center gap-x-0.5 text-vanilla-100\\"><span>Learn more</span>
-          <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"current\\"></zicon-stub></a></p>
+          <zicon-stub icon=\\"arrow-right\\" color=\\"current\\" size=\\"x-small\\"></zicon-stub></a></p>
       <div class=\\"mt-3 flex w-full items-stretch divide-x divide-ink-200 rounded-sm border border-ink-200 bg-ink-400\\">
-        <zinput-stub name=\\"\\" value=\\"asdf\\" label=\\"\\" type=\\"text\\" padding=\\"p-0 px-3\\" placeholder=\\"yourdomain.com\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow text-xs leading-5\\"></zinput-stub> <button class=\\"flex flex-shrink-0 items-center gap-x-1 bg-ink-300 p-3 text-xs leading-3 text-vanilla-100 hover:bg-ink-200\\">
-          <zicon-stub icon=\\"link-2\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"\\"></zicon-stub> <span>Request verification</span>
+        <zinput-stub padding=\\"p-0 px-3\\" placeholder=\\"yourdomain.com\\" value=\\"asdf\\" class=\\"flex-grow text-xs leading-5\\"></zinput-stub> <button class=\\"flex flex-shrink-0 items-center gap-x-1 bg-ink-300 p-3 text-xs leading-3 text-vanilla-100 hover:bg-ink-200\\">
+          <zicon-stub icon=\\"link-2\\" color=\\"vanilla-100\\" size=\\"x-small\\" class=\\"\\"></zicon-stub> <span>Request verification</span>
         </button>
       </div>
       <!---->
     </div>
     <div class=\\"rounded-md border border-ink-200 bg-ink-300 p-4\\">
       <div class=\\"float-right rounded-sm border border-ink-50 bg-ink-200 opacity-60\\">
-        <zbutton-stub color=\\"vanilla-100\\" iconcolor=\\"\\" label=\\"Configure\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"sliders\\" iconsize=\\"x-small\\"></zbutton-stub>
+        <zbutton-stub disabled=\\"true\\" button-type=\\"ghost\\" color=\\"vanilla-100\\" icon=\\"sliders\\" icon-size=\\"x-small\\" label=\\"Configure\\" size=\\"small\\"></zbutton-stub>
       </div>
       <p class=\\"text-sm leading-4 tracking-wide text-vanilla-300\\">Identity provider</p>
       <p class=\\"mt-1.5 text-xs leading-5 text-vanilla-400\\">
@@ -65,7 +65,7 @@ exports[`[[ SsoConfiguration ]] renders correctly with all SSO setup states 1`] 
       </p>
       <zalert-stub type=\\"info\\" class=\\"mt-3\\">
         <div class=\\"flex items-center gap-x-2\\">
-          <zicon-stub icon=\\"solid-alert-circle\\" size=\\"small\\" position=\\"\\" color=\\"robin-400\\"></zicon-stub> <span>You need to first verify your domain to configure SAML Single Sign-On.</span>
+          <zicon-stub icon=\\"solid-alert-circle\\" color=\\"robin-400\\"></zicon-stub> <span>You need to first verify your domain to configure SAML Single Sign-On.</span>
         </div>
       </zalert-stub>
       <!---->
@@ -84,17 +84,17 @@ exports[`[[ SsoConfiguration ]] renders correctly with all SSO setup states 2`] 
         When configured, users whose email address ends in the specified domain would be allowed
         to sign in using your SSO provider.
         <a href=\\"https://docs.deepsource.com/docs/sso\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"inline-flex items-center gap-x-0.5 text-vanilla-100\\"><span>Learn more</span>
-          <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"current\\"></zicon-stub></a></p>
+          <zicon-stub icon=\\"arrow-right\\" color=\\"current\\" size=\\"x-small\\"></zicon-stub></a></p>
       <div class=\\"mt-3 flex w-full items-stretch divide-x divide-ink-200 rounded-sm border border-ink-200 bg-ink-400\\">
-        <zinput-stub name=\\"\\" value=\\"asdf\\" label=\\"\\" type=\\"text\\" padding=\\"p-0 px-3\\" placeholder=\\"yourdomain.com\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow text-xs leading-5\\"></zinput-stub> <button class=\\"flex flex-shrink-0 items-center gap-x-1 bg-ink-300 p-3 text-xs leading-3 text-vanilla-100 hover:bg-ink-200\\">
-          <zicon-stub icon=\\"link-2\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"\\"></zicon-stub> <span>Request verification</span>
+        <zinput-stub padding=\\"p-0 px-3\\" placeholder=\\"yourdomain.com\\" value=\\"asdf\\" class=\\"flex-grow text-xs leading-5\\"></zinput-stub> <button class=\\"flex flex-shrink-0 items-center gap-x-1 bg-ink-300 p-3 text-xs leading-3 text-vanilla-100 hover:bg-ink-200\\">
+          <zicon-stub icon=\\"link-2\\" color=\\"vanilla-100\\" size=\\"x-small\\" class=\\"\\"></zicon-stub> <span>Request verification</span>
         </button>
       </div>
       <!---->
     </div>
     <div class=\\"rounded-md border border-ink-200 bg-ink-300 p-4\\">
       <div class=\\"float-right rounded-sm border border-ink-50 bg-ink-200 opacity-60\\">
-        <zbutton-stub color=\\"vanilla-100\\" iconcolor=\\"\\" label=\\"Configure\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"sliders\\" iconsize=\\"x-small\\"></zbutton-stub>
+        <zbutton-stub disabled=\\"true\\" button-type=\\"ghost\\" color=\\"vanilla-100\\" icon=\\"sliders\\" icon-size=\\"x-small\\" label=\\"Configure\\" size=\\"small\\"></zbutton-stub>
       </div>
       <p class=\\"text-sm leading-4 tracking-wide text-vanilla-300\\">Identity provider</p>
       <p class=\\"mt-1.5 text-xs leading-5 text-vanilla-400\\">
@@ -102,7 +102,7 @@ exports[`[[ SsoConfiguration ]] renders correctly with all SSO setup states 2`] 
       </p>
       <zalert-stub type=\\"info\\" class=\\"mt-3\\">
         <div class=\\"flex items-center gap-x-2\\">
-          <zicon-stub icon=\\"solid-alert-circle\\" size=\\"small\\" position=\\"\\" color=\\"robin-400\\"></zicon-stub> <span>You need to first verify your domain to configure SAML Single Sign-On.</span>
+          <zicon-stub icon=\\"solid-alert-circle\\" color=\\"robin-400\\"></zicon-stub> <span>You need to first verify your domain to configure SAML Single Sign-On.</span>
         </div>
       </zalert-stub>
       <!---->
@@ -121,17 +121,17 @@ exports[`[[ SsoConfiguration ]] renders correctly with all SSO setup states 3`] 
         When configured, users whose email address ends in the specified domain would be allowed
         to sign in using your SSO provider.
         <a href=\\"https://docs.deepsource.com/docs/sso\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"inline-flex items-center gap-x-0.5 text-vanilla-100\\"><span>Learn more</span>
-          <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"current\\"></zicon-stub></a></p>
+          <zicon-stub icon=\\"arrow-right\\" color=\\"current\\" size=\\"x-small\\"></zicon-stub></a></p>
       <div class=\\"mt-3 flex w-full items-stretch divide-x divide-ink-200 rounded-sm border border-ink-200 bg-ink-400\\">
-        <zinput-stub name=\\"\\" value=\\"asdf\\" label=\\"\\" type=\\"text\\" padding=\\"p-0 px-3\\" placeholder=\\"yourdomain.com\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow text-xs leading-5\\"></zinput-stub> <button class=\\"flex flex-shrink-0 items-center gap-x-1 bg-ink-300 p-3 text-xs leading-3 text-vanilla-100 hover:bg-ink-200\\">
-          <zicon-stub icon=\\"link-2\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"\\"></zicon-stub> <span>Request verification</span>
+        <zinput-stub padding=\\"p-0 px-3\\" placeholder=\\"yourdomain.com\\" value=\\"asdf\\" class=\\"flex-grow text-xs leading-5\\"></zinput-stub> <button class=\\"flex flex-shrink-0 items-center gap-x-1 bg-ink-300 p-3 text-xs leading-3 text-vanilla-100 hover:bg-ink-200\\">
+          <zicon-stub icon=\\"link-2\\" color=\\"vanilla-100\\" size=\\"x-small\\" class=\\"\\"></zicon-stub> <span>Request verification</span>
         </button>
       </div>
       <!---->
     </div>
     <div class=\\"rounded-md border border-ink-200 bg-ink-300 p-4\\">
       <div class=\\"float-right rounded-sm border border-ink-50 bg-ink-200 opacity-60\\">
-        <zbutton-stub color=\\"vanilla-100\\" iconcolor=\\"\\" label=\\"Configure\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"sliders\\" iconsize=\\"x-small\\"></zbutton-stub>
+        <zbutton-stub disabled=\\"true\\" button-type=\\"ghost\\" color=\\"vanilla-100\\" icon=\\"sliders\\" icon-size=\\"x-small\\" label=\\"Configure\\" size=\\"small\\"></zbutton-stub>
       </div>
       <p class=\\"text-sm leading-4 tracking-wide text-vanilla-300\\">Identity provider</p>
       <p class=\\"mt-1.5 text-xs leading-5 text-vanilla-400\\">
@@ -139,7 +139,7 @@ exports[`[[ SsoConfiguration ]] renders correctly with all SSO setup states 3`] 
       </p>
       <zalert-stub type=\\"info\\" class=\\"mt-3\\">
         <div class=\\"flex items-center gap-x-2\\">
-          <zicon-stub icon=\\"solid-alert-circle\\" size=\\"small\\" position=\\"\\" color=\\"robin-400\\"></zicon-stub> <span>You need to first verify your domain to configure SAML Single Sign-On.</span>
+          <zicon-stub icon=\\"solid-alert-circle\\" color=\\"robin-400\\"></zicon-stub> <span>You need to first verify your domain to configure SAML Single Sign-On.</span>
         </div>
       </zalert-stub>
       <!---->
@@ -158,24 +158,24 @@ exports[`[[ SsoConfiguration ]] renders correctly with all SSO setup states 4`] 
         When configured, users whose email address ends in the specified domain would be allowed
         to sign in using your SSO provider.
         <a href=\\"https://docs.deepsource.com/docs/sso\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" class=\\"inline-flex items-center gap-x-0.5 text-vanilla-100\\"><span>Learn more</span>
-          <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"current\\"></zicon-stub></a></p>
+          <zicon-stub icon=\\"arrow-right\\" color=\\"current\\" size=\\"x-small\\"></zicon-stub></a></p>
       <div class=\\"juniper-highlight-card mt-3\\">
         <div class=\\"flex items-center gap-x-2\\">
           <div class=\\"h-1.5 w-1.5 rounded-full bg-juniper-500\\"></div> <span class=\\"text-sm leading-4 text-juniper-300\\">https://deepsource.io is verified.</span>
         </div>
       </div>
-      <hr class=\\"-mx-4 mt-4 mb-3 border-ink-200\\">
+      <hr class=\\"-mx-4 mb-3 mt-4 border-ink-200\\">
       <div class=\\"-mb-1 flex flex-wrap items-center justify-between\\">
         <p class=\\"text-xs leading-4 text-vanilla-400\\">
           Please contact us to update your team's domain.
         </p> <a class=\\"flex items-center gap-x-1 rounded-sm border border-ink-50 bg-ink-200 px-2.5 py-1.5 text-xs leading-none\\">
-          <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Contact support</span>
+          <zicon-stub icon=\\"mail\\" size=\\"x-small\\"></zicon-stub> <span>Contact support</span>
         </a>
       </div>
     </div>
     <div class=\\"rounded-md border border-ink-200 bg-ink-300 p-4\\">
       <div class=\\"float-right rounded-sm border border-ink-50 bg-ink-200\\">
-        <zbutton-stub color=\\"vanilla-100\\" iconcolor=\\"\\" label=\\"Configure\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"sliders\\" iconsize=\\"x-small\\"></zbutton-stub>
+        <zbutton-stub button-type=\\"ghost\\" color=\\"vanilla-100\\" icon=\\"sliders\\" icon-size=\\"x-small\\" label=\\"Configure\\" size=\\"small\\"></zbutton-stub>
       </div>
       <p class=\\"text-sm leading-4 tracking-wide text-vanilla-300\\">Identity provider</p>
       <p class=\\"mt-1.5 text-xs leading-5 text-vanilla-400\\">

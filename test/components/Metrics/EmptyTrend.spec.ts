@@ -1,6 +1,6 @@
 import { render } from '@testing-library/vue'
 import { EmptyTrend, TrendTitle } from '~/components/Metrics'
-import { VTooltip } from 'v-tooltip'
+import { VTooltip } from 'floating-vue'
 import { VueConstructor } from 'vue'
 import { MetricType } from '~/types/metric'
 import { cartesian, generateGenericProps } from '~/test/utils'

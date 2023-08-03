@@ -28,13 +28,11 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import InputWrapper from './InputWrapper.vue'
-import { ZInput } from '@deepsource/zeal'
 import { ModelSync } from 'vue-property-decorator'
 
 @Component({
   components: {
-    InputWrapper,
-    ZInput
+    InputWrapper
   }
 })
 export default class TextInput extends Vue {

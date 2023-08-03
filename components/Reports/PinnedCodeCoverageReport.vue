@@ -1,8 +1,8 @@
 <template>
-  <chart-container :is-widget="true" class="pt-4 pb-0.5" @mouseleave.native="hideReportControls">
+  <chart-container :is-widget="true" class="pb-0.5 pt-4" @mouseleave.native="hideReportControls">
     <template #report-header>
-      <div class="inline-flex items-center justify-between w-full h-8">
-        <h3 class="inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal">
+      <div class="inline-flex h-8 w-full items-center justify-between">
+        <h3 class="inline-flex items-center gap-x-2 text-sm font-normal text-vanilla-100">
           {{ label }}
 
           <z-icon
@@ -10,7 +10,7 @@
             v-tooltip="{ content: helpText, delay: { show: 0, hide: 100 } }"
             icon="help"
             color="vanilla-400"
-            class="hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0"
+            class="hidden flex-shrink-0 stroke-1.5 transition-opacity duration-75 lg:inline"
           />
         </h3>
 
@@ -28,21 +28,21 @@
         <!-- Report controls section for larger screens -->
         <div
           :class="allowPinningReports ? 'w-19' : 'w-11'"
-          class="hidden lg:block h-10 relative"
+          class="relative hidden h-10 lg:block"
           @mouseenter="showReportControls"
         >
           <transition name="slide-fade">
             <div
               v-if="!revealReportControls"
               :key="1"
-              class="w-full h-full inline-flex items-center justify-end absolute top-0 left-0"
+              class="absolute left-0 top-0 inline-flex h-full w-full items-center justify-end"
             >
               <z-icon icon="more-horizontal" />
             </div>
             <div
               v-else
               :key="2"
-              class="w-full h-full inline-flex items-center justify-end gap-x-2 absolute top-0 left-0"
+              class="absolute left-0 top-0 inline-flex h-full w-full items-center justify-end gap-x-2"
             >
               <z-button
                 v-tooltip="'View full report'"
@@ -82,7 +82,7 @@
       <!-- Skeleton loader for the case in which the report gets swapped -->
       <div
         v-if="isReportWidgetDataFetch || isReportGettingSwapped"
-        class="h-72 mx-5 mt-5 rounded-lg bg-ink-300 animate-pulse"
+        class="mx-5 mt-5 h-72 animate-pulse rounded-lg bg-ink-300"
       ></div>
 
       <!-- Skeleton loader for the case when the report controls change -->
@@ -113,7 +113,6 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZButton, ZIcon } from '@deepsource/zeal'
 
 import {
   CompiledPinnedReportT,
@@ -128,7 +127,7 @@ import { RepositoryCoverageReportItem, ReportLevel } from '~/types/types'
 /**
  * Component with the markup for code coverage report
  */
-@Component({ name: 'PinnedCodeCoverageReport', components: { ZButton, ZIcon } })
+@Component({ name: 'PinnedCodeCoverageReport' })
 export default class PinnedCodeCoverageReport extends Vue {
   @Prop({ required: true })
   allowPinningReports: boolean

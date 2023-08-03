@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-1 gap-y-4 md:grid-cols-2 md:gap-y-0">
-    <div class="space-y-1.5 max-w-2xs">
+    <div class="max-w-2xs space-y-1.5">
       <h2 class="text-sm text-vanilla-300">Event alerts</h2>
       <p class="text-xs text-vanilla-400">
         Events for which you receive notification in your Slack channel.
@@ -19,16 +19,11 @@
 </template>
 
 <script lang="ts">
-import { ZIcon } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import IntegrationsDetailMixin from '~/mixins/integrationsDetailMixin'
 
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 
 /**
  * Component that is responsible to render `Event alerts` section on Slack integration detailed view

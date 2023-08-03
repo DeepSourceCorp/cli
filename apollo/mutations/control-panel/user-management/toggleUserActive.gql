@@ -1,4 +1,4 @@
-mutation($userId: ID!, $isActive: Boolean!) {
+mutation ($userId: ID!, $isActive: Boolean!) {
   toggleUserActive(input: { userId: $userId, isActive: $isActive }) {
     ok
   }

@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders InferredArtifact with all prop options: {"vcsUrl":"https://github.com/deepsourcelabs/bifrost/pull/32","number":32} 1`] = `
-"<div class=\\"w-full inline-flex gap-x-1.5 sm:items-center bg-ink-300 p-3 text-sm text-vanilla-400 border-b border-ink-200\\">
-  <zicon-stub icon=\\"artifact\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 mt-1 sm:mt-0 inline-block sm:hidden\\"></zicon-stub>
-  <zicon-stub icon=\\"artifact\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 mt-1 sm:mt-0 hidden sm:inline-block\\"></zicon-stub> <span>
+"<div class=\\"inline-flex w-full gap-x-1.5 border-b border-ink-200 bg-ink-300 p-3 text-sm text-vanilla-400 sm:items-center\\">
+  <zicon-stub icon=\\"artifact\\" size=\\"x-small\\" class=\\"mt-1 inline-block flex-shrink-0 sm:mt-0 sm:hidden\\"></zicon-stub>
+  <zicon-stub icon=\\"artifact\\" size=\\"small\\" class=\\"mt-1 hidden flex-shrink-0 sm:mt-0 sm:inline-block\\"></zicon-stub> <span>
     This check was inferred using the coverage report sent for
-    <a href=\\"https://github.com/deepsourcelabs/bifrost/pull/32\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" class=\\"inline-flex items-center text-vanilla-100 hover:underline hover:cursor-pointer\\">
+    <a href=\\"https://github.com/deepsourcelabs/bifrost/pull/32\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" class=\\"inline-flex items-center text-vanilla-100 hover:cursor-pointer hover:underline\\">
       PR #32
-      <zicon-stub icon=\\"arrow-up-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 mt-1 inline-block sm:hidden\\"></zicon-stub> <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 mt-0.5 hidden sm:inline-block\\"></zicon-stub></a></span>
+      <zicon-stub icon=\\"arrow-up-right\\" size=\\"x-small\\" class=\\"mt-1 inline-block flex-shrink-0 sm:hidden\\"></zicon-stub> <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" class=\\"mt-0.5 hidden flex-shrink-0 sm:inline-block\\"></zicon-stub></a></span>
 </div>"
 `;

@@ -2,13 +2,13 @@
   <section class="grid grid-cols-1 lg:grid-cols-16-fr">
     <reports-sidebar :level="ReportLevel.Owner" :show-public-reports="hasPublicReportViewAccess" />
 
-    <div class="flex flex-col p-4 gap-y-2">
+    <div class="flex flex-col gap-y-2 p-4">
       <page-title
         v-if="!viewingPublicReports"
         description-width-class="max-w-xl"
         :title="reportTitle"
         :description="reportDescription"
-        class="flex-col md:flex-row gap-y-4"
+        class="flex-col gap-y-4 md:flex-row"
       >
         <template v-if="hasPublicReportEditAccess" #actions>
           <z-button
@@ -47,8 +47,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZTab, ZButton, ZIcon, ZMenu, ZMenuItem, ZSplitButtonDropdown } from '@deepsource/zeal'
-import { ZDivider } from '@deepsource/zeal'
 
 import { TeamPerms } from '~/types/permTypes'
 import { ReportMeta, ReportPageT } from '~/types/reportTypes'
@@ -62,15 +60,6 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
  * Parent page for reports UI.
  */
 @Component({
-  components: {
-    ZTab,
-    ZButton,
-    ZIcon,
-    ZMenu,
-    ZMenuItem,
-    ZSplitButtonDropdown,
-    ZDivider
-  },
   layout: 'dashboard',
   middleware: [
     'perm',

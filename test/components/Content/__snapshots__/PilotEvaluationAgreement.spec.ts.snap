@@ -2,7 +2,7 @@
 
 exports[`[[ PilotEvaluationAgreement ]] renders the content supplied 1`] = `
 "<div class=\\"mx-auto max-w-4xl space-y-6\\">
-  <div class=\\"space-y-8 bg-vanilla-100 rounded-md p-12 text-ink-400\\">
+  <div class=\\"space-y-8 rounded-md bg-vanilla-100 p-12 text-ink-400\\">
     <div class=\\"space-y-8 text-center text-lg font-bold\\">
       <h1>DEEPSOURCE</h1>
       <h2>PILOT EVALUATION AGREEMENT</h2>

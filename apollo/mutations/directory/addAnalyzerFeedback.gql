@@ -1,4 +1,4 @@
-mutation($input: AddAnalyzerFeedbackInput!) {
+mutation ($input: AddAnalyzerFeedbackInput!) {
   addAnalyzerFeedback(input: $input) {
     ok
   }

@@ -1,4 +1,4 @@
-mutation($ownerId: ID!) {
+mutation ($ownerId: ID!) {
   verifyGsrPermissions(input: { ownerId: $ownerId }) {
     ok
   }

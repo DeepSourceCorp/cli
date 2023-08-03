@@ -1,4 +1,4 @@
-import { ZMenu } from '@deepsource/zeal'
+import ZMenu from '@/components/zeal/ZMenu'
 import { render } from '@testing-library/vue'
 import { ContextSwitcher } from '~/components/Layout/Sidebar'
 import { createLocalVue, RouterLinkStub } from '@vue/test-utils'

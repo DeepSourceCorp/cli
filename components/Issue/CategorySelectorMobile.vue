@@ -3,7 +3,7 @@
     <div class="filter-wrapper fixed z-20 flex w-screen justify-center p-3 pb-8 lg:hidden">
       <z-button
         button-type="primary"
-        class="flex items-center min-w-48"
+        class="flex min-w-48 items-center"
         @click="isModalOpen = true"
       >
         <div class="inline-flex w-full items-center gap-x-2 leading-tight">
@@ -58,7 +58,6 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZModal } from '@deepsource/zeal'
 
 import { shortenLargeNumber } from '~/utils/string'
 import { IssueFilterChoice } from '~/types/issues'
@@ -67,7 +66,6 @@ import { IssueFilterChoice } from '~/types/issues'
  * Component to add issue filtering based on category on mobiles for a repo
  */
 @Component({
-  components: { ZButton, ZIcon, ZModal },
   name: 'CategorySelectorMobile',
   methods: { shortenLargeNumber }
 })

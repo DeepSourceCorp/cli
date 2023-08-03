@@ -1,20 +1,20 @@
 <template>
-  <div class="col-span-1 border rounded-md border-slate-400 xl:col-span-2">
+  <div class="col-span-1 rounded-md border border-slate-400 xl:col-span-2">
     <div v-if="completion > 0" class="p-2">Account setup is {{ completion }}% complete</div>
     <div v-else class="p-2">Setup your account</div>
-    <div class="w-full h-1 bg-ink-200">
+    <div class="h-1 w-full bg-ink-200">
       <div
-        class="h-1 transition-all duration-100 ease-in-out transform bg-juniper"
+        class="h-1 transform bg-juniper transition-all duration-100 ease-in-out"
         :style="{
           width: `${completion}%`
         }"
       ></div>
     </div>
-    <div class="p-4 space-y-6">
+    <div class="space-y-6 p-4">
       <div v-for="(step, index) in steps" :key="index" class="flex items-start space-x-2">
         <div
-          class="grid flex-shrink-0 w-4 h-4 rounded-full place-content-center"
-          :class="getStatus(step) ? 'bg-juniper stroke-4' : 'border-2 border-slate-400'"
+          class="grid h-4 w-4 flex-shrink-0 place-content-center rounded-full"
+          :class="getStatus(step) ? 'stroke-4 bg-juniper' : 'border-2 border-slate-400'"
           :style="{
             'stroke-width': 4
           }"
@@ -25,7 +25,7 @@
           <h5
             class="leading-none"
             :class="{
-              'line-through text-vanilla-400': getStatus(step),
+              'text-vanilla-400 line-through': getStatus(step),
               'text-vanilla-200': !getStatus(step)
             }"
           >
@@ -46,9 +46,10 @@
               size="small"
               button-type="secondary"
               :icon="step.icon"
-              @click="step.action"
-              >{{ step.actionLabel }}</z-button
+              v-on="step.actions"
             >
+              {{ step.actionLabel }}
+            </z-button>
           </template>
         </div>
       </div>
@@ -76,7 +77,6 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZModal } from '@deepsource/zeal'
 
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import { AddRepoModal } from '@/components/AddRepo'
@@ -89,7 +89,7 @@ interface SetupStep {
   shortcode: string
   display_name: string
   description: string
-  action?: () => void
+  actions?: Record<string, () => void>
   actionLabel?: string
   icon?: string
   isSupported: boolean
@@ -97,9 +97,6 @@ interface SetupStep {
 
 @Component({
   components: {
-    ZButton,
-    ZIcon,
-    ZModal,
     AddRepoModal,
     InviteMembersModal,
     InstallAutofixModal
@@ -111,36 +108,6 @@ export default class AccountSetupCard extends mixins(OwnerDetailMixin) {
 
   @Prop({ required: true })
   provider: string
-
-  setupOptions: Record<string, Partial<SetupStep>> = {}
-
-  created() {
-    this.setupOptions = {
-      'activate-repository': {
-        action: this.activateRepo,
-        actionLabel: 'Activate repo',
-        icon: 'plus',
-        isSupported: true
-      },
-      'install-autofix': {
-        action: this.installAutofix,
-        actionLabel: 'Install Autofix',
-        icon: 'autofix',
-        isSupported: this.$gateKeeper.provider(AppFeatures.AUTOFIX, this.provider)
-      },
-      'invite-team': {
-        actionLabel: 'Invite team',
-        icon: 'user-plus',
-        isSupported: true
-      },
-      'configure-transformers': {
-        action: this.activateRepo,
-        actionLabel: 'Setup Transformers',
-        icon: 'plus',
-        isSupported: this.$gateKeeper.provider(AppFeatures.TRANSFORMS, this.provider)
-      }
-    }
-  }
 
   async fetch(): Promise<void> {
     await this.fetchAccountSetupStatus({
@@ -160,25 +127,55 @@ export default class AccountSetupCard extends mixins(OwnerDetailMixin) {
   showAddRepoModal = false
   showInstallAutofixModal = false
 
-  activateRepo() {
-    this.showAddRepoModal = true
-  }
-
-  installAutofix() {
-    this.showInstallAutofixModal = true
-  }
-
   get steps(): Array<SetupStep> | undefined {
+    const setupOptions: Record<string, Partial<SetupStep>> = {
+      'activate-repository': {
+        actions: {
+          click: () => {
+            this.showAddRepoModal = true
+          }
+        },
+        actionLabel: 'Activate repo',
+        icon: 'plus',
+        isSupported: true
+      },
+      'install-autofix': {
+        actions: {
+          click: () => {
+            this.showInstallAutofixModal = true
+          }
+        },
+        actionLabel: 'Install Autofix',
+        icon: 'autofix',
+        isSupported: this.$gateKeeper.provider(AppFeatures.AUTOFIX, this.provider)
+      },
+      'invite-team': {
+        actionLabel: 'Invite team',
+        icon: 'user-plus',
+        isSupported: true
+      },
+      'configure-transformers': {
+        actions: {
+          click: () => {
+            this.showAddRepoModal = true
+          }
+        },
+        actionLabel: 'Setup Transformers',
+        icon: 'plus',
+        isSupported: this.$gateKeeper.provider(AppFeatures.TRANSFORMS, this.provider)
+      }
+    }
+
     return (this.owner.accountSetupStatus as Array<SetupStep>)
       .filter((step) => {
-        const { isSupported } = this.setupOptions[step.shortcode]
+        const { isSupported } = setupOptions[step.shortcode]
 
         if (isSupported) {
           return step
         }
       })
       .map((step) => {
-        return Object.assign(JSON.parse(JSON.stringify(step)), this.setupOptions[step.shortcode])
+        return Object.assign(JSON.parse(JSON.stringify(step)), setupOptions[step.shortcode])
       })
   }
 

@@ -1,7 +1,7 @@
 <template>
-  <div class="items-center hidden space-x-4 md:flex">
+  <div class="hidden items-center space-x-4 md:flex">
     <h5
-      class="block font-semibold tracking-wider uppercase text-md whitespace-nowrap text-vanilla-400"
+      class="text-md block whitespace-nowrap font-semibold uppercase tracking-wider text-vanilla-400"
     >
       {{ title }}
     </h5>
@@ -14,13 +14,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
-import { ZDivider } from '@deepsource/zeal'
-
-@Component({
-  components: {
-    ZDivider
-  }
-})
+@Component({})
 export default class SectionHeader extends Vue {
   @Prop({ required: true })
   title: string

@@ -8,7 +8,7 @@
         </div>
         <div class="text-sm leading-relaxed text-vanilla-400">
           We will send a test payload that looks like this:
-          <div class="p-3 text-xs rounded-md my-3 bg-ink-200">
+          <div class="my-3 rounded-md bg-ink-200 p-3 text-xs">
             <highlightjs language="json" :code="testPayload" />
           </div>
           <alert-box>
@@ -17,7 +17,7 @@
           </alert-box>
         </div>
         <template #footer="{ close }">
-          <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
+          <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
             <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               Cancel
             </z-button>
@@ -39,17 +39,11 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZConfirm, ZButton } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import WebhookMixin from '~/mixins/webhookMixin'
 
-@Component({
-  components: {
-    ZConfirm,
-    ZButton
-  }
-})
+@Component({})
 export default class DeleteWebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixin) {
   public enabling = false
   public showEnableModal = false

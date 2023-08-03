@@ -1,12 +1,12 @@
 <template>
-  <div class="rounded-md relative pointer-events-none">
-    <div class="z-10 grid absolute mx-auto inset-0 rounded-md place-content-center">
-      <p class="text-sm text-center text-vanilla-400">{{ subtitle }}</p>
+  <div class="pointer-events-none relative rounded-md">
+    <div class="absolute inset-0 z-10 mx-auto grid place-content-center rounded-md">
+      <p class="text-center text-sm text-vanilla-400">{{ subtitle }}</p>
     </div>
     <code-coverage-table
       :linked-rows="true"
       :repo-coverage-list="tableData"
-      class="no-filter:opacity-10 blur-table opacity-60"
+      class="blur-table opacity-60 no-filter:opacity-10"
     />
   </div>
 </template>

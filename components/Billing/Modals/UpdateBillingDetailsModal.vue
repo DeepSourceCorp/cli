@@ -6,8 +6,8 @@
     width="narrow"
     @onClose="() => $emit('onClose')"
   >
-    <div class="p-4 space-y-4">
-      <fieldset class="text-sm space-y-1">
+    <div class="space-y-4 p-4">
+      <fieldset class="space-y-1 text-sm">
         <label class="leading-loose text-vanilla-400"
           >Billing email
           <z-input
@@ -27,18 +27,18 @@
           Please enter a valid email.
         </p>
       </fieldset>
-      <fieldset class="text-sm space-y-1">
+      <fieldset class="space-y-1 text-sm">
         <label for="billing-address" class="leading-loose text-vanilla-400">Billing address</label>
         <z-textarea
           id="billing-address"
           v-model="billingAddress"
           :placeholder="`Avengers Tower \n200 Park Avenue, New York`"
-          class="focus-within:border-vanilla-400 border-slate-400 bg-ink-400 text-vanilla-300"
+          class="border-slate-400 bg-ink-400 text-vanilla-300 focus-within:border-vanilla-400"
         />
       </fieldset>
     </div>
     <template #footer>
-      <div class="p-4 space-x-2 text-right text-vanilla-100">
+      <div class="space-x-2 p-4 text-right text-vanilla-100">
         <z-button
           :button-type="loading ? 'secondary' : 'primary'"
           size="small"
@@ -60,7 +60,6 @@
 </template>
 <script lang="ts">
 import { Vue, Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZInput, ZIcon, ZModal, ZTextarea } from '@deepsource/zeal'
 
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
@@ -68,15 +67,7 @@ interface ZModalInterface extends Vue {
   close?: () => void
 }
 
-@Component({
-  components: {
-    ZButton,
-    ZInput,
-    ZIcon,
-    ZModal,
-    ZTextarea
-  }
-})
+@Component({})
 export default class UpdateBillingDetailsModal extends mixins(OwnerBillingMixin) {
   private billingEmail = ''
   private billingAddress = ''

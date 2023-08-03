@@ -25,7 +25,7 @@
         </template>
       </div>
 
-      <div v-show="dataLoading" class="mx-5 min-h-72 pt-4 pb-2">
+      <div v-show="dataLoading" class="mx-5 min-h-72 pb-2 pt-4">
         <div
           class="h-full animate-pulse rounded-lg"
           :class="isAggregate ? 'bg-ink-200 bg-opacity-30' : 'bg-ink-300'"
@@ -57,8 +57,6 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-import { ZTag, ZSelect, ZOption, ZButton, ZChart, ZIcon, ZDivider } from '@deepsource/zeal'
-
 import { DurationTypeT, formatDate, parseISODate } from '~/utils/date'
 import { StatType, MetricType, ThresholdType } from '~/types/metric'
 import { formatIntl } from '~/utils/string'
@@ -77,15 +75,6 @@ interface TrendStatPropsT extends TrendStatProps {
  */
 @Component({
   name: 'TrendSection',
-  components: {
-    ZTag,
-    ZSelect,
-    ZOption,
-    ZButton,
-    ZChart,
-    ZIcon,
-    ZDivider
-  },
   methods: {
     formatIntl
   }

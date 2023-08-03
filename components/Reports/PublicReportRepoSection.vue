@@ -1,14 +1,14 @@
 <template>
   <div class="space-y-3">
-    <span class="text-xs font-semibold tracking-wider uppercase text-slate">
+    <span class="text-xs font-semibold uppercase tracking-wider text-slate">
       {{ repositoryList.length > 1 ? 'Repositories' : 'Repository' }}
     </span>
-    <div class="text-sm text-vanilla-400 leading-6">
+    <div class="text-sm leading-6 text-vanilla-400">
       <div v-if="repoListLoading && currentPage === 1" class="flex flex-wrap gap-x-1.5 gap-y-2">
         <div
           v-for="idx in defaultRepoVisible"
           :key="idx"
-          class="animate-pulse bg-ink-200 rounded-full h-7 w-24"
+          class="h-7 w-24 animate-pulse rounded-full bg-ink-200"
         ></div>
       </div>
 
@@ -17,19 +17,19 @@
           <div
             v-for="repo in repositoryList.slice(0, defaultRepoVisible)"
             :key="repo.id"
-            class="inline-flex items-center rounded-full gap-x-1 cursor py-1 px-2.5 bg-ink-200"
+            class="cursor inline-flex items-center gap-x-1 rounded-full bg-ink-200 px-2.5 py-1"
           >
             <z-icon :icon="repo.isPrivate ? 'z-lock' : 'globe'" />
             <span
               v-tooltip="{ content: repo.name, delay: { show: 0, hide: 100 } }"
-              class="truncate max-w-3xs"
+              class="max-w-3xs truncate"
             >
               {{ repo.name }}
             </span>
           </div>
           <span
             v-if="totalCount > defaultRepoVisible"
-            class="py-1 px-3 rounded-full h-7 border border-slate-400 leading-5"
+            class="h-7 rounded-full border border-slate-400 px-3 py-1 leading-5"
           >
             +{{ totalCount - defaultRepoVisible }}
           </span>
@@ -50,7 +50,7 @@
               color="vanilla-400"
               icon-color="vanilla-400"
               :class="isOpen && 'bg-ink-200'"
-              class="py-1 px-3 mt-4 border border-slate-400 hover:bg-ink-200"
+              class="mt-4 border border-slate-400 px-3 py-1 hover:bg-ink-200"
               @click="toggle"
             >
               Show all repositories
@@ -58,16 +58,16 @@
           </template>
           <template #body>
             <div
-              class="px-3.5 py-3 space-y-3 max-h-64 overflow-y-auto hide-scroll cursor leading-5"
+              class="hide-scroll cursor max-h-64 space-y-3 overflow-y-auto px-3.5 py-3 leading-5"
               @mousewheel.stop="scrollHandler"
             >
-              <h6 class="uppercase text-slate tracking-wider text-xs font-semibold">
+              <h6 class="text-xs font-semibold uppercase tracking-wider text-slate">
                 Repositories
               </h6>
               <div
                 v-for="repo in repositoryList"
                 :key="repo.id"
-                class="text-sm text-vanilla-400 flex items-center gap-x-2"
+                class="flex items-center gap-x-2 text-sm text-vanilla-400"
               >
                 <z-icon :icon="repo.isPrivate ? 'z-lock' : 'globe'" class="flex-shrink-0" />
                 <span
@@ -78,9 +78,9 @@
                 </span>
               </div>
               <template v-if="repoListLoading">
-                <div v-for="idx in perPageCount" :key="idx" class="w-40 flex items-center gap-x-2">
-                  <div class="h-4 bg-ink-200 animate-pulse w-4 rounded-sm"></div>
-                  <div class="h-4 bg-ink-200 animate-pulse flex-grow rounded-sm"></div>
+                <div v-for="idx in perPageCount" :key="idx" class="flex w-40 items-center gap-x-2">
+                  <div class="h-4 w-4 animate-pulse rounded-sm bg-ink-200"></div>
+                  <div class="h-4 flex-grow animate-pulse rounded-sm bg-ink-200"></div>
                 </div>
               </template>
             </div>
@@ -93,7 +93,6 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZMenu } from '@deepsource/zeal'
 import publicReportRepoList from '@/apollo/queries/reports/publicReportRepoList.gql'
 import { Repository } from '~/types/types'
 import PaginationMixin from '~/mixins/paginationMixin'
@@ -103,13 +102,7 @@ import { resolveNodes } from '~/utils/array'
 /**
  * Repo list component with popover to show paginated repo list
  */
-@Component({
-  components: {
-    ZIcon,
-    ZMenu,
-    ZButton
-  }
-})
+@Component({})
 export default class PublicReportRepoSection extends mixins(PaginationMixin) {
   @Prop({ required: true })
   reportId: number

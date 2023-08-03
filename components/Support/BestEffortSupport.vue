@@ -28,9 +28,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZAccordion, ZAccordionItem, ZIcon } from '@deepsource/zeal'
 
-@Component({ name: 'BestEffortSupport', components: { ZAccordion, ZAccordionItem, ZIcon } })
+@Component({ name: 'BestEffortSupport' })
 export default class BestEffortSupport extends Vue {
   @Prop({ type: String, required: true })
   supportTierCopy: string

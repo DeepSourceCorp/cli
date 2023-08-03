@@ -24,13 +24,13 @@
         v-for="(section, sectionIdx) in reportsList"
         :key="section.title"
         :divider="false"
-        :class="sectionIdx === 0 ? 'pt-2 pb-3' : 'pb-2'"
-        class="text-vanilla-400 overflow-x-auto hide-scroll"
+        :class="sectionIdx === 0 ? 'pb-3 pt-2' : 'pb-2'"
+        class="hide-scroll overflow-x-auto text-vanilla-400"
       >
         <!-- Not using the `title` prop for `ZMenuSection` since there is no way to override the text color -->
         <h6
           :class="{ 'mt-1': sectionIdx === 0 }"
-          class="text-slate px-2.5 mb-2 tracking-wider font-semibold text-xs"
+          class="mb-2 px-2.5 text-xs font-semibold tracking-wider text-slate"
         >
           {{ section.title }}
         </h6>
@@ -40,7 +40,7 @@
             v-for="item in section.items"
             :key="item.key"
             :disabled="isCurrentlyPinnedReport(item)"
-            class="flex items-center font-medium px-2.5 py-2 hover:bg-ink-200 cursor-pointer"
+            class="flex cursor-pointer items-center px-2.5 py-2 font-medium hover:bg-ink-200"
             :class="{ 'justify-between': isCurrentlyPinnedReport(item) }"
             @click="updatePinnedReport(item)"
           >
@@ -64,19 +64,19 @@
               v-if="item.type === PinnableReportType.DISTRIBUTION"
               :key="idx"
               :show-borders="false"
-              :class="collapsibleVisibilityStatus[item.key] ? 'pt-2 pb-0' : 'py-2'"
+              :class="collapsibleVisibilityStatus[item.key] ? 'pb-0 pt-2' : 'py-2'"
               class="px-2.5 outline-none"
             >
               <div class="w-full text-vanilla-400">
                 <!-- Title -->
                 <div
-                  class="flex items-center transition-all duration-700 ease-in-out group cursor-pointer"
+                  class="group flex cursor-pointer items-center transition-all duration-700 ease-in-out"
                   @click="updateCollapsibleMetadata(item)"
                 >
                   <span class="flex-1 font-medium">{{ item.label }}</span>
                   <z-icon
                     icon="chevron-down"
-                    class="transform transition-all ease-in-out group stroke-1.5 group-hover:text-vanilla-200"
+                    class="group transform stroke-1.5 transition-all ease-in-out group-hover:text-vanilla-200"
                     :class="collapsibleHeaderAnimations[item.key]"
                   />
                 </div>
@@ -84,17 +84,17 @@
                 <!-- Items -->
                 <div
                   v-if="collapsibleVisibilityStatus[item.key]"
-                  class="overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-52"
+                  class="max-h-52 overflow-hidden text-sm leading-6 transition-max-height duration-300 ease-in-out"
                 >
                   <!-- Requires a container `div` with padding on left for the lines on the left to show up -->
-                  <div class="pt-2 pl-4 nested-group">
+                  <div class="nested-group pl-4 pt-2">
                     <div
                       v-for="metadataItem in item.metadataItems"
                       :key="metadataItem.filter"
                       role="button"
-                      class="flex items-center px-1.5 py-2 gap-2 font-medium text-sm text-vanilla-400 hover:bg-ink-200 rounded-sm nested-group-item relative cursor-pointer"
+                      class="nested-group-item relative flex cursor-pointer items-center gap-2 rounded-sm px-1.5 py-2 text-sm font-medium text-vanilla-400 hover:bg-ink-200"
                       :class="{
-                        'justify-between cursor-not-allowed': isCurrentlyPinnedReport({
+                        'cursor-not-allowed justify-between': isCurrentlyPinnedReport({
                           ...item,
                           metadata: metadataItem
                         })
@@ -127,7 +127,7 @@
               v-else-if="item.type === PinnableReportType.NON_DISTRIBUTION"
               :key="idx"
               :disabled="isCurrentlyPinnedReport(item)"
-              class="flex items-center font-medium px-2.5 py-2 hover:bg-ink-200 cursor-pointer"
+              class="flex cursor-pointer items-center px-2.5 py-2 font-medium hover:bg-ink-200"
               :class="{ 'justify-between': isCurrentlyPinnedReport(item) }"
               @click="updatePinnedReport(item)"
             >
@@ -149,7 +149,6 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZTag } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import {
@@ -174,8 +173,7 @@ interface IZMenu extends Vue {
  * Pinnable reports list as menu items
  */
 @Component({
-  name: 'PinnableReportsList',
-  components: { ZButton, ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZTag }
+  name: 'PinnableReportsList'
 })
 export default class PinnableReportsList extends Vue {
   @Prop({ required: true })

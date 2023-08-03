@@ -62,18 +62,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZAlert, ZButton, ZIcon, ZInput, ZInputGroup, ZModal } from '@deepsource/zeal'
 
 @Component({
-  name: 'AddSubRepositoryModal',
-  components: {
-    ZAlert,
-    ZButton,
-    ZIcon,
-    ZInput,
-    ZInputGroup,
-    ZModal
-  }
+  name: 'AddSubRepositoryModal'
 })
 export default class AddSubRepositoryModal extends Vue {
   @Prop({ default: false })

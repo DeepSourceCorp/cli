@@ -10,10 +10,10 @@
       />
     </okta-icon-wrapper>
     <div>
-      <p class="overflow-hidden text-sm w-44 overflow-ellipsis">
+      <p class="w-44 overflow-hidden overflow-ellipsis text-sm">
         {{ orgUser.fullName || orgUser.email }}
       </p>
-      <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-0.5">
+      <div class="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-1">
         <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
           <z-tag
             icon-left="solid-circle"
@@ -22,7 +22,7 @@
             size="x-small"
             spacing="px-1.5 py-1"
             :icon-color="orgUser.isActive ? 'juniper' : 'honey'"
-            class="font-semibold leading-none tracking-wide uppercase text-vanilla-400 gap-x-1"
+            class="gap-x-1 font-semibold uppercase leading-none tracking-wide text-vanilla-400"
           >
             {{ orgUser.isActive ? 'Active' : 'Inactive' }}
           </z-tag>
@@ -34,7 +34,7 @@
             size="x-small"
             spacing="px-1.5 py-1"
             icon-color="robin"
-            class="font-semibold leading-none tracking-wide uppercase text-vanilla-400 gap-x-1"
+            class="gap-x-1 font-semibold uppercase leading-none tracking-wide text-vanilla-400"
           >
             Superuser
           </z-tag>
@@ -62,12 +62,10 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZAvatar, ZTag } from '@deepsource/zeal'
 import { EnterpriseUser } from '~/types/types'
 import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
-  components: { ZIcon, ZAvatar, ZTag },
   name: 'ControlPanelUserCardInfo',
   methods: { getDefaultAvatar }
 })

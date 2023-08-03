@@ -2,11 +2,11 @@
   <li
     tabindex="-1"
     role="option"
-    class="flex items-center w-full h-10 space-x-3 focus:outline-none"
-    :class="active ? 'bg-ink-300 text-vanilla-100 pr-4' : 'text-vanilla-400 px-4 py-2'"
+    class="flex h-10 w-full items-center space-x-3 focus:outline-none"
+    :class="active ? 'bg-ink-300 pr-4 text-vanilla-100' : 'px-4 py-2 text-vanilla-400'"
     @focus="$emit('focus')"
   >
-    <div v-if="active" class="w-0.5 mr-0.5 h-full rounded-r-lg -py-2 bg-juniper"></div>
+    <div v-if="active" class="-py-2 mr-0.5 h-full w-0.5 rounded-r-lg bg-juniper"></div>
     <z-icon v-if="icon" :icon="icon" />
     <z-avatar
       v-else-if="image"
@@ -23,7 +23,7 @@
       <span
         v-for="(key, index) in shortkeyCombination"
         :key="index"
-        class="flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200"
+        class="flex items-center justify-center rounded-sm bg-ink-200 p-1 px-1.5 text-xs leading-none"
         :class="[active ? 'text-vanilla-100' : 'text-vanilla-400']"
       >
         {{ formatKey(key) }}
@@ -34,19 +34,13 @@
 </template>
 <script lang="ts">
 import { mixins, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZAvatar } from '@deepsource/zeal'
 import ContextMixin from '~/mixins/contextMixin'
 import { parseKeybinding } from 'tinykeys'
 
 /**
  * Command Row component for the palette
  */
-@Component({
-  components: {
-    ZIcon,
-    ZAvatar
-  }
-})
+@Component({})
 export default class CommandRow extends mixins(ContextMixin) {
   @Prop()
   label: string

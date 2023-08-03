@@ -1,4 +1,4 @@
-query(
+query (
   $level: IssuePriorityLevel!
   $objectId: ID!
   $isIssuePrioritySet: Boolean

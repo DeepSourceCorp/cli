@@ -69,16 +69,6 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import {
-  ZIcon,
-  ZTag,
-  ZBreadcrumb,
-  ZBreadcrumbItem,
-  ZTab,
-  ZButton,
-  ZMenu,
-  ZMenuItem
-} from '@deepsource/zeal'
 import { IssueDetailsHeader, IssueActions } from '@/components/RepoIssues/index'
 
 import IssueDetailMixin from '@/mixins/issueDetailMixin'
@@ -92,18 +82,6 @@ import { IssuePriorityLevelVerbose } from '~/types/issuePriorityTypes'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 
 @Component({
-  components: {
-    ZButton,
-    ZIcon,
-    ZTag,
-    ZTab,
-    ZBreadcrumb,
-    ZBreadcrumbItem,
-    ZMenu,
-    ZMenuItem,
-    IssueDetailsHeader,
-    IssueActions
-  },
   layout: 'repository',
   middleware: [
     function ({ redirect, route }: Context): void {

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="px-4 py-3 rounded-md bg-ink-300"
+    class="rounded-md bg-ink-300 px-4 py-3"
     :class="{
       'opacity-50': !isActive,
       'cursor-pointer': allowHover
@@ -8,7 +8,7 @@
     @click="$emit('toggle')"
   >
     <div class="flex items-center space-x-2">
-      <div v-if="loading" class="h-10 my-2 rounded-md w-15 bg-ink-300 animate-pulse"></div>
+      <div v-if="loading" class="my-2 h-10 w-15 animate-pulse rounded-md bg-ink-300"></div>
       <span v-else-if="!Number.isNaN(value)" class="text-2.5xl font-medium">
         {{ shortenLargeNumber(value) }}
       </span>
@@ -22,8 +22,8 @@
       />
     </div>
 
-    <div class="flex items-center ml-px space-x-2 text-sm">
-      <div class="w-2 h-2 rounded-full" :class="labelBgClass"></div>
+    <div class="ml-px flex items-center space-x-2 text-sm">
+      <div class="h-2 w-2 rounded-full" :class="labelBgClass"></div>
       <span class="text-vanilla-400">{{ label }}</span>
     </div>
   </div>

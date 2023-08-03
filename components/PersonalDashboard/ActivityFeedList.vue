@@ -1,10 +1,10 @@
 <template>
   <list-section title="Activity Feed" footer-link-label="See all activity" footer-link="#">
-    <div class="divide-y divide-solid divide-ink-300 max-h-52 overflow-y-scroll">
+    <div class="max-h-52 divide-y divide-solid divide-ink-300 overflow-y-scroll">
       <div
         v-for="act in activityFeed"
         :key="act.id"
-        class="flex items-center text-vanilla-400 text-sm p-2"
+        class="flex items-center p-2 text-sm text-vanilla-400"
       >
         <span
           ><b class="text-vanilla-100">{{ act.loggedForDisplay }}</b> {{ act.description }}

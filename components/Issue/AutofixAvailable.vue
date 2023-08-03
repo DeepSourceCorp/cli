@@ -1,16 +1,16 @@
 <template>
   <z-badge v-if="autofixableIssuesCount > 0" type="success" :is-dot="modelValue ? true : false">
     <div
-      class="flex items-center h-8 p-2 space-x-2 leading-none border rounded-sm max-w-44 border-slate-400"
-      :class="modelValue ? 'hover:bg-ink-100 bg-ink-200' : 'hover:bg-ink-200 border-dashed'"
+      class="max-w-44 flex h-8 items-center space-x-2 rounded-sm border border-slate-400 p-2 leading-none"
+      :class="modelValue ? 'bg-ink-200 hover:bg-ink-100' : 'border-dashed hover:bg-ink-200'"
     >
       <div
-        class="flex items-center space-x-2 overflow-hidden text-sm cursor-pointer overflow-ellipsis"
+        class="flex cursor-pointer items-center space-x-2 overflow-hidden overflow-ellipsis text-sm"
         @click="modelValue = modelValue ? null : true"
       >
         <z-icon icon="autofix" size="small" :color="!modelValue ? 'vanilla-400' : 'vanilla-100'" />
         <span
-          class="text-xs truncate"
+          class="truncate text-xs"
           :class="modelValue ? 'text-vanilla-100' : 'text-vanilla-300'"
         >
           Filter by Autofix
@@ -19,7 +19,7 @@
           icon="plus"
           size="small"
           color="vanilla-400"
-          class="duration-75 transform"
+          class="transform duration-75"
           :class="{
             'rotate-45': modelValue
           }"
@@ -31,15 +31,9 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { ModelSync } from 'vue-property-decorator'
-import { ZIcon, ZBadge } from '@deepsource/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
-@Component({
-  components: {
-    ZIcon,
-    ZBadge
-  }
-})
+@Component({})
 export default class AutofixAvailable extends mixins(RepoDetailMixin) {
   @ModelSync('autofixAvailable', 'toggleAutofix', { type: Boolean, default: false })
   readonly modelValue: boolean

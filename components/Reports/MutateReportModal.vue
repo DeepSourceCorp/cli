@@ -1,7 +1,7 @@
 <template>
   <z-modal :title="editMode ? 'Edit report' : 'Share report'" @onClose="$emit('close')">
-    <fieldset class="p-4 flex flex-col gap-y-7">
-      <label for="report-title" class="space-y-2 text-sm text-vanilla-200 w-full">
+    <fieldset class="flex flex-col gap-y-7 p-4">
+      <label for="report-title" class="w-full space-y-2 text-sm text-vanilla-200">
         <p class="text-sm font-medium text-vanilla-100">Label</p>
         <z-input
           id="report-title"
@@ -12,10 +12,10 @@
           placeholder="What’s this report for?"
           size="small"
         />
-        <p class="text-vanilla-400 text-xs">This is used for internal reference only</p>
+        <p class="text-xs text-vanilla-400">This is used for internal reference only</p>
       </label>
 
-      <label v-if="reportIdOld" for="report-link" class="space-y-2 text-sm text-vanilla-200 w-full">
+      <label v-if="reportIdOld" for="report-link" class="w-full space-y-2 text-sm text-vanilla-200">
         <p class="text-sm font-medium text-vanilla-100">Shareable link</p>
         <z-input
           id="report-link"
@@ -61,7 +61,7 @@
               icon-size="x-small"
               label="Reset password"
               icon="refresh-cw"
-              class="gap-x-1 mt-1 bg-ink-200 opacity-80 hover:opacity-100"
+              class="mt-1 gap-x-1 bg-ink-200 opacity-80 hover:opacity-100"
               @click="handleResetPassword"
             />
           </template>
@@ -71,7 +71,7 @@
           for="password"
           class="block text-sm font-medium text-vanilla-400"
         >
-          <span class="mb-2 sr-only">Password</span>
+          <span class="sr-only mb-2">Password</span>
           <div class="relative">
             <z-input
               id="password"
@@ -82,7 +82,7 @@
               :show-border="false"
               placeholder="A randomly generated password with at least 16 characters"
             />
-            <div class="absolute flex top-1 right-1 gap-x-1 bg-ink-400">
+            <div class="absolute right-1 top-1 flex gap-x-1 bg-ink-400">
               <z-button
                 v-tooltip="isPasswordHidden ? 'Reveal password' : 'Hide password'"
                 button-type="secondary"
@@ -111,7 +111,7 @@
 
       <div class="grid grid-cols-2">
         <div class="flex flex-col gap-y-2">
-          <p class="text-xs uppercase text-vanilla-400 font-medium tracking-wider">Security</p>
+          <p class="text-xs font-medium uppercase tracking-wider text-vanilla-400">Security</p>
           <template v-for="(report, key) in ReportMeta">
             <z-checkbox
               v-if="report.type === ReportType.Compliance && report.level.includes(level)"
@@ -125,7 +125,7 @@
           </template>
         </div>
         <div class="flex flex-col gap-y-2">
-          <p class="text-xs uppercase text-vanilla-400 font-medium tracking-wider">Insights</p>
+          <p class="text-xs font-medium uppercase tracking-wider text-vanilla-400">Insights</p>
           <template v-for="(report, key) in ReportMeta">
             <z-checkbox
               v-if="report.type === ReportType.Insight && report.level.includes(level)"
@@ -152,7 +152,7 @@
       </toggle-input>
     </fieldset>
     <template #footer="{ close }">
-      <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
+      <div class="space-x-4 border-slate-400 p-4 text-right text-vanilla-100">
         <z-button
           icon="check"
           button-type="primary"
@@ -170,17 +170,6 @@
 <script lang="ts">
 import { Component, Watch, Prop, Vue } from 'nuxt-property-decorator'
 import Shifty from '@deepsource/shifty'
-import {
-  ZModal,
-  ZInput,
-  ZButton,
-  ZAlert,
-  ZSelect,
-  ZOption,
-  ZIcon,
-  ZToggle,
-  ZCheckbox
-} from '@deepsource/zeal'
 import { ReportPageT, ReportMeta } from '~/types/reportTypes'
 import {
   CreatePublicReportInput,
@@ -201,19 +190,7 @@ import {
 /**
  * Create Public Report modal
  */
-@Component({
-  components: {
-    ZModal,
-    ZInput,
-    ZButton,
-    ZAlert,
-    ZSelect,
-    ZOption,
-    ZIcon,
-    ZToggle,
-    ZCheckbox
-  }
-})
+@Component({})
 export default class MutateReportModal extends Vue {
   // Need level as prop because CreatePublicReportInput has level as required type
   @Prop({ required: true })

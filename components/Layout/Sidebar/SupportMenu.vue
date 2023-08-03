@@ -40,18 +40,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZMenu, ZMenuItem, ZMenuSection } from '@deepsource/zeal'
 
 /**
  * Support Menu, for the sidebar
  */
-@Component({
-  components: {
-    ZMenu,
-    ZMenuItem,
-    ZMenuSection
-  }
-})
+@Component({})
 export default class SupportMenu extends Vue {
   @Prop()
   isCollapsed: boolean

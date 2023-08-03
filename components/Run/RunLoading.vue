@@ -22,9 +22,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import { BaseState } from '@/components/RepoStates'
 
-@Component({ components: { ZIcon, BaseState } })
+@Component({ components: { BaseState } })
 export default class RunLoading extends Vue {}
 </script>

@@ -3,7 +3,7 @@
 exports[`renders DeletedAccountState with all prop options: DeletedAccountState 1`] = `
 "<div class=\\"relative flex w-full\\">
   <div class=\\"intermediate-page-gradient-layer absolute inset-x-1/4 -top-102 w-1/2 rounded-full\\"></div>
-  <div class=\\"mx-auto flex min-h-screen flex-col justify-between pt-32 pb-24 text-center text-sm text-vanilla-400\\">
+  <div class=\\"mx-auto flex min-h-screen flex-col justify-between pb-24 pt-32 text-center text-sm text-vanilla-400\\">
     <div class=\\"flex flex-grow items-center\\">
       <section class=\\"w-full space-y-8 px-3.5 py-12 md:px-12 md:py-19\\">
         <empty-state-picture webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"\\"></empty-state-picture>
@@ -21,7 +21,7 @@ exports[`renders DeletedAccountState with all prop options: DeletedAccountState 
 exports[`renders DeletedAccountState with all prop options: DeletedAccountState 2`] = `
 "<div class=\\"relative flex w-full\\">
   <div class=\\"intermediate-page-gradient-layer absolute inset-x-1/4 -top-102 w-1/2 rounded-full\\"></div>
-  <div class=\\"mx-auto flex min-h-screen flex-col justify-between pt-32 pb-24 text-center text-sm text-vanilla-400\\">
+  <div class=\\"mx-auto flex min-h-screen flex-col justify-between pb-24 pt-32 text-center text-sm text-vanilla-400\\">
     <div class=\\"flex flex-grow items-center\\">
       <section class=\\"w-full space-y-8 px-3.5 py-12 md:px-12 md:py-19\\">
         <empty-state-picture webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"\\"></empty-state-picture>
@@ -39,7 +39,7 @@ exports[`renders DeletedAccountState with all prop options: DeletedAccountState 
 exports[`renders DeletedAccountState with all prop options: DeletedAccountState 3`] = `
 "<div class=\\"relative flex w-full\\">
   <div class=\\"intermediate-page-gradient-layer absolute inset-x-1/4 -top-102 w-1/2 rounded-full\\"></div>
-  <div class=\\"mx-auto flex min-h-screen flex-col justify-between pt-32 pb-24 text-center text-sm text-vanilla-400\\">
+  <div class=\\"mx-auto flex min-h-screen flex-col justify-between pb-24 pt-32 text-center text-sm text-vanilla-400\\">
     <div class=\\"flex flex-grow items-center\\">
       <section class=\\"w-full space-y-8 px-3.5 py-12 md:px-12 md:py-19\\">
         <empty-state-picture webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"\\"></empty-state-picture>
@@ -57,7 +57,7 @@ exports[`renders DeletedAccountState with all prop options: DeletedAccountState 
 exports[`renders DeletedAccountState with all prop options: DeletedAccountState 4`] = `
 "<div class=\\"relative flex w-full\\">
   <div class=\\"intermediate-page-gradient-layer absolute inset-x-1/4 -top-102 w-1/2 rounded-full\\"></div>
-  <div class=\\"mx-auto flex min-h-screen flex-col justify-between pt-32 pb-24 text-center text-sm text-vanilla-400\\">
+  <div class=\\"mx-auto flex min-h-screen flex-col justify-between pb-24 pt-32 text-center text-sm text-vanilla-400\\">
     <div class=\\"flex flex-grow items-center\\">
       <section class=\\"w-full space-y-8 px-3.5 py-12 md:px-12 md:py-19\\">
         <empty-state-picture webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"\\"></empty-state-picture>

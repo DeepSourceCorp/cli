@@ -1,9 +1,9 @@
 <template>
-  <section class="grid gap-6 max-w-3xl grid-cols-1 p-4">
+  <section class="grid max-w-3xl grid-cols-1 gap-6 p-4">
     <div class="w-full space-y-0.5">
       <h2 class="font-medium">Workspaces</h2>
       <div class="text-sm text-vanilla-400">Manage your workspaces.</div>
-      <div class="pt-3 w-full flex items-center gap-x-2">
+      <div class="flex w-full items-center gap-x-2 pt-3">
         <z-input
           v-model="searchCandidate"
           :show-border="false"
@@ -31,12 +31,12 @@
     <div v-if="!searchCandidate" class="space-y-2">
       <div class="text-sm">Personal</div>
       <!-- Loading state -->
-      <div v-if="isLoading" class="grid divide-y divide-ink-200 border border-ink-200 rounded-md">
-        <div v-for="i in 3" :key="i" class="animate-pulse bg-ink-300 h-17"></div>
+      <div v-if="isLoading" class="grid divide-y divide-ink-200 rounded-md border border-ink-200">
+        <div v-for="i in 3" :key="i" class="h-17 animate-pulse bg-ink-300"></div>
       </div>
       <div
         v-else-if="personalAccounts.length"
-        class="grid divide-y divide-ink-200 border border-ink-200 rounded-md"
+        class="grid divide-y divide-ink-200 rounded-md border border-ink-200"
       >
         <account-card v-for="account in personalAccounts" :key="account.id" v-bind="account" />
       </div>
@@ -64,12 +64,12 @@
     <div v-if="!searchCandidate" class="space-y-2">
       <div class="text-sm">Teams</div>
       <!-- Loading state -->
-      <div v-if="isLoading" class="grid divide-y divide-ink-200 border border-ink-200 rounded-md">
-        <div v-for="i in 5" :key="i" class="animate-pulse bg-ink-300 h-17"></div>
+      <div v-if="isLoading" class="grid divide-y divide-ink-200 rounded-md border border-ink-200">
+        <div v-for="i in 5" :key="i" class="h-17 animate-pulse bg-ink-300"></div>
       </div>
       <div
         v-else-if="teamAccounts.length"
-        class="grid divide-y divide-ink-200 border border-ink-200 rounded-md"
+        class="grid divide-y divide-ink-200 rounded-md border border-ink-200"
       >
         <account-card v-for="account in teamAccounts" :key="account.id" v-bind="account" />
       </div>
@@ -95,13 +95,13 @@
     <!-- Search Results -->
     <div
       v-if="searchCandidate && isLoading"
-      class="grid divide-y divide-ink-200 border border-ink-200 rounded-md"
+      class="grid divide-y divide-ink-200 rounded-md border border-ink-200"
     >
-      <div v-for="i in 5" :key="i" class="animate-pulse bg-ink-300 h-17"></div>
+      <div v-for="i in 5" :key="i" class="h-17 animate-pulse bg-ink-300"></div>
     </div>
     <div
       v-else-if="searchCandidate && searchResults.length"
-      class="grid divide-y divide-ink-200 border border-ink-200 rounded-md"
+      class="grid divide-y divide-ink-200 rounded-md border border-ink-200"
     >
       <account-card v-for="account in searchResults" :key="account.id" v-bind="account" />
     </div>
@@ -124,7 +124,6 @@
 </template>
 
 <script lang="ts">
-import { ZAvatar, ZButton, ZIcon, ZInput } from '@deepsource/zeal'
 import { Component, Mixins } from 'vue-property-decorator'
 
 import AccountCard from '~/components/Settings/AccountCard.vue'
@@ -140,10 +139,6 @@ import { resolveNodes } from '~/utils/array'
  */
 @Component({
   components: {
-    ZButton,
-    ZIcon,
-    ZInput,
-    ZAvatar,
     AccountCard
   }
 })

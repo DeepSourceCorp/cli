@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-5xl p-4 space-y-4">
+  <div class="max-w-5xl space-y-4 p-4">
     <div>
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="cursor-pointer text-vanilla-400"
@@ -27,7 +27,7 @@
               {{ plan.planName }}
             </div>
             <div v-else class="flex-grow">
-              <div class="float-right w-24 h-5 rounded-md bg-ink-300 animate-pulse"></div>
+              <div class="float-right h-5 w-24 animate-pulse rounded-md bg-ink-300"></div>
             </div>
           </div>
           <div class="flex">
@@ -35,7 +35,7 @@
             <div class="flex-grow text-right">
               <div>{{ billingCycle | capitalize }}</div>
               <span
-                class="text-xs cursor-pointer text-vanilla-400 hover:text-vanilla-100"
+                class="cursor-pointer text-xs text-vanilla-400 hover:text-vanilla-100"
                 @click="updateBillingCycle(billingCycle === 'yearly' ? 'monthly' : 'yearly')"
               >
                 Change to {{ billingCycle === 'yearly' ? 'monthly' : 'yearly' }}
@@ -45,7 +45,7 @@
           <div class="flex">
             <label for="seats-count" class="w-32 font-medium">Seats</label>
             <div class="flex-grow">
-              <div class="flex items-center float-right space-x-1">
+              <div class="float-right flex items-center space-x-1">
                 <z-button
                   size="x-small"
                   icon="minus"
@@ -57,7 +57,7 @@
                 <input
                   id="seats-count"
                   aria-label="Seats"
-                  class="w-12 text-center bg-transparent focus:outline-none focus:ring focus:border-slate-400"
+                  class="w-12 bg-transparent text-center focus:border-slate-400 focus:outline-none focus:ring"
                   :value="seats"
                   type="text"
                   @debounceInput="updateSeatsInStore"
@@ -77,7 +77,7 @@
           <z-divider color="ink-300" />
           <template v-if="coupon.isApplied || credits.isApplied">
             <div class="flex">
-              <label class="font-medium w-72"
+              <label class="w-72 font-medium"
                 >Amount
                 <span class="text-vanilla-400"
                   >({{ seats }} × {{ formatUSD(seatAmount) }}, paid {{ billingCycle }})</span
@@ -89,7 +89,7 @@
             </div>
             <div v-if="coupon.isApplied" class="flex">
               <label class="w-32 font-medium">Coupon Applied</label>
-              <div class="flex-grow font-bold text-right text-juniper">
+              <div class="flex-grow text-right font-bold text-juniper">
                 -
                 <span>
                   {{ formatUSD(coupon.currentCycleDiscount) }}
@@ -98,7 +98,7 @@
             </div>
             <div v-if="credits.isApplied" class="flex">
               <label class="w-32 font-medium">Credits Applied</label>
-              <div class="flex-grow font-bold text-right">
+              <div class="flex-grow text-right font-bold">
                 -
                 <span>
                   {{ formatUSD(credits.currentCycleDiscount) }}
@@ -109,7 +109,7 @@
           </template>
           <div class="flex">
             <label class="w-32 font-medium">Total payable now</label>
-            <div class="flex items-center justify-end flex-grow space-x-2 text-lg font-bold">
+            <div class="flex flex-grow items-center justify-end space-x-2 text-lg font-bold">
               <z-icon v-if="loading" class="animate-spin" color="juniper" icon="spin-loader" />
               <span v-if="billingInfo.netPayableThisCycle !== null">
                 {{ formatUSD(billingInfo.netPayableThisCycle) }}
@@ -119,14 +119,14 @@
           <z-divider color="ink-300" />
           <p
             v-if="billingInfo.netPayableNextCycle !== null && billingInfo.nextBillingCycle !== null"
-            class="text-xs leading-snug text-vanilla-400 tracking-snug"
+            class="text-xs leading-snug tracking-snug text-vanilla-400"
           >
             You will be charged
             <span class="inline">{{ formatUSD(billingInfo.netPayableNextCycle) }}</span>
             when the next billing cycle starts on
             <b class="text-vanilla-100">{{ nextBillingDate }}</b>
           </p>
-          <div v-else-if="calculating" class="w-full h-4 rounded-md bg-ink-300 animate-pulse"></div>
+          <div v-else-if="calculating" class="h-4 w-full animate-pulse rounded-md bg-ink-300"></div>
           <div class="space-y-2">
             <z-input
               v-model="couponCode"
@@ -166,8 +166,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZBreadcrumb, ZBreadcrumbItem } from '@deepsource/zeal'
-import { ZButton, ZIcon, ZDivider, ZInput } from '@deepsource/zeal'
 import SubscriptionMixin, { Plan } from '~/mixins/subscriptionMixin'
 import { formatUSD } from '~/utils/string'
 import { parseISODate, formatDate } from '~/utils/date'
@@ -181,14 +179,6 @@ import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
  * Subscribe page for the user to subscribe to a plan
  */
 @Component({
-  components: {
-    ZBreadcrumb,
-    ZBreadcrumbItem,
-    ZButton,
-    ZIcon,
-    ZDivider,
-    ZInput
-  },
   middleware: ['teamOnly', 'perm'],
   methods: { formatUSD },
   filters: {

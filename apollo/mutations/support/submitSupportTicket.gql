@@ -1,4 +1,4 @@
-mutation($input: SubmitSupportTicketInput!) {
+mutation ($input: SubmitSupportTicketInput!) {
   submitSupportTicket(input: $input) {
     ok
   }

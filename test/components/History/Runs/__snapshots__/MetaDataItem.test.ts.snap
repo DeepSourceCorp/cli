@@ -2,6 +2,6 @@
 
 exports[`renders MetaDataItem with all prop options: {"icon":"antipattern","label":"Antipattern"} 1`] = `
 "<div class=\\"space-x-1\\">
-  <zicon-stub icon=\\"antipattern\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 inline mb-px\\"></zicon-stub> <span class=\\"text-vanilla-400 text-xs md:text-sm break-all inline\\">Antipattern</span>
+  <zicon-stub icon=\\"antipattern\\" size=\\"x-small\\" color=\\"vanilla-400\\" class=\\"mb-px inline flex-shrink-0\\"></zicon-stub> <span class=\\"text-vanilla-400 text-xs md:text-sm break-all inline\\">Antipattern</span>
 </div>"
 `;

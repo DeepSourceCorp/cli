@@ -1,6 +1,6 @@
 <template>
   <section>
-    <section class="px-4 py-3.5 min-h-13 border-b border-slate-400 flex flex-row items-center">
+    <section class="flex min-h-13 flex-row items-center border-b border-slate-400 px-4 py-3.5">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="text-vanilla-400">
           <nuxt-link :to="$generateRoute(['settings', 'webhooks'])">All endpoints</nuxt-link>
@@ -15,19 +15,19 @@
         </z-breadcrumb-item>
       </z-breadcrumb>
     </section>
-    <section v-if="$fetchState.pending" class="max-w-2xl p-4 space-y-8 animate-pulse">
+    <section v-if="$fetchState.pending" class="max-w-2xl animate-pulse space-y-8 p-4">
       <div class="space-y-2">
-        <div class="w-2/3 h-8 rounded-sm bg-ink-300"></div>
-        <div class="w-1/3 h-3 rounded-sm bg-ink-300"></div>
+        <div class="h-8 w-2/3 rounded-sm bg-ink-300"></div>
+        <div class="h-3 w-1/3 rounded-sm bg-ink-300"></div>
       </div>
       <div class="grid grid-cols-3 gap-5">
         <div v-for="ii in 5" :key="ii" class="h-12 rounded-sm bg-ink-300"></div>
         <div></div>
-        <div class="h-12 col-span-3 rounded-sm bg-ink-300"></div>
-        <div class="h-32 col-span-3 rounded-sm bg-ink-300"></div>
+        <div class="col-span-3 h-12 rounded-sm bg-ink-300"></div>
+        <div class="col-span-3 h-32 rounded-sm bg-ink-300"></div>
       </div>
     </section>
-    <section v-else :key="$route.fullPath" class="w-full p-4 mb-10">
+    <section v-else :key="$route.fullPath" class="mb-10 w-full p-4">
       <page-title class="max-w-2xl">
         <template v-if="delivery.eventType" #title>
           {{ delivery.eventType.name }}
@@ -37,7 +37,7 @@
           Created {{ formatDate(delivery.createdAt) }} · Finished in {{ delivery.finishedIn }}s
         </template>
       </page-title>
-      <div class="grid max-w-2xl grid-cols-2 mt-8 rounded-md sm:grid-cols-3 gap-y-6 gap-x-5">
+      <div class="mt-8 grid max-w-2xl grid-cols-2 gap-x-5 gap-y-6 rounded-md sm:grid-cols-3">
         <template v-for="stat in stats">
           <div
             v-if="stat.value !== null || stat.value !== undefined"
@@ -51,13 +51,13 @@
                 v-if="stat.help"
                 v-tooltip="{ content: stat.help, delay: { show: 0, hide: 100 } }"
                 icon="help"
-                class="stroke-1.5 transition-opacity duration-75 flex-shrink-0"
+                class="flex-shrink-0 stroke-1.5 transition-opacity duration-75"
                 color="vanilla-400"
               />
             </div>
             <div
               v-if="stat.isCode && stat.value"
-              class="p-3 text-sm rounded-md bg-ink-300 overflow-x-auto"
+              class="overflow-x-auto rounded-md bg-ink-300 p-3 text-sm"
             >
               <highlightjs langugage="json" :code="stat.value" />
             </div>
@@ -73,7 +73,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZTag, ZLabel, ZBreadcrumb, ZBreadcrumbItem } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import WebhookMixin from '~/mixins/webhookMixin'
@@ -81,13 +80,6 @@ import { formatDate } from '~/utils/date'
 import { TeamPerms } from '~/types/permTypes'
 
 @Component({
-  components: {
-    ZIcon,
-    ZTag,
-    ZLabel,
-    ZBreadcrumb,
-    ZBreadcrumbItem
-  },
   meta: {
     auth: {
       teamPerms: [TeamPerms.MANAGE_WEBHOOKS]

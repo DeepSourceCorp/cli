@@ -35,7 +35,6 @@
 </template>
 
 <script lang="ts">
-import { ZDialogGeneric, ZDivider, ZIcon } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import {
@@ -47,7 +46,7 @@ import {
   VcsProviderChoices
 } from '~/types/types'
 
-@Component({ name: 'MetadataViewMobile', components: { ZDialogGeneric, ZDivider, ZIcon } })
+@Component({ name: 'MetadataViewMobile' })
 export default class MetadataViewMobile extends Vue {
   @Prop()
   issuesPrevented: string | number

@@ -1,4 +1,4 @@
-mutation($input: InviteTeamMembersInput!) {
+mutation ($input: InviteTeamMembersInput!) {
   inviteTeamMembers(input: $input) {
     ok
   }

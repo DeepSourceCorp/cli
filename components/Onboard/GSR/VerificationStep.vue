@@ -1,5 +1,5 @@
 <template>
-  <section class="space-y-4 min-h-56">
+  <section class="min-h-56 space-y-4">
     <div class="flex items-center justify-between space-x-2">
       <h2
         class="flex-grow text-base font-semibold leading-none text-vanilla-300"
@@ -18,13 +18,8 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZTag } from '@deepsource/zeal'
 
 @Component({
-  components: {
-    ZIcon,
-    ZTag
-  },
   meta: {
     auth: {
       strict: true,

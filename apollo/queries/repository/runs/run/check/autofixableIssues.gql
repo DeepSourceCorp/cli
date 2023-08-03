@@ -1,4 +1,4 @@
-query($checkId: ID!) {
+query ($checkId: ID!) {
   check(checkId: $checkId) {
     id
     autofixableIssues {

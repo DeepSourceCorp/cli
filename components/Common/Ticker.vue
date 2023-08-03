@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="trendValue"
-    class="p-1 space-x-1 text-xs font-normal leading-none text-center rounded-md cursor"
+    class="cursor space-x-1 rounded-md p-1 text-center text-xs font-normal leading-none"
     :class="[
       customBgClass || bgClass,
       customBgClass ? '' : showBg ? 'bg-opacity-10' : 'bg-opacity-0'
@@ -29,15 +29,11 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { shortenLargeNumber } from '@/utils/string'
-import { ZIcon } from '@deepsource/zeal'
 
 /**
  * Ticker component for showing trends.
  */
 @Component({
-  components: {
-    ZIcon
-  },
   name: 'Ticker'
 })
 export default class Ticker extends Vue {

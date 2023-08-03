@@ -9,7 +9,7 @@
           button-type="secondary"
           @click="toggle"
         >
-          <span class="hidden md:inline text-vanilla-100">Sort</span>
+          <span class="hidden text-vanilla-100 md:inline">Sort</span>
         </z-button>
       </template>
 
@@ -41,7 +41,6 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ModelSync } from 'vue-property-decorator'
-import { ZIcon, ZButton, ZInput, ZMenu, ZMenuItem, ZBadge } from '@deepsource/zeal'
 
 export interface SortChoice {
   name: string
@@ -49,16 +48,7 @@ export interface SortChoice {
   icon: string
 }
 
-@Component({
-  components: {
-    ZIcon,
-    ZButton,
-    ZInput,
-    ZMenu,
-    ZMenuItem,
-    ZBadge
-  }
-})
+@Component({})
 export default class IssueSort extends Vue {
   @ModelSync('selectedSortFilter', 'updateSortFilter', { type: String })
   readonly modelValue: string

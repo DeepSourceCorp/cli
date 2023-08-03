@@ -1,4 +1,4 @@
-mutation($ownerPk: ID!, $email: String!, $role: TeamMemberRoleChoices!) {
+mutation ($ownerPk: ID!, $email: String!, $role: TeamMemberRoleChoices!) {
   updateTeamMemberRole(input: { ownerPk: $ownerPk, email: $email, role: $role }) {
     role
   }

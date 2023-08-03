@@ -73,7 +73,6 @@
 </template>
 
 <script lang="ts">
-import { ZAlert, ZAvatar, ZButton, ZIcon } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import ADSInstallationLandingGQLMutation from '@/apollo/mutations/installation/adsInstallationLanding.gql'
@@ -83,12 +82,6 @@ import { AdsOrganization } from '~/types/types'
 import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
-  components: {
-    ZAlert,
-    ZAvatar,
-    ZButton,
-    ZIcon
-  },
   meta: {
     auth: {
       strict: true,

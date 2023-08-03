@@ -116,8 +116,6 @@
 <script lang="ts">
 import { Component, namespace, mixins } from 'nuxt-property-decorator'
 
-import { ZButton, ZTag, ZIcon, ZChart } from '@deepsource/zeal'
-
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
 import { Analyzer, Issue } from '~/types/types'
 import { parseISODate, formatDate } from '~/utils/date'
@@ -128,7 +126,6 @@ import MetaMixin from '~/mixins/metaMixin'
 const directoryStore = namespace('directory/directory')
 
 @Component({
-  components: { ZButton, ZTag, ZIcon, ZChart },
   layout: 'sidebar-only',
   scrollToTop: true
 })

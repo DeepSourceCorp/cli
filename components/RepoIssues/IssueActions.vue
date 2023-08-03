@@ -66,6 +66,8 @@
         <z-menu-item
           v-for="filter in ignoreIssues"
           :key="filter.name"
+          as="button"
+          class="w-full"
           @click="() => openModal(filter.name)"
         >
           {{ filter.label }}
@@ -160,7 +162,6 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZMenu, ZMenuItem, ZSplitButtonDropdown } from '@deepsource/zeal'
 import { RepositoryIssue, Maybe } from '~/types/types'
 import { AutofixFileChooser } from '@/components/RepoIssues'
 import {
@@ -184,11 +185,6 @@ export interface CreateIssueActionItem {
 
 @Component({
   components: {
-    ZIcon,
-    ZButton,
-    ZMenu,
-    ZMenuItem,
-    ZSplitButtonDropdown,
     IgnoreIssueTestFiles,
     IgnoreIssueAllFiles,
     IgnoreIssueFilePattern,
@@ -205,7 +201,7 @@ export default class IssueActions extends mixins(RoleAccessMixin, IntegrationsDe
   @Prop({ default: true })
   isAutofixEnabled!: boolean
 
-  @Prop({ required: true })
+  @Prop({ default: '' })
   checkId: string
 
   @Prop({ default: () => [] })

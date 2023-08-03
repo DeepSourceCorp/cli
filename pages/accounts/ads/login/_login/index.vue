@@ -23,7 +23,7 @@
         </video>
       </div>
 
-      <div class="blur grid p-8 lg:w-98">
+      <div class="grid p-8 backdrop-blur-3xl lg:w-98">
         <z-stepper :show-numbers="true" align="vertical">
           <z-step>
             <template #title>
@@ -103,7 +103,6 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZIcon, ZStep, ZStepper } from '@deepsource/zeal'
 import { Context } from '@nuxt/types/app'
 import { Component, Vue } from 'nuxt-property-decorator'
 
@@ -115,12 +114,6 @@ import ADSInstallationLandingGQLMutation from '@/apollo/mutations/installation/a
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
 @Component({
-  components: {
-    ZButton,
-    ZIcon,
-    ZStep,
-    ZStepper
-  },
   meta: {
     auth: {
       strict: true,
@@ -144,7 +137,8 @@ import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
         )
 
         if (!response.data.viewer) {
-          return error({ statusCode: 500 })
+          error({ statusCode: 500 })
+          return
         }
 
         const { adsOrganization } = response.data.viewer
@@ -152,7 +146,8 @@ import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
         // Show the `404` page if the query yields `null`
         // There isn't an organization corresponding to the given `login`
         if (!adsOrganization) {
-          return error({ statusCode: 404 })
+          error({ statusCode: 404 })
+          return
         }
 
         const { hasInstalled, hasEnabledThirdPartyAccess } = adsOrganization
@@ -263,10 +258,3 @@ export default class ADSIntermediaryPage extends Vue {
   }
 }
 </script>
-
-<style scoped>
-.blur {
-  backdrop-filter: blur(60px);
-  -webkit-backdrop-filter: blur(60px);
-}
-</style>

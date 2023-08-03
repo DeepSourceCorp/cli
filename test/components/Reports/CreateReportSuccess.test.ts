@@ -2,7 +2,7 @@ import { render } from '@testing-library/vue'
 import { VueConstructor } from 'vue'
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 import { CreateReportSuccess } from '~/components/Reports'
 
 import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'

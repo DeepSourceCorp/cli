@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex gap-3 rounded-md border border-ink-200 bg-ink-200 bg-opacity-50 pt-4 pl-4 text-vanilla-100"
+    class="flex gap-3 rounded-md border border-ink-200 bg-ink-200 bg-opacity-50 pl-4 pt-4 text-vanilla-100"
   >
     <z-icon icon="bulb" color="current" class="flex-shrink-0" />
     <div class="flex flex-grow gap-x-3">
@@ -30,9 +30,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 
-@Component({ name: 'SupportFeatureInfo', components: { ZIcon } })
+@Component({ name: 'SupportFeatureInfo' })
 export default class SupportFeatureInfo extends Vue {}
 </script>
 

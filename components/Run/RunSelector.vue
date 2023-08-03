@@ -30,7 +30,7 @@
             <div class="flex flex-wrap gap-x-4 pl-6">
               <span
                 v-if="isRunSkipped(run.status)"
-                class="rounded-full bg-ink-200 px-1.5 pt-0.5 pb-px text-xxs uppercase leading-tight text-vanilla-400"
+                class="rounded-full bg-ink-200 px-1.5 pb-px pt-0.5 text-xxs uppercase leading-tight text-vanilla-400"
               >
                 Skipped
               </span>
@@ -66,7 +66,6 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZMenu, ZMenuItem, ZMenuSection, ZIcon } from '@deepsource/zeal'
 
 import { shortenLargeNumber } from '~/utils/string'
 import { runStatusIcon, runStatusIconColor } from '~/utils/ui'
@@ -74,7 +73,6 @@ import { Run, RunStatus } from '~/types/types'
 import { generalizeRunStatuses } from '~/utils/runs'
 
 @Component({
-  components: { ZMenu, ZMenuItem, ZMenuSection, ZIcon },
   methods: { runStatusIcon, runStatusIconColor, shortenLargeNumber }
 })
 export default class RunSelector extends Vue {

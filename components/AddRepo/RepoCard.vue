@@ -24,7 +24,7 @@
         <!-- Not using `ZTag` since it doesn't support custom font color -->
         <div
           v-if="showInactiveTag"
-          class="text-8px inline-flex items-center justify-evenly space-x-2 rounded-full bg-honey-500 py-0.5 px-2 text-ink-400 md:self-center"
+          class="text-8px inline-flex items-center justify-evenly space-x-2 rounded-full bg-honey-500 px-2 py-0.5 text-ink-400 md:self-center"
         >
           INACTIVE
         </div>
@@ -33,12 +33,12 @@
         <transition enter-class="duration-200 opacity-0" leave-class="duration-150 opacity-0">
           <div
             v-if="internalStarredState"
-            class="absolute right-1 -top-1.5 transform-gpu transition-all ease-in-out"
+            class="absolute -top-1.5 right-1 transform-gpu transition-all ease-in-out"
           >
             <div class="h-1.5 w-9 rounded-t-md bg-ink-200 opacity-60"></div>
           </div>
         </transition>
-        <div class="absolute right-1 -top-1.5 w-8">
+        <div class="absolute -top-1.5 right-1 w-8">
           <transition mode="out-in" enter-class="-translate-y-2" leave-class="-translate-y-2">
             <div
               v-if="internalStarredState"
@@ -99,7 +99,6 @@
   </base-card>
 </template>
 <script lang="ts">
-import { ZIcon } from '@deepsource/zeal'
 import { Component, mixins, Prop, Watch } from 'nuxt-property-decorator'
 
 import AnalyzerListMixin from '~/mixins/analyzerListMixin'
@@ -116,11 +115,7 @@ type RepoDescConfigT = {
 /**
  * Repo card component
  */
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 export default class RepoCard extends mixins(AnalyzerListMixin) {
   @Prop({ default: false })
   removeDefaultStyle: boolean
@@ -362,7 +357,7 @@ export default class RepoCard extends mixins(AnalyzerListMixin) {
 </script>
 <style lang="postcss">
 .ribbon:after {
-  @apply absolute top-10 left-0 h-0 w-0 border-slate-400 content;
+  @apply absolute left-0 top-10 h-0 w-0 border-slate-400 content;
   border-left-width: 16px;
   border-right-width: 16px;
   border-bottom: 10px solid transparent;

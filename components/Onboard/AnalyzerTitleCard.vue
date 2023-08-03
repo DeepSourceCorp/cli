@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center h-12 max-w-lg p-2 space-x-2 rounded-md cursor-pointer bg-ink-300 hover:bg-ink-200"
+    class="flex h-12 max-w-lg cursor-pointer items-center space-x-2 rounded-md bg-ink-300 p-2 hover:bg-ink-200"
     @click="handleClick()"
   >
     <analyzer-logo
@@ -16,12 +16,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
-@Component({
-  components: {
-    ZIcon
-  }
-})
+@Component({})
 export default class AnalyzerTitleCard extends Vue {
   @Prop({ default: 'globe' })
   icon!: string

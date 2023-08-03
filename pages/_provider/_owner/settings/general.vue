@@ -54,7 +54,7 @@
       <div v-else class="rounded-md border border-ink-200 bg-ink-300 p-4">
         <template v-if="ownerPublicKey">
           <h4 class="text-sm leading-4 tracking-wide text-vanilla-300">SSH access</h4>
-          <p class="mt-1.5 mb-2.5 text-xs leading-6 text-vanilla-400">
+          <p class="mb-2.5 mt-1.5 text-xs leading-6 text-vanilla-400">
             If your repositories have external private dependencies, you need to grant DeepSource
             access to fetch those dependencies via this public key.
           </p>
@@ -181,7 +181,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZAvatar, ZIcon, ZButton, ZConfirm } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
@@ -190,7 +189,6 @@ import { getDefaultAvatar } from '~/utils/ui'
 import { AppFeatures, TeamPerms } from '~/types/permTypes'
 
 @Component({
-  components: { ZAvatar, ZIcon, ZButton, ZConfirm },
   layout: 'dashboard',
   middleware: ['teamOnly', 'perm', 'validateProvider'],
   meta: {

@@ -27,18 +27,18 @@
         @onClose="close"
       >
         <template #footer="{ close }">
-          <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
+          <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
             <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               I changed my mind
             </z-button>
             <z-button
               v-if="updating"
-              class="w-60 flex items-center"
+              class="flex w-60 items-center"
               button-type="danger"
               size="small"
               :disabled="true"
             >
-              <z-icon icon="spin-loader" color="ink" class="animate-spin mr-2" />
+              <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin" />
               Downgrading subscription
             </z-button>
             <z-button
@@ -59,19 +59,11 @@
 </template>
 <script lang="ts">
 import { mixins, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZConfirm, ZButton } from '@deepsource/zeal'
-
 import { BillingInfo } from '~/types/types'
 
 import PlanDetailMixin from '~/mixins/planDetailMixin'
 
-@Component({
-  components: {
-    ZIcon,
-    ZConfirm,
-    ZButton
-  }
-})
+@Component({})
 export default class DowngradePlan extends mixins(PlanDetailMixin) {
   @Prop({ default: {} })
   billing: BillingInfo

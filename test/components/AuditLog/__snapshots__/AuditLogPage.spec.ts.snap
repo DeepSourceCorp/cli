@@ -10,17 +10,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub end-date=\\"Apr 17, 2023\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Logs for Last 3 months Jan 17, 2023 - Apr 17, 2023
       </p>
     </div>
@@ -59,17 +59,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub end-date=\\"Apr 17, 2023\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Searching logs...
       </p>
     </div>
@@ -102,17 +102,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 17, 2023\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Logs for Last 3 months Jan 17, 2023 - Apr 17, 2023
       </p>
     </div>
@@ -151,17 +151,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 17, 2023\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Searching logs...
       </p>
     </div>
@@ -194,17 +194,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub end-date=\\"Apr 17, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Logs for Last 3 months Jan 17, 2023 - Apr 17, 2023
       </p>
     </div>
@@ -243,17 +243,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub end-date=\\"Apr 17, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Searching logs...
       </p>
     </div>
@@ -286,17 +286,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 17, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Logs for Last 3 months Jan 17, 2023 - Apr 17, 2023
       </p>
     </div>
@@ -335,17 +335,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 17, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Searching logs...
       </p>
     </div>
@@ -378,17 +378,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub end-date=\\"Apr 17, 2023\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Logs for Last 3 months Jan 17, 2023 - Apr 17, 2023
       </p>
     </div>
@@ -427,17 +427,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub end-date=\\"Apr 17, 2023\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Searching logs...
       </p>
     </div>
@@ -470,17 +470,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 17, 2023\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Logs for Last 3 months Jan 17, 2023 - Apr 17, 2023
       </p>
     </div>
@@ -519,17 +519,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 17, 2023\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Searching logs...
       </p>
     </div>
@@ -562,17 +562,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub end-date=\\"Apr 17, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Logs for Last 3 months Jan 17, 2023 - Apr 17, 2023
       </p>
     </div>
@@ -611,17 +611,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub end-date=\\"Apr 17, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Searching logs...
       </p>
     </div>
@@ -654,17 +654,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 17, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Logs for Last 3 months Jan 17, 2023 - Apr 17, 2023
       </p>
     </div>
@@ -703,17 +703,17 @@ exports[`[[ AuditLogPage ]] renders the audit log page of different levels in va
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub loading=\\"true\\" end-date=\\"Apr 17, 2023\\" show-export-logs-success-modal=\\"true\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
     </div>
   </div>
-  <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\" class=\\"\\"></zdivider-stub>
+  <zdivider-stub margin=\\"m-0\\" class=\\"\\"></zdivider-stub>
   <div class=\\"mb-4 flex h-6 items-center justify-between\\">
     <div class=\\"inline-flex items-center gap-x-3\\">
-      <zicon-stub icon=\\"list-end\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
-      <p class=\\"page-context-text max-w-2xs break-words text-sm font-normal leading-5 text-vanilla-400 border-b-vanilla-400 md:max-w-xs lg:max-w-sm\\">
+      <zicon-stub icon=\\"list-end\\" class=\\"flex-shrink-0 self-start\\"></zicon-stub>
+      <p class=\\"max-w-2xs break-words border-b-vanilla-400 text-sm font-normal leading-5 text-vanilla-400 before:lh-crop-5 md:max-w-xs lg:max-w-sm\\">
         Searching logs...
       </p>
     </div>
@@ -746,7 +746,7 @@ exports[`[[ AuditLogPage ]] renders the corresponding empty state when there are
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"test-query\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"test-query\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub disabled=\\"true\\" end-date=\\"Apr 17, 2023\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>
@@ -770,7 +770,7 @@ exports[`[[ AuditLogPage ]] renders the empty state when there are no events fou
   </div>
   <!---->
   <div class=\\"flex flex-col items-start gap-x-2 gap-y-3 sm:flex-row sm:items-center\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search by event name or user...\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
+    <zinput-stub value=\\"\\" background-color=\\"ink-300\\" placeholder=\\"Search by event name or user...\\" size=\\"small\\" class=\\"flex-grow pl-2 text-sm\\"></zinput-stub>
     <div class=\\"flex w-full items-center gap-x-2\\">
       <daterangepicker-stub date-range-options=\\"[object Object]\\" selected-filter=\\"3m\\" class=\\"flex-grow\\"></daterangepicker-stub>
       <exportlogssuccessmodal-stub disabled=\\"true\\" end-date=\\"Apr 17, 2023\\" start-date=\\"Jan 17, 2023\\" viewer-email=\\"johndoe@test.com\\"></exportlogssuccessmodal-stub>

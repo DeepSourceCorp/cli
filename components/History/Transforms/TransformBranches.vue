@@ -5,7 +5,7 @@
     @toggled="toggled"
   >
     <template #expanded>
-      <div v-if="loading" class="flex flex-col space-y-2 justify-center items-center h-28">
+      <div v-if="loading" class="flex h-28 flex-col items-center justify-center space-y-2">
         <z-icon icon="loader" class="animate-spin duration-1000" />
         Fetching Transforms
       </div>
@@ -33,7 +33,6 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, namespace } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import TransformCard from './TransformCard.vue'
 import BranchList from '../BranchList.vue'
 
@@ -43,7 +42,6 @@ const transformRunListStore = namespace('transformerRun/list')
 
 @Component({
   components: {
-    ZIcon,
     TransformCard,
     BranchList
   }

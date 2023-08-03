@@ -1,5 +1,5 @@
 <template>
-  <main class="flex flex-col max-w-2xl p-4 gap-y-2">
+  <main class="flex max-w-2xl flex-col gap-y-2 p-4">
     <page-title
       title="Analysis configuration"
       description-width-class="max-w-2xl"
@@ -52,8 +52,8 @@
         :collapsible="false"
       />
     </section>
-    <section v-else class="overflow-x-scroll text-sm rounded-sm toml-box hide-scroll bg-ink-300">
-      <div class="sticky top-0 left-0 flex items-center justify-between p-3 space-x-2 bg-ink-200">
+    <section v-else class="toml-box hide-scroll overflow-x-scroll rounded-sm bg-ink-300 text-sm">
+      <div class="sticky left-0 top-0 flex items-center justify-between space-x-2 bg-ink-200 p-3">
         <code class="font-bold text-vanilla-200">.deepsource.toml</code>
         <copy-button
           v-tooltip="{
@@ -69,7 +69,7 @@
           class="hover:bg-vanilla-400 hover:bg-opacity-5"
         />
       </div>
-      <div class="p-3 text-sm bg-ink-300">
+      <div class="bg-ink-300 p-3 text-sm">
         <highlightjs language="toml" :code="toml" />
       </div>
     </section>
@@ -78,7 +78,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZRadioGroup, ZRadioButton } from '@deepsource/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { RepoPerms } from '~/types/permTypes'
 import TomlGeneratorMixin from '~/mixins/tomlGeneratorMixin'
@@ -88,12 +87,6 @@ import { AnalyzerInterface } from '~/store/analyzer/list'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 
 @Component({
-  components: {
-    ZButton,
-    ZIcon,
-    ZRadioGroup,
-    ZRadioButton
-  },
   layout: 'repository',
   middleware: ['validateProvider'],
   meta: {

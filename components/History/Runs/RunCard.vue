@@ -16,9 +16,9 @@
                 :icon="icon"
                 :class="{ 'animate-spin': isPending }"
                 :color="iconColor"
-                class="mt-0.5 mr-0.5 inline flex-shrink-0 self-center"
+                class="mr-0.5 mt-0.5 inline flex-shrink-0 self-center"
               />
-              <h3 class="inline cursor-pointer font-medium text-vanilla-100 line-clamp-1">
+              <h3 class="line-clamp-1 inline cursor-pointer font-medium text-vanilla-100">
                 {{ title || branchName }}
               </h3>
               <span class="inline font-medium text-vanilla-400">
@@ -83,7 +83,6 @@
 </template>
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 import { BaseCard } from '../'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { fromNow } from '@/utils/date'
@@ -94,8 +93,7 @@ import { GeneralizedRunT, generalizeRunStatuses } from '~/utils/runs'
 
 @Component({
   components: {
-    BaseCard,
-    ZIcon
+    BaseCard
   }
 })
 export default class RunCard extends mixins(RepoDetailMixin) {

@@ -1,4 +1,4 @@
-mutation(
+mutation (
   $ownerId: ID!
   $email: String!
   $action: InviteTeamMemberActionChoice!

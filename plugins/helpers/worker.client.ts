@@ -20,27 +20,28 @@ export type WorkerParams = {
   repo?: string
 }
 
-declare module 'vue/types/vue' {
-  interface Vue {
-    $sendWorkerTask: (taskName: string, params: WorkerParams) => void
-  }
-}
+// TODO enable to add types to Vue instance
+// declare module 'vue/types/vue' {
+//   interface Vue {
+//     $sendWorkerTask: (taskName: string, params: WorkerParams) => void
+//   }
+// }
 
-declare module '@nuxt/types' {
-  interface NuxtAppOptions {
-    $sendWorkerTask: (taskName: string, params: WorkerParams) => void
-  }
-  interface Context {
-    $sendWorkerTask: (taskName: string, params: WorkerParams) => void
-  }
-}
+// declare module '@nuxt/types' {
+//   interface NuxtAppOptions {
+//     $sendWorkerTask: (taskName: string, params: WorkerParams) => void
+//   }
+//   interface Context {
+//     $sendWorkerTask: (taskName: string, params: WorkerParams) => void
+//   }
+// }
 
-declare module 'vuex/types/index' {
-  // skipcq: JS-0387, JS-0356
-  interface Store<S> {
-    $sendWorkerTask: (taskName: string, params: WorkerParams) => void
-  }
-}
+// declare module 'vuex/types/index' {
+//   // skipcq: JS-0387, JS-0356
+//   interface Store<S> {
+//     $sendWorkerTask: (taskName: string, params: WorkerParams) => void
+//   }
+// }
 
 export default (context: Context, inject: Inject) => {
   const worker = window.Worker ? new Worker('/worker/data.worker.js') : workerStub
@@ -84,9 +85,10 @@ export default (context: Context, inject: Inject) => {
     }
   })
 
-  inject('worker', worker)
+  // TODO enable to inject worker and sendWorkerTask to Vue instance
+  // inject('worker', worker)
 
-  inject('sendWorkerTask', function (taskName: string, params: WorkerParams) {
-    _sendTask(taskName, params, context.app)
-  })
+  // inject('sendWorkerTask', function (taskName: string, params: WorkerParams) {
+  //   _sendTask(taskName, params, context.app)
+  // })
 }

@@ -1,6 +1,6 @@
 <template>
   <div :class="[spacing]">
-    <z-icon :icon="icon" :size="size" :color="iconColor" class="flex-shrink-0 inline mb-px" />
+    <z-icon :icon="icon" :size="size" :color="iconColor" class="mb-px inline flex-shrink-0" />
     <span :class="[textColor, textSize, wordBreak, 'inline']">
       <slot>{{ label }}</slot>
     </span>
@@ -8,12 +8,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsource/zeal'
 
 @Component({
-  components: {
-    ZIcon
-  },
   name: 'MetaDataItem'
 })
 export default class MetaDataItem extends Vue {

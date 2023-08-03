@@ -1,4 +1,4 @@
-mutation($input: GithubEnterpriseInstallationLandingInput!) {
+mutation ($input: GithubEnterpriseInstallationLandingInput!) {
   gheInstallationLanding(input: $input) {
     nextAction
     message

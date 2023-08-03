@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ render SelectRepositoriesForReport ]] renders SelectRepositoriesForReport with all prop options: {"ownerLogin":"deepsourcelabs","vcsProvider":"gh","editMode":false} 1`] = `
-"<div class=\\"p-4 pb-0 space-y-4\\">
-  <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for a repository...\\" debouncedelay=\\"350\\" icon=\\"search\\" size=\\"small\\" backgroundcolor=\\"ink-200\\" errorbordercolor=\\"cherry\\" class=\\"w-full\\"></zinput-stub>
+"<div class=\\"space-y-4 p-4 pb-0\\">
+  <zinput-stub icon=\\"search\\" background-color=\\"ink-200\\" size=\\"small\\" placeholder=\\"Search for a repository...\\" value=\\"\\" class=\\"w-full\\"></zinput-stub>
   <div class=\\"h-96 overflow-y-auto pb-5\\">
     <div class=\\"space-y-2.5\\">
-      <zcheckbox-stub label=\\"deepsourcelabs / demo-go\\" name=\\"\\" value=\\"UmVwb3NpdG9yeTp6d2phcGI=\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer hover:text-vanilla-100\\"></zcheckbox-stub>
-      <zcheckbox-stub label=\\"deepsourcelabs / marvin-docker\\" name=\\"\\" value=\\"UmVwb3NpdG9yeTp6dmpleXo=\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer hover:text-vanilla-100\\"></zcheckbox-stub>
-      <zcheckbox-stub label=\\"deepsourcelabs / asgard\\" name=\\"\\" value=\\"UmVwb3NpdG9yeTp6dmp2eXo=\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer hover:text-vanilla-100\\"></zcheckbox-stub>
-      <zcheckbox-stub label=\\"deepsourcelabs / demo-python\\" name=\\"\\" value=\\"UmVwb3NpdG9yeTp6ZXBqZWI=\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer hover:text-vanilla-100\\"></zcheckbox-stub>
+      <zcheckbox-stub model-value=\\"\\" value=\\"UmVwb3NpdG9yeTp6d2phcGI=\\" label=\\"deepsourcelabs / demo-go\\" size=\\"small\\" class=\\"cursor-pointer hover:text-vanilla-100\\"></zcheckbox-stub>
+      <zcheckbox-stub model-value=\\"\\" value=\\"UmVwb3NpdG9yeTp6dmpleXo=\\" label=\\"deepsourcelabs / marvin-docker\\" size=\\"small\\" class=\\"cursor-pointer hover:text-vanilla-100\\"></zcheckbox-stub>
+      <zcheckbox-stub model-value=\\"\\" value=\\"UmVwb3NpdG9yeTp6dmp2eXo=\\" label=\\"deepsourcelabs / asgard\\" size=\\"small\\" class=\\"cursor-pointer hover:text-vanilla-100\\"></zcheckbox-stub>
+      <zcheckbox-stub model-value=\\"\\" value=\\"UmVwb3NpdG9yeTp6ZXBqZWI=\\" label=\\"deepsourcelabs / demo-python\\" size=\\"small\\" class=\\"cursor-pointer hover:text-vanilla-100\\"></zcheckbox-stub>
     </div>
-    <!----> <button class=\\"fixed left-1/2 bottom-19 transform -translate-x-1/2 flex gap-1 items-center text-xs font-medium leading-4 rounded-full py-1.5 px-3.5 bg-ink-200 shadow-double-dark\\" style=\\"display: none;\\">
-      <zicon-stub icon=\\"arrow-up\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-100\\"></zicon-stub>
+    <!----> <button class=\\"fixed bottom-19 left-1/2 flex -translate-x-1/2 transform items-center gap-1 rounded-full bg-ink-200 px-3.5 py-1.5 text-xs font-medium leading-4 shadow-double-dark\\" style=\\"display: none;\\">
+      <zicon-stub icon=\\"arrow-up\\" color=\\"vanilla-100\\" size=\\"x-small\\"></zicon-stub>
       Back to top
     </button>
   </div>

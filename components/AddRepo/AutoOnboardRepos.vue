@@ -50,8 +50,6 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon, ZTabPane, ZDivider } from '@deepsource/zeal'
-import { RepoCard } from '@/components/AddRepo'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
@@ -66,14 +64,6 @@ export enum Stages {
 }
 
 @Component({
-  components: {
-    ZInput,
-    ZButton,
-    ZIcon,
-    ZTabPane,
-    ZDivider,
-    RepoCard
-  },
   name: 'AutoOnboardRepos'
 })
 export default class AutoOnboardRepos extends mixins(

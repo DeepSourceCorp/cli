@@ -113,7 +113,7 @@
           <template #description>
             <div class="copy-content-container max-w-2xs items-start sm:max-w-none">
               <code
-                class="max-w-md py-2 font-mono text-xs font-normal leading-4 text-vanilla-100 line-clamp-3"
+                class="line-clamp-3 max-w-md py-2 font-mono text-xs font-normal leading-4 text-vanilla-100"
               >
                 {{ cliCommand }}
               </code>
@@ -143,15 +143,6 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import {
-  ZAccordion,
-  ZAccordionItem,
-  ZIcon,
-  ZStepper,
-  ZStep,
-  ZSelect,
-  ZOption
-} from '@deepsource/zeal'
 
 interface InstallationMethod {
   label: 'cURL' | 'Homebrew'
@@ -159,16 +150,7 @@ interface InstallationMethod {
 }
 
 @Component({
-  name: 'EnableCoverageSteps',
-  components: {
-    ZAccordion,
-    ZAccordionItem,
-    ZIcon,
-    ZStepper,
-    ZStep,
-    ZSelect,
-    ZOption
-  }
+  name: 'EnableCoverageSteps'
 })
 export default class EnabledCoverageSteps extends Vue {
   @Prop({ required: true })
@@ -213,6 +195,6 @@ export default class EnabledCoverageSteps extends Vue {
 }
 
 .copy-content-container {
-  @apply flex justify-between rounded-sm border border-ink-200 bg-ink-400 pr-1 pl-2.5;
+  @apply flex justify-between rounded-sm border border-ink-200 bg-ink-400 pl-2.5 pr-1;
 }
 </style>

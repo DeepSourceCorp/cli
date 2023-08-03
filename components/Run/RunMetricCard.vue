@@ -3,20 +3,20 @@
     <template #title="{ open, toggleAccordion }">
       <div
         v-if="$slots.header"
-        class="flex w-full item-center justify-between px-4 p-3 border-b border-slate-400 cursor-pointer transition-all duration-300"
+        class="item-center flex w-full cursor-pointer justify-between border-b border-slate-400 p-3 px-4 transition-all duration-300"
         :class="{ 'border-opacity-0': !open }"
         @click="isInModal ? () => undefined : toggleAccordion()"
       >
         <slot name="header"></slot>
         <div
-          class="bg-ink-100 text-vanilla-100 text-xs rounded-full px-2 items-center gap-x-0.5"
+          class="items-center gap-x-0.5 rounded-full bg-ink-100 px-2 text-xs text-vanilla-100"
           :class="[isInModal ? 'hidden' : 'flex']"
         >
           {{ metricsCaptured.length }}
           <z-icon
             icon="chevron-down"
             size="x-small"
-            class="transform transition-transform ease-in-out duration-300"
+            class="transform transition-transform duration-300 ease-in-out"
             :class="{ 'rotate-180': open }"
           />
         </div>
@@ -39,17 +39,12 @@
 <script lang="ts">
 import { Component, namespace, Prop, Vue } from 'nuxt-property-decorator'
 import RunMetricStat from './RunMetricStat.vue'
-import { ZIcon, ZTag, ZButton, ZAccordionItem } from '@deepsource/zeal'
 import { Repository, RepositoryMetricValue } from '~/types/types'
 
 const repoStore = namespace('repository/detail')
 
 @Component({
   components: {
-    ZIcon,
-    ZTag,
-    ZButton,
-    ZAccordionItem,
     RunMetricStat
   }
 })

@@ -15,15 +15,15 @@
         class="z-20"
       >
         <template #toggleTrigger>
-          <div v-if="count" class="flex space-x-2 cursor-pointer md:items-center">
+          <div v-if="count" class="flex cursor-pointer space-x-2 md:items-center">
             <button
               v-tooltip="!isExpanded ? 'Show more runs' : ''"
               :disabled="listLoading"
               tabindex="0"
-              class="inline-flex items-center px-2 py-1 md:py-1.5 border rounded-full gap-x-1.5 justify-evenly bg-ink-300 hover:bg-ink-200 border-slate-400"
+              class="inline-flex items-center justify-evenly gap-x-1.5 rounded-full border border-slate-400 bg-ink-300 px-2 py-1 hover:bg-ink-200 md:py-1.5"
               @click.prevent="toggleItems"
             >
-              <span class="font-normal leading-none text-xxs md:text-xs text-vanilla-400">
+              <span class="text-xxs font-normal leading-none text-vanilla-400 md:text-xs">
                 {{ countText }}
               </span>
               <z-icon
@@ -37,7 +37,7 @@
                 v-else
                 icon="chevron-down"
                 size="x-small"
-                class="transition-all duration-300 transform"
+                class="transform transition-all duration-300"
                 :class="(isExpanded && 'rotate-180') || 'rotate-0'"
               />
             </button>
@@ -49,14 +49,14 @@
       <div class="relative space-y-2">
         <!-- Fade effect -->
         <div
-          class="z-10 absolute w-2 h-12 -top-6 left-px bg-gradient-to-b from-ink-400 via-ink-400 to-transparent"
+          class="absolute -top-6 left-px z-10 h-12 w-2 bg-gradient-to-b from-ink-400 via-ink-400 to-transparent"
         ></div>
         <run-card
           v-for="branchRun in runsInBranch"
           v-bind="generalizeRun(branchRun)"
           :key="branchRun.runId"
           :is-secondary="true"
-          class="ml-4 nested-group-item"
+          class="nested-group-item ml-4"
           action-text="Analyzed"
         />
       </div>
@@ -65,7 +65,6 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, namespace } from 'nuxt-property-decorator'
-import { ZIcon, ZTag, ZButton } from '@deepsource/zeal'
 import RunCard from './RunCard.vue'
 import BranchList from '../BranchList.vue'
 import { Run } from '~/types/types'
@@ -79,9 +78,6 @@ const runListStore = namespace('run/list')
 
 @Component({
   components: {
-    ZIcon,
-    ZTag,
-    ZButton,
     RunCard,
     BranchList
   },

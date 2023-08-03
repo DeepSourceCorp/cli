@@ -2,10 +2,10 @@
 
 exports[`[[ UserHeader ]] renders UserHeader 1`] = `
 "<div>
-  <div class=\\"overflow-x-auto border-b bg-ink-300 border-slate-400\\">
+  <div class=\\"overflow-x-auto border-b border-slate-400 bg-ink-300\\">
     <div id=\\"header\\" class=\\"flex items-center p-4\\">
-      <h2 class=\\"inline-flex items-center space-x-4 font-medium text-vanilla-100\\"><a class=\\"inline-flex items-center flex-shrink-0 space-x-2\\">
-          <!----> <span class=\\"text-xl font-semibold cursor-pointer lg:text-xl xl:text-2xl\\"></span></a></h2>
+      <h2 class=\\"inline-flex items-center space-x-4 font-medium text-vanilla-100\\"><a class=\\"inline-flex flex-shrink-0 items-center space-x-2\\">
+          <!----> <span class=\\"cursor-pointer text-xl font-semibold lg:text-xl xl:text-2xl\\"></span></a></h2>
     </div>
   </div>
 </div>"

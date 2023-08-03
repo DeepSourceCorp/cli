@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 pb-0 space-y-4">
+  <div class="space-y-4 p-4 pb-0">
     <z-input
       v-model="query"
       :show-border="false"
@@ -16,10 +16,10 @@
     </z-input>
 
     <div ref="reportSelectRepositoryList" class="h-96 overflow-y-auto pb-5" @scroll="onScroll">
-      <div v-if="repoListLoading" class="space-y-4 pt-px mt-4">
-        <div v-for="idx in 8" :key="idx" class="w-72 flex items-center gap-x-2">
-          <div class="h-4 bg-ink-200 animate-pulse w-4 rounded-sm"></div>
-          <div class="h-4 bg-ink-200 animate-pulse flex-grow rounded-sm"></div>
+      <div v-if="repoListLoading" class="mt-4 space-y-4 pt-px">
+        <div v-for="idx in 8" :key="idx" class="flex w-72 items-center gap-x-2">
+          <div class="h-4 w-4 animate-pulse rounded-sm bg-ink-200"></div>
+          <div class="h-4 flex-grow animate-pulse rounded-sm bg-ink-200"></div>
         </div>
       </div>
 
@@ -52,7 +52,7 @@
           repoList.length > 0 &&
           repoList.length < totalCount
         "
-        class="flex justify-center mt-5"
+        class="mt-5 flex justify-center"
       >
         <z-button
           label="Show more"
@@ -66,7 +66,7 @@
 
       <button
         v-show="scrollTopVisible"
-        class="fixed left-1/2 bottom-19 transform -translate-x-1/2 flex gap-1 items-center text-xs font-medium leading-4 rounded-full py-1.5 px-3.5 bg-ink-200 shadow-double-dark"
+        class="fixed bottom-19 left-1/2 flex -translate-x-1/2 transform items-center gap-1 rounded-full bg-ink-200 px-3.5 py-1.5 text-xs font-medium leading-4 shadow-double-dark"
         @click="resetRepoListScroll"
       >
         <z-icon icon="arrow-up" color="vanilla-100" size="x-small" />
@@ -78,7 +78,6 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZInput, ZIcon, ZCheckbox, ZButton } from '@deepsource/zeal'
 
 import PaginationMixin from '~/mixins/paginationMixin'
 import { resolveNodes } from '~/utils/array'
@@ -96,14 +95,7 @@ import { GraphqlQueryResponse } from '~/types/apolloTypes'
 /**
  * Component that contains repository selection UI for mutate owner report modal
  */
-@Component({
-  components: {
-    ZInput,
-    ZIcon,
-    ZCheckbox,
-    ZButton
-  }
-})
+@Component({})
 export default class SelectRepositoriesForReport extends mixins(PaginationMixin) {
   @Prop({ required: true })
   ownerLogin: string

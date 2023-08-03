@@ -268,7 +268,6 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZDivider, ZIcon, ZInput, ZOption, ZSelect, ZToggle } from '@deepsource/zeal'
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 
 import { AppFeatures, RepoPerms, TeamPerms } from '~/types/permTypes'
@@ -282,15 +281,6 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import { OwnerFeatureType } from '~/types/ownerTypes'
 
 @Component({
-  components: {
-    ZInput,
-    ZDivider,
-    ZToggle,
-    ZButton,
-    ZSelect,
-    ZOption,
-    ZIcon
-  },
   layout: 'repository',
   middleware: ['perm'],
   meta: {

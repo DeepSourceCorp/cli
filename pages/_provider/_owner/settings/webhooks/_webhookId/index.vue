@@ -1,6 +1,6 @@
 <template>
   <section>
-    <section class="px-4 py-3.5 min-h-13 border-b border-slate-400 flex flex-row items-center">
+    <section class="flex min-h-13 flex-row items-center border-b border-slate-400 px-4 py-3.5">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="text-vanilla-400">
           <nuxt-link :to="$generateRoute(['settings', 'webhooks'])">All endpoints</nuxt-link>
@@ -10,18 +10,18 @@
         </z-breadcrumb-item>
       </z-breadcrumb>
     </section>
-    <section v-if="$fetchState.pending" class="max-w-2xl p-4 space-y-8 animate-pulse">
+    <section v-if="$fetchState.pending" class="max-w-2xl animate-pulse space-y-8 p-4">
       <div class="grid grid-cols-4 gap-2">
-        <div class="h-8 col-span-2 bg-ink-300"></div>
+        <div class="col-span-2 h-8 bg-ink-300"></div>
         <div></div>
         <div class="h-8 bg-ink-300"></div>
-        <div class="h-4 col-span-2 bg-ink-300"></div>
+        <div class="col-span-2 h-4 bg-ink-300"></div>
       </div>
       <div class="grid grid-cols-1 gap-4">
         <div v-for="ii in 4" :key="ii" class="h-20 bg-ink-300"></div>
       </div>
     </section>
-    <section v-else :key="$route.fullPath" class="w-full p-4 mb-10">
+    <section v-else :key="$route.fullPath" class="mb-10 w-full p-4">
       <page-title
         class="max-w-2xl"
         :title="title"
@@ -68,7 +68,7 @@
               >
                 <template #footer="{ close }">
                   <div
-                    class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100"
+                    class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100"
                   >
                     <z-button
                       button-type="ghost"
@@ -128,7 +128,7 @@
             :show-password="!isSecretHidden"
           >
             <template #input-utilities>
-              <div class="absolute flex top-1 right-1 gap-x-1 bg-ink-400">
+              <div class="absolute right-1 top-1 flex gap-x-1 bg-ink-400">
                 <z-button
                   v-tooltip="isSecretHidden ? 'Reveal secret' : 'Hide secret'"
                   button-type="secondary"
@@ -160,12 +160,12 @@
           </password-input>
           <div class="py-4">
             <h4 class="mb-2 text-sm text-vanilla-100">Selected events</h4>
-            <div class="border rounded-md border-slate-400">
+            <div class="rounded-md border border-slate-400">
               <template v-if="readOnly">
                 <span
                   v-for="(event, position) in subscribedEvents"
                   :key="event.shortcode"
-                  class="block px-3 pt-2 pb-3 border-slate-400 space-y-0.5"
+                  class="block space-y-0.5 border-slate-400 px-3 pb-3 pt-2"
                   :class="{
                     'border-t': position !== 0
                   }"
@@ -178,13 +178,13 @@
                 <label
                   v-for="(event, position) in allEventsList"
                   :key="event.shortcode"
-                  class="block p-3 cursor-pointer border-slate-400"
+                  class="block cursor-pointer border-slate-400 p-3"
                   :class="{
                     'border-t': position !== 0,
                     'bg-ink-300': selectedEvents.includes(event.shortcode)
                   }"
                 >
-                  <div class="flex items-center mb-1">
+                  <div class="mb-1 flex items-center">
                     <z-checkbox
                       v-model="selectedEvents"
                       :value="event.shortcode"
@@ -198,7 +198,7 @@
               </template>
             </div>
           </div>
-          <section v-if="endpointDeliveriesCount && readOnly" class="py-4 space-y-2">
+          <section v-if="endpointDeliveriesCount && readOnly" class="space-y-2 py-4">
             <h4 class="text-sm text-vanilla-100">Webhook deliveries</h4>
             <webhook-log-list
               :key="$route.params.webhookId"
@@ -254,17 +254,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import {
-  ZIcon,
-  ZTag,
-  ZLabel,
-  ZInput,
-  ZButton,
-  ZConfirm,
-  ZBreadcrumb,
-  ZBreadcrumbItem,
-  ZCheckbox
-} from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import WebhookMixin from '~/mixins/webhookMixin'
@@ -275,17 +264,6 @@ import { resolveNodes } from '~/utils/array'
 import Shifty from '@deepsource/shifty'
 
 @Component({
-  components: {
-    ZIcon,
-    ZTag,
-    ZLabel,
-    ZInput,
-    ZButton,
-    ZConfirm,
-    ZBreadcrumb,
-    ZBreadcrumbItem,
-    ZCheckbox
-  },
   meta: {
     auth: {
       teamPerms: [TeamPerms.MANAGE_WEBHOOKS]

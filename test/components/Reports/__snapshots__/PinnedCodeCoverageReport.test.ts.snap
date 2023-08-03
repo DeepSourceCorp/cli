@@ -1,67 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"allowPinningReports":false} 1`] = `
-"<div class=\\"py-4 border border-slate-400 pt-4 pb-0.5 rounded-md min-h-96\\">
+"<div class=\\"border border-slate-400 py-4 pb-0.5 pt-4 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
-      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal\\">
+    <div class=\\"inline-flex h-8 w-full items-center justify-between\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-sm font-normal text-vanilla-100\\">
         Code Coverage
 
-        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+        <zicon-stub icon=\\"help\\" color=\\"vanilla-400\\" class=\\"hidden flex-shrink-0 stroke-1.5 transition-opacity duration-75 lg:inline v-popper--has-tooltip\\"></zicon-stub>
       </h3>
-      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
-      <div class=\\"hidden lg:block h-10 relative w-11\\">
+      <zbutton-stub button-type=\\"ghost\\" color=\\"vanilla-400\\" icon=\\"pie-chart\\" size=\\"small\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
+      <div class=\\"relative hidden h-10 lg:block w-11\\">
         <transition-stub name=\\"slide-fade\\">
-          <div class=\\"w-full h-full inline-flex items-center justify-end absolute top-0 left-0\\">
-            <zicon-stub icon=\\"more-horizontal\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+          <div class=\\"absolute left-0 top-0 inline-flex h-full w-full items-center justify-end\\">
+            <zicon-stub icon=\\"more-horizontal\\"></zicon-stub>
           </div>
         </transition-stub>
       </div>
     </div>
   </div>
   <!---->
-  <div class=\\"h-72 mx-5 mt-5 rounded-lg bg-ink-300 animate-pulse\\"></div>
+  <div class=\\"mx-5 mt-5 h-72 animate-pulse rounded-lg bg-ink-300\\"></div>
 </div>"
 `;
 
 exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"allowPinningReports":true} 1`] = `
-"<div class=\\"py-4 border border-slate-400 pt-4 pb-0.5 rounded-md min-h-96\\">
+"<div class=\\"border border-slate-400 py-4 pb-0.5 pt-4 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
-      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal\\">
+    <div class=\\"inline-flex h-8 w-full items-center justify-between\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-sm font-normal text-vanilla-100\\">
         Code Coverage
 
-        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+        <zicon-stub icon=\\"help\\" color=\\"vanilla-400\\" class=\\"hidden flex-shrink-0 stroke-1.5 transition-opacity duration-75 lg:inline v-popper--has-tooltip\\"></zicon-stub>
       </h3>
-      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
-      <div class=\\"hidden lg:block h-10 relative w-19\\">
+      <zbutton-stub button-type=\\"ghost\\" color=\\"vanilla-400\\" icon=\\"pie-chart\\" size=\\"small\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
+      <div class=\\"relative hidden h-10 lg:block w-19\\">
         <transition-stub name=\\"slide-fade\\">
-          <div class=\\"w-full h-full inline-flex items-center justify-end absolute top-0 left-0\\">
-            <zicon-stub icon=\\"more-horizontal\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+          <div class=\\"absolute left-0 top-0 inline-flex h-full w-full items-center justify-end\\">
+            <zicon-stub icon=\\"more-horizontal\\"></zicon-stub>
           </div>
         </transition-stub>
       </div>
     </div>
   </div>
   <!---->
-  <div class=\\"h-72 mx-5 mt-5 rounded-lg bg-ink-300 animate-pulse\\"></div>
+  <div class=\\"mx-5 mt-5 h-72 animate-pulse rounded-lg bg-ink-300\\"></div>
 </div>"
 `;
 
 exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report widget: {"loadingValue":{"condition":null,"status":false},"allowPinningReports":false} 1`] = `
-"<div class=\\"py-4 border border-slate-400 pt-4 pb-0.5 rounded-md min-h-96\\">
+"<div class=\\"border border-slate-400 py-4 pb-0.5 pt-4 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
-      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal\\">
+    <div class=\\"inline-flex h-8 w-full items-center justify-between\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-sm font-normal text-vanilla-100\\">
         Code Coverage
 
-        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+        <zicon-stub icon=\\"help\\" color=\\"vanilla-400\\" class=\\"hidden flex-shrink-0 stroke-1.5 transition-opacity duration-75 lg:inline v-popper--has-tooltip\\"></zicon-stub>
       </h3>
-      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
-      <div class=\\"hidden lg:block h-10 relative w-11\\">
+      <zbutton-stub button-type=\\"ghost\\" color=\\"vanilla-400\\" icon=\\"pie-chart\\" size=\\"small\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
+      <div class=\\"relative hidden h-10 lg:block w-11\\">
         <transition-stub name=\\"slide-fade\\">
-          <div class=\\"w-full h-full inline-flex items-center justify-end absolute top-0 left-0\\">
-            <zicon-stub icon=\\"more-horizontal\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+          <div class=\\"absolute left-0 top-0 inline-flex h-full w-full items-center justify-end\\">
+            <zicon-stub icon=\\"more-horizontal\\"></zicon-stub>
           </div>
         </transition-stub>
       </div>
@@ -73,19 +73,19 @@ exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report 
 `;
 
 exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report widget: {"loadingValue":{"condition":null,"status":false},"allowPinningReports":true} 1`] = `
-"<div class=\\"py-4 border border-slate-400 pt-4 pb-0.5 rounded-md min-h-96\\">
+"<div class=\\"border border-slate-400 py-4 pb-0.5 pt-4 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
-      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal\\">
+    <div class=\\"inline-flex h-8 w-full items-center justify-between\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-sm font-normal text-vanilla-100\\">
         Code Coverage
 
-        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+        <zicon-stub icon=\\"help\\" color=\\"vanilla-400\\" class=\\"hidden flex-shrink-0 stroke-1.5 transition-opacity duration-75 lg:inline v-popper--has-tooltip\\"></zicon-stub>
       </h3>
-      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
-      <div class=\\"hidden lg:block h-10 relative w-19\\">
+      <zbutton-stub button-type=\\"ghost\\" color=\\"vanilla-400\\" icon=\\"pie-chart\\" size=\\"small\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
+      <div class=\\"relative hidden h-10 lg:block w-19\\">
         <transition-stub name=\\"slide-fade\\">
-          <div class=\\"w-full h-full inline-flex items-center justify-end absolute top-0 left-0\\">
-            <zicon-stub icon=\\"more-horizontal\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+          <div class=\\"absolute left-0 top-0 inline-flex h-full w-full items-center justify-end\\">
+            <zicon-stub icon=\\"more-horizontal\\"></zicon-stub>
           </div>
         </transition-stub>
       </div>

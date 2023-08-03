@@ -148,7 +148,6 @@
   </div>
 </template>
 <script lang="ts">
-import { ZCheckbox, ZCode } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import { Maybe, Scalars } from '~/types/types'
@@ -156,12 +155,7 @@ import { Maybe, Scalars } from '~/types/types'
 /**
  * View the diff for a given Autofix session
  */
-@Component({
-  components: {
-    ZCheckbox,
-    ZCode
-  }
-})
+@Component({})
 export default class AutofixCodeDiff extends Vue {
   @Prop()
   isGroup!: boolean

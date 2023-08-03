@@ -1,4 +1,4 @@
-mutation($ownerId: ID!) {
+mutation ($ownerId: ID!) {
   syncRepositoriesForOwner(input: { ownerId: $ownerId }) {
     ok
   }

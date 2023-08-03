@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 text-sm bg-opacity-5 rounded-md" :class="[bgColor]">
+  <div class="rounded-md bg-opacity-5 p-4 text-sm" :class="[bgColor]">
     <span class="bg-clip-text" :class="[textColor, bgColor]">
       <slot></slot>
     </span>

@@ -45,12 +45,12 @@ exports[`[[ IntegrationCard ]] renders the integration logo along with the name:
     </p>
   </div>
   <div class=\\"mt-auto\\">
-    <ztag-stub state=\\"default\\" size=\\"x-small\\" bgcolor=\\"juniper\\" textsize=\\"xxs\\" spacing=\\"py-1 px-2\\" iconcolor=\\"current\\">
-      <div class=\\"flex items-center space-x-1.5\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"stroke-3 z-icon w-3 h-3 z-icon--check text-ink-50\\">
-          <polyline points=\\"20 6 9 17 4 12\\"></polyline>
-        </svg> <span class=\\"font-semibold leading-none tracking-wide text-ink-50\\">
+    <ztag-stub bg-color=\\"juniper\\" spacing=\\"py-1 px-2\\" size=\\"x-small\\" text-size=\\"xxs\\">
+      <div class=\\"flex items-center space-x-1.5\\">
+        <z-icon icon=\\"check\\" color=\\"ink-50\\" size=\\"x-small\\" class=\\"stroke-3\\"></z-icon> <span class=\\"font-semibold leading-none tracking-wide text-ink-50\\">
           INSTALLED
-        </span></div>
+        </span>
+      </div>
     </ztag-stub>
   </div>
 </a>"

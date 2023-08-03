@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/vue'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 
 import { cartesian, generateBooleanProps } from '~/test/utils'
 import RunAutofixBar from '../../../components/Run/RunAutofixBar.vue'

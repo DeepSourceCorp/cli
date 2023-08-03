@@ -1,10 +1,10 @@
 <template>
-  <div class="h-full p-4 bg-ink-400">
+  <div class="h-full bg-ink-400 p-4">
     <empty-state
       :svg-image-path="require('~/assets/images/ui-states/repo/inactive.svg')"
       title="You have not activated a repository yet"
       subtitle="Click the button below to get started."
-      class="flex flex-col justify-center min-h-full border-2 border-dashed rounded-lg border-slate-400"
+      class="flex min-h-full flex-col justify-center rounded-lg border-2 border-dashed border-slate-400"
     >
       <template #action>
         <z-button
@@ -15,7 +15,7 @@
           label="Activate new repository"
         />
         <nuxt-link-button v-else :to="installationUrl">
-          <z-icon icon="plus" size="small" color="ink-400" class="w-4 h-4 flex-shrink-0" />
+          <z-icon icon="plus" size="small" color="ink-400" class="h-4 w-4 flex-shrink-0" />
           <span class="text-sm font-medium">Activate new repository</span>
         </nuxt-link-button>
       </template>
@@ -25,7 +25,6 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton } from '@deepsource/zeal'
 import { Context } from '@nuxt/types'
 import { ContextGetterTypes } from '~/store/account/context'
 import ContextMixin from '~/mixins/contextMixin'
@@ -36,7 +35,6 @@ import ActiveUserMixin from '~/mixins/activeUserMixin'
  */
 @Component({
   layout: 'sidebar-only',
-  components: { ZIcon, ZButton },
   middleware: [
     function ({ redirect, store }: Context): void {
       if (!store.getters[`account/context/${ContextGetterTypes.TO_ONBOARD}`]) {

@@ -6,8 +6,8 @@ exports[`renders RunCard with all prop options: RunCard 1`] = `
     <div class=\\"gap-2 p-3\\">
       <div class=\\"flex flex-grow flex-col\\">
         <section class=\\"flex items-center gap-x-1 text-xs md:text-base\\">
-          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"mt-0.5 mr-0.5 inline flex-shrink-0 self-center has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
-          <h3 class=\\"inline cursor-pointer font-medium text-vanilla-100 line-clamp-1\\">
+          <zicon-stub icon=\\"check\\" color=\\"juniper\\" class=\\"mr-0.5 mt-0.5 inline flex-shrink-0 self-center v-popper--has-tooltip\\"></zicon-stub>
+          <h3 class=\\"line-clamp-1 inline cursor-pointer font-medium text-vanilla-100\\">
             Base branch
           </h3> <span class=\\"inline font-medium text-vanilla-400\\"> @435432 </span>
         </section>
@@ -44,8 +44,8 @@ exports[`renders RunCard with pending: RunCard Pending 1`] = `
     <div class=\\"gap-2 p-3\\">
       <div class=\\"flex flex-grow flex-col\\">
         <section class=\\"flex items-center gap-x-1 text-xs md:text-base\\">
-          <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mt-0.5 mr-0.5 inline flex-shrink-0 self-center animate-spin has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
-          <h3 class=\\"inline cursor-pointer font-medium text-vanilla-100 line-clamp-1\\">
+          <zicon-stub icon=\\"spin-loader\\" color=\\"vanilla-100\\" class=\\"mr-0.5 mt-0.5 inline flex-shrink-0 self-center animate-spin v-popper--has-tooltip\\"></zicon-stub>
+          <h3 class=\\"line-clamp-1 inline cursor-pointer font-medium text-vanilla-100\\">
             base
           </h3> <span class=\\"inline font-medium text-vanilla-400\\"> @435432 </span>
         </section>
@@ -67,8 +67,8 @@ exports[`renders RunCard with skipped: RunCard Pending 1`] = `
     <div class=\\"gap-2 p-3\\">
       <div class=\\"flex flex-grow flex-col\\">
         <section class=\\"flex items-center gap-x-1 text-xs md:text-base\\">
-          <zicon-stub icon=\\"circle-slash\\" size=\\"small\\" position=\\"\\" color=\\"slate-200\\" class=\\"mt-0.5 mr-0.5 inline flex-shrink-0 self-center has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
-          <h3 class=\\"inline cursor-pointer font-medium text-vanilla-100 line-clamp-1\\">
+          <zicon-stub icon=\\"circle-slash\\" color=\\"slate-200\\" class=\\"mr-0.5 mt-0.5 inline flex-shrink-0 self-center v-popper--has-tooltip\\"></zicon-stub>
+          <h3 class=\\"line-clamp-1 inline cursor-pointer font-medium text-vanilla-100\\">
             base
           </h3> <span class=\\"inline font-medium text-vanilla-400\\"> @435432 </span>
         </section>

@@ -6,7 +6,7 @@
       :class="isWidget ? 'pr-5' : 'pr-4'"
       class="block py-2.5"
     >
-      <div v-if="isPassing !== null" class="flex font-medium justify-end">
+      <div v-if="isPassing !== null" class="flex justify-end font-medium">
         <ticker
           v-tooltip="{
             content: isPassing ? 'Threshold passing' : 'Threshold failing',
@@ -29,7 +29,7 @@
       >
         {{ parsedValue }}
       </span>
-      <span v-else class="text-slate pr-1.5">—</span>
+      <span v-else class="pr-1.5 text-slate">—</span>
     </component>
   </td>
 </template>

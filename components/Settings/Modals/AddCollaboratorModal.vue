@@ -5,12 +5,12 @@
     @primaryAction="addMember"
     @onClose="close"
   >
-    <div class="overflow-y-scroll max-h-84">
-      <div v-if="selectedMember" class="p-4 space-y-5">
-        <div class="relative px-2 border rounded-lg border-slate-400 group">
+    <div class="max-h-84 overflow-y-scroll">
+      <div v-if="selectedMember" class="space-y-5 p-4">
+        <div class="group relative rounded-lg border border-slate-400 px-2">
           <span
             v-tooltip="'Back to search'"
-            class="absolute items-center justify-center hidden w-5 h-5 rounded-full cursor-pointer group-hover:flex -top-2 -right-2 bg-ink-100 hover:bg-slate"
+            class="absolute -right-2 -top-2 hidden h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-ink-100 hover:bg-slate group-hover:flex"
             @click="selectedMember = null"
           >
             <z-icon icon="corner-up-left" size="x-small" />
@@ -27,7 +27,7 @@
           <div
             v-for="opt in repoPerms"
             :key="opt.value"
-            class="p-2 space-y-1 text-sm rounded-lg cursor-pointer hover:bg-ink-200"
+            class="cursor-pointer space-y-1 rounded-lg p-2 text-sm hover:bg-ink-200"
             @click="selectedRole = opt.value"
           >
             <z-radio :value="opt.value" :label="opt.label" />
@@ -40,7 +40,7 @@
         </z-radio-group>
       </div>
       <template v-else>
-        <div class="p-4 space-y-4 text-sm font-normal">
+        <div class="space-y-4 p-4 text-sm font-normal">
           <p class="text-vanilla-400">
             You can add members who are already in your team to this repository. To add new members,
             please
@@ -59,12 +59,12 @@
         </div>
         <div
           v-if="memberSearchCandidate && hasMembers"
-          class="border-t divide-y divide-ink-100 border-slate-400"
+          class="divide-y divide-ink-100 border-t border-slate-400"
         >
           <member-list-item
             v-for="member in repository.addableMembers.edges"
             :key="member.node.id"
-            class="px-4 cursor-pointer hover:bg-ink-200"
+            class="cursor-pointer px-4 hover:bg-ink-200"
             :role="member.node.role"
             :show-role-options="false"
             :is-primary-user="member.node.isPrimaryUser"
@@ -72,7 +72,7 @@
             @click="selectedMember = member.node"
           />
         </div>
-        <div v-else-if="memberSearchCandidate && !fetching" class="flex items-center p-4 min-h-40">
+        <div v-else-if="memberSearchCandidate && !fetching" class="flex min-h-40 items-center p-4">
           <div class="w-full space-y-2 text-center">
             <h3 class="font-semibold">We couldn't find {{ memberSearchCandidate }}.</h3>
             <p class="text-xs text-vanilla-400">
@@ -86,19 +86,12 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZInput, ZIcon, ZModal, ZButton, ZRadioGroup, ZRadio } from '@deepsource/zeal'
 import { MemberListItem } from '@/components/Members'
 import RepoDetailMixin, { REPO_PERMS } from '~/mixins/repoDetailMixin'
 import { Maybe, RepositoryPermissionChoices, TeamMember } from '~/types/types'
 
 @Component({
   components: {
-    ZInput,
-    ZModal,
-    ZIcon,
-    ZButton,
-    ZRadioGroup,
-    ZRadio,
     MemberListItem
   }
 })
@@ -145,7 +138,7 @@ export default class AddCollaboratorModal extends mixins(RepoDetailMixin) {
       }
     } catch ({ message }) {
       const toastMsg = message
-        ? message.replace('GraphQL error: ', '')
+        ? (message as string).replace('GraphQL error: ', '')
         : 'Failed to add collaborator.'
       this.$toast.danger(toastMsg)
     }

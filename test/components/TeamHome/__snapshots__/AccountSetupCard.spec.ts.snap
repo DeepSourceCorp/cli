@@ -1,43 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Activate Repo ]]: Snapshot: Activate Repo 1`] = `
-"<div class=\\"col-span-1 border rounded-md border-slate-400 xl:col-span-2\\">
+"<div class=\\"col-span-1 rounded-md border border-slate-400 xl:col-span-2\\">
   <div class=\\"p-2\\">Account setup is 45% complete</div>
-  <div class=\\"w-full h-1 bg-ink-200\\">
-    <div class=\\"h-1 transition-all duration-100 ease-in-out transform bg-juniper\\" style=\\"width: 45%;\\"></div>
+  <div class=\\"h-1 w-full bg-ink-200\\">
+    <div class=\\"h-1 transform bg-juniper transition-all duration-100 ease-in-out\\" style=\\"width: 45%;\\"></div>
   </div>
-  <div class=\\"p-4 space-y-6\\">
+  <div class=\\"space-y-6 p-4\\">
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
         <h5 class=\\"leading-none text-vanilla-200\\">
           Activate a repository
         </h5>
-        <p class=\\"text-sm text-vanilla-400\\">This will enable continuous analysis on your repository on every commit and pull-request</p> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--plus text-vanilla-100 mr-1.5\\">
-            <line x1=\\"12\\" y1=\\"5\\" x2=\\"12\\" y2=\\"19\\"></line>
-            <line x1=\\"5\\" y1=\\"12\\" x2=\\"19\\" y2=\\"12\\"></line>
-          </svg>Activate repo</button>
+        <p class=\\"text-sm text-vanilla-400\\">This will enable continuous analysis on your repository on every commit and pull-request</p>
+        <z-button size=\\"small\\" button-type=\\"secondary\\" icon=\\"plus\\">
+          Activate repo
+        </z-button>
       </div>
     </div>
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
         <h5 class=\\"leading-none text-vanilla-200\\">
           Start using Autofix
         </h5>
-        <p class=\\"text-sm text-vanilla-400\\">Fix hundreds of issues in your code in a couple of clicks, automatically.</p> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-1.5 w-4 h-4 z-icon--autofix text-vanilla-100 mr-1.5\\">
-            <path d=\\"M6.72583 1.71012C6.80126 1.42996 7.19874 1.42996 7.27417 1.71012L8.14598 4.94805C8.26495 5.38991 8.6101 5.73505 9.05195 5.85402L12.2899 6.72583C12.57 6.80126 12.57 7.19874 12.2899 7.27417L9.05195 8.14598C8.61009 8.26495 8.26495 8.61009 8.14598 9.05195L7.27417 12.2899C7.19874 12.57 6.80126 12.57 6.72583 12.2899L5.85402 9.05195C5.73505 8.6101 5.38991 8.26495 4.94805 8.14598L1.71012 7.27417C1.42996 7.19874 1.42996 6.80126 1.71012 6.72583L4.94805 5.85402C5.38991 5.73505 5.73505 5.38991 5.85402 4.94805L6.72583 1.71012Z\\" stroke=\\"currentColor\\"></path>
-            <path d=\\"M16.7124 8.11492C16.813 7.85058 17.187 7.85058 17.2876 8.11492L18.1859 10.474C18.3187 10.8226 18.594 11.098 18.9427 11.2308L21.3018 12.129C21.5661 12.2297 21.5661 12.6036 21.3018 12.7043L18.9427 13.6026C18.594 13.7353 18.3187 14.0107 18.1859 14.3594L17.2876 16.7184C17.187 16.9827 16.813 16.9827 16.7124 16.7184L15.8141 14.3594C15.6813 14.0107 15.406 13.7353 15.0573 13.6026L12.6983 12.7043C12.4339 12.6036 12.4339 12.2297 12.6983 12.129L15.0573 11.2308C15.406 11.098 15.6813 10.8226 15.8141 10.474L16.7124 8.11492Z\\" stroke=\\"currentColor\\"></path>
-            <path d=\\"M10.247 15.4244C10.3355 15.1919 10.6645 15.1919 10.753 15.4244L11.3976 17.1171C11.5266 17.4559 11.7941 17.7234 12.1329 17.8524L13.8256 18.497C14.0581 18.5855 14.0581 18.9145 13.8256 19.003L12.1329 19.6476C11.7941 19.7766 11.5266 20.0441 11.3976 20.3829L10.753 22.0756C10.6645 22.3081 10.3355 22.3081 10.247 22.0756L9.60244 20.3829C9.47344 20.0441 9.20588 19.7766 8.86709 19.6476L7.17439 19.003C6.94187 18.9145 6.94187 18.5855 7.17439 18.497L8.86709 17.8524C9.20588 17.7234 9.47344 17.4559 9.60244 17.1171L10.247 15.4244Z\\" stroke=\\"currentColor\\"></path>
-          </svg>Install Autofix</button>
+        <p class=\\"text-sm text-vanilla-400\\">Fix hundreds of issues in your code in a couple of clicks, automatically.</p>
+        <z-button size=\\"small\\" button-type=\\"secondary\\" icon=\\"autofix\\">
+          Install Autofix
+        </z-button>
       </div>
     </div>
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
@@ -45,12 +44,8 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Activate Repo ]]: Snapshot: 
           Invite your team
         </h5>
         <p class=\\"text-sm text-vanilla-400\\">DeepSource is better with your teammates. Ask them to join the party!</p>
-        <div><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--user-plus text-vanilla-100 mr-1.5\\">
-              <path d=\\"M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2\\"></path>
-              <circle cx=\\"8.5\\" cy=\\"7\\" r=\\"4\\"></circle>
-              <line x1=\\"20\\" y1=\\"8\\" x2=\\"20\\" y2=\\"14\\"></line>
-              <line x1=\\"23\\" y1=\\"11\\" x2=\\"17\\" y2=\\"11\\"></line>
-            </svg>Invite team</button>
+        <div>
+          <z-button icon=\\"user-plus\\" button-type=\\"secondary\\" size=\\"small\\">Invite team</z-button>
           <portal-stub to=\\"modal\\">
             <!---->
             <!---->
@@ -59,17 +54,17 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Activate Repo ]]: Snapshot: 
       </div>
     </div>
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
         <h5 class=\\"leading-none text-vanilla-200\\">
           Start using Transformers
         </h5>
-        <p class=\\"text-sm text-vanilla-400\\">Put your code-formatting on complete autopilot. It's magical!</p> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--plus text-vanilla-100 mr-1.5\\">
-            <line x1=\\"12\\" y1=\\"5\\" x2=\\"12\\" y2=\\"19\\"></line>
-            <line x1=\\"5\\" y1=\\"12\\" x2=\\"19\\" y2=\\"12\\"></line>
-          </svg>Setup Transformers</button>
+        <p class=\\"text-sm text-vanilla-400\\">Put your code-formatting on complete autopilot. It's magical!</p>
+        <z-button size=\\"small\\" button-type=\\"secondary\\" icon=\\"plus\\">
+          Setup Transformers
+        </z-button>
       </div>
     </div>
   </div>
@@ -79,43 +74,42 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Activate Repo ]]: Snapshot: 
 `;
 
 exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Install Autofix ]]: Snapshot: Install Autofix 1`] = `
-"<div class=\\"col-span-1 border rounded-md border-slate-400 xl:col-span-2\\">
+"<div class=\\"col-span-1 rounded-md border border-slate-400 xl:col-span-2\\">
   <div class=\\"p-2\\">Account setup is 45% complete</div>
-  <div class=\\"w-full h-1 bg-ink-200\\">
-    <div class=\\"h-1 transition-all duration-100 ease-in-out transform bg-juniper\\" style=\\"width: 45%;\\"></div>
+  <div class=\\"h-1 w-full bg-ink-200\\">
+    <div class=\\"h-1 transform bg-juniper transition-all duration-100 ease-in-out\\" style=\\"width: 45%;\\"></div>
   </div>
-  <div class=\\"p-4 space-y-6\\">
+  <div class=\\"space-y-6 p-4\\">
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
         <h5 class=\\"leading-none text-vanilla-200\\">
           Activate a repository
         </h5>
-        <p class=\\"text-sm text-vanilla-400\\">This will enable continuous analysis on your repository on every commit and pull-request</p> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--plus text-vanilla-100 mr-1.5\\">
-            <line x1=\\"12\\" y1=\\"5\\" x2=\\"12\\" y2=\\"19\\"></line>
-            <line x1=\\"5\\" y1=\\"12\\" x2=\\"19\\" y2=\\"12\\"></line>
-          </svg>Activate repo</button>
+        <p class=\\"text-sm text-vanilla-400\\">This will enable continuous analysis on your repository on every commit and pull-request</p>
+        <z-button size=\\"small\\" button-type=\\"secondary\\" icon=\\"plus\\">
+          Activate repo
+        </z-button>
       </div>
     </div>
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
         <h5 class=\\"leading-none text-vanilla-200\\">
           Start using Autofix
         </h5>
-        <p class=\\"text-sm text-vanilla-400\\">Fix hundreds of issues in your code in a couple of clicks, automatically.</p> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-1.5 w-4 h-4 z-icon--autofix text-vanilla-100 mr-1.5\\">
-            <path d=\\"M6.72583 1.71012C6.80126 1.42996 7.19874 1.42996 7.27417 1.71012L8.14598 4.94805C8.26495 5.38991 8.6101 5.73505 9.05195 5.85402L12.2899 6.72583C12.57 6.80126 12.57 7.19874 12.2899 7.27417L9.05195 8.14598C8.61009 8.26495 8.26495 8.61009 8.14598 9.05195L7.27417 12.2899C7.19874 12.57 6.80126 12.57 6.72583 12.2899L5.85402 9.05195C5.73505 8.6101 5.38991 8.26495 4.94805 8.14598L1.71012 7.27417C1.42996 7.19874 1.42996 6.80126 1.71012 6.72583L4.94805 5.85402C5.38991 5.73505 5.73505 5.38991 5.85402 4.94805L6.72583 1.71012Z\\" stroke=\\"currentColor\\"></path>
-            <path d=\\"M16.7124 8.11492C16.813 7.85058 17.187 7.85058 17.2876 8.11492L18.1859 10.474C18.3187 10.8226 18.594 11.098 18.9427 11.2308L21.3018 12.129C21.5661 12.2297 21.5661 12.6036 21.3018 12.7043L18.9427 13.6026C18.594 13.7353 18.3187 14.0107 18.1859 14.3594L17.2876 16.7184C17.187 16.9827 16.813 16.9827 16.7124 16.7184L15.8141 14.3594C15.6813 14.0107 15.406 13.7353 15.0573 13.6026L12.6983 12.7043C12.4339 12.6036 12.4339 12.2297 12.6983 12.129L15.0573 11.2308C15.406 11.098 15.6813 10.8226 15.8141 10.474L16.7124 8.11492Z\\" stroke=\\"currentColor\\"></path>
-            <path d=\\"M10.247 15.4244C10.3355 15.1919 10.6645 15.1919 10.753 15.4244L11.3976 17.1171C11.5266 17.4559 11.7941 17.7234 12.1329 17.8524L13.8256 18.497C14.0581 18.5855 14.0581 18.9145 13.8256 19.003L12.1329 19.6476C11.7941 19.7766 11.5266 20.0441 11.3976 20.3829L10.753 22.0756C10.6645 22.3081 10.3355 22.3081 10.247 22.0756L9.60244 20.3829C9.47344 20.0441 9.20588 19.7766 8.86709 19.6476L7.17439 19.003C6.94187 18.9145 6.94187 18.5855 7.17439 18.497L8.86709 17.8524C9.20588 17.7234 9.47344 17.4559 9.60244 17.1171L10.247 15.4244Z\\" stroke=\\"currentColor\\"></path>
-          </svg>Install Autofix</button>
+        <p class=\\"text-sm text-vanilla-400\\">Fix hundreds of issues in your code in a couple of clicks, automatically.</p>
+        <z-button size=\\"small\\" button-type=\\"secondary\\" icon=\\"autofix\\">
+          Install Autofix
+        </z-button>
       </div>
     </div>
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
@@ -123,12 +117,8 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Install Autofix ]]: Snapshot
           Invite your team
         </h5>
         <p class=\\"text-sm text-vanilla-400\\">DeepSource is better with your teammates. Ask them to join the party!</p>
-        <div><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--user-plus text-vanilla-100 mr-1.5\\">
-              <path d=\\"M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2\\"></path>
-              <circle cx=\\"8.5\\" cy=\\"7\\" r=\\"4\\"></circle>
-              <line x1=\\"20\\" y1=\\"8\\" x2=\\"20\\" y2=\\"14\\"></line>
-              <line x1=\\"23\\" y1=\\"11\\" x2=\\"17\\" y2=\\"11\\"></line>
-            </svg>Invite team</button>
+        <div>
+          <z-button icon=\\"user-plus\\" button-type=\\"secondary\\" size=\\"small\\">Invite team</z-button>
           <portal-stub to=\\"modal\\">
             <!---->
             <!---->
@@ -137,17 +127,17 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Install Autofix ]]: Snapshot
       </div>
     </div>
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
         <h5 class=\\"leading-none text-vanilla-200\\">
           Start using Transformers
         </h5>
-        <p class=\\"text-sm text-vanilla-400\\">Put your code-formatting on complete autopilot. It's magical!</p> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--plus text-vanilla-100 mr-1.5\\">
-            <line x1=\\"12\\" y1=\\"5\\" x2=\\"12\\" y2=\\"19\\"></line>
-            <line x1=\\"5\\" y1=\\"12\\" x2=\\"19\\" y2=\\"12\\"></line>
-          </svg>Setup Transformers</button>
+        <p class=\\"text-sm text-vanilla-400\\">Put your code-formatting on complete autopilot. It's magical!</p>
+        <z-button size=\\"small\\" button-type=\\"secondary\\" icon=\\"plus\\">
+          Setup Transformers
+        </z-button>
       </div>
     </div>
   </div>
@@ -157,43 +147,42 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Install Autofix ]]: Snapshot
 `;
 
 exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Invite Member ]]: Snapshot: Invite Member 1`] = `
-"<div class=\\"col-span-1 border rounded-md border-slate-400 xl:col-span-2\\">
+"<div class=\\"col-span-1 rounded-md border border-slate-400 xl:col-span-2\\">
   <div class=\\"p-2\\">Account setup is 45% complete</div>
-  <div class=\\"w-full h-1 bg-ink-200\\">
-    <div class=\\"h-1 transition-all duration-100 ease-in-out transform bg-juniper\\" style=\\"width: 45%;\\"></div>
+  <div class=\\"h-1 w-full bg-ink-200\\">
+    <div class=\\"h-1 transform bg-juniper transition-all duration-100 ease-in-out\\" style=\\"width: 45%;\\"></div>
   </div>
-  <div class=\\"p-4 space-y-6\\">
+  <div class=\\"space-y-6 p-4\\">
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
         <h5 class=\\"leading-none text-vanilla-200\\">
           Activate a repository
         </h5>
-        <p class=\\"text-sm text-vanilla-400\\">This will enable continuous analysis on your repository on every commit and pull-request</p> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--plus text-vanilla-100 mr-1.5\\">
-            <line x1=\\"12\\" y1=\\"5\\" x2=\\"12\\" y2=\\"19\\"></line>
-            <line x1=\\"5\\" y1=\\"12\\" x2=\\"19\\" y2=\\"12\\"></line>
-          </svg>Activate repo</button>
+        <p class=\\"text-sm text-vanilla-400\\">This will enable continuous analysis on your repository on every commit and pull-request</p>
+        <z-button size=\\"small\\" button-type=\\"secondary\\" icon=\\"plus\\">
+          Activate repo
+        </z-button>
       </div>
     </div>
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
         <h5 class=\\"leading-none text-vanilla-200\\">
           Start using Autofix
         </h5>
-        <p class=\\"text-sm text-vanilla-400\\">Fix hundreds of issues in your code in a couple of clicks, automatically.</p> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-1.5 w-4 h-4 z-icon--autofix text-vanilla-100 mr-1.5\\">
-            <path d=\\"M6.72583 1.71012C6.80126 1.42996 7.19874 1.42996 7.27417 1.71012L8.14598 4.94805C8.26495 5.38991 8.6101 5.73505 9.05195 5.85402L12.2899 6.72583C12.57 6.80126 12.57 7.19874 12.2899 7.27417L9.05195 8.14598C8.61009 8.26495 8.26495 8.61009 8.14598 9.05195L7.27417 12.2899C7.19874 12.57 6.80126 12.57 6.72583 12.2899L5.85402 9.05195C5.73505 8.6101 5.38991 8.26495 4.94805 8.14598L1.71012 7.27417C1.42996 7.19874 1.42996 6.80126 1.71012 6.72583L4.94805 5.85402C5.38991 5.73505 5.73505 5.38991 5.85402 4.94805L6.72583 1.71012Z\\" stroke=\\"currentColor\\"></path>
-            <path d=\\"M16.7124 8.11492C16.813 7.85058 17.187 7.85058 17.2876 8.11492L18.1859 10.474C18.3187 10.8226 18.594 11.098 18.9427 11.2308L21.3018 12.129C21.5661 12.2297 21.5661 12.6036 21.3018 12.7043L18.9427 13.6026C18.594 13.7353 18.3187 14.0107 18.1859 14.3594L17.2876 16.7184C17.187 16.9827 16.813 16.9827 16.7124 16.7184L15.8141 14.3594C15.6813 14.0107 15.406 13.7353 15.0573 13.6026L12.6983 12.7043C12.4339 12.6036 12.4339 12.2297 12.6983 12.129L15.0573 11.2308C15.406 11.098 15.6813 10.8226 15.8141 10.474L16.7124 8.11492Z\\" stroke=\\"currentColor\\"></path>
-            <path d=\\"M10.247 15.4244C10.3355 15.1919 10.6645 15.1919 10.753 15.4244L11.3976 17.1171C11.5266 17.4559 11.7941 17.7234 12.1329 17.8524L13.8256 18.497C14.0581 18.5855 14.0581 18.9145 13.8256 19.003L12.1329 19.6476C11.7941 19.7766 11.5266 20.0441 11.3976 20.3829L10.753 22.0756C10.6645 22.3081 10.3355 22.3081 10.247 22.0756L9.60244 20.3829C9.47344 20.0441 9.20588 19.7766 8.86709 19.6476L7.17439 19.003C6.94187 18.9145 6.94187 18.5855 7.17439 18.497L8.86709 17.8524C9.20588 17.7234 9.47344 17.4559 9.60244 17.1171L10.247 15.4244Z\\" stroke=\\"currentColor\\"></path>
-          </svg>Install Autofix</button>
+        <p class=\\"text-sm text-vanilla-400\\">Fix hundreds of issues in your code in a couple of clicks, automatically.</p>
+        <z-button size=\\"small\\" button-type=\\"secondary\\" icon=\\"autofix\\">
+          Install Autofix
+        </z-button>
       </div>
     </div>
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
@@ -201,67 +190,48 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Invite Member ]]: Snapshot: 
           Invite your team
         </h5>
         <p class=\\"text-sm text-vanilla-400\\">DeepSource is better with your teammates. Ask them to join the party!</p>
-        <div><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--user-plus text-vanilla-100 mr-1.5\\">
-              <path d=\\"M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2\\"></path>
-              <circle cx=\\"8.5\\" cy=\\"7\\" r=\\"4\\"></circle>
-              <line x1=\\"20\\" y1=\\"8\\" x2=\\"20\\" y2=\\"14\\"></line>
-              <line x1=\\"23\\" y1=\\"11\\" x2=\\"17\\" y2=\\"11\\"></line>
-            </svg>Invite team</button>
+        <div>
+          <z-button icon=\\"user-plus\\" button-type=\\"secondary\\" size=\\"small\\">Invite team</z-button>
           <portal-stub to=\\"modal\\">
-            <div class=\\"fixed inset-0 flex items-end bg-opacity-60 bg-ink-400 z-dialog-backdrop sm:items-center z-modal-backdrop\\">
-              <transition-stub enterclass=\\"translate-y-full sm:translate-y-0 sm:scale-95 sm:opacity-0\\" leavetoclass=\\"translate-y-full sm:translate-y-0 sm:scale-105 sm:opacity-0\\" enteractiveclass=\\"transition-all duration-100 ease-in-out\\" leaveactiveclass=\\"transition-all duration-100 ease-in-out\\">
-                <div class=\\"mx-auto sm:mb-12 rounded-t-lg sm:rounded-md bg-ink-300 transform-gpu w-full sm:w-auto shadow-md\\">
-                  <div class=\\"z-modal w-full sm:w-102\\">
-                    <div class=\\"flex items-center justify-between p-4 space-x-2 border-ink-200 border-b\\"><span class=\\"text-base text-vanilla-100\\">Invite new members</span><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap z-modal-close-x text-vanilla-100 justify-center p-0 h-6 w-6 bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--x text-vanilla-100\\">
-                          <line x1=\\"18\\" y1=\\"6\\" x2=\\"6\\" y2=\\"18\\"></line>
-                          <line x1=\\"6\\" y1=\\"6\\" x2=\\"18\\" y2=\\"18\\"></line>
-                        </svg></button></div>
-                    <div class=\\"space-y-4 p-4 text-sm font-normal\\">
-                      <!---->
-                      <!---->
-                      <div class=\\"space-y-2\\">
-                        <div class=\\"flex items-start justify-between\\">
-                          <div>
-                            <h3 class=\\"text-base font-medium text-vanilla-100\\">Invite via link</h3>
-                            <p class=\\"text-sm text-vanilla-400\\">
-                              Teammates will create an account via the link
-                            </p>
-                          </div>
-                          <div><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--refresh-cw text-vanilla-100 mr-1.5\\">
-                                <polyline points=\\"23 4 23 10 17 10\\"></polyline>
-                                <polyline points=\\"1 20 1 14 7 14\\"></polyline>
-                                <path d=\\"M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15\\"></path>
-                              </svg>
-                              Reset Link
-                            </button></div>
-                        </div>
-                        <div class=\\"flex items-center w-full p-1 space-x-2 rounded-sm outline-none focus-within:border-vanilla-400 border border-ink-100 bg-ink-400 text-slate cursor-not-allowed h-10 text-sm space-x-2 leading-8 py-2 px-3 pr-1\\"><input aria-label=\\"\\" name=\\"\\" type=\\"text\\" placeholder=\\"Enter a value\\" disabled=\\"disabled\\" class=\\"flex flex-grow w-full overflow-hidden bg-transparent outline-none overflow-ellipsis caret-juniper cursor-not-allowed\\">
-                          <copybutton-stub value=\\"https://deepsource.icu/invitation/5cnHJHRUdbbpts2ZeiBa-20oabC_W_/\\" label=\\"Copy link\\" class=\\"w-36\\"></copybutton-stub>
-                        </div>
-                      </div>
+            <z-modal primary-action-label=\\"\\" title=\\"Invite new members\\">
+              <div class=\\"space-y-4 p-4 text-sm font-normal\\">
+                <!---->
+                <!---->
+                <div class=\\"space-y-2\\">
+                  <div class=\\"flex items-start justify-between\\">
+                    <div>
+                      <h3 class=\\"text-base font-medium text-vanilla-100\\">Invite via link</h3>
+                      <p class=\\"text-sm text-vanilla-400\\">
+                        Teammates will create an account via the link
+                      </p>
                     </div>
-                    <!---->
+                    <div>
+                      <z-button button-type=\\"secondary\\" icon=\\"refresh-cw\\" size=\\"small\\">
+                        Reset Link
+                      </z-button>
+                    </div>
                   </div>
+                  <z-input disabled=\\"true\\" show-border=\\"true\\" value=\\"https://deepsource.icu/invitation/5cnHJHRUdbbpts2ZeiBa-20oabC_W_/\\"></z-input>
                 </div>
-              </transition-stub>
-            </div>
+              </div>
+            </z-modal>
             <!---->
           </portal-stub>
         </div>
       </div>
     </div>
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
         <h5 class=\\"leading-none text-vanilla-200\\">
           Start using Transformers
         </h5>
-        <p class=\\"text-sm text-vanilla-400\\">Put your code-formatting on complete autopilot. It's magical!</p> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--plus text-vanilla-100 mr-1.5\\">
-            <line x1=\\"12\\" y1=\\"5\\" x2=\\"12\\" y2=\\"19\\"></line>
-            <line x1=\\"5\\" y1=\\"12\\" x2=\\"19\\" y2=\\"12\\"></line>
-          </svg>Setup Transformers</button>
+        <p class=\\"text-sm text-vanilla-400\\">Put your code-formatting on complete autopilot. It's magical!</p>
+        <z-button size=\\"small\\" button-type=\\"secondary\\" icon=\\"plus\\">
+          Setup Transformers
+        </z-button>
       </div>
     </div>
   </div>
@@ -271,43 +241,42 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Invite Member ]]: Snapshot: 
 `;
 
 exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Start Transformers ]]: Snapshot: Start Transformers 1`] = `
-"<div class=\\"col-span-1 border rounded-md border-slate-400 xl:col-span-2\\">
+"<div class=\\"col-span-1 rounded-md border border-slate-400 xl:col-span-2\\">
   <div class=\\"p-2\\">Account setup is 45% complete</div>
-  <div class=\\"w-full h-1 bg-ink-200\\">
-    <div class=\\"h-1 transition-all duration-100 ease-in-out transform bg-juniper\\" style=\\"width: 45%;\\"></div>
+  <div class=\\"h-1 w-full bg-ink-200\\">
+    <div class=\\"h-1 transform bg-juniper transition-all duration-100 ease-in-out\\" style=\\"width: 45%;\\"></div>
   </div>
-  <div class=\\"p-4 space-y-6\\">
+  <div class=\\"space-y-6 p-4\\">
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
         <h5 class=\\"leading-none text-vanilla-200\\">
           Activate a repository
         </h5>
-        <p class=\\"text-sm text-vanilla-400\\">This will enable continuous analysis on your repository on every commit and pull-request</p> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--plus text-vanilla-100 mr-1.5\\">
-            <line x1=\\"12\\" y1=\\"5\\" x2=\\"12\\" y2=\\"19\\"></line>
-            <line x1=\\"5\\" y1=\\"12\\" x2=\\"19\\" y2=\\"12\\"></line>
-          </svg>Activate repo</button>
+        <p class=\\"text-sm text-vanilla-400\\">This will enable continuous analysis on your repository on every commit and pull-request</p>
+        <z-button size=\\"small\\" button-type=\\"secondary\\" icon=\\"plus\\">
+          Activate repo
+        </z-button>
       </div>
     </div>
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
         <h5 class=\\"leading-none text-vanilla-200\\">
           Start using Autofix
         </h5>
-        <p class=\\"text-sm text-vanilla-400\\">Fix hundreds of issues in your code in a couple of clicks, automatically.</p> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-1.5 w-4 h-4 z-icon--autofix text-vanilla-100 mr-1.5\\">
-            <path d=\\"M6.72583 1.71012C6.80126 1.42996 7.19874 1.42996 7.27417 1.71012L8.14598 4.94805C8.26495 5.38991 8.6101 5.73505 9.05195 5.85402L12.2899 6.72583C12.57 6.80126 12.57 7.19874 12.2899 7.27417L9.05195 8.14598C8.61009 8.26495 8.26495 8.61009 8.14598 9.05195L7.27417 12.2899C7.19874 12.57 6.80126 12.57 6.72583 12.2899L5.85402 9.05195C5.73505 8.6101 5.38991 8.26495 4.94805 8.14598L1.71012 7.27417C1.42996 7.19874 1.42996 6.80126 1.71012 6.72583L4.94805 5.85402C5.38991 5.73505 5.73505 5.38991 5.85402 4.94805L6.72583 1.71012Z\\" stroke=\\"currentColor\\"></path>
-            <path d=\\"M16.7124 8.11492C16.813 7.85058 17.187 7.85058 17.2876 8.11492L18.1859 10.474C18.3187 10.8226 18.594 11.098 18.9427 11.2308L21.3018 12.129C21.5661 12.2297 21.5661 12.6036 21.3018 12.7043L18.9427 13.6026C18.594 13.7353 18.3187 14.0107 18.1859 14.3594L17.2876 16.7184C17.187 16.9827 16.813 16.9827 16.7124 16.7184L15.8141 14.3594C15.6813 14.0107 15.406 13.7353 15.0573 13.6026L12.6983 12.7043C12.4339 12.6036 12.4339 12.2297 12.6983 12.129L15.0573 11.2308C15.406 11.098 15.6813 10.8226 15.8141 10.474L16.7124 8.11492Z\\" stroke=\\"currentColor\\"></path>
-            <path d=\\"M10.247 15.4244C10.3355 15.1919 10.6645 15.1919 10.753 15.4244L11.3976 17.1171C11.5266 17.4559 11.7941 17.7234 12.1329 17.8524L13.8256 18.497C14.0581 18.5855 14.0581 18.9145 13.8256 19.003L12.1329 19.6476C11.7941 19.7766 11.5266 20.0441 11.3976 20.3829L10.753 22.0756C10.6645 22.3081 10.3355 22.3081 10.247 22.0756L9.60244 20.3829C9.47344 20.0441 9.20588 19.7766 8.86709 19.6476L7.17439 19.003C6.94187 18.9145 6.94187 18.5855 7.17439 18.497L8.86709 17.8524C9.20588 17.7234 9.47344 17.4559 9.60244 17.1171L10.247 15.4244Z\\" stroke=\\"currentColor\\"></path>
-          </svg>Install Autofix</button>
+        <p class=\\"text-sm text-vanilla-400\\">Fix hundreds of issues in your code in a couple of clicks, automatically.</p>
+        <z-button size=\\"small\\" button-type=\\"secondary\\" icon=\\"autofix\\">
+          Install Autofix
+        </z-button>
       </div>
     </div>
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
@@ -315,12 +284,8 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Start Transformers ]]: Snaps
           Invite your team
         </h5>
         <p class=\\"text-sm text-vanilla-400\\">DeepSource is better with your teammates. Ask them to join the party!</p>
-        <div><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--user-plus text-vanilla-100 mr-1.5\\">
-              <path d=\\"M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2\\"></path>
-              <circle cx=\\"8.5\\" cy=\\"7\\" r=\\"4\\"></circle>
-              <line x1=\\"20\\" y1=\\"8\\" x2=\\"20\\" y2=\\"14\\"></line>
-              <line x1=\\"23\\" y1=\\"11\\" x2=\\"17\\" y2=\\"11\\"></line>
-            </svg>Invite team</button>
+        <div>
+          <z-button icon=\\"user-plus\\" button-type=\\"secondary\\" size=\\"small\\">Invite team</z-button>
           <portal-stub to=\\"modal\\">
             <!---->
             <!---->
@@ -329,17 +294,17 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Start Transformers ]]: Snaps
       </div>
     </div>
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
         <h5 class=\\"leading-none text-vanilla-200\\">
           Start using Transformers
         </h5>
-        <p class=\\"text-sm text-vanilla-400\\">Put your code-formatting on complete autopilot. It's magical!</p> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--plus text-vanilla-100 mr-1.5\\">
-            <line x1=\\"12\\" y1=\\"5\\" x2=\\"12\\" y2=\\"19\\"></line>
-            <line x1=\\"5\\" y1=\\"12\\" x2=\\"19\\" y2=\\"12\\"></line>
-          </svg>Setup Transformers</button>
+        <p class=\\"text-sm text-vanilla-400\\">Put your code-formatting on complete autopilot. It's magical!</p>
+        <z-button size=\\"small\\" button-type=\\"secondary\\" icon=\\"plus\\">
+          Setup Transformers
+        </z-button>
       </div>
     </div>
   </div>
@@ -349,43 +314,42 @@ exports[`[[ AccountSetupCard ]] [[ AccountSetupCard Start Transformers ]]: Snaps
 `;
 
 exports[`[[ AccountSetupCard ]] renders AccountSetupCard 1`] = `
-"<div class=\\"col-span-1 border rounded-md border-slate-400 xl:col-span-2\\">
+"<div class=\\"col-span-1 rounded-md border border-slate-400 xl:col-span-2\\">
   <div class=\\"p-2\\">Account setup is 45% complete</div>
-  <div class=\\"w-full h-1 bg-ink-200\\">
-    <div class=\\"h-1 transition-all duration-100 ease-in-out transform bg-juniper\\" style=\\"width: 45%;\\"></div>
+  <div class=\\"h-1 w-full bg-ink-200\\">
+    <div class=\\"h-1 transform bg-juniper transition-all duration-100 ease-in-out\\" style=\\"width: 45%;\\"></div>
   </div>
-  <div class=\\"p-4 space-y-6\\">
+  <div class=\\"space-y-6 p-4\\">
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
         <h5 class=\\"leading-none text-vanilla-200\\">
           Activate a repository
         </h5>
-        <p class=\\"text-sm text-vanilla-400\\">This will enable continuous analysis on your repository on every commit and pull-request</p> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--plus text-vanilla-100 mr-1.5\\">
-            <line x1=\\"12\\" y1=\\"5\\" x2=\\"12\\" y2=\\"19\\"></line>
-            <line x1=\\"5\\" y1=\\"12\\" x2=\\"19\\" y2=\\"12\\"></line>
-          </svg>Activate repo</button>
+        <p class=\\"text-sm text-vanilla-400\\">This will enable continuous analysis on your repository on every commit and pull-request</p>
+        <z-button size=\\"small\\" button-type=\\"secondary\\" icon=\\"plus\\">
+          Activate repo
+        </z-button>
       </div>
     </div>
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
         <h5 class=\\"leading-none text-vanilla-200\\">
           Start using Autofix
         </h5>
-        <p class=\\"text-sm text-vanilla-400\\">Fix hundreds of issues in your code in a couple of clicks, automatically.</p> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-1.5 w-4 h-4 z-icon--autofix text-vanilla-100 mr-1.5\\">
-            <path d=\\"M6.72583 1.71012C6.80126 1.42996 7.19874 1.42996 7.27417 1.71012L8.14598 4.94805C8.26495 5.38991 8.6101 5.73505 9.05195 5.85402L12.2899 6.72583C12.57 6.80126 12.57 7.19874 12.2899 7.27417L9.05195 8.14598C8.61009 8.26495 8.26495 8.61009 8.14598 9.05195L7.27417 12.2899C7.19874 12.57 6.80126 12.57 6.72583 12.2899L5.85402 9.05195C5.73505 8.6101 5.38991 8.26495 4.94805 8.14598L1.71012 7.27417C1.42996 7.19874 1.42996 6.80126 1.71012 6.72583L4.94805 5.85402C5.38991 5.73505 5.73505 5.38991 5.85402 4.94805L6.72583 1.71012Z\\" stroke=\\"currentColor\\"></path>
-            <path d=\\"M16.7124 8.11492C16.813 7.85058 17.187 7.85058 17.2876 8.11492L18.1859 10.474C18.3187 10.8226 18.594 11.098 18.9427 11.2308L21.3018 12.129C21.5661 12.2297 21.5661 12.6036 21.3018 12.7043L18.9427 13.6026C18.594 13.7353 18.3187 14.0107 18.1859 14.3594L17.2876 16.7184C17.187 16.9827 16.813 16.9827 16.7124 16.7184L15.8141 14.3594C15.6813 14.0107 15.406 13.7353 15.0573 13.6026L12.6983 12.7043C12.4339 12.6036 12.4339 12.2297 12.6983 12.129L15.0573 11.2308C15.406 11.098 15.6813 10.8226 15.8141 10.474L16.7124 8.11492Z\\" stroke=\\"currentColor\\"></path>
-            <path d=\\"M10.247 15.4244C10.3355 15.1919 10.6645 15.1919 10.753 15.4244L11.3976 17.1171C11.5266 17.4559 11.7941 17.7234 12.1329 17.8524L13.8256 18.497C14.0581 18.5855 14.0581 18.9145 13.8256 19.003L12.1329 19.6476C11.7941 19.7766 11.5266 20.0441 11.3976 20.3829L10.753 22.0756C10.6645 22.3081 10.3355 22.3081 10.247 22.0756L9.60244 20.3829C9.47344 20.0441 9.20588 19.7766 8.86709 19.6476L7.17439 19.003C6.94187 18.9145 6.94187 18.5855 7.17439 18.497L8.86709 17.8524C9.20588 17.7234 9.47344 17.4559 9.60244 17.1171L10.247 15.4244Z\\" stroke=\\"currentColor\\"></path>
-          </svg>Install Autofix</button>
+        <p class=\\"text-sm text-vanilla-400\\">Fix hundreds of issues in your code in a couple of clicks, automatically.</p>
+        <z-button size=\\"small\\" button-type=\\"secondary\\" icon=\\"autofix\\">
+          Install Autofix
+        </z-button>
       </div>
     </div>
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
@@ -393,12 +357,8 @@ exports[`[[ AccountSetupCard ]] renders AccountSetupCard 1`] = `
           Invite your team
         </h5>
         <p class=\\"text-sm text-vanilla-400\\">DeepSource is better with your teammates. Ask them to join the party!</p>
-        <div><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--user-plus text-vanilla-100 mr-1.5\\">
-              <path d=\\"M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2\\"></path>
-              <circle cx=\\"8.5\\" cy=\\"7\\" r=\\"4\\"></circle>
-              <line x1=\\"20\\" y1=\\"8\\" x2=\\"20\\" y2=\\"14\\"></line>
-              <line x1=\\"23\\" y1=\\"11\\" x2=\\"17\\" y2=\\"11\\"></line>
-            </svg>Invite team</button>
+        <div>
+          <z-button icon=\\"user-plus\\" button-type=\\"secondary\\" size=\\"small\\">Invite team</z-button>
           <portal-stub to=\\"modal\\">
             <!---->
             <!---->
@@ -407,17 +367,17 @@ exports[`[[ AccountSetupCard ]] renders AccountSetupCard 1`] = `
       </div>
     </div>
     <div class=\\"flex items-start space-x-2\\">
-      <div class=\\"grid flex-shrink-0 w-4 h-4 rounded-full place-content-center border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
+      <div class=\\"grid h-4 w-4 flex-shrink-0 place-content-center rounded-full border-2 border-slate-400\\" style=\\"stroke-width: 4;\\">
         <!---->
       </div>
       <div class=\\"space-y-2\\">
         <h5 class=\\"leading-none text-vanilla-200\\">
           Start using Transformers
         </h5>
-        <p class=\\"text-sm text-vanilla-400\\">Put your code-formatting on complete autopilot. It's magical!</p> <button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-vanilla-100 justify-center p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-ink-300 hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon stroke-current w-4 h-4 z-icon--plus text-vanilla-100 mr-1.5\\">
-            <line x1=\\"12\\" y1=\\"5\\" x2=\\"12\\" y2=\\"19\\"></line>
-            <line x1=\\"5\\" y1=\\"12\\" x2=\\"19\\" y2=\\"12\\"></line>
-          </svg>Setup Transformers</button>
+        <p class=\\"text-sm text-vanilla-400\\">Put your code-formatting on complete autopilot. It's magical!</p>
+        <z-button size=\\"small\\" button-type=\\"secondary\\" icon=\\"plus\\">
+          Setup Transformers
+        </z-button>
       </div>
     </div>
   </div>

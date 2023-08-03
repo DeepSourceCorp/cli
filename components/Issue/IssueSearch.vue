@@ -3,8 +3,8 @@
     class="flex-grow transition-all ease-in-out"
     :class="
       expandOnFocus && (searchFocused || modelValue)
-        ? 'md:w-84 duration-150'
-        : 'md:w-44 duration-200'
+        ? 'duration-150 md:w-84'
+        : 'duration-200 md:w-44'
     "
   >
     <z-input
@@ -36,14 +36,8 @@
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 import { ModelSync, Prop } from 'vue-property-decorator'
-import { ZIcon, ZInput } from '@deepsource/zeal'
 
-@Component({
-  components: {
-    ZIcon,
-    ZInput
-  }
-})
+@Component({})
 export default class IssueSearch extends Vue {
   @ModelSync('searchCandidate', 'updateSearch', { type: String, default: null })
   readonly modelValue: string

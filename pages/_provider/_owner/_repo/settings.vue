@@ -26,7 +26,6 @@
 </template>
 
 <script lang="ts">
-import { ZTab } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
@@ -47,9 +46,6 @@ interface TabLink {
 }
 
 @Component({
-  components: {
-    ZTab
-  },
   layout: 'repository',
   middleware: [
     'perm',

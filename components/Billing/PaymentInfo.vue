@@ -7,7 +7,7 @@
     class="mt-5"
   >
     <div
-      class="flex items-center justify-between w-full p-4 border rounded-md border-slate-400 border-opacity-70"
+      class="flex w-full items-center justify-between rounded-md border border-slate-400 border-opacity-70 p-4"
     >
       <div class="flex items-center space-x-4">
         <img
@@ -17,7 +17,7 @@
             )}.png`)
           "
           :alt="ownerBillingInfo.activeCard.brand"
-          class="w-auto h-6"
+          class="h-6 w-auto"
         />
         <div class="ml-6 leading-5 text-vanilla-100">
           {{ ownerBillingInfo.activeCard.brand }}
@@ -28,7 +28,7 @@
         <div>{{ ownerBillingInfo.activeCard.endingIn }}</div>
       </div>
     </div>
-    <div class="flex items-center justify-end w-full">
+    <div class="flex w-full items-center justify-end">
       <z-button
         size="small"
         button-type="secondary"
@@ -50,14 +50,11 @@ import { Component, mixins } from 'nuxt-property-decorator'
 
 import { FormGroup } from '~/components/Form'
 import UpdateBillingDetailsModal from './Modals/UpdateBillingDetailsModal.vue'
-import { ZButton, ZIcon } from '@deepsource/zeal'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 @Component({
   components: {
     FormGroup,
-    ZButton,
-    ZIcon,
     UpdateBillingDetailsModal
   },
   layout: 'dashboard'

@@ -1,4 +1,4 @@
-import IssueAnalyzerSelector from './AnalyzerSelector.vue'
+import IssueAnalyzerSelector from './IssueAnalyzerSelector.vue'
 import IssueCategorySelector from './CategorySelector.vue'
 import IssueSort from './IssueSort.vue'
 import IssueSearch from './IssueSearch.vue'

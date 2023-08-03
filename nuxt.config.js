@@ -71,15 +71,6 @@ export default {
         ]
   },
   telemetry: false,
-  // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [
-    '@deepsource/zeal/dist/typography.css',
-    '@deepsource/zeal/dist/chart.css',
-    '@assets/css/default.scss',
-    '@deepsource/zeal/src/assets/css/syntax_highlighter.css', // remove this after ZCode export fix
-    '@assets/css/floating_vue.scss'
-  ],
-
   // https://nuxtjs.org/blog/moving-from-nuxtjs-dotenv-to-runtime-config
   // https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-runtime-config
   publicRuntimeConfig: {
@@ -127,11 +118,12 @@ export default {
     '~/plugins/helpers/localstorage.client.ts',
     '~/plugins/helpers/error.ts',
     '~/plugins/helpers/storage.client.ts',
-    '~/plugins/helpers/worker.client.ts',
     '~/plugins/helpers/ownerFeatures.ts',
     '~/plugins/components/toasts.client.ts',
     '~/plugins/components/floatingVue.ts',
     '~/plugins/components/palette.client.ts'
+    // ? Disable till worker is fixed
+    // '~/plugins/helpers/worker.client.ts',
   ],
 
   stripe: {
@@ -330,21 +322,12 @@ export default {
   modern: IS_DEVELOPMENT ? false : 'client',
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  // TODO: Remove this configuration
-  // https://github.com/nuxt-community/tailwindcss-module/issues/79#issuecomment-609693459
   build: {
     publicPath: IS_CLOUD_PRODUCTION ? process.env.CDN_URL : DEFAULT_PUBLIC_PATH,
     devtools: IS_STAGING,
     cache: true,
     sourceMap: true,
-    extractCSS: !IS_DEVELOPMENT,
-    postcss: {
-      preset: {
-        features: {
-          'focus-within-pseudo-class': false
-        }
-      }
-    },
+    transpile: ['@deepsource/charts/dist/frappe-charts.esm.js'],
     extend(config, { isClient }) {
       if (isClient) {
         config.devtool = 'source-map'

@@ -2,7 +2,7 @@
   <div class="fixed inset-0 flex items-start justify-center pt-32">
     <div
       ref="command-k-wrapper"
-      class="outline-none mx-auto min-h-10 w-full overflow-hidden rounded-lg border border-slate-400 bg-ink-300 shadow-double-dark sm:w-120"
+      class="mx-auto min-h-10 w-full overflow-hidden rounded-lg border border-slate-400 bg-ink-300 shadow-double-dark outline-none sm:w-120"
     >
       <div class="border-slate-400 p-4 pb-0" :class="{ 'border-b': commands.length }">
         <div class="space-x-2">
@@ -21,7 +21,7 @@
           autoComplete="off"
           role="combobox"
           spellCheck="false"
-          class="focus:outline-none h-12 w-full bg-transparent placeholder-slate"
+          class="h-12 w-full bg-transparent placeholder-slate focus:outline-none"
           :value="searchCandidate"
           :placeholder="inputPlaceholder"
           @input="setSearchValue"
@@ -89,10 +89,10 @@ export default class Palette extends mixins(RepoListMixin, ActiveUserMixin) {
     this.registerGlobalCommands()
 
     // Trigger sync repo list query to the web worker
-    this.$sendWorkerTask('syncRepoList', {
-      login: this.activeOwner,
-      provider: this.$providerMetaMap[this.activeProvider].value
-    })
+    // this.$sendWorkerTask('syncRepoList', {
+    //   login: this.activeOwner,
+    //   provider: this.$providerMetaMap[this.activeProvider].value
+    // })
   }
 
   /**

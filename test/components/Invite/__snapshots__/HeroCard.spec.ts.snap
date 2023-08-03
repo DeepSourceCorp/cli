@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ HeroCard ]] renders \`HeroCard\` with all prop combinations: {"showGlow":false,"showBorder":false,"showBackground":false} 1`] = `
-"<main class=\\"relative flex flex-col min-h-screen\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"w-auto h-6 mx-auto mt-12 md:mt-24\\">
+"<main class=\\"relative flex min-h-screen flex-col\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"mx-auto mt-12 h-6 w-auto md:mt-24\\">
   <div class=\\"relative grid flex-grow place-content-center\\">
     <!---->
     <transition-stub enterclass=\\"scale-95 translate-y-0 opacity-0\\" leavetoclass=\\"scale-105 translate-y-0 opacity-0\\" enteractiveclass=\\"transition-all duration-500 ease-in-out\\" leaveactiveclass=\\"transition-all duration-500 ease-in-out\\">
@@ -15,9 +15,9 @@ exports[`[[ HeroCard ]] renders \`HeroCard\` with all prop combinations: {"showG
 `;
 
 exports[`[[ HeroCard ]] renders \`HeroCard\` with all prop combinations: {"showGlow":false,"showBorder":false,"showBackground":true} 1`] = `
-"<main class=\\"relative flex flex-col min-h-screen\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"w-auto h-6 mx-auto mt-12 md:mt-24\\">
+"<main class=\\"relative flex min-h-screen flex-col\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"mx-auto mt-12 h-6 w-auto md:mt-24\\">
   <div class=\\"relative grid flex-grow place-content-center\\">
-    <div class=\\"absolute grid w-full h-full place-content-center\\"><img src=\\"~/assets/images/installation-provider-bg.png\\" alt=\\"bg\\"></div>
+    <div class=\\"absolute grid h-full w-full place-content-center\\"><img src=\\"~/assets/images/installation-provider-bg.png\\" alt=\\"bg\\"></div>
     <transition-stub enterclass=\\"scale-95 translate-y-0 opacity-0\\" leavetoclass=\\"scale-105 translate-y-0 opacity-0\\" enteractiveclass=\\"transition-all duration-500 ease-in-out\\" leaveactiveclass=\\"transition-all duration-500 ease-in-out\\">
       <div class=\\"relative\\">
         <!---->
@@ -29,7 +29,7 @@ exports[`[[ HeroCard ]] renders \`HeroCard\` with all prop combinations: {"showG
 `;
 
 exports[`[[ HeroCard ]] renders \`HeroCard\` with all prop combinations: {"showGlow":false,"showBorder":true,"showBackground":false} 1`] = `
-"<main class=\\"relative flex flex-col min-h-screen\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"w-auto h-6 mx-auto mt-12 md:mt-24\\">
+"<main class=\\"relative flex min-h-screen flex-col\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"mx-auto mt-12 h-6 w-auto md:mt-24\\">
   <div class=\\"relative grid flex-grow place-content-center\\">
     <!---->
     <transition-stub enterclass=\\"scale-95 translate-y-0 opacity-0\\" leavetoclass=\\"scale-105 translate-y-0 opacity-0\\" enteractiveclass=\\"transition-all duration-500 ease-in-out\\" leaveactiveclass=\\"transition-all duration-500 ease-in-out\\">
@@ -43,9 +43,9 @@ exports[`[[ HeroCard ]] renders \`HeroCard\` with all prop combinations: {"showG
 `;
 
 exports[`[[ HeroCard ]] renders \`HeroCard\` with all prop combinations: {"showGlow":false,"showBorder":true,"showBackground":true} 1`] = `
-"<main class=\\"relative flex flex-col min-h-screen\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"w-auto h-6 mx-auto mt-12 md:mt-24\\">
+"<main class=\\"relative flex min-h-screen flex-col\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"mx-auto mt-12 h-6 w-auto md:mt-24\\">
   <div class=\\"relative grid flex-grow place-content-center\\">
-    <div class=\\"absolute grid w-full h-full place-content-center\\"><img src=\\"~/assets/images/installation-provider-bg.png\\" alt=\\"bg\\"></div>
+    <div class=\\"absolute grid h-full w-full place-content-center\\"><img src=\\"~/assets/images/installation-provider-bg.png\\" alt=\\"bg\\"></div>
     <transition-stub enterclass=\\"scale-95 translate-y-0 opacity-0\\" leavetoclass=\\"scale-105 translate-y-0 opacity-0\\" enteractiveclass=\\"transition-all duration-500 ease-in-out\\" leaveactiveclass=\\"transition-all duration-500 ease-in-out\\">
       <div class=\\"relative\\">
         <!---->
@@ -57,12 +57,12 @@ exports[`[[ HeroCard ]] renders \`HeroCard\` with all prop combinations: {"showG
 `;
 
 exports[`[[ HeroCard ]] renders \`HeroCard\` with all prop combinations: {"showGlow":true,"showBorder":false,"showBackground":false} 1`] = `
-"<main class=\\"relative flex flex-col min-h-screen\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"w-auto h-6 mx-auto mt-12 md:mt-24\\">
+"<main class=\\"relative flex min-h-screen flex-col\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"mx-auto mt-12 h-6 w-auto md:mt-24\\">
   <div class=\\"relative grid flex-grow place-content-center\\">
     <!---->
     <transition-stub enterclass=\\"scale-95 translate-y-0 opacity-0\\" leavetoclass=\\"scale-105 translate-y-0 opacity-0\\" enteractiveclass=\\"transition-all duration-500 ease-in-out\\" leaveactiveclass=\\"transition-all duration-500 ease-in-out\\">
       <div class=\\"relative\\">
-        <div class=\\"absolute inset-0 scale-95 rounded-md glow opacity-40 no-filter:bg-opacity-80 transform-gpu\\"></div>
+        <div class=\\"glow absolute inset-0 scale-95 transform-gpu rounded-md opacity-40 no-filter:bg-opacity-80\\"></div>
         <!---->
       </div>
     </transition-stub>
@@ -71,12 +71,12 @@ exports[`[[ HeroCard ]] renders \`HeroCard\` with all prop combinations: {"showG
 `;
 
 exports[`[[ HeroCard ]] renders \`HeroCard\` with all prop combinations: {"showGlow":true,"showBorder":false,"showBackground":true} 1`] = `
-"<main class=\\"relative flex flex-col min-h-screen\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"w-auto h-6 mx-auto mt-12 md:mt-24\\">
+"<main class=\\"relative flex min-h-screen flex-col\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"mx-auto mt-12 h-6 w-auto md:mt-24\\">
   <div class=\\"relative grid flex-grow place-content-center\\">
-    <div class=\\"absolute grid w-full h-full place-content-center\\"><img src=\\"~/assets/images/installation-provider-bg.png\\" alt=\\"bg\\"></div>
+    <div class=\\"absolute grid h-full w-full place-content-center\\"><img src=\\"~/assets/images/installation-provider-bg.png\\" alt=\\"bg\\"></div>
     <transition-stub enterclass=\\"scale-95 translate-y-0 opacity-0\\" leavetoclass=\\"scale-105 translate-y-0 opacity-0\\" enteractiveclass=\\"transition-all duration-500 ease-in-out\\" leaveactiveclass=\\"transition-all duration-500 ease-in-out\\">
       <div class=\\"relative\\">
-        <div class=\\"absolute inset-0 scale-95 rounded-md glow opacity-40 no-filter:bg-opacity-80 transform-gpu\\"></div>
+        <div class=\\"glow absolute inset-0 scale-95 transform-gpu rounded-md opacity-40 no-filter:bg-opacity-80\\"></div>
         <!---->
       </div>
     </transition-stub>
@@ -85,12 +85,12 @@ exports[`[[ HeroCard ]] renders \`HeroCard\` with all prop combinations: {"showG
 `;
 
 exports[`[[ HeroCard ]] renders \`HeroCard\` with all prop combinations: {"showGlow":true,"showBorder":true,"showBackground":false} 1`] = `
-"<main class=\\"relative flex flex-col min-h-screen\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"w-auto h-6 mx-auto mt-12 md:mt-24\\">
+"<main class=\\"relative flex min-h-screen flex-col\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"mx-auto mt-12 h-6 w-auto md:mt-24\\">
   <div class=\\"relative grid flex-grow place-content-center\\">
     <!---->
     <transition-stub enterclass=\\"scale-95 translate-y-0 opacity-0\\" leavetoclass=\\"scale-105 translate-y-0 opacity-0\\" enteractiveclass=\\"transition-all duration-500 ease-in-out\\" leaveactiveclass=\\"transition-all duration-500 ease-in-out\\">
       <div class=\\"relative\\">
-        <div class=\\"absolute inset-0 scale-95 rounded-md glow opacity-40 no-filter:bg-opacity-80 transform-gpu\\"></div>
+        <div class=\\"glow absolute inset-0 scale-95 transform-gpu rounded-md opacity-40 no-filter:bg-opacity-80\\"></div>
         <!---->
       </div>
     </transition-stub>
@@ -99,12 +99,12 @@ exports[`[[ HeroCard ]] renders \`HeroCard\` with all prop combinations: {"showG
 `;
 
 exports[`[[ HeroCard ]] renders \`HeroCard\` with all prop combinations: {"showGlow":true,"showBorder":true,"showBackground":true} 1`] = `
-"<main class=\\"relative flex flex-col min-h-screen\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"w-auto h-6 mx-auto mt-12 md:mt-24\\">
+"<main class=\\"relative flex min-h-screen flex-col\\"><img src=\\"~/assets/images/logo-wordmark-white.svg\\" alt=\\"DeepSource\\" class=\\"mx-auto mt-12 h-6 w-auto md:mt-24\\">
   <div class=\\"relative grid flex-grow place-content-center\\">
-    <div class=\\"absolute grid w-full h-full place-content-center\\"><img src=\\"~/assets/images/installation-provider-bg.png\\" alt=\\"bg\\"></div>
+    <div class=\\"absolute grid h-full w-full place-content-center\\"><img src=\\"~/assets/images/installation-provider-bg.png\\" alt=\\"bg\\"></div>
     <transition-stub enterclass=\\"scale-95 translate-y-0 opacity-0\\" leavetoclass=\\"scale-105 translate-y-0 opacity-0\\" enteractiveclass=\\"transition-all duration-500 ease-in-out\\" leaveactiveclass=\\"transition-all duration-500 ease-in-out\\">
       <div class=\\"relative\\">
-        <div class=\\"absolute inset-0 scale-95 rounded-md glow opacity-40 no-filter:bg-opacity-80 transform-gpu\\"></div>
+        <div class=\\"glow absolute inset-0 scale-95 transform-gpu rounded-md opacity-40 no-filter:bg-opacity-80\\"></div>
         <!---->
       </div>
     </transition-stub>

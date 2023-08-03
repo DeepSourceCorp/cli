@@ -1,6 +1,6 @@
 <template>
   <hero-card width="lg">
-    <h1 class="text-xl font-bold leading-snug text-center text-vanilla-100">
+    <h1 class="text-center text-xl font-bold leading-snug text-vanilla-100">
       Verify your project configuration
     </h1>
     <section class="mt-8 space-y-5">
@@ -21,9 +21,9 @@
           <b>{{ $route.params.login }}</b
           >.
         </p>
-        <ul class="text-sm list-decimal ml-7">
+        <ul class="ml-7 list-decimal text-sm">
           <li v-for="perm in gsrPermsList" :key="perm.name">
-            <code class="leading-none bg-ink-100 px-0.5 py-px rounded-sm">{{ perm.name }}</code>
+            <code class="rounded-sm bg-ink-100 px-0.5 py-px leading-none">{{ perm.name }}</code>
           </li>
         </ul>
       </verification-step>
@@ -44,12 +44,12 @@
         <p class="text-sm text-vanilla-300">The following is the URL for the webhook endpoint:</p>
         <client-only>
           <div
-            class="flex items-center justify-between p-2 space-x-2 overflow-scroll border rounded-md hide-scroll bg-ink-400 border-slate-400"
+            class="hide-scroll flex items-center justify-between space-x-2 overflow-scroll rounded-md border border-slate-400 bg-ink-400 p-2"
           >
-            <span class="overflow-x-scroll font-mono text-sm text-vanilla-300 default-scroll">
+            <span class="default-scroll overflow-x-scroll font-mono text-sm text-vanilla-300">
               {{ webhookUrl }}
             </span>
-            <copy-button :value="webhookUrl" :disabled="!webhookUrl" class="flex-shrink-0 w-24" />
+            <copy-button :value="webhookUrl" :disabled="!webhookUrl" class="w-24 flex-shrink-0" />
           </div>
         </client-only>
         <p class="text-sm text-vanilla-300">
@@ -57,7 +57,7 @@
           <a
             target="_blank"
             rel="noopener noreferrer"
-            class="text-sm text-center text-juniper hover:underline"
+            class="text-center text-sm text-juniper hover:underline"
             href="https://cloud.google.com/source-repositories/docs/configuring-notifications"
           >
             Google Cloud documentation
@@ -77,7 +77,7 @@
           <a
             target="blank"
             rel="noopener noreferrer"
-            class="text-sm text-center text-juniper hover:underline"
+            class="text-center text-sm text-juniper hover:underline"
             href="https://source.cloud.google.com/user/ssh_keys?register=true"
           >
             Manage SSH keys
@@ -85,7 +85,7 @@
           and add the register the following public key.
         </p>
         <div
-          class="p-2 overflow-scroll font-mono text-sm break-words border rounded-md default-scroll bg-ink-400 text-vanilla-300 border-slate-400 max-h-24"
+          class="default-scroll max-h-24 overflow-scroll break-words rounded-md border border-slate-400 bg-ink-400 p-2 font-mono text-sm text-vanilla-300"
         >
           {{ owner.ownerSetting.publicKey }}
         </div>
@@ -98,7 +98,7 @@
           />
         </div>
       </verification-step>
-      <div class="flex items-center justify-end mt-5 space-x-2">
+      <div class="mt-5 flex items-center justify-end space-x-2">
         <z-button
           size="small"
           icon="arrow-left"
@@ -123,7 +123,6 @@
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
 import { Context } from '@nuxt/types'
-import { ZButton, ZIcon, ZStepper, ZStep } from '@deepsource/zeal'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import ContextMixin from '~/mixins/contextMixin'
 import AuthMixin from '~/mixins/authMixin'
@@ -145,12 +144,6 @@ import { OwnerDetailActions } from '~/store/owner/detail'
 const ownerStore = namespace('owner/detail')
 
 @Component({
-  components: {
-    ZButton,
-    ZIcon,
-    ZStepper,
-    ZStep
-  },
   middleware: [
     function ({ $config, error }: Context): void {
       if (!$config.gsrEnabled) {

@@ -2,10 +2,10 @@
 
 exports[`[[ FloatingButtonMobile ]] renders a floating action button 1`] = `
 "<portal-stub to=\\"floating-nav\\">
-  <div class=\\"lg:hidden fixed bottom-0 left-0 right-0 w-screen px-4 pb-5 font-medium bg-gradient-to-t from-ink-400 to-transparent\\">
-    <div class=\\"v-popper bottom-0 w-full text-center border-0 v-popper--theme-deepsource-dropdown\\"><button class=\\"flex items-center justify-between w-64 px-4 py-3 mx-auto text-sm divide-x rounded-lg shadow-lg ds-mobile-menu-trigger bg-ink-300 text-vanilla-100 divide-ink-100\\"><span class=\\"truncate\\">
+  <div class=\\"fixed bottom-0 left-0 right-0 w-screen bg-gradient-to-t from-ink-400 to-transparent px-4 pb-5 font-medium lg:hidden\\">
+    <div class=\\"v-popper bottom-0 w-full border-0 text-center v-popper--theme-deepsource-dropdown\\"><button class=\\"ds-mobile-menu-trigger mx-auto flex w-64 items-center justify-between divide-x divide-ink-100 rounded-lg bg-ink-300 px-4 py-3 text-sm text-vanilla-100 shadow-lg\\"><span class=\\"truncate\\">
             OWASP® Top 10
-          </span> <span class=\\"pl-4 border-slate-400\\"><zicon-stub icon=\\"chevron-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" button-type=\\"secondary\\" class=\\"flex-shrink-0 duration-150 transform\\"></zicon-stub></span></button></div>
+          </span> <span class=\\"border-slate-400 pl-4\\"><zicon-stub button-type=\\"secondary\\" size=\\"small\\" icon=\\"chevron-up\\" class=\\"flex-shrink-0 transform duration-150\\"></zicon-stub></span></button></div>
   </div>
 </portal-stub>"
 `;

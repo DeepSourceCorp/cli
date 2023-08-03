@@ -4,7 +4,7 @@
       class="hide-scroll hidden gap-x-8 overflow-x-auto border-b border-slate-400 pt-2 lg:sticky lg:flex lg:w-64 lg:flex-col lg:gap-y-4 lg:border-b-0 lg:border-r lg:pt-2"
       :class="atOwnerLevel ? 'vertical-sidebar-owner-level' : 'vertical-sidebar-repository-level'"
     >
-      <div class="flex flex-shrink-0 gap-x-8 pr-0 pl-4 lg:flex-col lg:gap-y-1 lg:px-2">
+      <div class="flex flex-shrink-0 gap-x-8 pl-4 pr-0 lg:flex-col lg:gap-y-1 lg:px-2">
         <!-- Compliance Items -->
         <p class="hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block">
           Security
@@ -108,14 +108,13 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 
-import { ZDivider, ZTab, ZIcon } from '@deepsource/zeal'
 import { ReportMeta, ReportPageT, ReportsTabLink } from '~/types/reportTypes'
 import { ReportLevel } from '~/types/types'
 
 /**
  * Sidebar component for public report page
  */
-@Component({ components: { ZDivider, ZTab, ZIcon } })
+@Component({})
 export default class ReportsSidebar extends Vue {
   @Prop({ required: true })
   level: ReportLevel

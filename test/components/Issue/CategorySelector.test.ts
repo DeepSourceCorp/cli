@@ -1,5 +1,5 @@
 import { render } from '@testing-library/vue'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 
 import { IssueCategorySelector } from '~/components/Issue'
 

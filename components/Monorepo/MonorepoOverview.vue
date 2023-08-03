@@ -110,19 +110,12 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZIcon, ZInput, ZPagination } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import { Repository } from '~/types/types'
 
 @Component({
-  name: 'MonorepoOverview',
-  components: {
-    ZButton,
-    ZIcon,
-    ZInput,
-    ZPagination
-  }
+  name: 'MonorepoOverview'
 })
 export default class MonorepoOverview extends Vue {
   @Prop({ default: false })

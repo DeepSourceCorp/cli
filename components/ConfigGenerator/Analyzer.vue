@@ -1,11 +1,11 @@
 <template>
-  <div class="text-base font-normal rounded-md bg-ink-300">
+  <div class="rounded-md bg-ink-300 text-base font-normal">
     <div class="flex items-center justify-between p-4">
       <div
         :class="{
           'cursor-pointer': hasCollapsibleContent
         }"
-        class="flex items-center space-x-2 font-bold select-none text-vanilla-100"
+        class="flex select-none items-center space-x-2 font-bold text-vanilla-100"
         @click="isCollapsed = !isCollapsed"
       >
         <analyzer-logo
@@ -21,14 +21,14 @@
           :class="{
             '-rotate-90': isCollapsed
           }"
-          class="duration-150 transform"
+          class="transform duration-150"
           icon="triangle-down"
         />
       </div>
       <button
         v-if="!readOnly"
         v-tooltip="{ content: 'Remove Analyzer', delay: { show: 700, hide: 100 } }"
-        class="p-1 rounded-md cursor-pointer hover:bg-cherry-600 hover:bg-opacity-20"
+        class="cursor-pointer rounded-md p-1 hover:bg-cherry-600 hover:bg-opacity-20"
         @click="onClose"
       >
         <z-icon icon="trash-2" color="cherry" size="small" />
@@ -37,7 +37,7 @@
     <form v-show="!isCollapsed" class="-mt-1 divide-y divide-ink-200">
       <div v-if="Array.isArray(configItems) && configItems.length">
         <template v-for="config in configItems">
-          <div :key="config.title" class="p-3 pt-0 space-y-2 text-vanilla-200">
+          <div :key="config.title" class="space-y-2 p-3 pt-0 text-vanilla-200">
             <span class="flex items-center space-x-2">
               <label class="text-xs text-vanilla-400">
                 {{ config.title || toSentenceCase(config.name) }}
@@ -58,7 +58,7 @@
                 <z-radio-group
                   v-model="config.selected"
                   :read-only="readOnly || disableActions"
-                  class="grid grid-cols-2 gap-2 -mb-2 text-xs md:grid-cols-3 lg:grid-cols-5"
+                  class="-mb-2 grid grid-cols-2 gap-2 text-xs md:grid-cols-3 lg:grid-cols-5"
                 >
                   <z-radio
                     v-for="option in config.enum"
@@ -85,7 +85,7 @@
               <z-radio-group
                 :model-value="`${Number(config.selected)}`"
                 :read-only="readOnly || disableActions"
-                class="grid grid-cols-3 text-xs gap-y-2 gap-x-4 md:grid-cols-6 lg:grid-cols-8"
+                class="grid grid-cols-3 gap-x-4 gap-y-2 text-xs md:grid-cols-6 lg:grid-cols-8"
                 @change="(val) => (config.selected = Boolean(Number(val)))"
               >
                 <!--Make these values boolean true and false-->
@@ -96,7 +96,7 @@
             <template v-else-if="config.type == 'array'">
               <div
                 v-if="config.items && config.items.enum"
-                class="grid grid-cols-2 gap-2 -mb-2 text-xs md:grid-cols-3 lg:grid-cols-5"
+                class="-mb-2 grid grid-cols-2 gap-2 text-xs md:grid-cols-3 lg:grid-cols-5"
               >
                 <z-checkbox
                   v-for="option in config.items.enum"
@@ -149,9 +149,9 @@
       <div
         v-if="showTransformers"
         :class="Array.isArray(configItems) && configItems.length ? '' : 'pt-0'"
-        class="p-3 space-y-2"
+        class="space-y-2 p-3"
       >
-        <label class="font-medium leading-none tracking-widest uppercase text-xxs text-vanilla-400"
+        <label class="text-xxs font-medium uppercase leading-none tracking-widest text-vanilla-400"
           >Transformers</label
         >
         <div class="grid grid-cols-2 gap-2">
@@ -159,17 +159,17 @@
             v-for="transformer in transformerItems"
             :key="transformer.shortcode"
             :class="[
-              transformer.enabled ? 'bg-ink-200 border-slate-400' : 'border-slate-400',
+              transformer.enabled ? 'border-slate-400 bg-ink-200' : 'border-slate-400',
               readOnly ? 'cursor-not-allowed' : 'cursor-pointer'
             ]"
-            class="flex items-center justify-between p-1 pl-2 text-sm border rounded-md"
+            class="flex items-center justify-between rounded-md border p-1 pl-2 text-sm"
             @click.prevent="toggleTransformer(transformer)"
           >
             <div
               :class="readOnly ? 'text-vanilla-400' : 'text-vanilla-200'"
               class="flex items-center space-x-2"
             >
-              <img :src="transformer.logo" class="w-auto h-3" :alt="transformer.name" />
+              <img :src="transformer.logo" class="h-3 w-auto" :alt="transformer.name" />
               <span>{{ transformer.name }}</span>
             </div>
             <z-checkbox
@@ -182,9 +182,9 @@
         </div>
       </div>
 
-      <div v-else-if="showInstallAutofixAppCTA" class="p-3 space-y-2">
+      <div v-else-if="showInstallAutofixAppCTA" class="space-y-2 p-3">
         <label class="text-sm tracking-wide text-vanilla-400">Transformers</label>
-        <div class="px-4 py-6 space-y-5 text-sm text-center border border-slate-400">
+        <div class="space-y-5 border border-slate-400 px-4 py-6 text-center text-sm">
           <h4 class="text-base font-medium text-vanilla-100">
             Enable Autofix app on {{ $providerMetaMap[$route.params.provider].text }}
           </h4>
@@ -201,7 +201,7 @@
               button-type="ghost"
               color="vanilla-100"
               size="small"
-              class="flex items-center w-48 bg-ink-200"
+              class="flex w-48 items-center bg-ink-200"
             >
               <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin" />
               Verifying installation
@@ -212,7 +212,7 @@
               color="vanilla-100"
               icon="autofix"
               size="small"
-              class="w-48 modal-primary-action bg-ink-200"
+              class="modal-primary-action w-48 bg-ink-200"
               @click="openAutofixInstallationUrl(close)"
               >Install Autofix app</z-button
             >
@@ -225,7 +225,6 @@
 
 <script lang="ts">
 import { toSentenceCase } from '@/utils/string'
-import { ZButton, ZCheckbox, ZIcon, ZInput, ZOption, ZRadio, ZRadioGroup } from '@deepsource/zeal'
 import { Component, mixins, namespace, Prop, Watch } from 'nuxt-property-decorator'
 
 import InstallAutofixMixin from '~/mixins/installAutofixMixin'
@@ -236,7 +235,6 @@ import {
   AnalyzerMetaProperitiesInterface,
   TransformerInterface
 } from '~/store/analyzer/list'
-import { AppFeatures } from '~/types/permTypes'
 import { Repository, TransformerTool } from '~/types/types'
 
 const repoDetailStore = namespace('repository/detail')
@@ -245,15 +243,6 @@ const repoDetailStore = namespace('repository/detail')
  * Analyzer component
  */
 @Component({
-  components: {
-    ZButton,
-    ZIcon,
-    ZInput,
-    ZCheckbox,
-    ZOption,
-    ZRadioGroup,
-    ZRadio
-  },
   methods: { toSentenceCase }
 })
 export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixin) {
@@ -363,11 +352,6 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
   }
 
   get showTransformers(): boolean {
-    const { provider } = this.$route.params
-    // if (!this.$gateKeeper.provider(AppFeatures.TRANSFORMS, provider)) {
-    //   return false
-    // }
-
     if (this.forTemplate) {
       return this.availableTransformers.length > 0
     }

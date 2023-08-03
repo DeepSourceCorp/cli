@@ -54,7 +54,7 @@
         :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
         :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
         subtitle="Please try changing your search query."
-        class="border border-dashed rounded-lg border-slate-400 py-20"
+        class="rounded-lg border border-dashed border-slate-400 py-20"
       />
 
       <lazy-empty-state
@@ -70,7 +70,7 @@
         </template>
       </lazy-empty-state>
 
-      <div v-if="totalPageCount > 1" class="flex justify-center text-sm my-6">
+      <div v-if="totalPageCount > 1" class="my-6 flex justify-center text-sm">
         <z-pagination
           :page="currentPage"
           :total-pages="totalPageCount"
@@ -84,7 +84,6 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZInput, ZIcon, ZPagination } from '@deepsource/zeal'
 
 import PaginationMixin from '~/mixins/paginationMixin'
 import RouteQueryMixin, { RouteQueryParamsT } from '~/mixins/routeQueryMixin'
@@ -109,11 +108,6 @@ export interface CodeCoverageFilters extends RouteQueryParamsT {
  */
 @Component({
   layout: 'dashboard',
-  components: {
-    ZInput,
-    ZIcon,
-    ZPagination
-  },
   scrollToTop: true
 })
 export default class PublicReportCodeCoverage extends mixins(

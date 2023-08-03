@@ -7,15 +7,15 @@ exports[`[[ MetadataViewMobile ]] renders the metadata information to be shown o
       <div class=\\"flex flex-col gap-y-4 p-4\\"><span>Analysis status</span><span>Source</span><span>Active issues</span><span>Issues prevented</span><span>Default branch</span><span>Analyzers</span></div>
       <div class=\\"flex flex-col gap-y-4 p-4\\"><span class=\\"text-right\\">Active</span>
         <div class=\\"flex items-center justify-end gap-x-1.5\\">
-          <zicon-stub icon=\\"github\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>GitHub</span>
+          <zicon-stub icon=\\"github\\" size=\\"x-small\\"></zicon-stub> <span>GitHub</span>
         </div> <span class=\\"text-right\\"> 22 </span> <span class=\\"text-right\\">0</span>
         <div class=\\"flex items-center justify-end gap-x-1.5\\">
-          <zicon-stub icon=\\"z-git-branch\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>master</span>
+          <zicon-stub icon=\\"z-git-branch\\" size=\\"x-small\\"></zicon-stub> <span>master</span>
         </div>
         <analyzerlist-stub available-analyzers=\\"[object Object]\\" class=\\"justify-end\\"></analyzerlist-stub>
       </div>
     </div>
-    <zdivider-stub direction=\\"horizontal\\" margin=\\"m-0\\" color=\\"ink-200\\"></zdivider-stub>
+    <zdivider-stub margin=\\"m-0\\"></zdivider-stub>
     <lastruninfo-stub latest-analysis-run=\\"[object Object]\\" runs=\\"[object Object]\\" class=\\"p-4\\"></lastruninfo-stub>
   </div>
 </zdialoggeneric-stub>"

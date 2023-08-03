@@ -8,7 +8,7 @@
       @onClose="close"
       @primaryAction="confirm"
     >
-      <div class="mb-2 text-base leading-relaxed text-vanilla-100 flex items-center">
+      <div class="mb-2 flex items-center text-base leading-relaxed text-vanilla-100">
         Confirm, delete this ignore rule?
       </div>
       <p class="text-sm leading-relaxed text-vanilla-400">
@@ -20,16 +20,9 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZConfirm, ZButton, ZCheckbox } from '@deepsource/zeal'
 
 @Component({
-  name: 'IgnoreRuleDeleteModal',
-  components: {
-    ZIcon,
-    ZConfirm,
-    ZButton,
-    ZCheckbox
-  }
+  name: 'IgnoreRuleDeleteModal'
 })
 export default class IgnoreRuleDeleteModal extends Vue {
   @Prop({ default: false })

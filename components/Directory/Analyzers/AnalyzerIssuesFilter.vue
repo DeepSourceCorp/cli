@@ -5,7 +5,7 @@
       :to="
         isIssuesPage && !analyzerShortcode ? '' : `/directory/analyzers/${analyzerShortcode}/issues`
       "
-      class="flex justify-between w-72 rounded-md p-2 mb-3 hover:bg-ink-200 hover:text-vanilla-100 focus:text-vanilla-100 outline-none focus:outline-none"
+      class="mb-3 flex w-72 justify-between rounded-md p-2 outline-none hover:bg-ink-200 hover:text-vanilla-100 focus:text-vanilla-100 focus:outline-none"
       :class="{
         'bg-ink-200 text-vanilla-100': activeFilter === '',
         'text-vanilla-400': activeFilter !== ''
@@ -32,7 +32,7 @@
       button-type="ghost"
       :type="isIssuesPage ? 'button' : ''"
       :color="activeFilter === issueType.shortcode ? '' : 'vanilla-400'"
-      class="flex justify-between w-72 rounded-md p-2 mb-3 hover:bg-ink-200 hover:text-vanilla-100 focus:text-vanilla-100 outline-none focus:outline-none"
+      class="mb-3 flex w-72 justify-between rounded-md p-2 outline-none hover:bg-ink-200 hover:text-vanilla-100 focus:text-vanilla-100 focus:outline-none"
       :class="{
         'bg-ink-200 text-vanilla-100': activeFilter === issueType.shortcode,
         'text-vanilla-400': activeFilter !== issueType.shortcode
@@ -51,13 +51,11 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZTag } from '@deepsource/zeal'
 
 import { shortenLargeNumber } from '~/utils/string'
 import IssueTypeT from '~/types/issueDistribution'
 
 @Component({
-  components: { ZButton, ZIcon, ZTag },
   methods: { shortenLargeNumber },
   name: 'AnalyzerIssuesFilter'
 })

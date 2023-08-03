@@ -14,15 +14,8 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZLabel } from '@deepsource/zeal'
 
-@Component({
-  components: {
-    ZIcon,
-    ZButton,
-    ZLabel
-  }
-})
+@Component({})
 export default class BranchList extends Vue {
   @Prop({ default: 1 })
   count: number

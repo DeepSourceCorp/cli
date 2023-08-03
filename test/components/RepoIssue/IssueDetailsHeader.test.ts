@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import dayjs from 'dayjs'
 import { render } from '@testing-library/vue'
-import { createLocalVue, shallowMount } from '@vue/test-utils'
-import { RouterLinkStub } from '@vue/test-utils'
-import VTooltip from 'v-tooltip'
+import { createLocalVue, shallowMount, RouterLinkStub } from '@vue/test-utils'
+import VTooltip from 'floating-vue'
 
 import { IssueDetailsHeader } from '~/components/RepoIssues'
 import { DurationTypeT, getDateFromXAgo } from '~/utils/date'

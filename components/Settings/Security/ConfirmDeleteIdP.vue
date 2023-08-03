@@ -79,10 +79,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZInput, ZModal } from '@deepsource/zeal'
 import { User } from '~/types/types'
 
-@Component({ components: { ZButton, ZIcon, ZInput, ZModal } })
+@Component({})
 export default class ConfirmDeleteIdP extends Vue {
   @Prop({ required: true })
   viewer: User

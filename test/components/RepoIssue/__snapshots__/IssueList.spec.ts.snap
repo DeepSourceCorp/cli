@@ -3,10 +3,10 @@
 exports[`[[ IssueList ]] renders a sample list of issue occurrences 1`] = `
 "<div class=\\"flex flex-col space-y-4\\">
   <div class=\\"flex w-full flex-row-reverse gap-2 xl:flex-row\\">
-    <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"x-small\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"text-vanilla-100 xl:hidden\\"></zmenu-stub>
-    <zmenu-stub direction=\\"right\\" placement=\\"bottom\\" size=\\"base\\" width=\\"x-small\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"hidden text-vanilla-100 xl:inline-block\\"></zmenu-stub>
+    <zmenu-stub direction=\\"left\\" width=\\"x-small\\" class=\\"text-vanilla-100 xl:hidden\\"></zmenu-stub>
+    <zmenu-stub width=\\"x-small\\" class=\\"hidden text-vanilla-100 xl:inline-block\\"></zmenu-stub>
     <div class=\\"h-full flex-grow xl:min-w-80\\">
-      <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for issue title, file or issue code\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\"></zinput-stub>
+      <zinput-stub background-color=\\"ink-300\\" size=\\"small\\" placeholder=\\"Search for issue title, file or issue code\\"></zinput-stub>
     </div>
   </div>
   <div class=\\"flex flex-col gap-y-3.5\\">

@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-col md:justify-between md:flex-row gap-y-4 md:gap-y-0">
-    <label class="text-sm md:place-self-center text-vanilla-100"> Notification channel </label>
+  <div class="flex flex-col gap-y-4 md:flex-row md:justify-between md:gap-y-0">
+    <label class="text-sm text-vanilla-100 md:place-self-center"> Notification channel </label>
 
-    <div class="w-full h-8 md:w-48">
+    <div class="h-8 w-full md:w-48">
       <!-- Loading state -->
-      <div v-if="pending" class="h-8 rounded-md bg-ink-300 animate-pulse"></div>
+      <div v-if="pending" class="h-8 animate-pulse rounded-md bg-ink-300"></div>
       <z-select
         v-else
         v-model="modelValue"
@@ -25,7 +25,6 @@
 </template>
 
 <script lang="ts">
-import { ZOption, ZSelect } from '@deepsource/zeal'
 import { Component, mixins, ModelSync, Prop } from 'nuxt-property-decorator'
 
 import IntegrationsDetailMixin from '~/mixins/integrationsDetailMixin'
@@ -33,12 +32,7 @@ import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { IntegrationProvider } from '~/types/types'
 
-@Component({
-  components: {
-    ZOption,
-    ZSelect
-  }
-})
+@Component({})
 
 /**
  * Component that is responsible to render `Notification channel` section

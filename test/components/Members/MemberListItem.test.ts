@@ -4,7 +4,10 @@ import { render, fireEvent } from '@testing-library/vue'
 import { MemberListItem } from '~/components/Members'
 import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
 
-import { ZMenu, ZMenuItem, ZMenuSection } from '@deepsource/zeal'
+import ZMenu from '@/components/zeal/ZMenu'
+import ZMenuItem from '@/components/zeal/ZMenu/ZMenuItem'
+import ZMenuSection from '@/components/zeal/ZMenu/ZMenuSection'
+
 import { mocksGenerator } from '~/test/mocks'
 
 const baseProps = {

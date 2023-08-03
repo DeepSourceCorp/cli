@@ -20,15 +20,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { ZButton } from '@deepsource/zeal'
 
-@Component({ components: { ZButton } })
+@Component({})
 export default class UpgradeToEnterprise extends Vue {}
 </script>
 
 <style scoped lang="postcss">
 .juniper-highlight-card {
-  @apply flex gap-x-16 justify-between rounded-md p-4 border;
+  @apply flex justify-between gap-x-16 rounded-md border p-4;
   background-color: rgba(51, 203, 154, 0.06);
   border-color: rgba(51, 203, 154, 0.1);
 }

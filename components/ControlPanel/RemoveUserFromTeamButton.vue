@@ -17,7 +17,7 @@
         @onClose="showRemoveUserFromTeamConfirm = false"
       >
         <template #footer="{ close }">
-          <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
+          <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
             <z-button
               button-type="ghost"
               :disabled="isRemovingUser"
@@ -48,14 +48,12 @@
 
 <script lang="ts">
 import { Component, Vue, namespace, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZConfirm, ZIcon } from '@deepsource/zeal'
 import { EnterpriseUser, Owner } from '~/types/types'
 import { TeamActions } from '~/store/team/detail'
 
 const teamStore = namespace('team/detail')
 
 @Component({
-  components: { ZButton, ZConfirm, ZIcon },
   name: 'RemoveUserFromTeamButton'
 })
 export default class RemoveUserFromTeamButton extends Vue {

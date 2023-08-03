@@ -6,7 +6,7 @@
     :body-spacing="0"
   >
     <template #controls>
-      <div class="flex justify-end w-full space-x-2">
+      <div class="flex w-full justify-end space-x-2">
         <graph-control
           class="float-right w-full sm:w-auto"
           :filter-value="30"
@@ -17,23 +17,23 @@
     <div class="sm:flex sm:flex-row-reverse">
       <div
         v-if="repository.autofixableIssuesMetadata"
-        class="flex w-full divide-y sm:flex-col sm:w-64 divide-ink-200"
+        class="flex w-full divide-y divide-ink-200 sm:w-64 sm:flex-col"
       >
-        <div class="p-4 sm:flex sm:flex-col sm:justify-end sm:h-1/2">
+        <div class="p-4 sm:flex sm:h-1/2 sm:flex-col sm:justify-end">
           <h5 class="text-2xl font-medium">
             {{ repository.autofixableIssuesMetadata.autofixableIssueCount }}
           </h5>
           <p class="text-xs text-vanilla-400">Issues to Autofix</p>
         </div>
-        <div class="justify-end p-4 sm:flex sm:flex-col sm:h-1/2">
+        <div class="justify-end p-4 sm:flex sm:h-1/2 sm:flex-col">
           <h5 class="text-2xl font-medium">
             {{ estimatedTimeSaved || 0 }}
           </h5>
           <p class="text-xs text-vanilla-400">Estimated time to be saved</p>
         </div>
       </div>
-      <div class="w-full sm:border-r border-slate-400">
-        <div class="flex items-start p-4 space-x-5">
+      <div class="w-full border-slate-400 sm:border-r">
+        <div class="flex items-start space-x-5 p-4">
           <graph-legend
             class="w-1/2 md:w-auto"
             :allow-hover="false"
@@ -45,7 +45,7 @@
           />
         </div>
         <div v-if="$fetchState.pending" class="p-4">
-          <div class="h-52 rounded-md bg-ink-300 animate-pulse"></div>
+          <div class="h-52 animate-pulse rounded-md bg-ink-300"></div>
         </div>
         <base-graph
           v-else-if="autofixTrend.values && autofixTrend.values.length"

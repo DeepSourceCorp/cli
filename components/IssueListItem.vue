@@ -16,7 +16,7 @@
               {{ shortcode }}
             </span>
           </div>
-          <div class="flex flex-wrap items-center gap-y-1.5 gap-x-4">
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5">
             <!-- Issue type -->
             <issue-type :issue-type="issueType" />
             <!-- First seen and last seen -->
@@ -91,7 +91,6 @@
 </template>
 
 <script lang="ts">
-import { ZIcon } from '@deepsource/zeal'
 import dayjs from 'dayjs'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
@@ -104,7 +103,6 @@ import { FilterParams } from './Run/AnalyzerRun.vue'
 
 @Component({
   components: {
-    ZIcon,
     IssueType,
     BaseCard
   },

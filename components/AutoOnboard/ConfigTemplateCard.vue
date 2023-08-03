@@ -9,7 +9,7 @@
       </p>
     </template>
     <template #info>
-      <div class="flex items-center justify-around h-full">
+      <div class="flex h-full items-center justify-around">
         <z-button
           v-if="allowCrud"
           v-tooltip="'Edit template'"
@@ -36,14 +36,8 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZButton } from '@deepsource/zeal'
 
-@Component({
-  components: {
-    ZIcon,
-    ZButton
-  }
-})
+@Component({})
 export default class ConfigTemplateCard extends Vue {
   @Prop({ required: true })
   title: string

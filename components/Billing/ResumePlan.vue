@@ -23,7 +23,7 @@
         @onClose="close"
       >
         <template #footer="{ close }">
-          <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
+          <div class="mt-6 flex items-center justify-end space-x-4 text-right text-vanilla-100">
             <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               Cancel
             </z-button>
@@ -34,7 +34,7 @@
               size="small"
               :disabled="true"
             >
-              <z-icon icon="spin-loader" color="ink" class="animate-spin mr-2" />
+              <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin" />
               Resuming plan
             </z-button>
             <z-button
@@ -56,16 +56,9 @@
 <script lang="ts">
 import { mixins, Component } from 'nuxt-property-decorator'
 import SubscriptionMixin from '~/mixins/subscriptionMixin'
-import { ZIcon, ZConfirm, ZButton } from '@deepsource/zeal'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
-@Component({
-  components: {
-    ZIcon,
-    ZConfirm,
-    ZButton
-  }
-})
+@Component({})
 export default class CancelPlan extends mixins(OwnerBillingMixin, SubscriptionMixin) {
   showConfirmDialog = false
   message =

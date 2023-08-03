@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="px-4 py-4 border-b border-slate-400">
+    <div class="border-b border-slate-400 px-4 py-4">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="cursor-pointer text-vanilla-400">
           <nuxt-link to="/control-panel/user-management/groups">Groups</nuxt-link>
@@ -13,8 +13,8 @@
       :loading="$fetchState.pending"
       @refetch="refetchData"
     />
-    <div class="flex items-center justify-between px-4 border-b border-slate-400">
-      <div class="flex gap-5 pt-3 overflow-auto flex-nowrap">
+    <div class="flex items-center justify-between border-b border-slate-400 px-4">
+      <div class="flex flex-nowrap gap-5 overflow-auto pt-3">
         <nuxt-link :to="`/control-panel/user-management/groups/${$route.params.groupId}`">
           <z-tab icon="users" border-active-color="vanilla-100" is-active> Users </z-tab>
         </nuxt-link>
@@ -39,12 +39,12 @@
     <control-panel-cards-skeleton v-if="$fetchState.pending" />
     <!-- HOTFIX: Nuxt SSR adds ghost a tags into dom during SSR -->
     <client-only v-else-if="groupUsers.length">
-      <div class="p-4 space-y-4">
+      <div class="space-y-4 p-4">
         <nuxt-link
           v-for="user in groupUsers"
           :key="user.id"
           :to="`/control-panel/user-management/users/${user.id}`"
-          class="grid items-center grid-cols-1 p-4 border rounded-md md:grid-cols-3 gap-x-4 gap-y-2 border-slate-400 hover:bg-ink-300"
+          class="grid grid-cols-1 items-center gap-x-4 gap-y-2 rounded-md border border-slate-400 p-4 hover:bg-ink-300 md:grid-cols-3"
         >
           <control-panel-user-card-info
             :org-user="user"
@@ -52,7 +52,7 @@
             class="md:col-span-2"
           />
           <div
-            class="flex flex-wrap justify-start gap-2 mt-1 ml-12 md:flex-nowrap md:justify-self-end md:ml-0 md:mt-0"
+            class="ml-12 mt-1 flex flex-wrap justify-start gap-2 md:ml-0 md:mt-0 md:flex-nowrap md:justify-self-end"
           >
             <remove-user-from-group-button
               v-if="!group.scimEnabled"
@@ -62,7 +62,7 @@
             />
           </div>
         </nuxt-link>
-        <div class="flex justify-center mt-6 text-sm">
+        <div class="mt-6 flex justify-center text-sm">
           <z-pagination
             v-if="totalPageCount > 1"
             :page="currentPage"
@@ -85,7 +85,6 @@
 
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import { ZInput, ZIcon, ZBreadcrumb, ZBreadcrumbItem, ZTab, ZPagination } from '@deepsource/zeal'
 
 import { OrgGroupsActions, OrgGroupsGetters } from '~/store/control-panel/groups'
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
@@ -97,14 +96,6 @@ import PaginationMixin from '~/mixins/paginationMixin'
 const groupManagementStore = namespace('control-panel/groups')
 
 @Component({
-  components: {
-    ZInput,
-    ZIcon,
-    ZBreadcrumb,
-    ZBreadcrumbItem,
-    ZTab,
-    ZPagination
-  },
   methods: { parseISODate, formatDate },
   layout: 'control-panel'
 })

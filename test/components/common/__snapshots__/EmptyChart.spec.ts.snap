@@ -5,7 +5,7 @@ exports[`renders EmptyChart with stacked bars: default render 1`] = `
   <div class=\\"absolute inset-0 z-10 mx-auto grid place-content-center rounded-md\\">
     <p class=\\"text-center text-sm text-vanilla-400\\">Not enough data to show a trend. Please come back later.</p>
   </div>
-  <zchart-stub datasets=\\"[object Object]\\" labels=\\"Label 0,Label 1,Label 2,Label 3,Label 4,Label 5,Label 6,Label 7,Label 8,Label 9,Label 10,Label 11,Label 12,Label 13,Label 14\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" humanizetooltips=\\"true\\" class=\\"blur-chart mx-auto opacity-10 no-filter:opacity-10\\"></zchart-stub>
+  <zchart-stub data-sets=\\"[object Object]\\" labels=\\"Label 0,Label 1,Label 2,Label 3,Label 4,Label 5,Label 6,Label 7,Label 8,Label 9,Label 10,Label 11,Label 12,Label 13,Label 14\\" colors=\\"#1035ad\\" bar-options=\\"[object Object]\\" type=\\"bar\\" class=\\"blur-chart mx-auto opacity-10 no-filter:opacity-10\\"></zchart-stub>
 </div>"
 `;
 
@@ -14,6 +14,6 @@ exports[`renders EmptyChart without any props: default render 1`] = `
   <div class=\\"absolute inset-0 z-10 mx-auto grid place-content-center rounded-md\\">
     <p class=\\"text-center text-sm text-vanilla-400\\">Not enough data to show a trend. Please come back later.</p>
   </div>
-  <zchart-stub datasets=\\"[object Object]\\" labels=\\"Label 0,Label 1,Label 2,Label 3,Label 4,Label 5,Label 6,Label 7,Label 8,Label 9,Label 10,Label 11,Label 12,Label 13,Label 14\\" type=\\"line\\" height=\\"300\\" colors=\\"robin,cherry,honey,juniper\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" humanizetooltips=\\"true\\" class=\\"blur-chart mx-auto opacity-10 no-filter:opacity-10\\"></zchart-stub>
+  <zchart-stub data-sets=\\"[object Object]\\" labels=\\"Label 0,Label 1,Label 2,Label 3,Label 4,Label 5,Label 6,Label 7,Label 8,Label 9,Label 10,Label 11,Label 12,Label 13,Label 14\\" colors=\\"robin,cherry,honey,juniper\\" bar-options=\\"[object Object]\\" type=\\"line\\" class=\\"blur-chart mx-auto opacity-10 no-filter:opacity-10\\"></zchart-stub>
 </div>"
 `;

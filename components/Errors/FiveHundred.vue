@@ -1,5 +1,5 @@
 <template>
-  <div class="relative h-screen five-hundred">
+  <div class="five-hundred relative h-screen">
     <div class="absolute inset-0">
       <div class="relative h-screen overflow-hidden">
         <!-- mobile top bg -->
@@ -15,7 +15,7 @@
           <img :src="require('~/assets/images/errors/500/500-bg-top-mobile.png')" alt="" />
         </picture>
         <!-- desktop left bg behind-->
-        <picture class="absolute bottom-0 -left-10 lg:left-0 w-screen lg:w-auto">
+        <picture class="absolute -left-10 bottom-0 w-screen lg:left-0 lg:w-auto">
           <source
             :srcset="require('~/assets/images/errors/500/500-bg-left.webp')"
             type="image/webp"
@@ -27,7 +27,7 @@
           <img :src="require('~/assets/images/errors/500/500-bg-left.png')" alt="" />
         </picture>
         <!-- desktop left bg in front -->
-        <picture class="absolute left-0 bottom-0 hidden lg:block z-20">
+        <picture class="absolute bottom-0 left-0 z-20 hidden lg:block">
           <source
             :srcset="require('~/assets/images/errors/500/500-fg-left.webp')"
             type="image/webp"
@@ -60,18 +60,18 @@
     </div>
     <div class="absolute bottom-0 w-screen overflow-hidden">
       <div class="flex items-end">
-        <div class="max-h-screen mx-auto z-10 foreground"></div>
+        <div class="foreground z-10 mx-auto max-h-screen"></div>
         <img
           :src="require('~/assets/images/errors/500/smoke.gif')"
           alt=""
-          class="absolute max-h-screen mx-auto right-1/2 smoke"
+          class="smoke absolute right-1/2 mx-auto max-h-screen"
         />
       </div>
     </div>
 
-    <div class="flex flex-col items-center justify-center h-full p-4 lg:p-0">
-      <div class="p-6 space-y-5 max-w-sm text-container z-30 lg:p-8 lg:max-w-lg xl:max-w-2xl">
-        <h1 class="text-2.5xl leading-none font-bold text-vanilla-100">
+    <div class="flex h-full flex-col items-center justify-center p-4 lg:p-0">
+      <div class="text-container z-30 max-w-sm space-y-5 p-6 lg:max-w-lg lg:p-8 xl:max-w-2xl">
+        <h1 class="text-2.5xl font-bold leading-none text-vanilla-100">
           <span class="text-vanilla-400">500</span> Server Error
         </h1>
 
@@ -88,7 +88,7 @@
                 href="https://deepsourcestatus.com"
                 target="_blank"
                 rel="noreferrer noopener"
-                class="text-vanilla-100 font-semibold"
+                class="font-semibold text-vanilla-100"
                 >deepsourcestatus.com</a
               >
               for updates.</span
@@ -112,7 +112,7 @@ import { Vue, Component } from 'vue-property-decorator'
 export default class FiveHundred extends Vue {}
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .five-hundred {
   background: #120000;
   background-size: contain;

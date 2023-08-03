@@ -174,7 +174,6 @@
 </template>
 
 <script lang="ts">
-import { ZAvatar, ZIcon, ZOption, ZSelect } from '@deepsource/zeal'
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
 
 import GetDeepSourceStatus from '~/apollo/queries/context/deepsourceStatus.gql'
@@ -218,10 +217,6 @@ const STATUS_COPY = {
 
 @Component({
   components: {
-    ZSelect,
-    ZOption,
-    ZIcon,
-    ZAvatar,
     SupportForm,
     SupportSecurityWarning,
     SupportFpInfo,
@@ -513,9 +508,8 @@ export default class Support extends mixins(ActiveUserMixin) {
 
     const { ccEmails, fromEmail, subject, supportHTML } = validatedFormData
 
-    const tag = this.supportCategoryOptions.find(
-      (option) => option.value === this.supportCategory
-    )?.tag
+    const tag = this.supportCategoryOptions.find((option) => option.value === this.supportCategory)
+      ?.tag
 
     const formData: SubmitSupportTicketInput = {
       fromEmail,

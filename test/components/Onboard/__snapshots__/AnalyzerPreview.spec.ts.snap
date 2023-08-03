@@ -1,25 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ AnalyzerPreview ]] renders AnalyzerPreview 1`] = `
-"<div class=\\"flex w-11/12 rounded-md bg-ink-300 h-80\\">
-  <section class=\\"w-2/5 p-4 space-y-4 border-r border-slate-400\\">
-    <div class=\\"flex items-center space-x-2\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><span class=\\"flex items-center justify-center text-center rounded-full bg-gradient-skeleton text-vanilla-300 leading-none h-8 w-8 text-sm\\"></span></a>
-      <div class=\\"flex items-center space-x-2 text-base font-medium cursor-pointer text-vanilla-200\\">
+"<div class=\\"flex h-80 w-11/12 rounded-md bg-ink-300\\">
+  <section class=\\"w-2/5 space-y-4 border-r border-slate-400 p-4\\">
+    <div class=\\"flex items-center space-x-2\\">
+      <z-avatar loading=\\"true\\" user-name=\\"loading\\" size=\\"md\\"></z-avatar>
+      <div class=\\"flex cursor-pointer items-center space-x-2 text-base font-medium text-vanilla-200\\">
 
-        <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--chevron-down text-vanilla-200\\">
-          <polyline points=\\"6 9 12 15 18 9\\"></polyline>
-        </svg></div>
+        <z-icon icon=\\"chevron-down\\" size=\\"small\\" color=\\"vanilla-200\\"></z-icon>
+      </div>
     </div>
-    <div class=\\"w-full p-10 rounded-md bg-ink-200\\"></div>
+    <div class=\\"w-full rounded-md bg-ink-200 p-10\\"></div>
     <div class=\\"space-y-2\\">
-      <div class=\\"flex items-center space-x-1\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 mr-1 z-icon w-3 h-3 z-icon--activity text-vanilla-400\\">
-          <polyline points=\\"22 12 18 12 15 21 9 3 6 12 2 12\\"></polyline>
-        </svg>
+      <div class=\\"flex items-center space-x-1\\">
+        <z-icon icon=\\"activity\\" size=\\"x-small\\" class=\\"mr-1 flex-shrink-0\\"></z-icon>
         <div class=\\"flex-1 text-xs\\">Actively analyzing</div>
-        <div class=\\"p-1 rounded-md bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-3 h-3 z-icon--plus text-vanilla-400\\" icon-color=\\"ink-400\\">
-            <line x1=\\"12\\" y1=\\"5\\" x2=\\"12\\" y2=\\"19\\"></line>
-            <line x1=\\"5\\" y1=\\"12\\" x2=\\"19\\" y2=\\"12\\"></line>
-          </svg></div>
+        <div class=\\"rounded-md bg-ink-200 p-1\\">
+          <z-icon icon=\\"plus\\" icon-color=\\"ink-400\\" size=\\"x-small\\"></z-icon>
+        </div>
       </div>
       <div class=\\"h-6 rounded-md bg-ink-200\\"></div>
       <div class=\\"h-6 rounded-md bg-ink-200\\"></div>
@@ -27,23 +25,23 @@ exports[`[[ AnalyzerPreview ]] renders AnalyzerPreview 1`] = `
       <div class=\\"h-6 rounded-md bg-ink-200\\"></div>
     </div>
   </section>
-  <section class=\\"flex flex-col w-3/5 h-full p-4 space-y-6\\">
+  <section class=\\"flex h-full w-3/5 flex-col space-y-6 p-4\\">
     <div class=\\"text-vanilla-400\\">
       /
-      <span class=\\"px-16 ml-2 bg-ink-100\\"></span></div>
-    <div class=\\"w-full h-5 rounded-md bg-ink-200\\"></div>
-    <div class=\\"flex text-sm text-center border-b gap-x-5 border-slate-400\\">
-      <div class=\\"pb-1 border-b-2 -mb-0.5 text-vanilla-400 border-transparent\\">
+      <span class=\\"ml-2 bg-ink-100 px-16\\"></span></div>
+    <div class=\\"h-5 w-full rounded-md bg-ink-200\\"></div>
+    <div class=\\"flex gap-x-5 border-b border-slate-400 text-center text-sm\\">
+      <div class=\\"-mb-0.5 border-b-2 pb-1 border-transparent text-vanilla-400\\">
         Overview
       </div>
-      <div class=\\"pb-1 border-b-2 -mb-0.5 text-vanilla-200 border-juniper\\">
+      <div class=\\"-mb-0.5 border-b-2 pb-1 border-juniper text-vanilla-200\\">
         Issues
       </div>
-      <div class=\\"pb-1 border-b-2 -mb-0.5 text-vanilla-400 border-transparent\\">
+      <div class=\\"-mb-0.5 border-b-2 pb-1 border-transparent text-vanilla-400\\">
         Autofixes
       </div>
     </div>
-    <div class=\\"p-6 bg-ink-100\\"></div>
+    <div class=\\"bg-ink-100 p-6\\"></div>
   </section>
 </div>"
 `;

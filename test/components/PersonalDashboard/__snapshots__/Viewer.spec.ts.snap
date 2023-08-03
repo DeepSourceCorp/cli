@@ -1,13 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ Viewer ]] renders Viewer 1`] = `
-"<section class=\\"flex flex-col justify-between border rounded-md border-slate-400\\">
+"<section class=\\"flex flex-col justify-between rounded-md border border-slate-400\\">
   <!---->
   <div class=\\"flex-grow p-0\\">
     <div class=\\"space-y-4 border-b border-slate-400 p-4\\">
-      <div class=\\"flex space-x-4\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\">
-          <!---->
-          <!----></a>
+      <div class=\\"flex space-x-4\\">
+        <z-avatar fallback-image=\\"test-image-dir/test-image-file.png\\" size=\\"lg\\"></z-avatar>
         <div>
           <h3 class=\\"text-base font-medium text-vanilla-100\\"></h3>
           <p class=\\"text-xs text-vanilla-400\\"></p>
@@ -16,8 +15,9 @@ exports[`[[ Viewer ]] renders Viewer 1`] = `
       <div class=\\"space-y-2\\">
         <h6 class=\\"text-xs font-medium uppercase tracking-wide text-vanilla-400\\">Your Teams</h6>
         <div class=\\"space-x-2\\">
-          <nuxt-link to=\\"/gh/deepsourcelabs\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/14ce08c1-6b0d-4502-9a03-576af9a06f9d.png\\" alt=\\"deepsourcelabs\\" class=\\"rounded-full object-cover leading-none h-8 w-8 text-sm\\">
-              <!----></a></nuxt-link>
+          <nuxt-link to=\\"/gh/deepsourcelabs\\">
+            <z-avatar image=\\"https://static.deepsource.io/avatars/14ce08c1-6b0d-4502-9a03-576af9a06f9d.png\\" fallback-image=\\"test-image-dir/test-image-file.png\\" user-name=\\"deepsourcelabs\\"></z-avatar>
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -27,8 +27,8 @@ exports[`[[ Viewer ]] renders Viewer 1`] = `
         <div class=\\"h-0.5 transform bg-juniper transition-all duration-100 ease-in-out\\" style=\\"width: 100%;\\"></div>
       </div>
       <div class=\\"space-y-6 p-4\\">
-        <div class=\\"flex items-start space-x-2\\"><label class=\\"relative flex items-center pl-6 text-base group z-input z-input__checkbox mt-2\\"><input type=\\"checkbox\\" name=\\"\\" class=\\"absolute w-0 h-0 opacity-0\\" value=\\"\\"><span data-before=\\"✓\\" data-content=\\"\\" class=\\"z-input__checkbox--checkmark h-5 w-5 font-medium absolute left-0 grid text-center text-transparent bg-transparent border border-solid rounded-sm cursor-pointer place-items-center border-slate before:content-before sibling-checked:text-ink-100 sibling-checked:bg-juniper sibling-checked:border-juniper group-hover:border-juniper\\"></span>
-            <!----></label>
+        <div class=\\"flex items-start space-x-2\\">
+          <z-checkbox model-value=\\"true\\" class=\\"mt-2\\"></z-checkbox>
           <div class=\\"space-y-2\\">
             <h5 class=\\"leading-none text-vanilla-400 line-through\\">
               Activate analysis on a repository
@@ -36,8 +36,8 @@ exports[`[[ Viewer ]] renders Viewer 1`] = `
             <!---->
           </div>
         </div>
-        <div class=\\"flex items-start space-x-2\\"><label class=\\"relative flex items-center pl-6 text-base group z-input z-input__checkbox mt-2\\"><input type=\\"checkbox\\" name=\\"\\" class=\\"absolute w-0 h-0 opacity-0\\" value=\\"\\"><span data-before=\\"✓\\" data-content=\\"\\" class=\\"z-input__checkbox--checkmark h-5 w-5 font-medium absolute left-0 grid text-center text-transparent bg-transparent border border-solid rounded-sm cursor-pointer place-items-center border-slate before:content-before sibling-checked:text-ink-100 sibling-checked:bg-juniper sibling-checked:border-juniper group-hover:border-juniper\\"></span>
-            <!----></label>
+        <div class=\\"flex items-start space-x-2\\">
+          <z-checkbox model-value=\\"true\\" class=\\"mt-2\\"></z-checkbox>
           <div class=\\"space-y-2\\">
             <h5 class=\\"leading-none text-vanilla-400 line-through\\">
               Add a new account
@@ -45,8 +45,8 @@ exports[`[[ Viewer ]] renders Viewer 1`] = `
             <!---->
           </div>
         </div>
-        <div class=\\"flex items-start space-x-2\\"><label class=\\"relative flex items-center pl-6 text-base group z-input z-input__checkbox mt-2\\"><input type=\\"checkbox\\" name=\\"\\" class=\\"absolute w-0 h-0 opacity-0\\" value=\\"\\"><span data-before=\\"✓\\" data-content=\\"\\" class=\\"z-input__checkbox--checkmark h-5 w-5 font-medium absolute left-0 grid text-center text-transparent bg-transparent border border-solid rounded-sm cursor-pointer place-items-center border-slate before:content-before sibling-checked:text-ink-100 sibling-checked:bg-juniper sibling-checked:border-juniper group-hover:border-juniper\\"></span>
-            <!----></label>
+        <div class=\\"flex items-start space-x-2\\">
+          <z-checkbox model-value=\\"true\\" class=\\"mt-2\\"></z-checkbox>
           <div class=\\"space-y-2\\">
             <h5 class=\\"leading-none text-vanilla-400 line-through\\">
               Join Community forum
@@ -54,8 +54,8 @@ exports[`[[ Viewer ]] renders Viewer 1`] = `
             <!---->
           </div>
         </div>
-        <div class=\\"flex items-start space-x-2\\"><label class=\\"relative flex items-center pl-6 text-base group z-input z-input__checkbox mt-2\\"><input type=\\"checkbox\\" name=\\"\\" class=\\"absolute w-0 h-0 opacity-0\\" value=\\"\\"><span data-before=\\"✓\\" data-content=\\"\\" class=\\"z-input__checkbox--checkmark h-5 w-5 font-medium absolute left-0 grid text-center text-transparent bg-transparent border border-solid rounded-sm cursor-pointer place-items-center border-slate before:content-before sibling-checked:text-ink-100 sibling-checked:bg-juniper sibling-checked:border-juniper group-hover:border-juniper\\"></span>
-            <!----></label>
+        <div class=\\"flex items-start space-x-2\\">
+          <z-checkbox model-value=\\"true\\" class=\\"mt-2\\"></z-checkbox>
           <div class=\\"space-y-2\\">
             <h5 class=\\"leading-none text-vanilla-400 line-through\\">
               Follow us on Twitter

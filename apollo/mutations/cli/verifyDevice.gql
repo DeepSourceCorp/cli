@@ -1,5 +1,5 @@
-mutation($input: VerifyDeviceInput!) {
-  verifyDevice (input: $input) {
+mutation ($input: VerifyDeviceInput!) {
+  verifyDevice(input: $input) {
     ok
   }
 }

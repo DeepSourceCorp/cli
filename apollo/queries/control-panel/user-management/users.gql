@@ -1,4 +1,4 @@
-query($q: String, $first: Int, $offset: Int) {
+query ($q: String, $first: Int, $offset: Int) {
   enterprise {
     users(q: $q, first: $first, offset: $offset) {
       totalCount

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/vue'
 
-import VTooltip from 'v-tooltip'
+import VTooltip from 'floating-vue'
 import { DistributionStats } from '~/components/Reports'
 
 import { cartesian, generateBooleanProps } from '~/test/utils'

@@ -1,27 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ FourOFour ]] renders \`404\` error page contents 1`] = `
-"<div class=\\"relative h-screen-dynamic four-o-four\\">
-  <picture class=\\"absolute top-0 right-0 lg:hidden\\">
+"<div class=\\"h-screen-dynamic four-o-four relative\\">
+  <picture class=\\"absolute right-0 top-0 lg:hidden\\">
     <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/webp\\">
     <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/png\\"> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\"></picture>
-  <picture class=\\"hidden absolute top-0 right-0 lg:inline\\">
+  <picture class=\\"absolute right-0 top-0 hidden lg:inline\\">
     <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/webp\\">
     <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/png\\"> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\" class=\\"bottom-10\\"></picture>
-  <div class=\\"flex flex-col items-center justify-center h-full p-4 lg:p-0\\">
-    <div class=\\"p-6 space-y-5 max-w-sm text-container z-30 lg:p-8 lg:max-w-lg xl:max-w-2xl\\">
-      <h1 class=\\"text-2.5xl leading-none font-bold text-vanilla-100\\"><span class=\\"text-vanilla-400\\"> 404 </span>
+  <div class=\\"flex h-full flex-col items-center justify-center p-4 lg:p-0\\">
+    <div class=\\"text-container z-30 max-w-sm space-y-5 p-6 lg:max-w-lg lg:p-8 xl:max-w-2xl\\">
+      <h1 class=\\"text-2.5xl font-bold leading-none text-vanilla-100\\"><span class=\\"text-vanilla-400\\"> 404 </span>
         Not Found
       </h1>
       <div class=\\"space-y-3\\">
         <h2 class=\\"text-base font-semibold text-vanilla-200 lg:text-lg\\">
           This dimension doesn't exist...
         </h2>
-        <p class=\\"text-sm text-vanilla-400 font-medium lg:text-base\\">
+        <p class=\\"text-sm font-medium text-vanilla-400 lg:text-base\\">
           We couldn’t find a page at the URL you’re on. You can try
-          <span class=\\"text-juniper-400 font-semibold\\"><a>logging in</a></span>
+          <span class=\\"font-semibold text-juniper-400\\"><a>logging in</a></span>
           or going back to the
-          <span class=\\"text-juniper-400 font-semibold\\"><a href=\\"/\\">homepage</a></span>.
+          <span class=\\"font-semibold text-juniper-400\\"><a href=\\"/\\">homepage</a></span>.
         </p>
       </div>
     </div>
@@ -32,12 +32,12 @@ exports[`[[ FourOFour ]] renders \`404\` error page contents 1`] = `
   <picture class=\\"absolute bottom-10 right-0\\">
     <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/webp\\">
     <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/png\\"> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\"></picture>
-  <picture class=\\"hidden absolute bottom-0 z-20 lg:block\\">
+  <picture class=\\"absolute bottom-0 z-20 hidden lg:block\\">
     <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/webp\\">
     <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/png\\"> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\"></picture>
   <div class=\\"absolute bottom-0 w-screen overflow-hidden\\">
     <div class=\\"flex items-end\\">
-      <div class=\\"max-h-screen-dynamic mx-auto z-10 foreground\\"></div> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\" class=\\"hidden absolute max-h-screen-dynamic mx-auto right-1/2 smoke lg:inline\\">
+      <div class=\\"max-h-screen-dynamic foreground z-10 mx-auto\\"></div> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\" class=\\"max-h-screen-dynamic smoke absolute right-1/2 mx-auto hidden lg:inline\\">
     </div>
   </div>
 </div>"

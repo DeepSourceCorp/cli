@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[isWidget ? 'rounded-md' : 'rounded-lg', { 'min-h-96': chartPresent }]"
-    class="py-4 border border-slate-400"
+    class="border border-slate-400 py-4"
   >
     <div v-if="$slots['report-header']" class="px-5">
       <slot name="report-header"></slot>
@@ -11,7 +11,7 @@
       v-if="$slots['report-stats'] || $slots['report-control']"
       class="flex justify-between gap-4 px-5"
     >
-      <div class="flex flex-wrap gap-y-6 gap-x-12">
+      <div class="flex flex-wrap gap-x-12 gap-y-6">
         <slot name="report-stats"></slot>
       </div>
       <div class="flex-shrink-0">

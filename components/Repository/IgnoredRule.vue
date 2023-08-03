@@ -26,16 +26,16 @@
     </template>
 
     <template #description>
-      <div class="flex text-xs gap-x-4">
+      <div class="flex gap-x-4 text-xs">
         <span class="flex items-center gap-x-1">
           <img
             :src="rule.creator.avatar"
             alt="Creator Avatar"
-            class="inline-block w-4 h-4 overflow-hidden rounded-full"
+            class="inline-block h-4 w-4 overflow-hidden rounded-full"
           />
           <span class="text-vanilla-400">{{ rule.creator.email }}</span>
         </span>
-        <span class="flex items-center leading-none gap-x-2">
+        <span class="flex items-center gap-x-2 leading-none">
           <z-icon icon="clock" color="vanilla-400" size="small" />
           <span class="text-vanilla-400">Added {{ ruleCreatedTime }}</span>
         </span>
@@ -43,7 +43,7 @@
     </template>
 
     <template v-if="allowDelete" #info>
-      <div class="flex justify-end h-full mt-1">
+      <div class="mt-1 flex h-full justify-end">
         <z-button
           v-tooltip="'Delete this rule'"
           size="small"
@@ -59,17 +59,11 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton } from '@deepsource/zeal'
 import { SilenceRule } from '~/types/types'
 import { fromNow } from '~/utils/date'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 
-@Component({
-  components: {
-    ZIcon,
-    ZButton
-  }
-})
+@Component({})
 export default class IgnoredRule extends mixins(RoleAccessMixin) {
   @Prop()
   rule!: SilenceRule

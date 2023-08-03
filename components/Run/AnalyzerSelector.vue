@@ -1,18 +1,18 @@
 <template>
-  <nav class="flex flex-col p-2 overflow-x-auto gap-x-8 hide-scroll lg:gap-y-1">
-    <p class="p-2 pl-2.5 text-xs font-semibold tracking-wide uppercase text-vanilla-400">Checks</p>
+  <nav class="hide-scroll flex flex-col gap-x-8 overflow-x-auto p-2 lg:gap-y-1">
+    <p class="p-2 pl-2.5 text-xs font-semibold uppercase tracking-wide text-vanilla-400">Checks</p>
     <template v-for="check in checks">
       <nuxt-link
         :key="check.id"
         :to="getRoute(check.analyzer.shortcode)"
-        class="flex-shrink-0 text-sm rounded-md group border-2"
+        class="group flex-shrink-0 rounded-md border-2 text-sm"
         :class="{
-          'border-vanilla-400 animate-pulse-border-once': flashActiveAnalyzer,
-          'border-opacity-0': currentAnalyzer !== check.analyzer.shortcode || !flashActiveAnalyzer
+          'animate-pulse-border-once border-vanilla-400': flashActiveAnalyzer,
+          'border-transparent': currentAnalyzer !== check.analyzer.shortcode || !flashActiveAnalyzer
         }"
       >
         <div
-          class="flex justify-between w-full p-2 text-sm rounded-md hover:bg-ink-200"
+          class="flex w-full justify-between rounded-md p-2 text-sm hover:bg-ink-200"
           :class="[
             currentAnalyzer === check.analyzer.shortcode
               ? 'bg-ink-200 text-vanilla-100'
@@ -28,7 +28,7 @@
             />
             <span>{{ check.analyzer.name }}</span>
           </div>
-          <z-tag bg-color="ink-100" text-size="xs" spacing="px-2 py-1" class="leading-none min-w-1">
+          <z-tag bg-color="ink-100" text-size="xs" spacing="px-2 py-1" class="min-w-1 leading-none">
             <span>{{ check.issuesRaisedCount }}</span>
           </z-tag>
         </div>
@@ -38,7 +38,6 @@
 </template>
 
 <script lang="ts">
-import { ZTag, ZIcon } from '@deepsource/zeal'
 import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
 import { Check, CheckStatus } from '~/types/types'
 import { checkStatusIcon, checkStatusIconColor } from '~/utils/ui'
@@ -48,10 +47,6 @@ import { checkStatusIcon, checkStatusIconColor } from '~/utils/ui'
  *
  */
 @Component({
-  components: {
-    ZTag,
-    ZIcon
-  },
   layout: 'repository',
   methods: {
     checkStatusIcon,
