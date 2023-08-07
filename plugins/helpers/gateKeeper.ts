@@ -209,13 +209,15 @@ const FEATURES_PROVIDER_MAP = {
     VcsProviderChoices.Github,
     VcsProviderChoices.GithubEnterprise,
     VcsProviderChoices.Bitbucket,
-    VcsProviderChoices.Gitlab
+    VcsProviderChoices.Gitlab,
+    VcsProviderChoices.Ads
   ],
   [AppFeatures.TRANSFORMS]: [
     VcsProviderChoices.Github,
     VcsProviderChoices.GithubEnterprise,
     VcsProviderChoices.Bitbucket,
-    VcsProviderChoices.Gitlab
+    VcsProviderChoices.Gitlab,
+    VcsProviderChoices.Ads
   ],
   [AppFeatures.WEBHOOKS]: [
     VcsProviderChoices.Github,
