@@ -1,7 +1,8 @@
 import { Middleware } from '@nuxt/types'
+import { AuthGetterTypes } from '~/store/account/auth'
 import { RepositoryDetailActions } from '~/store/repository/detail'
 
-const hidePrivateRepos: Middleware = async ({ store, route, error }) => {
+const hidePrivateRepos: Middleware = async ({ error, redirect, route, store }) => {
   if (!route.name?.startsWith('provider-owner-repo')) {
     return
   }
@@ -17,7 +18,14 @@ const hidePrivateRepos: Middleware = async ({ store, route, error }) => {
       }
     )
   } catch (e) {
-    error({ statusCode: 404, message: 'This page is not real' })
+    if (store.getters[`account/auth/${AuthGetterTypes.GET_LOGGED_IN}`]) {
+      error({ statusCode: 404 })
+      return
+    }
+
+    redirect(302, '/login', {
+      next: route.fullPath
+    })
   }
 }
 
