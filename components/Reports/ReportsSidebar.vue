@@ -7,7 +7,7 @@
       <div class="flex flex-shrink-0 gap-x-8 pl-4 pr-0 lg:flex-col lg:gap-y-1 lg:px-2">
         <!-- Compliance Items -->
         <p class="hidden p-2 text-xs font-semibold uppercase tracking-wide text-slate lg:block">
-          Security
+          Security and Compliance
         </p>
         <template v-for="item in complianceItems">
           <nuxt-link
@@ -133,6 +133,11 @@ export default class ReportsSidebar extends Vue {
         key: ReportPageT.SANS_TOP_25,
         label: ReportMeta[ReportPageT.SANS_TOP_25].title,
         link: [...this.baseLink, ReportPageT.SANS_TOP_25]
+      },
+      {
+        key: ReportPageT.MISRA_C,
+        label: ReportMeta[ReportPageT.MISRA_C].title,
+        link: [...this.baseLink, ReportPageT.MISRA_C]
       }
     ]
   }

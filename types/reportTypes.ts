@@ -38,6 +38,7 @@ export type ReportMetaProperties = {
 export enum ReportPageT {
   OWASP_TOP_10 = 'owasp-top-10',
   SANS_TOP_25 = 'sans-top-25',
+  MISRA_C = 'misra-c-2012',
   DISTRIBUTION = 'issue-distribution',
   PUBLIC_REPORTS = 'public-reports',
   CODE_COVERAGE = 'code-coverage',
@@ -99,6 +100,39 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     type: ReportType.Compliance,
     pinnableType: PinnableReportType.COMPLIANCE, // For use in pinnable reports menu items
     helpText: 'Compliance with CWE/SANS Top 25 security standard',
+    level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
+    copyText: (companyName) => {
+      return {
+        summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
+        <p>
+          The SANS Institute was founded in 1989 as a cooperative for information security thought
+          leadership. The CWE (Common Weakness Enumeration) / SANS Top 25 list is a well-known list
+          of the most common and severe errors in software that can lead to serious security
+          vulnerabilities. The list is used by organizations as a primer to ensure their source code
+          is secure.
+        </p>
+        <p>
+          DeepSource continuously scans ${companyName}’s source code continuously to detect violations
+          of CWE/SANS Top 25 recommendations and provides guidance to correct them. This report provides
+          the current, as well as a historical snapshot of the presence of such vulnerabilities in
+          ${companyName}’s source code, limited to the repositories, tracked on DeepSource.
+        </p>`,
+        intendedUse: `<h1 id="intended-use" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Intended use of this report</h1>
+        <p>
+          This report can be used by the ${companyName} team to identify and remediate violations of
+          CWE/SANS Top 25 recommendations in their source code. The report can also be used by key
+          stakeholders within the organization and interested external stakeholders to understand the
+          source code security posture of ${companyName}.
+        </p>`
+      }
+    }
+  },
+  [ReportPageT.MISRA_C]: {
+    title: 'MISRA C',
+    description: 'Overview of MISRA C 2012 compliance issues in your code.',
+    type: ReportType.Compliance,
+    pinnableType: PinnableReportType.COMPLIANCE, // For use in pinnable reports menu items
+    helpText: 'Compliance with MISRA C 2012 standard',
     level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
     copyText: (companyName) => {
       return {
