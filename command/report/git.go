@@ -79,7 +79,6 @@ func gitGetHead(workspaceDir string) (commitOID string, warning string, err erro
 			warning = "Warning: Looks like the checkout step is making a merge commit. " +
 				"Test coverage Analyzer would not run for the reported artifact because the merge commit doesn't exist upstream.\n" +
 				"Please refer to the docs for required changes. Ref: https://docs.deepsource.com/docs/analyzers-test-coverage#with-github-actions"
-
 		}
 	}
 
