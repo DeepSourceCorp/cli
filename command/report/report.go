@@ -376,7 +376,7 @@ func (opts *ReportOptions) Run() int {
 		fmt.Printf("Message   %s\n", queryResponse.Data.CreateArtifact.Message)
 	}
 	if warning != "" {
-		fmt.Printf(warning)
+		fmt.Print(warning)
 	}
 	return 0
 }
