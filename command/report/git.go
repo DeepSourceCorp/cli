@@ -98,18 +98,18 @@ func getGitHubActionsCommit(topCommit string) (headOID string, warning string, e
 			"Please refer to the docs for required changes. Ref: https://docs.deepsource.com/docs/analyzers-test-coverage#with-github-actions"
 	}
 
-	return headOID, warning, nil
+	return topCommit, warning, err
 }
 
 // Handle special case for TravisCI
-func getTravisCommit(string) (headOID string, warning string, err error) {
+func getTravisCommit(topCommit string) (headOID string, warning string, err error) {
 	// Travis creates a merge commit for pull requests on forks.
 	// The head of commit is this merge commit, which does not match the commit of deepsource check.
 	// Fetch value of pull request SHA. If this is a PR, it will return SHA of HEAD commit of the PR, else "".
 	// If prSHA is not empty, that means we got an SHA, which is HEAD. Return this.
 	if prSHA := os.Getenv("TRAVIS_PULL_REQUEST_SHA"); len(prSHA) > 0 {
-		return prSHA, "", nil
+		return prSHA, warning, err
 	}
 
-	return headOID, "", nil
+	return topCommit, warning, err
 }
