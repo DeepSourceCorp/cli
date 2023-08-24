@@ -12,6 +12,12 @@ import (
 
 // gitGetHead accepts a git directory and returns head commit OID / error
 func gitGetHead(workspaceDir string) (headOID string, warning string, err error) {
+	// Check if DeepSource's Test coverage action triggered this first before executing any git commands.
+	ghaHeadOID, err := getTestCoverageActionCommit()
+	if ghaHeadOID != "" {
+		return ghaHeadOID, warning, err
+	}
+
 	// get the top commit manually, using git command
 	headOID, err = fetchHeadManually(workspaceDir)
 	if err != nil {
@@ -99,6 +105,18 @@ func getGitHubActionsCommit(topCommit string) (headOID string, warning string, e
 	}
 
 	return topCommit, warning, err
+}
+
+// Return PR's HEAD ref set as env variable manually by DeepSource's Test coverage action.
+func getTestCoverageActionCommit() (headOID string, err error) {
+	// This is kept separate from `getGitHubActionsCommit` because we don't want to run any git command manually
+	// before this is checked. Since this is guaranteed to be set if artifact is sent using our GitHub action,
+	// we can reliably send the commit SHA, and no git commands are executed, making the actions work all the time. \o/
+
+	// We are setting PR's head commit as default using github context as env variable: "GHA_HEAD_COMMIT_SHA"
+	headOID = os.Getenv("GHA_HEAD_COMMIT_SHA")
+
+	return
 }
 
 // Handle special case for TravisCI
