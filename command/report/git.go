@@ -13,9 +13,9 @@ import (
 // gitGetHead accepts a git directory and returns head commit OID / error
 func gitGetHead(workspaceDir string) (headOID string, warning string, err error) {
 	// Check if DeepSource's Test coverage action triggered this first before executing any git commands.
-	ghaHeadOID, err := getTestCoverageActionCommit()
-	if ghaHeadOID != "" {
-		return ghaHeadOID, warning, err
+	headOID, err = getTestCoverageActionCommit()
+	if headOID != "" {
+		return headOID, warning, err
 	}
 
 	// get the top commit manually, using git command
@@ -83,7 +83,8 @@ func getGitHubActionsCommit(topCommit string) (headOID string, warning string, e
 	// Early exit when GITHUB_SHA points to the original commit.
 	// Ref: https://help.github.com/en/actions/reference/events-that-trigger-workflows#pull-request-event-pull_request
 	if _, isRefPresent := os.LookupEnv("GITHUB_REF"); !isRefPresent {
-		return os.Getenv("GITHUB_SHA"), "", nil
+		headOID = os.Getenv("GITHUB_SHA")
+		return
 	}
 
 	// Case: Detect Merge commit made by GitHub Actions, which pull_request events are nutorious to make.
@@ -98,13 +99,13 @@ func getGitHubActionsCommit(topCommit string) (headOID string, warning string, e
 	// 	  "pull_request_review_comment",
 	eventName := os.Getenv("GITHUB_EVENT_NAME")
 	eventCommitSha := os.Getenv("GITHUB_SHA")
-	if strings.HasPrefix(eventName, "pull_request") && headOID == eventCommitSha {
+	if strings.HasPrefix(eventName, "pull_request") && topCommit == eventCommitSha {
 		warning = "Warning: Looks like the checkout step is making a merge commit. " +
 			"Test coverage Analyzer would not run for the reported artifact because the merge commit doesn't exist upstream.\n" +
 			"Please refer to the docs for required changes. Ref: https://docs.deepsource.com/docs/analyzers-test-coverage#with-github-actions"
 	}
-
-	return topCommit, warning, err
+	headOID = topCommit
+	return
 }
 
 // Return PR's HEAD ref set as env variable manually by DeepSource's Test coverage action.
@@ -120,14 +121,14 @@ func getTestCoverageActionCommit() (headOID string, err error) {
 }
 
 // Handle special case for TravisCI
-func getTravisCommit(topCommit string) (headOID string, warning string, err error) {
+func getTravisCommit(topCommit string) (string, string, error) {
 	// Travis creates a merge commit for pull requests on forks.
 	// The head of commit is this merge commit, which does not match the commit of deepsource check.
 	// Fetch value of pull request SHA. If this is a PR, it will return SHA of HEAD commit of the PR, else "".
 	// If prSHA is not empty, that means we got an SHA, which is HEAD. Return this.
 	if prSHA := os.Getenv("TRAVIS_PULL_REQUEST_SHA"); len(prSHA) > 0 {
-		return prSHA, warning, err
+		return prSHA, "", nil
 	}
 
-	return topCommit, warning, err
+	return topCommit, "", nil
 }
