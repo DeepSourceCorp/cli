@@ -15,7 +15,7 @@ func gitGetHead(workspaceDir string) (headOID string, warning string, err error)
 	// Check if DeepSource's Test coverage action triggered this first before executing any git commands.
 	headOID, err = getTestCoverageActionCommit()
 	if headOID != "" {
-		return headOID, warning, err
+		return
 	}
 
 	// get the top commit manually, using git command
@@ -23,7 +23,7 @@ func gitGetHead(workspaceDir string) (headOID string, warning string, err error)
 	if err != nil {
 		fmt.Println(err)
 		sentry.CaptureException(err)
-		return "", "", err
+		return
 	}
 
 	// TRAVIS CI
@@ -53,7 +53,7 @@ func gitGetHead(workspaceDir string) (headOID string, warning string, err error)
 	}
 
 	// If we are here, it means there weren't any special cases. Return the manually found headOID.
-	return headOID, warning, nil
+	return
 }
 
 // Fetches the latest commit hash using the command `git rev-parse HEAD`
