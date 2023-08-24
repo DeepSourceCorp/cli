@@ -179,7 +179,7 @@ func (opts *ReportOptions) Run() int {
 	dsnAccessToken := dsnSplitTokenHost[0]
 
 	// Head Commit OID
-	headCommitOID, err := gitGetHead(currentDir)
+	headCommitOID, warning, err := gitGetHead(currentDir)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to get commit OID HEAD. Make sure you are running the CLI from a git repository")
 		sentry.CaptureException(err)
@@ -374,6 +374,9 @@ func (opts *ReportOptions) Run() int {
 	fmt.Printf("Key       %s\n", artifactKey)
 	if queryResponse.Data.CreateArtifact.Message != "" {
 		fmt.Printf("Message   %s\n", queryResponse.Data.CreateArtifact.Message)
+	}
+	if warning != "" {
+		fmt.Print(warning)
 	}
 	return 0
 }

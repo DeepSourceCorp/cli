@@ -22,7 +22,7 @@ test:
 test_setup:
 	mkdir -p ${CODE_PATH}
 	cd ${CODE_PATH} && ls -A1 | xargs rm -rf
-	git clone https://github.com/DeepSourceCorp/cli ${CODE_PATH}
+	git clone https://github.com/DeepSourceCorp/july ${CODE_PATH}
 	chmod +x /tmp/deepsource
 	cp ./command/report/tests/golden_files/python_coverage.xml /tmp
 
