@@ -125,8 +125,6 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 }
 
 func TestReportKeyValueWorkflow(t *testing.T) {
-	t.Setenv("GIT_COMMIT_SHA", commitOid)
-
 	// Read test artifact file
 	data, err := os.ReadFile("/tmp/python_coverage.xml")
 	if err != nil {
@@ -175,8 +173,6 @@ func TestReportKeyValueWorkflow(t *testing.T) {
 }
 
 func TestReportKeyValueFileWorkflow(t *testing.T) {
-	t.Setenv("GIT_COMMIT_SHA", commitOid)
-
 	cmd := exec.Command("/tmp/deepsource",
 		"report",
 		"--analyzer",
