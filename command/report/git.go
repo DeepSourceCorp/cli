@@ -23,8 +23,8 @@ func gitGetHead(workspaceDir string) (headOID string, warning string, err error)
 	// Example:
 	// GIT_COMMIT_SHA=$(git --no-pager rev-parse HEAD | tr -d '\n')
 	// docker run -e DEEPSOURCE_DSN -e GIT_COMMIT_SHA ...
-	if _, isManuallyInjectedSHA := os.LookupEnv("GIT_COMMIT_SHA"); isManuallyInjectedSHA {
-		return os.Getenv("GIT_COMMIT_SHA"), "", nil
+	if injectedSHA, isManuallyInjectedSHA := os.LookupEnv("GIT_COMMIT_SHA"); isManuallyInjectedSHA {
+		return injectedSHA, "", nil
 	}
 
 	// get the top commit manually, using git command. We will be using this if there's no env variable set for extracting commit.
