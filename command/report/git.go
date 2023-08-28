@@ -15,8 +15,23 @@ func gitGetHead(workspaceDir string) (headOID string, warning string, err error)
 		return
 	}
 
+	// Check if the `GIT_COMMIT_SHA` environment variable exists. If yes, return this as
+	// the latest commit sha.
+	// This is used in cases when the user wants to report tcv from inside a docker container in which they are running tests.
+	// In this scenario, the container doesn't have data about the latest git commit sha so
+	// it is injected by the user manually while running the container.
+	// Example:
+	// GIT_COMMIT_SHA=$(git --no-pager rev-parse HEAD | tr -d '\n')
+	// docker run -e DEEPSOURCE_DSN -e GIT_COMMIT_SHA ...
+	if _, isManuallyInjectedSHA := os.LookupEnv("GIT_COMMIT_SHA"); isManuallyInjectedSHA {
+		return os.Getenv("GIT_COMMIT_SHA"), "", nil
+	}
+
 	// get the top commit manually, using git command. We will be using this if there's no env variable set for extracting commit.
 	headOID, err = fetchHeadManually(workspaceDir)
+	if err != nil {
+		return
+	}
 
 	// TRAVIS CI
 	if envUser := os.Getenv("USER"); envUser == "travis" {
@@ -28,20 +43,6 @@ func gitGetHead(workspaceDir string) (headOID string, warning string, err error)
 	if _, isGitHubEnv := os.LookupEnv("GITHUB_ACTIONS"); isGitHubEnv {
 		headOID, warning, err = getGitHubActionsCommit(headOID)
 		return
-	}
-
-	// Check if the `GIT_COMMIT_SHA` environment variable exists. If yes, return this as
-	// the latest commit sha.
-	// This is used in cases when the user:
-	// 1. Is using a CI other than GH Actions/ Travis CI (handled above)
-	// 2. Wants to report tcv from inside a docker container in which they are running tests.
-	// In this scenario, the container doesn't have data about the latest git commit sha so
-	// it is injected by the user manually while running the container.
-	// Example:
-	// GIT_COMMIT_SHA=$(git --no-pager rev-parse HEAD | tr -d '\n')
-	// docker run -e DEEPSOURCE_DSN -e GIT_COMMIT_SHA ...
-	if _, isManuallyInjectedSHA := os.LookupEnv("GIT_COMMIT_SHA"); isManuallyInjectedSHA {
-		return os.Getenv("GIT_COMMIT_SHA"), "", nil
 	}
 
 	// If we are here, it means there weren't any special cases. Return the manually found headOID.
