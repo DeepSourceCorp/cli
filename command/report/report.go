@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 	"time"
@@ -182,6 +183,7 @@ func (opts *ReportOptions) Run() int {
 	headCommitOID, warning, err := gitGetHead(currentDir)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to get commit OID HEAD. Make sure you are running the CLI from a git repository")
+		log.Println(err)
 		sentry.CaptureException(err)
 		return 1
 	}

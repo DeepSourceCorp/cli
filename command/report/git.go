@@ -2,12 +2,9 @@ package report
 
 import (
 	"bytes"
-	"fmt"
 	"os"
 	"os/exec"
 	"strings"
-
-	"github.com/getsentry/sentry-go"
 )
 
 // gitGetHead accepts a git directory and returns head commit OID / error
@@ -18,13 +15,8 @@ func gitGetHead(workspaceDir string) (headOID string, warning string, err error)
 		return
 	}
 
-	// get the top commit manually, using git command
+	// get the top commit manually, using git command. We will be using this if there's no env variable set for extracting commit.
 	headOID, err = fetchHeadManually(workspaceDir)
-	if err != nil {
-		fmt.Println(err)
-		sentry.CaptureException(err)
-		return
-	}
 
 	// TRAVIS CI
 	if envUser := os.Getenv("USER"); envUser == "travis" {
