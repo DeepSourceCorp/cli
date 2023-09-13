@@ -127,7 +127,7 @@ func (opts *ReportOptions) Run() int {
 		return keys
 	}
 
-	if !supportedKeys[reportCommandKey] {
+	if reportCommandAnalyzerShortcode == "test-coverage" && !supportedKeys[reportCommandKey] {
 		err = fmt.Errorf("DeepSource | Error | Invalid Key: %s (Supported Keys: %v)", reportCommandKey, allowedKeys(supportedKeys))
 		fmt.Fprintln(os.Stderr, err)
 		sentry.CaptureException(err)
