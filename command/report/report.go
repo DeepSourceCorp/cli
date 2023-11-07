@@ -19,7 +19,7 @@ import (
 
 type ReportOptions struct {
 	Analyzer                    string
-	Type                        string
+	AnalyzerType                string
 	Key                         string
 	Value                       string
 	ValueFile                   string
@@ -58,7 +58,7 @@ func NewCmdReport() *cobra.Command {
 	// --repo, -r flag
 	cmd.Flags().StringVar(&opts.Analyzer, "analyzer", "", "name of the analyzer to report the artifact to (example: test-coverage)")
 
-	cmd.Flags().StringVar(&opts.Type, "type", "core", "type of the analyzer (example: community)")
+	cmd.Flags().StringVar(&opts.AnalyzerType, "analyzer-type", "core", "type of the analyzer")
 
 	cmd.Flags().StringVar(&opts.Key, "key", "", "shortcode of the language (example: go)")
 
@@ -88,7 +88,7 @@ func (opts *ReportOptions) Run() int {
 	/////////////////////
 
 	reportCommandAnalyzerShortcode := strings.TrimSpace(opts.Analyzer)
-	reportCommandAnalyzerType := strings.TrimSpace(opts.Type)
+	reportCommandAnalyzerType := strings.TrimSpace(opts.AnalyzerType)
 	reportCommandKey := strings.TrimSpace(opts.Key)
 	reportCommandValue := opts.Value
 	reportCommandValueFile := strings.TrimSpace(opts.ValueFile)

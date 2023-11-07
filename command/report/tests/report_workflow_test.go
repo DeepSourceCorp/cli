@@ -232,7 +232,7 @@ func TestReportAnalyzerTypeWorkflow(t *testing.T) {
 		"report",
 		"--analyzer",
 		analyzer,
-		"--type",
+		"--analyzer-type",
 		"community",
 		"--key",
 		key,
