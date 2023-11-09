@@ -87,12 +87,13 @@ builds:
       - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
 
 archives:
-  -
-    name_template: >-
+  - name_template: >-
       deepsource_{{ .Version }}_{{ .Os }}_
       {{- if eq .Arch "amd64" }}x86_64
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
+    files:
+      - completions/**/*
 checksum:
   name_template: 'checksums.txt'
 snapshot:
