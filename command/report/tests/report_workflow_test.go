@@ -37,8 +37,6 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Println("Request body: ", string(req))
-
 	// Check if the request has ArtifactMetadataInput in body
 	if bytes.Contains(req, []byte("ArtifactMetadataInput")) {
 		log.Println("ArtifactMetadataInput found in request body")
@@ -82,7 +80,14 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 		reportQuery.Variables.Input.Data = string(decompressedData)
 
 		// Read test graphql request body artifact file
-		requestBodyData, err := os.ReadFile("./golden_files/report_graphql_request_body.json")
+		requestBodyGoldenFilePath := "./golden_files/report_graphql_request_body.json"
+
+		if reportQuery.Variables.Input.AnalyzerType == "community" {
+			// There's a separate goldenfile for request made with a type flag passed as community
+			requestBodyGoldenFilePath = "./golden_files/report_graphql_community_request_body.json"
+		}
+
+		requestBodyData, err := os.ReadFile(requestBodyGoldenFilePath)
 		if err != nil {
 			log.Println(err)
 			return
@@ -95,6 +100,15 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 			log.Println(err)
 			return
 		}
+
+		// Make a map for metadata with workdir and compressed.This is to make local tests respect env variables.
+		metadata := make(map[string]interface{})
+		metadata["workDir"] = os.Getenv("CODE_PATH")
+		metadata["compressed"] = "True"
+		requestReportQuery.Variables.Input.Metadata = metadata
+
+		// Also change the ReporterVersion to the version of the CLI
+		requestReportQuery.Variables.Input.ReporterVersion = report.CliVersion
 
 		// Read test graphql success response body artifact file
 		successResponseBodyData, err := os.ReadFile("./golden_files/report_graphql_success_response_body.json")
@@ -177,6 +191,49 @@ func TestReportKeyValueFileWorkflow(t *testing.T) {
 		"report",
 		"--analyzer",
 		analyzer,
+		"--key",
+		key,
+		"--value-file",
+		"/tmp/python_coverage.xml",
+	)
+
+	// Set env variables
+	cmd.Env = os.Environ()
+	cmd.Env = append(cmd.Env, "DEEPSOURCE_DSN="+dsn)
+	cmd.Dir = os.Getenv("CODE_PATH")
+
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+
+	err := cmd.Run()
+
+	outStr, errStr := stdout.String(), stderr.String()
+	log.Printf("== Run deepsource CLI command ==\n%s\n%s\n", outStr, errStr)
+
+	if err != nil {
+		log.Println(outStr)
+		log.Println(errStr)
+		t.Errorf("Error executing deepsource CLI command: %v", err)
+	}
+
+	output, err := os.ReadFile("./golden_files/report_success.txt")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if want := string(output); want != outStr {
+		t.Errorf("Expected: %s, Got: %s", want, outStr)
+	}
+}
+
+func TestReportAnalyzerTypeWorkflow(t *testing.T) {
+	cmd := exec.Command("/tmp/deepsource",
+		"report",
+		"--analyzer",
+		analyzer,
+		"--analyzer-type",
+		"community",
 		"--key",
 		key,
 		"--value-file",

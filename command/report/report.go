@@ -19,6 +19,7 @@ import (
 
 type ReportOptions struct {
 	Analyzer                    string
+	AnalyzerType                string
 	Key                         string
 	Value                       string
 	ValueFile                   string
@@ -57,6 +58,8 @@ func NewCmdReport() *cobra.Command {
 	// --repo, -r flag
 	cmd.Flags().StringVar(&opts.Analyzer, "analyzer", "", "name of the analyzer to report the artifact to (example: test-coverage)")
 
+	cmd.Flags().StringVar(&opts.AnalyzerType, "analyzer-type", "", "type of the analyzer (example: community)")
+
 	cmd.Flags().StringVar(&opts.Key, "key", "", "shortcode of the language (example: go)")
 
 	cmd.Flags().StringVar(&opts.Value, "value", "", "value of the artifact")
@@ -85,6 +88,7 @@ func (opts *ReportOptions) Run() int {
 	/////////////////////
 
 	reportCommandAnalyzerShortcode := strings.TrimSpace(opts.Analyzer)
+	reportCommandAnalyzerType := strings.TrimSpace(opts.AnalyzerType)
 	reportCommandKey := strings.TrimSpace(opts.Key)
 	reportCommandValue := opts.Value
 	reportCommandValueFile := strings.TrimSpace(opts.ValueFile)
@@ -198,10 +202,12 @@ func (opts *ReportOptions) Run() int {
 	}
 
 	var analyzerShortcode string
+	var analyzerType string
 	var artifactKey string
 	var artifactValue string
 
 	analyzerShortcode = reportCommandAnalyzerShortcode
+	analyzerType = reportCommandAnalyzerType
 	artifactKey = reportCommandKey
 
 	if reportCommandValue != "" {
@@ -299,14 +305,21 @@ func (opts *ReportOptions) Run() int {
 		AccessToken:       dsnAccessToken,
 		CommitOID:         headCommitOID,
 		ReporterName:      "cli",
-		ReporterVersion:   cliVersion,
+		ReporterVersion:   CliVersion,
 		Key:               artifactKey,
 		Data:              artifactValue,
 		AnalyzerShortcode: analyzerShortcode,
-		Metadata:          reportMeta,
+		// AnalyzerType:      analyzerType,  // Add this in the later steps, only is the analyzer type is passed.
+		// This makes sure that the cli is always backwards compatible. The API is designed to accept analyzer type only if it is passed.
+		Metadata: reportMeta,
 	}
 
 	query := ReportQuery{Query: reportGraphqlQuery}
+	// Check if analyzerType is passed and add it to the queryInput
+	if analyzerType != "" {
+		queryInput.AnalyzerType = analyzerType
+	}
+	//  Pass queryInput to the query
 	query.Variables.Input = queryInput
 
 	// Marshal request body
