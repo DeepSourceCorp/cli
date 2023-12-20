@@ -102,8 +102,8 @@ archives:
   - id: default
     name_template: >-
         deepsource_{{ .Version }}_{{ .Os }}_{{ .Arch }}
-      files:
-        - completions/*
+    files:
+      - completions/*
 checksum:
   name_template: 'checksums.txt'
 snapshot:
