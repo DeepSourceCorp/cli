@@ -120,6 +120,8 @@ brews:
       name: homebrew-cli
       branch: cli-release
       token: "{{ .Env.HOMEBREW_TOKEN }}"
+    ids:
+      - arch_rename
     commit_author:
       name: deepsourcebot
       email: bot@deepsource.io
