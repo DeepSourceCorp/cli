@@ -42,3 +42,5 @@ func main() {
 		os.Exit(1)
 	}
 }
+
+// Path: cmd/deepsource/main.go
