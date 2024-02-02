@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"strings"
 	"testing"
 
 	"github.com/DataDog/zstd"
@@ -126,6 +127,9 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
+
+		requestReportQuery.Variables.Input.Data = strings.TrimSuffix(requestReportQuery.Variables.Input.Data, "\n")
+		reportQuery.Variables.Input.Data = strings.TrimSuffix(reportQuery.Variables.Input.Data, "\n")
 
 		if want, got := requestReportQuery, reportQuery; cmp.Equal(want, got) {
 			w.Write([]byte(successResponseBodyData))
