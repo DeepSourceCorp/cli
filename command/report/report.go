@@ -24,6 +24,7 @@ type ReportOptions struct {
 	Value                       string
 	ValueFile                   string
 	SkipCertificateVerification bool
+	DSN                         string
 }
 
 // NewCmdVersion returns the current version of cli being used
@@ -72,42 +73,16 @@ func NewCmdReport() *cobra.Command {
 	return cmd
 }
 
-func (opts *ReportOptions) Run() int {
-	// Verify the env variables
-	dsn := os.Getenv("DEEPSOURCE_DSN")
-	if dsn == "" {
-		fmt.Fprintln(os.Stderr, "DeepSource | Error | Environment variable DEEPSOURCE_DSN not set (or) is empty. You can find it under the repository settings page")
-		return 1
-	}
-	sentry.ConfigureScope(func(scope *sentry.Scope) {
-		scope.SetUser(sentry.User{ID: dsn})
-	})
+func (opts *ReportOptions) sanitize() {
+	opts.Analyzer = strings.TrimSpace(opts.Analyzer)
+	opts.AnalyzerType = strings.TrimSpace(opts.AnalyzerType)
+	opts.Key = strings.TrimSpace(opts.Key)
+	opts.Value = strings.TrimSpace(opts.Value)
+	opts.ValueFile = strings.TrimSpace(opts.ValueFile)
+	opts.DSN = strings.TrimSpace(os.Getenv("DEEPSOURCE_DSN"))
+}
 
-	/////////////////////
-	// Command: report //
-	/////////////////////
-
-	reportCommandAnalyzerShortcode := strings.TrimSpace(opts.Analyzer)
-	reportCommandAnalyzerType := strings.TrimSpace(opts.AnalyzerType)
-	reportCommandKey := strings.TrimSpace(opts.Key)
-	reportCommandValue := opts.Value
-	reportCommandValueFile := strings.TrimSpace(opts.ValueFile)
-
-	// Get current path
-	currentDir, err := os.Getwd()
-	if err != nil {
-		fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to identify current directory")
-		sentry.CaptureException(err)
-		return 1
-	}
-	sentry.ConfigureScope(func(scope *sentry.Scope) {
-		scope.SetExtra("currentDir", currentDir)
-	})
-
-	//////////////////
-	// Validate Key //
-	//////////////////
-
+func (opts *ReportOptions) validateKey() error {
 	supportedKeys := map[string]bool{
 		"python":     true,
 		"go":         true,
@@ -123,65 +98,55 @@ func (opts *ReportOptions) Run() int {
 		"kotlin":     true,
 	}
 
-	allowedKeys := func(m map[string]bool) []string {
-		keys := make([]string, 0, len(supportedKeys))
-		for k := range m {
-			keys = append(keys, k)
-		}
-		return keys
+	if opts.Analyzer == "test-coverage" && !supportedKeys[opts.Key] {
+		return fmt.Errorf("DeepSource | Error | Invalid Key: %s (Supported Keys: %v)", opts.Key, supportedKeys)
 	}
 
-	if reportCommandAnalyzerShortcode == "test-coverage" && !supportedKeys[reportCommandKey] {
-		err = fmt.Errorf("DeepSource | Error | Invalid Key: %s (Supported Keys: %v)", reportCommandKey, allowedKeys(supportedKeys))
+	return nil
+}
+
+func (opts *ReportOptions) Run() int {
+	opts.sanitize()
+	if opts.DSN == "" {
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Environment variable DEEPSOURCE_DSN not set (or) is empty. You can find it under the repository settings page")
+		return 1
+	}
+	sentry.ConfigureScope(func(scope *sentry.Scope) {
+		scope.SetUser(sentry.User{ID: opts.DSN})
+	})
+
+	/////////////////////
+	// Command: report //
+	/////////////////////
+
+	// Get current path
+	currentDir, err := os.Getwd()
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to identify current directory")
+		sentry.CaptureException(err)
+		return 1
+	}
+	sentry.ConfigureScope(func(scope *sentry.Scope) {
+		scope.SetExtra("currentDir", currentDir)
+	})
+
+	// validate key
+	if err := opts.validateKey(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		sentry.CaptureException(err)
 		return 1
 	}
 
-	//////////////////
-	// Validate DSN //
-	//////////////////
-
-	// Protocol
-	dsnSplitProtocolBody := strings.Split(dsn, "://")
-
-	// Validate DSN parsing
-	if len(dsnSplitProtocolBody) != 2 {
-		err = errors.New("DeepSource | Error | Invalid DSN. Cross verify DEEPSOURCE_DSN value against the settings page of the repository")
+	dsn, err := NewDSN(opts.DSN)
+	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		sentry.CaptureException(err)
 		return 1
 	}
-
-	// Check for valid protocol
-	if !strings.HasPrefix(dsnSplitProtocolBody[0], "http") {
-		err = errors.New("DeepSource | Error | DSN specified should start with http(s). Cross verify DEEPSOURCE_DSN value against the settings page of the repository")
-		fmt.Fprintln(os.Stderr, err)
-		sentry.CaptureException(err)
-		return 1
-	}
-	dsnProtocol := dsnSplitProtocolBody[0]
-
-	// Parse body of the DSN
-	dsnSplitTokenHost := strings.Split(dsnSplitProtocolBody[1], "@")
-
-	// Validate DSN parsing
-	if len(dsnSplitTokenHost) != 2 {
-		err = errors.New("DeepSource | Error | Invalid DSN. Cross verify DEEPSOURCE_DSN value against the settings page of the repository")
-		fmt.Fprintln(os.Stderr, err)
-		sentry.CaptureException(err)
-		return 1
-	}
-
-	// Set values parsed from DSN
-	dsnHost := dsnSplitTokenHost[1]
 
 	///////////////////////
 	// Generate metadata //
 	///////////////////////
-
-	// Access token
-	dsnAccessToken := dsnSplitTokenHost[0]
 
 	// Head Commit OID
 	headCommitOID, warning, err := gitGetHead(currentDir)
@@ -196,7 +161,7 @@ func (opts *ReportOptions) Run() int {
 	})
 
 	// Flag validation
-	if reportCommandValue == "" && reportCommandValueFile == "" {
+	if opts.Value == "" && opts.ValueFile == "" {
 		fmt.Fprintln(os.Stderr, "DeepSource | Error | '--value' (or) '--value-file' not passed")
 		return 1
 	}
@@ -206,26 +171,26 @@ func (opts *ReportOptions) Run() int {
 	var artifactKey string
 	var artifactValue string
 
-	analyzerShortcode = reportCommandAnalyzerShortcode
-	analyzerType = reportCommandAnalyzerType
-	artifactKey = reportCommandKey
+	analyzerShortcode = opts.Analyzer
+	analyzerType = opts.AnalyzerType
+	artifactKey = opts.Key
 
-	if reportCommandValue != "" {
-		artifactValue = reportCommandValue
+	if opts.Value != "" {
+		artifactValue = opts.Value
 	}
 
-	if reportCommandValueFile != "" {
+	if opts.ValueFile != "" {
 		// Check file size
-		_, err := os.Stat(reportCommandValueFile)
+		_, err := os.Stat(opts.ValueFile)
 		if err != nil {
-			fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to read specified value file:", reportCommandValueFile)
+			fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to read specified value file:", opts.ValueFile)
 			sentry.CaptureException(err)
 			return 1
 		}
 
-		valueBytes, err := os.ReadFile(reportCommandValueFile)
+		valueBytes, err := os.ReadFile(opts.ValueFile)
 		if err != nil {
-			fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to read specified value file:", reportCommandValueFile)
+			fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to read specified value file:", opts.ValueFile)
 			sentry.CaptureException(err)
 			return 1
 		}
@@ -244,7 +209,7 @@ func (opts *ReportOptions) Run() int {
 	}
 
 	r, err := makeQuery(
-		dsnProtocol+"://"+dsnHost+"/graphql/cli/",
+		dsn.Protocol+"://"+dsn.Host+"/graphql/cli/",
 		qBytes,
 		"application/json",
 		opts.SkipCertificateVerification,
@@ -284,7 +249,7 @@ func (opts *ReportOptions) Run() int {
 			compressLevel := 20
 			compressedBytes, err = zstd.CompressLevel(compressedBytes, []byte(artifactValue), compressLevel)
 			if err != nil {
-				fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to compress value file:", reportCommandValueFile)
+				fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to compress value file:", opts.ValueFile)
 				sentry.CaptureException(err)
 				return 1
 			}
@@ -302,7 +267,7 @@ func (opts *ReportOptions) Run() int {
 	////////////////////
 
 	queryInput := ReportQueryInput{
-		AccessToken:       dsnAccessToken,
+		AccessToken:       dsn.Token,
 		CommitOID:         headCommitOID,
 		ReporterName:      "cli",
 		ReporterVersion:   CliVersion,
@@ -331,7 +296,7 @@ func (opts *ReportOptions) Run() int {
 	}
 
 	queryResponseBody, err := makeQuery(
-		dsnProtocol+"://"+dsnHost+"/graphql/cli/",
+		dsn.Protocol+"://"+dsn.Host+"/graphql/cli/",
 		queryBodyBytes,
 		"application/json",
 		opts.SkipCertificateVerification,
@@ -347,7 +312,7 @@ func (opts *ReportOptions) Run() int {
 			return 1
 		}
 		queryResponseBody, err = makeQuery(
-			dsnProtocol+"://"+dsnHost+"/graphql/cli/",
+			dsn.Protocol+"://"+dsn.Host+"/graphql/cli/",
 			queryBodyBytes,
 			"application/json",
 			opts.SkipCertificateVerification,
