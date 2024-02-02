@@ -5,9 +5,7 @@ import (
 	"regexp"
 )
 
-var (
-	ErrInvalidDSN = errors.New("DeepSource | Error | Invalid DSN. Cross verify DEEPSOURCE_DSN value against the settings page of the repository")
-)
+var ErrInvalidDSN = errors.New("DeepSource | Error | Invalid DSN. Cross verify DEEPSOURCE_DSN value against the settings page of the repository")
 
 type DSN struct {
 	Protocol string
@@ -16,8 +14,7 @@ type DSN struct {
 }
 
 func NewDSN(raw string) (*DSN, error) {
-
-	var dsnPattern = regexp.MustCompile(`^(https?)://([^:@]+)@([^:/]+)`)
+	dsnPattern := regexp.MustCompile(`^(https?)://([^:@]+)@([^:/]+)`)
 	matches := dsnPattern.FindStringSubmatch(raw)
 	if len(matches) != 4 {
 		return nil, ErrInvalidDSN
