@@ -14,7 +14,7 @@ type DSN struct {
 }
 
 func NewDSN(raw string) (*DSN, error) {
-	dsnPattern := regexp.MustCompile(`^(https?)://([^:@]+)@([^:/]+)`)
+	var dsnPattern = regexp.MustCompile(`^(https?)://([^:@]+)@([^:/]+(?:\:\d+)?)`)
 	matches := dsnPattern.FindStringSubmatch(raw)
 	if len(matches) != 4 {
 		return nil, ErrInvalidDSN

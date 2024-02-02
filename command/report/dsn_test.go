@@ -28,6 +28,17 @@ func TestNewDSN(t *testing.T) {
 			wantErr: nil,
 		},
 		{
+			name: "valid DSN with port",
+			args: args{
+				raw: "http://f59a44307@localhost:8081",
+			},
+			want: &DSN{
+				Token:    "f59a44307",
+				Host:     "localhost:8081",
+				Protocol: "http",
+			},
+		},
+		{
 			name: "invalid DSN no http",
 			args: args{
 				raw: "no http",
