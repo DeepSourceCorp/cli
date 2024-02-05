@@ -161,6 +161,7 @@ func TestReportKeyValueWorkflow(t *testing.T) {
 
 	// Set env variables
 	cmd.Env = os.Environ()
+	cmd.Env = append(cmd.Env, "GIT_COMMIT_SHA="+"b9e678d8dcb43fa1340e8a0c579b2c642280dc27")
 	cmd.Env = append(cmd.Env, "DEEPSOURCE_DSN="+dsn)
 	cmd.Dir = os.Getenv("CODE_PATH")
 
@@ -203,6 +204,7 @@ func TestReportKeyValueFileWorkflow(t *testing.T) {
 
 	// Set env variables
 	cmd.Env = os.Environ()
+	cmd.Env = append(cmd.Env, "GIT_COMMIT_SHA="+"b9e678d8dcb43fa1340e8a0c579b2c642280dc27")
 	cmd.Env = append(cmd.Env, "DEEPSOURCE_DSN="+dsn)
 	cmd.Dir = os.Getenv("CODE_PATH")
 
@@ -246,6 +248,7 @@ func TestReportAnalyzerTypeWorkflow(t *testing.T) {
 
 	// Set env variables
 	cmd.Env = os.Environ()
+	cmd.Env = append(cmd.Env, "GIT_COMMIT_SHA="+"b9e678d8dcb43fa1340e8a0c579b2c642280dc27")
 	cmd.Env = append(cmd.Env, "DEEPSOURCE_DSN="+dsn)
 	cmd.Dir = os.Getenv("CODE_PATH")
 
