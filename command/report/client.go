@@ -3,6 +3,7 @@ package report
 import (
 	"context"
 	"crypto/tls"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -67,20 +68,20 @@ func (c *Client) CompressionEnabled() (bool, error) {
 	return false, nil
 }
 
-// const createArtifactMutationNew = `mutation($input: CreateArtifactInput!) {
-// 	createArtifact(input: $input) {
-// 		ok
-// 		message
-// 		error
-// 	}
-// }`
+const createArtifactMutationNew = `mutation($input: CreateArtifactInput!) {
+	createArtifact(input: $input) {
+		ok
+		message
+		error
+	}
+}`
 
-// const createArtifactMutationOld = `mutation($input: CreateArtifactInput!) {
-// 	createArtifact(input: $input) {
-// 		ok
-// 		error
-// 	}
-// }`
+const createArtifactMutationOld = `mutation($input: CreateArtifactInput!) {
+	createArtifact(input: $input) {
+		ok
+		error
+	}
+}`
 
 type CreateArtifactResponse struct {
 	CreateArtifact CreateArtifact `json:"createArtifact"`
@@ -105,7 +106,7 @@ type CreateArtifactInput struct {
 }
 
 func (c *Client) SendReportNew(input *CreateArtifactInput) (*CreateArtifactResponse, error) {
-	req := graphql.NewRequest(reportGraphqlQuery)
+	req := graphql.NewRequest(createArtifactMutationNew)
 	req.Var("input", input)
 
 	resp := CreateArtifactResponse{}
@@ -114,12 +115,12 @@ func (c *Client) SendReportNew(input *CreateArtifactInput) (*CreateArtifactRespo
 	if err != nil {
 		return nil, err
 	}
-
+	fmt.Println(resp)
 	return &resp, nil
 }
 
 func (c *Client) SendReportOld(input *CreateArtifactInput) (*CreateArtifactResponse, error) {
-	req := graphql.NewRequest(reportGraphqlQueryOld)
+	req := graphql.NewRequest(createArtifactMutationOld)
 	req.Var("input", input)
 
 	resp := CreateArtifactResponse{}
