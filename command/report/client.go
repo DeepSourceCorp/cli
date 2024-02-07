@@ -67,20 +67,20 @@ func (c *Client) CompressionEnabled() (bool, error) {
 	return false, nil
 }
 
-const createArtifactMutationNew = `mutation($input: CreateArtifactInput!) {
-	createArtifact(input: $input) {
-		ok
-		message
-		error
-	}
-}`
+// const createArtifactMutationNew = `mutation($input: CreateArtifactInput!) {
+// 	createArtifact(input: $input) {
+// 		ok
+// 		message
+// 		error
+// 	}
+// }`
 
-const createArtifactMutationOld = `mutation($input: CreateArtifactInput!) {
-	createArtifact(input: $input) {
-		ok
-		error
-	}
-}`
+// const createArtifactMutationOld = `mutation($input: CreateArtifactInput!) {
+// 	createArtifact(input: $input) {
+// 		ok
+// 		error
+// 	}
+// }`
 
 type CreateArtifactResponse struct {
 	CreateArtifact CreateArtifact `json:"createArtifact"`
@@ -105,7 +105,7 @@ type CreateArtifactInput struct {
 }
 
 func (c *Client) SendReportNew(input *CreateArtifactInput) (*CreateArtifactResponse, error) {
-	req := graphql.NewRequest(createArtifactMutationNew)
+	req := graphql.NewRequest(reportGraphqlQuery)
 	req.Var("input", input)
 
 	resp := CreateArtifactResponse{}
@@ -119,7 +119,7 @@ func (c *Client) SendReportNew(input *CreateArtifactInput) (*CreateArtifactRespo
 }
 
 func (c *Client) SendReportOld(input *CreateArtifactInput) (*CreateArtifactResponse, error) {
-	req := graphql.NewRequest(createArtifactMutationOld)
+	req := graphql.NewRequest(reportGraphqlQueryOld)
 	req.Var("input", input)
 
 	resp := CreateArtifactResponse{}
