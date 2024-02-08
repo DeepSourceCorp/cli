@@ -87,11 +87,21 @@ builds:
       - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
 
 archives:
-  - name_template: >-
+  - id: arch_rename
+    builds: 
+      - deepsource-darwin-amd64
+      - deepsource-linux-amd64
+      - windows-deepsource
+    name_template: >-
       deepsource_{{ .Version }}_{{ .Os }}_
       {{- if eq .Arch "amd64" }}x86_64
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
+    files:
+      - completions/*
+  - id: default
+    name_template: >-
+        deepsource_{{ .Version }}_{{ .Os }}_{{ .Arch }}
     files:
       - completions/*
 checksum:
@@ -110,6 +120,8 @@ brews:
       name: homebrew-cli
       branch: cli-release
       token: "{{ .Env.HOMEBREW_TOKEN }}"
+    ids:
+      - arch_rename
     commit_author:
       name: deepsourcebot
       email: bot@deepsource.io
