@@ -3,7 +3,6 @@ package report
 import (
 	"context"
 	"crypto/tls"
-	"fmt"
 	"net/http"
 	"time"
 
@@ -115,7 +114,6 @@ func (c *Client) SendReportNew(input *CreateArtifactInput) (*CreateArtifactRespo
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(resp)
 	return &resp, nil
 }
 
