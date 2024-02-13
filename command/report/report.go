@@ -2,7 +2,6 @@ package report
 
 import (
 	"encoding/base64"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
@@ -166,19 +165,10 @@ func (opts *ReportOptions) Run() int {
 		return 1
 	}
 
-	var analyzerShortcode string
-	var analyzerType string
-	var artifactKey string
 	var artifactValue string
-
-	analyzerShortcode = opts.Analyzer
-	analyzerType = opts.AnalyzerType
-	artifactKey = opts.Key
-
 	if opts.Value != "" {
 		artifactValue = opts.Value
 	}
-
 	if opts.ValueFile != "" {
 		// Check file size
 		_, err := os.Stat(opts.ValueFile)
@@ -198,162 +188,73 @@ func (opts *ReportOptions) Run() int {
 		artifactValue = string(valueBytes)
 	}
 
-	// Query DeepSource API to check if compression is supported
-	q := ReportQuery{Query: graphqlCheckCompressed}
-
-	qBytes, err := json.Marshal(q)
+	client := NewGraphQLClient(dsn.Protocol+"://"+dsn.Host+"/graphql/cli/", opts.SkipCertificateVerification)
+	mustCompress, err := client.CompressionEnabled()
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to marshal query:", err)
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to check if compression is supported")
 		sentry.CaptureException(err)
-		return 1
-	}
-
-	r, err := makeQuery(
-		dsn.Protocol+"://"+dsn.Host+"/graphql/cli/",
-		qBytes,
-		"application/json",
-		opts.SkipCertificateVerification,
-	)
-	if err != nil {
-		fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to make query:", err)
-		sentry.CaptureException(err)
-		return 1
-	}
-
-	// res is a struct to unmarshal the response to check if compression is supported
-	var res struct {
-		Data struct {
-			Type struct {
-				InputFields []struct {
-					Name string `json:"name"`
-				} `json:"inputFields"`
-			} `json:"__type"`
-		} `json:"data"`
-	}
-
-	err = json.Unmarshal(r, &res)
-	if err != nil {
-		fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to unmarshal response:", err)
-		sentry.CaptureException(err)
-		return 1
 	}
 
 	reportMeta := make(map[string]interface{})
 	reportMeta["workDir"] = currentDir
 
 	// Compress the value if compression is supported
-	for _, inputField := range res.Data.Type.InputFields {
-		if inputField.Name == "compressed" {
-			// Compress the byte array
-			var compressedBytes []byte
-			compressLevel := 20
-			compressedBytes, err = zstd.CompressLevel(compressedBytes, []byte(artifactValue), compressLevel)
-			if err != nil {
-				fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to compress value file:", opts.ValueFile)
-				sentry.CaptureException(err)
-				return 1
-			}
 
-			// Base64 encode the compressed byte array
-			artifactValue = base64.StdEncoding.EncodeToString(compressedBytes)
-
-			// Set the compression flag
-			reportMeta["compressed"] = "True"
+	if mustCompress {
+		// Compress the byte array
+		var compressedBytes []byte
+		compressLevel := 20
+		compressedBytes, err = zstd.CompressLevel(compressedBytes, []byte(artifactValue), compressLevel)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to compress value file:", opts.ValueFile)
+			sentry.CaptureException(err)
+			return 1
 		}
+
+		// Base64 encode the compressed byte array
+		artifactValue = base64.StdEncoding.EncodeToString(compressedBytes)
+
+		// Set the compression flag
+		reportMeta["compressed"] = "True"
 	}
 
-	////////////////////
-	// Generate query //
-	////////////////////
-
-	queryInput := ReportQueryInput{
+	queryInput := CreateArtifactInput{
 		AccessToken:       dsn.Token,
 		CommitOID:         headCommitOID,
 		ReporterName:      "cli",
 		ReporterVersion:   CliVersion,
-		Key:               artifactKey,
+		Key:               opts.Key,
 		Data:              artifactValue,
-		AnalyzerShortcode: analyzerShortcode,
+		AnalyzerShortcode: opts.Analyzer,
+		AnalyzerType:      opts.AnalyzerType,
 		// AnalyzerType:      analyzerType,  // Add this in the later steps, only is the analyzer type is passed.
 		// This makes sure that the cli is always backwards compatible. The API is designed to accept analyzer type only if it is passed.
 		Metadata: reportMeta,
 	}
 
-	query := ReportQuery{Query: reportGraphqlQuery}
-	// Check if analyzerType is passed and add it to the queryInput
-	if analyzerType != "" {
-		queryInput.AnalyzerType = analyzerType
-	}
-	//  Pass queryInput to the query
-	query.Variables.Input = queryInput
-
-	// Marshal request body
-	queryBodyBytes, err := json.Marshal(query)
-	if err != nil {
-		fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to marshal query body")
-		sentry.CaptureException(err)
-		return 1
-	}
-
-	queryResponseBody, err := makeQuery(
-		dsn.Protocol+"://"+dsn.Host+"/graphql/cli/",
-		queryBodyBytes,
-		"application/json",
-		opts.SkipCertificateVerification,
-	)
+	var res *CreateArtifactResponse
+	res, err = client.SendReportNew(&queryInput)
 	if err != nil {
 		// Make Query without message field.
-		query := ReportQuery{Query: reportGraphqlQueryOld}
-		query.Variables.Input = queryInput
-		queryBodyBytes, err := json.Marshal(query)
-		if err != nil {
-			fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to marshal query body")
-			sentry.CaptureException(err)
-			return 1
-		}
-		queryResponseBody, err = makeQuery(
-			dsn.Protocol+"://"+dsn.Host+"/graphql/cli/",
-			queryBodyBytes,
-			"application/json",
-			opts.SkipCertificateVerification,
-		)
+		res, err = client.SendReportOld(&queryInput)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "DeepSource | Error | Reporting failed |", err)
 			sentry.CaptureException(err)
 			return 1
 		}
 	}
-	// Parse query's response body
-	queryResponse := QueryResponse{}
-	err = json.Unmarshal(queryResponseBody, &queryResponse)
-	if err != nil {
-		fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to parse response body")
-		sentry.CaptureException(err)
-		return 1
-	}
 
-	// Check for errors in response body
-	// Response format:
-	// {
-	//   "data": {
-	//     "createArtifact": {
-	//       "ok": false,
-	//       "error": "No repository found attached with the access token: dasdsds"
-	//     }
-	//   }
-	// }
-
-	if !queryResponse.Data.CreateArtifact.Ok {
-		fmt.Fprintln(os.Stderr, "DeepSource | Error | Reporting failed |", queryResponse.Data.CreateArtifact.Error)
-		sentry.CaptureException(errors.New(queryResponse.Data.CreateArtifact.Error))
+	if !res.CreateArtifact.Ok {
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Reporting failed |", res.CreateArtifact.Error)
+		sentry.CaptureException(errors.New(res.CreateArtifact.Error))
 		return 1
 	}
 
 	fmt.Printf("DeepSource | Artifact published successfully\n\n")
-	fmt.Printf("Analyzer  %s\n", analyzerShortcode)
-	fmt.Printf("Key       %s\n", artifactKey)
-	if queryResponse.Data.CreateArtifact.Message != "" {
-		fmt.Printf("Message   %s\n", queryResponse.Data.CreateArtifact.Message)
+	fmt.Printf("Analyzer  %s\n", opts.Analyzer)
+	fmt.Printf("Key       %s\n", opts.Key)
+	if res.CreateArtifact.Message != "" {
+		fmt.Printf("Message   %s\n", res.CreateArtifact.Message)
 	}
 	if warning != "" {
 		fmt.Print(warning)

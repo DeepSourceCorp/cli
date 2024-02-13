@@ -1,5 +1,5 @@
 {
-    "query": "mutation($input: CreateArtifactInput!) {\r\n  createArtifact(input: $input) {\r\n    ok\r\n  message\r\n  error\r\n  }\r\n}",
+    "query": "mutation($input: CreateArtifactInput!) {\n\tcreateArtifact(input: $input) {\n\t\tok\n\t\tmessage\n\t\terror\n\t}\n}",
     "variables": {
         "input": {
             "accessToken": "f59ab9314307",
