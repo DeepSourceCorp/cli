@@ -3,9 +3,9 @@
 </p>
 
 <p align="center">
-  <a href="https://docs.deepsource.com">Documentation</a> |
+  <a href="https://docs.deepsource.com">Docs</a> |
   <a href="https://deepsource.com">Get Started</a> |
-  <a href="https://discuss.deepsource.com/">Community</a>
+  <a href="https://discuss.deepsource.com/">Discuss</a>
 </p>
 
 <p align="center">
