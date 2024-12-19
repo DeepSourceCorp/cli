@@ -32,7 +32,7 @@ brew install deepsourcelabs/cli/deepsource
 ### Binary Installation
 
 ```sh
-curl https://cli.deepsource.com/install | sh
+curl https://deepsource.com/cli | sh
 ```
 This script will detect the operating system and architecture and puts deepsource binary in `./bin/deepsource`.
 
