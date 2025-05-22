@@ -63,7 +63,7 @@ func TestFetchOIDCTokenFromProvider(t *testing.T) {
 	})
 
 	t.Run("non_200_status", func(t *testing.T) {
-		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			w.WriteHeader(http.StatusNotFound)
 		}))
 		defer server.Close()
@@ -79,7 +79,7 @@ func TestFetchOIDCTokenFromProvider(t *testing.T) {
 	})
 
 	t.Run("json_decode_error", func(t *testing.T) {
-		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			w.WriteHeader(http.StatusOK)
 			fmt.Fprint(w, "not a json")
 		}))
@@ -92,7 +92,7 @@ func TestFetchOIDCTokenFromProvider(t *testing.T) {
 	})
 
 	t.Run("empty_token_value", func(t *testing.T) {
-		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			w.WriteHeader(http.StatusOK)
 			json.NewEncoder(w).Encode(struct {
 				Value string `json:"value"`
@@ -155,7 +155,7 @@ func TestExchangeOIDCTokenForTempDSN(t *testing.T) {
 	})
 
 	t.Run("non_200_status", func(t *testing.T) {
-		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			w.WriteHeader(http.StatusForbidden)
 		}))
 		defer server.Close()
@@ -171,7 +171,7 @@ func TestExchangeOIDCTokenForTempDSN(t *testing.T) {
 	})
 
 	t.Run("json_decode_error", func(t *testing.T) {
-		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			w.WriteHeader(http.StatusOK)
 			fmt.Fprint(w, "not a json")
 		}))
@@ -184,7 +184,7 @@ func TestExchangeOIDCTokenForTempDSN(t *testing.T) {
 	})
 
 	t.Run("empty_dsn_value", func(t *testing.T) {
-		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			w.WriteHeader(http.StatusOK)
 			json.NewEncoder(w).Encode(struct {
 				DSN string `json:"access_token"`
@@ -203,6 +203,7 @@ func TestExchangeOIDCTokenForTempDSN(t *testing.T) {
 }
 
 // TestGetDSNFromOIDC tests the GetDSNFromOIDC function
+// skipcq: GO-R1005
 func TestGetDSNFromOIDC(t *testing.T) {
 	// Mock servers for FetchOIDCTokenFromProvider and ExchangeOIDCTokenForTempDSN
 	var mockTokenServerURL, mockDSNServerURL string
@@ -220,14 +221,14 @@ func TestGetDSNFromOIDC(t *testing.T) {
 		t.Cleanup(dsnServer.Close)
 	}
 
-	defaultTokenHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	defaultTokenHandler := http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(struct {
 			Value string `json:"value"`
 		}{Value: testOidcToken})
 	})
 
-	defaultDSNHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	defaultDSNHandler := http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(struct {
 			DSN string `json:"access_token"`
@@ -333,7 +334,7 @@ func TestGetDSNFromOIDC(t *testing.T) {
 	})
 
 	t.Run("error_fetch_oidc_token_fails", func(t *testing.T) {
-		tokenHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		tokenHandler := http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			w.WriteHeader(http.StatusInternalServerError) // Cause FetchOIDCTokenFromProvider to fail
 		})
 		setupServers(tokenHandler, defaultDSNHandler)
@@ -348,7 +349,7 @@ func TestGetDSNFromOIDC(t *testing.T) {
 	})
 
 	t.Run("error_exchange_oidc_token_fails", func(t *testing.T) {
-		dsnHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		dsnHandler := http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			w.WriteHeader(http.StatusInternalServerError) // Cause ExchangeOIDCTokenForTempDSN to fail
 		})
 		setupServers(defaultTokenHandler, dsnHandler)
