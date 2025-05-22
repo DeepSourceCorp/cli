@@ -104,7 +104,7 @@ func TestFetchOIDCTokenFromProvider(t *testing.T) {
 // TestExchangeOIDCTokenForTempDSN tests the ExchangeOIDCTokenForTempDSN function
 func TestExchangeOIDCTokenForTempDSN(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
-		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			w.WriteHeader(http.StatusOK)
 			json.NewEncoder(w).Encode(struct {
 				DSN string `json:"access_token"`
