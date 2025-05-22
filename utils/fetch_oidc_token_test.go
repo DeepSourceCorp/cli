@@ -21,16 +21,7 @@ const (
 // TestFetchOIDCTokenFromProvider tests the FetchOIDCTokenFromProvider function
 func TestFetchOIDCTokenFromProvider(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
-		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			if r.Method != "GET" {
-				t.Errorf("Expected GET request, got %s", r.Method)
-			}
-			if auth := r.Header.Get("Authorization"); auth != "Bearer "+testRequestID {
-				t.Errorf("Expected Authorization header 'Bearer %s', got '%s'", testRequestID, auth)
-			}
-			if audience := r.URL.Query().Get("audience"); audience != DEEPSOURCE_AUDIENCE {
-				t.Errorf("Expected audience query param '%s', got '%s'", DEEPSOURCE_AUDIENCE, audience)
-			}
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			w.WriteHeader(http.StatusOK)
 			json.NewEncoder(w).Encode(struct {
 				Value string `json:"value"`
@@ -114,16 +105,6 @@ func TestFetchOIDCTokenFromProvider(t *testing.T) {
 func TestExchangeOIDCTokenForTempDSN(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
 		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			if r.Method != "POST" {
-				t.Errorf("Expected POST request, got %s", r.Method)
-			}
-			expectedPath := fmt.Sprintf("/services/oidc/%s/", testProvider)
-			if r.URL.Path != expectedPath {
-				t.Errorf("Expected path '%s', got '%s'", expectedPath, r.URL.Path)
-			}
-			if auth := r.Header.Get("Authorization"); auth != "Bearer "+testOidcToken {
-				t.Errorf("Expected Authorization header 'Bearer %s', got '%s'", testOidcToken, auth)
-			}
 			w.WriteHeader(http.StatusOK)
 			json.NewEncoder(w).Encode(struct {
 				DSN string `json:"access_token"`

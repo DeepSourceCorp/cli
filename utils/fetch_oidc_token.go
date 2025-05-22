@@ -117,7 +117,7 @@ func GetDSNFromOIDC(requestId, requestUrl, dsEndpoint, provider string) (string,
 		case "github-actions":
 			requestId, foundIDToken = os.LookupEnv("ACTIONS_ID_TOKEN_REQUEST_TOKEN")
 			requestUrl, foundRequestURL = os.LookupEnv("ACTIONS_ID_TOKEN_REQUEST_URL")
-			if !foundIDToken || !foundRequestURL {
+			if !(foundIDToken && foundRequestURL) {
 				errMsg := `failed to fetch "ACTIONS_ID_TOKEN_REQUEST_TOKEN" and "ACTIONS_ID_TOKEN_REQUEST_URL" from environment variables. Please make sure you are running this in a GitHub Actions environment with the required permissions. Or, use '--oidc-request-token' and '--oidc-request-url' flags to pass the token and request URL`
 				return "", fmt.Errorf("%s", errMsg)
 			}
