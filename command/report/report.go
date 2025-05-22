@@ -25,6 +25,11 @@ type ReportOptions struct {
 	ValueFile                   string
 	SkipCertificateVerification bool
 	DSN                         string
+	UseOIDC                     bool
+	OIDCRequestToken            string // id token to manually get an OIDC token
+	OIDCRequestUrl              string // url to manually get an OIDC token
+	DeepSourceHostEndpoint      string // DeepSource host endpoint where the app is running. Defaults to the cloud endpoint https://app.deepsource.com
+	OIDCProvider                string // OIDC provider to use for authentication
 }
 
 // NewCmdVersion returns the current version of cli being used
@@ -67,6 +72,14 @@ func NewCmdReport() *cobra.Command {
 
 	cmd.Flags().StringVar(&opts.ValueFile, "value-file", "", "path to the artifact value file")
 
+	cmd.Flags().BoolVar(&opts.UseOIDC, "use-oidc", false, "use OIDC to authenticate with DeepSource")
+
+	cmd.Flags().StringVar(&opts.OIDCRequestToken, "oidc-request-token", "", "request ID token to fetch an OIDC token from OIDC provider")
+
+	cmd.Flags().StringVar(&opts.OIDCRequestUrl, "oidc-request-url", "", "OIDC provider's request URL to fetch an OIDC token")
+	cmd.Flags().StringVar(&opts.DeepSourceHostEndpoint, "deepsource-host-endpoint", "https://app.deepsource.com", "DeepSource host endpoint where the app is running. Defaults to the cloud endpoint https://app.deepsource.com")
+	cmd.Flags().StringVar(&opts.OIDCProvider, "oidc-provider", "", "OIDC provider to use for authentication. Supported providers: github-actions")
+
 	// --skip-verify flag to skip SSL certificate verification while reporting test coverage data.
 	cmd.Flags().BoolVar(&opts.SkipCertificateVerification, "skip-verify", false, "skip SSL certificate verification while sending the test coverage data")
 
@@ -80,6 +93,9 @@ func (opts *ReportOptions) sanitize() {
 	opts.Value = strings.TrimSpace(opts.Value)
 	opts.ValueFile = strings.TrimSpace(opts.ValueFile)
 	opts.DSN = strings.TrimSpace(os.Getenv("DEEPSOURCE_DSN"))
+	opts.OIDCRequestToken = strings.TrimSpace(opts.OIDCRequestToken)
+	opts.OIDCRequestUrl = strings.TrimSpace(opts.OIDCRequestUrl)
+	opts.DeepSourceHostEndpoint = strings.TrimSpace(opts.DeepSourceHostEndpoint)
 }
 
 func (opts *ReportOptions) validateKey() error {
@@ -107,6 +123,15 @@ func (opts *ReportOptions) validateKey() error {
 
 func (opts *ReportOptions) Run() int {
 	opts.sanitize()
+	if opts.UseOIDC {
+		dsn, err := utils.GetDSNFromOIDC(opts.OIDCRequestToken, opts.OIDCRequestUrl, opts.DeepSourceHostEndpoint, opts.OIDCProvider)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, "DeepSource | Error | Failed to get DSN using OIDC:", err)
+			return 1
+		}
+		opts.DSN = dsn
+	}
+
 	if opts.DSN == "" {
 		fmt.Fprintln(os.Stderr, "DeepSource | Error | Environment variable DEEPSOURCE_DSN not set (or) is empty. You can find it under the repository settings page")
 		return 1
