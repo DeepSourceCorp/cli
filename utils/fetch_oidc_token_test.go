@@ -288,12 +288,13 @@ func TestGetDSNFromOIDC(t *testing.T) {
 	})
 
 	t.Run("error_unsupported_provider", func(t *testing.T) {
+		t.Setenv("GITHUB_ACTIONS", "false") // Ensure GITHUB_ACTIONS env does not interfere
 		_, err := GetDSNFromOIDC(testRequestID, "url", testDsEndpoint, "unsupported")
 		if err == nil {
 			t.Fatal("Expected error for unsupported provider, got nil")
 		}
 		if !strings.Contains(err.Error(), "provider unsupported is not supported") {
-			t.Errorf("Unexpected error message: %s", err.Error())
+			t.Errorf("Expected error message to contain 'provider unsupported is not supported', got '%s'", err.Error())
 		}
 	})
 
