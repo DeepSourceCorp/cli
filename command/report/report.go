@@ -54,7 +54,7 @@ func NewCmdReport() *cobra.Command {
 		Short: "Report artifacts to DeepSource",
 		Long:  doc,
 		Args:  utils.NoArgs,
-		Run: func(cmd *cobra.Command, args []string) {
+		Run: func(_ *cobra.Command, args []string) {
 			returnCode := opts.Run()
 			sentry.Flush(2 * time.Second)
 			defer os.Exit(returnCode)

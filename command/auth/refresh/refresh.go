@@ -32,7 +32,7 @@ func NewCmdRefresh() *cobra.Command {
 		Short: "Refresh stored authentication credentials",
 		Long:  doc,
 		Args:  utils.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			return opts.Run()
 		},
 	}

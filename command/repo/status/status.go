@@ -40,7 +40,7 @@ func NewCmdRepoStatus() *cobra.Command {
 		Short: "View the activation status for the repository.",
 		Long:  doc,
 		Args:  utils.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			return opts.Run()
 		},
 	}

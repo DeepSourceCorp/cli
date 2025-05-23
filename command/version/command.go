@@ -20,7 +20,7 @@ func NewCmdVersion() *cobra.Command {
 		Use:   "version",
 		Short: "Get the version of the DeepSource CLI",
 		Args:  utils.NoArgs,
-		Run: func(cmd *cobra.Command, args []string) {
+		Run: func(_ *cobra.Command, args []string) {
 			o := Options{}
 			fmt.Println(o.Run())
 		},

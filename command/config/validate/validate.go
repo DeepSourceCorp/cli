@@ -30,7 +30,7 @@ func NewCmdValidate() *cobra.Command {
 		Use:   "validate",
 		Short: "Validate DeepSource config",
 		Args:  utils.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, args []string) error {
 			return o.Run()
 		},
 	}

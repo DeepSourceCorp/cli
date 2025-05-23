@@ -40,7 +40,7 @@ func NewCmdConfigGenerate() *cobra.Command {
 		Short: "Generate config for DeepSource",
 		Long:  doc,
 		Args:  utils.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			return o.Run()
 		},
 	}

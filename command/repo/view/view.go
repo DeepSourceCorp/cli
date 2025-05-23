@@ -43,7 +43,7 @@ func NewCmdRepoView() *cobra.Command {
 		Short: "Open the DeepSource dashboard of a repository",
 		Long:  doc,
 		Args:  utils.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, args []string) error {
 			return opts.Run()
 		},
 	}
