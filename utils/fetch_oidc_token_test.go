@@ -284,7 +284,7 @@ func TestGetDSNFromOIDC(t *testing.T) {
 		t.Setenv("GITHUB_ACTIONS", "true")
 		// ACTIONS_ID_TOKEN_REQUEST_TOKEN is missing
 		t.Setenv("ACTIONS_ID_TOKEN_REQUEST_URL", "url")
-		// make sure this is missing in when running on github actions too
+		// make sure this is missing when running on github actions too
 		os.Unsetenv("ACTIONS_ID_TOKEN_REQUEST_TOKEN")
 		t.Cleanup(func() {
 			os.Unsetenv("GITHUB_ACTIONS")
