@@ -9,6 +9,8 @@ on:
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Required to fetch the OIDC token
 
     steps:
       - name: Set up Go 1.x
