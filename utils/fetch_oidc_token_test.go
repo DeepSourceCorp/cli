@@ -284,6 +284,8 @@ func TestGetDSNFromOIDC(t *testing.T) {
 		t.Setenv("GITHUB_ACTIONS", "true")
 		// ACTIONS_ID_TOKEN_REQUEST_TOKEN is missing
 		t.Setenv("ACTIONS_ID_TOKEN_REQUEST_URL", "url")
+		// make sure this is missing when running on github actions too
+		os.Unsetenv("ACTIONS_ID_TOKEN_REQUEST_TOKEN")
 		t.Cleanup(func() {
 			os.Unsetenv("GITHUB_ACTIONS")
 			os.Unsetenv("ACTIONS_ID_TOKEN_REQUEST_URL")
@@ -300,6 +302,7 @@ func TestGetDSNFromOIDC(t *testing.T) {
 	t.Run("error_github_actions_env_vars_missing_url", func(t *testing.T) {
 		t.Setenv("GITHUB_ACTIONS", "true")
 		t.Setenv("ACTIONS_ID_TOKEN_REQUEST_TOKEN", "token")
+		os.Unsetenv("ACTIONS_ID_TOKEN_REQUEST_URL")
 		// ACTIONS_ID_TOKEN_REQUEST_URL is missing
 		t.Cleanup(func() {
 			os.Unsetenv("GITHUB_ACTIONS")
