@@ -26,7 +26,7 @@ func NewCmdStatus() *cobra.Command {
 		Short: "View the authentication status",
 		Long:  doc,
 		Args:  utils.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			opts := AuthStatusOptions{}
 			return opts.Run()
 		},

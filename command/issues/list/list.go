@@ -72,7 +72,7 @@ func NewCmdIssuesList() *cobra.Command {
 		Use:   "list",
 		Short: "List issues reported by DeepSource",
 		Long:  doc,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, args []string) error {
 			opts.FileArg = args
 			return opts.Run()
 		},
