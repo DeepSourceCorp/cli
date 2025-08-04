@@ -128,6 +128,15 @@ func TestValidateConfig(t *testing.T) {
             enabled = "falsee"`,
 			valid: false,
 		},
+		"config with syntax error": {
+			inputConfig: `
+            version = 1
+
+            [[analyzers]]
+            name = "python"
+            enabled = falsee`,
+			valid: false,
+		},
 	}
 
 	for testName, tc := range tests {
