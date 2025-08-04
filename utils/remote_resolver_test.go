@@ -27,6 +27,12 @@ func TestResolveRemote(t *testing.T) {
 			wantErr: false,
 		},
 		{
+			name:    "valid github enterprise remote URL (short form)",
+			repoArg: "ghe/deepsourcelabs/cli",
+			want:    &RemoteData{Owner: "deepsourcelabs", RepoName: "cli", VCSProvider: "GITHUB_ENTERPRISE"},
+			wantErr: false,
+		},
+		{
 			name:    "valid gitlab remote URL",
 			repoArg: "gitlab.com/deepsourcelabs/cli",
 			want:    &RemoteData{Owner: "deepsourcelabs", RepoName: "cli", VCSProvider: "GITLAB"},
@@ -48,6 +54,18 @@ func TestResolveRemote(t *testing.T) {
 			name:    "valid bitbucket remote URL (short form)",
 			repoArg: "bb/deepsourcelabs/cli",
 			want:    &RemoteData{Owner: "deepsourcelabs", RepoName: "cli", VCSProvider: "BITBUCKET"},
+			wantErr: false,
+		},
+		{
+			name:    "valid bitbucket datacenter remote URL (short form)",
+			repoArg: "bbdc/deepsourcelabs/cli",
+			want:    &RemoteData{Owner: "deepsourcelabs", RepoName: "cli", VCSProvider: "BITBUCKET_DATACENTER"},
+			wantErr: false,
+		},
+		{
+			name:    "valid Azure Devops remote URL (short form)",
+			repoArg: "ads/deepsourcelabs/cli",
+			want:    &RemoteData{Owner: "deepsourcelabs", RepoName: "cli", VCSProvider: "ADS"},
 			wantErr: false,
 		},
 		{
