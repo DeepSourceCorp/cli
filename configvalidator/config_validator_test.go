@@ -1,7 +1,6 @@
 package configvalidator
 
 import (
-	"reflect"
 	"testing"
 
 	"github.com/deepsourcelabs/cli/utils"
@@ -132,9 +131,9 @@ func TestValidateConfig(t *testing.T) {
 			inputConfig: `
             version = 1
 
-            [[analyzers]]
+            [[analyzers]
             name = "python"
-            enabled = falsee`,
+            enabled = false`,
 			valid: false,
 		},
 	}
@@ -143,7 +142,7 @@ func TestValidateConfig(t *testing.T) {
 		t.Run(testName, func(t *testing.T) {
 			c := &ConfigValidator{}
 			c.ValidateConfig([]byte(tc.inputConfig))
-			if !reflect.DeepEqual(tc.valid, c.Result.Valid) {
+			if tc.valid != c.Result.Valid {
 				t.Errorf("%s: expected: %v, got: %v. Error: %v", testName, tc.valid, c.Result.Valid, c.Result.Errors)
 			}
 		})

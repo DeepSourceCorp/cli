@@ -46,7 +46,8 @@ func (c *ConfigValidator) ValidateConfig(inputConfig []byte) Result {
 	err = viper.UnmarshalExact(&config)
 	if err != nil {
 		// Check if the error is due to invalid enabled field types
-		if strings.Contains(err.Error(), "enabled") {
+		// match `` * cannot parse 'analyzers[0].enabled' as bool: strconv.ParseBool: parsing "falsee": invalid syntax`
+		if strings.Contains(err.Error(), "strconv.ParseBool") {
 			c.Result.Valid = false
 			c.Result.Errors = append(c.Result.Errors, "The `enabled` property should be of boolean type (true/false)")
 			return c.Result
