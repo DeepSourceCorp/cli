@@ -2,15 +2,12 @@ version = 1
 
 [[analyzers]]
 name = "go"
-enabled = true
 
   [analyzers.meta]
   import_path = "github.com/deepsourcelabs/cli"
 
 [[analyzers]]
 name = "secrets"
-enabled = true
 
 [[analyzers]]
 name = "test-coverage"
-enabled = true

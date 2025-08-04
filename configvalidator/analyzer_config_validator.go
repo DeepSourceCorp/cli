@@ -24,15 +24,14 @@ func (c *ConfigValidator) validateAnalyzersConfig() {
 		c.pushError(fmt.Sprintf("Value of `analyzers` should be an array. Found: %v", analyzersType))
 	}
 
-	// Enabled must be boolean. And atleast one analyzer must be enabled among all mentioned in config
+	// Count enabled analyzers (missing enabled field defaults to true)
 	countEnabled := 0
 	for _, analyzer := range c.Config.Analyzers {
-		enabledType := reflect.TypeOf(analyzer.Enabled).Kind().String()
-		if enabledType != "bool" {
-			c.pushError(fmt.Sprintf("The `enabled` property should be of boolean type. Found: %v", enabledType))
-		}
+		// If enabled is not set (nil), consider it as enabled (true)
+		// If enabled is set, use its value
+		isEnabled := analyzer.Enabled == nil || *analyzer.Enabled
 
-		if analyzer.Enabled {
+		if isEnabled {
 			countEnabled++
 		}
 	}
@@ -47,7 +46,8 @@ func (c *ConfigValidator) validateAnalyzersConfig() {
 			if analyzer.Name == supportedAnalyzer {
 				// Copy the meta of activated analyzer for usage in
 				// analyzer meta validation
-				if analyzer.Enabled {
+				isEnabled := analyzer.Enabled == nil || *analyzer.Enabled
+				if isEnabled {
 					activatedAnalyzers[analyzer.Name] = analyzer.Meta
 				}
 				supported = true

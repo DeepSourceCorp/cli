@@ -107,7 +107,29 @@ func TestValidateConfig(t *testing.T) {
             enabled = true`,
 			valid: false,
 		},
+		"valid config with enabled not set (defaults to true)": {
+			inputConfig: `
+            version = 1
+
+            [[analyzers]]
+            name = "python"
+
+            [[transformers]]
+            name = "black"`,
+			valid: true,
+		},
+
+		"invalid config with enabled = \"falsee\" (non-boolean)": {
+			inputConfig: `
+            version = 1
+
+            [[analyzers]]
+            name = "python"
+            enabled = "falsee"`,
+			valid: false,
+		},
 	}
+
 	for testName, tc := range tests {
 		t.Run(testName, func(t *testing.T) {
 			c := &ConfigValidator{}

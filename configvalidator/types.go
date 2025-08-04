@@ -4,7 +4,7 @@ package configvalidator
 type Analyzer struct {
 	Name                string      `mapstructure:"name,omitempty" json:"name,omitempty"`
 	RuntimeVersion      string      `mapstructure:"runtime_version,omitempty" json:"runtime_version,omitempty"`
-	Enabled             bool        `mapstructure:"enabled,omitempty" json:"enabled"`
+	Enabled             *bool       `mapstructure:"enabled,omitempty" json:"enabled,omitempty"`
 	DependencyFilePaths []string    `mapstructure:"dependency_file_paths,omitempty" json:"dependency_file_paths,omitempty"`
 	Meta                interface{} `mapstructure:"meta,omitempty" json:"meta,omitempty"`
 	Thresholds          interface{} `mapstructure:"thresholds,omitempty" json:"thresholds,omitempty"`
@@ -12,7 +12,7 @@ type Analyzer struct {
 
 type Transformer struct {
 	Name    string `mapstructure:"name,omitempty" json:"name,omitempty"`
-	Enabled bool   `mapstructure:"enabled,omitempty" json:"enabled,omitempty"`
+	Enabled *bool  `mapstructure:"enabled,omitempty" json:"enabled,omitempty"`
 }
 
 type DSConfig struct {
