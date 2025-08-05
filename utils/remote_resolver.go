@@ -79,12 +79,16 @@ func RepoArgumentResolver(arg string) ([]string, error) {
 	switch argComponents[0] {
 	case "gh", "github.com":
 		argComponents[0] = "GITHUB"
-
+	case "ghe":
+		argComponents[0] = "GITHUB_ENTERPRISE"
 	case "gl", "gitlab.com":
 		argComponents[0] = "GITLAB"
-
 	case "bb", "bitbucket.com":
 		argComponents[0] = "BITBUCKET"
+	case "bbdc":
+		argComponents[0] = "BITBUCKET_DATACENTER"
+	case "ads":
+		argComponents[0] = "ADS"
 	default:
 		return argComponents, fmt.Errorf("VCSProvider `%s` not supported", argComponents[0])
 	}

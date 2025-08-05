@@ -15,9 +15,12 @@ import (
 )
 
 var VCSMap = map[string]string{
-	"GITHUB":    "gh",
-	"GITLAB":    "gl",
-	"BITBUCKET": "bb",
+	"GITHUB":               "gh",
+	"GITHUB_ENTERPRISE":    "ghe",
+	"GITLAB":               "gl",
+	"BITBUCKET":            "bb",
+	"BITBUCKET_DATACENTER": "bbdc",
+	"ADS":                  "ads",
 }
 
 type RepoViewOptions struct {
