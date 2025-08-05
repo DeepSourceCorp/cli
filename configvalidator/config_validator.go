@@ -2,6 +2,8 @@ package configvalidator
 
 import (
 	"bytes"
+	"fmt"
+	"strings"
 
 	"github.com/spf13/viper"
 )
@@ -41,7 +43,20 @@ func (c *ConfigValidator) ValidateConfig(inputConfig []byte) Result {
 		return c.Result
 	}
 	// Unmarshaling the configdata into DSConfig struct
-	viper.UnmarshalExact(&config)
+	err = viper.UnmarshalExact(&config)
+	if err != nil {
+		// Check if the error is due to invalid enabled field types
+		// match `` * cannot parse 'analyzers[0].enabled' as bool: strconv.ParseBool: parsing "falsee": invalid syntax`
+		if strings.Contains(err.Error(), "strconv.ParseBool") {
+			c.Result.Valid = false
+			c.Result.Errors = append(c.Result.Errors, "The `enabled` property should be of boolean type (true/false)")
+			return c.Result
+		}
+		// Other unmarshaling errors
+		c.Result.Valid = false
+		c.Result.Errors = append(c.Result.Errors, fmt.Sprintf("Error while parsing config: %v", err))
+		return c.Result
+	}
 	c.Config = config
 
 	// Validate generic config which applies to all analyzers and transformers

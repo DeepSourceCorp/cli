@@ -21,13 +21,8 @@ func (c *ConfigValidator) validateTransformersConfig() {
 		c.pushError(fmt.Sprintf("Value of `transformers` should be an array. Found: %v", transformersType))
 	}
 
-	// Enabled property should be of boolean type
-	for _, transformer := range c.Config.Transformers {
-		enabledType := reflect.TypeOf(transformer.Enabled).Kind().String()
-		if enabledType != "bool" {
-			c.pushError(fmt.Sprintf("The `enabled` property should be of boolean type. Found: %v", enabledType))
-		}
-	}
+	// Enabled property validation is handled in the main config validator
+	// (transformers with invalid enabled types will cause unmarshaling errors)
 
 	// ==== Transformer shortcode validation ====
 	supported := false
