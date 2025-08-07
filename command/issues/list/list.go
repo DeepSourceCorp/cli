@@ -213,10 +213,12 @@ func (opts *IssuesListOptions) showIssues() {
 		beginLine := issue.Location.Position.BeginLine
 		issueLocation := fmt.Sprintf("%s:%d", filePath, beginLine)
 		analyzerShortcode := issue.Analyzer.Shortcode
+		issueCategory := issue.IssueCategory
+		issueSeverity := issue.IssueSeverity
 		issueCode := issue.IssueCode
 		issueTitle := issue.IssueText
 
-		opts.ptermTable[index] = []string{issueLocation, analyzerShortcode, issueCode, issueTitle}
+		opts.ptermTable[index] = []string{issueLocation, analyzerShortcode, issueCode, issueTitle, issueCategory, issueSeverity}
 	}
 	// Using pterm to render the list of list
 	pterm.DefaultTable.WithSeparator("\t").WithData(opts.ptermTable).Render()

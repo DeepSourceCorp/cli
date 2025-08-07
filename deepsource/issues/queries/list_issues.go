@@ -29,6 +29,7 @@ const fetchAllIssuesQuery = `query GetAllIssues(
                   title
                   shortcode
                   category
+                  severity
                   isRecommended
                   analyzer {
                     name
@@ -70,6 +71,7 @@ type IssuesListResponse struct {
 									Title         string `json:"title"`
 									Shortcode     string `json:"shortcode"`
 									Category      string `json:"category"`
+									Severity      string `json:"severity"`
 									IsRecommended bool   `json:"isRecommended"`
 									Analyzer      struct {
 										Name      string `json:"name"`
@@ -105,16 +107,17 @@ func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.
 	}
 
 	issuesData := []issues.Issue{}
-	issueData := issues.Issue{}
 	for _, edge := range respData.Repository.Issues.Edges {
 		if len(edge.Node.Occurrences.Edges) == 0 {
 			continue
 		}
 
 		for _, occurenceEdge := range edge.Node.Occurrences.Edges {
-			issueData = issues.Issue{
-				IssueText: occurenceEdge.Node.Issue.Title,
-				IssueCode: occurenceEdge.Node.Issue.Shortcode,
+			issueData := issues.Issue{
+				IssueText:     occurenceEdge.Node.Issue.Title,
+				IssueCode:     occurenceEdge.Node.Issue.Shortcode,
+				IssueCategory: occurenceEdge.Node.Issue.Category,
+				IssueSeverity: occurenceEdge.Node.Issue.Severity,
 				Location: issues.Location{
 					Path: occurenceEdge.Node.Path,
 					Position: issues.Position{
