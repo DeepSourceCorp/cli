@@ -8,6 +8,8 @@ import (
 
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 	"github.com/owenrumney/go-sarif/v2/sarif"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 type ExportData struct {
@@ -164,10 +166,11 @@ func convertSARIF(issueData []issues.Issue) *sarif.Report {
 	count := 0
 
 	// Adding the tools data to the SARIF report corresponding to the number of analyzers activated
+	caser := cases.Title(language.English)
 	for _, issue := range issueData {
 		if !shortcodes[issue.Analyzer.Shortcode].exists {
-			driverName := "DeepSource " + strings.Title(issue.Analyzer.Shortcode) + " Analyzer"
-			informationURI := "https://deepsource.io/directory/analyzers/" + string(issue.Analyzer.Shortcode)
+			driverName := "DeepSource " + caser.String(issue.Analyzer.Shortcode) + " Analyzer"
+			informationURI := "https://deepsource.com/directory/" + string(issue.Analyzer.Shortcode)
 
 			tool := sarif.Tool{
 				Driver: &sarif.ToolComponent{
@@ -206,7 +209,7 @@ func convertSARIF(issueData []issues.Issue) *sarif.Report {
 			pb.Add("category", "")
 			pb.Add("recommended", "")
 
-			helpURI := "https://deepsource.io/directory/analyzers/" + string(issue.Analyzer.Shortcode) + "/issues/" + string(issue.IssueCode)
+			helpURI := "https://deepsource.com/directory/" + string(issue.Analyzer.Shortcode) + "/issues/" + string(issue.IssueCode)
 
 			// add rule
 			runs[idx].AddRule(issue.IssueCode).WithName(issue.IssueText).WithFullDescription(&fullDescription).WithHelpURI(helpURI).WithProperties(pb.Properties)

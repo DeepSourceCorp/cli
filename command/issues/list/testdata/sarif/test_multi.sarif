@@ -1,11 +1,11 @@
 {
   "version": "2.1.0",
-  "$schema": "https://json.schemastore.org/sarif-2.1.0-rtm.5.json",
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/main/sarif-2.1/schema/sarif-schema-2.1.0.json",
   "runs": [
     {
       "tool": {
         "driver": {
-          "informationUri": "https://deepsource.io/directory/analyzers/go",
+          "informationUri": "https://deepsource.com/directory/analyzers/go",
           "name": "DeepSource Go Analyzer",
           "rules": [
             {
@@ -15,7 +15,7 @@
               "fullDescription": {
                 "text": ""
               },
-              "helpUri": "https://deepsource.io/directory/analyzers/go/issues/RVV-B0013",
+              "helpUri": "https://deepsource.com/directory/analyzers/go/issues/RVV-B0013",
               "properties": {
                 "category": "",
                 "recommended": ""
@@ -74,7 +74,7 @@
     {
       "tool": {
         "driver": {
-          "informationUri": "https://deepsource.io/directory/analyzers/docker",
+          "informationUri": "https://deepsource.com/directory/analyzers/docker",
           "name": "DeepSource Docker Analyzer",
           "rules": [
             {
@@ -84,7 +84,7 @@
               "fullDescription": {
                 "text": ""
               },
-              "helpUri": "https://deepsource.io/directory/analyzers/docker/issues/DOK-DL3025",
+              "helpUri": "https://deepsource.com/directory/analyzers/docker/issues/DOK-DL3025",
               "properties": {
                 "category": "",
                 "recommended": ""
@@ -121,7 +121,7 @@
     {
       "tool": {
         "driver": {
-          "informationUri": "https://deepsource.io/directory/analyzers/python",
+          "informationUri": "https://deepsource.com/directory/analyzers/python",
           "name": "DeepSource Python Analyzer",
           "rules": [
             {
@@ -131,7 +131,7 @@
               "fullDescription": {
                 "text": ""
               },
-              "helpUri": "https://deepsource.io/directory/analyzers/python/issues/PY-W2000",
+              "helpUri": "https://deepsource.com/directory/analyzers/python/issues/PY-W2000",
               "properties": {
                 "category": "",
                 "recommended": ""

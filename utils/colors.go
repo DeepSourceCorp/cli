@@ -2,12 +2,12 @@ package utils
 
 import "github.com/fatih/color"
 
-func Yellow(format string, a ...interface{}) string {
+func Yellow(text string) string {
 	c := color.New(color.FgYellow, color.Bold)
-	return c.Sprintf(format, a...)
+	return c.Sprint(text)
 }
 
-func Cyan(format string, a ...interface{}) string {
+func Cyan(text string) string {
 	c := color.New(color.FgCyan, color.Bold)
-	return c.Sprintf(format, a...)
+	return c.Sprint(text)
 }

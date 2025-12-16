@@ -1,5 +1,5 @@
 PACKAGE_NAME          := github.com/deepsourcelabs/cli
-GOLANG_CROSS_VERSION  ?= v1.21.6
+GOLANG_CROSS_VERSION  ?= v1.25.3
 
 SYSROOT_DIR     ?= sysroots
 SYSROOT_ARCHIVE ?= sysroots.tar.bz2

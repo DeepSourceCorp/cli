@@ -51,7 +51,7 @@ Usage:
     deepsource <command> [<arguments>]
 
 Available commands are:
-    report      Report an artifact to an analyzer
+    auth        Authenticate with DeepSource
     config      Generate and Validate DeepSource config
     help        Help about any command
     issues      Show the list of issues in a file in a repository

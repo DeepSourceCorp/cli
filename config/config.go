@@ -19,6 +19,7 @@ const (
 	ConfigFileName  = "/config.toml"
 	DefaultHostName = "deepsource.io"
 )
+const configDirPermissions os.FileMode = 0700
 
 type CLIConfig struct {
 	Host           string    `toml:"host"`
@@ -111,7 +112,7 @@ func (cfg *CLIConfig) WriteFile() error {
 		return err
 	}
 
-	if err := os.MkdirAll(configDir, os.ModePerm); err != nil {
+	if err := os.MkdirAll(configDir, configDirPermissions); err != nil {
 		return err
 	}
 
@@ -120,16 +121,9 @@ func (cfg *CLIConfig) WriteFile() error {
 		return err
 	}
 
-	// Create file
-	file, err := os.Create(path)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	_, err = file.Write(data)
-
-	return err
+	// Write file with restricted permissions
+	const configFilePermissions os.FileMode = 0600
+	return os.WriteFile(path, data, configFilePermissions)
 }
 
 // Deletes the config during logging out user
