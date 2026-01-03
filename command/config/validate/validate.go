@@ -132,7 +132,7 @@ func extractDSConfigPath() (string, error) {
 			return "", errors.New("Error occured while looking for DeepSource config file. Exiting...")
 		} else {
 			// If found, use this as configpath
-			configPath = filepath.Join(path, "/.deepsource.toml")
+			configPath = filepath.Join(path, ".deepsource.toml")
 		}
 	}
 	return configPath, nil

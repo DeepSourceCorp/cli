@@ -5,7 +5,7 @@
     {
       "tool": {
         "driver": {
-          "informationUri": "https://deepsource.com/directory/analyzers/go",
+          "informationUri": "https://deepsource.com/directory/go",
           "name": "DeepSource Go Analyzer",
           "rules": [
             {
@@ -15,7 +15,7 @@
               "fullDescription": {
                 "text": ""
               },
-              "helpUri": "https://deepsource.com/directory/analyzers/go/issues/RVV-B0013",
+              "helpUri": "https://deepsource.com/directory/go/issues/RVV-B0013",
               "properties": {
                 "category": "",
                 "recommended": ""

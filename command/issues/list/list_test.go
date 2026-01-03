@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	"github.com/deepsourcelabs/cli/deepsource/issues"
+	"github.com/google/go-cmp/cmp"
 )
 
 // Helper function to read issues from a file.
@@ -98,7 +99,7 @@ func TestListSARIF(t *testing.T) {
 		_ = os.Remove("./testdata/exported.sarif")
 
 		if !reflect.DeepEqual(got, want) {
-			t.Errorf("got: %v; want: %v\n", got, want)
+			t.Errorf("diff: %s\n", cmp.Diff(got, want))
 		}
 	})
 
@@ -121,7 +122,7 @@ func TestListSARIF(t *testing.T) {
 		_ = os.Remove("./testdata/exported_multi.sarif")
 
 		if !reflect.DeepEqual(got, want) {
-			t.Errorf("got: %v; want: %v\n", got, want)
+			t.Errorf("diff: %s\n", cmp.Diff(got, want))
 		}
 	})
 }
