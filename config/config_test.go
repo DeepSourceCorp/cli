@@ -67,3 +67,8 @@ func TestVerifyAuthentication(t *testing.T) {
 		assert.NotNil(t, err)
 	})
 }
+
+func TestConfigWriteFile(t *testing.T) {
+	err := cfg.WriteFile()
+	assert.Nil(t, err)
+}
