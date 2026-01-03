@@ -10,8 +10,11 @@ import (
 )
 
 var (
-	configDirFn = os.UserHomeDir
-	readFileFn  = os.ReadFile
+	configDirFn   = os.UserHomeDir
+	readFileFn    = os.ReadFile
+	tomlMarshalFn = toml.Marshal
+	osMkdirAllFn  = os.MkdirAll
+	osWriteFileFn = os.WriteFile
 )
 
 const (
@@ -102,7 +105,7 @@ func GetConfig() (*CLIConfig, error) {
 
 // WriteFile writes the CLI config to file.
 func (cfg *CLIConfig) WriteFile() error {
-	data, err := toml.Marshal(cfg)
+	data, err := tomlMarshalFn(cfg)
 	if err != nil {
 		return err
 	}
@@ -112,7 +115,7 @@ func (cfg *CLIConfig) WriteFile() error {
 		return err
 	}
 
-	if err := os.MkdirAll(configDir, configDirPermissions); err != nil {
+	if err := osMkdirAllFn(configDir, configDirPermissions); err != nil {
 		return err
 	}
 
@@ -123,7 +126,7 @@ func (cfg *CLIConfig) WriteFile() error {
 
 	// Write file with restricted permissions
 	const configFilePermissions os.FileMode = 0600
-	return os.WriteFile(path, data, configFilePermissions)
+	return osWriteFileFn(path, data, configFilePermissions)
 }
 
 // Deletes the config during logging out user

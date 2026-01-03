@@ -1,6 +1,7 @@
 package config
 
 import (
+	"os"
 	"testing"
 	"time"
 
@@ -69,6 +70,118 @@ func TestVerifyAuthentication(t *testing.T) {
 }
 
 func TestConfigWriteFile(t *testing.T) {
-	err := cfg.WriteFile()
-	assert.Nil(t, err)
+	t.Run("successful write", func(t *testing.T) {
+		testCfg := CLIConfig{
+			Host:  "deepsource.io",
+			User:  "test",
+			Token: "test_token",
+		}
+		err := testCfg.WriteFile()
+		assert.Nil(t, err)
+	})
+
+	t.Run("error when tomlMarshal fails", func(t *testing.T) {
+		// Save original function
+		originalTomlMarshalFn := tomlMarshalFn
+		defer func() { tomlMarshalFn = originalTomlMarshalFn }()
+
+		// Mock tomlMarshalFn to return an error
+		tomlMarshalFn = func(v interface{}) ([]byte, error) {
+			return nil, assert.AnError
+		}
+
+		testCfg := CLIConfig{
+			Host:  "deepsource.io",
+			User:  "test",
+			Token: "test_token",
+		}
+		err := testCfg.WriteFile()
+		assert.NotNil(t, err)
+		assert.Equal(t, assert.AnError, err)
+	})
+
+	t.Run("error when configDir fails", func(t *testing.T) {
+		// Save original function
+		originalConfigDirFn := configDirFn
+		defer func() { configDirFn = originalConfigDirFn }()
+
+		// Mock configDirFn to return an error
+		configDirFn = func() (string, error) {
+			return "", assert.AnError
+		}
+
+		testCfg := CLIConfig{
+			Host:  "deepsource.io",
+			User:  "test",
+			Token: "test_token",
+		}
+		err := testCfg.WriteFile()
+		assert.NotNil(t, err)
+		assert.Equal(t, assert.AnError, err)
+	})
+
+	t.Run("error when MkdirAll fails", func(t *testing.T) {
+		// Save original functions
+		originalOsMkdirAllFn := osMkdirAllFn
+		defer func() { osMkdirAllFn = originalOsMkdirAllFn }()
+
+		// Mock osMkdirAllFn to return an error
+		osMkdirAllFn = func(path string, perm os.FileMode) error {
+			return assert.AnError
+		}
+
+		testCfg := CLIConfig{
+			Host:  "deepsource.io",
+			User:  "test",
+			Token: "test_token",
+		}
+		err := testCfg.WriteFile()
+		assert.NotNil(t, err)
+		assert.Equal(t, assert.AnError, err)
+	})
+
+	t.Run("error when configPath fails after MkdirAll", func(t *testing.T) {
+		// Save original function
+		originalConfigDirFn := configDirFn
+		defer func() { configDirFn = originalConfigDirFn }()
+
+		// Mock configDirFn to succeed first time (for configDir) but fail second time (for configPath)
+		callCount := 0
+		configDirFn = func() (string, error) {
+			callCount++
+			if callCount == 1 {
+				return t.TempDir(), nil
+			}
+			return "", assert.AnError
+		}
+
+		testCfg := CLIConfig{
+			Host:  "deepsource.io",
+			User:  "test",
+			Token: "test_token",
+		}
+		err := testCfg.WriteFile()
+		assert.NotNil(t, err)
+		assert.Equal(t, assert.AnError, err)
+	})
+
+	t.Run("error when WriteFile fails", func(t *testing.T) {
+		// Save original function
+		originalOsWriteFileFn := osWriteFileFn
+		defer func() { osWriteFileFn = originalOsWriteFileFn }()
+
+		// Mock osWriteFileFn to return an error
+		osWriteFileFn = func(name string, data []byte, perm os.FileMode) error {
+			return assert.AnError
+		}
+
+		testCfg := CLIConfig{
+			Host:  "deepsource.io",
+			User:  "test",
+			Token: "test_token",
+		}
+		err := testCfg.WriteFile()
+		assert.NotNil(t, err)
+		assert.Equal(t, assert.AnError, err)
+	})
 }
