@@ -21,7 +21,11 @@ func TestMain(m *testing.M) {
 	srv.Close()
 	os.Exit(code)
 }
-
+const (
+	mockServerAddress        = "localhost:8081"
+	serverReadyMaxRetries    = 200
+	serverReadyRetryInterval = 10 * time.Millisecond
+)
 func startMockAPIServer() {
 	// Start GraphQL server for test
 	srv = &http.Server{
@@ -38,13 +42,13 @@ func startMockAPIServer() {
 	}()
 
 	// Wait for server to be ready
-	for i := 0; i < 200; i++ {
-		conn, err := net.Dial("tcp", "localhost:8081")
+	for i := 0; i < serverReadyMaxRetries; i++ {
+		conn, err := net.Dial("tcp", mockServerAddress)
 		if err == nil {
 			conn.Close()
 			return
 		}
-		time.Sleep(10 * time.Millisecond)
+		time.Sleep(serverReadyRetryInterval)
 	}
 	panic("mock server failed to start within timeout")
 }

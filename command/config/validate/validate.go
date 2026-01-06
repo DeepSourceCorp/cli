@@ -61,7 +61,7 @@ func (o *Options) Run() error {
 	// Read the config in the form of string and send it
 	content, err := os.ReadFile(configPath)
 	if err != nil {
-		return fmt.Errorf("error occured while reading DeepSource config file %s: %w", configPath, err)
+		return fmt.Errorf("error occurred while reading DeepSource config file %s: %w", configPath, err)
 	}
 
 	// Fetch the client

@@ -88,8 +88,14 @@ func TestListSARIF(t *testing.T) {
 		opts.exportSARIF("./testdata/exported.sarif")
 
 		// read exported and test SARIF files
-		exported, _ := os.ReadFile("./testdata/exported.sarif")
-		test, _ := os.ReadFile("./testdata/sarif/test.sarif")
+		exported, err := os.ReadFile("./testdata/exported.sarif")
+		if err != nil {
+			t.Fatal(err)
+		}
+		test, err := os.ReadFile("./testdata/sarif/test.sarif")
+		if err != nil {
+			t.Fatal(err)
+		}
 
 		// trim carriage returns
 		got := strings.TrimSuffix(string(exported), "\n")
@@ -111,8 +117,14 @@ func TestListSARIF(t *testing.T) {
 		opts.exportSARIF("./testdata/exported_multi.sarif")
 
 		// read exported and test SARIF files
-		exported, _ := os.ReadFile("./testdata/exported_multi.sarif")
-		test, _ := os.ReadFile("./testdata/sarif/test_multi.sarif")
+		exported, err := os.ReadFile("./testdata/exported_multi.sarif")
+		if err != nil {
+			t.Fatal(err)
+		}
+		test, err := os.ReadFile("./testdata/sarif/test_multi.sarif")
+		if err != nil {
+			t.Fatal(err)
+		}
 
 		// trim carriage returns
 		got := strings.TrimSuffix(string(exported), "\n")

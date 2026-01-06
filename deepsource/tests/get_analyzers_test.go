@@ -74,6 +74,7 @@ func mockAnalyzer(w http.ResponseWriter, r *http.Request) {
 	errorResponseBodyData, err := os.ReadFile("./testdata/analyzer/error_response_body.json")
 	if err != nil {
 		log.Println(err)
+		http.Error(w, "Failed to read test data", http.StatusInternalServerError)
 		return
 	}
 
