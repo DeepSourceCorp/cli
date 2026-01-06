@@ -2,11 +2,14 @@ package config
 
 import (
 	"os"
+	"sync"
 	"testing"
 	"time"
 
 	"github.com/stretchr/testify/assert"
 )
+
+var mockMu sync.Mutex
 
 var cfg = CLIConfig{
 	Host:           "deepsource.io",
@@ -82,13 +85,18 @@ func TestConfigWriteFile(t *testing.T) {
 
 	t.Run("error when tomlMarshal fails", func(t *testing.T) {
 		// Save original function
+		mockMu.Lock()
 		originalTomlMarshalFn := tomlMarshalFn
-		defer func() { tomlMarshalFn = originalTomlMarshalFn }()
-
-		// Mock tomlMarshalFn to return an error
-		tomlMarshalFn = func(v interface{}) ([]byte, error) {
+		tomlMarshalFn = func(_ interface{}) ([]byte, error) {
 			return nil, assert.AnError
 		}
+		mockMu.Unlock()
+
+		defer func() {
+			mockMu.Lock()
+			tomlMarshalFn = originalTomlMarshalFn
+			mockMu.Unlock()
+		}()
 
 		testCfg := CLIConfig{
 			Host:  "deepsource.io",
@@ -102,13 +110,18 @@ func TestConfigWriteFile(t *testing.T) {
 
 	t.Run("error when configDir fails", func(t *testing.T) {
 		// Save original function
+		mockMu.Lock()
 		originalConfigDirFn := configDirFn
-		defer func() { configDirFn = originalConfigDirFn }()
-
-		// Mock configDirFn to return an error
 		configDirFn = func() (string, error) {
 			return "", assert.AnError
 		}
+		mockMu.Unlock()
+
+		defer func() {
+			mockMu.Lock()
+			configDirFn = originalConfigDirFn
+			mockMu.Unlock()
+		}()
 
 		testCfg := CLIConfig{
 			Host:  "deepsource.io",
@@ -122,13 +135,18 @@ func TestConfigWriteFile(t *testing.T) {
 
 	t.Run("error when MkdirAll fails", func(t *testing.T) {
 		// Save original functions
+		mockMu.Lock()
 		originalOsMkdirAllFn := osMkdirAllFn
-		defer func() { osMkdirAllFn = originalOsMkdirAllFn }()
-
-		// Mock osMkdirAllFn to return an error
-		osMkdirAllFn = func(path string, perm os.FileMode) error {
+		osMkdirAllFn = func(_ string, _ os.FileMode) error {
 			return assert.AnError
 		}
+		mockMu.Unlock()
+
+		defer func() {
+			mockMu.Lock()
+			osMkdirAllFn = originalOsMkdirAllFn
+			mockMu.Unlock()
+		}()
 
 		testCfg := CLIConfig{
 			Host:  "deepsource.io",
@@ -142,9 +160,8 @@ func TestConfigWriteFile(t *testing.T) {
 
 	t.Run("error when configPath fails after MkdirAll", func(t *testing.T) {
 		// Save original function
+		mockMu.Lock()
 		originalConfigDirFn := configDirFn
-		defer func() { configDirFn = originalConfigDirFn }()
-
 		// Mock configDirFn to succeed first time (for configDir) but fail second time (for configPath)
 		callCount := 0
 		configDirFn = func() (string, error) {
@@ -154,6 +171,13 @@ func TestConfigWriteFile(t *testing.T) {
 			}
 			return "", assert.AnError
 		}
+		mockMu.Unlock()
+
+		defer func() {
+			mockMu.Lock()
+			configDirFn = originalConfigDirFn
+			mockMu.Unlock()
+		}()
 
 		testCfg := CLIConfig{
 			Host:  "deepsource.io",
@@ -166,14 +190,18 @@ func TestConfigWriteFile(t *testing.T) {
 	})
 
 	t.Run("error when WriteFile fails", func(t *testing.T) {
-		// Save original function
+		mockMu.Lock()
 		originalOsWriteFileFn := osWriteFileFn
-		defer func() { osWriteFileFn = originalOsWriteFileFn }()
-
-		// Mock osWriteFileFn to return an error
-		osWriteFileFn = func(name string, data []byte, perm os.FileMode) error {
+		osWriteFileFn = func(_ string, _ []byte, _ os.FileMode) error {
 			return assert.AnError
 		}
+		mockMu.Unlock()
+
+		defer func() {
+			mockMu.Lock()
+			osWriteFileFn = originalOsWriteFileFn
+			mockMu.Unlock()
+		}()
 
 		testCfg := CLIConfig{
 			Host:  "deepsource.io",
