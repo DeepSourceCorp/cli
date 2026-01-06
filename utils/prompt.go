@@ -7,6 +7,9 @@ import (
 	"github.com/AlecAivazis/survey/v2/terminal"
 )
 
+// Function variable for testing - allows mocking survey.AskOne
+var surveyAskOne = survey.AskOne
+
 // ==========
 // Useful APIs of survey library
 // ==========
@@ -21,7 +24,7 @@ func ConfirmFromUser(msg, helpText string) (bool, error) {
 		Help:     helpText,
 	}
 
-	err := survey.AskOne(confirmPrompt, &response)
+	err := surveyAskOne(confirmPrompt, &response)
 	if err != nil {
 		return true, checkInterrupt(err)
 	}
@@ -42,7 +45,7 @@ func SelectFromOptions(msg, helpText string, opts []string) (string, error) {
 		Default:  nil,
 		Help:     helpText,
 	}
-	err := survey.AskOne(prompt, &result)
+	err := surveyAskOne(prompt, &result)
 	if err != nil {
 		return "", checkInterrupt(err)
 	}
@@ -60,7 +63,7 @@ func GetSingleLineInput(msg, helpText string) (string, error) {
 		Help:     helpText,
 	}
 
-	err := survey.AskOne(prompt, &response)
+	err := surveyAskOne(prompt, &response)
 	if err != nil {
 		return "", checkInterrupt(err)
 	}
@@ -84,7 +87,7 @@ func SelectFromMultipleOptions(msg, helpText string, options []string) ([]string
 		Options:  options,
 		Help:     helpText,
 	}
-	err := survey.AskOne(analyzerPrompt, &response, survey.WithValidator(survey.Required))
+	err := surveyAskOne(analyzerPrompt, &response, survey.WithValidator(survey.Required))
 	if err != nil {
 		return nil, checkInterrupt(err)
 	}
