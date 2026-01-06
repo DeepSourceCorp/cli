@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -59,9 +60,9 @@ func (o *Options) Run() error {
 	}
 
 	// Read the config in the form of string and send it
-	content, err := os.ReadFile(configPath)
+	content, err := ioutil.ReadFile(configPath)
 	if err != nil {
-		return fmt.Errorf("error occurred while reading DeepSource config file %s: %w", configPath, err)
+		return errors.New("Error occured while reading DeepSource config file. Exiting...")
 	}
 
 	// Fetch the client
@@ -132,7 +133,7 @@ func extractDSConfigPath() (string, error) {
 			return "", errors.New("Error occured while looking for DeepSource config file. Exiting...")
 		} else {
 			// If found, use this as configpath
-			configPath = filepath.Join(path, ".deepsource.toml")
+			configPath = filepath.Join(path, "/.deepsource.toml")
 		}
 	}
 	return configPath, nil
