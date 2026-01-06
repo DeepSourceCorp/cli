@@ -57,7 +57,7 @@ func mockAnalyzer(w http.ResponseWriter, r *http.Request) {
 	// Read test graphql request body artifact file
 	requestBodyData, err := os.ReadFile("./testdata/analyzer/request_body.txt")
 	if err != nil {
-		log.Println(err)
+		log.Printf("Failed to read request body test data: %v", err)
 		http.Error(w, "Failed to read test data", http.StatusInternalServerError)
 		return
 	}
@@ -65,7 +65,7 @@ func mockAnalyzer(w http.ResponseWriter, r *http.Request) {
 	// Read test graphql success response body artifact file
 	successResponseBodyData, err := os.ReadFile("./testdata/analyzer/success_response_body.json")
 	if err != nil {
-		log.Println(err)
+		log.Printf("Failed to read success response test data: %v", err)
 		http.Error(w, "Failed to read test data", http.StatusInternalServerError)
 		return
 	}
@@ -73,7 +73,7 @@ func mockAnalyzer(w http.ResponseWriter, r *http.Request) {
 	// Read test graphql error response body artifact file
 	errorResponseBodyData, err := os.ReadFile("./testdata/analyzer/error_response_body.json")
 	if err != nil {
-		log.Println(err)
+		log.Printf("Failed to read error response test data: %v", err)
 		http.Error(w, "Failed to read test data", http.StatusInternalServerError)
 		return
 	}

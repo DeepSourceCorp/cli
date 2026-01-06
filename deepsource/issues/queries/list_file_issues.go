@@ -124,7 +124,7 @@ func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]iss
 	}
 
 	// Formatting the query response w.r.t the output format of the SDK as specified in `issues_list.go`
-	issuesData := []issues.Issue{}
+	var issuesData []issues.Issue
 	issueData := issues.Issue{}
 	for _, edge := range respData.Repository.Issues.Edges {
 		if len(edge.Node.Occurrences.Edges) == 0 {

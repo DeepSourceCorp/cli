@@ -18,9 +18,10 @@ var (
 )
 
 const (
-	ConfigDirName   = "/.deepsource/"
-	ConfigFileName  = "/config.toml"
-	DefaultHostName = "deepsource.io"
+	ConfigDirName         = "/.deepsource/"
+	ConfigFileName        = "/config.toml"
+	DefaultHostName       = "deepsource.io"
+	configFilePermissions os.FileMode = 0600
 )
 const configDirPermissions os.FileMode = 0700
 
@@ -34,14 +35,13 @@ type CLIConfig struct {
 var Cfg CLIConfig
 
 // Sets the token expiry in the desired format
-// Sets the token expiry in the desired format
 func (cfg *CLIConfig) SetTokenExpiry(str string) {
 	t, _ := time.Parse(time.RFC3339, str)
 	cfg.TokenExpiresIn = t.UTC()
 }
 
 // Checks if the token has expired or not
-func (cfg CLIConfig) IsExpired() bool {
+func (cfg *CLIConfig) IsExpired() bool {
 	if cfg.TokenExpiresIn.IsZero() {
 		return true
 	}
@@ -49,7 +49,7 @@ func (cfg CLIConfig) IsExpired() bool {
 }
 
 // configDir returns the directory to store the config file.
-func (CLIConfig) configDir() (string, error) {
+func (*CLIConfig) configDir() (string, error) {
 	home, err := configDirFn()
 	if err != nil {
 		return "", err
@@ -58,7 +58,7 @@ func (CLIConfig) configDir() (string, error) {
 }
 
 // configPath returns the file path to the config file.
-func (cfg CLIConfig) configPath() (string, error) {
+func (cfg *CLIConfig) configPath() (string, error) {
 	home, err := cfg.configDir()
 	if err != nil {
 		return "", err
@@ -124,8 +124,6 @@ func (cfg *CLIConfig) WriteFile() error {
 		return err
 	}
 
-	// Write file with restricted permissions
-	const configFilePermissions os.FileMode = 0600
 	return osWriteFileFn(path, data, configFilePermissions)
 }
 

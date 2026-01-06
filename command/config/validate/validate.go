@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -30,7 +29,7 @@ func NewCmdValidate() *cobra.Command {
 		Use:   "validate",
 		Short: "Validate DeepSource config",
 		Args:  utils.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, _ []string) error {
 			return o.Run()
 		},
 	}
@@ -38,7 +37,7 @@ func NewCmdValidate() *cobra.Command {
 }
 
 // Run executes the command.
-func (o *Options) Run() error {
+func (*Options) Run() error {
 	// Fetch config
 	cfg, err := config.GetConfig()
 	if err != nil {
@@ -60,7 +59,7 @@ func (o *Options) Run() error {
 	}
 
 	// Read the config in the form of string and send it
-	content, err := ioutil.ReadFile(configPath)
+	content, err := os.ReadFile(configPath)
 	if err != nil {
 		return errors.New("Error occured while reading DeepSource config file. Exiting...")
 	}

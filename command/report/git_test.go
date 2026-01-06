@@ -212,46 +212,55 @@ func TestGitGetHead(t *testing.T) {
 		t.Setenv("USER", "travis")
 		t.Setenv("TRAVIS_PULL_REQUEST_SHA", "travis-pr-sha")
 
-		// Create a temp git repo for fetchHeadManually to work
-		tmpDir := t.TempDir()
-		initCmd := exec.Command("git", "init")
-		initCmd.Dir = tmpDir
-		if err := initCmd.Run(); err != nil {
-			t.Skip("git not available")
-		}
-
-		configEmail := exec.Command("git", "config", "user.email", "test@test.com")
-		configEmail.Dir = tmpDir
-		if err := configEmail.Run(); err != nil {
-			t.Skip("git config failed")
-		}
-
-		configName := exec.Command("git", "config", "user.name", "Test")
-		configName.Dir = tmpDir
-		if err := configName.Run(); err != nil {
-			t.Skip("git config failed")
-		}
-
-		testFile := filepath.Join(tmpDir, "test.txt")
-		if err := os.WriteFile(testFile, []byte("test"), 0644); err != nil {
-			t.Skip("failed to write test file")
-		}
-
-		addCmd := exec.Command("git", "add", ".")
-		addCmd.Dir = tmpDir
-		if err := addCmd.Run(); err != nil {
-			t.Skip("git add failed")
-		}
-
-		commitCmd := exec.Command("git", "commit", "-m", "initial")
-		commitCmd.Dir = tmpDir
-		if err := commitCmd.Run(); err != nil {
-			t.Skip("git commit failed")
-		}
+		tmpDir := setupGitRepo(t)
 
 		headOID, warning, err := gitGetHead(tmpDir)
 		assert.NoError(t, err)
 		assert.Equal(t, "travis-pr-sha", headOID)
 		assert.Empty(t, warning)
 	})
+}
+
+func setupGitRepo(t *testing.T) string {
+	t.Helper()
+	tmpDir := t.TempDir()
+
+	// Initialize a git repo
+	initCmd := exec.Command("git", "init")
+	initCmd.Dir = tmpDir
+	if err := initCmd.Run(); err != nil {
+		t.Skip("git not available")
+	}
+
+	// Configure git user
+	configEmail := exec.Command("git", "config", "user.email", "test@test.com")
+	configEmail.Dir = tmpDir
+	if err := configEmail.Run(); err != nil {
+		t.Skip("git config failed")
+	}
+
+	configName := exec.Command("git", "config", "user.name", "Test")
+	configName.Dir = tmpDir
+	if err := configName.Run(); err != nil {
+		t.Skip("git config failed")
+	}
+
+	// Create a commit
+	testFile := filepath.Join(tmpDir, "test.txt")
+	if err := os.WriteFile(testFile, []byte("test"), 0644); err != nil {
+		t.Skip("failed to write test file")
+	}
+
+	addCmd := exec.Command("git", "add", ".")
+	addCmd.Dir = tmpDir
+	if err := addCmd.Run(); err != nil {
+		t.Skip("git add failed")
+	}
+
+	commitCmd := exec.Command("git", "commit", "-m", "initial")
+	commitCmd.Dir = tmpDir
+	if err := commitCmd.Run(); err != nil {
+		t.Skip("git commit failed")
+	}
+	return tmpDir
 }

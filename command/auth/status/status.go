@@ -29,7 +29,7 @@ func NewCmdStatus() *cobra.Command {
 		Short: "View the authentication status",
 		Long:  doc,
 		Args:  utils.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, _ []string) error {
 			opts := AuthStatusOptions{}
 			return opts.Run()
 		},
@@ -37,7 +37,7 @@ func NewCmdStatus() *cobra.Command {
 	return cmd
 }
 
-func (opts *AuthStatusOptions) Run() error {
+func (*AuthStatusOptions) Run() error {
 	// Fetch config
 	cfg, err := getConfigFn()
 	if err != nil {

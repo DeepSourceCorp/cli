@@ -42,7 +42,7 @@ type IGQLClient interface {
 	GetToken() string
 }
 
-func (a AnalyzersRequest) Do(ctx context.Context, client IGQLClient) ([]analyzers.Analyzer, error) {
+func (AnalyzersRequest) Do(ctx context.Context, client IGQLClient) ([]analyzers.Analyzer, error) {
 	req := graphql.NewRequest(listAnalyzersQuery)
 
 	// set header fields

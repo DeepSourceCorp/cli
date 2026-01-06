@@ -34,18 +34,15 @@ func TestCheckInterrupt(t *testing.T) {
 func TestConfirmFromUser(t *testing.T) {
 	t.Run("user confirms", func(t *testing.T) {
 		mockMu.Lock()
+		defer mockMu.Unlock()
+
 		originalAskOne := surveyAskOne
+		defer func() { surveyAskOne = originalAskOne }()
+
 		surveyAskOne = func(p survey.Prompt, response interface{}, opts ...survey.AskOpt) error {
 			*(response.(*bool)) = true
 			return nil
 		}
-		mockMu.Unlock()
-
-		defer func() {
-			mockMu.Lock()
-			surveyAskOne = originalAskOne
-			mockMu.Unlock()
-		}()
 
 		result, err := ConfirmFromUser("Test?", "Help text")
 		assert.NoError(t, err)
@@ -54,18 +51,15 @@ func TestConfirmFromUser(t *testing.T) {
 
 	t.Run("user denies", func(t *testing.T) {
 		mockMu.Lock()
+		defer mockMu.Unlock()
+
 		originalAskOne := surveyAskOne
+		defer func() { surveyAskOne = originalAskOne }()
+
 		surveyAskOne = func(p survey.Prompt, response interface{}, opts ...survey.AskOpt) error {
 			*(response.(*bool)) = false
 			return nil
 		}
-		mockMu.Unlock()
-
-		defer func() {
-			mockMu.Lock()
-			surveyAskOne = originalAskOne
-			mockMu.Unlock()
-		}()
 
 		result, err := ConfirmFromUser("Test?", "Help text")
 		assert.NoError(t, err)
@@ -74,17 +68,14 @@ func TestConfirmFromUser(t *testing.T) {
 
 	t.Run("interrupt returns error", func(t *testing.T) {
 		mockMu.Lock()
+		defer mockMu.Unlock()
+
 		originalAskOne := surveyAskOne
+		defer func() { surveyAskOne = originalAskOne }()
+
 		surveyAskOne = func(p survey.Prompt, response interface{}, opts ...survey.AskOpt) error {
 			return terminal.InterruptErr
 		}
-		mockMu.Unlock()
-
-		defer func() {
-			mockMu.Lock()
-			surveyAskOne = originalAskOne
-			mockMu.Unlock()
-		}()
 
 		_, err := ConfirmFromUser("Test?", "Help text")
 		assert.Error(t, err)
@@ -93,17 +84,14 @@ func TestConfirmFromUser(t *testing.T) {
 
 	t.Run("other error is propagated", func(t *testing.T) {
 		mockMu.Lock()
+		defer mockMu.Unlock()
+
 		originalAskOne := surveyAskOne
+		defer func() { surveyAskOne = originalAskOne }()
+
 		surveyAskOne = func(p survey.Prompt, response interface{}, opts ...survey.AskOpt) error {
 			return errors.New("some error")
 		}
-		mockMu.Unlock()
-
-		defer func() {
-			mockMu.Lock()
-			surveyAskOne = originalAskOne
-			mockMu.Unlock()
-		}()
 
 		_, err := ConfirmFromUser("Test?", "Help text")
 		assert.Error(t, err)
@@ -114,18 +102,15 @@ func TestConfirmFromUser(t *testing.T) {
 func TestSelectFromOptions(t *testing.T) {
 	t.Run("valid selection", func(t *testing.T) {
 		mockMu.Lock()
+		defer mockMu.Unlock()
+
 		originalAskOne := surveyAskOne
+		defer func() { surveyAskOne = originalAskOne }()
+
 		surveyAskOne = func(p survey.Prompt, response interface{}, opts ...survey.AskOpt) error {
 			*(response.(*string)) = "option2"
 			return nil
 		}
-		mockMu.Unlock()
-
-		defer func() {
-			mockMu.Lock()
-			surveyAskOne = originalAskOne
-			mockMu.Unlock()
-		}()
 
 		result, err := SelectFromOptions("Select one", "Help", []string{"option1", "option2", "option3"})
 		assert.NoError(t, err)
@@ -134,17 +119,14 @@ func TestSelectFromOptions(t *testing.T) {
 
 	t.Run("interrupt returns error", func(t *testing.T) {
 		mockMu.Lock()
+		defer mockMu.Unlock()
+
 		originalAskOne := surveyAskOne
+		defer func() { surveyAskOne = originalAskOne }()
+
 		surveyAskOne = func(p survey.Prompt, response interface{}, opts ...survey.AskOpt) error {
 			return terminal.InterruptErr
 		}
-		mockMu.Unlock()
-
-		defer func() {
-			mockMu.Lock()
-			surveyAskOne = originalAskOne
-			mockMu.Unlock()
-		}()
 
 		_, err := SelectFromOptions("Select one", "Help", []string{"option1", "option2"})
 		assert.Error(t, err)
@@ -153,17 +135,14 @@ func TestSelectFromOptions(t *testing.T) {
 
 	t.Run("other error is propagated", func(t *testing.T) {
 		mockMu.Lock()
+		defer mockMu.Unlock()
+
 		originalAskOne := surveyAskOne
+		defer func() { surveyAskOne = originalAskOne }()
+
 		surveyAskOne = func(p survey.Prompt, response interface{}, opts ...survey.AskOpt) error {
 			return errors.New("selection error")
 		}
-		mockMu.Unlock()
-
-		defer func() {
-			mockMu.Lock()
-			surveyAskOne = originalAskOne
-			mockMu.Unlock()
-		}()
 
 		_, err := SelectFromOptions("Select one", "Help", []string{"option1"})
 		assert.Error(t, err)
@@ -174,18 +153,15 @@ func TestSelectFromOptions(t *testing.T) {
 func TestGetSingleLineInput(t *testing.T) {
 	t.Run("valid input", func(t *testing.T) {
 		mockMu.Lock()
+		defer mockMu.Unlock()
+
 		originalAskOne := surveyAskOne
+		defer func() { surveyAskOne = originalAskOne }()
+
 		surveyAskOne = func(p survey.Prompt, response interface{}, opts ...survey.AskOpt) error {
 			*(response.(*string)) = "user input"
 			return nil
 		}
-		mockMu.Unlock()
-
-		defer func() {
-			mockMu.Lock()
-			surveyAskOne = originalAskOne
-			mockMu.Unlock()
-		}()
 
 		result, err := GetSingleLineInput("Enter value", "Help")
 		assert.NoError(t, err)
@@ -194,18 +170,15 @@ func TestGetSingleLineInput(t *testing.T) {
 
 	t.Run("empty input", func(t *testing.T) {
 		mockMu.Lock()
+		defer mockMu.Unlock()
+
 		originalAskOne := surveyAskOne
+		defer func() { surveyAskOne = originalAskOne }()
+
 		surveyAskOne = func(p survey.Prompt, response interface{}, opts ...survey.AskOpt) error {
 			*(response.(*string)) = ""
 			return nil
 		}
-		mockMu.Unlock()
-
-		defer func() {
-			mockMu.Lock()
-			surveyAskOne = originalAskOne
-			mockMu.Unlock()
-		}()
 
 		result, err := GetSingleLineInput("Enter value", "Help")
 		assert.NoError(t, err)
@@ -214,17 +187,14 @@ func TestGetSingleLineInput(t *testing.T) {
 
 	t.Run("interrupt returns error", func(t *testing.T) {
 		mockMu.Lock()
+		defer mockMu.Unlock()
+
 		originalAskOne := surveyAskOne
+		defer func() { surveyAskOne = originalAskOne }()
+
 		surveyAskOne = func(p survey.Prompt, response interface{}, opts ...survey.AskOpt) error {
 			return terminal.InterruptErr
 		}
-		mockMu.Unlock()
-
-		defer func() {
-			mockMu.Lock()
-			surveyAskOne = originalAskOne
-			mockMu.Unlock()
-		}()
 
 		_, err := GetSingleLineInput("Enter value", "Help")
 		assert.Error(t, err)
@@ -235,19 +205,16 @@ func TestGetSingleLineInput(t *testing.T) {
 func TestSelectFromMultipleOptions(t *testing.T) {
 	t.Run("valid multiple selection", func(t *testing.T) {
 		mockMu.Lock()
+		defer mockMu.Unlock()
+
 		originalAskOne := surveyAskOne
+		defer func() { surveyAskOne = originalAskOne }()
+
 		surveyAskOne = func(p survey.Prompt, response interface{}, opts ...survey.AskOpt) error {
 			result := response.(*[]string)
 			*result = []string{"option1", "option3"}
 			return nil
 		}
-		mockMu.Unlock()
-
-		defer func() {
-			mockMu.Lock()
-			surveyAskOne = originalAskOne
-			mockMu.Unlock()
-		}()
 
 		result, err := SelectFromMultipleOptions("Select", "Help", []string{"option1", "option2", "option3"})
 		assert.NoError(t, err)
@@ -256,19 +223,16 @@ func TestSelectFromMultipleOptions(t *testing.T) {
 
 	t.Run("single selection", func(t *testing.T) {
 		mockMu.Lock()
+		defer mockMu.Unlock()
+
 		originalAskOne := surveyAskOne
+		defer func() { surveyAskOne = originalAskOne }()
+
 		surveyAskOne = func(p survey.Prompt, response interface{}, opts ...survey.AskOpt) error {
 			result := response.(*[]string)
 			*result = []string{"only_one"}
 			return nil
 		}
-		mockMu.Unlock()
-
-		defer func() {
-			mockMu.Lock()
-			surveyAskOne = originalAskOne
-			mockMu.Unlock()
-		}()
 
 		result, err := SelectFromMultipleOptions("Select", "Help", []string{"only_one", "other"})
 		assert.NoError(t, err)
@@ -277,17 +241,14 @@ func TestSelectFromMultipleOptions(t *testing.T) {
 
 	t.Run("interrupt returns error", func(t *testing.T) {
 		mockMu.Lock()
+		defer mockMu.Unlock()
+
 		originalAskOne := surveyAskOne
+		defer func() { surveyAskOne = originalAskOne }()
+
 		surveyAskOne = func(p survey.Prompt, response interface{}, opts ...survey.AskOpt) error {
 			return terminal.InterruptErr
 		}
-		mockMu.Unlock()
-
-		defer func() {
-			mockMu.Lock()
-			surveyAskOne = originalAskOne
-			mockMu.Unlock()
-		}()
 
 		_, err := SelectFromMultipleOptions("Select", "Help", []string{"option1"})
 		assert.Error(t, err)
@@ -296,17 +257,14 @@ func TestSelectFromMultipleOptions(t *testing.T) {
 
 	t.Run("other error is propagated", func(t *testing.T) {
 		mockMu.Lock()
+		defer mockMu.Unlock()
+
 		originalAskOne := surveyAskOne
+		defer func() { surveyAskOne = originalAskOne }()
+
 		surveyAskOne = func(p survey.Prompt, response interface{}, opts ...survey.AskOpt) error {
 			return errors.New("multi-select error")
 		}
-		mockMu.Unlock()
-
-		defer func() {
-			mockMu.Lock()
-			surveyAskOne = originalAskOne
-			mockMu.Unlock()
-		}()
 
 		_, err := SelectFromMultipleOptions("Select", "Help", []string{"option1"})
 		assert.Error(t, err)

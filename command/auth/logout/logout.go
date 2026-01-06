@@ -10,13 +10,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// Function variables for testing
-var (
-	getConfigFn       = config.GetConfig
-	confirmFromUserFn = utils.ConfirmFromUser
-)
-
-type LogoutOptions struct{}
+type LogoutOptions struct {
+	GetConfigFn       func() (*config.CLIConfig, error)
+	ConfirmFromUserFn func(string, string) (bool, error)
+}
 
 // NewCmdLogout handles the logout functionality for the CLI
 func NewCmdLogout() *cobra.Command {
@@ -24,8 +21,11 @@ func NewCmdLogout() *cobra.Command {
 		Use:   "logout",
 		Short: "Logout of your active DeepSource account",
 		Args:  utils.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
-			opts := LogoutOptions{}
+		RunE: func(_ *cobra.Command, _ []string) error {
+			opts := &LogoutOptions{
+				GetConfigFn:       config.GetConfig,
+				ConfirmFromUserFn: utils.ConfirmFromUser,
+			}
 			return opts.Run()
 		},
 	}
@@ -34,7 +34,7 @@ func NewCmdLogout() *cobra.Command {
 
 func (opts *LogoutOptions) Run() error {
 	// Fetch config
-	cfg, err := getConfigFn()
+	cfg, err := opts.GetConfigFn()
 	if err != nil {
 		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
 	}
@@ -45,7 +45,7 @@ func (opts *LogoutOptions) Run() error {
 
 	// Confirm from the user if they want to logout
 	logoutConfirmationMsg := "Are you sure you want to log out of DeepSource account?"
-	response, err := confirmFromUserFn(logoutConfirmationMsg, "")
+	response, err := opts.ConfirmFromUserFn(logoutConfirmationMsg, "")
 	if err != nil {
 		return err
 	}

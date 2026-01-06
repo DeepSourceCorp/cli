@@ -1,6 +1,8 @@
 package report
 
 import (
+	"encoding/json"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -106,8 +108,10 @@ func TestMakeQuery(t *testing.T) {
 	t.Run("sends request body correctly", func(t *testing.T) {
 		expectedBody := `{"test": "data"}`
 		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			body := make([]byte, r.ContentLength)
-			r.Body.Read(body)
+			body, err := io.ReadAll(r.Body)
+			if err != nil {
+				t.Fatalf("failed to read request body: %v", err)
+			}
 			if string(body) != expectedBody {
 				w.WriteHeader(http.StatusBadRequest)
 				return
@@ -145,7 +149,7 @@ func TestMakeQuery(t *testing.T) {
 	})
 
 	t.Run("skip certificate verification flag works", func(t *testing.T) {
-		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		server := httptest.NewTLSServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusOK)
 			w.Write([]byte(`{"ok": true}`))
 		}))
@@ -162,7 +166,11 @@ func TestMakeQuery(t *testing.T) {
 		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			contentType := r.Header.Get("Content-Type")
 			w.WriteHeader(http.StatusOK)
-			w.Write([]byte(`{"contentType": "` + contentType + `"}`))
+			w.Header().Set("Content-Type", "application/json")
+			response := map[string]string{"contentType": contentType}
+			if err := json.NewEncoder(w).Encode(response); err != nil {
+				t.Fatalf("failed to write json response: %v", err)
+			}
 		}))
 		defer server.Close()
 

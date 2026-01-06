@@ -54,6 +54,7 @@ func TestExactArgs(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
+			tc := tc
 			cmd := &cobra.Command{Use: "test"}
 			validator := ExactArgs(tc.count)
 			err := validator(cmd, tc.args)
@@ -216,6 +217,7 @@ func TestNoArgs(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
+			tc := tc
 			cmd := &cobra.Command{Use: "test"}
 			err := NoArgs(cmd, tc.args)
 

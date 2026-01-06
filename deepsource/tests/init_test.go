@@ -43,7 +43,7 @@ func startMockAPIServer() {
 
 	// Wait for server to be ready
 	for i := 0; i < serverReadyMaxRetries; i++ {
-		conn, err := net.Dial("tcp", mockServerAddress)
+		conn, err := net.DialTimeout("tcp", mockServerAddress, serverReadyRetryInterval)
 		if err == nil {
 			conn.Close()
 			return

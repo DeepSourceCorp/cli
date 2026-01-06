@@ -140,63 +140,33 @@ func TestNewCmdReport(t *testing.T) {
 		assert.NotEmpty(t, cmd.Long)
 	})
 
-	t.Run("has analyzer flag", func(t *testing.T) {
-		cmd := NewCmdReport()
-		flag := cmd.Flags().Lookup("analyzer")
-		assert.NotNil(t, flag)
-		assert.Equal(t, "", flag.DefValue)
-	})
+	flagTests := []struct {
+		name        string
+		defValue    string
+		hasDefValue bool
+	}{
+		{name: "analyzer", defValue: "", hasDefValue: true},
+		{name: "analyzer-type"},
+		{name: "key"},
+		{name: "value"},
+		{name: "value-file"},
+		{name: "use-oidc", defValue: "false", hasDefValue: true},
+		{name: "skip-verify", defValue: "false", hasDefValue: true},
+		{name: "deepsource-host-endpoint", defValue: "https://app.deepsource.com", hasDefValue: true},
+		{name: "oidc-provider"},
+	}
 
-	t.Run("has analyzer-type flag", func(t *testing.T) {
-		cmd := NewCmdReport()
-		flag := cmd.Flags().Lookup("analyzer-type")
-		assert.NotNil(t, flag)
-	})
+	cmd := NewCmdReport()
 
-	t.Run("has key flag", func(t *testing.T) {
-		cmd := NewCmdReport()
-		flag := cmd.Flags().Lookup("key")
-		assert.NotNil(t, flag)
-	})
-
-	t.Run("has value flag", func(t *testing.T) {
-		cmd := NewCmdReport()
-		flag := cmd.Flags().Lookup("value")
-		assert.NotNil(t, flag)
-	})
-
-	t.Run("has value-file flag", func(t *testing.T) {
-		cmd := NewCmdReport()
-		flag := cmd.Flags().Lookup("value-file")
-		assert.NotNil(t, flag)
-	})
-
-	t.Run("has use-oidc flag", func(t *testing.T) {
-		cmd := NewCmdReport()
-		flag := cmd.Flags().Lookup("use-oidc")
-		assert.NotNil(t, flag)
-		assert.Equal(t, "false", flag.DefValue)
-	})
-
-	t.Run("has skip-verify flag", func(t *testing.T) {
-		cmd := NewCmdReport()
-		flag := cmd.Flags().Lookup("skip-verify")
-		assert.NotNil(t, flag)
-		assert.Equal(t, "false", flag.DefValue)
-	})
-
-	t.Run("has deepsource-host-endpoint flag with default", func(t *testing.T) {
-		cmd := NewCmdReport()
-		flag := cmd.Flags().Lookup("deepsource-host-endpoint")
-		assert.NotNil(t, flag)
-		assert.Equal(t, "https://app.deepsource.com", flag.DefValue)
-	})
-
-	t.Run("has oidc-provider flag", func(t *testing.T) {
-		cmd := NewCmdReport()
-		flag := cmd.Flags().Lookup("oidc-provider")
-		assert.NotNil(t, flag)
-	})
+	for _, tt := range flagTests {
+		t.Run("has "+tt.name+" flag", func(t *testing.T) {
+			flag := cmd.Flags().Lookup(tt.name)
+			assert.NotNil(t, flag)
+			if tt.hasDefValue {
+				assert.Equal(t, tt.defValue, flag.DefValue)
+			}
+		})
+	}
 }
 
 func TestValueFileReading(t *testing.T) {

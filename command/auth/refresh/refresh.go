@@ -38,14 +38,14 @@ func NewCmdRefresh() *cobra.Command {
 		Short: "Refresh stored authentication credentials",
 		Long:  doc,
 		Args:  utils.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, _ []string) error {
 			return opts.Run()
 		},
 	}
 	return cmd
 }
 
-func (opts *RefreshOptions) Run() error {
+func (*RefreshOptions) Run() error {
 	// Fetch config
 	cfg, err := getConfigFn()
 	if err != nil {
@@ -58,8 +58,8 @@ func (opts *RefreshOptions) Run() error {
 
 	// Fetching DS Client
 	dsClient, err := newDeepsourceFn(deepsource.ClientOpts{
-		Token:    config.Cfg.Token,
-		HostName: config.Cfg.Host,
+		Token:    cfg.Token,
+		HostName: cfg.Host,
 	})
 	if err != nil {
 		return err

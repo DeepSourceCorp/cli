@@ -28,10 +28,8 @@ func TestAuthStatusOptions_Run(t *testing.T) {
 		getConfigFn = func() (*config.CLIConfig, error) {
 			return nil, errors.New("config read error")
 		}
-		mockMu.Unlock()
 
 		defer func() {
-			mockMu.Lock()
 			getConfigFn = originalGetConfig
 			mockMu.Unlock()
 		}()
@@ -48,10 +46,8 @@ func TestAuthStatusOptions_Run(t *testing.T) {
 		getConfigFn = func() (*config.CLIConfig, error) {
 			return &config.CLIConfig{Token: ""}, nil
 		}
-		mockMu.Unlock()
 
 		defer func() {
-			mockMu.Lock()
 			getConfigFn = originalGetConfig
 			mockMu.Unlock()
 		}()
@@ -72,10 +68,8 @@ func TestAuthStatusOptions_Run(t *testing.T) {
 				TokenExpiresIn: time.Now().Add(24 * time.Hour),
 			}, nil
 		}
-		mockMu.Unlock()
 
 		defer func() {
-			mockMu.Lock()
 			getConfigFn = originalGetConfig
 			mockMu.Unlock()
 		}()
@@ -95,10 +89,8 @@ func TestAuthStatusOptions_Run(t *testing.T) {
 				TokenExpiresIn: time.Now().Add(-24 * time.Hour),
 			}, nil
 		}
-		mockMu.Unlock()
 
 		defer func() {
-			mockMu.Lock()
 			getConfigFn = originalGetConfig
 			mockMu.Unlock()
 		}()
