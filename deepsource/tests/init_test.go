@@ -38,7 +38,7 @@ func startMockAPIServer() {
 	}()
 
 	// Wait for server to be ready
-	for i := 0; i < 50; i++ {
+	for i := 0; i < 200; i++ {
 		conn, err := net.Dial("tcp", "localhost:8081")
 		if err == nil {
 			conn.Close()
