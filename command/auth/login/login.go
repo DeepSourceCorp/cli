@@ -9,6 +9,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// Function variables for testing
+var (
+	getConfigFn          = config.GetConfig
+	confirmFromUserFn    = utils.ConfirmFromUser
+	selectFromOptionsFn  = utils.SelectFromOptions
+	getSingleLineInputFn = utils.GetSingleLineInput
+)
+
 var accountTypes = []string{"DeepSource (deepsource.io)", "DeepSource Enterprise"}
 
 // LoginOptions hold the metadata related to login operation
@@ -64,7 +72,7 @@ func NewCmdLogin() *cobra.Command {
 // Run executes the auth command and starts the login flow if not already authenticated
 func (opts *LoginOptions) Run() (err error) {
 	// Fetch config
-	cfg, _ := config.GetConfig()
+	cfg, _ := getConfigFn()
 	opts.User = cfg.User
 	opts.TokenExpired = cfg.IsExpired()
 
@@ -92,7 +100,7 @@ func (opts *LoginOptions) Run() (err error) {
 	if !opts.TokenExpired {
 		// The user is already logged in, confirm re-authentication.
 		msg := fmt.Sprintf("You're already logged into DeepSource as %s. Do you want to re-authenticate?", opts.User)
-		response, err := utils.ConfirmFromUser(msg, "")
+		response, err := confirmFromUserFn(msg, "")
 		if err != nil {
 			return fmt.Errorf("Error in fetching response. Please try again.")
 		}
@@ -121,13 +129,13 @@ func (opts *LoginOptions) handleInteractiveLogin() error {
 	hostPromptHelpText := "The hostname of the DeepSource instance to authenticate with"
 
 	// Display prompt to user
-	loginType, err := utils.SelectFromOptions(loginPromptMessage, loginPromptHelpText, accountTypes)
+	loginType, err := selectFromOptionsFn(loginPromptMessage, loginPromptHelpText, accountTypes)
 	if err != nil {
 		return err
 	}
 	// Prompt the user for hostname only in the case of on-premise
 	if loginType == "DeepSource Enterprise" {
-		opts.HostName, err = utils.GetSingleLineInput(hostPromptMessage, hostPromptHelpText)
+		opts.HostName, err = getSingleLineInputFn(hostPromptMessage, hostPromptHelpText)
 		if err != nil {
 			return err
 		}

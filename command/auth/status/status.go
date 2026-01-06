@@ -11,6 +11,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// Function variable for testing - allows mocking config.GetConfig
+var getConfigFn = config.GetConfig
+
 type AuthStatusOptions struct{}
 
 // NewCmdStatus handles the fetching of authentication status of CLI
@@ -36,7 +39,7 @@ func NewCmdStatus() *cobra.Command {
 
 func (opts *AuthStatusOptions) Run() error {
 	// Fetch config
-	cfg, err := config.GetConfig()
+	cfg, err := getConfigFn()
 	if err != nil {
 		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
 	}

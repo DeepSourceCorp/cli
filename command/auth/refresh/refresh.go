@@ -13,6 +13,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// Function variables for testing
+var (
+	getConfigFn      = config.GetConfig
+	newDeepsourceFn  = deepsource.New
+)
+
 type RefreshOptions struct{}
 
 // NewCmdRefresh handles the refreshing of authentication credentials
@@ -41,7 +47,7 @@ func NewCmdRefresh() *cobra.Command {
 
 func (opts *RefreshOptions) Run() error {
 	// Fetch config
-	cfg, err := config.GetConfig()
+	cfg, err := getConfigFn()
 	if err != nil {
 		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
 	}
@@ -51,7 +57,7 @@ func (opts *RefreshOptions) Run() error {
 	}
 
 	// Fetching DS Client
-	deepsource, err := deepsource.New(deepsource.ClientOpts{
+	dsClient, err := newDeepsourceFn(deepsource.ClientOpts{
 		Token:    config.Cfg.Token,
 		HostName: config.Cfg.Host,
 	})
@@ -60,7 +66,7 @@ func (opts *RefreshOptions) Run() error {
 	}
 	ctx := context.Background()
 	// Use the SDK to fetch the new auth data
-	refreshedConfigData, err := deepsource.RefreshAuthCreds(ctx, cfg.Token)
+	refreshedConfigData, err := dsClient.RefreshAuthCreds(ctx, cfg.Token)
 	if err != nil {
 		return err
 	}
