@@ -40,7 +40,6 @@ func NewCmdIssuesList() *cobra.Command {
 		RepoArg:  "",
 		LimitArg: 30,
 	}
-	// TODO:: add severity feature specifics here
 	doc := heredoc.Docf(`
         List issues reported by DeepSource.
 
@@ -204,19 +203,20 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 		// set fetched issues as issue data
 		opts.issuesData = getUniqueIssues(fetchedIssues)
 	}
-	if len(opts.SeverityArg) != 0 {
-		//now we have some flag in the severity arg section use this and filter only those issues
-		var fetchedIssues []issues.Issue
 
+	if len(opts.SeverityArg) != 0 {
+		var fetchedIssues []issues.Issue
+		//Filter issues based on the severity option specified
 		filteredIssues, err = filterIssuesBySeverity(opts.SeverityArg, opts.issuesData)
 		if err != nil {
 			return err
 		}
 		fetchedIssues = append(fetchedIssues, filteredIssues...)
-
+		// set fetched issues as issue data
 		opts.issuesData = getUniqueIssues(fetchedIssues)
 
 	}
+
 	return nil
 }
 

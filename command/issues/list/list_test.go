@@ -157,3 +157,75 @@ func TestFilterIssuesByAnalyzer(t *testing.T) {
 		}
 	})
 }
+
+func TestFilterIssuesBySeverity(t *testing.T) {
+	// Path to the dedicated severity test data
+	testDataPath := "./testdata/dummy/issues_severity.json"
+
+	// Case 1: Filter by a single severity
+	t.Run("must work with a single severity", func(t *testing.T) {
+		issues_data := ReadIssues(testDataPath)
+		// Testing lowercase "critical" to verify the ToUpper normalization logic
+		got, err := filterIssuesBySeverity([]string{"critical"}, issues_data)
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		}
+
+		// Expecting only the one CRITICAL issue defined in our JSON
+		if len(got) != 1 || strings.ToUpper(got[0].IssueSeverity) != "CRITICAL" {
+			t.Errorf("got: %v; expected 1 CRITICAL issue", got)
+		}
+	})
+
+	// Case 2: Filter by multiple severities simultaneously (Logical OR)
+	t.Run("must work with multiple severities", func(t *testing.T) {
+		issues_data := ReadIssues(testDataPath)
+
+		// Should return both MAJOR and MINOR issues
+		got, err := filterIssuesBySeverity([]string{"MAJOR", "MINOR"}, issues_data)
+
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		}
+
+		if len(got) != 2 {
+			t.Errorf("got: %d issues; want 2", len(got))
+		}
+	})
+
+	// Case 3: Handle invalid severity strings
+	t.Run("must return error for invalid severity input", func(t *testing.T) {
+		issues_data := ReadIssues(testDataPath)
+
+		// Verifying that the validator catches illegal entries
+		_, err := filterIssuesBySeverity([]string{"invalid_level"}, issues_data)
+		if err == nil {
+			t.Error("expected error for invalid severity 'invalid_level', got nil")
+		}
+	})
+
+	// Case 4: Handle valid severity that has no matches in the data
+	t.Run("must return empty list when no matches exist", func(t *testing.T) {
+		// Create a subset with only MINOR issues
+		subset := []issues.Issue{{IssueSeverity: "MINOR"}}
+
+		// Filtering for CRITICAL should yield 0 results but NO error
+		got, err := filterIssuesBySeverity([]string{"CRITICAL"}, subset)
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		}
+
+		if len(got) != 0 {
+			t.Errorf("expected 0 issues, got %d", len(got))
+		}
+	})
+
+	t.Run("should handle duplicate severity flags gracefully", func(t *testing.T) {
+		issues_data := ReadIssues(testDataPath)
+
+		got, _ := filterIssuesBySeverity([]string{"critical", "critical"}, issues_data)
+		if len(got) != 1 {
+			t.Errorf("expected 1 issue despite duplicate flag, got %d", len(got))
+		}
+	})
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "issue_title": "Critical Security Bug",
+    "issue_code": "SEC-001",
+    "issue_severity": "CRITICAL",
+    "location": { "path": "main.go", "position": { "begin": 10, "end": 10 } },
+    "Analyzer": { "analyzer": "go" }
+  },
+  {
+    "issue_title": "Major Performance Issue",
+    "issue_code": "PERF-002",
+    "issue_severity": "MAJOR",
+    "location": { "path": "utils.go", "position": { "begin": 20, "end": 20 } },
+    "Analyzer": { "analyzer": "go" }
+  },
+  {
+    "issue_title": "Minor Style Nitpick",
+    "issue_code": "STYLE-003",
+    "issue_severity": "MINOR",
+    "location": { "path": "list.go", "position": { "begin": 30, "end": 30 } },
+    "Analyzer": { "analyzer": "go" }
+  }
+]

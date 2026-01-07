@@ -33,6 +33,7 @@ func filterIssuesByPath(path string, issuesData []issues.Issue) ([]issues.Issue,
 		// get relative path
 		rel, err := filepath.Rel(path, issue.Location.Path)
 		if err != nil {
+
 			return nil, err
 		}
 
@@ -55,14 +56,26 @@ func filterIssuesByPath(path string, issuesData []issues.Issue) ([]issues.Issue,
 func filterIssuesBySeverity(severity []string, issuesData []issues.Issue) ([]issues.Issue, error) {
 	var filteredIssues []issues.Issue
 
-	// Create a map for quick lookup of severities
-	severityMap := make(map[string]bool)
-	for _, s := range severity {
-		severityMap[strings.ToUpper(s)] = true // Ensure case-insensitivity
+	// valid options for severity
+	validSeverities := map[string]bool{
+		"CRITICAL": true,
+		"MAJOR":    true,
+		"MINOR":    true,
 	}
 
+	//  Validate user input and normalize to uppercase
+	severityMap := make(map[string]bool)
+	for _, s := range severity {
+		upperS := strings.ToUpper(s)
+		if !validSeverities[upperS] {
+			return nil, fmt.Errorf("invalid severity level: %s (valid options: CRITICAL, MAJOR, MINOR)", s)
+		}
+		severityMap[upperS] = true
+	}
+
+	//  Filter the issues list
 	for _, issue := range issuesData {
-		// Match against the IssueSeverity field from the SDK struct
+		//match against the IssueSeverity field from the SDK Issue Struct
 		if severityMap[strings.ToUpper(issue.IssueSeverity)] {
 			filteredIssues = append(filteredIssues, issue)
 		}
