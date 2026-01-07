@@ -23,6 +23,7 @@ type IssuesListOptions struct {
 	FileArg           []string
 	RepoArg           string
 	AnalyzerArg       []string
+	SeverityArg       []string
 	LimitArg          int
 	OutputFilenameArg string
 	JSONArg           bool
@@ -39,34 +40,37 @@ func NewCmdIssuesList() *cobra.Command {
 		RepoArg:  "",
 		LimitArg: 30,
 	}
-
+	// TODO:: add severity feature specifics here
 	doc := heredoc.Docf(`
-		List issues reported by DeepSource.
+        List issues reported by DeepSource.
 
-		To list issues for the current repository:
-		%[1]s
+        To list issues for the current repository:
+        %[1]s
 
-		To list issues for a specific repository, use the %[2]s flag:
-		%[3]s
+        To list issues for a specific repository, use the %[2]s flag:
+        %[3]s
 
-		To list issues for a specific analyzer, use the %[4]s flag:
-		%[5]s
+        To list issues for a specific analyzer, use the %[4]s flag:
+        %[5]s
 
-		To limit the number of issues reported, use the %[6]s flag:
-		%[7]s
+        To limit the number of issues reported, use the %[6]s flag:
+        %[7]s
 
-		To export listed issues to a file, use the %[8]s flag:
-		%[9]s
+        To export listed issues to a file, use the %[8]s flag:
+        %[9]s
 
-		To export listed issues to a JSON file, use the %[10]s flag:
-		%[11]s
+        To export listed issues to a JSON file, use the %[10]s flag:
+        %[11]s
 
-		To export listed issues to a CSV file, use the %[12]s flag:
-		%[13]s
+        To export listed issues to a CSV file, use the %[12]s flag:
+        %[13]s
 
-		To export listed issues to a SARIF file, use the %[14]s flag:
-		%[15]s
-		`, utils.Cyan("deepsource issues list"), utils.Yellow("--repo"), utils.Cyan("deepsource issues list --repo repo_name"), utils.Yellow("--analyzer"), utils.Cyan("deepsource issues list --analyzer python"), utils.Yellow("--limit"), utils.Cyan("deepsource issues list --limit 100"), utils.Yellow("--output-file"), utils.Cyan("deepsource issues list --output-file file_name"), utils.Yellow("--json"), utils.Cyan("deepsource issues list --json --output-file example.json"), utils.Yellow("--csv"), utils.Cyan("deepsource issues list --csv --output-file example.csv"), utils.Yellow("--sarif"), utils.Cyan("deepsource issues list --sarif --output-file example.sarif"))
+        To export listed issues to a SARIF file, use the %[14]s flag:
+        %[15]s
+
+        To list issues for specific severities, use the %[16]s flag:
+        %[17]s
+        `, utils.Cyan("deepsource issues list"), utils.Yellow("--repo"), utils.Cyan("deepsource issues list --repo repo_name"), utils.Yellow("--analyzer"), utils.Cyan("deepsource issues list --analyzer python"), utils.Yellow("--limit"), utils.Cyan("deepsource issues list --limit 100"), utils.Yellow("--output-file"), utils.Cyan("deepsource issues list --output-file file_name"), utils.Yellow("--json"), utils.Cyan("deepsource issues list --json --output-file example.json"), utils.Yellow("--csv"), utils.Cyan("deepsource issues list --csv --output-file example.csv"), utils.Yellow("--sarif"), utils.Cyan("deepsource issues list --sarif --output-file example.sarif"), utils.Yellow("--severity"), utils.Cyan("deepsource issues list --severity critical --severity major"))
 
 	cmd := &cobra.Command{
 		Use:   "list",
@@ -80,6 +84,9 @@ func NewCmdIssuesList() *cobra.Command {
 
 	// --repo, -r flag
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "List the issues of the specified repository")
+
+	// --severity -s flag
+	cmd.Flags().StringArrayVarP(&opts.SeverityArg, "severity", "s", nil, "List issues for specified severity (CRITICAL, MAJOR, MINOR)")
 
 	// --analyzer, -a flag
 	cmd.Flags().StringArrayVarP(&opts.AnalyzerArg, "analyzer", "a", nil, "List the issues for the specified analyzer")
@@ -197,7 +204,19 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 		// set fetched issues as issue data
 		opts.issuesData = getUniqueIssues(fetchedIssues)
 	}
+	if len(opts.SeverityArg) != 0 {
+		//now we have some flag in the severity arg section use this and filter only those issues
+		var fetchedIssues []issues.Issue
 
+		filteredIssues, err = filterIssuesBySeverity(opts.SeverityArg, opts.issuesData)
+		if err != nil {
+			return err
+		}
+		fetchedIssues = append(fetchedIssues, filteredIssues...)
+
+		opts.issuesData = getUniqueIssues(fetchedIssues)
+
+	}
 	return nil
 }
 

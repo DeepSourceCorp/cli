@@ -50,6 +50,27 @@ func filterIssuesByPath(path string, issuesData []issues.Issue) ([]issues.Issue,
 	return getUniqueIssues(filteredIssues), nil
 }
 
+//Filters issues based on the severity of issue specified
+
+func filterIssuesBySeverity(severity []string, issuesData []issues.Issue) ([]issues.Issue, error) {
+	var filteredIssues []issues.Issue
+
+	// Create a map for quick lookup of severities
+	severityMap := make(map[string]bool)
+	for _, s := range severity {
+		severityMap[strings.ToUpper(s)] = true // Ensure case-insensitivity
+	}
+
+	for _, issue := range issuesData {
+		// Match against the IssueSeverity field from the SDK struct
+		if severityMap[strings.ToUpper(issue.IssueSeverity)] {
+			filteredIssues = append(filteredIssues, issue)
+		}
+	}
+
+	return getUniqueIssues(filteredIssues), nil
+}
+
 // Filters issues based on the analyzer shortcode.
 func filterIssuesByAnalyzer(analyzer []string, issuesData []issues.Issue) ([]issues.Issue, error) {
 	var filteredIssues []issues.Issue
