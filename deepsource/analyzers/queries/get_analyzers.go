@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/deepsource/analyzers"
-	"github.com/deepsourcelabs/graphql"
 )
 
 // GraphQL query
@@ -22,7 +22,9 @@ const listAnalyzersQuery = `
     }
 }`
 
-type AnalyzersRequest struct{}
+type AnalyzersRequest struct {
+	client graphqlclient.GraphQLClient
+}
 
 type AnalyzersResponse struct {
 	Analyzers struct {
@@ -36,24 +38,14 @@ type AnalyzersResponse struct {
 	} `json:"analyzers"`
 }
 
-// GraphQL client interface
-type IGQLClient interface {
-	GQL() *graphql.Client
-	GetToken() string
+func NewAnalyzersRequest(client graphqlclient.GraphQLClient) *AnalyzersRequest {
+	return &AnalyzersRequest{client: client}
 }
 
-func (a AnalyzersRequest) Do(ctx context.Context, client IGQLClient) ([]analyzers.Analyzer, error) {
-	req := graphql.NewRequest(listAnalyzersQuery)
-
-	// set header fields
-	req.Header.Set("Cache-Control", "no-cache")
-	tokenHeader := fmt.Sprintf("Bearer %s", client.GetToken())
-	req.Header.Add("Authorization", tokenHeader)
-
-	// run it and capture the response
+func (a *AnalyzersRequest) Do(ctx context.Context) ([]analyzers.Analyzer, error) {
 	var respData AnalyzersResponse
-	if err := client.GQL().Run(ctx, req, &respData); err != nil {
-		return nil, err
+	if err := a.client.Query(ctx, listAnalyzersQuery, nil, &respData); err != nil {
+		return nil, fmt.Errorf("fetch analyzers: %w", err)
 	}
 
 	// Formatting the query response w.r.t the output format

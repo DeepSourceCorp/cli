@@ -5,15 +5,12 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"os"
-	"os/exec"
-	"path/filepath"
 	"strconv"
 	"strings"
 
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/configvalidator"
-	"github.com/deepsourcelabs/cli/deepsource"
+	configsvc "github.com/deepsourcelabs/cli/internal/services/config"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
@@ -39,12 +36,8 @@ func NewCmdValidate() *cobra.Command {
 
 // Run executes the command.
 func (o *Options) Run() error {
-	// Fetch config
-	cfg, err := config.GetConfig()
-	if err != nil {
-		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
-	}
-	err = cfg.VerifyAuthentication()
+	svc := configsvc.NewService(config.DefaultManager())
+	cfg, err := svc.LoadConfig()
 	if err != nil {
 		return err
 	}
@@ -54,7 +47,7 @@ func (o *Options) Run() error {
 	fmt.Println()
 
 	// Extract the path of DeepSource config
-	configPath, err := extractDSConfigPath()
+	configPath, err := svc.FindConfigPath()
 	if err != nil {
 		return err
 	}
@@ -66,17 +59,10 @@ func (o *Options) Run() error {
 	}
 
 	// Fetch the client
-	deepsource, err := deepsource.New(deepsource.ClientOpts{
-		Token:    config.Cfg.Token,
-		HostName: config.Cfg.Host,
-	})
-	if err != nil {
-		return err
-	}
 	ctx := context.Background()
 	// Fetch the list of supported analyzers and transformers' data
 	// using the SDK
-	err = utils.GetAnalyzersAndTransformersData(ctx, *deepsource)
+	err = svc.FetchAnalyzersAndTransformersData(ctx, cfg)
 	if err != nil {
 		return err
 	}
@@ -104,41 +90,6 @@ func (o *Options) Run() error {
 // Extracts the path of DeepSource config (.deepsource.toml) in the user repo
 // Checks in the current working directory as well as the root directory
 // of the project
-func extractDSConfigPath() (string, error) {
-	var configPath string
-
-	// Get current working directory of user from where this command is run
-	cwd, err := os.Getwd()
-	if err != nil {
-		return "", errors.New("Error occured while fetching current working directory. Exiting...")
-	}
-
-	// Form the full path of cwd to search for .deepsource.toml
-	configPath = filepath.Join(cwd, ".deepsource.toml")
-
-	// Check if there is a deepsource.toml file here
-	if _, err = os.Stat(configPath); err != nil {
-		// Since, no .deepsource.toml in the cwd,
-		// fetching the top level directory
-		output, err := exec.Command("git", "rev-parse", "--show-toplevel").Output()
-		if err != nil {
-			return "", err
-		}
-
-		// Removing trailing null characters
-		path := strings.TrimRight(string(output), "\000\n")
-
-		// Check if the config exists on this path
-		if _, err = os.Stat(filepath.Join(path, ".deepsource.toml")); err != nil {
-			return "", errors.New("Error occured while looking for DeepSource config file. Exiting...")
-		} else {
-			// If found, use this as configpath
-			configPath = filepath.Join(path, "/.deepsource.toml")
-		}
-	}
-	return configPath, nil
-}
-
 // Handles printing the output when viper fails to read TOML file due to bad syntax
 func printViperError(fileContent []byte, errors []string) {
 	var errorString string

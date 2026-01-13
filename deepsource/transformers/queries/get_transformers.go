@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/deepsource/transformers"
-	"github.com/deepsourcelabs/graphql"
 )
 
 // Query to list supported Transformers
@@ -21,7 +21,9 @@ const listTransformersQuery = `
     }
 }`
 
-type TransformersRequest struct{}
+type TransformersRequest struct {
+	client graphqlclient.GraphQLClient
+}
 
 type TransformersResponse struct {
 	Transformers struct {
@@ -34,25 +36,14 @@ type TransformersResponse struct {
 	} `json:"transformers"`
 }
 
-// GraphQL client interface
-type IGQLClient interface {
-	GQL() *graphql.Client
-	GetToken() string
+func NewTransformersRequest(client graphqlclient.GraphQLClient) *TransformersRequest {
+	return &TransformersRequest{client: client}
 }
 
-func (t TransformersRequest) Do(ctx context.Context, client IGQLClient) ([]transformers.Transformer, error) {
-	req := graphql.NewRequest(listTransformersQuery)
-
-	// set header fields
-	req.Header.Set("Cache-Control", "no-cache")
-	// Adding PAT as header for auth
-	tokenHeader := fmt.Sprintf("Bearer %s", client.GetToken())
-	req.Header.Add("Authorization", tokenHeader)
-
-	// run it and capture the response
+func (t *TransformersRequest) Do(ctx context.Context) ([]transformers.Transformer, error) {
 	var respData TransformersResponse
-	if err := client.GQL().Run(ctx, req, &respData); err != nil {
-		return nil, err
+	if err := t.client.Query(ctx, listTransformersQuery, nil, &respData); err != nil {
+		return nil, fmt.Errorf("fetch transformers: %w", err)
 	}
 
 	// Formatting the query response w.r.t the SDK response ([]transformers.Transformer)

@@ -1,6 +1,8 @@
 package command
 
 import (
+	"context"
+
 	"github.com/deepsourcelabs/cli/command/auth"
 	"github.com/deepsourcelabs/cli/command/config"
 	"github.com/deepsourcelabs/cli/command/issues"
@@ -34,6 +36,12 @@ Login into DeepSource using the command : deepsource auth login`,
 }
 
 func Execute() error {
+	return ExecuteContext(context.Background())
+}
+
+// ExecuteContext runs the root command with a parent context.
+func ExecuteContext(ctx context.Context) error {
 	cmd := NewCmdRoot()
+	cmd.SetContext(ctx)
 	return cmd.Execute()
 }

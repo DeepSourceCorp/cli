@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
-	"github.com/deepsourcelabs/graphql"
 )
 
 // GraphQL query to refresh token
@@ -25,6 +25,7 @@ type RefreshTokenParams struct {
 }
 
 type RefreshTokenRequest struct {
+	client graphqlclient.GraphQLClient
 	Params RefreshTokenParams
 }
 
@@ -32,17 +33,15 @@ type RefreshTokenResponse struct {
 	auth.PAT `json:"refreshPat"`
 }
 
-func (r RefreshTokenRequest) Do(ctx context.Context, client IGQLClient) (*auth.PAT, error) {
-	req := graphql.NewRequest(refreshTokenQuery)
+func NewRefreshTokenRequest(client graphqlclient.GraphQLClient, params RefreshTokenParams) *RefreshTokenRequest {
+	return &RefreshTokenRequest{client: client, Params: params}
+}
 
-	// set header fields
-	req.Header.Set("Cache-Control", "no-cache")
-	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", r.Params.Token))
-
-	// run it and capture the response
+func (r *RefreshTokenRequest) Do(ctx context.Context) (*auth.PAT, error) {
+	r.client.SetAuthToken(r.Params.Token)
 	var respData RefreshTokenResponse
-	if err := client.GQL().Run(ctx, req, &respData); err != nil {
-		return nil, err
+	if err := r.client.Mutate(ctx, refreshTokenQuery, nil, &respData); err != nil {
+		return nil, fmt.Errorf("refresh PAT: %w", err)
 	}
 
 	return &respData.PAT, nil

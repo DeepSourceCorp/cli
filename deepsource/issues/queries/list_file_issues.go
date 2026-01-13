@@ -5,8 +5,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
-	"github.com/deepsourcelabs/graphql"
 )
 
 // Query to fetch issues for a certain file specified by the user
@@ -60,6 +60,7 @@ type FileIssuesListParams struct {
 
 // Request struct
 type FileIssuesListRequest struct {
+	client graphqlclient.GraphQLClient
 	Params FileIssuesListParams
 }
 
@@ -94,33 +95,21 @@ type FileIssuesResponse struct {
 	} `json:"repository"`
 }
 
-// GraphQL client interface
-type IGQLClient interface {
-	GQL() *graphql.Client
-	GetToken() string
+func NewFileIssuesListRequest(client graphqlclient.GraphQLClient, params FileIssuesListParams) *FileIssuesListRequest {
+	return &FileIssuesListRequest{client: client, Params: params}
 }
 
-func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.Issue, error) {
-	req := graphql.NewRequest(fetchFileIssuesQuery)
-	req.Header.Set("Cache-Control", "no-cache")
-
-	req.Var("name", f.Params.RepoName)
-	req.Var("owner", f.Params.Owner)
-	req.Var("provider", f.Params.Provider)
-	req.Var("path", f.Params.FilePath)
-	req.Var("limit", f.Params.Limit)
-
-	// set header fields
-	req.Header.Set("Cache-Control", "no-cache")
-
-	// Adding token as header for auth
-	tokenHeader := fmt.Sprintf("Bearer %s", client.GetToken())
-	req.Header.Add("Authorization", tokenHeader)
-
-	// run it and capture the response
+func (f *FileIssuesListRequest) Do(ctx context.Context) ([]issues.Issue, error) {
+	vars := map[string]interface{}{
+		"name":     f.Params.RepoName,
+		"owner":    f.Params.Owner,
+		"provider": f.Params.Provider,
+		"path":     f.Params.FilePath,
+		"limit":    f.Params.Limit,
+	}
 	var respData FileIssuesResponse
-	if err := client.GQL().Run(ctx, req, &respData); err != nil {
-		return nil, err
+	if err := f.client.Query(ctx, fetchFileIssuesQuery, vars, &respData); err != nil {
+		return nil, fmt.Errorf("list file issues: %w", err)
 	}
 
 	// Formatting the query response w.r.t the output format of the SDK as specified in `issues_list.go`

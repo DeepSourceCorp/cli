@@ -3,6 +3,7 @@ package version
 import (
 	"fmt"
 
+	versionsvc "github.com/deepsourcelabs/cli/internal/services/version"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/deepsourcelabs/cli/version"
 	"github.com/spf13/cobra"
@@ -37,9 +38,6 @@ func (Options) Validate() error {
 
 // Run executest the command.
 func (Options) Run() string {
-	buildInfo := getBuildInfo()
-	if buildInfo == nil {
-		return ""
-	}
-	return getBuildInfo().String()
+	svc := versionsvc.NewServiceWith(getBuildInfo)
+	return svc.String()
 }

@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/deepsourcelabs/cli/config"
+	authsvc "github.com/deepsourcelabs/cli/internal/services/auth"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
@@ -27,8 +28,9 @@ func NewCmdLogout() *cobra.Command {
 }
 
 func (opts *LogoutOptions) Run() error {
+	svc := authsvc.NewService(config.DefaultManager())
 	// Fetch config
-	cfg, err := config.GetConfig()
+	cfg, err := svc.LoadConfig()
 	if err != nil {
 		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
 	}
@@ -46,8 +48,7 @@ func (opts *LogoutOptions) Run() error {
 
 	// If response is true, delete the config file => logged out the user
 	if response {
-		err := cfg.Delete()
-		if err != nil {
+		if err := svc.DeleteConfig(); err != nil {
 			return err
 		}
 	}

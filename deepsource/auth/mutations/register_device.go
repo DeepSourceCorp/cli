@@ -2,9 +2,10 @@ package auth
 
 import (
 	"context"
+	"fmt"
 
+	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
-	"github.com/deepsourcelabs/graphql"
 )
 
 // GraphQL mutation to register Device get a device code
@@ -19,23 +20,22 @@ const registerDeviceMutation = `mutation register {
 	}
 }`
 
-type RegisterDeviceRequest struct{}
+type RegisterDeviceRequest struct {
+	client graphqlclient.GraphQLClient
+}
 
 type RegisterDeviceResponse struct {
 	auth.Device `json:"registerDevice"`
 }
 
-type IGQLClient interface {
-	GQL() *graphql.Client
+func NewRegisterDeviceRequest(client graphqlclient.GraphQLClient) *RegisterDeviceRequest {
+	return &RegisterDeviceRequest{client: client}
 }
 
-func (r RegisterDeviceRequest) Do(ctx context.Context, client IGQLClient) (*auth.Device, error) {
-	req := graphql.NewRequest(registerDeviceMutation)
-	req.Header.Set("Cache-Control", "no-cache")
-
+func (r *RegisterDeviceRequest) Do(ctx context.Context) (*auth.Device, error) {
 	var res RegisterDeviceResponse
-	if err := client.GQL().Run(ctx, req, &res); err != nil {
-		return nil, err
+	if err := r.client.Mutate(ctx, registerDeviceMutation, nil, &res); err != nil {
+		return nil, fmt.Errorf("register device: %w", err)
 	}
 
 	return &res.Device, nil

@@ -5,8 +5,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
-	"github.com/deepsourcelabs/graphql"
 )
 
 const fetchAllIssuesQuery = `query GetAllIssues(
@@ -53,6 +53,7 @@ type IssuesListParams struct {
 }
 
 type IssuesListRequest struct {
+	client graphqlclient.GraphQLClient
 	Params IssuesListParams
 }
 
@@ -87,23 +88,20 @@ type IssuesListResponse struct {
 	} `json:"repository"`
 }
 
-func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.Issue, error) {
-	req := graphql.NewRequest(fetchAllIssuesQuery)
-	req.Var("name", i.Params.RepoName)
-	req.Var("owner", i.Params.Owner)
-	req.Var("provider", i.Params.Provider)
-	req.Var("limit", i.Params.Limit)
+func NewIssuesListRequest(client graphqlclient.GraphQLClient, params IssuesListParams) *IssuesListRequest {
+	return &IssuesListRequest{client: client, Params: params}
+}
 
-	// set header fields
-	req.Header.Set("Cache-Control", "no-cache")
-	// Adding PAT as a header for authentication
-	tokenHeader := fmt.Sprintf("Bearer %s", client.GetToken())
-	req.Header.Add("Authorization", tokenHeader)
-
-	// run it and capture the response
+func (i *IssuesListRequest) Do(ctx context.Context) ([]issues.Issue, error) {
+	vars := map[string]interface{}{
+		"name":     i.Params.RepoName,
+		"owner":    i.Params.Owner,
+		"provider": i.Params.Provider,
+		"limit":    i.Params.Limit,
+	}
 	var respData IssuesListResponse
-	if err := client.GQL().Run(ctx, req, &respData); err != nil {
-		return nil, err
+	if err := i.client.Query(ctx, fetchAllIssuesQuery, vars, &respData); err != nil {
+		return nil, fmt.Errorf("list issues: %w", err)
 	}
 
 	issuesData := []issues.Issue{}

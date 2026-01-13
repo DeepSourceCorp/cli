@@ -4,23 +4,15 @@ import (
 	"context"
 
 	"github.com/deepsourcelabs/cli/config"
-	"github.com/deepsourcelabs/cli/deepsource"
-	"github.com/deepsourcelabs/cli/utils"
+	configsvc "github.com/deepsourcelabs/cli/internal/services/config"
 )
 
 // Responsible for collecting user input for generating DeepSource config
-func (o *Options) collectUserInput() error {
-	deepsource, err := deepsource.New(deepsource.ClientOpts{
-		Token:    config.Cfg.Token,
-		HostName: config.Cfg.Host,
-	})
-	if err != nil {
-		return err
-	}
+func (o *Options) collectUserInput(svc *configsvc.Service, cfg *config.CLIConfig) error {
 	ctx := context.Background()
 
 	// Get the list of analyzers and transformers supported by DeepSource
-	err = utils.GetAnalyzersAndTransformersData(ctx, *deepsource)
+	err := svc.FetchAnalyzersAndTransformersData(ctx, cfg)
 	if err != nil {
 		return err
 	}

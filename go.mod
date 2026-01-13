@@ -1,6 +1,6 @@
 module github.com/deepsourcelabs/cli
 
-go 1.21
+go 1.24
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.2.12

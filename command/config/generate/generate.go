@@ -8,6 +8,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
+	configsvc "github.com/deepsourcelabs/cli/internal/services/config"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/fatih/color"
 	toml "github.com/pelletier/go-toml"
@@ -33,7 +34,7 @@ func NewCmdConfigGenerate() *cobra.Command {
 		Generate config for the DeepSource CLI.
 
 		Configs are stored in: %[1]s
-		`, utils.Cyan(filepath.Join(home, "deepsource", "config.toml")))
+		`, utils.Cyan("%s", filepath.Join(home, "deepsource", "config.toml")))
 
 	cmd := &cobra.Command{
 		Use:   "generate",
@@ -49,18 +50,14 @@ func NewCmdConfigGenerate() *cobra.Command {
 
 // Run executes the command.
 func (o *Options) Run() error {
-	// Fetch config
-	cfg, err := config.GetConfig()
-	if err != nil {
-		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
-	}
-	err = cfg.VerifyAuthentication()
+	svc := configsvc.NewService(config.DefaultManager())
+	cfg, err := svc.LoadConfig()
 	if err != nil {
 		return err
 	}
 
 	// Step 1: Collect user input
-	err = o.collectUserInput()
+	err = o.collectUserInput(svc, cfg)
 	if err != nil {
 		fmt.Println("\nError occured while collecting input.Exiting...")
 		return err

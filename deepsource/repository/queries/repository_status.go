@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/deepsource/repository"
-	"github.com/deepsourcelabs/graphql"
 )
 
 // Query to fetch the status of the repo data sent as param
@@ -22,6 +22,7 @@ type RepoStatusParams struct {
 }
 
 type RepoStatusRequest struct {
+	client graphqlclient.GraphQLClient
 	Params RepoStatusParams
 }
 
@@ -31,28 +32,19 @@ type RepoStatusResponse struct {
 	} `json:"repository"`
 }
 
-// GraphQL client interface
-type IGQLClient interface {
-	GQL() *graphql.Client
-	GetToken() string
+func NewRepoStatusRequest(client graphqlclient.GraphQLClient, params RepoStatusParams) *RepoStatusRequest {
+	return &RepoStatusRequest{client: client, Params: params}
 }
 
-func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient) (*repository.Meta, error) {
-	req := graphql.NewRequest(repoStatusQuery)
-	req.Var("name", r.Params.RepoName)
-	req.Var("owner", r.Params.Owner)
-	req.Var("provider", r.Params.Provider)
-
-	// set header fields
-	req.Header.Set("Cache-Control", "no-cache")
-	// Adding PAT as header for auth
-	tokenHeader := fmt.Sprintf("Bearer %s", client.GetToken())
-	req.Header.Add("Authorization", tokenHeader)
-
-	// run it and capture the response
+func (r *RepoStatusRequest) Do(ctx context.Context) (*repository.Meta, error) {
+	vars := map[string]interface{}{
+		"name":     r.Params.RepoName,
+		"owner":    r.Params.Owner,
+		"provider": r.Params.Provider,
+	}
 	var respData RepoStatusResponse
-	if err := client.GQL().Run(ctx, req, &respData); err != nil {
-		return nil, err
+	if err := r.client.Query(ctx, repoStatusQuery, vars, &respData); err != nil {
+		return nil, fmt.Errorf("fetch repo status: %w", err)
 	}
 
 	// Formatting the query response w.r.t the repository.Meta structure
