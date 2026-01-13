@@ -9,16 +9,16 @@ import (
 
 	"github.com/cli/browser"
 	"github.com/deepsourcelabs/cli/config"
-	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
+	authsvc "github.com/deepsourcelabs/cli/internal/services/auth"
 	"github.com/fatih/color"
 )
 
 // Starts the login flow for the CLI
-func (opts *LoginOptions) startLoginFlow(cfg *config.CLIConfig) error {
+func (opts *LoginOptions) startLoginFlow(svc *authsvc.Service, cfg *config.CLIConfig) error {
 	// Register the device and get a device code through the response
 	ctx := context.Background()
-	deviceRegistrationResponse, err := registerDevice(ctx)
+	deviceRegistrationResponse, err := registerDevice(ctx, svc, cfg)
 	if err != nil {
 		return err
 	}
@@ -37,7 +37,7 @@ func (opts *LoginOptions) startLoginFlow(cfg *config.CLIConfig) error {
 
 	// Fetch the PAT using the device registration resonse
 	var tokenData *auth.PAT
-	tokenData, opts.AuthTimedOut, err = fetchPAT(ctx, deviceRegistrationResponse)
+	tokenData, opts.AuthTimedOut, err = fetchPAT(ctx, deviceRegistrationResponse, svc, cfg)
 	if err != nil {
 		return err
 	}
@@ -54,32 +54,18 @@ func (opts *LoginOptions) startLoginFlow(cfg *config.CLIConfig) error {
 	cfg.SetTokenExpiry(tokenData.Expiry)
 
 	// Having stored the data in the global Cfg object, write it into the config file present in the local filesystem
-	err = cfg.WriteFile()
+	err = svc.SaveConfig(cfg)
 	if err != nil {
 		return fmt.Errorf("Error in writing authentication data to a file. Exiting...")
 	}
 	return nil
 }
 
-func registerDevice(ctx context.Context) (*auth.Device, error) {
-	// Fetching DeepSource client in order to interact with SDK
-	deepsource, err := deepsource.New(deepsource.ClientOpts{
-		Token:    config.Cfg.Token,
-		HostName: config.Cfg.Host,
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	// Send a mutation to register device and get the device code
-	res, err := deepsource.RegisterDevice(ctx)
-	if err != nil {
-		return nil, err
-	}
-	return res, nil
+func registerDevice(ctx context.Context, svc *authsvc.Service, cfg *config.CLIConfig) (*auth.Device, error) {
+	return svc.RegisterDevice(ctx, cfg)
 }
 
-func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.PAT, bool, error) {
+func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device, svc *authsvc.Service, cfg *config.CLIConfig) (*auth.PAT, bool, error) {
 	var tokenData *auth.PAT
 	var err error
 	defaultUserName := "user"
@@ -103,15 +89,6 @@ func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.P
 	}
 	userDescription := fmt.Sprintf("CLI PAT for %s@%s", userName, hostName)
 
-	// Fetching DeepSource client in order to interact with SDK
-	deepsource, err := deepsource.New(deepsource.ClientOpts{
-		Token:    config.Cfg.Token,
-		HostName: config.Cfg.Host,
-	})
-	if err != nil {
-		return nil, authTimedOut, err
-	}
-
 	// Keep polling the mutation at a certain interval till the expiry timeperiod
 	ticker := time.NewTicker(time.Duration(deviceRegistrationData.Interval) * time.Second)
 	pollStartTime := time.Now()
@@ -119,7 +96,7 @@ func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.P
 	// Polling for fetching PAT
 	func() {
 		for range ticker.C {
-			tokenData, err = deepsource.Login(ctx, deviceRegistrationData.Code, userDescription)
+			tokenData, err = svc.RequestPAT(ctx, cfg, deviceRegistrationData.Code, userDescription)
 			if err == nil {
 				authTimedOut = false
 				return

@@ -2,31 +2,23 @@ package view
 
 import (
 	"context"
-	"errors"
+	"encoding/json"
 	"fmt"
-	"strings"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/cli/browser"
 	"github.com/deepsourcelabs/cli/config"
-	"github.com/deepsourcelabs/cli/deepsource"
+	reposvc "github.com/deepsourcelabs/cli/internal/services/repo"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v3"
 )
-
-var VCSMap = map[string]string{
-	"GITHUB":               "gh",
-	"GITHUB_ENTERPRISE":    "ghe",
-	"GITLAB":               "gl",
-	"BITBUCKET":            "bb",
-	"BITBUCKET_DATACENTER": "bbdc",
-	"ADS":                  "ads",
-}
 
 type RepoViewOptions struct {
 	RepoArg        string
 	TokenExpired   bool
 	SelectedRemote *utils.RemoteData
+	Output         string
 }
 
 func NewCmdRepoView() *cobra.Command {
@@ -53,54 +45,42 @@ func NewCmdRepoView() *cobra.Command {
 
 	// --repo, -r flag
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Open the DeepSource dashboard of the specified repository")
+	cmd.Flags().StringVar(&opts.Output, "output", "table", "Output format: table, json, yaml")
 	return cmd
 }
 
 func (opts *RepoViewOptions) Run() (err error) {
-	// Fetch config
-	cfg, err := config.GetConfig()
-	if err != nil {
-		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
-	}
-	err = cfg.VerifyAuthentication()
-	if err != nil {
-		return err
-	}
-
-	// Get the remote repository URL for which issues have to
-	// be listed
-	opts.SelectedRemote, err = utils.ResolveRemote(opts.RepoArg)
-	if err != nil {
-		return err
-	}
-
-	// Making the "isActivated" (repo status) query again just to confirm if the user has access to that repo
-	deepsource, err := deepsource.New(deepsource.ClientOpts{
-		Token:    config.Cfg.Token,
-		HostName: config.Cfg.Host,
-	})
-	if err != nil {
-		return err
-	}
 	ctx := context.Background()
-	_, err = deepsource.GetRepoStatus(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider)
+	svc := reposvc.NewService(config.DefaultManager())
+	dashboardURL, err := svc.ViewURL(ctx, opts.RepoArg)
 	if err != nil {
-		if strings.Contains(err.Error(), "Signature has expired") {
-			return errors.New("The token has expired. Please refresh the token using the command `deepsource auth refresh`")
-		}
-
-		if strings.Contains(err.Error(), "Repository matching query does not exist") {
-			return errors.New("Unauthorized access. Please login if you haven't using the command `deepsource auth login`")
-		}
+		return err
 	}
 
-	// If the user has access to repo, frame the full URL of the repo and open it on the
-	// default browser
-	VCSShortcode := VCSMap[opts.SelectedRemote.VCSProvider]
+	return printView(opts.Output, dashboardURL)
+}
 
-	// Framing the complete URL
-	dashboardURL := fmt.Sprintf("https://%s/%s/%s/%s/", config.Cfg.Host, VCSShortcode, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName)
-	fmt.Printf("Press Enter to open %s in your browser...", dashboardURL)
-	fmt.Scanln()
-	return browser.OpenURL(dashboardURL)
+func printView(format string, dashboardURL string) error {
+	switch format {
+	case "", "table":
+		fmt.Printf("Press Enter to open %s in your browser...", dashboardURL)
+		fmt.Scanln()
+		return browser.OpenURL(dashboardURL)
+	case "json":
+		payload, err := json.MarshalIndent(map[string]string{"url": dashboardURL}, "", "  ")
+		if err != nil {
+			return fmt.Errorf("DeepSource | Error | Failed to format JSON output: %w", err)
+		}
+		fmt.Printf("%s\n", payload)
+		return nil
+	case "yaml":
+		payload, err := yaml.Marshal(map[string]string{"url": dashboardURL})
+		if err != nil {
+			return fmt.Errorf("DeepSource | Error | Failed to format YAML output: %w", err)
+		}
+		fmt.Print(string(payload))
+		return nil
+	default:
+		return fmt.Errorf("DeepSource | Error | Unsupported output format: %s", format)
+	}
 }

@@ -2,42 +2,58 @@ package tests
 
 import (
 	"context"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"reflect"
 	"testing"
 
+	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	analyzers "github.com/deepsourcelabs/cli/deepsource/analyzers/queries"
 	"github.com/deepsourcelabs/graphql"
 )
 
-// mock client
-type Client struct {
-	gql   *graphql.Client
-	token string
+type testGraphQLClient struct {
+	client *graphql.Client
+	token  string
 }
 
-// Returns a GraphQL client which can be used to interact with the GQL APIs
-func (c Client) GQL() *graphql.Client {
-	return c.gql
+func (c *testGraphQLClient) Query(ctx context.Context, query string, vars map[string]interface{}, result interface{}) error {
+	return c.run(ctx, query, vars, result)
 }
 
-// Returns the token which is required for authentication and thus, interacting with the APIs
-func (c Client) GetToken() string {
-	return c.token
+func (c *testGraphQLClient) Mutate(ctx context.Context, mutation string, vars map[string]interface{}, result interface{}) error {
+	return c.run(ctx, mutation, vars, result)
+}
+
+func (c *testGraphQLClient) SetAuthToken(token string) {
+	c.token = token
+}
+
+func (c *testGraphQLClient) run(ctx context.Context, query string, vars map[string]interface{}, result interface{}) error {
+	req := graphql.NewRequest(query)
+	req.Header.Set("Cache-Control", "no-cache")
+	if c.token != "" {
+		req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", c.token))
+	}
+	for key, value := range vars {
+		req.Var(key, value)
+	}
+	return c.client.Run(ctx, req, result)
 }
 
 func TestAnalyzers(t *testing.T) {
 	t.Run("valid GraphQL request", func(t *testing.T) {
 		// create client
 		gql := graphql.NewClient("http://localhost:8081/analyzer")
-		c := Client{gql: gql, token: "secret"}
+		c := &testGraphQLClient{client: gql, token: "secret"}
 
 		// perform request
-		req := analyzers.AnalyzersRequest{}
+		var gqlClient graphqlclient.GraphQLClient = c
+		req := analyzers.NewAnalyzersRequest(gqlClient)
 		ctx := context.Background()
-		_, err := req.Do(ctx, c)
+		_, err := req.Do(ctx)
 		if err != nil {
 			t.Error(err.Error())
 		}

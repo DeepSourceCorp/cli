@@ -9,6 +9,7 @@ import (
 	"testing"
 
 	"github.com/deepsourcelabs/cli/deepsource/issues"
+	issuesvc "github.com/deepsourcelabs/cli/internal/services/issues"
 )
 
 // Helper function to read issues from a file.
@@ -115,7 +116,7 @@ func TestFilterIssuesByPath(t *testing.T) {
 		issues_data := ReadIssues("./testdata/dummy/issues_data_multi.json")
 		issues_docker := ReadIssues("./testdata/dummy/issues_docker.json")
 
-		got, _ := filterIssuesByPath("Dockerfile", issues_data)
+		got, _ := issuesvc.FilterIssuesByPath("Dockerfile", issues_data)
 		want := issues_docker
 		if !reflect.DeepEqual(got, want) {
 			t.Errorf("got: %v; want: %v\n", got, want)
@@ -126,7 +127,7 @@ func TestFilterIssuesByPath(t *testing.T) {
 		issues_data := ReadIssues("./testdata/dummy/issues_data_multi.json")
 		issues_deepsource := ReadIssues("./testdata/dummy/issues_deepsource.json")
 
-		got, _ := filterIssuesByPath("deepsource/", issues_data)
+		got, _ := issuesvc.FilterIssuesByPath("deepsource/", issues_data)
 		want := issues_deepsource
 		if !reflect.DeepEqual(got, want) {
 			t.Errorf("got: %v; want: %v\n", got, want)
@@ -139,7 +140,7 @@ func TestFilterIssuesByAnalyzer(t *testing.T) {
 		issues_data := ReadIssues("./testdata/dummy/issues_data_multi.json")
 		issues_docker := ReadIssues("./testdata/dummy/issues_docker.json")
 
-		got, _ := filterIssuesByAnalyzer([]string{"docker"}, issues_data)
+		got, _ := issuesvc.FilterIssuesByAnalyzer([]string{"docker"}, issues_data)
 		want := issues_docker
 		if !reflect.DeepEqual(got, want) {
 			t.Errorf("got: %v; want: %v\n", got, want)
@@ -150,7 +151,7 @@ func TestFilterIssuesByAnalyzer(t *testing.T) {
 		issues_data := ReadIssues("./testdata/dummy/issues_data_multi.json")
 		issues_multi_analyzers := ReadIssues("./testdata/dummy/issues_multiple_analyzers.json")
 
-		got, _ := filterIssuesByAnalyzer([]string{"docker", "python"}, issues_data)
+		got, _ := issuesvc.FilterIssuesByAnalyzer([]string{"docker", "python"}, issues_data)
 		want := issues_multi_analyzers
 		if !reflect.DeepEqual(got, want) {
 			t.Errorf("got: %v; want: %v\n", got, want)

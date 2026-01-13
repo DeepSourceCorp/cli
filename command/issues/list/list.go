@@ -10,8 +10,8 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
-	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
+	issuesvc "github.com/deepsourcelabs/cli/internal/services/issues"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
@@ -104,16 +104,6 @@ func NewCmdIssuesList() *cobra.Command {
 
 // Execute the command
 func (opts *IssuesListOptions) Run() (err error) {
-	// Fetch config
-	cfg, err := config.GetConfig()
-	if err != nil {
-		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
-	}
-	err = cfg.VerifyAuthentication()
-	if err != nil {
-		return err
-	}
-
 	// The current limit of querying issues at once is 100.
 	// If the limit passed by user is greater than 100, exit
 	// with an error message
@@ -121,18 +111,20 @@ func (opts *IssuesListOptions) Run() (err error) {
 		return fmt.Errorf("The maximum allowed limit to fetch issues is 100. Found %d", opts.LimitArg)
 	}
 
-	// Get the remote repository URL for which issues have to be listed
-	opts.SelectedRemote, err = utils.ResolveRemote(opts.RepoArg)
-	if err != nil {
-		return err
-	}
-
 	// Fetch the list of issues using SDK (deepsource package) based on user input
 	ctx := context.Background()
-	err = opts.getIssuesData(ctx)
+	svc := issuesvc.NewService(config.DefaultManager())
+	result, err := svc.List(ctx, issuesvc.ListOptions{
+		RepoArg:      opts.RepoArg,
+		FileArgs:     opts.FileArg,
+		AnalyzerArgs: opts.AnalyzerArg,
+		Limit:        opts.LimitArg,
+	})
 	if err != nil {
 		return err
 	}
+	opts.SelectedRemote = result.Remote
+	opts.issuesData = result.Issues
 
 	if opts.JSONArg {
 		opts.exportJSON(opts.OutputFilenameArg)
@@ -142,60 +134,6 @@ func (opts *IssuesListOptions) Run() (err error) {
 		opts.exportSARIF(opts.OutputFilenameArg)
 	} else {
 		opts.showIssues()
-	}
-
-	return nil
-}
-
-// Gets the data about issues using the SDK based on the user input
-// i.e for a single file or for the whole project
-func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
-	// Get the deepsource client for using the issue fetching SDK to fetch the list of issues
-	deepsource, err := deepsource.New(deepsource.ClientOpts{
-		Token:    config.Cfg.Token,
-		HostName: config.Cfg.Host,
-	})
-	if err != nil {
-		return err
-	}
-
-	// Fetch list of issues for the whole project
-	opts.issuesData, err = deepsource.GetIssues(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, opts.LimitArg)
-	if err != nil {
-		return err
-	}
-
-	var filteredIssues []issues.Issue
-
-	// Fetch issues for a certain FileArg (filepath) passed by the user
-	// Example: `deepsource issues list api/hello.py`
-	if len(opts.FileArg) != 0 {
-		var fetchedIssues []issues.Issue
-		for _, arg := range opts.FileArg {
-			// Filter issues for the valid directories/files
-			filteredIssues, err = filterIssuesByPath(arg, opts.issuesData)
-			if err != nil {
-				return err
-			}
-			fetchedIssues = append(fetchedIssues, filteredIssues...)
-		}
-
-		// set fetched issues as issue data
-		opts.issuesData = getUniqueIssues(fetchedIssues)
-	}
-
-	if len(opts.AnalyzerArg) != 0 {
-		var fetchedIssues []issues.Issue
-
-		// Filter issues based on the analyzer shortcode
-		filteredIssues, err = filterIssuesByAnalyzer(opts.AnalyzerArg, opts.issuesData)
-		if err != nil {
-			return err
-		}
-		fetchedIssues = append(fetchedIssues, filteredIssues...)
-
-		// set fetched issues as issue data
-		opts.issuesData = getUniqueIssues(fetchedIssues)
 	}
 
 	return nil

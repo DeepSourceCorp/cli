@@ -6,6 +6,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
+	authsvc "github.com/deepsourcelabs/cli/internal/services/auth"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
@@ -35,8 +36,9 @@ func NewCmdStatus() *cobra.Command {
 }
 
 func (opts *AuthStatusOptions) Run() error {
+	svc := authsvc.NewService(config.DefaultManager())
 	// Fetch config
-	cfg, err := config.GetConfig()
+	cfg, err := svc.LoadConfig()
 	if err != nil {
 		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
 	}

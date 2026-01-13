@@ -7,7 +7,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
-	"github.com/deepsourcelabs/cli/deepsource"
+	authsvc "github.com/deepsourcelabs/cli/internal/services/auth"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
@@ -40,8 +40,9 @@ func NewCmdRefresh() *cobra.Command {
 }
 
 func (opts *RefreshOptions) Run() error {
+	svc := authsvc.NewService(config.DefaultManager())
 	// Fetch config
-	cfg, err := config.GetConfig()
+	cfg, err := svc.LoadConfig()
 	if err != nil {
 		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
 	}
@@ -50,17 +51,9 @@ func (opts *RefreshOptions) Run() error {
 		return errors.New("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
 	}
 
-	// Fetching DS Client
-	deepsource, err := deepsource.New(deepsource.ClientOpts{
-		Token:    config.Cfg.Token,
-		HostName: config.Cfg.Host,
-	})
-	if err != nil {
-		return err
-	}
 	ctx := context.Background()
 	// Use the SDK to fetch the new auth data
-	refreshedConfigData, err := deepsource.RefreshAuthCreds(ctx, cfg.Token)
+	refreshedConfigData, err := svc.RefreshAuth(ctx, cfg)
 	if err != nil {
 		return err
 	}
@@ -71,7 +64,7 @@ func (opts *RefreshOptions) Run() error {
 	cfg.SetTokenExpiry(refreshedConfigData.Expiry)
 
 	// Having formatted the data, write it to the config file
-	err = cfg.WriteFile()
+	err = svc.SaveConfig(cfg)
 	if err != nil {
 		fmt.Println("Error in writing authentication data to a file. Exiting...")
 		return err

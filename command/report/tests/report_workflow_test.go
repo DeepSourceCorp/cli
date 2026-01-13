@@ -8,12 +8,13 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"os/exec"
 	"strings"
 	"testing"
 
 	"github.com/DataDog/zstd"
 	"github.com/deepsourcelabs/cli/command/report"
+	"github.com/deepsourcelabs/cli/internal/adapters"
+	"github.com/deepsourcelabs/cli/internal/container"
 	"github.com/google/go-cmp/cmp"
 )
 
@@ -25,10 +26,10 @@ import (
 // Sample values to the run the analyzer on
 const (
 	analyzer  = "test-coverage"
-	commitOid = "b7ff1a5ecb0dce0541b935224f852ee98570bbd4"
-	dsn       = "http://f59ab9314307@localhost:8081"
 	key       = "python"
 )
+
+var dsn = "http://f59ab9314307@localhost:8081"
 
 func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 	// Read request request request body
@@ -144,12 +145,12 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 
 func TestReportKeyValueWorkflow(t *testing.T) {
 	// Read test artifact file
-	data, err := os.ReadFile("/tmp/python_coverage.xml")
+	data, err := os.ReadFile(coverageFilePath)
 	if err != nil {
 		t.Error(err)
 	}
 
-	cmd := exec.Command("/tmp/deepsource",
+	outStr, errStr, err := runReportCommand(t, []string{
 		"report",
 		"--analyzer",
 		analyzer,
@@ -157,21 +158,7 @@ func TestReportKeyValueWorkflow(t *testing.T) {
 		key,
 		"--value",
 		string(data),
-	)
-
-	// Set env variables
-	cmd.Env = os.Environ()
-	cmd.Env = append(cmd.Env, "DEEPSOURCE_DSN="+dsn)
-	cmd.Dir = os.Getenv("CODE_PATH")
-
-	var stdout, stderr bytes.Buffer
-
-	cmd.Stdout = &stdout
-	cmd.Stderr = &stderr
-
-	err = cmd.Run()
-
-	outStr, errStr := stdout.String(), stderr.String()
+	})
 	log.Printf("== Run deepsource CLI command ==\n%s\n%s\n", outStr, errStr)
 
 	if err != nil {
@@ -191,28 +178,15 @@ func TestReportKeyValueWorkflow(t *testing.T) {
 }
 
 func TestReportKeyValueFileWorkflow(t *testing.T) {
-	cmd := exec.Command("/tmp/deepsource",
+	outStr, errStr, err := runReportCommand(t, []string{
 		"report",
 		"--analyzer",
 		analyzer,
 		"--key",
 		key,
 		"--value-file",
-		"/tmp/python_coverage.xml",
-	)
-
-	// Set env variables
-	cmd.Env = os.Environ()
-	cmd.Env = append(cmd.Env, "DEEPSOURCE_DSN="+dsn)
-	cmd.Dir = os.Getenv("CODE_PATH")
-
-	var stdout, stderr bytes.Buffer
-	cmd.Stdout = &stdout
-	cmd.Stderr = &stderr
-
-	err := cmd.Run()
-
-	outStr, errStr := stdout.String(), stderr.String()
+		coverageFilePath,
+	})
 	log.Printf("== Run deepsource CLI command ==\n%s\n%s\n", outStr, errStr)
 
 	if err != nil {
@@ -232,7 +206,7 @@ func TestReportKeyValueFileWorkflow(t *testing.T) {
 }
 
 func TestReportAnalyzerTypeWorkflow(t *testing.T) {
-	cmd := exec.Command("/tmp/deepsource",
+	outStr, errStr, err := runReportCommand(t, []string{
 		"report",
 		"--analyzer",
 		analyzer,
@@ -241,21 +215,8 @@ func TestReportAnalyzerTypeWorkflow(t *testing.T) {
 		"--key",
 		key,
 		"--value-file",
-		"/tmp/python_coverage.xml",
-	)
-
-	// Set env variables
-	cmd.Env = os.Environ()
-	cmd.Env = append(cmd.Env, "DEEPSOURCE_DSN="+dsn)
-	cmd.Dir = os.Getenv("CODE_PATH")
-
-	var stdout, stderr bytes.Buffer
-	cmd.Stdout = &stdout
-	cmd.Stderr = &stderr
-
-	err := cmd.Run()
-
-	outStr, errStr := stdout.String(), stderr.String()
+		coverageFilePath,
+	})
 	log.Printf("== Run deepsource CLI command ==\n%s\n%s\n", outStr, errStr)
 
 	if err != nil {
@@ -272,4 +233,28 @@ func TestReportAnalyzerTypeWorkflow(t *testing.T) {
 	if want := string(output); want != outStr {
 		t.Errorf("Expected: %s, Got: %s", want, outStr)
 	}
+}
+
+func runReportCommand(t *testing.T, args []string) (string, string, error) {
+	t.Helper()
+
+	deps := container.NewTest()
+	if env, ok := deps.Environment.(*adapters.MockEnvironment); ok {
+		env.Set("DEEPSOURCE_DSN", dsn)
+	}
+	if git, ok := deps.GitClient.(*adapters.MockGitClient); ok {
+		git.SetHead("b9e678d8dcb43fa1340e8a0c579b2c642280dc27", "")
+	}
+	if srv != nil {
+		deps.HTTPClient = srv.Client()
+	}
+
+	cmd := report.NewCmdReportWithDeps(deps)
+	cmd.SetArgs(args[1:])
+
+	err := cmd.Execute()
+	if output, ok := deps.Output.(*adapters.BufferOutput); ok {
+		return output.String(), output.ErrorString(), err
+	}
+	return "", "", err
 }

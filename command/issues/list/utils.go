@@ -2,8 +2,6 @@ package list
 
 import (
 	"fmt"
-	"os"
-	"path/filepath"
 	"strings"
 
 	"github.com/deepsourcelabs/cli/deepsource/issues"
@@ -18,73 +16,6 @@ type ExportData struct {
 type Summary struct {
 	TotalOccurences int `json:"total_occurences"`
 	UniqueIssues    int `json:"unique_issues"`
-}
-
-///////////////////////
-// Filtering utilities
-///////////////////////
-
-// Filters issues based on a path, works for both directories and files
-func filterIssuesByPath(path string, issuesData []issues.Issue) ([]issues.Issue, error) {
-	var filteredIssues []issues.Issue
-	for _, issue := range issuesData {
-		up := ".." + string(os.PathSeparator)
-
-		// get relative path
-		rel, err := filepath.Rel(path, issue.Location.Path)
-		if err != nil {
-			return nil, err
-		}
-
-		// handle files
-		if rel == "." {
-			filteredIssues = append(filteredIssues, issue)
-		}
-
-		// check if the relative path has a parent directory
-		if !strings.HasPrefix(rel, up) && rel != ".." {
-			filteredIssues = append(filteredIssues, issue)
-		}
-	}
-
-	return getUniqueIssues(filteredIssues), nil
-}
-
-// Filters issues based on the analyzer shortcode.
-func filterIssuesByAnalyzer(analyzer []string, issuesData []issues.Issue) ([]issues.Issue, error) {
-	var filteredIssues []issues.Issue
-
-	// maintain a map of analyzer shortcodes
-	analyzerMap := make(map[string]bool)
-	for _, shortcode := range analyzer {
-		analyzerMap[shortcode] = true
-	}
-
-	for _, issue := range issuesData {
-		if analyzerMap[issue.Analyzer.Shortcode] {
-			filteredIssues = append(filteredIssues, issue)
-		}
-	}
-
-	return getUniqueIssues(filteredIssues), nil
-}
-
-// Returns de-duplicated issues.
-func getUniqueIssues(fetchedIssues []issues.Issue) []issues.Issue {
-	var uniqueIssues []issues.Issue
-
-	// inUnique is a map which is used for checking whether an issue exists already or not
-	inUnique := make(map[issues.Issue]bool)
-
-	for _, issue := range fetchedIssues {
-		// if the issue isn't present in inUnique, append the issue to uniqueIssues and update inUnique
-		if _, ok := inUnique[issue]; !ok {
-			inUnique[issue] = true
-			uniqueIssues = append(uniqueIssues, issue)
-		}
-	}
-
-	return uniqueIssues
 }
 
 ///////////////////////

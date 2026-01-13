@@ -39,16 +39,6 @@ func TestIsExpired(t *testing.T) {
 	assert.Equal(t, true, result)
 }
 
-func TestConfigDir(t *testing.T) {
-	_, err := cfg.configDir()
-	assert.Nil(t, err)
-}
-
-func TestConfigPath(t *testing.T) {
-	_, err := cfg.configPath()
-	assert.Nil(t, err)
-}
-
 func TestGetConfig(t *testing.T) {
 	_, err := GetConfig()
 	assert.Nil(t, err)

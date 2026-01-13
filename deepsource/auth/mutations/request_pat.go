@@ -2,9 +2,10 @@ package auth
 
 import (
 	"context"
+	"fmt"
 
+	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
-	"github.com/deepsourcelabs/graphql"
 )
 
 type RequestPATParams struct {
@@ -13,6 +14,7 @@ type RequestPATParams struct {
 }
 
 type RequestPATRequest struct {
+	client graphqlclient.GraphQLClient
 	Params RequestPATParams
 }
 
@@ -32,14 +34,15 @@ type RequestPATResponse struct {
 	auth.PAT `json:"requestPatWithDeviceCode"`
 }
 
-func (r RequestPATRequest) Do(ctx context.Context, client IGQLClient) (*auth.PAT, error) {
-	req := graphql.NewRequest(requestPATMutation)
-	req.Header.Set("Cache-Control", "no-cache")
-	req.Var("input", r.Params)
+func NewRequestPATRequest(client graphqlclient.GraphQLClient, params RequestPATParams) *RequestPATRequest {
+	return &RequestPATRequest{client: client, Params: params}
+}
 
+func (r *RequestPATRequest) Do(ctx context.Context) (*auth.PAT, error) {
 	var res RequestPATResponse
-	if err := client.GQL().Run(ctx, req, &res); err != nil {
-		return nil, err
+	vars := map[string]interface{}{"input": r.Params}
+	if err := r.client.Mutate(ctx, requestPATMutation, vars, &res); err != nil {
+		return nil, fmt.Errorf("request PAT: %w", err)
 	}
 
 	return &res.PAT, nil

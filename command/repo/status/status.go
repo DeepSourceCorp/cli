@@ -2,27 +2,30 @@ package status
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
-	"github.com/deepsourcelabs/cli/deepsource"
+	reposvc "github.com/deepsourcelabs/cli/internal/services/repo"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v3"
 )
 
 type RepoStatusOptions struct {
 	RepoArg        string
 	TokenExpired   bool
 	SelectedRemote *utils.RemoteData
+	Output         string
 }
 
 // NewCmdRepoStatus handles querying the activation status of the repo supplied as an arg
 func NewCmdRepoStatus() *cobra.Command {
 	opts := RepoStatusOptions{
 		RepoArg:      "",
-		TokenExpired: config.Cfg.IsExpired(),
+		TokenExpired: false,
 	}
 
 	doc := heredoc.Docf(`
@@ -47,45 +50,46 @@ func NewCmdRepoStatus() *cobra.Command {
 
 	// --repo, -r flag
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Get the activation status of the specified repository")
+	cmd.Flags().StringVar(&opts.Output, "output", "table", "Output format: table, json, yaml")
 	return cmd
 }
 
 func (opts *RepoStatusOptions) Run() (err error) {
-	// Fetch config
-	cfg, err := config.GetConfig()
-	if err != nil {
-		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
-	}
-	err = cfg.VerifyAuthentication()
-	if err != nil {
-		return err
-	}
-
-	// Get the remote repository URL for which issues have to
-	// be listed
-	opts.SelectedRemote, err = utils.ResolveRemote(opts.RepoArg)
-	if err != nil {
-		return err
-	}
-	// Use the SDK to find the activation status
-	deepsource, err := deepsource.New(deepsource.ClientOpts{
-		Token:    config.Cfg.Token,
-		HostName: config.Cfg.Host,
-	})
-	if err != nil {
-		return err
-	}
 	ctx := context.Background()
-	statusResponse, err := deepsource.GetRepoStatus(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider)
+	svc := reposvc.NewService(config.DefaultManager())
+	result, err := svc.Status(ctx, opts.RepoArg)
 	if err != nil {
 		return err
 	}
+	opts.SelectedRemote = result.Remote
 
-	// Check response and show corresponding output
-	if statusResponse.Activated {
-		pterm.Info.Println("Analysis active on DeepSource (deepsource.io)")
-	} else {
-		pterm.Info.Println("DeepSource analysis is currently not activated on this repository.")
+	return printStatus(opts.Output, result)
+}
+
+func printStatus(format string, result *reposvc.StatusResult) error {
+	switch format {
+	case "", "table":
+		if result.Activated {
+			pterm.Info.Println("Analysis active on DeepSource (deepsource.io)")
+		} else {
+			pterm.Info.Println("DeepSource analysis is currently not activated on this repository.")
+		}
+		return nil
+	case "json":
+		payload, err := json.MarshalIndent(result, "", "  ")
+		if err != nil {
+			return fmt.Errorf("DeepSource | Error | Failed to format JSON output: %w", err)
+		}
+		fmt.Printf("%s\n", payload)
+		return nil
+	case "yaml":
+		payload, err := yaml.Marshal(result)
+		if err != nil {
+			return fmt.Errorf("DeepSource | Error | Failed to format YAML output: %w", err)
+		}
+		fmt.Print(string(payload))
+		return nil
+	default:
+		return fmt.Errorf("DeepSource | Error | Unsupported output format: %s", format)
 	}
-	return nil
 }

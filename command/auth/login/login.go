@@ -5,6 +5,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
+	authsvc "github.com/deepsourcelabs/cli/internal/services/auth"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 )
@@ -63,8 +64,9 @@ func NewCmdLogin() *cobra.Command {
 
 // Run executes the auth command and starts the login flow if not already authenticated
 func (opts *LoginOptions) Run() (err error) {
+	svc := authsvc.NewService(config.DefaultManager())
 	// Fetch config
-	cfg, _ := config.GetConfig()
+	cfg, _ := svc.LoadConfig()
 	opts.User = cfg.User
 	opts.TokenExpired = cfg.IsExpired()
 
@@ -105,12 +107,12 @@ func (opts *LoginOptions) Run() (err error) {
 
 	// If PAT is passed, start the login flow through PAT
 	if opts.PAT != "" {
-		return opts.startPATLoginFlow(cfg, opts.PAT)
+		return opts.startPATLoginFlow(svc, cfg, opts.PAT)
 	}
 
 	// Condition 2
 	// `startLoginFlow` implements the authentication flow for the CLI
-	return opts.startLoginFlow(cfg)
+	return opts.startLoginFlow(svc, cfg)
 }
 
 func (opts *LoginOptions) handleInteractiveLogin() error {
