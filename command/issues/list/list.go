@@ -20,17 +20,21 @@ import (
 const MAX_ISSUE_LIMIT = 100
 
 type IssuesListOptions struct {
-	FileArg           []string
-	RepoArg           string
-	AnalyzerArg       []string
-	LimitArg          int
-	OutputFilenameArg string
-	JSONArg           bool
-	CSVArg            bool
-	SARIFArg          bool
-	SelectedRemote    *utils.RemoteData
-	issuesData        []issues.Issue
-	ptermTable        [][]string
+	FileArg               []string
+	RepoArg               string
+	AnalyzerArg           []string
+	LimitArg              int
+	OutputFilenameArg     string
+	JSONArg               bool
+	CSVArg                bool
+	SeverityArg           string
+	AutofixAvailableArg   bool
+	AutofixAiAvailableArg bool
+	IsRecommendedArg      bool
+	SARIFArg              bool
+	SelectedRemote        *utils.RemoteData
+	issuesData            []issues.Issue
+	ptermTable            [][]string
 }
 
 func NewCmdIssuesList() *cobra.Command {
@@ -84,6 +88,9 @@ func NewCmdIssuesList() *cobra.Command {
 	// --analyzer, -a flag
 	cmd.Flags().StringArrayVarP(&opts.AnalyzerArg, "analyzer", "a", nil, "List the issues for the specified analyzer")
 
+	// --severity, -s flag
+	cmd.Flags().StringVarP(&opts.SeverityArg, "severity", "s", "", "List the issues for the specified severity")
+
 	// --limit, -l flag
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Fetch the issues upto the specified limit")
 
@@ -98,6 +105,15 @@ func NewCmdIssuesList() *cobra.Command {
 
 	// --sarif flag
 	cmd.Flags().BoolVar(&opts.SARIFArg, "sarif", false, "Output reported issues in SARIF format")
+
+	// --recommended flag
+	cmd.Flags().BoolVar(&opts.IsRecommendedArg, "recommended", false, "Filter issues by recommendation")
+
+	// --autofixAvailable flag
+	cmd.Flags().BoolVar(&opts.AutofixAvailableArg, "autofixAvailable", false, "Filter issues by autofix available")
+
+	// --aiAutofixAvailable flag
+	cmd.Flags().BoolVar(&opts.AutofixAiAvailableArg, "aiAutofixAvailable", false, "Filter issues by autofix AI available")
 
 	return cmd
 }
@@ -198,6 +214,62 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 		opts.issuesData = getUniqueIssues(fetchedIssues)
 	}
 
+	if len(opts.SeverityArg) != 0 {
+		var fetchedIssues []issues.Issue
+
+		// Filter issues based on the severity
+		filteredIssues, err = filterIssuesBySeverity(opts.SeverityArg, opts.issuesData)
+		if err != nil {
+			return err
+		}
+		fetchedIssues = append(fetchedIssues, filteredIssues...)
+
+		// set fetched issues as issue data
+		opts.issuesData = getUniqueIssues(fetchedIssues)
+	}
+
+	if opts.IsRecommendedArg {
+		var fetchedIssues []issues.Issue
+
+		// Filter issues based on the recommended
+		filteredIssues, err = filterIssuesByRecommended(opts.IsRecommendedArg, opts.issuesData)
+		if err != nil {
+			return err
+		}
+		fetchedIssues = append(fetchedIssues, filteredIssues...)
+
+		// set fetched issues as issue data
+		opts.issuesData = getUniqueIssues(fetchedIssues)
+	}
+
+	if opts.AutofixAvailableArg {
+		var fetchedIssues []issues.Issue
+
+		// Filter issues based on the autofix available
+		filteredIssues, err = filterIssuesByAutofixAiAvailable(opts.AutofixAvailableArg, opts.issuesData)
+		if err != nil {
+			return err
+		}
+		fetchedIssues = append(fetchedIssues, filteredIssues...)
+
+		// set fetched issues as issue data
+		opts.issuesData = getUniqueIssues(fetchedIssues)
+	}
+
+	if opts.AutofixAiAvailableArg {
+		var fetchedIssues []issues.Issue
+
+		// Filter issues based on the autofix ai available
+		filteredIssues, err = filterIssuesByAutofixAiAvailable(opts.AutofixAiAvailableArg, opts.issuesData)
+		if err != nil {
+			return err
+		}
+		fetchedIssues = append(fetchedIssues, filteredIssues...)
+
+		// set fetched issues as issue data
+		opts.issuesData = getUniqueIssues(fetchedIssues)
+	}
+
 	return nil
 }
 
@@ -215,10 +287,13 @@ func (opts *IssuesListOptions) showIssues() {
 		analyzerShortcode := issue.Analyzer.Shortcode
 		issueCategory := issue.IssueCategory
 		issueSeverity := issue.IssueSeverity
+		issueIsRecommended := fmt.Sprint(issue.IsRecommended)
+		issueAutofixAvailable := fmt.Sprint(issue.AutofixAvailable)
+		issueAutofixAiAvailable := fmt.Sprint(issue.AutofixAiAvailable)
 		issueCode := issue.IssueCode
 		issueTitle := issue.IssueText
 
-		opts.ptermTable[index] = []string{issueLocation, analyzerShortcode, issueCode, issueTitle, issueCategory, issueSeverity}
+		opts.ptermTable[index] = []string{issueLocation, analyzerShortcode, issueCode, issueTitle, issueCategory, issueSeverity, issueIsRecommended, issueAutofixAvailable, issueAutofixAiAvailable}
 	}
 	// Using pterm to render the list of list
 	pterm.DefaultTable.WithSeparator("\t").WithData(opts.ptermTable).Render()

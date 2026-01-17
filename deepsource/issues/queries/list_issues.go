@@ -68,12 +68,14 @@ type IssuesListResponse struct {
 								BeginLine int    `json:"beginLine"`
 								EndLine   int    `json:"endLine"`
 								Issue     struct {
-									Title         string `json:"title"`
-									Shortcode     string `json:"shortcode"`
-									Category      string `json:"category"`
-									Severity      string `json:"severity"`
-									IsRecommended bool   `json:"isRecommended"`
-									Analyzer      struct {
+									Title              string `json:"title"`
+									Shortcode          string `json:"shortcode"`
+									Category           string `json:"category"`
+									Severity           string `json:"severity"`
+									IsRecommended      bool   `json:"isRecommended"`
+									AutofixAvailable   bool   `json:"autofixAvailable"`
+									AutofixAiAvailable bool   `json:"autofixAiAvailable"`
+									Analyzer           struct {
 										Name      string `json:"name"`
 										Shortcode string `json:"shortcode"`
 									} `json:"analyzer"`
@@ -114,10 +116,13 @@ func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.
 
 		for _, occurenceEdge := range edge.Node.Occurrences.Edges {
 			issueData := issues.Issue{
-				IssueText:     occurenceEdge.Node.Issue.Title,
-				IssueCode:     occurenceEdge.Node.Issue.Shortcode,
-				IssueCategory: occurenceEdge.Node.Issue.Category,
-				IssueSeverity: occurenceEdge.Node.Issue.Severity,
+				IssueText:          occurenceEdge.Node.Issue.Title,
+				IssueCode:          occurenceEdge.Node.Issue.Shortcode,
+				IssueCategory:      occurenceEdge.Node.Issue.Category,
+				IssueSeverity:      occurenceEdge.Node.Issue.Severity,
+				IsRecommended:      occurenceEdge.Node.Issue.IsRecommended,
+				AutofixAvailable:   occurenceEdge.Node.Issue.AutofixAvailable,
+				AutofixAiAvailable: occurenceEdge.Node.Issue.AutofixAiAvailable,
 				Location: issues.Location{
 					Path: occurenceEdge.Node.Path,
 					Position: issues.Position{

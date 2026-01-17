@@ -51,6 +51,58 @@ func filterIssuesByPath(path string, issuesData []issues.Issue) ([]issues.Issue,
 }
 
 // Filters issues based on the analyzer shortcode.
+func filterIssuesBySeverity(severity string, issuesData []issues.Issue) ([]issues.Issue, error) {
+	var filteredIssues []issues.Issue
+
+	for _, issue := range issuesData {
+		if issue.IssueSeverity == severity {
+			filteredIssues = append(filteredIssues, issue)
+		}
+	}
+
+	return getUniqueIssues(filteredIssues), nil
+}
+
+// Filters issues based on the analyzer shortcode.
+func filterIssuesByRecommended(recommended bool, issuesData []issues.Issue) ([]issues.Issue, error) {
+	var filteredIssues []issues.Issue
+
+	for _, issue := range issuesData {
+		if issue.IsRecommended {
+			filteredIssues = append(filteredIssues, issue)
+		}
+	}
+
+	return getUniqueIssues(filteredIssues), nil
+}
+
+// Filters issues based on the analyzer shortcode.
+func filterIssuesByAutofixAvailable(autofixAvailable bool, issuesData []issues.Issue) ([]issues.Issue, error) {
+	var filteredIssues []issues.Issue
+
+	for _, issue := range issuesData {
+		if issue.AutofixAvailable {
+			filteredIssues = append(filteredIssues, issue)
+		}
+	}
+
+	return getUniqueIssues(filteredIssues), nil
+}
+
+// Filters issues based on the analyzer shortcode.
+func filterIssuesByAutofixAiAvailable(autofixAiAvailable bool, issuesData []issues.Issue) ([]issues.Issue, error) {
+	var filteredIssues []issues.Issue
+
+	for _, issue := range issuesData {
+		if issue.AutofixAiAvailable {
+			filteredIssues = append(filteredIssues, issue)
+		}
+	}
+
+	return getUniqueIssues(filteredIssues), nil
+}
+
+// Filters issues based on the analyzer shortcode.
 func filterIssuesByAnalyzer(analyzer []string, issuesData []issues.Issue) ([]issues.Issue, error) {
 	var filteredIssues []issues.Issue
 
