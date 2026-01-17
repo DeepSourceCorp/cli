@@ -2,9 +2,10 @@ package tests
 
 import (
 	"context"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
+	"os"
 	"reflect"
 	"testing"
 
@@ -46,24 +47,24 @@ func TestAnalyzers(t *testing.T) {
 
 // a mock GraphQL handler for testing
 func mockAnalyzer(w http.ResponseWriter, r *http.Request) {
-	req, _ := ioutil.ReadAll(r.Body)
+	req, _ := io.ReadAll(r.Body)
 
 	// Read test graphql request body artifact file
-	requestBodyData, err := ioutil.ReadFile("./testdata/analyzer/request_body.txt")
+	requestBodyData, err := os.ReadFile("./testdata/analyzer/request_body.txt")
 	if err != nil {
 		log.Println(err)
 		return
 	}
 
 	// Read test graphql success response body artifact file
-	successResponseBodyData, err := ioutil.ReadFile("./testdata/analyzer/success_response_body.json")
+	successResponseBodyData, err := os.ReadFile("./testdata/analyzer/success_response_body.json")
 	if err != nil {
 		log.Println(err)
 		return
 	}
 
 	// Read test graphql error response body artifact file
-	errorResponseBodyData, err := ioutil.ReadFile("./testdata/analyzer/error_response_body.json")
+	errorResponseBodyData, err := os.ReadFile("./testdata/analyzer/error_response_body.json")
 	if err != nil {
 		log.Println(err)
 		return

@@ -5,7 +5,6 @@ import (
 	"encoding/csv"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 
 	"github.com/MakeNowJust/heredoc"
@@ -215,59 +214,23 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 	}
 
 	if len(opts.SeverityArg) != 0 {
-		var fetchedIssues []issues.Issue
-
-		// Filter issues based on the severity
-		filteredIssues, err = filterIssuesBySeverity(opts.SeverityArg, opts.issuesData)
-		if err != nil {
-			return err
-		}
-		fetchedIssues = append(fetchedIssues, filteredIssues...)
-
-		// set fetched issues as issue data
-		opts.issuesData = getUniqueIssues(fetchedIssues)
+		filteredIssues := utils.Filter(opts.issuesData, func(i issues.Issue) bool { return i.IssueSeverity == opts.SeverityArg })
+		opts.issuesData = getUniqueIssues(filteredIssues)
 	}
 
 	if opts.IsRecommendedArg {
-		var fetchedIssues []issues.Issue
-
-		// Filter issues based on the recommended
-		filteredIssues, err = filterIssuesByRecommended(opts.IsRecommendedArg, opts.issuesData)
-		if err != nil {
-			return err
-		}
-		fetchedIssues = append(fetchedIssues, filteredIssues...)
-
-		// set fetched issues as issue data
-		opts.issuesData = getUniqueIssues(fetchedIssues)
+		filteredIssues := utils.Filter(opts.issuesData, func(i issues.Issue) bool { return i.IsRecommended })
+		opts.issuesData = getUniqueIssues(filteredIssues)
 	}
 
 	if opts.AutofixAvailableArg {
-		var fetchedIssues []issues.Issue
-
-		// Filter issues based on the autofix available
-		filteredIssues, err = filterIssuesByAutofixAiAvailable(opts.AutofixAvailableArg, opts.issuesData)
-		if err != nil {
-			return err
-		}
-		fetchedIssues = append(fetchedIssues, filteredIssues...)
-
-		// set fetched issues as issue data
-		opts.issuesData = getUniqueIssues(fetchedIssues)
+		filteredIssues := utils.Filter(opts.issuesData, func(i issues.Issue) bool { return i.AutofixAvailable })
+		opts.issuesData = getUniqueIssues(filteredIssues)
 	}
 
 	if opts.AutofixAiAvailableArg {
-		var fetchedIssues []issues.Issue
-
-		// Filter issues based on the autofix ai available
-		filteredIssues, err = filterIssuesByAutofixAiAvailable(opts.AutofixAiAvailableArg, opts.issuesData)
-		if err != nil {
-			return err
-		}
-		fetchedIssues = append(fetchedIssues, filteredIssues...)
-
-		// set fetched issues as issue data
-		opts.issuesData = getUniqueIssues(fetchedIssues)
+		filteredIssues := utils.Filter(opts.issuesData, func(i issues.Issue) bool { return i.AutofixAiAvailable })
+		opts.issuesData = getUniqueIssues(filteredIssues)
 	}
 
 	return nil
@@ -312,7 +275,7 @@ func (opts *IssuesListOptions) exportJSON(filename string) (err error) {
 		return nil
 	}
 
-	if err = ioutil.WriteFile(filename, data, 0o644); err != nil {
+	if err = os.WriteFile(filename, data, 0o644); err != nil {
 		return err
 	}
 
