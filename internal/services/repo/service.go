@@ -9,7 +9,7 @@ import (
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/repository"
-	"github.com/deepsourcelabs/cli/utils"
+	"github.com/deepsourcelabs/cli/internal/vcs"
 )
 
 // Client defines the repo API used by the service.
@@ -24,7 +24,7 @@ type ClientFactory func(opts deepsource.ClientOpts) (Client, error)
 type Service struct {
 	config        *config.Manager
 	newClient     ClientFactory
-	resolveRemote func(repoArg string) (*utils.RemoteData, error)
+	resolveRemote func(repoArg string) (*vcs.RemoteData, error)
 }
 
 // NewService creates a repo service.
@@ -32,13 +32,13 @@ func NewService(configMgr *config.Manager) *Service {
 	return &Service{
 		config:        configMgr,
 		newClient:     func(opts deepsource.ClientOpts) (Client, error) { return deepsource.New(opts) },
-		resolveRemote: utils.ResolveRemote,
+		resolveRemote: vcs.ResolveRemote,
 	}
 }
 
 // StatusResult holds repository status info.
 type StatusResult struct {
-	Remote    *utils.RemoteData
+	Remote    *vcs.RemoteData
 	Activated bool
 	Host      string
 }

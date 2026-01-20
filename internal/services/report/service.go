@@ -16,7 +16,7 @@ import (
 
 	"github.com/DataDog/zstd"
 	"github.com/deepsourcelabs/cli/internal/interfaces"
-	"github.com/deepsourcelabs/cli/utils"
+	"github.com/deepsourcelabs/cli/internal/oidc"
 )
 
 type ServiceDeps struct {
@@ -62,7 +62,7 @@ func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 	s.sanitize(&opts)
 
 	if opts.UseOIDC {
-		dsn, err := utils.GetDSNFromOIDC(opts.OIDCRequestToken, opts.OIDCRequestUrl, opts.DeepSourceHostEndpoint, opts.OIDCProvider)
+		dsn, err := oidc.GetDSNFromOIDC(opts.OIDCRequestToken, opts.OIDCRequestUrl, opts.DeepSourceHostEndpoint, opts.OIDCProvider)
 		if err != nil {
 			s.capture(err)
 			return nil, fmt.Errorf("DeepSource | Error | Failed to get DSN using OIDC: %w", err)

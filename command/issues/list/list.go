@@ -11,8 +11,10 @@ import (
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
+	"github.com/deepsourcelabs/cli/internal/cli/completion"
+	"github.com/deepsourcelabs/cli/internal/cli/style"
 	issuesvc "github.com/deepsourcelabs/cli/internal/services/issues"
-	"github.com/deepsourcelabs/cli/utils"
+	"github.com/deepsourcelabs/cli/internal/vcs"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -28,7 +30,7 @@ type IssuesListOptions struct {
 	JSONArg           bool
 	CSVArg            bool
 	SARIFArg          bool
-	SelectedRemote    *utils.RemoteData
+	SelectedRemote    *vcs.RemoteData
 	issuesData        []issues.Issue
 	ptermTable        [][]string
 }
@@ -66,7 +68,7 @@ func NewCmdIssuesList() *cobra.Command {
 
 		To export listed issues to a SARIF file, use the %[14]s flag:
 		%[15]s
-		`, utils.Cyan("deepsource issues list"), utils.Yellow("--repo"), utils.Cyan("deepsource issues list --repo repo_name"), utils.Yellow("--analyzer"), utils.Cyan("deepsource issues list --analyzer python"), utils.Yellow("--limit"), utils.Cyan("deepsource issues list --limit 100"), utils.Yellow("--output-file"), utils.Cyan("deepsource issues list --output-file file_name"), utils.Yellow("--json"), utils.Cyan("deepsource issues list --json --output-file example.json"), utils.Yellow("--csv"), utils.Cyan("deepsource issues list --csv --output-file example.csv"), utils.Yellow("--sarif"), utils.Cyan("deepsource issues list --sarif --output-file example.sarif"))
+		`, style.Cyan("deepsource issues list"), style.Yellow("--repo"), style.Cyan("deepsource issues list --repo repo_name"), style.Yellow("--analyzer"), style.Cyan("deepsource issues list --analyzer python"), style.Yellow("--limit"), style.Cyan("deepsource issues list --limit 100"), style.Yellow("--output-file"), style.Cyan("deepsource issues list --output-file file_name"), style.Yellow("--json"), style.Cyan("deepsource issues list --json --output-file example.json"), style.Yellow("--csv"), style.Cyan("deepsource issues list --csv --output-file example.csv"), style.Yellow("--sarif"), style.Cyan("deepsource issues list --sarif --output-file example.sarif"))
 
 	cmd := &cobra.Command{
 		Use:   "list",
@@ -98,6 +100,10 @@ func NewCmdIssuesList() *cobra.Command {
 
 	// --sarif flag
 	cmd.Flags().BoolVar(&opts.SARIFArg, "sarif", false, "Output reported issues in SARIF format")
+
+	_ = cmd.RegisterFlagCompletionFunc("repo", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
+	})
 
 	return cmd
 }

@@ -5,8 +5,9 @@ import (
 	"fmt"
 
 	"github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/internal/cli/args"
+	"github.com/deepsourcelabs/cli/internal/cli/prompt"
 	authsvc "github.com/deepsourcelabs/cli/internal/services/auth"
-	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -18,7 +19,7 @@ func NewCmdLogout() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "logout",
 		Short: "Logout of your active DeepSource account",
-		Args:  utils.NoArgs,
+		Args:  args.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			opts := LogoutOptions{}
 			return opts.Run()
@@ -41,7 +42,7 @@ func (opts *LogoutOptions) Run() error {
 
 	// Confirm from the user if they want to logout
 	logoutConfirmationMsg := "Are you sure you want to log out of DeepSource account?"
-	response, err := utils.ConfirmFromUser(logoutConfirmationMsg, "")
+	response, err := prompt.ConfirmFromUser(logoutConfirmationMsg, "")
 	if err != nil {
 		return err
 	}

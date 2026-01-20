@@ -1,0 +1,40 @@
+package configvalidator
+
+import (
+	"fmt"
+	"reflect"
+
+	"github.com/deepsourcelabs/cli/internal/configdata"
+	"github.com/spf13/viper"
+)
+
+// Validates Transformers Config
+func (c *ConfigValidator) validateTransformersConfig() {
+	// If no transformer activated by user, return without any errors
+	if viper.Get("transformers") == nil {
+		return
+	}
+
+	// Transformers should be an array
+	transformersType := reflect.TypeOf(c.Config.Transformers).Kind().String()
+	if transformersType != "slice" {
+		c.pushError(fmt.Sprintf("Value of `transformers` should be an array. Found: %v", transformersType))
+	}
+
+	// Enabled property validation is handled in the main config validator
+	// (transformers with invalid enabled types will cause unmarshaling errors)
+
+	// ==== Transformer shortcode validation ====
+	supported := false
+	for _, activatedTransformer := range c.Config.Transformers {
+		for _, supportedTransformer := range configdata.TransformersData.TransformerShortcodes {
+			if activatedTransformer.Name == supportedTransformer {
+				supported = true
+				break
+			}
+		}
+		if !supported {
+			c.pushError(fmt.Sprintf("The Tranformer %s is not supported yet.", activatedTransformer.Name))
+		}
+	}
+}

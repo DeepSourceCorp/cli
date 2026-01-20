@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 
 	"github.com/AlecAivazis/survey/v2"
-	"github.com/deepsourcelabs/cli/utils"
+	"github.com/deepsourcelabs/cli/internal/cli/prompt"
 )
 
 // ==========
@@ -17,7 +17,7 @@ func (o *Options) collectExcludePatterns() error {
 	helpMsg := "Glob patterns of files that should not be analyzed such as auto-generated files, migrations, compatibility files."
 
 	// Confirm from the user if they want to add an exclude pattern
-	response, err := utils.ConfirmFromUser(excludePatternsMsg, helpMsg)
+	response, err := prompt.ConfirmFromUser(excludePatternsMsg, helpMsg)
 	if err != nil {
 		return err
 	}
@@ -40,7 +40,7 @@ func (o *Options) collectTestPatterns() error {
 	helpMsg := "Glob patterns of the test files. This helps us reduce false positives."
 
 	// Confirm from the user (y/N) if he/she wants to add test patterns
-	response, err := utils.ConfirmFromUser(testPatternsMsg, helpMsg)
+	response, err := prompt.ConfirmFromUser(testPatternsMsg, helpMsg)
 	if err != nil {
 		return err
 	}
@@ -87,7 +87,7 @@ func (o *Options) inputFilePatterns(field, msg, helpMsg string) error {
 		// Iterating this until user says no
 		// Here field contains : "test"/"exclude" depending upon the invoking
 		confirmationMsg := fmt.Sprintf("Add more %s patterns?", field)
-		response, err := utils.ConfirmFromUser(confirmationMsg, "")
+		response, err := prompt.ConfirmFromUser(confirmationMsg, "")
 		if err != nil {
 			return err
 		}

@@ -5,8 +5,10 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/internal/cli/args"
+	"github.com/deepsourcelabs/cli/internal/cli/prompt"
+	"github.com/deepsourcelabs/cli/internal/cli/style"
 	authsvc "github.com/deepsourcelabs/cli/internal/services/auth"
-	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -35,7 +37,7 @@ func NewCmdLogin() *cobra.Command {
 
 		Use %[3]s to authenticate with a specific DeepSource instance, for example:
 		%[4]s
-		`, utils.Yellow("--with-token"), utils.Cyan("deepsource auth login --with-token dsp_abcd"), utils.Yellow("--hostname"), utils.Cyan("deepsource auth login --hostname my_instance"))
+		`, style.Yellow("--with-token"), style.Cyan("deepsource auth login --with-token dsp_abcd"), style.Yellow("--hostname"), style.Cyan("deepsource auth login --hostname my_instance"))
 
 	opts := LoginOptions{
 		AuthTimedOut: false,
@@ -48,7 +50,7 @@ func NewCmdLogin() *cobra.Command {
 		Use:   "login",
 		Short: "Log in to DeepSource using Command Line Interface",
 		Long:  doc,
-		Args:  utils.NoArgs,
+		Args:  args.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return opts.Run()
 		},
@@ -94,7 +96,7 @@ func (opts *LoginOptions) Run() (err error) {
 	if !opts.TokenExpired {
 		// The user is already logged in, confirm re-authentication.
 		msg := fmt.Sprintf("You're already logged into DeepSource as %s. Do you want to re-authenticate?", opts.User)
-		response, err := utils.ConfirmFromUser(msg, "")
+		response, err := prompt.ConfirmFromUser(msg, "")
 		if err != nil {
 			return fmt.Errorf("Error in fetching response. Please try again.")
 		}
@@ -123,13 +125,13 @@ func (opts *LoginOptions) handleInteractiveLogin() error {
 	hostPromptHelpText := "The hostname of the DeepSource instance to authenticate with"
 
 	// Display prompt to user
-	loginType, err := utils.SelectFromOptions(loginPromptMessage, loginPromptHelpText, accountTypes)
+	loginType, err := prompt.SelectFromOptions(loginPromptMessage, loginPromptHelpText, accountTypes)
 	if err != nil {
 		return err
 	}
 	// Prompt the user for hostname only in the case of on-premise
 	if loginType == "DeepSource Enterprise" {
-		opts.HostName, err = utils.GetSingleLineInput(hostPromptMessage, hostPromptHelpText)
+		opts.HostName, err = prompt.GetSingleLineInput(hostPromptMessage, hostPromptHelpText)
 		if err != nil {
 			return err
 		}

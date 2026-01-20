@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/deepsourcelabs/cli/internal/interfaces"
-	"github.com/deepsourcelabs/cli/utils"
+	"github.com/deepsourcelabs/cli/internal/vcs"
 )
 
 // RealGitClient provides git operations using the host environment.
@@ -22,7 +22,7 @@ func (g *RealGitClient) GetHead(workspaceDir string) (string, string, error) {
 }
 
 func (g *RealGitClient) ListRemotes(dir string) (map[string]interfaces.RemoteInfo, error) {
-	remotes, err := utils.ListRemotes()
+	remotes, err := vcs.ListRemotes()
 	if err != nil {
 		return nil, err
 	}

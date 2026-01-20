@@ -10,7 +10,7 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource/repository"
 	"github.com/deepsourcelabs/cli/internal/adapters"
 	"github.com/deepsourcelabs/cli/internal/secrets"
-	"github.com/deepsourcelabs/cli/utils"
+	"github.com/deepsourcelabs/cli/internal/vcs"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -31,8 +31,8 @@ func TestServiceStatus(t *testing.T) {
 	assert.NoError(t, mgr.Write(cfg))
 
 	svc := NewService(mgr)
-	svc.resolveRemote = func(repoArg string) (*utils.RemoteData, error) {
-		return &utils.RemoteData{Owner: "o", RepoName: "r", VCSProvider: "GITHUB"}, nil
+	svc.resolveRemote = func(repoArg string) (*vcs.RemoteData, error) {
+		return &vcs.RemoteData{Owner: "o", RepoName: "r", VCSProvider: "GITHUB"}, nil
 	}
 	svc.newClient = func(opts deepsource.ClientOpts) (Client, error) {
 		return &fakeRepoClient{status: &repository.Meta{Activated: true}}, nil
@@ -54,8 +54,8 @@ func TestServiceViewURLUnauthorized(t *testing.T) {
 	assert.NoError(t, mgr.Write(cfg))
 
 	svc := NewService(mgr)
-	svc.resolveRemote = func(repoArg string) (*utils.RemoteData, error) {
-		return &utils.RemoteData{Owner: "o", RepoName: "r", VCSProvider: "GITHUB"}, nil
+	svc.resolveRemote = func(repoArg string) (*vcs.RemoteData, error) {
+		return &vcs.RemoteData{Owner: "o", RepoName: "r", VCSProvider: "GITHUB"}, nil
 	}
 	svc.newClient = func(opts deepsource.ClientOpts) (Client, error) {
 		return &fakeRepoClient{err: errors.New("Repository matching query does not exist")}, nil

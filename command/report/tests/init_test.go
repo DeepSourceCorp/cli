@@ -66,16 +66,16 @@ func prepareArtifacts() error {
 		return err
 	}
 
-	rootDir := filepath.Clean(filepath.Join(wd, "..", "..", ".."))
+	defaultRoot := filepath.Clean(filepath.Join(wd, "..", "..", ".."))
+	rootDir := defaultRoot
 	if envRoot := os.Getenv("CODE_PATH"); envRoot != "" {
-		if _, err := os.Stat(envRoot); err == nil {
+		coverageCandidate := filepath.Join(envRoot, "command", "report", "tests", "golden_files", "python_coverage.xml")
+		if _, err := os.Stat(coverageCandidate); err == nil {
 			rootDir = envRoot
 		}
 	}
 	repoRoot = rootDir
-	if os.Getenv("CODE_PATH") == "" {
-		_ = os.Setenv("CODE_PATH", repoRoot)
-	}
+	_ = os.Setenv("CODE_PATH", repoRoot)
 
 	tempDir, err := os.MkdirTemp("", "deepsource-report")
 	if err != nil {

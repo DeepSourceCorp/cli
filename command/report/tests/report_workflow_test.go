@@ -8,6 +8,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
+	"runtime"
 	"strings"
 	"testing"
 
@@ -25,11 +27,23 @@ import (
 
 // Sample values to the run the analyzer on
 const (
-	analyzer  = "test-coverage"
-	key       = "python"
+	analyzer = "test-coverage"
+	key      = "python"
 )
 
 var dsn = "http://f59ab9314307@localhost:8081"
+
+func testDir() string {
+	_, filename, _, ok := runtime.Caller(0)
+	if !ok {
+		return "."
+	}
+	return filepath.Dir(filename)
+}
+
+func goldenFilePath(name string) string {
+	return filepath.Join(testDir(), "golden_files", name)
+}
 
 func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 	// Read request request request body
@@ -45,7 +59,7 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
 
-		successResponseBodyData, err := os.ReadFile("./golden_files/report_grqphql_artifactmetadatainput_response_success.json")
+		successResponseBodyData, err := os.ReadFile(goldenFilePath("report_grqphql_artifactmetadatainput_response_success.json"))
 		if err != nil {
 			log.Println(err)
 			return
@@ -82,11 +96,11 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 		reportQuery.Variables.Input.Data = string(decompressedData)
 
 		// Read test graphql request body artifact file
-		requestBodyGoldenFilePath := "./golden_files/report_graphql_request_body.json"
+		requestBodyGoldenFilePath := goldenFilePath("report_graphql_request_body.json")
 
 		if reportQuery.Variables.Input.AnalyzerType == "community" {
 			// There's a separate goldenfile for request made with a type flag passed as community
-			requestBodyGoldenFilePath = "./golden_files/report_graphql_community_request_body.json"
+			requestBodyGoldenFilePath = goldenFilePath("report_graphql_community_request_body.json")
 		}
 
 		requestBodyData, err := os.ReadFile(requestBodyGoldenFilePath)
@@ -113,14 +127,14 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 		requestReportQuery.Variables.Input.ReporterVersion = report.CliVersion
 
 		// Read test graphql success response body artifact file
-		successResponseBodyData, err := os.ReadFile("./golden_files/report_graphql_success_response_body.json")
+		successResponseBodyData, err := os.ReadFile(goldenFilePath("report_graphql_success_response_body.json"))
 		if err != nil {
 			log.Println(err)
 			return
 		}
 
 		// Read test graphql error response body artifact file
-		errorResponseBodyData, err := os.ReadFile("./golden_files/report_graphql_error_response_body.json")
+		errorResponseBodyData, err := os.ReadFile(goldenFilePath("report_graphql_error_response_body.json"))
 		if err != nil {
 			log.Println(err)
 			return
@@ -135,9 +149,7 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 		if want, got := requestReportQuery, reportQuery; cmp.Equal(want, got) {
 			w.Write([]byte(successResponseBodyData))
 		} else {
-			if want != got {
-				log.Printf("Mismatch found:\nDiff: %s\n", cmp.Diff(want, got))
-			}
+			log.Printf("Mismatch found:\nDiff: %s\n", cmp.Diff(want, got))
 			w.Write([]byte(errorResponseBodyData))
 		}
 	}
@@ -167,7 +179,7 @@ func TestReportKeyValueWorkflow(t *testing.T) {
 		t.Errorf("Error executing deepsource CLI command: %v", err)
 	}
 
-	output, err := os.ReadFile("./golden_files/report_success.txt")
+	output, err := os.ReadFile(goldenFilePath("report_success.txt"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -195,7 +207,7 @@ func TestReportKeyValueFileWorkflow(t *testing.T) {
 		t.Errorf("Error executing deepsource CLI command: %v", err)
 	}
 
-	output, err := os.ReadFile("./golden_files/report_success.txt")
+	output, err := os.ReadFile(goldenFilePath("report_success.txt"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -225,7 +237,7 @@ func TestReportAnalyzerTypeWorkflow(t *testing.T) {
 		t.Errorf("Error executing deepsource CLI command: %v", err)
 	}
 
-	output, err := os.ReadFile("./golden_files/report_success.txt")
+	output, err := os.ReadFile(goldenFilePath("report_success.txt"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -249,12 +261,21 @@ func runReportCommand(t *testing.T, args []string) (string, string, error) {
 		deps.HTTPClient = srv.Client()
 	}
 
+	origDir, err := os.Getwd()
+	if err == nil {
+		if repoRoot != "" {
+			if chdirErr := os.Chdir(repoRoot); chdirErr == nil {
+				defer os.Chdir(origDir)
+			}
+		}
+	}
+
 	cmd := report.NewCmdReportWithDeps(deps)
 	cmd.SetArgs(args[1:])
 
-	err := cmd.Execute()
+	execErr := cmd.Execute()
 	if output, ok := deps.Output.(*adapters.BufferOutput); ok {
-		return output.String(), output.ErrorString(), err
+		return output.String(), output.ErrorString(), execErr
 	}
-	return "", "", err
+	return "", "", execErr
 }

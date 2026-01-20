@@ -6,8 +6,9 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/internal/cli/args"
+	"github.com/deepsourcelabs/cli/internal/cli/style"
 	authsvc "github.com/deepsourcelabs/cli/internal/services/auth"
-	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -20,13 +21,13 @@ func NewCmdStatus() *cobra.Command {
 		View the authentication status.
 
 		To check the authentication status, use %[1]s
-	`, utils.Cyan("deepsource auth status"))
+	`, style.Cyan("deepsource auth status"))
 
 	cmd := &cobra.Command{
 		Use:   "status",
 		Short: "View the authentication status",
 		Long:  doc,
-		Args:  utils.NoArgs,
+		Args:  args.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			opts := AuthStatusOptions{}
 			return opts.Run()

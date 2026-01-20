@@ -2,6 +2,7 @@ package command
 
 import (
 	"context"
+	"os"
 
 	"github.com/deepsourcelabs/cli/command/auth"
 	"github.com/deepsourcelabs/cli/command/config"
@@ -13,6 +14,9 @@ import (
 )
 
 func NewCmdRoot() *cobra.Command {
+	var verbose bool
+	var quiet bool
+
 	cmd := &cobra.Command{
 		Use:   "deepsource <command> <subcommand> [flags]",
 		Short: "DeepSource CLI",
@@ -22,7 +26,18 @@ Now ship good code directly from the command line.
 Login into DeepSource using the command : deepsource auth login`,
 		SilenceErrors: true,
 		SilenceUsage:  true,
-	}
+		PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		if quiet {
+			_ = os.Setenv("DEEPSOURCE_CLI_QUIET", "1")
+		}
+		if verbose && !quiet {
+			_ = os.Setenv("DEEPSOURCE_CLI_DEBUG", "1")
+		}
+	},
+}
+
+	cmd.PersistentFlags().BoolVar(&verbose, "verbose", false, "Enable verbose diagnostics")
+	cmd.PersistentFlags().BoolVar(&quiet, "quiet", false, "Suppress non-error output")
 
 	// Child Commands
 	cmd.AddCommand(version.NewCmdVersion())
