@@ -145,14 +145,15 @@ func (opts *IssuesListOptions) Run() (err error) {
 	return nil
 }
 
-// Parses the SDK response and formats the data in the form of a TAB separated table
+// Parses the SDK response and formats the data in the form of a table
 // and renders it using pterm
 func (opts *IssuesListOptions) showIssues() {
-	// A 2d array to contain list of issues details arrays
-	opts.ptermTable = make([][]string, len(opts.issuesData))
+	// Create table header
+	header := []string{"LOCATION", "ANALYZER", "CODE", "TITLE", "CATEGORY", "SEVERITY"}
+	data := [][]string{header}
 
-	// Curating the data and appending to the 2d array
-	for index, issue := range opts.issuesData {
+	// Add data rows
+	for _, issue := range opts.issuesData {
 		filePath := issue.Location.Path
 		beginLine := issue.Location.Position.BeginLine
 		issueLocation := fmt.Sprintf("%s:%d", filePath, beginLine)
@@ -162,10 +163,11 @@ func (opts *IssuesListOptions) showIssues() {
 		issueCode := issue.IssueCode
 		issueTitle := issue.IssueText
 
-		opts.ptermTable[index] = []string{issueLocation, analyzerShortcode, issueCode, issueTitle, issueCategory, issueSeverity}
+		data = append(data, []string{issueLocation, analyzerShortcode, issueCode, issueTitle, issueCategory, issueSeverity})
 	}
-	// Using pterm to render the list of list
-	pterm.DefaultTable.WithSeparator("\t").WithData(opts.ptermTable).Render()
+
+	// Render table with header
+	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
 }
 
 // Handles exporting issues as JSON

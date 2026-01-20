@@ -57,22 +57,19 @@ func (opts *WhoAmIOptions) Run(ctx context.Context) error {
 		fullName = "-"
 	}
 
-	pterm.DefaultSection.Println("User")
-	userSummary := [][]string{
-		{"Name", fullName},
-		{"Email", user.Email},
-		{"ID", user.ID},
-	}
-	pterm.DefaultTable.WithData(userSummary).WithBoxed(false).Render()
+	// Display user info with modern styling
+	pterm.DefaultBox.WithTitle("Authenticated as").WithTitleTopCenter().Println(
+		fmt.Sprintf("%s\n%s", pterm.Bold.Sprint(fullName), pterm.Gray(user.Email)),
+	)
 
 	if len(user.Accounts) == 0 {
-		pterm.Println("Accounts: none")
 		return nil
 	}
 
+	// Display accounts
 	pterm.Println("")
-	pterm.DefaultSection.Println("Accounts")
-	accountsTable := [][]string{{"Account", "Type", "VCS", "ID"}}
+	pterm.Println(pterm.Bold.Sprint("Connected Accounts"))
+	accountsTable := [][]string{{"LOGIN", "TYPE", "VCS PROVIDER"}}
 	for _, account := range user.Accounts {
 		label := strings.TrimSpace(account.Login)
 		if label == "" {
@@ -82,9 +79,8 @@ func (opts *WhoAmIOptions) Run(ctx context.Context) error {
 			label,
 			account.Type,
 			account.VCSProvider,
-			account.ID,
 		})
 	}
-	pterm.DefaultTable.WithHasHeader(true).WithData(accountsTable).Render()
+	pterm.DefaultTable.WithHasHeader().WithData(accountsTable).Render()
 	return nil
 }
