@@ -27,6 +27,7 @@ func startMockAPIServer() {
 	}
 
 	http.HandleFunc("/analyzer", mockAnalyzer)
+	http.HandleFunc("/viewer", mockViewer)
 
 	go func() {
 		err := srv.ListenAndServe()

@@ -185,7 +185,7 @@ func (opts *IssuesListOptions) exportJSON(filename string) (err error) {
 		return err
 	}
 
-	pterm.Info.Printf("Saved issues to %s!\n", filename)
+	pterm.Printf("Saved issues to %s!\n", filename)
 	return nil
 }
 
@@ -212,7 +212,7 @@ func (opts *IssuesListOptions) exportCSV(filename string) error {
 		return err
 	}
 
-	pterm.Info.Printf("Saved issues to %s!\n", filename)
+	pterm.Printf("Saved issues to %s!\n", filename)
 	return nil
 }
 
@@ -231,6 +231,6 @@ func (opts *IssuesListOptions) exportSARIF(filename string) (err error) {
 	if err := report.WriteFile(filename); err != nil {
 		return err
 	}
-	pterm.Info.Printf("Saved issues to %s!\n", filename)
+	pterm.Printf("Saved issues to %s!\n", filename)
 	return nil
 }

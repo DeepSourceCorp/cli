@@ -6,6 +6,7 @@ import (
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	dsauth "github.com/deepsourcelabs/cli/deepsource/auth"
+	dsuser "github.com/deepsourcelabs/cli/deepsource/user"
 )
 
 // ClientFactory constructs a DeepSource API client.
@@ -59,4 +60,12 @@ func (s *Service) RefreshAuth(ctx context.Context, cfg *config.CLIConfig) (*dsau
 		return nil, err
 	}
 	return client.RefreshAuthCreds(ctx, cfg.Token)
+}
+
+func (s *Service) GetViewer(ctx context.Context, cfg *config.CLIConfig) (*dsuser.User, error) {
+	client, err := s.newClient(deepsource.ClientOpts{Token: cfg.Token, HostName: cfg.Host})
+	if err != nil {
+		return nil, err
+	}
+	return client.GetViewer(ctx)
 }

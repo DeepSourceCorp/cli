@@ -83,9 +83,9 @@ func printStatus(format string, result *reposvc.StatusResult) error {
 	switch format {
 	case "", "table":
 		if result.Activated {
-			pterm.Info.Println("Analysis active on DeepSource (deepsource.io)")
+			pterm.Println("Analysis active on DeepSource (deepsource.io)")
 		} else {
-			pterm.Info.Println("DeepSource analysis is currently not activated on this repository.")
+			pterm.Println("DeepSource analysis is currently not activated on this repository.")
 		}
 		return nil
 	case "json":

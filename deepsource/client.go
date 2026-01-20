@@ -16,6 +16,8 @@ import (
 	repoQuery "github.com/deepsourcelabs/cli/deepsource/repository/queries"
 	"github.com/deepsourcelabs/cli/deepsource/transformers"
 	transformerQuery "github.com/deepsourcelabs/cli/deepsource/transformers/queries"
+	"github.com/deepsourcelabs/cli/deepsource/user"
+	userQuery "github.com/deepsourcelabs/cli/deepsource/user/queries"
 	"github.com/deepsourcelabs/graphql"
 )
 
@@ -172,6 +174,16 @@ func (c Client) GetIssuesForFile(ctx context.Context, owner, repoName, provider,
 		FilePath: filePath,
 		Limit:    limit,
 	})
+	res, err := req.Do(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// Returns details of the authenticated user.
+func (c Client) GetViewer(ctx context.Context) (*user.User, error) {
+	req := userQuery.NewViewerRequest(c.gqlWrapper)
 	res, err := req.Do(ctx)
 	if err != nil {
 		return nil, err

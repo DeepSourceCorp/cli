@@ -3,6 +3,7 @@ package issues
 import (
 	"github.com/spf13/cobra"
 
+	"github.com/deepsourcelabs/cli/command/issues/browse"
 	"github.com/deepsourcelabs/cli/command/issues/list"
 )
 
@@ -16,5 +17,6 @@ func NewCmdIssues() *cobra.Command {
 		Short: "Show the list of issues in a file in a repository",
 	}
 	cmd.AddCommand(list.NewCmdIssuesList())
+	cmd.AddCommand(browse.NewCmdIssuesBrowse())
 	return cmd
 }
