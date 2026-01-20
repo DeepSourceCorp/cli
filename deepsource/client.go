@@ -5,6 +5,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/deepsourcelabs/cli/deepsource/runs"
+	runsQuery "github.com/deepsourcelabs/cli/deepsource/runs/queries"
 	"github.com/deepsourcelabs/cli/deepsource/analyzers"
 	analyzerQuery "github.com/deepsourcelabs/cli/deepsource/analyzers/queries"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
@@ -184,6 +186,38 @@ func (c Client) GetIssuesForFile(ctx context.Context, owner, repoName, provider,
 // Returns details of the authenticated user.
 func (c Client) GetViewer(ctx context.Context) (*user.User, error) {
 	req := userQuery.NewViewerRequest(c.gqlWrapper)
+	res, err := req.Do(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// Returns the list of analysis runs for a repository.
+// owner : The username of the owner of the repository
+// repoName : The name of the repository
+// provider : The VCS provider which hosts the repo (GITHUB/GITLAB/BITBUCKET)
+// limit : The number of analysis runs to fetch
+func (c Client) GetAnalysisRuns(ctx context.Context, owner, repoName, provider string, limit int) ([]runs.AnalysisRun, error) {
+	req := runsQuery.NewAnalysisRunsListRequest(c.gqlWrapper, runsQuery.AnalysisRunsListParams{
+		Owner:    owner,
+		RepoName: repoName,
+		Provider: provider,
+		Limit:    limit,
+	})
+	res, err := req.Do(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// Returns the issues for a specific analysis run.
+// commitOid : The commit OID of the analysis run
+func (c Client) GetRunIssues(ctx context.Context, commitOid string) (*runs.RunWithIssues, error) {
+	req := runsQuery.NewRunIssuesRequest(c.gqlWrapper, runsQuery.RunIssuesParams{
+		CommitOid: commitOid,
+	})
 	res, err := req.Do(ctx)
 	if err != nil {
 		return nil, err

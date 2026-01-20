@@ -9,6 +9,7 @@ import (
 	"github.com/deepsourcelabs/cli/command/issues"
 	"github.com/deepsourcelabs/cli/command/repo"
 	"github.com/deepsourcelabs/cli/command/report"
+	"github.com/deepsourcelabs/cli/command/runs"
 	"github.com/deepsourcelabs/cli/command/version"
 	"github.com/spf13/cobra"
 )
@@ -45,6 +46,7 @@ Login into DeepSource using the command : deepsource auth login`,
 	cmd.AddCommand(auth.NewCmdAuth())
 	cmd.AddCommand(repo.NewCmdRepo())
 	cmd.AddCommand(issues.NewCmdIssues())
+	cmd.AddCommand(runs.NewCmdRuns())
 	cmd.AddCommand(report.NewCmdReport())
 
 	return cmd
