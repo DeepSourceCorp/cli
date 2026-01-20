@@ -43,7 +43,7 @@ func (o *Options) Run() error {
 	}
 
 	// Just an info
-	pterm.Info.Println("DeepSource config (.deepsource.toml) is mostly present in the root directory of the project.")
+	pterm.Println("DeepSource config (.deepsource.toml) is mostly present in the root directory of the project.")
 	fmt.Println()
 
 	// Extract the path of DeepSource config

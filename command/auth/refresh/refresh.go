@@ -70,6 +70,6 @@ func (opts *RefreshOptions) Run() error {
 		fmt.Println("Error in writing authentication data to a file. Exiting...")
 		return err
 	}
-	pterm.Info.Println("Authentication successfully refreshed.")
+	pterm.Println("Authentication successfully refreshed.")
 	return nil
 }

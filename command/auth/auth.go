@@ -7,6 +7,7 @@ import (
 	"github.com/deepsourcelabs/cli/command/auth/logout"
 	"github.com/deepsourcelabs/cli/command/auth/refresh"
 	"github.com/deepsourcelabs/cli/command/auth/status"
+	"github.com/deepsourcelabs/cli/command/auth/whoami"
 )
 
 // Options holds the metadata.
@@ -22,5 +23,6 @@ func NewCmdAuth() *cobra.Command {
 	cmd.AddCommand(logout.NewCmdLogout())
 	cmd.AddCommand(refresh.NewCmdRefresh())
 	cmd.AddCommand(status.NewCmdStatus())
+	cmd.AddCommand(whoami.NewCmdWhoAmI())
 	return cmd
 }

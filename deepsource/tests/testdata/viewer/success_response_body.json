@@ -1,0 +1,1 @@
+{"data":{"viewer":{"id":"VXNlcjp6a2dkZXk=","firstName":"John","lastName":"Doe","email":"john@example.com","accounts":{"edges":[{"node":{"id":"QWNjb3VudDox","login":"team-alpha","type":"TEAM","vcsProvider":"GITHUB"}},{"node":{"id":"QWNjb3VudDoy","login":"john","type":"INDIVIDUAL","vcsProvider":"GITHUB"}}]}}}}

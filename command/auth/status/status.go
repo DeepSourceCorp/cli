@@ -50,9 +50,9 @@ func (opts *AuthStatusOptions) Run() error {
 
 	// Check if the token has already expired
 	if !cfg.IsExpired() {
-		pterm.Info.Printf("Logged in to DeepSource as %s.\n", cfg.User)
+		pterm.Printf("Logged in to DeepSource as %s.\n", cfg.User)
 	} else {
-		pterm.Info.Println("The authentication has expired. Run \"deepsource auth refresh\" to refresh the credentials.")
+		pterm.Println("The authentication has expired. Run \"deepsource auth refresh\" to refresh the credentials.")
 	}
 	return nil
 }

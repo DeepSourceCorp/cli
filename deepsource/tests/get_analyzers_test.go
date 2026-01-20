@@ -9,8 +9,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	analyzers "github.com/deepsourcelabs/cli/deepsource/analyzers/queries"
+	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/graphql"
 )
 
