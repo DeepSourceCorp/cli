@@ -7,10 +7,11 @@ import (
 	"os"
 
 	"github.com/MakeNowJust/heredoc"
+	"github.com/deepsourcelabs/cli/internal/cli/args"
+	"github.com/deepsourcelabs/cli/internal/cli/style"
 	"github.com/deepsourcelabs/cli/internal/container"
 	"github.com/deepsourcelabs/cli/internal/interfaces"
 	reportsvc "github.com/deepsourcelabs/cli/internal/services/report"
-	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
 )
@@ -33,10 +34,11 @@ type ReportOptions struct {
 
 // NewCmdVersion returns the current version of cli being used
 func NewCmdReport() *cobra.Command {
-	return NewCmdReportWithDeps(container.New())
+	return NewCmdReportWithDeps(nil)
 }
 
 // NewCmdReportWithDeps builds the report command with injected dependencies.
+// When deps is nil, it will be created at execution time to respect flags/env.
 func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 	opts := ReportOptions{}
 
@@ -51,24 +53,27 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 
 		You can flag combinations as well:
 		%[5]s
-		`, utils.Yellow("--analyzer"), utils.Cyan("deepsource report --analyzer python"), utils.Yellow("--value"), utils.Cyan("deepsource report --key value"), utils.Cyan("deepsource report --analyzer go --value-file coverage.out"))
-
-	svc := reportsvc.NewService(reportsvc.ServiceDeps{
-		GitClient:   deps.GitClient,
-		HTTPClient:  deps.HTTPClient,
-		FileSystem:  deps.FileSystem,
-		Environment: deps.Environment,
-		Telemetry:   deps.Telemetry,
-		Output:      deps.Output,
-		Workdir:     os.Getwd,
-	})
+		`, style.Yellow("--analyzer"), style.Cyan("deepsource report --analyzer python"), style.Yellow("--value"), style.Cyan("deepsource report --key value"), style.Cyan("deepsource report --analyzer go --value-file coverage.out"))
 
 	cmd := &cobra.Command{
 		Use:   "report",
 		Short: "Report artifacts to DeepSource",
 		Long:  doc,
-		Args:  utils.NoArgs,
+		Args:  args.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
+			if deps == nil {
+				deps = container.New()
+			}
+			svc := reportsvc.NewService(reportsvc.ServiceDeps{
+				GitClient:   deps.GitClient,
+				HTTPClient:  deps.HTTPClient,
+				FileSystem:  deps.FileSystem,
+				Environment: deps.Environment,
+				Telemetry:   deps.Telemetry,
+				Output:      deps.Output,
+				Workdir:     os.Getwd,
+			})
+
 			return opts.Run(cmd.Context(), svc, deps.Output)
 		},
 	}
@@ -95,6 +100,24 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 
 	// --skip-verify flag to skip SSL certificate verification while reporting test coverage data.
 	cmd.Flags().BoolVar(&opts.SkipCertificateVerification, "skip-verify", false, "skip SSL certificate verification while sending the test coverage data")
+
+	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+		return []string{
+			"table\tHuman-readable table",
+			"json\tJSON output",
+			"yaml\tYAML output",
+		}, cobra.ShellCompDirectiveNoFileComp
+	})
+	_ = cmd.RegisterFlagCompletionFunc("analyzer-type", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+		return []string{
+			"community\tCommunity analyzer",
+		}, cobra.ShellCompDirectiveNoFileComp
+	})
+	_ = cmd.RegisterFlagCompletionFunc("oidc-provider", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+		return []string{
+			"github-actions\tGitHub Actions OIDC",
+		}, cobra.ShellCompDirectiveNoFileComp
+	})
 
 	return cmd
 }

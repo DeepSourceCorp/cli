@@ -10,7 +10,7 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 	"github.com/deepsourcelabs/cli/internal/adapters"
 	"github.com/deepsourcelabs/cli/internal/secrets"
-	"github.com/deepsourcelabs/cli/utils"
+	"github.com/deepsourcelabs/cli/internal/vcs"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -31,8 +31,8 @@ func TestServiceListFilters(t *testing.T) {
 	assert.NoError(t, mgr.Write(cfg))
 
 	svc := NewService(mgr)
-	svc.resolveRemote = func(repoArg string) (*utils.RemoteData, error) {
-		return &utils.RemoteData{Owner: "o", RepoName: "r", VCSProvider: "GITHUB"}, nil
+	svc.resolveRemote = func(repoArg string) (*vcs.RemoteData, error) {
+		return &vcs.RemoteData{Owner: "o", RepoName: "r", VCSProvider: "GITHUB"}, nil
 	}
 	svc.newClient = func(opts deepsource.ClientOpts) (Client, error) {
 		return &fakeIssuesClient{issues: []issues.Issue{
@@ -58,8 +58,8 @@ func TestServiceListMissingAuth(t *testing.T) {
 	assert.NoError(t, mgr.Write(cfg))
 
 	svc := NewService(mgr)
-	svc.resolveRemote = func(repoArg string) (*utils.RemoteData, error) {
-		return &utils.RemoteData{Owner: "o", RepoName: "r", VCSProvider: "GITHUB"}, nil
+	svc.resolveRemote = func(repoArg string) (*vcs.RemoteData, error) {
+		return &vcs.RemoteData{Owner: "o", RepoName: "r", VCSProvider: "GITHUB"}, nil
 	}
 
 	_, err := svc.List(context.Background(), ListOptions{RepoArg: "", Limit: 30})

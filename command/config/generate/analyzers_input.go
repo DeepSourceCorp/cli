@@ -4,7 +4,8 @@ import (
 	"log"
 
 	"github.com/Jeffail/gabs/v2"
-	"github.com/deepsourcelabs/cli/utils"
+	"github.com/deepsourcelabs/cli/internal/cli/prompt"
+	"github.com/deepsourcelabs/cli/internal/configdata"
 )
 
 // Struct to hold the data regarding the compulsary meta fields as required by analyzers
@@ -26,7 +27,7 @@ func (o *Options) collectAnalyzerInput() (err error) {
 	analyzerPromptMsg := "Which languages/tools does your project use?"
 	analyzerPromptHelpText := "Analyzers will find issues in your code. Add an analyzer by selecting a language you've written your code in."
 
-	o.ActivatedAnalyzers, err = utils.SelectFromMultipleOptions(analyzerPromptMsg, analyzerPromptHelpText, utils.AnalyzersData.AnalyzerNames)
+	o.ActivatedAnalyzers, err = prompt.SelectFromMultipleOptions(analyzerPromptMsg, analyzerPromptHelpText, configdata.AnalyzersData.AnalyzerNames)
 	if err != nil {
 		return err
 	}
@@ -60,7 +61,7 @@ func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMeta
 			switch metaFields[i].Type {
 			case "boolean":
 				metaFields[i].UserInput = "true"
-				res, err := utils.ConfirmFromUser(metaFields[i].Title, metaFields[i].Description)
+				res, err := prompt.ConfirmFromUser(metaFields[i].Title, metaFields[i].Description)
 				if err != nil {
 					return err
 				}
@@ -68,12 +69,12 @@ func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMeta
 					metaFields[i].UserInput = "false"
 				}
 			case "enum":
-				metaFields[i].UserInput, err = utils.SelectFromOptions(metaFields[i].Title, metaFields[i].Description, metaFields[i].Options)
+				metaFields[i].UserInput, err = prompt.SelectFromOptions(metaFields[i].Title, metaFields[i].Description, metaFields[i].Options)
 				if err != nil {
 					return err
 				}
 			default:
-				metaFields[i].UserInput, err = utils.GetSingleLineInput(metaFields[i].Title, metaFields[i].Description)
+				metaFields[i].UserInput, err = prompt.GetSingleLineInput(metaFields[i].Title, metaFields[i].Description)
 				if err != nil {
 					return err
 				}
@@ -136,12 +137,12 @@ func (o *Options) extractRequiredAnalyzerMetaFields() error {
 
 	// Extract `optional_required` fields of analyzer meta of selected analyzers
 	for _, activatedAnalyzer := range o.ActivatedAnalyzers {
-		analyzerShortcode := utils.AnalyzersData.AnalyzersMap[activatedAnalyzer]
+		analyzerShortcode := configdata.AnalyzersData.AnalyzersMap[activatedAnalyzer]
 		// Assigning optional fields to nil before checking for an analyzer
 		optionalFields = nil
 		requiredMetaData = nil
 
-		analyzerMeta := utils.AnalyzersData.AnalyzersMetaMap[analyzerShortcode]
+		analyzerMeta := configdata.AnalyzersData.AnalyzersMetaMap[analyzerShortcode]
 		// Parse the analyzer meta of the analyzer using `gabs`
 		jsonParsed, err := gabs.ParseJSON([]byte(analyzerMeta))
 		if err != nil {

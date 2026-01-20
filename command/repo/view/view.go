@@ -8,8 +8,11 @@ import (
 	"github.com/MakeNowJust/heredoc"
 	"github.com/cli/browser"
 	"github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/internal/cli/args"
+	"github.com/deepsourcelabs/cli/internal/cli/completion"
+	"github.com/deepsourcelabs/cli/internal/cli/style"
 	reposvc "github.com/deepsourcelabs/cli/internal/services/repo"
-	"github.com/deepsourcelabs/cli/utils"
+	"github.com/deepsourcelabs/cli/internal/vcs"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
 )
@@ -17,27 +20,27 @@ import (
 type RepoViewOptions struct {
 	RepoArg        string
 	TokenExpired   bool
-	SelectedRemote *utils.RemoteData
+	SelectedRemote *vcs.RemoteData
 	Output         string
 }
 
 func NewCmdRepoView() *cobra.Command {
 	opts := RepoViewOptions{
 		RepoArg:        "",
-		SelectedRemote: &utils.RemoteData{},
+		SelectedRemote: &vcs.RemoteData{},
 	}
 
 	doc := heredoc.Docf(`
 		Open the DeepSource dashboard of a repository.
 
 		Run %[1]s to open the DeepSource dashboard inside the browser.
-		`, utils.Cyan("deepsource repo view"))
+		`, style.Cyan("deepsource repo view"))
 
 	cmd := &cobra.Command{
 		Use:   "view",
 		Short: "Open the DeepSource dashboard of a repository",
 		Long:  doc,
-		Args:  utils.NoArgs,
+		Args:  args.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return opts.Run()
 		},
@@ -46,6 +49,16 @@ func NewCmdRepoView() *cobra.Command {
 	// --repo, -r flag
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Open the DeepSource dashboard of the specified repository")
 	cmd.Flags().StringVar(&opts.Output, "output", "table", "Output format: table, json, yaml")
+	_ = cmd.RegisterFlagCompletionFunc("repo", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
+	})
+	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+		return []string{
+			"table\tHuman-readable table",
+			"json\tJSON output",
+			"yaml\tYAML output",
+		}, cobra.ShellCompDirectiveNoFileComp
+	})
 	return cmd
 }
 

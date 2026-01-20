@@ -15,7 +15,7 @@ test:
 	echo "\n====TESTING DEEPSOURCE PACKAGE====\n"
 	CGO_ENABLED=1 go test -v ./deepsource/tests/...
 	echo "\n====TESTING CONFIG VALIDATOR PACKAGE====\n"
-	go test -v ./configvalidator/... -count=1
+	go test -v ./internal/configvalidator/... -count=1
 	echo "\n====CALCULATING TEST COVERAGE FOR ENTIRE PACKAGE====\n"
 	go test -v -coverprofile=coverage.out -count=1 ./...
 

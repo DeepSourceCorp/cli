@@ -7,8 +7,9 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/internal/cli/args"
+	"github.com/deepsourcelabs/cli/internal/cli/style"
 	authsvc "github.com/deepsourcelabs/cli/internal/services/auth"
-	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -23,7 +24,7 @@ func NewCmdRefresh() *cobra.Command {
 		Authentication credentials expire after a certain amount of time.
 
 		To renew the authentication credentials, use %[1]s
-		`, utils.Yellow("deepsource auth refresh"))
+		`, style.Yellow("deepsource auth refresh"))
 
 	opts := RefreshOptions{}
 
@@ -31,7 +32,7 @@ func NewCmdRefresh() *cobra.Command {
 		Use:   "refresh",
 		Short: "Refresh stored authentication credentials",
 		Long:  doc,
-		Args:  utils.NoArgs,
+		Args:  args.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return opts.Run()
 		},

@@ -7,7 +7,7 @@ import (
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
-	"github.com/deepsourcelabs/cli/utils"
+	"github.com/deepsourcelabs/cli/internal/vcs"
 )
 
 // Client defines the API used for fetching issues.
@@ -20,17 +20,17 @@ type ClientFactory func(opts deepsource.ClientOpts) (Client, error)
 
 // Service provides issue operations.
 type Service struct {
-	config       *config.Manager
-	newClient    ClientFactory
-	resolveRemote func(repoArg string) (*utils.RemoteData, error)
+	config        *config.Manager
+	newClient     ClientFactory
+	resolveRemote func(repoArg string) (*vcs.RemoteData, error)
 }
 
 // NewService creates an issues service.
 func NewService(configMgr *config.Manager) *Service {
 	return &Service{
-		config:       configMgr,
-		newClient:    func(opts deepsource.ClientOpts) (Client, error) { return deepsource.New(opts) },
-		resolveRemote: utils.ResolveRemote,
+		config:        configMgr,
+		newClient:     func(opts deepsource.ClientOpts) (Client, error) { return deepsource.New(opts) },
+		resolveRemote: vcs.ResolveRemote,
 	}
 }
 
@@ -45,7 +45,7 @@ type ListOptions struct {
 // ListResult is the issues response payload.
 type ListResult struct {
 	Issues []issues.Issue
-	Remote *utils.RemoteData
+	Remote *vcs.RemoteData
 }
 
 // List fetches issues for a repository and applies filters.

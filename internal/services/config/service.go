@@ -12,8 +12,8 @@ import (
 	cliconfig "github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/internal/adapters"
+	"github.com/deepsourcelabs/cli/internal/configdata"
 	"github.com/deepsourcelabs/cli/internal/interfaces"
-	"github.com/deepsourcelabs/cli/utils"
 )
 
 // Service encapsulates config-related workflows.
@@ -52,7 +52,7 @@ func (s *Service) FetchAnalyzersAndTransformersData(ctx context.Context, cfg *cl
 	if err != nil {
 		return err
 	}
-	return utils.GetAnalyzersAndTransformersData(ctx, *client)
+	return configdata.GetAnalyzersAndTransformersData(ctx, *client)
 }
 
 // FindConfigPath locates .deepsource.toml in current or repo root.

@@ -8,8 +8,10 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/internal/cli/args"
+	"github.com/deepsourcelabs/cli/internal/cli/style"
+	"github.com/deepsourcelabs/cli/internal/configdata"
 	configsvc "github.com/deepsourcelabs/cli/internal/services/config"
-	"github.com/deepsourcelabs/cli/utils"
 	"github.com/fatih/color"
 	toml "github.com/pelletier/go-toml"
 	"github.com/spf13/cobra"
@@ -34,13 +36,13 @@ func NewCmdConfigGenerate() *cobra.Command {
 		Generate config for the DeepSource CLI.
 
 		Configs are stored in: %[1]s
-		`, utils.Cyan("%s", filepath.Join(home, "deepsource", "config.toml")))
+		`, style.Cyan("%s", filepath.Join(home, "deepsource", "config.toml")))
 
 	cmd := &cobra.Command{
 		Use:   "generate",
 		Short: "Generate config for DeepSource",
 		Long:  doc,
-		Args:  utils.NoArgs,
+		Args:  args.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return o.Run()
 		},
@@ -106,7 +108,7 @@ func (o *Options) generateDeepSourceConfig() error {
 		}
 
 		activatedAnalyzerData := Analyzer{
-			Name:    utils.AnalyzersData.AnalyzersMap[analyzer],
+			Name:    configdata.AnalyzersData.AnalyzersMap[analyzer],
 			Enabled: true,
 		}
 		if len(metaMap) != 0 {
@@ -118,7 +120,7 @@ func (o *Options) generateDeepSourceConfig() error {
 	// Copying activated transformers from Options struct to DSConfig based "config" struct
 	for _, transformer := range o.ActivatedTransformers {
 		config.Transformers = append(config.Transformers, Transformer{
-			Name:    utils.TransformersData.TransformerMap[transformer],
+			Name:    configdata.TransformersData.TransformerMap[transformer],
 			Enabled: true,
 		})
 	}

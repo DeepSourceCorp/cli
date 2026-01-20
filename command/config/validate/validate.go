@@ -9,9 +9,9 @@ import (
 	"strings"
 
 	"github.com/deepsourcelabs/cli/config"
-	"github.com/deepsourcelabs/cli/configvalidator"
+	"github.com/deepsourcelabs/cli/internal/cli/args"
+	"github.com/deepsourcelabs/cli/internal/configvalidator"
 	configsvc "github.com/deepsourcelabs/cli/internal/services/config"
-	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -26,7 +26,7 @@ func NewCmdValidate() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "validate",
 		Short: "Validate DeepSource config",
-		Args:  utils.NoArgs,
+		Args:  args.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return o.Run()
 		},
