@@ -20,10 +20,31 @@ import (
 )
 
 type IssuesOptions struct {
-	commitOid      string
-	jsonOutput    bool
-	outputFile    string
-	runWithIssues *runs.RunWithIssues
+	commitOid       string
+	jsonOutput      bool
+	outputFile      string
+	analyzerFilters []string
+	categoryFilters []string
+	severityFilters []string
+	codeFilters     []string
+	pathFilters     []string
+	runWithIssues   *runs.RunWithIssues
+}
+
+// AddRunIssueFlags registers flags for filtering and output options.
+func AddRunIssueFlags(cmd *cobra.Command, opts *IssuesOptions) {
+	// --json flag
+	cmd.Flags().BoolVar(&opts.jsonOutput, "json", false, "Output issues in JSON format")
+
+	// --output-file, -o flag
+	cmd.Flags().StringVarP(&opts.outputFile, "output-file", "o", "", "Output file to write the issues to")
+
+	// filter flags
+	cmd.Flags().StringArrayVar(&opts.analyzerFilters, "analyzer", nil, "Filter issues by analyzer shortcode (repeatable)")
+	cmd.Flags().StringArrayVar(&opts.categoryFilters, "category", nil, "Filter issues by category (repeatable)")
+	cmd.Flags().StringArrayVar(&opts.severityFilters, "severity", nil, "Filter issues by severity (repeatable)")
+	cmd.Flags().StringArrayVar(&opts.codeFilters, "code", nil, "Filter issues by issue code (repeatable)")
+	cmd.Flags().StringArrayVar(&opts.pathFilters, "path", nil, "Filter issues by path substring (repeatable)")
 }
 
 // NewCmdRunsIssues shows the issues in a specific analysis run.
@@ -32,7 +53,8 @@ func NewCmdRunsIssues() *cobra.Command {
 		View issues in a specific analysis run.
 
 		Use %[1]s to view the issues found in a specific run.
-	`, style.Cyan("deepsource runs issues <commit-oid>"))
+		Filter issues by analyzer, category, severity, issue code, or path when needed.
+	`, style.Cyan("deepsource runs <commit-oid>"))
 
 	opts := IssuesOptions{}
 
@@ -47,13 +69,15 @@ func NewCmdRunsIssues() *cobra.Command {
 		},
 	}
 
-	// --json flag
-	cmd.Flags().BoolVar(&opts.jsonOutput, "json", false, "Output issues in JSON format")
-
-	// --output-file, -o flag
-	cmd.Flags().StringVarP(&opts.outputFile, "output-file", "o", "", "Output file to write the issues to")
+	AddRunIssueFlags(cmd, &opts)
 
 	return cmd
+}
+
+// RunWithCommit runs the command for the provided commit OID.
+func (opts *IssuesOptions) RunWithCommit(ctx context.Context, commitOid string) error {
+	opts.commitOid = commitOid
+	return opts.Run(ctx)
 }
 
 func (opts *IssuesOptions) Run(ctx context.Context) error {
@@ -87,6 +111,9 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 		return fmt.Errorf("failed to fetch run issues: %w", err)
 	}
 
+	// Apply filters, if any
+	runWithIssues.Issues = opts.filterIssues(runWithIssues.Issues)
+
 	opts.runWithIssues = runWithIssues
 
 	// If JSON output is requested, export and return
@@ -113,7 +140,11 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 
 	if len(runWithIssues.Issues) == 0 {
 		pterm.Println("")
-		pterm.Success.Println("No issues found in this run")
+		if opts.hasFilters() {
+			pterm.Success.Println("No issues matched the provided filters")
+		} else {
+			pterm.Success.Println("No issues found in this run")
+		}
 		return nil
 	}
 
@@ -123,6 +154,93 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 	opts.showIssues(runWithIssues.Issues)
 
 	return nil
+}
+
+func (opts *IssuesOptions) hasFilters() bool {
+	return len(opts.analyzerFilters) > 0 ||
+		len(opts.categoryFilters) > 0 ||
+		len(opts.severityFilters) > 0 ||
+		len(opts.codeFilters) > 0 ||
+		len(opts.pathFilters) > 0
+}
+
+func (opts *IssuesOptions) filterIssues(issues []runs.RunIssue) []runs.RunIssue {
+	if !opts.hasFilters() {
+		return issues
+	}
+
+	analyzerSet := makeStringSet(opts.analyzerFilters)
+	categorySet := makeStringSet(opts.categoryFilters)
+	severitySet := makeStringSet(opts.severityFilters)
+	codeSet := makeStringSet(opts.codeFilters)
+	pathFilters := makeLowerStrings(opts.pathFilters)
+
+	filtered := make([]runs.RunIssue, 0, len(issues))
+	for _, issue := range issues {
+		if len(analyzerSet) > 0 && !setContainsFold(analyzerSet, issue.AnalyzerShortcode) {
+			continue
+		}
+		if len(categorySet) > 0 && !setContainsFold(categorySet, issue.Category) {
+			continue
+		}
+		if len(severitySet) > 0 && !setContainsFold(severitySet, issue.Severity) {
+			continue
+		}
+		if len(codeSet) > 0 && !setContainsFold(codeSet, issue.IssueCode) {
+			continue
+		}
+		if len(pathFilters) > 0 && !matchesPathFilters(issue.Path, pathFilters) {
+			continue
+		}
+		filtered = append(filtered, issue)
+	}
+
+	return filtered
+}
+
+func makeStringSet(values []string) map[string]struct{} {
+	set := make(map[string]struct{})
+	for _, value := range values {
+		normalized := strings.ToLower(strings.TrimSpace(value))
+		if normalized == "" {
+			continue
+		}
+		set[normalized] = struct{}{}
+	}
+	return set
+}
+
+func makeLowerStrings(values []string) []string {
+	normalized := make([]string, 0, len(values))
+	for _, value := range values {
+		trimmed := strings.TrimSpace(value)
+		if trimmed == "" {
+			continue
+		}
+		normalized = append(normalized, strings.ToLower(trimmed))
+	}
+	return normalized
+}
+
+func setContainsFold(set map[string]struct{}, value string) bool {
+	_, ok := set[strings.ToLower(strings.TrimSpace(value))]
+	return ok
+}
+
+func matchesPathFilters(path string, filters []string) bool {
+	if path == "" {
+		return false
+	}
+	lowerPath := strings.ToLower(path)
+	for _, filter := range filters {
+		if filter == "" {
+			continue
+		}
+		if strings.Contains(lowerPath, filter) {
+			return true
+		}
+	}
+	return false
 }
 
 func (opts *IssuesOptions) showIssues(issues []runs.RunIssue) {
