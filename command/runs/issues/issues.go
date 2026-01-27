@@ -2,7 +2,9 @@ package issues
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"strings"
@@ -18,7 +20,10 @@ import (
 )
 
 type IssuesOptions struct {
-	commitOid string
+	commitOid      string
+	jsonOutput    bool
+	outputFile    string
+	runWithIssues *runs.RunWithIssues
 }
 
 // NewCmdRunsIssues shows the issues in a specific analysis run.
@@ -29,18 +34,25 @@ func NewCmdRunsIssues() *cobra.Command {
 		Use %[1]s to view the issues found in a specific run.
 	`, style.Cyan("deepsource runs issues <commit-oid>"))
 
+	opts := IssuesOptions{}
+
 	cmd := &cobra.Command{
 		Use:   "issues <commit-oid>",
 		Short: "View issues in a specific analysis run",
 		Long:  doc,
 		Args:  args.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			opts := IssuesOptions{
-				commitOid: args[0],
-			}
+			opts.commitOid = args[0]
 			return opts.Run(cmd.Context())
 		},
 	}
+
+	// --json flag
+	cmd.Flags().BoolVar(&opts.jsonOutput, "json", false, "Output issues in JSON format")
+
+	// --output-file, -o flag
+	cmd.Flags().StringVarP(&opts.outputFile, "output-file", "o", "", "Output file to write the issues to")
+
 	return cmd
 }
 
@@ -73,6 +85,13 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 	runWithIssues, err := dsClient.GetRunIssues(ctx, commitOid)
 	if err != nil {
 		return fmt.Errorf("failed to fetch run issues: %w", err)
+	}
+
+	opts.runWithIssues = runWithIssues
+
+	// If JSON output is requested, export and return
+	if opts.jsonOutput {
+		return opts.exportJSON(opts.outputFile)
 	}
 
 	// Display run info
@@ -270,4 +289,81 @@ func expandCommitOID(commitOid string) (string, error) {
 	}
 
 	return commitOid, nil
+}
+
+// RunIssuesJSON represents the JSON structure for run issues output
+type RunIssuesJSON struct {
+	RunUid     string       `json:"run_uid"`
+	CommitOid  string       `json:"commit_oid"`
+	BranchName string       `json:"branch_name"`
+	Status     string       `json:"status"`
+	Issues     []IssueJSON  `json:"issues"`
+}
+
+// IssueJSON represents an issue in JSON format
+type IssueJSON struct {
+	Path              string    `json:"path"`
+	BeginLine         int       `json:"begin_line"`
+	BeginColumn       int       `json:"begin_column"`
+	EndLine           int       `json:"end_line"`
+	EndColumn         int       `json:"end_column"`
+	IssueText         string    `json:"issue_text"`
+	IssueCode         string    `json:"issue_code"`
+	Title             string    `json:"title"`
+	Category          string    `json:"category"`
+	Severity          string    `json:"severity"`
+	AnalyzerName      string    `json:"analyzer_name"`
+	AnalyzerShortcode string    `json:"analyzer_shortcode"`
+}
+
+// exportJSON exports the run issues to JSON format
+func (opts *IssuesOptions) exportJSON(filename string) error {
+	if opts.runWithIssues == nil {
+		return fmt.Errorf("no run data available to export")
+	}
+
+	// Convert to JSON structure
+	jsonData := RunIssuesJSON{
+		RunUid:     opts.runWithIssues.RunUid,
+		CommitOid:  opts.runWithIssues.CommitOid,
+		BranchName: opts.runWithIssues.BranchName,
+		Status:     opts.runWithIssues.Status,
+		Issues:     make([]IssueJSON, 0, len(opts.runWithIssues.Issues)),
+	}
+
+	for _, issue := range opts.runWithIssues.Issues {
+		jsonData.Issues = append(jsonData.Issues, IssueJSON{
+			Path:              issue.Path,
+			BeginLine:         issue.BeginLine,
+			BeginColumn:       issue.BeginColumn,
+			EndLine:           issue.EndLine,
+			EndColumn:         issue.EndColumn,
+			IssueText:         issue.IssueText,
+			IssueCode:         issue.IssueCode,
+			Title:             issue.Title,
+			Category:          issue.Category,
+			Severity:          issue.Severity,
+			AnalyzerName:      issue.AnalyzerName,
+			AnalyzerShortcode: issue.AnalyzerShortcode,
+		})
+	}
+
+	// Marshal to JSON
+	data, err := json.MarshalIndent(jsonData, "", "  ")
+	if err != nil {
+		return fmt.Errorf("failed to marshal JSON: %w", err)
+	}
+
+	// Write to file or stdout
+	if filename == "" {
+		fmt.Println(string(data))
+		return nil
+	}
+
+	if err := ioutil.WriteFile(filename, data, 0644); err != nil {
+		return fmt.Errorf("failed to write JSON file: %w", err)
+	}
+
+	pterm.Printf("Saved issues to %s!\n", filename)
+	return nil
 }
