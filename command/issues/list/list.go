@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
@@ -152,22 +153,135 @@ func (opts *IssuesListOptions) showIssues() {
 	header := []string{"LOCATION", "ANALYZER", "CODE", "TITLE", "CATEGORY", "SEVERITY"}
 	data := [][]string{header}
 
+	// Get terminal width for column width calculation
+	terminalWidth := pterm.GetTerminalWidth()
+	if terminalWidth == 0 {
+		terminalWidth = 120 // Default fallback
+	}
+
+	// Calculate column widths (6 columns total)
+	// Allocate space: LOCATION (20%), ANALYZER (10%), CODE (10%), TITLE (35%), CATEGORY (15%), SEVERITY (10%)
+	colWidths := []int{
+		int(float64(terminalWidth) * 0.20), // LOCATION
+		int(float64(terminalWidth) * 0.10), // ANALYZER
+		int(float64(terminalWidth) * 0.10), // CODE
+		int(float64(terminalWidth) * 0.35), // TITLE
+		int(float64(terminalWidth) * 0.15), // CATEGORY
+		int(float64(terminalWidth) * 0.10), // SEVERITY
+	}
+
+	// Get current working directory for relative path display
+	cwd, _ := os.Getwd()
+
 	// Add data rows
 	for _, issue := range opts.issuesData {
 		filePath := issue.Location.Path
+		if cwd != "" && strings.HasPrefix(filePath, cwd) {
+			filePath = strings.TrimPrefix(filePath, cwd+"/")
+		}
+
+		// Format location with start and end line numbers
 		beginLine := issue.Location.Position.BeginLine
-		issueLocation := fmt.Sprintf("%s:%d", filePath, beginLine)
+		endLine := issue.Location.Position.EndLine
+		var issueLocation string
+		if beginLine == endLine {
+			issueLocation = fmt.Sprintf("%s:%d", filePath, beginLine)
+		} else {
+			issueLocation = fmt.Sprintf("%s:%d-%d", filePath, beginLine, endLine)
+		}
+
 		analyzerShortcode := issue.Analyzer.Shortcode
 		issueCategory := issue.IssueCategory
-		issueSeverity := issue.IssueSeverity
+		issueSeverity := formatSeverity(issue.IssueSeverity)
 		issueCode := issue.IssueCode
 		issueTitle := issue.IssueText
 
-		data = append(data, []string{issueLocation, analyzerShortcode, issueCode, issueTitle, issueCategory, issueSeverity})
+		// Wrap text for each column
+		data = append(data, []string{
+			wrapText(issueLocation, colWidths[0]),
+			wrapText(analyzerShortcode, colWidths[1]),
+			wrapText(issueCode, colWidths[2]),
+			wrapText(issueTitle, colWidths[3]),
+			wrapText(issueCategory, colWidths[4]),
+			wrapText(issueSeverity, colWidths[5]),
+		})
 	}
 
-	// Render table with header
-	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
+	// Render table with header, boxed style, and row separators
+	pterm.DefaultTable.WithHasHeader().WithBoxed().WithRowSeparator("-").WithHeaderRowSeparator("-").WithData(data).Render()
+}
+
+// formatSeverity formats severity with appropriate color styling
+func formatSeverity(severity string) string {
+	switch strings.ToUpper(severity) {
+	case "CRITICAL":
+		return pterm.Red(severity)
+	case "MAJOR":
+		return pterm.LightRed(severity)
+	case "MINOR":
+		return pterm.Yellow(severity)
+	default:
+		return severity
+	}
+}
+
+// wrapText wraps text to fit within the specified width, inserting newlines for multiline cells
+func wrapText(text string, maxWidth int) string {
+	if maxWidth <= 0 {
+		return text
+	}
+
+	// If text fits, return as-is
+	if len(text) <= maxWidth {
+		return text
+	}
+
+	// Split text into words for better wrapping
+	words := strings.Fields(text)
+	if len(words) == 0 {
+		return text
+	}
+
+	var lines []string
+	var currentLine strings.Builder
+
+	for _, word := range words {
+		// If adding this word would exceed the width, start a new line
+		if currentLine.Len() > 0 && currentLine.Len()+len(word)+1 > maxWidth {
+			lines = append(lines, currentLine.String())
+			currentLine.Reset()
+		}
+
+		// If a single word is longer than maxWidth, we have to break it
+		if len(word) > maxWidth {
+			// If we have content in current line, save it first
+			if currentLine.Len() > 0 {
+				lines = append(lines, currentLine.String())
+				currentLine.Reset()
+			}
+			// Break the long word
+			for len(word) > maxWidth {
+				lines = append(lines, word[:maxWidth])
+				word = word[maxWidth:]
+			}
+			if len(word) > 0 {
+				currentLine.WriteString(word)
+			}
+		} else {
+			// Add word to current line
+			if currentLine.Len() > 0 {
+				currentLine.WriteString(" ")
+			}
+			currentLine.WriteString(word)
+		}
+	}
+
+	// Add the last line if it has content
+	if currentLine.Len() > 0 {
+		lines = append(lines, currentLine.String())
+	}
+
+	return strings.Join(lines, "\n")
 }
 
 // Handles exporting issues as JSON
