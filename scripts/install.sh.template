@@ -1,0 +1,114 @@
+#!/bin/sh
+# DeepSource CLI installer
+# Usage: curl -fsSL https://DOMAIN/cli/install.sh | sh
+
+set -e
+
+INSTALL_DIR="${DEEPSOURCE_INSTALL_DIR:-}"
+BASE_URL="__BASE_URL__"
+
+log() { printf '%s\n' "$1"; }
+err() { printf '\033[31mError: %s\033[0m\n' "$1" >&2; exit 1; }
+
+detect_os() {
+  case "$(uname -s)" in
+    Linux*)  echo "linux" ;;
+    Darwin*) echo "darwin" ;;
+    *)       err "Unsupported OS: $(uname -s)" ;;
+  esac
+}
+
+detect_arch() {
+  case "$(uname -m)" in
+    x86_64|amd64)  echo "amd64" ;;
+    arm64|aarch64) echo "arm64" ;;
+    *)             err "Unsupported architecture: $(uname -m)" ;;
+  esac
+}
+
+check_command() {
+  command -v "$1" >/dev/null 2>&1 || err "'$1' is required but not found"
+}
+
+main() {
+  check_command curl
+  check_command tar
+  check_command sha256sum || check_command shasum || err "sha256sum or shasum is required"
+
+  OS="$(detect_os)"
+  ARCH="$(detect_arch)"
+
+  log "Detected platform: ${OS}/${ARCH}"
+  log "Fetching latest version..."
+
+  MANIFEST="$(curl -fsSL "${BASE_URL}/build/manifest.json")"
+  VERSION="$(printf '%s' "$MANIFEST" | grep -o '"version":"[^"]*"' | head -1 | cut -d'"' -f4)"
+
+  if [ -z "$VERSION" ]; then
+    err "Failed to determine latest version from manifest"
+  fi
+
+  log "Installing DeepSource CLI v${VERSION}..."
+
+  PLATFORM_KEY="${OS}_${ARCH}"
+  ARCHIVE="$(printf '%s' "$MANIFEST" | grep -o "\"${PLATFORM_KEY}\":{[^}]*}" | grep -o '"archive":"[^"]*"' | cut -d'"' -f4)"
+  EXPECTED_SHA="$(printf '%s' "$MANIFEST" | grep -o "\"${PLATFORM_KEY}\":{[^}]*}" | grep -o '"sha256":"[^"]*"' | cut -d'"' -f4)"
+
+  if [ -z "$ARCHIVE" ]; then
+    err "No build available for ${OS}/${ARCH}"
+  fi
+
+  ARCHIVE_URL="${BASE_URL}/build/${ARCHIVE}"
+  TMPDIR="$(mktemp -d)"
+  trap 'rm -rf "$TMPDIR"' EXIT
+
+  log "Downloading ${ARCHIVE}..."
+  curl -fsSL -o "${TMPDIR}/${ARCHIVE}" "$ARCHIVE_URL"
+
+  log "Verifying checksum..."
+  if command -v sha256sum >/dev/null 2>&1; then
+    ACTUAL_SHA="$(sha256sum "${TMPDIR}/${ARCHIVE}" | awk '{print $1}')"
+  else
+    ACTUAL_SHA="$(shasum -a 256 "${TMPDIR}/${ARCHIVE}" | awk '{print $1}')"
+  fi
+
+  if [ "$ACTUAL_SHA" != "$EXPECTED_SHA" ]; then
+    err "Checksum mismatch: expected ${EXPECTED_SHA}, got ${ACTUAL_SHA}"
+  fi
+
+  log "Checksum verified."
+
+  # Determine install directory
+  if [ -n "$INSTALL_DIR" ]; then
+    BIN_DIR="$INSTALL_DIR"
+  elif [ "$(id -u)" = "0" ]; then
+    BIN_DIR="/usr/local/bin"
+  else
+    BIN_DIR="${HOME}/.local/bin"
+  fi
+
+  mkdir -p "$BIN_DIR"
+
+  tar -xzf "${TMPDIR}/${ARCHIVE}" -C "$TMPDIR"
+  install -m 755 "${TMPDIR}/deepsource" "${BIN_DIR}/deepsource"
+
+  # macOS: clear quarantine and re-sign
+  if [ "$OS" = "darwin" ]; then
+    xattr -dr com.apple.quarantine "${BIN_DIR}/deepsource" 2>/dev/null || true
+    codesign --force --sign - "${BIN_DIR}/deepsource" 2>/dev/null || true
+  fi
+
+  log "DeepSource CLI v${VERSION} installed to ${BIN_DIR}/deepsource"
+
+  # Check if install dir is in PATH
+  case ":${PATH}:" in
+    *":${BIN_DIR}:"*) ;;
+    *)
+      log ""
+      log "Add ${BIN_DIR} to your PATH:"
+      log "  export PATH=\"${BIN_DIR}:\$PATH\""
+      ;;
+  esac
+}
+
+main

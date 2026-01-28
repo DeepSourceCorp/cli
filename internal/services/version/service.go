@@ -1,19 +1,19 @@
 package version
 
-import "github.com/deepsourcelabs/cli/version"
+import "github.com/deepsourcelabs/cli/buildinfo"
 
 // Service provides version information.
 type Service struct {
-	getBuildInfo func() *version.BuildInfo
+	getBuildInfo func() *buildinfo.BuildInfo
 }
 
 // NewService creates a version service.
 func NewService() *Service {
-	return NewServiceWith(version.GetBuildInfo)
+	return NewServiceWith(buildinfo.GetBuildInfo)
 }
 
 // NewServiceWith creates a version service with a custom build info provider.
-func NewServiceWith(getBuildInfo func() *version.BuildInfo) *Service {
+func NewServiceWith(getBuildInfo func() *buildinfo.BuildInfo) *Service {
 	return &Service{getBuildInfo: getBuildInfo}
 }
 

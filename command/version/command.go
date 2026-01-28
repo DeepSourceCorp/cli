@@ -5,7 +5,7 @@ import (
 
 	"github.com/deepsourcelabs/cli/internal/cli/args"
 	versionsvc "github.com/deepsourcelabs/cli/internal/services/version"
-	"github.com/deepsourcelabs/cli/version"
+	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/spf13/cobra"
 )
 
@@ -13,7 +13,7 @@ import (
 type Options struct{}
 
 // For testing.  TODO: cleanup
-var getBuildInfo = version.GetBuildInfo
+var getBuildInfo = buildinfo.GetBuildInfo
 
 // NewCmdVersion returns the current version of cli being used
 func NewCmdVersion() *cobra.Command {

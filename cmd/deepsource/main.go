@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/deepsourcelabs/cli/command"
-	v "github.com/deepsourcelabs/cli/version"
+	v "github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/getsentry/sentry-go"
 	"github.com/pterm/pterm"
 )

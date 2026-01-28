@@ -1,12 +1,9 @@
 module github.com/deepsourcelabs/cli
 
-go 1.24.0
-
-toolchain go1.24.2
+go 1.25.3
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.7
-	github.com/DataDog/zstd v1.5.7
 	github.com/Jeffail/gabs/v2 v2.7.0
 	github.com/MakeNowJust/heredoc v1.0.0
 	github.com/cli/browser v1.3.0
@@ -14,6 +11,7 @@ require (
 	github.com/fatih/color v1.18.0
 	github.com/getsentry/sentry-go v0.41.0
 	github.com/google/go-cmp v0.6.0
+	github.com/klauspost/compress v1.18.3
 	github.com/owenrumney/go-sarif/v2 v2.3.3
 	github.com/pelletier/go-toml v1.9.5
 	github.com/pterm/pterm v0.12.82

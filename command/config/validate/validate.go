@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"strconv"
 	"strings"
 
@@ -53,7 +53,7 @@ func (o *Options) Run() error {
 	}
 
 	// Read the config in the form of string and send it
-	content, err := ioutil.ReadFile(configPath)
+	content, err := os.ReadFile(configPath)
 	if err != nil {
 		return errors.New("Error occured while reading DeepSource config file. Exiting...")
 	}

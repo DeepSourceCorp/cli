@@ -1,0 +1,355 @@
+name: Build and Deploy
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+      - 'v*.*.*-*'
+
+permissions:
+  contents: read
+
+env:
+  GO_VERSION: '1.25'
+
+jobs:
+  resolve-env:
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.resolve.outputs.environment }}
+      base_url: ${{ steps.resolve.outputs.base_url }}
+      bucket: ${{ steps.resolve.outputs.bucket }}
+      version: ${{ steps.resolve.outputs.version }}
+    steps:
+      - name: Resolve environment from tag
+        id: resolve
+        run: |
+          TAG="${GITHUB_REF#refs/tags/v}"
+          if [[ "$TAG" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "environment=prod" >> "$GITHUB_OUTPUT"
+            echo "base_url=https://deepsource.com/cli" >> "$GITHUB_OUTPUT"
+            echo "bucket=${{ secrets.R2_PROD_BUCKET_NAME }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "environment=dev" >> "$GITHUB_OUTPUT"
+            echo "base_url=https://deepsource.one/cli" >> "$GITHUB_OUTPUT"
+            echo "bucket=${{ secrets.R2_DEV_BUCKET_NAME }}" >> "$GITHUB_OUTPUT"
+          fi
+          echo "version=${TAG}" >> "$GITHUB_OUTPUT"
+
+  build-linux:
+    needs: resolve-env
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - goarch: amd64
+            cc: x86_64-linux-gnu-gcc
+            cxx: x86_64-linux-gnu-g++
+          - goarch: arm64
+            cc: aarch64-linux-gnu-gcc
+            cxx: aarch64-linux-gnu-g++
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - name: Install cross-compiler
+        if: matrix.goarch == 'arm64'
+        run: sudo apt-get update && sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+
+      - name: Generate completions
+        run: bash scripts/gen-completions.sh
+
+      - name: Build
+        env:
+          CGO_ENABLED: '1'
+          GOOS: linux
+          GOARCH: ${{ matrix.goarch }}
+          CC: ${{ matrix.cc }}
+          CXX: ${{ matrix.cxx }}
+        run: |
+          cd cmd/deepsource && go build -tags static_all \
+            -ldflags "-X 'main.version=${{ needs.resolve-env.outputs.version }}' -X 'main.Date=$(date -u +%Y-%m-%d)' -X 'main.SentryDSN=${{ secrets.SENTRY_DSN }}'" \
+            -o deepsource .
+
+      - name: Package
+        run: |
+          ARCHIVE="deepsource_${{ needs.resolve-env.outputs.version }}_linux_${{ matrix.goarch }}.tar.gz"
+          tar -czf "$ARCHIVE" -C cmd/deepsource deepsource -C ../../ completions
+          sha256sum "$ARCHIVE" > "${ARCHIVE}.sha256"
+          echo "ARCHIVE=${ARCHIVE}" >> "$GITHUB_ENV"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-linux-${{ matrix.goarch }}
+          path: |
+            deepsource_*.tar.gz
+            deepsource_*.tar.gz.sha256
+
+  build-darwin:
+    needs: resolve-env
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        goarch: [amd64, arm64]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - name: Generate completions
+        run: bash scripts/gen-completions.sh
+
+      - name: Build
+        env:
+          CGO_ENABLED: '1'
+          GOOS: darwin
+          GOARCH: ${{ matrix.goarch }}
+        run: |
+          cd cmd/deepsource && go build -tags static_all \
+            -ldflags "-X 'main.version=${{ needs.resolve-env.outputs.version }}' -X 'main.Date=$(date -u +%Y-%m-%d)' -X 'main.SentryDSN=${{ secrets.SENTRY_DSN }}'" \
+            -o deepsource .
+
+      - name: Codesign
+        env:
+          APPLE_CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+        run: |
+          # Import certificate
+          CERT_PATH="$RUNNER_TEMP/certificate.p12"
+          KEYCHAIN_PATH="$RUNNER_TEMP/signing.keychain-db"
+          KEYCHAIN_PASSWORD="$(openssl rand -hex 16)"
+
+          echo "$APPLE_CERTIFICATE_BASE64" | base64 --decode > "$CERT_PATH"
+
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security import "$CERT_PATH" -P "$APPLE_CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
+          security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security list-keychains -d user -s "$KEYCHAIN_PATH" login.keychain
+
+          # Sign the binary
+          codesign --force --options runtime \
+            --sign "Developer ID Application: DeepSource Corp" \
+            cmd/deepsource/deepsource
+
+      - name: Notarize
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
+        run: |
+          # Create zip for notarization
+          ditto -c -k cmd/deepsource/deepsource notarize.zip
+          xcrun notarytool submit notarize.zip \
+            --apple-id "$APPLE_ID" \
+            --team-id "$APPLE_TEAM_ID" \
+            --password "$APPLE_APP_PASSWORD" \
+            --wait
+
+      - name: Verify signing
+        run: |
+          codesign --verify --verbose cmd/deepsource/deepsource
+          spctl --assess --type execute cmd/deepsource/deepsource || true
+
+      - name: Package
+        run: |
+          ARCHIVE="deepsource_${{ needs.resolve-env.outputs.version }}_darwin_${{ matrix.goarch }}.tar.gz"
+          tar -czf "$ARCHIVE" -C cmd/deepsource deepsource -C ../../ completions
+          shasum -a 256 "$ARCHIVE" > "${ARCHIVE}.sha256"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-darwin-${{ matrix.goarch }}
+          path: |
+            deepsource_*.tar.gz
+            deepsource_*.tar.gz.sha256
+
+  build-windows:
+    needs: resolve-env
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - name: Install cross-compiler
+        run: sudo apt-get update && sudo apt-get install -y gcc-mingw-w64-x86-64
+
+      - name: Build
+        env:
+          CGO_ENABLED: '1'
+          GOOS: windows
+          GOARCH: amd64
+          CC: x86_64-w64-mingw32-gcc
+          CXX: x86_64-w64-mingw32-g++
+        run: |
+          cd cmd/deepsource && go build -tags static_all \
+            -ldflags "-X 'main.version=${{ needs.resolve-env.outputs.version }}' -X 'main.Date=$(date -u +%Y-%m-%d)' -X 'main.SentryDSN=${{ secrets.SENTRY_DSN }}'" \
+            -o deepsource.exe .
+
+      - name: Package
+        run: |
+          ARCHIVE="deepsource_${{ needs.resolve-env.outputs.version }}_windows_amd64.zip"
+          zip "$ARCHIVE" -j cmd/deepsource/deepsource.exe
+          sha256sum "$ARCHIVE" > "${ARCHIVE}.sha256"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-windows-amd64
+          path: |
+            deepsource_*.zip
+            deepsource_*.zip.sha256
+
+  deploy:
+    needs: [resolve-env, build-linux, build-darwin, build-windows]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+
+      - name: Generate manifest
+        run: |
+          VERSION="${{ needs.resolve-env.outputs.version }}"
+          BUILD_TIME="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+          get_sha() {
+            cat "artifacts/${1}.sha256" | awk '{print $1}'
+          }
+
+          cat > artifacts/manifest.json <<EOF
+          {
+            "version": "${VERSION}",
+            "buildTime": "${BUILD_TIME}",
+            "platforms": {
+              "darwin_amd64": {
+                "archive": "deepsource_${VERSION}_darwin_amd64.tar.gz",
+                "sha256": "$(get_sha "deepsource_${VERSION}_darwin_amd64.tar.gz")"
+              },
+              "darwin_arm64": {
+                "archive": "deepsource_${VERSION}_darwin_arm64.tar.gz",
+                "sha256": "$(get_sha "deepsource_${VERSION}_darwin_arm64.tar.gz")"
+              },
+              "linux_amd64": {
+                "archive": "deepsource_${VERSION}_linux_amd64.tar.gz",
+                "sha256": "$(get_sha "deepsource_${VERSION}_linux_amd64.tar.gz")"
+              },
+              "linux_arm64": {
+                "archive": "deepsource_${VERSION}_linux_arm64.tar.gz",
+                "sha256": "$(get_sha "deepsource_${VERSION}_linux_arm64.tar.gz")"
+              },
+              "windows_amd64": {
+                "archive": "deepsource_${VERSION}_windows_amd64.zip",
+                "sha256": "$(get_sha "deepsource_${VERSION}_windows_amd64.zip")"
+              }
+            }
+          }
+          EOF
+
+      - name: Generate install script
+        run: |
+          sed "s|__BASE_URL__|${{ needs.resolve-env.outputs.base_url }}|g" \
+            scripts/install.sh.template > artifacts/install.sh
+
+      - name: Upload to R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          ENDPOINT="https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com"
+          BUCKET="${{ needs.resolve-env.outputs.bucket }}"
+
+          # Upload archives and checksums (immutable)
+          for f in artifacts/deepsource_*; do
+            aws s3 cp "$f" "s3://${BUCKET}/cli/build/$(basename "$f")" \
+              --endpoint-url "$ENDPOINT" \
+              --cache-control "public, max-age=31536000, immutable"
+          done
+
+          # Upload manifest and install script (short cache)
+          for f in artifacts/manifest.json artifacts/install.sh; do
+            aws s3 cp "$f" "s3://${BUCKET}/cli/$(basename "$f")" \
+              --endpoint-url "$ENDPOINT" \
+              --cache-control "public, max-age=60"
+          done
+
+  publish-homebrew:
+    needs: [resolve-env, deploy]
+    if: needs.resolve-env.outputs.environment == 'prod'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+
+      - name: Generate formula
+        run: |
+          VERSION="${{ needs.resolve-env.outputs.version }}"
+          BASE="${{ needs.resolve-env.outputs.base_url }}/build"
+
+          DARWIN_AMD64_SHA="$(cat artifacts/deepsource_${VERSION}_darwin_amd64.tar.gz.sha256 | awk '{print $1}')"
+          DARWIN_ARM64_SHA="$(cat artifacts/deepsource_${VERSION}_darwin_arm64.tar.gz.sha256 | awk '{print $1}')"
+          LINUX_AMD64_SHA="$(cat artifacts/deepsource_${VERSION}_linux_amd64.tar.gz.sha256 | awk '{print $1}')"
+          LINUX_ARM64_SHA="$(cat artifacts/deepsource_${VERSION}_linux_arm64.tar.gz.sha256 | awk '{print $1}')"
+
+          cat > deepsource.rb <<FORMULA
+          class Deepsource < Formula
+            desc "Command line interface to DeepSource"
+            homepage "https://github.com/deepsourcelabs/cli"
+            license "BSD-2-Clause"
+            version "${VERSION}"
+
+            on_macos do
+              if Hardware::CPU.intel?
+                url "${BASE}/deepsource_${VERSION}_darwin_amd64.tar.gz"
+                sha256 "${DARWIN_AMD64_SHA}"
+              end
+              if Hardware::CPU.arm?
+                url "${BASE}/deepsource_${VERSION}_darwin_arm64.tar.gz"
+                sha256 "${DARWIN_ARM64_SHA}"
+              end
+            end
+
+            on_linux do
+              if Hardware::CPU.intel?
+                url "${BASE}/deepsource_${VERSION}_linux_amd64.tar.gz"
+                sha256 "${LINUX_AMD64_SHA}"
+              end
+              if Hardware::CPU.arm?
+                url "${BASE}/deepsource_${VERSION}_linux_arm64.tar.gz"
+                sha256 "${LINUX_ARM64_SHA}"
+              end
+            end
+
+            def install
+              bin.install "deepsource"
+              bash_completion.install "completions/deepsource.bash" => "deepsource"
+              zsh_completion.install "completions/deepsource.zsh" => "_deepsource"
+              fish_completion.install "completions/deepsource.fish"
+            end
+          end
+          FORMULA
+
+      - name: Push formula to homebrew-cli
+        env:
+          DS_BOT_PAT: ${{ secrets.DS_BOT_PAT }}
+        run: |
+          git clone "https://deepsourcebot:${DS_BOT_PAT}@github.com/DeepSourceCorp/homebrew-cli.git" homebrew-cli
+          cp deepsource.rb homebrew-cli/Formula/deepsource.rb
+          cd homebrew-cli
+          git config user.name "deepsourcebot"
+          git config user.email "bot@deepsource.io"
+          git checkout -B cli-release
+          git add Formula/deepsource.rb
+          git commit -m "Update deepsource to ${{ needs.resolve-env.outputs.version }}"
+          git push -f origin cli-release

@@ -13,7 +13,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/DataDog/zstd"
+	"github.com/klauspost/compress/zstd"
 	"github.com/deepsourcelabs/cli/command/report"
 	"github.com/deepsourcelabs/cli/internal/adapters"
 	"github.com/deepsourcelabs/cli/internal/container"
@@ -86,7 +86,13 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Decompress zstd compressed data
-		decompressedData, err := zstd.Decompress(nil, decodedData)
+		decoder, err := zstd.NewReader(nil)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		defer decoder.Close()
+		decompressedData, err := decoder.DecodeAll(decodedData, nil)
 		if err != nil {
 			log.Println(err)
 			return
