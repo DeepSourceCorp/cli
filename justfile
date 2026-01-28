@@ -7,8 +7,6 @@ test:
 	go test -v ./command/report/tests/... -count=1
 	echo "\n====TESTING DEEPSOURCE PACKAGE====\n"
 	go test -v ./deepsource/tests/...
-	echo "\n====TESTING CONFIG VALIDATOR PACKAGE====\n"
-	go test -v ./internal/configvalidator/... -count=1
 	echo "\n====CALCULATING TEST COVERAGE FOR ENTIRE PACKAGE====\n"
 	go test -v -coverprofile=coverage.out -count=1 ./...
 
