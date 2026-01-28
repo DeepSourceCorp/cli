@@ -2,7 +2,6 @@ package list
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"os"
 	"reflect"
 	"strings"
@@ -14,7 +13,7 @@ import (
 
 // Helper function to read issues from a file.
 func ReadIssues(path string) []issues.Issue {
-	raw, _ := ioutil.ReadFile(path)
+	raw, _ := os.ReadFile(path)
 	var fetchedIssues []issues.Issue
 	_ = json.Unmarshal(raw, &fetchedIssues)
 
@@ -27,8 +26,8 @@ func TestListCSV(t *testing.T) {
 	opts.exportCSV("./testdata/exported.csv")
 
 	// read exported and test CSV files
-	exported, _ := ioutil.ReadFile("./testdata/exported.csv")
-	test, _ := ioutil.ReadFile("./testdata/csv/test.csv")
+	exported, _ := os.ReadFile("./testdata/exported.csv")
+	test, _ := os.ReadFile("./testdata/csv/test.csv")
 
 	// trim carriage returns
 	got := strings.TrimSuffix(string(exported), "\n")
@@ -48,8 +47,8 @@ func TestListJSON(t *testing.T) {
 	opts.exportJSON("./testdata/exported.json")
 
 	// read exported and test JSON files
-	exported, _ := ioutil.ReadFile("./testdata/exported.json")
-	test, _ := ioutil.ReadFile("./testdata/json/test.json")
+	exported, _ := os.ReadFile("./testdata/exported.json")
+	test, _ := os.ReadFile("./testdata/json/test.json")
 
 	// trim carriage returns
 	got := strings.TrimSuffix(string(exported), "\n")
@@ -72,8 +71,8 @@ func TestListSARIF(t *testing.T) {
 		opts.exportSARIF("./testdata/exported.sarif")
 
 		// read exported and test SARIF files
-		exported, _ := ioutil.ReadFile("./testdata/exported.sarif")
-		test, _ := ioutil.ReadFile("./testdata/sarif/test.sarif")
+		exported, _ := os.ReadFile("./testdata/exported.sarif")
+		test, _ := os.ReadFile("./testdata/sarif/test.sarif")
 
 		// trim carriage returns
 		got := strings.TrimSuffix(string(exported), "\n")
@@ -95,8 +94,8 @@ func TestListSARIF(t *testing.T) {
 		opts.exportSARIF("./testdata/exported_multi.sarif")
 
 		// read exported and test SARIF files
-		exported, _ := ioutil.ReadFile("./testdata/exported_multi.sarif")
-		test, _ := ioutil.ReadFile("./testdata/sarif/test_multi.sarif")
+		exported, _ := os.ReadFile("./testdata/exported_multi.sarif")
+		test, _ := os.ReadFile("./testdata/sarif/test_multi.sarif")
 
 		// trim carriage returns
 		got := strings.TrimSuffix(string(exported), "\n")

@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"strings"
@@ -478,7 +477,7 @@ func (opts *IssuesOptions) exportJSON(filename string) error {
 		return nil
 	}
 
-	if err := ioutil.WriteFile(filename, data, 0644); err != nil {
+	if err := os.WriteFile(filename, data, 0644); err != nil {
 		return fmt.Errorf("failed to write JSON file: %w", err)
 	}
 

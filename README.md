@@ -41,6 +41,28 @@ This script will detect the operating system and architecture and puts deepsourc
 In order to report test-coverage to DeepSource using the `report` command, an environment variable named as `DEEPSOURCE_DSN` has to
 be set. It's value will be available under 'Settings' tab of the repository page.
 
+## Authentication
+
+### Browser-based login (default)
+```sh
+deepsource auth login
+```
+
+### Token-based login
+```sh
+deepsource auth login --token <your-token>
+```
+
+### Enterprise (custom hostname)
+```sh
+deepsource auth login --host your-enterprise.deepsource.com
+```
+
+### OIDC-based reporting (CI environments)
+```sh
+deepsource report --analyzer test-coverage --key go --value-file ./coverage.out --use-oidc
+```
+
 ## Usage
 
 The CLI provides access to a wide range of commands. Here is a list of the
@@ -51,13 +73,14 @@ Usage:
     deepsource <command> [<arguments>]
 
 Available commands are:
-    report      Report an artifact to an analyzer
+    auth        Authentication commands (login, logout, refresh, status)
     config      Generate and Validate DeepSource config
-    help        Help about any command
     issues      Show the list of issues in a file in a repository
-    repo        Operations related to the project repository
+    repo        Operations related to the project repository (status, view)
     report      Report artifacts to DeepSource
+    runs        View analysis runs and run issues
     version     Get the version of the DeepSource CLI
+    whoami      Show the currently authenticated user
 
 Help:
     Use 'deepsource <command> --help/-h' for more information about the command.

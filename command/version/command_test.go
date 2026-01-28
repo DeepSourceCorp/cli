@@ -4,14 +4,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/deepsourcelabs/cli/version"
+	"github.com/deepsourcelabs/cli/buildinfo"
 )
 
 func TestOptions_Run(t *testing.T) {
 	date, _ := time.Parse("2006-01-02", "2021-01-21")
 
-	getBuildInfo = func() *version.BuildInfo {
-		return &version.BuildInfo{
+	getBuildInfo = func() *buildinfo.BuildInfo {
+		return &buildinfo.BuildInfo{
 			Version: "1.5.0",
 			Date:    date,
 		}

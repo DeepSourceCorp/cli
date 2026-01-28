@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/DataDog/zstd"
+	"github.com/klauspost/compress/zstd"
 	"github.com/deepsourcelabs/cli/internal/interfaces"
 	"github.com/deepsourcelabs/cli/internal/oidc"
 )
@@ -256,10 +256,11 @@ func (s *Service) compressIfSupported(ctx context.Context, dsn *DSN, artifactVal
 			continue
 		}
 
-		compressedBytes, err := zstd.CompressLevel(nil, []byte(artifactValue), 20)
+		encoder, err := zstd.NewWriter(nil, zstd.WithEncoderLevel(zstd.SpeedBestCompression))
 		if err != nil {
-			return "", fmt.Errorf("DeepSource | Error | Failed to compress value file: %w", err)
+			return "", fmt.Errorf("DeepSource | Error | Failed to create zstd encoder: %w", err)
 		}
+		compressedBytes := encoder.EncodeAll([]byte(artifactValue), nil)
 
 		meta["compressed"] = "True"
 		return base64.StdEncoding.EncodeToString(compressedBytes), nil

@@ -2,8 +2,9 @@ package tests
 
 import (
 	"context"
-	"io/ioutil"
+	"io"
 	"log"
+	"os"
 	"net/http"
 	"reflect"
 	"testing"
@@ -29,21 +30,21 @@ func TestViewer(t *testing.T) {
 }
 
 func mockViewer(w http.ResponseWriter, r *http.Request) {
-	req, _ := ioutil.ReadAll(r.Body)
+	req, _ := io.ReadAll(r.Body)
 
-	requestBodyData, err := ioutil.ReadFile("./testdata/viewer/request_body.txt")
+	requestBodyData, err := os.ReadFile("./testdata/viewer/request_body.txt")
 	if err != nil {
 		log.Println(err)
 		return
 	}
 
-	successResponseBodyData, err := ioutil.ReadFile("./testdata/viewer/success_response_body.json")
+	successResponseBodyData, err := os.ReadFile("./testdata/viewer/success_response_body.json")
 	if err != nil {
 		log.Println(err)
 		return
 	}
 
-	errorResponseBodyData, err := ioutil.ReadFile("./testdata/viewer/error_response_body.json")
+	errorResponseBodyData, err := os.ReadFile("./testdata/viewer/error_response_body.json")
 	if err != nil {
 		log.Println(err)
 		return
