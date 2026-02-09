@@ -117,6 +117,10 @@ func (r RunIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issu
 
 	issuesData := []issues.Issue{}
 	for _, checkEdge := range respData.Run.Checks.Edges {
+		if len(checkEdge.Node.Occurrences.Edges) == 0 {
+			continue
+		}
+
 		for _, occurrenceEdge := range checkEdge.Node.Occurrences.Edges {
 			issueData := issues.Issue{
 				IssueText:     occurrenceEdge.Node.Issue.Title,
