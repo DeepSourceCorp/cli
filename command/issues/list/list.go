@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"regexp"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
@@ -103,8 +104,8 @@ func NewCmdIssuesList() *cobra.Command {
 	// --sarif flag
 	cmd.Flags().BoolVar(&opts.SARIFArg, "sarif", false, "Output reported issues in SARIF format")
 
-	// --commit, -c flag
-	cmd.Flags().StringVarP(&opts.CommitArg, "commit", "c", "", "List issues from the analysis run for a specific commit SHA")
+	// --commit flag
+	cmd.Flags().StringVar(&opts.CommitArg, "commit", "", "List issues from the analysis run for a specific commit SHA")
 
 	return cmd
 }
@@ -126,6 +127,17 @@ func (opts *IssuesListOptions) Run() (err error) {
 	// with an error message
 	if opts.LimitArg > MAX_ISSUE_LIMIT {
 		return fmt.Errorf("The maximum allowed limit to fetch issues is 100. Found %d", opts.LimitArg)
+	}
+
+	// Validate --commit flag
+	if opts.CommitArg != "" {
+		if opts.RepoArg != "" {
+			return fmt.Errorf("--commit and --repo cannot be used together")
+		}
+		commitSHAPattern := regexp.MustCompile(`^[0-9a-fA-F]{6,40}$`)
+		if !commitSHAPattern.MatchString(opts.CommitArg) {
+			return fmt.Errorf("invalid commit SHA: %q (expected 6-40 hex characters)", opts.CommitArg)
+		}
 	}
 
 	// Get the remote repository URL (not needed when querying by commit)

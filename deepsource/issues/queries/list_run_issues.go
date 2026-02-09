@@ -138,5 +138,11 @@ func (r RunIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issu
 		}
 	}
 
+	// The limit is applied per-analyzer check in the GraphQL query,
+	// so cap the total to the requested limit.
+	if r.Params.Limit > 0 && len(issuesData) > r.Params.Limit {
+		issuesData = issuesData[:r.Params.Limit]
+	}
+
 	return issuesData, nil
 }
