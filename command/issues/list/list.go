@@ -20,6 +20,8 @@ import (
 
 const MAX_ISSUE_LIMIT = 100
 
+var commitSHAPattern = regexp.MustCompile(`^[0-9a-fA-F]{6,40}$`)
+
 type IssuesListOptions struct {
 	FileArg           []string
 	RepoArg           string
@@ -107,6 +109,9 @@ func NewCmdIssuesList() *cobra.Command {
 	// --commit flag
 	cmd.Flags().StringVar(&opts.CommitArg, "commit", "", "List issues from the analysis run for a specific commit SHA")
 
+	// --commit and --repo are mutually exclusive
+	cmd.MarkFlagsMutuallyExclusive("commit", "repo")
+
 	return cmd
 }
 
@@ -131,10 +136,6 @@ func (opts *IssuesListOptions) Run() (err error) {
 
 	// Validate --commit flag
 	if opts.CommitArg != "" {
-		if opts.RepoArg != "" {
-			return fmt.Errorf("--commit and --repo cannot be used together")
-		}
-		commitSHAPattern := regexp.MustCompile(`^[0-9a-fA-F]{6,40}$`)
 		if !commitSHAPattern.MatchString(opts.CommitArg) {
 			return fmt.Errorf("invalid commit SHA: %q (expected 6-40 hex characters)", opts.CommitArg)
 		}

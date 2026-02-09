@@ -165,7 +165,7 @@ func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string,
 }
 
 // Returns the list of issues found in an analysis run for a specific commit.
-// commitOID : The full commit SHA to look up
+// commitOID : The commit SHA to look up (full or abbreviated, 6-40 hex characters)
 // limit : The amount of issues to be listed. The default limit is 30 while the maximum limit is currently 100.
 func (c Client) GetIssuesByCommit(ctx context.Context, commitOID string, limit int) ([]issues.Issue, error) {
 	req := issuesQuery.RunIssuesListRequest{
