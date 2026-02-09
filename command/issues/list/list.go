@@ -22,6 +22,7 @@ const MAX_ISSUE_LIMIT = 100
 type IssuesListOptions struct {
 	FileArg           []string
 	RepoArg           string
+	CommitArg         string
 	AnalyzerArg       []string
 	LimitArg          int
 	OutputFilenameArg string
@@ -66,7 +67,10 @@ func NewCmdIssuesList() *cobra.Command {
 
 		To export listed issues to a SARIF file, use the %[14]s flag:
 		%[15]s
-		`, utils.Cyan("deepsource issues list"), utils.Yellow("--repo"), utils.Cyan("deepsource issues list --repo repo_name"), utils.Yellow("--analyzer"), utils.Cyan("deepsource issues list --analyzer python"), utils.Yellow("--limit"), utils.Cyan("deepsource issues list --limit 100"), utils.Yellow("--output-file"), utils.Cyan("deepsource issues list --output-file file_name"), utils.Yellow("--json"), utils.Cyan("deepsource issues list --json --output-file example.json"), utils.Yellow("--csv"), utils.Cyan("deepsource issues list --csv --output-file example.csv"), utils.Yellow("--sarif"), utils.Cyan("deepsource issues list --sarif --output-file example.sarif"))
+
+		To list issues for a specific commit (e.g. on a PR branch), use the %[16]s flag:
+		%[17]s
+		`, utils.Cyan("deepsource issues list"), utils.Yellow("--repo"), utils.Cyan("deepsource issues list --repo repo_name"), utils.Yellow("--analyzer"), utils.Cyan("deepsource issues list --analyzer python"), utils.Yellow("--limit"), utils.Cyan("deepsource issues list --limit 100"), utils.Yellow("--output-file"), utils.Cyan("deepsource issues list --output-file file_name"), utils.Yellow("--json"), utils.Cyan("deepsource issues list --json --output-file example.json"), utils.Yellow("--csv"), utils.Cyan("deepsource issues list --csv --output-file example.csv"), utils.Yellow("--sarif"), utils.Cyan("deepsource issues list --sarif --output-file example.sarif"), utils.Yellow("--commit"), utils.Cyan("deepsource issues list --commit abc123def456"))
 
 	cmd := &cobra.Command{
 		Use:   "list",
@@ -99,6 +103,9 @@ func NewCmdIssuesList() *cobra.Command {
 	// --sarif flag
 	cmd.Flags().BoolVar(&opts.SARIFArg, "sarif", false, "Output reported issues in SARIF format")
 
+	// --commit, -c flag
+	cmd.Flags().StringVarP(&opts.CommitArg, "commit", "c", "", "List issues from the analysis run for a specific commit SHA")
+
 	return cmd
 }
 
@@ -121,10 +128,12 @@ func (opts *IssuesListOptions) Run() (err error) {
 		return fmt.Errorf("The maximum allowed limit to fetch issues is 100. Found %d", opts.LimitArg)
 	}
 
-	// Get the remote repository URL for which issues have to be listed
-	opts.SelectedRemote, err = utils.ResolveRemote(opts.RepoArg)
-	if err != nil {
-		return err
+	// Get the remote repository URL (not needed when querying by commit)
+	if opts.CommitArg == "" {
+		opts.SelectedRemote, err = utils.ResolveRemote(opts.RepoArg)
+		if err != nil {
+			return err
+		}
 	}
 
 	// Fetch the list of issues using SDK (deepsource package) based on user input
@@ -159,10 +168,18 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 		return err
 	}
 
-	// Fetch list of issues for the whole project
-	opts.issuesData, err = deepsource.GetIssues(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, opts.LimitArg)
-	if err != nil {
-		return err
+	// If --commit is specified, fetch issues from the analysis run for that commit
+	if opts.CommitArg != "" {
+		opts.issuesData, err = deepsource.GetIssuesByCommit(ctx, opts.CommitArg, opts.LimitArg)
+		if err != nil {
+			return err
+		}
+	} else {
+		// Fetch list of issues for the whole project (default branch)
+		opts.issuesData, err = deepsource.GetIssues(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, opts.LimitArg)
+		if err != nil {
+			return err
+		}
 	}
 
 	var filteredIssues []issues.Issue
