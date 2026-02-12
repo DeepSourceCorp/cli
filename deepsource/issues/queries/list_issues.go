@@ -28,6 +28,7 @@ const fetchAllIssuesQuery = `query GetAllIssues(
                 issue {
                   title
                   shortcode
+                  shortDescription
                   category
                   severity
                   isRecommended
@@ -68,13 +69,14 @@ type IssuesListResponse struct {
 								Path      string `json:"path"`
 								BeginLine int    `json:"beginLine"`
 								EndLine   int    `json:"endLine"`
-								Issue     struct {
-									Title         string `json:"title"`
-									Shortcode     string `json:"shortcode"`
-									Category      string `json:"category"`
-									Severity      string `json:"severity"`
-									IsRecommended bool   `json:"isRecommended"`
-									Analyzer      struct {
+								Issue struct {
+									Title            string `json:"title"`
+									Shortcode        string `json:"shortcode"`
+									ShortDescription string `json:"shortDescription"`
+									Category         string `json:"category"`
+									Severity         string `json:"severity"`
+									IsRecommended    bool   `json:"isRecommended"`
+									Analyzer         struct {
 										Name      string `json:"name"`
 										Shortcode string `json:"shortcode"`
 									} `json:"analyzer"`
@@ -101,7 +103,7 @@ func (i *IssuesListRequest) Do(ctx context.Context) ([]issues.Issue, error) {
 	}
 	var respData IssuesListResponse
 	if err := i.client.Query(ctx, fetchAllIssuesQuery, vars, &respData); err != nil {
-		return nil, fmt.Errorf("list issues: %w", err)
+		return nil, fmt.Errorf("List issues: %w", err)
 	}
 
 	issuesData := []issues.Issue{}
@@ -123,7 +125,9 @@ func (i *IssuesListRequest) Do(ctx context.Context) ([]issues.Issue, error) {
 						EndLine:   occurenceEdge.Node.EndLine,
 					},
 				},
+				Description: occurenceEdge.Node.Issue.ShortDescription,
 				Analyzer: issues.AnalyzerMeta{
+					Name:      occurenceEdge.Node.Issue.Analyzer.Name,
 					Shortcode: occurenceEdge.Node.Issue.Analyzer.Shortcode,
 				},
 			}

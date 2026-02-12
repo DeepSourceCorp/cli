@@ -14,29 +14,32 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource/runs"
 	"github.com/deepsourcelabs/cli/internal/cli/args"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
+	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v3"
 )
 
 type IssuesOptions struct {
 	commitOid       string
-	jsonOutput      bool
+	outputFormat    string
 	outputFile      string
 	analyzerFilters []string
 	categoryFilters []string
 	severityFilters []string
 	codeFilters     []string
 	pathFilters     []string
+	sourceFilters   []string
 	runWithIssues   *runs.RunWithIssues
 }
 
 // AddRunIssueFlags registers flags for filtering and output options.
 func AddRunIssueFlags(cmd *cobra.Command, opts *IssuesOptions) {
-	// --json flag
-	cmd.Flags().BoolVar(&opts.jsonOutput, "json", false, "Output issues in JSON format")
+	// --output flag (replaces --json)
+	cmd.Flags().StringVar(&opts.outputFormat, "output", "table", "Output format: table, json, yaml")
 
-	// --output-file, -o flag
-	cmd.Flags().StringVarP(&opts.outputFile, "output-file", "o", "", "Output file to write the issues to")
+	// --output-file flag
+	cmd.Flags().StringVar(&opts.outputFile, "output-file", "", "Output file to write the issues to")
 
 	// filter flags
 	cmd.Flags().StringArrayVar(&opts.analyzerFilters, "analyzer", nil, "Filter issues by analyzer shortcode (repeatable)")
@@ -44,6 +47,15 @@ func AddRunIssueFlags(cmd *cobra.Command, opts *IssuesOptions) {
 	cmd.Flags().StringArrayVar(&opts.severityFilters, "severity", nil, "Filter issues by severity (repeatable)")
 	cmd.Flags().StringArrayVar(&opts.codeFilters, "code", nil, "Filter issues by issue code (repeatable)")
 	cmd.Flags().StringArrayVar(&opts.pathFilters, "path", nil, "Filter issues by path substring (repeatable)")
+	cmd.Flags().StringArrayVar(&opts.sourceFilters, "source", nil, "Filter issues by source: static, ai (repeatable)")
+
+	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+		return []string{
+			"table\tHuman-readable table",
+			"json\tJSON output",
+			"yaml\tYAML output",
+		}, cobra.ShellCompDirectiveNoFileComp
+	})
 }
 
 // NewCmdRunsIssues shows the issues in a specific analysis run.
@@ -81,9 +93,10 @@ func (opts *IssuesOptions) RunWithCommit(ctx context.Context, commitOid string) 
 
 func (opts *IssuesOptions) Run(ctx context.Context) error {
 	// Load configuration
-	cfg, err := config.DefaultManager().Load()
+	cfgMgr := config.DefaultManager()
+	cfg, err := cfgMgr.Load()
 	if err != nil {
-		return fmt.Errorf("error while reading DeepSource CLI config: %v", err)
+		return clierrors.NewCLIError(clierrors.ErrInvalidConfig, "Error reading DeepSource CLI config", err)
 	}
 	if err := cfg.VerifyAuthentication(); err != nil {
 		return err
@@ -92,13 +105,14 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 	// Expand commit OID to full SHA if it's a short one
 	commitOid, err := expandCommitOID(opts.commitOid)
 	if err != nil {
-		return fmt.Errorf("failed to expand commit OID: %w", err)
+		return clierrors.NewCLIError(clierrors.ErrGitOperationFailed, "Failed to expand commit OID", err)
 	}
 
 	// Initialize DeepSource client
 	dsClient, err := deepsource.New(deepsource.ClientOpts{
-		Token:    cfg.Token,
-		HostName: cfg.Host,
+		Token:            cfg.Token,
+		HostName:         cfg.Host,
+		OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
 	})
 	if err != nil {
 		return err
@@ -107,7 +121,7 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 	// Fetch run with issues
 	runWithIssues, err := dsClient.GetRunIssues(ctx, commitOid)
 	if err != nil {
-		return fmt.Errorf("failed to fetch run issues: %w", err)
+		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to fetch run issues", err)
 	}
 
 	// Apply filters, if any
@@ -115,9 +129,9 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 
 	opts.runWithIssues = runWithIssues
 
-	// If JSON output is requested, export and return
-	if opts.jsonOutput {
-		return opts.exportJSON(opts.outputFile)
+	// If non-table output is requested, export and return
+	if opts.outputFormat == "json" || opts.outputFormat == "yaml" {
+		return opts.exportOutput(opts.outputFile)
 	}
 
 	// Display run info
@@ -160,7 +174,8 @@ func (opts *IssuesOptions) hasFilters() bool {
 		len(opts.categoryFilters) > 0 ||
 		len(opts.severityFilters) > 0 ||
 		len(opts.codeFilters) > 0 ||
-		len(opts.pathFilters) > 0
+		len(opts.pathFilters) > 0 ||
+		len(opts.sourceFilters) > 0
 }
 
 func (opts *IssuesOptions) filterIssues(issues []runs.RunIssue) []runs.RunIssue {
@@ -172,6 +187,7 @@ func (opts *IssuesOptions) filterIssues(issues []runs.RunIssue) []runs.RunIssue 
 	categorySet := makeStringSet(opts.categoryFilters)
 	severitySet := makeStringSet(opts.severityFilters)
 	codeSet := makeStringSet(opts.codeFilters)
+	sourceSet := makeStringSet(opts.sourceFilters)
 	pathFilters := makeLowerStrings(opts.pathFilters)
 
 	filtered := make([]runs.RunIssue, 0, len(issues))
@@ -186,6 +202,9 @@ func (opts *IssuesOptions) filterIssues(issues []runs.RunIssue) []runs.RunIssue 
 			continue
 		}
 		if len(codeSet) > 0 && !setContainsFold(codeSet, issue.IssueCode) {
+			continue
+		}
+		if len(sourceSet) > 0 && !setContainsFold(sourceSet, issue.Source) {
 			continue
 		}
 		if len(pathFilters) > 0 && !matchesPathFilters(issue.Path, pathFilters) {
@@ -243,7 +262,7 @@ func matchesPathFilters(path string, filters []string) bool {
 }
 
 func (opts *IssuesOptions) showIssues(issues []runs.RunIssue) {
-	header := []string{"LOCATION", "ANALYZER", "CODE", "TITLE", "CATEGORY", "SEVERITY"}
+	header := []string{"LOCATION", "SOURCE", "ANALYZER", "CODE", "TITLE", "CATEGORY", "SEVERITY"}
 	data := [][]string{header}
 
 	// Get terminal width for column width calculation
@@ -252,14 +271,14 @@ func (opts *IssuesOptions) showIssues(issues []runs.RunIssue) {
 		terminalWidth = 120 // Default fallback
 	}
 
-	// Calculate column widths (6 columns total)
-	// Allocate space: LOCATION (20%), ANALYZER (10%), CODE (10%), TITLE (35%), CATEGORY (15%), SEVERITY (10%)
+	// Calculate column widths (7 columns total)
 	colWidths := []int{
-		int(float64(terminalWidth) * 0.20), // LOCATION
+		int(float64(terminalWidth) * 0.18), // LOCATION
+		int(float64(terminalWidth) * 0.08), // SOURCE
 		int(float64(terminalWidth) * 0.10), // ANALYZER
 		int(float64(terminalWidth) * 0.10), // CODE
-		int(float64(terminalWidth) * 0.35), // TITLE
-		int(float64(terminalWidth) * 0.15), // CATEGORY
+		int(float64(terminalWidth) * 0.30), // TITLE
+		int(float64(terminalWidth) * 0.14), // CATEGORY
 		int(float64(terminalWidth) * 0.10), // SEVERITY
 	}
 
@@ -286,11 +305,12 @@ func (opts *IssuesOptions) showIssues(issues []runs.RunIssue) {
 		// Wrap text for each column
 		data = append(data, []string{
 			wrapText(issueLocation, colWidths[0]),
-			wrapText(issue.AnalyzerShortcode, colWidths[1]),
-			wrapText(issue.IssueCode, colWidths[2]),
-			wrapText(issue.Title, colWidths[3]),
-			wrapText(issue.Category, colWidths[4]),
-			wrapText(severity, colWidths[5]),
+			wrapText(issue.Source, colWidths[1]),
+			wrapText(issue.AnalyzerShortcode, colWidths[2]),
+			wrapText(issue.IssueCode, colWidths[3]),
+			wrapText(issue.Title, colWidths[4]),
+			wrapText(issue.Category, colWidths[5]),
+			wrapText(severity, colWidths[6]),
 		})
 	}
 
@@ -429,14 +449,15 @@ type IssueJSON struct {
 	Title             string    `json:"title"`
 	Category          string    `json:"category"`
 	Severity          string    `json:"severity"`
+	Source            string    `json:"source"`
 	AnalyzerName      string    `json:"analyzer_name"`
 	AnalyzerShortcode string    `json:"analyzer_shortcode"`
 }
 
-// exportJSON exports the run issues to JSON format
-func (opts *IssuesOptions) exportJSON(filename string) error {
+// exportOutput exports the run issues to JSON or YAML format
+func (opts *IssuesOptions) exportOutput(filename string) error {
 	if opts.runWithIssues == nil {
-		return fmt.Errorf("no run data available to export")
+		return clierrors.NewCLIError(clierrors.ErrAPIError, "No run data available to export", nil)
 	}
 
 	// Convert to JSON structure
@@ -460,25 +481,40 @@ func (opts *IssuesOptions) exportJSON(filename string) error {
 			Title:             issue.Title,
 			Category:          issue.Category,
 			Severity:          issue.Severity,
+			Source:            issue.Source,
 			AnalyzerName:      issue.AnalyzerName,
 			AnalyzerShortcode: issue.AnalyzerShortcode,
 		})
 	}
 
-	// Marshal to JSON
-	data, err := json.MarshalIndent(jsonData, "", "  ")
-	if err != nil {
-		return fmt.Errorf("failed to marshal JSON: %w", err)
+	// Marshal based on format
+	var data []byte
+	var err error
+	switch opts.outputFormat {
+	case "yaml":
+		data, err = yaml.Marshal(jsonData)
+		if err != nil {
+			return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format YAML output", err)
+		}
+	default: // json
+		data, err = json.MarshalIndent(jsonData, "", "  ")
+		if err != nil {
+			return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format JSON output", err)
+		}
 	}
 
 	// Write to file or stdout
 	if filename == "" {
-		fmt.Println(string(data))
+		if opts.outputFormat == "yaml" {
+			fmt.Print(string(data))
+		} else {
+			fmt.Println(string(data))
+		}
 		return nil
 	}
 
 	if err := os.WriteFile(filename, data, 0644); err != nil {
-		return fmt.Errorf("failed to write JSON file: %w", err)
+		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to write output file", err)
 	}
 
 	pterm.Printf("Saved issues to %s!\n", filename)

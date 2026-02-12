@@ -1,3 +1,87 @@
+"""An issue occurrence found during code analysis."""
+type AnalysisIssue {
+  """Unique identifier for this issue occurrence."""
+  id: ID!
+
+  """Source of this issue."""
+  source: AnalysisIssueSource!
+
+  """File path where the issue was found."""
+  path: String!
+
+  """Severity of the issue."""
+  severity: IssueSeverity!
+
+  """Category of the issue."""
+  category: IssueCategory!
+
+  """Description of the issue."""
+  title: String
+
+  """Detailed explanation of the issue."""
+  explanation: String
+
+  """Whether this issue is suppressed."""
+  isSuppressed: Boolean!
+
+  """Starting line number."""
+  beginLine: Int!
+
+  """Starting column number."""
+  beginColumn: Int!
+
+  """Ending line number."""
+  endLine: Int!
+
+  """Ending column number."""
+  endColumn: Int!
+
+  """Time when the issue was first detected."""
+  createdAt: DateTime!
+
+  """Time when the issue was last modified."""
+  modifiedAt: DateTime!
+
+  """Issue shortcode. Null for AI issues."""
+  shortcode: String
+
+  """The issue definition. Null for AI issues."""
+  issue: Issue
+}
+
+"""Source of an analysis issue."""
+enum AnalysisIssueSource {
+  STATIC
+  AI
+}
+
+"""An enumeration."""
+enum IssueSeverity {
+  CRITICAL
+  MAJOR
+  MINOR
+}
+
+"""An enumeration."""
+enum IssueCategory {
+  ANTI_PATTERN
+  BUG_RISK
+  PERFORMANCE
+  SECURITY
+  COVERAGE
+  TYPECHECK
+  STYLE
+  DOCUMENTATION
+  SECRETS
+}
+
+"""
+The `DateTime` scalar type represents a DateTime
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar DateTime
+
 type ComplianceReport implements Report {
   """The key of the report."""
   key: ReportKey
@@ -261,30 +345,10 @@ type IssueDistributionItem {
 }
 
 """An enumeration."""
-enum IssueCategory {
-  ANTI_PATTERN
-  BUG_RISK
-  PERFORMANCE
-  SECURITY
-  COVERAGE
-  TYPECHECK
-  STYLE
-  DOCUMENTATION
-  SECRETS
-}
-
-"""An enumeration."""
 enum AnalyzerType {
   CORE
   COMMUNITY
   CUSTOM
-}
-
-"""An enumeration."""
-enum IssueSeverity {
-  CRITICAL
-  MAJOR
-  MINOR
 }
 
 type IssueDistributionReport implements Report {
@@ -443,118 +507,206 @@ type ChangesetStatsCounts {
   newCovered: Int
 }
 
-type Query {
-  """The currently authenticated user."""
-  viewer: User
-
-  """Lookup a transformer by its shortcode."""
-  transformer(
-    """Shortcode of the transformer."""
-    shortcode: String!
-  ): Transformer @deprecated(reason: "Use `codeFormatter` instead")
-
-  """List all transformers with optional filtering."""
-  transformers(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String): TransformerConnection @deprecated(reason: "Use `codeFormatters` instead")
-
-  """Lookup a repository on DeepSource using it's name and VCS provider."""
-  repository(
-    """The name of the repository to lookup."""
-    name: String!
-
-    """
-    The login or username of the account under which the repository exists.
-    """
-    login: String!
-
-    """VCS Provider of the repository."""
-    vcsProvider: VCSProvider!
-  ): Repository
-
-  """The DeepSource installation."""
-  installation: Installation
-
-  """Lookup a code formatter by its shortcode."""
-  codeFormatter(
-    """Shortcode of the code formatter."""
-    shortcode: String!
-  ): CodeFormatter
-
-  """List all code formatters with optional filtering."""
-  codeFormatters(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String): CodeFormatterConnection
-
-  """Get an analyzer from its shortcode."""
-  analyzer(
-    """Shortcode of the analyzer you'd like to get."""
-    shortcode: String!
-  ): Analyzer
-
-  """Get all analyzers available on DeepSource."""
-  analyzers(offset: Int, before: String, after: String, first: Int, last: Int): AnalyzerConnection
-
-  """Fetch an AnalysisRun object from it's UID or commit OID."""
-  run(
-    """UID of the Analysis Run you want to get."""
-    runUid: UUID
-
-    """Commit OID of the Analysis Run you want to get."""
-    commitOid: String
-  ): AnalysisRun!
-
-  """
-  An account on DeepSource (individual or team). A user can add multiple accounts from multiple VCS providers.
-  """
-  account(
-    """The login or username to lookup the account by."""
-    login: String!
-
-    """VCS Provider of the account."""
-    vcsProvider: VCSProvider!
-  ): Account
-  node(
-    """The ID of the object"""
-    id: ID!
-  ): MaskPrimaryKeyNode
-}
-
-type User implements MaskPrimaryKeyNode {
-  firstName: String!
-  lastName: String!
-  email: String!
+"""A Pull Request on DeepSource."""
+type PullRequest implements MaskPrimaryKeyNode {
+  createdAt: DateTime!
+  baseBranch: String
+  branch: String
+  number: Int
+  title: String
 
   """The ID of the object"""
   id: ID!
 
-  """
-  All the accounts associated with the user. This includes the team accounts the user is part of and the individual accounts they have added on DeepSource.
-  """
-  accounts(offset: Int, before: String, after: String, first: Int, last: Int): AccountConnection
+  """Current state of this pull request (open/closed)"""
+  state: PRState!
 
-  """The anonymous ID used for analytics and tracking."""
-  analyticsId: String!
+  """URL of the PR on the VCS provider's website"""
+  vcsUrl: String!
 
-  """Whether the user is a beta tester."""
-  isBetaTester: Boolean!
+  """Summary of issues and vulnerabilities for this PR"""
+  summary: PRSummary!
 
-  """The IDE subscription associated with the user."""
-  ideSubscription: IDESubscription
+  """Latest analysis run on this pull request"""
+  latestAnalysisRun: AnalysisRun
+
+  """All issue occurrences from the latest analysis run on this PR"""
+  issueOccurrences(offset: Int, before: String, after: String, first: Int, last: Int, analyzerIn: [String]): OccurrenceConnection!
+
+  """All vulnerability occurrences from the latest analysis run on this PR"""
+  vulnerabilityOccurrences(offset: Int, before: String, after: String, first: Int, last: Int): VulnerabilityOccurrenceConnection!
+
+  """List of DeepSource metrics captured in the latest run"""
+  metrics: [RepositoryMetric!]
 }
 
-type AccountConnection {
-  """Pagination data for this connection."""
-  pageInfo: PageInfo!
-
-  """Contains the nodes in this connection."""
-  edges: [AccountEdge]!
-  totalCount: Int
+"""State of a pull request."""
+enum PRState {
+  OPEN
+  CLOSED
 }
 
-"""A Relay edge containing a `Account` and its cursor."""
-type AccountEdge {
-  """The item at the end of the edge"""
-  node: Account
+"""Summary counts for a pull request."""
+type PRSummary {
+  """Total issues raised by this pull request"""
+  issuesRaised: Int
 
-  """A cursor for use in pagination"""
-  cursor: String!
+  """Total issues resolved by this pull request"""
+  issuesResolved: Int
+
+  """Total issues suppressed in this pull request"""
+  issuesSuppressed: Int
+
+  """Total vulnerabilities raised by this pull request"""
+  vulnerabilitiesRaised: Int
+}
+
+type AnalysisRun implements MaskPrimaryKeyNode {
+  createdAt: DateTime!
+  branchName: String
+  baseOid: String
+  commitOid: String
+  finishedAt: DateTime
+  repository: Repository!
+
+  """The ID of the object"""
+  id: ID!
+
+  """UID of this AnalysisRun."""
+  runUid: UUID!
+
+  """The current status of the run."""
+  status: AnalysisRunStatus!
+
+  """Summary of the analysis run"""
+  summary: AnalysisRunSummary!
+
+  """Time when the analysis run was last modified"""
+  updatedAt: DateTime!
+
+  """Analyzer checks in the analysis run."""
+  checks(offset: Int, before: String, after: String, first: Int, last: Int, analyzerIn: [String]): CheckConnection
+
+  """
+  Statistics pertaining to the changeset (of a commit or PR) in the analysis run.
+  """
+  changesetStats: ChangesetStats
+
+  """Report Card for the Run with quality dimension grades and scores"""
+  reportCard: RunReport
+
+  """SCA checks for OSS dependency analysis in this run."""
+  scaChecks(offset: Int, before: String, after: String, first: Int, last: Int): SCACheckConnection
+}
+
+type Repository implements MaskPrimaryKeyNode {
+  """The name of this repository."""
+  name: String!
+
+  """Object ID of the latest commit on the default branch."""
+  latestCommitOid: String
+  isPrivate: Boolean!
+  isActivated: Boolean!
+
+  """The ID of the object"""
+  id: ID!
+
+  """The account under which this repository exists."""
+  account: Account!
+
+  """Past analysis runs for the repository"""
+  analysisRuns(offset: Int, before: String, after: String, first: Int, last: Int): AnalysisRunConnection
+
+  """
+  The `.deepsource.toml` config of the repository represented as a JSON object.
+  """
+  configJson: JSON
+
+  """The default base branch of the repository on DeepSource."""
+  defaultBranch: String
+
+  """The DSN for this repository."""
+  dsn: String
+
+  """Get all the analyzers enabled in this repository."""
+  enabledAnalyzers(offset: Int, before: String, after: String, first: Int, last: Int): AnalyzerConnection
+
+  """
+  Get all issues raised in the default branch of this repository. Specifying a path would only return those issues whose occurrences are present in the file at path.
+  """
+  issues(
+    """Show issues for this path only."""
+    path: String
+    offset: Int
+    before: String
+    after: String
+    first: Int
+    last: Int
+    tags: [String]
+    analyzerIn: [String]
+  ): RepositoryIssueConnection
+
+  """All issue occurrences in the default branch."""
+  issueOccurrences(offset: Int, before: String, after: String, first: Int, last: Int, analyzerIn: [String]): OccurrenceConnection
+
+  """List of dependency vulnerability occurrences in the default branch."""
+  dependencyVulnerabilityOccurrences(offset: Int, before: String, after: String, first: Int, last: Int): VulnerabilityOccurrenceConnection
+
+  """Get a dependency vulnerability occurrence by its ID."""
+  dependencyVulnerabilityOccurrence(id: ID!): VulnerabilityOccurrence!
+
+  """Get a specific pull request by its number on the VCS provider"""
+  pullRequest(
+    """Pull request number on the VCS provider"""
+    number: Int!
+  ): PullRequest
+
+  """Get a specific repository target."""
+  target(id: ID!): RepositoryTarget!
+
+  """List of repository targets for this repository."""
+  targets(offset: Int, before: String, after: String, first: Int, last: Int): RepositoryTargetConnection!
+
+  """Get a report associated with this repository"""
+  report(
+    """Get the report associated with the report key"""
+    key: ReportKey!
+  ): Report! @deprecated(reason: "Deprecated in favor of `reports`.")
+
+  """Namespace containing all available reports."""
+  reports: RepositoryReportsNamespace!
+
+  """VCS Provider of the repository."""
+  vcsProvider: VCSProvider!
+
+  """URL of the repository on the VCS."""
+  vcsUrl: String!
+
+  """List of all DeepSource metrics."""
+  metrics(
+    """List of metric shortcodes to filter on."""
+    shortcodeIn: [MetricShortcode]
+  ): [RepositoryMetric!]!
+
+  """List of `IgnoreRule`s that exist for the repository."""
+  ignoreRules(offset: Int, before: String, after: String, first: Int, last: Int, issueShortcode: String, filePath: String): IgnoreRuleConnection
+
+  """Issue categories configuration for the repository."""
+  issueCategorySettings: [IssueCategorySetting!]!
+
+  """Issue priority configuration for the repository."""
+  issuePrioritySettings: [IssuePrioritySetting!]!
+
+  """Metric settings for the repository."""
+  metricSettings: [MetricSetting!]!
+
+  """
+  Whether the account has allowed Autofix AI to run on private repositories.
+  """
+  allowAutofixAi: Boolean!
+
+  """Whether to use the legacy autofix engine."""
+  useLegacyAutofix: Boolean!
 }
 
 type Account implements MaskPrimaryKeyNode {
@@ -914,108 +1066,150 @@ type RepositoryEdge {
   cursor: String!
 }
 
-type Repository implements MaskPrimaryKeyNode {
-  """The name of this repository."""
-  name: String!
+type TeamMemberConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
 
-  """Object ID of the latest commit on the default branch."""
-  latestCommitOid: String
-  isPrivate: Boolean!
-  isActivated: Boolean!
+  """Contains the nodes in this connection."""
+  edges: [TeamMemberEdge]!
+  totalCount: Int
+}
+
+"""A Relay edge containing a `TeamMember` and its cursor."""
+type TeamMemberEdge {
+  """The item at the end of the edge"""
+  node: TeamMember
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Represents a user within a team."""
+type TeamMember implements MaskPrimaryKeyNode {
+  """The ID of the object"""
+  id: ID!
+
+  """The User instance."""
+  user: User!
+
+  """The role this user has in the team."""
+  role: TeamMemberRole!
+
+  """Whether this user is the owner of the team."""
+  isOwner: Boolean!
+
+  """The time when this user joined the team."""
+  joinedAt: DateTime!
+}
+
+type User implements MaskPrimaryKeyNode {
+  firstName: String!
+  lastName: String!
+  email: String!
 
   """The ID of the object"""
   id: ID!
 
-  """The account under which this repository exists."""
-  account: Account!
-
-  """Past analysis runs for the repository"""
-  analysisRuns(offset: Int, before: String, after: String, first: Int, last: Int): AnalysisRunConnection
-
   """
-  The `.deepsource.toml` config of the repository represented as a JSON object.
+  All the accounts associated with the user. This includes the team accounts the user is part of and the individual accounts they have added on DeepSource.
   """
-  configJson: JSON
+  accounts(offset: Int, before: String, after: String, first: Int, last: Int): AccountConnection
 
-  """The default base branch of the repository on DeepSource."""
-  defaultBranch: String
+  """The anonymous ID used for analytics and tracking."""
+  analyticsId: String!
 
-  """The DSN for this repository."""
-  dsn: String
+  """Whether the user is a beta tester."""
+  isBetaTester: Boolean!
 
-  """Get all the analyzers enabled in this repository."""
-  enabledAnalyzers(offset: Int, before: String, after: String, first: Int, last: Int): AnalyzerConnection
+  """The IDE subscription associated with the user."""
+  ideSubscription: IDESubscription
+}
 
-  """
-  Get all issues raised in the default branch of this repository. Specifying a path would only return those issues whose occurrences are present in the file at path.
-  """
-  issues(
-    """Show issues for this path only."""
-    path: String
-    offset: Int
-    before: String
-    after: String
-    first: Int
-    last: Int
-    tags: [String]
-    analyzerIn: [String]
-  ): RepositoryIssueConnection
+type AccountConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
 
-  """All issue occurrences in the default branch."""
-  issueOccurrences(offset: Int, before: String, after: String, first: Int, last: Int, analyzerIn: [String]): OccurrenceConnection
+  """Contains the nodes in this connection."""
+  edges: [AccountEdge]!
+  totalCount: Int
+}
 
-  """List of dependency vulnerability occurrences in the default branch."""
-  dependencyVulnerabilityOccurrences(offset: Int, before: String, after: String, first: Int, last: Int): VulnerabilityOccurrenceConnection
+"""A Relay edge containing a `Account` and its cursor."""
+type AccountEdge {
+  """The item at the end of the edge"""
+  node: Account
 
-  """Get a dependency vulnerability occurrence by its ID."""
-  dependencyVulnerabilityOccurrence(id: ID!): VulnerabilityOccurrence!
+  """A cursor for use in pagination"""
+  cursor: String!
+}
 
-  """Get a specific repository target."""
-  target(id: ID!): RepositoryTarget!
+"""Subscription details of an DeepSource IDE subscription."""
+type IDESubscription {
+  """The plan of this subscription."""
+  plan: IDESubscriptionPlan!
+}
 
-  """List of repository targets for this repository."""
-  targets(offset: Int, before: String, after: String, first: Int, last: Int): RepositoryTargetConnection!
+"""Represents DeepSource's IDE subscription plans."""
+enum IDESubscriptionPlan {
+  FREE
+  PRO
+  SPONSORED
+}
 
-  """Get a report associated with this repository"""
-  report(
-    """Get the report associated with the report key"""
-    key: ReportKey!
-  ): Report! @deprecated(reason: "Deprecated in favor of `reports`.")
+"""An enumeration."""
+enum TeamMemberRole {
+  ADMIN
+  MEMBER
+  CONTRIBUTOR
+}
 
-  """Namespace containing all available reports."""
-  reports: RepositoryReportsNamespace!
+"""Subscription and billing details of an `Account`."""
+type AccountSubscription {
+  """The plan associated with this account's subscription."""
+  plan: AccountSubscriptionPlan!
+}
 
-  """VCS Provider of the repository."""
-  vcsProvider: VCSProvider!
+"""Represents DeepSource's subscription plans."""
+enum AccountSubscriptionPlan {
+  FREE
+  STARTER
+  BUSINESS
+  ENTERPRISE
+}
 
-  """URL of the repository on the VCS."""
-  vcsUrl: String!
+type TeamSuppressedIssueConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
 
-  """List of all DeepSource metrics."""
-  metrics(
-    """List of metric shortcodes to filter on."""
-    shortcodeIn: [MetricShortcode]
-  ): [RepositoryMetric!]!
+  """Contains the nodes in this connection."""
+  edges: [TeamSuppressedIssueEdge]!
+  totalCount: Int
+}
 
-  """List of `IgnoreRule`s that exist for the repository."""
-  ignoreRules(offset: Int, before: String, after: String, first: Int, last: Int, issueShortcode: String, filePath: String): IgnoreRuleConnection
+"""A Relay edge containing a `TeamSuppressedIssue` and its cursor."""
+type TeamSuppressedIssueEdge {
+  """The item at the end of the edge"""
+  node: TeamSuppressedIssue
 
-  """Issue categories configuration for the repository."""
-  issueCategorySettings: [IssueCategorySetting!]!
+  """A cursor for use in pagination"""
+  cursor: String!
+}
 
-  """Issue priority configuration for the repository."""
-  issuePrioritySettings: [IssuePrioritySetting!]!
+"""
+A `TeamSuppressedIssue` represents an issue from an analyzer that has been suppressed on the team level. This is
+a global suppression that affects all repositories in the team.
+"""
+type TeamSuppressedIssue implements MaskPrimaryKeyNode {
+  createdAt: DateTime!
 
-  """Metric settings for the repository."""
-  metricSettings: [MetricSetting!]!
+  """The ID of the object"""
+  id: ID!
 
-  """
-  Whether the account has allowed Autofix AI to run on private repositories.
-  """
-  allowAutofixAi: Boolean!
+  """The `Issue` that is suppressed."""
+  issue: Issue!
 
-  """Whether to use the legacy autofix engine."""
-  useLegacyAutofix: Boolean!
+  """The user who suppressed the issue."""
+  user: User
 }
 
 type AnalysisRunConnection {
@@ -1034,344 +1228,6 @@ type AnalysisRunEdge {
 
   """A cursor for use in pagination"""
   cursor: String!
-}
-
-type AnalysisRun implements MaskPrimaryKeyNode {
-  createdAt: DateTime!
-  branchName: String
-  baseOid: String
-  commitOid: String
-  finishedAt: DateTime
-  repository: Repository!
-
-  """The ID of the object"""
-  id: ID!
-
-  """UID of this AnalysisRun."""
-  runUid: UUID!
-
-  """The current status of the run."""
-  status: AnalysisRunStatus!
-
-  """Summary of the analysis run"""
-  summary: AnalysisRunSummary!
-
-  """Time when the analysis run was last modified"""
-  updatedAt: DateTime!
-
-  """Analyzer checks in the analysis run."""
-  checks(offset: Int, before: String, after: String, first: Int, last: Int, analyzerIn: [String]): CheckConnection
-
-  """
-  Statistics pertaining to the changeset (of a commit or PR) in the analysis run.
-  """
-  changesetStats: ChangesetStats
-}
-
-"""
-The `DateTime` scalar type represents a DateTime
-value as specified by
-[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
-"""
-scalar DateTime
-
-"""
-Leverages the internal Python implementation of UUID (uuid.UUID) to provide native UUID objects
-in fields, resolvers and input.
-"""
-scalar UUID
-
-"""An enumeration."""
-enum AnalysisRunStatus {
-  PENDING
-  SUCCESS
-  FAILURE
-  TIMEOUT
-  CANCEL
-  READY
-  SKIPPED
-}
-
-type AnalysisRunSummary {
-  """Number of issues introduced during this analysis run"""
-  occurrencesIntroduced: Int
-
-  """Number of issues marked as resolved in this analysis run"""
-  occurrencesResolved: Int
-
-  """Number of issues marked as suppressed in this analysis run"""
-  occurrencesSuppressed: Int
-  occurrenceDistributionByAnalyzer: [OccurrenceDistributionByAnalyzer]
-  occurrenceDistributionByCategory: [OccurrenceDistributionByCategory]
-}
-
-type OccurrenceDistributionByAnalyzer {
-  """Shortcode of the analyzer"""
-  analyzerShortcode: String!
-
-  """Number of issues detected by the analyzer"""
-  introduced: Int!
-}
-
-type OccurrenceDistributionByCategory {
-  """Category of the issue"""
-  category: IssueCategory!
-
-  """Number of issues detected that belong to this category"""
-  introduced: Int!
-}
-
-type CheckConnection {
-  """Pagination data for this connection."""
-  pageInfo: PageInfo!
-
-  """Contains the nodes in this connection."""
-  edges: [CheckEdge]!
-  totalCount: Int
-}
-
-"""A Relay edge containing a `Check` and its cursor."""
-type CheckEdge {
-  """The item at the end of the edge"""
-  node: Check
-
-  """A cursor for use in pagination"""
-  cursor: String!
-}
-
-"""A single analyzer check as part of an analysis run."""
-type Check implements MaskPrimaryKeyNode {
-  """The ID of the object"""
-  id: ID!
-
-  """Sequence number of the check in the analysis run it belongs to."""
-  sequence: Int!
-
-  """The current status of the check."""
-  status: CheckStatus!
-
-  """The analyzer related to the check."""
-  analyzer: Analyzer!
-
-  """Time when the check was created."""
-  createdAt: DateTime!
-
-  """Time when the check was last modified."""
-  updatedAt: DateTime!
-
-  """Time when the check finished."""
-  finishedAt: DateTime
-
-  """Summary of the check."""
-  summary: CheckSummary!
-
-  """Issue occurrences found in the check."""
-  occurrences(offset: Int, before: String, after: String, first: Int, last: Int, analyzerIn: [String]): OccurrenceConnection!
-
-  """List of DeepSource metrics captured in the check."""
-  metrics: [RepositoryMetric!]
-}
-
-"""An enumeration."""
-enum CheckStatus {
-  WAITING
-  PENDING
-  SUCCESS
-  FAILURE
-  TIMEOUT
-  CANCEL
-  READY
-  NEUTRAL
-  ARTIFACT_TIMEOUT
-  SKIPPED
-}
-
-"""Summary of a check."""
-type CheckSummary {
-  """Number of issues introduced in the check."""
-  occurrencesIntroduced: Int
-
-  """Number of issues resolved in the check."""
-  occurrencesResolved: Int
-
-  """Number of issues marked as suppressed in the check."""
-  occurrencesSuppressed: Int
-
-  """The issue category distribution for the check."""
-  occurrenceDistributionByCategory: [OccurrenceDistributionByCategory]
-}
-
-type OccurrenceConnection {
-  """Pagination data for this connection."""
-  pageInfo: PageInfo!
-
-  """Contains the nodes in this connection."""
-  edges: [OccurrenceEdge]!
-  totalCount: Int
-}
-
-"""A Relay edge containing a `Occurrence` and its cursor."""
-type OccurrenceEdge {
-  """The item at the end of the edge"""
-  node: Occurrence
-
-  """A cursor for use in pagination"""
-  cursor: String!
-}
-
-type Occurrence implements MaskPrimaryKeyNode {
-  path: String!
-  beginLine: Int!
-  beginColumn: Int!
-  endLine: Int!
-  endColumn: Int!
-
-  """The ID of the object"""
-  id: ID!
-
-  """The definition of the issue which has been raised."""
-  issue: Issue!
-
-  """Title describing the issue which has been raised here."""
-  title: String!
-}
-
-"""A Metric's manifestation specific to a repository."""
-type RepositoryMetric implements MetricDefinition {
-  """The metric's name."""
-  name: String!
-
-  """The metric's unique identifier."""
-  shortcode: MetricShortcode!
-
-  """The metric's description in markdown format."""
-  description: String!
-
-  """Direction which can be considered positive for the metric."""
-  positiveDirection: Direction!
-
-  """Unit suffix to apply to the metric value."""
-  unit: String
-
-  """Lower bound for the metric value."""
-  minValueAllowed: Int
-
-  """Upper bound for the metric value."""
-  maxValueAllowed: Int
-
-  """Whether this metric is enabled for reporting in the repository."""
-  isReported: Boolean!
-
-  """
-  Whether to fail checks when thresholds are not met for the metric in the repository.
-  """
-  isThresholdEnforced: Boolean!
-
-  """Items in the repository metric."""
-  items: [RepositoryMetricItem!]!
-}
-
-"""An item in the `RepositoryMetric`."""
-type RepositoryMetricItem implements MaskPrimaryKeyNode {
-  """The ID of the object"""
-  id: ID!
-
-  """Distinct key representing the metric in the repository."""
-  key: MetricKey!
-
-  """
-  Threshold value for the metric, customizable by the user. Null if no threshold is set.
-  """
-  threshold: Int
-
-  """
-  Latest value captured for this metric on the repository's default branch.
-  """
-  latestValue: Float
-
-  """
-  Latest value captured for this metric on the repository's default branch. Suffixed with the unit and returned as a human-readable string.
-  """
-  latestValueDisplay: String
-
-  """
-  The status of the threshold condition for the latest metric value on the repository's default branch.
-  """
-  thresholdStatus: MetricThresholdStatus
-
-  """
-  All values captured for this metric in the repository's default branch.
-  """
-  values(offset: Int, before: String, after: String, first: Int, last: Int, commitOidIn: [String]): MetricValueConnection
-}
-
-"""Represents the key for which the metric is recorded in a repository."""
-enum MetricKey {
-  AGGREGATE
-  C_AND_CPP
-  CSHARP
-  GO
-  JAVA
-  JAVASCRIPT
-  PHP
-  PYTHON
-  RUBY
-  RUST
-  SCALA
-  KOTLIN
-  SWIFT
-}
-
-"""
-Represents the status of the threshold condition for a particular metric value.
-"""
-enum MetricThresholdStatus {
-  PASSING
-  FAILING
-}
-
-type MetricValueConnection {
-  """Pagination data for this connection."""
-  pageInfo: PageInfo!
-
-  """Contains the nodes in this connection."""
-  edges: [MetricValueEdge]!
-  totalCount: Int
-}
-
-"""A Relay edge containing a `MetricValue` and its cursor."""
-type MetricValueEdge {
-  """The item at the end of the edge"""
-  node: MetricValue
-
-  """A cursor for use in pagination"""
-  cursor: String!
-}
-
-"""An individual value captured for a RepositoryMetric."""
-type MetricValue implements MaskPrimaryKeyNode {
-  """The ID of the object"""
-  id: ID!
-
-  """Metric value reported by the analyzer."""
-  value: Float!
-
-  """Value suffixed with the unit of the metric."""
-  valueDisplay: String!
-
-  """
-  Threshold value for the metric when this value was reported. Null if no threshold was set.
-  """
-  threshold: Int
-
-  """The status of the threshold condition for the metric value."""
-  thresholdStatus: MetricThresholdStatus
-
-  """Commit SHA for which this value was recorded on the repository."""
-  commitOid: String!
-
-  """The time at which the value was captured."""
-  createdAt: DateTime!
 }
 
 """A JSON object."""
@@ -1425,6 +1281,41 @@ type RepositoryIssue implements MaskPrimaryKeyNode {
 
   """The repository for which this issue has been raised."""
   repository: Repository!
+}
+
+type OccurrenceConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [OccurrenceEdge]!
+  totalCount: Int
+}
+
+"""A Relay edge containing a `Occurrence` and its cursor."""
+type OccurrenceEdge {
+  """The item at the end of the edge"""
+  node: Occurrence
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type Occurrence implements MaskPrimaryKeyNode {
+  path: String!
+  beginLine: Int!
+  beginColumn: Int!
+  endLine: Int!
+  endColumn: Int!
+
+  """The ID of the object"""
+  id: ID!
+
+  """The definition of the issue which has been raised."""
+  issue: Issue!
+
+  """Title describing the issue which has been raised here."""
+  title: String!
 }
 
 type VulnerabilityOccurrenceConnection {
@@ -1678,6 +1569,144 @@ type RepositoryReportsNamespace {
   issuesAutofixed: IssuesAutofixedReport!
 }
 
+"""A Metric's manifestation specific to a repository."""
+type RepositoryMetric implements MetricDefinition {
+  """The metric's name."""
+  name: String!
+
+  """The metric's unique identifier."""
+  shortcode: MetricShortcode!
+
+  """The metric's description in markdown format."""
+  description: String!
+
+  """Direction which can be considered positive for the metric."""
+  positiveDirection: Direction!
+
+  """Unit suffix to apply to the metric value."""
+  unit: String
+
+  """Lower bound for the metric value."""
+  minValueAllowed: Int
+
+  """Upper bound for the metric value."""
+  maxValueAllowed: Int
+
+  """Whether this metric is enabled for reporting in the repository."""
+  isReported: Boolean!
+
+  """
+  Whether to fail checks when thresholds are not met for the metric in the repository.
+  """
+  isThresholdEnforced: Boolean!
+
+  """Items in the repository metric."""
+  items: [RepositoryMetricItem!]!
+}
+
+"""An item in the `RepositoryMetric`."""
+type RepositoryMetricItem implements MaskPrimaryKeyNode {
+  """The ID of the object"""
+  id: ID!
+
+  """Distinct key representing the metric in the repository."""
+  key: MetricKey!
+
+  """
+  Threshold value for the metric, customizable by the user. Null if no threshold is set.
+  """
+  threshold: Int
+
+  """
+  Latest value captured for this metric on the repository's default branch.
+  """
+  latestValue: Float
+
+  """
+  Latest value captured for this metric on the repository's default branch. Suffixed with the unit and returned as a human-readable string.
+  """
+  latestValueDisplay: String
+
+  """
+  The status of the threshold condition for the latest metric value on the repository's default branch.
+  """
+  thresholdStatus: MetricThresholdStatus
+
+  """
+  All values captured for this metric in the repository's default branch.
+  """
+  values(offset: Int, before: String, after: String, first: Int, last: Int, commitOidIn: [String]): MetricValueConnection
+}
+
+"""Represents the key for which the metric is recorded in a repository."""
+enum MetricKey {
+  AGGREGATE
+  C_AND_CPP
+  CSHARP
+  GO
+  JAVA
+  JAVASCRIPT
+  PHP
+  PYTHON
+  RUBY
+  RUST
+  SCALA
+  KOTLIN
+  SWIFT
+}
+
+"""
+Represents the status of the threshold condition for a particular metric value.
+"""
+enum MetricThresholdStatus {
+  PASSING
+  FAILING
+}
+
+type MetricValueConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [MetricValueEdge]!
+  totalCount: Int
+}
+
+"""A Relay edge containing a `MetricValue` and its cursor."""
+type MetricValueEdge {
+  """The item at the end of the edge"""
+  node: MetricValue
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""An individual value captured for a RepositoryMetric."""
+type MetricValue implements MaskPrimaryKeyNode {
+  """The ID of the object"""
+  id: ID!
+
+  """Metric value reported by the analyzer."""
+  value: Float!
+
+  """Value suffixed with the unit of the metric."""
+  valueDisplay: String!
+
+  """
+  Threshold value for the metric when this value was reported. Null if no threshold was set.
+  """
+  threshold: Int
+
+  """The status of the threshold condition for the metric value."""
+  thresholdStatus: MetricThresholdStatus
+
+  """Commit SHA for which this value was recorded on the repository."""
+  commitOid: String!
+
+  """The time at which the value was captured."""
+  createdAt: DateTime!
+}
+
 type IgnoreRuleConnection {
   """Pagination data for this connection."""
   pageInfo: PageInfo!
@@ -1800,109 +1829,427 @@ type MetricSetting {
   isThresholdEnforced: Boolean!
 }
 
-type TeamMemberConnection {
+"""
+Leverages the internal Python implementation of UUID (uuid.UUID) to provide native UUID objects
+in fields, resolvers and input.
+"""
+scalar UUID
+
+"""An enumeration."""
+enum AnalysisRunStatus {
+  PENDING
+  SUCCESS
+  FAILURE
+  TIMEOUT
+  CANCEL
+  READY
+  SKIPPED
+}
+
+type AnalysisRunSummary {
+  """Number of issues introduced during this analysis run"""
+  occurrencesIntroduced: Int
+
+  """Number of issues marked as resolved in this analysis run"""
+  occurrencesResolved: Int
+
+  """Number of issues marked as suppressed in this analysis run"""
+  occurrencesSuppressed: Int
+
+  """Number of vulnerabilities introduced in this run"""
+  vulnerabilitiesIntroduced: Int
+  occurrenceDistributionByAnalyzer: [OccurrenceDistributionByAnalyzer]
+  occurrenceDistributionByCategory: [OccurrenceDistributionByCategory]
+}
+
+type OccurrenceDistributionByAnalyzer {
+  """Shortcode of the analyzer"""
+  analyzerShortcode: String!
+
+  """Number of issues detected by the analyzer"""
+  introduced: Int!
+}
+
+type OccurrenceDistributionByCategory {
+  """Category of the issue"""
+  category: IssueCategory!
+
+  """Number of issues detected that belong to this category"""
+  introduced: Int!
+}
+
+type CheckConnection {
   """Pagination data for this connection."""
   pageInfo: PageInfo!
 
   """Contains the nodes in this connection."""
-  edges: [TeamMemberEdge]!
+  edges: [CheckEdge]!
   totalCount: Int
 }
 
-"""A Relay edge containing a `TeamMember` and its cursor."""
-type TeamMemberEdge {
+"""A Relay edge containing a `Check` and its cursor."""
+type CheckEdge {
   """The item at the end of the edge"""
-  node: TeamMember
+  node: Check
 
   """A cursor for use in pagination"""
   cursor: String!
 }
 
-"""Represents a user within a team."""
-type TeamMember implements MaskPrimaryKeyNode {
+"""A single analyzer check as part of an analysis run."""
+type Check implements MaskPrimaryKeyNode {
   """The ID of the object"""
   id: ID!
 
-  """The User instance."""
-  user: User!
+  """Sequence number of the check in the analysis run it belongs to."""
+  sequence: Int!
 
-  """The role this user has in the team."""
-  role: TeamMemberRole!
+  """The current status of the check."""
+  status: CheckStatus!
 
-  """Whether this user is the owner of the team."""
-  isOwner: Boolean!
+  """The analyzer related to the check."""
+  analyzer: Analyzer!
 
-  """The time when this user joined the team."""
-  joinedAt: DateTime!
+  """Time when the check was created."""
+  createdAt: DateTime!
+
+  """Time when the check was last modified."""
+  updatedAt: DateTime!
+
+  """Time when the check finished."""
+  finishedAt: DateTime
+
+  """Summary of the check."""
+  summary: CheckSummary!
+
+  """Issue occurrences found in the check."""
+  occurrences(offset: Int, before: String, after: String, first: Int, last: Int, analyzerIn: [String]): OccurrenceConnection! @deprecated(reason: "Use 'issues' field instead. The 'issues' field returns both static analysis and AI review issues with filtering support.")
+
+  """List of DeepSource metrics captured in the check."""
+  metrics: [RepositoryMetric!]
+
+  """All issues found in this check."""
+  issues(
+    source: AnalysisIssueSource
+    category: IssueCategory
+    severity: IssueSeverity
+
+    """Filter by shortcode. Only applies to STATIC issues."""
+    q: String
+    before: String
+    after: String
+    first: Int
+    last: Int
+  ): AnalysisIssueConnection
 }
 
 """An enumeration."""
-enum TeamMemberRole {
-  ADMIN
-  MEMBER
-  CONTRIBUTOR
+enum CheckStatus {
+  WAITING
+  PENDING
+  SUCCESS
+  FAILURE
+  TIMEOUT
+  CANCEL
+  READY
+  NEUTRAL
+  ARTIFACT_TIMEOUT
+  SKIPPED
 }
 
-"""Subscription and billing details of an `Account`."""
-type AccountSubscription {
-  """The plan associated with this account's subscription."""
-  plan: AccountSubscriptionPlan!
+"""Summary of a check."""
+type CheckSummary {
+  """Number of issues introduced in the check."""
+  occurrencesIntroduced: Int
+
+  """Number of issues resolved in the check."""
+  occurrencesResolved: Int
+
+  """Number of issues marked as suppressed in the check."""
+  occurrencesSuppressed: Int
+
+  """The issue category distribution for the check."""
+  occurrenceDistributionByCategory: [OccurrenceDistributionByCategory]
 }
 
-"""Represents DeepSource's subscription plans."""
-enum AccountSubscriptionPlan {
-  FREE
-  STARTER
-  BUSINESS
-  ENTERPRISE
-}
-
-type TeamSuppressedIssueConnection {
+"""Connection for paginated analysis issues."""
+type AnalysisIssueConnection {
   """Pagination data for this connection."""
   pageInfo: PageInfo!
 
   """Contains the nodes in this connection."""
-  edges: [TeamSuppressedIssueEdge]!
+  edges: [AnalysisIssueEdge]!
+
+  """Total number of issues matching the filter."""
   totalCount: Int
 }
 
-"""A Relay edge containing a `TeamSuppressedIssue` and its cursor."""
-type TeamSuppressedIssueEdge {
+"""A Relay edge containing a `AnalysisIssue` and its cursor."""
+type AnalysisIssueEdge {
   """The item at the end of the edge"""
-  node: TeamSuppressedIssue
+  node: AnalysisIssue
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Code quality report card for an analysis run."""
+type RunReport implements MaskPrimaryKeyNode {
+  """The ID of the object"""
+  id: ID!
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+
+  """Current status of the report."""
+  status: RunReportStatus!
+
+  """Security dimension score."""
+  security: RunReportDimension
+
+  """Reliability dimension score."""
+  reliability: RunReportDimension
+
+  """Complexity dimension score."""
+  complexity: RunReportDimension
+
+  """Code hygiene dimension score."""
+  hygiene: RunReportDimension
+
+  """Test coverage metrics."""
+  coverage: RunReportCoverage
+
+  """Aggregate score across all dimensions."""
+  aggregate: RunReportAggregate
+
+  """Analysis run metadata."""
+  meta: RunReportMetadata
+
+  """Suggested focus area for improvement."""
+  focusArea: RunReportFocusArea
+}
+
+"""Status of the Run Report"""
+enum RunReportStatus {
+  IN_PROGRESS
+  RECOMPUTE
+  COMPLETED
+  PENDING
+}
+
+"""A code quality dimension score (e.g., security, reliability)."""
+type RunReportDimension {
+  """Letter grade (A, B, C, or D)."""
+  grade: RunReportGrade!
+
+  """Numeric score (0-100)."""
+  score: Int!
+
+  """Number of issues in this dimension."""
+  issuesCount: Int!
+
+  """Human-readable summary of the dimension."""
+  summary: String
+}
+
+"""Letter grade for a report dimension"""
+enum RunReportGrade {
+  A
+  B
+  C
+  D
+}
+
+"""Test coverage metrics for an analysis run."""
+type RunReportCoverage {
+  """Letter grade (A, B, C, or D)."""
+  grade: RunReportGrade
+
+  """Numeric coverage score (0-100)."""
+  score: Int
+
+  """Percentage of lines covered by tests."""
+  lineCoverage: Float
+
+  """Percentage of branches covered by tests."""
+  branchCoverage: Float
+}
+
+"""Aggregate code quality score across all dimensions."""
+type RunReportAggregate {
+  """Overall letter grade (A, B, C, or D)."""
+  grade: RunReportGrade!
+
+  """Overall numeric score (0-100)."""
+  score: Int!
+}
+
+"""Metadata about the analysis run scope and limits."""
+type RunReportMetadata {
+  """Number of lines analyzed."""
+  linesChanged: Int!
+
+  """Number of files analyzed."""
+  filesChanged: Int!
+
+  """
+  Whether the aggregate grade was capped due to critical or security issues.
+  """
+  capped: Boolean!
+
+  """Reason for grade capping."""
+  capReason: String
+}
+
+"""Suggested area to focus on for code quality improvement."""
+type RunReportFocusArea {
+  """The dimension to focus on improving."""
+  dimension: String
+
+  """Recommended action to take."""
+  action: String
+}
+
+type SCACheckConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [SCACheckEdge]!
+  totalCount: Int
+}
+
+"""A Relay edge containing a `SCACheck` and its cursor."""
+type SCACheckEdge {
+  """The item at the end of the edge"""
+  node: SCACheck
 
   """A cursor for use in pagination"""
   cursor: String!
 }
 
 """
-A `TeamSuppressedIssue` represents an issue from an analyzer that has been suppressed on the team level. This is
-a global suppression that affects all repositories in the team.
+A single SCA (Software Composition Analysis) check as part of an analysis run.
 """
-type TeamSuppressedIssue implements MaskPrimaryKeyNode {
-  createdAt: DateTime!
-
+type SCACheck implements MaskPrimaryKeyNode {
   """The ID of the object"""
   id: ID!
 
-  """The `Issue` that is suppressed."""
-  issue: Issue!
+  """Sequence number of the SCA check in the analysis run it belongs to."""
+  sequence: Int!
 
-  """The user who suppressed the issue."""
-  user: User
+  """The current status of the SCA check."""
+  status: SCACheckStatus!
+
+  """The repository target for which this SCA check was performed."""
+  target: RepositoryTarget
+
+  """Time when the SCA check was created."""
+  createdAt: DateTime!
+
+  """Time when the SCA check was last modified."""
+  updatedAt: DateTime!
+
+  """Time when the SCA check finished."""
+  finishedAt: DateTime
+
+  """Summary of the SCA check."""
+  summary: SCACheckSummary!
+
+  """Vulnerability occurrences found in the SCA check."""
+  vulnerabilityOccurrences(offset: Int, before: String, after: String, first: Int, last: Int): VulnerabilityOccurrenceConnection!
 }
 
-"""Subscription details of an DeepSource IDE subscription."""
-type IDESubscription {
-  """The plan of this subscription."""
-  plan: IDESubscriptionPlan!
+"""An enumeration."""
+enum SCACheckStatus {
+  WAITING
+  PENDING
+  SUCCESS
+  FAILURE
+  TIMEOUT
+  CANCEL
+  READY
+  NEUTRAL
+  ARTIFACT_TIMEOUT
+  SKIPPED
 }
 
-"""Represents DeepSource's IDE subscription plans."""
-enum IDESubscriptionPlan {
-  FREE
-  PRO
-  SPONSORED
+"""Summary of an SCA check."""
+type SCACheckSummary {
+  """Number of vulnerabilities introduced in the check."""
+  vulnerabilitiesIntroduced: Int
+}
+
+type Query {
+  """The currently authenticated user."""
+  viewer: User
+
+  """Lookup a transformer by its shortcode."""
+  transformer(
+    """Shortcode of the transformer."""
+    shortcode: String!
+  ): Transformer @deprecated(reason: "Use `codeFormatter` instead")
+
+  """List all transformers with optional filtering."""
+  transformers(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String): TransformerConnection @deprecated(reason: "Use `codeFormatters` instead")
+
+  """Lookup a repository on DeepSource using it's name and VCS provider."""
+  repository(
+    """The name of the repository to lookup."""
+    name: String!
+
+    """
+    The login or username of the account under which the repository exists.
+    """
+    login: String!
+
+    """VCS Provider of the repository."""
+    vcsProvider: VCSProvider!
+  ): Repository
+
+  """The DeepSource installation."""
+  installation: Installation
+
+  """Lookup a code formatter by its shortcode."""
+  codeFormatter(
+    """Shortcode of the code formatter."""
+    shortcode: String!
+  ): CodeFormatter
+
+  """List all code formatters with optional filtering."""
+  codeFormatters(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String): CodeFormatterConnection
+
+  """Get an analyzer from its shortcode."""
+  analyzer(
+    """Shortcode of the analyzer you'd like to get."""
+    shortcode: String!
+  ): Analyzer
+
+  """Get all analyzers available on DeepSource."""
+  analyzers(offset: Int, before: String, after: String, first: Int, last: Int): AnalyzerConnection
+
+  """Fetch an AnalysisRun object from it's UID or commit OID."""
+  run(
+    """UID of the Analysis Run you want to get."""
+    runUid: UUID
+
+    """Commit OID of the Analysis Run you want to get."""
+    commitOid: String
+  ): AnalysisRun!
+
+  """
+  An account on DeepSource (individual or team). A user can add multiple accounts from multiple VCS providers.
+  """
+  account(
+    """The login or username to lookup the account by."""
+    login: String!
+
+    """VCS Provider of the account."""
+    vcsProvider: VCSProvider!
+  ): Account
+  node(
+    """The ID of the object"""
+    id: ID!
+  ): MaskPrimaryKeyNode
 }
 
 """A transformer on DeepSource."""

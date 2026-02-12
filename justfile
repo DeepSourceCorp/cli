@@ -1,8 +1,13 @@
 PACKAGE_NAME := "github.com/deepsourcelabs/cli"
 
-build:
+default:
+    @just --list
+
+# Build the CLI binary to /tmp/deepsource
+build-local:
 	cd cmd/deepsource && go build -o /tmp/deepsource .
 
+# Run all tests with coverage
 test:
 	go test -v ./command/report/tests/... -count=1
 	echo "\n====TESTING DEEPSOURCE PACKAGE====\n"
@@ -10,6 +15,7 @@ test:
 	echo "\n====CALCULATING TEST COVERAGE FOR ENTIRE PACKAGE====\n"
 	go test -v -coverprofile=coverage.out -count=1 ./...
 
+# Clone test fixtures and prepare test environment
 test-setup:
 	mkdir -p $CODE_PATH
 	cd $CODE_PATH && ls -A1 | xargs rm -rf
@@ -17,9 +23,11 @@ test-setup:
 	chmod +x /tmp/deepsource
 	cp ./command/report/tests/golden_files/python_coverage.xml /tmp
 
+# Remove build artifacts and coverage files
 clean:
 	rm -rf /tmp/deepsource coverage.out dist/ completions/
 
+# Bump patch version (x.y.Z)
 bump-patch:
 	#!/usr/bin/env bash
 	set -euo pipefail
@@ -31,6 +39,7 @@ bump-patch:
 	git commit -m "Bump version to ${new}"
 	echo "Bumped ${current} -> ${new}"
 
+# Bump minor version (x.Y.0)
 bump-minor:
 	#!/usr/bin/env bash
 	set -euo pipefail
@@ -42,6 +51,7 @@ bump-minor:
 	git commit -m "Bump version to ${new}"
 	echo "Bumped ${current} -> ${new}"
 
+# Bump major version (X.0.0)
 bump-major:
 	#!/usr/bin/env bash
 	set -euo pipefail
@@ -53,6 +63,7 @@ bump-major:
 	git commit -m "Bump version to ${new}"
 	echo "Bumped ${current} -> ${new}"
 
+# Tag and push a release version
 deploy:
 	#!/usr/bin/env bash
 	set -euo pipefail
@@ -63,6 +74,7 @@ deploy:
 	git push origin "${tag}"
 	echo "Pushed ${tag} — build-and-deploy workflow triggered"
 
+# Tag and push a dev release (version + commit hash)
 deploy-dev:
 	#!/usr/bin/env bash
 	set -euo pipefail

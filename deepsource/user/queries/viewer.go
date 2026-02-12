@@ -59,7 +59,7 @@ func NewViewerRequest(client graphqlclient.GraphQLClient) *ViewerRequest {
 func (r *ViewerRequest) Do(ctx context.Context) (*dsuser.User, error) {
 	var respData viewerResponse
 	if err := r.client.Query(ctx, viewerQuery, nil, &respData); err != nil {
-		return nil, fmt.Errorf("fetch viewer: %w", err)
+		return nil, fmt.Errorf("Fetch viewer: %w", err)
 	}
 
 	user := &dsuser.User{

@@ -3,8 +3,8 @@ package secrets
 import "errors"
 
 var (
-	ErrNotFound    = errors.New("secret not found")
-	ErrUnavailable = errors.New("secrets store unavailable")
+	ErrNotFound    = errors.New("Secret not found")
+	ErrUnavailable = errors.New("Secrets store unavailable")
 )
 
 // Store provides secret storage primitives.

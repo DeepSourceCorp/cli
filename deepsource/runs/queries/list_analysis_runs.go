@@ -84,7 +84,7 @@ func (r *AnalysisRunsListRequest) Do(ctx context.Context) ([]runs.AnalysisRun, e
 	}
 	var respData AnalysisRunsListResponse
 	if err := r.client.Query(ctx, fetchAnalysisRunsQuery, vars, &respData); err != nil {
-		return nil, fmt.Errorf("list analysis runs: %w", err)
+		return nil, fmt.Errorf("List analysis runs: %w", err)
 	}
 
 	result := make([]runs.AnalysisRun, 0, len(respData.Repository.AnalysisRuns.Edges))

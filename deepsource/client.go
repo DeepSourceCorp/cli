@@ -5,8 +5,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/deepsourcelabs/cli/deepsource/runs"
-	runsQuery "github.com/deepsourcelabs/cli/deepsource/runs/queries"
 	"github.com/deepsourcelabs/cli/deepsource/analyzers"
 	analyzerQuery "github.com/deepsourcelabs/cli/deepsource/analyzers/queries"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
@@ -14,8 +12,14 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 	issuesQuery "github.com/deepsourcelabs/cli/deepsource/issues/queries"
+	"github.com/deepsourcelabs/cli/deepsource/metrics"
+	metricsQuery "github.com/deepsourcelabs/cli/deepsource/metrics/queries"
+	"github.com/deepsourcelabs/cli/deepsource/vulnerabilities"
+	vulnerabilitiesQuery "github.com/deepsourcelabs/cli/deepsource/vulnerabilities/queries"
 	"github.com/deepsourcelabs/cli/deepsource/repository"
 	repoQuery "github.com/deepsourcelabs/cli/deepsource/repository/queries"
+	"github.com/deepsourcelabs/cli/deepsource/runs"
+	runsQuery "github.com/deepsourcelabs/cli/deepsource/runs/queries"
 	"github.com/deepsourcelabs/cli/deepsource/transformers"
 	transformerQuery "github.com/deepsourcelabs/cli/deepsource/transformers/queries"
 	"github.com/deepsourcelabs/cli/deepsource/user"
@@ -28,6 +32,11 @@ var defaultHostName = "deepsource.io"
 type ClientOpts struct {
 	Token    string
 	HostName string
+
+	// OnTokenRefreshed is called after a successful automatic token refresh.
+	// If set, enables transparent token refresh when API calls fail due to
+	// expired tokens. The callback should persist the new credentials.
+	OnTokenRefreshed func(token, expiry, email string)
 }
 
 type Client struct {
@@ -50,11 +59,26 @@ func (c Client) GetToken() string {
 func New(cp ClientOpts) (*Client, error) {
 	apiClientURL := getAPIClientURL(cp.HostName)
 	gql := graphql.NewClient(apiClientURL)
-	return &Client{
-		gql:        gql,
-		gqlWrapper: graphqlclient.NewWithClient(gql, cp.Token),
-		token:      cp.Token,
-	}, nil
+
+	c := &Client{
+		gql:   gql,
+		token: cp.Token,
+	}
+
+	if cp.OnTokenRefreshed != nil {
+		c.gqlWrapper = graphqlclient.NewWithClientAndRefresher(gql, cp.Token, func(ctx context.Context, currentToken string) (string, error) {
+			pat, err := c.RefreshAuthCreds(ctx, currentToken)
+			if err != nil {
+				return "", err
+			}
+			cp.OnTokenRefreshed(pat.Token, pat.Expiry, pat.User.Email)
+			return pat.Token, nil
+		})
+	} else {
+		c.gqlWrapper = graphqlclient.NewWithClient(gql, cp.Token)
+	}
+
+	return c, nil
 }
 
 // // Formats and returns the DeepSource Public API client URL
@@ -217,6 +241,120 @@ func (c Client) GetAnalysisRuns(ctx context.Context, owner, repoName, provider s
 func (c Client) GetRunIssues(ctx context.Context, commitOid string) (*runs.RunWithIssues, error) {
 	req := runsQuery.NewRunIssuesRequest(c.gqlWrapper, runsQuery.RunIssuesParams{
 		CommitOid: commitOid,
+	})
+	res, err := req.Do(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// Returns issues for a specific run as a flat list (for issues list command).
+func (c Client) GetRunIssuesFlat(ctx context.Context, commitOid string, limit int) ([]issues.Issue, error) {
+	req := issuesQuery.NewRunIssuesFlatRequest(c.gqlWrapper, issuesQuery.RunIssuesFlatParams{
+		CommitOid: commitOid,
+		Limit:     limit,
+	})
+	res, err := req.Do(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// Returns issues for a specific pull request.
+func (c Client) GetPRIssues(ctx context.Context, owner, repoName, provider string, prNumber, limit int) ([]issues.Issue, error) {
+	req := issuesQuery.NewPRIssuesListRequest(c.gqlWrapper, issuesQuery.PRIssuesListParams{
+		Owner:    owner,
+		RepoName: repoName,
+		Provider: provider,
+		PRNumber: prNumber,
+		Limit:    limit,
+	})
+	res, err := req.Do(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// Returns metrics for a repository's default branch.
+func (c Client) GetRepoMetrics(ctx context.Context, owner, repoName, provider string) ([]metrics.RepositoryMetric, error) {
+	req := metricsQuery.NewRepoMetricsRequest(c.gqlWrapper, metricsQuery.RepoMetricsParams{
+		Owner:    owner,
+		RepoName: repoName,
+		Provider: provider,
+	})
+	res, err := req.Do(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// Returns metrics for a specific analysis run.
+func (c Client) GetRunMetrics(ctx context.Context, commitOid string) (*metrics.RunMetrics, error) {
+	req := metricsQuery.NewRunMetricsRequest(c.gqlWrapper, metricsQuery.RunMetricsParams{
+		CommitOid: commitOid,
+	})
+	res, err := req.Do(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// Returns metrics for a specific pull request.
+func (c Client) GetPRMetrics(ctx context.Context, owner, repoName, provider string, prNumber int) (*metrics.PRMetrics, error) {
+	req := metricsQuery.NewPRMetricsRequest(c.gqlWrapper, metricsQuery.PRMetricsParams{
+		Owner:    owner,
+		RepoName: repoName,
+		Provider: provider,
+		PRNumber: prNumber,
+	})
+	res, err := req.Do(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// Returns vulnerabilities for a repository's default branch.
+func (c Client) GetRepoVulns(ctx context.Context, owner, repoName, provider string, limit int) ([]vulnerabilities.VulnerabilityOccurrence, error) {
+	req := vulnerabilitiesQuery.NewRepoVulnsRequest(c.gqlWrapper, vulnerabilitiesQuery.RepoVulnsParams{
+		Owner:    owner,
+		RepoName: repoName,
+		Provider: provider,
+		Limit:    limit,
+	})
+	res, err := req.Do(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// Returns vulnerabilities for a specific analysis run.
+func (c Client) GetRunVulns(ctx context.Context, commitOid string, limit int) (*vulnerabilities.RunVulns, error) {
+	req := vulnerabilitiesQuery.NewRunVulnsRequest(c.gqlWrapper, vulnerabilitiesQuery.RunVulnsParams{
+		CommitOid: commitOid,
+		Limit:     limit,
+	})
+	res, err := req.Do(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// Returns vulnerabilities for a specific pull request.
+func (c Client) GetPRVulns(ctx context.Context, owner, repoName, provider string, prNumber, limit int) (*vulnerabilities.PRVulns, error) {
+	req := vulnerabilitiesQuery.NewPRVulnsRequest(c.gqlWrapper, vulnerabilitiesQuery.PRVulnsParams{
+		Owner:    owner,
+		RepoName: repoName,
+		Provider: provider,
+		PRNumber: prNumber,
+		Limit:    limit,
 	})
 	res, err := req.Do(ctx)
 	if err != nil {

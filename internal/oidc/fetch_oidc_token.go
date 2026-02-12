@@ -38,7 +38,7 @@ func FetchOIDCTokenFromProvider(requestId, requestUrl string) (string, error) {
 
 	// check if the response is 200
 	if resp.StatusCode != http.StatusOK {
-		return "", fmt.Errorf("failed to fetch OIDC token: %s", resp.Status)
+		return "", fmt.Errorf("Failed to fetch OIDC token: %s", resp.Status)
 	}
 
 	// extract the token from the json response. The token is sent under the key `value`
@@ -51,7 +51,7 @@ func FetchOIDCTokenFromProvider(requestId, requestUrl string) (string, error) {
 	}
 	// check if the token is empty
 	if tokenResponse.Value == "" {
-		return "", fmt.Errorf("failed to fetch OIDC token: empty token")
+		return "", fmt.Errorf("Failed to fetch OIDC token: empty token")
 	}
 	// return the token
 	return tokenResponse.Value, nil
@@ -76,7 +76,7 @@ func ExchangeOIDCTokenForTempDSN(oidcToken, dsEndpoint, provider string) (string
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		return "", fmt.Errorf("failed to exchange OIDC token for DSN: %s", resp.Status)
+		return "", fmt.Errorf("Failed to exchange OIDC token for DSN: %s", resp.Status)
 	}
 	var exchangeResponse ExchangeResponse
 	if err := json.NewDecoder(resp.Body).Decode(&exchangeResponse); err != nil {
@@ -84,7 +84,7 @@ func ExchangeOIDCTokenForTempDSN(oidcToken, dsEndpoint, provider string) (string
 	}
 	// check if the token is empty
 	if exchangeResponse.DSN == "" {
-		return "", fmt.Errorf("failed to exchange OIDC token for DSN: empty token")
+		return "", fmt.Errorf("Failed to exchange OIDC token for DSN: empty token")
 	}
 	// return the token
 	return exchangeResponse.DSN, nil
@@ -98,16 +98,16 @@ func GetDSNFromOIDC(requestId, requestUrl, dsEndpoint, provider string) (string,
 	}
 
 	if dsEndpoint == "" {
-		return "", fmt.Errorf("--deepsource-host-endpoint can not be empty")
+		return "", fmt.Errorf("--deepsource-host-endpoint cannot be empty")
 	}
 
 	if provider == "" {
-		return "", fmt.Errorf("--oidc-provider can not be empty")
+		return "", fmt.Errorf("--oidc-provider cannot be empty")
 	}
 
 	isSupported := ALLOWED_PROVIDERS[provider]
 	if !isSupported {
-		return "", fmt.Errorf("provider %s is not supported for OIDC Token exchange (Supported Providers: %v)", provider, ALLOWED_PROVIDERS)
+		return "", fmt.Errorf("Provider %s is not supported for OIDC token exchange (supported providers: %v)", provider, ALLOWED_PROVIDERS)
 	}
 	if requestId == "" || requestUrl == "" {
 		var foundIDToken, foundRequestURL bool
@@ -118,7 +118,7 @@ func GetDSNFromOIDC(requestId, requestUrl, dsEndpoint, provider string) (string,
 			requestId, foundIDToken = os.LookupEnv("ACTIONS_ID_TOKEN_REQUEST_TOKEN")
 			requestUrl, foundRequestURL = os.LookupEnv("ACTIONS_ID_TOKEN_REQUEST_URL")
 			if !(foundIDToken && foundRequestURL) {
-				errMsg := `failed to fetch "ACTIONS_ID_TOKEN_REQUEST_TOKEN" and "ACTIONS_ID_TOKEN_REQUEST_URL" from environment variables. Please make sure you are running this in a GitHub Actions environment with the required permissions. Or, use '--oidc-request-token' and '--oidc-request-url' flags to pass the token and request URL`
+				errMsg := `Failed to fetch "ACTIONS_ID_TOKEN_REQUEST_TOKEN" and "ACTIONS_ID_TOKEN_REQUEST_URL" from environment variables. Please make sure you are running this in a GitHub Actions environment with the required permissions. Or, use '--oidc-request-token' and '--oidc-request-url' flags to pass the token and request URL`
 				return "", fmt.Errorf("%s", errMsg)
 			}
 		}

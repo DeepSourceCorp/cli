@@ -2,12 +2,12 @@ package status
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/internal/cli/args"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
+	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	authsvc "github.com/deepsourcelabs/cli/internal/services/auth"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
@@ -41,7 +41,7 @@ func (opts *AuthStatusOptions) Run() error {
 	// Fetch config
 	cfg, err := svc.LoadConfig()
 	if err != nil {
-		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
+		return clierrors.NewCLIError(clierrors.ErrInvalidConfig, "Error reading DeepSource CLI config", err)
 	}
 	// Checking if the user has authenticated / logged in or not
 	if cfg.Token == "" {
@@ -52,7 +52,7 @@ func (opts *AuthStatusOptions) Run() error {
 	if !cfg.IsExpired() {
 		pterm.Printf("Logged in to DeepSource as %s.\n", cfg.User)
 	} else {
-		pterm.Println("The authentication has expired. Run \"deepsource auth refresh\" to refresh the credentials.")
+		pterm.Println("The authentication has expired. Run \"deepsource auth login\" to re-authenticate.")
 	}
 	return nil
 }

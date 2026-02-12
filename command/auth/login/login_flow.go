@@ -10,6 +10,7 @@ import (
 	"github.com/cli/browser"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
+	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	authsvc "github.com/deepsourcelabs/cli/internal/services/auth"
 	"github.com/fatih/color"
 )
@@ -23,41 +24,42 @@ func (opts *LoginOptions) startLoginFlow(svc *authsvc.Service, cfg *config.CLICo
 		return err
 	}
 
-	// Print the user code and the permission to open browser at verificationURI
-	c := color.New(color.FgCyan, color.Bold)
-	c.Printf("Please copy your one-time code: %s\n", deviceRegistrationResponse.UserCode)
-	c.Printf("Press enter to open deepsource.io in your browser...")
-	fmt.Scanln()
-
-	// Having received the user code, open the browser at verificationURIComplete
+	// Open the browser for authentication
 	err = browser.OpenURL(deviceRegistrationResponse.VerificationURIComplete)
 	if err != nil {
-		return err
+		// If the browser fails to open, show the URL for manual access
+		c := color.New(color.FgCyan, color.Bold)
+		c.Printf("Open this URL in your browser to authenticate:\n")
+		fmt.Println(deviceRegistrationResponse.VerificationURIComplete)
+	} else {
+		fmt.Println("Opened the authentication page in your browser")
 	}
 
-	// Fetch the PAT using the device registration resonse
+	fmt.Println("Waiting for authentication")
+
+	// Fetch the PAT by polling the server
 	var tokenData *auth.PAT
 	tokenData, opts.AuthTimedOut, err = fetchPAT(ctx, deviceRegistrationResponse, svc, cfg)
 	if err != nil {
 		return err
 	}
 
-	// Check if it was a success poll or the Auth timed out
 	if opts.AuthTimedOut {
-		return fmt.Errorf("Authentication timed out")
+		return clierrors.NewCLIError(clierrors.ErrAuthRequired, "Authentication timed out. Please try again", nil)
 	}
 
-	// Storing the useful data for future reference and usage
-	// in a global config object (Cfg)
+	// Store auth data in config
 	cfg.User = tokenData.User.Email
 	cfg.Token = tokenData.Token
 	cfg.SetTokenExpiry(tokenData.Expiry)
 
-	// Having stored the data in the global Cfg object, write it into the config file present in the local filesystem
 	err = svc.SaveConfig(cfg)
 	if err != nil {
-		return fmt.Errorf("Error in writing authentication data to a file. Exiting...")
+		return clierrors.NewCLIError(clierrors.ErrInvalidConfig, "Failed to save authentication data", err)
 	}
+
+	c := color.New(color.FgGreen, color.Bold)
+	c.Printf("Logged in as %s\n", tokenData.User.Email)
 	return nil
 }
 

@@ -45,7 +45,7 @@ func NewAnalyzersRequest(client graphqlclient.GraphQLClient) *AnalyzersRequest {
 func (a *AnalyzersRequest) Do(ctx context.Context) ([]analyzers.Analyzer, error) {
 	var respData AnalyzersResponse
 	if err := a.client.Query(ctx, listAnalyzersQuery, nil, &respData); err != nil {
-		return nil, fmt.Errorf("fetch analyzers: %w", err)
+		return nil, fmt.Errorf("Fetch analyzers: %w", err)
 	}
 
 	// Formatting the query response w.r.t the output format

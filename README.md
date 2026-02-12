@@ -74,13 +74,10 @@ Usage:
 
 Available commands are:
     auth        Authentication commands (login, logout, refresh, status)
-    config      Generate and Validate DeepSource config
     issues      Show the list of issues in a file in a repository
     repo        Operations related to the project repository (status, view)
     report      Report artifacts to DeepSource
     runs        View analysis runs and run issues
-    version     Get the version of the DeepSource CLI
-    whoami      Show the currently authenticated user
 
 Help:
     Use 'deepsource <command> --help/-h' for more information about the command.

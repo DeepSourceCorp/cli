@@ -34,15 +34,8 @@ func (cfg CLIConfig) IsExpired() bool {
 }
 
 func (cfg *CLIConfig) VerifyAuthentication() error {
-	// Checking if the user has authenticated / logged in or not
 	if cfg.Token == "" {
 		return errors.New("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
 	}
-
-	// // Check if the token has already expired
-	// if cfg.IsExpired() {
-	// 	return errors.New("The authentication has expired. Run \"deepsource auth refresh\" to refresh the credentials.")
-	// }
-
 	return nil
 }

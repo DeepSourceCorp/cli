@@ -43,7 +43,7 @@ func NewTransformersRequest(client graphqlclient.GraphQLClient) *TransformersReq
 func (t *TransformersRequest) Do(ctx context.Context) ([]transformers.Transformer, error) {
 	var respData TransformersResponse
 	if err := t.client.Query(ctx, listTransformersQuery, nil, &respData); err != nil {
-		return nil, fmt.Errorf("fetch transformers: %w", err)
+		return nil, fmt.Errorf("Fetch transformers: %w", err)
 	}
 
 	// Formatting the query response w.r.t the SDK response ([]transformers.Transformer)

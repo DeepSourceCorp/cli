@@ -58,7 +58,11 @@ func (s *Service) Status(ctx context.Context, repoArg string) (*StatusResult, er
 		return nil, err
 	}
 
-	client, err := s.newClient(deepsource.ClientOpts{Token: cfg.Token, HostName: cfg.Host})
+	client, err := s.newClient(deepsource.ClientOpts{
+		Token:            cfg.Token,
+		HostName:         cfg.Host,
+		OnTokenRefreshed: s.config.TokenRefreshCallback(),
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -86,16 +90,17 @@ func (s *Service) ViewURL(ctx context.Context, repoArg string) (string, error) {
 		return "", err
 	}
 
-	client, err := s.newClient(deepsource.ClientOpts{Token: cfg.Token, HostName: cfg.Host})
+	client, err := s.newClient(deepsource.ClientOpts{
+		Token:            cfg.Token,
+		HostName:         cfg.Host,
+		OnTokenRefreshed: s.config.TokenRefreshCallback(),
+	})
 	if err != nil {
 		return "", err
 	}
 
 	_, err = client.GetRepoStatus(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 	if err != nil {
-		if strings.Contains(err.Error(), "Signature has expired") {
-			return "", errors.New("The token has expired. Please refresh the token using the command `deepsource auth refresh`")
-		}
 		if strings.Contains(err.Error(), "Repository matching query does not exist") {
 			return "", errors.New("Unauthorized access. Please login if you haven't using the command `deepsource auth login`")
 		}

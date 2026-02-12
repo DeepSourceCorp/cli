@@ -109,7 +109,7 @@ func (f *FileIssuesListRequest) Do(ctx context.Context) ([]issues.Issue, error) 
 	}
 	var respData FileIssuesResponse
 	if err := f.client.Query(ctx, fetchFileIssuesQuery, vars, &respData); err != nil {
-		return nil, fmt.Errorf("list file issues: %w", err)
+		return nil, fmt.Errorf("List file issues: %w", err)
 	}
 
 	// Formatting the query response w.r.t the output format of the SDK as specified in `issues_list.go`

@@ -34,12 +34,6 @@ func NewDualOutputWithDebug(logPath string) (*DualOutput, error) {
 // NewDualOutputFromEnv enables diagnostic logging when DEEPSOURCE_CLI_DEBUG is set.
 func NewDualOutputFromEnv() *DualOutput {
 	debug := strings.TrimSpace(os.Getenv("DEEPSOURCE_CLI_DEBUG"))
-	quiet := strings.TrimSpace(os.Getenv("DEEPSOURCE_CLI_QUIET"))
-	if quiet != "" && quiet != "0" {
-		output := NewDualOutput()
-		output.user = io.Discard
-		return output
-	}
 	if debug == "" {
 		return NewDualOutput()
 	}

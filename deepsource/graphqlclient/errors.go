@@ -10,7 +10,7 @@ type GraphQLError struct {
 }
 
 func (e *GraphQLError) Error() string {
-	return fmt.Sprintf("graphql %s failed: %v", e.Operation, e.Cause)
+	return fmt.Sprintf("GraphQL %s failed: %v", e.Operation, e.Cause)
 }
 
 func (e *GraphQLError) Unwrap() error {

@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/klauspost/compress/zstd"
+	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	"github.com/deepsourcelabs/cli/internal/interfaces"
 	"github.com/deepsourcelabs/cli/internal/oidc"
 )
@@ -71,7 +72,7 @@ func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 	}
 
 	if opts.DSN == "" {
-		return nil, errors.New("DeepSource | Error | Environment variable DEEPSOURCE_DSN not set (or) is empty. Set DEEPSOURCE_DSN from the repository settings page or use --use-oidc.")
+		return nil, clierrors.NewUserError(errors.New("DeepSource | Error | Environment variable DEEPSOURCE_DSN not set (or) is empty. Set DEEPSOURCE_DSN from the repository settings page or use --use-oidc."))
 	}
 
 	s.infof("DeepSource | Info | Preparing artifact...\n")
@@ -82,14 +83,16 @@ func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 	}
 
 	if err := s.validateKey(opts); err != nil {
-		s.capture(err)
-		return nil, err
+		uerr := clierrors.NewUserError(err)
+		s.capture(uerr)
+		return nil, uerr
 	}
 
 	dsn, err := NewDSN(opts.DSN)
 	if err != nil {
-		s.capture(err)
-		return nil, err
+		uerr := clierrors.NewUserError(err)
+		s.capture(uerr)
+		return nil, uerr
 	}
 
 	headCommitOID, warning, err := s.git.GetHead(currentDir)
@@ -99,20 +102,22 @@ func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 	}
 
 	if opts.Value == "" && opts.ValueFile == "" {
-		return nil, errors.New("DeepSource | Error | '--value' (or) '--value-file' not passed")
+		return nil, clierrors.NewUserError(errors.New("DeepSource | Error | '--value' (or) '--value-file' not passed"))
 	}
 
 	artifactValue := opts.Value
 	if opts.ValueFile != "" {
 		if _, err := s.fs.Stat(opts.ValueFile); err != nil {
-			s.capture(err)
-			return nil, fmt.Errorf("DeepSource | Error | Unable to read specified value file: %s", opts.ValueFile)
+			uerr := clierrors.NewUserErrorf("DeepSource | Error | Unable to read specified value file: %s", opts.ValueFile)
+			s.capture(uerr)
+			return nil, uerr
 		}
 
 		valueBytes, err := s.fs.ReadFile(opts.ValueFile)
 		if err != nil {
-			s.capture(err)
-			return nil, fmt.Errorf("DeepSource | Error | Unable to read specified value file: %s", opts.ValueFile)
+			uerr := clierrors.NewUserErrorf("DeepSource | Error | Unable to read specified value file: %s", opts.ValueFile)
+			s.capture(uerr)
+			return nil, uerr
 		}
 
 		artifactValue = string(valueBytes)
@@ -313,6 +318,9 @@ func (s *Service) makeQuery(ctx context.Context, dsn *DSN, body []byte, skipVeri
 
 func (s *Service) capture(err error) {
 	if s.telemetry == nil {
+		return
+	}
+	if clierrors.IsUserError(err) {
 		return
 	}
 	s.telemetry.CaptureException(err)

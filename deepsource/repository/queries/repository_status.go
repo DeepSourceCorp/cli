@@ -44,7 +44,7 @@ func (r *RepoStatusRequest) Do(ctx context.Context) (*repository.Meta, error) {
 	}
 	var respData RepoStatusResponse
 	if err := r.client.Query(ctx, repoStatusQuery, vars, &respData); err != nil {
-		return nil, fmt.Errorf("fetch repo status: %w", err)
+		return nil, fmt.Errorf("Fetch repo status: %w", err)
 	}
 
 	// Formatting the query response w.r.t the repository.Meta structure
