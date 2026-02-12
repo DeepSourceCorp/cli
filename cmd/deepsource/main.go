@@ -61,9 +61,6 @@ func main() {
 		var cliErr *clierrors.CLIError
 		if errors.As(err, &cliErr) {
 			pterm.Error.Println(cliErr.Message)
-			if os.Getenv("DEEPSOURCE_CLI_DEBUG") != "" && cliErr.Cause != nil {
-				pterm.DefaultBasicText.Printf("  cause: %v\n", cliErr.Cause)
-			}
 		} else {
 			pterm.Error.Println(err)
 		}

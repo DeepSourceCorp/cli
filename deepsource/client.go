@@ -27,7 +27,7 @@ import (
 	"github.com/deepsourcelabs/graphql"
 )
 
-var defaultHostName = "deepsource.io"
+var defaultHostName = "deepsource.com"
 
 type ClientOpts struct {
 	Token    string
@@ -249,7 +249,7 @@ func (c Client) GetRunIssues(ctx context.Context, commitOid string) (*runs.RunWi
 	return res, nil
 }
 
-// Returns issues for a specific run as a flat list (for issues list command).
+// Returns issues for a specific run as a flat list (for issues --commit).
 func (c Client) GetRunIssuesFlat(ctx context.Context, commitOid string, limit int) ([]issues.Issue, error) {
 	req := issuesQuery.NewRunIssuesFlatRequest(c.gqlWrapper, issuesQuery.RunIssuesFlatParams{
 		CommitOid: commitOid,
@@ -339,6 +339,20 @@ func (c Client) GetRunVulns(ctx context.Context, commitOid string, limit int) (*
 	req := vulnerabilitiesQuery.NewRunVulnsRequest(c.gqlWrapper, vulnerabilitiesQuery.RunVulnsParams{
 		CommitOid: commitOid,
 		Limit:     limit,
+	})
+	res, err := req.Do(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// Returns the list of enabled analyzers for a repository.
+func (c Client) GetEnabledAnalyzers(ctx context.Context, owner, repoName, provider string) ([]analyzers.Analyzer, error) {
+	req := repoQuery.NewEnabledAnalyzersRequest(c.gqlWrapper, repoQuery.EnabledAnalyzersParams{
+		Owner:    owner,
+		RepoName: repoName,
+		Provider: provider,
 	})
 	res, err := req.Do(ctx)
 	if err != nil {

@@ -1,4 +1,4 @@
-package list
+package analysis
 
 import (
 	"context"
@@ -18,44 +18,51 @@ import (
 	"github.com/spf13/cobra"
 )
 
-type RunsListOptions struct {
-	RepoArg    string
-	LimitArg   int
-	ptermTable [][]string
+type AnalysisOptions struct {
+	RepoArg   string
+	LimitArg  int
+	commitOid string
 }
 
-func NewCmdRunsList() *cobra.Command {
-	opts := RunsListOptions{
+func NewCmdAnalysis() *cobra.Command {
+	opts := AnalysisOptions{
 		LimitArg: 20,
 	}
 
 	doc := heredoc.Docf(`
-		List analysis runs for a repository.
+		View analysis runs for a repository.
 
-		To list analysis runs for the current repository:
-		%[1]s
+		Lists recent analysis runs by default:
+		  %[1]s
 
-		To list analysis runs for a specific repository, use the %[2]s flag:
-		%[3]s
+		Use %[2]s to scope to a specific repository:
+		  %[3]s
 
-		To limit the number of runs shown, use the %[4]s flag:
-		%[5]s
-		`, style.Cyan("deepsource runs list"), style.Yellow("--repo"), style.Cyan("deepsource runs list --repo repo_name"), style.Yellow("--limit"), style.Cyan("deepsource runs list --limit 50"))
+		Use %[4]s to show run metadata and issues summary:
+		  %[5]s
+		`,
+		style.Cyan("deepsource analysis"),
+		style.Yellow("--repo"),
+		style.Cyan("deepsource analysis --repo repo_name"),
+		style.Yellow("--commit"),
+		style.Cyan("deepsource analysis --commit abc123f"),
+	)
 
 	cmd := &cobra.Command{
-		Use:   "list",
-		Short: "List analysis runs",
+		Use:   "analysis [flags]",
+		Short: "View analysis runs",
 		Long:  doc,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return opts.Run()
+			if opts.commitOid != "" {
+				return opts.runDetail(cmd.Context())
+			}
+			return opts.runList()
 		},
 	}
 
-	// --repo, -r flag
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "List history for the specified repository")
-
-	// --limit, -l flag
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 20, "Number of analysis runs to fetch")
+	cmd.Flags().StringVar(&opts.commitOid, "commit", "", "Show metadata and issues summary for a specific commit")
 
 	_ = cmd.RegisterFlagCompletionFunc("repo", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
@@ -64,9 +71,8 @@ func NewCmdRunsList() *cobra.Command {
 	return cmd
 }
 
-// Execute the command
-func (opts *RunsListOptions) Run() error {
-	// Load configuration
+// runList fetches and displays a table of recent analysis runs.
+func (opts *AnalysisOptions) runList() error {
 	cfgMgr := config.DefaultManager()
 	cfg, err := cfgMgr.Load()
 	if err != nil {
@@ -76,13 +82,11 @@ func (opts *RunsListOptions) Run() error {
 		return err
 	}
 
-	// Resolve remote repository
 	remote, err := vcs.ResolveRemote(opts.RepoArg)
 	if err != nil {
 		return err
 	}
 
-	// Create DeepSource client
 	client, err := deepsource.New(deepsource.ClientOpts{
 		Token:            cfg.Token,
 		HostName:         cfg.Host,
@@ -92,51 +96,94 @@ func (opts *RunsListOptions) Run() error {
 		return err
 	}
 
-	// Fetch analysis runs
 	ctx := context.Background()
-	runs, err := client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
+	analysisRuns, err := client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
 	if err != nil {
 		return err
 	}
 
-	if len(runs) == 0 {
+	if len(analysisRuns) == 0 {
 		pterm.Info.Println("No analysis runs found for this repository.")
 		return nil
 	}
 
-	opts.showHistory(runs)
+	showRunsTable(analysisRuns)
 	return nil
 }
 
-// Format and display the runs using pterm
-func (opts *RunsListOptions) showHistory(analysisRuns []runs.AnalysisRun) {
-	// Create table header
+// runDetail fetches and displays metadata + issues summary for a single commit.
+func (opts *AnalysisOptions) runDetail(ctx context.Context) error {
+	cfgMgr := config.DefaultManager()
+	cfg, err := cfgMgr.Load()
+	if err != nil {
+		return clierrors.NewCLIError(clierrors.ErrInvalidConfig, "Error reading DeepSource CLI config", err)
+	}
+	if err := cfg.VerifyAuthentication(); err != nil {
+		return err
+	}
+
+	client, err := deepsource.New(deepsource.ClientOpts{
+		Token:            cfg.Token,
+		HostName:         cfg.Host,
+		OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+	})
+	if err != nil {
+		return err
+	}
+
+	commitOid := opts.commitOid
+	runWithIssues, err := client.GetRunIssues(ctx, commitOid)
+	if err != nil {
+		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to fetch run details", err)
+	}
+
+	commitShort := commitOid
+	if len(commitShort) > 8 {
+		commitShort = commitShort[:8]
+	}
+
+	pterm.DefaultBox.WithTitle("Analysis Run").WithTitleTopCenter().Println(
+		fmt.Sprintf("%s %s\n%s %s\n%s %s",
+			pterm.Bold.Sprint("Commit:"),
+			commitShort,
+			pterm.Bold.Sprint("Branch:"),
+			runWithIssues.BranchName,
+			pterm.Bold.Sprint("Status:"),
+			formatStatus(runWithIssues.Status),
+		),
+	)
+
+	showIssuesSummary(runWithIssues.Issues)
+
+	pterm.Println()
+	pterm.Info.Printfln("Run %s to view full issue details",
+		style.Cyan("deepsource issues --commit %s", commitShort))
+
+	return nil
+}
+
+// --- Display helpers ---
+
+func showRunsTable(analysisRuns []runs.AnalysisRun) {
 	header := []string{"COMMIT", "BRANCH", "STATUS", "INTRODUCED", "RESOLVED", "SUPPRESSED", "FINISHED"}
 	data := [][]string{header}
 
-	// Add data rows
 	for _, run := range analysisRuns {
-		// Truncate commit OID for display
 		commitShort := run.CommitOid
 		if len(commitShort) > 8 {
 			commitShort = commitShort[:8]
 		}
 
-		// Format branch name
 		branch := run.BranchName
 		if branch == "" {
 			branch = "-"
 		}
 
-		// Format status with color
 		status := formatStatus(run.Status)
-
-		// Format counts
 		introduced := fmt.Sprintf("%d", run.OccurrencesIntroduced)
 		resolved := fmt.Sprintf("%d", run.OccurrencesResolved)
 		suppressed := fmt.Sprintf("%d", run.OccurrencesSuppressed)
 
-		// Format finished time
 		finished := "-"
 		if run.FinishedAt != nil {
 			finished = formatTime(*run.FinishedAt)
@@ -153,11 +200,46 @@ func (opts *RunsListOptions) showHistory(analysisRuns []runs.AnalysisRun) {
 		})
 	}
 
-	// Render table
 	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
 }
 
-// Format status with appropriate styling
+func showIssuesSummary(issues []runs.RunIssue) {
+	if len(issues) == 0 {
+		pterm.Println()
+		pterm.Success.Println("No issues found in this run")
+		return
+	}
+
+	var critical, major, minor int
+	for _, issue := range issues {
+		switch strings.ToUpper(issue.Severity) {
+		case "CRITICAL":
+			critical++
+		case "MAJOR":
+			major++
+		case "MINOR":
+			minor++
+		}
+	}
+
+	pterm.Println()
+	pterm.Println(pterm.Bold.Sprintf("Issues: %d total", len(issues)))
+
+	parts := []string{}
+	if critical > 0 {
+		parts = append(parts, pterm.Red(fmt.Sprintf("%d critical", critical)))
+	}
+	if major > 0 {
+		parts = append(parts, pterm.LightRed(fmt.Sprintf("%d major", major)))
+	}
+	if minor > 0 {
+		parts = append(parts, pterm.Yellow(fmt.Sprintf("%d minor", minor)))
+	}
+	if len(parts) > 0 {
+		pterm.Println("  " + strings.Join(parts, ", "))
+	}
+}
+
 func formatStatus(status string) string {
 	switch strings.ToUpper(status) {
 	case "SUCCESS":
@@ -173,7 +255,6 @@ func formatStatus(status string) string {
 	}
 }
 
-// Format time to relative time (e.g., "2 hours ago")
 func formatTime(t time.Time) string {
 	now := time.Now()
 	diff := now.Sub(t)

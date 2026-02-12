@@ -7,6 +7,7 @@ import (
 
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
+	"github.com/deepsourcelabs/cli/deepsource/analyzers"
 	"github.com/deepsourcelabs/cli/deepsource/repository"
 	"github.com/deepsourcelabs/cli/internal/adapters"
 	"github.com/deepsourcelabs/cli/internal/secrets"
@@ -23,11 +24,15 @@ func (f *fakeRepoClient) GetRepoStatus(ctx context.Context, owner, repoName, pro
 	return f.status, f.err
 }
 
+func (f *fakeRepoClient) GetEnabledAnalyzers(ctx context.Context, owner, repoName, provider string) ([]analyzers.Analyzer, error) {
+	return nil, f.err
+}
+
 func TestServiceStatus(t *testing.T) {
 	tempDir := t.TempDir()
 	homeDir := func() (string, error) { return tempDir, nil }
 	mgr := config.NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, secrets.NoopStore{}, "test-key")
-	cfg := &config.CLIConfig{Host: "deepsource.io", User: "demo", Token: "token"}
+	cfg := &config.CLIConfig{Host: "deepsource.com", User: "demo", Token: "token"}
 	assert.NoError(t, mgr.Write(cfg))
 
 	svc := NewService(mgr)
@@ -42,7 +47,7 @@ func TestServiceStatus(t *testing.T) {
 	assert.NoError(t, err)
 	if assert.NotNil(t, result) {
 		assert.True(t, result.Activated)
-		assert.Equal(t, "deepsource.io", result.Host)
+		assert.Equal(t, "deepsource.com", result.Host)
 	}
 }
 
@@ -50,7 +55,7 @@ func TestServiceViewURLUnauthorized(t *testing.T) {
 	tempDir := t.TempDir()
 	homeDir := func() (string, error) { return tempDir, nil }
 	mgr := config.NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, secrets.NoopStore{}, "test-key")
-	cfg := &config.CLIConfig{Host: "deepsource.io", User: "demo", Token: "token"}
+	cfg := &config.CLIConfig{Host: "deepsource.com", User: "demo", Token: "token"}
 	assert.NoError(t, mgr.Write(cfg))
 
 	svc := NewService(mgr)

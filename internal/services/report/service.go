@@ -330,5 +330,5 @@ func (s *Service) infof(format string, args ...interface{}) {
 	if s.output == nil {
 		return
 	}
-	s.output.Errorf(format, args...)
+	s.output.Printf(format, args...)
 }

@@ -8,7 +8,7 @@ import (
 )
 
 var cfg = CLIConfig{
-	Host:           "deepsource.io",
+	Host:           "deepsource.com",
 	User:           "test",
 	Token:          "test_token",
 	TokenExpiresIn: time.Time{},

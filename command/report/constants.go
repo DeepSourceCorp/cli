@@ -10,7 +10,7 @@ Available commands are:
 Help:
     Use 'deepsource <command> --help' for more information about the command.
 Documentation:
-    https://deepsource.io/docs/cli
+    https://deepsource.com/docs/cli
 `
 
 	reportUsageMessage = `
@@ -30,7 +30,7 @@ Notes:
     - Pass either '--value' or '--value-file'. If both are passed, contents of '--value' will be considered.
     - '--analyzer-type' is optional. If not passed, it will default to 'core'.
 Documentation:
-    https://deepsource.io/docs/cli#report
+    https://deepsource.com/docs/cli#report
 `
 	reportGraphqlQuery     = "mutation($input: CreateArtifactInput!) {\r\n  createArtifact(input: $input) {\r\n    ok\r\n  message\r\n  error\r\n  }\r\n}"
 	reportGraphqlQueryOld  = "mutation($input: CreateArtifactInput!) {\r\n  createArtifact(input: $input) {\r\n    ok\r\n  error\r\n  }\r\n}"
