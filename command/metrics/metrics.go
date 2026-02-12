@@ -36,7 +36,7 @@ type MetricsOptions struct {
 
 func NewCmdMetrics() *cobra.Command {
 	opts := MetricsOptions{
-		OutputFormat: "human",
+		OutputFormat: "pretty",
 		LimitArg:     30,
 	}
 
@@ -77,7 +77,7 @@ func NewCmdMetrics() *cobra.Command {
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
 
 	// --output flag
-	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "human", "Output format: human, table, json, yaml")
+	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, table, json, yaml")
 
 	// --output-file flag
 	cmd.Flags().StringVar(&opts.OutputFile, "output-file", "", "Write output to a file instead of stdout")
@@ -94,7 +94,7 @@ func NewCmdMetrics() *cobra.Command {
 	})
 	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 		return []string{
-			"human\tHuman-readable grouped output",
+			"pretty\tPretty-printed grouped output",
 			"table\tTabular output",
 			"json\tJSON output",
 			"yaml\tYAML output",
@@ -420,9 +420,9 @@ func (opts *MetricsOptions) printFooter(count int) {
 func formatStatus(status string) string {
 	switch strings.ToUpper(status) {
 	case "PASSING":
-		return pterm.Green(status)
+		return pterm.Green("Passing")
 	case "FAILING":
-		return pterm.Red(status)
+		return pterm.Red("Failing")
 	default:
 		return status
 	}

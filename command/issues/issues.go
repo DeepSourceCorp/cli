@@ -41,7 +41,7 @@ type IssuesOptions struct {
 func NewCmdIssues() *cobra.Command {
 	opts := IssuesOptions{
 		LimitArg:     30,
-		OutputFormat: "human",
+		OutputFormat: "pretty",
 	}
 
 	doc := heredoc.Docf(`
@@ -81,7 +81,7 @@ func NewCmdIssues() *cobra.Command {
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Maximum number of issues to fetch")
 
 	// --output, -o flag
-	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "human", "Output format: human, table, json, yaml")
+	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, table, json, yaml")
 
 	// --output-file flag
 	cmd.Flags().StringVar(&opts.OutputFile, "output-file", "", "Write output to a file instead of stdout")
@@ -107,7 +107,7 @@ func NewCmdIssues() *cobra.Command {
 	})
 	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 		return []string{
-			"human\tHuman-readable grouped output",
+			"pretty\tPretty-printed grouped output",
 			"table\tTable output",
 			"json\tJSON output",
 			"yaml\tYAML output",
@@ -360,54 +360,48 @@ func (opts *IssuesOptions) outputTable() error {
 		return nil
 	}
 
-	header := []string{"LOCATION", "SOURCE", "ANALYZER", "CODE", "TITLE", "CATEGORY", "SEVERITY"}
+	showSource := opts.CommitOid != "" || opts.PRNumber > 0
+
+	var header []string
+	if showSource {
+		header = []string{"LOCATION", "SOURCE", "ANALYZER", "CODE", "TITLE", "CATEGORY", "SEVERITY"}
+	} else {
+		header = []string{"LOCATION", "ANALYZER", "CODE", "TITLE", "CATEGORY", "SEVERITY"}
+	}
 	data := [][]string{header}
-
-	terminalWidth := pterm.GetTerminalWidth()
-	if terminalWidth == 0 {
-		terminalWidth = 120
-	}
-
-	colWidths := []int{
-		int(float64(terminalWidth) * 0.18), // LOCATION
-		int(float64(terminalWidth) * 0.08), // SOURCE
-		int(float64(terminalWidth) * 0.10), // ANALYZER
-		int(float64(terminalWidth) * 0.10), // CODE
-		int(float64(terminalWidth) * 0.30), // TITLE
-		int(float64(terminalWidth) * 0.14), // CATEGORY
-		int(float64(terminalWidth) * 0.10), // SEVERITY
-	}
 
 	cwd, _ := os.Getwd()
 
 	for _, issue := range opts.issues {
-		filePath := issue.Location.Path
-		if cwd != "" && strings.HasPrefix(filePath, cwd) {
-			filePath = strings.TrimPrefix(filePath, cwd+"/")
-		}
-
-		var issueLocation string
-		if issue.Location.Position.BeginLine == issue.Location.Position.EndLine {
-			issueLocation = fmt.Sprintf("%s:%d", filePath, issue.Location.Position.BeginLine)
-		} else {
-			issueLocation = fmt.Sprintf("%s:%d-%d", filePath, issue.Location.Position.BeginLine, issue.Location.Position.EndLine)
-		}
-
+		location := formatLocation(issue, cwd)
 		severity := formatSeverity(issue.IssueSeverity)
+		category := humanizeCategory(issue.IssueCategory)
+		analyzer := analyzerDisplayName(issue.Analyzer)
 
-		data = append(data, []string{
-			wrapText(issueLocation, colWidths[0]),
-			wrapText(issue.IssueSource, colWidths[1]),
-			wrapText(issue.Analyzer.Shortcode, colWidths[2]),
-			wrapText(issue.IssueCode, colWidths[3]),
-			wrapText(issue.IssueText, colWidths[4]),
-			wrapText(issue.IssueCategory, colWidths[5]),
-			wrapText(severity, colWidths[6]),
-		})
+		if showSource {
+			data = append(data, []string{
+				location,
+				issue.IssueSource,
+				analyzer,
+				issue.IssueCode,
+				issue.IssueText,
+				category,
+				severity,
+			})
+		} else {
+			data = append(data, []string{
+				location,
+				analyzer,
+				issue.IssueCode,
+				issue.IssueText,
+				category,
+				severity,
+			})
+		}
 	}
 
-	pterm.Println(pterm.Bold.Sprintf("Found %d issue(s)", len(opts.issues)))
-	pterm.DefaultTable.WithHasHeader().WithBoxed().WithRowSeparator("-").WithHeaderRowSeparator("-").WithData(data).Render()
+	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
+	pterm.Printf("\nShowing %d issue(s)\n", len(opts.issues))
 
 	return nil
 }
@@ -536,15 +530,16 @@ func colorSeverity(sev string, text string) string {
 }
 
 func formatSeverity(severity string) string {
+	humanized := humanizeSeverity(severity)
 	switch strings.ToUpper(severity) {
 	case "CRITICAL":
-		return pterm.Red(severity)
+		return pterm.Red(humanized)
 	case "MAJOR":
-		return pterm.LightRed(severity)
+		return pterm.LightRed(humanized)
 	case "MINOR":
-		return pterm.Yellow(severity)
+		return pterm.Yellow(humanized)
 	default:
-		return severity
+		return humanized
 	}
 }
 
@@ -559,52 +554,3 @@ func formatLocation(issue issues.Issue, cwd string) string {
 	return fmt.Sprintf("%s:%d-%d", filePath, issue.Location.Position.BeginLine, issue.Location.Position.EndLine)
 }
 
-func wrapText(text string, maxWidth int) string {
-	if maxWidth <= 0 {
-		return text
-	}
-
-	if len(text) <= maxWidth {
-		return text
-	}
-
-	words := strings.Fields(text)
-	if len(words) == 0 {
-		return text
-	}
-
-	var lines []string
-	var currentLine strings.Builder
-
-	for _, word := range words {
-		if currentLine.Len() > 0 && currentLine.Len()+len(word)+1 > maxWidth {
-			lines = append(lines, currentLine.String())
-			currentLine.Reset()
-		}
-
-		if len(word) > maxWidth {
-			if currentLine.Len() > 0 {
-				lines = append(lines, currentLine.String())
-				currentLine.Reset()
-			}
-			for len(word) > maxWidth {
-				lines = append(lines, word[:maxWidth])
-				word = word[maxWidth:]
-			}
-			if len(word) > 0 {
-				currentLine.WriteString(word)
-			}
-		} else {
-			if currentLine.Len() > 0 {
-				currentLine.WriteString(" ")
-			}
-			currentLine.WriteString(word)
-		}
-	}
-
-	if currentLine.Len() > 0 {
-		lines = append(lines, currentLine.String())
-	}
-
-	return strings.Join(lines, "\n")
-}
