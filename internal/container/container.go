@@ -26,7 +26,7 @@ func New() *Container {
 		Environment: adapters.NewRealEnvironment(),
 		GitClient:   adapters.NewRealGitClient(),
 		HTTPClient:  adapters.NewHTTPClient(60 * time.Second),
-		Output:      adapters.NewDualOutputFromEnv(),
+		Output:      adapters.NewDualOutput(),
 		Telemetry:   adapters.NewSentryClient(),
 		Config:      config.DefaultManager(),
 	}

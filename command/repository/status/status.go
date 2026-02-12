@@ -24,7 +24,6 @@ type RepoStatusOptions struct {
 	Output         string
 }
 
-// NewCmdRepoStatus handles querying the activation status of the repo supplied as an arg
 func NewCmdRepoStatus() *cobra.Command {
 	opts := RepoStatusOptions{
 		RepoArg:      "",
@@ -39,7 +38,7 @@ func NewCmdRepoStatus() *cobra.Command {
 
 		To check if a specific repository is activated on DeepSource, use the %[2]s flag:
 		%[3]s
-		`, style.Cyan("deepsource repo status"), style.Yellow("--repo"), style.Cyan("deepsource repo status --repo repo_name"))
+		`, style.Cyan("deepsource repository status"), style.Yellow("--repo"), style.Cyan("deepsource repository status --repo repo_name"))
 
 	cmd := &cobra.Command{
 		Use:   "status",
@@ -51,7 +50,6 @@ func NewCmdRepoStatus() *cobra.Command {
 		},
 	}
 
-	// --repo, -r flag
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Get the activation status of the specified repository")
 	cmd.Flags().StringVar(&opts.Output, "output", "table", "Output format: table, json, yaml")
 	_ = cmd.RegisterFlagCompletionFunc("repo", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
@@ -83,7 +81,7 @@ func printStatus(format string, result *reposvc.StatusResult) error {
 	switch format {
 	case "", "table":
 		if result.Activated {
-			pterm.Println("Analysis active on DeepSource (deepsource.io)")
+			pterm.Println("Analysis active on DeepSource (deepsource.com)")
 		} else {
 			pterm.Println("DeepSource analysis is currently not activated on this repository.")
 		}

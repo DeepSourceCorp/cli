@@ -12,6 +12,7 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 	"github.com/deepsourcelabs/cli/internal/cli/completion"
+	"github.com/deepsourcelabs/cli/internal/cli/style"
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	"github.com/deepsourcelabs/cli/internal/vcs"
 	"github.com/pterm/pterm"
@@ -23,42 +24,50 @@ type IssuesOptions struct {
 	RepoArg         string
 	LimitArg        int
 	OutputFormat    string
+	OutputFile      string
 	Verbose         bool
+	AnalyzerFilters []string
 	CategoryFilters []string
 	SeverityFilters []string
 	CodeFilters     []string
 	PathFilters     []string
 	SourceFilters   []string
-	CommitOid          string
+	CommitOid       string
 	PRNumber        int
 	repoSlug        string
 	issues          []issues.Issue
 }
 
-// NewCmdIssues returns the issues command
 func NewCmdIssues() *cobra.Command {
 	opts := IssuesOptions{
 		LimitArg:     30,
 		OutputFormat: "human",
 	}
 
-	doc := heredoc.Doc(`
-		List issues in a repository.
+	doc := heredoc.Docf(`
+		View issues in a repository.
 
-		By default, lists issues from the default branch. Use --run or --pr
-		to scope to a specific run or pull request.
+		Lists issues from the default branch by default:
+		  %[1]s
 
-		Examples:
-		  deepsource issues
-		  deepsource issues --repo owner/repo
-		  deepsource issues --run abc123f
-		  deepsource issues --pr 123
-		  deepsource issues --severity critical --category security,bug-risk
-	`)
+		Scope to a specific commit or pull request:
+		  %[2]s
+		  %[3]s
+
+		Output as a table or structured format:
+		  %[4]s
+		  %[5]s
+		`,
+		style.Cyan("deepsource issues"),
+		style.Cyan("deepsource issues --commit abc123f"),
+		style.Cyan("deepsource issues --pr 123"),
+		style.Cyan("deepsource issues --output table"),
+		style.Cyan("deepsource issues --output json"),
+	)
 
 	cmd := &cobra.Command{
-		Use:   "issues",
-		Short: "List issues from the default branch",
+		Use:   "issues [flags]",
+		Short: "View issues in a repository",
 		Long:  doc,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return opts.Run(cmd.Context())
@@ -71,17 +80,21 @@ func NewCmdIssues() *cobra.Command {
 	// --limit, -l flag
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Maximum number of issues to fetch")
 
-	// --output flag
-	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "human", "Output format: human, json, yaml")
+	// --output, -o flag
+	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "human", "Output format: human, table, json, yaml")
+
+	// --output-file flag
+	cmd.Flags().StringVar(&opts.OutputFile, "output-file", "", "Write output to a file instead of stdout")
 
 	// --verbose, -v flag
 	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show issue code, analyzer, and description")
 
 	// Scoping flags
-	cmd.Flags().StringVar(&opts.CommitOid, "run", "", "Scope to a specific run by commit OID")
+	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit OID")
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
 
 	// Filter flags
+	cmd.Flags().StringSliceVar(&opts.AnalyzerFilters, "analyzer", nil, "Filter by analyzer shortcode (e.g. python,go)")
 	cmd.Flags().StringSliceVar(&opts.CategoryFilters, "category", nil, "Filter by category (e.g. security,bug-risk)")
 	cmd.Flags().StringSliceVar(&opts.SeverityFilters, "severity", nil, "Filter by severity (e.g. critical,major)")
 	cmd.Flags().StringSliceVar(&opts.CodeFilters, "code", nil, "Filter by issue code (e.g. GO-R1005)")
@@ -95,6 +108,7 @@ func NewCmdIssues() *cobra.Command {
 	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 		return []string{
 			"human\tHuman-readable grouped output",
+			"table\tTable output",
 			"json\tJSON output",
 			"yaml\tYAML output",
 		}, cobra.ShellCompDirectiveNoFileComp
@@ -116,13 +130,12 @@ func NewCmdIssues() *cobra.Command {
 	})
 
 	// Mutual exclusivity
-	cmd.MarkFlagsMutuallyExclusive("run", "pr")
+	cmd.MarkFlagsMutuallyExclusive("commit", "pr")
 
 	return cmd
 }
 
 func (opts *IssuesOptions) Run(ctx context.Context) error {
-	// Load configuration
 	cfgMgr := config.DefaultManager()
 	cfg, err := cfgMgr.Load()
 	if err != nil {
@@ -132,14 +145,12 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 		return err
 	}
 
-	// Resolve remote repository
 	remote, err := vcs.ResolveRemote(opts.RepoArg)
 	if err != nil {
 		return err
 	}
 	opts.repoSlug = remote.Owner + "/" + remote.RepoName
 
-	// Create DeepSource client
 	client, err := deepsource.New(deepsource.ClientOpts{
 		Token:            cfg.Token,
 		HostName:         cfg.Host,
@@ -149,7 +160,6 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 		return err
 	}
 
-	// Fetch issues based on scope
 	var issuesList []issues.Issue
 	switch {
 	case opts.CommitOid != "":
@@ -163,23 +173,26 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 		return err
 	}
 
-	// Apply filters
 	issuesList = opts.filterIssues(issuesList)
 	opts.issues = issuesList
 
-	// Output based on format
 	switch opts.OutputFormat {
 	case "json":
 		return opts.outputJSON()
 	case "yaml":
 		return opts.outputYAML()
+	case "table":
+		return opts.outputTable()
 	default:
 		return opts.outputHuman()
 	}
 }
 
+// --- Filters ---
+
 func (opts *IssuesOptions) hasFilters() bool {
-	return len(opts.CategoryFilters) > 0 ||
+	return len(opts.AnalyzerFilters) > 0 ||
+		len(opts.CategoryFilters) > 0 ||
 		len(opts.SeverityFilters) > 0 ||
 		len(opts.CodeFilters) > 0 ||
 		len(opts.PathFilters) > 0 ||
@@ -191,6 +204,7 @@ func (opts *IssuesOptions) filterIssues(issuesList []issues.Issue) []issues.Issu
 		return issuesList
 	}
 
+	analyzerSet := makeStringSet(opts.AnalyzerFilters)
 	categorySet := makeStringSet(opts.CategoryFilters)
 	severitySet := makeStringSet(opts.SeverityFilters)
 	codeSet := makeStringSet(opts.CodeFilters)
@@ -199,6 +213,9 @@ func (opts *IssuesOptions) filterIssues(issuesList []issues.Issue) []issues.Issu
 
 	filtered := make([]issues.Issue, 0, len(issuesList))
 	for _, issue := range issuesList {
+		if len(analyzerSet) > 0 && !setContainsFold(analyzerSet, issue.Analyzer.Shortcode) {
+			continue
+		}
 		if len(categorySet) > 0 && !setContainsFold(categorySet, issue.IssueCategory) {
 			continue
 		}
@@ -227,7 +244,6 @@ func makeStringSet(values []string) map[string]struct{} {
 		if normalized == "" {
 			continue
 		}
-		// Handle both underscore and hyphen formats
 		normalized = strings.ReplaceAll(normalized, "-", "_")
 		set[normalized] = struct{}{}
 	}
@@ -269,6 +285,8 @@ func matchesPathFilters(path string, filters []string) bool {
 	return false
 }
 
+// --- Human output ---
+
 func (opts *IssuesOptions) outputHuman() error {
 	if len(opts.issues) == 0 {
 		if opts.hasFilters() {
@@ -279,10 +297,8 @@ func (opts *IssuesOptions) outputHuman() error {
 		return nil
 	}
 
-	// Get current working directory for relative path display
 	cwd, _ := os.Getwd()
 
-	// Group issues by severity
 	order := []string{"CRITICAL", "MAJOR", "MINOR"}
 	groups := make(map[string][]issues.Issue)
 	for _, issue := range opts.issues {
@@ -296,7 +312,6 @@ func (opts *IssuesOptions) outputHuman() error {
 			continue
 		}
 
-		// Colored severity header with count
 		header := fmt.Sprintf("%s (%d)", humanizeSeverity(sev), len(group))
 		fmt.Println(colorSeverity(sev, header))
 		fmt.Println()
@@ -321,11 +336,10 @@ func (opts *IssuesOptions) outputHuman() error {
 		}
 	}
 
-	// Footer
 	fmt.Printf("Showing %d issue(s) in %s", len(opts.issues), opts.repoSlug)
 	switch {
 	case opts.CommitOid != "":
-		fmt.Printf(" from run %s\n", opts.CommitOid)
+		fmt.Printf(" from commit %s\n", opts.CommitOid)
 	case opts.PRNumber > 0:
 		fmt.Printf(" from PR #%d\n", opts.PRNumber)
 	default:
@@ -333,6 +347,137 @@ func (opts *IssuesOptions) outputHuman() error {
 	}
 	return nil
 }
+
+// --- Table output ---
+
+func (opts *IssuesOptions) outputTable() error {
+	if len(opts.issues) == 0 {
+		if opts.hasFilters() {
+			pterm.Info.Println("No issues matched the provided filters.")
+		} else {
+			pterm.Info.Println("No issues found.")
+		}
+		return nil
+	}
+
+	header := []string{"LOCATION", "SOURCE", "ANALYZER", "CODE", "TITLE", "CATEGORY", "SEVERITY"}
+	data := [][]string{header}
+
+	terminalWidth := pterm.GetTerminalWidth()
+	if terminalWidth == 0 {
+		terminalWidth = 120
+	}
+
+	colWidths := []int{
+		int(float64(terminalWidth) * 0.18), // LOCATION
+		int(float64(terminalWidth) * 0.08), // SOURCE
+		int(float64(terminalWidth) * 0.10), // ANALYZER
+		int(float64(terminalWidth) * 0.10), // CODE
+		int(float64(terminalWidth) * 0.30), // TITLE
+		int(float64(terminalWidth) * 0.14), // CATEGORY
+		int(float64(terminalWidth) * 0.10), // SEVERITY
+	}
+
+	cwd, _ := os.Getwd()
+
+	for _, issue := range opts.issues {
+		filePath := issue.Location.Path
+		if cwd != "" && strings.HasPrefix(filePath, cwd) {
+			filePath = strings.TrimPrefix(filePath, cwd+"/")
+		}
+
+		var issueLocation string
+		if issue.Location.Position.BeginLine == issue.Location.Position.EndLine {
+			issueLocation = fmt.Sprintf("%s:%d", filePath, issue.Location.Position.BeginLine)
+		} else {
+			issueLocation = fmt.Sprintf("%s:%d-%d", filePath, issue.Location.Position.BeginLine, issue.Location.Position.EndLine)
+		}
+
+		severity := formatSeverity(issue.IssueSeverity)
+
+		data = append(data, []string{
+			wrapText(issueLocation, colWidths[0]),
+			wrapText(issue.IssueSource, colWidths[1]),
+			wrapText(issue.Analyzer.Shortcode, colWidths[2]),
+			wrapText(issue.IssueCode, colWidths[3]),
+			wrapText(issue.IssueText, colWidths[4]),
+			wrapText(issue.IssueCategory, colWidths[5]),
+			wrapText(severity, colWidths[6]),
+		})
+	}
+
+	pterm.Println(pterm.Bold.Sprintf("Found %d issue(s)", len(opts.issues)))
+	pterm.DefaultTable.WithHasHeader().WithBoxed().WithRowSeparator("-").WithHeaderRowSeparator("-").WithData(data).Render()
+
+	return nil
+}
+
+// --- JSON/YAML output ---
+
+type IssueJSON struct {
+	Path      string `json:"path" yaml:"path"`
+	BeginLine int    `json:"begin_line" yaml:"begin_line"`
+	EndLine   int    `json:"end_line" yaml:"end_line"`
+	IssueCode string `json:"issue_code" yaml:"issue_code"`
+	Title     string `json:"title" yaml:"title"`
+	Category  string `json:"category" yaml:"category"`
+	Severity  string `json:"severity" yaml:"severity"`
+	Source    string `json:"source" yaml:"source"`
+	Analyzer  string `json:"analyzer" yaml:"analyzer"`
+}
+
+func (opts *IssuesOptions) toJSONIssues() []IssueJSON {
+	result := make([]IssueJSON, 0, len(opts.issues))
+	for _, issue := range opts.issues {
+		result = append(result, IssueJSON{
+			Path:      issue.Location.Path,
+			BeginLine: issue.Location.Position.BeginLine,
+			EndLine:   issue.Location.Position.EndLine,
+			IssueCode: issue.IssueCode,
+			Title:     issue.IssueText,
+			Category:  issue.IssueCategory,
+			Severity:  issue.IssueSeverity,
+			Source:    issue.IssueSource,
+			Analyzer:  issue.Analyzer.Shortcode,
+		})
+	}
+	return result
+}
+
+func (opts *IssuesOptions) outputJSON() error {
+	data, err := json.MarshalIndent(opts.toJSONIssues(), "", "  ")
+	if err != nil {
+		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format JSON output", err)
+	}
+	return opts.writeOutput(data, true)
+}
+
+func (opts *IssuesOptions) outputYAML() error {
+	data, err := yaml.Marshal(opts.toJSONIssues())
+	if err != nil {
+		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format YAML output", err)
+	}
+	return opts.writeOutput(data, false)
+}
+
+func (opts *IssuesOptions) writeOutput(data []byte, trailingNewline bool) error {
+	if opts.OutputFile == "" {
+		if trailingNewline {
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(string(data))
+		}
+		return nil
+	}
+
+	if err := os.WriteFile(opts.OutputFile, data, 0644); err != nil {
+		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to write output file", err)
+	}
+	pterm.Printf("Saved issues to %s!\n", opts.OutputFile)
+	return nil
+}
+
+// --- Formatting helpers ---
 
 func humanizeSeverity(s string) string {
 	switch strings.ToUpper(s) {
@@ -390,6 +535,19 @@ func colorSeverity(sev string, text string) string {
 	}
 }
 
+func formatSeverity(severity string) string {
+	switch strings.ToUpper(severity) {
+	case "CRITICAL":
+		return pterm.Red(severity)
+	case "MAJOR":
+		return pterm.LightRed(severity)
+	case "MINOR":
+		return pterm.Yellow(severity)
+	default:
+		return severity
+	}
+}
+
 func formatLocation(issue issues.Issue, cwd string) string {
 	filePath := issue.Location.Path
 	if cwd != "" && strings.HasPrefix(filePath, cwd) {
@@ -401,51 +559,52 @@ func formatLocation(issue issues.Issue, cwd string) string {
 	return fmt.Sprintf("%s:%d-%d", filePath, issue.Location.Position.BeginLine, issue.Location.Position.EndLine)
 }
 
-// IssueJSON represents an issue in JSON/YAML output
-type IssueJSON struct {
-	Path      string `json:"path" yaml:"path"`
-	BeginLine int    `json:"begin_line" yaml:"begin_line"`
-	EndLine   int    `json:"end_line" yaml:"end_line"`
-	IssueCode string `json:"issue_code" yaml:"issue_code"`
-	Title     string `json:"title" yaml:"title"`
-	Category  string `json:"category" yaml:"category"`
-	Severity  string `json:"severity" yaml:"severity"`
-	Source    string `json:"source" yaml:"source"`
-	Analyzer  string `json:"analyzer" yaml:"analyzer"`
-}
-
-func (opts *IssuesOptions) toJSONIssues() []IssueJSON {
-	result := make([]IssueJSON, 0, len(opts.issues))
-	for _, issue := range opts.issues {
-		result = append(result, IssueJSON{
-			Path:      issue.Location.Path,
-			BeginLine: issue.Location.Position.BeginLine,
-			EndLine:   issue.Location.Position.EndLine,
-			IssueCode: issue.IssueCode,
-			Title:     issue.IssueText,
-			Category:  issue.IssueCategory,
-			Severity:  issue.IssueSeverity,
-			Source:    issue.IssueSource,
-			Analyzer:  issue.Analyzer.Shortcode,
-		})
+func wrapText(text string, maxWidth int) string {
+	if maxWidth <= 0 {
+		return text
 	}
-	return result
-}
 
-func (opts *IssuesOptions) outputJSON() error {
-	data, err := json.MarshalIndent(opts.toJSONIssues(), "", "  ")
-	if err != nil {
-		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format JSON output", err)
+	if len(text) <= maxWidth {
+		return text
 	}
-	fmt.Println(string(data))
-	return nil
-}
 
-func (opts *IssuesOptions) outputYAML() error {
-	data, err := yaml.Marshal(opts.toJSONIssues())
-	if err != nil {
-		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format YAML output", err)
+	words := strings.Fields(text)
+	if len(words) == 0 {
+		return text
 	}
-	fmt.Print(string(data))
-	return nil
+
+	var lines []string
+	var currentLine strings.Builder
+
+	for _, word := range words {
+		if currentLine.Len() > 0 && currentLine.Len()+len(word)+1 > maxWidth {
+			lines = append(lines, currentLine.String())
+			currentLine.Reset()
+		}
+
+		if len(word) > maxWidth {
+			if currentLine.Len() > 0 {
+				lines = append(lines, currentLine.String())
+				currentLine.Reset()
+			}
+			for len(word) > maxWidth {
+				lines = append(lines, word[:maxWidth])
+				word = word[maxWidth:]
+			}
+			if len(word) > 0 {
+				currentLine.WriteString(word)
+			}
+		} else {
+			if currentLine.Len() > 0 {
+				currentLine.WriteString(" ")
+			}
+			currentLine.WriteString(word)
+		}
+	}
+
+	if currentLine.Len() > 0 {
+		lines = append(lines, currentLine.String())
+	}
+
+	return strings.Join(lines, "\n")
 }

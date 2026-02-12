@@ -3,35 +3,27 @@ package command
 import (
 	"context"
 	"fmt"
-	"os"
 
 	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/command/auth"
+	"github.com/deepsourcelabs/cli/command/analysis"
 	"github.com/deepsourcelabs/cli/command/issues"
 	"github.com/deepsourcelabs/cli/command/metrics"
-	"github.com/deepsourcelabs/cli/command/repo"
+	"github.com/deepsourcelabs/cli/command/repository"
 	"github.com/deepsourcelabs/cli/command/report"
-	"github.com/deepsourcelabs/cli/command/runs"
 	"github.com/deepsourcelabs/cli/command/vulnerabilities"
 	"github.com/spf13/cobra"
 )
 
 func NewCmdRoot() *cobra.Command {
-	var verbose bool
-
 	cmd := &cobra.Command{
-		Use:   "deepsource <command> <subcommand> [flags]",
+		Use:   "deepsource <command> [flags]",
 		Short: "DeepSource CLI",
 		Long: `DeepSource CLI - Ship good code from the command line.
 
 To get started, run: deepsource auth login`,
 		SilenceErrors: true,
 		SilenceUsage:  true,
-		PersistentPreRun: func(cmd *cobra.Command, args []string) {
-			if verbose {
-				_ = os.Setenv("DEEPSOURCE_CLI_DEBUG", "1")
-			}
-		},
 	}
 
 	// Set version using --version flag
@@ -47,12 +39,10 @@ To get started, run: deepsource auth login`,
 	// Hide help subcommand (--help flag still works)
 	cmd.SetHelpCommand(&cobra.Command{Hidden: true})
 
-	cmd.PersistentFlags().BoolVar(&verbose, "verbose", false, "Enable verbose diagnostics")
-
 	// Child Commands
 	cmd.AddCommand(auth.NewCmdAuth())
-	cmd.AddCommand(repo.NewCmdRepo())
-	cmd.AddCommand(runs.NewCmdRuns())
+	cmd.AddCommand(repository.NewCmdRepository())
+	cmd.AddCommand(analysis.NewCmdAnalysis())
 	cmd.AddCommand(report.NewCmdReport())
 	cmd.AddCommand(issues.NewCmdIssues())
 	cmd.AddCommand(metrics.NewCmdMetrics())

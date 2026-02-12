@@ -8,6 +8,7 @@ import (
 
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
+	"github.com/deepsourcelabs/cli/deepsource/analyzers"
 	"github.com/deepsourcelabs/cli/deepsource/repository"
 	"github.com/deepsourcelabs/cli/internal/vcs"
 )
@@ -15,6 +16,7 @@ import (
 // Client defines the repo API used by the service.
 type Client interface {
 	GetRepoStatus(ctx context.Context, owner, repoName, provider string) (*repository.Meta, error)
+	GetEnabledAnalyzers(ctx context.Context, owner, repoName, provider string) ([]analyzers.Analyzer, error)
 }
 
 // ClientFactory constructs a repo client.
@@ -113,6 +115,33 @@ func (s *Service) ViewURL(ctx context.Context, repoArg string) (string, error) {
 	}
 
 	return fmt.Sprintf("https://%s/%s/%s/%s/", cfg.Host, vcsShortcode, remote.Owner, remote.RepoName), nil
+}
+
+// EnabledAnalyzers returns the analyzers enabled on a repository.
+func (s *Service) EnabledAnalyzers(ctx context.Context, repoArg string) ([]analyzers.Analyzer, error) {
+	cfg, err := s.config.Load()
+	if err != nil {
+		return nil, fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
+	}
+	if err := cfg.VerifyAuthentication(); err != nil {
+		return nil, err
+	}
+
+	remote, err := s.resolveRemote(repoArg)
+	if err != nil {
+		return nil, err
+	}
+
+	client, err := s.newClient(deepsource.ClientOpts{
+		Token:            cfg.Token,
+		HostName:         cfg.Host,
+		OnTokenRefreshed: s.config.TokenRefreshCallback(),
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return client.GetEnabledAnalyzers(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 }
 
 func vcsShortcode(provider string) string {

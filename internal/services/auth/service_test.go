@@ -15,7 +15,7 @@ func TestServiceSaveLoadDeleteConfig(t *testing.T) {
 	mgr := config.NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, secrets.NoopStore{}, "test-key")
 	svc := NewService(mgr)
 
-	cfg := &config.CLIConfig{Host: "deepsource.io", User: "demo", Token: "demo-token"}
+	cfg := &config.CLIConfig{Host: "deepsource.com", User: "demo", Token: "demo-token"}
 	assert.NoError(t, svc.SaveConfig(cfg))
 
 	loaded, err := svc.LoadConfig()

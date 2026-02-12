@@ -8,7 +8,7 @@ import (
 const (
 	ConfigDirName   = "/.deepsource/"
 	ConfigFileName  = "/config.toml"
-	DefaultHostName = "deepsource.io"
+	DefaultHostName = "deepsource.com"
 )
 
 type CLIConfig struct {

@@ -70,14 +70,16 @@ commands along with their brief description.
 
 ```
 Usage:
-    deepsource <command> [<arguments>]
+    deepsource <command> [flags]
 
 Available commands are:
-    auth        Authentication commands (login, logout, refresh, status)
-    issues      Show the list of issues in a file in a repository
-    repo        Operations related to the project repository (status, view)
-    report      Report artifacts to DeepSource
-    runs        View analysis runs and run issues
+    auth                Authentication commands (login, logout, refresh, status)
+    analysis            View analysis runs
+    issues              View issues in a repository
+    repo                Operations related to the project repository (status, view)
+    report              Report artifacts to DeepSource
+    metrics             View repository metrics
+    vulnerabilities     View vulnerabilities in a repository
 
 Help:
     Use 'deepsource <command> --help/-h' for more information about the command.

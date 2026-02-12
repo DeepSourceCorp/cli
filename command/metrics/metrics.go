@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"os"
 	"strings"
 
 	"github.com/MakeNowJust/heredoc"
@@ -21,9 +22,13 @@ import (
 
 type MetricsOptions struct {
 	RepoArg      string
-	RunOid       string
+	CommitOid    string
 	PRNumber     int
 	OutputFormat string
+	OutputFile   string
+	Verbose      bool
+	LimitArg     int
+	repoSlug     string
 	repoMetrics  []metrics.RepositoryMetric
 	runMetrics   *metrics.RunMetrics
 	prMetrics    *metrics.PRMetrics
@@ -31,14 +36,15 @@ type MetricsOptions struct {
 
 func NewCmdMetrics() *cobra.Command {
 	opts := MetricsOptions{
-		OutputFormat: "table",
+		OutputFormat: "human",
+		LimitArg:     30,
 	}
 
 	doc := heredoc.Docf(`
 		View code metrics for a repository.
 
 		By default, shows metrics from the default branch. Use %[1]s or %[2]s
-		to scope to a specific run or pull request.
+		to scope to a specific analysis run or pull request.
 
 		Examples:
 		  %[3]s
@@ -46,16 +52,16 @@ func NewCmdMetrics() *cobra.Command {
 		  %[5]s
 		  %[6]s
 		`,
-		style.Yellow("--run"),
+		style.Yellow("--commit"),
 		style.Yellow("--pr"),
 		style.Cyan("deepsource metrics"),
 		style.Cyan("deepsource metrics --repo owner/repo"),
-		style.Cyan("deepsource metrics --run abc123f"),
+		style.Cyan("deepsource metrics --commit abc123f"),
 		style.Cyan("deepsource metrics --pr 123"),
 	)
 
 	cmd := &cobra.Command{
-		Use:   "metrics",
+		Use:   "metrics [flags]",
 		Short: "View repository metrics",
 		Long:  doc,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -67,11 +73,20 @@ func NewCmdMetrics() *cobra.Command {
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository (owner/name)")
 
 	// Scoping flags
-	cmd.Flags().StringVar(&opts.RunOid, "run", "", "Scope to a specific run by commit OID")
+	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit OID")
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
 
 	// --output flag
-	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "table", "Output format: table, json, yaml")
+	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "human", "Output format: human, table, json, yaml")
+
+	// --output-file flag
+	cmd.Flags().StringVar(&opts.OutputFile, "output-file", "", "Write output to a file instead of stdout")
+
+	// --verbose, -v flag
+	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show shortcodes and descriptions")
+
+	// --limit, -l flag
+	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Maximum number of metrics to fetch")
 
 	// Completions
 	_ = cmd.RegisterFlagCompletionFunc("repo", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
@@ -79,14 +94,15 @@ func NewCmdMetrics() *cobra.Command {
 	})
 	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 		return []string{
-			"table\tHuman-readable table",
+			"human\tHuman-readable grouped output",
+			"table\tTabular output",
 			"json\tJSON output",
 			"yaml\tYAML output",
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
 
 	// Mutual exclusivity
-	cmd.MarkFlagsMutuallyExclusive("run", "pr")
+	cmd.MarkFlagsMutuallyExclusive("commit", "pr")
 
 	return cmd
 }
@@ -107,6 +123,7 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
+	opts.repoSlug = remote.Owner + "/" + remote.RepoName
 
 	// Create DeepSource client
 	client, err := deepsource.New(deepsource.ClientOpts{
@@ -120,8 +137,8 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 
 	// Fetch metrics based on scope
 	switch {
-	case opts.RunOid != "":
-		opts.runMetrics, err = client.GetRunMetrics(ctx, opts.RunOid)
+	case opts.CommitOid != "":
+		opts.runMetrics, err = client.GetRunMetrics(ctx, opts.CommitOid)
 	case opts.PRNumber > 0:
 		opts.prMetrics, err = client.GetPRMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.PRNumber)
 	default:
@@ -131,14 +148,31 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 		return err
 	}
 
+	// Apply client-side limit
+	if opts.LimitArg > 0 {
+		if metricsList := opts.getMetrics(); len(metricsList) > opts.LimitArg {
+			truncated := metricsList[:opts.LimitArg]
+			switch {
+			case opts.runMetrics != nil:
+				opts.runMetrics.Metrics = truncated
+			case opts.prMetrics != nil:
+				opts.prMetrics.Metrics = truncated
+			default:
+				opts.repoMetrics = truncated
+			}
+		}
+	}
+
 	// Output based on format
 	switch opts.OutputFormat {
 	case "json":
 		return opts.outputJSON()
 	case "yaml":
 		return opts.outputYAML()
-	default:
+	case "table":
 		return opts.outputTable()
+	default:
+		return opts.outputHuman()
 	}
 }
 
@@ -271,6 +305,118 @@ func (opts *MetricsOptions) outputChangesetStats() {
 	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
 }
 
+func (opts *MetricsOptions) outputHuman() error {
+	metricsList := opts.getMetrics()
+
+	if len(metricsList) == 0 {
+		pterm.Info.Println("No metrics found.")
+		return nil
+	}
+
+	totalItems := 0
+	for _, m := range metricsList {
+		// Metric name header (bold)
+		header := pterm.Bold.Sprint(m.Name)
+		if opts.Verbose && m.Shortcode != "" {
+			header += fmt.Sprintf(" (%s)", m.Shortcode)
+		}
+		fmt.Println(header)
+
+		if opts.Verbose && m.Description != "" {
+			fmt.Printf("  %s\n", m.Description)
+		}
+
+		for _, item := range m.Items {
+			value := formatValueDisplay(item, m.Unit)
+			colored := colorByStatus(value, item.ThresholdStatus)
+			threshold := formatThresholdDisplay(item, m.Unit)
+
+			fmt.Printf("  %s: %s%s\n", item.Key, colored, threshold)
+			totalItems++
+		}
+
+		fmt.Println()
+	}
+
+	// Changeset stats for run scope
+	if opts.runMetrics != nil && opts.runMetrics.ChangesetStats != nil {
+		opts.outputHumanChangesetStats()
+		fmt.Println()
+	}
+
+	opts.printFooter(totalItems)
+	return nil
+}
+
+func (opts *MetricsOptions) outputHumanChangesetStats() {
+	stats := opts.runMetrics.ChangesetStats
+
+	fmt.Println(pterm.Bold.Sprint("Changeset Coverage"))
+	printChangesetLine("Lines", stats.Lines)
+	printChangesetLine("Branches", stats.Branches)
+	printChangesetLine("Conditions", stats.Conditions)
+}
+
+func formatValueDisplay(item metrics.RepositoryMetricItem, unit string) string {
+	if item.LatestValueDisplay != "" {
+		return item.LatestValueDisplay
+	}
+	if item.LatestValue != nil {
+		return fmt.Sprintf("%.1f%s", *item.LatestValue, unit)
+	}
+	return "-"
+}
+
+func formatThresholdDisplay(item metrics.RepositoryMetricItem, unit string) string {
+	if item.Threshold == nil {
+		return ""
+	}
+	return fmt.Sprintf(" (threshold: %d%s)", *item.Threshold, unit)
+}
+
+func colorByStatus(text string, status string) string {
+	switch strings.ToUpper(status) {
+	case "PASSING":
+		return pterm.Green(text)
+	case "FAILING":
+		return pterm.Red(text)
+	default:
+		return text
+	}
+}
+
+func printChangesetLine(label string, counts metrics.ChangesetStatsCounts) {
+	overall := intPtrVal(counts.Overall)
+	overallCovered := intPtrVal(counts.OverallCovered)
+	new := intPtrVal(counts.New)
+	newCovered := intPtrVal(counts.NewCovered)
+	fmt.Printf("  %s: %d covered of %d overall, %d covered of %d new\n",
+		label, overallCovered, overall, newCovered, new)
+}
+
+func intPtrVal(v *int) int {
+	if v == nil {
+		return 0
+	}
+	return *v
+}
+
+func (opts *MetricsOptions) printFooter(count int) {
+	fmt.Printf("Showing %d metric(s) in %s", count, opts.repoSlug)
+	switch {
+	case opts.runMetrics != nil:
+		commitShort := opts.runMetrics.CommitOid
+		if len(commitShort) > 7 {
+			commitShort = commitShort[:7]
+		}
+		fmt.Printf(" from commit %s on %s\n", commitShort, opts.runMetrics.BranchName)
+	case opts.prMetrics != nil:
+		fmt.Printf(" from PR #%d (%s -> %s)\n", opts.prMetrics.Number, opts.prMetrics.Branch, opts.prMetrics.BaseBranch)
+	default:
+		fmt.Println(" from default branch")
+	}
+}
+
 func formatStatus(status string) string {
 	switch strings.ToUpper(status) {
 	case "PASSING":
@@ -304,8 +450,7 @@ func (opts *MetricsOptions) outputJSON() error {
 	if err != nil {
 		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format JSON output", err)
 	}
-	fmt.Println(string(data))
-	return nil
+	return opts.writeOutput(data, true)
 }
 
 func (opts *MetricsOptions) outputYAML() error {
@@ -323,6 +468,22 @@ func (opts *MetricsOptions) outputYAML() error {
 	if err != nil {
 		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format YAML output", err)
 	}
-	fmt.Print(string(data))
+	return opts.writeOutput(data, false)
+}
+
+func (opts *MetricsOptions) writeOutput(data []byte, trailingNewline bool) error {
+	if opts.OutputFile == "" {
+		if trailingNewline {
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(string(data))
+		}
+		return nil
+	}
+
+	if err := os.WriteFile(opts.OutputFile, data, 0644); err != nil {
+		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to write output file", err)
+	}
+	pterm.Printf("Saved metrics to %s!\n", opts.OutputFile)
 	return nil
 }

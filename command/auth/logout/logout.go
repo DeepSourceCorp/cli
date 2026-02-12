@@ -53,6 +53,6 @@ func (opts *LogoutOptions) Run() error {
 			return err
 		}
 	}
-	pterm.Println("Logged out from DeepSource (deepsource.io)")
+	pterm.Println("Logged out from DeepSource (deepsource.com)")
 	return nil
 }

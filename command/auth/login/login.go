@@ -12,7 +12,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var accountTypes = []string{"DeepSource (deepsource.io)", "DeepSource Enterprise"}
+var accountTypes = []string{"DeepSource (deepsource.com)", "Enterprise Server"}
 
 // LoginOptions hold the metadata related to login operation
 type LoginOptions struct {
@@ -67,8 +67,11 @@ func NewCmdLogin() *cobra.Command {
 // Run executes the auth command and starts the login flow if not already authenticated
 func (opts *LoginOptions) Run() (err error) {
 	svc := authsvc.NewService(config.DefaultManager())
-	// Fetch config
-	cfg, _ := svc.LoadConfig()
+	// Fetch config (errors are non-fatal: a zero config just means "not logged in")
+	cfg, err := svc.LoadConfig()
+	if err != nil {
+		cfg = &config.CLIConfig{}
+	}
 	opts.User = cfg.User
 	opts.TokenExpired = cfg.IsExpired()
 
@@ -81,7 +84,7 @@ func (opts *LoginOptions) Run() (err error) {
 	}
 
 	// Checking if the user passed a hostname. If yes, storing it in the config
-	// Else using the default hostname (deepsource.io)
+	// Else using the default hostname (deepsource.com)
 	if opts.HostName != "" {
 		cfg.Host = opts.HostName
 	} else {
@@ -130,7 +133,7 @@ func (opts *LoginOptions) handleInteractiveLogin() error {
 		return err
 	}
 	// Prompt the user for hostname only in the case of on-premise
-	if loginType == "DeepSource Enterprise" {
+	if loginType == "Enterprise Server" {
 		opts.HostName, err = prompt.GetSingleLineInput(hostPromptMessage, hostPromptHelpText)
 		if err != nil {
 			return err
