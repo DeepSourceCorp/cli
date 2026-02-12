@@ -37,7 +37,7 @@ type VulnerabilitiesOptions struct {
 
 func NewCmdVulnerabilities() *cobra.Command {
 	opts := VulnerabilitiesOptions{
-		OutputFormat: "human",
+		OutputFormat: "pretty",
 		LimitArg:     100,
 	}
 
@@ -80,7 +80,7 @@ func NewCmdVulnerabilities() *cobra.Command {
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
 
 	// --output flag
-	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "human", "Output format: human, table, json, yaml")
+	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, table, json, yaml")
 
 	// --output-file flag
 	cmd.Flags().StringVar(&opts.OutputFile, "output-file", "", "Write output to a file instead of stdout")
@@ -100,7 +100,7 @@ func NewCmdVulnerabilities() *cobra.Command {
 	})
 	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 		return []string{
-			"human\tHuman-readable grouped output",
+			"pretty\tPretty-printed grouped output",
 			"table\tTabular output",
 			"json\tJSON output",
 			"yaml\tYAML output",
@@ -340,7 +340,7 @@ func (opts *VulnerabilitiesOptions) outputTable() error {
 	}
 
 	// Build vulnerabilities table
-	header := []string{"ID", "SEVERITY", "PACKAGE", "VERSION", "FIX", "REACHABLE"}
+	header := []string{"ID", "SEVERITY", "PACKAGE", "VERSION", "ECOSYSTEM", "FIX", "REACHABILITY"}
 	data := [][]string{header}
 
 	for _, v := range vulnsList {
@@ -351,12 +351,14 @@ func (opts *VulnerabilitiesOptions) outputTable() error {
 
 		reachable := formatReachability(v.Reachability)
 		severity := formatSeverity(v.Vulnerability.Severity)
+		ecosystem := humanizeEcosystem(v.Package.Ecosystem)
 
 		data = append(data, []string{
 			v.Vulnerability.Identifier,
 			severity,
 			v.Package.Name,
 			v.PackageVersion.Version,
+			ecosystem,
 			fix,
 			reachable,
 		})
@@ -369,28 +371,55 @@ func (opts *VulnerabilitiesOptions) outputTable() error {
 }
 
 func formatSeverity(severity string) string {
+	humanized := humanizeSeverity(severity)
 	switch strings.ToUpper(severity) {
 	case "CRITICAL":
-		return pterm.Red(severity)
+		return pterm.Red(humanized)
 	case "HIGH":
-		return pterm.LightRed(severity)
+		return pterm.LightRed(humanized)
 	case "MEDIUM":
-		return pterm.Yellow(severity)
+		return pterm.Yellow(humanized)
 	case "LOW":
-		return pterm.Blue(severity)
+		return pterm.Blue(humanized)
 	default:
-		return severity
+		return humanized
 	}
 }
 
 func formatReachability(reachability string) string {
 	switch strings.ToUpper(reachability) {
 	case "REACHABLE":
-		return pterm.Red("YES")
+		return pterm.Red("Yes")
 	case "UNREACHABLE":
-		return pterm.Green("NO")
+		return pterm.Green("No")
 	default:
-		return "UNKNOWN"
+		return "Unknown"
+	}
+}
+
+func humanizeEcosystem(ecosystem string) string {
+	switch strings.ToUpper(ecosystem) {
+	case "GO":
+		return "Go"
+	case "NPM":
+		return "npm"
+	case "PYPI":
+		return "PyPI"
+	case "MAVEN":
+		return "Maven"
+	case "RUBYGEMS":
+		return "RubyGems"
+	case "NUGET":
+		return "NuGet"
+	case "CARGO":
+		return "Cargo"
+	case "PACKAGIST":
+		return "Packagist"
+	default:
+		if ecosystem == "" {
+			return "-"
+		}
+		return ecosystem
 	}
 }
 
