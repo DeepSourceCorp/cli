@@ -10,11 +10,11 @@ import (
 // Options holds the metadata.
 type Options struct{}
 
-// NewCmdVersion returns the current version of cli being used
+// NewCmdRepo returns the command for repository operations
 func NewCmdRepo() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "repo",
-		Short: "Operations related to the project repository",
+		Short: "Manage repository settings",
 	}
 	cmd.AddCommand(status.NewCmdRepoStatus())
 	cmd.AddCommand(view.NewCmdRepoView())

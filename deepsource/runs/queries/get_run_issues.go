@@ -22,20 +22,19 @@ const getRunIssuesQuery = `query GetRunIssues($commitOid: String!) {
             name
             shortcode
           }
-          occurrences {
+          issues {
             edges {
               node {
+                source
                 path
                 beginLine
                 beginColumn
                 endLine
                 endColumn
                 title
-                issue {
-                  shortcode
-                  category
-                  severity
-                }
+                shortcode
+                category
+                severity
               }
             }
           }
@@ -67,23 +66,22 @@ type RunIssuesResponse struct {
 						Name      string `json:"name"`
 						Shortcode string `json:"shortcode"`
 					} `json:"analyzer"`
-					Occurrences struct {
+					Issues struct {
 						Edges []struct {
 							Node struct {
+								Source      string `json:"source"`
 								Path        string `json:"path"`
 								BeginLine   int    `json:"beginLine"`
 								BeginColumn int    `json:"beginColumn"`
 								EndLine     int    `json:"endLine"`
 								EndColumn   int    `json:"endColumn"`
 								Title       string `json:"title"`
-								Issue       struct {
-									Shortcode string `json:"shortcode"`
-									Category  string `json:"category"`
-									Severity  string `json:"severity"`
-								} `json:"issue"`
+								Shortcode   string `json:"shortcode"`
+								Category    string `json:"category"`
+								Severity    string `json:"severity"`
 							} `json:"node"`
 						} `json:"edges"`
-					} `json:"occurrences"`
+					} `json:"issues"`
 				} `json:"node"`
 			} `json:"edges"`
 		} `json:"checks"`
@@ -100,7 +98,7 @@ func (r *RunIssuesRequest) Do(ctx context.Context) (*runs.RunWithIssues, error) 
 	}
 	var respData RunIssuesResponse
 	if err := r.client.Query(ctx, getRunIssuesQuery, vars, &respData); err != nil {
-		return nil, fmt.Errorf("get run issues: %w", err)
+		return nil, fmt.Errorf("Get run issues: %w", err)
 	}
 
 	result := &runs.RunWithIssues{
@@ -113,19 +111,19 @@ func (r *RunIssuesRequest) Do(ctx context.Context) (*runs.RunWithIssues, error) 
 
 	for _, checkEdge := range respData.Run.Checks.Edges {
 		check := checkEdge.Node
-		for _, occEdge := range check.Occurrences.Edges {
-			occ := occEdge.Node
+		for _, issueEdge := range check.Issues.Edges {
+			node := issueEdge.Node
 			issue := runs.RunIssue{
-				Path:              occ.Path,
-				BeginLine:         occ.BeginLine,
-				BeginColumn:       occ.BeginColumn,
-				EndLine:           occ.EndLine,
-				EndColumn:         occ.EndColumn,
-				IssueText:         "", // issueText is not available in the schema
-				IssueCode:         occ.Issue.Shortcode,
-				Title:             occ.Title,
-				Category:          occ.Issue.Category,
-				Severity:          occ.Issue.Severity,
+				Path:              node.Path,
+				BeginLine:         node.BeginLine,
+				BeginColumn:       node.BeginColumn,
+				EndLine:           node.EndLine,
+				EndColumn:         node.EndColumn,
+				IssueCode:         node.Shortcode,
+				Title:             node.Title,
+				Category:          node.Category,
+				Severity:          node.Severity,
+				Source:            node.Source,
 				AnalyzerName:      check.Analyzer.Name,
 				AnalyzerShortcode: check.Analyzer.Shortcode,
 			}

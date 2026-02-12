@@ -39,7 +39,7 @@ main() {
   ARCH="$(detect_arch)"
 
   log "Detected platform: ${OS}/${ARCH}"
-  log "Fetching latest version..."
+  log "Fetching latest version.."
 
   MANIFEST="$(curl -fsSL "${BASE_URL}/build/manifest.json")"
   VERSION="$(printf '%s' "$MANIFEST" | grep -o '"version":"[^"]*"' | head -1 | cut -d'"' -f4)"
@@ -48,7 +48,7 @@ main() {
     err "Failed to determine latest version from manifest"
   fi
 
-  log "Installing DeepSource CLI v${VERSION}..."
+  log "Installing DeepSource CLI v${VERSION}.."
 
   PLATFORM_KEY="${OS}_${ARCH}"
   ARCHIVE="$(printf '%s' "$MANIFEST" | grep -o "\"${PLATFORM_KEY}\":{[^}]*}" | grep -o '"archive":"[^"]*"' | cut -d'"' -f4)"
@@ -62,10 +62,10 @@ main() {
   TMPDIR="$(mktemp -d)"
   trap 'rm -rf "$TMPDIR"' EXIT
 
-  log "Downloading ${ARCHIVE}..."
+  log "Downloading ${ARCHIVE}.."
   curl -fsSL -o "${TMPDIR}/${ARCHIVE}" "$ARCHIVE_URL"
 
-  log "Verifying checksum..."
+  log "Verifying checksum.."
   if command -v sha256sum >/dev/null 2>&1; then
     ACTUAL_SHA="$(sha256sum "${TMPDIR}/${ARCHIVE}" | awk '{print $1}')"
   else

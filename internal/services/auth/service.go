@@ -54,14 +54,6 @@ func (s *Service) RequestPAT(ctx context.Context, cfg *config.CLIConfig, deviceC
 	return client.Login(ctx, deviceCode, description)
 }
 
-func (s *Service) RefreshAuth(ctx context.Context, cfg *config.CLIConfig) (*dsauth.PAT, error) {
-	client, err := s.newClient(deepsource.ClientOpts{Token: cfg.Token, HostName: cfg.Host})
-	if err != nil {
-		return nil, err
-	}
-	return client.RefreshAuthCreds(ctx, cfg.Token)
-}
-
 func (s *Service) GetViewer(ctx context.Context, cfg *config.CLIConfig) (*dsuser.User, error) {
 	client, err := s.newClient(deepsource.ClientOpts{Token: cfg.Token, HostName: cfg.Host})
 	if err != nil {

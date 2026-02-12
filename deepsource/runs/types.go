@@ -36,6 +36,7 @@ type RunIssue struct {
 	Title             string `json:"title"`
 	Category          string `json:"category"`
 	Severity          string `json:"severity"`
+	Source            string `json:"source"`
 	AnalyzerName      string `json:"analyzerName"`
 	AnalyzerShortcode string `json:"analyzerShortcode"`
 }

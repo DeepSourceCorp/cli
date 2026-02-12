@@ -35,7 +35,7 @@ func NewRegisterDeviceRequest(client graphqlclient.GraphQLClient) *RegisterDevic
 func (r *RegisterDeviceRequest) Do(ctx context.Context) (*auth.Device, error) {
 	var res RegisterDeviceResponse
 	if err := r.client.Mutate(ctx, registerDeviceMutation, nil, &res); err != nil {
-		return nil, fmt.Errorf("register device: %w", err)
+		return nil, fmt.Errorf("Register device: %w", err)
 	}
 
 	return &res.Device, nil

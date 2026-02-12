@@ -228,6 +228,21 @@ func (m *Manager) writeYAML(cfg *CLIConfig, path string) error {
 	return m.fs.WriteFile(path, data, 0o644)
 }
 
+// TokenRefreshCallback returns a callback that persists refreshed token
+// credentials. Intended for use with deepsource.ClientOpts.OnTokenRefreshed.
+func (m *Manager) TokenRefreshCallback() func(token, expiry, email string) {
+	return func(token, expiry, email string) {
+		cfg, err := m.Load()
+		if err != nil {
+			return
+		}
+		cfg.Token = token
+		cfg.SetTokenExpiry(expiry)
+		cfg.User = email
+		_ = m.Write(cfg)
+	}
+}
+
 // GetConfig loads the config using OS-backed defaults.
 func GetConfig() (*CLIConfig, error) {
 	return DefaultManager().Load()

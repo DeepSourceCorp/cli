@@ -42,7 +42,7 @@ func (r *RequestPATRequest) Do(ctx context.Context) (*auth.PAT, error) {
 	var res RequestPATResponse
 	vars := map[string]interface{}{"input": r.Params}
 	if err := r.client.Mutate(ctx, requestPATMutation, vars, &res); err != nil {
-		return nil, fmt.Errorf("request PAT: %w", err)
+		return nil, fmt.Errorf("Request PAT: %w", err)
 	}
 
 	return &res.PAT, nil

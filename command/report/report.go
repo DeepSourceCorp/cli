@@ -32,7 +32,7 @@ type ReportOptions struct {
 	Output                      string // Output format: table, json, yaml
 }
 
-// NewCmdVersion returns the current version of cli being used
+// NewCmdReport returns the command to report artifacts to DeepSource
 func NewCmdReport() *cobra.Command {
 	return NewCmdReportWithDeps(nil)
 }

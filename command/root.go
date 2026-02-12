@@ -2,48 +2,61 @@ package command
 
 import (
 	"context"
+	"fmt"
 	"os"
 
+	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/command/auth"
+	"github.com/deepsourcelabs/cli/command/issues"
+	"github.com/deepsourcelabs/cli/command/metrics"
 	"github.com/deepsourcelabs/cli/command/repo"
 	"github.com/deepsourcelabs/cli/command/report"
 	"github.com/deepsourcelabs/cli/command/runs"
-	"github.com/deepsourcelabs/cli/command/version"
+	"github.com/deepsourcelabs/cli/command/vulnerabilities"
 	"github.com/spf13/cobra"
 )
 
 func NewCmdRoot() *cobra.Command {
 	var verbose bool
-	var quiet bool
 
 	cmd := &cobra.Command{
 		Use:   "deepsource <command> <subcommand> [flags]",
 		Short: "DeepSource CLI",
-		Long: `Welcome to DeepSource CLI
-Now ship good code directly from the command line.
+		Long: `DeepSource CLI - Ship good code from the command line.
 
-Login into DeepSource using the command : deepsource auth login`,
+To get started, run: deepsource auth login`,
 		SilenceErrors: true,
 		SilenceUsage:  true,
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		if quiet {
-			_ = os.Setenv("DEEPSOURCE_CLI_QUIET", "1")
-		}
-		if verbose && !quiet {
-			_ = os.Setenv("DEEPSOURCE_CLI_DEBUG", "1")
-		}
-	},
-}
+			if verbose {
+				_ = os.Setenv("DEEPSOURCE_CLI_DEBUG", "1")
+			}
+		},
+	}
+
+	// Set version using --version flag
+	info := buildinfo.GetBuildInfo()
+	if info != nil {
+		cmd.Version = info.Version
+		cmd.SetVersionTemplate(fmt.Sprintf("DeepSource CLI %s (%s)\n", info.Version, info.GitCommit))
+	}
+
+	// Disable default completion command
+	cmd.CompletionOptions.DisableDefaultCmd = true
+
+	// Hide help subcommand (--help flag still works)
+	cmd.SetHelpCommand(&cobra.Command{Hidden: true})
 
 	cmd.PersistentFlags().BoolVar(&verbose, "verbose", false, "Enable verbose diagnostics")
-	cmd.PersistentFlags().BoolVar(&quiet, "quiet", false, "Suppress non-error output")
 
 	// Child Commands
-	cmd.AddCommand(version.NewCmdVersion())
 	cmd.AddCommand(auth.NewCmdAuth())
 	cmd.AddCommand(repo.NewCmdRepo())
 	cmd.AddCommand(runs.NewCmdRuns())
 	cmd.AddCommand(report.NewCmdReport())
+	cmd.AddCommand(issues.NewCmdIssues())
+	cmd.AddCommand(metrics.NewCmdMetrics())
+	cmd.AddCommand(vulnerabilities.NewCmdVulnerabilities())
 
 	return cmd
 }

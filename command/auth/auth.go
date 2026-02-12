@@ -5,15 +5,13 @@ import (
 
 	"github.com/deepsourcelabs/cli/command/auth/login"
 	"github.com/deepsourcelabs/cli/command/auth/logout"
-	"github.com/deepsourcelabs/cli/command/auth/refresh"
 	"github.com/deepsourcelabs/cli/command/auth/status"
-	"github.com/deepsourcelabs/cli/command/auth/whoami"
 )
 
 // Options holds the metadata.
 type Options struct{}
 
-// NewCmdAuth handles the auth command which has various sub-commands like `login`, `logout`, `refresh` and `status`
+// NewCmdAuth handles the auth command which has various sub-commands like `login`, `logout` and `status`
 func NewCmdAuth() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "auth",
@@ -21,8 +19,6 @@ func NewCmdAuth() *cobra.Command {
 	}
 	cmd.AddCommand(login.NewCmdLogin())
 	cmd.AddCommand(logout.NewCmdLogout())
-	cmd.AddCommand(refresh.NewCmdRefresh())
 	cmd.AddCommand(status.NewCmdStatus())
-	cmd.AddCommand(whoami.NewCmdWhoAmI())
 	return cmd
 }

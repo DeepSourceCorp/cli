@@ -41,7 +41,7 @@ func (r *RefreshTokenRequest) Do(ctx context.Context) (*auth.PAT, error) {
 	r.client.SetAuthToken(r.Params.Token)
 	var respData RefreshTokenResponse
 	if err := r.client.Mutate(ctx, refreshTokenQuery, nil, &respData); err != nil {
-		return nil, fmt.Errorf("refresh PAT: %w", err)
+		return nil, fmt.Errorf("Refresh PAT: %w", err)
 	}
 
 	return &respData.PAT, nil

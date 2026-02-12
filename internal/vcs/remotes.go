@@ -83,7 +83,7 @@ func ListRemotes() (map[string][]string, error) {
 	remoteList := strings.Split(string(remotes), "\n")
 
 	if len(remoteList) <= 1 {
-		return remoteMap, fmt.Errorf("no remotes found")
+		return remoteMap, fmt.Errorf("No remotes found")
 	}
 
 	// Removing the last blank element

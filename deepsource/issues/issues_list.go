@@ -11,6 +11,7 @@ type Location struct {
 }
 
 type AnalyzerMeta struct {
+	Name      string `json:"name"`     // Analyzer name (human-readable)
 	Shortcode string `json:"analyzer"` // Analyzer shortcode
 }
 
@@ -19,6 +20,8 @@ type Issue struct {
 	IssueCode     string       `json:"issue_code"`     // DeepSource code for the issue reported
 	IssueCategory string       `json:"issue_category"` // Category of the issue reported
 	IssueSeverity string       `json:"issue_severity"` // Severity of the issue reported
+	IssueSource   string       `json:"issue_source"`   // Source of the issue (STATIC or AI)
+	Description   string       `json:"description"`    // Short description / explanation of the issue
 	Location      Location     `json:"location"`       // The location data for the issue reported
 	Analyzer      AnalyzerMeta // The Analyzer which raised the issue
 }

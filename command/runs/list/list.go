@@ -12,6 +12,7 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource/runs"
 	"github.com/deepsourcelabs/cli/internal/cli/completion"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
+	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	"github.com/deepsourcelabs/cli/internal/vcs"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
@@ -66,9 +67,10 @@ func NewCmdRunsList() *cobra.Command {
 // Execute the command
 func (opts *RunsListOptions) Run() error {
 	// Load configuration
-	cfg, err := config.DefaultManager().Load()
+	cfgMgr := config.DefaultManager()
+	cfg, err := cfgMgr.Load()
 	if err != nil {
-		return fmt.Errorf("error while reading DeepSource CLI config: %v", err)
+		return clierrors.NewCLIError(clierrors.ErrInvalidConfig, "Error reading DeepSource CLI config", err)
 	}
 	if err := cfg.VerifyAuthentication(); err != nil {
 		return err
@@ -81,7 +83,11 @@ func (opts *RunsListOptions) Run() error {
 	}
 
 	// Create DeepSource client
-	client, err := deepsource.New(deepsource.ClientOpts{Token: cfg.Token, HostName: cfg.Host})
+	client, err := deepsource.New(deepsource.ClientOpts{
+		Token:            cfg.Token,
+		HostName:         cfg.Host,
+		OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+	})
 	if err != nil {
 		return err
 	}

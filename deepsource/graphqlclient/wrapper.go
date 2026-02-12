@@ -3,13 +3,20 @@ package graphqlclient
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/deepsourcelabs/graphql"
 )
 
+// TokenRefresher is called when a request fails due to an expired token.
+// It receives the current token and should return a new valid token.
+type TokenRefresher func(ctx context.Context, currentToken string) (newToken string, err error)
+
 type wrapper struct {
-	client *graphql.Client
-	token  string
+	client     *graphql.Client
+	token      string
+	refresher  TokenRefresher
+	refreshing bool
 }
 
 // New creates a GraphQL client wrapper.
@@ -28,6 +35,17 @@ func NewWithClient(client *graphql.Client, token string) GraphQLClient {
 	}
 }
 
+// NewWithClientAndRefresher creates a GraphQL client wrapper with auto-refresh support.
+// When a request fails with an expired token error, the refresher is called to obtain
+// a new token and the request is retried once.
+func NewWithClientAndRefresher(client *graphql.Client, token string, refresher TokenRefresher) GraphQLClient {
+	return &wrapper{
+		client:    client,
+		token:     token,
+		refresher: refresher,
+	}
+}
+
 func (w *wrapper) Query(ctx context.Context, query string, vars map[string]interface{}, result interface{}) error {
 	return w.run(ctx, query, vars, result, "query")
 }
@@ -40,7 +58,7 @@ func (w *wrapper) SetAuthToken(token string) {
 	w.token = token
 }
 
-func (w *wrapper) run(ctx context.Context, query string, vars map[string]interface{}, result interface{}, op string) error {
+func (w *wrapper) exec(ctx context.Context, query string, vars map[string]interface{}, result interface{}, op string) error {
 	req := graphql.NewRequest(query)
 	req.Header.Set("Cache-Control", "no-cache")
 	if w.token != "" {
@@ -58,4 +76,29 @@ func (w *wrapper) run(ctx context.Context, query string, vars map[string]interfa
 		}
 	}
 	return nil
+}
+
+func (w *wrapper) run(ctx context.Context, query string, vars map[string]interface{}, result interface{}, op string) error {
+	err := w.exec(ctx, query, vars, result, op)
+	if err == nil {
+		return nil
+	}
+
+	if !w.refreshing && w.refresher != nil && isTokenExpired(err) {
+		w.refreshing = true
+		defer func() { w.refreshing = false }()
+
+		newToken, refreshErr := w.refresher(ctx, w.token)
+		if refreshErr != nil {
+			return fmt.Errorf("Token expired and refresh failed, run \"deepsource auth login\" to re-authenticate: %w", refreshErr)
+		}
+		w.token = newToken
+		return w.exec(ctx, query, vars, result, op)
+	}
+
+	return err
+}
+
+func isTokenExpired(err error) bool {
+	return strings.Contains(err.Error(), "Signature has expired")
 }
