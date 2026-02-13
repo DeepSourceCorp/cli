@@ -1,0 +1,52 @@
+{
+  "run": {
+    "runUid": "run-uid-001",
+    "commitOid": "abc123f",
+    "branchName": "main",
+    "status": "SUCCESS",
+    "checks": {
+      "edges": [
+        {
+          "node": {
+            "analyzer": {
+              "name": "Go",
+              "shortcode": "go"
+            },
+            "issues": {
+              "edges": [
+                {
+                  "node": {
+                    "source": "static",
+                    "path": "cmd/server/main.go",
+                    "beginLine": 42,
+                    "beginColumn": 5,
+                    "endLine": 42,
+                    "endColumn": 30,
+                    "title": "Error return value not checked",
+                    "shortcode": "GO-R1005",
+                    "category": "BUG_RISK",
+                    "severity": "MAJOR"
+                  }
+                },
+                {
+                  "node": {
+                    "source": "ai",
+                    "path": "internal/handler/auth.go",
+                    "beginLine": 15,
+                    "beginColumn": 1,
+                    "endLine": 20,
+                    "endColumn": 2,
+                    "title": "Potential SQL injection",
+                    "shortcode": "GO-S1001",
+                    "category": "SECURITY",
+                    "severity": "CRITICAL"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

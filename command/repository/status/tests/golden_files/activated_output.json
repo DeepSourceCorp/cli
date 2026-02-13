@@ -1,0 +1,9 @@
+{
+  "Remote": {
+    "Owner": "testowner",
+    "RepoName": "testrepo",
+    "VCSProvider": "GITHUB"
+  },
+  "Activated": true,
+  "Host": "deepsource.com"
+}

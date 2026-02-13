@@ -1,0 +1,12 @@
+[
+  {
+    "Name": "Go",
+    "Shortcode": "go",
+    "MetaSchema": ""
+  },
+  {
+    "Name": "Python",
+    "Shortcode": "python",
+    "MetaSchema": ""
+  }
+]

@@ -55,6 +55,12 @@ func (c Client) GetToken() string {
 	return c.token
 }
 
+// NewWithGraphQLClient creates a Client that uses the given GraphQL client
+// directly. Intended for tests where a MockClient provides canned responses.
+func NewWithGraphQLClient(gql graphqlclient.GraphQLClient) *Client {
+	return &Client{gqlWrapper: gql}
+}
+
 // Returns a new GQLClient
 func New(cp ClientOpts) (*Client, error) {
 	apiClientURL := getAPIClientURL(cp.HostName)

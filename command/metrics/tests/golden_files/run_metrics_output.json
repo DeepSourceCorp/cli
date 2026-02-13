@@ -1,0 +1,25 @@
+{
+  "commit_oid": "abc123f4567890abcdef1234567890abcdef1234",
+  "branch_name": "main",
+  "status": "SUCCESS",
+  "metrics": [
+    {
+      "name": "Line Coverage",
+      "shortcode": "LCV",
+      "description": "Percentage of lines covered by tests",
+      "positive_direction": "UP",
+      "unit": "%",
+      "is_reported": true,
+      "is_threshold_enforced": true,
+      "items": [
+        {
+          "key": "aggregate",
+          "threshold": 80,
+          "latest_value": 78.2,
+          "latest_value_display": "78.2%",
+          "threshold_status": "FAILING"
+        }
+      ]
+    }
+  ]
+}

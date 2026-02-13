@@ -1,0 +1,26 @@
+{
+  "number": 42,
+  "title": "Add unit tests for metrics",
+  "base_branch": "main",
+  "branch": "feature/metrics-tests",
+  "metrics": [
+    {
+      "name": "Line Coverage",
+      "shortcode": "LCV",
+      "description": "Percentage of lines covered by tests",
+      "positive_direction": "UP",
+      "unit": "%",
+      "is_reported": true,
+      "is_threshold_enforced": true,
+      "items": [
+        {
+          "key": "aggregate",
+          "threshold": 80,
+          "latest_value": 90.1,
+          "latest_value_display": "90.1%",
+          "threshold_status": "PASSING"
+        }
+      ]
+    }
+  ]
+}

@@ -4,10 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 	"strings"
 
 	"github.com/MakeNowJust/heredoc"
+	"github.com/deepsourcelabs/cli/command/cmddeps"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/vulnerabilities"
@@ -33,12 +35,25 @@ type VulnerabilitiesOptions struct {
 	repoVulns       []vulnerabilities.VulnerabilityOccurrence
 	runVulns        *vulnerabilities.RunVulns
 	prVulns         *vulnerabilities.PRVulns
+	deps            *cmddeps.Deps
+}
+
+func (opts *VulnerabilitiesOptions) stdout() io.Writer {
+	if opts.deps != nil && opts.deps.Stdout != nil {
+		return opts.deps.Stdout
+	}
+	return os.Stdout
 }
 
 func NewCmdVulnerabilities() *cobra.Command {
+	return NewCmdVulnerabilitiesWithDeps(nil)
+}
+
+func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	opts := VulnerabilitiesOptions{
 		OutputFormat: "pretty",
 		LimitArg:     100,
+		deps:         deps,
 	}
 
 	doc := heredoc.Docf(`
@@ -118,7 +133,12 @@ func NewCmdVulnerabilities() *cobra.Command {
 
 func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 	// Load configuration
-	cfgMgr := config.DefaultManager()
+	var cfgMgr *config.Manager
+	if opts.deps != nil && opts.deps.ConfigMgr != nil {
+		cfgMgr = opts.deps.ConfigMgr
+	} else {
+		cfgMgr = config.DefaultManager()
+	}
 	cfg, err := cfgMgr.Load()
 	if err != nil {
 		return clierrors.NewCLIError(clierrors.ErrInvalidConfig, "Error reading DeepSource CLI config", err)
@@ -135,13 +155,18 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 	opts.repoSlug = remote.Owner + "/" + remote.RepoName
 
 	// Create DeepSource client
-	client, err := deepsource.New(deepsource.ClientOpts{
-		Token:            cfg.Token,
-		HostName:         cfg.Host,
-		OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
-	})
-	if err != nil {
-		return err
+	var client *deepsource.Client
+	if opts.deps != nil && opts.deps.Client != nil {
+		client = opts.deps.Client
+	} else {
+		client, err = deepsource.New(deepsource.ClientOpts{
+			Token:            cfg.Token,
+			HostName:         cfg.Host,
+			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+		})
+		if err != nil {
+			return err
+		}
 	}
 
 	// Fetch vulnerabilities based on scope
@@ -493,10 +518,11 @@ func (opts *VulnerabilitiesOptions) outputYAML() error {
 
 func (opts *VulnerabilitiesOptions) writeOutput(data []byte, trailingNewline bool) error {
 	if opts.OutputFile == "" {
+		w := opts.stdout()
 		if trailingNewline {
-			fmt.Println(string(data))
+			fmt.Fprintln(w, string(data))
 		} else {
-			fmt.Print(string(data))
+			fmt.Fprint(w, string(data))
 		}
 		return nil
 	}

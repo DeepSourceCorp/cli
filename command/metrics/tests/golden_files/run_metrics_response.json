@@ -1,0 +1,36 @@
+{
+  "run": {
+    "commitOid": "abc123f4567890abcdef1234567890abcdef1234",
+    "branchName": "main",
+    "status": "SUCCESS",
+    "changesetStats": null,
+    "checks": {
+      "edges": [
+        {
+          "node": {
+            "metrics": [
+              {
+                "name": "Line Coverage",
+                "shortcode": "LCV",
+                "description": "Percentage of lines covered by tests",
+                "positiveDirection": "UP",
+                "unit": "%",
+                "isReported": true,
+                "isThresholdEnforced": true,
+                "items": [
+                  {
+                    "key": "aggregate",
+                    "threshold": 80,
+                    "latestValue": 78.2,
+                    "latestValueDisplay": "78.2%",
+                    "thresholdStatus": "FAILING"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

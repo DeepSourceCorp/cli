@@ -2,11 +2,15 @@ package analysis
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"io"
+	"os"
 	"strings"
 	"time"
 
 	"github.com/MakeNowJust/heredoc"
+	"github.com/deepsourcelabs/cli/command/cmddeps"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/runs"
@@ -19,14 +23,28 @@ import (
 )
 
 type AnalysisOptions struct {
-	RepoArg   string
-	LimitArg  int
-	commitOid string
+	RepoArg      string
+	LimitArg     int
+	OutputFormat string
+	commitOid    string
+	deps         *cmddeps.Deps
+}
+
+func (opts *AnalysisOptions) stdout() io.Writer {
+	if opts.deps != nil && opts.deps.Stdout != nil {
+		return opts.deps.Stdout
+	}
+	return os.Stdout
 }
 
 func NewCmdAnalysis() *cobra.Command {
+	return NewCmdAnalysisWithDeps(nil)
+}
+
+func NewCmdAnalysisWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	opts := AnalysisOptions{
 		LimitArg: 20,
+		deps:     deps,
 	}
 
 	doc := heredoc.Docf(`
@@ -63,9 +81,16 @@ func NewCmdAnalysis() *cobra.Command {
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "List history for the specified repository")
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 20, "Number of analysis runs to fetch")
 	cmd.Flags().StringVar(&opts.commitOid, "commit", "", "Show metadata and issues summary for a specific commit")
+	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
 
 	_ = cmd.RegisterFlagCompletionFunc("repo", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
+	})
+	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+		return []string{
+			"pretty\tPretty-printed output",
+			"json\tJSON output",
+		}, cobra.ShellCompDirectiveNoFileComp
 	})
 
 	return cmd
@@ -73,7 +98,12 @@ func NewCmdAnalysis() *cobra.Command {
 
 // runList fetches and displays a table of recent analysis runs.
 func (opts *AnalysisOptions) runList() error {
-	cfgMgr := config.DefaultManager()
+	var cfgMgr *config.Manager
+	if opts.deps != nil && opts.deps.ConfigMgr != nil {
+		cfgMgr = opts.deps.ConfigMgr
+	} else {
+		cfgMgr = config.DefaultManager()
+	}
 	cfg, err := cfgMgr.Load()
 	if err != nil {
 		return clierrors.NewCLIError(clierrors.ErrInvalidConfig, "Error reading DeepSource CLI config", err)
@@ -87,13 +117,18 @@ func (opts *AnalysisOptions) runList() error {
 		return err
 	}
 
-	client, err := deepsource.New(deepsource.ClientOpts{
-		Token:            cfg.Token,
-		HostName:         cfg.Host,
-		OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
-	})
-	if err != nil {
-		return err
+	var client *deepsource.Client
+	if opts.deps != nil && opts.deps.Client != nil {
+		client = opts.deps.Client
+	} else {
+		client, err = deepsource.New(deepsource.ClientOpts{
+			Token:            cfg.Token,
+			HostName:         cfg.Host,
+			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+		})
+		if err != nil {
+			return err
+		}
 	}
 
 	ctx := context.Background()
@@ -107,13 +142,22 @@ func (opts *AnalysisOptions) runList() error {
 		return nil
 	}
 
+	if opts.OutputFormat == "json" {
+		return opts.outputRunsJSON(analysisRuns)
+	}
+
 	showRunsTable(analysisRuns)
 	return nil
 }
 
 // runDetail fetches and displays metadata + issues summary for a single commit.
 func (opts *AnalysisOptions) runDetail(ctx context.Context) error {
-	cfgMgr := config.DefaultManager()
+	var cfgMgr *config.Manager
+	if opts.deps != nil && opts.deps.ConfigMgr != nil {
+		cfgMgr = opts.deps.ConfigMgr
+	} else {
+		cfgMgr = config.DefaultManager()
+	}
 	cfg, err := cfgMgr.Load()
 	if err != nil {
 		return clierrors.NewCLIError(clierrors.ErrInvalidConfig, "Error reading DeepSource CLI config", err)
@@ -122,19 +166,28 @@ func (opts *AnalysisOptions) runDetail(ctx context.Context) error {
 		return err
 	}
 
-	client, err := deepsource.New(deepsource.ClientOpts{
-		Token:            cfg.Token,
-		HostName:         cfg.Host,
-		OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
-	})
-	if err != nil {
-		return err
+	var client *deepsource.Client
+	if opts.deps != nil && opts.deps.Client != nil {
+		client = opts.deps.Client
+	} else {
+		client, err = deepsource.New(deepsource.ClientOpts{
+			Token:            cfg.Token,
+			HostName:         cfg.Host,
+			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+		})
+		if err != nil {
+			return err
+		}
 	}
 
 	commitOid := opts.commitOid
 	runWithIssues, err := client.GetRunIssues(ctx, commitOid)
 	if err != nil {
 		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to fetch run details", err)
+	}
+
+	if opts.OutputFormat == "json" {
+		return opts.outputRunDetailJSON(runWithIssues)
 	}
 
 	commitShort := commitOid
@@ -159,6 +212,79 @@ func (opts *AnalysisOptions) runDetail(ctx context.Context) error {
 	pterm.Info.Printfln("Run %s to view full issue details",
 		style.Cyan("deepsource issues --commit %s", commitShort))
 
+	return nil
+}
+
+// --- JSON output ---
+
+type AnalysisRunJSON struct {
+	CommitOid              string     `json:"commit_oid"`
+	BranchName             string     `json:"branch_name"`
+	Status                 string     `json:"status"`
+	OccurrencesIntroduced  int        `json:"occurrences_introduced"`
+	OccurrencesResolved    int        `json:"occurrences_resolved"`
+	OccurrencesSuppressed  int        `json:"occurrences_suppressed"`
+	FinishedAt             *time.Time `json:"finished_at"`
+}
+
+type RunDetailJSON struct {
+	CommitOid  string         `json:"commit_oid"`
+	BranchName string         `json:"branch_name"`
+	Status     string         `json:"status"`
+	Issues     []RunIssueJSON `json:"issues"`
+}
+
+type RunIssueJSON struct {
+	Path     string `json:"path"`
+	Title    string `json:"title"`
+	Code     string `json:"code"`
+	Category string `json:"category"`
+	Severity string `json:"severity"`
+}
+
+func (opts *AnalysisOptions) outputRunsJSON(analysisRuns []runs.AnalysisRun) error {
+	result := make([]AnalysisRunJSON, 0, len(analysisRuns))
+	for _, run := range analysisRuns {
+		result = append(result, AnalysisRunJSON{
+			CommitOid:              run.CommitOid,
+			BranchName:             run.BranchName,
+			Status:                 run.Status,
+			OccurrencesIntroduced:  run.OccurrencesIntroduced,
+			OccurrencesResolved:    run.OccurrencesResolved,
+			OccurrencesSuppressed:  run.OccurrencesSuppressed,
+			FinishedAt:             run.FinishedAt,
+		})
+	}
+	data, err := json.MarshalIndent(result, "", "  ")
+	if err != nil {
+		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format JSON output", err)
+	}
+	fmt.Fprintln(opts.stdout(), string(data))
+	return nil
+}
+
+func (opts *AnalysisOptions) outputRunDetailJSON(runWithIssues *runs.RunWithIssues) error {
+	issuesJSON := make([]RunIssueJSON, 0, len(runWithIssues.Issues))
+	for _, issue := range runWithIssues.Issues {
+		issuesJSON = append(issuesJSON, RunIssueJSON{
+			Path:     issue.Path,
+			Title:    issue.Title,
+			Code:     issue.IssueCode,
+			Category: issue.Category,
+			Severity: issue.Severity,
+		})
+	}
+	result := RunDetailJSON{
+		CommitOid:  runWithIssues.CommitOid,
+		BranchName: runWithIssues.BranchName,
+		Status:     runWithIssues.Status,
+		Issues:     issuesJSON,
+	}
+	data, err := json.MarshalIndent(result, "", "  ")
+	if err != nil {
+		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format JSON output", err)
+	}
+	fmt.Fprintln(opts.stdout(), string(data))
 	return nil
 }
 

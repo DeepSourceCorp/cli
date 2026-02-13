@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Line Coverage",
+    "shortcode": "LCV",
+    "description": "Percentage of lines covered by tests",
+    "positive_direction": "UP",
+    "unit": "%",
+    "is_reported": true,
+    "is_threshold_enforced": true,
+    "items": [
+      {
+        "key": "aggregate",
+        "threshold": 80,
+        "latest_value": 85.5,
+        "latest_value_display": "85.5%",
+        "threshold_status": "PASSING"
+      }
+    ]
+  },
+  {
+    "name": "Documentation Coverage",
+    "shortcode": "DOC",
+    "description": "Percentage of documented public symbols",
+    "positive_direction": "UP",
+    "unit": "%",
+    "is_reported": true,
+    "is_threshold_enforced": false,
+    "items": [
+      {
+        "key": "aggregate",
+        "threshold": 60,
+        "latest_value": 42.3,
+        "latest_value_display": "42.3%",
+        "threshold_status": "FAILING"
+      }
+    ]
+  }
+]

@@ -69,7 +69,7 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 				HTTPClient:  deps.HTTPClient,
 				FileSystem:  deps.FileSystem,
 				Environment: deps.Environment,
-				Telemetry:   deps.Telemetry,
+				Sentry:      deps.Sentry,
 				Output:      deps.Output,
 				Workdir:     os.Getwd,
 			})

@@ -38,6 +38,15 @@ func NewService(configMgr *config.Manager) *Service {
 	}
 }
 
+// NewTestService creates a repo service with injectable client factory for testing.
+func NewTestService(configMgr *config.Manager, clientFactory ClientFactory) *Service {
+	return &Service{
+		config:        configMgr,
+		newClient:     clientFactory,
+		resolveRemote: vcs.ResolveRemote,
+	}
+}
+
 // StatusResult holds repository status info.
 type StatusResult struct {
 	Remote    *vcs.RemoteData

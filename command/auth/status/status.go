@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	"github.com/MakeNowJust/heredoc"
+	"github.com/deepsourcelabs/cli/command/cmddeps"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/internal/cli/args"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
@@ -13,10 +14,16 @@ import (
 	"github.com/spf13/cobra"
 )
 
-type AuthStatusOptions struct{}
+type AuthStatusOptions struct {
+	deps *cmddeps.Deps
+}
 
 // NewCmdStatus handles the fetching of authentication status of CLI
 func NewCmdStatus() *cobra.Command {
+	return NewCmdStatusWithDeps(nil)
+}
+
+func NewCmdStatusWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	doc := heredoc.Docf(`
 		View the authentication status.
 
@@ -29,7 +36,7 @@ func NewCmdStatus() *cobra.Command {
 		Long:  doc,
 		Args:  args.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			opts := AuthStatusOptions{}
+			opts := AuthStatusOptions{deps: deps}
 			return opts.Run()
 		},
 	}
@@ -37,7 +44,13 @@ func NewCmdStatus() *cobra.Command {
 }
 
 func (opts *AuthStatusOptions) Run() error {
-	svc := authsvc.NewService(config.DefaultManager())
+	var cfgMgr *config.Manager
+	if opts.deps != nil && opts.deps.ConfigMgr != nil {
+		cfgMgr = opts.deps.ConfigMgr
+	} else {
+		cfgMgr = config.DefaultManager()
+	}
+	svc := authsvc.NewService(cfgMgr)
 	// Fetch config
 	cfg, err := svc.LoadConfig()
 	if err != nil {

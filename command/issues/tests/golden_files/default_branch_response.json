@@ -1,0 +1,89 @@
+{
+  "repository": {
+    "issues": {
+      "edges": [
+        {
+          "node": {
+            "occurrences": {
+              "edges": [
+                {
+                  "node": {
+                    "path": "cmd/server/main.go",
+                    "beginLine": 42,
+                    "endLine": 42,
+                    "issue": {
+                      "title": "Error return value not checked",
+                      "shortcode": "GO-R1005",
+                      "shortDescription": "Error return value of a function call is not checked",
+                      "category": "BUG_RISK",
+                      "severity": "MAJOR",
+                      "isRecommended": false,
+                      "analyzer": {
+                        "name": "Go",
+                        "shortcode": "go"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "node": {
+            "occurrences": {
+              "edges": [
+                {
+                  "node": {
+                    "path": "internal/handler/auth.go",
+                    "beginLine": 15,
+                    "endLine": 20,
+                    "issue": {
+                      "title": "Potential SQL injection",
+                      "shortcode": "GO-S1001",
+                      "shortDescription": "SQL query constructed with string concatenation",
+                      "category": "SECURITY",
+                      "severity": "CRITICAL",
+                      "isRecommended": false,
+                      "analyzer": {
+                        "name": "Go",
+                        "shortcode": "go"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "node": {
+            "occurrences": {
+              "edges": [
+                {
+                  "node": {
+                    "path": "pkg/utils/helpers.go",
+                    "beginLine": 88,
+                    "endLine": 88,
+                    "issue": {
+                      "title": "Function too complex",
+                      "shortcode": "GO-R1003",
+                      "shortDescription": "Cyclomatic complexity exceeds threshold",
+                      "category": "ANTI_PATTERN",
+                      "severity": "MINOR",
+                      "isRecommended": false,
+                      "analyzer": {
+                        "name": "Go",
+                        "shortcode": "go"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

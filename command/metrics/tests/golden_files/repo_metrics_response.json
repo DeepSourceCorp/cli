@@ -1,0 +1,42 @@
+{
+  "repository": {
+    "metrics": [
+      {
+        "name": "Line Coverage",
+        "shortcode": "LCV",
+        "description": "Percentage of lines covered by tests",
+        "positiveDirection": "UP",
+        "unit": "%",
+        "isReported": true,
+        "isThresholdEnforced": true,
+        "items": [
+          {
+            "key": "aggregate",
+            "threshold": 80,
+            "latestValue": 85.5,
+            "latestValueDisplay": "85.5%",
+            "thresholdStatus": "PASSING"
+          }
+        ]
+      },
+      {
+        "name": "Documentation Coverage",
+        "shortcode": "DOC",
+        "description": "Percentage of documented public symbols",
+        "positiveDirection": "UP",
+        "unit": "%",
+        "isReported": true,
+        "isThresholdEnforced": false,
+        "items": [
+          {
+            "key": "aggregate",
+            "threshold": 60,
+            "latestValue": 42.3,
+            "latestValueDisplay": "42.3%",
+            "thresholdStatus": "FAILING"
+          }
+        ]
+      }
+    ]
+  }
+}

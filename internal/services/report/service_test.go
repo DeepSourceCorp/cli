@@ -52,7 +52,7 @@ func TestReportSuccess(t *testing.T) {
 		HTTPClient:  httpClient,
 		FileSystem:  adapters.NewOSFileSystem(),
 		Environment: env,
-		Telemetry:   adapters.NewNoOpTelemetry(),
+		Sentry:      adapters.NewNoOpSentry(),
 		Output:      adapters.NewBufferOutput(),
 		Workdir: func() (string, error) {
 			return tempDir, nil
@@ -84,7 +84,7 @@ func TestReportMissingValue(t *testing.T) {
 		HTTPClient:  &mockHTTPClient{DoFunc: func(req *http.Request) (*http.Response, error) { return nil, nil }},
 		FileSystem:  adapters.NewOSFileSystem(),
 		Environment: env,
-		Telemetry:   adapters.NewNoOpTelemetry(),
+		Sentry:      adapters.NewNoOpSentry(),
 		Workdir: func() (string, error) {
 			return "/tmp", nil
 		},

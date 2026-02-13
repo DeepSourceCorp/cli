@@ -1,0 +1,44 @@
+[
+  {
+    "id": "vuln-occ-sev-001",
+    "reachability": "REACHABLE",
+    "fixability": "FIXABLE",
+    "vulnerability": {
+      "identifier": "CVE-2024-1111",
+      "severity": "CRITICAL",
+      "summary": "SQL injection in query builder",
+      "cvss_v3_base_score": 9.1,
+      "fixed_versions": [
+        "5.0.1"
+      ]
+    },
+    "package": {
+      "name": "db-driver",
+      "ecosystem": "GO"
+    },
+    "package_version": {
+      "version": "5.0.0"
+    }
+  },
+  {
+    "id": "vuln-occ-sev-002",
+    "reachability": "UNREACHABLE",
+    "fixability": "FIXABLE",
+    "vulnerability": {
+      "identifier": "CVE-2024-2222",
+      "severity": "HIGH",
+      "summary": "Buffer overflow in parser",
+      "cvss_v3_base_score": 7.8,
+      "fixed_versions": [
+        "2.5.0"
+      ]
+    },
+    "package": {
+      "name": "parser-lib",
+      "ecosystem": "CARGO"
+    },
+    "package_version": {
+      "version": "2.4.3"
+    }
+  }
+]

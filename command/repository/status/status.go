@@ -4,8 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
+	"os"
 
 	"github.com/MakeNowJust/heredoc"
+	"github.com/deepsourcelabs/cli/command/cmddeps"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/internal/cli/args"
 	"github.com/deepsourcelabs/cli/internal/cli/completion"
@@ -22,12 +25,25 @@ type RepoStatusOptions struct {
 	TokenExpired   bool
 	SelectedRemote *vcs.RemoteData
 	Output         string
+	deps           *cmddeps.Deps
+}
+
+func (opts *RepoStatusOptions) stdout() io.Writer {
+	if opts.deps != nil && opts.deps.Stdout != nil {
+		return opts.deps.Stdout
+	}
+	return os.Stdout
 }
 
 func NewCmdRepoStatus() *cobra.Command {
+	return NewCmdRepoStatusWithDeps(nil)
+}
+
+func NewCmdRepoStatusWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	opts := RepoStatusOptions{
 		RepoArg:      "",
 		TokenExpired: false,
+		deps:         deps,
 	}
 
 	doc := heredoc.Docf(`
@@ -67,18 +83,30 @@ func NewCmdRepoStatus() *cobra.Command {
 
 func (opts *RepoStatusOptions) Run() (err error) {
 	ctx := context.Background()
-	svc := reposvc.NewService(config.DefaultManager())
+	var cfgMgr *config.Manager
+	if opts.deps != nil && opts.deps.ConfigMgr != nil {
+		cfgMgr = opts.deps.ConfigMgr
+	} else {
+		cfgMgr = config.DefaultManager()
+	}
+	var svc *reposvc.Service
+	if opts.deps != nil && opts.deps.RepoService != nil {
+		svc = opts.deps.RepoService
+	} else {
+		svc = reposvc.NewService(cfgMgr)
+	}
 	result, err := svc.Status(ctx, opts.RepoArg)
 	if err != nil {
 		return err
 	}
 	opts.SelectedRemote = result.Remote
 
-	return printStatus(opts.Output, result)
+	return opts.printStatus(result)
 }
 
-func printStatus(format string, result *reposvc.StatusResult) error {
-	switch format {
+func (opts *RepoStatusOptions) printStatus(result *reposvc.StatusResult) error {
+	w := opts.stdout()
+	switch opts.Output {
 	case "", "table":
 		if result.Activated {
 			pterm.Println("Analysis active on DeepSource (deepsource.com)")
@@ -91,16 +119,16 @@ func printStatus(format string, result *reposvc.StatusResult) error {
 		if err != nil {
 			return fmt.Errorf("DeepSource | Error | Failed to format JSON output: %w", err)
 		}
-		fmt.Printf("%s\n", payload)
+		fmt.Fprintf(w, "%s\n", payload)
 		return nil
 	case "yaml":
 		payload, err := yaml.Marshal(result)
 		if err != nil {
 			return fmt.Errorf("DeepSource | Error | Failed to format YAML output: %w", err)
 		}
-		fmt.Print(string(payload))
+		fmt.Fprint(w, string(payload))
 		return nil
 	default:
-		return fmt.Errorf("DeepSource | Error | Unsupported output format: %s", format)
+		return fmt.Errorf("DeepSource | Error | Unsupported output format: %s", opts.Output)
 	}
 }

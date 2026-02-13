@@ -1,0 +1,35 @@
+[
+  {
+    "path": "cmd/server/main.go",
+    "begin_line": 42,
+    "end_line": 42,
+    "issue_code": "GO-R1005",
+    "title": "Error return value not checked",
+    "category": "BUG_RISK",
+    "severity": "MAJOR",
+    "source": "",
+    "analyzer": "go"
+  },
+  {
+    "path": "internal/handler/auth.go",
+    "begin_line": 15,
+    "end_line": 20,
+    "issue_code": "GO-S1001",
+    "title": "Potential SQL injection",
+    "category": "SECURITY",
+    "severity": "CRITICAL",
+    "source": "",
+    "analyzer": "go"
+  },
+  {
+    "path": "pkg/utils/helpers.go",
+    "begin_line": 88,
+    "end_line": 88,
+    "issue_code": "GO-R1003",
+    "title": "Function too complex",
+    "category": "ANTI_PATTERN",
+    "severity": "MINOR",
+    "source": "",
+    "analyzer": "go"
+  }
+]

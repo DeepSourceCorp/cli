@@ -1,0 +1,28 @@
+{
+  "repository": {
+    "pullRequest": {
+      "issueOccurrences": {
+        "edges": [
+          {
+            "node": {
+              "path": "pkg/api/handler.go",
+              "beginLine": 33,
+              "endLine": 33,
+              "title": "Unused variable declared",
+              "issue": {
+                "shortcode": "GO-R1002",
+                "shortDescription": "Variable declared but never used",
+                "category": "BUG_RISK",
+                "severity": "MINOR",
+                "analyzer": {
+                  "name": "Go",
+                  "shortcode": "go"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

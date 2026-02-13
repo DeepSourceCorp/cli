@@ -1,0 +1,46 @@
+{
+  "run": {
+    "checks": {
+      "edges": [
+        {
+          "node": {
+            "analyzer": {
+              "name": "Go",
+              "shortcode": "go"
+            },
+            "issues": {
+              "edges": [
+                {
+                  "node": {
+                    "source": "static",
+                    "path": "cmd/server/main.go",
+                    "beginLine": 42,
+                    "endLine": 42,
+                    "title": "Error return value not checked",
+                    "shortcode": "GO-R1005",
+                    "explanation": "Error return value of a function call is not checked",
+                    "category": "BUG_RISK",
+                    "severity": "MAJOR"
+                  }
+                },
+                {
+                  "node": {
+                    "source": "ai",
+                    "path": "internal/handler/auth.go",
+                    "beginLine": 15,
+                    "endLine": 20,
+                    "title": "Potential SQL injection",
+                    "shortcode": "GO-S1001",
+                    "explanation": "SQL query constructed with string concatenation",
+                    "category": "SECURITY",
+                    "severity": "CRITICAL"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}
