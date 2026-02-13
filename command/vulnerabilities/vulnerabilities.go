@@ -365,7 +365,7 @@ func (opts *VulnerabilitiesOptions) outputTable() error {
 	}
 
 	// Build vulnerabilities table
-	header := []string{"ID", "SEVERITY", "PACKAGE", "VERSION", "ECOSYSTEM", "FIX", "REACHABILITY"}
+	header := []string{"ID", "Severity", "Package", "Version", "Ecosystem", "Fix", "Reachability"}
 	data := [][]string{header}
 
 	for _, v := range vulnsList {

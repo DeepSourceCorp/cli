@@ -389,9 +389,9 @@ func (opts *IssuesOptions) outputTable() error {
 
 	var header []string
 	if showSource {
-		header = []string{"LOCATION", "SOURCE", "ANALYZER", "CODE", "TITLE", "CATEGORY", "SEVERITY"}
+		header = []string{"Location", "Source", "Analyzer", "Code", "Title", "Category", "Severity"}
 	} else {
-		header = []string{"LOCATION", "ANALYZER", "CODE", "TITLE", "CATEGORY", "SEVERITY"}
+		header = []string{"Location", "Analyzer", "Code", "Title", "Category", "Severity"}
 	}
 	data := [][]string{header}
 
