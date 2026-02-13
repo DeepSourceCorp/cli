@@ -113,6 +113,7 @@ jobs:
             -o "$BINARY_NAME" .
 
       - name: Codesign
+        if: needs.resolve-env.outputs.environment == 'prod'
         env:
           APPLE_CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
           APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
@@ -139,6 +140,7 @@ jobs:
             "cmd/deepsource/${BINARY_NAME}"
 
       - name: Notarize
+        if: needs.resolve-env.outputs.environment == 'prod'
         env:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
@@ -155,6 +157,7 @@ jobs:
             --wait
 
       - name: Verify signing
+        if: needs.resolve-env.outputs.environment == 'prod'
         run: |
           BINARY_NAME="${{ needs.resolve-env.outputs.binary_name }}"
           codesign --verify --verbose "cmd/deepsource/${BINARY_NAME}"
