@@ -63,7 +63,7 @@ func TestFetchOIDCTokenFromProvider(t *testing.T) {
 		if err == nil {
 			t.Fatal("Expected error for non-200 status, got nil")
 		}
-		expectedErrorMsg := "failed to fetch OIDC token: 404 Not Found"
+		expectedErrorMsg := "Failed to fetch OIDC token: 404 Not Found"
 		if !strings.Contains(err.Error(), expectedErrorMsg) {
 			t.Errorf("Expected error message to contain '%s', got '%s'", expectedErrorMsg, err.Error())
 		}
@@ -145,7 +145,7 @@ func TestExchangeOIDCTokenForTempDSN(t *testing.T) {
 		if err == nil {
 			t.Fatal("Expected error for non-200 status, got nil")
 		}
-		expectedErrorMsg := "failed to exchange OIDC token for DSN: 403 Forbidden"
+		expectedErrorMsg := "Failed to exchange OIDC token for DSN: 403 Forbidden"
 		if !strings.Contains(err.Error(), expectedErrorMsg) {
 			t.Errorf("Expected error message to contain '%s', got '%s'", expectedErrorMsg, err.Error())
 		}
@@ -252,7 +252,7 @@ func TestGetDSNFromOIDC(t *testing.T) {
 		if err == nil {
 			t.Fatal("Expected error for empty dsEndpoint, got nil")
 		}
-		if !strings.Contains(err.Error(), "--deepsource-host-endpoint can not be empty") {
+		if !strings.Contains(err.Error(), "--deepsource-host-endpoint cannot be empty") {
 			t.Errorf("Unexpected error message: %s", err.Error())
 		}
 	})
@@ -264,7 +264,7 @@ func TestGetDSNFromOIDC(t *testing.T) {
 		if err == nil {
 			t.Fatal("Expected error for empty provider, got nil")
 		}
-		if !strings.Contains(err.Error(), "--oidc-provider can not be empty") {
+		if !strings.Contains(err.Error(), "--oidc-provider cannot be empty") {
 			t.Errorf("Unexpected error message: %s", err.Error())
 		}
 	})
@@ -275,8 +275,8 @@ func TestGetDSNFromOIDC(t *testing.T) {
 		if err == nil {
 			t.Fatal("Expected error for unsupported provider, got nil")
 		}
-		if !strings.Contains(err.Error(), "provider unsupported is not supported") {
-			t.Errorf("Expected error message to contain 'provider unsupported is not supported', got '%s'", err.Error())
+		if !strings.Contains(err.Error(), "Provider unsupported is not supported") {
+			t.Errorf("Expected error message to contain 'Provider unsupported is not supported', got '%s'", err.Error())
 		}
 	})
 
@@ -294,7 +294,7 @@ func TestGetDSNFromOIDC(t *testing.T) {
 		if err == nil {
 			t.Fatal("Expected error for missing ACTIONS_ID_TOKEN_REQUEST_TOKEN, got nil")
 		}
-		if !strings.Contains(err.Error(), `failed to fetch "ACTIONS_ID_TOKEN_REQUEST_TOKEN"`) {
+		if !strings.Contains(err.Error(), `Failed to fetch "ACTIONS_ID_TOKEN_REQUEST_TOKEN"`) {
 			t.Errorf("Unexpected error message: %s", err.Error())
 		}
 	})
@@ -312,7 +312,7 @@ func TestGetDSNFromOIDC(t *testing.T) {
 		if err == nil {
 			t.Fatal("Expected error for missing ACTIONS_ID_TOKEN_REQUEST_URL, got nil")
 		}
-		if !strings.Contains(err.Error(), `failed to fetch "ACTIONS_ID_TOKEN_REQUEST_TOKEN"`) { // Error message covers both
+		if !strings.Contains(err.Error(), `Failed to fetch "ACTIONS_ID_TOKEN_REQUEST_TOKEN"`) { // Error message covers both
 			t.Errorf("Unexpected error message: %s", err.Error())
 		}
 	})
@@ -327,7 +327,7 @@ func TestGetDSNFromOIDC(t *testing.T) {
 		if err == nil {
 			t.Fatal("Expected error when FetchOIDCTokenFromProvider fails, got nil")
 		}
-		if !strings.Contains(err.Error(), "failed to fetch OIDC token") {
+		if !strings.Contains(err.Error(), "Failed to fetch OIDC token") {
 			t.Errorf("Unexpected error message: %s", err.Error())
 		}
 	})
@@ -342,7 +342,7 @@ func TestGetDSNFromOIDC(t *testing.T) {
 		if err == nil {
 			t.Fatal("Expected error when ExchangeOIDCTokenForTempDSN fails, got nil")
 		}
-		if !strings.Contains(err.Error(), "failed to exchange OIDC token for DSN") {
+		if !strings.Contains(err.Error(), "Failed to exchange OIDC token for DSN") {
 			t.Errorf("Unexpected error message: %s", err.Error())
 		}
 	})
