@@ -18,7 +18,6 @@ jobs:
     outputs:
       environment: ${{ steps.resolve.outputs.environment }}
       base_url: ${{ steps.resolve.outputs.base_url }}
-      bucket: ${{ steps.resolve.outputs.bucket }}
       version: ${{ steps.resolve.outputs.version }}
       binary_name: ${{ steps.resolve.outputs.binary_name }}
     steps:
@@ -29,12 +28,10 @@ jobs:
           if [[ "$TAG" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "environment=prod" >> "$GITHUB_OUTPUT"
             echo "base_url=https://deepsource.com/cli" >> "$GITHUB_OUTPUT"
-            echo "bucket=${{ secrets.R2_PROD_BUCKET_NAME }}" >> "$GITHUB_OUTPUT"
             echo "binary_name=deepsource" >> "$GITHUB_OUTPUT"
           else
             echo "environment=dev" >> "$GITHUB_OUTPUT"
             echo "base_url=https://deepsource.one/cli" >> "$GITHUB_OUTPUT"
-            echo "bucket=${{ secrets.R2_DEV_BUCKET_NAME }}" >> "$GITHUB_OUTPUT"
             echo "binary_name=deepsource-dev" >> "$GITHUB_OUTPUT"
           fi
           echo "version=${TAG}" >> "$GITHUB_OUTPUT"
@@ -279,7 +276,11 @@ jobs:
           AWS_DEFAULT_REGION: auto
         run: |
           ENDPOINT="https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com"
-          BUCKET="${{ needs.resolve-env.outputs.bucket }}"
+          if [ "${{ needs.resolve-env.outputs.environment }}" = "prod" ]; then
+            BUCKET="${{ secrets.R2_PROD_BUCKET_NAME }}"
+          else
+            BUCKET="${{ secrets.R2_DEV_BUCKET_NAME }}"
+          fi
 
           # Upload archives and checksums (immutable)
           for f in artifacts/${{ needs.resolve-env.outputs.binary_name }}_*; do
