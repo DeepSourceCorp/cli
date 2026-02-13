@@ -4,8 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
+	"os"
 
 	"github.com/MakeNowJust/heredoc"
+	"github.com/deepsourcelabs/cli/command/cmddeps"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource/analyzers"
 	"github.com/deepsourcelabs/cli/internal/cli/args"
@@ -20,10 +23,24 @@ import (
 type AnalyzersOptions struct {
 	RepoArg string
 	Output  string
+	deps    *cmddeps.Deps
+}
+
+func (opts *AnalyzersOptions) stdout() io.Writer {
+	if opts.deps != nil && opts.deps.Stdout != nil {
+		return opts.deps.Stdout
+	}
+	return os.Stdout
 }
 
 func NewCmdAnalyzers() *cobra.Command {
-	opts := AnalyzersOptions{}
+	return NewCmdAnalyzersWithDeps(nil)
+}
+
+func NewCmdAnalyzersWithDeps(deps *cmddeps.Deps) *cobra.Command {
+	opts := AnalyzersOptions{
+		deps: deps,
+	}
 
 	doc := heredoc.Docf(`
 		List analyzers enabled on a repository.
@@ -62,17 +79,29 @@ func NewCmdAnalyzers() *cobra.Command {
 
 func (opts *AnalyzersOptions) Run() error {
 	ctx := context.Background()
-	svc := reposvc.NewService(config.DefaultManager())
+	var cfgMgr *config.Manager
+	if opts.deps != nil && opts.deps.ConfigMgr != nil {
+		cfgMgr = opts.deps.ConfigMgr
+	} else {
+		cfgMgr = config.DefaultManager()
+	}
+	var svc *reposvc.Service
+	if opts.deps != nil && opts.deps.RepoService != nil {
+		svc = opts.deps.RepoService
+	} else {
+		svc = reposvc.NewService(cfgMgr)
+	}
 	result, err := svc.EnabledAnalyzers(ctx, opts.RepoArg)
 	if err != nil {
 		return err
 	}
 
-	return printAnalyzers(opts.Output, result)
+	return opts.printAnalyzers(result)
 }
 
-func printAnalyzers(format string, list []analyzers.Analyzer) error {
-	switch format {
+func (opts *AnalyzersOptions) printAnalyzers(list []analyzers.Analyzer) error {
+	w := opts.stdout()
+	switch opts.Output {
 	case "", "table":
 		if len(list) == 0 {
 			pterm.Println("No analyzers enabled on this repository.")
@@ -90,16 +119,16 @@ func printAnalyzers(format string, list []analyzers.Analyzer) error {
 		if err != nil {
 			return fmt.Errorf("DeepSource | Error | Failed to format JSON output: %w", err)
 		}
-		fmt.Printf("%s\n", payload)
+		fmt.Fprintf(w, "%s\n", payload)
 		return nil
 	case "yaml":
 		payload, err := yaml.Marshal(list)
 		if err != nil {
 			return fmt.Errorf("DeepSource | Error | Failed to format YAML output: %w", err)
 		}
-		fmt.Print(string(payload))
+		fmt.Fprint(w, string(payload))
 		return nil
 	default:
-		return fmt.Errorf("DeepSource | Error | Unsupported output format: %s", format)
+		return fmt.Errorf("DeepSource | Error | Unsupported output format: %s", opts.Output)
 	}
 }

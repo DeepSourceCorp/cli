@@ -1,0 +1,71 @@
+{
+  "repository": {
+    "dependencyVulnerabilityOccurrences": {
+      "edges": [
+        {
+          "node": {
+            "id": "vuln-occ-sev-001",
+            "reachability": "REACHABLE",
+            "fixability": "FIXABLE",
+            "vulnerability": {
+              "identifier": "CVE-2024-1111",
+              "severity": "CRITICAL",
+              "summary": "SQL injection in query builder",
+              "cvssV3BaseScore": 9.1,
+              "fixedVersions": ["5.0.1"]
+            },
+            "package": {
+              "name": "db-driver",
+              "ecosystem": "GO"
+            },
+            "packageVersion": {
+              "version": "5.0.0"
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "vuln-occ-sev-002",
+            "reachability": "UNREACHABLE",
+            "fixability": "FIXABLE",
+            "vulnerability": {
+              "identifier": "CVE-2024-2222",
+              "severity": "HIGH",
+              "summary": "Buffer overflow in parser",
+              "cvssV3BaseScore": 7.8,
+              "fixedVersions": ["2.5.0"]
+            },
+            "package": {
+              "name": "parser-lib",
+              "ecosystem": "CARGO"
+            },
+            "packageVersion": {
+              "version": "2.4.3"
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "vuln-occ-sev-003",
+            "reachability": "UNREACHABLE",
+            "fixability": "UNFIXABLE",
+            "vulnerability": {
+              "identifier": "CVE-2024-4444",
+              "severity": "LOW",
+              "summary": "Timing side-channel in comparison",
+              "cvssV3BaseScore": 3.1,
+              "fixedVersions": []
+            },
+            "package": {
+              "name": "crypto-utils",
+              "ecosystem": "NPM"
+            },
+            "packageVersion": {
+              "version": "1.0.0"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

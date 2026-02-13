@@ -1,0 +1,40 @@
+{
+  "run": {
+    "commitOid": "abc123f0deadbeef1234567890abcdef12345678",
+    "branchName": "main",
+    "status": "SUCCESS",
+    "scaChecks": {
+      "edges": [
+        {
+          "node": {
+            "vulnerabilityOccurrences": {
+              "edges": [
+                {
+                  "node": {
+                    "id": "vuln-occ-run-001",
+                    "reachability": "REACHABLE",
+                    "fixability": "FIXABLE",
+                    "vulnerability": {
+                      "identifier": "CVE-2024-9999",
+                      "severity": "HIGH",
+                      "summary": "Path traversal in file upload handler",
+                      "cvssV3BaseScore": 8.1,
+                      "fixedVersions": ["3.1.0"]
+                    },
+                    "package": {
+                      "name": "file-handler",
+                      "ecosystem": "PYPI"
+                    },
+                    "packageVersion": {
+                      "version": "3.0.5"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

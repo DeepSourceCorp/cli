@@ -27,14 +27,15 @@ func (opts *LoginOptions) startLoginFlow(svc *authsvc.Service, cfg *config.CLICo
 	// Open the browser for authentication
 	err = browser.OpenURL(deviceRegistrationResponse.VerificationURIComplete)
 	if err != nil {
-		// If the browser fails to open, show the URL for manual access
 		c := color.New(color.FgCyan, color.Bold)
 		c.Printf("Open this URL in your browser to authenticate:\n")
-		fmt.Println(deviceRegistrationResponse.VerificationURIComplete)
 	} else {
-		fmt.Println("Opened the authentication page in your browser")
+		fmt.Println("Opened the authentication page in your browser.")
+		c := color.New(color.FgCyan, color.Bold)
+		c.Printf("If the browser didn't open, visit this URL to authenticate:\n")
 	}
-
+	fmt.Println(deviceRegistrationResponse.VerificationURIComplete)
+	fmt.Println()
 	fmt.Println("Waiting for authentication")
 
 	// Fetch the PAT by polling the server

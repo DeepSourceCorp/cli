@@ -15,7 +15,7 @@ type Container struct {
 	GitClient   interfaces.GitClient
 	HTTPClient  interfaces.HTTPClient
 	Output      interfaces.OutputWriter
-	Telemetry   interfaces.TelemetryClient
+	Sentry      interfaces.SentryClient
 	Config      *config.Manager
 }
 
@@ -27,7 +27,7 @@ func New() *Container {
 		GitClient:   adapters.NewRealGitClient(),
 		HTTPClient:  adapters.NewHTTPClient(60 * time.Second),
 		Output:      adapters.NewDualOutput(),
-		Telemetry:   adapters.NewSentryClient(),
+		Sentry:      adapters.NewSentryClient(),
 		Config:      config.DefaultManager(),
 	}
 }

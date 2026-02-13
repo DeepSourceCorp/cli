@@ -1,0 +1,13 @@
+[
+  {
+    "path": "pkg/api/handler.go",
+    "begin_line": 33,
+    "end_line": 33,
+    "issue_code": "GO-R1002",
+    "title": "Unused variable declared",
+    "category": "BUG_RISK",
+    "severity": "MINOR",
+    "source": "",
+    "analyzer": "go"
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "repository": {
+    "pullRequest": {
+      "number": 42,
+      "title": "Add unit tests for metrics",
+      "baseBranch": "main",
+      "branch": "feature/metrics-tests",
+      "metrics": [
+        {
+          "name": "Line Coverage",
+          "shortcode": "LCV",
+          "description": "Percentage of lines covered by tests",
+          "positiveDirection": "UP",
+          "unit": "%",
+          "isReported": true,
+          "isThresholdEnforced": true,
+          "items": [
+            {
+              "key": "aggregate",
+              "threshold": 80,
+              "latestValue": 90.1,
+              "latestValueDisplay": "90.1%",
+              "thresholdStatus": "PASSING"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

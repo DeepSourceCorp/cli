@@ -4,10 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 	"strings"
 
 	"github.com/MakeNowJust/heredoc"
+	"github.com/deepsourcelabs/cli/command/cmddeps"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/metrics"
@@ -32,12 +34,25 @@ type MetricsOptions struct {
 	repoMetrics  []metrics.RepositoryMetric
 	runMetrics   *metrics.RunMetrics
 	prMetrics    *metrics.PRMetrics
+	deps         *cmddeps.Deps
+}
+
+func (opts *MetricsOptions) stdout() io.Writer {
+	if opts.deps != nil && opts.deps.Stdout != nil {
+		return opts.deps.Stdout
+	}
+	return os.Stdout
 }
 
 func NewCmdMetrics() *cobra.Command {
+	return NewCmdMetricsWithDeps(nil)
+}
+
+func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	opts := MetricsOptions{
 		OutputFormat: "pretty",
 		LimitArg:     30,
+		deps:         deps,
 	}
 
 	doc := heredoc.Docf(`
@@ -109,7 +124,12 @@ func NewCmdMetrics() *cobra.Command {
 
 func (opts *MetricsOptions) Run(ctx context.Context) error {
 	// Load configuration
-	cfgMgr := config.DefaultManager()
+	var cfgMgr *config.Manager
+	if opts.deps != nil && opts.deps.ConfigMgr != nil {
+		cfgMgr = opts.deps.ConfigMgr
+	} else {
+		cfgMgr = config.DefaultManager()
+	}
 	cfg, err := cfgMgr.Load()
 	if err != nil {
 		return clierrors.NewCLIError(clierrors.ErrInvalidConfig, "Error reading DeepSource CLI config", err)
@@ -126,13 +146,18 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 	opts.repoSlug = remote.Owner + "/" + remote.RepoName
 
 	// Create DeepSource client
-	client, err := deepsource.New(deepsource.ClientOpts{
-		Token:            cfg.Token,
-		HostName:         cfg.Host,
-		OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
-	})
-	if err != nil {
-		return err
+	var client *deepsource.Client
+	if opts.deps != nil && opts.deps.Client != nil {
+		client = opts.deps.Client
+	} else {
+		client, err = deepsource.New(deepsource.ClientOpts{
+			Token:            cfg.Token,
+			HostName:         cfg.Host,
+			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+		})
+		if err != nil {
+			return err
+		}
 	}
 
 	// Fetch metrics based on scope
@@ -473,10 +498,11 @@ func (opts *MetricsOptions) outputYAML() error {
 
 func (opts *MetricsOptions) writeOutput(data []byte, trailingNewline bool) error {
 	if opts.OutputFile == "" {
+		w := opts.stdout()
 		if trailingNewline {
-			fmt.Println(string(data))
+			fmt.Fprintln(w, string(data))
 		} else {
-			fmt.Print(string(data))
+			fmt.Fprint(w, string(data))
 		}
 		return nil
 	}

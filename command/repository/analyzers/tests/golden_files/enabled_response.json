@@ -1,0 +1,20 @@
+{
+  "repository": {
+    "enabledAnalyzers": {
+      "edges": [
+        {
+          "node": {
+            "name": "Go",
+            "shortcode": "go"
+          }
+        },
+        {
+          "node": {
+            "name": "Python",
+            "shortcode": "python"
+          }
+        }
+      ]
+    }
+  }
+}

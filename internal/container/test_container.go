@@ -16,7 +16,7 @@ func NewTest() *Container {
 		GitClient:   adapters.NewMockGitClient(),
 		HTTPClient:  adapters.NewMockHTTPClient(),
 		Output:      adapters.NewBufferOutput(),
-		Telemetry:   adapters.NewNoOpTelemetry(),
+		Sentry:      adapters.NewNoOpSentry(),
 		Config:      config.NewManager(adapters.NewOSFileSystem(), os.UserHomeDir),
 	}
 }
@@ -27,4 +27,4 @@ var _ interfaces.Environment = (*adapters.RealEnvironment)(nil)
 var _ interfaces.GitClient = (*adapters.RealGitClient)(nil)
 var _ interfaces.HTTPClient = (*adapters.MockHTTPClient)(nil)
 var _ interfaces.OutputWriter = (*adapters.StdOutput)(nil)
-var _ interfaces.TelemetryClient = (*adapters.SentryClient)(nil)
+var _ interfaces.SentryClient = (*adapters.SentryClient)(nil)

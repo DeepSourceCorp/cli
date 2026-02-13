@@ -1,0 +1,35 @@
+{
+  "repository": {
+    "pullRequest": {
+      "number": 42,
+      "title": "Upgrade dependencies to fix vulnerabilities",
+      "baseBranch": "main",
+      "branch": "fix/upgrade-deps",
+      "vulnerabilityOccurrences": {
+        "edges": [
+          {
+            "node": {
+              "id": "vuln-occ-pr-001",
+              "reachability": "UNREACHABLE",
+              "fixability": "FIXABLE",
+              "vulnerability": {
+                "identifier": "CVE-2024-3333",
+                "severity": "MEDIUM",
+                "summary": "Information disclosure via error messages",
+                "cvssV3BaseScore": 5.3,
+                "fixedVersions": ["4.2.0"]
+              },
+              "package": {
+                "name": "web-framework",
+                "ecosystem": "NPM"
+              },
+              "packageVersion": {
+                "version": "4.1.2"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

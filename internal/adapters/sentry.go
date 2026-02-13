@@ -6,7 +6,7 @@ import (
 	"github.com/getsentry/sentry-go"
 )
 
-// SentryClient reports telemetry via sentry-go.
+// SentryClient reports errors via sentry-go.
 type SentryClient struct{}
 
 func NewSentryClient() *SentryClient {

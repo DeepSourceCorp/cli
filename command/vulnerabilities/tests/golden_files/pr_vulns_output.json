@@ -1,0 +1,29 @@
+{
+  "number": 42,
+  "title": "Upgrade dependencies to fix vulnerabilities",
+  "base_branch": "main",
+  "branch": "fix/upgrade-deps",
+  "vulnerabilities": [
+    {
+      "id": "vuln-occ-pr-001",
+      "reachability": "UNREACHABLE",
+      "fixability": "FIXABLE",
+      "vulnerability": {
+        "identifier": "CVE-2024-3333",
+        "severity": "MEDIUM",
+        "summary": "Information disclosure via error messages",
+        "cvss_v3_base_score": 5.3,
+        "fixed_versions": [
+          "4.2.0"
+        ]
+      },
+      "package": {
+        "name": "web-framework",
+        "ecosystem": "NPM"
+      },
+      "package_version": {
+        "version": "4.1.2"
+      }
+    }
+  ]
+}

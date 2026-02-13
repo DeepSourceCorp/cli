@@ -4,10 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 	"strings"
 
 	"github.com/MakeNowJust/heredoc"
+	"github.com/deepsourcelabs/cli/command/cmddeps"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
@@ -36,12 +38,25 @@ type IssuesOptions struct {
 	PRNumber        int
 	repoSlug        string
 	issues          []issues.Issue
+	deps            *cmddeps.Deps
+}
+
+func (opts *IssuesOptions) stdout() io.Writer {
+	if opts.deps != nil && opts.deps.Stdout != nil {
+		return opts.deps.Stdout
+	}
+	return os.Stdout
 }
 
 func NewCmdIssues() *cobra.Command {
+	return NewCmdIssuesWithDeps(nil)
+}
+
+func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	opts := IssuesOptions{
 		LimitArg:     30,
 		OutputFormat: "pretty",
+		deps:         deps,
 	}
 
 	doc := heredoc.Docf(`
@@ -136,7 +151,12 @@ func NewCmdIssues() *cobra.Command {
 }
 
 func (opts *IssuesOptions) Run(ctx context.Context) error {
-	cfgMgr := config.DefaultManager()
+	var cfgMgr *config.Manager
+	if opts.deps != nil && opts.deps.ConfigMgr != nil {
+		cfgMgr = opts.deps.ConfigMgr
+	} else {
+		cfgMgr = config.DefaultManager()
+	}
 	cfg, err := cfgMgr.Load()
 	if err != nil {
 		return clierrors.NewCLIError(clierrors.ErrInvalidConfig, "Error reading DeepSource CLI config", err)
@@ -151,13 +171,18 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 	}
 	opts.repoSlug = remote.Owner + "/" + remote.RepoName
 
-	client, err := deepsource.New(deepsource.ClientOpts{
-		Token:            cfg.Token,
-		HostName:         cfg.Host,
-		OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
-	})
-	if err != nil {
-		return err
+	var client *deepsource.Client
+	if opts.deps != nil && opts.deps.Client != nil {
+		client = opts.deps.Client
+	} else {
+		client, err = deepsource.New(deepsource.ClientOpts{
+			Token:            cfg.Token,
+			HostName:         cfg.Host,
+			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+		})
+		if err != nil {
+			return err
+		}
 	}
 
 	var issuesList []issues.Issue
@@ -456,10 +481,11 @@ func (opts *IssuesOptions) outputYAML() error {
 
 func (opts *IssuesOptions) writeOutput(data []byte, trailingNewline bool) error {
 	if opts.OutputFile == "" {
+		w := opts.stdout()
 		if trailingNewline {
-			fmt.Println(string(data))
+			fmt.Fprintln(w, string(data))
 		} else {
-			fmt.Print(string(data))
+			fmt.Fprint(w, string(data))
 		}
 		return nil
 	}

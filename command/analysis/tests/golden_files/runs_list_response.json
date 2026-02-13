@@ -1,0 +1,38 @@
+{
+  "repository": {
+    "analysisRuns": {
+      "edges": [
+        {
+          "node": {
+            "runUid": "run-uid-001",
+            "commitOid": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+            "branchName": "main",
+            "status": "SUCCESS",
+            "createdAt": "2025-01-15T10:00:00Z",
+            "finishedAt": "2025-01-15T10:30:00Z",
+            "summary": {
+              "occurrencesIntroduced": 3,
+              "occurrencesResolved": 1,
+              "occurrencesSuppressed": 0
+            }
+          }
+        },
+        {
+          "node": {
+            "runUid": "run-uid-002",
+            "commitOid": "b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3",
+            "branchName": "feature/auth",
+            "status": "PENDING",
+            "createdAt": "2025-01-16T08:00:00Z",
+            "finishedAt": null,
+            "summary": {
+              "occurrencesIntroduced": 0,
+              "occurrencesResolved": 0,
+              "occurrencesSuppressed": 0
+            }
+          }
+        }
+      ]
+    }
+  }
+}

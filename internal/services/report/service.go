@@ -25,7 +25,7 @@ type ServiceDeps struct {
 	HTTPClient  interfaces.HTTPClient
 	FileSystem  interfaces.FileSystem
 	Environment interfaces.Environment
-	Telemetry   interfaces.TelemetryClient
+	Sentry      interfaces.SentryClient
 	Output      interfaces.OutputWriter
 	Workdir     func() (string, error)
 }
@@ -36,7 +36,7 @@ type Service struct {
 	http      interfaces.HTTPClient
 	fs        interfaces.FileSystem
 	env       interfaces.Environment
-	telemetry interfaces.TelemetryClient
+	sentry    interfaces.SentryClient
 	output    interfaces.OutputWriter
 	workdir   func() (string, error)
 }
@@ -52,7 +52,7 @@ func NewService(deps ServiceDeps) *Service {
 		http:      deps.HTTPClient,
 		fs:        deps.FileSystem,
 		env:       deps.Environment,
-		telemetry: deps.Telemetry,
+		sentry:    deps.Sentry,
 		output:    deps.Output,
 		workdir:   workdir,
 	}
@@ -317,13 +317,13 @@ func (s *Service) makeQuery(ctx context.Context, dsn *DSN, body []byte, skipVeri
 }
 
 func (s *Service) capture(err error) {
-	if s.telemetry == nil {
+	if s.sentry == nil {
 		return
 	}
 	if clierrors.IsUserError(err) {
 		return
 	}
-	s.telemetry.CaptureException(err)
+	s.sentry.CaptureException(err)
 }
 
 func (s *Service) infof(format string, args ...interface{}) {
