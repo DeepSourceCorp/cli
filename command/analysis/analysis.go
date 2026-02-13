@@ -291,7 +291,7 @@ func (opts *AnalysisOptions) outputRunDetailJSON(runWithIssues *runs.RunWithIssu
 // --- Display helpers ---
 
 func showRunsTable(analysisRuns []runs.AnalysisRun) {
-	header := []string{"COMMIT", "BRANCH", "STATUS", "INTRODUCED", "RESOLVED", "SUPPRESSED", "FINISHED"}
+	header := []string{"Commit", "Branch", "Status", "Introduced", "Resolved", "Suppressed", "Finished"}
 	data := [][]string{header}
 
 	for _, run := range analysisRuns {
@@ -369,13 +369,13 @@ func showIssuesSummary(issues []runs.RunIssue) {
 func formatStatus(status string) string {
 	switch strings.ToUpper(status) {
 	case "SUCCESS":
-		return pterm.Green(status)
+		return pterm.Green("Success")
 	case "FAILURE":
-		return pterm.Red(status)
+		return pterm.Red("Failure")
 	case "PENDING":
-		return pterm.Yellow(status)
+		return pterm.Yellow("Pending")
 	case "RUNNING":
-		return pterm.Cyan(status)
+		return pterm.Cyan("Running")
 	default:
 		return status
 	}

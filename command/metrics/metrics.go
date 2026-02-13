@@ -248,7 +248,7 @@ func (opts *MetricsOptions) outputTable() error {
 	}
 
 	// Build metrics table
-	header := []string{"METRIC", "KEY", "VALUE", "THRESHOLD", "STATUS"}
+	header := []string{"Metric", "Key", "Value", "Threshold", "Status"}
 	data := [][]string{header}
 
 	for _, m := range metricsList {
@@ -297,7 +297,7 @@ func (opts *MetricsOptions) outputChangesetStats() {
 
 	pterm.DefaultSection.Println("Changeset Coverage")
 
-	header := []string{"TYPE", "OVERALL", "COVERED", "NEW", "NEW COVERED"}
+	header := []string{"Type", "Overall", "Covered", "New", "New Covered"}
 	data := [][]string{header}
 
 	// Lines

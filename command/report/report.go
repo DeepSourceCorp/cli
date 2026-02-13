@@ -96,13 +96,14 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 	cmd.Flags().StringVar(&opts.OIDCRequestUrl, "oidc-request-url", "", "OIDC provider's request URL to fetch an OIDC token")
 	cmd.Flags().StringVar(&opts.DeepSourceHostEndpoint, "deepsource-host-endpoint", "https://app.deepsource.com", "DeepSource host endpoint where the app is running. Defaults to the cloud endpoint https://app.deepsource.com")
 	cmd.Flags().StringVar(&opts.OIDCProvider, "oidc-provider", "", "OIDC provider to use for authentication. Supported providers: github-actions")
-	cmd.Flags().StringVar(&opts.Output, "output", "table", "Output format: table, json, yaml")
+	cmd.Flags().StringVar(&opts.Output, "output", "pretty", "Output format: pretty, table, json, yaml")
 
 	// --skip-verify flag to skip SSL certificate verification while reporting test coverage data.
 	cmd.Flags().BoolVar(&opts.SkipCertificateVerification, "skip-verify", false, "skip SSL certificate verification while sending the test coverage data")
 
 	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 		return []string{
+			"pretty\tPretty-printed output",
 			"table\tHuman-readable table",
 			"json\tJSON output",
 			"yaml\tYAML output",
@@ -168,7 +169,7 @@ func printReportResult(output interfaces.OutputWriter, format string, result *re
 	}
 
 	switch format {
-	case "", "table":
+	case "", "pretty", "table":
 		write("DeepSource | Artifact published successfully\n\n")
 		write("Analyzer  %s\n", result.Analyzer)
 		write("Key       %s\n", result.Key)

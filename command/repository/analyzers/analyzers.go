@@ -62,12 +62,13 @@ func NewCmdAnalyzersWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	}
 
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "List analyzers for a specific repository")
-	cmd.Flags().StringVar(&opts.Output, "output", "table", "Output format: table, json, yaml")
+	cmd.Flags().StringVar(&opts.Output, "output", "pretty", "Output format: pretty, table, json, yaml")
 	_ = cmd.RegisterFlagCompletionFunc("repo", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
 	})
 	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 		return []string{
+			"pretty\tPretty-printed output",
 			"table\tHuman-readable table",
 			"json\tJSON output",
 			"yaml\tYAML output",
@@ -102,7 +103,7 @@ func (opts *AnalyzersOptions) Run() error {
 func (opts *AnalyzersOptions) printAnalyzers(list []analyzers.Analyzer) error {
 	w := opts.stdout()
 	switch opts.Output {
-	case "", "table":
+	case "", "pretty", "table":
 		if len(list) == 0 {
 			pterm.Println("No analyzers enabled on this repository.")
 			return nil
