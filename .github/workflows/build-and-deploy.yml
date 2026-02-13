@@ -20,6 +20,7 @@ jobs:
       base_url: ${{ steps.resolve.outputs.base_url }}
       bucket: ${{ steps.resolve.outputs.bucket }}
       version: ${{ steps.resolve.outputs.version }}
+      binary_name: ${{ steps.resolve.outputs.binary_name }}
     steps:
       - name: Resolve environment from tag
         id: resolve
@@ -29,10 +30,12 @@ jobs:
             echo "environment=prod" >> "$GITHUB_OUTPUT"
             echo "base_url=https://deepsource.com/cli" >> "$GITHUB_OUTPUT"
             echo "bucket=${{ secrets.R2_PROD_BUCKET_NAME }}" >> "$GITHUB_OUTPUT"
+            echo "binary_name=deepsource" >> "$GITHUB_OUTPUT"
           else
             echo "environment=dev" >> "$GITHUB_OUTPUT"
             echo "base_url=https://deepsource.one/cli" >> "$GITHUB_OUTPUT"
             echo "bucket=${{ secrets.R2_DEV_BUCKET_NAME }}" >> "$GITHUB_OUTPUT"
+            echo "binary_name=deepsource-dev" >> "$GITHUB_OUTPUT"
           fi
           echo "version=${TAG}" >> "$GITHUB_OUTPUT"
 
@@ -58,9 +61,6 @@ jobs:
         if: matrix.goarch == 'arm64'
         run: sudo apt-get update && sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 
-      - name: Generate completions
-        run: bash scripts/gen-completions.sh
-
       - name: Build
         env:
           CGO_ENABLED: '1'
@@ -69,14 +69,16 @@ jobs:
           CC: ${{ matrix.cc }}
           CXX: ${{ matrix.cxx }}
         run: |
+          BINARY_NAME="${{ needs.resolve-env.outputs.binary_name }}"
           cd cmd/deepsource && go build -tags static_all \
-            -ldflags "-X 'main.version=${{ needs.resolve-env.outputs.version }}' -X 'main.Date=$(date -u +%Y-%m-%d)' -X 'main.SentryDSN=${{ secrets.SENTRY_DSN }}'" \
-            -o deepsource .
+            -ldflags "-X 'main.version=${{ needs.resolve-env.outputs.version }}' -X 'main.Date=$(date -u +%Y-%m-%d)' -X 'main.SentryDSN=${{ secrets.SENTRY_DSN }}' -X 'main.buildMode=${{ needs.resolve-env.outputs.environment }}'" \
+            -o "$BINARY_NAME" .
 
       - name: Package
         run: |
-          ARCHIVE="deepsource_${{ needs.resolve-env.outputs.version }}_linux_${{ matrix.goarch }}.tar.gz"
-          tar -czf "$ARCHIVE" -C cmd/deepsource deepsource -C ../../ completions
+          BINARY_NAME="${{ needs.resolve-env.outputs.binary_name }}"
+          ARCHIVE="${BINARY_NAME}_${{ needs.resolve-env.outputs.version }}_linux_${{ matrix.goarch }}.tar.gz"
+          tar -czf "$ARCHIVE" -C cmd/deepsource "$BINARY_NAME"
           sha256sum "$ARCHIVE" > "${ARCHIVE}.sha256"
           echo "ARCHIVE=${ARCHIVE}" >> "$GITHUB_ENV"
 
@@ -84,8 +86,8 @@ jobs:
         with:
           name: build-linux-${{ matrix.goarch }}
           path: |
-            deepsource_*.tar.gz
-            deepsource_*.tar.gz.sha256
+            ${{ needs.resolve-env.outputs.binary_name }}_*.tar.gz
+            ${{ needs.resolve-env.outputs.binary_name }}_*.tar.gz.sha256
 
   build-darwin:
     needs: resolve-env
@@ -99,18 +101,16 @@ jobs:
         with:
           go-version: ${{ env.GO_VERSION }}
 
-      - name: Generate completions
-        run: bash scripts/gen-completions.sh
-
       - name: Build
         env:
           CGO_ENABLED: '1'
           GOOS: darwin
           GOARCH: ${{ matrix.goarch }}
         run: |
+          BINARY_NAME="${{ needs.resolve-env.outputs.binary_name }}"
           cd cmd/deepsource && go build -tags static_all \
-            -ldflags "-X 'main.version=${{ needs.resolve-env.outputs.version }}' -X 'main.Date=$(date -u +%Y-%m-%d)' -X 'main.SentryDSN=${{ secrets.SENTRY_DSN }}'" \
-            -o deepsource .
+            -ldflags "-X 'main.version=${{ needs.resolve-env.outputs.version }}' -X 'main.Date=$(date -u +%Y-%m-%d)' -X 'main.SentryDSN=${{ secrets.SENTRY_DSN }}' -X 'main.buildMode=${{ needs.resolve-env.outputs.environment }}'" \
+            -o "$BINARY_NAME" .
 
       - name: Codesign
         env:
@@ -131,10 +131,12 @@ jobs:
           security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
           security list-keychains -d user -s "$KEYCHAIN_PATH" login.keychain
 
+          BINARY_NAME="${{ needs.resolve-env.outputs.binary_name }}"
+
           # Sign the binary
           codesign --force --options runtime \
             --sign "Developer ID Application: DeepSource Corp" \
-            cmd/deepsource/deepsource
+            "cmd/deepsource/${BINARY_NAME}"
 
       - name: Notarize
         env:
@@ -142,8 +144,10 @@ jobs:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
         run: |
+          BINARY_NAME="${{ needs.resolve-env.outputs.binary_name }}"
+
           # Create zip for notarization
-          ditto -c -k cmd/deepsource/deepsource notarize.zip
+          ditto -c -k "cmd/deepsource/${BINARY_NAME}" notarize.zip
           xcrun notarytool submit notarize.zip \
             --apple-id "$APPLE_ID" \
             --team-id "$APPLE_TEAM_ID" \
@@ -152,21 +156,23 @@ jobs:
 
       - name: Verify signing
         run: |
-          codesign --verify --verbose cmd/deepsource/deepsource
-          spctl --assess --type execute cmd/deepsource/deepsource || true
+          BINARY_NAME="${{ needs.resolve-env.outputs.binary_name }}"
+          codesign --verify --verbose "cmd/deepsource/${BINARY_NAME}"
+          spctl --assess --type execute "cmd/deepsource/${BINARY_NAME}" || true
 
       - name: Package
         run: |
-          ARCHIVE="deepsource_${{ needs.resolve-env.outputs.version }}_darwin_${{ matrix.goarch }}.tar.gz"
-          tar -czf "$ARCHIVE" -C cmd/deepsource deepsource -C ../../ completions
+          BINARY_NAME="${{ needs.resolve-env.outputs.binary_name }}"
+          ARCHIVE="${BINARY_NAME}_${{ needs.resolve-env.outputs.version }}_darwin_${{ matrix.goarch }}.tar.gz"
+          tar -czf "$ARCHIVE" -C cmd/deepsource "$BINARY_NAME"
           shasum -a 256 "$ARCHIVE" > "${ARCHIVE}.sha256"
 
       - uses: actions/upload-artifact@v4
         with:
           name: build-darwin-${{ matrix.goarch }}
           path: |
-            deepsource_*.tar.gz
-            deepsource_*.tar.gz.sha256
+            ${{ needs.resolve-env.outputs.binary_name }}_*.tar.gz
+            ${{ needs.resolve-env.outputs.binary_name }}_*.tar.gz.sha256
 
   build-windows:
     needs: resolve-env
@@ -188,22 +194,24 @@ jobs:
           CC: x86_64-w64-mingw32-gcc
           CXX: x86_64-w64-mingw32-g++
         run: |
+          BINARY_NAME="${{ needs.resolve-env.outputs.binary_name }}"
           cd cmd/deepsource && go build -tags static_all \
-            -ldflags "-X 'main.version=${{ needs.resolve-env.outputs.version }}' -X 'main.Date=$(date -u +%Y-%m-%d)' -X 'main.SentryDSN=${{ secrets.SENTRY_DSN }}'" \
-            -o deepsource.exe .
+            -ldflags "-X 'main.version=${{ needs.resolve-env.outputs.version }}' -X 'main.Date=$(date -u +%Y-%m-%d)' -X 'main.SentryDSN=${{ secrets.SENTRY_DSN }}' -X 'main.buildMode=${{ needs.resolve-env.outputs.environment }}'" \
+            -o "${BINARY_NAME}.exe" .
 
       - name: Package
         run: |
-          ARCHIVE="deepsource_${{ needs.resolve-env.outputs.version }}_windows_amd64.zip"
-          zip "$ARCHIVE" -j cmd/deepsource/deepsource.exe
+          BINARY_NAME="${{ needs.resolve-env.outputs.binary_name }}"
+          ARCHIVE="${BINARY_NAME}_${{ needs.resolve-env.outputs.version }}_windows_amd64.zip"
+          zip "$ARCHIVE" -j "cmd/deepsource/${BINARY_NAME}.exe"
           sha256sum "$ARCHIVE" > "${ARCHIVE}.sha256"
 
       - uses: actions/upload-artifact@v4
         with:
           name: build-windows-amd64
           path: |
-            deepsource_*.zip
-            deepsource_*.zip.sha256
+            ${{ needs.resolve-env.outputs.binary_name }}_*.zip
+            ${{ needs.resolve-env.outputs.binary_name }}_*.zip.sha256
 
   deploy:
     needs: [resolve-env, build-linux, build-darwin, build-windows]
@@ -219,6 +227,7 @@ jobs:
       - name: Generate manifest
         run: |
           VERSION="${{ needs.resolve-env.outputs.version }}"
+          BINARY_NAME="${{ needs.resolve-env.outputs.binary_name }}"
           BUILD_TIME="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
           get_sha() {
@@ -231,24 +240,24 @@ jobs:
             "buildTime": "${BUILD_TIME}",
             "platforms": {
               "darwin_amd64": {
-                "archive": "deepsource_${VERSION}_darwin_amd64.tar.gz",
-                "sha256": "$(get_sha "deepsource_${VERSION}_darwin_amd64.tar.gz")"
+                "archive": "${BINARY_NAME}_${VERSION}_darwin_amd64.tar.gz",
+                "sha256": "$(get_sha "${BINARY_NAME}_${VERSION}_darwin_amd64.tar.gz")"
               },
               "darwin_arm64": {
-                "archive": "deepsource_${VERSION}_darwin_arm64.tar.gz",
-                "sha256": "$(get_sha "deepsource_${VERSION}_darwin_arm64.tar.gz")"
+                "archive": "${BINARY_NAME}_${VERSION}_darwin_arm64.tar.gz",
+                "sha256": "$(get_sha "${BINARY_NAME}_${VERSION}_darwin_arm64.tar.gz")"
               },
               "linux_amd64": {
-                "archive": "deepsource_${VERSION}_linux_amd64.tar.gz",
-                "sha256": "$(get_sha "deepsource_${VERSION}_linux_amd64.tar.gz")"
+                "archive": "${BINARY_NAME}_${VERSION}_linux_amd64.tar.gz",
+                "sha256": "$(get_sha "${BINARY_NAME}_${VERSION}_linux_amd64.tar.gz")"
               },
               "linux_arm64": {
-                "archive": "deepsource_${VERSION}_linux_arm64.tar.gz",
-                "sha256": "$(get_sha "deepsource_${VERSION}_linux_arm64.tar.gz")"
+                "archive": "${BINARY_NAME}_${VERSION}_linux_arm64.tar.gz",
+                "sha256": "$(get_sha "${BINARY_NAME}_${VERSION}_linux_arm64.tar.gz")"
               },
               "windows_amd64": {
-                "archive": "deepsource_${VERSION}_windows_amd64.zip",
-                "sha256": "$(get_sha "deepsource_${VERSION}_windows_amd64.zip")"
+                "archive": "${BINARY_NAME}_${VERSION}_windows_amd64.zip",
+                "sha256": "$(get_sha "${BINARY_NAME}_${VERSION}_windows_amd64.zip")"
               }
             }
           }
@@ -256,7 +265,8 @@ jobs:
 
       - name: Generate install script
         run: |
-          sed "s|__BASE_URL__|${{ needs.resolve-env.outputs.base_url }}|g" \
+          sed -e "s|__BASE_URL__|${{ needs.resolve-env.outputs.base_url }}|g" \
+              -e "s|__BINARY_NAME__|${{ needs.resolve-env.outputs.binary_name }}|g" \
             scripts/install.sh.template > artifacts/install.sh
 
       - name: Upload to R2
@@ -269,7 +279,7 @@ jobs:
           BUCKET="${{ needs.resolve-env.outputs.bucket }}"
 
           # Upload archives and checksums (immutable)
-          for f in artifacts/deepsource_*; do
+          for f in artifacts/${{ needs.resolve-env.outputs.binary_name }}_*; do
             aws s3 cp "$f" "s3://${BUCKET}/cli/build/$(basename "$f")" \
               --endpoint-url "$ENDPOINT" \
               --cache-control "public, max-age=31536000, immutable"
@@ -333,9 +343,6 @@ jobs:
 
             def install
               bin.install "deepsource"
-              bash_completion.install "completions/deepsource.bash" => "deepsource"
-              zsh_completion.install "completions/deepsource.zsh" => "_deepsource"
-              fish_completion.install "completions/deepsource.fish"
             end
           end
           FORMULA

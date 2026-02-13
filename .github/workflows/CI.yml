@@ -24,6 +24,9 @@ jobs:
           fetch-depth: 1
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - name: Install just
+        uses: extractions/setup-just@v2
+
       - name: Build the binary
         run: just build
 

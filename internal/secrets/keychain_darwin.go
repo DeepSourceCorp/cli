@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"os/exec"
 	"strings"
+
+	"github.com/deepsourcelabs/cli/buildinfo"
 )
 
 type keychainStore struct {
@@ -14,7 +16,7 @@ type keychainStore struct {
 
 // NewKeychainStore returns a macOS keychain-backed store.
 func NewKeychainStore() Store {
-	return &keychainStore{service: "deepsource-cli"}
+	return &keychainStore{service: buildinfo.KeychainSvc}
 }
 
 func (k *keychainStore) Get(key string) (string, error) {

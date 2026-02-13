@@ -24,6 +24,9 @@ var (
 
 	// DSN used for sentry
 	SentryDSN string
+
+	// buildMode is "dev" or "prod" (default). Set via ldflags -X.
+	buildMode string
 )
 
 func sentryEnvironment(ver string) string {
@@ -36,10 +39,18 @@ func sentryEnvironment(ver string) string {
 func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
+	// Override app identity for dev builds
+	if buildMode == "dev" {
+		v.AppName = "deepsource-dev"
+		v.ConfigDirName = ".deepsource-dev"
+		v.KeychainSvc = "deepsource-dev-cli"
+		v.KeychainKey = "deepsource-dev-cli-token"
+	}
+
 	// Init sentry
 	err := sentry.Init(sentry.ClientOptions{
 		Dsn:         SentryDSN,
-		Release:     "deepsource-cli@" + version,
+		Release:     v.AppName + "-cli@" + version,
 		Environment: sentryEnvironment(version),
 	})
 	if err != nil {

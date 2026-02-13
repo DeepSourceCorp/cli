@@ -6,6 +6,7 @@ set -e
 
 INSTALL_DIR="${DEEPSOURCE_INSTALL_DIR:-}"
 BASE_URL="__BASE_URL__"
+BINARY_NAME="__BINARY_NAME__"
 
 log() { printf '%s\n' "$1"; }
 err() { printf '\033[31mError: %s\033[0m\n' "$1" >&2; exit 1; }
@@ -48,7 +49,7 @@ main() {
     err "Failed to determine latest version from manifest"
   fi
 
-  log "Installing DeepSource CLI v${VERSION}.."
+  log "Installing ${BINARY_NAME} v${VERSION}.."
 
   PLATFORM_KEY="${OS}_${ARCH}"
   ARCHIVE="$(printf '%s' "$MANIFEST" | grep -o "\"${PLATFORM_KEY}\":{[^}]*}" | grep -o '"archive":"[^"]*"' | cut -d'"' -f4)"
@@ -90,15 +91,15 @@ main() {
   mkdir -p "$BIN_DIR"
 
   tar -xzf "${TMPDIR}/${ARCHIVE}" -C "$TMPDIR"
-  install -m 755 "${TMPDIR}/deepsource" "${BIN_DIR}/deepsource"
+  install -m 755 "${TMPDIR}/${BINARY_NAME}" "${BIN_DIR}/${BINARY_NAME}"
 
   # macOS: clear quarantine and re-sign
   if [ "$OS" = "darwin" ]; then
-    xattr -dr com.apple.quarantine "${BIN_DIR}/deepsource" 2>/dev/null || true
-    codesign --force --sign - "${BIN_DIR}/deepsource" 2>/dev/null || true
+    xattr -dr com.apple.quarantine "${BIN_DIR}/${BINARY_NAME}" 2>/dev/null || true
+    codesign --force --sign - "${BIN_DIR}/${BINARY_NAME}" 2>/dev/null || true
   fi
 
-  log "DeepSource CLI v${VERSION} installed to ${BIN_DIR}/deepsource"
+  log "${BINARY_NAME} v${VERSION} installed to ${BIN_DIR}/${BINARY_NAME}"
 
   # Check if install dir is in PATH
   case ":${PATH}:" in

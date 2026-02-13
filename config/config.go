@@ -1,12 +1,13 @@
 package config
 
 import (
-	"errors"
+	"fmt"
 	"time"
+
+	"github.com/deepsourcelabs/cli/buildinfo"
 )
 
 const (
-	ConfigDirName   = "/.deepsource/"
 	ConfigFileName  = "/config.toml"
 	DefaultHostName = "deepsource.com"
 )
@@ -35,7 +36,7 @@ func (cfg CLIConfig) IsExpired() bool {
 
 func (cfg *CLIConfig) VerifyAuthentication() error {
 	if cfg.Token == "" {
-		return errors.New("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
+		return fmt.Errorf("You are not logged into DeepSource. Run \"%s auth login\" to authenticate.", buildinfo.AppName)
 	}
 	return nil
 }
