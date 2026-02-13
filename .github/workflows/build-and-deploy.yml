@@ -267,7 +267,7 @@ jobs:
         run: |
           sed -e "s|__BASE_URL__|${{ needs.resolve-env.outputs.base_url }}|g" \
               -e "s|__BINARY_NAME__|${{ needs.resolve-env.outputs.binary_name }}|g" \
-            scripts/install.sh.template > artifacts/install.sh
+            scripts/install.sh.template > artifacts/install
 
       - name: Upload to R2
         env:
@@ -297,7 +297,7 @@ jobs:
           done
 
           # Upload manifest and install script (short cache)
-          for f in artifacts/manifest.json artifacts/install.sh; do
+          for f in artifacts/manifest.json artifacts/install; do
             aws s3 cp "$f" "s3://${BUCKET}/${PREFIX}$(basename "$f")" \
               --endpoint-url "$ENDPOINT" \
               --cache-control "public, max-age=60"
