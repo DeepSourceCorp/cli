@@ -1,6 +1,6 @@
 #!/bin/sh
 # DeepSource CLI installer
-# Usage: curl -fsSL https://DOMAIN/cli/install.sh | sh
+# Usage: curl -fsSL https://DOMAIN/install | sh
 
 set -e
 
@@ -8,14 +8,15 @@ INSTALL_DIR="${DEEPSOURCE_INSTALL_DIR:-}"
 BASE_URL="__BASE_URL__"
 BINARY_NAME="__BINARY_NAME__"
 
-log() { printf '%s\n' "$1"; }
-err() { printf '\033[31mError: %s\033[0m\n' "$1" >&2; exit 1; }
+pass() { printf '\033[0;32m✓\033[0m %s\n' "$1"; }
+fail() { printf '\033[0;31m✗ %s\033[0m\n' "$1" >&2; exit 1; }
+info() { printf '\033[0;36m→\033[0m %s\n' "$1"; }
 
 detect_os() {
   case "$(uname -s)" in
     Linux*)  echo "linux" ;;
     Darwin*) echo "darwin" ;;
-    *)       err "Unsupported OS: $(uname -s)" ;;
+    *)       fail "Unsupported OS: $(uname -s)" ;;
   esac
 }
 
@@ -23,50 +24,44 @@ detect_arch() {
   case "$(uname -m)" in
     x86_64|amd64)  echo "amd64" ;;
     arm64|aarch64) echo "arm64" ;;
-    *)             err "Unsupported architecture: $(uname -m)" ;;
+    *)             fail "Unsupported architecture: $(uname -m)" ;;
   esac
 }
 
-check_command() {
-  command -v "$1" >/dev/null 2>&1 || err "'$1' is required but not found"
-}
-
 main() {
-  check_command curl
-  check_command tar
-  check_command sha256sum || check_command shasum || err "sha256sum or shasum is required"
+  command -v curl >/dev/null 2>&1 || fail "curl is required but not found"
+  command -v tar >/dev/null 2>&1 || fail "tar is required but not found"
+  command -v sha256sum >/dev/null 2>&1 || command -v shasum >/dev/null 2>&1 || fail "sha256sum or shasum is required"
+  pass "Dependencies verified"
 
   OS="$(detect_os)"
   ARCH="$(detect_arch)"
+  pass "Platform: ${OS}/${ARCH}"
 
-  log "Detected platform: ${OS}/${ARCH}"
-  log "Fetching latest version.."
-
-  MANIFEST="$(curl -fsSL "${BASE_URL}/manifest.json")"
+  MANIFEST="$(curl -fsSL "${BASE_URL}/manifest.json" | tr -d ' \n\r\t')"
   VERSION="$(printf '%s' "$MANIFEST" | grep -o '"version":"[^"]*"' | head -1 | cut -d'"' -f4)"
 
   if [ -z "$VERSION" ]; then
-    err "Failed to determine latest version from manifest"
+    fail "Failed to determine latest version from manifest"
   fi
 
-  log "Installing ${BINARY_NAME} v${VERSION}.."
+  pass "Version: v${VERSION}"
 
   PLATFORM_KEY="${OS}_${ARCH}"
   ARCHIVE="$(printf '%s' "$MANIFEST" | grep -o "\"${PLATFORM_KEY}\":{[^}]*}" | grep -o '"archive":"[^"]*"' | cut -d'"' -f4)"
   EXPECTED_SHA="$(printf '%s' "$MANIFEST" | grep -o "\"${PLATFORM_KEY}\":{[^}]*}" | grep -o '"sha256":"[^"]*"' | cut -d'"' -f4)"
 
   if [ -z "$ARCHIVE" ]; then
-    err "No build available for ${OS}/${ARCH}"
+    fail "No build available for ${OS}/${ARCH}"
   fi
 
   ARCHIVE_URL="${BASE_URL}/build/${ARCHIVE}"
   TMPDIR="$(mktemp -d)"
   trap 'rm -rf "$TMPDIR"' EXIT
 
-  log "Downloading ${ARCHIVE}.."
   curl -fsSL -o "${TMPDIR}/${ARCHIVE}" "$ARCHIVE_URL"
+  pass "Downloaded"
 
-  log "Verifying checksum.."
   if command -v sha256sum >/dev/null 2>&1; then
     ACTUAL_SHA="$(sha256sum "${TMPDIR}/${ARCHIVE}" | awk '{print $1}')"
   else
@@ -74,10 +69,10 @@ main() {
   fi
 
   if [ "$ACTUAL_SHA" != "$EXPECTED_SHA" ]; then
-    err "Checksum mismatch: expected ${EXPECTED_SHA}, got ${ACTUAL_SHA}"
+    fail "Checksum mismatch: expected ${EXPECTED_SHA}, got ${ACTUAL_SHA}"
   fi
 
-  log "Checksum verified."
+  pass "Checksum verified"
 
   # Determine install directory
   if [ -n "$INSTALL_DIR" ]; then
@@ -99,15 +94,20 @@ main() {
     codesign --force --sign - "${BIN_DIR}/${BINARY_NAME}" 2>/dev/null || true
   fi
 
-  log "${BINARY_NAME} v${VERSION} installed to ${BIN_DIR}/${BINARY_NAME}"
+  pass "Installed to ${BIN_DIR}/${BINARY_NAME}"
+
+  echo ""
 
   # Check if install dir is in PATH
   case ":${PATH}:" in
-    *":${BIN_DIR}:"*) ;;
+    *":${BIN_DIR}:"*)
+      info "Run '${BINARY_NAME}' to get started"
+      ;;
     *)
-      log ""
-      log "Add ${BIN_DIR} to your PATH:"
-      log "  export PATH=\"${BIN_DIR}:\$PATH\""
+      info "Add ${BIN_DIR} to your PATH:"
+      printf '  export PATH="%s:$PATH"\n' "$BIN_DIR"
+      echo ""
+      info "Then run '${BINARY_NAME}' to get started"
       ;;
   esac
 }
