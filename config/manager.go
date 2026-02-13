@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/internal/adapters"
 	"github.com/deepsourcelabs/cli/internal/interfaces"
 	"github.com/deepsourcelabs/cli/internal/secrets"
@@ -27,7 +28,7 @@ func NewManager(fs interfaces.FileSystem, homeDir func() (string, error)) *Manag
 // NewManagerWithSecrets creates a config manager with a secrets store.
 func NewManagerWithSecrets(fs interfaces.FileSystem, homeDir func() (string, error), store secrets.Store, key string) *Manager {
 	if key == "" {
-		key = "deepsource-cli-token"
+		key = buildinfo.KeychainKey
 	}
 	if store == nil {
 		store = secrets.NoopStore{}
@@ -45,7 +46,7 @@ func (m *Manager) configDir() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return filepath.Join(home, ConfigDirName), nil
+	return filepath.Join(home, buildinfo.ConfigDirName), nil
 }
 
 func (m *Manager) configPath() (string, error) {

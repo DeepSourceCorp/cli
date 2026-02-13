@@ -17,11 +17,9 @@ import (
 
 func NewCmdRoot() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "deepsource <command> [flags]",
+		Use:   buildinfo.AppName + " <command> [flags]",
 		Short: "DeepSource CLI",
-		Long: `DeepSource CLI - Ship good code from the command line.
-
-To get started, run: deepsource auth login`,
+		Long:  "DeepSource CLI - Ship good code from the command line.\n\nTo get started, run: " + buildinfo.AppName + " auth login",
 		SilenceErrors: true,
 		SilenceUsage:  true,
 	}

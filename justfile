@@ -3,6 +3,9 @@ PACKAGE_NAME := "github.com/deepsourcelabs/cli"
 default:
     @just --list
 
+# Build the CLI binary (CI alias)
+build: build-local
+
 # Build the CLI binary to /tmp/deepsource
 build-local:
 	cd cmd/deepsource && go build -o /tmp/deepsource .
@@ -32,7 +35,7 @@ test-setup:
 
 # Remove build artifacts and coverage files
 clean:
-	rm -rf /tmp/deepsource coverage.out dist/ completions/
+	rm -rf /tmp/deepsource coverage.out dist/
 
 # Bump patch version (x.y.Z)
 bump-patch:
@@ -70,8 +73,8 @@ bump-major:
 	git commit -m "Bump version to ${new}"
 	echo "Bumped ${current} -> ${new}"
 
-# Tag and push a release version
-deploy:
+# Tag and push a production release
+deploy-prod:
 	#!/usr/bin/env bash
 	set -euo pipefail
 	version=$(cat VERSION)
