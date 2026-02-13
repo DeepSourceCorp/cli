@@ -42,7 +42,7 @@ main() {
   log "Detected platform: ${OS}/${ARCH}"
   log "Fetching latest version.."
 
-  MANIFEST="$(curl -fsSL "${BASE_URL}/build/manifest.json")"
+  MANIFEST="$(curl -fsSL "${BASE_URL}/manifest.json")"
   VERSION="$(printf '%s' "$MANIFEST" | grep -o '"version":"[^"]*"' | head -1 | cut -d'"' -f4)"
 
   if [ -z "$VERSION" ]; then
