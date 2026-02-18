@@ -2,6 +2,7 @@ package tests
 
 import (
 	"bytes"
+	"os"
 	"path/filepath"
 	"runtime"
 	"strings"
@@ -18,7 +19,7 @@ func goldenPath(name string) string {
 	return filepath.Join(filepath.Dir(callerFile), "golden_files", name)
 }
 
-func TestMetricsDefaultBranch(t *testing.T) {
+func TestMetricsDefaultBranchFlag(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
 		"GetRepoMetrics": goldenPath("repo_metrics_response.json"),
@@ -33,7 +34,7 @@ func TestMetricsDefaultBranch(t *testing.T) {
 	}
 
 	cmd := metricsCmd.NewCmdMetricsWithDeps(deps)
-	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--output", "json"})
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--default-branch", "--output", "json"})
 
 	if err := cmd.Execute(); err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -44,6 +45,68 @@ func TestMetricsDefaultBranch(t *testing.T) {
 
 	if strings.TrimSpace(got) != strings.TrimSpace(expected) {
 		t.Errorf("output mismatch.\nExpected:\n%s\nGot:\n%s", expected, got)
+	}
+}
+
+func TestMetricsAutoDetectBranch(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"analysisRuns(first:": goldenPath("analysis_runs_response.json"),
+		"changesetStats {":   goldenPath("run_metrics_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "main", nil
+		},
+	}
+
+	cmd := metricsCmd.NewCmdMetricsWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--output", "json"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	expected := string(testutil.LoadGoldenFile(t, goldenPath("run_metrics_output.json")))
+	got := buf.String()
+
+	if strings.TrimSpace(got) != strings.TrimSpace(expected) {
+		t.Errorf("output mismatch.\nExpected:\n%s\nGot:\n%s", expected, got)
+	}
+}
+
+func TestMetricsNoRunsForBranch(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"analysisRuns(first:": goldenPath("analysis_runs_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "feature-no-runs", nil
+		},
+	}
+
+	cmd := metricsCmd.NewCmdMetricsWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--output", "json"})
+
+	err := cmd.Execute()
+	if err == nil {
+		t.Fatal("expected error for branch with no runs, got nil")
+	}
+	if !strings.Contains(err.Error(), "no analysis runs found") {
+		t.Errorf("expected error about no analysis runs, got: %s", err.Error())
 	}
 }
 
@@ -102,5 +165,137 @@ func TestMetricsPRScope(t *testing.T) {
 
 	if strings.TrimSpace(got) != strings.TrimSpace(expected) {
 		t.Errorf("output mismatch.\nExpected:\n%s\nGot:\n%s", expected, got)
+	}
+}
+
+func TestMetricsMutualExclusivity(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+
+	deps := &cmddeps.Deps{
+		ConfigMgr: cfgMgr,
+	}
+
+	// --commit and --pr
+	cmd := metricsCmd.NewCmdMetricsWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--commit", "abc123", "--pr", "42"})
+
+	err := cmd.Execute()
+	if err == nil {
+		t.Fatal("expected error for mutually exclusive flags, got nil")
+	}
+
+	errMsg := err.Error()
+	if !strings.Contains(errMsg, "commit") || !strings.Contains(errMsg, "pr") {
+		t.Errorf("expected error mentioning 'commit' and 'pr', got: %s", errMsg)
+	}
+
+	// --commit and --default-branch
+	cmd2 := metricsCmd.NewCmdMetricsWithDeps(deps)
+	cmd2.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--commit", "abc123", "--default-branch"})
+
+	err2 := cmd2.Execute()
+	if err2 == nil {
+		t.Fatal("expected error for mutually exclusive flags --commit and --default-branch, got nil")
+	}
+
+	errMsg2 := err2.Error()
+	if !strings.Contains(errMsg2, "commit") || !strings.Contains(errMsg2, "default-branch") {
+		t.Errorf("expected error mentioning 'commit' and 'default-branch', got: %s", errMsg2)
+	}
+}
+
+func TestMetricsYAMLOutput(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"GetRepoMetrics": goldenPath("repo_metrics_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+	}
+
+	cmd := metricsCmd.NewCmdMetricsWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--default-branch", "--output", "yaml"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	expected := string(testutil.LoadGoldenFile(t, goldenPath("repo_metrics_output.yaml")))
+	got := buf.String()
+
+	if strings.TrimSpace(got) != strings.TrimSpace(expected) {
+		t.Errorf("output mismatch.\nExpected:\n%s\nGot:\n%s", expected, got)
+	}
+}
+
+func TestMetricsOutputFile(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"GetRepoMetrics": goldenPath("repo_metrics_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+	}
+
+	tmpFile := filepath.Join(t.TempDir(), "metrics_output.json")
+
+	cmd := metricsCmd.NewCmdMetricsWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--default-branch", "--output", "json", "--output-file", tmpFile})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	// stdout should NOT contain the JSON
+	if strings.Contains(buf.String(), "Line Coverage") {
+		t.Error("expected JSON output to go to file, not stdout")
+	}
+
+	// Verify file content
+	fileContent, err := os.ReadFile(tmpFile)
+	if err != nil {
+		t.Fatalf("failed to read output file: %v", err)
+	}
+
+	expected := string(testutil.LoadGoldenFile(t, goldenPath("repo_metrics_output.json")))
+	if strings.TrimSpace(string(fileContent)) != strings.TrimSpace(expected) {
+		t.Errorf("file output mismatch.\nExpected:\n%s\nGot:\n%s", expected, string(fileContent))
+	}
+}
+
+func TestMetricsEmptyResults(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"GetRepoMetrics": goldenPath("empty_metrics_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+	}
+
+	cmd := metricsCmd.NewCmdMetricsWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--default-branch", "--output", "json"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	got := strings.TrimSpace(buf.String())
+	if got != "[]" {
+		t.Errorf("expected empty array '[]', got: %s", got)
 	}
 }

@@ -12,11 +12,14 @@ type VulnerabilityOccurrence struct {
 
 // Vulnerability represents vulnerability details
 type Vulnerability struct {
-	Identifier     string    `json:"identifier" yaml:"identifier"`
-	Severity       string    `json:"severity" yaml:"severity"`
-	Summary        string    `json:"summary" yaml:"summary"`
+	Identifier      string   `json:"identifier" yaml:"identifier"`
+	Severity        string   `json:"severity" yaml:"severity"`
+	Summary         string   `json:"summary" yaml:"summary"`
 	CvssV3BaseScore *float64 `json:"cvss_v3_base_score,omitempty" yaml:"cvss_v3_base_score,omitempty"`
-	FixedVersions  []string  `json:"fixed_versions" yaml:"fixed_versions"`
+	FixedVersions   []string `json:"fixed_versions" yaml:"fixed_versions"`
+	Aliases         []string `json:"aliases" yaml:"aliases"`
+	EpssScore       *float64 `json:"epss_score,omitempty" yaml:"epss_score,omitempty"`
+	ReferenceUrls   []string `json:"reference_urls" yaml:"reference_urls"`
 }
 
 // Package represents a package

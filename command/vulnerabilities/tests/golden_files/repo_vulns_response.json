@@ -12,7 +12,10 @@
               "severity": "CRITICAL",
               "summary": "Remote code execution via crafted input",
               "cvssV3BaseScore": 9.8,
-              "fixedVersions": ["1.2.4", "1.3.0"]
+              "fixedVersions": ["1.2.4", "1.3.0"],
+              "aliases": ["GHSA-xxxx-yyyy-zzzz"],
+              "epssScore": 0.42,
+              "referenceUrls": ["https://nvd.nist.gov/vuln/detail/CVE-2024-1234"]
             },
             "package": {
               "name": "example-lib",
@@ -33,7 +36,10 @@
               "severity": "HIGH",
               "summary": "Denial of service through unbounded allocation",
               "cvssV3BaseScore": 7.5,
-              "fixedVersions": ["2.0.1"]
+              "fixedVersions": ["2.0.1"],
+              "aliases": [],
+              "epssScore": null,
+              "referenceUrls": []
             },
             "package": {
               "name": "another-pkg",

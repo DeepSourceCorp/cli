@@ -17,7 +17,10 @@
                 "severity": "MEDIUM",
                 "summary": "Information disclosure via error messages",
                 "cvssV3BaseScore": 5.3,
-                "fixedVersions": ["4.2.0"]
+                "fixedVersions": ["4.2.0"],
+                "aliases": [],
+                "epssScore": null,
+                "referenceUrls": ["https://nvd.nist.gov/vuln/detail/CVE-2024-3333"]
               },
               "package": {
                 "name": "web-framework",

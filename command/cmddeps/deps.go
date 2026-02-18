@@ -16,4 +16,5 @@ type Deps struct {
 	ConfigMgr   *config.Manager
 	Stdout      io.Writer
 	RepoService *reposvc.Service
+	BranchNameFunc func() (string, error)
 }

@@ -10,6 +10,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/command/cmddeps"
+	"github.com/deepsourcelabs/cli/command/cmdutil"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/vulnerabilities"
@@ -23,19 +24,21 @@ import (
 )
 
 type VulnerabilitiesOptions struct {
-	RepoArg         string
-	CommitOid       string
-	PRNumber        int
-	OutputFormat    string
-	OutputFile      string
-	Verbose         bool
-	LimitArg        int
-	SeverityFilters []string
-	repoSlug        string
-	repoVulns       []vulnerabilities.VulnerabilityOccurrence
-	runVulns        *vulnerabilities.RunVulns
-	prVulns         *vulnerabilities.PRVulns
-	deps            *cmddeps.Deps
+	RepoArg          string
+	CommitOid        string
+	PRNumber         int
+	DefaultBranch    bool
+	OutputFormat     string
+	OutputFile       string
+	Verbose          bool
+	LimitArg         int
+	SeverityFilters  []string
+	repoSlug         string
+	autoDetectedBranch string
+	repoVulns        []vulnerabilities.VulnerabilityOccurrence
+	runVulns         *vulnerabilities.RunVulns
+	prVulns          *vulnerabilities.PRVulns
+	deps             *cmddeps.Deps
 }
 
 func (opts *VulnerabilitiesOptions) stdout() io.Writer {
@@ -59,23 +62,27 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	doc := heredoc.Docf(`
 		View dependency vulnerabilities for a repository.
 
-		By default, shows vulnerabilities from the default branch. Use %[1]s or %[2]s
-		to scope to a specific analysis run or pull request.
+		By default, shows vulnerabilities from the latest analyzed commit on the current branch. Use %[1]s or %[2]s
+		to scope to a specific analysis run or pull request, or %[3]s to query
+		the default branch.
 
 		Examples:
-		  %[3]s
 		  %[4]s
 		  %[5]s
 		  %[6]s
 		  %[7]s
+		  %[8]s
+		  %[9]s
 		`,
 		style.Yellow("--commit"),
 		style.Yellow("--pr"),
+		style.Yellow("--default-branch"),
 		style.Cyan("deepsource vulnerabilities"),
 		style.Cyan("deepsource vulnerabilities --repo owner/repo"),
 		style.Cyan("deepsource vulnerabilities --commit abc123f"),
 		style.Cyan("deepsource vulnerabilities --pr 123"),
 		style.Cyan("deepsource vulnerabilities --severity critical,high"),
+		style.Cyan("deepsource vulnerabilities --default-branch"),
 	)
 
 	cmd := &cobra.Command{
@@ -93,6 +100,7 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	// Scoping flags
 	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit OID")
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
+	cmd.Flags().BoolVar(&opts.DefaultBranch, "default-branch", false, "Show vulnerabilities from the default branch instead of current branch")
 
 	// --output flag
 	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, table, json, yaml")
@@ -126,7 +134,7 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	})
 
 	// Mutual exclusivity
-	cmd.MarkFlagsMutuallyExclusive("commit", "pr")
+	cmd.MarkFlagsMutuallyExclusive("commit", "pr", "default-branch")
 
 	return cmd
 }
@@ -175,8 +183,20 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 		opts.runVulns, err = client.GetRunVulns(ctx, opts.CommitOid, opts.LimitArg)
 	case opts.PRNumber > 0:
 		opts.prVulns, err = client.GetPRVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.PRNumber, opts.LimitArg)
-	default:
+	case opts.DefaultBranch:
 		opts.repoVulns, err = client.GetRepoVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
+	default:
+		var branchNameFunc func() (string, error)
+		if opts.deps != nil {
+			branchNameFunc = opts.deps.BranchNameFunc
+		}
+		commitOid, branchName, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc)
+		if resolveErr != nil {
+			return resolveErr
+		}
+		opts.CommitOid = commitOid
+		opts.autoDetectedBranch = branchName
+		opts.runVulns, err = client.GetRunVulns(ctx, commitOid, opts.LimitArg)
 	}
 	if err != nil {
 		return err
@@ -276,8 +296,14 @@ func printVulnVerboseInfo(vuln vulnerabilities.Vulnerability, v vulnerabilities.
 	if vuln.CvssV3BaseScore != nil {
 		fmt.Printf("    CVSS: %.1f\n", *vuln.CvssV3BaseScore)
 	}
+	if vuln.EpssScore != nil {
+		fmt.Printf("    EPSS: %.2f\n", *vuln.EpssScore)
+	}
 	if vuln.Summary != "" {
 		fmt.Printf("    %s\n", vuln.Summary)
+	}
+	if len(vuln.Aliases) > 0 {
+		fmt.Printf("    Also known as: %s\n", strings.Join(vuln.Aliases, ", "))
 	}
 	if len(vuln.FixedVersions) > 0 {
 		fmt.Printf("    Fixed in: %s\n", strings.Join(vuln.FixedVersions, ", "))
@@ -287,6 +313,9 @@ func printVulnVerboseInfo(vuln vulnerabilities.Vulnerability, v vulnerabilities.
 	}
 	if v.Fixability != "" {
 		fmt.Printf("    Fixability: %s\n", strings.ToLower(v.Fixability))
+	}
+	if len(vuln.ReferenceUrls) > 0 {
+		fmt.Printf("    References: %s\n", strings.Join(vuln.ReferenceUrls, ", "))
 	}
 }
 
@@ -349,6 +378,12 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 
 	fmt.Printf("Showing %d vulnerability(ies) in %s", len(vulnsList), opts.repoSlug)
 	switch {
+	case opts.autoDetectedBranch != "":
+		commitShort := opts.CommitOid
+		if len(commitShort) > 8 {
+			commitShort = commitShort[:8]
+		}
+		fmt.Printf(" from %s (%s)\n", opts.autoDetectedBranch, commitShort)
 	case opts.runVulns != nil:
 		commitShort := opts.runVulns.CommitOid
 		if len(commitShort) > 7 {
@@ -571,3 +606,4 @@ func (opts *VulnerabilitiesOptions) writeOutput(data []byte, trailingNewline boo
 	pterm.Printf("Saved vulnerabilities to %s!\n", opts.OutputFile)
 	return nil
 }
+

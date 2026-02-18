@@ -34,6 +34,9 @@ const fetchPRVulnsQuery = `query GetPRVulns(
               summary
               cvssV3BaseScore
               fixedVersions
+              aliases
+              epssScore
+              referenceUrls
             }
             package {
               name
@@ -81,6 +84,9 @@ type PRVulnsResponse struct {
 							Summary         string   `json:"summary"`
 							CvssV3BaseScore *float64 `json:"cvssV3BaseScore"`
 							FixedVersions   []string `json:"fixedVersions"`
+							Aliases         []string `json:"aliases"`
+							EpssScore       *float64 `json:"epssScore"`
+							ReferenceUrls   []string `json:"referenceUrls"`
 						} `json:"vulnerability"`
 						Package struct {
 							Name      string `json:"name"`
@@ -134,6 +140,9 @@ func (r *PRVulnsRequest) Do(ctx context.Context) (*vulnerabilities.PRVulns, erro
 				Summary:         node.Vulnerability.Summary,
 				CvssV3BaseScore: node.Vulnerability.CvssV3BaseScore,
 				FixedVersions:   node.Vulnerability.FixedVersions,
+				Aliases:         node.Vulnerability.Aliases,
+				EpssScore:       node.Vulnerability.EpssScore,
+				ReferenceUrls:   node.Vulnerability.ReferenceUrls,
 			},
 			Package: vulnerabilities.Package{
 				Name:      node.Package.Name,

@@ -3,6 +3,7 @@ package logout
 import (
 	"errors"
 
+	"github.com/deepsourcelabs/cli/command/cmddeps"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/internal/cli/args"
 	"github.com/deepsourcelabs/cli/internal/cli/prompt"
@@ -12,16 +13,23 @@ import (
 	"github.com/spf13/cobra"
 )
 
-type LogoutOptions struct{}
+type LogoutOptions struct {
+	deps *cmddeps.Deps
+}
 
 // NewCmdLogout handles the logout functionality for the CLI
 func NewCmdLogout() *cobra.Command {
+	return NewCmdLogoutWithDeps(nil)
+}
+
+// NewCmdLogoutWithDeps creates the logout command with injectable dependencies.
+func NewCmdLogoutWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "logout",
 		Short: "Logout of your active DeepSource account",
 		Args:  args.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			opts := LogoutOptions{}
+			opts := LogoutOptions{deps: deps}
 			return opts.Run()
 		},
 	}
@@ -29,7 +37,13 @@ func NewCmdLogout() *cobra.Command {
 }
 
 func (opts *LogoutOptions) Run() error {
-	svc := authsvc.NewService(config.DefaultManager())
+	var cfgMgr *config.Manager
+	if opts.deps != nil && opts.deps.ConfigMgr != nil {
+		cfgMgr = opts.deps.ConfigMgr
+	} else {
+		cfgMgr = config.DefaultManager()
+	}
+	svc := authsvc.NewService(cfgMgr)
 	// Fetch config
 	cfg, err := svc.LoadConfig()
 	if err != nil {

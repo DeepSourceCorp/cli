@@ -3,9 +3,12 @@ package dashboard
 import (
 	"context"
 	"fmt"
+	"io"
+	"os"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/cli/browser"
+	"github.com/deepsourcelabs/cli/command/cmddeps"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/internal/cli/args"
 	"github.com/deepsourcelabs/cli/internal/cli/completion"
@@ -16,10 +19,24 @@ import (
 
 type DashboardOptions struct {
 	RepoArg string
+	deps    *cmddeps.Deps
+}
+
+func (opts *DashboardOptions) stdout() io.Writer {
+	if opts.deps != nil && opts.deps.Stdout != nil {
+		return opts.deps.Stdout
+	}
+	return os.Stdout
 }
 
 func NewCmdDashboard() *cobra.Command {
-	opts := DashboardOptions{}
+	return NewCmdDashboardWithDeps(nil)
+}
+
+func NewCmdDashboardWithDeps(deps *cmddeps.Deps) *cobra.Command {
+	opts := DashboardOptions{
+		deps: deps,
+	}
 
 	doc := heredoc.Docf(`
 		Open the DeepSource dashboard for a repository.
@@ -50,10 +67,30 @@ func NewCmdDashboard() *cobra.Command {
 
 func (opts *DashboardOptions) Run() error {
 	ctx := context.Background()
-	svc := reposvc.NewService(config.DefaultManager())
+
+	var cfgMgr *config.Manager
+	if opts.deps != nil && opts.deps.ConfigMgr != nil {
+		cfgMgr = opts.deps.ConfigMgr
+	} else {
+		cfgMgr = config.DefaultManager()
+	}
+
+	var svc *reposvc.Service
+	if opts.deps != nil && opts.deps.RepoService != nil {
+		svc = opts.deps.RepoService
+	} else {
+		svc = reposvc.NewService(cfgMgr)
+	}
+
 	dashboardURL, err := svc.ViewURL(ctx, opts.RepoArg)
 	if err != nil {
 		return err
+	}
+
+	// In test mode, write URL to stdout instead of opening browser
+	if opts.deps != nil && opts.deps.Stdout != nil {
+		fmt.Fprintf(opts.stdout(), "%s\n", dashboardURL)
+		return nil
 	}
 
 	fmt.Printf("Opening %s in your browser...\n", dashboardURL)

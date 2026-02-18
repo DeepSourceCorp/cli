@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/MakeNowJust/heredoc"
+	"github.com/deepsourcelabs/cli/command/cmddeps"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/internal/cli/args"
 	"github.com/deepsourcelabs/cli/internal/cli/prompt"
@@ -22,10 +23,16 @@ type LoginOptions struct {
 	HostName     string
 	Interactive  bool
 	PAT          string
+	deps         *cmddeps.Deps
 }
 
 // NewCmdLogin handles the login functionality for the CLI
 func NewCmdLogin() *cobra.Command {
+	return NewCmdLoginWithDeps(nil)
+}
+
+// NewCmdLoginWithDeps creates the login command with injectable dependencies.
+func NewCmdLoginWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	doc := heredoc.Docf(`
 		Log in to DeepSource using the CLI.
 
@@ -44,6 +51,7 @@ func NewCmdLogin() *cobra.Command {
 		TokenExpired: true,
 		User:         "",
 		HostName:     "",
+		deps:         deps,
 	}
 
 	cmd := &cobra.Command{
@@ -66,7 +74,13 @@ func NewCmdLogin() *cobra.Command {
 
 // Run executes the auth command and starts the login flow if not already authenticated
 func (opts *LoginOptions) Run() (err error) {
-	svc := authsvc.NewService(config.DefaultManager())
+	var cfgMgr *config.Manager
+	if opts.deps != nil && opts.deps.ConfigMgr != nil {
+		cfgMgr = opts.deps.ConfigMgr
+	} else {
+		cfgMgr = config.DefaultManager()
+	}
+	svc := authsvc.NewService(cfgMgr)
 	// Fetch config (errors are non-fatal: a zero config just means "not logged in")
 	cfg, err := svc.LoadConfig()
 	if err != nil {
