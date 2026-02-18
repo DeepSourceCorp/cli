@@ -2,7 +2,6 @@ package command
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/command/auth"
@@ -28,7 +27,7 @@ func NewCmdRoot() *cobra.Command {
 	info := buildinfo.GetBuildInfo()
 	if info != nil {
 		cmd.Version = info.Version
-		cmd.SetVersionTemplate(fmt.Sprintf("DeepSource CLI %s (%s)\n", info.Version, info.GitCommit))
+		cmd.SetVersionTemplate(info.String() + "\n")
 	}
 
 	// Disable default completion command

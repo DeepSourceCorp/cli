@@ -243,6 +243,53 @@ func (opts *VulnerabilitiesOptions) hasFilters() bool {
 	return len(opts.SeverityFilters) > 0
 }
 
+type vulnGroup struct {
+	identifier string
+	vuln       vulnerabilities.Vulnerability
+	entries    []vulnerabilities.VulnerabilityOccurrence
+}
+
+func groupByIdentifier(list []vulnerabilities.VulnerabilityOccurrence) []vulnGroup {
+	order := []string{}
+	groups := map[string]*vulnGroup{}
+	for _, v := range list {
+		id := v.Vulnerability.Identifier
+		if g, ok := groups[id]; ok {
+			g.entries = append(g.entries, v)
+		} else {
+			order = append(order, id)
+			groups[id] = &vulnGroup{
+				identifier: id,
+				vuln:       v.Vulnerability,
+				entries:    []vulnerabilities.VulnerabilityOccurrence{v},
+			}
+		}
+	}
+	result := make([]vulnGroup, 0, len(order))
+	for _, id := range order {
+		result = append(result, *groups[id])
+	}
+	return result
+}
+
+func printVulnVerboseInfo(vuln vulnerabilities.Vulnerability, v vulnerabilities.VulnerabilityOccurrence) {
+	if vuln.CvssV3BaseScore != nil {
+		fmt.Printf("    CVSS: %.1f\n", *vuln.CvssV3BaseScore)
+	}
+	if vuln.Summary != "" {
+		fmt.Printf("    %s\n", vuln.Summary)
+	}
+	if len(vuln.FixedVersions) > 0 {
+		fmt.Printf("    Fixed in: %s\n", strings.Join(vuln.FixedVersions, ", "))
+	}
+	if v.Reachability != "" {
+		fmt.Printf("    Reachability: %s\n", strings.ToLower(v.Reachability))
+	}
+	if v.Fixability != "" {
+		fmt.Printf("    Fixability: %s\n", strings.ToLower(v.Fixability))
+	}
+}
+
 func (opts *VulnerabilitiesOptions) outputHuman() error {
 	vulnsList := opts.getVulns()
 
@@ -270,43 +317,34 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 
 		header := fmt.Sprintf("%s (%d)", humanizeSeverity(sev), len(group))
 		fmt.Println(colorSeverity(sev, header))
+
+		vulnGroups := groupByIdentifier(group)
+		for _, vg := range vulnGroups {
+			if len(vg.entries) == 1 {
+				v := vg.entries[0]
+				ecosystem := v.Package.Ecosystem
+				if ecosystem == "" {
+					ecosystem = "unknown"
+				}
+				fmt.Printf("  %s: %s@%s (%s)\n", vg.identifier, v.Package.Name, v.PackageVersion.Version, ecosystem)
+				if opts.Verbose {
+					printVulnVerboseInfo(vg.vuln, v)
+				}
+			} else {
+				fmt.Printf("  %s (%d packages)\n", vg.identifier, len(vg.entries))
+				if opts.Verbose {
+					printVulnVerboseInfo(vg.vuln, vg.entries[0])
+				}
+				for _, v := range vg.entries {
+					ecosystem := v.Package.Ecosystem
+					if ecosystem == "" {
+						ecosystem = "unknown"
+					}
+					fmt.Printf("    %s@%s (%s)\n", v.Package.Name, v.PackageVersion.Version, ecosystem)
+				}
+			}
+		}
 		fmt.Println()
-
-		for _, v := range group {
-			ecosystem := v.Package.Ecosystem
-			if ecosystem == "" {
-				ecosystem = "unknown"
-			}
-			fmt.Printf("  %s: %s@%s (%s)\n",
-				v.Vulnerability.Identifier,
-				v.Package.Name,
-				v.PackageVersion.Version,
-				ecosystem,
-			)
-
-			if opts.Verbose {
-				if v.Vulnerability.CvssV3BaseScore != nil {
-					fmt.Printf("    CVSS: %.1f\n", *v.Vulnerability.CvssV3BaseScore)
-				}
-				if v.Vulnerability.Summary != "" {
-					fmt.Printf("    %s\n", v.Vulnerability.Summary)
-				}
-				if len(v.Vulnerability.FixedVersions) > 0 {
-					fmt.Printf("    Fixed in: %s\n", strings.Join(v.Vulnerability.FixedVersions, ", "))
-				}
-				if v.Reachability != "" {
-					fmt.Printf("    Reachability: %s\n", strings.ToLower(v.Reachability))
-				}
-				if v.Fixability != "" {
-					fmt.Printf("    Fixability: %s\n", strings.ToLower(v.Fixability))
-				}
-				fmt.Println()
-			}
-		}
-
-		if !opts.Verbose {
-			fmt.Println()
-		}
 	}
 
 	fmt.Printf("Showing %d vulnerability(ies) in %s", len(vulnsList), opts.repoSlug)

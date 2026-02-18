@@ -102,7 +102,7 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().StringVar(&opts.OutputFile, "output-file", "", "Write output to a file instead of stdout")
 
 	// --verbose, -v flag
-	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show issue code, analyzer, and description")
+	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show issue description")
 
 	// Scoping flags
 	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit OID")
@@ -312,6 +312,68 @@ func matchesPathFilters(path string, filters []string) bool {
 
 // --- Human output ---
 
+type codeGroup struct {
+	issue     issues.Issue
+	locations []issues.Location
+}
+
+type categoryGroup struct {
+	category string
+	codes    []codeGroup
+	total    int
+}
+
+// groupByCategoryAndCode groups issues first by category (preserving first-seen order),
+// then by issue code within each category.
+func groupByCategoryAndCode(list []issues.Issue) []categoryGroup {
+	catOrder := []string{}
+	catMap := map[string]*categoryGroup{}
+
+	for _, issue := range list {
+		cat := issue.IssueCategory
+		cg, catExists := catMap[cat]
+		if !catExists {
+			catOrder = append(catOrder, cat)
+			cg = &categoryGroup{category: cat}
+			catMap[cat] = cg
+		}
+
+		found := false
+		for i := range cg.codes {
+			if cg.codes[i].issue.IssueCode == issue.IssueCode {
+				cg.codes[i].locations = append(cg.codes[i].locations, issue.Location)
+				found = true
+				break
+			}
+		}
+		if !found {
+			cg.codes = append(cg.codes, codeGroup{
+				issue:     issue,
+				locations: []issues.Location{issue.Location},
+			})
+		}
+		cg.total++
+	}
+
+	result := make([]categoryGroup, 0, len(catOrder))
+	for _, cat := range catOrder {
+		result = append(result, *catMap[cat])
+	}
+	return result
+}
+
+const ruledLineWidth = 55
+
+func severityRuledHeader(sev string, count int) string {
+	label := fmt.Sprintf("── %s (%d) ", humanizeSeverity(sev), count)
+	pad := ruledLineWidth - len(label)
+	if pad < 3 {
+		pad = 3
+	}
+	line := label + strings.Repeat("─", pad)
+	return colorSeverity(sev, line)
+}
+
 func (opts *IssuesOptions) outputHuman() error {
 	if len(opts.issues) == 0 {
 		if opts.hasFilters() {
@@ -332,44 +394,56 @@ func (opts *IssuesOptions) outputHuman() error {
 	}
 
 	for _, sev := range order {
-		group, ok := groups[sev]
-		if !ok || len(group) == 0 {
+		sevGroup, ok := groups[sev]
+		if !ok || len(sevGroup) == 0 {
 			continue
 		}
 
-		header := fmt.Sprintf("%s (%d)", humanizeSeverity(sev), len(group))
-		fmt.Println(colorSeverity(sev, header))
+		fmt.Println(severityRuledHeader(sev, len(sevGroup)))
 		fmt.Println()
 
-		for _, issue := range group {
-			location := formatLocation(issue, cwd)
-			category := humanizeCategory(issue.IssueCategory)
-			fmt.Printf("  %s: %s (%s)\n", category, issue.IssueText, location)
+		catGroups := groupByCategoryAndCode(sevGroup)
+		for _, cg := range catGroups {
+			fmt.Printf("  %s (%d)\n\n", humanizeCategory(cg.category), cg.total)
 
-			if opts.Verbose {
-				analyzer := analyzerDisplayName(issue.Analyzer)
-				fmt.Printf("    %s · %s\n", issue.IssueCode, analyzer)
-				if issue.Description != "" {
-					fmt.Printf("    %s\n", issue.Description)
+			for _, ig := range cg.codes {
+				fmt.Printf("    %s %s\n", pterm.Bold.Sprint("✗"), pterm.Bold.Sprint(ig.issue.IssueText))
+
+				analyzer := analyzerDisplayName(ig.issue.Analyzer)
+				meta := fmt.Sprintf("%s · %s", ig.issue.IssueCode, analyzer)
+				if len(ig.locations) > 1 {
+					meta += fmt.Sprintf(" (%d occurrences)", len(ig.locations))
 				}
+				fmt.Printf("      %s\n", pterm.Gray(meta))
+
+				for _, loc := range ig.locations {
+					fmt.Printf("      %s\n", pterm.Gray(formatLocationFromParts(loc, cwd)))
+				}
+
+				if opts.Verbose && ig.issue.Description != "" {
+					desc := ig.issue.Description
+					if idx := strings.IndexByte(desc, '\n'); idx != -1 {
+						desc = desc[:idx]
+					}
+					fmt.Printf("      %s\n", pterm.Gray(desc))
+				}
+
 				fmt.Println()
 			}
 		}
-
-		if !opts.Verbose {
-			fmt.Println()
-		}
 	}
 
-	fmt.Printf("Showing %d issue(s) in %s", len(opts.issues), opts.repoSlug)
+	fmt.Println(strings.Repeat("─", ruledLineWidth))
+
+	scope := "default branch"
 	switch {
 	case opts.CommitOid != "":
-		fmt.Printf(" from commit %s\n", opts.CommitOid)
+		scope = "commit " + opts.CommitOid
 	case opts.PRNumber > 0:
-		fmt.Printf(" from PR #%d\n", opts.PRNumber)
-	default:
-		fmt.Println(" from default branch")
+		scope = fmt.Sprintf("PR #%d", opts.PRNumber)
 	}
+	fmt.Printf("%d issues · %s · %s\n", len(opts.issues), opts.repoSlug, scope)
+
 	return nil
 }
 
@@ -569,14 +643,19 @@ func formatSeverity(severity string) string {
 	}
 }
 
-func formatLocation(issue issues.Issue, cwd string) string {
-	filePath := issue.Location.Path
+func formatLocationFromParts(loc issues.Location, cwd string) string {
+	filePath := loc.Path
 	if cwd != "" && strings.HasPrefix(filePath, cwd) {
 		filePath = strings.TrimPrefix(filePath, cwd+"/")
 	}
-	if issue.Location.Position.BeginLine == issue.Location.Position.EndLine {
-		return fmt.Sprintf("%s:%d", filePath, issue.Location.Position.BeginLine)
+	if loc.Position.BeginLine == loc.Position.EndLine {
+		return fmt.Sprintf("%s:%d", filePath, loc.Position.BeginLine)
 	}
-	return fmt.Sprintf("%s:%d-%d", filePath, issue.Location.Position.BeginLine, issue.Location.Position.EndLine)
+	return fmt.Sprintf("%s:%d-%d", filePath, loc.Position.BeginLine, loc.Position.EndLine)
+}
+
+
+func formatLocation(issue issues.Issue, cwd string) string {
+	return formatLocationFromParts(issue.Location, cwd)
 }
 
