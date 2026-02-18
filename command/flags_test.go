@@ -3,7 +3,7 @@ package command
 import (
 	"testing"
 
-	analysisCmd "github.com/deepsourcelabs/cli/command/analysis"
+	runsCmd "github.com/deepsourcelabs/cli/command/runs"
 	issuesCmd "github.com/deepsourcelabs/cli/command/issues"
 	metricsCmd "github.com/deepsourcelabs/cli/command/metrics"
 	vulnsCmd "github.com/deepsourcelabs/cli/command/vulnerabilities"
@@ -35,7 +35,6 @@ func TestFlagDefaults(t *testing.T) {
 				{name: "severity", defaultValue: "[]"},
 				{name: "category", defaultValue: "[]"},
 				{name: "analyzer", defaultValue: "[]"},
-				{name: "code", defaultValue: "[]"},
 				{name: "path", defaultValue: "[]"},
 				{name: "source", defaultValue: "[]"},
 				{name: "default-branch", defaultValue: "false"},
@@ -69,8 +68,8 @@ func TestFlagDefaults(t *testing.T) {
 			},
 		},
 		{
-			name:     "analysis",
-			buildCmd: analysisCmd.NewCmdAnalysis,
+			name:     "runs",
+			buildCmd: runsCmd.NewCmdRuns,
 			expected: []flagExpectation{
 				{name: "limit", defaultValue: "20"},
 				{name: "output", defaultValue: "pretty"},

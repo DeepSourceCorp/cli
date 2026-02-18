@@ -1,4 +1,4 @@
-package analysis
+package runs
 
 import (
 	"context"
@@ -6,14 +6,16 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"sort"
 	"strings"
 	"time"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/command/cmddeps"
+	"github.com/deepsourcelabs/cli/command/cmdutil"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
-	"github.com/deepsourcelabs/cli/deepsource/runs"
+	runstypes "github.com/deepsourcelabs/cli/deepsource/runs"
 	"github.com/deepsourcelabs/cli/internal/cli/completion"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
@@ -22,7 +24,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-type AnalysisOptions struct {
+type RunsOptions struct {
 	RepoArg      string
 	LimitArg     int
 	OutputFormat string
@@ -30,19 +32,19 @@ type AnalysisOptions struct {
 	deps         *cmddeps.Deps
 }
 
-func (opts *AnalysisOptions) stdout() io.Writer {
+func (opts *RunsOptions) stdout() io.Writer {
 	if opts.deps != nil && opts.deps.Stdout != nil {
 		return opts.deps.Stdout
 	}
 	return os.Stdout
 }
 
-func NewCmdAnalysis() *cobra.Command {
-	return NewCmdAnalysisWithDeps(nil)
+func NewCmdRuns() *cobra.Command {
+	return NewCmdRunsWithDeps(nil)
 }
 
-func NewCmdAnalysisWithDeps(deps *cmddeps.Deps) *cobra.Command {
-	opts := AnalysisOptions{
+func NewCmdRunsWithDeps(deps *cmddeps.Deps) *cobra.Command {
+	opts := RunsOptions{
 		LimitArg: 20,
 		deps:     deps,
 	}
@@ -59,19 +61,20 @@ func NewCmdAnalysisWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Use %[4]s to show run metadata and issues summary:
 		  %[5]s
 		`,
-		style.Cyan("deepsource analysis"),
+		style.Cyan("deepsource runs"),
 		style.Yellow("--repo"),
-		style.Cyan("deepsource analysis --repo repo_name"),
+		style.Cyan("deepsource runs --repo repo_name"),
 		style.Yellow("--commit"),
-		style.Cyan("deepsource analysis --commit abc123f"),
+		style.Cyan("deepsource runs --commit abc123f"),
 	)
 
 	cmd := &cobra.Command{
-		Use:   "analysis [flags]",
+		Use:   "runs [flags]",
 		Short: "View analysis runs",
 		Long:  doc,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if opts.commitOid != "" {
+				opts.commitOid = cmdutil.ResolveCommitOid(opts.commitOid)
 				return opts.runDetail(cmd.Context())
 			}
 			return opts.runList()
@@ -97,7 +100,7 @@ func NewCmdAnalysisWithDeps(deps *cmddeps.Deps) *cobra.Command {
 }
 
 // runList fetches and displays a table of recent analysis runs.
-func (opts *AnalysisOptions) runList() error {
+func (opts *RunsOptions) runList() error {
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
 		cfgMgr = opts.deps.ConfigMgr
@@ -132,7 +135,7 @@ func (opts *AnalysisOptions) runList() error {
 	}
 
 	ctx := context.Background()
-	analysisRuns, err := client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
+	analysisRuns, _, err := client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg, nil)
 	if err != nil {
 		return err
 	}
@@ -151,7 +154,7 @@ func (opts *AnalysisOptions) runList() error {
 }
 
 // runDetail fetches and displays metadata + issues summary for a single commit.
-func (opts *AnalysisOptions) runDetail(ctx context.Context) error {
+func (opts *RunsOptions) runDetail(ctx context.Context) error {
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
 		cfgMgr = opts.deps.ConfigMgr
@@ -195,7 +198,7 @@ func (opts *AnalysisOptions) runDetail(ctx context.Context) error {
 		commitShort = commitShort[:8]
 	}
 
-	pterm.DefaultBox.WithTitle("Analysis Run").WithTitleTopCenter().Println(
+	pterm.DefaultBox.WithTitle("Run Details").WithTitleTopCenter().Println(
 		fmt.Sprintf("%s %s\n%s %s\n%s %s",
 			pterm.Bold.Sprint("Commit:"),
 			commitShort,
@@ -206,6 +209,7 @@ func (opts *AnalysisOptions) runDetail(ctx context.Context) error {
 		),
 	)
 
+	cmdutil.ShowReportCard(runWithIssues.ReportCard)
 	showIssuesSummary(runWithIssues.Issues)
 
 	pterm.Println()
@@ -217,10 +221,11 @@ func (opts *AnalysisOptions) runDetail(ctx context.Context) error {
 
 // --- JSON output ---
 
-type AnalysisRunJSON struct {
+type RunJSON struct {
 	CommitOid              string     `json:"commit_oid"`
 	BranchName             string     `json:"branch_name"`
 	Status                 string     `json:"status"`
+	Grade                  string     `json:"grade"`
 	OccurrencesIntroduced  int        `json:"occurrences_introduced"`
 	OccurrencesResolved    int        `json:"occurrences_resolved"`
 	OccurrencesSuppressed  int        `json:"occurrences_suppressed"`
@@ -228,10 +233,11 @@ type AnalysisRunJSON struct {
 }
 
 type RunDetailJSON struct {
-	CommitOid  string         `json:"commit_oid"`
-	BranchName string         `json:"branch_name"`
-	Status     string         `json:"status"`
-	Issues     []RunIssueJSON `json:"issues"`
+	CommitOid  string                  `json:"commit_oid"`
+	BranchName string                  `json:"branch_name"`
+	Status     string                  `json:"status"`
+	ReportCard *cmdutil.ReportCardJSON `json:"report_card,omitempty"`
+	Issues     []RunIssueJSON          `json:"issues"`
 }
 
 type RunIssueJSON struct {
@@ -240,15 +246,21 @@ type RunIssueJSON struct {
 	Code     string `json:"code"`
 	Category string `json:"category"`
 	Severity string `json:"severity"`
+	Analyzer string `json:"analyzer"`
 }
 
-func (opts *AnalysisOptions) outputRunsJSON(analysisRuns []runs.AnalysisRun) error {
-	result := make([]AnalysisRunJSON, 0, len(analysisRuns))
+func (opts *RunsOptions) outputRunsJSON(analysisRuns []runstypes.AnalysisRun) error {
+	result := make([]RunJSON, 0, len(analysisRuns))
 	for _, run := range analysisRuns {
-		result = append(result, AnalysisRunJSON{
+		grade := "-"
+		if run.ReportCard != nil && run.ReportCard.Aggregate != nil {
+			grade = run.ReportCard.Aggregate.Grade
+		}
+		result = append(result, RunJSON{
 			CommitOid:              run.CommitOid,
 			BranchName:             run.BranchName,
 			Status:                 run.Status,
+			Grade:                  grade,
 			OccurrencesIntroduced:  run.OccurrencesIntroduced,
 			OccurrencesResolved:    run.OccurrencesResolved,
 			OccurrencesSuppressed:  run.OccurrencesSuppressed,
@@ -263,7 +275,7 @@ func (opts *AnalysisOptions) outputRunsJSON(analysisRuns []runs.AnalysisRun) err
 	return nil
 }
 
-func (opts *AnalysisOptions) outputRunDetailJSON(runWithIssues *runs.RunWithIssues) error {
+func (opts *RunsOptions) outputRunDetailJSON(runWithIssues *runstypes.RunWithIssues) error {
 	issuesJSON := make([]RunIssueJSON, 0, len(runWithIssues.Issues))
 	for _, issue := range runWithIssues.Issues {
 		issuesJSON = append(issuesJSON, RunIssueJSON{
@@ -272,12 +284,14 @@ func (opts *AnalysisOptions) outputRunDetailJSON(runWithIssues *runs.RunWithIssu
 			Code:     issue.IssueCode,
 			Category: issue.Category,
 			Severity: issue.Severity,
+			Analyzer: issue.AnalyzerName,
 		})
 	}
 	result := RunDetailJSON{
 		CommitOid:  runWithIssues.CommitOid,
 		BranchName: runWithIssues.BranchName,
 		Status:     runWithIssues.Status,
+		ReportCard: cmdutil.ToReportCardJSON(runWithIssues.ReportCard),
 		Issues:     issuesJSON,
 	}
 	data, err := json.MarshalIndent(result, "", "  ")
@@ -290,8 +304,8 @@ func (opts *AnalysisOptions) outputRunDetailJSON(runWithIssues *runs.RunWithIssu
 
 // --- Display helpers ---
 
-func showRunsTable(analysisRuns []runs.AnalysisRun) {
-	header := []string{"Commit", "Branch", "Status", "Introduced", "Resolved", "Suppressed", "Finished"}
+func showRunsTable(analysisRuns []runstypes.AnalysisRun) {
+	header := []string{"Commit", "Branch", "Status", "Grade", "Introduced", "Resolved", "Suppressed", "Finished"}
 	data := [][]string{header}
 
 	for _, run := range analysisRuns {
@@ -306,6 +320,12 @@ func showRunsTable(analysisRuns []runs.AnalysisRun) {
 		}
 
 		status := formatStatus(run.Status)
+
+		grade := "-"
+		if run.ReportCard != nil && run.ReportCard.Aggregate != nil {
+			grade = run.ReportCard.Aggregate.Grade
+		}
+
 		introduced := fmt.Sprintf("%d", run.OccurrencesIntroduced)
 		resolved := fmt.Sprintf("%d", run.OccurrencesResolved)
 		suppressed := fmt.Sprintf("%d", run.OccurrencesSuppressed)
@@ -319,6 +339,7 @@ func showRunsTable(analysisRuns []runs.AnalysisRun) {
 			commitShort,
 			branch,
 			status,
+			grade,
 			introduced,
 			resolved,
 			suppressed,
@@ -329,7 +350,7 @@ func showRunsTable(analysisRuns []runs.AnalysisRun) {
 	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
 }
 
-func showIssuesSummary(issues []runs.RunIssue) {
+func showIssuesSummary(issues []runstypes.RunIssue) {
 	if len(issues) == 0 {
 		pterm.Println()
 		pterm.Success.Println("No issues found in this run")
@@ -337,6 +358,9 @@ func showIssuesSummary(issues []runs.RunIssue) {
 	}
 
 	var critical, major, minor int
+	categoryCount := map[string]int{}
+	analyzerCount := map[string]int{}
+
 	for _, issue := range issues {
 		switch strings.ToUpper(issue.Severity) {
 		case "CRITICAL":
@@ -345,6 +369,12 @@ func showIssuesSummary(issues []runs.RunIssue) {
 			major++
 		case "MINOR":
 			minor++
+		}
+		if issue.Category != "" {
+			categoryCount[issue.Category]++
+		}
+		if issue.AnalyzerName != "" {
+			analyzerCount[issue.AnalyzerName]++
 		}
 	}
 
@@ -364,6 +394,31 @@ func showIssuesSummary(issues []runs.RunIssue) {
 	if len(parts) > 0 {
 		pterm.Println("  " + strings.Join(parts, ", "))
 	}
+
+	if len(categoryCount) > 0 {
+		pterm.Println()
+		pterm.Println(pterm.Bold.Sprint("By Category:"))
+		for _, key := range sortedKeys(categoryCount) {
+			pterm.Printf("  %s: %d\n", cmdutil.FormatCategory(key), categoryCount[key])
+		}
+	}
+
+	if len(analyzerCount) > 0 {
+		pterm.Println()
+		pterm.Println(pterm.Bold.Sprint("By Analyzer:"))
+		for _, key := range sortedKeys(analyzerCount) {
+			pterm.Printf("  %s: %d\n", key, analyzerCount[key])
+		}
+	}
+}
+
+func sortedKeys(m map[string]int) []string {
+	keys := make([]string, 0, len(m))
+	for k := range m {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	return keys
 }
 
 func formatStatus(status string) string {

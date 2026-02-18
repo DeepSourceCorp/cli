@@ -290,35 +290,6 @@ func TestIssuesFilterByAnalyzer(t *testing.T) {
 	}
 }
 
-func TestIssuesFilterByCode(t *testing.T) {
-	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
-	mock := testutil.MockQueryFunc(t, map[string]string{
-		"issues(first: $limit)": goldenPath("default_branch_response.json"),
-	})
-	client := deepsource.NewWithGraphQLClient(mock)
-
-	var buf bytes.Buffer
-	deps := &cmddeps.Deps{
-		Client:    client,
-		ConfigMgr: cfgMgr,
-		Stdout:    &buf,
-	}
-
-	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
-	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--default-branch", "--code", "GO-S1001", "--output", "json"})
-
-	if err := cmd.Execute(); err != nil {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	expected := string(testutil.LoadGoldenFile(t, goldenPath("filtered_code_output.json")))
-	got := buf.String()
-
-	if strings.TrimSpace(got) != strings.TrimSpace(expected) {
-		t.Errorf("output mismatch.\nExpected:\n%s\nGot:\n%s", expected, got)
-	}
-}
-
 func TestIssuesFilterByPath(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{

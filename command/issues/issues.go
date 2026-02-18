@@ -33,7 +33,6 @@ type IssuesOptions struct {
 	AnalyzerFilters []string
 	CategoryFilters []string
 	SeverityFilters []string
-	CodeFilters     []string
 	PathFilters     []string
 	SourceFilters   []string
 	CommitOid       string
@@ -111,7 +110,7 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show issue description")
 
 	// Scoping flags
-	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit OID")
+	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit SHA")
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
 	cmd.Flags().BoolVar(&opts.DefaultBranch, "default-branch", false, "Show issues from the default branch instead of current branch")
 
@@ -119,7 +118,6 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().StringSliceVar(&opts.AnalyzerFilters, "analyzer", nil, "Filter by analyzer shortcode (e.g. python,go)")
 	cmd.Flags().StringSliceVar(&opts.CategoryFilters, "category", nil, "Filter by category (e.g. security,bug-risk)")
 	cmd.Flags().StringSliceVar(&opts.SeverityFilters, "severity", nil, "Filter by severity (e.g. critical,major)")
-	cmd.Flags().StringSliceVar(&opts.CodeFilters, "code", nil, "Filter by issue code (e.g. GO-R1005)")
 	cmd.Flags().StringSliceVar(&opts.PathFilters, "path", nil, "Filter by path substring (e.g. cmd/,internal/)")
 	cmd.Flags().StringSliceVar(&opts.SourceFilters, "source", nil, "Filter by source (static, ai)")
 
@@ -192,6 +190,10 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 		}
 	}
 
+	if opts.CommitOid != "" {
+		opts.CommitOid = cmdutil.ResolveCommitOid(opts.CommitOid)
+	}
+
 	serverFilters := opts.buildServerFilters()
 
 	var issuesList []issues.Issue
@@ -209,6 +211,10 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 		}
 		commitOid, branchName, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc)
 		if resolveErr != nil {
+			if branchName != "" && branchName == cmdutil.GetDefaultBranch() {
+				issuesList, err = client.GetIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
+				break
+			}
 			return resolveErr
 		}
 		opts.CommitOid = commitOid
@@ -260,7 +266,6 @@ func (opts *IssuesOptions) hasFilters() bool {
 	return len(opts.AnalyzerFilters) > 0 ||
 		len(opts.CategoryFilters) > 0 ||
 		len(opts.SeverityFilters) > 0 ||
-		len(opts.CodeFilters) > 0 ||
 		len(opts.PathFilters) > 0 ||
 		len(opts.SourceFilters) > 0
 }
@@ -273,7 +278,6 @@ func (opts *IssuesOptions) filterIssues(issuesList []issues.Issue) []issues.Issu
 	analyzerSet := makeStringSet(opts.AnalyzerFilters)
 	categorySet := makeStringSet(opts.CategoryFilters)
 	severitySet := makeStringSet(opts.SeverityFilters)
-	codeSet := makeStringSet(opts.CodeFilters)
 	sourceSet := makeStringSet(opts.SourceFilters)
 	pathFilters := makeLowerStrings(opts.PathFilters)
 
@@ -286,9 +290,6 @@ func (opts *IssuesOptions) filterIssues(issuesList []issues.Issue) []issues.Issu
 			continue
 		}
 		if len(severitySet) > 0 && !setContainsFold(severitySet, issue.IssueSeverity) {
-			continue
-		}
-		if len(codeSet) > 0 && !setContainsFold(codeSet, issue.IssueCode) {
 			continue
 		}
 		if len(sourceSet) > 0 && !setContainsFold(sourceSet, issue.IssueSource) {

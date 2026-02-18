@@ -15,9 +15,10 @@ const fetchAnalysisRunsQuery = `query GetAnalysisRuns(
   $owner: String!
   $provider: VCSProvider!
   $limit: Int!
+  $after: String
 ) {
   repository(name: $name, login: $owner, vcsProvider: $provider) {
-    analysisRuns(first: $limit) {
+    analysisRuns(first: $limit, after: $after) {
       edges {
         node {
           runUid
@@ -44,6 +45,10 @@ const fetchAnalysisRunsQuery = `query GetAnalysisRuns(
           }
         }
       }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
     }
   }
 }`
@@ -53,11 +58,17 @@ type AnalysisRunsListParams struct {
 	RepoName string
 	Provider string
 	Limit    int
+	After    *string
 }
 
 type AnalysisRunsListRequest struct {
 	client graphqlclient.GraphQLClient
 	Params AnalysisRunsListParams
+}
+
+type PageInfo struct {
+	HasNextPage bool    `json:"hasNextPage"`
+	EndCursor   *string `json:"endCursor"`
 }
 
 type AnalysisRunsListResponse struct {
@@ -116,6 +127,7 @@ type AnalysisRunsListResponse struct {
 					} `json:"reportCard"`
 				} `json:"node"`
 			} `json:"edges"`
+			PageInfo PageInfo `json:"pageInfo"`
 		} `json:"analysisRuns"`
 	} `json:"repository"`
 }
@@ -124,16 +136,19 @@ func NewAnalysisRunsListRequest(client graphqlclient.GraphQLClient, params Analy
 	return &AnalysisRunsListRequest{client: client, Params: params}
 }
 
-func (r *AnalysisRunsListRequest) Do(ctx context.Context) ([]runs.AnalysisRun, error) {
+func (r *AnalysisRunsListRequest) Do(ctx context.Context) ([]runs.AnalysisRun, PageInfo, error) {
 	vars := map[string]interface{}{
 		"name":     r.Params.RepoName,
 		"owner":    r.Params.Owner,
 		"provider": r.Params.Provider,
 		"limit":    r.Params.Limit,
 	}
+	if r.Params.After != nil {
+		vars["after"] = *r.Params.After
+	}
 	var respData AnalysisRunsListResponse
 	if err := r.client.Query(ctx, fetchAnalysisRunsQuery, vars, &respData); err != nil {
-		return nil, fmt.Errorf("List analysis runs: %w", err)
+		return nil, PageInfo{}, fmt.Errorf("List analysis runs: %w", err)
 	}
 
 	result := make([]runs.AnalysisRun, 0, len(respData.Repository.AnalysisRuns.Edges))
@@ -199,5 +214,5 @@ func (r *AnalysisRunsListRequest) Do(ctx context.Context) ([]runs.AnalysisRun, e
 		result = append(result, run)
 	}
 
-	return result, nil
+	return result, respData.Repository.AnalysisRuns.PageInfo, nil
 }

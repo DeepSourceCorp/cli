@@ -1,0 +1,37 @@
+{
+  "status": "READY",
+  "security": {
+    "grade": "A+",
+    "score": 98,
+    "issues_count": 1
+  },
+  "reliability": {
+    "grade": "A",
+    "score": 95,
+    "issues_count": 2
+  },
+  "complexity": {
+    "grade": "B+",
+    "score": 85,
+    "issues_count": 5
+  },
+  "hygiene": {
+    "grade": "A",
+    "score": 92,
+    "issues_count": 3
+  },
+  "coverage": {
+    "grade": "B",
+    "score": 80,
+    "line_coverage": 78.5,
+    "branch_coverage": 65.2
+  },
+  "aggregate": {
+    "grade": "A",
+    "score": 92
+  },
+  "focus_area": {
+    "dimension": "COMPLEXITY",
+    "action": "Reduce cyclomatic complexity"
+  }
+}

@@ -74,7 +74,7 @@ Usage:
 
 Available commands are:
     auth                Authentication commands (login, logout, refresh, status)
-    analysis            View analysis runs
+    runs                View analysis runs
     issues              View issues in a repository
     repo                Operations related to the project repository (status, view)
     report              Report artifacts to DeepSource

@@ -5,9 +5,10 @@ import (
 
 	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/command/auth"
-	"github.com/deepsourcelabs/cli/command/analysis"
+	"github.com/deepsourcelabs/cli/command/runs"
 	"github.com/deepsourcelabs/cli/command/issues"
 	"github.com/deepsourcelabs/cli/command/metrics"
+	"github.com/deepsourcelabs/cli/command/reportcard"
 	"github.com/deepsourcelabs/cli/command/repository"
 	"github.com/deepsourcelabs/cli/command/report"
 	"github.com/deepsourcelabs/cli/command/vulnerabilities"
@@ -39,10 +40,11 @@ func NewCmdRoot() *cobra.Command {
 	// Child Commands
 	cmd.AddCommand(auth.NewCmdAuth())
 	cmd.AddCommand(repository.NewCmdRepository())
-	cmd.AddCommand(analysis.NewCmdAnalysis())
+	cmd.AddCommand(runs.NewCmdRuns())
 	cmd.AddCommand(report.NewCmdReport())
 	cmd.AddCommand(issues.NewCmdIssues())
 	cmd.AddCommand(metrics.NewCmdMetrics())
+	cmd.AddCommand(reportcard.NewCmdReportCard())
 	cmd.AddCommand(vulnerabilities.NewCmdVulnerabilities())
 
 	return cmd
