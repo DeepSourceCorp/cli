@@ -362,18 +362,6 @@ func groupByCategoryAndCode(list []issues.Issue) []categoryGroup {
 	return result
 }
 
-const ruledLineWidth = 55
-
-func severityRuledHeader(sev string, count int) string {
-	label := fmt.Sprintf("── %s (%d) ", humanizeSeverity(sev), count)
-	pad := ruledLineWidth - len(label)
-	if pad < 3 {
-		pad = 3
-	}
-	line := label + strings.Repeat("─", pad)
-	return colorSeverity(sev, line)
-}
-
 func (opts *IssuesOptions) outputHuman() error {
 	if len(opts.issues) == 0 {
 		if opts.hasFilters() {
@@ -384,6 +372,48 @@ func (opts *IssuesOptions) outputHuman() error {
 		return nil
 	}
 
+	// Build severity counts for the summary box.
+	sevCounts := map[string]int{}
+	for _, issue := range opts.issues {
+		sev := strings.ToUpper(issue.IssueSeverity)
+		sevCounts[sev]++
+	}
+
+	// Build severity breakdown string (only non-zero severities, colored).
+	var sevParts []string
+	for _, sev := range []string{"CRITICAL", "MAJOR", "MINOR"} {
+		if c := sevCounts[sev]; c > 0 {
+			sevParts = append(sevParts, colorSeverity(sev, fmt.Sprintf("%d %s", c, strings.ToLower(humanizeSeverity(sev)))))
+		}
+	}
+
+	// Build the ruled section header.
+	fmt.Println(pterm.Bold.Sprint("── Issues ────"))
+
+	var scopeLabel string
+	switch {
+	case opts.CommitOid != "":
+		short := opts.CommitOid
+		if len(short) > 8 {
+			short = short[:8]
+		}
+		scopeLabel = "commit " + short
+	case opts.PRNumber > 0:
+		scopeLabel = fmt.Sprintf("PR #%d", opts.PRNumber)
+	default:
+		scopeLabel = "default branch"
+	}
+
+	fmt.Printf("%s · %s\n", opts.repoSlug, scopeLabel)
+
+	summaryLine := fmt.Sprintf("%d total", len(opts.issues))
+	if len(sevParts) > 0 {
+		summaryLine += ": " + strings.Join(sevParts, " · ")
+	}
+	fmt.Println(summaryLine)
+	fmt.Println()
+
+	// Group and render issues by severity → category → code.
 	cwd, _ := os.Getwd()
 
 	order := []string{"CRITICAL", "MAJOR", "MINOR"}
@@ -399,7 +429,7 @@ func (opts *IssuesOptions) outputHuman() error {
 			continue
 		}
 
-		fmt.Println(severityRuledHeader(sev, len(sevGroup)))
+		fmt.Println(colorSeverity(sev, fmt.Sprintf("%s (%d)", humanizeSeverity(sev), len(sevGroup))))
 		fmt.Println()
 
 		catGroups := groupByCategoryAndCode(sevGroup)
@@ -433,16 +463,7 @@ func (opts *IssuesOptions) outputHuman() error {
 		}
 	}
 
-	fmt.Println(strings.Repeat("─", ruledLineWidth))
-
-	scope := "default branch"
-	switch {
-	case opts.CommitOid != "":
-		scope = "commit " + opts.CommitOid
-	case opts.PRNumber > 0:
-		scope = fmt.Sprintf("PR #%d", opts.PRNumber)
-	}
-	fmt.Printf("%d issues · %s · %s\n", len(opts.issues), opts.repoSlug, scope)
+	fmt.Printf("Showing %d issue(s) in %s from %s\n", len(opts.issues), opts.repoSlug, scopeLabel)
 
 	return nil
 }
