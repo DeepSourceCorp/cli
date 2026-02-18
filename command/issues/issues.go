@@ -10,9 +10,11 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/command/cmddeps"
+	"github.com/deepsourcelabs/cli/command/cmdutil"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
+	issuesQuery "github.com/deepsourcelabs/cli/deepsource/issues/queries"
 	"github.com/deepsourcelabs/cli/internal/cli/completion"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
@@ -36,7 +38,9 @@ type IssuesOptions struct {
 	SourceFilters   []string
 	CommitOid       string
 	PRNumber        int
+	DefaultBranch   bool
 	repoSlug        string
+	autoDetectedBranch string
 	issues          []issues.Issue
 	deps            *cmddeps.Deps
 }
@@ -62,20 +66,22 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	doc := heredoc.Docf(`
 		View issues in a repository.
 
-		Lists issues from the default branch by default:
+		By default, shows issues from the latest analyzed commit on the current branch:
 		  %[1]s
 
-		Scope to a specific commit or pull request:
+		Scope to a specific commit, pull request, or the default branch:
 		  %[2]s
 		  %[3]s
+		  %[4]s
 
 		Output as a table or structured format:
-		  %[4]s
 		  %[5]s
+		  %[6]s
 		`,
 		style.Cyan("deepsource issues"),
 		style.Cyan("deepsource issues --commit abc123f"),
 		style.Cyan("deepsource issues --pr 123"),
+		style.Cyan("deepsource issues --default-branch"),
 		style.Cyan("deepsource issues --output table"),
 		style.Cyan("deepsource issues --output json"),
 	)
@@ -107,6 +113,7 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	// Scoping flags
 	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit OID")
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
+	cmd.Flags().BoolVar(&opts.DefaultBranch, "default-branch", false, "Show issues from the default branch instead of current branch")
 
 	// Filter flags
 	cmd.Flags().StringSliceVar(&opts.AnalyzerFilters, "analyzer", nil, "Filter by analyzer shortcode (e.g. python,go)")
@@ -145,7 +152,7 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	})
 
 	// Mutual exclusivity
-	cmd.MarkFlagsMutuallyExclusive("commit", "pr")
+	cmd.MarkFlagsMutuallyExclusive("commit", "pr", "default-branch")
 
 	return cmd
 }
@@ -185,14 +192,28 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 		}
 	}
 
+	serverFilters := opts.buildServerFilters()
+
 	var issuesList []issues.Issue
 	switch {
 	case opts.CommitOid != "":
-		issuesList, err = client.GetRunIssuesFlat(ctx, opts.CommitOid, opts.LimitArg)
+		issuesList, err = client.GetRunIssuesFlat(ctx, opts.CommitOid, opts.LimitArg, serverFilters)
 	case opts.PRNumber > 0:
 		issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.PRNumber, opts.LimitArg)
-	default:
+	case opts.DefaultBranch:
 		issuesList, err = client.GetIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
+	default:
+		var branchNameFunc func() (string, error)
+		if opts.deps != nil {
+			branchNameFunc = opts.deps.BranchNameFunc
+		}
+		commitOid, branchName, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc)
+		if resolveErr != nil {
+			return resolveErr
+		}
+		opts.CommitOid = commitOid
+		opts.autoDetectedBranch = branchName
+		issuesList, err = client.GetRunIssuesFlat(ctx, commitOid, opts.LimitArg, serverFilters)
 	}
 	if err != nil {
 		return err
@@ -211,6 +232,26 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 	default:
 		return opts.outputHuman()
 	}
+}
+
+// buildServerFilters returns RunIssuesFlatParams with server-side filters set
+// for any filter that has exactly one value. Multi-value filters are left to
+// client-side filtering.
+func (opts *IssuesOptions) buildServerFilters() issuesQuery.RunIssuesFlatParams {
+	var params issuesQuery.RunIssuesFlatParams
+	if len(opts.SourceFilters) == 1 {
+		v := strings.ToUpper(strings.TrimSpace(opts.SourceFilters[0]))
+		params.Source = &v
+	}
+	if len(opts.CategoryFilters) == 1 {
+		v := strings.ToUpper(strings.TrimSpace(opts.CategoryFilters[0]))
+		params.Category = &v
+	}
+	if len(opts.SeverityFilters) == 1 {
+		v := strings.ToUpper(strings.TrimSpace(opts.SeverityFilters[0]))
+		params.Severity = &v
+	}
+	return params
 }
 
 // --- Filters ---
@@ -392,6 +433,12 @@ func (opts *IssuesOptions) outputHuman() error {
 
 	var scopeLabel string
 	switch {
+	case opts.autoDetectedBranch != "":
+		short := opts.CommitOid
+		if len(short) > 8 {
+			short = short[:8]
+		}
+		scopeLabel = opts.autoDetectedBranch + " (" + short + ")"
 	case opts.CommitOid != "":
 		short := opts.CommitOid
 		if len(short) > 8 {
@@ -429,12 +476,12 @@ func (opts *IssuesOptions) outputHuman() error {
 			continue
 		}
 
-		fmt.Println(colorSeverity(sev, fmt.Sprintf("%s (%d)", humanizeSeverity(sev), len(sevGroup))))
+		fmt.Println(colorSeverity(sev, fmt.Sprintf("%s (%d issues)", humanizeSeverity(sev), len(sevGroup))))
 		fmt.Println()
 
 		catGroups := groupByCategoryAndCode(sevGroup)
 		for _, cg := range catGroups {
-			fmt.Printf("  %s (%d)\n\n", humanizeCategory(cg.category), cg.total)
+			fmt.Printf("  %s (%d issues)\n\n", humanizeCategory(cg.category), cg.total)
 
 			for _, ig := range cg.codes {
 				fmt.Printf("    %s %s\n", pterm.Bold.Sprint("✗"), pterm.Bold.Sprint(ig.issue.IssueText))

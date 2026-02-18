@@ -9,7 +9,7 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 )
 
-const fetchRunIssuesFlatQuery = `query GetRunIssues($commitOid: String!, $limit: Int!) {
+const fetchRunIssuesFlatQuery = `query GetRunIssues($commitOid: String!, $limit: Int!, $source: AnalysisIssueSource, $category: IssueCategory, $severity: IssueSeverity, $q: String) {
   run(commitOid: $commitOid) {
     checks {
       edges {
@@ -18,7 +18,7 @@ const fetchRunIssuesFlatQuery = `query GetRunIssues($commitOid: String!, $limit:
             name
             shortcode
           }
-          issues(first: $limit) {
+          issues(first: $limit, source: $source, category: $category, severity: $severity, q: $q) {
             edges {
               node {
                 source
@@ -42,6 +42,10 @@ const fetchRunIssuesFlatQuery = `query GetRunIssues($commitOid: String!, $limit:
 type RunIssuesFlatParams struct {
 	CommitOid string
 	Limit     int
+	Source    *string // nil = don't filter server-side
+	Category *string // nil = don't filter
+	Severity *string // nil = don't filter
+	Q        *string // nil = don't filter
 }
 
 type RunIssuesFlatRequest struct {
@@ -87,6 +91,18 @@ func (r *RunIssuesFlatRequest) Do(ctx context.Context) ([]issues.Issue, error) {
 	vars := map[string]interface{}{
 		"commitOid": r.Params.CommitOid,
 		"limit":     r.Params.Limit,
+	}
+	if r.Params.Source != nil {
+		vars["source"] = *r.Params.Source
+	}
+	if r.Params.Category != nil {
+		vars["category"] = *r.Params.Category
+	}
+	if r.Params.Severity != nil {
+		vars["severity"] = *r.Params.Severity
+	}
+	if r.Params.Q != nil {
+		vars["q"] = *r.Params.Q
 	}
 	var respData RunIssuesFlatResponse
 	if err := r.client.Query(ctx, fetchRunIssuesFlatQuery, vars, &respData); err != nil {

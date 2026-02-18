@@ -12,7 +12,10 @@
               "severity": "CRITICAL",
               "summary": "SQL injection in query builder",
               "cvssV3BaseScore": 9.1,
-              "fixedVersions": ["5.0.1"]
+              "fixedVersions": ["5.0.1"],
+              "aliases": [],
+              "epssScore": 0.87,
+              "referenceUrls": []
             },
             "package": {
               "name": "db-driver",
@@ -33,7 +36,10 @@
               "severity": "HIGH",
               "summary": "Buffer overflow in parser",
               "cvssV3BaseScore": 7.8,
-              "fixedVersions": ["2.5.0"]
+              "fixedVersions": ["2.5.0"],
+              "aliases": [],
+              "epssScore": null,
+              "referenceUrls": []
             },
             "package": {
               "name": "parser-lib",
@@ -54,7 +60,10 @@
               "severity": "LOW",
               "summary": "Timing side-channel in comparison",
               "cvssV3BaseScore": 3.1,
-              "fixedVersions": []
+              "fixedVersions": [],
+              "aliases": [],
+              "epssScore": null,
+              "referenceUrls": []
             },
             "package": {
               "name": "crypto-utils",

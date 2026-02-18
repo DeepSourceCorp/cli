@@ -10,6 +10,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/command/cmddeps"
+	"github.com/deepsourcelabs/cli/command/cmdutil"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/metrics"
@@ -23,18 +24,20 @@ import (
 )
 
 type MetricsOptions struct {
-	RepoArg      string
-	CommitOid    string
-	PRNumber     int
-	OutputFormat string
-	OutputFile   string
-	Verbose      bool
-	LimitArg     int
-	repoSlug     string
-	repoMetrics  []metrics.RepositoryMetric
-	runMetrics   *metrics.RunMetrics
-	prMetrics    *metrics.PRMetrics
-	deps         *cmddeps.Deps
+	RepoArg          string
+	CommitOid        string
+	PRNumber         int
+	DefaultBranch    bool
+	OutputFormat     string
+	OutputFile       string
+	Verbose          bool
+	LimitArg         int
+	repoSlug         string
+	autoDetectedBranch string
+	repoMetrics      []metrics.RepositoryMetric
+	runMetrics       *metrics.RunMetrics
+	prMetrics        *metrics.PRMetrics
+	deps             *cmddeps.Deps
 }
 
 func (opts *MetricsOptions) stdout() io.Writer {
@@ -58,21 +61,25 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	doc := heredoc.Docf(`
 		View code metrics for a repository.
 
-		By default, shows metrics from the default branch. Use %[1]s or %[2]s
-		to scope to a specific analysis run or pull request.
+		By default, shows metrics from the latest analyzed commit on the current branch. Use %[1]s or %[2]s
+		to scope to a specific analysis run or pull request, or %[3]s to query
+		the default branch.
 
 		Examples:
-		  %[3]s
 		  %[4]s
 		  %[5]s
 		  %[6]s
+		  %[7]s
+		  %[8]s
 		`,
 		style.Yellow("--commit"),
 		style.Yellow("--pr"),
+		style.Yellow("--default-branch"),
 		style.Cyan("deepsource metrics"),
 		style.Cyan("deepsource metrics --repo owner/repo"),
 		style.Cyan("deepsource metrics --commit abc123f"),
 		style.Cyan("deepsource metrics --pr 123"),
+		style.Cyan("deepsource metrics --default-branch"),
 	)
 
 	cmd := &cobra.Command{
@@ -90,6 +97,7 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	// Scoping flags
 	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit OID")
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
+	cmd.Flags().BoolVar(&opts.DefaultBranch, "default-branch", false, "Show metrics from the default branch instead of current branch")
 
 	// --output flag
 	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, table, json, yaml")
@@ -117,7 +125,7 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	})
 
 	// Mutual exclusivity
-	cmd.MarkFlagsMutuallyExclusive("commit", "pr")
+	cmd.MarkFlagsMutuallyExclusive("commit", "pr", "default-branch")
 
 	return cmd
 }
@@ -166,8 +174,20 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 		opts.runMetrics, err = client.GetRunMetrics(ctx, opts.CommitOid)
 	case opts.PRNumber > 0:
 		opts.prMetrics, err = client.GetPRMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.PRNumber)
-	default:
+	case opts.DefaultBranch:
 		opts.repoMetrics, err = client.GetRepoMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
+	default:
+		var branchNameFunc func() (string, error)
+		if opts.deps != nil {
+			branchNameFunc = opts.deps.BranchNameFunc
+		}
+		commitOid, branchName, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc)
+		if resolveErr != nil {
+			return resolveErr
+		}
+		opts.CommitOid = commitOid
+		opts.autoDetectedBranch = branchName
+		opts.runMetrics, err = client.GetRunMetrics(ctx, commitOid)
 	}
 	if err != nil {
 		return err
@@ -429,6 +449,12 @@ func intPtrVal(v *int) int {
 func (opts *MetricsOptions) printFooter(count int) {
 	fmt.Printf("Showing %d metric(s) in %s", count, opts.repoSlug)
 	switch {
+	case opts.autoDetectedBranch != "":
+		commitShort := opts.CommitOid
+		if len(commitShort) > 8 {
+			commitShort = commitShort[:8]
+		}
+		fmt.Printf(" from %s (%s)\n", opts.autoDetectedBranch, commitShort)
 	case opts.runMetrics != nil:
 		commitShort := opts.runMetrics.CommitOid
 		if len(commitShort) > 7 {

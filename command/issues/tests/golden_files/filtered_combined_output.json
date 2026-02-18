@@ -1,0 +1,13 @@
+[
+  {
+    "path": "internal/handler/auth.go",
+    "begin_line": 15,
+    "end_line": 20,
+    "issue_code": "GO-S1001",
+    "title": "Potential SQL injection",
+    "category": "SECURITY",
+    "severity": "CRITICAL",
+    "source": "",
+    "analyzer": "go"
+  }
+]

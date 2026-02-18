@@ -38,6 +38,30 @@ func CreateTestConfigManager(t *testing.T, token, host, user string) *config.Man
 	return mgr
 }
 
+// CreateExpiredTestConfigManager creates a config.Manager backed by a temp directory
+// with a zero-value token expiry, so IsExpired() returns true.
+func CreateExpiredTestConfigManager(t *testing.T, token, host, user string) *config.Manager {
+	t.Helper()
+
+	tmpDir := t.TempDir()
+	fs := adapters.NewOSFileSystem()
+	mgr := config.NewManagerWithSecrets(fs, func() (string, error) {
+		return tmpDir, nil
+	}, secrets.NoopStore{}, "")
+
+	cfg := &config.CLIConfig{
+		Token: token,
+		Host:  host,
+		User:  user,
+		// Zero TokenExpiresIn → IsExpired() returns true
+	}
+	if err := mgr.Write(cfg); err != nil {
+		t.Fatalf("failed to write test config: %v", err)
+	}
+
+	return mgr
+}
+
 // LoadGoldenFile reads a golden file from the given absolute path.
 func LoadGoldenFile(t *testing.T, path string) []byte {
 	t.Helper()

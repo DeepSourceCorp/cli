@@ -20,8 +20,8 @@ import (
 	repoQuery "github.com/deepsourcelabs/cli/deepsource/repository/queries"
 	"github.com/deepsourcelabs/cli/deepsource/runs"
 	runsQuery "github.com/deepsourcelabs/cli/deepsource/runs/queries"
-	"github.com/deepsourcelabs/cli/deepsource/transformers"
-	transformerQuery "github.com/deepsourcelabs/cli/deepsource/transformers/queries"
+	"github.com/deepsourcelabs/cli/deepsource/codeformatters"
+	codeformatterQuery "github.com/deepsourcelabs/cli/deepsource/codeformatters/queries"
 	"github.com/deepsourcelabs/cli/deepsource/user"
 	userQuery "github.com/deepsourcelabs/cli/deepsource/user/queries"
 	"github.com/deepsourcelabs/graphql"
@@ -145,9 +145,9 @@ func (c Client) GetSupportedAnalyzers(ctx context.Context) ([]analyzers.Analyzer
 	return res, nil
 }
 
-// Returns the list of Transformers supported by DeepSource along with their meta like shortcode.
-func (c Client) GetSupportedTransformers(ctx context.Context) ([]transformers.Transformer, error) {
-	req := transformerQuery.NewTransformersRequest(c.gqlWrapper)
+// Returns the list of CodeFormatters supported by DeepSource along with their meta like shortcode.
+func (c Client) GetSupportedCodeFormatters(ctx context.Context) ([]codeformatters.CodeFormatter, error) {
+	req := codeformatterQuery.NewCodeFormattersRequest(c.gqlWrapper)
 	res, err := req.Do(ctx)
 	if err != nil {
 		return nil, err
@@ -256,11 +256,10 @@ func (c Client) GetRunIssues(ctx context.Context, commitOid string) (*runs.RunWi
 }
 
 // Returns issues for a specific run as a flat list (for issues --commit).
-func (c Client) GetRunIssuesFlat(ctx context.Context, commitOid string, limit int) ([]issues.Issue, error) {
-	req := issuesQuery.NewRunIssuesFlatRequest(c.gqlWrapper, issuesQuery.RunIssuesFlatParams{
-		CommitOid: commitOid,
-		Limit:     limit,
-	})
+func (c Client) GetRunIssuesFlat(ctx context.Context, commitOid string, limit int, filters issuesQuery.RunIssuesFlatParams) ([]issues.Issue, error) {
+	filters.CommitOid = commitOid
+	filters.Limit = limit
+	req := issuesQuery.NewRunIssuesFlatRequest(c.gqlWrapper, filters)
 	res, err := req.Do(ctx)
 	if err != nil {
 		return nil, err
