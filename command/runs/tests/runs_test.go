@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/deepsourcelabs/cli/command/cmddeps"
-	analysisCmd "github.com/deepsourcelabs/cli/command/analysis"
+	runsCmd "github.com/deepsourcelabs/cli/command/runs"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/internal/testutil"
 )
@@ -18,7 +18,7 @@ func goldenPath(name string) string {
 	return filepath.Join(filepath.Dir(callerFile), "golden_files", name)
 }
 
-func TestAnalysisListRuns(t *testing.T) {
+func TestRunsListRuns(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
 		"GetAnalysisRuns": goldenPath("runs_list_response.json"),
@@ -32,7 +32,7 @@ func TestAnalysisListRuns(t *testing.T) {
 		Stdout:    &buf,
 	}
 
-	cmd := analysisCmd.NewCmdAnalysisWithDeps(deps)
+	cmd := runsCmd.NewCmdRunsWithDeps(deps)
 	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--output", "json"})
 
 	if err := cmd.Execute(); err != nil {
@@ -47,7 +47,7 @@ func TestAnalysisListRuns(t *testing.T) {
 	}
 }
 
-func TestAnalysisRunDetail(t *testing.T) {
+func TestRunsRunDetail(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
 		"GetRunIssues": goldenPath("run_detail_response.json"),
@@ -61,7 +61,7 @@ func TestAnalysisRunDetail(t *testing.T) {
 		Stdout:    &buf,
 	}
 
-	cmd := analysisCmd.NewCmdAnalysisWithDeps(deps)
+	cmd := runsCmd.NewCmdRunsWithDeps(deps)
 	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--commit", "abc123f", "--output", "json"})
 
 	if err := cmd.Execute(); err != nil {

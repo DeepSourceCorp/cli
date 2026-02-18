@@ -95,7 +95,7 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository (owner/name)")
 
 	// Scoping flags
-	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit OID")
+	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit SHA")
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
 	cmd.Flags().BoolVar(&opts.DefaultBranch, "default-branch", false, "Show metrics from the default branch instead of current branch")
 
@@ -168,6 +168,10 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 		}
 	}
 
+	if opts.CommitOid != "" {
+		opts.CommitOid = cmdutil.ResolveCommitOid(opts.CommitOid)
+	}
+
 	// Fetch metrics based on scope
 	switch {
 	case opts.CommitOid != "":
@@ -183,6 +187,10 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 		}
 		commitOid, branchName, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc)
 		if resolveErr != nil {
+			if branchName != "" && branchName == cmdutil.GetDefaultBranch() {
+				opts.repoMetrics, err = client.GetRepoMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
+				break
+			}
 			return resolveErr
 		}
 		opts.CommitOid = commitOid

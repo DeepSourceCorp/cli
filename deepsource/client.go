@@ -228,18 +228,20 @@ func (c Client) GetViewer(ctx context.Context) (*user.User, error) {
 // repoName : The name of the repository
 // provider : The VCS provider which hosts the repo (GITHUB/GITLAB/BITBUCKET)
 // limit : The number of analysis runs to fetch
-func (c Client) GetAnalysisRuns(ctx context.Context, owner, repoName, provider string, limit int) ([]runs.AnalysisRun, error) {
+// after : Cursor for pagination (nil for first page)
+func (c Client) GetAnalysisRuns(ctx context.Context, owner, repoName, provider string, limit int, after *string) ([]runs.AnalysisRun, runsQuery.PageInfo, error) {
 	req := runsQuery.NewAnalysisRunsListRequest(c.gqlWrapper, runsQuery.AnalysisRunsListParams{
 		Owner:    owner,
 		RepoName: repoName,
 		Provider: provider,
 		Limit:    limit,
+		After:    after,
 	})
-	res, err := req.Do(ctx)
+	res, pageInfo, err := req.Do(ctx)
 	if err != nil {
-		return nil, err
+		return nil, runsQuery.PageInfo{}, err
 	}
-	return res, nil
+	return res, pageInfo, nil
 }
 
 // Returns the issues for a specific analysis run.
@@ -364,6 +366,17 @@ func (c Client) GetEnabledAnalyzers(ctx context.Context, owner, repoName, provid
 		return nil, err
 	}
 	return res, nil
+}
+
+// Returns the branch name for a specific pull request.
+func (c Client) GetPRBranch(ctx context.Context, owner, repoName, provider string, prNumber int) (string, error) {
+	req := runsQuery.NewPRBranchRequest(c.gqlWrapper, runsQuery.PRBranchParams{
+		Owner:    owner,
+		RepoName: repoName,
+		Provider: provider,
+		PRNumber: prNumber,
+	})
+	return req.Do(ctx)
 }
 
 // Returns vulnerabilities for a specific pull request.

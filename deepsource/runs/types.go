@@ -58,11 +58,12 @@ type ReportFocusArea struct {
 
 // RunWithIssues represents an analysis run with its associated issues
 type RunWithIssues struct {
-	RunUid     string     `json:"runUid"`
-	CommitOid  string     `json:"commitOid"`
-	BranchName string     `json:"branchName"`
-	Status     string     `json:"status"`
-	Issues     []RunIssue `json:"issues"`
+	RunUid     string      `json:"runUid"`
+	CommitOid  string      `json:"commitOid"`
+	BranchName string      `json:"branchName"`
+	Status     string      `json:"status"`
+	ReportCard *ReportCard `json:"reportCard,omitempty" yaml:"report_card,omitempty"`
+	Issues     []RunIssue  `json:"issues"`
 }
 
 // RunIssue represents an issue found in an analysis run

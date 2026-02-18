@@ -1,0 +1,60 @@
+{
+  "commit_oid": "abc123f",
+  "branch_name": "main",
+  "status": "SUCCESS",
+  "report_card": {
+    "status": "READY",
+    "security": {
+      "grade": "A+",
+      "score": 98,
+      "issues_count": 1
+    },
+    "reliability": {
+      "grade": "A",
+      "score": 95,
+      "issues_count": 2
+    },
+    "complexity": {
+      "grade": "B+",
+      "score": 85,
+      "issues_count": 5
+    },
+    "hygiene": {
+      "grade": "A",
+      "score": 92,
+      "issues_count": 3
+    },
+    "coverage": {
+      "grade": "B",
+      "score": 80,
+      "line_coverage": 78.5,
+      "branch_coverage": 65.2
+    },
+    "aggregate": {
+      "grade": "A",
+      "score": 92
+    },
+    "focus_area": {
+      "dimension": "COMPLEXITY",
+      "action": "Reduce cyclomatic complexity"
+    }
+  },
+  "issues": [
+    {
+      "path": "cmd/server/main.go",
+      "title": "Error return value not checked",
+      "code": "GO-R1005",
+      "category": "BUG_RISK",
+      "severity": "MAJOR",
+      "analyzer": "Go"
+    },
+    {
+      "path": "internal/handler/auth.go",
+      "title": "Potential SQL injection",
+      "code": "GO-S1001",
+      "category": "SECURITY",
+      "severity": "CRITICAL",
+      "analyzer": "Go"
+    }
+  ]
+}

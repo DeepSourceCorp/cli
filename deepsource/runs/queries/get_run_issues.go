@@ -15,6 +15,16 @@ const getRunIssuesQuery = `query GetRunIssues($commitOid: String!) {
     commitOid
     branchName
     status
+    reportCard {
+      status
+      security { grade score issuesCount }
+      reliability { grade score issuesCount }
+      complexity { grade score issuesCount }
+      hygiene { grade score issuesCount }
+      coverage { grade score lineCoverage branchCoverage }
+      aggregate { grade score }
+      focusArea { dimension action }
+    }
     checks {
       edges {
         node {
@@ -59,7 +69,44 @@ type RunIssuesResponse struct {
 		CommitOid  string `json:"commitOid"`
 		BranchName string `json:"branchName"`
 		Status     string `json:"status"`
-		Checks     struct {
+		ReportCard *struct {
+			Status      string `json:"status"`
+			Security    *struct {
+				Grade       string `json:"grade"`
+				Score       int    `json:"score"`
+				IssuesCount int    `json:"issuesCount"`
+			} `json:"security"`
+			Reliability *struct {
+				Grade       string `json:"grade"`
+				Score       int    `json:"score"`
+				IssuesCount int    `json:"issuesCount"`
+			} `json:"reliability"`
+			Complexity *struct {
+				Grade       string `json:"grade"`
+				Score       int    `json:"score"`
+				IssuesCount int    `json:"issuesCount"`
+			} `json:"complexity"`
+			Hygiene *struct {
+				Grade       string `json:"grade"`
+				Score       int    `json:"score"`
+				IssuesCount int    `json:"issuesCount"`
+			} `json:"hygiene"`
+			Coverage *struct {
+				Grade          string   `json:"grade"`
+				Score          *int     `json:"score"`
+				LineCoverage   *float64 `json:"lineCoverage"`
+				BranchCoverage *float64 `json:"branchCoverage"`
+			} `json:"coverage"`
+			Aggregate *struct {
+				Grade string `json:"grade"`
+				Score int    `json:"score"`
+			} `json:"aggregate"`
+			FocusArea *struct {
+				Dimension string `json:"dimension"`
+				Action    string `json:"action"`
+			} `json:"focusArea"`
+		} `json:"reportCard"`
+		Checks struct {
 			Edges []struct {
 				Node struct {
 					Analyzer struct {
@@ -107,6 +154,51 @@ func (r *RunIssuesRequest) Do(ctx context.Context) (*runs.RunWithIssues, error) 
 		BranchName: respData.Run.BranchName,
 		Status:     respData.Run.Status,
 		Issues:     make([]runs.RunIssue, 0),
+	}
+
+	if rc := respData.Run.ReportCard; rc != nil {
+		reportCard := &runs.ReportCard{
+			Status: rc.Status,
+		}
+		if rc.Security != nil {
+			reportCard.Security = &runs.ReportDimension{
+				Grade: rc.Security.Grade, Score: rc.Security.Score, IssuesCount: rc.Security.IssuesCount,
+			}
+		}
+		if rc.Reliability != nil {
+			reportCard.Reliability = &runs.ReportDimension{
+				Grade: rc.Reliability.Grade, Score: rc.Reliability.Score, IssuesCount: rc.Reliability.IssuesCount,
+			}
+		}
+		if rc.Complexity != nil {
+			reportCard.Complexity = &runs.ReportDimension{
+				Grade: rc.Complexity.Grade, Score: rc.Complexity.Score, IssuesCount: rc.Complexity.IssuesCount,
+			}
+		}
+		if rc.Hygiene != nil {
+			reportCard.Hygiene = &runs.ReportDimension{
+				Grade: rc.Hygiene.Grade, Score: rc.Hygiene.Score, IssuesCount: rc.Hygiene.IssuesCount,
+			}
+		}
+		if rc.Coverage != nil {
+			reportCard.Coverage = &runs.ReportCoverage{
+				Grade:          rc.Coverage.Grade,
+				Score:          rc.Coverage.Score,
+				LineCoverage:   rc.Coverage.LineCoverage,
+				BranchCoverage: rc.Coverage.BranchCoverage,
+			}
+		}
+		if rc.Aggregate != nil {
+			reportCard.Aggregate = &runs.ReportAggregate{
+				Grade: rc.Aggregate.Grade, Score: rc.Aggregate.Score,
+			}
+		}
+		if rc.FocusArea != nil {
+			reportCard.FocusArea = &runs.ReportFocusArea{
+				Dimension: rc.FocusArea.Dimension, Action: rc.FocusArea.Action,
+			}
+		}
+		result.ReportCard = reportCard
 	}
 
 	for _, checkEdge := range respData.Run.Checks.Edges {

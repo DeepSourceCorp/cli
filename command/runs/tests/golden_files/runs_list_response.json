@@ -14,6 +14,16 @@
               "occurrencesIntroduced": 3,
               "occurrencesResolved": 1,
               "occurrencesSuppressed": 0
+            },
+            "reportCard": {
+              "status": "READY",
+              "security": { "grade": "A+", "score": 98, "issuesCount": 1 },
+              "reliability": { "grade": "A", "score": 95, "issuesCount": 2 },
+              "complexity": { "grade": "B+", "score": 85, "issuesCount": 5 },
+              "hygiene": { "grade": "A", "score": 92, "issuesCount": 3 },
+              "coverage": { "grade": "B", "score": 80, "lineCoverage": 78.5, "branchCoverage": 65.2 },
+              "aggregate": { "grade": "A", "score": 92 },
+              "focusArea": { "dimension": "COMPLEXITY", "action": "Reduce cyclomatic complexity" }
             }
           }
         },
@@ -29,7 +39,8 @@
               "occurrencesIntroduced": 0,
               "occurrencesResolved": 0,
               "occurrencesSuppressed": 0
-            }
+            },
+            "reportCard": null
           }
         }
       ]
