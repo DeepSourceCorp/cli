@@ -66,7 +66,7 @@ func main() {
 		}
 	}()
 
-	v.SetBuildInfo(version, Date, "", "")
+	v.SetBuildInfo(version, Date, buildMode)
 
 	if err := command.Execute(); err != nil {
 		var cliErr *clierrors.CLIError
