@@ -522,6 +522,9 @@ func (opts *IssuesOptions) outputHuman() error {
 
 			sevTag := colorSeverity(issue.IssueSeverity, "["+severity+"]")
 			fmt.Printf("  %s  [%s] %s\n", issue.IssueText, analyzer, sevTag)
+			if opts.Verbose && issue.Description != "" {
+				fmt.Printf("  %s\n", pterm.Gray(issue.Description))
+			}
 			fmt.Printf("  %s\n", pterm.Gray(location))
 			if i < len(group)-1 {
 				fmt.Println()
