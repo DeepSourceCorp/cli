@@ -35,17 +35,47 @@ func NewCmdRoot() *cobra.Command {
 	cmd.CompletionOptions.DisableDefaultCmd = true
 
 	// Hide help subcommand (--help flag still works)
-	cmd.SetHelpCommand(&cobra.Command{Hidden: true})
+	cmd.SetHelpCommand(&cobra.Command{Hidden: true, GroupID: "auth"})
+
+	// Command groups
+	cmd.AddGroup(
+		&cobra.Group{ID: "auth", Title: "Authentication:"},
+		&cobra.Group{ID: "repository", Title: "Repository:"},
+		&cobra.Group{ID: "analysis", Title: "Analysis:"},
+	)
 
 	// Child Commands
-	cmd.AddCommand(auth.NewCmdAuth())
-	cmd.AddCommand(repository.NewCmdRepository())
-	cmd.AddCommand(runs.NewCmdRuns())
-	cmd.AddCommand(report.NewCmdReport())
-	cmd.AddCommand(issues.NewCmdIssues())
-	cmd.AddCommand(metrics.NewCmdMetrics())
-	cmd.AddCommand(reportcard.NewCmdReportCard())
-	cmd.AddCommand(vulnerabilities.NewCmdVulnerabilities())
+	authCmd := auth.NewCmdAuth()
+	authCmd.GroupID = "auth"
+	cmd.AddCommand(authCmd)
+
+	repositoryCmd := repository.NewCmdRepository()
+	repositoryCmd.GroupID = "repository"
+	cmd.AddCommand(repositoryCmd)
+
+	runsCmd := runs.NewCmdRuns()
+	runsCmd.GroupID = "repository"
+	cmd.AddCommand(runsCmd)
+
+	reportCmd := report.NewCmdReport()
+	reportCmd.GroupID = "repository"
+	cmd.AddCommand(reportCmd)
+
+	issuesCmd := issues.NewCmdIssues()
+	issuesCmd.GroupID = "analysis"
+	cmd.AddCommand(issuesCmd)
+
+	metricsCmd := metrics.NewCmdMetrics()
+	metricsCmd.GroupID = "analysis"
+	cmd.AddCommand(metricsCmd)
+
+	reportCardCmd := reportcard.NewCmdReportCard()
+	reportCardCmd.GroupID = "analysis"
+	cmd.AddCommand(reportCardCmd)
+
+	vulnsCmd := vulnerabilities.NewCmdVulnerabilities()
+	vulnsCmd.GroupID = "analysis"
+	cmd.AddCommand(vulnsCmd)
 
 	return cmd
 }

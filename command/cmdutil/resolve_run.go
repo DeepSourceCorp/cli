@@ -12,30 +12,30 @@ import (
 	"github.com/deepsourcelabs/cli/internal/vcs"
 )
 
-// ResolveLatestRun finds the latest successful analysis run for the current git branch.
+// ResolveLatestRun finds the latest analysis run for the current git branch.
 // It walks recent commits from git history and looks up each via the run(commitOid) API.
-// Returns the commitOid of the latest run and the branch name.
+// Returns the commitOid, branch name, and run status of the latest run.
 func ResolveLatestRun(
 	ctx context.Context,
 	client *deepsource.Client,
 	remote *vcs.RemoteData,
 	branchNameFunc func() (string, error),
 	commitLogFunc func(branch string) ([]string, error),
-) (commitOid string, branchName string, err error) {
+) (commitOid string, branchName string, runStatus string, err error) {
 	if branchNameFunc != nil {
 		branchName, err = branchNameFunc()
 	} else {
 		branchName, err = getCurrentBranch()
 	}
 	if err != nil {
-		return "", "", fmt.Errorf("failed to detect current branch: %w", err)
+		return "", "", "", fmt.Errorf("failed to detect current branch: %w", err)
 	}
 
 	run, err := resolveRunFromCommits(ctx, client, branchName, commitLogFunc)
 	if err != nil {
-		return "", branchName, err
+		return "", branchName, "", err
 	}
-	return run.CommitOid, branchName, nil
+	return run.CommitOid, branchName, run.Status, nil
 }
 
 // ResolveLatestRunForBranch finds the latest successful analysis run for a given branch name.
@@ -52,7 +52,7 @@ func ResolveLatestRunForBranch(
 }
 
 // resolveRunFromCommits walks recent commits on a branch and returns the first
-// successful analysis run found via the run(commitOid) API.
+// analysis run found via the run(commitOid) API.
 func resolveRunFromCommits(
 	ctx context.Context,
 	client *deepsource.Client,
@@ -70,20 +70,36 @@ func resolveRunFromCommits(
 		return nil, fmt.Errorf("failed to get commit history for branch %q: %w", branchName, err)
 	}
 
+	var lastErr error
 	for _, sha := range commits {
 		run, err := client.GetRunByCommit(ctx, sha)
 		if err != nil {
+			lastErr = err
 			continue
 		}
-		if run != nil && run.Status == "SUCCESS" && run.BranchName == branchName {
+		if run != nil && run.BranchName == branchName {
 			return run, nil
 		}
+	}
+
+	if lastErr != nil {
+		return nil, fmt.Errorf("failed to fetch analysis run: %w", lastErr)
 	}
 
 	return nil, fmt.Errorf(
 		"no analysis runs found for branch %q.\nTry: --default-branch, --commit <sha>, or push and analyze this branch first",
 		branchName,
 	)
+}
+
+// IsRunInProgress returns true if the run status indicates analysis hasn't completed.
+func IsRunInProgress(status string) bool {
+	return status == "PENDING" || status == "RUNNING"
+}
+
+// IsRunTimedOut returns true if the run status indicates analysis timed out.
+func IsRunTimedOut(status string) bool {
+	return status == "TIMEOUT"
 }
 
 // ResolveCommitOid expands a short commit SHA to a full 40-char SHA using git rev-parse.

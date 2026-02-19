@@ -20,6 +20,7 @@ import (
 	"github.com/deepsourcelabs/cli/internal/vcs"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 	"gopkg.in/yaml.v3"
 )
 
@@ -29,7 +30,6 @@ type VulnerabilitiesOptions struct {
 	PRNumber         int
 	DefaultBranch    bool
 	OutputFormat     string
-	OutputFile       string
 	Verbose          bool
 	LimitArg         int
 	SeverityFilters  []string
@@ -94,27 +94,13 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		},
 	}
 
-	// --repo, -r flag
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository (owner/name)")
-
-	// Scoping flags
+	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 100, "Maximum number of vulnerabilities to fetch")
+	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json, yaml")
+	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show CVSS score, summary, fix versions, and reachability")
 	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit SHA")
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
 	cmd.Flags().BoolVar(&opts.DefaultBranch, "default-branch", false, "Show vulnerabilities from the default branch instead of current branch")
-
-	// --output flag
-	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, table, json, yaml")
-
-	// --output-file flag
-	cmd.Flags().StringVar(&opts.OutputFile, "output-file", "", "Write output to a file instead of stdout")
-
-	// --verbose, -v flag
-	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show CVSS score, summary, fix versions, and reachability")
-
-	// --limit flag
-	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 100, "Maximum number of vulnerabilities to fetch")
-
-	// --severity filter flag
 	cmd.Flags().StringSliceVar(&opts.SeverityFilters, "severity", nil, "Filter by severity (e.g. critical,high)")
 
 	// Completions
@@ -123,8 +109,7 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	})
 	_ = cmd.RegisterFlagCompletionFunc("output", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
-			"pretty\tPretty-printed grouped output",
-			"table\tTabular output",
+			"pretty\tPretty-printed output",
 			"json\tJSON output",
 			"yaml\tYAML output",
 		}, cobra.ShellCompDirectiveNoFileComp
@@ -133,8 +118,9 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		return []string{"critical", "high", "medium", "low", "none"}, cobra.ShellCompDirectiveNoFileComp
 	})
 
-	// Mutual exclusivity
 	cmd.MarkFlagsMutuallyExclusive("commit", "pr", "default-branch")
+
+	setVulnsUsageFunc(cmd)
 
 	return cmd
 }
@@ -196,13 +182,21 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 			branchNameFunc = opts.deps.BranchNameFunc
 			commitLogFunc = opts.deps.CommitLogFunc
 		}
-		commitOid, branchName, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc, commitLogFunc)
+		commitOid, branchName, runStatus, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc, commitLogFunc)
 		if resolveErr != nil {
 			if branchName != "" && branchName == cmdutil.GetDefaultBranch() {
 				opts.repoVulns, err = client.GetRepoVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
 				break
 			}
 			return resolveErr
+		}
+		if cmdutil.IsRunInProgress(runStatus) {
+			pterm.Info.Printfln("Analysis is still in progress for branch %q.", branchName)
+			return nil
+		}
+		if cmdutil.IsRunTimedOut(runStatus) {
+			pterm.Warning.Printfln("Analysis timed out for branch %q.", branchName)
+			return nil
 		}
 		opts.CommitOid = commitOid
 		opts.autoDetectedBranch = branchName
@@ -221,8 +215,6 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 		return opts.outputJSON()
 	case "yaml":
 		return opts.outputYAML()
-	case "table":
-		return opts.outputTable()
 	default:
 		return opts.outputHuman()
 	}
@@ -273,59 +265,24 @@ func (opts *VulnerabilitiesOptions) hasFilters() bool {
 	return len(opts.SeverityFilters) > 0
 }
 
-type vulnGroup struct {
-	identifier string
-	vuln       vulnerabilities.Vulnerability
-	entries    []vulnerabilities.VulnerabilityOccurrence
-}
-
-func groupByIdentifier(list []vulnerabilities.VulnerabilityOccurrence) []vulnGroup {
-	var order []string
-	groups := map[string]*vulnGroup{}
-	for _, v := range list {
-		id := v.Vulnerability.Identifier
-		if g, ok := groups[id]; ok {
-			g.entries = append(g.entries, v)
-		} else {
-			order = append(order, id)
-			groups[id] = &vulnGroup{
-				identifier: id,
-				vuln:       v.Vulnerability,
-				entries:    []vulnerabilities.VulnerabilityOccurrence{v},
-			}
+func (opts *VulnerabilitiesOptions) scopeLabel() string {
+	switch {
+	case opts.autoDetectedBranch != "":
+		commitShort := opts.CommitOid
+		if len(commitShort) > 8 {
+			commitShort = commitShort[:8]
 		}
-	}
-	result := make([]vulnGroup, 0, len(order))
-	for _, id := range order {
-		result = append(result, *groups[id])
-	}
-	return result
-}
-
-func printVulnVerboseInfo(vuln vulnerabilities.Vulnerability, v vulnerabilities.VulnerabilityOccurrence) {
-	if vuln.CvssV3BaseScore != nil {
-		fmt.Printf("    CVSS: %.1f\n", *vuln.CvssV3BaseScore)
-	}
-	if vuln.EpssScore != nil {
-		fmt.Printf("    EPSS: %.2f\n", *vuln.EpssScore)
-	}
-	if vuln.Summary != "" {
-		fmt.Printf("    %s\n", vuln.Summary)
-	}
-	if len(vuln.Aliases) > 0 {
-		fmt.Printf("    Also known as: %s\n", strings.Join(vuln.Aliases, ", "))
-	}
-	if len(vuln.FixedVersions) > 0 {
-		fmt.Printf("    Fixed in: %s\n", strings.Join(vuln.FixedVersions, ", "))
-	}
-	if v.Reachability != "" {
-		fmt.Printf("    Reachability: %s\n", strings.ToLower(v.Reachability))
-	}
-	if v.Fixability != "" {
-		fmt.Printf("    Fixability: %s\n", strings.ToLower(v.Fixability))
-	}
-	if len(vuln.ReferenceUrls) > 0 {
-		fmt.Printf("    References: %s\n", strings.Join(vuln.ReferenceUrls, ", "))
+		return fmt.Sprintf("%s (%s)", opts.autoDetectedBranch, commitShort)
+	case opts.runVulns != nil:
+		commitShort := opts.runVulns.CommitOid
+		if len(commitShort) > 7 {
+			commitShort = commitShort[:7]
+		}
+		return fmt.Sprintf("commit %s", commitShort)
+	case opts.prVulns != nil:
+		return fmt.Sprintf("PR #%d", opts.prVulns.Number)
+	default:
+		return "default branch"
 	}
 }
 
@@ -341,157 +298,76 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 		return nil
 	}
 
-	severityOrder := []string{"CRITICAL", "HIGH", "MEDIUM", "LOW", "NONE"}
-	groups := make(map[string][]vulnerabilities.VulnerabilityOccurrence)
+	// Summary header
+	fmt.Println(pterm.Bold.Sprintf("── Vulnerabilities · %s ────", opts.scopeLabel()))
+
+	// Severity counts
+	sevCounts := map[string]int{}
 	for _, v := range vulnsList {
 		sev := strings.ToUpper(v.Vulnerability.Severity)
-		groups[sev] = append(groups[sev], v)
+		sevCounts[sev]++
+	}
+	var sevParts []string
+	for _, sev := range []string{"CRITICAL", "HIGH", "MEDIUM", "LOW", "NONE"} {
+		if c := sevCounts[sev]; c > 0 {
+			sevParts = append(sevParts, colorSeverity(sev, fmt.Sprintf("%d %s", c, strings.ToLower(humanizeSeverity(sev)))))
+		}
+	}
+	summaryLine := fmt.Sprintf("   %d total", len(vulnsList))
+	if len(sevParts) > 0 {
+		summaryLine += " · " + strings.Join(sevParts, " · ")
+	}
+	fmt.Println(summaryLine)
+
+	reachableCount := 0
+	for _, v := range vulnsList {
+		if strings.EqualFold(v.Reachability, "REACHABLE") {
+			reachableCount++
+		}
+	}
+	if reachableCount > 0 {
+		fmt.Println("   " + pterm.Red(fmt.Sprintf("%d reachable", reachableCount)))
+	}
+	fmt.Println()
+
+	// Group vulnerabilities by severity
+	grouped := make(map[string][]vulnerabilities.VulnerabilityOccurrence)
+	for _, v := range vulnsList {
+		sev := strings.ToUpper(v.Vulnerability.Severity)
+		grouped[sev] = append(grouped[sev], v)
 	}
 
+	severityOrder := []string{"CRITICAL", "HIGH", "MEDIUM", "LOW", "NONE"}
 	for _, sev := range severityOrder {
-		group, ok := groups[sev]
-		if !ok || len(group) == 0 {
+		group, ok := grouped[sev]
+		if !ok {
 			continue
 		}
 
-		header := fmt.Sprintf("%s (%d)", humanizeSeverity(sev), len(group))
-		fmt.Println(colorSeverity(sev, header))
+		fmt.Println(pterm.Bold.Sprintf("── %s ──", colorSeverity(sev, humanizeSeverity(sev))))
 
-		vulnGroups := groupByIdentifier(group)
-		for _, vg := range vulnGroups {
-			if len(vg.entries) == 1 {
-				v := vg.entries[0]
-				ecosystem := v.Package.Ecosystem
-				if ecosystem == "" {
-					ecosystem = "unknown"
-				}
-				fmt.Printf("  %s: %s@%s (%s)\n", vg.identifier, v.Package.Name, v.PackageVersion.Version, ecosystem)
-				if opts.Verbose {
-					printVulnVerboseInfo(vg.vuln, v)
-				}
-			} else {
-				fmt.Printf("  %s (%d packages)\n", vg.identifier, len(vg.entries))
-				if opts.Verbose {
-					printVulnVerboseInfo(vg.vuln, vg.entries[0])
-				}
-				for _, v := range vg.entries {
-					ecosystem := v.Package.Ecosystem
-					if ecosystem == "" {
-						ecosystem = "unknown"
-					}
-					fmt.Printf("    %s@%s (%s)\n", v.Package.Name, v.PackageVersion.Version, ecosystem)
-				}
+		header := []string{"ID", "Package", "Version", "Ecosystem", "Fix", "Reachability"}
+		data := [][]string{header}
+		for _, v := range group {
+			fix := "-"
+			if len(v.Vulnerability.FixedVersions) > 0 {
+				fix = v.Vulnerability.FixedVersions[0]
 			}
+			data = append(data, []string{
+				v.Vulnerability.Identifier,
+				v.Package.Name,
+				v.PackageVersion.Version,
+				humanizeEcosystem(v.Package.Ecosystem),
+				fix,
+				formatReachability(v.Reachability),
+			})
 		}
+		pterm.DefaultTable.WithHasHeader().WithData(data).Render()
 		fmt.Println()
 	}
 
-	fmt.Printf("Showing %d vulnerability(ies) in %s", len(vulnsList), opts.repoSlug)
-	switch {
-	case opts.autoDetectedBranch != "":
-		commitShort := opts.CommitOid
-		if len(commitShort) > 8 {
-			commitShort = commitShort[:8]
-		}
-		fmt.Printf(" from %s (%s)\n", opts.autoDetectedBranch, commitShort)
-	case opts.runVulns != nil:
-		commitShort := opts.runVulns.CommitOid
-		if len(commitShort) > 7 {
-			commitShort = commitShort[:7]
-		}
-		fmt.Printf(" from commit %s\n", commitShort)
-	case opts.prVulns != nil:
-		fmt.Printf(" from PR #%d\n", opts.prVulns.Number)
-	default:
-		fmt.Println(" from default branch")
-	}
+	fmt.Printf("\nShowing %d vulnerability(ies) in %s from %s\n", len(vulnsList), opts.repoSlug, opts.scopeLabel())
 	return nil
-}
-
-func (opts *VulnerabilitiesOptions) outputTable() error {
-	vulnsList := opts.getVulns()
-
-	if len(vulnsList) == 0 {
-		if opts.hasFilters() {
-			pterm.Info.Println("No vulnerabilities matched the provided filters.")
-		} else {
-			pterm.Info.Println("No vulnerabilities found.")
-		}
-		return nil
-	}
-
-	// Show context header for run/PR scopes
-	if opts.runVulns != nil {
-		commitShort := opts.runVulns.CommitOid
-		if len(commitShort) > 8 {
-			commitShort = commitShort[:8]
-		}
-		pterm.DefaultBox.WithTitle("Run Vulnerabilities").WithTitleTopCenter().Println(
-			fmt.Sprintf("%s %s\n%s %s",
-				pterm.Bold.Sprint("Commit:"),
-				commitShort,
-				pterm.Bold.Sprint("Branch:"),
-				opts.runVulns.BranchName,
-			),
-		)
-		pterm.Println()
-	} else if opts.prVulns != nil {
-		pterm.DefaultBox.WithTitle("Pull Request Vulnerabilities").WithTitleTopCenter().Println(
-			fmt.Sprintf("%s #%d\n%s %s",
-				pterm.Bold.Sprint("PR:"),
-				opts.prVulns.Number,
-				pterm.Bold.Sprint("Branch:"),
-				opts.prVulns.Branch,
-			),
-		)
-		pterm.Println()
-	}
-
-	// Build vulnerabilities table
-	header := []string{"ID", "Severity", "Package", "Version", "Ecosystem", "Fix", "Reachability"}
-	data := [][]string{header}
-
-	for _, v := range vulnsList {
-		fix := "-"
-		if len(v.Vulnerability.FixedVersions) > 0 {
-			fix = v.Vulnerability.FixedVersions[0]
-		}
-
-		reachable := formatReachability(v.Reachability)
-		severity := formatSeverity(v.Vulnerability.Severity)
-		ecosystem := humanizeEcosystem(v.Package.Ecosystem)
-
-		data = append(data, []string{
-			v.Vulnerability.Identifier,
-			severity,
-			v.Package.Name,
-			v.PackageVersion.Version,
-			ecosystem,
-			fix,
-			reachable,
-		})
-	}
-
-	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
-	pterm.Printf("\nShowing %d vulnerability(ies)\n", len(vulnsList))
-
-	return nil
-}
-
-func formatSeverity(severity string) string {
-	humanized := humanizeSeverity(severity)
-	switch strings.ToUpper(severity) {
-	case "CRITICAL":
-		return pterm.Red(humanized)
-	case "HIGH":
-		return pterm.LightRed(humanized)
-	case "MEDIUM":
-		return pterm.Yellow(humanized)
-	case "LOW":
-		return pterm.Blue(humanized)
-	default:
-		return humanized
-	}
 }
 
 func formatReachability(reachability string) string {
@@ -578,7 +454,8 @@ func (opts *VulnerabilitiesOptions) outputJSON() error {
 	if err != nil {
 		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format JSON output", err)
 	}
-	return opts.writeOutput(data, true)
+	fmt.Fprintln(opts.stdout(), string(data))
+	return nil
 }
 
 func (opts *VulnerabilitiesOptions) outputYAML() error {
@@ -596,24 +473,68 @@ func (opts *VulnerabilitiesOptions) outputYAML() error {
 	if err != nil {
 		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format YAML output", err)
 	}
-	return opts.writeOutput(data, false)
+	fmt.Fprint(opts.stdout(), string(data))
+	return nil
 }
 
-func (opts *VulnerabilitiesOptions) writeOutput(data []byte, trailingNewline bool) error {
-	if opts.OutputFile == "" {
-		w := opts.stdout()
-		if trailingNewline {
-			fmt.Fprintln(w, string(data))
-		} else {
-			fmt.Fprint(w, string(data))
+func setVulnsUsageFunc(cmd *cobra.Command) {
+	cmd.SetUsageFunc(func(c *cobra.Command) error {
+		groups := []struct {
+			title string
+			flags []string
+		}{
+			{"Scope", []string{"commit", "pr", "default-branch"}},
+			{"Filters", []string{"severity"}},
+			{"Output", []string{"output", "limit", "verbose"}},
+			{"General", []string{"repo", "help"}},
 		}
+
+		w := c.OutOrStderr()
+		fmt.Fprintf(w, "Usage:\n  %s\n", c.UseLine())
+		for _, g := range groups {
+			fmt.Fprintf(w, "\n%s:\n", g.title)
+			for _, name := range g.flags {
+				f := c.Flags().Lookup(name)
+				if f == nil {
+					continue
+				}
+				fmt.Fprintf(w, "  %s\n", vulnsFlagUsageLine(f))
+			}
+		}
+		fmt.Fprintln(w)
 		return nil
+	})
+}
+
+func vulnsFlagUsageLine(f *pflag.Flag) string {
+	var line string
+	if f.Shorthand != "" {
+		line = fmt.Sprintf("-%s, --%s", f.Shorthand, f.Name)
+	} else {
+		line = fmt.Sprintf("    --%s", f.Name)
 	}
 
-	if err := os.WriteFile(opts.OutputFile, data, 0644); err != nil {
-		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to write output file", err)
+	vartype := f.Value.Type()
+	switch vartype {
+	case "bool":
+		// no type suffix for booleans
+	case "stringSlice":
+		line += " strings"
+	default:
+		line += " " + vartype
 	}
-	pterm.Printf("Saved vulnerabilities to %s!\n", opts.OutputFile)
-	return nil
+
+	const pad = 28
+	if len(line) < pad {
+		line += strings.Repeat(" ", pad-len(line))
+	} else {
+		line += "  "
+	}
+	line += f.Usage
+
+	if f.DefValue != "" && f.DefValue != "false" && f.DefValue != "[]" && f.DefValue != "0" {
+		line += fmt.Sprintf(" (default %s)", f.DefValue)
+	}
+	return line
 }
 

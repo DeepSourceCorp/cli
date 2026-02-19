@@ -22,6 +22,7 @@ import (
 	"github.com/deepsourcelabs/cli/internal/vcs"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 )
 
 type RunsOptions struct {
@@ -83,8 +84,8 @@ func NewCmdRunsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "List history for the specified repository")
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 20, "Number of analysis runs to fetch")
-	cmd.Flags().StringVar(&opts.commitOid, "commit", "", "Show metadata and issues summary for a specific commit")
 	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
+	cmd.Flags().StringVar(&opts.commitOid, "commit", "", "Show metadata and issues summary for a specific commit")
 
 	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
@@ -95,6 +96,8 @@ func NewCmdRunsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 			"json\tJSON output",
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
+
+	setRunsUsageFunc(cmd)
 
 	return cmd
 }
@@ -434,6 +437,64 @@ func formatStatus(status string) string {
 	default:
 		return status
 	}
+}
+
+func setRunsUsageFunc(cmd *cobra.Command) {
+	cmd.SetUsageFunc(func(c *cobra.Command) error {
+		groups := []struct {
+			title string
+			flags []string
+		}{
+			{"Scope", []string{"commit"}},
+			{"Output", []string{"output", "limit"}},
+			{"General", []string{"repo", "help"}},
+		}
+
+		w := c.OutOrStderr()
+		fmt.Fprintf(w, "Usage:\n  %s\n", c.UseLine())
+		for _, g := range groups {
+			fmt.Fprintf(w, "\n%s:\n", g.title)
+			for _, name := range g.flags {
+				f := c.Flags().Lookup(name)
+				if f == nil {
+					continue
+				}
+				fmt.Fprintf(w, "  %s\n", runsFlagUsageLine(f))
+			}
+		}
+		fmt.Fprintln(w)
+		return nil
+	})
+}
+
+func runsFlagUsageLine(f *pflag.Flag) string {
+	var line string
+	if f.Shorthand != "" {
+		line = fmt.Sprintf("-%s, --%s", f.Shorthand, f.Name)
+	} else {
+		line = fmt.Sprintf("    --%s", f.Name)
+	}
+
+	vartype := f.Value.Type()
+	switch vartype {
+	case "bool":
+		// no type suffix for booleans
+	default:
+		line += " " + vartype
+	}
+
+	const pad = 28
+	if len(line) < pad {
+		line += strings.Repeat(" ", pad-len(line))
+	} else {
+		line += "  "
+	}
+	line += f.Usage
+
+	if f.DefValue != "" && f.DefValue != "false" && f.DefValue != "[]" && f.DefValue != "0" {
+		line += fmt.Sprintf(" (default %s)", f.DefValue)
+	}
+	return line
 }
 
 func formatTime(t time.Time) string {
