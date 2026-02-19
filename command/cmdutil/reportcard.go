@@ -36,7 +36,7 @@ func ShowReportCard(rc *runs.ReportCard) {
 	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
 
 	if rc.Coverage != nil {
-		parts := []string{}
+		var parts []string
 		if rc.Coverage.Grade != "" {
 			parts = append(parts, fmt.Sprintf("Grade: %s", gradeColor(rc.Coverage.Grade)))
 		}
@@ -80,7 +80,7 @@ func gradeColor(grade string) string {
 func FormatCategory(s string) string {
 	parts := strings.Split(strings.ToLower(s), "_")
 	for i, p := range parts {
-		if len(p) > 0 {
+		if p != "" {
 			parts[i] = strings.ToUpper(p[:1]) + p[1:]
 		}
 	}

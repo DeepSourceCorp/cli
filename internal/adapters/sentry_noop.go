@@ -9,14 +9,14 @@ func NewNoOpSentry() *NoOpSentry {
 	return &NoOpSentry{}
 }
 
-func (n *NoOpSentry) Init(dsn string) error {
+func (*NoOpSentry) Init(_ string) error {
 	return nil
 }
 
-func (n *NoOpSentry) CaptureException(err error) {}
+func (*NoOpSentry) CaptureException(_ error) {}
 
-func (n *NoOpSentry) CaptureMessage(msg string) {}
+func (*NoOpSentry) CaptureMessage(_ string) {}
 
-func (n *NoOpSentry) ConfigureScope(f func(scope interface{})) {}
+func (*NoOpSentry) ConfigureScope(_ func(scope interface{})) {}
 
-func (n *NoOpSentry) Flush(timeout time.Duration) {}
+func (*NoOpSentry) Flush(_ time.Duration) {}

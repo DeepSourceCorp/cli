@@ -17,11 +17,11 @@ func NewRealGitClient() *RealGitClient {
 	return &RealGitClient{}
 }
 
-func (g *RealGitClient) GetHead(workspaceDir string) (string, string, error) {
+func (*RealGitClient) GetHead(workspaceDir string) (string, string, error) {
 	return gitGetHead(workspaceDir)
 }
 
-func (g *RealGitClient) ListRemotes(dir string) (map[string]interfaces.RemoteInfo, error) {
+func (*RealGitClient) ListRemotes(_ string) (map[string]interfaces.RemoteInfo, error) {
 	remotes, err := vcs.ListRemotes()
 	if err != nil {
 		return nil, err
@@ -131,7 +131,7 @@ func getTestCoverageActionCommit() (headOID string, err error) {
 
 // Handle special case for TravisCI.
 func getTravisCommit(topCommit string) (string, string, error) {
-	if prSHA := os.Getenv("TRAVIS_PULL_REQUEST_SHA"); len(prSHA) > 0 {
+	if prSHA := os.Getenv("TRAVIS_PULL_REQUEST_SHA"); prSHA != "" {
 		return prSHA, "", nil
 	}
 

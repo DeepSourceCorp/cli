@@ -52,13 +52,13 @@ func NewCmdDashboardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Short: "Open the DeepSource dashboard for the current repository",
 		Long:  doc,
 		Args:  args.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, _ []string) error {
 			return opts.Run()
 		},
 	}
 
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Open the dashboard for a specific repository")
-	_ = cmd.RegisterFlagCompletionFunc("repo", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
 	})
 

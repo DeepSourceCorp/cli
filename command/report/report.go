@@ -60,7 +60,7 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 		Short: "Report artifacts to DeepSource",
 		Long:  doc,
 		Args:  args.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			if deps == nil {
 				deps = container.New()
 			}
@@ -101,7 +101,7 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 	// --skip-verify flag to skip SSL certificate verification while reporting test coverage data.
 	cmd.Flags().BoolVar(&opts.SkipCertificateVerification, "skip-verify", false, "skip SSL certificate verification while sending the test coverage data")
 
-	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("output", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
 			"pretty\tPretty-printed output",
 			"table\tHuman-readable table",
@@ -109,12 +109,12 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 			"yaml\tYAML output",
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
-	_ = cmd.RegisterFlagCompletionFunc("analyzer-type", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("analyzer-type", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
 			"community\tCommunity analyzer",
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
-	_ = cmd.RegisterFlagCompletionFunc("oidc-provider", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("oidc-provider", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
 			"github-actions\tGitHub Actions OIDC",
 		}, cobra.ShellCompDirectiveNoFileComp

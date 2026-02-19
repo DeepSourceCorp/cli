@@ -25,7 +25,7 @@ func TestRepoAnalyzersEnabled(t *testing.T) {
 		"enabledAnalyzers {": goldenPath("enabled_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
-	svc := reposvc.NewTestService(cfgMgr, func(opts deepsource.ClientOpts) (reposvc.Client, error) {
+	svc := reposvc.NewTestService(cfgMgr, func(_ deepsource.ClientOpts) (reposvc.Client, error) {
 		return client, nil
 	})
 

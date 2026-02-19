@@ -25,7 +25,7 @@ func TestRepoStatusActivated(t *testing.T) {
 		"isActivated": goldenPath("activated_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
-	svc := reposvc.NewTestService(cfgMgr, func(opts deepsource.ClientOpts) (reposvc.Client, error) {
+	svc := reposvc.NewTestService(cfgMgr, func(_ deepsource.ClientOpts) (reposvc.Client, error) {
 		return client, nil
 	})
 
@@ -57,7 +57,7 @@ func TestRepoStatusNotActivated(t *testing.T) {
 		"isActivated": goldenPath("not_activated_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
-	svc := reposvc.NewTestService(cfgMgr, func(opts deepsource.ClientOpts) (reposvc.Client, error) {
+	svc := reposvc.NewTestService(cfgMgr, func(_ deepsource.ClientOpts) (reposvc.Client, error) {
 		return client, nil
 	})
 

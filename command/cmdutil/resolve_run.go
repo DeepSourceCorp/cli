@@ -12,13 +12,15 @@ import (
 	"github.com/deepsourcelabs/cli/internal/vcs"
 )
 
-// ResolveLatestRun finds the latest analysis run for the current git branch.
+// ResolveLatestRun finds the latest successful analysis run for the current git branch.
+// It walks recent commits from git history and looks up each via the run(commitOid) API.
 // Returns the commitOid of the latest run and the branch name.
 func ResolveLatestRun(
 	ctx context.Context,
 	client *deepsource.Client,
 	remote *vcs.RemoteData,
 	branchNameFunc func() (string, error),
+	commitLogFunc func(branch string) ([]string, error),
 ) (commitOid string, branchName string, err error) {
 	if branchNameFunc != nil {
 		branchName, err = branchNameFunc()
@@ -29,64 +31,57 @@ func ResolveLatestRun(
 		return "", "", fmt.Errorf("failed to detect current branch: %w", err)
 	}
 
-	const maxPages = 5
-	var after *string
-
-	for page := 0; page < maxPages; page++ {
-		runs, pageInfo, err := client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, 30, after)
-		if err != nil {
-			return "", "", fmt.Errorf("failed to fetch analysis runs: %w", err)
-		}
-
-		for _, run := range runs {
-			if run.BranchName == branchName && run.Status == "SUCCESS" {
-				return run.CommitOid, branchName, nil
-			}
-		}
-
-		if !pageInfo.HasNextPage || pageInfo.EndCursor == nil {
-			break
-		}
-		after = pageInfo.EndCursor
+	run, err := resolveRunFromCommits(ctx, client, branchName, commitLogFunc)
+	if err != nil {
+		return "", branchName, err
 	}
-
-	return "", branchName, fmt.Errorf(
-		"no analysis runs found for branch %q.\nTry: --default-branch, --commit <sha>, or push and analyze this branch first",
-		branchName,
-	)
+	return run.CommitOid, branchName, nil
 }
 
 // ResolveLatestRunForBranch finds the latest successful analysis run for a given branch name.
+// It walks recent commits on the branch and looks up each via the run(commitOid) API.
 // Returns the full AnalysisRun (which includes the ReportCard).
 func ResolveLatestRunForBranch(
 	ctx context.Context,
 	client *deepsource.Client,
 	remote *vcs.RemoteData,
 	branchName string,
+	commitLogFunc func(branch string) ([]string, error),
 ) (*runs.AnalysisRun, error) {
-	const maxPages = 5
-	var after *string
+	return resolveRunFromCommits(ctx, client, branchName, commitLogFunc)
+}
 
-	for page := 0; page < maxPages; page++ {
-		analysisRuns, pageInfo, err := client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, 30, after)
+// resolveRunFromCommits walks recent commits on a branch and returns the first
+// successful analysis run found via the run(commitOid) API.
+func resolveRunFromCommits(
+	ctx context.Context,
+	client *deepsource.Client,
+	branchName string,
+	commitLogFunc func(branch string) ([]string, error),
+) (*runs.AnalysisRun, error) {
+	var commits []string
+	var err error
+	if commitLogFunc != nil {
+		commits, err = commitLogFunc(branchName)
+	} else {
+		commits, err = getCommitLog(branchName)
+	}
+	if err != nil {
+		return nil, fmt.Errorf("failed to get commit history for branch %q: %w", branchName, err)
+	}
+
+	for _, sha := range commits {
+		run, err := client.GetRunByCommit(ctx, sha)
 		if err != nil {
-			return nil, fmt.Errorf("failed to fetch analysis runs: %w", err)
+			continue
 		}
-
-		for i := range analysisRuns {
-			if analysisRuns[i].BranchName == branchName && analysisRuns[i].Status == "SUCCESS" {
-				return &analysisRuns[i], nil
-			}
+		if run != nil && run.Status == "SUCCESS" && run.BranchName == branchName {
+			return run, nil
 		}
-
-		if !pageInfo.HasNextPage || pageInfo.EndCursor == nil {
-			break
-		}
-		after = pageInfo.EndCursor
 	}
 
 	return nil, fmt.Errorf(
-		"no successful analysis runs found for branch %q",
+		"no analysis runs found for branch %q.\nTry: --default-branch, --commit <sha>, or push and analyze this branch first",
 		branchName,
 	)
 }
@@ -110,6 +105,15 @@ func ResolveCommitOid(commitOid string) string {
 	return commitOid
 }
 
+// ResolveBranchName returns the current branch name using the provided function,
+// or falls back to git rev-parse if branchNameFunc is nil.
+func ResolveBranchName(branchNameFunc func() (string, error)) (string, error) {
+	if branchNameFunc != nil {
+		return branchNameFunc()
+	}
+	return getCurrentBranch()
+}
+
 func getCurrentBranch() (string, error) {
 	cmd := exec.Command("git", "--no-pager", "rev-parse", "--abbrev-ref", "HEAD")
 	var stdout, stderr bytes.Buffer
@@ -119,6 +123,22 @@ func getCurrentBranch() (string, error) {
 		return "", err
 	}
 	return strings.TrimSuffix(stdout.String(), "\n"), nil
+}
+
+// getCommitLog returns recent commit SHAs for a branch using git log.
+func getCommitLog(branch string) ([]string, error) {
+	cmd := exec.Command("git", "--no-pager", "log", branch, "--format=%H", "-n", "50")
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+	if err := cmd.Run(); err != nil {
+		return nil, fmt.Errorf("%s: %s", err, strings.TrimSpace(stderr.String()))
+	}
+	lines := strings.TrimSpace(stdout.String())
+	if lines == "" {
+		return nil, nil
+	}
+	return strings.Split(lines, "\n"), nil
 }
 
 // GetDefaultBranch returns the default branch name of the origin remote

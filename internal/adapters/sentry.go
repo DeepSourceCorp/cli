@@ -13,24 +13,24 @@ func NewSentryClient() *SentryClient {
 	return &SentryClient{}
 }
 
-func (s *SentryClient) Init(dsn string) error {
+func (*SentryClient) Init(dsn string) error {
 	return sentry.Init(sentry.ClientOptions{Dsn: dsn})
 }
 
-func (s *SentryClient) CaptureException(err error) {
+func (*SentryClient) CaptureException(err error) {
 	sentry.CaptureException(err)
 }
 
-func (s *SentryClient) CaptureMessage(msg string) {
+func (*SentryClient) CaptureMessage(msg string) {
 	sentry.CaptureMessage(msg)
 }
 
-func (s *SentryClient) ConfigureScope(f func(scope interface{})) {
+func (*SentryClient) ConfigureScope(f func(scope interface{})) {
 	sentry.ConfigureScope(func(scope *sentry.Scope) {
 		f(scope)
 	})
 }
 
-func (s *SentryClient) Flush(timeout time.Duration) {
+func (*SentryClient) Flush(timeout time.Duration) {
 	sentry.Flush(timeout)
 }

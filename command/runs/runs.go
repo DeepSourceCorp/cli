@@ -72,7 +72,7 @@ func NewCmdRunsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Use:   "runs [flags]",
 		Short: "View analysis runs",
 		Long:  doc,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			if opts.commitOid != "" {
 				opts.commitOid = cmdutil.ResolveCommitOid(opts.commitOid)
 				return opts.runDetail(cmd.Context())
@@ -86,10 +86,10 @@ func NewCmdRunsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().StringVar(&opts.commitOid, "commit", "", "Show metadata and issues summary for a specific commit")
 	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
 
-	_ = cmd.RegisterFlagCompletionFunc("repo", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
 	})
-	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("output", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
 			"pretty\tPretty-printed output",
 			"json\tJSON output",
@@ -381,7 +381,7 @@ func showIssuesSummary(issues []runstypes.RunIssue) {
 	pterm.Println()
 	pterm.Println(pterm.Bold.Sprintf("Issues: %d total", len(issues)))
 
-	parts := []string{}
+	var parts []string
 	if critical > 0 {
 		parts = append(parts, pterm.Red(fmt.Sprintf("%d critical", critical)))
 	}
