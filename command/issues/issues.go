@@ -22,7 +22,6 @@ import (
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	"gopkg.in/yaml.v3"
 )
 
 type IssuesOptions struct {
@@ -99,7 +98,7 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Maximum number of issues to fetch")
 
 	// --output, -o flag
-	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json, yaml")
+	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
 
 	// --verbose, -v flag
 	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show issue description")
@@ -124,7 +123,6 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		return []string{
 			"pretty\tPretty-printed output",
 			"json\tJSON output",
-			"yaml\tYAML output",
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
 	_ = cmd.RegisterFlagCompletionFunc("category", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
@@ -299,8 +297,6 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 	switch opts.OutputFormat {
 	case "json":
 		return opts.outputJSON()
-	case "yaml":
-		return opts.outputYAML()
 	default:
 		return opts.outputHuman()
 	}
@@ -537,33 +533,35 @@ func (opts *IssuesOptions) outputHuman() error {
 	return nil
 }
 
-// --- JSON/YAML output ---
+// --- JSON output ---
 
 type IssueJSON struct {
-	Path      string `json:"path" yaml:"path"`
-	BeginLine int    `json:"begin_line" yaml:"begin_line"`
-	EndLine   int    `json:"end_line" yaml:"end_line"`
-	IssueCode string `json:"issue_code" yaml:"issue_code"`
-	Title     string `json:"title" yaml:"title"`
-	Category  string `json:"category" yaml:"category"`
-	Severity  string `json:"severity" yaml:"severity"`
-	Source    string `json:"source" yaml:"source"`
-	Analyzer  string `json:"analyzer" yaml:"analyzer"`
+	Path        string `json:"path"`
+	BeginLine   int    `json:"begin_line"`
+	EndLine     int    `json:"end_line"`
+	IssueCode   string `json:"issue_code"`
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Category    string `json:"category"`
+	Severity    string `json:"severity"`
+	Source      string `json:"source"`
+	Analyzer    string `json:"analyzer"`
 }
 
 func (opts *IssuesOptions) toJSONIssues() []IssueJSON {
 	result := make([]IssueJSON, 0, len(opts.issues))
 	for _, issue := range opts.issues {
 		result = append(result, IssueJSON{
-			Path:      issue.Location.Path,
-			BeginLine: issue.Location.Position.BeginLine,
-			EndLine:   issue.Location.Position.EndLine,
-			IssueCode: issue.IssueCode,
-			Title:     issue.IssueText,
-			Category:  issue.IssueCategory,
-			Severity:  issue.IssueSeverity,
-			Source:    issue.IssueSource,
-			Analyzer:  issue.Analyzer.Shortcode,
+			Path:        issue.Location.Path,
+			BeginLine:   issue.Location.Position.BeginLine,
+			EndLine:     issue.Location.Position.EndLine,
+			IssueCode:   issue.IssueCode,
+			Title:       issue.IssueText,
+			Description: issue.Description,
+			Category:    issue.IssueCategory,
+			Severity:    issue.IssueSeverity,
+			Source:      issue.IssueSource,
+			Analyzer:    issue.Analyzer.Shortcode,
 		})
 	}
 	return result
@@ -575,14 +573,6 @@ func (opts *IssuesOptions) outputJSON() error {
 		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format JSON output", err)
 	}
 	return opts.writeOutput(data, true)
-}
-
-func (opts *IssuesOptions) outputYAML() error {
-	data, err := yaml.Marshal(opts.toJSONIssues())
-	if err != nil {
-		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format YAML output", err)
-	}
-	return opts.writeOutput(data, false)
 }
 
 func (opts *IssuesOptions) writeOutput(data []byte, trailingNewline bool) error {

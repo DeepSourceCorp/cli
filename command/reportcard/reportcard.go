@@ -21,7 +21,6 @@ import (
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	"gopkg.in/yaml.v3"
 )
 
 type ReportCardOptions struct {
@@ -87,7 +86,7 @@ func NewCmdReportCardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	}
 
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository (owner/name)")
-	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json, yaml")
+	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
 	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit SHA")
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
 	cmd.Flags().BoolVar(&opts.DefaultBranch, "default-branch", false, "Show report card from the default branch instead of current branch")
@@ -99,7 +98,6 @@ func NewCmdReportCardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		return []string{
 			"pretty\tPretty-printed output",
 			"json\tJSON output",
-			"yaml\tYAML output",
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
 
@@ -171,8 +169,6 @@ func (opts *ReportCardOptions) Run(ctx context.Context) error {
 	switch opts.OutputFormat {
 	case "json":
 		return opts.outputJSON()
-	case "yaml":
-		return opts.outputYAML()
 	default:
 		return opts.outputHuman()
 	}
@@ -328,16 +324,6 @@ func (opts *ReportCardOptions) outputJSON() error {
 		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format JSON output", err)
 	}
 	fmt.Fprintln(opts.stdout(), string(data))
-	return nil
-}
-
-func (opts *ReportCardOptions) outputYAML() error {
-	result := cmdutil.ToReportCardJSON(opts.reportCard)
-	data, err := yaml.Marshal(result)
-	if err != nil {
-		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format YAML output", err)
-	}
-	fmt.Fprint(opts.stdout(), string(data))
 	return nil
 }
 

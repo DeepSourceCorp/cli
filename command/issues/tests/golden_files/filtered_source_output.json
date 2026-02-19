@@ -5,6 +5,7 @@
     "end_line": 20,
     "issue_code": "GO-S1001",
     "title": "Potential SQL injection",
+    "description": "SQL query constructed with string concatenation",
     "category": "SECURITY",
     "severity": "CRITICAL",
     "source": "ai",

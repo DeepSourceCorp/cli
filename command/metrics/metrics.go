@@ -22,7 +22,6 @@ import (
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	"gopkg.in/yaml.v3"
 )
 
 type MetricsOptions struct {
@@ -99,7 +98,7 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Maximum number of metrics to fetch")
 
 	// --output, -o flag
-	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json, yaml")
+	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
 
 	// --verbose, -v flag
 	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show shortcodes and descriptions")
@@ -117,7 +116,6 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		return []string{
 			"pretty\tPretty-printed output",
 			"json\tJSON output",
-			"yaml\tYAML output",
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
 
@@ -229,8 +227,6 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 	switch opts.OutputFormat {
 	case "json":
 		return opts.outputJSON()
-	case "yaml":
-		return opts.outputYAML()
 	default:
 		return opts.outputHuman()
 	}
@@ -464,25 +460,6 @@ func (opts *MetricsOptions) outputJSON() error {
 		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format JSON output", err)
 	}
 	fmt.Fprintln(opts.stdout(), string(data))
-	return nil
-}
-
-func (opts *MetricsOptions) outputYAML() error {
-	var data []byte
-	var err error
-
-	switch {
-	case opts.runMetrics != nil:
-		data, err = yaml.Marshal(opts.runMetrics)
-	case opts.prMetrics != nil:
-		data, err = yaml.Marshal(opts.prMetrics)
-	default:
-		data, err = yaml.Marshal(opts.repoMetrics)
-	}
-	if err != nil {
-		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format YAML output", err)
-	}
-	fmt.Fprint(opts.stdout(), string(data))
 	return nil
 }
 
