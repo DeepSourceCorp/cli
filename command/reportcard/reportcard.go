@@ -32,6 +32,7 @@ type ReportCardOptions struct {
 	OutputFormat  string
 	deps          *cmddeps.Deps
 	reportCard    *runs.ReportCard
+	repoSlug      string
 	commitOid     string
 	branchName    string
 }
@@ -128,6 +129,7 @@ func (opts *ReportCardOptions) Run(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
+	opts.repoSlug = remote.Owner + "/" + remote.RepoName
 
 	var client *deepsource.Client
 	if opts.deps != nil && opts.deps.Client != nil {
@@ -162,7 +164,7 @@ func (opts *ReportCardOptions) Run(ctx context.Context) error {
 	}
 
 	if opts.reportCard == nil {
-		pterm.Info.Println("No report card available for this analysis run.")
+		pterm.Info.Printfln("No report card found in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		return nil
 	}
 
@@ -284,6 +286,27 @@ func (opts *ReportCardOptions) resolveByCurrentBranch(ctx context.Context, clien
 	opts.commitOid = run.CommitOid
 	opts.branchName = run.BranchName
 	return nil
+}
+
+func (opts *ReportCardOptions) scopeLabel() string {
+	switch {
+	case opts.branchName != "" && opts.commitOid != "":
+		commitShort := opts.commitOid
+		if len(commitShort) > 8 {
+			commitShort = commitShort[:8]
+		}
+		return fmt.Sprintf("%s (%s)", opts.branchName, commitShort)
+	case opts.CommitOid != "":
+		commitShort := opts.CommitOid
+		if len(commitShort) > 8 {
+			commitShort = commitShort[:8]
+		}
+		return fmt.Sprintf("commit %s", commitShort)
+	case opts.PRNumber > 0:
+		return fmt.Sprintf("PR #%d", opts.PRNumber)
+	default:
+		return "default branch"
+	}
 }
 
 func (opts *ReportCardOptions) outputHuman() error {

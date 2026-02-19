@@ -272,7 +272,7 @@ func (opts *MetricsOptions) outputHuman() error {
 	metricsList := opts.getMetrics()
 
 	if len(metricsList) == 0 {
-		pterm.Info.Println("No metrics found.")
+		pterm.Info.Printfln("No metrics found in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		return nil
 	}
 
