@@ -13,7 +13,6 @@ import (
 	"github.com/deepsourcelabs/cli/internal/interfaces"
 	reportsvc "github.com/deepsourcelabs/cli/internal/services/report"
 	"github.com/spf13/cobra"
-	"gopkg.in/yaml.v3"
 )
 
 type ReportOptions struct {
@@ -29,7 +28,7 @@ type ReportOptions struct {
 	OIDCRequestUrl              string // url to manually get an OIDC token
 	DeepSourceHostEndpoint      string // DeepSource host endpoint where the app is running. Defaults to the cloud endpoint https://app.deepsource.com
 	OIDCProvider                string // OIDC provider to use for authentication
-	Output                      string // Output format: table, json, yaml
+	Output                      string // Output format: pretty, json
 }
 
 // NewCmdReport returns the command to report artifacts to DeepSource
@@ -96,7 +95,7 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 	cmd.Flags().StringVar(&opts.OIDCRequestUrl, "oidc-request-url", "", "OIDC provider's request URL to fetch an OIDC token")
 	cmd.Flags().StringVar(&opts.DeepSourceHostEndpoint, "deepsource-host-endpoint", "https://app.deepsource.com", "DeepSource host endpoint where the app is running. Defaults to the cloud endpoint https://app.deepsource.com")
 	cmd.Flags().StringVar(&opts.OIDCProvider, "oidc-provider", "", "OIDC provider to use for authentication. Supported providers: github-actions")
-	cmd.Flags().StringVar(&opts.Output, "output", "pretty", "Output format: pretty, table, json, yaml")
+	cmd.Flags().StringVar(&opts.Output, "output", "pretty", "Output format: pretty, json")
 
 	// --skip-verify flag to skip SSL certificate verification while reporting test coverage data.
 	cmd.Flags().BoolVar(&opts.SkipCertificateVerification, "skip-verify", false, "skip SSL certificate verification while sending the test coverage data")
@@ -104,9 +103,7 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 	_ = cmd.RegisterFlagCompletionFunc("output", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
 			"pretty\tPretty-printed output",
-			"table\tHuman-readable table",
 			"json\tJSON output",
-			"yaml\tYAML output",
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
 	_ = cmd.RegisterFlagCompletionFunc("analyzer-type", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
@@ -169,7 +166,7 @@ func printReportResult(output interfaces.OutputWriter, format string, result *re
 	}
 
 	switch format {
-	case "", "pretty", "table":
+	case "", "pretty":
 		write("DeepSource | Artifact published successfully\n\n")
 		write("Analyzer  %s\n", result.Analyzer)
 		write("Key       %s\n", result.Key)
@@ -186,13 +183,6 @@ func printReportResult(output interfaces.OutputWriter, format string, result *re
 			return fmt.Errorf("DeepSource | Error | Failed to format JSON output: %w", err)
 		}
 		write("%s\n", payload)
-		return nil
-	case "yaml":
-		payload, err := yaml.Marshal(result)
-		if err != nil {
-			return fmt.Errorf("DeepSource | Error | Failed to format YAML output: %w", err)
-		}
-		write("%s", payload)
 		return nil
 	default:
 		return fmt.Errorf("DeepSource | Error | Unsupported output format: %s", format)

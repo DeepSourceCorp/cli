@@ -238,35 +238,6 @@ func TestVulnsMutualExclusivity(t *testing.T) {
 	}
 }
 
-func TestVulnsYAMLOutput(t *testing.T) {
-	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
-	mock := testutil.MockQueryFunc(t, map[string]string{
-		"dependencyVulnerabilityOccurrences(first: $limit)": goldenPath("repo_vulns_response.json"),
-	})
-	client := deepsource.NewWithGraphQLClient(mock)
-
-	var buf bytes.Buffer
-	deps := &cmddeps.Deps{
-		Client:    client,
-		ConfigMgr: cfgMgr,
-		Stdout:    &buf,
-	}
-
-	cmd := vulnsCmd.NewCmdVulnerabilitiesWithDeps(deps)
-	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--default-branch", "--output", "yaml"})
-
-	if err := cmd.Execute(); err != nil {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	expected := string(testutil.LoadGoldenFile(t, goldenPath("repo_vulns_output.yaml")))
-	got := buf.String()
-
-	if strings.TrimSpace(got) != strings.TrimSpace(expected) {
-		t.Errorf("output mismatch.\nExpected:\n%s\nGot:\n%s", expected, got)
-	}
-}
-
 func TestVulnsEmptyResults(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{

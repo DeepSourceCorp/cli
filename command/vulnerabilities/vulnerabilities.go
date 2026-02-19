@@ -21,7 +21,6 @@ import (
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	"gopkg.in/yaml.v3"
 )
 
 type VulnerabilitiesOptions struct {
@@ -96,7 +95,7 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository (owner/name)")
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 100, "Maximum number of vulnerabilities to fetch")
-	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json, yaml")
+	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
 	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show CVSS score, summary, fix versions, and reachability")
 	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit SHA")
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
@@ -111,7 +110,6 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		return []string{
 			"pretty\tPretty-printed output",
 			"json\tJSON output",
-			"yaml\tYAML output",
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
 	_ = cmd.RegisterFlagCompletionFunc("severity", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
@@ -213,8 +211,6 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 	switch opts.OutputFormat {
 	case "json":
 		return opts.outputJSON()
-	case "yaml":
-		return opts.outputYAML()
 	default:
 		return opts.outputHuman()
 	}
@@ -455,25 +451,6 @@ func (opts *VulnerabilitiesOptions) outputJSON() error {
 		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format JSON output", err)
 	}
 	fmt.Fprintln(opts.stdout(), string(data))
-	return nil
-}
-
-func (opts *VulnerabilitiesOptions) outputYAML() error {
-	var data []byte
-	var err error
-
-	switch {
-	case opts.runVulns != nil:
-		data, err = yaml.Marshal(opts.runVulns)
-	case opts.prVulns != nil:
-		data, err = yaml.Marshal(opts.prVulns)
-	default:
-		data, err = yaml.Marshal(opts.repoVulns)
-	}
-	if err != nil {
-		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format YAML output", err)
-	}
-	fmt.Fprint(opts.stdout(), string(data))
 	return nil
 }
 

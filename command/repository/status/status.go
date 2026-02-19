@@ -19,7 +19,6 @@ import (
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	"gopkg.in/yaml.v3"
 )
 
 type RepoStatusOptions struct {
@@ -69,7 +68,7 @@ func NewCmdRepoStatusWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	}
 
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Get the activation status of the specified repository")
-	cmd.Flags().StringVarP(&opts.Output, "output", "o", "pretty", "Output format: pretty, json, yaml")
+	cmd.Flags().StringVarP(&opts.Output, "output", "o", "pretty", "Output format: pretty, json")
 	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
 	})
@@ -77,7 +76,6 @@ func NewCmdRepoStatusWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		return []string{
 			"pretty\tPretty-printed output",
 			"json\tJSON output",
-			"yaml\tYAML output",
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
 
@@ -125,13 +123,6 @@ func (opts *RepoStatusOptions) printStatus(result *reposvc.StatusResult) error {
 			return fmt.Errorf("DeepSource | Error | Failed to format JSON output: %w", err)
 		}
 		fmt.Fprintf(w, "%s\n", payload)
-		return nil
-	case "yaml":
-		payload, err := yaml.Marshal(result)
-		if err != nil {
-			return fmt.Errorf("DeepSource | Error | Failed to format YAML output: %w", err)
-		}
-		fmt.Fprint(w, string(payload))
 		return nil
 	default:
 		return fmt.Errorf("DeepSource | Error | Unsupported output format: %s", opts.Output)

@@ -14,46 +14,46 @@ type AnalysisRun struct {
 	OccurrencesIntroduced int         `json:"occurrencesIntroduced"`
 	OccurrencesResolved   int         `json:"occurrencesResolved"`
 	OccurrencesSuppressed int         `json:"occurrencesSuppressed"`
-	ReportCard            *ReportCard `json:"reportCard,omitempty" yaml:"report_card,omitempty"`
+	ReportCard            *ReportCard `json:"reportCard,omitempty"`
 }
 
 // ReportCard contains quality grades and scores for an analysis run
 type ReportCard struct {
-	Status      string           `json:"status" yaml:"status"`
-	Security    *ReportDimension `json:"security,omitempty" yaml:"security,omitempty"`
-	Reliability *ReportDimension `json:"reliability,omitempty" yaml:"reliability,omitempty"`
-	Complexity  *ReportDimension `json:"complexity,omitempty" yaml:"complexity,omitempty"`
-	Hygiene     *ReportDimension `json:"hygiene,omitempty" yaml:"hygiene,omitempty"`
-	Coverage    *ReportCoverage  `json:"coverage,omitempty" yaml:"coverage,omitempty"`
-	Aggregate   *ReportAggregate `json:"aggregate,omitempty" yaml:"aggregate,omitempty"`
-	FocusArea   *ReportFocusArea `json:"focusArea,omitempty" yaml:"focus_area,omitempty"`
+	Status      string           `json:"status"`
+	Security    *ReportDimension `json:"security,omitempty"`
+	Reliability *ReportDimension `json:"reliability,omitempty"`
+	Complexity  *ReportDimension `json:"complexity,omitempty"`
+	Hygiene     *ReportDimension `json:"hygiene,omitempty"`
+	Coverage    *ReportCoverage  `json:"coverage,omitempty"`
+	Aggregate   *ReportAggregate `json:"aggregate,omitempty"`
+	FocusArea   *ReportFocusArea `json:"focusArea,omitempty"`
 }
 
 // ReportDimension represents a single quality dimension (security, reliability, etc.)
 type ReportDimension struct {
-	Grade       string `json:"grade" yaml:"grade"`
-	Score       int    `json:"score" yaml:"score"`
-	IssuesCount int    `json:"issuesCount" yaml:"issues_count"`
+	Grade       string `json:"grade"`
+	Score       int    `json:"score"`
+	IssuesCount int    `json:"issuesCount"`
 }
 
 // ReportCoverage represents coverage information in a report card
 type ReportCoverage struct {
-	Grade          string   `json:"grade,omitempty" yaml:"grade,omitempty"`
-	Score          *int     `json:"score,omitempty" yaml:"score,omitempty"`
-	LineCoverage   *float64 `json:"lineCoverage,omitempty" yaml:"line_coverage,omitempty"`
-	BranchCoverage *float64 `json:"branchCoverage,omitempty" yaml:"branch_coverage,omitempty"`
+	Grade          string   `json:"grade,omitempty"`
+	Score          *int     `json:"score,omitempty"`
+	LineCoverage   *float64 `json:"lineCoverage,omitempty"`
+	BranchCoverage *float64 `json:"branchCoverage,omitempty"`
 }
 
 // ReportAggregate represents the aggregate grade across all dimensions
 type ReportAggregate struct {
-	Grade string `json:"grade" yaml:"grade"`
-	Score int    `json:"score" yaml:"score"`
+	Grade string `json:"grade"`
+	Score int    `json:"score"`
 }
 
 // ReportFocusArea represents the recommended area of focus
 type ReportFocusArea struct {
-	Dimension string `json:"dimension,omitempty" yaml:"dimension,omitempty"`
-	Action    string `json:"action,omitempty" yaml:"action,omitempty"`
+	Dimension string `json:"dimension,omitempty"`
+	Action    string `json:"action,omitempty"`
 }
 
 // RunWithIssues represents an analysis run with its associated issues
@@ -62,7 +62,7 @@ type RunWithIssues struct {
 	CommitOid  string      `json:"commitOid"`
 	BranchName string      `json:"branchName"`
 	Status     string      `json:"status"`
-	ReportCard *ReportCard `json:"reportCard,omitempty" yaml:"report_card,omitempty"`
+	ReportCard *ReportCard `json:"reportCard,omitempty"`
 	Issues     []RunIssue  `json:"issues"`
 }
 
