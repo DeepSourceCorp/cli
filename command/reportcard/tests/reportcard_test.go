@@ -21,7 +21,7 @@ func goldenPath(name string) string {
 func TestReportCardCommitScope(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"GetAnalysisRuns": goldenPath("report_card_response.json"),
+		"GetRun": goldenPath("get_run_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -53,10 +53,8 @@ func TestReportCardCommitScope(t *testing.T) {
 
 func TestReportCardAutoDetect(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
-	// ResolveLatestRun does GetAnalysisRuns, then resolveByCurrentBranch does another GetAnalysisRuns
-	// Both match the same route since they use the same query substring
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"analysisRuns(first:": goldenPath("report_card_response.json"),
+		"GetRun": goldenPath("get_run_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -67,6 +65,9 @@ func TestReportCardAutoDetect(t *testing.T) {
 		Stdout:    &buf,
 		BranchNameFunc: func() (string, error) {
 			return "main", nil
+		},
+		CommitLogFunc: func(branch string) ([]string, error) {
+			return []string{"abc123f0000000000000000000000000deadbeef"}, nil
 		},
 	}
 

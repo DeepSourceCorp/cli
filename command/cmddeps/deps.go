@@ -17,4 +17,5 @@ type Deps struct {
 	Stdout      io.Writer
 	RepoService *reposvc.Service
 	BranchNameFunc func() (string, error)
+	CommitLogFunc  func(branch string) ([]string, error)
 }

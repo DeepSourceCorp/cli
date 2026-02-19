@@ -89,7 +89,7 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Use:   "issues [flags]",
 		Short: "View issues in a repository",
 		Long:  doc,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			return opts.Run(cmd.Context())
 		},
 	}
@@ -122,10 +122,10 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().StringSliceVar(&opts.SourceFilters, "source", nil, "Filter by source (static, ai)")
 
 	// Completions
-	_ = cmd.RegisterFlagCompletionFunc("repo", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
 	})
-	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("output", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
 			"pretty\tPretty-printed grouped output",
 			"table\tTable output",
@@ -133,7 +133,7 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 			"yaml\tYAML output",
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
-	_ = cmd.RegisterFlagCompletionFunc("category", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("category", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
 			"anti-pattern",
 			"bug-risk",
@@ -145,7 +145,7 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 			"documentation",
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
-	_ = cmd.RegisterFlagCompletionFunc("severity", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("severity", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{"critical", "major", "minor"}, cobra.ShellCompDirectiveNoFileComp
 	})
 
@@ -206,10 +206,12 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 		issuesList, err = client.GetIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
 	default:
 		var branchNameFunc func() (string, error)
+		var commitLogFunc func(string) ([]string, error)
 		if opts.deps != nil {
 			branchNameFunc = opts.deps.BranchNameFunc
+			commitLogFunc = opts.deps.CommitLogFunc
 		}
-		commitOid, branchName, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc)
+		commitOid, branchName, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc, commitLogFunc)
 		if resolveErr != nil {
 			if branchName != "" && branchName == cmdutil.GetDefaultBranch() {
 				issuesList, err = client.GetIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
@@ -368,7 +370,7 @@ type categoryGroup struct {
 // groupByCategoryAndCode groups issues first by category (preserving first-seen order),
 // then by issue code within each category.
 func groupByCategoryAndCode(list []issues.Issue) []categoryGroup {
-	catOrder := []string{}
+	var catOrder []string
 	catMap := map[string]*categoryGroup{}
 
 	for _, issue := range list {

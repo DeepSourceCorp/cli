@@ -12,15 +12,15 @@ func NewRealEnvironment() *RealEnvironment {
 	return &RealEnvironment{}
 }
 
-func (e *RealEnvironment) Get(key string) string {
+func (*RealEnvironment) Get(key string) string {
 	return os.Getenv(key)
 }
 
-func (e *RealEnvironment) Set(key string, value string) error {
+func (*RealEnvironment) Set(key string, value string) error {
 	return os.Setenv(key, value)
 }
 
-func (e *RealEnvironment) Lookup(key string) (string, bool) {
+func (*RealEnvironment) Lookup(key string) (string, bool) {
 	return os.LookupEnv(key)
 }
 

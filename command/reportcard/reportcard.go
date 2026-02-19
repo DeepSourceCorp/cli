@@ -79,7 +79,7 @@ func NewCmdReportCardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Use:   "report-card [flags]",
 		Short: "View repository report card",
 		Long:  doc,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			return opts.Run(cmd.Context())
 		},
 	}
@@ -91,10 +91,10 @@ func NewCmdReportCardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json, yaml")
 	cmd.Flags().StringVar(&opts.OutputFile, "output-file", "", "Write output to a file instead of stdout")
 
-	_ = cmd.RegisterFlagCompletionFunc("repo", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
 	})
-	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("output", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
 			"pretty\tPretty-printed output",
 			"json\tJSON output",
@@ -175,32 +175,18 @@ func (opts *ReportCardOptions) Run(ctx context.Context) error {
 }
 
 func (opts *ReportCardOptions) resolveByCommit(ctx context.Context, client *deepsource.Client, remote *vcs.RemoteData) error {
-	// Find the run matching this commit in analysis runs
-	const maxPages = 5
-	var after *string
-
-	for page := 0; page < maxPages; page++ {
-		analysisRuns, pageInfo, err := client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, 30, after)
-		if err != nil {
-			return fmt.Errorf("failed to fetch analysis runs: %w", err)
-		}
-
-		for _, run := range analysisRuns {
-			if run.CommitOid == opts.CommitOid {
-				opts.reportCard = run.ReportCard
-				opts.commitOid = run.CommitOid
-				opts.branchName = run.BranchName
-				return nil
-			}
-		}
-
-		if !pageInfo.HasNextPage || pageInfo.EndCursor == nil {
-			break
-		}
-		after = pageInfo.EndCursor
+	run, err := client.GetRunByCommit(ctx, opts.CommitOid)
+	if err != nil {
+		return fmt.Errorf("failed to fetch analysis run: %w", err)
+	}
+	if run == nil {
+		return fmt.Errorf("no analysis run found for commit %s", opts.CommitOid)
 	}
 
-	return fmt.Errorf("no analysis run found for commit %s", opts.CommitOid)
+	opts.reportCard = run.ReportCard
+	opts.commitOid = run.CommitOid
+	opts.branchName = run.BranchName
+	return nil
 }
 
 func (opts *ReportCardOptions) resolveByPR(ctx context.Context, client *deepsource.Client, remote *vcs.RemoteData) error {
@@ -209,7 +195,12 @@ func (opts *ReportCardOptions) resolveByPR(ctx context.Context, client *deepsour
 		return err
 	}
 
-	run, err := cmdutil.ResolveLatestRunForBranch(ctx, client, remote, branch)
+	var commitLogFunc func(string) ([]string, error)
+	if opts.deps != nil {
+		commitLogFunc = opts.deps.CommitLogFunc
+	}
+
+	run, err := cmdutil.ResolveLatestRunForBranch(ctx, client, remote, branch, commitLogFunc)
 	if err != nil {
 		return fmt.Errorf("no successful analysis run found for PR #%d (branch %q): %w", opts.PRNumber, branch, err)
 	}
@@ -226,7 +217,12 @@ func (opts *ReportCardOptions) resolveByDefaultBranch(ctx context.Context, clien
 		return fmt.Errorf("could not detect default branch; try --commit instead")
 	}
 
-	run, err := cmdutil.ResolveLatestRunForBranch(ctx, client, remote, defaultBranch)
+	var commitLogFunc func(string) ([]string, error)
+	if opts.deps != nil {
+		commitLogFunc = opts.deps.CommitLogFunc
+	}
+
+	run, err := cmdutil.ResolveLatestRunForBranch(ctx, client, remote, defaultBranch, commitLogFunc)
 	if err != nil {
 		return err
 	}
@@ -239,42 +235,25 @@ func (opts *ReportCardOptions) resolveByDefaultBranch(ctx context.Context, clien
 
 func (opts *ReportCardOptions) resolveByCurrentBranch(ctx context.Context, client *deepsource.Client, remote *vcs.RemoteData) error {
 	var branchNameFunc func() (string, error)
+	var commitLogFunc func(string) ([]string, error)
 	if opts.deps != nil {
 		branchNameFunc = opts.deps.BranchNameFunc
+		commitLogFunc = opts.deps.CommitLogFunc
 	}
-	commitOid, branchName, err := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc)
+
+	branchName, err := cmdutil.ResolveBranchName(branchNameFunc)
 	if err != nil {
 		return err
 	}
 
-	// We have the commitOid; now find the full run to get its ReportCard
-	const maxPages = 5
-	var after *string
-
-	for page := 0; page < maxPages; page++ {
-		analysisRuns, pageInfo, fetchErr := client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, 30, after)
-		if fetchErr != nil {
-			return fmt.Errorf("failed to fetch analysis runs: %w", fetchErr)
-		}
-
-		for _, run := range analysisRuns {
-			if run.CommitOid == commitOid {
-				opts.reportCard = run.ReportCard
-				opts.commitOid = run.CommitOid
-				opts.branchName = run.BranchName
-				return nil
-			}
-		}
-
-		if !pageInfo.HasNextPage || pageInfo.EndCursor == nil {
-			break
-		}
-		after = pageInfo.EndCursor
+	run, err := cmdutil.ResolveLatestRunForBranch(ctx, client, remote, branchName, commitLogFunc)
+	if err != nil {
+		return err
 	}
 
-	// Fallback: we found the run via ResolveLatestRun but couldn't match it in pagination
-	opts.commitOid = commitOid
-	opts.branchName = branchName
+	opts.reportCard = run.ReportCard
+	opts.commitOid = run.CommitOid
+	opts.branchName = run.BranchName
 	return nil
 }
 

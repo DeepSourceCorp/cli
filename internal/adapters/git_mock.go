@@ -28,10 +28,10 @@ func (g *MockGitClient) SetRemotes(remotes map[string]interfaces.RemoteInfo) {
 	g.Remotes = remotes
 }
 
-func (g *MockGitClient) GetHead(dir string) (string, string, error) {
+func (g *MockGitClient) GetHead(_ string) (string, string, error) {
 	return g.HeadOID, g.Warning, g.Err
 }
 
-func (g *MockGitClient) ListRemotes(dir string) (map[string]interfaces.RemoteInfo, error) {
+func (g *MockGitClient) ListRemotes(_ string) (map[string]interfaces.RemoteInfo, error) {
 	return g.Remotes, g.Err
 }

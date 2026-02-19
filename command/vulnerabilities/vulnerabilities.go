@@ -89,7 +89,7 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Use:   "vulnerabilities [flags]",
 		Short: "View dependency vulnerabilities",
 		Long:  doc,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			return opts.Run(cmd.Context())
 		},
 	}
@@ -118,10 +118,10 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().StringSliceVar(&opts.SeverityFilters, "severity", nil, "Filter by severity (e.g. critical,high)")
 
 	// Completions
-	_ = cmd.RegisterFlagCompletionFunc("repo", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
 	})
-	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("output", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
 			"pretty\tPretty-printed grouped output",
 			"table\tTabular output",
@@ -129,7 +129,7 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 			"yaml\tYAML output",
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
-	_ = cmd.RegisterFlagCompletionFunc("severity", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("severity", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{"critical", "high", "medium", "low", "none"}, cobra.ShellCompDirectiveNoFileComp
 	})
 
@@ -191,10 +191,12 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 		opts.repoVulns, err = client.GetRepoVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
 	default:
 		var branchNameFunc func() (string, error)
+		var commitLogFunc func(string) ([]string, error)
 		if opts.deps != nil {
 			branchNameFunc = opts.deps.BranchNameFunc
+			commitLogFunc = opts.deps.CommitLogFunc
 		}
-		commitOid, branchName, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc)
+		commitOid, branchName, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc, commitLogFunc)
 		if resolveErr != nil {
 			if branchName != "" && branchName == cmdutil.GetDefaultBranch() {
 				opts.repoVulns, err = client.GetRepoVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
@@ -278,7 +280,7 @@ type vulnGroup struct {
 }
 
 func groupByIdentifier(list []vulnerabilities.VulnerabilityOccurrence) []vulnGroup {
-	order := []string{}
+	var order []string
 	groups := map[string]*vulnGroup{}
 	for _, v := range list {
 		id := v.Vulnerability.Identifier

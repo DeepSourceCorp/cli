@@ -86,7 +86,7 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Use:   "metrics [flags]",
 		Short: "View repository metrics",
 		Long:  doc,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			return opts.Run(cmd.Context())
 		},
 	}
@@ -112,10 +112,10 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Maximum number of metrics to fetch")
 
 	// Completions
-	_ = cmd.RegisterFlagCompletionFunc("repo", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
 	})
-	_ = cmd.RegisterFlagCompletionFunc("output", func(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	_ = cmd.RegisterFlagCompletionFunc("output", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
 			"pretty\tPretty-printed grouped output",
 			"table\tTabular output",
@@ -182,10 +182,12 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 		opts.repoMetrics, err = client.GetRepoMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 	default:
 		var branchNameFunc func() (string, error)
+		var commitLogFunc func(string) ([]string, error)
 		if opts.deps != nil {
 			branchNameFunc = opts.deps.BranchNameFunc
+			commitLogFunc = opts.deps.CommitLogFunc
 		}
-		commitOid, branchName, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc)
+		commitOid, branchName, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc, commitLogFunc)
 		if resolveErr != nil {
 			if branchName != "" && branchName == cmdutil.GetDefaultBranch() {
 				opts.repoMetrics, err = client.GetRepoMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
@@ -277,7 +279,8 @@ func (opts *MetricsOptions) outputTable() error {
 
 	// Build metrics table
 	header := []string{"Metric", "Key", "Value", "Threshold", "Status"}
-	data := [][]string{header}
+	data := make([][]string, 0, 4)
+	data = append(data, header)
 
 	for _, m := range metricsList {
 		for _, item := range m.Items {
@@ -441,10 +444,10 @@ func colorByStatus(text string, status string) string {
 func printChangesetLine(label string, counts metrics.ChangesetStatsCounts) {
 	overall := intPtrVal(counts.Overall)
 	overallCovered := intPtrVal(counts.OverallCovered)
-	new := intPtrVal(counts.New)
+	newCount := intPtrVal(counts.New)
 	newCovered := intPtrVal(counts.NewCovered)
 	fmt.Printf("  %s: %d covered of %d overall, %d covered of %d new\n",
-		label, overallCovered, overall, newCovered, new)
+		label, overallCovered, overall, newCovered, newCount)
 }
 
 func intPtrVal(v *int) int {

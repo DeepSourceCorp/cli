@@ -244,6 +244,19 @@ func (c Client) GetAnalysisRuns(ctx context.Context, owner, repoName, provider s
 	return res, pageInfo, nil
 }
 
+// Returns the analysis run for a specific commit.
+// Returns nil (not an error) if no run exists for the given commit.
+func (c Client) GetRunByCommit(ctx context.Context, commitOid string) (*runs.AnalysisRun, error) {
+	req := runsQuery.NewGetRunRequest(c.gqlWrapper, runsQuery.GetRunParams{
+		CommitOid: commitOid,
+	})
+	res, err := req.Do(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
 // Returns the issues for a specific analysis run.
 // commitOid : The commit OID of the analysis run
 func (c Client) GetRunIssues(ctx context.Context, commitOid string) (*runs.RunWithIssues, error) {

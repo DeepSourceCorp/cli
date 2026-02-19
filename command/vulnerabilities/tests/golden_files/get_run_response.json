@@ -1,0 +1,17 @@
+{
+  "run": {
+    "runUid": "run-001",
+    "commitOid": "deadbeef1234567890",
+    "branchName": "main",
+    "status": "SUCCESS",
+    "createdAt": "2025-01-15T10:00:00Z",
+    "finishedAt": "2025-01-15T10:05:00Z",
+    "updatedAt": "2025-01-15T10:05:00Z",
+    "summary": {
+      "occurrencesIntroduced": 0,
+      "occurrencesResolved": 0,
+      "occurrencesSuppressed": 0
+    },
+    "reportCard": null
+  }
+}
