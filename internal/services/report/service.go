@@ -290,7 +290,7 @@ func (s *Service) makeQuery(ctx context.Context, dsn *DSN, body []byte, skipVeri
 		client = &http.Client{
 			Timeout: time.Second * 60,
 			Transport: &http.Transport{
-				TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+				TLSClientConfig: &tls.Config{InsecureSkipVerify: true, MinVersion: tls.VersionTLS12},
 			},
 		}
 	}

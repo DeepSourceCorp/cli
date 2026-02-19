@@ -66,7 +66,7 @@ func TestReportCardAutoDetect(t *testing.T) {
 		BranchNameFunc: func() (string, error) {
 			return "main", nil
 		},
-		CommitLogFunc: func(branch string) ([]string, error) {
+		CommitLogFunc: func(_ string) ([]string, error) {
 			return []string{"abc123f0000000000000000000000000deadbeef"}, nil
 		},
 	}

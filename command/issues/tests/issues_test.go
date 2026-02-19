@@ -34,7 +34,7 @@ func TestIssuesAutoDetectBranch(t *testing.T) {
 		BranchNameFunc: func() (string, error) {
 			return "main", nil
 		},
-		CommitLogFunc: func(branch string) ([]string, error) {
+		CommitLogFunc: func(_ string) ([]string, error) {
 			return []string{"deadbeef1234567890"}, nil
 		},
 	}
@@ -69,7 +69,7 @@ func TestIssuesNoRunsForBranch(t *testing.T) {
 		BranchNameFunc: func() (string, error) {
 			return "feature-no-runs", nil
 		},
-		CommitLogFunc: func(branch string) ([]string, error) {
+		CommitLogFunc: func(_ string) ([]string, error) {
 			return []string{"aaaaaa1234567890"}, nil
 		},
 	}

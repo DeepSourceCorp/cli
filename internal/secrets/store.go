@@ -17,15 +17,15 @@ type Store interface {
 // NoopStore implements Store with no backing storage.
 type NoopStore struct{}
 
-func (NoopStore) Get(key string) (string, error) {
+func (NoopStore) Get(_ string) (string, error) {
 	return "", ErrUnavailable
 }
 
-func (NoopStore) Set(key string, value string) error {
+func (NoopStore) Set(_ string, _ string) error {
 	return ErrUnavailable
 }
 
-func (NoopStore) Delete(key string) error {
+func (NoopStore) Delete(_ string) error {
 	return ErrUnavailable
 }
 

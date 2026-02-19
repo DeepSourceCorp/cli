@@ -9,7 +9,6 @@ import (
 
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/runs"
-	"github.com/deepsourcelabs/cli/internal/vcs"
 )
 
 // ResolveLatestRun finds the latest analysis run for the current git branch.
@@ -18,7 +17,6 @@ import (
 func ResolveLatestRun(
 	ctx context.Context,
 	client *deepsource.Client,
-	remote *vcs.RemoteData,
 	branchNameFunc func() (string, error),
 	commitLogFunc func(branch string) ([]string, error),
 ) (commitOid string, branchName string, runStatus string, err error) {
@@ -44,7 +42,6 @@ func ResolveLatestRun(
 func ResolveLatestRunForBranch(
 	ctx context.Context,
 	client *deepsource.Client,
-	remote *vcs.RemoteData,
 	branchName string,
 	commitLogFunc func(branch string) ([]string, error),
 ) (*runs.AnalysisRun, error) {
