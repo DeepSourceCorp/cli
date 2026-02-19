@@ -81,7 +81,7 @@ func TestReportMissingValue(t *testing.T) {
 
 	svc := NewService(ServiceDeps{
 		GitClient:   git,
-		HTTPClient:  &mockHTTPClient{DoFunc: func(req *http.Request) (*http.Response, error) { return nil, nil }},
+		HTTPClient:  &mockHTTPClient{DoFunc: func(_ *http.Request) (*http.Response, error) { return nil, nil }},
 		FileSystem:  adapters.NewOSFileSystem(),
 		Environment: env,
 		Sentry:      adapters.NewNoOpSentry(),

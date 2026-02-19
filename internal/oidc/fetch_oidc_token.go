@@ -18,7 +18,7 @@ var (
 // It takes the request ID and the request URL as input and returns the OIDC token as a string.
 func FetchOIDCTokenFromProvider(requestId, requestUrl string) (string, error) {
 	// requestid is the bearer token that needs to be sent to the request url
-	req, err := http.NewRequest("GET", requestUrl, nil)
+	req, err := http.NewRequest("GET", requestUrl, http.NoBody)
 	if err != nil {
 		return "", err
 	}
@@ -61,7 +61,7 @@ func FetchOIDCTokenFromProvider(requestId, requestUrl string) (string, error) {
 // It sends the OIDC token to the respective DeepSource API endpoint and returns the temp DSN as string.
 func ExchangeOIDCTokenForTempDSN(oidcToken, dsEndpoint, provider string) (string, error) {
 	apiEndpoint := fmt.Sprintf("%s/services/oidc/%s/", dsEndpoint, provider)
-	req, err := http.NewRequest("POST", apiEndpoint, nil)
+	req, err := http.NewRequest("POST", apiEndpoint, http.NoBody)
 	if err != nil {
 		return "", err
 	}

@@ -94,7 +94,7 @@ func MockQueryFunc(t *testing.T, routes map[string]string) *graphqlclient.MockCl
 	}
 
 	mock := graphqlclient.NewMockClient()
-	mock.QueryFunc = func(ctx context.Context, query string, vars map[string]any, result any) error {
+	mock.QueryFunc = func(_ context.Context, query string, _ map[string]any, result any) error {
 		for _, r := range loaded {
 			if strings.Contains(query, r.substring) {
 				return json.Unmarshal(r.data, result)

@@ -20,11 +20,11 @@ type fakeRepoClient struct {
 	err    error
 }
 
-func (f *fakeRepoClient) GetRepoStatus(ctx context.Context, owner, repoName, provider string) (*repository.Meta, error) {
+func (f *fakeRepoClient) GetRepoStatus(_ context.Context, _, _, _ string) (*repository.Meta, error) {
 	return f.status, f.err
 }
 
-func (f *fakeRepoClient) GetEnabledAnalyzers(ctx context.Context, owner, repoName, provider string) ([]analyzers.Analyzer, error) {
+func (f *fakeRepoClient) GetEnabledAnalyzers(_ context.Context, _, _, _ string) ([]analyzers.Analyzer, error) {
 	return nil, f.err
 }
 
@@ -36,10 +36,10 @@ func TestServiceStatus(t *testing.T) {
 	assert.NoError(t, mgr.Write(cfg))
 
 	svc := NewService(mgr)
-	svc.resolveRemote = func(repoArg string) (*vcs.RemoteData, error) {
+	svc.resolveRemote = func(_ string) (*vcs.RemoteData, error) {
 		return &vcs.RemoteData{Owner: "o", RepoName: "r", VCSProvider: "GITHUB"}, nil
 	}
-	svc.newClient = func(opts deepsource.ClientOpts) (Client, error) {
+	svc.newClient = func(_ deepsource.ClientOpts) (Client, error) {
 		return &fakeRepoClient{status: &repository.Meta{Activated: true}}, nil
 	}
 
@@ -59,10 +59,10 @@ func TestServiceViewURLUnauthorized(t *testing.T) {
 	assert.NoError(t, mgr.Write(cfg))
 
 	svc := NewService(mgr)
-	svc.resolveRemote = func(repoArg string) (*vcs.RemoteData, error) {
+	svc.resolveRemote = func(_ string) (*vcs.RemoteData, error) {
 		return &vcs.RemoteData{Owner: "o", RepoName: "r", VCSProvider: "GITHUB"}, nil
 	}
-	svc.newClient = func(opts deepsource.ClientOpts) (Client, error) {
+	svc.newClient = func(_ deepsource.ClientOpts) (Client, error) {
 		return &fakeRepoClient{err: errors.New("Repository matching query does not exist")}, nil
 	}
 

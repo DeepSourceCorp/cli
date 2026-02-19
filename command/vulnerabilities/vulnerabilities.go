@@ -182,7 +182,7 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 			branchNameFunc = opts.deps.BranchNameFunc
 			commitLogFunc = opts.deps.CommitLogFunc
 		}
-		commitOid, branchName, runStatus, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc, commitLogFunc)
+		commitOid, branchName, runStatus, resolveErr := cmdutil.ResolveLatestRun(ctx, client, branchNameFunc, commitLogFunc)
 		if resolveErr != nil {
 			if branchName != "" && branchName == cmdutil.GetDefaultBranch() {
 				opts.repoVulns, err = client.GetRepoVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
