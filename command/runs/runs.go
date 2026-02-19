@@ -144,7 +144,7 @@ func (opts *RunsOptions) runList() error {
 	}
 
 	if len(analysisRuns) == 0 {
-		pterm.Info.Println("No analysis runs found for this repository.")
+		pterm.Info.Printfln("No analysis runs found in %s/%s.", remote.Owner, remote.RepoName)
 		return nil
 	}
 

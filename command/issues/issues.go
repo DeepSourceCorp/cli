@@ -420,12 +420,33 @@ func matchesPathFilters(path string, filters []string) bool {
 
 // --- Human output ---
 
+func (opts *IssuesOptions) scopeLabel() string {
+	switch {
+	case opts.autoDetectedBranch != "":
+		short := opts.CommitOid
+		if len(short) > 8 {
+			short = short[:8]
+		}
+		return opts.autoDetectedBranch + " (" + short + ")"
+	case opts.CommitOid != "":
+		short := opts.CommitOid
+		if len(short) > 8 {
+			short = short[:8]
+		}
+		return "commit " + short
+	case opts.PRNumber > 0:
+		return fmt.Sprintf("PR #%d", opts.PRNumber)
+	default:
+		return "default branch"
+	}
+}
+
 func (opts *IssuesOptions) outputHuman() error {
 	if len(opts.issues) == 0 {
 		if opts.hasFilters() {
-			pterm.Info.Println("No issues matched the provided filters.")
+			pterm.Info.Printfln("No issues matched the provided filters in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		} else {
-			pterm.Info.Println("No issues found.")
+			pterm.Info.Printfln("No issues found in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		}
 		return nil
 	}
@@ -445,27 +466,7 @@ func (opts *IssuesOptions) outputHuman() error {
 		}
 	}
 
-	// Build the ruled section header.
-	var scopeLabel string
-	switch {
-	case opts.autoDetectedBranch != "":
-		short := opts.CommitOid
-		if len(short) > 8 {
-			short = short[:8]
-		}
-		scopeLabel = opts.autoDetectedBranch + " (" + short + ")"
-	case opts.CommitOid != "":
-		short := opts.CommitOid
-		if len(short) > 8 {
-			short = short[:8]
-		}
-		scopeLabel = "commit " + short
-	case opts.PRNumber > 0:
-		scopeLabel = fmt.Sprintf("PR #%d", opts.PRNumber)
-	default:
-		scopeLabel = "default branch"
-	}
-
+	scopeLabel := opts.scopeLabel()
 	fmt.Println(pterm.Bold.Sprintf("── Issues · %s ────", scopeLabel))
 
 	summaryLine := fmt.Sprintf("   %d total", len(opts.issues))

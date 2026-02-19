@@ -291,9 +291,9 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 
 	if len(vulnsList) == 0 {
 		if opts.hasFilters() {
-			pterm.Info.Println("No vulnerabilities matched the provided filters.")
+			pterm.Info.Printfln("No vulnerabilities matched the provided filters in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		} else {
-			pterm.Info.Println("No vulnerabilities found.")
+			pterm.Info.Printfln("No vulnerabilities found in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		}
 		return nil
 	}
