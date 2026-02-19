@@ -21,6 +21,7 @@ import (
 	"github.com/deepsourcelabs/cli/internal/vcs"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 	"gopkg.in/yaml.v3"
 )
 
@@ -28,7 +29,6 @@ type IssuesOptions struct {
 	RepoArg         string
 	LimitArg        int
 	OutputFormat    string
-	OutputFile      string
 	Verbose         bool
 	AnalyzerFilters []string
 	CategoryFilters []string
@@ -73,15 +73,13 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		  %[3]s
 		  %[4]s
 
-		Output as a table or structured format:
+		Output as a structured format:
 		  %[5]s
-		  %[6]s
 		`,
 		style.Cyan("deepsource issues"),
 		style.Cyan("deepsource issues --commit abc123f"),
 		style.Cyan("deepsource issues --pr 123"),
 		style.Cyan("deepsource issues --default-branch"),
-		style.Cyan("deepsource issues --output table"),
 		style.Cyan("deepsource issues --output json"),
 	)
 
@@ -101,10 +99,7 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Maximum number of issues to fetch")
 
 	// --output, -o flag
-	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, table, json, yaml")
-
-	// --output-file flag
-	cmd.Flags().StringVar(&opts.OutputFile, "output-file", "", "Write output to a file instead of stdout")
+	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json, yaml")
 
 	// --verbose, -v flag
 	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show issue description")
@@ -127,8 +122,7 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	})
 	_ = cmd.RegisterFlagCompletionFunc("output", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
-			"pretty\tPretty-printed grouped output",
-			"table\tTable output",
+			"pretty\tPretty-printed output",
 			"json\tJSON output",
 			"yaml\tYAML output",
 		}, cobra.ShellCompDirectiveNoFileComp
@@ -152,7 +146,71 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	// Mutual exclusivity
 	cmd.MarkFlagsMutuallyExclusive("commit", "pr", "default-branch")
 
+	setIssuesUsageFunc(cmd)
+
 	return cmd
+}
+
+func setIssuesUsageFunc(cmd *cobra.Command) {
+	cmd.SetUsageFunc(func(c *cobra.Command) error {
+		groups := []struct {
+			title string
+			flags []string
+		}{
+			{"Scope", []string{"commit", "pr", "default-branch"}},
+			{"Filters", []string{"analyzer", "category", "severity", "path", "source"}},
+			{"Output", []string{"output", "limit", "verbose"}},
+			{"General", []string{"repo", "help"}},
+		}
+
+		w := c.OutOrStderr()
+		fmt.Fprintf(w, "Usage:\n  %s\n", c.UseLine())
+		for _, g := range groups {
+			fmt.Fprintf(w, "\n%s:\n", g.title)
+			for _, name := range g.flags {
+				f := c.Flags().Lookup(name)
+				if f == nil {
+					continue
+				}
+				fmt.Fprintf(w, "  %s\n", flagUsageLine(f))
+			}
+		}
+		fmt.Fprintln(w)
+		return nil
+	})
+}
+
+func flagUsageLine(f *pflag.Flag) string {
+	var line string
+	if f.Shorthand != "" {
+		line = fmt.Sprintf("-%s, --%s", f.Shorthand, f.Name)
+	} else {
+		line = fmt.Sprintf("    --%s", f.Name)
+	}
+
+	vartype := f.Value.Type()
+	switch vartype {
+	case "bool":
+		// no type suffix for booleans
+	case "stringSlice":
+		line += " strings"
+	default:
+		line += " " + vartype
+	}
+
+	// Pad to 28 chars for alignment, then add usage.
+	const pad = 28
+	if len(line) < pad {
+		line += strings.Repeat(" ", pad-len(line))
+	} else {
+		line += "  "
+	}
+	line += f.Usage
+
+	if f.DefValue != "" && f.DefValue != "false" && f.DefValue != "[]" && f.DefValue != "0" {
+		line += fmt.Sprintf(" (default %s)", f.DefValue)
+	}
+	return line
 }
 
 func (opts *IssuesOptions) Run(ctx context.Context) error {
@@ -211,13 +269,21 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 			branchNameFunc = opts.deps.BranchNameFunc
 			commitLogFunc = opts.deps.CommitLogFunc
 		}
-		commitOid, branchName, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc, commitLogFunc)
+		commitOid, branchName, runStatus, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc, commitLogFunc)
 		if resolveErr != nil {
 			if branchName != "" && branchName == cmdutil.GetDefaultBranch() {
 				issuesList, err = client.GetIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
 				break
 			}
 			return resolveErr
+		}
+		if cmdutil.IsRunInProgress(runStatus) {
+			pterm.Info.Printfln("Analysis is still in progress for branch %q.", branchName)
+			return nil
+		}
+		if cmdutil.IsRunTimedOut(runStatus) {
+			pterm.Warning.Printfln("Analysis timed out for branch %q.", branchName)
+			return nil
 		}
 		opts.CommitOid = commitOid
 		opts.autoDetectedBranch = branchName
@@ -235,8 +301,6 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 		return opts.outputJSON()
 	case "yaml":
 		return opts.outputYAML()
-	case "table":
-		return opts.outputTable()
 	default:
 		return opts.outputHuman()
 	}
@@ -356,56 +420,6 @@ func matchesPathFilters(path string, filters []string) bool {
 
 // --- Human output ---
 
-type codeGroup struct {
-	issue     issues.Issue
-	locations []issues.Location
-}
-
-type categoryGroup struct {
-	category string
-	codes    []codeGroup
-	total    int
-}
-
-// groupByCategoryAndCode groups issues first by category (preserving first-seen order),
-// then by issue code within each category.
-func groupByCategoryAndCode(list []issues.Issue) []categoryGroup {
-	var catOrder []string
-	catMap := map[string]*categoryGroup{}
-
-	for _, issue := range list {
-		cat := issue.IssueCategory
-		cg, catExists := catMap[cat]
-		if !catExists {
-			catOrder = append(catOrder, cat)
-			cg = &categoryGroup{category: cat}
-			catMap[cat] = cg
-		}
-
-		found := false
-		for i := range cg.codes {
-			if cg.codes[i].issue.IssueCode == issue.IssueCode {
-				cg.codes[i].locations = append(cg.codes[i].locations, issue.Location)
-				found = true
-				break
-			}
-		}
-		if !found {
-			cg.codes = append(cg.codes, codeGroup{
-				issue:     issue,
-				locations: []issues.Location{issue.Location},
-			})
-		}
-		cg.total++
-	}
-
-	result := make([]categoryGroup, 0, len(catOrder))
-	for _, cat := range catOrder {
-		result = append(result, *catMap[cat])
-	}
-	return result
-}
-
 func (opts *IssuesOptions) outputHuman() error {
 	if len(opts.issues) == 0 {
 		if opts.hasFilters() {
@@ -432,8 +446,6 @@ func (opts *IssuesOptions) outputHuman() error {
 	}
 
 	// Build the ruled section header.
-	fmt.Println(pterm.Bold.Sprint("── Issues ────"))
-
 	var scopeLabel string
 	switch {
 	case opts.autoDetectedBranch != "":
@@ -454,124 +466,69 @@ func (opts *IssuesOptions) outputHuman() error {
 		scopeLabel = "default branch"
 	}
 
-	fmt.Printf("%s · %s\n", opts.repoSlug, scopeLabel)
+	fmt.Println(pterm.Bold.Sprintf("── Issues · %s ────", scopeLabel))
 
-	summaryLine := fmt.Sprintf("%d total", len(opts.issues))
+	summaryLine := fmt.Sprintf("   %d total", len(opts.issues))
 	if len(sevParts) > 0 {
-		summaryLine += ": " + strings.Join(sevParts, " · ")
+		summaryLine += " · " + strings.Join(sevParts, " · ")
 	}
 	fmt.Println(summaryLine)
+
+	catCounts := map[string]int{}
+	for _, issue := range opts.issues {
+		cat := strings.ToUpper(issue.IssueCategory)
+		catCounts[cat]++
+	}
+	var catParts []string
+	for _, cat := range []string{"BUG_RISK", "SECURITY", "ANTI_PATTERN", "PERFORMANCE", "STYLE", "DOCUMENTATION", "COVERAGE", "TYPECHECK"} {
+		if c := catCounts[cat]; c > 0 {
+			catParts = append(catParts, fmt.Sprintf("%d %s", c, strings.ToLower(humanizeCategory(cat))))
+		}
+	}
+	if len(catParts) > 0 {
+		fmt.Println("   " + strings.Join(catParts, " · "))
+	}
 	fmt.Println()
 
-	// Group and render issues by severity → category → code.
 	cwd, _ := os.Getwd()
 
-	order := []string{"CRITICAL", "MAJOR", "MINOR"}
-	groups := make(map[string][]issues.Issue)
+	// Group issues by category.
+	grouped := map[string][]issues.Issue{}
 	for _, issue := range opts.issues {
-		sev := strings.ToUpper(issue.IssueSeverity)
-		groups[sev] = append(groups[sev], issue)
+		cat := strings.ToUpper(issue.IssueCategory)
+		grouped[cat] = append(grouped[cat], issue)
 	}
 
-	for _, sev := range order {
-		sevGroup, ok := groups[sev]
-		if !ok || len(sevGroup) == 0 {
+	categoryOrder := []string{"BUG_RISK", "SECURITY", "ANTI_PATTERN", "PERFORMANCE", "STYLE", "DOCUMENTATION", "COVERAGE", "TYPECHECK"}
+	first := true
+	for _, cat := range categoryOrder {
+		group, ok := grouped[cat]
+		if !ok {
 			continue
 		}
 
-		fmt.Println(colorSeverity(sev, fmt.Sprintf("%s (%d issues)", humanizeSeverity(sev), len(sevGroup))))
-		fmt.Println()
+		if !first {
+			fmt.Println()
+		}
+		first = false
 
-		catGroups := groupByCategoryAndCode(sevGroup)
-		for _, cg := range catGroups {
-			fmt.Printf("  %s (%d issues)\n\n", humanizeCategory(cg.category), cg.total)
+		fmt.Println(pterm.Bold.Sprintf("  ── %s ──", humanizeCategory(cat)))
 
-			for _, ig := range cg.codes {
-				fmt.Printf("    %s %s\n", pterm.Bold.Sprint("✗"), pterm.Bold.Sprint(ig.issue.IssueText))
+		for i, issue := range group {
+			location := formatLocation(issue, cwd)
+			severity := humanizeSeverity(issue.IssueSeverity)
+			analyzer := analyzerDisplayName(issue.Analyzer)
 
-				analyzer := analyzerDisplayName(ig.issue.Analyzer)
-				meta := fmt.Sprintf("%s · %s", ig.issue.IssueCode, analyzer)
-				if len(ig.locations) > 1 {
-					meta += fmt.Sprintf(" (%d occurrences)", len(ig.locations))
-				}
-				fmt.Printf("      %s\n", pterm.Gray(meta))
-
-				for _, loc := range ig.locations {
-					fmt.Printf("      %s\n", pterm.Gray(formatLocationFromParts(loc, cwd)))
-				}
-
-				if opts.Verbose && ig.issue.Description != "" {
-					desc := ig.issue.Description
-					if idx := strings.IndexByte(desc, '\n'); idx != -1 {
-						desc = desc[:idx]
-					}
-					fmt.Printf("      %s\n", pterm.Gray(desc))
-				}
-
+			sevTag := colorSeverity(issue.IssueSeverity, "["+severity+"]")
+			fmt.Printf("  %s  [%s] %s\n", issue.IssueText, analyzer, sevTag)
+			fmt.Printf("  %s\n", pterm.Gray(location))
+			if i < len(group)-1 {
 				fmt.Println()
 			}
 		}
 	}
 
-	fmt.Printf("Showing %d issue(s) in %s from %s\n", len(opts.issues), opts.repoSlug, scopeLabel)
-
-	return nil
-}
-
-// --- Table output ---
-
-func (opts *IssuesOptions) outputTable() error {
-	if len(opts.issues) == 0 {
-		if opts.hasFilters() {
-			pterm.Info.Println("No issues matched the provided filters.")
-		} else {
-			pterm.Info.Println("No issues found.")
-		}
-		return nil
-	}
-
-	showSource := opts.CommitOid != "" || opts.PRNumber > 0
-
-	var header []string
-	if showSource {
-		header = []string{"Location", "Source", "Analyzer", "Code", "Title", "Category", "Severity"}
-	} else {
-		header = []string{"Location", "Analyzer", "Code", "Title", "Category", "Severity"}
-	}
-	data := [][]string{header}
-
-	cwd, _ := os.Getwd()
-
-	for _, issue := range opts.issues {
-		location := formatLocation(issue, cwd)
-		severity := formatSeverity(issue.IssueSeverity)
-		category := humanizeCategory(issue.IssueCategory)
-		analyzer := analyzerDisplayName(issue.Analyzer)
-
-		if showSource {
-			data = append(data, []string{
-				location,
-				issue.IssueSource,
-				analyzer,
-				issue.IssueCode,
-				issue.IssueText,
-				category,
-				severity,
-			})
-		} else {
-			data = append(data, []string{
-				location,
-				analyzer,
-				issue.IssueCode,
-				issue.IssueText,
-				category,
-				severity,
-			})
-		}
-	}
-
-	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
-	pterm.Printf("\nShowing %d issue(s)\n", len(opts.issues))
+	fmt.Printf("\nShowing %d issue(s) in %s from %s\n", len(opts.issues), opts.repoSlug, scopeLabel)
 
 	return nil
 }
@@ -625,20 +582,12 @@ func (opts *IssuesOptions) outputYAML() error {
 }
 
 func (opts *IssuesOptions) writeOutput(data []byte, trailingNewline bool) error {
-	if opts.OutputFile == "" {
-		w := opts.stdout()
-		if trailingNewline {
-			fmt.Fprintln(w, string(data))
-		} else {
-			fmt.Fprint(w, string(data))
-		}
-		return nil
+	w := opts.stdout()
+	if trailingNewline {
+		fmt.Fprintln(w, string(data))
+	} else {
+		fmt.Fprint(w, string(data))
 	}
-
-	if err := os.WriteFile(opts.OutputFile, data, 0644); err != nil {
-		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to write output file", err)
-	}
-	pterm.Printf("Saved issues to %s!\n", opts.OutputFile)
 	return nil
 }
 
@@ -700,19 +649,6 @@ func colorSeverity(sev string, text string) string {
 	}
 }
 
-func formatSeverity(severity string) string {
-	humanized := humanizeSeverity(severity)
-	switch strings.ToUpper(severity) {
-	case "CRITICAL":
-		return pterm.Red(humanized)
-	case "MAJOR":
-		return pterm.LightRed(humanized)
-	case "MINOR":
-		return pterm.Yellow(humanized)
-	default:
-		return humanized
-	}
-}
 
 func formatLocationFromParts(loc issues.Location, cwd string) string {
 	filePath := loc.Path

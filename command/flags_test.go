@@ -31,7 +31,6 @@ func TestFlagDefaults(t *testing.T) {
 				{name: "pr", defaultValue: "0"},
 				{name: "commit", defaultValue: ""},
 				{name: "repo", defaultValue: ""},
-				{name: "output-file", defaultValue: ""},
 				{name: "severity", defaultValue: "[]"},
 				{name: "category", defaultValue: "[]"},
 				{name: "analyzer", defaultValue: "[]"},
@@ -50,7 +49,6 @@ func TestFlagDefaults(t *testing.T) {
 				{name: "pr", defaultValue: "0"},
 				{name: "commit", defaultValue: ""},
 				{name: "repo", defaultValue: ""},
-				{name: "output-file", defaultValue: ""},
 			},
 		},
 		{
@@ -63,7 +61,6 @@ func TestFlagDefaults(t *testing.T) {
 				{name: "pr", defaultValue: "0"},
 				{name: "commit", defaultValue: ""},
 				{name: "repo", defaultValue: ""},
-				{name: "output-file", defaultValue: ""},
 				{name: "severity", defaultValue: "[]"},
 			},
 		},

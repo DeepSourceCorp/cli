@@ -2,7 +2,6 @@ package tests
 
 import (
 	"bytes"
-	"os"
 	"path/filepath"
 	"runtime"
 	"strings"
@@ -409,46 +408,6 @@ func TestIssuesYAMLOutput(t *testing.T) {
 
 	if strings.TrimSpace(got) != strings.TrimSpace(expected) {
 		t.Errorf("output mismatch.\nExpected:\n%s\nGot:\n%s", expected, got)
-	}
-}
-
-func TestIssuesOutputFile(t *testing.T) {
-	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
-	mock := testutil.MockQueryFunc(t, map[string]string{
-		"issues(first: $limit)": goldenPath("default_branch_response.json"),
-	})
-	client := deepsource.NewWithGraphQLClient(mock)
-
-	var buf bytes.Buffer
-	deps := &cmddeps.Deps{
-		Client:    client,
-		ConfigMgr: cfgMgr,
-		Stdout:    &buf,
-	}
-
-	tmpFile := filepath.Join(t.TempDir(), "issues_output.json")
-
-	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
-	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--default-branch", "--output", "json", "--output-file", tmpFile})
-
-	if err := cmd.Execute(); err != nil {
-		t.Fatalf("unexpected error: %v", err)
-	}
-
-	// stdout should NOT contain the JSON (it goes to the file)
-	if strings.Contains(buf.String(), "GO-R1005") {
-		t.Error("expected JSON output to go to file, not stdout")
-	}
-
-	// Verify file content
-	fileContent, err := os.ReadFile(tmpFile)
-	if err != nil {
-		t.Fatalf("failed to read output file: %v", err)
-	}
-
-	expected := string(testutil.LoadGoldenFile(t, goldenPath("default_branch_output.json")))
-	if strings.TrimSpace(string(fileContent)) != strings.TrimSpace(expected) {
-		t.Errorf("file output mismatch.\nExpected:\n%s\nGot:\n%s", expected, string(fileContent))
 	}
 }
 

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"sort"
 	"strings"
 
 	"github.com/MakeNowJust/heredoc"
@@ -20,6 +21,7 @@ import (
 	"github.com/deepsourcelabs/cli/internal/vcs"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 	"gopkg.in/yaml.v3"
 )
 
@@ -29,7 +31,6 @@ type MetricsOptions struct {
 	PRNumber         int
 	DefaultBranch    bool
 	OutputFormat     string
-	OutputFile       string
 	Verbose          bool
 	LimitArg         int
 	repoSlug         string
@@ -94,22 +95,19 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	// --repo, -r flag
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository (owner/name)")
 
-	// Scoping flags
-	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit SHA")
-	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
-	cmd.Flags().BoolVar(&opts.DefaultBranch, "default-branch", false, "Show metrics from the default branch instead of current branch")
+	// --limit, -l flag
+	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Maximum number of metrics to fetch")
 
-	// --output flag
-	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, table, json, yaml")
-
-	// --output-file flag
-	cmd.Flags().StringVar(&opts.OutputFile, "output-file", "", "Write output to a file instead of stdout")
+	// --output, -o flag
+	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json, yaml")
 
 	// --verbose, -v flag
 	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show shortcodes and descriptions")
 
-	// --limit, -l flag
-	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Maximum number of metrics to fetch")
+	// Scoping flags
+	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit SHA")
+	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
+	cmd.Flags().BoolVar(&opts.DefaultBranch, "default-branch", false, "Show metrics from the default branch instead of current branch")
 
 	// Completions
 	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
@@ -117,8 +115,7 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	})
 	_ = cmd.RegisterFlagCompletionFunc("output", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
-			"pretty\tPretty-printed grouped output",
-			"table\tTabular output",
+			"pretty\tPretty-printed output",
 			"json\tJSON output",
 			"yaml\tYAML output",
 		}, cobra.ShellCompDirectiveNoFileComp
@@ -126,6 +123,8 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 
 	// Mutual exclusivity
 	cmd.MarkFlagsMutuallyExclusive("commit", "pr", "default-branch")
+
+	setMetricsUsageFunc(cmd)
 
 	return cmd
 }
@@ -187,13 +186,21 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 			branchNameFunc = opts.deps.BranchNameFunc
 			commitLogFunc = opts.deps.CommitLogFunc
 		}
-		commitOid, branchName, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc, commitLogFunc)
+		commitOid, branchName, runStatus, resolveErr := cmdutil.ResolveLatestRun(ctx, client, remote, branchNameFunc, commitLogFunc)
 		if resolveErr != nil {
 			if branchName != "" && branchName == cmdutil.GetDefaultBranch() {
 				opts.repoMetrics, err = client.GetRepoMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 				break
 			}
 			return resolveErr
+		}
+		if cmdutil.IsRunInProgress(runStatus) {
+			pterm.Info.Printfln("Analysis is still in progress for branch %q.", branchName)
+			return nil
+		}
+		if cmdutil.IsRunTimedOut(runStatus) {
+			pterm.Warning.Printfln("Analysis timed out for branch %q.", branchName)
+			return nil
 		}
 		opts.CommitOid = commitOid
 		opts.autoDetectedBranch = branchName
@@ -224,8 +231,6 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 		return opts.outputJSON()
 	case "yaml":
 		return opts.outputYAML()
-	case "table":
-		return opts.outputTable()
 	default:
 		return opts.outputHuman()
 	}
@@ -242,7 +247,28 @@ func (opts *MetricsOptions) getMetrics() []metrics.RepositoryMetric {
 	}
 }
 
-func (opts *MetricsOptions) outputTable() error {
+func (opts *MetricsOptions) scopeLabel() string {
+	switch {
+	case opts.autoDetectedBranch != "":
+		commitShort := opts.CommitOid
+		if len(commitShort) > 8 {
+			commitShort = commitShort[:8]
+		}
+		return fmt.Sprintf("%s (%s)", opts.autoDetectedBranch, commitShort)
+	case opts.runMetrics != nil:
+		commitShort := opts.runMetrics.CommitOid
+		if len(commitShort) > 7 {
+			commitShort = commitShort[:7]
+		}
+		return fmt.Sprintf("commit %s on %s", commitShort, opts.runMetrics.BranchName)
+	case opts.prMetrics != nil:
+		return fmt.Sprintf("PR #%d (%s -> %s)", opts.prMetrics.Number, opts.prMetrics.Branch, opts.prMetrics.BaseBranch)
+	default:
+		return "default branch"
+	}
+}
+
+func (opts *MetricsOptions) outputHuman() error {
 	metricsList := opts.getMetrics()
 
 	if len(metricsList) == 0 {
@@ -250,38 +276,20 @@ func (opts *MetricsOptions) outputTable() error {
 		return nil
 	}
 
-	// Show context header for run/PR scopes
-	if opts.runMetrics != nil {
-		commitShort := opts.runMetrics.CommitOid
-		if len(commitShort) > 8 {
-			commitShort = commitShort[:8]
-		}
-		pterm.DefaultBox.WithTitle("Run Metrics").WithTitleTopCenter().Println(
-			fmt.Sprintf("%s %s\n%s %s",
-				pterm.Bold.Sprint("Commit:"),
-				commitShort,
-				pterm.Bold.Sprint("Branch:"),
-				opts.runMetrics.BranchName,
-			),
-		)
-		pterm.Println()
-	} else if opts.prMetrics != nil {
-		pterm.DefaultBox.WithTitle("Pull Request Metrics").WithTitleTopCenter().Println(
-			fmt.Sprintf("%s #%d\n%s %s",
-				pterm.Bold.Sprint("PR:"),
-				opts.prMetrics.Number,
-				pterm.Bold.Sprint("Branch:"),
-				opts.prMetrics.Branch,
-			),
-		)
-		pterm.Println()
+	fmt.Println(pterm.Bold.Sprintf("── Metrics · %s ────", opts.scopeLabel()))
+	fmt.Println()
+
+	// Group metric rows by key (e.g. "AGGREGATE", "PYTHON")
+	type row struct {
+		name      string
+		value     string
+		threshold string
+		status    string
 	}
+	grouped := make(map[string][]row)
+	var seenKeys []string
 
-	// Build metrics table
-	header := []string{"Metric", "Key", "Value", "Threshold", "Status"}
-	data := make([][]string, 0, 4)
-	data = append(data, header)
-
+	totalItems := 0
 	for _, m := range metricsList {
 		for _, item := range m.Items {
 			threshold := "-"
@@ -302,24 +310,54 @@ func (opts *MetricsOptions) outputTable() error {
 				value = "-"
 			}
 
-			data = append(data, []string{
-				m.Name,
-				item.Key,
-				value,
-				threshold,
-				status,
+			if _, ok := grouped[item.Key]; !ok {
+				seenKeys = append(seenKeys, item.Key)
+			}
+			grouped[item.Key] = append(grouped[item.Key], row{
+				name:      m.Name,
+				value:     value,
+				threshold: threshold,
+				status:    status,
 			})
+			totalItems++
 		}
 	}
 
-	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
+	// Sort keys: "AGGREGATE" first, then remaining alphabetically
+	sort.SliceStable(seenKeys, func(i, j int) bool {
+		if seenKeys[i] == "AGGREGATE" {
+			return true
+		}
+		if seenKeys[j] == "AGGREGATE" {
+			return false
+		}
+		return seenKeys[i] < seenKeys[j]
+	})
 
-	// Show changeset stats for run scope
+	// Render per-key sections
+	for idx, key := range seenKeys {
+		label := strings.ToUpper(key[:1]) + strings.ToLower(key[1:])
+		fmt.Println(pterm.Bold.Sprintf("── %s ──", label))
+		fmt.Println()
+
+		data := [][]string{{"Metric", "Value", "Threshold", "Status"}}
+		for _, r := range grouped[key] {
+			data = append(data, []string{r.name, r.value, r.threshold, r.status})
+		}
+		pterm.DefaultTable.WithHasHeader().WithData(data).Render()
+
+		if idx < len(seenKeys)-1 {
+			fmt.Println()
+		}
+	}
+
+	// Changeset stats for run scope
 	if opts.runMetrics != nil && opts.runMetrics.ChangesetStats != nil {
-		pterm.Println()
 		opts.outputChangesetStats()
 	}
 
+	fmt.Println()
+	opts.printFooter(totalItems)
 	return nil
 }
 
@@ -328,155 +366,51 @@ func (opts *MetricsOptions) outputChangesetStats() {
 
 	pterm.DefaultSection.Println("Changeset Coverage")
 
-	header := []string{"Type", "Overall", "Covered", "New", "New Covered"}
+	header := []string{"Type", "Overall", "Covered", "Overall %", "New", "New Covered", "New %"}
 	data := [][]string{header}
 
-	// Lines
 	data = append(data, []string{
 		"Lines",
 		formatIntPtr(stats.Lines.Overall),
 		formatIntPtr(stats.Lines.OverallCovered),
+		coveragePct(stats.Lines.Overall, stats.Lines.OverallCovered),
 		formatIntPtr(stats.Lines.New),
 		formatIntPtr(stats.Lines.NewCovered),
+		newCoveragePct(stats.Lines.New, stats.Lines.NewCovered),
 	})
 
-	// Branches
 	data = append(data, []string{
 		"Branches",
 		formatIntPtr(stats.Branches.Overall),
 		formatIntPtr(stats.Branches.OverallCovered),
+		coveragePct(stats.Branches.Overall, stats.Branches.OverallCovered),
 		formatIntPtr(stats.Branches.New),
 		formatIntPtr(stats.Branches.NewCovered),
+		newCoveragePct(stats.Branches.New, stats.Branches.NewCovered),
 	})
 
-	// Conditions
 	data = append(data, []string{
 		"Conditions",
 		formatIntPtr(stats.Conditions.Overall),
 		formatIntPtr(stats.Conditions.OverallCovered),
+		coveragePct(stats.Conditions.Overall, stats.Conditions.OverallCovered),
 		formatIntPtr(stats.Conditions.New),
 		formatIntPtr(stats.Conditions.NewCovered),
+		newCoveragePct(stats.Conditions.New, stats.Conditions.NewCovered),
 	})
 
 	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
-}
 
-func (opts *MetricsOptions) outputHuman() error {
-	metricsList := opts.getMetrics()
-
-	if len(metricsList) == 0 {
-		pterm.Info.Println("No metrics found.")
-		return nil
-	}
-
-	totalItems := 0
-	for _, m := range metricsList {
-		// Metric name header (bold)
-		header := pterm.Bold.Sprint(m.Name)
-		if opts.Verbose && m.Shortcode != "" {
-			header += fmt.Sprintf(" (%s)", m.Shortcode)
-		}
-		fmt.Println(header)
-
-		if opts.Verbose && m.Description != "" {
-			fmt.Printf("  %s\n", m.Description)
-		}
-
-		for _, item := range m.Items {
-			value := formatValueDisplay(item, m.Unit)
-			colored := colorByStatus(value, item.ThresholdStatus)
-			threshold := formatThresholdDisplay(item, m.Unit)
-
-			fmt.Printf("  %s: %s%s\n", item.Key, colored, threshold)
-			totalItems++
-		}
-
+	if opts.Verbose {
 		fmt.Println()
+		fmt.Println(pterm.Gray("  Lines:      Executable source code lines — the most common coverage metric."))
+		fmt.Println(pterm.Gray("  Branches:   Decision branches (if/else, switch arms) — did both paths execute?"))
+		fmt.Println(pterm.Gray("  Conditions: Individual boolean sub-expressions in compound conditions (a && b)."))
 	}
-
-	// Changeset stats for run scope
-	if opts.runMetrics != nil && opts.runMetrics.ChangesetStats != nil {
-		opts.outputHumanChangesetStats()
-		fmt.Println()
-	}
-
-	opts.printFooter(totalItems)
-	return nil
-}
-
-func (opts *MetricsOptions) outputHumanChangesetStats() {
-	stats := opts.runMetrics.ChangesetStats
-
-	fmt.Println(pterm.Bold.Sprint("Changeset Coverage"))
-	printChangesetLine("Lines", stats.Lines)
-	printChangesetLine("Branches", stats.Branches)
-	printChangesetLine("Conditions", stats.Conditions)
-}
-
-func formatValueDisplay(item metrics.RepositoryMetricItem, unit string) string {
-	if item.LatestValueDisplay != "" {
-		return item.LatestValueDisplay
-	}
-	if item.LatestValue != nil {
-		return fmt.Sprintf("%.1f%s", *item.LatestValue, unit)
-	}
-	return "-"
-}
-
-func formatThresholdDisplay(item metrics.RepositoryMetricItem, unit string) string {
-	if item.Threshold == nil {
-		return ""
-	}
-	return fmt.Sprintf(" (threshold: %d%s)", *item.Threshold, unit)
-}
-
-func colorByStatus(text string, status string) string {
-	switch strings.ToUpper(status) {
-	case "PASSING":
-		return pterm.Green(text)
-	case "FAILING":
-		return pterm.Red(text)
-	default:
-		return text
-	}
-}
-
-func printChangesetLine(label string, counts metrics.ChangesetStatsCounts) {
-	overall := intPtrVal(counts.Overall)
-	overallCovered := intPtrVal(counts.OverallCovered)
-	newCount := intPtrVal(counts.New)
-	newCovered := intPtrVal(counts.NewCovered)
-	fmt.Printf("  %s: %d covered of %d overall, %d covered of %d new\n",
-		label, overallCovered, overall, newCovered, newCount)
-}
-
-func intPtrVal(v *int) int {
-	if v == nil {
-		return 0
-	}
-	return *v
 }
 
 func (opts *MetricsOptions) printFooter(count int) {
-	fmt.Printf("Showing %d metric(s) in %s", count, opts.repoSlug)
-	switch {
-	case opts.autoDetectedBranch != "":
-		commitShort := opts.CommitOid
-		if len(commitShort) > 8 {
-			commitShort = commitShort[:8]
-		}
-		fmt.Printf(" from %s (%s)\n", opts.autoDetectedBranch, commitShort)
-	case opts.runMetrics != nil:
-		commitShort := opts.runMetrics.CommitOid
-		if len(commitShort) > 7 {
-			commitShort = commitShort[:7]
-		}
-		fmt.Printf(" from commit %s on %s\n", commitShort, opts.runMetrics.BranchName)
-	case opts.prMetrics != nil:
-		fmt.Printf(" from PR #%d (%s -> %s)\n", opts.prMetrics.Number, opts.prMetrics.Branch, opts.prMetrics.BaseBranch)
-	default:
-		fmt.Println(" from default branch")
-	}
+	fmt.Printf("Showing %d metric(s) in %s from %s\n", count, opts.repoSlug, opts.scopeLabel())
 }
 
 func formatStatus(status string) string {
@@ -497,6 +431,23 @@ func formatIntPtr(val *int) string {
 	return fmt.Sprintf("%d", *val)
 }
 
+func coveragePct(total, covered *int) string {
+	if total == nil || covered == nil || *total == 0 {
+		return "-"
+	}
+	return fmt.Sprintf("%.1f%%", float64(*covered)/float64(*total)*100)
+}
+
+func newCoveragePct(total, covered *int) string {
+	if total == nil || covered == nil || (*total == 0 && *covered == 0) {
+		return "-"
+	}
+	if *total == 0 {
+		return "-"
+	}
+	return fmt.Sprintf("%.1f%%", float64(*covered)/float64(*total)*100)
+}
+
 func (opts *MetricsOptions) outputJSON() error {
 	var data []byte
 	var err error
@@ -512,7 +463,8 @@ func (opts *MetricsOptions) outputJSON() error {
 	if err != nil {
 		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format JSON output", err)
 	}
-	return opts.writeOutput(data, true)
+	fmt.Fprintln(opts.stdout(), string(data))
+	return nil
 }
 
 func (opts *MetricsOptions) outputYAML() error {
@@ -530,23 +482,65 @@ func (opts *MetricsOptions) outputYAML() error {
 	if err != nil {
 		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format YAML output", err)
 	}
-	return opts.writeOutput(data, false)
+	fmt.Fprint(opts.stdout(), string(data))
+	return nil
 }
 
-func (opts *MetricsOptions) writeOutput(data []byte, trailingNewline bool) error {
-	if opts.OutputFile == "" {
-		w := opts.stdout()
-		if trailingNewline {
-			fmt.Fprintln(w, string(data))
-		} else {
-			fmt.Fprint(w, string(data))
+func setMetricsUsageFunc(cmd *cobra.Command) {
+	cmd.SetUsageFunc(func(c *cobra.Command) error {
+		groups := []struct {
+			title string
+			flags []string
+		}{
+			{"Scope", []string{"commit", "pr", "default-branch"}},
+			{"Output", []string{"output", "limit", "verbose"}},
+			{"General", []string{"repo", "help"}},
 		}
+
+		w := c.OutOrStderr()
+		fmt.Fprintf(w, "Usage:\n  %s\n", c.UseLine())
+		for _, g := range groups {
+			fmt.Fprintf(w, "\n%s:\n", g.title)
+			for _, name := range g.flags {
+				f := c.Flags().Lookup(name)
+				if f == nil {
+					continue
+				}
+				fmt.Fprintf(w, "  %s\n", metricsFlagUsageLine(f))
+			}
+		}
+		fmt.Fprintln(w)
 		return nil
+	})
+}
+
+func metricsFlagUsageLine(f *pflag.Flag) string {
+	var line string
+	if f.Shorthand != "" {
+		line = fmt.Sprintf("-%s, --%s", f.Shorthand, f.Name)
+	} else {
+		line = fmt.Sprintf("    --%s", f.Name)
 	}
 
-	if err := os.WriteFile(opts.OutputFile, data, 0644); err != nil {
-		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to write output file", err)
+	vartype := f.Value.Type()
+	switch vartype {
+	case "bool":
+		// no type suffix for booleans
+	default:
+		line += " " + vartype
 	}
-	pterm.Printf("Saved metrics to %s!\n", opts.OutputFile)
-	return nil
+
+	// Pad to 28 chars for alignment, then add usage.
+	const pad = 28
+	if len(line) < pad {
+		line += strings.Repeat(" ", pad-len(line))
+	} else {
+		line += "  "
+	}
+	line += f.Usage
+
+	if f.DefValue != "" && f.DefValue != "false" && f.DefValue != "[]" && f.DefValue != "0" {
+		line += fmt.Sprintf(" (default %s)", f.DefValue)
+	}
+	return line
 }

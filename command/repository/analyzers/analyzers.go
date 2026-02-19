@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/command/cmddeps"
@@ -17,6 +18,7 @@ import (
 	reposvc "github.com/deepsourcelabs/cli/internal/services/repo"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 	"gopkg.in/yaml.v3"
 )
 
@@ -62,18 +64,19 @@ func NewCmdAnalyzersWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	}
 
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "List analyzers for a specific repository")
-	cmd.Flags().StringVar(&opts.Output, "output", "pretty", "Output format: pretty, table, json, yaml")
+	cmd.Flags().StringVarP(&opts.Output, "output", "o", "pretty", "Output format: pretty, json, yaml")
 	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
 	})
 	_ = cmd.RegisterFlagCompletionFunc("output", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
 			"pretty\tPretty-printed output",
-			"table\tHuman-readable table",
 			"json\tJSON output",
 			"yaml\tYAML output",
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
+
+	setAnalyzersUsageFunc(cmd)
 
 	return cmd
 }
@@ -103,7 +106,7 @@ func (opts *AnalyzersOptions) Run() error {
 func (opts *AnalyzersOptions) printAnalyzers(list []analyzers.Analyzer) error {
 	w := opts.stdout()
 	switch opts.Output {
-	case "", "pretty", "table":
+	case "", "pretty":
 		if len(list) == 0 {
 			pterm.Println("No analyzers enabled on this repository.")
 			return nil
@@ -132,4 +135,61 @@ func (opts *AnalyzersOptions) printAnalyzers(list []analyzers.Analyzer) error {
 	default:
 		return fmt.Errorf("DeepSource | Error | Unsupported output format: %s", opts.Output)
 	}
+}
+
+func setAnalyzersUsageFunc(cmd *cobra.Command) {
+	cmd.SetUsageFunc(func(c *cobra.Command) error {
+		groups := []struct {
+			title string
+			flags []string
+		}{
+			{"Output", []string{"output"}},
+			{"General", []string{"repo", "help"}},
+		}
+
+		w := c.OutOrStderr()
+		fmt.Fprintf(w, "Usage:\n  %s\n", c.UseLine())
+		for _, g := range groups {
+			fmt.Fprintf(w, "\n%s:\n", g.title)
+			for _, name := range g.flags {
+				f := c.Flags().Lookup(name)
+				if f == nil {
+					continue
+				}
+				fmt.Fprintf(w, "  %s\n", analyzersFlagUsageLine(f))
+			}
+		}
+		fmt.Fprintln(w)
+		return nil
+	})
+}
+
+func analyzersFlagUsageLine(f *pflag.Flag) string {
+	var line string
+	if f.Shorthand != "" {
+		line = fmt.Sprintf("-%s, --%s", f.Shorthand, f.Name)
+	} else {
+		line = fmt.Sprintf("    --%s", f.Name)
+	}
+
+	vartype := f.Value.Type()
+	switch vartype {
+	case "bool":
+		// no type suffix for booleans
+	default:
+		line += " " + vartype
+	}
+
+	const pad = 28
+	if len(line) < pad {
+		line += strings.Repeat(" ", pad-len(line))
+	} else {
+		line += "  "
+	}
+	line += f.Usage
+
+	if f.DefValue != "" && f.DefValue != "false" && f.DefValue != "[]" && f.DefValue != "0" {
+		line += fmt.Sprintf(" (default %s)", f.DefValue)
+	}
+	return line
 }

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/command/cmddeps"
@@ -19,6 +20,7 @@ import (
 	"github.com/deepsourcelabs/cli/internal/vcs"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 	"gopkg.in/yaml.v3"
 )
 
@@ -28,7 +30,6 @@ type ReportCardOptions struct {
 	PRNumber      int
 	DefaultBranch bool
 	OutputFormat  string
-	OutputFile    string
 	deps          *cmddeps.Deps
 	reportCard    *runs.ReportCard
 	commitOid     string
@@ -85,11 +86,10 @@ func NewCmdReportCardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	}
 
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository (owner/name)")
+	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json, yaml")
 	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit SHA")
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
 	cmd.Flags().BoolVar(&opts.DefaultBranch, "default-branch", false, "Show report card from the default branch instead of current branch")
-	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json, yaml")
-	cmd.Flags().StringVar(&opts.OutputFile, "output-file", "", "Write output to a file instead of stdout")
 
 	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
@@ -103,6 +103,8 @@ func NewCmdReportCardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	})
 
 	cmd.MarkFlagsMutuallyExclusive("commit", "pr", "default-branch")
+
+	setReportCardUsageFunc(cmd)
 
 	return cmd
 }
@@ -202,7 +204,16 @@ func (opts *ReportCardOptions) resolveByPR(ctx context.Context, client *deepsour
 
 	run, err := cmdutil.ResolveLatestRunForBranch(ctx, client, remote, branch, commitLogFunc)
 	if err != nil {
-		return fmt.Errorf("no successful analysis run found for PR #%d (branch %q): %w", opts.PRNumber, branch, err)
+		return fmt.Errorf("no analysis run found for PR #%d (branch %q): %w", opts.PRNumber, branch, err)
+	}
+
+	if cmdutil.IsRunInProgress(run.Status) {
+		pterm.Info.Printfln("Analysis is still in progress for PR #%d (branch %q).", opts.PRNumber, branch)
+		return nil
+	}
+	if cmdutil.IsRunTimedOut(run.Status) {
+		pterm.Warning.Printfln("Analysis timed out for PR #%d (branch %q).", opts.PRNumber, branch)
+		return nil
 	}
 
 	opts.reportCard = run.ReportCard
@@ -225,6 +236,15 @@ func (opts *ReportCardOptions) resolveByDefaultBranch(ctx context.Context, clien
 	run, err := cmdutil.ResolveLatestRunForBranch(ctx, client, remote, defaultBranch, commitLogFunc)
 	if err != nil {
 		return err
+	}
+
+	if cmdutil.IsRunInProgress(run.Status) {
+		pterm.Info.Printfln("Analysis is still in progress for branch %q.", defaultBranch)
+		return nil
+	}
+	if cmdutil.IsRunTimedOut(run.Status) {
+		pterm.Warning.Printfln("Analysis timed out for branch %q.", defaultBranch)
+		return nil
 	}
 
 	opts.reportCard = run.ReportCard
@@ -251,6 +271,15 @@ func (opts *ReportCardOptions) resolveByCurrentBranch(ctx context.Context, clien
 		return err
 	}
 
+	if cmdutil.IsRunInProgress(run.Status) {
+		pterm.Info.Printfln("Analysis is still in progress for branch %q.", branchName)
+		return nil
+	}
+	if cmdutil.IsRunTimedOut(run.Status) {
+		pterm.Warning.Printfln("Analysis timed out for branch %q.", branchName)
+		return nil
+	}
+
 	opts.reportCard = run.ReportCard
 	opts.commitOid = run.CommitOid
 	opts.branchName = run.BranchName
@@ -263,14 +292,7 @@ func (opts *ReportCardOptions) outputHuman() error {
 		commitShort = commitShort[:8]
 	}
 
-	pterm.DefaultBox.WithTitle("Report Card").WithTitleTopCenter().Println(
-		fmt.Sprintf("%s %s\n%s %s",
-			pterm.Bold.Sprint("Commit:"),
-			commitShort,
-			pterm.Bold.Sprint("Branch:"),
-			opts.branchName,
-		),
-	)
+	fmt.Println(pterm.Bold.Sprintf("── Report Card · %s (%s) ────", opts.branchName, commitShort))
 
 	cmdutil.ShowReportCard(opts.reportCard)
 	return nil
@@ -282,7 +304,8 @@ func (opts *ReportCardOptions) outputJSON() error {
 	if err != nil {
 		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format JSON output", err)
 	}
-	return opts.writeOutput(data, true)
+	fmt.Fprintln(opts.stdout(), string(data))
+	return nil
 }
 
 func (opts *ReportCardOptions) outputYAML() error {
@@ -291,23 +314,64 @@ func (opts *ReportCardOptions) outputYAML() error {
 	if err != nil {
 		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to format YAML output", err)
 	}
-	return opts.writeOutput(data, false)
+	fmt.Fprint(opts.stdout(), string(data))
+	return nil
 }
 
-func (opts *ReportCardOptions) writeOutput(data []byte, trailingNewline bool) error {
-	if opts.OutputFile == "" {
-		w := opts.stdout()
-		if trailingNewline {
-			fmt.Fprintln(w, string(data))
-		} else {
-			fmt.Fprint(w, string(data))
+func setReportCardUsageFunc(cmd *cobra.Command) {
+	cmd.SetUsageFunc(func(c *cobra.Command) error {
+		groups := []struct {
+			title string
+			flags []string
+		}{
+			{"Scope", []string{"commit", "pr", "default-branch"}},
+			{"Output", []string{"output"}},
+			{"General", []string{"repo", "help"}},
 		}
+
+		w := c.OutOrStderr()
+		fmt.Fprintf(w, "Usage:\n  %s\n", c.UseLine())
+		for _, g := range groups {
+			fmt.Fprintf(w, "\n%s:\n", g.title)
+			for _, name := range g.flags {
+				f := c.Flags().Lookup(name)
+				if f == nil {
+					continue
+				}
+				fmt.Fprintf(w, "  %s\n", reportCardFlagUsageLine(f))
+			}
+		}
+		fmt.Fprintln(w)
 		return nil
+	})
+}
+
+func reportCardFlagUsageLine(f *pflag.Flag) string {
+	var line string
+	if f.Shorthand != "" {
+		line = fmt.Sprintf("-%s, --%s", f.Shorthand, f.Name)
+	} else {
+		line = fmt.Sprintf("    --%s", f.Name)
 	}
 
-	if err := os.WriteFile(opts.OutputFile, data, 0644); err != nil {
-		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to write output file", err)
+	vartype := f.Value.Type()
+	switch vartype {
+	case "bool":
+		// no type suffix for booleans
+	default:
+		line += " " + vartype
 	}
-	pterm.Printf("Saved report card to %s!\n", opts.OutputFile)
-	return nil
+
+	const pad = 28
+	if len(line) < pad {
+		line += strings.Repeat(" ", pad-len(line))
+	} else {
+		line += "  "
+	}
+	line += f.Usage
+
+	if f.DefValue != "" && f.DefValue != "false" && f.DefValue != "[]" && f.DefValue != "0" {
+		line += fmt.Sprintf(" (default %s)", f.DefValue)
+	}
+	return line
 }
