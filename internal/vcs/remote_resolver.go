@@ -38,6 +38,11 @@ func ResolveRemote(repoArg string) (*RemoteData, error) {
 		return nil, err
 	}
 
+	// If no supported VCS remotes were found
+	if len(remotesData) == 0 {
+		return nil, fmt.Errorf("No supported VCS remotes found. Use --repo flag to specify the repository manually")
+	}
+
 	// If there is only one remote, use it
 	if len(remotesData) == 1 {
 		for _, value := range remotesData {

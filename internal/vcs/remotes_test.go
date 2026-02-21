@@ -32,6 +32,30 @@ var sshRemoteMap = map[string][]string{
 }
 var sshRemoteList = []string{"origin	git@github.com:username/repo.git (fetch)", "origin	git@github.com:username/repo.git (push)", "upstream	git@github.com:company/repo.git (fetch)", "upstream	git@github.com:company/repo.git (push)"}
 
+// Test data for Azure DevOps HTTPS URLs
+var adsHTTPSRemoteMap = map[string][]string{
+	"origin": {"myorg", "myrepo", "ADS", "myorg/myrepo"},
+}
+var adsHTTPSRemoteList = []string{"origin	https://dev.azure.com/myorg/myproject/_git/myrepo (fetch)", "origin	https://dev.azure.com/myorg/myproject/_git/myrepo (push)"}
+
+// Test data for Azure DevOps SSH URLs
+var adsSSHRemoteMap = map[string][]string{
+	"origin": {"myorg", "myrepo", "ADS", "myorg/myrepo"},
+}
+var adsSSHRemoteList = []string{"origin	git@ssh.dev.azure.com:v3/myorg/myproject/myrepo (fetch)", "origin	git@ssh.dev.azure.com:v3/myorg/myproject/myrepo (push)"}
+
+// Test data for legacy visualstudio.com HTTPS URLs
+var adsLegacyHTTPSRemoteMap = map[string][]string{
+	"origin": {"myorg", "myrepo", "ADS", "myorg/myrepo"},
+}
+var adsLegacyHTTPSRemoteList = []string{"origin	https://myorg.visualstudio.com/myproject/_git/myrepo (fetch)", "origin	https://myorg.visualstudio.com/myproject/_git/myrepo (push)"}
+
+// Test data for legacy visualstudio.com SSH URLs
+var adsLegacySSHRemoteMap = map[string][]string{
+	"origin": {"myorg", "myrepo", "ADS", "myorg/myrepo"},
+}
+var adsLegacySSHRemoteList = []string{"origin	myorg@vs-ssh.visualstudio.com:v3/myorg/myproject/myrepo (fetch)", "origin	myorg@vs-ssh.visualstudio.com:v3/myorg/myproject/myrepo (push)"}
+
 func TestGetRemoteMap(t *testing.T) {
 	tests := []struct {
 		name    string
@@ -57,6 +81,26 @@ func TestGetRemoteMap(t *testing.T) {
 			"SSH URLs",
 			sshRemoteList,
 			sshRemoteMap,
+		},
+		{
+			"Azure DevOps HTTPS URLs",
+			adsHTTPSRemoteList,
+			adsHTTPSRemoteMap,
+		},
+		{
+			"Azure DevOps SSH URLs",
+			adsSSHRemoteList,
+			adsSSHRemoteMap,
+		},
+		{
+			"Azure DevOps legacy visualstudio.com HTTPS URLs",
+			adsLegacyHTTPSRemoteList,
+			adsLegacyHTTPSRemoteMap,
+		},
+		{
+			"Azure DevOps legacy visualstudio.com SSH URLs",
+			adsLegacySSHRemoteList,
+			adsLegacySSHRemoteMap,
 		},
 	}
 

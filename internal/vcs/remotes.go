@@ -27,6 +27,8 @@ func getRemoteMap(remoteList []string) (map[string][]string, error) {
 			VCSProvider = "GITLAB"
 		} else if strings.Contains(remoteURL, "bitbucket") {
 			VCSProvider = "BITBUCKET"
+		} else if strings.Contains(remoteURL, "dev.azure.com") || strings.Contains(remoteURL, "visualstudio.com") {
+			VCSProvider = "ADS"
 		} else {
 			continue
 		}
@@ -39,8 +41,41 @@ func getRemoteMap(remoteList []string) (map[string][]string, error) {
 
 		var owner string
 
-		// git@ ssh urls
-		if strings.HasPrefix(remoteURL, "git@") {
+		if VCSProvider == "ADS" {
+			// Azure DevOps has non-standard URL structures that need special handling
+			if strings.HasPrefix(remoteURL, "https://") {
+				u, err := url.Parse(remoteURL)
+				if err != nil {
+					continue
+				}
+				if strings.Contains(remoteURL, "dev.azure.com") {
+					// https://dev.azure.com/{org}/{project}/_git/{repo}
+					splitPath := strings.Split(strings.Trim(u.Path, "/"), "/")
+					if len(splitPath) > 0 {
+						owner = splitPath[0]
+					}
+				} else if strings.Contains(remoteURL, "visualstudio.com") {
+					// https://{org}.visualstudio.com/{project}/_git/{repo}
+					hostParts := strings.Split(u.Hostname(), ".")
+					if len(hostParts) > 0 {
+						owner = hostParts[0]
+					}
+				}
+			} else {
+				// SSH variants:
+				// git@ssh.dev.azure.com:v3/{org}/{project}/{repo}
+				// {org}@vs-ssh.visualstudio.com:v3/{org}/{project}/{repo}
+				pathURL := strings.Split(remoteURL, ":")
+				if len(pathURL) > 1 {
+					splitPath := strings.Split(pathURL[1], "/")
+					// path starts with v3/{org}/...
+					if len(splitPath) > 1 {
+						owner = splitPath[1]
+					}
+				}
+			}
+		} else if strings.HasPrefix(remoteURL, "git@") {
+			// git@ ssh urls
 			pathURL := strings.Split(remoteURL, ":")
 			newPathURL := pathURL[1]
 			u, err := url.Parse(newPathURL)
