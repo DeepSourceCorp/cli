@@ -1,18 +1,18 @@
 {
   "run": {
-    "runUid": "run-uid-001",
-    "commitOid": "abc123f",
+    "runUid": "run-uid-5e8f1b",
+    "commitOid": "5e8f1b2c3d4a9e7f0a1b2c3d4e5f6a7b8c9d0e1f",
     "branchName": "main",
     "status": "SUCCESS",
     "reportCard": {
       "status": "READY",
-      "security": { "grade": "A+", "score": 98, "issuesCount": 1 },
-      "reliability": { "grade": "A", "score": 95, "issuesCount": 2 },
-      "complexity": { "grade": "B+", "score": 85, "issuesCount": 5 },
-      "hygiene": { "grade": "A", "score": 92, "issuesCount": 3 },
-      "coverage": { "grade": "B", "score": 80, "lineCoverage": 78.5, "branchCoverage": 65.2 },
-      "aggregate": { "grade": "A", "score": 92 },
-      "focusArea": { "dimension": "COMPLEXITY", "action": "Reduce cyclomatic complexity" }
+      "security": { "grade": "A+", "score": 99, "issuesCount": 0 },
+      "reliability": { "grade": "A", "score": 94, "issuesCount": 2 },
+      "complexity": { "grade": "B+", "score": 87, "issuesCount": 3 },
+      "hygiene": { "grade": "A", "score": 91, "issuesCount": 1 },
+      "coverage": { "grade": "B+", "score": 85, "lineCoverage": 82.4, "branchCoverage": 71.0 },
+      "aggregate": { "grade": "A", "score": 93 },
+      "focusArea": { "dimension": "COMPLEXITY", "action": "Reduce cyclomatic complexity in core packages" }
     },
     "checks": {
       "edges": [
@@ -27,13 +27,13 @@
                 {
                   "node": {
                     "source": "static",
-                    "path": "cmd/server/main.go",
+                    "path": "cmd/deepsource/main.go",
                     "beginLine": 42,
                     "beginColumn": 5,
                     "endLine": 42,
                     "endColumn": 30,
-                    "title": "Error return value not checked",
-                    "shortcode": "GO-R1005",
+                    "title": "Unchecked error return value of os.ReadFile",
+                    "shortcode": "GO-W1007",
                     "category": "BUG_RISK",
                     "severity": "MAJOR"
                   }
@@ -41,15 +41,15 @@
                 {
                   "node": {
                     "source": "ai",
-                    "path": "internal/handler/auth.go",
-                    "beginLine": 15,
+                    "path": "internal/vcs/remotes.go",
+                    "beginLine": 87,
                     "beginColumn": 1,
-                    "endLine": 20,
+                    "endLine": 91,
                     "endColumn": 2,
-                    "title": "Potential SQL injection",
-                    "shortcode": "GO-S1001",
+                    "title": "HTTP request built with user-controlled URL",
+                    "shortcode": "GO-S1010",
                     "category": "SECURITY",
-                    "severity": "CRITICAL"
+                    "severity": "MAJOR"
                   }
                 }
               ]

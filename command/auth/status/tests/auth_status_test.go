@@ -35,8 +35,10 @@ func createConfigManager(t *testing.T, token, host, user string, expiry time.Tim
 func TestAuthStatusLoggedIn(t *testing.T) {
 	cfgMgr := createConfigManager(t, "test-token", "deepsource.com", "user@example.com", time.Now().Add(24*time.Hour))
 
+	var buf strings.Builder
 	deps := &cmddeps.Deps{
 		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
 	}
 
 	cmd := statusCmd.NewCmdStatusWithDeps(deps)
@@ -44,7 +46,10 @@ func TestAuthStatusLoggedIn(t *testing.T) {
 	if err := cmd.Execute(); err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	// pterm output goes to real stdout in this case, but at least we verify no error
+
+	if !strings.Contains(buf.String(), "Logged in to DeepSource as") {
+		t.Errorf("expected logged-in message, got: %q", buf.String())
+	}
 }
 
 func TestAuthStatusNotLoggedIn(t *testing.T) {
@@ -69,8 +74,10 @@ func TestAuthStatusNotLoggedIn(t *testing.T) {
 func TestAuthStatusExpired(t *testing.T) {
 	cfgMgr := createConfigManager(t, "test-token", "deepsource.com", "user@example.com", time.Now().Add(-24*time.Hour))
 
+	var buf strings.Builder
 	deps := &cmddeps.Deps{
 		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
 	}
 
 	cmd := statusCmd.NewCmdStatusWithDeps(deps)
@@ -78,5 +85,9 @@ func TestAuthStatusExpired(t *testing.T) {
 	// Expired token should not error, just prints a message
 	if err := cmd.Execute(); err != nil {
 		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if !strings.Contains(buf.String(), "The authentication has expired") {
+		t.Errorf("expected expired message, got: %q", buf.String())
 	}
 }

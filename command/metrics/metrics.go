@@ -76,7 +76,7 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		style.Yellow("--pr"),
 		style.Yellow("--default-branch"),
 		style.Cyan("deepsource metrics"),
-		style.Cyan("deepsource metrics --repo owner/repo"),
+		style.Cyan("deepsource metrics --repo gh/owner/name"),
 		style.Cyan("deepsource metrics --commit abc123f"),
 		style.Cyan("deepsource metrics --pr 123"),
 		style.Cyan("deepsource metrics --default-branch"),
@@ -92,7 +92,7 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	}
 
 	// --repo, -r flag
-	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository (owner/name)")
+	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository in provider/owner/name format (e.g. gh/owner/name). Supported providers: gh, gl, bb, ads")
 
 	// --limit, -l flag
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Maximum number of metrics to fetch")
@@ -193,11 +193,11 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 			return resolveErr
 		}
 		if cmdutil.IsRunInProgress(runStatus) {
-			pterm.Info.Printfln("Analysis is still in progress for branch %q.", branchName)
+			style.Infof(opts.stdout(), "Analysis is still in progress for branch %q.", branchName)
 			return nil
 		}
 		if cmdutil.IsRunTimedOut(runStatus) {
-			pterm.Warning.Printfln("Analysis timed out for branch %q.", branchName)
+			style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", branchName)
 			return nil
 		}
 		opts.CommitOid = commitOid
@@ -268,7 +268,7 @@ func (opts *MetricsOptions) outputHuman() error {
 	metricsList := opts.getMetrics()
 
 	if len(metricsList) == 0 {
-		pterm.Info.Printfln("No metrics found in %s on %s.", opts.repoSlug, opts.scopeLabel())
+		style.Infof(opts.stdout(), "No metrics found in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		return nil
 	}
 

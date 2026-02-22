@@ -2,6 +2,9 @@ package logout
 
 import (
 	"errors"
+	"fmt"
+	"io"
+	"os"
 
 	"github.com/deepsourcelabs/cli/command/cmddeps"
 	"github.com/deepsourcelabs/cli/config"
@@ -9,12 +12,24 @@ import (
 	"github.com/deepsourcelabs/cli/internal/cli/prompt"
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	authsvc "github.com/deepsourcelabs/cli/internal/services/auth"
-	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
 type LogoutOptions struct {
-	deps *cmddeps.Deps
+	deps        *cmddeps.Deps
+	ConfirmFunc func(msg, helpText string) (bool, error)
+}
+
+func (opts *LogoutOptions) stdout() io.Writer {
+	if opts.deps != nil && opts.deps.Stdout != nil {
+		return opts.deps.Stdout
+	}
+	return os.Stdout
+}
+
+// NewLogoutOptionsForTest creates a LogoutOptions for use in tests.
+func NewLogoutOptionsForTest(deps *cmddeps.Deps, confirmFunc func(string, string) (bool, error)) *LogoutOptions {
+	return &LogoutOptions{deps: deps, ConfirmFunc: confirmFunc}
 }
 
 // NewCmdLogout handles the logout functionality for the CLI
@@ -29,7 +44,7 @@ func NewCmdLogoutWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Short: "Logout of your active DeepSource account",
 		Args:  args.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			opts := LogoutOptions{deps: deps}
+			opts := LogoutOptions{deps: deps, ConfirmFunc: prompt.ConfirmFromUser}
 			return opts.Run()
 		},
 	}
@@ -56,7 +71,11 @@ func (opts *LogoutOptions) Run() error {
 
 	// Confirm from the user if they want to logout
 	logoutConfirmationMsg := "Are you sure you want to log out of DeepSource account?"
-	response, err := prompt.ConfirmFromUser(logoutConfirmationMsg, "")
+	confirmFn := opts.ConfirmFunc
+	if confirmFn == nil {
+		confirmFn = prompt.ConfirmFromUser
+	}
+	response, err := confirmFn(logoutConfirmationMsg, "")
 	if err != nil {
 		return err
 	}
@@ -67,6 +86,6 @@ func (opts *LogoutOptions) Run() error {
 			return err
 		}
 	}
-	pterm.Println("Logged out from DeepSource (deepsource.com)")
+	fmt.Fprintln(opts.stdout(), "Logged out from DeepSource (deepsource.com)")
 	return nil
 }

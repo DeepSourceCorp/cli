@@ -1,13 +1,25 @@
 [
   {
-    "path": "pkg/api/handler.go",
-    "begin_line": 33,
-    "end_line": 33,
-    "issue_code": "GO-R1002",
-    "title": "Unused variable declared",
-    "description": "Variable declared but never used",
+    "path": "cmd/deepsource/main.go",
+    "begin_line": 42,
+    "end_line": 42,
+    "issue_code": "GO-W1007",
+    "title": "Unchecked error return value of os.ReadFile",
+    "description": "Return value of io.ReadAll is not checked for errors",
     "category": "BUG_RISK",
-    "severity": "MINOR",
+    "severity": "MAJOR",
+    "source": "",
+    "analyzer": "go"
+  },
+  {
+    "path": "internal/vcs/remotes.go",
+    "begin_line": 87,
+    "end_line": 91,
+    "issue_code": "GO-S1010",
+    "title": "HTTP request built with user-controlled URL",
+    "description": "Constructing HTTP request with user-controlled URL allows SSRF",
+    "category": "SECURITY",
+    "severity": "MAJOR",
     "source": "",
     "analyzer": "go"
   }

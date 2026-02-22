@@ -13,12 +13,12 @@
                 {
                   "node": {
                     "source": "static",
-                    "path": "cmd/server/main.go",
+                    "path": "cmd/deepsource/main.go",
                     "beginLine": 42,
                     "endLine": 42,
-                    "title": "Error return value not checked",
-                    "shortcode": "GO-R1005",
-                    "explanation": "Error return value of a function call is not checked",
+                    "title": "Unchecked error return value of os.ReadFile",
+                    "shortcode": "GO-W1007",
+                    "explanation": "Return value of io.ReadAll is not checked for errors",
                     "category": "BUG_RISK",
                     "severity": "MAJOR"
                   }
@@ -26,14 +26,14 @@
                 {
                   "node": {
                     "source": "ai",
-                    "path": "internal/handler/auth.go",
-                    "beginLine": 15,
-                    "endLine": 20,
-                    "title": "Potential SQL injection",
-                    "shortcode": "GO-S1001",
-                    "explanation": "SQL query constructed with string concatenation",
+                    "path": "internal/vcs/remotes.go",
+                    "beginLine": 87,
+                    "endLine": 91,
+                    "title": "HTTP request built with user-controlled URL",
+                    "shortcode": "GO-S1010",
+                    "explanation": "Constructing HTTP request with user-controlled URL allows SSRF",
                     "category": "SECURITY",
-                    "severity": "CRITICAL"
+                    "severity": "MAJOR"
                   }
                 }
               ]

@@ -51,6 +51,41 @@ func TestReportCardCommitScope(t *testing.T) {
 	}
 }
 
+func TestReportCardNoRuns(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"GetRun": goldenPath("get_run_null_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "feature/no-runs", nil
+		},
+		CommitLogFunc: func(_ string) ([]string, error) {
+			return []string{"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}, nil
+		},
+	}
+
+	cmd := reportcardCmd.NewCmdReportCardWithDeps(deps)
+	cmd.SetArgs([]string{
+		"--repo", "gh/testowner/testrepo",
+		"--output", "json",
+	})
+
+	err := cmd.Execute()
+	if err == nil {
+		t.Fatal("expected error for branch with no runs, got nil")
+	}
+	if !strings.Contains(err.Error(), "no analysis runs found") {
+		t.Errorf("expected error about no analysis runs, got: %s", err.Error())
+	}
+}
+
 func TestReportCardAutoDetect(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{

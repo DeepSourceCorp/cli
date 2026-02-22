@@ -2,9 +2,9 @@
   "repository": {
     "pullRequest": {
       "number": 42,
-      "title": "Add unit tests for metrics",
+      "title": "Add unit tests for VCS remote resolver",
       "baseBranch": "main",
-      "branch": "feature/metrics-tests",
+      "branch": "feature/vcs-resolver-tests",
       "metrics": [
         {
           "name": "Line Coverage",
@@ -18,8 +18,26 @@
             {
               "key": "aggregate",
               "threshold": 80,
-              "latestValue": 90.1,
-              "latestValueDisplay": "90.1%",
+              "latestValue": 88.6,
+              "latestValueDisplay": "88.6%",
+              "thresholdStatus": "PASSING"
+            }
+          ]
+        },
+        {
+          "name": "Branch Coverage",
+          "shortcode": "BCV",
+          "description": "Percentage of branches covered by tests",
+          "positiveDirection": "UP",
+          "unit": "%",
+          "isReported": true,
+          "isThresholdEnforced": true,
+          "items": [
+            {
+              "key": "aggregate",
+              "threshold": 70,
+              "latestValue": 75.3,
+              "latestValueDisplay": "75.3%",
               "thresholdStatus": "PASSING"
             }
           ]

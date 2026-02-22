@@ -15,7 +15,7 @@ func (opts *LoginOptions) startPATLoginFlow(svc *authsvc.Service, cfg *config.CL
 	// Having stored the data in the global Cfg object, write it into the config file present in the local filesystem
 	err := svc.SaveConfig(cfg)
 	if err != nil {
-		return fmt.Errorf("Error in writing authentication data to a file. Exiting...")
+		return fmt.Errorf("Error in writing authentication data to a file. Exiting..")
 	}
 	return nil
 }

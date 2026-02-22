@@ -11,6 +11,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"sort"
 	"strings"
 	"time"
 
@@ -66,20 +67,20 @@ func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 		dsn, err := oidc.GetDSNFromOIDC(opts.OIDCRequestToken, opts.OIDCRequestUrl, opts.DeepSourceHostEndpoint, opts.OIDCProvider)
 		if err != nil {
 			s.capture(err)
-			return nil, fmt.Errorf("DeepSource | Error | Failed to get DSN using OIDC: %w", err)
+			return nil, fmt.Errorf("Failed to get DSN using OIDC: %w", err)
 		}
 		opts.DSN = dsn
 	}
 
 	if opts.DSN == "" {
-		return nil, clierrors.NewUserError(errors.New("DeepSource | Error | Environment variable DEEPSOURCE_DSN not set (or) is empty. Set DEEPSOURCE_DSN from the repository settings page or use --use-oidc."))
+		return nil, clierrors.NewUserError(errors.New("Environment variable DEEPSOURCE_DSN not set (or) is empty. Set DEEPSOURCE_DSN from the repository settings page or use --use-oidc."))
 	}
 
-	s.infof("DeepSource | Info | Preparing artifact...\n")
+	s.infof("Preparing artifact..\n")
 	currentDir, err := s.workdir()
 	if err != nil {
 		s.capture(err)
-		return nil, errors.New("DeepSource | Error | Unable to identify current directory")
+		return nil, errors.New("Unable to identify current directory")
 	}
 
 	if err := s.validateKey(opts); err != nil {
@@ -98,24 +99,24 @@ func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 	headCommitOID, warning, err := s.git.GetHead(currentDir)
 	if err != nil {
 		s.capture(err)
-		return nil, errors.New("DeepSource | Error | Unable to get commit OID HEAD. Make sure you are running the CLI from a git repository")
+		return nil, errors.New("Unable to get commit OID HEAD. Make sure you are running the CLI from a git repository")
 	}
 
 	if opts.Value == "" && opts.ValueFile == "" {
-		return nil, clierrors.NewUserError(errors.New("DeepSource | Error | '--value' (or) '--value-file' not passed"))
+		return nil, clierrors.NewUserError(errors.New("Provide artifact data using --value or --value-file"))
 	}
 
 	artifactValue := opts.Value
 	if opts.ValueFile != "" {
 		if _, err := s.fs.Stat(opts.ValueFile); err != nil {
-			uerr := clierrors.NewUserErrorf("DeepSource | Error | Unable to read specified value file: %s", opts.ValueFile)
+			uerr := clierrors.NewUserErrorf("Unable to read specified value file: %s", opts.ValueFile)
 			s.capture(uerr)
 			return nil, uerr
 		}
 
 		valueBytes, err := s.fs.ReadFile(opts.ValueFile)
 		if err != nil {
-			uerr := clierrors.NewUserErrorf("DeepSource | Error | Unable to read specified value file: %s", opts.ValueFile)
+			uerr := clierrors.NewUserErrorf("Unable to read specified value file: %s", opts.ValueFile)
 			s.capture(uerr)
 			return nil, uerr
 		}
@@ -123,7 +124,7 @@ func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 		artifactValue = string(valueBytes)
 	}
 
-	s.infof("DeepSource | Info | Checking compression support...\n")
+	s.infof("Checking compression support..\n")
 	meta := map[string]interface{}{"workDir": currentDir}
 	compressed, err := s.compressIfSupported(ctx, dsn, artifactValue, opts.SkipCertificateVerification, meta)
 	if err != nil {
@@ -152,10 +153,10 @@ func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 	queryBodyBytes, err := json.Marshal(query)
 	if err != nil {
 		s.capture(err)
-		return nil, errors.New("DeepSource | Error | Unable to marshal query body")
+		return nil, errors.New("Unable to marshal query body")
 	}
 
-	s.infof("DeepSource | Info | Uploading artifact...\n")
+	s.infof("Uploading artifact..\n")
 	responseBody, err := s.makeQuery(ctx, dsn, queryBodyBytes, opts.SkipCertificateVerification)
 	if err != nil {
 		queryFallback := ReportQuery{Query: reportGraphqlQueryOld}
@@ -163,26 +164,26 @@ func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 		queryBodyBytes, err = json.Marshal(queryFallback)
 		if err != nil {
 			s.capture(err)
-			return nil, errors.New("DeepSource | Error | Unable to marshal query body")
+			return nil, errors.New("Unable to marshal query body")
 		}
 
 		responseBody, err = s.makeQuery(ctx, dsn, queryBodyBytes, opts.SkipCertificateVerification)
 		if err != nil {
 			s.capture(err)
-			return nil, fmt.Errorf("DeepSource | Error | Reporting failed | %w", err)
+			return nil, fmt.Errorf("Reporting failed: %w", err)
 		}
 	}
 
 	queryResponse := QueryResponse{}
 	if err := json.Unmarshal(responseBody, &queryResponse); err != nil {
 		s.capture(err)
-		return nil, errors.New("DeepSource | Error | Unable to parse response body")
+		return nil, errors.New("Unable to parse response body")
 	}
 
 	if !queryResponse.Data.CreateArtifact.Ok {
 		err := errors.New(queryResponse.Data.CreateArtifact.Error)
 		s.capture(err)
-		return nil, fmt.Errorf("DeepSource | Error | Reporting failed | %s", queryResponse.Data.CreateArtifact.Error)
+		return nil, fmt.Errorf("Reporting failed: %s", queryResponse.Data.CreateArtifact.Error)
 	}
 
 	return &Result{
@@ -224,7 +225,12 @@ func (s *Service) validateKey(opts Options) error {
 	}
 
 	if opts.Analyzer == "test-coverage" && !supportedKeys[opts.Key] {
-		return fmt.Errorf("DeepSource | Error | Invalid Key: %s (Supported Keys: %v)", opts.Key, supportedKeys)
+		keys := make([]string, 0, len(supportedKeys))
+		for k := range supportedKeys {
+			keys = append(keys, k)
+		}
+		sort.Strings(keys)
+		return fmt.Errorf("Invalid key %q for test-coverage. Supported keys: %s", opts.Key, strings.Join(keys, ", "))
 	}
 
 	return nil
@@ -234,12 +240,12 @@ func (s *Service) compressIfSupported(ctx context.Context, dsn *DSN, artifactVal
 	q := ReportQuery{Query: graphqlCheckCompressed}
 	qBytes, err := json.Marshal(q)
 	if err != nil {
-		return "", fmt.Errorf("DeepSource | Error | Failed to marshal query: %w", err)
+		return "", fmt.Errorf("Failed to marshal query: %w", err)
 	}
 
 	response, err := s.makeQuery(ctx, dsn, qBytes, skipVerify)
 	if err != nil {
-		return "", fmt.Errorf("DeepSource | Error | Failed to make query: %w", err)
+		return "", fmt.Errorf("Failed to make query: %w", err)
 	}
 
 	var res struct {
@@ -253,7 +259,7 @@ func (s *Service) compressIfSupported(ctx context.Context, dsn *DSN, artifactVal
 	}
 
 	if err := json.Unmarshal(response, &res); err != nil {
-		return "", fmt.Errorf("DeepSource | Error | Failed to unmarshal response: %w", err)
+		return "", fmt.Errorf("Failed to unmarshal response: %w", err)
 	}
 
 	for _, inputField := range res.Data.Type.InputFields {
@@ -263,7 +269,7 @@ func (s *Service) compressIfSupported(ctx context.Context, dsn *DSN, artifactVal
 
 		encoder, err := zstd.NewWriter(nil, zstd.WithEncoderLevel(zstd.SpeedBestCompression))
 		if err != nil {
-			return "", fmt.Errorf("DeepSource | Error | Failed to create zstd encoder: %w", err)
+			return "", fmt.Errorf("Failed to create zstd encoder: %w", err)
 		}
 		compressedBytes := encoder.EncodeAll([]byte(artifactValue), nil)
 

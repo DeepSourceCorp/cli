@@ -16,7 +16,6 @@ import (
 	"github.com/deepsourcelabs/cli/internal/cli/style"
 	reposvc "github.com/deepsourcelabs/cli/internal/services/repo"
 	"github.com/deepsourcelabs/cli/internal/vcs"
-	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )
@@ -55,7 +54,7 @@ func NewCmdRepoStatusWithDeps(deps *cmddeps.Deps) *cobra.Command {
 
 		To check if a specific repository is activated on DeepSource, use the %[2]s flag:
 		%[3]s
-		`, style.Cyan("deepsource repository status"), style.Yellow("--repo"), style.Cyan("deepsource repository status --repo repo_name"))
+		`, style.Cyan("deepsource repo status"), style.Yellow("--repo"), style.Cyan("deepsource repo status --repo gh/owner/name"))
 
 	cmd := &cobra.Command{
 		Use:   "status",
@@ -67,7 +66,7 @@ func NewCmdRepoStatusWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Get the activation status of the specified repository")
+	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository in provider/owner/name format (e.g. gh/owner/name). Supported providers: gh, gl, bb, ads")
 	cmd.Flags().StringVarP(&opts.Output, "output", "o", "pretty", "Output format: pretty, json")
 	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
@@ -112,9 +111,9 @@ func (opts *RepoStatusOptions) printStatus(result *reposvc.StatusResult) error {
 	switch opts.Output {
 	case "", "pretty":
 		if result.Activated {
-			pterm.Println("Analysis active on DeepSource (deepsource.com)")
+			fmt.Fprintln(w, "Analysis active on DeepSource (deepsource.com)")
 		} else {
-			pterm.Println("DeepSource analysis is currently not activated on this repository.")
+			fmt.Fprintln(w, "DeepSource analysis is currently not activated on this repository.")
 		}
 		return nil
 	case "json":

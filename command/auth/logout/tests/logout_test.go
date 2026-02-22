@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/deepsourcelabs/cli/command/cmddeps"
 	logoutCmd "github.com/deepsourcelabs/cli/command/auth/logout"
+	"github.com/deepsourcelabs/cli/command/cmddeps"
 	"github.com/deepsourcelabs/cli/internal/testutil"
 )
 
@@ -27,5 +27,25 @@ func TestLogoutNotLoggedIn(t *testing.T) {
 
 	if !strings.Contains(err.Error(), "not logged into DeepSource") {
 		t.Errorf("expected error to contain %q, got %q", "not logged into DeepSource", err.Error())
+	}
+}
+
+func TestLogoutSuccess(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "user@example.com")
+
+	var buf strings.Builder
+	deps := &cmddeps.Deps{
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+	}
+
+	opts := logoutCmd.NewLogoutOptionsForTest(deps, func(_, _ string) (bool, error) { return true, nil })
+
+	if err := opts.Run(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if !strings.Contains(buf.String(), "Logged out from DeepSource") {
+		t.Errorf("expected logout message, got: %q", buf.String())
 	}
 }

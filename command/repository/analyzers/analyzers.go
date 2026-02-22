@@ -50,7 +50,7 @@ func NewCmdAnalyzersWithDeps(deps *cmddeps.Deps) *cobra.Command {
 
 		To list analyzers for a specific repository, use the %[2]s flag:
 		%[3]s
-		`, style.Cyan("deepsource repository analyzers"), style.Yellow("--repo"), style.Cyan("deepsource repository analyzers --repo owner/repo"))
+		`, style.Cyan("deepsource repo analyzers"), style.Yellow("--repo"), style.Cyan("deepsource repo analyzers --repo gh/owner/name"))
 
 	cmd := &cobra.Command{
 		Use:   "analyzers",
@@ -106,7 +106,7 @@ func (opts *AnalyzersOptions) printAnalyzers(list []analyzers.Analyzer) error {
 	switch opts.Output {
 	case "", "pretty":
 		if len(list) == 0 {
-			pterm.Println("No analyzers enabled on this repository.")
+			fmt.Fprintln(w, "No analyzers enabled on this repository.")
 			return nil
 		}
 		data := pterm.TableData{{"Name", "Shortcode"}}
@@ -114,7 +114,7 @@ func (opts *AnalyzersOptions) printAnalyzers(list []analyzers.Analyzer) error {
 			data = append(data, []string{a.Name, a.Shortcode})
 		}
 		pterm.DefaultTable.WithHasHeader().WithData(data).Render()
-		pterm.Printf("\n%d analyzer(s) enabled\n", len(list))
+		fmt.Fprintf(w, "\n%d analyzer(s) enabled\n", len(list))
 		return nil
 	case "json":
 		payload, err := json.MarshalIndent(list, "", "  ")

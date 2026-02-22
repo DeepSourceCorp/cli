@@ -20,7 +20,7 @@ func (e *GraphQLError) Unwrap() error {
 // TruncateQuery trims long queries for error messages.
 func TruncateQuery(query string) string {
 	if len(query) > 100 {
-		return query[:100] + "..."
+		return query[:100] + ".."
 	}
 	return query
 }

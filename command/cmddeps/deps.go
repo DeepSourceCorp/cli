@@ -15,6 +15,7 @@ type Deps struct {
 	Client      *deepsource.Client
 	ConfigMgr   *config.Manager
 	Stdout      io.Writer
+	Stderr      io.Writer
 	RepoService *reposvc.Service
 	BranchNameFunc func() (string, error)
 	CommitLogFunc  func(branch string) ([]string, error)

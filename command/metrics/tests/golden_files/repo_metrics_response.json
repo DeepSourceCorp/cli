@@ -13,27 +13,45 @@
           {
             "key": "aggregate",
             "threshold": 80,
-            "latestValue": 85.5,
-            "latestValueDisplay": "85.5%",
+            "latestValue": 82.4,
+            "latestValueDisplay": "82.4%",
             "thresholdStatus": "PASSING"
           }
         ]
       },
       {
-        "name": "Documentation Coverage",
-        "shortcode": "DOC",
-        "description": "Percentage of documented public symbols",
+        "name": "Branch Coverage",
+        "shortcode": "BCV",
+        "description": "Percentage of branches covered by tests",
         "positiveDirection": "UP",
+        "unit": "%",
+        "isReported": true,
+        "isThresholdEnforced": true,
+        "items": [
+          {
+            "key": "aggregate",
+            "threshold": 70,
+            "latestValue": 71.0,
+            "latestValueDisplay": "71.0%",
+            "thresholdStatus": "PASSING"
+          }
+        ]
+      },
+      {
+        "name": "Duplicate Code",
+        "shortcode": "DDP",
+        "description": "Percentage of duplicate code blocks in the codebase",
+        "positiveDirection": "DOWN",
         "unit": "%",
         "isReported": true,
         "isThresholdEnforced": false,
         "items": [
           {
             "key": "aggregate",
-            "threshold": 60,
-            "latestValue": 42.3,
-            "latestValueDisplay": "42.3%",
-            "thresholdStatus": "FAILING"
+            "threshold": 5,
+            "latestValue": 3.2,
+            "latestValueDisplay": "3.2%",
+            "thresholdStatus": "PASSING"
           }
         ]
       }

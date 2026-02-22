@@ -70,7 +70,7 @@ func NewCmdReportCardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		style.Yellow("--pr"),
 		style.Yellow("--default-branch"),
 		style.Cyan("deepsource report-card"),
-		style.Cyan("deepsource report-card --repo owner/repo"),
+		style.Cyan("deepsource report-card --repo gh/owner/name"),
 		style.Cyan("deepsource report-card --commit abc123f"),
 		style.Cyan("deepsource report-card --pr 123"),
 		style.Cyan("deepsource report-card --default-branch"),
@@ -85,7 +85,7 @@ func NewCmdReportCardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository (owner/name)")
+	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository in provider/owner/name format (e.g. gh/owner/name). Supported providers: gh, gl, bb, ads")
 	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
 	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit SHA")
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
@@ -162,7 +162,7 @@ func (opts *ReportCardOptions) Run(ctx context.Context) error {
 	}
 
 	if opts.reportCard == nil {
-		pterm.Info.Printfln("No report card found in %s on %s.", opts.repoSlug, opts.scopeLabel())
+		style.Infof(opts.stdout(), "No report card found in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		return nil
 	}
 
@@ -206,11 +206,11 @@ func (opts *ReportCardOptions) resolveByPR(ctx context.Context, client *deepsour
 	}
 
 	if cmdutil.IsRunInProgress(run.Status) {
-		pterm.Info.Printfln("Analysis is still in progress for PR #%d (branch %q).", opts.PRNumber, branch)
+		style.Infof(opts.stdout(), "Analysis is still in progress for PR #%d (branch %q).", opts.PRNumber, branch)
 		return nil
 	}
 	if cmdutil.IsRunTimedOut(run.Status) {
-		pterm.Warning.Printfln("Analysis timed out for PR #%d (branch %q).", opts.PRNumber, branch)
+		style.Warnf(opts.stdout(), "Analysis timed out for PR #%d (branch %q).", opts.PRNumber, branch)
 		return nil
 	}
 
@@ -237,11 +237,11 @@ func (opts *ReportCardOptions) resolveByDefaultBranch(ctx context.Context, clien
 	}
 
 	if cmdutil.IsRunInProgress(run.Status) {
-		pterm.Info.Printfln("Analysis is still in progress for branch %q.", defaultBranch)
+		style.Infof(opts.stdout(), "Analysis is still in progress for branch %q.", defaultBranch)
 		return nil
 	}
 	if cmdutil.IsRunTimedOut(run.Status) {
-		pterm.Warning.Printfln("Analysis timed out for branch %q.", defaultBranch)
+		style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", defaultBranch)
 		return nil
 	}
 
@@ -270,11 +270,11 @@ func (opts *ReportCardOptions) resolveByCurrentBranch(ctx context.Context, clien
 	}
 
 	if cmdutil.IsRunInProgress(run.Status) {
-		pterm.Info.Printfln("Analysis is still in progress for branch %q.", branchName)
+		style.Infof(opts.stdout(), "Analysis is still in progress for branch %q.", branchName)
 		return nil
 	}
 	if cmdutil.IsRunTimedOut(run.Status) {
-		pterm.Warning.Printfln("Analysis timed out for branch %q.", branchName)
+		style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", branchName)
 		return nil
 	}
 
@@ -313,7 +313,7 @@ func (opts *ReportCardOptions) outputHuman() error {
 
 	fmt.Println(pterm.Bold.Sprintf("── Report Card · %s (%s) ────", opts.branchName, commitShort))
 
-	cmdutil.ShowReportCard(opts.reportCard)
+	cmdutil.ShowReportCard(opts.stdout(), opts.reportCard)
 	return nil
 }
 

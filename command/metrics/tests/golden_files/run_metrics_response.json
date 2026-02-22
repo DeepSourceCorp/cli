@@ -1,6 +1,6 @@
 {
   "run": {
-    "commitOid": "abc123f4567890abcdef1234567890abcdef1234",
+    "commitOid": "3f4a2b1c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a",
     "branchName": "main",
     "status": "SUCCESS",
     "changesetStats": null,
@@ -21,9 +21,27 @@
                   {
                     "key": "aggregate",
                     "threshold": 80,
-                    "latestValue": 78.2,
-                    "latestValueDisplay": "78.2%",
-                    "thresholdStatus": "FAILING"
+                    "latestValue": 82.4,
+                    "latestValueDisplay": "82.4%",
+                    "thresholdStatus": "PASSING"
+                  }
+                ]
+              },
+              {
+                "name": "Branch Coverage",
+                "shortcode": "BCV",
+                "description": "Percentage of branches covered by tests",
+                "positiveDirection": "UP",
+                "unit": "%",
+                "isReported": true,
+                "isThresholdEnforced": true,
+                "items": [
+                  {
+                    "key": "aggregate",
+                    "threshold": 70,
+                    "latestValue": 71.0,
+                    "latestValueDisplay": "71.0%",
+                    "thresholdStatus": "PASSING"
                   }
                 ]
               }

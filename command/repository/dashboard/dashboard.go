@@ -45,7 +45,7 @@ func NewCmdDashboardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 
 		To open the dashboard for a specific repository, use the %[2]s flag:
 		%[3]s
-		`, style.Cyan("deepsource repository dashboard"), style.Yellow("--repo"), style.Cyan("deepsource repository dashboard --repo owner/repo"))
+		`, style.Cyan("deepsource repo dashboard"), style.Yellow("--repo"), style.Cyan("deepsource repo dashboard --repo gh/owner/name"))
 
 	cmd := &cobra.Command{
 		Use:   "dashboard",
@@ -93,6 +93,6 @@ func (opts *DashboardOptions) Run() error {
 		return nil
 	}
 
-	fmt.Printf("Opening %s in your browser...\n", dashboardURL)
+	fmt.Printf("Opening %s in your browser..\n", dashboardURL)
 	return browser.OpenURL(dashboardURL)
 }

@@ -138,6 +138,11 @@ func getCurrentBranch() (string, error) {
 	return strings.TrimSuffix(stdout.String(), "\n"), nil
 }
 
+// GetCommitLog returns recent commit SHAs for a branch using git log.
+func GetCommitLog(branch string) ([]string, error) {
+	return getCommitLog(branch)
+}
+
 // getCommitLog returns recent commit SHAs for a branch using git log.
 func getCommitLog(branch string) ([]string, error) {
 	cmd := exec.Command("git", "--no-pager", "log", branch, "--format=%H", "-n", "50")
