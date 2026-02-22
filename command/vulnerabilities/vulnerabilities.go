@@ -77,7 +77,7 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		style.Yellow("--pr"),
 		style.Yellow("--default-branch"),
 		style.Cyan("deepsource vulnerabilities"),
-		style.Cyan("deepsource vulnerabilities --repo owner/repo"),
+		style.Cyan("deepsource vulnerabilities --repo gh/owner/name"),
 		style.Cyan("deepsource vulnerabilities --commit abc123f"),
 		style.Cyan("deepsource vulnerabilities --pr 123"),
 		style.Cyan("deepsource vulnerabilities --severity critical,high"),
@@ -93,7 +93,7 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository (owner/name)")
+	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository in provider/owner/name format (e.g. gh/owner/name). Supported providers: gh, gl, bb, ads")
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 100, "Maximum number of vulnerabilities to fetch")
 	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
 	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show CVSS score, summary, fix versions, and reachability")
@@ -189,11 +189,11 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 			return resolveErr
 		}
 		if cmdutil.IsRunInProgress(runStatus) {
-			pterm.Info.Printfln("Analysis is still in progress for branch %q.", branchName)
+			style.Infof(opts.stdout(), "Analysis is still in progress for branch %q.", branchName)
 			return nil
 		}
 		if cmdutil.IsRunTimedOut(runStatus) {
-			pterm.Warning.Printfln("Analysis timed out for branch %q.", branchName)
+			style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", branchName)
 			return nil
 		}
 		opts.CommitOid = commitOid
@@ -287,9 +287,9 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 
 	if len(vulnsList) == 0 {
 		if opts.hasFilters() {
-			pterm.Info.Printfln("No vulnerabilities matched the provided filters in %s on %s.", opts.repoSlug, opts.scopeLabel())
+			style.Infof(opts.stdout(), "No vulnerabilities matched the provided filters in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		} else {
-			pterm.Info.Printfln("No vulnerabilities found in %s on %s.", opts.repoSlug, opts.scopeLabel())
+			style.Infof(opts.stdout(), "No vulnerabilities found in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		}
 		return nil
 	}
@@ -306,7 +306,7 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 	var sevParts []string
 	for _, sev := range []string{"CRITICAL", "HIGH", "MEDIUM", "LOW", "NONE"} {
 		if c := sevCounts[sev]; c > 0 {
-			sevParts = append(sevParts, colorSeverity(sev, fmt.Sprintf("%d %s", c, strings.ToLower(humanizeSeverity(sev)))))
+			sevParts = append(sevParts, style.VulnSeverityColor(sev,fmt.Sprintf("%d %s", c, strings.ToLower(humanizeSeverity(sev)))))
 		}
 	}
 	summaryLine := fmt.Sprintf("   %d total", len(vulnsList))
@@ -340,7 +340,7 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 			continue
 		}
 
-		fmt.Println(pterm.Bold.Sprintf("── %s ──", colorSeverity(sev, humanizeSeverity(sev))))
+		fmt.Println(pterm.Bold.Sprintf("── %s ──", style.VulnSeverityColor(sev, humanizeSeverity(sev))))
 
 		header := []string{"ID", "Package", "Version", "Ecosystem", "Fix", "Reachability"}
 		data := [][]string{header}
@@ -417,21 +417,6 @@ func humanizeSeverity(s string) string {
 		return "None"
 	default:
 		return s
-	}
-}
-
-func colorSeverity(sev string, text string) string {
-	switch strings.ToUpper(sev) {
-	case "CRITICAL":
-		return pterm.Red(text)
-	case "HIGH":
-		return pterm.LightRed(text)
-	case "MEDIUM":
-		return pterm.Yellow(text)
-	case "LOW":
-		return pterm.Blue(text)
-	default:
-		return text
 	}
 }
 

@@ -2,70 +2,57 @@ package cmdutil
 
 import (
 	"fmt"
+	"io"
 	"strings"
 
 	"github.com/deepsourcelabs/cli/deepsource/runs"
+	"github.com/deepsourcelabs/cli/internal/cli/style"
 	"github.com/pterm/pterm"
 )
 
 // ShowReportCard renders a report card as a pterm table.
-func ShowReportCard(rc *runs.ReportCard) {
+func ShowReportCard(w io.Writer, rc *runs.ReportCard) {
 	if rc == nil {
 		return
 	}
 
-	pterm.Println()
+	fmt.Fprintln(w)
 
 	header := []string{"Dimension", "Grade", "Score", "Issues"}
 	data := [][]string{header}
 
 	if rc.Security != nil {
-		data = append(data, []string{"Security", gradeColor(rc.Security.Grade), fmt.Sprintf("%d", rc.Security.Score), fmt.Sprintf("%d", rc.Security.IssuesCount)})
+		data = append(data, []string{"Security", style.GradeColor(rc.Security.Grade), fmt.Sprintf("%d", rc.Security.Score), fmt.Sprintf("%d", rc.Security.IssuesCount)})
 	}
 	if rc.Reliability != nil {
-		data = append(data, []string{"Reliability", gradeColor(rc.Reliability.Grade), fmt.Sprintf("%d", rc.Reliability.Score), fmt.Sprintf("%d", rc.Reliability.IssuesCount)})
+		data = append(data, []string{"Reliability", style.GradeColor(rc.Reliability.Grade), fmt.Sprintf("%d", rc.Reliability.Score), fmt.Sprintf("%d", rc.Reliability.IssuesCount)})
 	}
 	if rc.Complexity != nil {
-		data = append(data, []string{"Complexity", gradeColor(rc.Complexity.Grade), fmt.Sprintf("%d", rc.Complexity.Score), fmt.Sprintf("%d", rc.Complexity.IssuesCount)})
+		data = append(data, []string{"Complexity", style.GradeColor(rc.Complexity.Grade), fmt.Sprintf("%d", rc.Complexity.Score), fmt.Sprintf("%d", rc.Complexity.IssuesCount)})
 	}
 	if rc.Hygiene != nil {
-		data = append(data, []string{"Hygiene", gradeColor(rc.Hygiene.Grade), fmt.Sprintf("%d", rc.Hygiene.Score), fmt.Sprintf("%d", rc.Hygiene.IssuesCount)})
+		data = append(data, []string{"Hygiene", style.GradeColor(rc.Hygiene.Grade), fmt.Sprintf("%d", rc.Hygiene.Score), fmt.Sprintf("%d", rc.Hygiene.IssuesCount)})
 	}
 	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
 
 	if rc.Coverage != nil {
 		var coverageParts []string
-		coverageParts = append(coverageParts, fmt.Sprintf("Grade: %s", gradeColor(rc.Coverage.Grade)))
+		coverageParts = append(coverageParts, fmt.Sprintf("Grade: %s", style.GradeColor(rc.Coverage.Grade)))
 		if rc.Coverage.LineCoverage != nil {
 			coverageParts = append(coverageParts, fmt.Sprintf("Line: %.1f%%", *rc.Coverage.LineCoverage))
 		}
 		if rc.Coverage.BranchCoverage != nil {
 			coverageParts = append(coverageParts, fmt.Sprintf("Branch: %.1f%%", *rc.Coverage.BranchCoverage))
 		}
-		pterm.Printf("%s %s\n", pterm.Bold.Sprint("Coverage:"), strings.Join(coverageParts, "  |  "))
+		fmt.Fprintf(w, "%s %s\n", pterm.Bold.Sprint("Coverage:"), strings.Join(coverageParts, "  |  "))
 	}
 
 	if rc.Aggregate != nil {
-		pterm.Printf("%s %s (score: %d)\n", pterm.Bold.Sprint("Aggregate:"), gradeColor(rc.Aggregate.Grade), rc.Aggregate.Score)
+		fmt.Fprintf(w, "%s %s (score: %d)\n", pterm.Bold.Sprint("Aggregate:"), style.GradeColor(rc.Aggregate.Grade), rc.Aggregate.Score)
 	}
 
 	if rc.FocusArea != nil && rc.FocusArea.Dimension != "" {
-		pterm.Printf("%s %s — %s\n", pterm.Bold.Sprint("Focus Area:"), FormatCategory(rc.FocusArea.Dimension), rc.FocusArea.Action)
-	}
-}
-
-func gradeColor(grade string) string {
-	switch {
-	case strings.HasPrefix(grade, "A"):
-		return pterm.Green(grade)
-	case strings.HasPrefix(grade, "B"):
-		return pterm.LightGreen(grade)
-	case strings.HasPrefix(grade, "C"):
-		return pterm.Yellow(grade)
-	case strings.HasPrefix(grade, "D"):
-		return pterm.LightRed(grade)
-	default:
-		return pterm.Red(grade)
+		fmt.Fprintf(w, "%s %s — %s\n", pterm.Bold.Sprint("Focus Area:"), FormatCategory(rc.FocusArea.Dimension), rc.FocusArea.Action)
 	}
 }
 

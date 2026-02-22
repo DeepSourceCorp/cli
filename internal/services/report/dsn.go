@@ -5,7 +5,7 @@ import (
 	"regexp"
 )
 
-var ErrInvalidDSN = errors.New("DeepSource | Error | Invalid DSN. Expected format: https://token@host. Cross verify DEEPSOURCE_DSN against the repository settings page")
+var ErrInvalidDSN = errors.New("Invalid DSN. Expected format: https://token@host. Cross verify DEEPSOURCE_DSN against the repository settings page")
 
 type DSN struct {
 	Protocol string

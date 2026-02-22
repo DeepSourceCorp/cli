@@ -8,13 +8,13 @@
               "edges": [
                 {
                   "node": {
-                    "path": "internal/handler/auth.go",
-                    "beginLine": 15,
-                    "endLine": 20,
+                    "path": "internal/vcs/remotes.go",
+                    "beginLine": 87,
+                    "endLine": 91,
                     "issue": {
-                      "title": "Potential SQL injection",
-                      "shortcode": "GO-S1001",
-                      "shortDescription": "SQL query constructed with string concatenation",
+                      "title": "HTTP request built with user-controlled URL",
+                      "shortcode": "GO-S1010",
+                      "shortDescription": "Constructing HTTP request with user-controlled URL allows SSRF",
                       "category": "SECURITY",
                       "severity": "CRITICAL",
                       "isRecommended": false,
@@ -35,46 +35,19 @@
               "edges": [
                 {
                   "node": {
-                    "path": "cmd/server/main.go",
-                    "beginLine": 42,
-                    "endLine": 42,
+                    "path": "deepsource/client.go",
+                    "beginLine": 23,
+                    "endLine": 23,
                     "issue": {
-                      "title": "Error return value not checked",
-                      "shortcode": "GO-R1005",
-                      "shortDescription": "Error return value of a function call is not checked",
-                      "category": "BUG_RISK",
-                      "severity": "MAJOR",
+                      "title": "Hardcoded credential found in source file",
+                      "shortcode": "SCS-G101",
+                      "shortDescription": "A hardcoded credential was found in source code",
+                      "category": "SECURITY",
+                      "severity": "CRITICAL",
                       "isRecommended": false,
                       "analyzer": {
-                        "name": "Go",
-                        "shortcode": "go"
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        },
-        {
-          "node": {
-            "occurrences": {
-              "edges": [
-                {
-                  "node": {
-                    "path": "pkg/utils/helpers.go",
-                    "beginLine": 88,
-                    "endLine": 88,
-                    "issue": {
-                      "title": "Function too complex",
-                      "shortcode": "GO-R1003",
-                      "shortDescription": "Cyclomatic complexity exceeds threshold",
-                      "category": "ANTI_PATTERN",
-                      "severity": "MINOR",
-                      "isRecommended": false,
-                      "analyzer": {
-                        "name": "Go",
-                        "shortcode": "go"
+                        "name": "Secrets",
+                        "shortcode": "secrets"
                       }
                     }
                   }

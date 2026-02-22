@@ -1,22 +1,12 @@
 [
   {
-    "commit_oid": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+    "commit_oid": "3f4a2b1c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a",
     "branch_name": "main",
     "status": "SUCCESS",
-    "grade": "A",
-    "occurrences_introduced": 3,
-    "occurrences_resolved": 1,
-    "occurrences_suppressed": 0,
-    "finished_at": "2025-01-15T10:30:00Z"
-  },
-  {
-    "commit_oid": "b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3",
-    "branch_name": "feature/auth",
-    "status": "PENDING",
     "grade": "-",
     "occurrences_introduced": 0,
-    "occurrences_resolved": 0,
+    "occurrences_resolved": 2,
     "occurrences_suppressed": 0,
-    "finished_at": null
+    "finished_at": "2025-03-15T08:10:00Z"
   }
 ]

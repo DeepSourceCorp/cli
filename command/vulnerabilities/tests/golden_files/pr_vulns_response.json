@@ -2,32 +2,32 @@
   "repository": {
     "pullRequest": {
       "number": 42,
-      "title": "Upgrade dependencies to fix vulnerabilities",
+      "title": "Upgrade golang.org/x/net to fix CVE-2023-44487",
       "baseBranch": "main",
-      "branch": "fix/upgrade-deps",
+      "branch": "fix/upgrade-x-net",
       "vulnerabilityOccurrences": {
         "edges": [
           {
             "node": {
               "id": "vuln-occ-pr-001",
-              "reachability": "UNREACHABLE",
+              "reachability": "REACHABLE",
               "fixability": "FIXABLE",
               "vulnerability": {
-                "identifier": "CVE-2024-3333",
-                "severity": "MEDIUM",
-                "summary": "Information disclosure via error messages",
-                "cvssV3BaseScore": 5.3,
-                "fixedVersions": ["4.2.0"],
-                "aliases": [],
-                "epssScore": null,
-                "referenceUrls": ["https://nvd.nist.gov/vuln/detail/CVE-2024-3333"]
+                "identifier": "CVE-2023-44487",
+                "severity": "HIGH",
+                "summary": "HTTP/2 Rapid Reset Attack causes denial of service in net/http servers",
+                "cvssV3BaseScore": 7.5,
+                "fixedVersions": ["0.17.0"],
+                "aliases": ["GHSA-qppj-fm56-57gc"],
+                "epssScore": 0.96,
+                "referenceUrls": ["https://nvd.nist.gov/vuln/detail/CVE-2023-44487"]
               },
               "package": {
-                "name": "web-framework",
-                "ecosystem": "NPM"
+                "name": "golang.org/x/net",
+                "ecosystem": "GO"
               },
               "packageVersion": {
-                "version": "4.1.2"
+                "version": "0.13.0"
               }
             }
           }

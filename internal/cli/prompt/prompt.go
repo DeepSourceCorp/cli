@@ -96,7 +96,7 @@ func SelectFromMultipleOptions(msg, helpText string, options []string) ([]string
 // Survey library doesn't exit on Ctrl+c interrupt. This handler helps in that.
 func checkInterrupt(err error) error {
 	if err == terminal.InterruptErr {
-		return errors.New("Interrupt received. Exiting...")
+		return errors.New("Interrupt received. Exiting..")
 	}
 	return err
 }

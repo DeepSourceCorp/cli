@@ -1,14 +1,14 @@
 [
   {
-    "path": "internal/handler/auth.go",
-    "begin_line": 15,
-    "end_line": 20,
-    "issue_code": "GO-S1001",
-    "title": "Potential SQL injection",
-    "description": "SQL query constructed with string concatenation",
+    "path": "deepsource/client.go",
+    "begin_line": 23,
+    "end_line": 23,
+    "issue_code": "SCS-G101",
+    "title": "Hardcoded credential found in source file",
+    "description": "A hardcoded credential was found in source code",
     "category": "SECURITY",
     "severity": "CRITICAL",
     "source": "",
-    "analyzer": "go"
+    "analyzer": "secrets"
   }
 ]

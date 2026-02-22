@@ -1,8 +1,8 @@
 {
   "number": 42,
-  "title": "Add unit tests for metrics",
+  "title": "Add unit tests for VCS remote resolver",
   "base_branch": "main",
-  "branch": "feature/metrics-tests",
+  "branch": "feature/vcs-resolver-tests",
   "metrics": [
     {
       "name": "Line Coverage",
@@ -16,8 +16,26 @@
         {
           "key": "aggregate",
           "threshold": 80,
-          "latest_value": 90.1,
-          "latest_value_display": "90.1%",
+          "latest_value": 88.6,
+          "latest_value_display": "88.6%",
+          "threshold_status": "PASSING"
+        }
+      ]
+    },
+    {
+      "name": "Branch Coverage",
+      "shortcode": "BCV",
+      "description": "Percentage of branches covered by tests",
+      "positive_direction": "UP",
+      "unit": "%",
+      "is_reported": true,
+      "is_threshold_enforced": true,
+      "items": [
+        {
+          "key": "aggregate",
+          "threshold": 70,
+          "latest_value": 75.3,
+          "latest_value_display": "75.3%",
           "threshold_status": "PASSING"
         }
       ]

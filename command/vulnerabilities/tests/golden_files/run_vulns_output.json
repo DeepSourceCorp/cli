@@ -1,5 +1,5 @@
 {
-  "commit_oid": "abc123f0deadbeef1234567890abcdef12345678",
+  "commit_oid": "3f4a2b1c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a",
   "branch_name": "main",
   "status": "SUCCESS",
   "vulnerabilities": [
@@ -8,27 +8,26 @@
       "reachability": "REACHABLE",
       "fixability": "FIXABLE",
       "vulnerability": {
-        "identifier": "CVE-2024-9999",
-        "severity": "HIGH",
-        "summary": "Path traversal in file upload handler",
-        "cvss_v3_base_score": 8.1,
+        "identifier": "CVE-2022-41717",
+        "severity": "MEDIUM",
+        "summary": "Excessive memory use in encoding/multipart and net/textproto",
+        "cvss_v3_base_score": 5.3,
         "fixed_versions": [
-          "3.1.0"
+          "0.4.0"
         ],
         "aliases": [
-          "GHSA-aaaa-bbbb-cccc"
+          "GHSA-xrjj-mj9h-534m"
         ],
-        "epss_score": 0.15,
         "reference_urls": [
-          "https://nvd.nist.gov/vuln/detail/CVE-2024-9999"
+          "https://nvd.nist.gov/vuln/detail/CVE-2022-41717"
         ]
       },
       "package": {
-        "name": "file-handler",
-        "ecosystem": "PYPI"
+        "name": "golang.org/x/net",
+        "ecosystem": "GO"
       },
       "package_version": {
-        "version": "3.0.5"
+        "version": "0.1.0"
       }
     }
   ]

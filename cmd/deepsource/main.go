@@ -10,9 +10,9 @@ import (
 
 	v "github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/command"
+	"github.com/deepsourcelabs/cli/internal/cli/style"
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	"github.com/getsentry/sentry-go"
-	"github.com/pterm/pterm"
 )
 
 var (
@@ -71,9 +71,9 @@ func main() {
 	if err := command.Execute(); err != nil {
 		var cliErr *clierrors.CLIError
 		if errors.As(err, &cliErr) {
-			pterm.Error.Println(cliErr.Message)
+			style.Errorf(os.Stderr, "%s", cliErr.Message)
 		} else {
-			pterm.Error.Println(err)
+			style.Errorf(os.Stderr, "%v", err)
 		}
 		if !clierrors.IsUserError(err) {
 			sentry.CaptureException(err)

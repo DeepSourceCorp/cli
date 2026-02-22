@@ -1,59 +1,59 @@
 {
-  "commit_oid": "abc123f",
+  "commit_oid": "5e8f1b2c3d4a9e7f0a1b2c3d4e5f6a7b8c9d0e1f",
   "branch_name": "main",
   "status": "SUCCESS",
   "report_card": {
     "status": "READY",
     "security": {
       "grade": "A+",
-      "score": 98,
-      "issues_count": 1
+      "score": 99,
+      "issues_count": 0
     },
     "reliability": {
       "grade": "A",
-      "score": 95,
+      "score": 94,
       "issues_count": 2
     },
     "complexity": {
       "grade": "B+",
-      "score": 85,
-      "issues_count": 5
+      "score": 87,
+      "issues_count": 3
     },
     "hygiene": {
       "grade": "A",
-      "score": 92,
-      "issues_count": 3
+      "score": 91,
+      "issues_count": 1
     },
     "coverage": {
-      "grade": "B",
-      "score": 80,
-      "line_coverage": 78.5,
-      "branch_coverage": 65.2
+      "grade": "B+",
+      "score": 85,
+      "line_coverage": 82.4,
+      "branch_coverage": 71
     },
     "aggregate": {
       "grade": "A",
-      "score": 92
+      "score": 93
     },
     "focus_area": {
       "dimension": "COMPLEXITY",
-      "action": "Reduce cyclomatic complexity"
+      "action": "Reduce cyclomatic complexity in core packages"
     }
   },
   "issues": [
     {
-      "path": "cmd/server/main.go",
-      "title": "Error return value not checked",
-      "code": "GO-R1005",
+      "path": "cmd/deepsource/main.go",
+      "title": "Unchecked error return value of os.ReadFile",
+      "code": "GO-W1007",
       "category": "BUG_RISK",
       "severity": "MAJOR",
       "analyzer": "Go"
     },
     {
-      "path": "internal/handler/auth.go",
-      "title": "Potential SQL injection",
-      "code": "GO-S1001",
+      "path": "internal/vcs/remotes.go",
+      "title": "HTTP request built with user-controlled URL",
+      "code": "GO-S1010",
       "category": "SECURITY",
-      "severity": "CRITICAL",
+      "severity": "MAJOR",
       "analyzer": "Go"
     }
   ]

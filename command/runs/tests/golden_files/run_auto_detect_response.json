@@ -1,0 +1,20 @@
+{
+  "run": {
+    "runUid": "run-uid-autodetect-01",
+    "commitOid": "3f4a2b1c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a",
+    "branchName": "main",
+    "status": "SUCCESS",
+    "createdAt": "2025-03-15T08:00:00Z",
+    "finishedAt": "2025-03-15T08:10:00Z",
+    "updatedAt": "2025-03-15T08:10:00Z",
+    "summary": {
+      "occurrencesIntroduced": 0,
+      "occurrencesResolved": 2,
+      "occurrencesSuppressed": 0
+    },
+    "reportCard": null,
+    "checks": {
+      "edges": []
+    }
+  }
+}

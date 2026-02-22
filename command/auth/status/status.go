@@ -2,6 +2,9 @@ package status
 
 import (
 	"errors"
+	"fmt"
+	"io"
+	"os"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/command/cmddeps"
@@ -10,12 +13,18 @@ import (
 	"github.com/deepsourcelabs/cli/internal/cli/style"
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	authsvc "github.com/deepsourcelabs/cli/internal/services/auth"
-	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
 type AuthStatusOptions struct {
 	deps *cmddeps.Deps
+}
+
+func (opts *AuthStatusOptions) stdout() io.Writer {
+	if opts.deps != nil && opts.deps.Stdout != nil {
+		return opts.deps.Stdout
+	}
+	return os.Stdout
 }
 
 // NewCmdStatus handles the fetching of authentication status of CLI
@@ -63,9 +72,9 @@ func (opts *AuthStatusOptions) Run() error {
 
 	// Check if the token has already expired
 	if !cfg.IsExpired() {
-		pterm.Printf("Logged in to DeepSource as %s.\n", cfg.User)
+		fmt.Fprintf(opts.stdout(), "Logged in to DeepSource as %s.\n", cfg.User)
 	} else {
-		pterm.Println("The authentication has expired. Run \"deepsource auth login\" to re-authenticate.")
+		fmt.Fprintln(opts.stdout(), "The authentication has expired. Run \"deepsource auth login\" to re-authenticate.")
 	}
 	return nil
 }

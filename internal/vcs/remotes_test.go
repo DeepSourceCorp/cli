@@ -56,6 +56,20 @@ var adsLegacySSHRemoteMap = map[string][]string{
 }
 var adsLegacySSHRemoteList = []string{"origin	myorg@vs-ssh.visualstudio.com:v3/myorg/myproject/myrepo (fetch)", "origin	myorg@vs-ssh.visualstudio.com:v3/myorg/myproject/myrepo (push)"}
 
+// TestGetRemoteMap_EmptyInput verifies that an empty remote list returns an empty map.
+// Note: the ListRemotes() code path (auto-detecting remotes from git) requires an
+// integration test environment with a real git process, so it is not covered here.
+// If the map is empty, the caller (ResolveRemote) is responsible for returning an error.
+func TestGetRemoteMap_EmptyInput(t *testing.T) {
+	got, err := getRemoteMap([]string{})
+	if err != nil {
+		t.Fatalf("unexpected error for empty input: %v", err)
+	}
+	if len(got) != 0 {
+		t.Errorf("expected empty map, got %d entries: %v", len(got), got)
+	}
+}
+
 func TestGetRemoteMap(t *testing.T) {
 	tests := []struct {
 		name    string

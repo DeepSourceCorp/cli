@@ -10,8 +10,8 @@ import (
 
 func NewCmdRepository() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:     "repository",
-		Aliases: []string{"repo"},
+		Use:     "repo",
+		Aliases: []string{"repository"},
 		Short:   "Manage repository settings",
 	}
 	cmd.AddCommand(dashboard.NewCmdDashboard())

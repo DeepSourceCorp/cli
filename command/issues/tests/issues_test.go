@@ -382,6 +382,95 @@ func TestIssuesMultipleFilters(t *testing.T) {
 	}
 }
 
+func TestIssuesRunInProgress(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"query GetRun(": goldenPath("run_pending_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "feature/new-auth", nil
+		},
+		CommitLogFunc: func(_ string) ([]string, error) {
+			return []string{"7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d"}, nil
+		},
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--output", "json"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("expected nil error for in-progress run, got: %v", err)
+	}
+	got := buf.String()
+	if !strings.Contains(got, "→") || !strings.Contains(got, "Analysis is still in progress for branch") {
+		t.Errorf("expected in-progress info message, got: %q", got)
+	}
+}
+
+func TestIssuesRunTimeout(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"query GetRun(": goldenPath("run_timeout_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "feature/new-auth", nil
+		},
+		CommitLogFunc: func(_ string) ([]string, error) {
+			return []string{"9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f"}, nil
+		},
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--output", "json"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("expected nil error for timed-out run, got: %v", err)
+	}
+	got := buf.String()
+	if !strings.Contains(got, "Warning:") || !strings.Contains(got, "Analysis timed out for branch") {
+		t.Errorf("expected timeout warning message, got: %q", got)
+	}
+}
+
+func TestIssuesLimitFlag(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"issues(first: $limit)": goldenPath("default_branch_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--default-branch", "--limit", "5", "--output", "json"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error with --limit flag: %v", err)
+	}
+	if strings.TrimSpace(buf.String()) == "" {
+		t.Error("expected non-empty JSON output")
+	}
+}
+
 func TestIssuesEmptyResults(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{

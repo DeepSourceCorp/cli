@@ -8,21 +8,21 @@
             "reachability": "REACHABLE",
             "fixability": "FIXABLE",
             "vulnerability": {
-              "identifier": "CVE-2024-1111",
+              "identifier": "CVE-2023-44487",
               "severity": "CRITICAL",
-              "summary": "SQL injection in query builder",
-              "cvssV3BaseScore": 9.1,
-              "fixedVersions": ["5.0.1"],
-              "aliases": [],
-              "epssScore": 0.87,
-              "referenceUrls": []
+              "summary": "HTTP/2 Rapid Reset Attack causes denial of service in net/http servers",
+              "cvssV3BaseScore": 9.8,
+              "fixedVersions": ["0.17.0"],
+              "aliases": ["GHSA-qppj-fm56-57gc"],
+              "epssScore": 0.96,
+              "referenceUrls": ["https://nvd.nist.gov/vuln/detail/CVE-2023-44487"]
             },
             "package": {
-              "name": "db-driver",
+              "name": "golang.org/x/net",
               "ecosystem": "GO"
             },
             "packageVersion": {
-              "version": "5.0.0"
+              "version": "0.13.0"
             }
           }
         },
@@ -32,21 +32,21 @@
             "reachability": "UNREACHABLE",
             "fixability": "FIXABLE",
             "vulnerability": {
-              "identifier": "CVE-2024-2222",
+              "identifier": "CVE-2022-41717",
               "severity": "HIGH",
-              "summary": "Buffer overflow in parser",
-              "cvssV3BaseScore": 7.8,
-              "fixedVersions": ["2.5.0"],
-              "aliases": [],
+              "summary": "Excessive memory use in encoding/multipart and net/textproto",
+              "cvssV3BaseScore": 7.5,
+              "fixedVersions": ["0.4.0"],
+              "aliases": ["GHSA-xrjj-mj9h-534m"],
               "epssScore": null,
-              "referenceUrls": []
+              "referenceUrls": ["https://nvd.nist.gov/vuln/detail/CVE-2022-41717"]
             },
             "package": {
-              "name": "parser-lib",
-              "ecosystem": "CARGO"
+              "name": "golang.org/x/net",
+              "ecosystem": "GO"
             },
             "packageVersion": {
-              "version": "2.4.3"
+              "version": "0.1.0"
             }
           }
         },
@@ -56,21 +56,21 @@
             "reachability": "UNREACHABLE",
             "fixability": "UNFIXABLE",
             "vulnerability": {
-              "identifier": "CVE-2024-4444",
+              "identifier": "CVE-2022-27664",
               "severity": "LOW",
-              "summary": "Timing side-channel in comparison",
+              "summary": "Uncontrolled resource consumption in golang.org/x/net/http2",
               "cvssV3BaseScore": 3.1,
               "fixedVersions": [],
               "aliases": [],
               "epssScore": null,
-              "referenceUrls": []
+              "referenceUrls": ["https://nvd.nist.gov/vuln/detail/CVE-2022-27664"]
             },
             "package": {
-              "name": "crypto-utils",
-              "ecosystem": "NPM"
+              "name": "golang.org/x/net",
+              "ecosystem": "GO"
             },
             "packageVersion": {
-              "version": "1.0.0"
+              "version": "0.0.0"
             }
           }
         }

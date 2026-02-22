@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/internal/cli/args"
@@ -13,6 +14,7 @@ import (
 	"github.com/deepsourcelabs/cli/internal/interfaces"
 	reportsvc "github.com/deepsourcelabs/cli/internal/services/report"
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 )
 
 type ReportOptions struct {
@@ -44,15 +46,19 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 	doc := heredoc.Docf(`
 		Report artifacts to DeepSource.
 
-		Use %[1]s to specify the analyzer, for example:
-		%[2]s
+		Use %[1]s to specify the analyzer shortcode and %[2]s to identify the language:
+		  %[3]s
 
-		Use %[3]s to specify the value of the artifact:
-		%[4]s
-
-		You can flag combinations as well:
-		%[5]s
-		`, style.Yellow("--analyzer"), style.Cyan("deepsource report --analyzer python"), style.Yellow("--value"), style.Cyan("deepsource report --key value"), style.Cyan("deepsource report --analyzer go --value-file coverage.out"))
+		Provide the artifact value inline or from a file:
+		  %[4]s
+		  %[5]s
+		`,
+		style.Yellow("--analyzer"),
+		style.Yellow("--key"),
+		style.Cyan("deepsource report --analyzer test-coverage --key python --value-file coverage.xml"),
+		style.Cyan("deepsource report --analyzer test-coverage --key go --value '<coverage_data>'"),
+		style.Cyan("deepsource report --analyzer test-coverage --key go --value-file coverage.out"),
+	)
 
 	cmd := &cobra.Command{
 		Use:   "report",
@@ -77,7 +83,7 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 		},
 	}
 
-	// --repo, -r flag
+	// --analyzer flag
 	cmd.Flags().StringVar(&opts.Analyzer, "analyzer", "", "name of the analyzer to report the artifact to (example: test-coverage)")
 
 	cmd.Flags().StringVar(&opts.AnalyzerType, "analyzer-type", "", "type of the analyzer (example: community)")
@@ -100,6 +106,16 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 	// --skip-verify flag to skip SSL certificate verification while reporting test coverage data.
 	cmd.Flags().BoolVar(&opts.SkipCertificateVerification, "skip-verify", false, "skip SSL certificate verification while sending the test coverage data")
 
+	_ = cmd.RegisterFlagCompletionFunc("analyzer", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
+		return []string{
+			"test-coverage\tReport test coverage data",
+		}, cobra.ShellCompDirectiveNoFileComp
+	})
+	_ = cmd.RegisterFlagCompletionFunc("key", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
+		return []string{
+			"python", "go", "javascript", "ruby", "java", "scala", "php", "csharp", "cxx", "rust", "swift", "kotlin",
+		}, cobra.ShellCompDirectiveNoFileComp
+	})
 	_ = cmd.RegisterFlagCompletionFunc("output", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
 			"pretty\tPretty-printed output",
@@ -117,6 +133,7 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
 
+	setReportUsageFunc(cmd)
 	return cmd
 }
 
@@ -136,24 +153,74 @@ func (opts *ReportOptions) Run(ctx context.Context, svc *reportsvc.Service, outp
 		OIDCProvider:                opts.OIDCProvider,
 	})
 	if err != nil {
-		if output != nil {
-			output.Errorf("%v\n", err)
-		} else {
-			fmt.Fprintln(os.Stderr, err)
-		}
 		return err
 	}
 
 	if err := printReportResult(output, opts.Output, result); err != nil {
-		if output != nil {
-			output.Errorf("%v\n", err)
-		} else {
-			fmt.Fprintln(os.Stderr, err)
-		}
 		return err
 	}
 
 	return nil
+}
+
+func setReportUsageFunc(cmd *cobra.Command) {
+	cmd.SetUsageFunc(func(c *cobra.Command) error {
+		groups := []struct {
+			title string
+			flags []string
+		}{
+			{"Artifact", []string{"analyzer", "analyzer-type", "key", "value", "value-file"}},
+			{"Authentication", []string{"use-oidc", "oidc-provider", "oidc-request-token", "oidc-request-url", "deepsource-host-endpoint"}},
+			{"Output", []string{"output"}},
+			{"General", []string{"skip-verify", "help"}},
+		}
+		w := c.OutOrStderr()
+		fmt.Fprintf(w, "Usage:\n  %s\n", c.UseLine())
+		for _, g := range groups {
+			fmt.Fprintf(w, "\n%s:\n", g.title)
+			for _, name := range g.flags {
+				f := c.Flags().Lookup(name)
+				if f == nil {
+					continue
+				}
+				fmt.Fprintf(w, "  %s\n", flagUsageLine(f))
+			}
+		}
+		fmt.Fprintln(w)
+		return nil
+	})
+}
+
+func flagUsageLine(f *pflag.Flag) string {
+	var line string
+	if f.Shorthand != "" {
+		line = fmt.Sprintf("-%s, --%s", f.Shorthand, f.Name)
+	} else {
+		line = fmt.Sprintf("    --%s", f.Name)
+	}
+
+	vartype := f.Value.Type()
+	switch vartype {
+	case "bool":
+		// no type suffix for booleans
+	case "stringSlice":
+		line += " strings"
+	default:
+		line += " " + vartype
+	}
+
+	const pad = 28
+	if len(line) < pad {
+		line += strings.Repeat(" ", pad-len(line))
+	} else {
+		line += "  "
+	}
+	line += f.Usage
+
+	if f.DefValue != "" && f.DefValue != "false" && f.DefValue != "[]" && f.DefValue != "0" {
+		line += fmt.Sprintf(" (default %s)", f.DefValue)
+	}
+	return line
 }
 
 func printReportResult(output interfaces.OutputWriter, format string, result *reportsvc.Result) error {
@@ -167,7 +234,7 @@ func printReportResult(output interfaces.OutputWriter, format string, result *re
 
 	switch format {
 	case "", "pretty":
-		write("DeepSource | Artifact published successfully\n\n")
+		write("Artifact published successfully\n\n")
 		write("Analyzer  %s\n", result.Analyzer)
 		write("Key       %s\n", result.Key)
 		if result.Message != "" {
@@ -180,11 +247,11 @@ func printReportResult(output interfaces.OutputWriter, format string, result *re
 	case "json":
 		payload, err := json.MarshalIndent(result, "", "  ")
 		if err != nil {
-			return fmt.Errorf("DeepSource | Error | Failed to format JSON output: %w", err)
+			return fmt.Errorf("Failed to format JSON output: %w", err)
 		}
 		write("%s\n", payload)
 		return nil
 	default:
-		return fmt.Errorf("DeepSource | Error | Unsupported output format: %s", format)
+		return fmt.Errorf("Unsupported output format: %s", format)
 	}
 }

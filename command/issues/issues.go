@@ -92,7 +92,7 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	}
 
 	// --repo, -r flag
-	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository to list issues for (owner/name)")
+	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository in provider/owner/name format (e.g. gh/owner/name). Supported providers: gh, gl, bb, ads")
 
 	// --limit, -l flag
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Maximum number of issues to fetch")
@@ -276,11 +276,11 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 			return resolveErr
 		}
 		if cmdutil.IsRunInProgress(runStatus) {
-			pterm.Info.Printfln("Analysis is still in progress for branch %q.", branchName)
+			style.Infof(opts.stdout(), "Analysis is still in progress for branch %q.", branchName)
 			return nil
 		}
 		if cmdutil.IsRunTimedOut(runStatus) {
-			pterm.Warning.Printfln("Analysis timed out for branch %q.", branchName)
+			style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", branchName)
 			return nil
 		}
 		opts.CommitOid = commitOid
@@ -440,9 +440,9 @@ func (opts *IssuesOptions) scopeLabel() string {
 func (opts *IssuesOptions) outputHuman() error {
 	if len(opts.issues) == 0 {
 		if opts.hasFilters() {
-			pterm.Info.Printfln("No issues matched the provided filters in %s on %s.", opts.repoSlug, opts.scopeLabel())
+			style.Infof(opts.stdout(), "No issues matched the provided filters in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		} else {
-			pterm.Info.Printfln("No issues found in %s on %s.", opts.repoSlug, opts.scopeLabel())
+			style.Infof(opts.stdout(), "No issues found in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		}
 		return nil
 	}
@@ -458,7 +458,7 @@ func (opts *IssuesOptions) outputHuman() error {
 	var sevParts []string
 	for _, sev := range []string{"CRITICAL", "MAJOR", "MINOR"} {
 		if c := sevCounts[sev]; c > 0 {
-			sevParts = append(sevParts, colorSeverity(sev, fmt.Sprintf("%d %s", c, strings.ToLower(humanizeSeverity(sev)))))
+			sevParts = append(sevParts, style.IssueSeverityColor(sev, fmt.Sprintf("%d %s", c, strings.ToLower(humanizeSeverity(sev)))))
 		}
 	}
 
@@ -516,7 +516,7 @@ func (opts *IssuesOptions) outputHuman() error {
 			severity := humanizeSeverity(issue.IssueSeverity)
 			analyzer := analyzerDisplayName(issue.Analyzer)
 
-			sevTag := colorSeverity(issue.IssueSeverity, "["+severity+"]")
+			sevTag := style.IssueSeverityColor(issue.IssueSeverity, "["+severity+"]")
 			fmt.Printf("  %s  [%s] %s\n", issue.IssueText, analyzer, sevTag)
 			if opts.Verbose && issue.Description != "" {
 				fmt.Printf("  %s\n", pterm.Gray(issue.Description))
@@ -629,20 +629,6 @@ func analyzerDisplayName(meta issues.AnalyzerMeta) string {
 	}
 	return meta.Shortcode
 }
-
-func colorSeverity(sev string, text string) string {
-	switch strings.ToUpper(sev) {
-	case "CRITICAL":
-		return pterm.Red(text)
-	case "MAJOR":
-		return pterm.LightRed(text)
-	case "MINOR":
-		return pterm.Yellow(text)
-	default:
-		return text
-	}
-}
-
 
 func formatLocationFromParts(loc issues.Location, cwd string) string {
 	filePath := loc.Path

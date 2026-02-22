@@ -64,7 +64,7 @@ func NewCmdRunsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		`,
 		style.Cyan("deepsource runs"),
 		style.Yellow("--repo"),
-		style.Cyan("deepsource runs --repo repo_name"),
+		style.Cyan("deepsource runs --repo gh/owner/name"),
 		style.Yellow("--commit"),
 		style.Cyan("deepsource runs --commit abc123f"),
 	)
@@ -82,7 +82,7 @@ func NewCmdRunsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "List history for the specified repository")
+	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository in provider/owner/name format (e.g. gh/owner/name). Supported providers: gh, gl, bb, ads")
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 20, "Number of analysis runs to fetch")
 	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
 	cmd.Flags().StringVar(&opts.commitOid, "commit", "", "Show metadata and issues summary for a specific commit")
@@ -118,11 +118,6 @@ func (opts *RunsOptions) runList() error {
 		return err
 	}
 
-	remote, err := vcs.ResolveRemote(opts.RepoArg)
-	if err != nil {
-		return err
-	}
-
 	var client *deepsource.Client
 	if opts.deps != nil && opts.deps.Client != nil {
 		client = opts.deps.Client
@@ -138,13 +133,58 @@ func (opts *RunsOptions) runList() error {
 	}
 
 	ctx := context.Background()
-	analysisRuns, _, err := client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg, nil)
-	if err != nil {
-		return err
+
+	var analysisRuns []runstypes.AnalysisRun
+
+	if opts.RepoArg != "" {
+		remote, resolveErr := vcs.ResolveRemote(opts.RepoArg)
+		if resolveErr != nil {
+			return resolveErr
+		}
+		analysisRuns, _, err = client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg, nil)
+		if err != nil {
+			return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to fetch analysis runs", err)
+		}
+	} else {
+		var branchName string
+		if opts.deps != nil && opts.deps.BranchNameFunc != nil {
+			branchName, err = opts.deps.BranchNameFunc()
+		} else {
+			branchName, err = cmdutil.ResolveBranchName(nil)
+		}
+		if err != nil {
+			return fmt.Errorf("failed to detect current branch: %w", err)
+		}
+
+		var commits []string
+		if opts.deps != nil && opts.deps.CommitLogFunc != nil {
+			commits, err = opts.deps.CommitLogFunc(branchName)
+		} else {
+			commits, err = cmdutil.GetCommitLog(branchName)
+		}
+		if err != nil {
+			return fmt.Errorf("failed to get commit history: %w", err)
+		}
+
+		seen := make(map[string]bool)
+		for _, sha := range commits {
+			if len(analysisRuns) >= opts.LimitArg {
+				break
+			}
+			run, err := client.GetRunByCommit(ctx, sha)
+			if err != nil {
+				continue
+			}
+			if run == nil || seen[run.RunUid] {
+				continue
+			}
+			seen[run.RunUid] = true
+			analysisRuns = append(analysisRuns, *run)
+		}
 	}
 
 	if len(analysisRuns) == 0 {
-		pterm.Info.Printfln("No analysis runs found in %s/%s.", remote.Owner, remote.RepoName)
+		style.Infof(opts.stdout(), "No analysis runs found.")
 		return nil
 	}
 
@@ -208,15 +248,15 @@ func (opts *RunsOptions) runDetail(ctx context.Context) error {
 			pterm.Bold.Sprint("Branch:"),
 			runWithIssues.BranchName,
 			pterm.Bold.Sprint("Status:"),
-			formatStatus(runWithIssues.Status),
+			style.RunStatusColor(runWithIssues.Status),
 		),
 	)
 
-	cmdutil.ShowReportCard(runWithIssues.ReportCard)
-	showIssuesSummary(runWithIssues.Issues)
+	cmdutil.ShowReportCard(opts.stdout(), runWithIssues.ReportCard)
+	showIssuesSummary(opts.stdout(), runWithIssues.Issues)
 
-	pterm.Println()
-	pterm.Info.Printfln("Run %s to view full issue details",
+	fmt.Fprintln(opts.stdout())
+	style.Infof(opts.stdout(), "Run %s to view full issue details",
 		style.Cyan("deepsource issues --commit %s", commitShort))
 
 	return nil
@@ -322,7 +362,7 @@ func showRunsTable(analysisRuns []runstypes.AnalysisRun) {
 			branch = "-"
 		}
 
-		status := formatStatus(run.Status)
+		status := style.RunStatusColor(run.Status)
 
 		grade := "-"
 		if run.ReportCard != nil && run.ReportCard.Aggregate != nil {
@@ -353,10 +393,10 @@ func showRunsTable(analysisRuns []runstypes.AnalysisRun) {
 	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
 }
 
-func showIssuesSummary(issues []runstypes.RunIssue) {
+func showIssuesSummary(w io.Writer, issues []runstypes.RunIssue) {
 	if len(issues) == 0 {
-		pterm.Println()
-		pterm.Success.Println("No issues found in this run")
+		fmt.Fprintln(w)
+		style.Successf(w, "%s", "No issues found in this run")
 		return
 	}
 
@@ -381,36 +421,36 @@ func showIssuesSummary(issues []runstypes.RunIssue) {
 		}
 	}
 
-	pterm.Println()
-	pterm.Println(pterm.Bold.Sprintf("Issues: %d total", len(issues)))
+	fmt.Fprintln(w)
+	fmt.Fprintln(w, pterm.Bold.Sprintf("Issues: %d total", len(issues)))
 
 	var parts []string
 	if critical > 0 {
-		parts = append(parts, pterm.Red(fmt.Sprintf("%d critical", critical)))
+		parts = append(parts, style.IssueSeverityColor("CRITICAL", fmt.Sprintf("%d critical", critical)))
 	}
 	if major > 0 {
-		parts = append(parts, pterm.LightRed(fmt.Sprintf("%d major", major)))
+		parts = append(parts, style.IssueSeverityColor("MAJOR", fmt.Sprintf("%d major", major)))
 	}
 	if minor > 0 {
-		parts = append(parts, pterm.Yellow(fmt.Sprintf("%d minor", minor)))
+		parts = append(parts, style.IssueSeverityColor("MINOR", fmt.Sprintf("%d minor", minor)))
 	}
 	if len(parts) > 0 {
-		pterm.Println("  " + strings.Join(parts, ", "))
+		fmt.Fprintln(w, "  "+strings.Join(parts, ", "))
 	}
 
 	if len(categoryCount) > 0 {
-		pterm.Println()
-		pterm.Println(pterm.Bold.Sprint("By Category:"))
+		fmt.Fprintln(w)
+		fmt.Fprintln(w, pterm.Bold.Sprint("By Category:"))
 		for _, key := range sortedKeys(categoryCount) {
-			pterm.Printf("  %s: %d\n", cmdutil.FormatCategory(key), categoryCount[key])
+			fmt.Fprintf(w, "  %s: %d\n", cmdutil.FormatCategory(key), categoryCount[key])
 		}
 	}
 
 	if len(analyzerCount) > 0 {
-		pterm.Println()
-		pterm.Println(pterm.Bold.Sprint("By Analyzer:"))
+		fmt.Fprintln(w)
+		fmt.Fprintln(w, pterm.Bold.Sprint("By Analyzer:"))
 		for _, key := range sortedKeys(analyzerCount) {
-			pterm.Printf("  %s: %d\n", key, analyzerCount[key])
+			fmt.Fprintf(w, "  %s: %d\n", key, analyzerCount[key])
 		}
 	}
 }
@@ -422,21 +462,6 @@ func sortedKeys(m map[string]int) []string {
 	}
 	sort.Strings(keys)
 	return keys
-}
-
-func formatStatus(status string) string {
-	switch strings.ToUpper(status) {
-	case "SUCCESS":
-		return pterm.Green("Success")
-	case "FAILURE":
-		return pterm.Red("Failure")
-	case "PENDING":
-		return pterm.Yellow("Pending")
-	case "RUNNING":
-		return pterm.Cyan("Running")
-	default:
-		return status
-	}
 }
 
 func setRunsUsageFunc(cmd *cobra.Command) {

@@ -5,15 +5,33 @@
         "edges": [
           {
             "node": {
-              "path": "pkg/api/handler.go",
-              "beginLine": 33,
-              "endLine": 33,
-              "title": "Unused variable declared",
+              "path": "cmd/deepsource/main.go",
+              "beginLine": 42,
+              "endLine": 42,
+              "title": "Unchecked error return value of os.ReadFile",
               "issue": {
-                "shortcode": "GO-R1002",
-                "shortDescription": "Variable declared but never used",
+                "shortcode": "GO-W1007",
+                "shortDescription": "Return value of io.ReadAll is not checked for errors",
                 "category": "BUG_RISK",
-                "severity": "MINOR",
+                "severity": "MAJOR",
+                "analyzer": {
+                  "name": "Go",
+                  "shortcode": "go"
+                }
+              }
+            }
+          },
+          {
+            "node": {
+              "path": "internal/vcs/remotes.go",
+              "beginLine": 87,
+              "endLine": 91,
+              "title": "HTTP request built with user-controlled URL",
+              "issue": {
+                "shortcode": "GO-S1010",
+                "shortDescription": "Constructing HTTP request with user-controlled URL allows SSRF",
+                "category": "SECURITY",
+                "severity": "MAJOR",
                 "analyzer": {
                   "name": "Go",
                   "shortcode": "go"

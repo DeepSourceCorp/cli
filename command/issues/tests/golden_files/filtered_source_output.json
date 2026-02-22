@@ -1,13 +1,13 @@
 [
   {
-    "path": "internal/handler/auth.go",
-    "begin_line": 15,
-    "end_line": 20,
-    "issue_code": "GO-S1001",
-    "title": "Potential SQL injection",
-    "description": "SQL query constructed with string concatenation",
+    "path": "internal/vcs/remotes.go",
+    "begin_line": 87,
+    "end_line": 91,
+    "issue_code": "GO-S1010",
+    "title": "HTTP request built with user-controlled URL",
+    "description": "Constructing HTTP request with user-controlled URL allows SSRF",
     "category": "SECURITY",
-    "severity": "CRITICAL",
+    "severity": "MAJOR",
     "source": "ai",
     "analyzer": "go"
   }
