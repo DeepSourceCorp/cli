@@ -65,7 +65,7 @@ func resolveRunFromCommits(
 	}
 	if len(allRuns) == 0 {
 		return nil, fmt.Errorf(
-			"no analysis runs found for branch %q.\nTry: --default-branch, --commit <sha>, or push and analyze this branch first",
+			"no analysis runs found for branch %q.\nTry: --default-branch, --commit <sha>, or --pr <number>",
 			branchName,
 		)
 	}

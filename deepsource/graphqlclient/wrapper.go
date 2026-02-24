@@ -3,12 +3,35 @@ package graphqlclient
 import (
 	"context"
 	"fmt"
+	"io"
+	"net/http"
 	"strings"
 	"time"
 
 	"github.com/deepsourcelabs/cli/internal/debug"
 	"github.com/deepsourcelabs/graphql"
 )
+
+// StatusCheckTransport wraps an http.RoundTripper and returns an error for
+// non-2xx HTTP responses. This prevents the graphql library from silently
+// decoding non-GraphQL responses (e.g. 404 pages) as empty data.
+type StatusCheckTransport struct {
+	Base http.RoundTripper
+}
+
+func (t *StatusCheckTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	resp, err := t.Base.RoundTrip(req)
+	if err != nil {
+		return resp, err
+	}
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		body, _ := io.ReadAll(resp.Body)
+		resp.Body.Close()
+		debug.Log("graphql: HTTP %d from %s: %s", resp.StatusCode, req.URL, string(body))
+		return nil, fmt.Errorf("unexpected HTTP %d from %s", resp.StatusCode, req.URL.Host)
+	}
+	return resp, nil
+}
 
 // TokenRefresher is called when a request fails due to an expired token.
 // It receives the current token and should return a new valid token.
@@ -113,5 +136,7 @@ func (w *wrapper) run(ctx context.Context, query string, vars map[string]interfa
 }
 
 func isTokenExpired(err error) bool {
-	return strings.Contains(err.Error(), "Signature has expired")
+	msg := err.Error()
+	return strings.Contains(msg, "Signature has expired") ||
+		strings.Contains(msg, "unexpected HTTP 401")
 }
