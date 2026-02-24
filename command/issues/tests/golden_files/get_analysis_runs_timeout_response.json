@@ -1,0 +1,29 @@
+{
+  "repository": {
+    "analysisRuns": {
+      "edges": [
+        {
+          "node": {
+            "runUid": "run-uid-timeout-01",
+            "commitOid": "9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f",
+            "branchName": "feature/new-auth",
+            "status": "TIMEOUT",
+            "createdAt": "2025-03-11T11:00:00Z",
+            "finishedAt": "2025-03-11T12:00:00Z",
+            "updatedAt": "2025-03-11T12:00:00Z",
+            "summary": {
+              "occurrencesIntroduced": 0,
+              "occurrencesResolved": 0,
+              "occurrencesSuppressed": 0
+            },
+            "reportCard": null
+          }
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": null
+      }
+    }
+  }
+}

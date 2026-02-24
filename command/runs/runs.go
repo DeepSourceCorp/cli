@@ -141,7 +141,7 @@ func (opts *RunsOptions) runList() error {
 		if resolveErr != nil {
 			return resolveErr
 		}
-		analysisRuns, _, err = client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg, nil)
+		analysisRuns, _, err = client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg, nil, nil)
 		if err != nil {
 			return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to fetch analysis runs", err)
 		}
@@ -156,30 +156,19 @@ func (opts *RunsOptions) runList() error {
 			return fmt.Errorf("failed to detect current branch: %w", err)
 		}
 
-		var commits []string
-		if opts.deps != nil && opts.deps.CommitLogFunc != nil {
-			commits, err = opts.deps.CommitLogFunc(branchName)
+		var remote *vcs.RemoteData
+		if opts.deps != nil && opts.deps.RemoteFunc != nil {
+			remote, err = opts.deps.RemoteFunc()
 		} else {
-			commits, err = cmdutil.GetCommitLog(branchName)
+			remote, err = vcs.ResolveRemote("")
 		}
 		if err != nil {
-			return fmt.Errorf("failed to get commit history: %w", err)
+			return err
 		}
 
-		seen := make(map[string]bool)
-		for _, sha := range commits {
-			if len(analysisRuns) >= opts.LimitArg {
-				break
-			}
-			run, err := client.GetRunByCommit(ctx, sha)
-			if err != nil {
-				continue
-			}
-			if run == nil || seen[run.RunUid] {
-				continue
-			}
-			seen[run.RunUid] = true
-			analysisRuns = append(analysisRuns, *run)
+		analysisRuns, _, err = client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg, nil, &branchName)
+		if err != nil {
+			return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to fetch analysis runs", err)
 		}
 	}
 

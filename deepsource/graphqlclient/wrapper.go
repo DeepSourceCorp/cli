@@ -4,7 +4,9 @@ import (
 	"context"
 	"fmt"
 	"strings"
+	"time"
 
+	"github.com/deepsourcelabs/cli/internal/debug"
 	"github.com/deepsourcelabs/graphql"
 )
 
@@ -59,6 +61,12 @@ func (w *wrapper) SetAuthToken(token string) {
 }
 
 func (w *wrapper) exec(ctx context.Context, query string, vars map[string]interface{}, result interface{}, op string) error {
+	debug.Log("graphql: %s %s", op, TruncateQuery(query))
+	if len(vars) > 0 {
+		debug.Log("graphql: vars %v", vars)
+	}
+	start := time.Now()
+
 	req := graphql.NewRequest(query)
 	req.Header.Set("Cache-Control", "no-cache")
 	if w.token != "" {
@@ -69,12 +77,14 @@ func (w *wrapper) exec(ctx context.Context, query string, vars map[string]interf
 	}
 
 	if err := w.client.Run(ctx, req, result); err != nil {
+		debug.Log("graphql: %s failed in %dms: %v", op, time.Since(start).Milliseconds(), err)
 		return &GraphQLError{
 			Operation: op,
 			Query:     TruncateQuery(query),
 			Cause:     err,
 		}
 	}
+	debug.Log("graphql: %s completed in %dms", op, time.Since(start).Milliseconds())
 	return nil
 }
 
@@ -85,13 +95,16 @@ func (w *wrapper) run(ctx context.Context, query string, vars map[string]interfa
 	}
 
 	if !w.refreshing && w.refresher != nil && isTokenExpired(err) {
+		debug.Log("graphql: token expired, attempting refresh")
 		w.refreshing = true
 		defer func() { w.refreshing = false }()
 
 		newToken, refreshErr := w.refresher(ctx, w.token)
 		if refreshErr != nil {
+			debug.Log("graphql: token refresh failed: %v", refreshErr)
 			return fmt.Errorf("Token expired and refresh failed, run \"deepsource auth login\" to re-authenticate: %w", refreshErr)
 		}
+		debug.Log("graphql: token refreshed, retrying request")
 		w.token = newToken
 		return w.exec(ctx, query, vars, result, op)
 	}

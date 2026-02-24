@@ -6,6 +6,7 @@ import (
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	reposvc "github.com/deepsourcelabs/cli/internal/services/repo"
+	"github.com/deepsourcelabs/cli/internal/vcs"
 )
 
 // Deps holds injectable dependencies for commands, enabling testability.
@@ -18,5 +19,5 @@ type Deps struct {
 	Stderr      io.Writer
 	RepoService *reposvc.Service
 	BranchNameFunc func() (string, error)
-	CommitLogFunc  func(branch string) ([]string, error)
+	RemoteFunc     func() (*vcs.RemoteData, error)
 }

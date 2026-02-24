@@ -1,0 +1,29 @@
+{
+  "repository": {
+    "analysisRuns": {
+      "edges": [
+        {
+          "node": {
+            "runUid": "run-uid-pending-01",
+            "commitOid": "7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d",
+            "branchName": "feature/new-auth",
+            "status": "PENDING",
+            "createdAt": "2025-03-12T14:00:00Z",
+            "finishedAt": null,
+            "updatedAt": "2025-03-12T14:00:00Z",
+            "summary": {
+              "occurrencesIntroduced": 0,
+              "occurrencesResolved": 0,
+              "occurrencesSuppressed": 0
+            },
+            "reportCard": null
+          }
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": null
+      }
+    }
+  }
+}

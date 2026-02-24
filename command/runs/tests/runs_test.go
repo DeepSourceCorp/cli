@@ -11,6 +11,7 @@ import (
 	runsCmd "github.com/deepsourcelabs/cli/command/runs"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/internal/testutil"
+	"github.com/deepsourcelabs/cli/internal/vcs"
 )
 
 func goldenPath(name string) string {
@@ -21,7 +22,7 @@ func goldenPath(name string) string {
 func TestRunsListRuns(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"GetRun": goldenPath("run_auto_detect_response.json"),
+		"GetAnalysisRuns": goldenPath("runs_auto_detect_bulk_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -33,8 +34,8 @@ func TestRunsListRuns(t *testing.T) {
 		BranchNameFunc: func() (string, error) {
 			return "main", nil
 		},
-		CommitLogFunc: func(_ string) ([]string, error) {
-			return []string{"3f4a2b1c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a"}, nil
+		RemoteFunc: func() (*vcs.RemoteData, error) {
+			return &vcs.RemoteData{Owner: "testowner", RepoName: "testrepo", VCSProvider: "GITHUB"}, nil
 		},
 	}
 
@@ -55,7 +56,10 @@ func TestRunsListRuns(t *testing.T) {
 
 func TestRunsEmptyList(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
-	client := deepsource.NewWithGraphQLClient(testutil.MockQueryFunc(t, map[string]string{}))
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"GetAnalysisRuns": goldenPath("empty_runs_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
 
 	var buf bytes.Buffer
 	deps := &cmddeps.Deps{
@@ -65,8 +69,8 @@ func TestRunsEmptyList(t *testing.T) {
 		BranchNameFunc: func() (string, error) {
 			return "main", nil
 		},
-		CommitLogFunc: func(_ string) ([]string, error) {
-			return []string{}, nil
+		RemoteFunc: func() (*vcs.RemoteData, error) {
+			return &vcs.RemoteData{Owner: "testowner", RepoName: "testrepo", VCSProvider: "GITHUB"}, nil
 		},
 	}
 
@@ -85,7 +89,7 @@ func TestRunsEmptyList(t *testing.T) {
 func TestRunsAutoDetectBranch(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"GetRun": goldenPath("run_auto_detect_response.json"),
+		"GetAnalysisRuns": goldenPath("runs_auto_detect_bulk_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -97,8 +101,8 @@ func TestRunsAutoDetectBranch(t *testing.T) {
 		BranchNameFunc: func() (string, error) {
 			return "main", nil
 		},
-		CommitLogFunc: func(_ string) ([]string, error) {
-			return []string{"3f4a2b1c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a"}, nil
+		RemoteFunc: func() (*vcs.RemoteData, error) {
+			return &vcs.RemoteData{Owner: "testowner", RepoName: "testrepo", VCSProvider: "GITHUB"}, nil
 		},
 	}
 

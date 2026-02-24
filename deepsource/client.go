@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/deepsourcelabs/cli/deepsource/analyzers"
+	"github.com/deepsourcelabs/cli/internal/debug"
 	analyzerQuery "github.com/deepsourcelabs/cli/deepsource/analyzers/queries"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
 	authmut "github.com/deepsourcelabs/cli/deepsource/auth/mutations"
@@ -65,6 +66,8 @@ func NewWithGraphQLClient(gql graphqlclient.GraphQLClient) *Client {
 func New(cp ClientOpts) (*Client, error) {
 	apiClientURL := getAPIClientURL(cp.HostName)
 	gql := graphql.NewClient(apiClientURL)
+
+	debug.Log("client: API endpoint %s", apiClientURL)
 
 	c := &Client{
 		gql:   gql,
@@ -229,13 +232,14 @@ func (c Client) GetViewer(ctx context.Context) (*user.User, error) {
 // provider : The VCS provider which hosts the repo (GITHUB/GITLAB/BITBUCKET)
 // limit : The number of analysis runs to fetch
 // after : Cursor for pagination (nil for first page)
-func (c Client) GetAnalysisRuns(ctx context.Context, owner, repoName, provider string, limit int, after *string) ([]runs.AnalysisRun, runsQuery.PageInfo, error) {
+func (c Client) GetAnalysisRuns(ctx context.Context, owner, repoName, provider string, limit int, after *string, branchName *string) ([]runs.AnalysisRun, runsQuery.PageInfo, error) {
 	req := runsQuery.NewAnalysisRunsListRequest(c.gqlWrapper, runsQuery.AnalysisRunsListParams{
-		Owner:    owner,
-		RepoName: repoName,
-		Provider: provider,
-		Limit:    limit,
-		After:    after,
+		Owner:      owner,
+		RepoName:   repoName,
+		Provider:   provider,
+		Limit:      limit,
+		After:      after,
+		BranchName: branchName,
 	})
 	res, pageInfo, err := req.Do(ctx)
 	if err != nil {
@@ -390,6 +394,25 @@ func (c Client) GetPRBranch(ctx context.Context, owner, repoName, provider strin
 		PRNumber: prNumber,
 	})
 	return req.Do(ctx)
+}
+
+// Returns the PR number for a branch, if an open PR exists.
+// Returns found=false when no PR exists or the PR is not open.
+func (c Client) GetPRForBranch(ctx context.Context, owner, repoName, provider, branch string) (prNumber int, found bool, err error) {
+	req := runsQuery.NewPRByBranchRequest(c.gqlWrapper, runsQuery.PRByBranchParams{
+		Owner:    owner,
+		RepoName: repoName,
+		Provider: provider,
+		Branch:   branch,
+	})
+	number, state, ok, err := req.Do(ctx)
+	if err != nil {
+		return 0, false, err
+	}
+	if !ok || state != "OPEN" {
+		return 0, false, nil
+	}
+	return number, true, nil
 }
 
 // Returns vulnerabilities for a specific pull request.

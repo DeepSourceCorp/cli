@@ -9,12 +9,20 @@ import (
 	"testing"
 
 	"github.com/deepsourcelabs/cli/deepsource"
+	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/internal/testutil"
+	"github.com/deepsourcelabs/cli/internal/vcs"
 )
 
 func testdataPath(name string) string {
 	_, callerFile, _, _ := runtime.Caller(0)
 	return filepath.Join(filepath.Dir(callerFile), "testdata", name)
+}
+
+var testRemote = &vcs.RemoteData{
+	Owner:       "testowner",
+	RepoName:    "testrepo",
+	VCSProvider: "GITHUB",
 }
 
 // TestIsRunInProgress checks that only PENDING and RUNNING are considered in-progress.
@@ -102,7 +110,7 @@ func TestResolveCommitOid_Short(t *testing.T) {
 // TestResolveLatestRun_FindsRun verifies a SUCCESS run is returned when found.
 func TestResolveLatestRun_FindsRun(t *testing.T) {
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"query GetRun(": testdataPath("get_run_success_response.json"),
+		"query GetAnalysisRuns(": testdataPath("get_analysis_runs_success_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -112,7 +120,7 @@ func TestResolveLatestRun_FindsRun(t *testing.T) {
 		context.Background(),
 		client,
 		func() (string, error) { return "main", nil },
-		func(_ string) ([]string, error) { return []string{sha}, nil },
+		testRemote,
 	)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -131,7 +139,7 @@ func TestResolveLatestRun_FindsRun(t *testing.T) {
 // TestResolveLatestRun_NoRuns verifies the "no analysis runs found" error path.
 func TestResolveLatestRun_NoRuns(t *testing.T) {
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"query GetRun(": testdataPath("get_run_null_response.json"),
+		"query GetAnalysisRuns(": testdataPath("get_analysis_runs_empty_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -139,12 +147,7 @@ func TestResolveLatestRun_NoRuns(t *testing.T) {
 		context.Background(),
 		client,
 		func() (string, error) { return "feature/no-runs", nil },
-		func(_ string) ([]string, error) {
-			return []string{
-				"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-				"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-			}, nil
-		},
+		testRemote,
 	)
 	if err == nil {
 		t.Fatal("expected error, got nil")
@@ -163,7 +166,7 @@ func TestResolveLatestRun_BranchError(t *testing.T) {
 		context.Background(),
 		client,
 		func() (string, error) { return "", errors.New("no git repo") },
-		func(_ string) ([]string, error) { return []string{"abc"}, nil },
+		testRemote,
 	)
 	if err == nil {
 		t.Fatal("expected error, got nil")
@@ -173,10 +176,75 @@ func TestResolveLatestRun_BranchError(t *testing.T) {
 	}
 }
 
+// TestResolvePRForBranch_Found verifies an open PR is returned when the API finds one.
+func TestResolvePRForBranch_Found(t *testing.T) {
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"pullRequests(": testdataPath("get_pr_by_branch_found_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	prNumber, found := ResolvePRForBranch(context.Background(), client, "feature/new-auth", testRemote)
+	if !found {
+		t.Fatal("expected found=true, got false")
+	}
+	if prNumber != 42 {
+		t.Errorf("expected prNumber=42, got %d", prNumber)
+	}
+}
+
+// TestResolvePRForBranch_NotFound verifies no PR is returned when the API returns empty edges.
+func TestResolvePRForBranch_NotFound(t *testing.T) {
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"pullRequests(": testdataPath("get_pr_by_branch_empty_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	prNumber, found := ResolvePRForBranch(context.Background(), client, "feature/no-pr", testRemote)
+	if found {
+		t.Fatal("expected found=false, got true")
+	}
+	if prNumber != 0 {
+		t.Errorf("expected prNumber=0, got %d", prNumber)
+	}
+}
+
+// TestResolvePRForBranch_ClosedPR verifies a closed PR is treated as not found.
+func TestResolvePRForBranch_ClosedPR(t *testing.T) {
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"pullRequests(": testdataPath("get_pr_by_branch_closed_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	prNumber, found := ResolvePRForBranch(context.Background(), client, "feature/closed-pr", testRemote)
+	if found {
+		t.Fatal("expected found=false for CLOSED PR, got true")
+	}
+	if prNumber != 0 {
+		t.Errorf("expected prNumber=0, got %d", prNumber)
+	}
+}
+
+// TestResolvePRForBranch_Error verifies that errors are swallowed and return found=false.
+func TestResolvePRForBranch_Error(t *testing.T) {
+	mock := graphqlclient.NewMockClient()
+	mock.QueryFunc = func(_ context.Context, _ string, _ map[string]any, _ any) error {
+		return errors.New("network error")
+	}
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	prNumber, found := ResolvePRForBranch(context.Background(), client, "feature/error-branch", testRemote)
+	if found {
+		t.Fatal("expected found=false on error, got true")
+	}
+	if prNumber != 0 {
+		t.Errorf("expected prNumber=0, got %d", prNumber)
+	}
+}
+
 // TestResolveLatestRunForBranch_Success verifies the public wrapper returns a run.
 func TestResolveLatestRunForBranch_Success(t *testing.T) {
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"query GetRun(": testdataPath("get_run_success_response.json"),
+		"query GetAnalysisRuns(": testdataPath("get_analysis_runs_success_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -186,7 +254,7 @@ func TestResolveLatestRunForBranch_Success(t *testing.T) {
 		context.Background(),
 		client,
 		"main",
-		func(_ string) ([]string, error) { return []string{sha}, nil },
+		testRemote,
 	)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)

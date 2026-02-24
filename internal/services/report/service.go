@@ -16,6 +16,7 @@ import (
 	"time"
 
 	"github.com/klauspost/compress/zstd"
+	"github.com/deepsourcelabs/cli/internal/debug"
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	"github.com/deepsourcelabs/cli/internal/interfaces"
 	"github.com/deepsourcelabs/cli/internal/oidc"
@@ -282,6 +283,8 @@ func (s *Service) compressIfSupported(ctx context.Context, dsn *DSN, artifactVal
 
 func (s *Service) makeQuery(ctx context.Context, dsn *DSN, body []byte, skipVerify bool) ([]byte, error) {
 	url := dsn.Protocol + "://" + dsn.Host + "/graphql/cli/"
+	debug.Log("report: POST %s", url)
+	start := time.Now()
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, bytes.NewBuffer(body))
 	if err != nil {
@@ -303,6 +306,7 @@ func (s *Service) makeQuery(ctx context.Context, dsn *DSN, body []byte, skipVeri
 
 	res, err := client.Do(req)
 	if err != nil {
+		debug.Log("report: POST failed in %dms: %v", time.Since(start).Milliseconds(), err)
 		return resBody, err
 	}
 	defer res.Body.Close()
@@ -311,6 +315,8 @@ func (s *Service) makeQuery(ctx context.Context, dsn *DSN, body []byte, skipVeri
 	if err != nil {
 		return resBody, err
 	}
+
+	debug.Log("report: POST %d in %dms (%d bytes)", res.StatusCode, time.Since(start).Milliseconds(), len(resBody))
 
 	if res.StatusCode >= http.StatusInternalServerError || res.StatusCode != 200 {
 		if resBody != nil {

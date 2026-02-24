@@ -1,0 +1,38 @@
+{
+  "repository": {
+    "analysisRuns": {
+      "edges": [
+        {
+          "node": {
+            "runUid": "run-uid-100",
+            "commitOid": "abc123f0000000000000000000000000deadbeef",
+            "branchName": "main",
+            "status": "SUCCESS",
+            "createdAt": "2025-01-20T12:00:00Z",
+            "finishedAt": "2025-01-20T12:15:00Z",
+            "updatedAt": "2025-01-20T12:15:00Z",
+            "summary": {
+              "occurrencesIntroduced": 2,
+              "occurrencesResolved": 1,
+              "occurrencesSuppressed": 0
+            },
+            "reportCard": {
+              "status": "READY",
+              "security": { "grade": "A+", "score": 98, "issuesCount": 1 },
+              "reliability": { "grade": "A", "score": 95, "issuesCount": 2 },
+              "complexity": { "grade": "B+", "score": 85, "issuesCount": 5 },
+              "hygiene": { "grade": "A", "score": 92, "issuesCount": 3 },
+              "coverage": { "grade": "B", "score": 80, "lineCoverage": 78.5, "branchCoverage": 65.2 },
+              "aggregate": { "grade": "A", "score": 92 },
+              "focusArea": { "dimension": "COMPLEXITY", "action": "Reduce cyclomatic complexity" }
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": null
+      }
+    }
+  }
+}

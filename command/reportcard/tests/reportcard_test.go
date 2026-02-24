@@ -54,7 +54,8 @@ func TestReportCardCommitScope(t *testing.T) {
 func TestReportCardNoRuns(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"GetRun": goldenPath("get_run_null_response.json"),
+		"pullRequests(":         goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_empty_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -65,9 +66,6 @@ func TestReportCardNoRuns(t *testing.T) {
 		Stdout:    &buf,
 		BranchNameFunc: func() (string, error) {
 			return "feature/no-runs", nil
-		},
-		CommitLogFunc: func(_ string) ([]string, error) {
-			return []string{"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}, nil
 		},
 	}
 
@@ -86,10 +84,48 @@ func TestReportCardNoRuns(t *testing.T) {
 	}
 }
 
+func TestReportCardAutoDetectPR(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"pullRequests(":         goldenPath("get_pr_by_branch_found_response.json"),
+		"pullRequest(number:":   goldenPath("get_pr_branch_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "feature/new-auth", nil
+		},
+	}
+
+	cmd := reportcardCmd.NewCmdReportCardWithDeps(deps)
+	cmd.SetArgs([]string{
+		"--repo", "gh/testowner/testrepo",
+		"--output", "json",
+	})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	expected := string(testutil.LoadGoldenFile(t, goldenPath("report_card_output.json")))
+	got := buf.String()
+
+	if strings.TrimSpace(got) != strings.TrimSpace(expected) {
+		t.Errorf("output mismatch.\nExpected:\n%s\nGot:\n%s", expected, got)
+	}
+}
+
 func TestReportCardAutoDetect(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"GetRun": goldenPath("get_run_response.json"),
+		"pullRequests(":         goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -100,9 +136,6 @@ func TestReportCardAutoDetect(t *testing.T) {
 		Stdout:    &buf,
 		BranchNameFunc: func() (string, error) {
 			return "main", nil
-		},
-		CommitLogFunc: func(_ string) ([]string, error) {
-			return []string{"abc123f0000000000000000000000000deadbeef"}, nil
 		},
 	}
 

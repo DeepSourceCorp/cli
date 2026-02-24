@@ -21,8 +21,9 @@ func goldenPath(name string) string {
 func TestIssuesAutoDetectBranch(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"query GetRun(": goldenPath("get_run_response.json"),
-		"checks {":      goldenPath("commit_scope_response.json"),
+		"pullRequests(":         goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_response.json"),
+		"checks {":              goldenPath("commit_scope_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -33,9 +34,6 @@ func TestIssuesAutoDetectBranch(t *testing.T) {
 		Stdout:    &buf,
 		BranchNameFunc: func() (string, error) {
 			return "main", nil
-		},
-		CommitLogFunc: func(_ string) ([]string, error) {
-			return []string{"deadbeef1234567890"}, nil
 		},
 	}
 
@@ -54,10 +52,44 @@ func TestIssuesAutoDetectBranch(t *testing.T) {
 	}
 }
 
+func TestIssuesAutoDetectPR(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"pullRequests(":                   goldenPath("get_pr_by_branch_found_response.json"),
+		"issueOccurrences(first: $limit)": goldenPath("pr_scope_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "feature/new-auth", nil
+		},
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--output", "json"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	expected := string(testutil.LoadGoldenFile(t, goldenPath("pr_scope_output.json")))
+	got := buf.String()
+
+	if strings.TrimSpace(got) != strings.TrimSpace(expected) {
+		t.Errorf("output mismatch.\nExpected:\n%s\nGot:\n%s", expected, got)
+	}
+}
+
 func TestIssuesNoRunsForBranch(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"query GetRun(": goldenPath("get_run_null_response.json"),
+		"pullRequests(":         goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_empty_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -68,9 +100,6 @@ func TestIssuesNoRunsForBranch(t *testing.T) {
 		Stdout:    &buf,
 		BranchNameFunc: func() (string, error) {
 			return "feature-no-runs", nil
-		},
-		CommitLogFunc: func(_ string) ([]string, error) {
-			return []string{"aaaaaa1234567890"}, nil
 		},
 	}
 
@@ -385,7 +414,8 @@ func TestIssuesMultipleFilters(t *testing.T) {
 func TestIssuesRunInProgress(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"query GetRun(": goldenPath("run_pending_response.json"),
+		"pullRequests(":         goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_pending_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -396,9 +426,6 @@ func TestIssuesRunInProgress(t *testing.T) {
 		Stdout:    &buf,
 		BranchNameFunc: func() (string, error) {
 			return "feature/new-auth", nil
-		},
-		CommitLogFunc: func(_ string) ([]string, error) {
-			return []string{"7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d"}, nil
 		},
 	}
 
@@ -417,7 +444,8 @@ func TestIssuesRunInProgress(t *testing.T) {
 func TestIssuesRunTimeout(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"query GetRun(": goldenPath("run_timeout_response.json"),
+		"pullRequests(":         goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_timeout_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -428,9 +456,6 @@ func TestIssuesRunTimeout(t *testing.T) {
 		Stdout:    &buf,
 		BranchNameFunc: func() (string, error) {
 			return "feature/new-auth", nil
-		},
-		CommitLogFunc: func(_ string) ([]string, error) {
-			return []string{"9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f"}, nil
 		},
 	}
 
@@ -497,3 +522,4 @@ func TestIssuesEmptyResults(t *testing.T) {
 		t.Errorf("expected empty array '[]', got: %s", got)
 	}
 }
+

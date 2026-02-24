@@ -153,9 +153,9 @@ func (opts *ReportCardOptions) Run(ctx context.Context) error {
 	case opts.PRNumber > 0:
 		err = opts.resolveByPR(ctx, client, remote)
 	case opts.DefaultBranch:
-		err = opts.resolveByDefaultBranch(ctx, client)
+		err = opts.resolveByDefaultBranch(ctx, client, remote)
 	default:
-		err = opts.resolveByCurrentBranch(ctx, client)
+		err = opts.resolveByCurrentBranch(ctx, client, remote)
 	}
 	if err != nil {
 		return err
@@ -195,12 +195,7 @@ func (opts *ReportCardOptions) resolveByPR(ctx context.Context, client *deepsour
 		return err
 	}
 
-	var commitLogFunc func(string) ([]string, error)
-	if opts.deps != nil {
-		commitLogFunc = opts.deps.CommitLogFunc
-	}
-
-	run, err := cmdutil.ResolveLatestRunForBranch(ctx, client, branch, commitLogFunc)
+	run, err := cmdutil.ResolveLatestRunForBranch(ctx, client, branch, remote)
 	if err != nil {
 		return fmt.Errorf("no analysis run found for PR #%d (branch %q): %w", opts.PRNumber, branch, err)
 	}
@@ -220,18 +215,13 @@ func (opts *ReportCardOptions) resolveByPR(ctx context.Context, client *deepsour
 	return nil
 }
 
-func (opts *ReportCardOptions) resolveByDefaultBranch(ctx context.Context, client *deepsource.Client) error {
+func (opts *ReportCardOptions) resolveByDefaultBranch(ctx context.Context, client *deepsource.Client, remote *vcs.RemoteData) error {
 	defaultBranch := cmdutil.GetDefaultBranch()
 	if defaultBranch == "" {
 		return fmt.Errorf("could not detect default branch; try --commit instead")
 	}
 
-	var commitLogFunc func(string) ([]string, error)
-	if opts.deps != nil {
-		commitLogFunc = opts.deps.CommitLogFunc
-	}
-
-	run, err := cmdutil.ResolveLatestRunForBranch(ctx, client, defaultBranch, commitLogFunc)
+	run, err := cmdutil.ResolveLatestRunForBranch(ctx, client, defaultBranch, remote)
 	if err != nil {
 		return err
 	}
@@ -251,12 +241,10 @@ func (opts *ReportCardOptions) resolveByDefaultBranch(ctx context.Context, clien
 	return nil
 }
 
-func (opts *ReportCardOptions) resolveByCurrentBranch(ctx context.Context, client *deepsource.Client) error {
+func (opts *ReportCardOptions) resolveByCurrentBranch(ctx context.Context, client *deepsource.Client, remote *vcs.RemoteData) error {
 	var branchNameFunc func() (string, error)
-	var commitLogFunc func(string) ([]string, error)
 	if opts.deps != nil {
 		branchNameFunc = opts.deps.BranchNameFunc
-		commitLogFunc = opts.deps.CommitLogFunc
 	}
 
 	branchName, err := cmdutil.ResolveBranchName(branchNameFunc)
@@ -264,7 +252,13 @@ func (opts *ReportCardOptions) resolveByCurrentBranch(ctx context.Context, clien
 		return err
 	}
 
-	run, err := cmdutil.ResolveLatestRunForBranch(ctx, client, branchName, commitLogFunc)
+	// Try to auto-detect an open PR for this branch
+	if prNumber, found := cmdutil.ResolvePRForBranch(ctx, client, branchName, remote); found {
+		opts.PRNumber = prNumber
+		return opts.resolveByPR(ctx, client, remote)
+	}
+
+	run, err := cmdutil.ResolveLatestRunForBranch(ctx, client, branchName, remote)
 	if err != nil {
 		return err
 	}

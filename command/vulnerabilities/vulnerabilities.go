@@ -175,12 +175,22 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 		opts.repoVulns, err = client.GetRepoVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
 	default:
 		var branchNameFunc func() (string, error)
-		var commitLogFunc func(string) ([]string, error)
 		if opts.deps != nil {
 			branchNameFunc = opts.deps.BranchNameFunc
-			commitLogFunc = opts.deps.CommitLogFunc
 		}
-		commitOid, branchName, runStatus, resolveErr := cmdutil.ResolveLatestRun(ctx, client, branchNameFunc, commitLogFunc)
+		branchName, branchErr := cmdutil.ResolveBranchName(branchNameFunc)
+		if branchErr != nil {
+			return branchErr
+		}
+
+		// Try to auto-detect an open PR for this branch
+		if prNumber, found := cmdutil.ResolvePRForBranch(ctx, client, branchName, remote); found {
+			opts.PRNumber = prNumber
+			opts.prVulns, err = client.GetPRVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, prNumber, opts.LimitArg)
+			break
+		}
+
+		commitOid, _, runStatus, resolveErr := cmdutil.ResolveLatestRun(ctx, client, branchNameFunc, remote)
 		if resolveErr != nil {
 			if branchName != "" && branchName == cmdutil.GetDefaultBranch() {
 				opts.repoVulns, err = client.GetRepoVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)

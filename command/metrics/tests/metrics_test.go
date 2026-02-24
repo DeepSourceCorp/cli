@@ -47,11 +47,45 @@ func TestMetricsDefaultBranchFlag(t *testing.T) {
 	}
 }
 
+func TestMetricsAutoDetectPR(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"pullRequests(":  goldenPath("get_pr_by_branch_found_response.json"),
+		"GetPRMetrics":   goldenPath("pr_metrics_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "feature/vcs-resolver-tests", nil
+		},
+	}
+
+	cmd := metricsCmd.NewCmdMetricsWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--output", "json"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	expected := string(testutil.LoadGoldenFile(t, goldenPath("pr_metrics_output.json")))
+	got := buf.String()
+
+	if strings.TrimSpace(got) != strings.TrimSpace(expected) {
+		t.Errorf("output mismatch.\nExpected:\n%s\nGot:\n%s", expected, got)
+	}
+}
+
 func TestMetricsAutoDetectBranch(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"query GetRun(":    goldenPath("get_run_response.json"),
-		"changesetStats {": goldenPath("run_metrics_response.json"),
+		"pullRequests(":         goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_response.json"),
+		"changesetStats {":      goldenPath("run_metrics_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -62,9 +96,6 @@ func TestMetricsAutoDetectBranch(t *testing.T) {
 		Stdout:    &buf,
 		BranchNameFunc: func() (string, error) {
 			return "main", nil
-		},
-		CommitLogFunc: func(_ string) ([]string, error) {
-			return []string{"deadbeef1234567890"}, nil
 		},
 	}
 
@@ -86,7 +117,8 @@ func TestMetricsAutoDetectBranch(t *testing.T) {
 func TestMetricsNoRunsForBranch(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"query GetRun(": goldenPath("get_run_null_response.json"),
+		"pullRequests(":         goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_empty_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -97,9 +129,6 @@ func TestMetricsNoRunsForBranch(t *testing.T) {
 		Stdout:    &buf,
 		BranchNameFunc: func() (string, error) {
 			return "feature-no-runs", nil
-		},
-		CommitLogFunc: func(_ string) ([]string, error) {
-			return []string{"aaaaaa1234567890"}, nil
 		},
 	}
 
