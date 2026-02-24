@@ -9,16 +9,18 @@ import (
 
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/runs"
+	"github.com/deepsourcelabs/cli/internal/debug"
+	"github.com/deepsourcelabs/cli/internal/vcs"
 )
 
 // ResolveLatestRun finds the latest analysis run for the current git branch.
-// It walks recent commits from git history and looks up each via the run(commitOid) API.
+// It fetches recent runs via the GetAnalysisRuns bulk API and filters by branch name.
 // Returns the commitOid, branch name, and run status of the latest run.
 func ResolveLatestRun(
 	ctx context.Context,
 	client *deepsource.Client,
 	branchNameFunc func() (string, error),
-	commitLogFunc func(branch string) ([]string, error),
+	remote *vcs.RemoteData,
 ) (commitOid string, branchName string, runStatus string, err error) {
 	if branchNameFunc != nil {
 		branchName, err = branchNameFunc()
@@ -29,64 +31,46 @@ func ResolveLatestRun(
 		return "", "", "", fmt.Errorf("failed to detect current branch: %w", err)
 	}
 
-	run, err := resolveRunFromCommits(ctx, client, branchName, commitLogFunc)
+	run, err := resolveRunFromCommits(ctx, client, branchName, remote)
 	if err != nil {
 		return "", branchName, "", err
 	}
 	return run.CommitOid, branchName, run.Status, nil
 }
 
-// ResolveLatestRunForBranch finds the latest successful analysis run for a given branch name.
-// It walks recent commits on the branch and looks up each via the run(commitOid) API.
+// ResolveLatestRunForBranch finds the latest analysis run for a given branch name.
+// It fetches recent runs via the GetAnalysisRuns bulk API and filters by branch name.
 // Returns the full AnalysisRun (which includes the ReportCard).
 func ResolveLatestRunForBranch(
 	ctx context.Context,
 	client *deepsource.Client,
 	branchName string,
-	commitLogFunc func(branch string) ([]string, error),
+	remote *vcs.RemoteData,
 ) (*runs.AnalysisRun, error) {
-	return resolveRunFromCommits(ctx, client, branchName, commitLogFunc)
+	return resolveRunFromCommits(ctx, client, branchName, remote)
 }
 
-// resolveRunFromCommits walks recent commits on a branch and returns the first
-// analysis run found via the run(commitOid) API.
+// resolveRunFromCommits fetches the latest analysis run for a given branch using
+// server-side filtering. Returns the most recent run for the branch.
 func resolveRunFromCommits(
 	ctx context.Context,
 	client *deepsource.Client,
 	branchName string,
-	commitLogFunc func(branch string) ([]string, error),
+	remote *vcs.RemoteData,
 ) (*runs.AnalysisRun, error) {
-	var commits []string
-	var err error
-	if commitLogFunc != nil {
-		commits, err = commitLogFunc(branchName)
-	} else {
-		commits, err = getCommitLog(branchName)
-	}
+	debug.Log("resolve: fetching analysis runs for branch %q", branchName)
+	allRuns, _, err := client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, 1, nil, &branchName)
 	if err != nil {
-		return nil, fmt.Errorf("failed to get commit history for branch %q: %w", branchName, err)
+		return nil, fmt.Errorf("failed to fetch analysis runs: %w", err)
 	}
-
-	var lastErr error
-	for _, sha := range commits {
-		run, err := client.GetRunByCommit(ctx, sha)
-		if err != nil {
-			lastErr = err
-			continue
-		}
-		if run != nil && run.BranchName == branchName {
-			return run, nil
-		}
+	if len(allRuns) == 0 {
+		return nil, fmt.Errorf(
+			"no analysis runs found for branch %q.\nTry: --default-branch, --commit <sha>, or push and analyze this branch first",
+			branchName,
+		)
 	}
-
-	if lastErr != nil {
-		return nil, fmt.Errorf("failed to fetch analysis run: %w", lastErr)
-	}
-
-	return nil, fmt.Errorf(
-		"no analysis runs found for branch %q.\nTry: --default-branch, --commit <sha>, or push and analyze this branch first",
-		branchName,
-	)
+	debug.Log("resolve: found run %s (status=%s) at commit %.7s", allRuns[0].RunUid, allRuns[0].Status, allRuns[0].CommitOid)
+	return &allRuns[0], nil
 }
 
 // IsRunInProgress returns true if the run status indicates analysis hasn't completed.
@@ -135,28 +119,27 @@ func getCurrentBranch() (string, error) {
 	if err := cmd.Run(); err != nil {
 		return "", err
 	}
-	return strings.TrimSuffix(stdout.String(), "\n"), nil
+	branch := strings.TrimSuffix(stdout.String(), "\n")
+	debug.Log("git: current branch = %q", branch)
+	return branch, nil
 }
 
-// GetCommitLog returns recent commit SHAs for a branch using git log.
-func GetCommitLog(branch string) ([]string, error) {
-	return getCommitLog(branch)
-}
-
-// getCommitLog returns recent commit SHAs for a branch using git log.
-func getCommitLog(branch string) ([]string, error) {
-	cmd := exec.Command("git", "--no-pager", "log", branch, "--format=%H", "-n", "50")
-	var stdout, stderr bytes.Buffer
-	cmd.Stdout = &stdout
-	cmd.Stderr = &stderr
-	if err := cmd.Run(); err != nil {
-		return nil, fmt.Errorf("%s: %s", err, strings.TrimSpace(stderr.String()))
+// ResolvePRForBranch checks whether the given branch has an open pull request.
+// Returns the PR number if found, or found=false otherwise.
+// Errors are swallowed (best-effort) — callers fall back to run-based resolution.
+func ResolvePRForBranch(ctx context.Context, client *deepsource.Client, branchName string, remote *vcs.RemoteData) (prNumber int, found bool) {
+	debug.Log("resolve: checking for open PR on branch %q", branchName)
+	prNumber, found, err := client.GetPRForBranch(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, branchName)
+	if err != nil {
+		debug.Log("resolve: PR lookup failed: %v", err)
+		return 0, false
 	}
-	lines := strings.TrimSpace(stdout.String())
-	if lines == "" {
-		return nil, nil
+	if found {
+		debug.Log("resolve: found open PR #%d for branch %q", prNumber, branchName)
+	} else {
+		debug.Log("resolve: no open PR for branch %q", branchName)
 	}
-	return strings.Split(lines, "\n"), nil
+	return prNumber, found
 }
 
 // GetDefaultBranch returns the default branch name of the origin remote

@@ -6,6 +6,8 @@ import (
 	"os/exec"
 	"regexp"
 	"strings"
+
+	"github.com/deepsourcelabs/cli/internal/debug"
 )
 
 func getRemoteMap(remoteList []string) (map[string][]string, error) {
@@ -134,11 +136,14 @@ func ListRemotes() (map[string][]string, error) {
 }
 
 func runCmd(command string, args []string) (string, error) {
+	debug.Log("git: exec %s %s", command, strings.Join(args, " "))
 	output, err := exec.Command(command, args...).Output()
 	if err != nil {
+		debug.Log("git: exec failed: %v", err)
 		return "", err
 	}
 
-	// Removing trailing null characters
-	return strings.TrimRight(string(output), "\000"), nil
+	result := strings.TrimRight(string(output), "\000")
+	debug.Log("git: exec ok (%d bytes)", len(result))
+	return result, nil
 }

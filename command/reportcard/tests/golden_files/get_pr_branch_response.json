@@ -1,0 +1,7 @@
+{
+  "repository": {
+    "pullRequest": {
+      "branch": "feature/new-auth"
+    }
+  }
+}

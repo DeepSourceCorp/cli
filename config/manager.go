@@ -7,6 +7,7 @@ import (
 
 	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/internal/adapters"
+	"github.com/deepsourcelabs/cli/internal/debug"
 	"github.com/deepsourcelabs/cli/internal/interfaces"
 	"github.com/deepsourcelabs/cli/internal/secrets"
 	"github.com/pelletier/go-toml"
@@ -64,6 +65,7 @@ func (m *Manager) Load() (*CLIConfig, error) {
 	if err != nil {
 		return cfg, err
 	}
+	debug.Log("config: loading from %s", tomlPath)
 
 	if exists, err := m.exists(tomlPath); err != nil {
 		return cfg, err
@@ -78,11 +80,14 @@ func (m *Manager) Load() (*CLIConfig, error) {
 		}
 	}
 
+	tokenFromKeychain := false
 	if cfg.Token == "" {
 		if token, err := m.secrets.Get(m.secretsKey); err == nil {
 			cfg.Token = token
+			tokenFromKeychain = true
 		}
 	}
+	debug.Log("config: host=%q user=%q token_present=%v keychain=%v", cfg.Host, cfg.User, cfg.Token != "", tokenFromKeychain)
 
 	return cfg, nil
 }

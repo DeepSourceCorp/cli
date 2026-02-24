@@ -179,12 +179,22 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 		opts.repoMetrics, err = client.GetRepoMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 	default:
 		var branchNameFunc func() (string, error)
-		var commitLogFunc func(string) ([]string, error)
 		if opts.deps != nil {
 			branchNameFunc = opts.deps.BranchNameFunc
-			commitLogFunc = opts.deps.CommitLogFunc
 		}
-		commitOid, branchName, runStatus, resolveErr := cmdutil.ResolveLatestRun(ctx, client, branchNameFunc, commitLogFunc)
+		branchName, branchErr := cmdutil.ResolveBranchName(branchNameFunc)
+		if branchErr != nil {
+			return branchErr
+		}
+
+		// Try to auto-detect an open PR for this branch
+		if prNumber, found := cmdutil.ResolvePRForBranch(ctx, client, branchName, remote); found {
+			opts.PRNumber = prNumber
+			opts.prMetrics, err = client.GetPRMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, prNumber)
+			break
+		}
+
+		commitOid, _, runStatus, resolveErr := cmdutil.ResolveLatestRun(ctx, client, branchNameFunc, remote)
 		if resolveErr != nil {
 			if branchName != "" && branchName == cmdutil.GetDefaultBranch() {
 				opts.repoMetrics, err = client.GetRepoMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)

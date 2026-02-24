@@ -1,0 +1,14 @@
+{
+  "repository": {
+    "pullRequests": {
+      "edges": [
+        {
+          "node": {
+            "number": 42,
+            "state": "OPEN"
+          }
+        }
+      ]
+    }
+  }
+}

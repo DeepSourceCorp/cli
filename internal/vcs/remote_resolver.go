@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/deepsourcelabs/cli/internal/cli/prompt"
+	"github.com/deepsourcelabs/cli/internal/debug"
 )
 
 type RemoteData struct {
@@ -18,6 +19,7 @@ func ResolveRemote(repoArg string) (*RemoteData, error) {
 
 	// If the user supplied a --repo flag with the repo URL
 	if repoArg != "" {
+		debug.Log("remote: using --repo flag %q", repoArg)
 		repoData, err := RepoArgumentResolver(repoArg)
 		if err != nil {
 			return nil, err
@@ -25,11 +27,13 @@ func ResolveRemote(repoArg string) (*RemoteData, error) {
 		remote.VCSProvider = repoData[0]
 		remote.Owner = repoData[1]
 		remote.RepoName = repoData[2]
+		debug.Log("remote: resolved to %s/%s (provider=%s)", remote.Owner, remote.RepoName, remote.VCSProvider)
 		return &remote, nil
 	}
 
 	// If the user didn't pass --repo flag
 	// Figure out list of remotes by reading git config
+	debug.Log("remote: auto-detecting from git remotes")
 	remotesData, err := ListRemotes()
 	if err != nil {
 		if strings.Contains(err.Error(), "exit status 128") {
@@ -50,6 +54,7 @@ func ResolveRemote(repoArg string) (*RemoteData, error) {
 			remote.RepoName = value[1]
 			remote.VCSProvider = value[2]
 		}
+		debug.Log("remote: resolved to %s/%s (provider=%s)", remote.Owner, remote.RepoName, remote.VCSProvider)
 		return &remote, nil
 	}
 

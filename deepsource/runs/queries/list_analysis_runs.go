@@ -16,9 +16,10 @@ const fetchAnalysisRunsQuery = `query GetAnalysisRuns(
   $provider: VCSProvider!
   $limit: Int!
   $after: String
+  $branch: String
 ) {
   repository(name: $name, login: $owner, vcsProvider: $provider) {
-    analysisRuns(first: $limit, after: $after) {
+    analysisRuns(first: $limit, after: $after, branch: $branch) {
       edges {
         node {
           runUid
@@ -54,11 +55,12 @@ const fetchAnalysisRunsQuery = `query GetAnalysisRuns(
 }`
 
 type AnalysisRunsListParams struct {
-	Owner    string
-	RepoName string
-	Provider string
-	Limit    int
-	After    *string
+	Owner      string
+	RepoName   string
+	Provider   string
+	Limit      int
+	After      *string
+	BranchName *string
 }
 
 type AnalysisRunsListRequest struct {
@@ -145,6 +147,9 @@ func (r *AnalysisRunsListRequest) Do(ctx context.Context) ([]runs.AnalysisRun, P
 	}
 	if r.Params.After != nil {
 		vars["after"] = *r.Params.After
+	}
+	if r.Params.BranchName != nil {
+		vars["branch"] = *r.Params.BranchName
 	}
 	var respData AnalysisRunsListResponse
 	if err := r.client.Query(ctx, fetchAnalysisRunsQuery, vars, &respData); err != nil {

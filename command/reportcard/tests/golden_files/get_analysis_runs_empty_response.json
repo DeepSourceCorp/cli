@@ -1,0 +1,11 @@
+{
+  "repository": {
+    "analysisRuns": {
+      "edges": [],
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": null
+      }
+    }
+  }
+}

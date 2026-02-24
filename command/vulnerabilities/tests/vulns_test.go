@@ -47,11 +47,45 @@ func TestVulnsDefaultBranchFlag(t *testing.T) {
 	}
 }
 
+func TestVulnsAutoDetectPR(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"pullRequests(":                           goldenPath("get_pr_by_branch_found_response.json"),
+		"vulnerabilityOccurrences(first: $limit)": goldenPath("pr_vulns_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "fix/upgrade-x-net", nil
+		},
+	}
+
+	cmd := vulnsCmd.NewCmdVulnerabilitiesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--output", "json"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	expected := string(testutil.LoadGoldenFile(t, goldenPath("pr_vulns_output.json")))
+	got := buf.String()
+
+	if strings.TrimSpace(got) != strings.TrimSpace(expected) {
+		t.Errorf("output mismatch.\nExpected:\n%s\nGot:\n%s", expected, got)
+	}
+}
+
 func TestVulnsAutoDetectBranch(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"query GetRun(": goldenPath("get_run_response.json"),
-		"scaChecks {":   goldenPath("run_vulns_response.json"),
+		"pullRequests(":         goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_response.json"),
+		"scaChecks {":            goldenPath("run_vulns_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -62,9 +96,6 @@ func TestVulnsAutoDetectBranch(t *testing.T) {
 		Stdout:    &buf,
 		BranchNameFunc: func() (string, error) {
 			return "main", nil
-		},
-		CommitLogFunc: func(_ string) ([]string, error) {
-			return []string{"deadbeef1234567890"}, nil
 		},
 	}
 
@@ -86,7 +117,8 @@ func TestVulnsAutoDetectBranch(t *testing.T) {
 func TestVulnsNoRunsForBranch(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"query GetRun(": goldenPath("get_run_null_response.json"),
+		"pullRequests(":         goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_empty_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -97,9 +129,6 @@ func TestVulnsNoRunsForBranch(t *testing.T) {
 		Stdout:    &buf,
 		BranchNameFunc: func() (string, error) {
 			return "feature-no-runs", nil
-		},
-		CommitLogFunc: func(_ string) ([]string, error) {
-			return []string{"aaaaaa1234567890"}, nil
 		},
 	}
 
