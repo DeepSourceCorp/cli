@@ -4,13 +4,14 @@ package deepsource
 import (
 	"context"
 	"fmt"
+	"net/http"
 
 	"github.com/deepsourcelabs/cli/deepsource/analyzers"
+	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/internal/debug"
 	analyzerQuery "github.com/deepsourcelabs/cli/deepsource/analyzers/queries"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
 	authmut "github.com/deepsourcelabs/cli/deepsource/auth/mutations"
-	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 	issuesQuery "github.com/deepsourcelabs/cli/deepsource/issues/queries"
 	"github.com/deepsourcelabs/cli/deepsource/metrics"
@@ -65,7 +66,10 @@ func NewWithGraphQLClient(gql graphqlclient.GraphQLClient) *Client {
 // Returns a new GQLClient
 func New(cp ClientOpts) (*Client, error) {
 	apiClientURL := getAPIClientURL(cp.HostName)
-	gql := graphql.NewClient(apiClientURL)
+	httpClient := &http.Client{
+		Transport: &graphqlclient.StatusCheckTransport{Base: http.DefaultTransport},
+	}
+	gql := graphql.NewClient(apiClientURL, graphql.WithHTTPClient(httpClient))
 
 	debug.Log("client: API endpoint %s", apiClientURL)
 
@@ -90,8 +94,21 @@ func New(cp ClientOpts) (*Client, error) {
 	return c, nil
 }
 
-// // Formats and returns the DeepSource Public API client URL
+// normalizeHostName maps known aliases for the DeepSource cloud host back to
+// the canonical "deepsource.com". Users may have legacy or alternate hostnames
+// in their config (e.g. "deepsource.io" or "app.deepsource.com").
+func normalizeHostName(hostName string) string {
+	switch hostName {
+	case "deepsource.io", "app.deepsource.com":
+		return defaultHostName
+	default:
+		return hostName
+	}
+}
+
+// Formats and returns the DeepSource Public API client URL
 func getAPIClientURL(hostName string) string {
+	hostName = normalizeHostName(hostName)
 	apiClientURL := fmt.Sprintf("https://api.%s/graphql/", defaultHostName)
 
 	// Check if the domain is different from the default domain (In case of Enterprise users)
