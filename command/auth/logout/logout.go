@@ -1,7 +1,6 @@
 package logout
 
 import (
-	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -66,7 +65,7 @@ func (opts *LogoutOptions) Run() error {
 	}
 	// Checking if the user has authenticated / logged in or not
 	if cfg.Token == "" {
-		return errors.New("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
+		return clierrors.ErrNotLoggedIn()
 	}
 
 	// Confirm from the user if they want to logout

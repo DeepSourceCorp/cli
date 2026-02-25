@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/deepsourcelabs/cli/internal/debug"
+	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	"github.com/deepsourcelabs/graphql"
 )
 
@@ -125,7 +126,7 @@ func (w *wrapper) run(ctx context.Context, query string, vars map[string]interfa
 		newToken, refreshErr := w.refresher(ctx, w.token)
 		if refreshErr != nil {
 			debug.Log("graphql: token refresh failed: %v", refreshErr)
-			return fmt.Errorf("Token expired and refresh failed, run \"deepsource auth login\" to re-authenticate: %w", refreshErr)
+			return clierrors.ErrTokenExpired(refreshErr)
 		}
 		debug.Log("graphql: token refreshed, retrying request")
 		w.token = newToken

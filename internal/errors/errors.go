@@ -3,6 +3,8 @@ package errors
 import (
 	stderrors "errors"
 	"fmt"
+
+	"github.com/deepsourcelabs/cli/buildinfo"
 )
 
 // ErrorCode represents a CLI error category.
@@ -83,6 +85,43 @@ func IsUserError(err error) bool {
 		return ce.Code.IsUserErrorCode()
 	}
 	return false
+}
+
+// IsAuthError returns true for auth-related error codes.
+func (c ErrorCode) IsAuthError() bool {
+	return c == ErrAuthRequired || c == ErrAuthExpired
+}
+
+// ErrNotLoggedIn returns a CLIError for unauthenticated users.
+func ErrNotLoggedIn() *CLIError {
+	return NewCLIError(ErrAuthRequired,
+		fmt.Sprintf("Not logged in. Run %q to authenticate", buildinfo.AppName+" auth login"),
+		nil)
+}
+
+// ErrTokenExpired returns a CLIError for expired authentication.
+func ErrTokenExpired(cause error) *CLIError {
+	return NewCLIError(ErrAuthExpired,
+		fmt.Sprintf("Authentication expired. Run %q to re-authenticate", buildinfo.AppName+" auth login"),
+		cause)
+}
+
+// ErrAuthTimeout returns a CLIError for authentication timeouts.
+func ErrAuthTimeout() *CLIError {
+	return NewCLIError(ErrAuthRequired,
+		fmt.Sprintf("Authentication timed out. Run %q to try again", buildinfo.AppName+" auth login"),
+		nil)
+}
+
+// WrapAPIError wraps err in a CLIError with ErrAPIError code, unless the error
+// chain already contains an auth error — in which case it returns the auth
+// error directly so it isn't buried.
+func WrapAPIError(message string, err error) error {
+	var ce *CLIError
+	if stderrors.As(err, &ce) && ce.Code.IsAuthError() {
+		return ce
+	}
+	return NewCLIError(ErrAPIError, message, err)
 }
 
 // IsUserErrorCode returns true for error codes that represent user-correctable problems.

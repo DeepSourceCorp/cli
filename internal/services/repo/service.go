@@ -2,7 +2,6 @@ package repo
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"strings"
 
@@ -10,6 +9,7 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/analyzers"
 	"github.com/deepsourcelabs/cli/deepsource/repository"
+	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	"github.com/deepsourcelabs/cli/internal/vcs"
 )
 
@@ -113,7 +113,7 @@ func (s *Service) ViewURL(ctx context.Context, repoArg string) (string, error) {
 	_, err = client.GetRepoStatus(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 	if err != nil {
 		if strings.Contains(err.Error(), "Repository matching query does not exist") {
-			return "", errors.New("Unauthorized access. Please login if you haven't using the command `deepsource auth login`")
+			return "", clierrors.ErrNotLoggedIn()
 		}
 		return "", err
 	}

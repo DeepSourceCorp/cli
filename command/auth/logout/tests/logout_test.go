@@ -25,8 +25,8 @@ func TestLogoutNotLoggedIn(t *testing.T) {
 		t.Fatal("expected error when not logged in, got nil")
 	}
 
-	if !strings.Contains(err.Error(), "not logged into DeepSource") {
-		t.Errorf("expected error to contain %q, got %q", "not logged into DeepSource", err.Error())
+	if !strings.Contains(err.Error(), "Not logged in") {
+		t.Errorf("expected error to contain %q, got %q", "Not logged in", err.Error())
 	}
 }
 

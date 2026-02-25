@@ -1,10 +1,9 @@
 package config
 
 import (
-	"fmt"
 	"time"
 
-	"github.com/deepsourcelabs/cli/buildinfo"
+	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 )
 
 const (
@@ -36,7 +35,7 @@ func (cfg CLIConfig) IsExpired() bool {
 
 func (cfg *CLIConfig) VerifyAuthentication() error {
 	if cfg.Token == "" {
-		return fmt.Errorf("You are not logged into DeepSource. Run \"%s auth login\" to authenticate.", buildinfo.AppName)
+		return clierrors.ErrNotLoggedIn()
 	}
 	return nil
 }

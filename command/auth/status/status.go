@@ -1,7 +1,6 @@
 package status
 
 import (
-	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -67,14 +66,14 @@ func (opts *AuthStatusOptions) Run() error {
 	}
 	// Checking if the user has authenticated / logged in or not
 	if cfg.Token == "" {
-		return errors.New("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
+		return clierrors.ErrNotLoggedIn()
 	}
 
 	// Check if the token has already expired
 	if !cfg.IsExpired() {
 		fmt.Fprintf(opts.stdout(), "Logged in to DeepSource as %s.\n", cfg.User)
 	} else {
-		fmt.Fprintln(opts.stdout(), "The authentication has expired. Run \"deepsource auth login\" to re-authenticate.")
+		style.Warnf(opts.stdout(), "Authentication expired. Run %q to re-authenticate", "deepsource auth login")
 	}
 	return nil
 }
