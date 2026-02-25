@@ -276,14 +276,15 @@ func (opts *MetricsOptions) scopeLabel() string {
 
 func (opts *MetricsOptions) outputHuman() error {
 	metricsList := opts.getMetrics()
+	w := opts.stdout()
 
 	if len(metricsList) == 0 {
-		style.Infof(opts.stdout(), "No metrics found in %s on %s.", opts.repoSlug, opts.scopeLabel())
+		style.Infof(w, "No metrics found in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		return nil
 	}
 
-	fmt.Println(pterm.Bold.Sprintf("── Metrics · %s ────", opts.scopeLabel()))
-	fmt.Println()
+	fmt.Fprintln(w, pterm.Bold.Sprintf("── Metrics · %s ────", opts.scopeLabel()))
+	fmt.Fprintln(w)
 
 	// Group metric rows by key (e.g. "AGGREGATE", "PYTHON")
 	type row struct {
@@ -343,34 +344,35 @@ func (opts *MetricsOptions) outputHuman() error {
 	// Render per-key sections
 	for idx, key := range seenKeys {
 		label := strings.ToUpper(key[:1]) + strings.ToLower(key[1:])
-		fmt.Println(pterm.Bold.Sprintf("── %s ──", label))
-		fmt.Println()
+		fmt.Fprintln(w, pterm.Bold.Sprintf("── %s ──", label))
+		fmt.Fprintln(w)
 
 		data := [][]string{{"Metric", "Value", "Threshold", "Status"}}
 		for _, r := range grouped[key] {
 			data = append(data, []string{r.name, r.value, r.threshold, r.status})
 		}
-		pterm.DefaultTable.WithHasHeader().WithData(data).Render()
+		pterm.DefaultTable.WithHasHeader().WithData(data).WithWriter(w).Render()
 
 		if idx < len(seenKeys)-1 {
-			fmt.Println()
+			fmt.Fprintln(w)
 		}
 	}
 
 	// Changeset stats for run scope
 	if opts.runMetrics != nil && opts.runMetrics.ChangesetStats != nil {
-		opts.outputChangesetStats()
+		opts.outputChangesetStats(w)
 	}
 
-	fmt.Println()
-	opts.printFooter(totalItems)
+	fmt.Fprintln(w)
+	opts.printFooter(w, totalItems)
 	return nil
 }
 
-func (opts *MetricsOptions) outputChangesetStats() {
+func (opts *MetricsOptions) outputChangesetStats(w io.Writer) {
 	stats := opts.runMetrics.ChangesetStats
 
-	pterm.DefaultSection.Println("Changeset Coverage")
+	fmt.Fprintln(w)
+	fmt.Fprintln(w, pterm.Bold.Sprint("Changeset Coverage"))
 
 	header := []string{"Type", "Overall", "Covered", "Overall %", "New", "New Covered", "New %"}
 	data := [][]string{header}
@@ -405,18 +407,18 @@ func (opts *MetricsOptions) outputChangesetStats() {
 		newCoveragePct(stats.Conditions.New, stats.Conditions.NewCovered),
 	})
 
-	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
+	pterm.DefaultTable.WithHasHeader().WithData(data).WithWriter(w).Render()
 
 	if opts.Verbose {
-		fmt.Println()
-		fmt.Println(pterm.Gray("  Lines:      Executable source code lines — the most common coverage metric."))
-		fmt.Println(pterm.Gray("  Branches:   Decision branches (if/else, switch arms) — did both paths execute?"))
-		fmt.Println(pterm.Gray("  Conditions: Individual boolean sub-expressions in compound conditions (a && b)."))
+		fmt.Fprintln(w)
+		fmt.Fprintln(w, pterm.Gray("  Lines:      Executable source code lines — the most common coverage metric."))
+		fmt.Fprintln(w, pterm.Gray("  Branches:   Decision branches (if/else, switch arms) — did both paths execute?"))
+		fmt.Fprintln(w, pterm.Gray("  Conditions: Individual boolean sub-expressions in compound conditions (a && b)."))
 	}
 }
 
-func (opts *MetricsOptions) printFooter(count int) {
-	fmt.Printf("Showing %d metric(s) in %s from %s\n", count, opts.repoSlug, opts.scopeLabel())
+func (opts *MetricsOptions) printFooter(w io.Writer, count int) {
+	fmt.Fprintf(w, "Showing %d metric(s) in %s from %s\n", count, opts.repoSlug, opts.scopeLabel())
 }
 
 func formatStatus(status string) string {

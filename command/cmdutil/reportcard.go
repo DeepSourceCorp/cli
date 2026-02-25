@@ -33,7 +33,7 @@ func ShowReportCard(w io.Writer, rc *runs.ReportCard) {
 	if rc.Hygiene != nil {
 		data = append(data, []string{"Hygiene", style.GradeColor(rc.Hygiene.Grade), fmt.Sprintf("%d", rc.Hygiene.Score), fmt.Sprintf("%d", rc.Hygiene.IssuesCount)})
 	}
-	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
+	pterm.DefaultTable.WithHasHeader().WithData(data).WithWriter(w).Render()
 
 	if rc.Coverage != nil {
 		var coverageParts []string
