@@ -57,6 +57,7 @@ func TestIssuesAutoDetectPR(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
 		"pullRequests(":                   goldenPath("get_pr_by_branch_found_response.json"),
+		"query GetAnalysisRuns(":          goldenPath("get_analysis_runs_response.json"),
 		"issueOccurrences(first: $limit)": goldenPath("pr_scope_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
