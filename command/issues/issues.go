@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"slices"
 	"strings"
 	"time"
 
@@ -299,6 +300,28 @@ func (opts *IssuesOptions) resolveIssues(ctx context.Context, client *deepsource
 		if prNumber, found := cmdutil.ResolvePRForBranch(ctx, client, branchName, remote); found {
 			opts.PRNumber = prNumber
 			opts.autoDetectedBranch = branchName
+
+			// Check if latest run is still in progress before fetching PR issues.
+			run, runErr := cmdutil.ResolveLatestRunForBranch(ctx, client, branchName, remote)
+			if runErr == nil && cmdutil.IsRunInProgress(run.Status) {
+				finalStatus, waitErr := cmdutil.WaitOrFallback(
+					ctx, opts.stdout(), run.Status, run.CommitOid[:8], branchName, 5*time.Second,
+					func(ctx context.Context) (string, error) {
+						r, err := cmdutil.ResolveLatestRunForBranch(ctx, client, branchName, remote)
+						if err != nil {
+							return "", err
+						}
+						return r.Status, nil
+					})
+				if waitErr != nil {
+					return nil, waitErr
+				}
+				if cmdutil.IsRunTimedOut(finalStatus) {
+					style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", branchName)
+					return nil, nil
+				}
+			}
+
 			issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, prNumber, opts.LimitArg)
 			break
 		}
@@ -345,7 +368,7 @@ func (opts *IssuesOptions) resolveIssues(ctx context.Context, client *deepsource
 // warnIfUnpushedCommits prints a warning if the branch was auto-detected and
 // has local commits that haven't been pushed to the remote.
 func (opts *IssuesOptions) warnIfUnpushedCommits() {
-	if opts.autoDetectedBranch == "" {
+	if opts.autoDetectedBranch == "" || len(opts.issues) == 0 {
 		return
 	}
 
@@ -572,6 +595,10 @@ func (opts *IssuesOptions) outputHuman() error {
 			continue
 		}
 
+		slices.SortStableFunc(group, func(a, b issues.Issue) int {
+			return severityRank(a.IssueSeverity) - severityRank(b.IssueSeverity)
+		})
+
 		if !first {
 			fmt.Fprintln(w)
 		}
@@ -583,7 +610,7 @@ func (opts *IssuesOptions) outputHuman() error {
 			location := formatLocation(issue, cwd)
 			severity := humanizeSeverity(issue.IssueSeverity)
 			sevTag := style.IssueSeverityColor(issue.IssueSeverity, "["+severity+"]")
-			fmt.Fprintf(w, "  %s  %s\n", sevTag, issue.IssueText)
+			fmt.Fprintf(w, "  %s %s\n", sevTag, issue.IssueText)
 			if opts.Verbose && issue.Description != "" {
 				fmt.Fprintf(w, "  %s\n", pterm.Gray(issue.Description))
 			}
@@ -652,6 +679,19 @@ func (opts *IssuesOptions) writeOutput(data []byte, trailingNewline bool) error 
 }
 
 // --- Formatting helpers ---
+
+func severityRank(s string) int {
+	switch strings.ToUpper(s) {
+	case "CRITICAL":
+		return 0
+	case "MAJOR":
+		return 1
+	case "MINOR":
+		return 2
+	default:
+		return 3
+	}
+}
 
 func humanizeSeverity(s string) string {
 	switch strings.ToUpper(s) {
