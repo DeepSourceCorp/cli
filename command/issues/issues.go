@@ -333,6 +333,10 @@ func (opts *IssuesOptions) resolveIssues(ctx context.Context, client *deepsource
 				}
 			}
 
+			if runErr == nil {
+				opts.CommitOid = run.CommitOid
+			}
+
 			issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, prNumber, opts.LimitArg)
 			break
 		}
@@ -398,11 +402,11 @@ func (opts *IssuesOptions) warnIfLocalChanges() {
 
 	switch {
 	case unpushed && uncommitted:
-		style.Infof(opts.stdout(), "You have unpushed commits and uncommitted changes on %q. Displayed issues may not reflect your latest local changes.", opts.autoDetectedBranch)
+		style.Infof(opts.stdout(), "You have unpushed commits and uncommitted changes on branch %s. Displayed issues may not reflect your latest local changes.", opts.autoDetectedBranch)
 	case unpushed:
-		style.Infof(opts.stdout(), "You have unpushed commits on %q. Displayed issues may not reflect your latest local changes.", opts.autoDetectedBranch)
+		style.Infof(opts.stdout(), "You have unpushed commits on branch %s. Displayed issues may not reflect your latest local changes.", opts.autoDetectedBranch)
 	case uncommitted:
-		style.Infof(opts.stdout(), "You have uncommitted changes on %q. Displayed issues may not reflect your latest local changes.", opts.autoDetectedBranch)
+		style.Infof(opts.stdout(), "You have uncommitted changes on branch %s. Displayed issues may not reflect your latest local changes.", opts.autoDetectedBranch)
 	}
 }
 
@@ -566,10 +570,23 @@ func buildIssueSummary(issuesList []issues.Issue) (sevParts []string, catParts [
 	}
 	for _, cat := range []string{"BUG_RISK", "SECURITY", "ANTI_PATTERN", "PERFORMANCE", "STYLE", "DOCUMENTATION", "COVERAGE", "TYPECHECK"} {
 		if c := catCounts[cat]; c > 0 {
-			catParts = append(catParts, fmt.Sprintf("%d %s", c, strings.ToLower(humanizeCategory(cat))))
+			catParts = append(catParts, fmt.Sprintf("%d %s", c, strings.ToLower(pluralizeCategory(cat, c))))
 		}
 	}
 	return sevParts, catParts
+}
+
+func pluralizeCategory(cat string, count int) string {
+	name := humanizeCategory(cat)
+	if count == 1 {
+		return name
+	}
+	switch strings.ToUpper(cat) {
+	case "BUG_RISK", "ANTI_PATTERN":
+		return name + "s"
+	default:
+		return name
+	}
 }
 
 func groupIssuesByCategory(issuesList []issues.Issue) map[string][]issues.Issue {
