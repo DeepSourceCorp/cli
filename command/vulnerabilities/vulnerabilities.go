@@ -203,6 +203,7 @@ func (opts *VulnerabilitiesOptions) resolveVulnerabilities(ctx context.Context, 
 
 		if prNumber, found := cmdutil.ResolvePRForBranch(ctx, client, branchName, remote); found {
 			opts.PRNumber = prNumber
+			opts.autoDetectedBranch = branchName
 			opts.prVulns, err = client.GetPRVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, prNumber, opts.LimitArg)
 			break
 		}

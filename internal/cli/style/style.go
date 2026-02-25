@@ -27,10 +27,11 @@ func Errorf(w io.Writer, format string, a ...interface{}) {
 	fmt.Fprintln(w, pterm.Red("✗ Error: "+msg))
 }
 
-// Infof prints an informational message with a cyan → prefix.
+// Infof prints an informational note with a "Note:" prefix (uncolored).
 func Infof(w io.Writer, format string, a ...interface{}) {
 	msg := capitalize(fmt.Sprintf(format, a...))
-	fmt.Fprintln(w, pterm.Cyan("→ "+msg))
+	fmt.Fprintln(w)
+	fmt.Fprintln(w, "Note: "+msg)
 }
 
 // Warnf prints a warning message with a yellow ! prefix.

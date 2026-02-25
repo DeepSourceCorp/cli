@@ -219,6 +219,7 @@ func (opts *MetricsOptions) resolveMetrics(ctx context.Context, client *deepsour
 
 		if prNumber, found := cmdutil.ResolvePRForBranch(ctx, client, branchName, remote); found {
 			opts.PRNumber = prNumber
+			opts.autoDetectedBranch = branchName
 			opts.prMetrics, err = client.GetPRMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, prNumber)
 			break
 		}

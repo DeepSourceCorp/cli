@@ -81,7 +81,7 @@ func TestRunsEmptyList(t *testing.T) {
 		t.Fatalf("unexpected error for empty runs list: %v", err)
 	}
 	got := buf.String()
-	if !strings.Contains(got, "→") || !strings.Contains(got, "No analysis runs found") {
+	if !strings.Contains(got, "Note:") || !strings.Contains(got, "No analysis runs found") {
 		t.Errorf("expected empty-list info message, got: %q", got)
 	}
 }

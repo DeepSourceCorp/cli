@@ -298,6 +298,7 @@ func (opts *IssuesOptions) resolveIssues(ctx context.Context, client *deepsource
 
 		if prNumber, found := cmdutil.ResolvePRForBranch(ctx, client, branchName, remote); found {
 			opts.PRNumber = prNumber
+			opts.autoDetectedBranch = branchName
 			issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, prNumber, opts.LimitArg)
 			break
 		}
