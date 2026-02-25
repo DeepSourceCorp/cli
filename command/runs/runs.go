@@ -143,7 +143,7 @@ func (opts *RunsOptions) runList() error {
 		}
 		analysisRuns, _, err = client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg, nil, nil)
 		if err != nil {
-			return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to fetch analysis runs", err)
+			return clierrors.WrapAPIError("Failed to fetch analysis runs", err)
 		}
 	} else {
 		var branchName string
@@ -168,7 +168,7 @@ func (opts *RunsOptions) runList() error {
 
 		analysisRuns, _, err = client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg, nil, &branchName)
 		if err != nil {
-			return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to fetch analysis runs", err)
+			return clierrors.WrapAPIError("Failed to fetch analysis runs", err)
 		}
 	}
 
@@ -218,7 +218,7 @@ func (opts *RunsOptions) runDetail(ctx context.Context) error {
 	commitOid := opts.commitOid
 	runWithIssues, err := client.GetRunIssues(ctx, commitOid)
 	if err != nil {
-		return clierrors.NewCLIError(clierrors.ErrAPIError, "Failed to fetch run details", err)
+		return clierrors.WrapAPIError("Failed to fetch run details", err)
 	}
 
 	if opts.OutputFormat == "json" {

@@ -66,7 +66,7 @@ func TestAuthStatusNotLoggedIn(t *testing.T) {
 		t.Fatal("expected error for not logged in, got nil")
 	}
 
-	if !strings.Contains(err.Error(), "not logged into DeepSource") {
+	if !strings.Contains(err.Error(), "Not logged in") {
 		t.Errorf("expected not-logged-in error message, got: %s", err.Error())
 	}
 }
@@ -87,7 +87,7 @@ func TestAuthStatusExpired(t *testing.T) {
 		t.Fatalf("unexpected error: %v", err)
 	}
 
-	if !strings.Contains(buf.String(), "The authentication has expired") {
+	if !strings.Contains(buf.String(), "Authentication expired") {
 		t.Errorf("expected expired message, got: %q", buf.String())
 	}
 }

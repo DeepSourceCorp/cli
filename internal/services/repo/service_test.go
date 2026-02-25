@@ -68,5 +68,5 @@ func TestServiceViewURLUnauthorized(t *testing.T) {
 
 	_, err := svc.ViewURL(context.Background(), "")
 	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "Unauthorized")
+	assert.Contains(t, err.Error(), "Not logged in")
 }

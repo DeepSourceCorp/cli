@@ -46,7 +46,7 @@ func (opts *LoginOptions) startLoginFlow(svc *authsvc.Service, cfg *config.CLICo
 	}
 
 	if opts.AuthTimedOut {
-		return clierrors.NewCLIError(clierrors.ErrAuthRequired, "Authentication timed out. Please try again", nil)
+		return clierrors.ErrAuthTimeout()
 	}
 
 	// Store auth data in config
