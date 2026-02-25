@@ -583,6 +583,19 @@ func groupIssuesByCategory(issuesList []issues.Issue) map[string][]issues.Issue 
 
 func (opts *IssuesOptions) outputHuman(ctx context.Context) error {
 	if len(opts.issues) == 0 {
+		// Safety net: check for in-progress run before scope menu.
+		// This catches cases where resolveIssues bypassed WaitOrFallback
+		// (e.g. PR path ignoring FALLBACK status).
+		if opts.autoDetectedBranch != "" && !opts.explicitScope {
+			handled, err := opts.checkInProgressAndRetry(ctx)
+			if err != nil {
+				return err
+			}
+			if handled {
+				return nil
+			}
+		}
+
 		if opts.hasFilters() {
 			style.Infof(opts.stdout(), "No issues matched the provided filters in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		} else {
@@ -668,6 +681,126 @@ func (opts *IssuesOptions) renderHumanIssues() error {
 	fmt.Fprintf(w, "\nShowing %d issue(s) in %s from %s\n", len(opts.issues), opts.repoSlug, scopeLabel)
 
 	return nil
+}
+
+// --- Safety-net: in-progress check before scope menu ---
+
+// checkInProgressAndRetry makes an extra API call to see if the latest run is
+// in-progress when we got 0 issues on an auto-detected branch. This catches
+// cases where resolveIssues bypassed or ignored the WaitOrFallback result
+// (e.g. the PR path). Returns (true, nil) if it handled the situation and
+// the scope menu should be skipped.
+func (opts *IssuesOptions) checkInProgressAndRetry(ctx context.Context) (bool, error) {
+	run, err := cmdutil.ResolveLatestRunForBranch(ctx, opts.client, opts.autoDetectedBranch, opts.remote)
+	if err != nil || !cmdutil.IsRunInProgress(run.Status) {
+		return false, nil
+	}
+
+	commitShort := run.CommitOid
+	if len(commitShort) > 8 {
+		commitShort = commitShort[:8]
+	}
+
+	if !opts.isInteractive() {
+		return opts.refetchAfterFallback(ctx, commitShort)
+	}
+
+	// Interactive: let the user choose to wait or see last completed results.
+	fmt.Fprintf(opts.stdout(), "\nAnalysis is still running on branch %q (latest commit %s).\n\n", opts.autoDetectedBranch, commitShort)
+
+	choice, err := opts.selectFromOptions(
+		"What would you like to do?",
+		"",
+		[]string{
+			"Wait for the current analysis to finish",
+			"Show results from the last completed analysis",
+		},
+	)
+	if err != nil {
+		return false, err
+	}
+
+	if choice == "Show results from the last completed analysis" {
+		return opts.refetchAfterFallback(ctx, commitShort)
+	}
+
+	// Wait: poll for completion.
+	pollCtx, cancel := context.WithTimeout(ctx, 10*time.Minute)
+	defer cancel()
+
+	style.Infof(opts.stdout(), "Waiting for analysis to complete...")
+
+	ticker := time.NewTicker(5 * time.Second)
+	defer ticker.Stop()
+
+	for {
+		select {
+		case <-pollCtx.Done():
+			return false, pollCtx.Err()
+		case <-ticker.C:
+			r, checkErr := cmdutil.ResolveLatestRunForBranch(pollCtx, opts.client, opts.autoDetectedBranch, opts.remote)
+			if checkErr != nil {
+				return false, checkErr
+			}
+			if !cmdutil.IsRunInProgress(r.Status) {
+				if cmdutil.IsRunTimedOut(r.Status) {
+					style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", opts.autoDetectedBranch)
+					return true, nil
+				}
+				// Run completed — re-fetch issues.
+				opts.CommitOid = r.CommitOid
+				return opts.refetchIssuesAndRender(ctx)
+			}
+		}
+	}
+}
+
+// refetchAfterFallback finds the last completed run on the branch and
+// re-fetches issues from it. If no completed run exists, prints a message
+// and returns (true, nil) so the scope menu is skipped.
+func (opts *IssuesOptions) refetchAfterFallback(ctx context.Context, inProgressCommitShort string) (bool, error) {
+	run, err := cmdutil.ResolveLatestCompletedRun(ctx, opts.client, opts.autoDetectedBranch, opts.remote)
+	if err != nil {
+		return false, err
+	}
+	if run == nil {
+		style.Infof(opts.stdout(), "No completed analysis runs found for branch %q.", opts.autoDetectedBranch)
+		return true, nil
+	}
+
+	completedShort := run.CommitOid
+	if len(completedShort) > 8 {
+		completedShort = completedShort[:8]
+	}
+	style.Infof(opts.stdout(), "Analysis is running on commit %s. Showing results from the last analyzed commit (%s).", inProgressCommitShort, completedShort)
+	opts.CommitOid = run.CommitOid
+	return opts.refetchIssuesAndRender(ctx)
+}
+
+// refetchIssuesAndRender re-fetches issues based on the current scope
+// (PR or commit), filters them, and renders the result.
+func (opts *IssuesOptions) refetchIssuesAndRender(ctx context.Context) (bool, error) {
+	serverFilters := opts.buildServerFilters()
+
+	var issuesList []issues.Issue
+	var err error
+	if opts.PRNumber > 0 {
+		issuesList, err = opts.client.GetPRIssues(ctx, opts.remote.Owner, opts.remote.RepoName, opts.remote.VCSProvider, opts.PRNumber, opts.LimitArg)
+	} else if opts.CommitOid != "" {
+		issuesList, err = opts.client.GetRunIssuesFlat(ctx, opts.CommitOid, opts.LimitArg, serverFilters)
+	}
+	if err != nil {
+		return false, err
+	}
+
+	issuesList = opts.filterIssues(issuesList)
+	opts.issues = issuesList
+
+	if len(opts.issues) == 0 {
+		style.Infof(opts.stdout(), "No issues found in %s on %s.", opts.repoSlug, opts.scopeLabel())
+		return true, nil
+	}
+	return true, opts.renderHumanIssues()
 }
 
 // --- Interactive scope menu ---

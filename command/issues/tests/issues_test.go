@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
+	"sync/atomic"
 	"testing"
 
 	"github.com/deepsourcelabs/cli/command/cmddeps"
@@ -857,6 +858,155 @@ func TestIssuesScopeMenuNotShownForJSON(t *testing.T) {
 
 	if menuShown {
 		t.Error("scope menu should not be shown for JSON output")
+	}
+}
+
+// TestIssuesSafetyNetPRPathInProgress verifies that when a branch has a PR
+// and the latest run is PENDING, the safety net in outputHuman catches it
+// (non-interactive path) and prints "No completed analysis runs found"
+// instead of showing the scope menu.
+func TestIssuesSafetyNetPRPathInProgress(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"pullRequests(":                   goldenPath("get_pr_by_branch_found_response.json"),
+		"query GetAnalysisRuns(":          goldenPath("get_analysis_runs_pending_response.json"),
+		"issueOccurrences(first: $limit)": goldenPath("pr_scope_empty_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var scopeMenuCalls int32
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "feature/new-auth", nil
+		},
+		HasUnpushedCommitsFunc:    func() bool { return false },
+		HasUncommittedChangesFunc: func() bool { return false },
+		// Non-interactive: isInteractive returns false by default in tests.
+		SelectFromOptionsFunc: func(msg, help string, opts []string) (string, error) {
+			atomic.AddInt32(&scopeMenuCalls, 1)
+			return "Exit", nil
+		},
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	got := buf.String()
+	if !strings.Contains(got, "No completed analysis runs found") {
+		t.Errorf("expected 'No completed analysis runs found' message, got: %q", got)
+	}
+	if atomic.LoadInt32(&scopeMenuCalls) > 0 {
+		t.Error("scope menu should not be shown when safety net handles in-progress run")
+	}
+}
+
+// TestIssuesSafetyNetPRPathInteractive verifies the interactive safety net:
+// when the latest run is PENDING and the user chooses to show last completed
+// results, the scope menu is skipped.
+func TestIssuesSafetyNetPRPathInteractive(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"pullRequests(":                   goldenPath("get_pr_by_branch_found_response.json"),
+		"query GetAnalysisRuns(":          goldenPath("get_analysis_runs_pending_response.json"),
+		"issueOccurrences(first: $limit)": goldenPath("pr_scope_empty_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	scopeMenuShown := false
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "feature/new-auth", nil
+		},
+		HasUnpushedCommitsFunc:    func() bool { return false },
+		HasUncommittedChangesFunc: func() bool { return false },
+		IsInteractiveFunc:         func() bool { return true },
+		SelectFromOptionsFunc: func(msg, help string, opts []string) (string, error) {
+			if strings.Contains(msg, "different scope") {
+				scopeMenuShown = true
+				return "Exit", nil
+			}
+			// Safety-net prompt
+			return "Show results from the last completed analysis", nil
+		},
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	got := buf.String()
+	if !strings.Contains(got, "Analysis is still running") {
+		t.Errorf("expected 'Analysis is still running' prompt, got: %q", got)
+	}
+	if !strings.Contains(got, "No completed analysis runs found") {
+		t.Errorf("expected 'No completed analysis runs found' message, got: %q", got)
+	}
+	if scopeMenuShown {
+		t.Error("scope menu should not be shown when safety net handles in-progress run")
+	}
+}
+
+// TestIssuesSafetyNetNotTriggeredWhenCompleted verifies that when the latest
+// run is SUCCESS (not in-progress), the safety net returns false and the scope
+// menu is shown as usual.
+func TestIssuesSafetyNetNotTriggeredWhenCompleted(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"pullRequests(":          goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_empty_issues_response.json"),
+		"checks {":               goldenPath("commit_scope_empty_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	scopeMenuShown := false
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "feature/empty-branch", nil
+		},
+		HasUnpushedCommitsFunc:    func() bool { return false },
+		HasUncommittedChangesFunc: func() bool { return false },
+		IsInteractiveFunc:         func() bool { return true },
+		SelectFromOptionsFunc: func(msg, help string, opts []string) (string, error) {
+			if strings.Contains(msg, "different scope") {
+				scopeMenuShown = true
+			}
+			return "Exit", nil
+		},
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if !scopeMenuShown {
+		t.Error("scope menu should be shown when run is completed (safety net should not trigger)")
+	}
+
+	got := buf.String()
+	if !strings.Contains(got, "No issues found") {
+		t.Errorf("expected 'No issues found' message, got: %q", got)
 	}
 }
 
