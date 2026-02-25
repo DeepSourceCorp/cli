@@ -293,6 +293,7 @@ func (opts *VulnerabilitiesOptions) scopeLabel() string {
 }
 
 func (opts *VulnerabilitiesOptions) outputHuman() error {
+	w := opts.stdout()
 	vulnsList := opts.getVulns()
 
 	if len(vulnsList) == 0 {
@@ -305,7 +306,7 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 	}
 
 	// Summary header
-	fmt.Println(pterm.Bold.Sprintf("── Vulnerabilities · %s ────", opts.scopeLabel()))
+	fmt.Fprintln(w, pterm.Bold.Sprintf("── Vulnerabilities · %s ────", opts.scopeLabel()))
 
 	// Severity counts
 	sevCounts := map[string]int{}
@@ -316,14 +317,14 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 	var sevParts []string
 	for _, sev := range []string{"CRITICAL", "HIGH", "MEDIUM", "LOW", "NONE"} {
 		if c := sevCounts[sev]; c > 0 {
-			sevParts = append(sevParts, style.VulnSeverityColor(sev,fmt.Sprintf("%d %s", c, strings.ToLower(humanizeSeverity(sev)))))
+			sevParts = append(sevParts, style.VulnSeverityColor(sev, fmt.Sprintf("%d %s", c, strings.ToLower(humanizeSeverity(sev)))))
 		}
 	}
 	summaryLine := fmt.Sprintf("   %d total", len(vulnsList))
 	if len(sevParts) > 0 {
 		summaryLine += " · " + strings.Join(sevParts, " · ")
 	}
-	fmt.Println(summaryLine)
+	fmt.Fprintln(w, summaryLine)
 
 	reachableCount := 0
 	for _, v := range vulnsList {
@@ -332,9 +333,9 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 		}
 	}
 	if reachableCount > 0 {
-		fmt.Println("   " + pterm.Red(fmt.Sprintf("%d reachable", reachableCount)))
+		fmt.Fprintln(w, "   "+pterm.Red(fmt.Sprintf("%d reachable", reachableCount)))
 	}
-	fmt.Println()
+	fmt.Fprintln(w)
 
 	// Group vulnerabilities by severity
 	grouped := make(map[string][]vulnerabilities.VulnerabilityOccurrence)
@@ -350,7 +351,7 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 			continue
 		}
 
-		fmt.Println(pterm.Bold.Sprintf("── %s ──", style.VulnSeverityColor(sev, humanizeSeverity(sev))))
+		fmt.Fprintln(w, pterm.Bold.Sprintf("── %s ──", style.VulnSeverityColor(sev, humanizeSeverity(sev))))
 
 		header := []string{"ID", "Package", "Version", "Ecosystem", "Fix", "Reachability"}
 		data := [][]string{header}
@@ -368,11 +369,11 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 				formatReachability(v.Reachability),
 			})
 		}
-		pterm.DefaultTable.WithHasHeader().WithData(data).Render()
-		fmt.Println()
+		pterm.DefaultTable.WithHasHeader().WithData(data).WithWriter(w).Render()
+		fmt.Fprintln(w)
 	}
 
-	fmt.Printf("\nShowing %d vulnerability(ies) in %s from %s\n", len(vulnsList), opts.repoSlug, opts.scopeLabel())
+	fmt.Fprintf(w, "\nShowing %d vulnerability(ies) in %s from %s\n", len(vulnsList), opts.repoSlug, opts.scopeLabel())
 	return nil
 }
 

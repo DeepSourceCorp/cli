@@ -1,0 +1,14 @@
+[
+  {
+    "path": "cmd/deepsource/main.go",
+    "begin_line": 42,
+    "end_line": 42,
+    "issue_code": "GO-W1007",
+    "title": "Unchecked error return value of os.ReadFile",
+    "description": "Return value of io.ReadAll is not checked for errors",
+    "category": "BUG_RISK",
+    "severity": "MAJOR",
+    "source": "static",
+    "analyzer": "go"
+  }
+]

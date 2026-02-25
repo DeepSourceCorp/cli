@@ -312,21 +312,28 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 	}
 }
 
+// normalizeEnumValue converts a user-supplied filter value to the GraphQL enum
+// form: trimmed, uppercased, hyphens replaced with underscores.
+// e.g. "bug-risk" -> "BUG_RISK", "anti-pattern" -> "ANTI_PATTERN".
+func normalizeEnumValue(s string) string {
+	return strings.ReplaceAll(strings.ToUpper(strings.TrimSpace(s)), "-", "_")
+}
+
 // buildServerFilters returns RunIssuesFlatParams with server-side filters set
 // for any filter that has exactly one value. Multi-value filters are left to
 // client-side filtering.
 func (opts *IssuesOptions) buildServerFilters() issuesQuery.RunIssuesFlatParams {
 	var params issuesQuery.RunIssuesFlatParams
 	if len(opts.SourceFilters) == 1 {
-		v := strings.ToUpper(strings.TrimSpace(opts.SourceFilters[0]))
+		v := normalizeEnumValue(opts.SourceFilters[0])
 		params.Source = &v
 	}
 	if len(opts.CategoryFilters) == 1 {
-		v := strings.ToUpper(strings.TrimSpace(opts.CategoryFilters[0]))
+		v := normalizeEnumValue(opts.CategoryFilters[0])
 		params.Category = &v
 	}
 	if len(opts.SeverityFilters) == 1 {
-		v := strings.ToUpper(strings.TrimSpace(opts.SeverityFilters[0]))
+		v := normalizeEnumValue(opts.SeverityFilters[0])
 		params.Severity = &v
 	}
 	return params
@@ -448,6 +455,7 @@ func (opts *IssuesOptions) scopeLabel() string {
 }
 
 func (opts *IssuesOptions) outputHuman() error {
+	w := opts.stdout()
 	if len(opts.issues) == 0 {
 		if opts.hasFilters() {
 			style.Infof(opts.stdout(), "No issues matched the provided filters in %s on %s.", opts.repoSlug, opts.scopeLabel())
@@ -473,13 +481,13 @@ func (opts *IssuesOptions) outputHuman() error {
 	}
 
 	scopeLabel := opts.scopeLabel()
-	fmt.Println(pterm.Bold.Sprintf("── Issues · %s ────", scopeLabel))
+	fmt.Fprintln(w, pterm.Bold.Sprintf("── Issues · %s ────", scopeLabel))
 
 	summaryLine := fmt.Sprintf("   %d total", len(opts.issues))
 	if len(sevParts) > 0 {
 		summaryLine += " · " + strings.Join(sevParts, " · ")
 	}
-	fmt.Println(summaryLine)
+	fmt.Fprintln(w, summaryLine)
 
 	catCounts := map[string]int{}
 	for _, issue := range opts.issues {
@@ -493,9 +501,9 @@ func (opts *IssuesOptions) outputHuman() error {
 		}
 	}
 	if len(catParts) > 0 {
-		fmt.Println("   " + strings.Join(catParts, " · "))
+		fmt.Fprintln(w, "   "+strings.Join(catParts, " · "))
 	}
-	fmt.Println()
+	fmt.Fprintln(w)
 
 	cwd, _ := os.Getwd()
 
@@ -515,11 +523,11 @@ func (opts *IssuesOptions) outputHuman() error {
 		}
 
 		if !first {
-			fmt.Println()
+			fmt.Fprintln(w)
 		}
 		first = false
 
-		fmt.Println(pterm.Bold.Sprintf("  ── %s ──", humanizeCategory(cat)))
+		fmt.Fprintln(w, pterm.Bold.Sprintf("  ── %s ──", humanizeCategory(cat)))
 
 		for i, issue := range group {
 			location := formatLocation(issue, cwd)
@@ -527,18 +535,18 @@ func (opts *IssuesOptions) outputHuman() error {
 			analyzer := analyzerDisplayName(issue.Analyzer)
 
 			sevTag := style.IssueSeverityColor(issue.IssueSeverity, "["+severity+"]")
-			fmt.Printf("  %s  [%s] %s\n", issue.IssueText, analyzer, sevTag)
+			fmt.Fprintf(w, "  %s  [%s] %s\n", issue.IssueText, analyzer, sevTag)
 			if opts.Verbose && issue.Description != "" {
-				fmt.Printf("  %s\n", pterm.Gray(issue.Description))
+				fmt.Fprintf(w, "  %s\n", pterm.Gray(issue.Description))
 			}
-			fmt.Printf("  %s\n", pterm.Gray(location))
+			fmt.Fprintf(w, "  %s\n", pterm.Gray(location))
 			if i < len(group)-1 {
-				fmt.Println()
+				fmt.Fprintln(w)
 			}
 		}
 	}
 
-	fmt.Printf("\nShowing %d issue(s) in %s from %s\n", len(opts.issues), opts.repoSlug, scopeLabel)
+	fmt.Fprintf(w, "\nShowing %d issue(s) in %s from %s\n", len(opts.issues), opts.repoSlug, scopeLabel)
 
 	return nil
 }
