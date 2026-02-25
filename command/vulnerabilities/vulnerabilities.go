@@ -165,7 +165,24 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 		opts.CommitOid = cmdutil.ResolveCommitOid(opts.CommitOid)
 	}
 
-	// Fetch vulnerabilities based on scope
+	if err := opts.resolveVulnerabilities(ctx, client, remote); err != nil {
+		return err
+	}
+
+	// Apply severity filter if provided
+	opts.applyFilters()
+
+	// Output based on format
+	switch opts.OutputFormat {
+	case "json":
+		return opts.outputJSON()
+	default:
+		return opts.outputHuman()
+	}
+}
+
+func (opts *VulnerabilitiesOptions) resolveVulnerabilities(ctx context.Context, client *deepsource.Client, remote *vcs.RemoteData) error {
+	var err error
 	switch {
 	case opts.CommitOid != "":
 		opts.runVulns, err = client.GetRunVulns(ctx, opts.CommitOid, opts.LimitArg)
@@ -183,7 +200,6 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 			return branchErr
 		}
 
-		// Try to auto-detect an open PR for this branch
 		if prNumber, found := cmdutil.ResolvePRForBranch(ctx, client, branchName, remote); found {
 			opts.PRNumber = prNumber
 			opts.prVulns, err = client.GetPRVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, prNumber, opts.LimitArg)
@@ -210,20 +226,7 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 		opts.autoDetectedBranch = branchName
 		opts.runVulns, err = client.GetRunVulns(ctx, commitOid, opts.LimitArg)
 	}
-	if err != nil {
-		return err
-	}
-
-	// Apply severity filter if provided
-	opts.applyFilters()
-
-	// Output based on format
-	switch opts.OutputFormat {
-	case "json":
-		return opts.outputJSON()
-	default:
-		return opts.outputHuman()
-	}
+	return err
 }
 
 func (opts *VulnerabilitiesOptions) getVulns() []vulnerabilities.VulnerabilityOccurrence {

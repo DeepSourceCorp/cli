@@ -38,16 +38,35 @@ func ResolveLatestRun(
 	return run.CommitOid, branchName, run.Status, nil
 }
 
-// ResolveLatestRunForBranch finds the latest analysis run for a given branch name.
-// It fetches recent runs via the GetAnalysisRuns bulk API and filters by branch name.
-// Returns the full AnalysisRun (which includes the ReportCard).
+// ResolveLatestRunForBranch finds the latest analysis run for a given branch name
+// that has a completed report card. It fetches up to 10 recent runs and returns
+// the first one with a non-nil ReportCard. If no run has a report card, it returns
+// the most recent run (so callers can still show in-progress/timeout status messages).
 func ResolveLatestRunForBranch(
 	ctx context.Context,
 	client *deepsource.Client,
 	branchName string,
 	remote *vcs.RemoteData,
 ) (*runs.AnalysisRun, error) {
-	return resolveRunFromCommits(ctx, client, branchName, remote)
+	debug.Log("resolve: fetching recent analysis runs for branch %q (limit=10)", branchName)
+	allRuns, _, err := client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, 10, nil, &branchName)
+	if err != nil {
+		return nil, fmt.Errorf("failed to fetch analysis runs: %w", err)
+	}
+	if len(allRuns) == 0 {
+		return nil, fmt.Errorf(
+			"no analysis runs found for branch %q.\nTry: --default-branch, --commit <sha>, or --pr <number>",
+			branchName,
+		)
+	}
+	for i, run := range allRuns {
+		if run.ReportCard != nil {
+			debug.Log("resolve: found run %s (status=%s) with report card at index %d", run.RunUid, run.Status, i)
+			return &allRuns[i], nil
+		}
+	}
+	debug.Log("resolve: no run with report card found, returning latest run %s (status=%s)", allRuns[0].RunUid, allRuns[0].Status)
+	return &allRuns[0], nil
 }
 
 // resolveRunFromCommits fetches the latest analysis run for a given branch using
@@ -140,6 +159,20 @@ func ResolvePRForBranch(ctx context.Context, client *deepsource.Client, branchNa
 		debug.Log("resolve: no open PR for branch %q", branchName)
 	}
 	return prNumber, found
+}
+
+// HasUnpushedCommits returns true if the current branch has commits that
+// haven't been pushed to the upstream remote. Returns false if the upstream
+// is not configured or if git is unavailable.
+func HasUnpushedCommits() bool {
+	cmd := exec.Command("git", "--no-pager", "rev-list", "@{upstream}..HEAD", "--count")
+	var stdout bytes.Buffer
+	cmd.Stdout = &stdout
+	if err := cmd.Run(); err != nil {
+		return false
+	}
+	count := strings.TrimSpace(stdout.String())
+	return count != "0"
 }
 
 // GetDefaultBranch returns the default branch name of the origin remote

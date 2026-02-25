@@ -30,10 +30,16 @@ func TestMain(m *testing.M) {
 			dsn = parsed
 		}
 	}
+	origCodePath, hadCodePath := os.LookupEnv("CODE_PATH")
 	if err := prepareArtifacts(); err != nil {
 		log.Printf("failed to prepare report artifacts: %v", err)
 	}
 	code := m.Run()
+	if hadCodePath {
+		os.Setenv("CODE_PATH", origCodePath)
+	} else {
+		os.Unsetenv("CODE_PATH")
+	}
 	srv.Close()
 	os.Exit(code)
 }

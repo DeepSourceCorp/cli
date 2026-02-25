@@ -25,7 +25,7 @@ func TestStatusCheckTransport_Success(t *testing.T) {
 	transport := &StatusCheckTransport{
 		Base: &stubTransport{statusCode: 200, body: `{"data":{}}`},
 	}
-	req, _ := http.NewRequest("POST", "https://api.deepsource.com/graphql/", nil)
+	req, _ := http.NewRequest("POST", "https://api.deepsource.com/graphql/", http.NoBody)
 	resp, err := transport.RoundTrip(req)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -49,7 +49,7 @@ func TestStatusCheckTransport_Non2xx(t *testing.T) {
 			transport := &StatusCheckTransport{
 				Base: &stubTransport{statusCode: tt.statusCode, body: "not graphql"},
 			}
-			req, _ := http.NewRequest("POST", "https://example.com/api/graphql/", nil)
+			req, _ := http.NewRequest("POST", "https://example.com/api/graphql/", http.NoBody)
 			_, err := transport.RoundTrip(req)
 			if err == nil {
 				t.Fatal("expected error for non-2xx status")

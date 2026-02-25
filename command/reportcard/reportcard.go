@@ -31,9 +31,9 @@ type ReportCardOptions struct {
 	OutputFormat  string
 	deps          *cmddeps.Deps
 	reportCard    *runs.ReportCard
-	repoSlug      string
-	commitOid     string
-	branchName    string
+	repoSlug           string
+	resolvedCommitOid  string
+	branchName         string
 }
 
 func (opts *ReportCardOptions) stdout() io.Writer {
@@ -108,7 +108,7 @@ func NewCmdReportCardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	return cmd
 }
 
-func (opts *ReportCardOptions) Run(ctx context.Context) error {
+func (opts *ReportCardOptions) initClientAndRemote() (*deepsource.Client, *vcs.RemoteData, error) {
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
 		cfgMgr = opts.deps.ConfigMgr
@@ -117,15 +117,15 @@ func (opts *ReportCardOptions) Run(ctx context.Context) error {
 	}
 	cfg, err := cfgMgr.Load()
 	if err != nil {
-		return clierrors.NewCLIError(clierrors.ErrInvalidConfig, "Error reading DeepSource CLI config", err)
+		return nil, nil, clierrors.NewCLIError(clierrors.ErrInvalidConfig, "Error reading DeepSource CLI config", err)
 	}
 	if err := cfg.VerifyAuthentication(); err != nil {
-		return err
+		return nil, nil, err
 	}
 
 	remote, err := vcs.ResolveRemote(opts.RepoArg)
 	if err != nil {
-		return err
+		return nil, nil, err
 	}
 	opts.repoSlug = remote.Owner + "/" + remote.RepoName
 
@@ -139,8 +139,16 @@ func (opts *ReportCardOptions) Run(ctx context.Context) error {
 			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
 		})
 		if err != nil {
-			return err
+			return nil, nil, err
 		}
+	}
+	return client, remote, nil
+}
+
+func (opts *ReportCardOptions) Run(ctx context.Context) error {
+	client, remote, err := opts.initClientAndRemote()
+	if err != nil {
+		return err
 	}
 
 	if opts.CommitOid != "" {
@@ -184,7 +192,7 @@ func (opts *ReportCardOptions) resolveByCommit(ctx context.Context, client *deep
 	}
 
 	opts.reportCard = run.ReportCard
-	opts.commitOid = run.CommitOid
+	opts.resolvedCommitOid = run.CommitOid
 	opts.branchName = run.BranchName
 	return nil
 }
@@ -210,7 +218,7 @@ func (opts *ReportCardOptions) resolveByPR(ctx context.Context, client *deepsour
 	}
 
 	opts.reportCard = run.ReportCard
-	opts.commitOid = run.CommitOid
+	opts.resolvedCommitOid = run.CommitOid
 	opts.branchName = run.BranchName
 	return nil
 }
@@ -236,7 +244,7 @@ func (opts *ReportCardOptions) resolveByDefaultBranch(ctx context.Context, clien
 	}
 
 	opts.reportCard = run.ReportCard
-	opts.commitOid = run.CommitOid
+	opts.resolvedCommitOid = run.CommitOid
 	opts.branchName = run.BranchName
 	return nil
 }
@@ -273,15 +281,15 @@ func (opts *ReportCardOptions) resolveByCurrentBranch(ctx context.Context, clien
 	}
 
 	opts.reportCard = run.ReportCard
-	opts.commitOid = run.CommitOid
+	opts.resolvedCommitOid = run.CommitOid
 	opts.branchName = run.BranchName
 	return nil
 }
 
 func (opts *ReportCardOptions) scopeLabel() string {
 	switch {
-	case opts.branchName != "" && opts.commitOid != "":
-		commitShort := opts.commitOid
+	case opts.branchName != "" && opts.resolvedCommitOid != "":
+		commitShort := opts.resolvedCommitOid
 		if len(commitShort) > 8 {
 			commitShort = commitShort[:8]
 		}
@@ -301,7 +309,7 @@ func (opts *ReportCardOptions) scopeLabel() string {
 
 func (opts *ReportCardOptions) outputHuman() error {
 	w := opts.stdout()
-	commitShort := opts.commitOid
+	commitShort := opts.resolvedCommitOid
 	if len(commitShort) > 8 {
 		commitShort = commitShort[:8]
 	}

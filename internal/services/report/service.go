@@ -64,17 +64,8 @@ func NewService(deps ServiceDeps) *Service {
 func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 	s.sanitize(&opts)
 
-	if opts.UseOIDC {
-		dsn, err := oidc.GetDSNFromOIDC(opts.OIDCRequestToken, opts.OIDCRequestUrl, opts.DeepSourceHostEndpoint, opts.OIDCProvider)
-		if err != nil {
-			s.capture(err)
-			return nil, fmt.Errorf("Failed to get DSN using OIDC: %w", err)
-		}
-		opts.DSN = dsn
-	}
-
-	if opts.DSN == "" {
-		return nil, clierrors.NewUserError(errors.New("Environment variable DEEPSOURCE_DSN not set (or) is empty. Set DEEPSOURCE_DSN from the repository settings page or use --use-oidc."))
+	if err := s.resolveDSN(&opts); err != nil {
+		return nil, err
 	}
 
 	s.infof("Preparing artifact..\n")
@@ -84,7 +75,7 @@ func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 		return nil, errors.New("Unable to identify current directory")
 	}
 
-	if err := s.validateKey(opts); err != nil {
+	if err := validateKey(opts); err != nil {
 		uerr := clierrors.NewUserError(err)
 		s.capture(uerr)
 		return nil, uerr
@@ -103,26 +94,9 @@ func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 		return nil, errors.New("Unable to get commit OID HEAD. Make sure you are running the CLI from a git repository")
 	}
 
-	if opts.Value == "" && opts.ValueFile == "" {
-		return nil, clierrors.NewUserError(errors.New("Provide artifact data using --value or --value-file"))
-	}
-
-	artifactValue := opts.Value
-	if opts.ValueFile != "" {
-		if _, err := s.fs.Stat(opts.ValueFile); err != nil {
-			uerr := clierrors.NewUserErrorf("Unable to read specified value file: %s", opts.ValueFile)
-			s.capture(uerr)
-			return nil, uerr
-		}
-
-		valueBytes, err := s.fs.ReadFile(opts.ValueFile)
-		if err != nil {
-			uerr := clierrors.NewUserErrorf("Unable to read specified value file: %s", opts.ValueFile)
-			s.capture(uerr)
-			return nil, uerr
-		}
-
-		artifactValue = string(valueBytes)
+	artifactValue, err := s.resolveArtifactValue(opts)
+	if err != nil {
+		return nil, err
 	}
 
 	s.infof("Checking compression support..\n")
@@ -148,6 +122,51 @@ func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 		queryInput.AnalyzerType = opts.AnalyzerType
 	}
 
+	responseBody, err := s.uploadArtifact(ctx, dsn, queryInput, opts.SkipCertificateVerification)
+	if err != nil {
+		return nil, err
+	}
+
+	return s.parseReportResponse(responseBody, opts, warning)
+}
+
+func (s *Service) resolveDSN(opts *Options) error {
+	if opts.UseOIDC {
+		dsn, err := oidc.GetDSNFromOIDC(opts.OIDCRequestToken, opts.OIDCRequestUrl, opts.DeepSourceHostEndpoint, opts.OIDCProvider)
+		if err != nil {
+			s.capture(err)
+			return fmt.Errorf("Failed to get DSN using OIDC: %w", err)
+		}
+		opts.DSN = dsn
+	}
+	if opts.DSN == "" {
+		return clierrors.NewUserError(errors.New("Environment variable DEEPSOURCE_DSN not set (or) is empty. Set DEEPSOURCE_DSN from the repository settings page or use --use-oidc."))
+	}
+	return nil
+}
+
+func (s *Service) resolveArtifactValue(opts Options) (string, error) {
+	if opts.Value == "" && opts.ValueFile == "" {
+		return "", clierrors.NewUserError(errors.New("Provide artifact data using --value or --value-file"))
+	}
+	if opts.ValueFile == "" {
+		return opts.Value, nil
+	}
+	if _, err := s.fs.Stat(opts.ValueFile); err != nil {
+		uerr := clierrors.NewUserErrorf("Unable to read specified value file: %s", opts.ValueFile)
+		s.capture(uerr)
+		return "", uerr
+	}
+	valueBytes, err := s.fs.ReadFile(opts.ValueFile)
+	if err != nil {
+		uerr := clierrors.NewUserErrorf("Unable to read specified value file: %s", opts.ValueFile)
+		s.capture(uerr)
+		return "", uerr
+	}
+	return string(valueBytes), nil
+}
+
+func (s *Service) uploadArtifact(ctx context.Context, dsn *DSN, queryInput ReportQueryInput, skipVerify bool) ([]byte, error) {
 	query := ReportQuery{Query: reportGraphqlQuery}
 	query.Variables.Input = queryInput
 
@@ -158,7 +177,7 @@ func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 	}
 
 	s.infof("Uploading artifact..\n")
-	responseBody, err := s.makeQuery(ctx, dsn, queryBodyBytes, opts.SkipCertificateVerification)
+	responseBody, err := s.makeQuery(ctx, dsn, queryBodyBytes, skipVerify)
 	if err != nil {
 		queryFallback := ReportQuery{Query: reportGraphqlQueryOld}
 		queryFallback.Variables.Input = queryInput
@@ -168,13 +187,17 @@ func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 			return nil, errors.New("Unable to marshal query body")
 		}
 
-		responseBody, err = s.makeQuery(ctx, dsn, queryBodyBytes, opts.SkipCertificateVerification)
+		responseBody, err = s.makeQuery(ctx, dsn, queryBodyBytes, skipVerify)
 		if err != nil {
 			s.capture(err)
 			return nil, fmt.Errorf("Reporting failed: %w", err)
 		}
 	}
 
+	return responseBody, nil
+}
+
+func (s *Service) parseReportResponse(responseBody []byte, opts Options, warning string) (*Result, error) {
 	queryResponse := QueryResponse{}
 	if err := json.Unmarshal(responseBody, &queryResponse); err != nil {
 		s.capture(err)
@@ -209,7 +232,7 @@ func (s *Service) sanitize(opts *Options) {
 	opts.DeepSourceHostEndpoint = strings.TrimSpace(opts.DeepSourceHostEndpoint)
 }
 
-func (s *Service) validateKey(opts Options) error {
+func validateKey(opts Options) error {
 	supportedKeys := map[string]bool{
 		"python":     true,
 		"go":         true,
@@ -299,7 +322,7 @@ func (s *Service) makeQuery(ctx context.Context, dsn *DSN, body []byte, skipVeri
 		client = &http.Client{
 			Timeout: time.Second * 60,
 			Transport: &http.Transport{
-				TLSClientConfig: &tls.Config{InsecureSkipVerify: true, MinVersion: tls.VersionTLS12},
+				TLSClientConfig: &tls.Config{InsecureSkipVerify: true, MinVersion: tls.VersionTLS12}, // skipcq: GSC-G402
 			},
 		}
 	}

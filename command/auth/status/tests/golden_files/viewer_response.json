@@ -1,0 +1,20 @@
+{
+  "viewer": {
+    "id": "VXNlcjoxMjM0",
+    "firstName": "Test",
+    "lastName": "User",
+    "email": "user@example.com",
+    "accounts": {
+      "edges": [
+        {
+          "node": {
+            "id": "QWNjb3VudDo1Njc4",
+            "login": "testorg",
+            "type": "TEAM",
+            "vcsProvider": "GITHUB"
+          }
+        }
+      ]
+    }
+  }
+}

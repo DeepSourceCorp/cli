@@ -1,6 +1,8 @@
 package status
 
 import (
+	"context"
+	stderrors "errors"
 	"fmt"
 	"io"
 	"os"
@@ -8,10 +10,10 @@ import (
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/command/cmddeps"
 	"github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/internal/cli/args"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
-	authsvc "github.com/deepsourcelabs/cli/internal/services/auth"
 	"github.com/spf13/cobra"
 )
 
@@ -58,9 +60,8 @@ func (opts *AuthStatusOptions) Run() error {
 	} else {
 		cfgMgr = config.DefaultManager()
 	}
-	svc := authsvc.NewService(cfgMgr)
 	// Fetch config
-	cfg, err := svc.LoadConfig()
+	cfg, err := cfgMgr.Load()
 	if err != nil {
 		return clierrors.NewCLIError(clierrors.ErrInvalidConfig, "Error reading DeepSource CLI config", err)
 	}
@@ -69,11 +70,40 @@ func (opts *AuthStatusOptions) Run() error {
 		return clierrors.ErrNotLoggedIn()
 	}
 
-	// Check if the token has already expired
-	if !cfg.IsExpired() {
-		fmt.Fprintf(opts.stdout(), "Logged in to DeepSource as %s.\n", cfg.User)
-	} else {
+	// Fast path: if the local token expiry has passed, no need for a network call
+	if cfg.IsExpired() {
 		style.Warnf(opts.stdout(), "Authentication expired. Run %q to re-authenticate", "deepsource auth login")
+		return nil
 	}
+
+	// Validate token against the server
+	var client *deepsource.Client
+	if opts.deps != nil && opts.deps.Client != nil {
+		client = opts.deps.Client
+	} else {
+		client, err = deepsource.New(deepsource.ClientOpts{
+			Token:            cfg.Token,
+			HostName:         cfg.Host,
+			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+		})
+		if err != nil {
+			fmt.Fprintf(opts.stdout(), "Logged in to DeepSource as %s (could not verify with server).\n", cfg.User)
+			return nil
+		}
+	}
+
+	_, verifyErr := client.GetViewer(context.Background())
+	if verifyErr != nil {
+		var ce *clierrors.CLIError
+		if stderrors.As(verifyErr, &ce) && ce.Code.IsAuthError() {
+			style.Warnf(opts.stdout(), "Authentication expired. Run %q to re-authenticate", "deepsource auth login")
+			return nil
+		}
+		// Network error or other non-auth failure — report as logged in but unverified
+		fmt.Fprintf(opts.stdout(), "Logged in to DeepSource as %s (could not verify with server).\n", cfg.User)
+		return nil
+	}
+
+	fmt.Fprintf(opts.stdout(), "Logged in to DeepSource as %s.\n", cfg.User)
 	return nil
 }

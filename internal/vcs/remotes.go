@@ -10,90 +10,97 @@ import (
 	"github.com/deepsourcelabs/cli/internal/debug"
 )
 
+func detectProvider(remoteURL string) string {
+	switch {
+	case strings.Contains(remoteURL, "github"):
+		return "GITHUB"
+	case strings.Contains(remoteURL, "gitlab"):
+		return "GITLAB"
+	case strings.Contains(remoteURL, "bitbucket"):
+		return "BITBUCKET"
+	case strings.Contains(remoteURL, "dev.azure.com"), strings.Contains(remoteURL, "visualstudio.com"):
+		return "ADS"
+	default:
+		return ""
+	}
+}
+
+func extractRepoName(remoteURL string) string {
+	repoNameRegexp := regexp.MustCompile(`.+/([^/]+)(\.git)?$`)
+	matched := repoNameRegexp.FindStringSubmatch(remoteURL)
+	return strings.TrimSuffix(matched[1], ".git")
+}
+
+func extractOwner(remoteURL, provider string) string {
+	if provider == "ADS" {
+		return extractADSOwner(remoteURL)
+	}
+	if strings.HasPrefix(remoteURL, "git@") {
+		pathURL := strings.Split(remoteURL, ":")
+		u, err := url.Parse(pathURL[1])
+		if err != nil {
+			return ""
+		}
+		splitPath := strings.Split(u.Path, "/")
+		return splitPath[0]
+	}
+	if strings.HasPrefix(remoteURL, "https://") {
+		remoteRegexp := regexp.MustCompile(`.+//(.+)/(.+)/(.+)(\.git)?$`)
+		matched := remoteRegexp.FindStringSubmatch(remoteURL)
+		return matched[2]
+	}
+	return ""
+}
+
+func extractADSOwner(remoteURL string) string {
+	if strings.HasPrefix(remoteURL, "https://") {
+		u, err := url.Parse(remoteURL)
+		if err != nil {
+			return ""
+		}
+		if strings.Contains(remoteURL, "dev.azure.com") {
+			splitPath := strings.Split(strings.Trim(u.Path, "/"), "/")
+			if len(splitPath) > 0 {
+				return splitPath[0]
+			}
+		} else if strings.Contains(remoteURL, "visualstudio.com") {
+			hostParts := strings.Split(u.Hostname(), ".")
+			if len(hostParts) > 0 {
+				return hostParts[0]
+			}
+		}
+		return ""
+	}
+	// SSH variants:
+	// git@ssh.dev.azure.com:v3/{org}/{project}/{repo}
+	// {org}@vs-ssh.visualstudio.com:v3/{org}/{project}/{repo}
+	pathURL := strings.Split(remoteURL, ":")
+	if len(pathURL) > 1 {
+		splitPath := strings.Split(pathURL[1], "/")
+		if len(splitPath) > 1 {
+			return splitPath[1]
+		}
+	}
+	return ""
+}
+
 func getRemoteMap(remoteList []string) (map[string][]string, error) {
 	remoteMap := make(map[string][]string)
 	for _, remoteData := range remoteList {
-
-		var VCSProvider string
-
-		// Split the single remote to fetch the name and URL of the remote
-		// TLDR; Fetch "origin" and "<url>" from "origin <url>"
 		remoteParams := strings.Fields(remoteData)
 		remoteName := remoteParams[0]
 		remoteURL := remoteParams[1]
 
-		// Parsing out VCS Provider from the remote URL
-		if strings.Contains(remoteURL, "github") {
-			VCSProvider = "GITHUB"
-		} else if strings.Contains(remoteURL, "gitlab") {
-			VCSProvider = "GITLAB"
-		} else if strings.Contains(remoteURL, "bitbucket") {
-			VCSProvider = "BITBUCKET"
-		} else if strings.Contains(remoteURL, "dev.azure.com") || strings.Contains(remoteURL, "visualstudio.com") {
-			VCSProvider = "ADS"
-		} else {
+		provider := detectProvider(remoteURL)
+		if provider == "" {
 			continue
 		}
 
-		RepoNameRegexp := regexp.MustCompile(`.+/([^/]+)(\.git)?$`)
+		repoName := extractRepoName(remoteURL)
+		owner := extractOwner(remoteURL, provider)
 
-		// Parsing out repository name from the remote URL using the above regex
-		matched := RepoNameRegexp.FindStringSubmatch(remoteURL)
-		repositoryName := strings.TrimSuffix(matched[1], ".git")
-
-		var owner string
-
-		if VCSProvider == "ADS" {
-			// Azure DevOps has non-standard URL structures that need special handling
-			if strings.HasPrefix(remoteURL, "https://") {
-				u, err := url.Parse(remoteURL)
-				if err != nil {
-					continue
-				}
-				if strings.Contains(remoteURL, "dev.azure.com") {
-					// https://dev.azure.com/{org}/{project}/_git/{repo}
-					splitPath := strings.Split(strings.Trim(u.Path, "/"), "/")
-					if len(splitPath) > 0 {
-						owner = splitPath[0]
-					}
-				} else if strings.Contains(remoteURL, "visualstudio.com") {
-					// https://{org}.visualstudio.com/{project}/_git/{repo}
-					hostParts := strings.Split(u.Hostname(), ".")
-					if len(hostParts) > 0 {
-						owner = hostParts[0]
-					}
-				}
-			} else {
-				// SSH variants:
-				// git@ssh.dev.azure.com:v3/{org}/{project}/{repo}
-				// {org}@vs-ssh.visualstudio.com:v3/{org}/{project}/{repo}
-				pathURL := strings.Split(remoteURL, ":")
-				if len(pathURL) > 1 {
-					splitPath := strings.Split(pathURL[1], "/")
-					// path starts with v3/{org}/...
-					if len(splitPath) > 1 {
-						owner = splitPath[1]
-					}
-				}
-			}
-		} else if strings.HasPrefix(remoteURL, "git@") {
-			// git@ ssh urls
-			pathURL := strings.Split(remoteURL, ":")
-			newPathURL := pathURL[1]
-			u, err := url.Parse(newPathURL)
-			if err != nil {
-				continue
-			}
-			splitPath := strings.Split(u.Path, "/")
-			owner = splitPath[0]
-		} else if strings.HasPrefix(remoteURL, "https://") {
-			remoteRegexp := regexp.MustCompile(`.+//(.+)/(.+)/(.+)(\.git)?$`)
-			matched := remoteRegexp.FindStringSubmatch(remoteURL)
-			owner = matched[2]
-		}
-
-		completeRepositoryName := fmt.Sprintf("%s/%s", owner, repositoryName)
-		remoteMap[remoteName] = []string{owner, repositoryName, VCSProvider, completeRepositoryName}
+		completeRepositoryName := fmt.Sprintf("%s/%s", owner, repoName)
+		remoteMap[remoteName] = []string{owner, repoName, provider, completeRepositoryName}
 	}
 
 	return remoteMap, nil
