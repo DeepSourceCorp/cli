@@ -300,14 +300,15 @@ func (opts *ReportCardOptions) scopeLabel() string {
 }
 
 func (opts *ReportCardOptions) outputHuman() error {
+	w := opts.stdout()
 	commitShort := opts.commitOid
 	if len(commitShort) > 8 {
 		commitShort = commitShort[:8]
 	}
 
-	fmt.Println(pterm.Bold.Sprintf("── Report Card · %s (%s) ────", opts.branchName, commitShort))
+	fmt.Fprintln(w, pterm.Bold.Sprintf("── Report Card · %s (%s) ────", opts.branchName, commitShort))
 
-	cmdutil.ShowReportCard(opts.stdout(), opts.reportCard)
+	cmdutil.ShowReportCard(w, opts.reportCard)
 	return nil
 }
 
