@@ -35,7 +35,8 @@ func TestIssuesAutoDetectBranch(t *testing.T) {
 		BranchNameFunc: func() (string, error) {
 			return "main", nil
 		},
-		HasUnpushedCommitsFunc: func() bool { return false },
+		HasUnpushedCommitsFunc:    func() bool { return false },
+		HasUncommittedChangesFunc: func() bool { return false },
 	}
 
 	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
@@ -70,7 +71,8 @@ func TestIssuesAutoDetectPR(t *testing.T) {
 		BranchNameFunc: func() (string, error) {
 			return "feature/new-auth", nil
 		},
-		HasUnpushedCommitsFunc: func() bool { return false },
+		HasUnpushedCommitsFunc:    func() bool { return false },
+		HasUncommittedChangesFunc: func() bool { return false },
 	}
 
 	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
@@ -545,9 +547,8 @@ func TestIssuesUnpushedCommitsWarning(t *testing.T) {
 		BranchNameFunc: func() (string, error) {
 			return "main", nil
 		},
-		HasUnpushedCommitsFunc: func() bool {
-			return true
-		},
+		HasUnpushedCommitsFunc:    func() bool { return true },
+		HasUncommittedChangesFunc: func() bool { return false },
 	}
 
 	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
@@ -560,6 +561,83 @@ func TestIssuesUnpushedCommitsWarning(t *testing.T) {
 	got := buf.String()
 	if !strings.Contains(got, "unpushed commits") {
 		t.Errorf("expected unpushed commits warning, got: %q", got)
+	}
+	if strings.Contains(got, "uncommitted changes") {
+		t.Errorf("should not mention uncommitted changes when only unpushed, got: %q", got)
+	}
+}
+
+func TestIssuesUncommittedChangesWarning(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"pullRequests(":         goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_response.json"),
+		"checks {":              goldenPath("commit_scope_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "main", nil
+		},
+		HasUnpushedCommitsFunc:    func() bool { return false },
+		HasUncommittedChangesFunc: func() bool { return true },
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--output", "json"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	got := buf.String()
+	if !strings.Contains(got, "uncommitted changes") {
+		t.Errorf("expected uncommitted changes warning, got: %q", got)
+	}
+	if strings.Contains(got, "unpushed commits") {
+		t.Errorf("should not mention unpushed commits when only uncommitted, got: %q", got)
+	}
+}
+
+func TestIssuesBothUnpushedAndUncommitted(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"pullRequests(":         goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_response.json"),
+		"checks {":              goldenPath("commit_scope_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "main", nil
+		},
+		HasUnpushedCommitsFunc:    func() bool { return true },
+		HasUncommittedChangesFunc: func() bool { return true },
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--output", "json"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	got := buf.String()
+	if !strings.Contains(got, "unpushed commits") {
+		t.Errorf("expected 'unpushed commits' in warning, got: %q", got)
+	}
+	if !strings.Contains(got, "uncommitted changes") {
+		t.Errorf("expected 'uncommitted changes' in warning, got: %q", got)
 	}
 }
 
@@ -575,9 +653,8 @@ func TestIssuesNoUnpushedWarningWithCommitFlag(t *testing.T) {
 		Client:    client,
 		ConfigMgr: cfgMgr,
 		Stdout:    &buf,
-		HasUnpushedCommitsFunc: func() bool {
-			return true
-		},
+		HasUnpushedCommitsFunc:    func() bool { return true },
+		HasUncommittedChangesFunc: func() bool { return true },
 	}
 
 	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
@@ -590,6 +667,9 @@ func TestIssuesNoUnpushedWarningWithCommitFlag(t *testing.T) {
 	got := buf.String()
 	if strings.Contains(got, "unpushed commits") {
 		t.Errorf("should not show unpushed warning with --commit flag, got: %q", got)
+	}
+	if strings.Contains(got, "uncommitted changes") {
+		t.Errorf("should not show uncommitted warning with --commit flag, got: %q", got)
 	}
 }
 
@@ -622,6 +702,161 @@ func TestIssuesCategoryHyphenWithCommit(t *testing.T) {
 
 	if strings.TrimSpace(got) != strings.TrimSpace(expected) {
 		t.Errorf("output mismatch.\nExpected:\n%s\nGot:\n%s", expected, got)
+	}
+}
+
+// TestIssuesScopeMenuDefaultBranch verifies that when no issues are found on
+// the current branch with no explicit scope flags, an interactive menu appears
+// and selecting "default branch" re-queries and shows results.
+func TestIssuesScopeMenuDefaultBranch(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"pullRequests(":          goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_empty_issues_response.json"),
+		"checks {":               goldenPath("commit_scope_empty_response.json"),
+		"issues(first: $limit)":  goldenPath("default_branch_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "feature/empty-branch", nil
+		},
+		HasUnpushedCommitsFunc:    func() bool { return false },
+		HasUncommittedChangesFunc: func() bool { return false },
+		IsInteractiveFunc:         func() bool { return true },
+		SelectFromOptionsFunc: func(msg, help string, opts []string) (string, error) {
+			return "View issues on default branch", nil
+		},
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	got := buf.String()
+	// Should contain the issues from the default branch re-query
+	if !strings.Contains(got, "Issues") {
+		t.Errorf("expected issues output after scope menu selection, got: %q", got)
+	}
+}
+
+// TestIssuesScopeMenuExit verifies that picking "Exit" from the scope menu
+// cleanly returns without re-querying.
+func TestIssuesScopeMenuExit(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"pullRequests(":          goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_empty_issues_response.json"),
+		"checks {":               goldenPath("commit_scope_empty_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "feature/empty-branch", nil
+		},
+		HasUnpushedCommitsFunc:    func() bool { return false },
+		HasUncommittedChangesFunc: func() bool { return false },
+		IsInteractiveFunc:         func() bool { return true },
+		SelectFromOptionsFunc: func(msg, help string, opts []string) (string, error) {
+			return "Exit", nil
+		},
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	got := buf.String()
+	if !strings.Contains(got, "No issues found") {
+		t.Errorf("expected 'No issues found' message, got: %q", got)
+	}
+	// Should NOT contain a second query result
+	if strings.Contains(got, "── Issues") {
+		t.Errorf("should not show issues after Exit selection, got: %q", got)
+	}
+}
+
+// TestIssuesScopeMenuNotShownWithExplicitFlag verifies that no interactive menu
+// is shown when an explicit scope flag like --default-branch is provided.
+func TestIssuesScopeMenuNotShownWithExplicitFlag(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"issues(first: $limit)": goldenPath("empty_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	menuShown := false
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		IsInteractiveFunc: func() bool { return true },
+		SelectFromOptionsFunc: func(msg, help string, opts []string) (string, error) {
+			menuShown = true
+			return "Exit", nil
+		},
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--default-branch"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if menuShown {
+		t.Error("scope menu should not be shown when --default-branch flag is provided")
+	}
+}
+
+// TestIssuesScopeMenuNotShownForJSON verifies that no interactive menu is shown
+// when output format is JSON.
+func TestIssuesScopeMenuNotShownForJSON(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"issues(first: $limit)": goldenPath("empty_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	menuShown := false
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		IsInteractiveFunc: func() bool { return true },
+		SelectFromOptionsFunc: func(msg, help string, opts []string) (string, error) {
+			menuShown = true
+			return "Exit", nil
+		},
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--default-branch", "--output", "json"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if menuShown {
+		t.Error("scope menu should not be shown for JSON output")
 	}
 }
 

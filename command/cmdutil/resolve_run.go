@@ -248,6 +248,18 @@ func HasUnpushedCommits() bool {
 	return count != "0"
 }
 
+// HasUncommittedChanges returns true if the working tree has uncommitted
+// changes (staged or unstaged). Returns false if git is unavailable.
+func HasUncommittedChanges() bool {
+	cmd := exec.Command("git", "status", "--porcelain")
+	var stdout bytes.Buffer
+	cmd.Stdout = &stdout
+	if err := cmd.Run(); err != nil {
+		return false
+	}
+	return strings.TrimSpace(stdout.String()) != ""
+}
+
 // GetDefaultBranch returns the default branch name of the origin remote
 // (e.g. "master" or "main"). Returns an empty string if it cannot be determined.
 func GetDefaultBranch() string {
