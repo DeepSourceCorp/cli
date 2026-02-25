@@ -169,7 +169,36 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 		opts.CommitOid = cmdutil.ResolveCommitOid(opts.CommitOid)
 	}
 
-	// Fetch metrics based on scope
+	if err := opts.resolveMetrics(ctx, client, remote); err != nil {
+		return err
+	}
+
+	// Apply client-side limit
+	if opts.LimitArg > 0 {
+		if metricsList := opts.getMetrics(); len(metricsList) > opts.LimitArg {
+			truncated := metricsList[:opts.LimitArg]
+			switch {
+			case opts.runMetrics != nil:
+				opts.runMetrics.Metrics = truncated
+			case opts.prMetrics != nil:
+				opts.prMetrics.Metrics = truncated
+			default:
+				opts.repoMetrics = truncated
+			}
+		}
+	}
+
+	// Output based on format
+	switch opts.OutputFormat {
+	case "json":
+		return opts.outputJSON()
+	default:
+		return opts.outputHuman()
+	}
+}
+
+func (opts *MetricsOptions) resolveMetrics(ctx context.Context, client *deepsource.Client, remote *vcs.RemoteData) error {
+	var err error
 	switch {
 	case opts.CommitOid != "":
 		opts.runMetrics, err = client.GetRunMetrics(ctx, opts.CommitOid)
@@ -187,7 +216,6 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 			return branchErr
 		}
 
-		// Try to auto-detect an open PR for this branch
 		if prNumber, found := cmdutil.ResolvePRForBranch(ctx, client, branchName, remote); found {
 			opts.PRNumber = prNumber
 			opts.prMetrics, err = client.GetPRMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, prNumber)
@@ -214,32 +242,7 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 		opts.autoDetectedBranch = branchName
 		opts.runMetrics, err = client.GetRunMetrics(ctx, commitOid)
 	}
-	if err != nil {
-		return err
-	}
-
-	// Apply client-side limit
-	if opts.LimitArg > 0 {
-		if metricsList := opts.getMetrics(); len(metricsList) > opts.LimitArg {
-			truncated := metricsList[:opts.LimitArg]
-			switch {
-			case opts.runMetrics != nil:
-				opts.runMetrics.Metrics = truncated
-			case opts.prMetrics != nil:
-				opts.prMetrics.Metrics = truncated
-			default:
-				opts.repoMetrics = truncated
-			}
-		}
-	}
-
-	// Output based on format
-	switch opts.OutputFormat {
-	case "json":
-		return opts.outputJSON()
-	default:
-		return opts.outputHuman()
-	}
+	return err
 }
 
 func (opts *MetricsOptions) getMetrics() []metrics.RepositoryMetric {
@@ -274,29 +277,18 @@ func (opts *MetricsOptions) scopeLabel() string {
 	}
 }
 
-func (opts *MetricsOptions) outputHuman() error {
-	metricsList := opts.getMetrics()
-	w := opts.stdout()
+type metricRow struct {
+	name      string
+	value     string
+	threshold string
+	status    string
+}
 
-	if len(metricsList) == 0 {
-		style.Infof(w, "No metrics found in %s on %s.", opts.repoSlug, opts.scopeLabel())
-		return nil
-	}
-
-	fmt.Fprintln(w, pterm.Bold.Sprintf("── Metrics · %s ────", opts.scopeLabel()))
-	fmt.Fprintln(w)
-
-	// Group metric rows by key (e.g. "AGGREGATE", "PYTHON")
-	type row struct {
-		name      string
-		value     string
-		threshold string
-		status    string
-	}
-	grouped := make(map[string][]row)
+func groupMetricsByKey(metricsList []metrics.RepositoryMetric) (map[string][]metricRow, []string, int) {
+	grouped := make(map[string][]metricRow)
 	var seenKeys []string
-
 	totalItems := 0
+
 	for _, m := range metricsList {
 		for _, item := range m.Items {
 			threshold := "-"
@@ -320,7 +312,7 @@ func (opts *MetricsOptions) outputHuman() error {
 			if _, ok := grouped[item.Key]; !ok {
 				seenKeys = append(seenKeys, item.Key)
 			}
-			grouped[item.Key] = append(grouped[item.Key], row{
+			grouped[item.Key] = append(grouped[item.Key], metricRow{
 				name:      m.Name,
 				value:     value,
 				threshold: threshold,
@@ -330,7 +322,6 @@ func (opts *MetricsOptions) outputHuman() error {
 		}
 	}
 
-	// Sort keys: "AGGREGATE" first, then remaining alphabetically
 	sort.SliceStable(seenKeys, func(i, j int) bool {
 		if seenKeys[i] == "AGGREGATE" {
 			return true
@@ -341,7 +332,23 @@ func (opts *MetricsOptions) outputHuman() error {
 		return seenKeys[i] < seenKeys[j]
 	})
 
-	// Render per-key sections
+	return grouped, seenKeys, totalItems
+}
+
+func (opts *MetricsOptions) outputHuman() error {
+	metricsList := opts.getMetrics()
+	w := opts.stdout()
+
+	if len(metricsList) == 0 {
+		style.Infof(w, "No metrics found in %s on %s.", opts.repoSlug, opts.scopeLabel())
+		return nil
+	}
+
+	fmt.Fprintln(w, pterm.Bold.Sprintf("── Metrics · %s ────", opts.scopeLabel()))
+	fmt.Fprintln(w)
+
+	grouped, seenKeys, totalItems := groupMetricsByKey(metricsList)
+
 	for idx, key := range seenKeys {
 		label := strings.ToUpper(key[:1]) + strings.ToLower(key[1:])
 		fmt.Fprintln(w, pterm.Bold.Sprintf("── %s ──", label))
@@ -385,9 +392,7 @@ func (opts *MetricsOptions) outputChangesetStats(w io.Writer) {
 		formatIntPtr(stats.Lines.New),
 		formatIntPtr(stats.Lines.NewCovered),
 		newCoveragePct(stats.Lines.New, stats.Lines.NewCovered),
-	})
-
-	data = append(data, []string{
+	}, []string{
 		"Branches",
 		formatIntPtr(stats.Branches.Overall),
 		formatIntPtr(stats.Branches.OverallCovered),
@@ -395,9 +400,7 @@ func (opts *MetricsOptions) outputChangesetStats(w io.Writer) {
 		formatIntPtr(stats.Branches.New),
 		formatIntPtr(stats.Branches.NewCovered),
 		newCoveragePct(stats.Branches.New, stats.Branches.NewCovered),
-	})
-
-	data = append(data, []string{
+	}, []string{
 		"Conditions",
 		formatIntPtr(stats.Conditions.Overall),
 		formatIntPtr(stats.Conditions.OverallCovered),

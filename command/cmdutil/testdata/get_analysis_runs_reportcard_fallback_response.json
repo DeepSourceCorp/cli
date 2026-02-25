@@ -1,0 +1,55 @@
+{
+  "repository": {
+    "analysisRuns": {
+      "edges": [
+        {
+          "node": {
+            "runUid": "run-uid-latest",
+            "commitOid": "a9140a56b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6",
+            "branchName": "v2",
+            "status": "SUCCESS",
+            "createdAt": "2025-03-12T10:00:00Z",
+            "finishedAt": "2025-03-12T10:05:00Z",
+            "updatedAt": "2025-03-12T10:05:00Z",
+            "summary": {
+              "occurrencesIntroduced": 0,
+              "occurrencesResolved": 0,
+              "occurrencesSuppressed": 0
+            },
+            "reportCard": null
+          }
+        },
+        {
+          "node": {
+            "runUid": "run-uid-older",
+            "commitOid": "b8230b67c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7",
+            "branchName": "v2",
+            "status": "SUCCESS",
+            "createdAt": "2025-03-11T09:00:00Z",
+            "finishedAt": "2025-03-11T09:08:00Z",
+            "updatedAt": "2025-03-11T09:08:00Z",
+            "summary": {
+              "occurrencesIntroduced": 2,
+              "occurrencesResolved": 1,
+              "occurrencesSuppressed": 0
+            },
+            "reportCard": {
+              "status": "PASSING",
+              "security": null,
+              "reliability": null,
+              "complexity": null,
+              "hygiene": null,
+              "coverage": null,
+              "aggregate": null,
+              "focusArea": null
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": null
+      }
+    }
+  }
+}

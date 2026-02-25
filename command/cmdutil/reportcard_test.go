@@ -39,13 +39,12 @@ func TestToReportCardJSON_Nil(t *testing.T) {
 	}
 }
 
-// TestToReportCardJSON_AllFields verifies a fully-populated ReportCard converts correctly.
-func TestToReportCardJSON_AllFields(t *testing.T) {
+func buildFullReportCard() *runs.ReportCard {
 	lineCov := 82.4
 	branchCov := 71.0
 	score := 88
 
-	rc := &runs.ReportCard{
+	return &runs.ReportCard{
 		Status:      "READY",
 		Security:    &runs.ReportDimension{Grade: "A+", Score: 99, IssuesCount: 0},
 		Reliability: &runs.ReportDimension{Grade: "A", Score: 94, IssuesCount: 3},
@@ -60,38 +59,36 @@ func TestToReportCardJSON_AllFields(t *testing.T) {
 		Aggregate: &runs.ReportAggregate{Grade: "A", Score: 93},
 		FocusArea: &runs.ReportFocusArea{Dimension: "COMPLEXITY", Action: "Reduce cyclomatic complexity"},
 	}
+}
 
+// TestToReportCardJSON_AllFields verifies a fully-populated ReportCard converts correctly.
+func TestToReportCardJSON_AllFields(t *testing.T) {
+	rc := buildFullReportCard()
 	got := ToReportCardJSON(rc)
 	if got == nil {
 		t.Fatal("expected non-nil result")
 	}
 
-	if got.Status != "READY" {
-		t.Errorf("Status: want %q, got %q", "READY", got.Status)
+	checks := []struct {
+		name string
+		ok   bool
+		detail interface{}
+	}{
+		{"Status", got.Status == "READY", got.Status},
+		{"Security", got.Security != nil && got.Security.Grade == "A+" && got.Security.Score == 99 && got.Security.IssuesCount == 0, got.Security},
+		{"Reliability", got.Reliability != nil && got.Reliability.Grade == "A", got.Reliability},
+		{"Complexity", got.Complexity != nil && got.Complexity.Score == 87, got.Complexity},
+		{"Hygiene", got.Hygiene != nil && got.Hygiene.IssuesCount == 2, got.Hygiene},
+		{"Coverage.Grade", got.Coverage != nil && got.Coverage.Grade == "B+", got.Coverage},
+		{"Coverage.LineCoverage", got.Coverage != nil && got.Coverage.LineCoverage != nil && *got.Coverage.LineCoverage == 82.4, got.Coverage},
+		{"Coverage.BranchCoverage", got.Coverage != nil && got.Coverage.BranchCoverage != nil && *got.Coverage.BranchCoverage == 71.0, got.Coverage},
+		{"Aggregate", got.Aggregate != nil && got.Aggregate.Grade == "A" && got.Aggregate.Score == 93, got.Aggregate},
+		{"FocusArea", got.FocusArea != nil && got.FocusArea.Dimension == "COMPLEXITY", got.FocusArea},
 	}
-	if got.Security == nil || got.Security.Grade != "A+" || got.Security.Score != 99 || got.Security.IssuesCount != 0 {
-		t.Errorf("Security mismatch: %+v", got.Security)
-	}
-	if got.Reliability == nil || got.Reliability.Grade != "A" {
-		t.Errorf("Reliability mismatch: %+v", got.Reliability)
-	}
-	if got.Complexity == nil || got.Complexity.Score != 87 {
-		t.Errorf("Complexity mismatch: %+v", got.Complexity)
-	}
-	if got.Hygiene == nil || got.Hygiene.IssuesCount != 2 {
-		t.Errorf("Hygiene mismatch: %+v", got.Hygiene)
-	}
-	if got.Coverage == nil || got.Coverage.Grade != "B+" || got.Coverage.LineCoverage == nil || *got.Coverage.LineCoverage != lineCov {
-		t.Errorf("Coverage mismatch: %+v", got.Coverage)
-	}
-	if got.Coverage.BranchCoverage == nil || *got.Coverage.BranchCoverage != branchCov {
-		t.Errorf("BranchCoverage mismatch: %+v", got.Coverage.BranchCoverage)
-	}
-	if got.Aggregate == nil || got.Aggregate.Grade != "A" || got.Aggregate.Score != 93 {
-		t.Errorf("Aggregate mismatch: %+v", got.Aggregate)
-	}
-	if got.FocusArea == nil || got.FocusArea.Dimension != "COMPLEXITY" {
-		t.Errorf("FocusArea mismatch: %+v", got.FocusArea)
+	for _, c := range checks {
+		if !c.ok {
+			t.Errorf("%s mismatch: %+v", c.name, c.detail)
+		}
 	}
 }
 

@@ -1,16 +1,29 @@
 package tests
 
 import (
+	"context"
+	"fmt"
+	"path/filepath"
+	"runtime"
 	"strings"
 	"testing"
 	"time"
 
-	"github.com/deepsourcelabs/cli/command/cmddeps"
 	statusCmd "github.com/deepsourcelabs/cli/command/auth/status"
+	"github.com/deepsourcelabs/cli/command/cmddeps"
 	"github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/deepsource"
+	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/internal/adapters"
+	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	"github.com/deepsourcelabs/cli/internal/secrets"
+	"github.com/deepsourcelabs/cli/internal/testutil"
 )
+
+func goldenPath(name string) string {
+	_, filename, _, _ := runtime.Caller(0)
+	return filepath.Join(filepath.Dir(filename), "golden_files", name)
+}
 
 func createConfigManager(t *testing.T, token, host, user string, expiry time.Time) *config.Manager {
 	t.Helper()
@@ -35,9 +48,15 @@ func createConfigManager(t *testing.T, token, host, user string, expiry time.Tim
 func TestAuthStatusLoggedIn(t *testing.T) {
 	cfgMgr := createConfigManager(t, "test-token", "deepsource.com", "user@example.com", time.Now().Add(24*time.Hour))
 
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"viewer": goldenPath("viewer_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
 	var buf strings.Builder
 	deps := &cmddeps.Deps{
 		ConfigMgr: cfgMgr,
+		Client:    client,
 		Stdout:    &buf,
 	}
 
@@ -89,5 +108,33 @@ func TestAuthStatusExpired(t *testing.T) {
 
 	if !strings.Contains(buf.String(), "Authentication expired") {
 		t.Errorf("expected expired message, got: %q", buf.String())
+	}
+}
+
+func TestAuthStatusServerRejected(t *testing.T) {
+	cfgMgr := createConfigManager(t, "test-token", "deepsource.com", "user@example.com", time.Now().Add(24*time.Hour))
+
+	// Mock client that returns an auth error from GetViewer
+	mock := graphqlclient.NewMockClient()
+	mock.QueryFunc = func(_ context.Context, query string, _ map[string]any, result any) error {
+		return clierrors.ErrTokenExpired(fmt.Errorf("token revoked"))
+	}
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf strings.Builder
+	deps := &cmddeps.Deps{
+		ConfigMgr: cfgMgr,
+		Client:    client,
+		Stdout:    &buf,
+	}
+
+	cmd := statusCmd.NewCmdStatusWithDeps(deps)
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if !strings.Contains(buf.String(), "Authentication expired") {
+		t.Errorf("expected expired message for server-rejected token, got: %q", buf.String())
 	}
 }

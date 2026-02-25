@@ -66,6 +66,10 @@ func main() {
 		}
 	}()
 
+	os.Exit(run())
+}
+
+func run() int {
 	v.SetBuildInfo(version, Date, buildMode)
 
 	if err := command.Execute(); err != nil {
@@ -79,6 +83,7 @@ func main() {
 			sentry.CaptureException(err)
 		}
 		sentry.Flush(2 * time.Second)
-		os.Exit(1)
+		return 1
 	}
+	return 0
 }

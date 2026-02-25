@@ -250,9 +250,34 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 		opts.CommitOid = cmdutil.ResolveCommitOid(opts.CommitOid)
 	}
 
+	issuesList, err := opts.resolveIssues(ctx, client, remote)
+	if err != nil {
+		return err
+	}
+
+	issuesList = opts.filterIssues(issuesList)
+	opts.issues = issuesList
+
+	switch opts.OutputFormat {
+	case "json":
+		if err := opts.outputJSON(); err != nil {
+			return err
+		}
+	default:
+		if err := opts.outputHuman(); err != nil {
+			return err
+		}
+	}
+
+	opts.warnIfUnpushedCommits()
+	return nil
+}
+
+func (opts *IssuesOptions) resolveIssues(ctx context.Context, client *deepsource.Client, remote *vcs.RemoteData) ([]issues.Issue, error) {
 	serverFilters := opts.buildServerFilters()
 
 	var issuesList []issues.Issue
+	var err error
 	switch {
 	case opts.CommitOid != "":
 		issuesList, err = client.GetRunIssuesFlat(ctx, opts.CommitOid, opts.LimitArg, serverFilters)
@@ -267,10 +292,9 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 		}
 		branchName, branchErr := cmdutil.ResolveBranchName(branchNameFunc)
 		if branchErr != nil {
-			return branchErr
+			return nil, branchErr
 		}
 
-		// Try to auto-detect an open PR for this branch
 		if prNumber, found := cmdutil.ResolvePRForBranch(ctx, client, branchName, remote); found {
 			opts.PRNumber = prNumber
 			issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, prNumber, opts.LimitArg)
@@ -283,32 +307,37 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 				issuesList, err = client.GetIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
 				break
 			}
-			return resolveErr
+			return nil, resolveErr
 		}
 		if cmdutil.IsRunInProgress(runStatus) {
 			style.Infof(opts.stdout(), "Analysis is still in progress for branch %q.", branchName)
-			return nil
+			return nil, nil
 		}
 		if cmdutil.IsRunTimedOut(runStatus) {
 			style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", branchName)
-			return nil
+			return nil, nil
 		}
 		opts.CommitOid = commitOid
 		opts.autoDetectedBranch = branchName
 		issuesList, err = client.GetRunIssuesFlat(ctx, commitOid, opts.LimitArg, serverFilters)
 	}
-	if err != nil {
-		return err
+	return issuesList, err
+}
+
+// warnIfUnpushedCommits prints a warning if the branch was auto-detected and
+// has local commits that haven't been pushed to the remote.
+func (opts *IssuesOptions) warnIfUnpushedCommits() {
+	if opts.autoDetectedBranch == "" {
+		return
 	}
 
-	issuesList = opts.filterIssues(issuesList)
-	opts.issues = issuesList
+	hasUnpushed := cmdutil.HasUnpushedCommits
+	if opts.deps != nil && opts.deps.HasUnpushedCommitsFunc != nil {
+		hasUnpushed = opts.deps.HasUnpushedCommitsFunc
+	}
 
-	switch opts.OutputFormat {
-	case "json":
-		return opts.outputJSON()
-	default:
-		return opts.outputHuman()
+	if hasUnpushed() {
+		style.Infof(opts.stdout(), "You have unpushed commits on %q. Displayed issues may not reflect your latest local changes.", opts.autoDetectedBranch)
 	}
 }
 
@@ -454,6 +483,36 @@ func (opts *IssuesOptions) scopeLabel() string {
 	}
 }
 
+func buildIssueSummary(issuesList []issues.Issue) (sevParts []string, catParts []string) {
+	sevCounts := map[string]int{}
+	catCounts := map[string]int{}
+	for _, issue := range issuesList {
+		sevCounts[strings.ToUpper(issue.IssueSeverity)]++
+		catCounts[strings.ToUpper(issue.IssueCategory)]++
+	}
+
+	for _, sev := range []string{"CRITICAL", "MAJOR", "MINOR"} {
+		if c := sevCounts[sev]; c > 0 {
+			sevParts = append(sevParts, style.IssueSeverityColor(sev, fmt.Sprintf("%d %s", c, strings.ToLower(humanizeSeverity(sev)))))
+		}
+	}
+	for _, cat := range []string{"BUG_RISK", "SECURITY", "ANTI_PATTERN", "PERFORMANCE", "STYLE", "DOCUMENTATION", "COVERAGE", "TYPECHECK"} {
+		if c := catCounts[cat]; c > 0 {
+			catParts = append(catParts, fmt.Sprintf("%d %s", c, strings.ToLower(humanizeCategory(cat))))
+		}
+	}
+	return sevParts, catParts
+}
+
+func groupIssuesByCategory(issuesList []issues.Issue) map[string][]issues.Issue {
+	grouped := map[string][]issues.Issue{}
+	for _, issue := range issuesList {
+		cat := strings.ToUpper(issue.IssueCategory)
+		grouped[cat] = append(grouped[cat], issue)
+	}
+	return grouped
+}
+
 func (opts *IssuesOptions) outputHuman() error {
 	w := opts.stdout()
 	if len(opts.issues) == 0 {
@@ -465,20 +524,7 @@ func (opts *IssuesOptions) outputHuman() error {
 		return nil
 	}
 
-	// Build severity counts for the summary box.
-	sevCounts := map[string]int{}
-	for _, issue := range opts.issues {
-		sev := strings.ToUpper(issue.IssueSeverity)
-		sevCounts[sev]++
-	}
-
-	// Build severity breakdown string (only non-zero severities, colored).
-	var sevParts []string
-	for _, sev := range []string{"CRITICAL", "MAJOR", "MINOR"} {
-		if c := sevCounts[sev]; c > 0 {
-			sevParts = append(sevParts, style.IssueSeverityColor(sev, fmt.Sprintf("%d %s", c, strings.ToLower(humanizeSeverity(sev)))))
-		}
-	}
+	sevParts, catParts := buildIssueSummary(opts.issues)
 
 	scopeLabel := opts.scopeLabel()
 	fmt.Fprintln(w, pterm.Bold.Sprintf("── Issues · %s ────", scopeLabel))
@@ -489,17 +535,6 @@ func (opts *IssuesOptions) outputHuman() error {
 	}
 	fmt.Fprintln(w, summaryLine)
 
-	catCounts := map[string]int{}
-	for _, issue := range opts.issues {
-		cat := strings.ToUpper(issue.IssueCategory)
-		catCounts[cat]++
-	}
-	var catParts []string
-	for _, cat := range []string{"BUG_RISK", "SECURITY", "ANTI_PATTERN", "PERFORMANCE", "STYLE", "DOCUMENTATION", "COVERAGE", "TYPECHECK"} {
-		if c := catCounts[cat]; c > 0 {
-			catParts = append(catParts, fmt.Sprintf("%d %s", c, strings.ToLower(humanizeCategory(cat))))
-		}
-	}
 	if len(catParts) > 0 {
 		fmt.Fprintln(w, "   "+strings.Join(catParts, " · "))
 	}
@@ -507,13 +542,7 @@ func (opts *IssuesOptions) outputHuman() error {
 
 	cwd, _ := os.Getwd()
 
-	// Group issues by category.
-	grouped := map[string][]issues.Issue{}
-	for _, issue := range opts.issues {
-		cat := strings.ToUpper(issue.IssueCategory)
-		grouped[cat] = append(grouped[cat], issue)
-	}
-
+	grouped := groupIssuesByCategory(opts.issues)
 	categoryOrder := []string{"BUG_RISK", "SECURITY", "ANTI_PATTERN", "PERFORMANCE", "STYLE", "DOCUMENTATION", "COVERAGE", "TYPECHECK"}
 	first := true
 	for _, cat := range categoryOrder {

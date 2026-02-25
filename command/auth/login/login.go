@@ -1,11 +1,13 @@
 package login
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/command/cmddeps"
 	"github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/internal/cli/args"
 	"github.com/deepsourcelabs/cli/internal/cli/prompt"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
@@ -88,6 +90,22 @@ func (opts *LoginOptions) Run() (err error) {
 	}
 	opts.User = cfg.User
 	opts.TokenExpired = cfg.IsExpired()
+
+	// If local says valid, verify against the server
+	if !opts.TokenExpired && cfg.Token != "" && cfg.Host != "" {
+		client, clientErr := deepsource.New(deepsource.ClientOpts{
+			Token:            cfg.Token,
+			HostName:         cfg.Host,
+			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+		})
+		if clientErr == nil {
+			_, verifyErr := client.GetViewer(context.Background())
+			if verifyErr != nil {
+				// Server rejected the token — treat as expired
+				opts.TokenExpired = true
+			}
+		}
+	}
 
 	// Login using the interactive mode
 	if opts.Interactive {

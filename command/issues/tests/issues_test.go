@@ -523,6 +523,71 @@ func TestIssuesEmptyResults(t *testing.T) {
 	}
 }
 
+func TestIssuesUnpushedCommitsWarning(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"pullRequests(":         goldenPath("get_pr_by_branch_empty_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_response.json"),
+		"checks {":              goldenPath("commit_scope_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "main", nil
+		},
+		HasUnpushedCommitsFunc: func() bool {
+			return true
+		},
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--output", "json"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	got := buf.String()
+	if !strings.Contains(got, "unpushed commits") {
+		t.Errorf("expected unpushed commits warning, got: %q", got)
+	}
+}
+
+func TestIssuesNoUnpushedWarningWithCommitFlag(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"checks {": goldenPath("commit_scope_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		HasUnpushedCommitsFunc: func() bool {
+			return true
+		},
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--commit", "abc123f", "--output", "json"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	got := buf.String()
+	if strings.Contains(got, "unpushed commits") {
+		t.Errorf("should not show unpushed warning with --commit flag, got: %q", got)
+	}
+}
+
 // TestIssuesCategoryHyphenWithCommit verifies that hyphenated category values
 // like "bug-risk" and "anti-pattern" are normalised to the GraphQL enum form
 // (BUG_RISK, ANTI_PATTERN) when sent as server-side filters with --commit.

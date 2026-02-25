@@ -132,44 +132,9 @@ func (opts *RunsOptions) runList() error {
 		}
 	}
 
-	ctx := context.Background()
-
-	var analysisRuns []runstypes.AnalysisRun
-
-	if opts.RepoArg != "" {
-		remote, resolveErr := vcs.ResolveRemote(opts.RepoArg)
-		if resolveErr != nil {
-			return resolveErr
-		}
-		analysisRuns, _, err = client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg, nil, nil)
-		if err != nil {
-			return clierrors.WrapAPIError("Failed to fetch analysis runs", err)
-		}
-	} else {
-		var branchName string
-		if opts.deps != nil && opts.deps.BranchNameFunc != nil {
-			branchName, err = opts.deps.BranchNameFunc()
-		} else {
-			branchName, err = cmdutil.ResolveBranchName(nil)
-		}
-		if err != nil {
-			return fmt.Errorf("failed to detect current branch: %w", err)
-		}
-
-		var remote *vcs.RemoteData
-		if opts.deps != nil && opts.deps.RemoteFunc != nil {
-			remote, err = opts.deps.RemoteFunc()
-		} else {
-			remote, err = vcs.ResolveRemote("")
-		}
-		if err != nil {
-			return err
-		}
-
-		analysisRuns, _, err = client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg, nil, &branchName)
-		if err != nil {
-			return clierrors.WrapAPIError("Failed to fetch analysis runs", err)
-		}
+	analysisRuns, err := opts.fetchRuns(client)
+	if err != nil {
+		return err
 	}
 
 	if len(analysisRuns) == 0 {
@@ -183,6 +148,49 @@ func (opts *RunsOptions) runList() error {
 
 	showRunsTable(opts.stdout(), analysisRuns)
 	return nil
+}
+
+func (opts *RunsOptions) fetchRuns(client *deepsource.Client) ([]runstypes.AnalysisRun, error) {
+	ctx := context.Background()
+
+	if opts.RepoArg != "" {
+		remote, resolveErr := vcs.ResolveRemote(opts.RepoArg)
+		if resolveErr != nil {
+			return nil, resolveErr
+		}
+		runs, _, err := client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg, nil, nil)
+		if err != nil {
+			return nil, clierrors.WrapAPIError("Failed to fetch analysis runs", err)
+		}
+		return runs, nil
+	}
+
+	var branchName string
+	var err error
+	if opts.deps != nil && opts.deps.BranchNameFunc != nil {
+		branchName, err = opts.deps.BranchNameFunc()
+	} else {
+		branchName, err = cmdutil.ResolveBranchName(nil)
+	}
+	if err != nil {
+		return nil, fmt.Errorf("failed to detect current branch: %w", err)
+	}
+
+	var remote *vcs.RemoteData
+	if opts.deps != nil && opts.deps.RemoteFunc != nil {
+		remote, err = opts.deps.RemoteFunc()
+	} else {
+		remote, err = vcs.ResolveRemote("")
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	runs, _, err := client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg, nil, &branchName)
+	if err != nil {
+		return nil, clierrors.WrapAPIError("Failed to fetch analysis runs", err)
+	}
+	return runs, nil
 }
 
 // runDetail fetches and displays metadata + issues summary for a single commit.
@@ -382,6 +390,41 @@ func showRunsTable(w io.Writer, analysisRuns []runstypes.AnalysisRun) {
 	pterm.DefaultTable.WithHasHeader().WithData(data).WithWriter(w).Render()
 }
 
+type issueSeverityCounts struct {
+	critical int
+	major    int
+	minor    int
+}
+
+func countIssuesBySeverity(issues []runstypes.RunIssue) issueSeverityCounts {
+	var counts issueSeverityCounts
+	for _, issue := range issues {
+		switch strings.ToUpper(issue.Severity) {
+		case "CRITICAL":
+			counts.critical++
+		case "MAJOR":
+			counts.major++
+		case "MINOR":
+			counts.minor++
+		}
+	}
+	return counts
+}
+
+func renderSeverityBreakdown(counts issueSeverityCounts) []string {
+	var parts []string
+	if counts.critical > 0 {
+		parts = append(parts, style.IssueSeverityColor("CRITICAL", fmt.Sprintf("%d critical", counts.critical)))
+	}
+	if counts.major > 0 {
+		parts = append(parts, style.IssueSeverityColor("MAJOR", fmt.Sprintf("%d major", counts.major)))
+	}
+	if counts.minor > 0 {
+		parts = append(parts, style.IssueSeverityColor("MINOR", fmt.Sprintf("%d minor", counts.minor)))
+	}
+	return parts
+}
+
 func showIssuesSummary(w io.Writer, issues []runstypes.RunIssue) {
 	if len(issues) == 0 {
 		fmt.Fprintln(w)
@@ -389,19 +432,9 @@ func showIssuesSummary(w io.Writer, issues []runstypes.RunIssue) {
 		return
 	}
 
-	var critical, major, minor int
 	categoryCount := map[string]int{}
 	analyzerCount := map[string]int{}
-
 	for _, issue := range issues {
-		switch strings.ToUpper(issue.Severity) {
-		case "CRITICAL":
-			critical++
-		case "MAJOR":
-			major++
-		case "MINOR":
-			minor++
-		}
 		if issue.Category != "" {
 			categoryCount[issue.Category]++
 		}
@@ -413,17 +446,8 @@ func showIssuesSummary(w io.Writer, issues []runstypes.RunIssue) {
 	fmt.Fprintln(w)
 	fmt.Fprintln(w, pterm.Bold.Sprintf("Issues: %d total", len(issues)))
 
-	var parts []string
-	if critical > 0 {
-		parts = append(parts, style.IssueSeverityColor("CRITICAL", fmt.Sprintf("%d critical", critical)))
-	}
-	if major > 0 {
-		parts = append(parts, style.IssueSeverityColor("MAJOR", fmt.Sprintf("%d major", major)))
-	}
-	if minor > 0 {
-		parts = append(parts, style.IssueSeverityColor("MINOR", fmt.Sprintf("%d minor", minor)))
-	}
-	if len(parts) > 0 {
+	counts := countIssuesBySeverity(issues)
+	if parts := renderSeverityBreakdown(counts); len(parts) > 0 {
 		fmt.Fprintln(w, "  "+strings.Join(parts, ", "))
 	}
 

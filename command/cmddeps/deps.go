@@ -18,6 +18,7 @@ type Deps struct {
 	Stdout      io.Writer
 	Stderr      io.Writer
 	RepoService *reposvc.Service
-	BranchNameFunc func() (string, error)
-	RemoteFunc     func() (*vcs.RemoteData, error)
+	BranchNameFunc         func() (string, error)
+	RemoteFunc             func() (*vcs.RemoteData, error)
+	HasUnpushedCommitsFunc func() bool
 }
