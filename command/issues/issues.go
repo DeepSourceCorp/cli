@@ -483,6 +483,9 @@ func matchesPathFilters(path string, filters []string) bool {
 func (opts *IssuesOptions) scopeLabel() string {
 	switch {
 	case opts.autoDetectedBranch != "":
+		if opts.CommitOid == "" {
+			return opts.autoDetectedBranch
+		}
 		short := opts.CommitOid
 		if len(short) > 8 {
 			short = short[:8]
@@ -579,10 +582,8 @@ func (opts *IssuesOptions) outputHuman() error {
 		for i, issue := range group {
 			location := formatLocation(issue, cwd)
 			severity := humanizeSeverity(issue.IssueSeverity)
-			analyzer := analyzerDisplayName(issue.Analyzer)
-
 			sevTag := style.IssueSeverityColor(issue.IssueSeverity, "["+severity+"]")
-			fmt.Fprintf(w, "  %s [%s]  %s\n", sevTag, analyzer, issue.IssueText)
+			fmt.Fprintf(w, "  %s  %s\n", sevTag, issue.IssueText)
 			if opts.Verbose && issue.Description != "" {
 				fmt.Fprintf(w, "  %s\n", pterm.Gray(issue.Description))
 			}
@@ -688,12 +689,6 @@ func humanizeCategory(c string) string {
 	}
 }
 
-func analyzerDisplayName(meta issues.AnalyzerMeta) string {
-	if meta.Name != "" {
-		return meta.Name
-	}
-	return meta.Shortcode
-}
 
 func formatLocationFromParts(loc issues.Location, cwd string) string {
 	filePath := loc.Path
