@@ -4,9 +4,9 @@
       "edges": [
         {
           "node": {
-            "runUid": "run-uid-first",
-            "commitOid": "a9140a56b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6",
-            "branchName": "v2",
+            "runUid": "run-uid-running-1",
+            "commitOid": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0",
+            "branchName": "feature/new-auth",
             "status": "RUNNING",
             "createdAt": "2025-03-12T10:00:00Z",
             "finishedAt": null,
@@ -21,16 +21,16 @@
         },
         {
           "node": {
-            "runUid": "run-uid-second",
-            "commitOid": "b8230b67c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7",
-            "branchName": "v2",
+            "runUid": "run-uid-success-2",
+            "commitOid": "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1",
+            "branchName": "feature/new-auth",
             "status": "SUCCESS",
             "createdAt": "2025-03-11T09:00:00Z",
             "finishedAt": "2025-03-11T09:08:00Z",
             "updatedAt": "2025-03-11T09:08:00Z",
             "summary": {
-              "occurrencesIntroduced": 1,
-              "occurrencesResolved": 0,
+              "occurrencesIntroduced": 2,
+              "occurrencesResolved": 1,
               "occurrencesSuppressed": 0
             },
             "reportCard": null

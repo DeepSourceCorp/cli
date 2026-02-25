@@ -1,12 +1,14 @@
 package cmdutil
 
 import (
+	"bytes"
 	"context"
 	"errors"
 	"path/filepath"
 	"runtime"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
@@ -267,5 +269,175 @@ func TestResolveLatestRunForBranch_Success(t *testing.T) {
 	}
 	if run.CommitOid != sha {
 		t.Errorf("expected commitOid %q, got %q", sha, run.CommitOid)
+	}
+}
+
+// --- WaitOrFallback tests ---
+
+// TestWaitOrFallback_AlreadyCompleted verifies that a non-in-progress status
+// is returned immediately without any polling or prompt.
+func TestWaitOrFallback_AlreadyCompleted(t *testing.T) {
+	var buf bytes.Buffer
+	status, err := WaitOrFallback(
+		context.Background(),
+		&buf,
+		"SUCCESS",
+		"abc12345",
+		"main",
+		10*time.Millisecond,
+		func(_ context.Context) (string, error) {
+			t.Fatal("check should not be called for completed status")
+			return "", nil
+		},
+	)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if status != "SUCCESS" {
+		t.Errorf("expected SUCCESS, got %q", status)
+	}
+}
+
+// TestWaitOrFallback_TimeoutStatus verifies TIMEOUT is returned immediately.
+func TestWaitOrFallback_TimeoutStatus(t *testing.T) {
+	var buf bytes.Buffer
+	status, err := WaitOrFallback(
+		context.Background(),
+		&buf,
+		"TIMEOUT",
+		"abc12345",
+		"main",
+		10*time.Millisecond,
+		func(_ context.Context) (string, error) {
+			t.Fatal("check should not be called for TIMEOUT status")
+			return "", nil
+		},
+	)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if status != "TIMEOUT" {
+		t.Errorf("expected TIMEOUT, got %q", status)
+	}
+}
+
+// TestWaitOrFallback_NonTTYFallback verifies that in a non-TTY environment
+// (like a test runner), an in-progress status returns FALLBACK.
+func TestWaitOrFallback_NonTTYFallback(t *testing.T) {
+	var buf bytes.Buffer
+	status, err := WaitOrFallback(
+		context.Background(),
+		&buf,
+		"RUNNING",
+		"abc12345",
+		"feature/test",
+		10*time.Millisecond,
+		func(_ context.Context) (string, error) {
+			t.Fatal("check should not be called in non-TTY fallback")
+			return "", nil
+		},
+	)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if status != "FALLBACK" {
+		t.Errorf("expected FALLBACK, got %q", status)
+	}
+}
+
+// TestWaitOrFallback_PendingFallback verifies PENDING also triggers FALLBACK in non-TTY.
+func TestWaitOrFallback_PendingFallback(t *testing.T) {
+	var buf bytes.Buffer
+	status, err := WaitOrFallback(
+		context.Background(),
+		&buf,
+		"PENDING",
+		"def67890",
+		"develop",
+		10*time.Millisecond,
+		func(_ context.Context) (string, error) {
+			t.Fatal("check should not be called in non-TTY fallback")
+			return "", nil
+		},
+	)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if status != "FALLBACK" {
+		t.Errorf("expected FALLBACK, got %q", status)
+	}
+}
+
+// --- ResolveLatestCompletedRun tests ---
+
+// TestResolveLatestCompletedRun_MixedStatus verifies that the first completed
+// run is returned when the most recent run is still in-progress.
+func TestResolveLatestCompletedRun_MixedStatus(t *testing.T) {
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"query GetAnalysisRuns(": testdataPath("get_analysis_runs_mixed_status_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	run, err := ResolveLatestCompletedRun(
+		context.Background(),
+		client,
+		"feature/new-auth",
+		testRemote,
+	)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if run == nil {
+		t.Fatal("expected non-nil run, got nil")
+	}
+	if run.Status != "SUCCESS" {
+		t.Errorf("expected status SUCCESS, got %q", run.Status)
+	}
+	if run.RunUid != "run-uid-success-2" {
+		t.Errorf("expected run-uid-success-2, got %q", run.RunUid)
+	}
+}
+
+// TestResolveLatestCompletedRun_AllRunning verifies nil is returned when
+// no completed runs exist.
+func TestResolveLatestCompletedRun_AllRunning(t *testing.T) {
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"query GetAnalysisRuns(": testdataPath("get_analysis_runs_all_running_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	run, err := ResolveLatestCompletedRun(
+		context.Background(),
+		client,
+		"develop",
+		testRemote,
+	)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if run != nil {
+		t.Errorf("expected nil run, got %+v", run)
+	}
+}
+
+// TestResolveLatestCompletedRun_NoRuns verifies nil is returned when the
+// branch has no runs at all.
+func TestResolveLatestCompletedRun_NoRuns(t *testing.T) {
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"query GetAnalysisRuns(": testdataPath("get_analysis_runs_empty_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	run, err := ResolveLatestCompletedRun(
+		context.Background(),
+		client,
+		"feature/no-runs",
+		testRemote,
+	)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if run != nil {
+		t.Errorf("expected nil run, got %+v", run)
 	}
 }
