@@ -7,6 +7,7 @@ import (
 	"io"
 	"os"
 	"slices"
+	"strconv"
 	"strings"
 	"time"
 
@@ -18,12 +19,14 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 	issuesQuery "github.com/deepsourcelabs/cli/deepsource/issues/queries"
 	"github.com/deepsourcelabs/cli/internal/cli/completion"
+	"github.com/deepsourcelabs/cli/internal/cli/prompt"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	"github.com/deepsourcelabs/cli/internal/vcs"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
+	"golang.org/x/term"
 )
 
 type IssuesOptions struct {
@@ -43,6 +46,9 @@ type IssuesOptions struct {
 	autoDetectedBranch string
 	issues          []issues.Issue
 	deps            *cmddeps.Deps
+	explicitScope   bool
+	client          *deepsource.Client
+	remote          *vcs.RemoteData
 }
 
 func (opts *IssuesOptions) stdout() io.Writer {
@@ -248,9 +254,14 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 		}
 	}
 
+	opts.explicitScope = opts.CommitOid != "" || opts.PRNumber > 0 || opts.DefaultBranch
+
 	if opts.CommitOid != "" {
 		opts.CommitOid = cmdutil.ResolveCommitOid(opts.CommitOid)
 	}
+
+	opts.client = client
+	opts.remote = remote
 
 	issuesList, err := opts.resolveIssues(ctx, client, remote)
 	if err != nil {
@@ -266,12 +277,12 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 			return err
 		}
 	default:
-		if err := opts.outputHuman(); err != nil {
+		if err := opts.outputHuman(ctx); err != nil {
 			return err
 		}
 	}
 
-	opts.warnIfUnpushedCommits()
+	opts.warnIfLocalChanges()
 	return nil
 }
 
@@ -365,9 +376,9 @@ func (opts *IssuesOptions) resolveIssues(ctx context.Context, client *deepsource
 	return issuesList, err
 }
 
-// warnIfUnpushedCommits prints a warning if the branch was auto-detected and
-// has local commits that haven't been pushed to the remote.
-func (opts *IssuesOptions) warnIfUnpushedCommits() {
+// warnIfLocalChanges prints a warning if the branch was auto-detected and
+// has unpushed commits or uncommitted changes.
+func (opts *IssuesOptions) warnIfLocalChanges() {
 	if opts.autoDetectedBranch == "" || len(opts.issues) == 0 {
 		return
 	}
@@ -377,8 +388,21 @@ func (opts *IssuesOptions) warnIfUnpushedCommits() {
 		hasUnpushed = opts.deps.HasUnpushedCommitsFunc
 	}
 
-	if hasUnpushed() {
+	hasUncommitted := cmdutil.HasUncommittedChanges
+	if opts.deps != nil && opts.deps.HasUncommittedChangesFunc != nil {
+		hasUncommitted = opts.deps.HasUncommittedChangesFunc
+	}
+
+	unpushed := hasUnpushed()
+	uncommitted := hasUncommitted()
+
+	switch {
+	case unpushed && uncommitted:
+		style.Infof(opts.stdout(), "You have unpushed commits and uncommitted changes on %q. Displayed issues may not reflect your latest local changes.", opts.autoDetectedBranch)
+	case unpushed:
 		style.Infof(opts.stdout(), "You have unpushed commits on %q. Displayed issues may not reflect your latest local changes.", opts.autoDetectedBranch)
+	case uncommitted:
+		style.Infof(opts.stdout(), "You have uncommitted changes on %q. Displayed issues may not reflect your latest local changes.", opts.autoDetectedBranch)
 	}
 }
 
@@ -557,30 +581,50 @@ func groupIssuesByCategory(issuesList []issues.Issue) map[string][]issues.Issue 
 	return grouped
 }
 
-func (opts *IssuesOptions) outputHuman() error {
-	w := opts.stdout()
+func (opts *IssuesOptions) outputHuman(ctx context.Context) error {
 	if len(opts.issues) == 0 {
 		if opts.hasFilters() {
 			style.Infof(opts.stdout(), "No issues matched the provided filters in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		} else {
 			style.Infof(opts.stdout(), "No issues found in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		}
+
+		if opts.shouldPromptAlternativeScope() {
+			newIssues, err := opts.promptAlternativeScope(ctx)
+			if err != nil {
+				return err
+			}
+			if newIssues != nil {
+				opts.issues = newIssues
+				if len(opts.issues) == 0 {
+					style.Infof(opts.stdout(), "No issues found in %s on %s.", opts.repoSlug, opts.scopeLabel())
+					return nil
+				}
+				return opts.renderHumanIssues()
+			}
+		}
 		return nil
 	}
+
+	return opts.renderHumanIssues()
+}
+
+func (opts *IssuesOptions) renderHumanIssues() error {
+	w := opts.stdout()
 
 	sevParts, catParts := buildIssueSummary(opts.issues)
 
 	scopeLabel := opts.scopeLabel()
 	fmt.Fprintln(w, pterm.Bold.Sprintf("── Issues · %s ────", scopeLabel))
 
-	summaryLine := fmt.Sprintf("   %d total", len(opts.issues))
+	summaryLine := fmt.Sprintf("%d total", len(opts.issues))
 	if len(sevParts) > 0 {
 		summaryLine += " · " + strings.Join(sevParts, " · ")
 	}
 	fmt.Fprintln(w, summaryLine)
 
 	if len(catParts) > 0 {
-		fmt.Fprintln(w, "   "+strings.Join(catParts, " · "))
+		fmt.Fprintln(w, strings.Join(catParts, " · "))
 	}
 	fmt.Fprintln(w)
 
@@ -624,6 +668,90 @@ func (opts *IssuesOptions) outputHuman() error {
 	fmt.Fprintf(w, "\nShowing %d issue(s) in %s from %s\n", len(opts.issues), opts.repoSlug, scopeLabel)
 
 	return nil
+}
+
+// --- Interactive scope menu ---
+
+func (opts *IssuesOptions) selectFromOptions(msg, help string, options []string) (string, error) {
+	if opts.deps != nil && opts.deps.SelectFromOptionsFunc != nil {
+		return opts.deps.SelectFromOptionsFunc(msg, help, options)
+	}
+	return prompt.SelectFromOptions(msg, help, options)
+}
+
+func (opts *IssuesOptions) getSingleLineInput(msg, help string) (string, error) {
+	if opts.deps != nil && opts.deps.GetSingleLineInputFunc != nil {
+		return opts.deps.GetSingleLineInputFunc(msg, help)
+	}
+	return prompt.GetSingleLineInput(msg, help)
+}
+
+func (opts *IssuesOptions) isInteractive() bool {
+	if opts.deps != nil && opts.deps.IsInteractiveFunc != nil {
+		return opts.deps.IsInteractiveFunc()
+	}
+	return term.IsTerminal(int(os.Stdout.Fd()))
+}
+
+func (opts *IssuesOptions) shouldPromptAlternativeScope() bool {
+	return !opts.explicitScope &&
+		!opts.hasFilters() &&
+		opts.OutputFormat == "pretty" &&
+		opts.isInteractive()
+}
+
+const (
+	scopeOptionDefaultBranch = "View issues on default branch"
+	scopeOptionPR            = "View issues for a pull request"
+	scopeOptionCommit        = "View issues for a specific commit"
+	scopeOptionExit          = "Exit"
+)
+
+func (opts *IssuesOptions) promptAlternativeScope(ctx context.Context) ([]issues.Issue, error) {
+	fmt.Fprintln(opts.stdout())
+	choice, err := opts.selectFromOptions(
+		"Try a different scope?",
+		"",
+		[]string{scopeOptionDefaultBranch, scopeOptionPR, scopeOptionCommit, scopeOptionExit},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	// Reset scope fields
+	opts.CommitOid = ""
+	opts.PRNumber = 0
+	opts.DefaultBranch = false
+	opts.autoDetectedBranch = ""
+
+	switch choice {
+	case scopeOptionDefaultBranch:
+		opts.DefaultBranch = true
+	case scopeOptionPR:
+		prStr, inputErr := opts.getSingleLineInput("Pull request number:", "")
+		if inputErr != nil {
+			return nil, inputErr
+		}
+		prNum, parseErr := strconv.Atoi(strings.TrimSpace(prStr))
+		if parseErr != nil {
+			return nil, fmt.Errorf("invalid PR number: %s", prStr)
+		}
+		opts.PRNumber = prNum
+	case scopeOptionCommit:
+		sha, inputErr := opts.getSingleLineInput("Commit SHA:", "")
+		if inputErr != nil {
+			return nil, inputErr
+		}
+		opts.CommitOid = cmdutil.ResolveCommitOid(strings.TrimSpace(sha))
+	case scopeOptionExit:
+		return nil, nil
+	}
+
+	issuesList, err := opts.resolveIssues(ctx, opts.client, opts.remote)
+	if err != nil {
+		return nil, err
+	}
+	return opts.filterIssues(issuesList), nil
 }
 
 // --- JSON output ---

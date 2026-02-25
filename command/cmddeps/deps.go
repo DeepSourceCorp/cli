@@ -20,5 +20,9 @@ type Deps struct {
 	RepoService *reposvc.Service
 	BranchNameFunc         func() (string, error)
 	RemoteFunc             func() (*vcs.RemoteData, error)
-	HasUnpushedCommitsFunc func() bool
+	HasUnpushedCommitsFunc     func() bool
+	HasUncommittedChangesFunc  func() bool
+	SelectFromOptionsFunc      func(msg, help string, opts []string) (string, error)
+	GetSingleLineInputFunc func(msg, help string) (string, error)
+	IsInteractiveFunc      func() bool
 }
