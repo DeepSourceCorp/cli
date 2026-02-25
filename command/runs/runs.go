@@ -181,7 +181,7 @@ func (opts *RunsOptions) runList() error {
 		return opts.outputRunsJSON(analysisRuns)
 	}
 
-	showRunsTable(analysisRuns)
+	showRunsTable(opts.stdout(), analysisRuns)
 	return nil
 }
 
@@ -336,7 +336,7 @@ func (opts *RunsOptions) outputRunDetailJSON(runWithIssues *runstypes.RunWithIss
 
 // --- Display helpers ---
 
-func showRunsTable(analysisRuns []runstypes.AnalysisRun) {
+func showRunsTable(w io.Writer, analysisRuns []runstypes.AnalysisRun) {
 	header := []string{"Commit", "Branch", "Status", "Grade", "Introduced", "Resolved", "Suppressed", "Finished"}
 	data := [][]string{header}
 
@@ -379,7 +379,7 @@ func showRunsTable(analysisRuns []runstypes.AnalysisRun) {
 		})
 	}
 
-	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
+	pterm.DefaultTable.WithHasHeader().WithData(data).WithWriter(w).Render()
 }
 
 func showIssuesSummary(w io.Writer, issues []runstypes.RunIssue) {
