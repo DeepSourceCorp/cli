@@ -35,6 +35,7 @@ func TestIssuesAutoDetectBranch(t *testing.T) {
 		BranchNameFunc: func() (string, error) {
 			return "main", nil
 		},
+		HasUnpushedCommitsFunc: func() bool { return false },
 	}
 
 	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
@@ -68,6 +69,7 @@ func TestIssuesAutoDetectPR(t *testing.T) {
 		BranchNameFunc: func() (string, error) {
 			return "feature/new-auth", nil
 		},
+		HasUnpushedCommitsFunc: func() bool { return false },
 	}
 
 	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
