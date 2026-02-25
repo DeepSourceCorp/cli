@@ -1,10 +1,9 @@
 #!/bin/sh
 # DeepSource CLI installer
-# Usage: curl -fsSL https://DOMAIN/install | sh
 
 set -e
 
-INSTALL_DIR="${DEEPSOURCE_INSTALL_DIR:-}"
+INSTALL_DIR="${BINDIR:-}"
 BASE_URL="__BASE_URL__"
 BINARY_NAME="__BINARY_NAME__"
 
@@ -80,7 +79,7 @@ main() {
   elif [ "$(id -u)" = "0" ]; then
     BIN_DIR="/usr/local/bin"
   else
-    BIN_DIR="${HOME}/.local/bin"
+    BIN_DIR="__DEFAULT_INSTALL_DIR__"
   fi
 
   mkdir -p "$BIN_DIR"

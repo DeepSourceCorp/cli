@@ -701,58 +701,7 @@ func (opts *IssuesOptions) checkInProgressAndRetry(ctx context.Context) (bool, e
 		commitShort = commitShort[:8]
 	}
 
-	if !opts.isInteractive() {
-		return opts.refetchAfterFallback(ctx, commitShort)
-	}
-
-	// Interactive: let the user choose to wait or see last completed results.
-	fmt.Fprintf(opts.stdout(), "\nAnalysis is still running on branch %q (latest commit %s).\n\n", opts.autoDetectedBranch, commitShort)
-
-	choice, err := opts.selectFromOptions(
-		"What would you like to do?",
-		"",
-		[]string{
-			"Wait for the current analysis to finish",
-			"Show results from the last completed analysis",
-		},
-	)
-	if err != nil {
-		return false, err
-	}
-
-	if choice == "Show results from the last completed analysis" {
-		return opts.refetchAfterFallback(ctx, commitShort)
-	}
-
-	// Wait: poll for completion.
-	pollCtx, cancel := context.WithTimeout(ctx, 10*time.Minute)
-	defer cancel()
-
-	style.Infof(opts.stdout(), "Waiting for analysis to complete...")
-
-	ticker := time.NewTicker(5 * time.Second)
-	defer ticker.Stop()
-
-	for {
-		select {
-		case <-pollCtx.Done():
-			return false, pollCtx.Err()
-		case <-ticker.C:
-			r, checkErr := cmdutil.ResolveLatestRunForBranch(pollCtx, opts.client, opts.autoDetectedBranch, opts.remote)
-			if checkErr != nil {
-				return false, checkErr
-			}
-			if !cmdutil.IsRunInProgress(r.Status) {
-				if cmdutil.IsRunTimedOut(r.Status) {
-					style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", opts.autoDetectedBranch)
-					return true, nil
-				}
-				// Run completed — re-fetch issues.
-				opts.CommitOid = r.CommitOid
-				return opts.refetchIssuesAndRender(ctx)
-			}
-		}
-	}
+	return opts.refetchAfterFallback(ctx, commitShort)
 }
 
 // refetchAfterFallback finds the last completed run on the branch and
@@ -764,7 +713,7 @@ func (opts *IssuesOptions) refetchAfterFallback(ctx context.Context, inProgressC
 		return false, err
 	}
 	if run == nil {
-		style.Infof(opts.stdout(), "No completed analysis runs found for branch %q.", opts.autoDetectedBranch)
+		style.Infof(opts.stdout(), "Analysis is in progress on branch %q (commit %s). Try again in a few minutes.", opts.autoDetectedBranch, inProgressCommitShort)
 		return true, nil
 	}
 
