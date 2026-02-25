@@ -4,11 +4,18 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"io"
+	"os"
 	"os/exec"
 	"strings"
+	"time"
+
+	"golang.org/x/term"
 
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/runs"
+	"github.com/deepsourcelabs/cli/internal/cli/prompt"
+	"github.com/deepsourcelabs/cli/internal/cli/style"
 	"github.com/deepsourcelabs/cli/internal/debug"
 	"github.com/deepsourcelabs/cli/internal/vcs"
 )
@@ -38,35 +45,14 @@ func ResolveLatestRun(
 	return run.CommitOid, branchName, run.Status, nil
 }
 
-// ResolveLatestRunForBranch finds the latest analysis run for a given branch name
-// that has a completed report card. It fetches up to 10 recent runs and returns
-// the first one with a non-nil ReportCard. If no run has a report card, it returns
-// the most recent run (so callers can still show in-progress/timeout status messages).
+// ResolveLatestRunForBranch finds the latest analysis run for a given branch name.
 func ResolveLatestRunForBranch(
 	ctx context.Context,
 	client *deepsource.Client,
 	branchName string,
 	remote *vcs.RemoteData,
 ) (*runs.AnalysisRun, error) {
-	debug.Log("resolve: fetching recent analysis runs for branch %q (limit=10)", branchName)
-	allRuns, _, err := client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, 10, nil, &branchName)
-	if err != nil {
-		return nil, fmt.Errorf("failed to fetch analysis runs: %w", err)
-	}
-	if len(allRuns) == 0 {
-		return nil, fmt.Errorf(
-			"no analysis runs found for branch %q.\nTry: --default-branch, --commit <sha>, or --pr <number>",
-			branchName,
-		)
-	}
-	for i, run := range allRuns {
-		if run.ReportCard != nil {
-			debug.Log("resolve: found run %s (status=%s) with report card at index %d", run.RunUid, run.Status, i)
-			return &allRuns[i], nil
-		}
-	}
-	debug.Log("resolve: no run with report card found, returning latest run %s (status=%s)", allRuns[0].RunUid, allRuns[0].Status)
-	return &allRuns[0], nil
+	return resolveRunFromCommits(ctx, client, branchName, remote)
 }
 
 // resolveRunFromCommits fetches the latest analysis run for a given branch using
@@ -100,6 +86,93 @@ func IsRunInProgress(status string) bool {
 // IsRunTimedOut returns true if the run status indicates analysis timed out.
 func IsRunTimedOut(status string) bool {
 	return status == "TIMEOUT"
+}
+
+// WaitOrFallback handles in-progress analysis runs by either waiting for
+// completion (interactive TTY) or falling back to the last completed run
+// (non-interactive). Returns the final run status, or "FALLBACK" if the
+// caller should fetch the last completed run instead.
+func WaitOrFallback(
+	ctx context.Context,
+	w io.Writer,
+	initialStatus string,
+	commitShort string,
+	branchName string,
+	pollInterval time.Duration,
+	check func(ctx context.Context) (status string, err error),
+) (string, error) {
+	if !IsRunInProgress(initialStatus) {
+		return initialStatus, nil
+	}
+
+	if !term.IsTerminal(int(os.Stdout.Fd())) {
+		return "FALLBACK", nil
+	}
+
+	fmt.Fprintf(w, "\nAnalysis is still running on branch %q (latest commit %s).\n\n", branchName, commitShort)
+
+	choice, err := prompt.SelectFromOptions(
+		"What would you like to do?",
+		"",
+		[]string{
+			"Wait for the current analysis to finish",
+			"Show results from the last completed analysis",
+		},
+	)
+	if err != nil {
+		return "", err
+	}
+
+	if choice == "Show results from the last completed analysis" {
+		return "FALLBACK", nil
+	}
+
+	pollCtx, cancel := context.WithTimeout(ctx, 10*time.Minute)
+	defer cancel()
+
+	style.Infof(w, "Waiting for analysis to complete...")
+
+	ticker := time.NewTicker(pollInterval)
+	defer ticker.Stop()
+
+	for {
+		select {
+		case <-pollCtx.Done():
+			return "", pollCtx.Err()
+		case <-ticker.C:
+			status, checkErr := check(pollCtx)
+			if checkErr != nil {
+				return "", checkErr
+			}
+			if !IsRunInProgress(status) {
+				return status, nil
+			}
+		}
+	}
+}
+
+// ResolveLatestCompletedRun finds the most recent completed analysis run on
+// a branch, skipping any that are still in-progress or timed out. Returns
+// nil if no completed run is found.
+func ResolveLatestCompletedRun(
+	ctx context.Context,
+	client *deepsource.Client,
+	branchName string,
+	remote *vcs.RemoteData,
+) (*runs.AnalysisRun, error) {
+	debug.Log("resolve: fetching recent runs for branch %q to find last completed (limit=10)", branchName)
+	allRuns, _, err := client.GetAnalysisRuns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, 10, nil, &branchName)
+	if err != nil {
+		return nil, fmt.Errorf("failed to fetch analysis runs: %w", err)
+	}
+	for i, run := range allRuns {
+		if !IsRunInProgress(run.Status) && !IsRunTimedOut(run.Status) {
+			debug.Log("resolve: found completed run %s (status=%s) at index %d", run.RunUid, run.Status, i)
+			return &allRuns[i], nil
+		}
+	}
+	debug.Log("resolve: no completed run found among %d runs", len(allRuns))
+	return nil, nil
 }
 
 // ResolveCommitOid expands a short commit SHA to a full 40-char SHA using git rev-parse.

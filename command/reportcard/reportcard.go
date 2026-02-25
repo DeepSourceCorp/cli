@@ -7,6 +7,7 @@ import (
 	"io"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/command/cmddeps"
@@ -208,11 +209,31 @@ func (opts *ReportCardOptions) resolveByPR(ctx context.Context, client *deepsour
 		return fmt.Errorf("no analysis run found for PR #%d (branch %q): %w", opts.PRNumber, branch, err)
 	}
 
-	if cmdutil.IsRunInProgress(run.Status) {
-		style.Infof(opts.stdout(), "Analysis is still in progress for PR #%d (branch %q).", opts.PRNumber, branch)
-		return nil
+	finalStatus, waitErr := cmdutil.WaitOrFallback(ctx, opts.stdout(), run.Status, run.CommitOid[:8], branch, 5*time.Second,
+		func(ctx context.Context) (string, error) {
+			r, err := cmdutil.ResolveLatestRunForBranch(ctx, client, branch, remote)
+			if err != nil {
+				return "", err
+			}
+			run = r
+			return r.Status, nil
+		})
+	if waitErr != nil {
+		return waitErr
 	}
-	if cmdutil.IsRunTimedOut(run.Status) {
+	if finalStatus == "FALLBACK" {
+		completed, err := cmdutil.ResolveLatestCompletedRun(ctx, client, branch, remote)
+		if err != nil {
+			return err
+		}
+		if completed == nil {
+			style.Infof(opts.stdout(), "No completed analysis runs found for branch %q.", branch)
+			return nil
+		}
+		style.Infof(opts.stdout(), "Analysis is running on commit %s. Showing results from the last analyzed commit (%s).", run.CommitOid[:8], completed.CommitOid[:8])
+		run = completed
+	}
+	if cmdutil.IsRunTimedOut(finalStatus) {
 		style.Warnf(opts.stdout(), "Analysis timed out for PR #%d (branch %q).", opts.PRNumber, branch)
 		return nil
 	}
@@ -234,11 +255,31 @@ func (opts *ReportCardOptions) resolveByDefaultBranch(ctx context.Context, clien
 		return err
 	}
 
-	if cmdutil.IsRunInProgress(run.Status) {
-		style.Infof(opts.stdout(), "Analysis is still in progress for branch %q.", defaultBranch)
-		return nil
+	finalStatus, waitErr := cmdutil.WaitOrFallback(ctx, opts.stdout(), run.Status, run.CommitOid[:8], defaultBranch, 5*time.Second,
+		func(ctx context.Context) (string, error) {
+			r, err := cmdutil.ResolveLatestRunForBranch(ctx, client, defaultBranch, remote)
+			if err != nil {
+				return "", err
+			}
+			run = r
+			return r.Status, nil
+		})
+	if waitErr != nil {
+		return waitErr
 	}
-	if cmdutil.IsRunTimedOut(run.Status) {
+	if finalStatus == "FALLBACK" {
+		completed, err := cmdutil.ResolveLatestCompletedRun(ctx, client, defaultBranch, remote)
+		if err != nil {
+			return err
+		}
+		if completed == nil {
+			style.Infof(opts.stdout(), "No completed analysis runs found for branch %q.", defaultBranch)
+			return nil
+		}
+		style.Infof(opts.stdout(), "Analysis is running on commit %s. Showing results from the last analyzed commit (%s).", run.CommitOid[:8], completed.CommitOid[:8])
+		run = completed
+	}
+	if cmdutil.IsRunTimedOut(finalStatus) {
 		style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", defaultBranch)
 		return nil
 	}
@@ -271,11 +312,31 @@ func (opts *ReportCardOptions) resolveByCurrentBranch(ctx context.Context, clien
 		return err
 	}
 
-	if cmdutil.IsRunInProgress(run.Status) {
-		style.Infof(opts.stdout(), "Analysis is still in progress for branch %q.", branchName)
-		return nil
+	finalStatus, waitErr := cmdutil.WaitOrFallback(ctx, opts.stdout(), run.Status, run.CommitOid[:8], branchName, 5*time.Second,
+		func(ctx context.Context) (string, error) {
+			r, err := cmdutil.ResolveLatestRunForBranch(ctx, client, branchName, remote)
+			if err != nil {
+				return "", err
+			}
+			run = r
+			return r.Status, nil
+		})
+	if waitErr != nil {
+		return waitErr
 	}
-	if cmdutil.IsRunTimedOut(run.Status) {
+	if finalStatus == "FALLBACK" {
+		completed, err := cmdutil.ResolveLatestCompletedRun(ctx, client, branchName, remote)
+		if err != nil {
+			return err
+		}
+		if completed == nil {
+			style.Infof(opts.stdout(), "No completed analysis runs found for branch %q.", branchName)
+			return nil
+		}
+		style.Infof(opts.stdout(), "Analysis is running on commit %s. Showing results from the last analyzed commit (%s).", run.CommitOid[:8], completed.CommitOid[:8])
+		run = completed
+	}
+	if cmdutil.IsRunTimedOut(finalStatus) {
 		style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", branchName)
 		return nil
 	}

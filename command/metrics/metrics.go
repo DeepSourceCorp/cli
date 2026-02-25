@@ -8,6 +8,7 @@ import (
 	"os"
 	"sort"
 	"strings"
+	"time"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/command/cmddeps"
@@ -230,11 +231,27 @@ func (opts *MetricsOptions) resolveMetrics(ctx context.Context, client *deepsour
 			}
 			return resolveErr
 		}
-		if cmdutil.IsRunInProgress(runStatus) {
-			style.Infof(opts.stdout(), "Analysis is still in progress for branch %q.", branchName)
-			return nil
+		finalStatus, waitErr := cmdutil.WaitOrFallback(ctx, opts.stdout(), runStatus, commitOid[:8], branchName, 5*time.Second,
+			func(ctx context.Context) (string, error) {
+				_, _, s, err := cmdutil.ResolveLatestRun(ctx, client, branchNameFunc, remote)
+				return s, err
+			})
+		if waitErr != nil {
+			return waitErr
 		}
-		if cmdutil.IsRunTimedOut(runStatus) {
+		if finalStatus == "FALLBACK" {
+			run, fallbackErr := cmdutil.ResolveLatestCompletedRun(ctx, client, branchName, remote)
+			if fallbackErr != nil {
+				return fallbackErr
+			}
+			if run == nil {
+				style.Infof(opts.stdout(), "No completed analysis runs found for branch %q.", branchName)
+				return nil
+			}
+			style.Infof(opts.stdout(), "Analysis is running on commit %s. Showing results from the last analyzed commit (%s).", commitOid[:8], run.CommitOid[:8])
+			commitOid = run.CommitOid
+		}
+		if cmdutil.IsRunTimedOut(finalStatus) {
 			style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", branchName)
 			return nil
 		}

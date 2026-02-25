@@ -436,8 +436,10 @@ func TestIssuesRunInProgress(t *testing.T) {
 		t.Fatalf("expected nil error for in-progress run, got: %v", err)
 	}
 	got := buf.String()
-	if !strings.Contains(got, "→") || !strings.Contains(got, "Analysis is still in progress for branch") {
-		t.Errorf("expected in-progress info message, got: %q", got)
+	// In non-TTY (test runner), in-progress auto-falls back to last completed run.
+	// Since the mock only has a PENDING run, no completed run is found.
+	if !strings.Contains(got, "No completed analysis runs found") {
+		t.Errorf("expected fallback 'no completed runs' message, got: %q", got)
 	}
 }
 
