@@ -27,7 +27,7 @@ jobs:
           TAG="${GITHUB_REF#refs/tags/v}"
           if [[ "$TAG" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "environment=prod" >> "$GITHUB_OUTPUT"
-            echo "base_url=https://deepsource.com/cli" >> "$GITHUB_OUTPUT"
+            echo "base_url=https://cli.deepsource.com" >> "$GITHUB_OUTPUT"
             echo "binary_name=deepsource" >> "$GITHUB_OUTPUT"
           else
             echo "environment=dev" >> "$GITHUB_OUTPUT"
@@ -263,11 +263,19 @@ jobs:
           }
           EOF
 
-      - name: Generate install script
+      - name: Generate install scripts
         run: |
+          # New install script (cli.deepsource.com)
           sed -e "s|__BASE_URL__|${{ needs.resolve-env.outputs.base_url }}|g" \
               -e "s|__BINARY_NAME__|${{ needs.resolve-env.outputs.binary_name }}|g" \
+              -e 's|__DEFAULT_INSTALL_DIR__|${HOME}/.local/bin|g' \
             scripts/install.sh.template > artifacts/install
+
+          # Legacy install script (deepsource.io/cli)
+          sed -e "s|__BASE_URL__|https://deepsource.io/cli|g" \
+              -e 's|__BINARY_NAME__|deepsource|g' \
+              -e 's|__DEFAULT_INSTALL_DIR__|./bin|g' \
+            scripts/install.sh.template > artifacts/install-legacy
 
       - name: Upload to R2
         env:
@@ -296,8 +304,8 @@ jobs:
               --cache-control "public, max-age=31536000, immutable"
           done
 
-          # Upload manifest and install script (short cache)
-          for f in artifacts/manifest.json artifacts/install; do
+          # Upload manifest and install scripts (short cache)
+          for f in artifacts/manifest.json artifacts/install artifacts/install-legacy; do
             aws s3 cp "$f" "s3://${BUCKET}/${PREFIX}$(basename "$f")" \
               --endpoint-url "$ENDPOINT" \
               --cache-control "public, max-age=60"
