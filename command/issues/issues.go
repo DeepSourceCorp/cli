@@ -474,13 +474,13 @@ func (opts *IssuesOptions) scopeLabel() string {
 	switch {
 	case opts.autoDetectedBranch != "":
 		if opts.CommitOid == "" {
-			return opts.autoDetectedBranch
+			return "branch " + opts.autoDetectedBranch
 		}
 		short := opts.CommitOid
 		if len(short) > 8 {
 			short = short[:8]
 		}
-		return opts.autoDetectedBranch + " (" + short + ")"
+		return "branch " + opts.autoDetectedBranch + " (" + short + ")"
 	case opts.CommitOid != "":
 		short := opts.CommitOid
 		if len(short) > 8 {

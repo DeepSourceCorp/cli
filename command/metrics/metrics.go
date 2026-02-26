@@ -292,13 +292,13 @@ func (opts *MetricsOptions) scopeLabel() string {
 	switch {
 	case opts.autoDetectedBranch != "":
 		if opts.CommitOid == "" {
-			return opts.autoDetectedBranch
+			return "branch " + opts.autoDetectedBranch
 		}
 		commitShort := opts.CommitOid
 		if len(commitShort) > 8 {
 			commitShort = commitShort[:8]
 		}
-		return fmt.Sprintf("%s (%s)", opts.autoDetectedBranch, commitShort)
+		return fmt.Sprintf("branch %s (%s)", opts.autoDetectedBranch, commitShort)
 	case opts.runMetrics != nil:
 		commitShort := opts.runMetrics.CommitOid
 		if len(commitShort) > 7 {
