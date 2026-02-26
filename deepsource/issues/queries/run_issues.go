@@ -7,6 +7,7 @@ import (
 
 	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
+	"github.com/deepsourcelabs/cli/deepsource/pagination"
 )
 
 const fetchRunIssuesFlatQuery = `query GetRunIssues($commitOid: String!, $limit: Int!, $source: AnalysisIssueSource, $category: IssueCategory, $severity: IssueSeverity, $q: String) {
@@ -41,7 +42,6 @@ const fetchRunIssuesFlatQuery = `query GetRunIssues($commitOid: String!, $limit:
 
 type RunIssuesFlatParams struct {
 	CommitOid string
-	Limit     int
 	Source    *string // nil = don't filter server-side
 	Category *string // nil = don't filter
 	Severity *string // nil = don't filter
@@ -88,9 +88,9 @@ func NewRunIssuesFlatRequest(client graphqlclient.GraphQLClient, params RunIssue
 }
 
 func (r *RunIssuesFlatRequest) Do(ctx context.Context) ([]issues.Issue, error) {
-	vars := map[string]interface{}{
+	vars := map[string]any{
 		"commitOid": r.Params.CommitOid,
-		"limit":     r.Params.Limit,
+		"limit":     pagination.NestedPageSize,
 	}
 	if r.Params.Source != nil {
 		vars["source"] = *r.Params.Source

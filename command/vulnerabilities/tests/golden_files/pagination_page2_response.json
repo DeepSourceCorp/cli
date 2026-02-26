@@ -1,0 +1,36 @@
+{
+  "repository": {
+    "dependencyVulnerabilityOccurrences": {
+      "edges": [
+        {
+          "node": {
+            "id": "vuln-occ-002",
+            "reachability": "UNREACHABLE",
+            "fixability": "FIXABLE",
+            "vulnerability": {
+              "identifier": "CVE-2022-41717",
+              "severity": "MEDIUM",
+              "summary": "Excessive memory use in encoding/multipart and net/textproto",
+              "cvssV3BaseScore": 5.3,
+              "fixedVersions": ["0.4.0"],
+              "aliases": ["GHSA-xrjj-mj9h-534m"],
+              "epssScore": null,
+              "referenceUrls": ["https://nvd.nist.gov/vuln/detail/CVE-2022-41717"]
+            },
+            "package": {
+              "name": "golang.org/x/net",
+              "ecosystem": "GO"
+            },
+            "packageVersion": {
+              "version": "0.1.0"
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": null
+      }
+    }
+  }
+}

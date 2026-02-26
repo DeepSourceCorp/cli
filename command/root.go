@@ -2,17 +2,19 @@ package command
 
 import (
 	"context"
+	"os"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/command/auth"
-	"github.com/deepsourcelabs/cli/command/runs"
 	"github.com/deepsourcelabs/cli/command/issues"
 	"github.com/deepsourcelabs/cli/command/metrics"
+	"github.com/deepsourcelabs/cli/command/report"
 	"github.com/deepsourcelabs/cli/command/reportcard"
 	"github.com/deepsourcelabs/cli/command/repository"
-	"github.com/deepsourcelabs/cli/command/report"
+	"github.com/deepsourcelabs/cli/command/runs"
 	"github.com/deepsourcelabs/cli/command/vulnerabilities"
+	"github.com/deepsourcelabs/cli/internal/cli/completion"
 	"github.com/spf13/cobra"
 )
 
@@ -47,7 +49,10 @@ func NewCmdRoot() *cobra.Command {
 			  vulnerabilities  List dependency vulnerabilities (--severity)
 			  report           Upload analysis artifacts from CI (--analyzer, --key, --value-file)
 			  auth             Login, logout, check status
-			  repo             Repository info (status, dashboard, analyzers)
+			  repo             Repository info (status, dashboard)
+
+			Setup:
+			  --install-completions   Install shell completions for bash, zsh, or fish
 		`, buildinfo.AppName),
 		Example: heredoc.Docf(`
 			# Check for security issues on the current branch
@@ -73,6 +78,20 @@ func NewCmdRoot() *cobra.Command {
 		`, buildinfo.AppName),
 		SilenceErrors: true,
 		SilenceUsage:  true,
+	}
+
+	var installCompletions bool
+	cmd.PersistentFlags().BoolVar(&installCompletions, "install-completions", false, "Install shell completions for bash, zsh, or fish")
+
+	cmd.PersistentPreRunE = func(cmd *cobra.Command, args []string) error {
+		if !installCompletions {
+			return nil
+		}
+		if err := completion.Install(cmd.Root(), os.Stderr); err != nil {
+			return err
+		}
+		os.Exit(0)
+		return nil
 	}
 
 	// Set version using --version flag

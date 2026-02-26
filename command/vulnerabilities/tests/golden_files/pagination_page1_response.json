@@ -1,0 +1,36 @@
+{
+  "repository": {
+    "dependencyVulnerabilityOccurrences": {
+      "edges": [
+        {
+          "node": {
+            "id": "vuln-occ-001",
+            "reachability": "REACHABLE",
+            "fixability": "FIXABLE",
+            "vulnerability": {
+              "identifier": "CVE-2023-44487",
+              "severity": "HIGH",
+              "summary": "HTTP/2 Rapid Reset Attack causes denial of service in net/http servers",
+              "cvssV3BaseScore": 7.5,
+              "fixedVersions": ["0.17.0"],
+              "aliases": ["GHSA-qppj-fm56-57gc"],
+              "epssScore": 0.96,
+              "referenceUrls": ["https://nvd.nist.gov/vuln/detail/CVE-2023-44487"]
+            },
+            "package": {
+              "name": "golang.org/x/net",
+              "ecosystem": "GO"
+            },
+            "packageVersion": {
+              "version": "0.13.0"
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": true,
+        "endCursor": "cursor-vulns-page1"
+      }
+    }
+  }
+}

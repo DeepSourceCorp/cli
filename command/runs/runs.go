@@ -427,7 +427,6 @@ func renderSeverityBreakdown(counts issueSeverityCounts) []string {
 
 func showIssuesSummary(w io.Writer, issues []runstypes.RunIssue) {
 	if len(issues) == 0 {
-		fmt.Fprintln(w)
 		style.Successf(w, "%s", "No issues found in this run")
 		return
 	}
@@ -443,7 +442,6 @@ func showIssuesSummary(w io.Writer, issues []runstypes.RunIssue) {
 		}
 	}
 
-	fmt.Fprintln(w)
 	fmt.Fprintln(w, pterm.Bold.Sprintf("Issues: %d total", len(issues)))
 
 	counts := countIssuesBySeverity(issues)

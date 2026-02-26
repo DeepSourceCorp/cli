@@ -1,9 +1,4 @@
 {
-  "Remote": {
-    "Owner": "testowner",
-    "RepoName": "testrepo",
-    "VCSProvider": "GITHUB"
-  },
-  "Activated": false,
-  "Host": "deepsource.com"
+  "repo_slug": "gh/testowner/testrepo",
+  "activated": false
 }

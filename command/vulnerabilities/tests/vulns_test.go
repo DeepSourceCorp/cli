@@ -2,6 +2,9 @@ package tests
 
 import (
 	"bytes"
+	"context"
+	"encoding/json"
+	"os"
 	"path/filepath"
 	"runtime"
 	"strings"
@@ -10,6 +13,7 @@ import (
 	"github.com/deepsourcelabs/cli/command/cmddeps"
 	vulnsCmd "github.com/deepsourcelabs/cli/command/vulnerabilities"
 	"github.com/deepsourcelabs/cli/deepsource"
+	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/internal/testutil"
 )
 
@@ -21,7 +25,7 @@ func goldenPath(name string) string {
 func TestVulnsDefaultBranchFlag(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"dependencyVulnerabilityOccurrences(first: $limit)": goldenPath("repo_vulns_response.json"),
+		"dependencyVulnerabilityOccurrences(first:": goldenPath("repo_vulns_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -52,7 +56,7 @@ func TestVulnsAutoDetectPR(t *testing.T) {
 	mock := testutil.MockQueryFunc(t, map[string]string{
 		"pullRequests(":                           goldenPath("get_pr_by_branch_found_response.json"),
 		"query GetAnalysisRuns(":                  goldenPath("get_analysis_runs_response.json"),
-		"vulnerabilityOccurrences(first: $limit)": goldenPath("pr_vulns_response.json"),
+		"vulnerabilityOccurrences(first:": goldenPath("pr_vulns_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -181,7 +185,7 @@ func TestVulnsCommitScope(t *testing.T) {
 func TestVulnsPRScope(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"vulnerabilityOccurrences(first: $limit)": goldenPath("pr_vulns_response.json"),
+		"vulnerabilityOccurrences(first:": goldenPath("pr_vulns_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -210,7 +214,7 @@ func TestVulnsPRScope(t *testing.T) {
 func TestVulnsFilterBySeverity(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"dependencyVulnerabilityOccurrences(first: $limit)": goldenPath("severity_filter_response.json"),
+		"dependencyVulnerabilityOccurrences(first:": goldenPath("severity_filter_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -275,7 +279,7 @@ func TestVulnsMutualExclusivity(t *testing.T) {
 func TestVulnsEmptyResults(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"dependencyVulnerabilityOccurrences(first: $limit)": goldenPath("empty_vulns_response.json"),
+		"dependencyVulnerabilityOccurrences(first:": goldenPath("empty_vulns_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -296,5 +300,59 @@ func TestVulnsEmptyResults(t *testing.T) {
 	got := strings.TrimSpace(buf.String())
 	if got != "[]" {
 		t.Errorf("expected empty array '[]', got: %s", got)
+	}
+}
+
+func TestVulnsPagination(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+
+	page1Data, err := os.ReadFile(goldenPath("pagination_page1_response.json"))
+	if err != nil {
+		t.Fatalf("failed to read page1 golden file: %v", err)
+	}
+	page2Data, err := os.ReadFile(goldenPath("pagination_page2_response.json"))
+	if err != nil {
+		t.Fatalf("failed to read page2 golden file: %v", err)
+	}
+
+	mock := graphqlclient.NewMockClient()
+	callCount := 0
+	mock.QueryFunc = func(_ context.Context, query string, vars map[string]any, result any) error {
+		if !strings.Contains(query, "dependencyVulnerabilityOccurrences(first:") {
+			t.Fatalf("unexpected query: %s", query)
+		}
+		callCount++
+		if _, hasAfter := vars["after"]; hasAfter {
+			return json.Unmarshal(page2Data, result)
+		}
+		return json.Unmarshal(page1Data, result)
+	}
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+	}
+
+	cmd := vulnsCmd.NewCmdVulnerabilitiesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--default-branch", "--output", "json"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if callCount != 2 {
+		t.Errorf("expected 2 API calls for pagination, got %d", callCount)
+	}
+
+	// Parse output JSON to verify both pages were collected
+	var vulns []map[string]any
+	if err := json.Unmarshal([]byte(strings.TrimSpace(buf.String())), &vulns); err != nil {
+		t.Fatalf("failed to parse JSON output: %v", err)
+	}
+	if len(vulns) != 2 {
+		t.Errorf("expected 2 vulnerabilities from 2 pages, got %d", len(vulns))
 	}
 }

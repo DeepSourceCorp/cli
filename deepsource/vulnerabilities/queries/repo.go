@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
+	"github.com/deepsourcelabs/cli/deepsource/pagination"
 	"github.com/deepsourcelabs/cli/deepsource/vulnerabilities"
 )
 
@@ -14,9 +15,10 @@ const fetchRepoVulnsQuery = `query GetRepoVulns(
   $owner: String!
   $provider: VCSProvider!
   $limit: Int!
+  $after: String
 ) {
   repository(name: $name, login: $owner, vcsProvider: $provider) {
-    dependencyVulnerabilityOccurrences(first: $limit) {
+    dependencyVulnerabilityOccurrences(first: $limit, after: $after) {
       edges {
         node {
           id
@@ -41,6 +43,10 @@ const fetchRepoVulnsQuery = `query GetRepoVulns(
           }
         }
       }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
     }
   }
 }`
@@ -49,7 +55,6 @@ type RepoVulnsParams struct {
 	Owner    string
 	RepoName string
 	Provider string
-	Limit    int
 }
 
 type RepoVulnsRequest struct {
@@ -84,6 +89,7 @@ type RepoVulnsResponse struct {
 					} `json:"packageVersion"`
 				} `json:"node"`
 			} `json:"edges"`
+			PageInfo pagination.PageInfo `json:"pageInfo"`
 		} `json:"dependencyVulnerabilityOccurrences"`
 	} `json:"repository"`
 }
@@ -93,44 +99,60 @@ func NewRepoVulnsRequest(client graphqlclient.GraphQLClient, params RepoVulnsPar
 }
 
 func (r *RepoVulnsRequest) Do(ctx context.Context) ([]vulnerabilities.VulnerabilityOccurrence, error) {
-	vars := map[string]any{
-		"name":     r.Params.RepoName,
-		"owner":    r.Params.Owner,
-		"provider": r.Params.Provider,
-		"limit":    r.Params.Limit,
-	}
-	var respData RepoVulnsResponse
-	if err := r.client.Query(ctx, fetchRepoVulnsQuery, vars, &respData); err != nil {
-		return nil, fmt.Errorf("Fetch repo vulnerabilities: %w", err)
-	}
+	allVulns := make([]vulnerabilities.VulnerabilityOccurrence, 0)
+	var cursor *string
 
-	result := make([]vulnerabilities.VulnerabilityOccurrence, 0)
-	for _, edge := range respData.Repository.DependencyVulnerabilityOccurrences.Edges {
-		node := edge.Node
-		v := vulnerabilities.VulnerabilityOccurrence{
-			ID:           node.ID,
-			Reachability: node.Reachability,
-			Fixability:   node.Fixability,
-			Vulnerability: vulnerabilities.Vulnerability{
-				Identifier:      node.Vulnerability.Identifier,
-				Severity:        node.Vulnerability.Severity,
-				Summary:         node.Vulnerability.Summary,
-				CvssV3BaseScore: node.Vulnerability.CvssV3BaseScore,
-				FixedVersions:   node.Vulnerability.FixedVersions,
-				Aliases:         node.Vulnerability.Aliases,
-				EpssScore:       node.Vulnerability.EpssScore,
-				ReferenceUrls:   node.Vulnerability.ReferenceUrls,
-			},
-			Package: vulnerabilities.Package{
-				Name:      node.Package.Name,
-				Ecosystem: node.Package.Ecosystem,
-			},
-			PackageVersion: vulnerabilities.PackageVersion{
-				Version: node.PackageVersion.Version,
-			},
+	for {
+		vars := map[string]any{
+			"name":     r.Params.RepoName,
+			"owner":    r.Params.Owner,
+			"provider": r.Params.Provider,
+			"limit":    pagination.DefaultPageSize,
 		}
-		result = append(result, v)
+		if cursor != nil {
+			vars["after"] = *cursor
+		}
+
+		var respData RepoVulnsResponse
+		if err := r.client.Query(ctx, fetchRepoVulnsQuery, vars, &respData); err != nil {
+			return nil, fmt.Errorf("Fetch repo vulnerabilities: %w", err)
+		}
+
+		for _, edge := range respData.Repository.DependencyVulnerabilityOccurrences.Edges {
+			node := edge.Node
+			v := vulnerabilities.VulnerabilityOccurrence{
+				ID:           node.ID,
+				Reachability: node.Reachability,
+				Fixability:   node.Fixability,
+				Vulnerability: vulnerabilities.Vulnerability{
+					Identifier:      node.Vulnerability.Identifier,
+					Severity:        node.Vulnerability.Severity,
+					Summary:         node.Vulnerability.Summary,
+					CvssV3BaseScore: node.Vulnerability.CvssV3BaseScore,
+					FixedVersions:   node.Vulnerability.FixedVersions,
+					Aliases:         node.Vulnerability.Aliases,
+					EpssScore:       node.Vulnerability.EpssScore,
+					ReferenceUrls:   node.Vulnerability.ReferenceUrls,
+				},
+				Package: vulnerabilities.Package{
+					Name:      node.Package.Name,
+					Ecosystem: node.Package.Ecosystem,
+				},
+				PackageVersion: vulnerabilities.PackageVersion{
+					Version: node.PackageVersion.Version,
+				},
+			}
+			allVulns = append(allVulns, v)
+		}
+
+		if len(allVulns) >= pagination.MaxResults {
+			break
+		}
+		if !respData.Repository.DependencyVulnerabilityOccurrences.PageInfo.HasNextPage {
+			break
+		}
+		cursor = respData.Repository.DependencyVulnerabilityOccurrences.PageInfo.EndCursor
 	}
 
-	return result, nil
+	return allVulns, nil
 }

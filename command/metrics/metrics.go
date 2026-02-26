@@ -54,7 +54,6 @@ func NewCmdMetrics() *cobra.Command {
 func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	opts := MetricsOptions{
 		OutputFormat: "pretty",
-		LimitArg:     30,
 		deps:         deps,
 	}
 
@@ -95,7 +94,7 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository in provider/owner/name format (e.g. gh/owner/name). Supported providers: gh, gl, bb, ads")
 
 	// --limit, -l flag
-	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Maximum number of metrics to fetch")
+	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 0, "Maximum number of metrics to display (0 = all)")
 
 	// --output, -o flag
 	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
@@ -386,20 +385,15 @@ func (opts *MetricsOptions) outputHuman() error {
 
 	iw := &indentWriter{w: w, prefix: "  "}
 
-	for idx, key := range seenKeys {
+	for _, key := range seenKeys {
 		label := strings.ToUpper(key[:1]) + strings.ToLower(key[1:])
 		fmt.Fprintln(w, pterm.Bold.Sprintf("  ── %s ──", label))
-		fmt.Fprintln(w)
-
 		data := [][]string{{"Metric", "Value", "Threshold", "Status"}}
 		for _, r := range grouped[key] {
 			data = append(data, []string{r.name, r.value, r.threshold, r.status})
 		}
 		pterm.DefaultTable.WithHasHeader().WithData(data).WithWriter(iw).Render()
 
-		if idx < len(seenKeys)-1 {
-			fmt.Fprintln(w)
-		}
 	}
 
 	// Changeset stats for run scope
@@ -407,7 +401,6 @@ func (opts *MetricsOptions) outputHuman() error {
 		opts.outputChangesetStats(w)
 	}
 
-	fmt.Fprintln(w)
 	opts.printFooter(w, totalItems)
 	return nil
 }
@@ -416,7 +409,6 @@ func (opts *MetricsOptions) outputChangesetStats(w io.Writer) {
 	stats := opts.runMetrics.ChangesetStats
 	iw := &indentWriter{w: w, prefix: "  "}
 
-	fmt.Fprintln(w)
 	fmt.Fprintln(w, pterm.Bold.Sprint("  Changeset Coverage"))
 
 	header := []string{"Type", "Overall", "Covered", "Overall %", "New", "New Covered", "New %"}
@@ -451,7 +443,6 @@ func (opts *MetricsOptions) outputChangesetStats(w io.Writer) {
 	pterm.DefaultTable.WithHasHeader().WithData(data).WithWriter(iw).Render()
 
 	if opts.Verbose {
-		fmt.Fprintln(w)
 		fmt.Fprintln(w, pterm.Gray("    Lines:      Executable source code lines — the most common coverage metric."))
 		fmt.Fprintln(w, pterm.Gray("    Branches:   Decision branches (if/else, switch arms) — did both paths execute?"))
 		fmt.Fprintln(w, pterm.Gray("    Conditions: Individual boolean sub-expressions in compound conditions (a && b)."))

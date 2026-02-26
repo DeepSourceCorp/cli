@@ -7,6 +7,7 @@ import (
 
 	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
+	"github.com/deepsourcelabs/cli/deepsource/pagination"
 )
 
 // Query to fetch issues for a certain file specified by the user
@@ -16,9 +17,10 @@ const fetchFileIssuesQuery = `query GetIssuesForPath(
   $provider: VCSProvider!
   $limit: Int!
   $filepath: String!
+  $after: String
 ) {
   repository(name: $name, login: $owner, vcsProvider: $provider) {
-    issues(first: $limit, path:$filepath) {
+    issues(first: $limit, path:$filepath, after: $after) {
       edges {
         node {
           issue {
@@ -45,6 +47,10 @@ const fetchFileIssuesQuery = `query GetIssuesForPath(
           }
         }
       }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
     }
   }
 }
@@ -55,7 +61,6 @@ type FileIssuesListParams struct {
 	RepoName string
 	Provider string
 	FilePath string
-	Limit    int
 }
 
 // Request struct
@@ -91,6 +96,7 @@ type FileIssuesResponse struct {
 					} `json:"occurrences"`
 				} `json:"node"`
 			} `json:"edges"`
+			PageInfo pagination.PageInfo `json:"pageInfo"`
 		} `json:"issues"`
 	} `json:"repository"`
 }
@@ -100,47 +106,60 @@ func NewFileIssuesListRequest(client graphqlclient.GraphQLClient, params FileIss
 }
 
 func (f *FileIssuesListRequest) Do(ctx context.Context) ([]issues.Issue, error) {
-	vars := map[string]interface{}{
-		"name":     f.Params.RepoName,
-		"owner":    f.Params.Owner,
-		"provider": f.Params.Provider,
-		"path":     f.Params.FilePath,
-		"limit":    f.Params.Limit,
-	}
-	var respData FileIssuesResponse
-	if err := f.client.Query(ctx, fetchFileIssuesQuery, vars, &respData); err != nil {
-		return nil, fmt.Errorf("List file issues: %w", err)
-	}
+	allIssues := make([]issues.Issue, 0)
+	var cursor *string
 
-	// Formatting the query response w.r.t the output format of the SDK as specified in `issues_list.go`
-	issuesData := []issues.Issue{}
-	issueData := issues.Issue{}
-	for _, edge := range respData.Repository.Issues.Edges {
-		if len(edge.Node.Occurrences.Edges) == 0 {
-			continue
+	for {
+		vars := map[string]any{
+			"name":     f.Params.RepoName,
+			"owner":    f.Params.Owner,
+			"provider": f.Params.Provider,
+			"path":     f.Params.FilePath,
+			"limit":    pagination.DefaultPageSize,
+		}
+		if cursor != nil {
+			vars["after"] = *cursor
 		}
 
-		for _, occurenceEdge := range edge.Node.Occurrences.Edges {
-			// Check if the path matches the one entered as a flag in the command
-			if occurenceEdge.Node.Path == f.Params.FilePath {
-				issueData = issues.Issue{
-					IssueText: occurenceEdge.Node.Issue.Title,
-					IssueCode: occurenceEdge.Node.Issue.Shortcode,
-					Location: issues.Location{
-						Path: occurenceEdge.Node.Path,
-						Position: issues.Position{
-							BeginLine: occurenceEdge.Node.BeginLine,
-							EndLine:   occurenceEdge.Node.EndLine,
+		var respData FileIssuesResponse
+		if err := f.client.Query(ctx, fetchFileIssuesQuery, vars, &respData); err != nil {
+			return nil, fmt.Errorf("List file issues: %w", err)
+		}
+
+		for _, edge := range respData.Repository.Issues.Edges {
+			if len(edge.Node.Occurrences.Edges) == 0 {
+				continue
+			}
+
+			for _, occurenceEdge := range edge.Node.Occurrences.Edges {
+				if occurenceEdge.Node.Path == f.Params.FilePath {
+					issueData := issues.Issue{
+						IssueText: occurenceEdge.Node.Issue.Title,
+						IssueCode: occurenceEdge.Node.Issue.Shortcode,
+						Location: issues.Location{
+							Path: occurenceEdge.Node.Path,
+							Position: issues.Position{
+								BeginLine: occurenceEdge.Node.BeginLine,
+								EndLine:   occurenceEdge.Node.EndLine,
+							},
 						},
-					},
-					Analyzer: issues.AnalyzerMeta{
-						Shortcode: occurenceEdge.Node.Issue.Analyzer.Shortcode,
-					},
+						Analyzer: issues.AnalyzerMeta{
+							Shortcode: occurenceEdge.Node.Issue.Analyzer.Shortcode,
+						},
+					}
+					allIssues = append(allIssues, issueData)
 				}
 			}
-			issuesData = append(issuesData, issueData)
 		}
+
+		if len(allIssues) >= pagination.MaxResults {
+			break
+		}
+		if !respData.Repository.Issues.PageInfo.HasNextPage {
+			break
+		}
+		cursor = respData.Repository.Issues.PageInfo.EndCursor
 	}
 
-	return issuesData, nil
+	return allIssues, nil
 }

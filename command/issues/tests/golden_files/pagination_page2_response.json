@@ -1,0 +1,39 @@
+{
+  "repository": {
+    "issues": {
+      "edges": [
+        {
+          "node": {
+            "occurrences": {
+              "edges": [
+                {
+                  "node": {
+                    "path": "internal/vcs/remotes.go",
+                    "beginLine": 87,
+                    "endLine": 91,
+                    "issue": {
+                      "title": "HTTP request built with user-controlled URL",
+                      "shortcode": "GO-S1010",
+                      "shortDescription": "Constructing HTTP request with user-controlled URL allows SSRF",
+                      "category": "SECURITY",
+                      "severity": "MAJOR",
+                      "isRecommended": false,
+                      "analyzer": {
+                        "name": "Go",
+                        "shortcode": "go"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": null
+      }
+    }
+  }
+}

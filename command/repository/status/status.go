@@ -15,17 +15,14 @@ import (
 	"github.com/deepsourcelabs/cli/internal/cli/completion"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
 	reposvc "github.com/deepsourcelabs/cli/internal/services/repo"
-	"github.com/deepsourcelabs/cli/internal/vcs"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )
 
 type RepoStatusOptions struct {
-	RepoArg        string
-	TokenExpired   bool
-	SelectedRemote *vcs.RemoteData
-	Output         string
-	deps           *cmddeps.Deps
+	RepoArg string
+	Output  string
+	deps    *cmddeps.Deps
 }
 
 func (opts *RepoStatusOptions) stdout() io.Writer {
@@ -41,24 +38,22 @@ func NewCmdRepoStatus() *cobra.Command {
 
 func NewCmdRepoStatusWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	opts := RepoStatusOptions{
-		RepoArg:      "",
-		TokenExpired: false,
-		deps:         deps,
+		deps: deps,
 	}
 
 	doc := heredoc.Docf(`
-		View the activation status for the repository.
+		View the status and enabled analyzers for the repository.
 
-		To check if the current repository is activated on DeepSource, run:
+		To check the status of the current repository on DeepSource, run:
 		%[1]s
 
-		To check if a specific repository is activated on DeepSource, use the %[2]s flag:
+		To check a specific repository, use the %[2]s flag:
 		%[3]s
 		`, style.Cyan("deepsource repo status"), style.Yellow("--repo"), style.Cyan("deepsource repo status --repo gh/owner/name"))
 
 	cmd := &cobra.Command{
 		Use:   "status",
-		Short: "View the activation status for the repository.",
+		Short: "View the status and enabled analyzers for the repository.",
 		Long:  doc,
 		Args:  args.NoArgs,
 		RunE: func(_ *cobra.Command, _ []string) error {
@@ -83,7 +78,7 @@ func NewCmdRepoStatusWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	return cmd
 }
 
-func (opts *RepoStatusOptions) Run() (err error) {
+func (opts *RepoStatusOptions) Run() error {
 	ctx := context.Background()
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
@@ -97,23 +92,32 @@ func (opts *RepoStatusOptions) Run() (err error) {
 	} else {
 		svc = reposvc.NewService(cfgMgr)
 	}
-	result, err := svc.Status(ctx, opts.RepoArg)
+
+	result, err := svc.StatusWithAnalyzers(ctx, opts.RepoArg)
 	if err != nil {
 		return err
 	}
-	opts.SelectedRemote = result.Remote
 
 	return opts.printStatus(result)
 }
 
-func (opts *RepoStatusOptions) printStatus(result *reposvc.StatusResult) error {
+func (opts *RepoStatusOptions) printStatus(result *reposvc.FullStatusResult) error {
 	w := opts.stdout()
 	switch opts.Output {
 	case "", "pretty":
+		fmt.Fprintf(w, "%-12s%s\n", "Repository", result.RepoSlug)
 		if result.Activated {
-			fmt.Fprintln(w, "Analysis active on DeepSource (deepsource.com)")
+			fmt.Fprintf(w, "%-12s%s\n", "Status", "Active")
+			fmt.Fprintf(w, "%-12s%s\n", "Dashboard", result.DashboardURL)
+
+			if len(result.Analyzers) > 0 {
+				fmt.Fprintf(w, "\nAnalyzers (%d)\n", len(result.Analyzers))
+				for _, a := range result.Analyzers {
+					fmt.Fprintf(w, "  %-10s%s\n", a.Shortcode, a.Name)
+				}
+			}
 		} else {
-			fmt.Fprintln(w, "DeepSource analysis is currently not activated on this repository.")
+			fmt.Fprintf(w, "%-12s%s\n", "Status", "Not active")
 		}
 		return nil
 	case "json":

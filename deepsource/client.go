@@ -192,17 +192,12 @@ func (c Client) GetRepoStatus(ctx context.Context, owner, repoName, provider str
 	return res, nil
 }
 
-// Returns the list of issues for a certain repository whose data is sent as parameters.
-// Owner : The username of the owner of the repository
-// repoName : The name of the repository whose activation status has to be queried
-// provider : The VCS provider which hosts the repo (GITHUB/GITLAB/BITBUCKET)
-// limit : The amount of issues to be listed. The default limit is 30 while the maximum limit is currently 100.
-func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string, limit int) ([]issues.Issue, error) {
+// Returns the list of issues for a certain repository. Auto-paginates to fetch all results.
+func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string) ([]issues.Issue, error) {
 	req := issuesQuery.NewIssuesListRequest(c.gqlWrapper, issuesQuery.IssuesListParams{
 		Owner:    owner,
 		RepoName: repoName,
 		Provider: provider,
-		Limit:    limit,
 	})
 	res, err := req.Do(ctx)
 	if err != nil {
@@ -212,19 +207,13 @@ func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string,
 	return res, nil
 }
 
-// Returns the list of issues reported for a certain file in a certain repository whose data is sent as parameters.
-// Owner : The username of the owner of the repository
-// repoName : The name of the repository whose activation status has to be queried
-// provider : The VCS provider which hosts the repo (GITHUB/GITLAB/BITBUCKET)
-// filePath : The relative path of the file. Eg: "tests/mock.py" if a file `mock.py` is present in `tests` directory which in turn is present in the root dir
-// limit : The amount of issues to be listed. The default limit is 30 while the maximum limit is currently 100.
-func (c Client) GetIssuesForFile(ctx context.Context, owner, repoName, provider, filePath string, limit int) ([]issues.Issue, error) {
+// Returns the list of issues reported for a certain file. Auto-paginates to fetch all results.
+func (c Client) GetIssuesForFile(ctx context.Context, owner, repoName, provider, filePath string) ([]issues.Issue, error) {
 	req := issuesQuery.NewFileIssuesListRequest(c.gqlWrapper, issuesQuery.FileIssuesListParams{
 		Owner:    owner,
 		RepoName: repoName,
 		Provider: provider,
 		FilePath: filePath,
-		Limit:    limit,
 	})
 	res, err := req.Do(ctx)
 	if err != nil {
@@ -291,10 +280,9 @@ func (c Client) GetRunIssues(ctx context.Context, commitOid string) (*runs.RunWi
 	return res, nil
 }
 
-// Returns issues for a specific run as a flat list (for issues --commit).
-func (c Client) GetRunIssuesFlat(ctx context.Context, commitOid string, limit int, filters issuesQuery.RunIssuesFlatParams) ([]issues.Issue, error) {
+// Returns issues for a specific run as a flat list (for issues --commit). Auto-paginates nested results.
+func (c Client) GetRunIssuesFlat(ctx context.Context, commitOid string, filters issuesQuery.RunIssuesFlatParams) ([]issues.Issue, error) {
 	filters.CommitOid = commitOid
-	filters.Limit = limit
 	req := issuesQuery.NewRunIssuesFlatRequest(c.gqlWrapper, filters)
 	res, err := req.Do(ctx)
 	if err != nil {
@@ -303,14 +291,13 @@ func (c Client) GetRunIssuesFlat(ctx context.Context, commitOid string, limit in
 	return res, nil
 }
 
-// Returns issues for a specific pull request.
-func (c Client) GetPRIssues(ctx context.Context, owner, repoName, provider string, prNumber, limit int) ([]issues.Issue, error) {
+// Returns issues for a specific pull request. Auto-paginates to fetch all results.
+func (c Client) GetPRIssues(ctx context.Context, owner, repoName, provider string, prNumber int) ([]issues.Issue, error) {
 	req := issuesQuery.NewPRIssuesListRequest(c.gqlWrapper, issuesQuery.PRIssuesListParams{
 		Owner:    owner,
 		RepoName: repoName,
 		Provider: provider,
 		PRNumber: prNumber,
-		Limit:    limit,
 	})
 	res, err := req.Do(ctx)
 	if err != nil {
@@ -360,13 +347,12 @@ func (c Client) GetPRMetrics(ctx context.Context, owner, repoName, provider stri
 	return res, nil
 }
 
-// Returns vulnerabilities for a repository's default branch.
-func (c Client) GetRepoVulns(ctx context.Context, owner, repoName, provider string, limit int) ([]vulnerabilities.VulnerabilityOccurrence, error) {
+// Returns vulnerabilities for a repository's default branch. Auto-paginates to fetch all results.
+func (c Client) GetRepoVulns(ctx context.Context, owner, repoName, provider string) ([]vulnerabilities.VulnerabilityOccurrence, error) {
 	req := vulnerabilitiesQuery.NewRepoVulnsRequest(c.gqlWrapper, vulnerabilitiesQuery.RepoVulnsParams{
 		Owner:    owner,
 		RepoName: repoName,
 		Provider: provider,
-		Limit:    limit,
 	})
 	res, err := req.Do(ctx)
 	if err != nil {
@@ -376,10 +362,9 @@ func (c Client) GetRepoVulns(ctx context.Context, owner, repoName, provider stri
 }
 
 // Returns vulnerabilities for a specific analysis run.
-func (c Client) GetRunVulns(ctx context.Context, commitOid string, limit int) (*vulnerabilities.RunVulns, error) {
+func (c Client) GetRunVulns(ctx context.Context, commitOid string) (*vulnerabilities.RunVulns, error) {
 	req := vulnerabilitiesQuery.NewRunVulnsRequest(c.gqlWrapper, vulnerabilitiesQuery.RunVulnsParams{
 		CommitOid: commitOid,
-		Limit:     limit,
 	})
 	res, err := req.Do(ctx)
 	if err != nil {
@@ -432,14 +417,13 @@ func (c Client) GetPRForBranch(ctx context.Context, owner, repoName, provider, b
 	return number, true, nil
 }
 
-// Returns vulnerabilities for a specific pull request.
-func (c Client) GetPRVulns(ctx context.Context, owner, repoName, provider string, prNumber, limit int) (*vulnerabilities.PRVulns, error) {
+// Returns vulnerabilities for a specific pull request. Auto-paginates to fetch all results.
+func (c Client) GetPRVulns(ctx context.Context, owner, repoName, provider string, prNumber int) (*vulnerabilities.PRVulns, error) {
 	req := vulnerabilitiesQuery.NewPRVulnsRequest(c.gqlWrapper, vulnerabilitiesQuery.PRVulnsParams{
 		Owner:    owner,
 		RepoName: repoName,
 		Provider: provider,
 		PRNumber: prNumber,
-		Limit:    limit,
 	})
 	res, err := req.Do(ctx)
 	if err != nil {
