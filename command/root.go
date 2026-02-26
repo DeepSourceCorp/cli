@@ -2,8 +2,9 @@ package command
 
 import (
 	"context"
+	"fmt"
+	"strings"
 
-	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/command/auth"
 	completionCmd "github.com/deepsourcelabs/cli/command/completion"
@@ -14,70 +15,21 @@ import (
 	"github.com/deepsourcelabs/cli/command/repository"
 	"github.com/deepsourcelabs/cli/command/runs"
 	"github.com/deepsourcelabs/cli/command/vulnerabilities"
+	"github.com/deepsourcelabs/cli/internal/cli/style"
+	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
 func NewCmdRoot() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   buildinfo.AppName + " <command> [flags]",
-		Short: "DeepSource CLI",
-		Long: heredoc.Docf(`
-			DeepSource CLI — query code-quality data from the command line.
-
-			Authentication (required before all other commands):
-			  %[1]s auth login
-
-			Repository targeting:
-			  --repo <provider/owner/name>   provider: gh, gl, bb, or ads
-			  If omitted, auto-detected from the current git remote.
-
-			Output format:
-			  --output json    machine-readable JSON (supported by issues, metrics, runs,
-			                   report-card, vulnerabilities)
-
-			Scope (where applicable):
-			  --commit <sha>          specific commit
-			  --pr <number>           pull request
-			  --default-branch        repository default branch
-
-			Commands:
-			  issues           List code-quality issues (--category, --analyzer, --limit, --pr)
-			  metrics          Show code metrics (--metric)
-			  runs             List analysis runs (--limit)
-			  report-card      View report card (--commit)
-			  vulnerabilities  List dependency vulnerabilities (--severity)
-			  report           Upload analysis artifacts from CI (--analyzer, --key, --value-file)
-			  auth             Login, logout, check status
-			  repo             Repository info (status, dashboard)
-
-			Setup:
-			  completion    Install shell completions for bash, zsh, or fish
-		`, buildinfo.AppName),
-		Example: heredoc.Docf(`
-			# Check for security issues on the current branch
-			%[1]s issues --output json --category security
-
-			# Get all issues for pull request #42
-			%[1]s issues --repo gh/owner/name --pr 42 --output json
-
-			# View code metrics on the current branch
-			%[1]s metrics --output json
-
-			# Check critical and high dependency vulnerabilities on the current branch
-			%[1]s vulnerabilities --severity critical,high --output json
-
-			# View report card for a specific commit
-			%[1]s report-card --commit abc123f --output json
-
-			# Report test coverage from CI
-			%[1]s report --analyzer test-coverage --key go --value-file coverage.out
-
-			# List the 5 most recent analysis runs
-			%[1]s runs --output json --limit 5
-		`, buildinfo.AppName),
+		Use:           buildinfo.AppName + " <command> [flags]",
+		Short:         "DeepSource CLI",
+		Long:          style.BoldCyan("DeepSource CLI — Ship good code from the command line.") + "\n\nTo get started, run → " + buildinfo.AppName + " auth login",
 		SilenceErrors: true,
 		SilenceUsage:  true,
 	}
+
+	cmd.SetHelpFunc(rootHelpFunc)
 
 	// Set version using --version flag
 	info := buildinfo.GetBuildInfo()
@@ -137,7 +89,94 @@ func NewCmdRoot() *cobra.Command {
 	completionC.GroupID = "setup"
 	cmd.AddCommand(completionC)
 
+	cmd.InitDefaultHelpFlag()
+	cmd.Flags().Lookup("help").Usage = "Show usage and available commands"
+	cmd.Flags().Lookup("version").Usage = "Print version and build info"
+
 	return cmd
+}
+
+func buildExampleText() string {
+	app := buildinfo.AppName
+	examples := []struct {
+		comment string
+		cmd     string
+	}{
+		{"Check for security issues on the current branch", app + " issues --output json --category security"},
+		{"Get all issues for pull request #42", app + " issues --repo gh/owner/name --pr 42 --output json"},
+		{"View code metrics on the current branch", app + " metrics --output json"},
+		{"Check critical and high dependency vulnerabilities on the current branch", app + " vulnerabilities --severity critical,high --output json"},
+		{"View report card for a specific commit", app + " report-card --commit abc123f --output json"},
+		{"Report test coverage from CI", app + " report --analyzer test-coverage --key go --value-file coverage.out"},
+		{"List the 5 most recent analysis runs", app + " runs --output json --limit 5"},
+	}
+	var lines []string
+	for _, ex := range examples {
+		lines = append(lines, style.Gray("# %s", ex.comment))
+		lines = append(lines, ex.cmd)
+		lines = append(lines, "")
+	}
+	// Remove trailing blank line
+	if len(lines) > 0 {
+		lines = lines[:len(lines)-1]
+	}
+	return strings.Join(lines, "\n")
+}
+
+func rootHelpFunc(cmd *cobra.Command, _ []string) {
+	out := cmd.OutOrStdout()
+
+	// Long description (already colored)
+	fmt.Fprintln(out, cmd.Long)
+	fmt.Fprintln(out)
+
+	// Usage
+	fmt.Fprintf(out, "%s\n", style.BoldCyan("Usage:"))
+	fmt.Fprintf(out, "  %s\n\n", cmd.UseLine())
+
+	// Command groups
+	groups := cmd.Groups()
+	if len(groups) > 0 {
+		for _, group := range groups {
+			if group.ID == "auth" {
+				continue
+			}
+			fmt.Fprintf(out, "%s\n", style.BoldCyan("%s", group.Title))
+			for _, sub := range cmd.Commands() {
+				if sub.GroupID == group.ID && sub.IsAvailableCommand() {
+					name := sub.Name()
+					padding := 17 - len(sub.Name())
+					if padding < 2 {
+						padding = 2
+					}
+					fmt.Fprintf(out, "  %s%s%s\n", name, strings.Repeat(" ", padding), sub.Short)
+				}
+			}
+			fmt.Fprintln(out)
+		}
+	}
+
+	// Examples
+	examples := buildExampleText()
+	if examples != "" {
+		fmt.Fprintf(out, "%s\n", style.BoldCyan("Examples:"))
+		for _, line := range strings.Split(examples, "\n") {
+			fmt.Fprintf(out, "  %s\n", line)
+		}
+		fmt.Fprintln(out)
+	}
+
+	// Flags
+	flagUsages := cmd.LocalFlags().FlagUsages()
+	if flagUsages != "" {
+		fmt.Fprintf(out, "%s\n", style.BoldCyan("Flags:"))
+		fmt.Fprint(out, flagUsages)
+		fmt.Fprintln(out)
+	}
+
+	// Footer
+	fmt.Fprintln(out, pterm.Gray("Run "+cmd.CommandPath()+" <command> --help to learn more about a command."))
+	fmt.Fprintln(out, pterm.Gray("Full docs at docs.deepsource.com/docs/developers/cli/usage"))
 }
 
 func Execute() error {
