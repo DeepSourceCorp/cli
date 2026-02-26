@@ -12,17 +12,6 @@ build-local:
 
 # Run all tests with coverage
 test:
-	go test -v ./command/report/tests/... -count=1
-	go test -v ./command/issues/tests/... -count=1
-	go test -v ./command/metrics/tests/... -count=1
-	go test -v ./command/vulnerabilities/tests/... -count=1
-	go test -v ./command/analysis/tests/... -count=1
-	go test -v ./command/repository/status/tests/... -count=1
-	go test -v ./command/repository/analyzers/tests/... -count=1
-	go test -v ./command/auth/status/tests/... -count=1
-	echo "\n====TESTING DEEPSOURCE PACKAGE====\n"
-	go test -v ./deepsource/tests/...
-	echo "\n====CALCULATING TEST COVERAGE FOR ENTIRE PACKAGE====\n"
 	go test -v -coverprofile=coverage.out -count=1 ./...
 
 # Clone test fixtures and prepare test environment

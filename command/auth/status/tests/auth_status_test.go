@@ -116,7 +116,7 @@ func TestAuthStatusServerRejected(t *testing.T) {
 
 	// Mock client that returns an auth error from GetViewer
 	mock := graphqlclient.NewMockClient()
-	mock.QueryFunc = func(_ context.Context, query string, _ map[string]any, result any) error {
+	mock.QueryFunc = func(_ context.Context, query string, _ map[string]any, _ any) error {
 		return clierrors.ErrTokenExpired(fmt.Errorf("token revoked"))
 	}
 	client := deepsource.NewWithGraphQLClient(mock)

@@ -31,7 +31,7 @@ const (
 	key      = "python"
 )
 
-var dsn = "http://f59ab9314307@localhost:8081"
+var dsn = "http://test-mock-token@localhost:8081"
 
 func testDir() string {
 	_, filename, _, ok := runtime.Caller(0)

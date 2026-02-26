@@ -61,6 +61,44 @@ func buildFullReportCard() *runs.ReportCard {
 	}
 }
 
+func assertDimension(t *testing.T, name string, dim *ReportDimensionJSON, wantGrade string, wantScore int, wantIssues int) {
+	t.Helper()
+	if dim == nil {
+		t.Fatalf("%s: expected non-nil", name)
+		return
+	}
+	if dim.Grade != wantGrade {
+		t.Errorf("%s.Grade = %q, want %q", name, dim.Grade, wantGrade)
+	}
+	if dim.Score != wantScore {
+		t.Errorf("%s.Score = %d, want %d", name, dim.Score, wantScore)
+	}
+	if dim.IssuesCount != wantIssues {
+		t.Errorf("%s.IssuesCount = %d, want %d", name, dim.IssuesCount, wantIssues)
+	}
+}
+
+func assertCoverage(t *testing.T, cov *ReportCoverageJSON, wantGrade string, wantLine float64, wantBranch float64) {
+	t.Helper()
+	if cov == nil {
+		t.Fatal("Coverage: expected non-nil")
+		return
+	}
+	if cov.Grade != wantGrade {
+		t.Errorf("Coverage.Grade = %q, want %q", cov.Grade, wantGrade)
+	}
+	if cov.LineCoverage == nil {
+		t.Error("Coverage.LineCoverage: expected non-nil")
+	} else if *cov.LineCoverage != wantLine {
+		t.Errorf("Coverage.LineCoverage = %v, want %v", *cov.LineCoverage, wantLine)
+	}
+	if cov.BranchCoverage == nil {
+		t.Error("Coverage.BranchCoverage: expected non-nil")
+	} else if *cov.BranchCoverage != wantBranch {
+		t.Errorf("Coverage.BranchCoverage = %v, want %v", *cov.BranchCoverage, wantBranch)
+	}
+}
+
 // TestToReportCardJSON_AllFields verifies a fully-populated ReportCard converts correctly.
 func TestToReportCardJSON_AllFields(t *testing.T) {
 	rc := buildFullReportCard()
@@ -69,26 +107,28 @@ func TestToReportCardJSON_AllFields(t *testing.T) {
 		t.Fatal("expected non-nil result")
 	}
 
-	checks := []struct {
-		name string
-		ok   bool
-		detail interface{}
-	}{
-		{"Status", got.Status == "READY", got.Status},
-		{"Security", got.Security != nil && got.Security.Grade == "A+" && got.Security.Score == 99 && got.Security.IssuesCount == 0, got.Security},
-		{"Reliability", got.Reliability != nil && got.Reliability.Grade == "A", got.Reliability},
-		{"Complexity", got.Complexity != nil && got.Complexity.Score == 87, got.Complexity},
-		{"Hygiene", got.Hygiene != nil && got.Hygiene.IssuesCount == 2, got.Hygiene},
-		{"Coverage.Grade", got.Coverage != nil && got.Coverage.Grade == "B+", got.Coverage},
-		{"Coverage.LineCoverage", got.Coverage != nil && got.Coverage.LineCoverage != nil && *got.Coverage.LineCoverage == 82.4, got.Coverage},
-		{"Coverage.BranchCoverage", got.Coverage != nil && got.Coverage.BranchCoverage != nil && *got.Coverage.BranchCoverage == 71.0, got.Coverage},
-		{"Aggregate", got.Aggregate != nil && got.Aggregate.Grade == "A" && got.Aggregate.Score == 93, got.Aggregate},
-		{"FocusArea", got.FocusArea != nil && got.FocusArea.Dimension == "COMPLEXITY", got.FocusArea},
+	if got.Status != "READY" {
+		t.Errorf("Status = %q, want %q", got.Status, "READY")
 	}
-	for _, c := range checks {
-		if !c.ok {
-			t.Errorf("%s mismatch: %+v", c.name, c.detail)
-		}
+
+	assertDimension(t, "Security", got.Security, "A+", 99, 0)
+	assertDimension(t, "Reliability", got.Reliability, "A", 94, 3)
+	assertDimension(t, "Complexity", got.Complexity, "B+", 87, 4)
+	assertDimension(t, "Hygiene", got.Hygiene, "A", 91, 2)
+	assertCoverage(t, got.Coverage, "B+", 82.4, 71.0)
+
+	if got.Aggregate == nil {
+		t.Fatal("Aggregate: expected non-nil")
+	}
+	if got.Aggregate.Grade != "A" || got.Aggregate.Score != 93 {
+		t.Errorf("Aggregate = {%q, %d}, want {\"A\", 93}", got.Aggregate.Grade, got.Aggregate.Score)
+	}
+
+	if got.FocusArea == nil {
+		t.Fatal("FocusArea: expected non-nil")
+	}
+	if got.FocusArea.Dimension != "COMPLEXITY" {
+		t.Errorf("FocusArea.Dimension = %q, want %q", got.FocusArea.Dimension, "COMPLEXITY")
 	}
 }
 
