@@ -95,6 +95,8 @@ main() {
 
   pass "Installed to ${BIN_DIR}/${BINARY_NAME}"
 
+  "${BIN_DIR}/${BINARY_NAME}" completion >/dev/null 2>&1 || true
+
   echo ""
 
   # Check if install dir is in PATH

@@ -252,7 +252,7 @@ func TestGetDSNFromOIDC(t *testing.T) {
 		if err == nil {
 			t.Fatal("Expected error for empty dsEndpoint, got nil")
 		}
-		if !strings.Contains(err.Error(), "--deepsource-host-endpoint cannot be empty") {
+		if !strings.Contains(err.Error(), "--host cannot be empty") {
 			t.Errorf("Unexpected error message: %s", err.Error())
 		}
 	})

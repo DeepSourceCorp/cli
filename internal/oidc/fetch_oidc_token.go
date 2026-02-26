@@ -98,7 +98,7 @@ func GetDSNFromOIDC(requestId, requestUrl, dsEndpoint, provider string) (string,
 	}
 
 	if dsEndpoint == "" {
-		return "", fmt.Errorf("--deepsource-host-endpoint cannot be empty")
+		return "", fmt.Errorf("--host cannot be empty")
 	}
 
 	if provider == "" {
