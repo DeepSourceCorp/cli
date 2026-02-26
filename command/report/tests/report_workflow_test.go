@@ -255,6 +255,7 @@ func TestReportAnalyzerTypeWorkflow(t *testing.T) {
 
 func runReportCommand(t *testing.T, args []string) (string, string, error) {
 	t.Helper()
+	t.Setenv("CODE_PATH", repoRoot)
 
 	deps := container.NewTest()
 	if env, ok := deps.Environment.(*adapters.MockEnvironment); ok {

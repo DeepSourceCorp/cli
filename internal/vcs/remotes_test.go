@@ -172,6 +172,38 @@ func TestGetRemoteMap_EmptyInput(t *testing.T) {
 	}
 }
 
+func TestExtractADSOwner_SSHNoColon(t *testing.T) {
+	// SSH URL without a colon separator → fallthrough return ""
+	got := extractADSOwner("git@ssh.dev.azure.com")
+	if got != "" {
+		t.Errorf("extractADSOwner(no colon) = %q, want empty", got)
+	}
+}
+
+func TestExtractADSOwner_SSHShortPath(t *testing.T) {
+	// SSH URL with colon but only one path segment → return ""
+	got := extractADSOwner("git@ssh.dev.azure.com:v3")
+	if got != "" {
+		t.Errorf("extractADSOwner(short path) = %q, want empty", got)
+	}
+}
+
+func TestExtractADSOwner_HTTPSVisualStudioEmptyHost(t *testing.T) {
+	got := extractADSOwner("https://visualstudio.com/proj/_git/repo")
+	if got != "visualstudio" {
+		t.Errorf("extractADSOwner(visualstudio no subdomain) = %q, want %q", got, "visualstudio")
+	}
+}
+
+func TestExtractOwner_SSHParseError(t *testing.T) {
+	// git@ prefix with a path that url.Parse can handle, but returns no owner
+	got := extractOwner("git@github.com:", "GITHUB")
+	// After splitting on ":", the second element is "" which url.Parse accepts
+	// The path will be empty, resulting in an index-out-of-bounds or empty return
+	// Just ensure no panic
+	_ = got
+}
+
 func TestGetRemoteMap(t *testing.T) {
 	tests := []struct {
 		name    string
