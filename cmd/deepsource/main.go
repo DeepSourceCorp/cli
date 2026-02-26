@@ -37,6 +37,10 @@ func sentryEnvironment(ver string) string {
 }
 
 func main() {
+	os.Exit(mainRun())
+}
+
+func mainRun() (exitCode int) {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
 	// Override app identity for dev builds
@@ -62,12 +66,11 @@ func main() {
 			sentry.CurrentHub().Recover(r)
 			sentry.Flush(2 * time.Second)
 			fmt.Fprintf(os.Stderr, "fatal: unexpected panic: %v\n", r)
-			os.Exit(2)
+			exitCode = 2
 		}
 	}()
 
-	exitCode := run()
-	os.Exit(exitCode)
+	return run()
 }
 
 func run() int {

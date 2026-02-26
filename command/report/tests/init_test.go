@@ -36,9 +36,13 @@ func TestMain(m *testing.M) {
 	}
 	code := m.Run()
 	if hadCodePath {
-		os.Setenv("CODE_PATH", origCodePath)
+		if err := os.Setenv("CODE_PATH", origCodePath); err != nil {
+			log.Printf("failed to restore CODE_PATH: %v", err)
+		}
 	} else {
-		os.Unsetenv("CODE_PATH")
+		if err := os.Unsetenv("CODE_PATH"); err != nil {
+			log.Printf("failed to unset CODE_PATH: %v", err)
+		}
 	}
 	srv.Close()
 	os.Exit(code)
@@ -81,7 +85,9 @@ func prepareArtifacts() error {
 		}
 	}
 	repoRoot = rootDir
-	_ = os.Setenv("CODE_PATH", repoRoot)
+	if err := os.Setenv("CODE_PATH", repoRoot); err != nil {
+		return fmt.Errorf("failed to set CODE_PATH: %w", err)
+	}
 
 	tempDir, err := os.MkdirTemp("", "deepsource-report")
 	if err != nil {
