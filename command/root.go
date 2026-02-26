@@ -3,6 +3,7 @@ package command
 import (
 	"context"
 
+	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/command/auth"
 	"github.com/deepsourcelabs/cli/command/runs"
@@ -19,7 +20,57 @@ func NewCmdRoot() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   buildinfo.AppName + " <command> [flags]",
 		Short: "DeepSource CLI",
-		Long:  "DeepSource CLI - Ship good code from the command line.\n\nTo get started, run: " + buildinfo.AppName + " auth login",
+		Long: heredoc.Docf(`
+			DeepSource CLI — query code-quality data from the command line.
+
+			Authentication (required before all other commands):
+			  %[1]s auth login
+
+			Repository targeting:
+			  --repo <provider/owner/name>   provider: gh, gl, bb, or ads
+			  If omitted, auto-detected from the current git remote.
+
+			Output format:
+			  --output json    machine-readable JSON (supported by issues, metrics, runs,
+			                   report-card, vulnerabilities)
+
+			Scope (where applicable):
+			  --commit <sha>          specific commit
+			  --pr <number>           pull request
+			  --default-branch        repository default branch
+
+			Commands:
+			  issues           List code-quality issues (--category, --analyzer, --limit, --pr)
+			  metrics          Show code metrics (--metric)
+			  runs             List analysis runs (--limit)
+			  report-card      View report card (--commit)
+			  vulnerabilities  List dependency vulnerabilities (--severity)
+			  report           Upload analysis artifacts from CI (--analyzer, --key, --value-file)
+			  auth             Login, logout, check status
+			  repo             Repository info (status, dashboard, analyzers)
+		`, buildinfo.AppName),
+		Example: heredoc.Docf(`
+			# Check for security issues on the current branch
+			%[1]s issues --output json --category security
+
+			# Get all issues for pull request #42
+			%[1]s issues --repo gh/owner/name --pr 42 --output json
+
+			# View code metrics on the current branch
+			%[1]s metrics --output json
+
+			# Check critical and high dependency vulnerabilities on the current branch
+			%[1]s vulnerabilities --severity critical,high --output json
+
+			# View report card for a specific commit
+			%[1]s report-card --commit abc123f --output json
+
+			# Report test coverage from CI
+			%[1]s report --analyzer test-coverage --key go --value-file coverage.out
+
+			# List the 5 most recent analysis runs
+			%[1]s runs --output json --limit 5
+		`, buildinfo.AppName),
 		SilenceErrors: true,
 		SilenceUsage:  true,
 	}

@@ -30,20 +30,10 @@ func TestMain(m *testing.M) {
 			dsn = parsed
 		}
 	}
-	origCodePath, hadCodePath := os.LookupEnv("CODE_PATH")
 	if err := prepareArtifacts(); err != nil {
 		log.Printf("failed to prepare report artifacts: %v", err)
 	}
 	code := m.Run()
-	if hadCodePath {
-		if err := os.Setenv("CODE_PATH", origCodePath); err != nil {
-			log.Printf("failed to restore CODE_PATH: %v", err)
-		}
-	} else {
-		if err := os.Unsetenv("CODE_PATH"); err != nil {
-			log.Printf("failed to unset CODE_PATH: %v", err)
-		}
-	}
 	srv.Close()
 	os.Exit(code)
 }
@@ -85,9 +75,6 @@ func prepareArtifacts() error {
 		}
 	}
 	repoRoot = rootDir
-	if err := os.Setenv("CODE_PATH", repoRoot); err != nil {
-		return fmt.Errorf("failed to set CODE_PATH: %w", err)
-	}
 
 	tempDir, err := os.MkdirTemp("", "deepsource-report")
 	if err != nil {
