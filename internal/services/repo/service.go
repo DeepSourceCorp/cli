@@ -54,6 +54,14 @@ type StatusResult struct {
 	Host      string
 }
 
+// FullStatusResult holds complete repo status including analyzers.
+type FullStatusResult struct {
+	RepoSlug     string               `json:"repo_slug"`
+	Activated    bool                  `json:"activated"`
+	DashboardURL string               `json:"dashboard_url,omitempty"`
+	Analyzers    []analyzers.Analyzer  `json:"analyzers,omitempty"`
+}
+
 // Status checks repository activation status.
 func (s *Service) Status(ctx context.Context, repoArg string) (*StatusResult, error) {
 	cfg, err := s.config.Load()
@@ -84,6 +92,59 @@ func (s *Service) Status(ctx context.Context, repoArg string) (*StatusResult, er
 	}
 
 	return &StatusResult{Remote: remote, Activated: statusResponse.Activated, Host: cfg.Host}, nil
+}
+
+// StatusWithAnalyzers returns full repo status including enabled analyzers.
+func (s *Service) StatusWithAnalyzers(ctx context.Context, repoArg string) (*FullStatusResult, error) {
+	cfg, err := s.config.Load()
+	if err != nil {
+		return nil, fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
+	}
+	if err := cfg.VerifyAuthentication(); err != nil {
+		return nil, err
+	}
+
+	remote, err := s.resolveRemote(repoArg)
+	if err != nil {
+		return nil, err
+	}
+
+	client, err := s.newClient(deepsource.ClientOpts{
+		Token:            cfg.Token,
+		HostName:         cfg.Host,
+		OnTokenRefreshed: s.config.TokenRefreshCallback(),
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	statusResponse, err := client.GetRepoStatus(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
+	if err != nil {
+		return nil, err
+	}
+
+	sc := vcsShortcode(remote.VCSProvider)
+	if sc == "" {
+		return nil, fmt.Errorf("Unknown VCS provider: %s", remote.VCSProvider)
+	}
+	slug := fmt.Sprintf("%s/%s/%s", sc, remote.Owner, remote.RepoName)
+
+	result := &FullStatusResult{
+		RepoSlug:  slug,
+		Activated: statusResponse.Activated,
+	}
+
+	if statusResponse.Activated {
+		result.DashboardURL = fmt.Sprintf("https://%s/%s/", getDashboardHost(cfg.Host), slug)
+
+		azs, err := client.GetEnabledAnalyzers(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
+		if err != nil {
+			return nil, err
+		}
+		result.Analyzers = azs
+	}
+
+	return result, nil
 }
 
 // ViewURL validates access and returns the dashboard URL.

@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
+	"github.com/deepsourcelabs/cli/deepsource/pagination"
 	"github.com/deepsourcelabs/cli/deepsource/vulnerabilities"
 )
 
@@ -15,6 +16,7 @@ const fetchPRVulnsQuery = `query GetPRVulns(
   $provider: VCSProvider!
   $prNumber: Int!
   $limit: Int!
+  $after: String
 ) {
   repository(name: $name, login: $owner, vcsProvider: $provider) {
     pullRequest(number: $prNumber) {
@@ -22,7 +24,7 @@ const fetchPRVulnsQuery = `query GetPRVulns(
       title
       baseBranch
       branch
-      vulnerabilityOccurrences(first: $limit) {
+      vulnerabilityOccurrences(first: $limit, after: $after) {
         edges {
           node {
             id
@@ -47,6 +49,10 @@ const fetchPRVulnsQuery = `query GetPRVulns(
             }
           }
         }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
       }
     }
   }
@@ -57,7 +63,6 @@ type PRVulnsParams struct {
 	RepoName string
 	Provider string
 	PRNumber int
-	Limit    int
 }
 
 type PRVulnsRequest struct {
@@ -97,6 +102,7 @@ type PRVulnsResponse struct {
 						} `json:"packageVersion"`
 					} `json:"node"`
 				} `json:"edges"`
+				PageInfo pagination.PageInfo `json:"pageInfo"`
 			} `json:"vulnerabilityOccurrences"`
 		} `json:"pullRequest"`
 	} `json:"repository"`
@@ -107,52 +113,79 @@ func NewPRVulnsRequest(client graphqlclient.GraphQLClient, params PRVulnsParams)
 }
 
 func (r *PRVulnsRequest) Do(ctx context.Context) (*vulnerabilities.PRVulns, error) {
-	vars := map[string]any{
-		"name":     r.Params.RepoName,
-		"owner":    r.Params.Owner,
-		"provider": r.Params.Provider,
-		"prNumber": r.Params.PRNumber,
-		"limit":    r.Params.Limit,
-	}
-	var respData PRVulnsResponse
-	if err := r.client.Query(ctx, fetchPRVulnsQuery, vars, &respData); err != nil {
-		return nil, fmt.Errorf("Fetch PR vulnerabilities: %w", err)
-	}
+	var result *vulnerabilities.PRVulns
+	var cursor *string
 
-	pr := respData.Repository.PullRequest
-	result := &vulnerabilities.PRVulns{
-		Number:     pr.Number,
-		Title:      pr.Title,
-		BaseBranch: pr.BaseBranch,
-		Branch:     pr.Branch,
-		Vulns:      make([]vulnerabilities.VulnerabilityOccurrence, 0),
-	}
-
-	for _, edge := range pr.VulnerabilityOccurrences.Edges {
-		node := edge.Node
-		v := vulnerabilities.VulnerabilityOccurrence{
-			ID:           node.ID,
-			Reachability: node.Reachability,
-			Fixability:   node.Fixability,
-			Vulnerability: vulnerabilities.Vulnerability{
-				Identifier:      node.Vulnerability.Identifier,
-				Severity:        node.Vulnerability.Severity,
-				Summary:         node.Vulnerability.Summary,
-				CvssV3BaseScore: node.Vulnerability.CvssV3BaseScore,
-				FixedVersions:   node.Vulnerability.FixedVersions,
-				Aliases:         node.Vulnerability.Aliases,
-				EpssScore:       node.Vulnerability.EpssScore,
-				ReferenceUrls:   node.Vulnerability.ReferenceUrls,
-			},
-			Package: vulnerabilities.Package{
-				Name:      node.Package.Name,
-				Ecosystem: node.Package.Ecosystem,
-			},
-			PackageVersion: vulnerabilities.PackageVersion{
-				Version: node.PackageVersion.Version,
-			},
+	for {
+		vars := map[string]any{
+			"name":     r.Params.RepoName,
+			"owner":    r.Params.Owner,
+			"provider": r.Params.Provider,
+			"prNumber": r.Params.PRNumber,
+			"limit":    pagination.DefaultPageSize,
 		}
-		result.Vulns = append(result.Vulns, v)
+		if cursor != nil {
+			vars["after"] = *cursor
+		}
+
+		var respData PRVulnsResponse
+		if err := r.client.Query(ctx, fetchPRVulnsQuery, vars, &respData); err != nil {
+			return nil, fmt.Errorf("Fetch PR vulnerabilities: %w", err)
+		}
+
+		pr := respData.Repository.PullRequest
+
+		// Capture PR metadata on first iteration
+		if result == nil {
+			result = &vulnerabilities.PRVulns{
+				Number:     pr.Number,
+				Title:      pr.Title,
+				BaseBranch: pr.BaseBranch,
+				Branch:     pr.Branch,
+				Vulns:      make([]vulnerabilities.VulnerabilityOccurrence, 0),
+			}
+		}
+
+		for _, edge := range pr.VulnerabilityOccurrences.Edges {
+			node := edge.Node
+			v := vulnerabilities.VulnerabilityOccurrence{
+				ID:           node.ID,
+				Reachability: node.Reachability,
+				Fixability:   node.Fixability,
+				Vulnerability: vulnerabilities.Vulnerability{
+					Identifier:      node.Vulnerability.Identifier,
+					Severity:        node.Vulnerability.Severity,
+					Summary:         node.Vulnerability.Summary,
+					CvssV3BaseScore: node.Vulnerability.CvssV3BaseScore,
+					FixedVersions:   node.Vulnerability.FixedVersions,
+					Aliases:         node.Vulnerability.Aliases,
+					EpssScore:       node.Vulnerability.EpssScore,
+					ReferenceUrls:   node.Vulnerability.ReferenceUrls,
+				},
+				Package: vulnerabilities.Package{
+					Name:      node.Package.Name,
+					Ecosystem: node.Package.Ecosystem,
+				},
+				PackageVersion: vulnerabilities.PackageVersion{
+					Version: node.PackageVersion.Version,
+				},
+			}
+			result.Vulns = append(result.Vulns, v)
+		}
+
+		if len(result.Vulns) >= pagination.MaxResults {
+			break
+		}
+		if !pr.VulnerabilityOccurrences.PageInfo.HasNextPage {
+			break
+		}
+		cursor = pr.VulnerabilityOccurrences.PageInfo.EndCursor
+	}
+
+	if result == nil {
+		result = &vulnerabilities.PRVulns{
+			Vulns: make([]vulnerabilities.VulnerabilityOccurrence, 0),
+		}
 	}
 
 	return result, nil

@@ -54,7 +54,6 @@ func NewCmdVulnerabilities() *cobra.Command {
 func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	opts := VulnerabilitiesOptions{
 		OutputFormat: "pretty",
-		LimitArg:     100,
 		deps:         deps,
 	}
 
@@ -94,7 +93,7 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	}
 
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository in provider/owner/name format (e.g. gh/owner/name). Supported providers: gh, gl, bb, ads")
-	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 100, "Maximum number of vulnerabilities to fetch")
+	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 0, "Maximum number of vulnerabilities to display (0 = all)")
 	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
 	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show CVSS score, summary, fix versions, and reachability")
 	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit SHA")
@@ -172,6 +171,9 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 	// Apply severity filter if provided
 	opts.applyFilters()
 
+	// Apply limit cap if set
+	opts.applyLimit()
+
 	// Output based on format
 	var outErr error
 	switch opts.OutputFormat {
@@ -222,11 +224,11 @@ func (opts *VulnerabilitiesOptions) resolveVulnerabilities(ctx context.Context, 
 	var err error
 	switch {
 	case opts.CommitOid != "":
-		opts.runVulns, err = client.GetRunVulns(ctx, opts.CommitOid, opts.LimitArg)
+		opts.runVulns, err = client.GetRunVulns(ctx, opts.CommitOid)
 	case opts.PRNumber > 0:
-		opts.prVulns, err = client.GetPRVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.PRNumber, opts.LimitArg)
+		opts.prVulns, err = client.GetPRVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.PRNumber)
 	case opts.DefaultBranch:
-		opts.repoVulns, err = client.GetRepoVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
+		opts.repoVulns, err = client.GetRepoVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 	default:
 		var branchNameFunc func() (string, error)
 		if opts.deps != nil {
@@ -244,15 +246,34 @@ func (opts *VulnerabilitiesOptions) resolveVulnerabilities(ctx context.Context, 
 		case ab.PRNumber > 0:
 			opts.PRNumber = ab.PRNumber
 			opts.CommitOid = ab.CommitOid
-			opts.prVulns, err = client.GetPRVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, ab.PRNumber, opts.LimitArg)
+			opts.prVulns, err = client.GetPRVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, ab.PRNumber)
 		case ab.UseRepo:
-			opts.repoVulns, err = client.GetRepoVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
+			opts.repoVulns, err = client.GetRepoVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 		default:
 			opts.CommitOid = ab.CommitOid
-			opts.runVulns, err = client.GetRunVulns(ctx, ab.CommitOid, opts.LimitArg)
+			opts.runVulns, err = client.GetRunVulns(ctx, ab.CommitOid)
 		}
 	}
 	return err
+}
+
+func (opts *VulnerabilitiesOptions) applyLimit() {
+	if opts.LimitArg <= 0 {
+		return
+	}
+	vulnsList := opts.getVulns()
+	if len(vulnsList) <= opts.LimitArg {
+		return
+	}
+	truncated := vulnsList[:opts.LimitArg]
+	switch {
+	case opts.runVulns != nil:
+		opts.runVulns.Vulns = truncated
+	case opts.prVulns != nil:
+		opts.prVulns.Vulns = truncated
+	default:
+		opts.repoVulns = truncated
+	}
 }
 
 func (opts *VulnerabilitiesOptions) getVulns() []vulnerabilities.VulnerabilityOccurrence {
@@ -403,7 +424,6 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 		}
 		iw := &indentWriter{w: w, prefix: "  "}
 		pterm.DefaultTable.WithHasHeader().WithData(data).WithWriter(iw).Render()
-		fmt.Fprintln(w)
 	}
 
 	fmt.Fprintf(w, "Showing %d %s in %s from %s\n", len(vulnsList), style.Pluralize(len(vulnsList), "vulnerability", "vulnerabilities"), opts.repoSlug, opts.scopeLabel())

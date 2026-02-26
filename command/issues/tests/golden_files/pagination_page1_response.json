@@ -1,0 +1,39 @@
+{
+  "repository": {
+    "issues": {
+      "edges": [
+        {
+          "node": {
+            "occurrences": {
+              "edges": [
+                {
+                  "node": {
+                    "path": "cmd/deepsource/main.go",
+                    "beginLine": 42,
+                    "endLine": 42,
+                    "issue": {
+                      "title": "Unchecked error return value of os.ReadFile",
+                      "shortcode": "GO-W1007",
+                      "shortDescription": "Return value of io.ReadAll is not checked for errors",
+                      "category": "BUG_RISK",
+                      "severity": "MAJOR",
+                      "isRecommended": false,
+                      "analyzer": {
+                        "name": "Go",
+                        "shortcode": "go"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": true,
+        "endCursor": "cursor-page1"
+      }
+    }
+  }
+}

@@ -59,7 +59,6 @@ func NewCmdIssues() *cobra.Command {
 
 func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	opts := IssuesOptions{
-		LimitArg:     30,
 		OutputFormat: "pretty",
 		deps:         deps,
 	}
@@ -98,7 +97,7 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository in provider/owner/name format (e.g. gh/owner/name). Supported providers: gh, gl, bb, ads")
 
 	// --limit, -l flag
-	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Maximum number of issues to fetch")
+	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 0, "Maximum number of issues to display (0 = all)")
 
 	// --output, -o flag
 	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
@@ -262,6 +261,12 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 	}
 
 	issuesList = opts.filterIssues(issuesList)
+
+	// Apply limit cap if set
+	if opts.LimitArg > 0 && len(issuesList) > opts.LimitArg {
+		issuesList = issuesList[:opts.LimitArg]
+	}
+
 	opts.issues = issuesList
 
 	switch opts.OutputFormat {
@@ -286,11 +291,11 @@ func (opts *IssuesOptions) resolveIssues(ctx context.Context, client *deepsource
 	var err error
 	switch {
 	case opts.CommitOid != "":
-		issuesList, err = client.GetRunIssuesFlat(ctx, opts.CommitOid, opts.LimitArg, serverFilters)
+		issuesList, err = client.GetRunIssuesFlat(ctx, opts.CommitOid, serverFilters)
 	case opts.PRNumber > 0:
-		issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.PRNumber, opts.LimitArg)
+		issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.PRNumber)
 	case opts.DefaultBranch:
-		issuesList, err = client.GetIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
+		issuesList, err = client.GetIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 	default:
 		var branchNameFunc func() (string, error)
 		if opts.deps != nil {
@@ -308,12 +313,12 @@ func (opts *IssuesOptions) resolveIssues(ctx context.Context, client *deepsource
 		case ab.PRNumber > 0:
 			opts.PRNumber = ab.PRNumber
 			opts.CommitOid = ab.CommitOid
-			issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, ab.PRNumber, opts.LimitArg)
+			issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, ab.PRNumber)
 		case ab.UseRepo:
-			issuesList, err = client.GetIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
+			issuesList, err = client.GetIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 		default:
 			opts.CommitOid = ab.CommitOid
-			issuesList, err = client.GetRunIssuesFlat(ctx, ab.CommitOid, opts.LimitArg, serverFilters)
+			issuesList, err = client.GetRunIssuesFlat(ctx, ab.CommitOid, serverFilters)
 		}
 	}
 	return issuesList, err

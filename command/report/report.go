@@ -234,7 +234,7 @@ func printReportResult(output interfaces.OutputWriter, format string, result *re
 
 	switch format {
 	case "", "pretty":
-		write("Artifact published successfully\n\n")
+		write("Artifact published successfully\n")
 		write("Analyzer  %s\n", result.Analyzer)
 		write("Key       %s\n", result.Key)
 		if result.Message != "" {

@@ -1,9 +1,19 @@
 {
-  "Remote": {
-    "Owner": "testowner",
-    "RepoName": "testrepo",
-    "VCSProvider": "GITHUB"
-  },
-  "Activated": true,
-  "Host": "deepsource.com"
+  "repo_slug": "gh/testowner/testrepo",
+  "activated": true,
+  "dashboard_url": "https://app.deepsource.com/gh/testowner/testrepo/",
+  "analyzers": [
+    {
+      "name": "Go",
+      "shortcode": "go"
+    },
+    {
+      "name": "Python",
+      "shortcode": "python"
+    },
+    {
+      "name": "Docker",
+      "shortcode": "docker"
+    }
+  ]
 }

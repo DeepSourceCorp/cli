@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
+	"github.com/deepsourcelabs/cli/deepsource/pagination"
 	"github.com/deepsourcelabs/cli/deepsource/vulnerabilities"
 )
 
@@ -51,7 +52,6 @@ const fetchRunVulnsQuery = `query GetRunVulns($commitOid: String!, $limit: Int!)
 
 type RunVulnsParams struct {
 	CommitOid string
-	Limit     int
 }
 
 type RunVulnsRequest struct {
@@ -106,7 +106,7 @@ func NewRunVulnsRequest(client graphqlclient.GraphQLClient, params RunVulnsParam
 func (r *RunVulnsRequest) Do(ctx context.Context) (*vulnerabilities.RunVulns, error) {
 	vars := map[string]any{
 		"commitOid": r.Params.CommitOid,
-		"limit":     r.Params.Limit,
+		"limit":     pagination.NestedPageSize,
 	}
 	var respData RunVulnsResponse
 	if err := r.client.Query(ctx, fetchRunVulnsQuery, vars, &respData); err != nil {

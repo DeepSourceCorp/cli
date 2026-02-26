@@ -25,7 +25,7 @@ func TestFlagDefaults(t *testing.T) {
 			name:     "issues",
 			buildCmd: issuesCmd.NewCmdIssues,
 			expected: []flagExpectation{
-				{name: "limit", defaultValue: "30"},
+				{name: "limit", defaultValue: "0"},
 				{name: "output", defaultValue: "pretty"},
 				{name: "verbose", defaultValue: "false"},
 				{name: "pr", defaultValue: "0"},
@@ -43,7 +43,7 @@ func TestFlagDefaults(t *testing.T) {
 			name:     "metrics",
 			buildCmd: metricsCmd.NewCmdMetrics,
 			expected: []flagExpectation{
-				{name: "limit", defaultValue: "30"},
+				{name: "limit", defaultValue: "0"},
 				{name: "output", defaultValue: "pretty"},
 				{name: "verbose", defaultValue: "false"},
 				{name: "pr", defaultValue: "0"},
@@ -55,7 +55,7 @@ func TestFlagDefaults(t *testing.T) {
 			name:     "vulnerabilities",
 			buildCmd: vulnsCmd.NewCmdVulnerabilities,
 			expected: []flagExpectation{
-				{name: "limit", defaultValue: "100"},
+				{name: "limit", defaultValue: "0"},
 				{name: "output", defaultValue: "pretty"},
 				{name: "verbose", defaultValue: "false"},
 				{name: "pr", defaultValue: "0"},

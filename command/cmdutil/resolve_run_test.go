@@ -3,6 +3,7 @@ package cmdutil
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"path/filepath"
 	"runtime"
@@ -417,6 +418,81 @@ func TestResolveLatestCompletedRun_AllRunning(t *testing.T) {
 	}
 	if run != nil {
 		t.Errorf("expected nil run, got %+v", run)
+	}
+}
+
+// TestResolveWithPR_PendingFallback verifies that resolveWithPR falls back to
+// the last completed run when the latest run is PENDING and WaitOrFallback
+// returns FALLBACK (non-TTY environment).
+func TestResolveWithPR_PendingFallback(t *testing.T) {
+	pendingData := testutil.LoadGoldenFile(t, testdataPath("get_analysis_runs_pending_response.json"))
+	mixedData := testutil.LoadGoldenFile(t, testdataPath("get_analysis_runs_mixed_status_response.json"))
+
+	callCount := 0
+	mock := graphqlclient.NewMockClient()
+	mock.QueryFunc = func(_ context.Context, query string, _ map[string]any, result any) error {
+		if !strings.Contains(query, "query GetAnalysisRuns(") {
+			t.Fatalf("unexpected query: %s", query)
+		}
+		callCount++
+		if callCount == 1 {
+			// First call: ResolveLatestRunForBranch → PENDING run
+			return json.Unmarshal(pendingData, result)
+		}
+		// Second call: ResolveLatestCompletedRun → mixed (RUNNING + SUCCESS)
+		return json.Unmarshal(mixedData, result)
+	}
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	result := &AutoBranchResult{BranchName: "feature/new-auth", PRNumber: 42}
+
+	got, err := resolveWithPR(context.Background(), &buf, client, "feature/new-auth", testRemote, result)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if got.Empty {
+		t.Fatal("expected non-empty result, got Empty=true")
+	}
+	// Should fall back to the completed run's commit OID
+	const expectedOid = "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1"
+	if got.CommitOid != expectedOid {
+		t.Errorf("expected CommitOid=%q (completed run), got %q", expectedOid, got.CommitOid)
+	}
+	if !strings.Contains(buf.String(), "Showing results from the last analyzed commit") {
+		t.Errorf("expected fallback info message, got: %s", buf.String())
+	}
+}
+
+// TestResolveWithPR_PendingNoCompletedRuns verifies that resolveWithPR returns
+// Empty=true when the latest run is PENDING and no completed runs exist.
+func TestResolveWithPR_PendingNoCompletedRuns(t *testing.T) {
+	pendingData := testutil.LoadGoldenFile(t, testdataPath("get_analysis_runs_pending_response.json"))
+	allRunningData := testutil.LoadGoldenFile(t, testdataPath("get_analysis_runs_all_running_response.json"))
+
+	callCount := 0
+	mock := graphqlclient.NewMockClient()
+	mock.QueryFunc = func(_ context.Context, query string, _ map[string]any, result any) error {
+		callCount++
+		if callCount == 1 {
+			return json.Unmarshal(pendingData, result)
+		}
+		return json.Unmarshal(allRunningData, result)
+	}
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	result := &AutoBranchResult{BranchName: "feature/new-auth", PRNumber: 42}
+
+	got, err := resolveWithPR(context.Background(), &buf, client, "feature/new-auth", testRemote, result)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if !got.Empty {
+		t.Fatal("expected Empty=true when no completed runs exist")
+	}
+	if !strings.Contains(buf.String(), "No completed analysis runs found") {
+		t.Errorf("expected 'no completed runs' message, got: %s", buf.String())
 	}
 }
 

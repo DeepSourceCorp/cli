@@ -3,7 +3,6 @@ package repository
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/deepsourcelabs/cli/command/repository/analyzers"
 	"github.com/deepsourcelabs/cli/command/repository/dashboard"
 	"github.com/deepsourcelabs/cli/command/repository/status"
 )
@@ -16,6 +15,5 @@ func NewCmdRepository() *cobra.Command {
 	}
 	cmd.AddCommand(dashboard.NewCmdDashboard())
 	cmd.AddCommand(status.NewCmdRepoStatus())
-	cmd.AddCommand(analyzers.NewCmdAnalyzers())
 	return cmd
 }

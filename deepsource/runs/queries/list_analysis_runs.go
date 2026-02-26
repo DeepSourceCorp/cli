@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
+	"github.com/deepsourcelabs/cli/deepsource/pagination"
 	"github.com/deepsourcelabs/cli/deepsource/runs"
 )
 
@@ -68,10 +69,8 @@ type AnalysisRunsListRequest struct {
 	Params AnalysisRunsListParams
 }
 
-type PageInfo struct {
-	HasNextPage bool    `json:"hasNextPage"`
-	EndCursor   *string `json:"endCursor"`
-}
+// PageInfo is an alias for the shared pagination type.
+type PageInfo = pagination.PageInfo
 
 type AnalysisRunsListResponse struct {
 	Repository struct {

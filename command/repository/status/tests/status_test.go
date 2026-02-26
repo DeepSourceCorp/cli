@@ -22,7 +22,8 @@ func goldenPath(name string) string {
 func TestRepoStatusActivated(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"isActivated": goldenPath("activated_response.json"),
+		"isActivated":         goldenPath("activated_response.json"),
+		"enabledAnalyzers {": goldenPath("enabled_analyzers_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 	svc := reposvc.NewTestService(cfgMgr, func(_ deepsource.ClientOpts) (reposvc.Client, error) {

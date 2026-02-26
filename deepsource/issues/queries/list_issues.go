@@ -7,6 +7,7 @@ import (
 
 	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
+	"github.com/deepsourcelabs/cli/deepsource/pagination"
 )
 
 const fetchAllIssuesQuery = `query GetAllIssues(
@@ -14,9 +15,10 @@ const fetchAllIssuesQuery = `query GetAllIssues(
   $owner: String!
   $provider: VCSProvider!
   $limit: Int!
+  $after: String
 ) {
   repository(name: $name, login: $owner, vcsProvider: $provider, ) {
-    issues(first: $limit) {
+    issues(first: $limit, after: $after) {
       edges {
         node {
           occurrences {
@@ -42,6 +44,10 @@ const fetchAllIssuesQuery = `query GetAllIssues(
           }
         }
       }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
     }
   }
 }`
@@ -50,7 +56,6 @@ type IssuesListParams struct {
 	Owner    string
 	RepoName string
 	Provider string
-	Limit    int
 }
 
 type IssuesListRequest struct {
@@ -86,6 +91,7 @@ type IssuesListResponse struct {
 					} `json:"occurrences"`
 				} `json:"node"`
 			} `json:"edges"`
+			PageInfo pagination.PageInfo `json:"pageInfo"`
 		} `json:"issues"`
 	} `json:"repository"`
 }
@@ -95,45 +101,61 @@ func NewIssuesListRequest(client graphqlclient.GraphQLClient, params IssuesListP
 }
 
 func (i *IssuesListRequest) Do(ctx context.Context) ([]issues.Issue, error) {
-	vars := map[string]interface{}{
-		"name":     i.Params.RepoName,
-		"owner":    i.Params.Owner,
-		"provider": i.Params.Provider,
-		"limit":    i.Params.Limit,
-	}
-	var respData IssuesListResponse
-	if err := i.client.Query(ctx, fetchAllIssuesQuery, vars, &respData); err != nil {
-		return nil, fmt.Errorf("List issues: %w", err)
-	}
+	allIssues := make([]issues.Issue, 0)
+	var cursor *string
 
-	issuesData := []issues.Issue{}
-	for _, edge := range respData.Repository.Issues.Edges {
-		if len(edge.Node.Occurrences.Edges) == 0 {
-			continue
+	for {
+		vars := map[string]any{
+			"name":     i.Params.RepoName,
+			"owner":    i.Params.Owner,
+			"provider": i.Params.Provider,
+			"limit":    pagination.DefaultPageSize,
+		}
+		if cursor != nil {
+			vars["after"] = *cursor
 		}
 
-		for _, occurenceEdge := range edge.Node.Occurrences.Edges {
-			issueData := issues.Issue{
-				IssueText:     occurenceEdge.Node.Issue.Title,
-				IssueCode:     occurenceEdge.Node.Issue.Shortcode,
-				IssueCategory: occurenceEdge.Node.Issue.Category,
-				IssueSeverity: occurenceEdge.Node.Issue.Severity,
-				Location: issues.Location{
-					Path: occurenceEdge.Node.Path,
-					Position: issues.Position{
-						BeginLine: occurenceEdge.Node.BeginLine,
-						EndLine:   occurenceEdge.Node.EndLine,
-					},
-				},
-				Description: occurenceEdge.Node.Issue.ShortDescription,
-				Analyzer: issues.AnalyzerMeta{
-					Name:      occurenceEdge.Node.Issue.Analyzer.Name,
-					Shortcode: occurenceEdge.Node.Issue.Analyzer.Shortcode,
-				},
+		var respData IssuesListResponse
+		if err := i.client.Query(ctx, fetchAllIssuesQuery, vars, &respData); err != nil {
+			return nil, fmt.Errorf("List issues: %w", err)
+		}
+
+		for _, edge := range respData.Repository.Issues.Edges {
+			if len(edge.Node.Occurrences.Edges) == 0 {
+				continue
 			}
-			issuesData = append(issuesData, issueData)
+
+			for _, occurenceEdge := range edge.Node.Occurrences.Edges {
+				issueData := issues.Issue{
+					IssueText:     occurenceEdge.Node.Issue.Title,
+					IssueCode:     occurenceEdge.Node.Issue.Shortcode,
+					IssueCategory: occurenceEdge.Node.Issue.Category,
+					IssueSeverity: occurenceEdge.Node.Issue.Severity,
+					Location: issues.Location{
+						Path: occurenceEdge.Node.Path,
+						Position: issues.Position{
+							BeginLine: occurenceEdge.Node.BeginLine,
+							EndLine:   occurenceEdge.Node.EndLine,
+						},
+					},
+					Description: occurenceEdge.Node.Issue.ShortDescription,
+					Analyzer: issues.AnalyzerMeta{
+						Name:      occurenceEdge.Node.Issue.Analyzer.Name,
+						Shortcode: occurenceEdge.Node.Issue.Analyzer.Shortcode,
+					},
+				}
+				allIssues = append(allIssues, issueData)
+			}
 		}
+
+		if len(allIssues) >= pagination.MaxResults {
+			break
+		}
+		if !respData.Repository.Issues.PageInfo.HasNextPage {
+			break
+		}
+		cursor = respData.Repository.Issues.PageInfo.EndCursor
 	}
 
-	return issuesData, nil
+	return allIssues, nil
 }

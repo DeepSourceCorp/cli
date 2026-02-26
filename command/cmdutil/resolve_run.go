@@ -276,6 +276,20 @@ func resolveWithPR(
 			result.Empty = true
 			return result, nil
 		}
+		if finalStatus == "FALLBACK" {
+			completedRun, fallbackErr := ResolveLatestCompletedRun(ctx, client, branchName, remote)
+			if fallbackErr != nil {
+				return nil, fallbackErr
+			}
+			if completedRun == nil {
+				style.Infof(w, "No completed analysis runs found for branch %q.", branchName)
+				result.Empty = true
+				return result, nil
+			}
+			style.Infof(w, "Analysis is running on commit %s. Showing results from the last analyzed commit (%s).", run.CommitOid[:8], completedRun.CommitOid[:8])
+			result.CommitOid = completedRun.CommitOid
+			return result, nil
+		}
 	}
 	if runErr == nil {
 		result.CommitOid = run.CommitOid

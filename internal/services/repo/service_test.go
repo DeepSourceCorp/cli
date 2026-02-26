@@ -16,8 +16,9 @@ import (
 )
 
 type fakeRepoClient struct {
-	status *repository.Meta
-	err    error
+	status    *repository.Meta
+	analyzers []analyzers.Analyzer
+	err       error
 }
 
 func (f *fakeRepoClient) GetRepoStatus(_ context.Context, _, _, _ string) (*repository.Meta, error) {
@@ -25,7 +26,7 @@ func (f *fakeRepoClient) GetRepoStatus(_ context.Context, _, _, _ string) (*repo
 }
 
 func (f *fakeRepoClient) GetEnabledAnalyzers(_ context.Context, _, _, _ string) ([]analyzers.Analyzer, error) {
-	return nil, f.err
+	return f.analyzers, f.err
 }
 
 func TestServiceStatus(t *testing.T) {
@@ -86,4 +87,61 @@ func TestServiceViewURLUnauthorized(t *testing.T) {
 	_, err := svc.ViewURL(context.Background(), "")
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "Not logged in")
+}
+
+func TestServiceStatusWithAnalyzers_Activated(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+	mgr := config.NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, secrets.NoopStore{}, "test-key")
+	cfg := &config.CLIConfig{Host: "deepsource.com", User: "demo", Token: "token"}
+	assert.NoError(t, mgr.Write(cfg))
+
+	svc := NewService(mgr)
+	svc.resolveRemote = func(_ string) (*vcs.RemoteData, error) {
+		return &vcs.RemoteData{Owner: "owner", RepoName: "cli", VCSProvider: "GITHUB"}, nil
+	}
+	svc.newClient = func(_ deepsource.ClientOpts) (Client, error) {
+		return &fakeRepoClient{
+			status: &repository.Meta{Activated: true},
+			analyzers: []analyzers.Analyzer{
+				{Name: "Go", Shortcode: "go"},
+				{Name: "Python", Shortcode: "python"},
+			},
+		}, nil
+	}
+
+	result, err := svc.StatusWithAnalyzers(context.Background(), "")
+	assert.NoError(t, err)
+	if assert.NotNil(t, result) {
+		assert.True(t, result.Activated)
+		assert.Equal(t, "gh/owner/cli", result.RepoSlug)
+		assert.Equal(t, "https://app.deepsource.com/gh/owner/cli/", result.DashboardURL)
+		assert.Len(t, result.Analyzers, 2)
+		assert.Equal(t, "go", result.Analyzers[0].Shortcode)
+	}
+}
+
+func TestServiceStatusWithAnalyzers_NotActivated(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+	mgr := config.NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, secrets.NoopStore{}, "test-key")
+	cfg := &config.CLIConfig{Host: "deepsource.com", User: "demo", Token: "token"}
+	assert.NoError(t, mgr.Write(cfg))
+
+	svc := NewService(mgr)
+	svc.resolveRemote = func(_ string) (*vcs.RemoteData, error) {
+		return &vcs.RemoteData{Owner: "owner", RepoName: "cli", VCSProvider: "GITHUB"}, nil
+	}
+	svc.newClient = func(_ deepsource.ClientOpts) (Client, error) {
+		return &fakeRepoClient{status: &repository.Meta{Activated: false}}, nil
+	}
+
+	result, err := svc.StatusWithAnalyzers(context.Background(), "")
+	assert.NoError(t, err)
+	if assert.NotNil(t, result) {
+		assert.False(t, result.Activated)
+		assert.Equal(t, "gh/owner/cli", result.RepoSlug)
+		assert.Empty(t, result.DashboardURL)
+		assert.Nil(t, result.Analyzers)
+	}
 }
