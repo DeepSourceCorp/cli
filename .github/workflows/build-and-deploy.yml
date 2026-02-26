@@ -273,7 +273,7 @@ jobs:
 
           # Legacy install script (deepsource.io/cli backward compat)
           sed -e "s|__BASE_URL__|${{ needs.resolve-env.outputs.base_url }}|g" \
-              -e 's|__BINARY_NAME__|deepsource|g' \
+              -e "s|__BINARY_NAME__|${{ needs.resolve-env.outputs.binary_name }}|g" \
               -e 's|__DEFAULT_INSTALL_DIR__|./bin|g' \
             scripts/install.sh.template > artifacts/install-legacy
 
