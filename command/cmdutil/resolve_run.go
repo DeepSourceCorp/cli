@@ -242,34 +242,57 @@ func ResolveAutoBranch(
 	// Check for an open PR on this branch.
 	if prNumber, found := ResolvePRForBranch(ctx, client, branchName, remote); found {
 		result.PRNumber = prNumber
-
-		run, runErr := ResolveLatestRunForBranch(ctx, client, branchName, remote)
-		if runErr == nil && IsRunInProgress(run.Status) {
-			finalStatus, waitErr := WaitOrFallback(
-				ctx, w, run.Status, run.CommitOid[:8], branchName, 5*time.Second,
-				func(ctx context.Context) (string, error) {
-					r, err := ResolveLatestRunForBranch(ctx, client, branchName, remote)
-					if err != nil {
-						return "", err
-					}
-					return r.Status, nil
-				})
-			if waitErr != nil {
-				return nil, waitErr
-			}
-			if IsRunTimedOut(finalStatus) {
-				style.Warnf(w, "Analysis timed out for branch %q.", branchName)
-				result.Empty = true
-				return result, nil
-			}
-		}
-		if runErr == nil {
-			result.CommitOid = run.CommitOid
-		}
-		return result, nil
+		return resolveWithPR(ctx, w, client, branchName, remote, result)
 	}
 
-	// No PR — resolve latest run on the branch.
+	return resolveWithoutPR(ctx, w, client, branchNameFunc, branchName, remote, result)
+}
+
+// resolveWithPR handles branch resolution when an open PR exists.
+func resolveWithPR(
+	ctx context.Context,
+	w io.Writer,
+	client *deepsource.Client,
+	branchName string,
+	remote *vcs.RemoteData,
+	result *AutoBranchResult,
+) (*AutoBranchResult, error) {
+	run, runErr := ResolveLatestRunForBranch(ctx, client, branchName, remote)
+	if runErr == nil && IsRunInProgress(run.Status) {
+		finalStatus, waitErr := WaitOrFallback(
+			ctx, w, run.Status, run.CommitOid[:8], branchName, 5*time.Second,
+			func(ctx context.Context) (string, error) {
+				r, err := ResolveLatestRunForBranch(ctx, client, branchName, remote)
+				if err != nil {
+					return "", err
+				}
+				return r.Status, nil
+			})
+		if waitErr != nil {
+			return nil, waitErr
+		}
+		if IsRunTimedOut(finalStatus) {
+			style.Warnf(w, "Analysis timed out for branch %q.", branchName)
+			result.Empty = true
+			return result, nil
+		}
+	}
+	if runErr == nil {
+		result.CommitOid = run.CommitOid
+	}
+	return result, nil
+}
+
+// resolveWithoutPR handles branch resolution when no PR exists.
+func resolveWithoutPR(
+	ctx context.Context,
+	w io.Writer,
+	client *deepsource.Client,
+	branchNameFunc func() (string, error),
+	branchName string,
+	remote *vcs.RemoteData,
+	result *AutoBranchResult,
+) (*AutoBranchResult, error) {
 	commitOid, _, runStatus, resolveErr := ResolveLatestRun(ctx, client, branchNameFunc, remote)
 	if resolveErr != nil {
 		if branchName != "" && branchName == GetDefaultBranch() {

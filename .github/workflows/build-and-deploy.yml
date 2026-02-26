@@ -271,8 +271,8 @@ jobs:
               -e 's|__DEFAULT_INSTALL_DIR__|${HOME}/.local/bin|g' \
             scripts/install.sh.template > artifacts/install
 
-          # Legacy install script (deepsource.io/cli)
-          sed -e "s|__BASE_URL__|https://deepsource.io/cli|g" \
+          # Legacy install script (deepsource.io/cli backward compat)
+          sed -e "s|__BASE_URL__|${{ needs.resolve-env.outputs.base_url }}|g" \
               -e 's|__BINARY_NAME__|deepsource|g' \
               -e 's|__DEFAULT_INSTALL_DIR__|./bin|g' \
             scripts/install.sh.template > artifacts/install-legacy
@@ -290,12 +290,7 @@ jobs:
             BUCKET="${{ secrets.R2_DEV_BUCKET_NAME }}"
           fi
 
-          # Prod stores under cli/ prefix; dev serves bucket root via subdomain
-          if [ "${{ needs.resolve-env.outputs.environment }}" = "prod" ]; then
-            PREFIX="cli/"
-          else
-            PREFIX=""
-          fi
+          PREFIX=""
 
           # Upload archives and checksums (immutable)
           for f in artifacts/${{ needs.resolve-env.outputs.binary_name }}_*; do

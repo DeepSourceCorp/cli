@@ -56,6 +56,108 @@ var adsLegacySSHRemoteMap = map[string][]string{
 }
 var adsLegacySSHRemoteList = []string{"origin	myorg@vs-ssh.visualstudio.com:v3/myorg/myproject/myrepo (fetch)", "origin	myorg@vs-ssh.visualstudio.com:v3/myorg/myproject/myrepo (push)"}
 
+func TestDetectProvider(t *testing.T) {
+	tests := []struct {
+		url  string
+		want string
+	}{
+		{"git@github.com:user/repo.git", "GITHUB"},
+		{"https://github.com/user/repo", "GITHUB"},
+		{"git@gitlab.com:user/repo.git", "GITLAB"},
+		{"https://gitlab.com/user/repo", "GITLAB"},
+		{"git@bitbucket.org:user/repo.git", "BITBUCKET"},
+		{"https://bitbucket.org/user/repo", "BITBUCKET"},
+		{"https://dev.azure.com/org/proj/_git/repo", "ADS"},
+		{"https://org.visualstudio.com/proj/_git/repo", "ADS"},
+		{"git@ssh.dev.azure.com:v3/org/proj/repo", "ADS"},
+		{"https://example.com/user/repo", ""},
+		{"git@selfhosted.example.com:user/repo.git", ""},
+	}
+	for _, tt := range tests {
+		t.Run(tt.url, func(t *testing.T) {
+			got := detectProvider(tt.url)
+			if got != tt.want {
+				t.Errorf("detectProvider(%q) = %q, want %q", tt.url, got, tt.want)
+			}
+		})
+	}
+}
+
+func TestExtractRepoName(t *testing.T) {
+	tests := []struct {
+		url  string
+		want string
+	}{
+		{"git@github.com:user/myrepo.git", "myrepo"},
+		{"https://github.com/user/myrepo", "myrepo"},
+		{"https://github.com/user/myrepo.git", "myrepo"},
+		{"https://dev.azure.com/org/proj/_git/myrepo", "myrepo"},
+		{"git@ssh.dev.azure.com:v3/org/proj/myrepo", "myrepo"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.url, func(t *testing.T) {
+			got := extractRepoName(tt.url)
+			if got != tt.want {
+				t.Errorf("extractRepoName(%q) = %q, want %q", tt.url, got, tt.want)
+			}
+		})
+	}
+}
+
+func TestExtractOwner(t *testing.T) {
+	tests := []struct {
+		url      string
+		provider string
+		want     string
+	}{
+		// SSH GitHub
+		{"git@github.com:myowner/repo.git", "GITHUB", "myowner"},
+		// HTTPS GitHub
+		{"https://github.com/myowner/repo", "GITHUB", "myowner"},
+		// HTTPS with PAT
+		{"https://user:token@github.com/myowner/repo", "GITHUB", "myowner"},
+		// SSH GitLab
+		{"git@gitlab.com:myowner/repo.git", "GITLAB", "myowner"},
+		// HTTPS GitLab
+		{"https://gitlab.com/myowner/repo", "GITLAB", "myowner"},
+		// ADS delegation
+		{"https://dev.azure.com/myorg/proj/_git/repo", "ADS", "myorg"},
+		// Unknown prefix
+		{"ftp://example.com/owner/repo", "GITHUB", ""},
+	}
+	for _, tt := range tests {
+		t.Run(tt.url, func(t *testing.T) {
+			got := extractOwner(tt.url, tt.provider)
+			if got != tt.want {
+				t.Errorf("extractOwner(%q, %q) = %q, want %q", tt.url, tt.provider, got, tt.want)
+			}
+		})
+	}
+}
+
+func TestExtractADSOwner(t *testing.T) {
+	tests := []struct {
+		name string
+		url  string
+		want string
+	}{
+		{"HTTPS dev.azure.com", "https://dev.azure.com/myorg/proj/_git/repo", "myorg"},
+		{"HTTPS visualstudio.com", "https://myorg.visualstudio.com/proj/_git/repo", "myorg"},
+		{"SSH dev.azure.com", "git@ssh.dev.azure.com:v3/myorg/proj/repo", "myorg"},
+		{"SSH visualstudio.com", "myorg@vs-ssh.visualstudio.com:v3/myorg/proj/repo", "myorg"},
+		{"HTTPS dev.azure.com empty path", "https://dev.azure.com/", ""},
+		{"HTTPS invalid URL", "https://://bad", ""},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := extractADSOwner(tt.url)
+			if got != tt.want {
+				t.Errorf("extractADSOwner(%q) = %q, want %q", tt.url, got, tt.want)
+			}
+		})
+	}
+}
+
 // TestGetRemoteMap_EmptyInput verifies that an empty remote list returns an empty map.
 // Note: the ListRemotes() code path (auto-detecting remotes from git) requires an
 // integration test environment with a real git process, so it is not covered here.
@@ -116,6 +218,34 @@ func TestGetRemoteMap(t *testing.T) {
 			adsLegacySSHRemoteList,
 			adsLegacySSHRemoteMap,
 		},
+		{
+			"GitLab HTTPS URLs",
+			[]string{
+				"origin	https://gitlab.com/myuser/myrepo (fetch)",
+				"origin	https://gitlab.com/myuser/myrepo (push)",
+			},
+			map[string][]string{
+				"origin": {"myuser", "myrepo", "GITLAB", "myuser/myrepo"},
+			},
+		},
+		{
+			"Bitbucket SSH URLs",
+			[]string{
+				"origin	git@bitbucket.org:myuser/myrepo.git (fetch)",
+				"origin	git@bitbucket.org:myuser/myrepo.git (push)",
+			},
+			map[string][]string{
+				"origin": {"myuser", "myrepo", "BITBUCKET", "myuser/myrepo"},
+			},
+		},
+		{
+			"unsupported provider is skipped",
+			[]string{
+				"origin	https://selfhosted.example.com/user/repo (fetch)",
+				"origin	https://selfhosted.example.com/user/repo (push)",
+			},
+			map[string][]string{},
+		},
 	}
 
 	for _, tt := range tests {
@@ -124,6 +254,10 @@ func TestGetRemoteMap(t *testing.T) {
 			if err != nil {
 				t.Error(err)
 				return
+			}
+
+			if len(remoteMap) != len(tt.want) {
+				t.Errorf("got %d remotes, want %d", len(remoteMap), len(tt.want))
 			}
 
 			for remote := range remoteMap {
