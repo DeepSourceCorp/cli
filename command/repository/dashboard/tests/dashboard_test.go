@@ -44,7 +44,7 @@ func TestDashboardRepoFlag(t *testing.T) {
 	}
 
 	got := strings.TrimSpace(buf.String())
-	expected := "https://deepsource.com/gh/owner/repo/"
+	expected := "https://app.deepsource.com/gh/owner/repo/"
 	if got != expected {
 		t.Errorf("expected URL %q, got %q", expected, got)
 	}
@@ -75,7 +75,7 @@ func TestDashboardShortFlag(t *testing.T) {
 	}
 
 	got := strings.TrimSpace(buf.String())
-	expected := "https://deepsource.com/gh/owner/repo/"
+	expected := "https://app.deepsource.com/gh/owner/repo/"
 	if got != expected {
 		t.Errorf("expected URL %q, got %q", expected, got)
 	}

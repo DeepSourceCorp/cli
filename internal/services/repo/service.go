@@ -123,7 +123,7 @@ func (s *Service) ViewURL(ctx context.Context, repoArg string) (string, error) {
 		return "", fmt.Errorf("Unknown VCS provider: %s", remote.VCSProvider)
 	}
 
-	return fmt.Sprintf("https://%s/%s/%s/%s/", cfg.Host, vcsShortcode, remote.Owner, remote.RepoName), nil
+	return fmt.Sprintf("https://%s/%s/%s/%s/", getDashboardHost(cfg.Host), vcsShortcode, remote.Owner, remote.RepoName), nil
 }
 
 // EnabledAnalyzers returns the analyzers enabled on a repository.
@@ -151,6 +151,20 @@ func (s *Service) EnabledAnalyzers(ctx context.Context, repoArg string) ([]analy
 	}
 
 	return client.GetEnabledAnalyzers(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
+}
+
+// getDashboardHost maps the API hostname to the web dashboard hostname.
+// Cloud users have their dashboard at app.deepsource.com, while enterprise
+// users access it on their own hostname.
+func getDashboardHost(host string) string {
+	switch host {
+	case "deepsource.com", "deepsource.io":
+		return "app.deepsource.com"
+	case "deepsource.one":
+		return "app.deepsource.one"
+	default:
+		return host
+	}
 }
 
 func vcsShortcode(provider string) string {

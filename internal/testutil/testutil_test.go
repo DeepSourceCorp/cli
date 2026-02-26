@@ -1,6 +1,7 @@
 package testutil
 
 import (
+	"bytes"
 	"os"
 	"path/filepath"
 	"testing"
@@ -16,7 +17,7 @@ func TestLoadGoldenFile(t *testing.T) {
 	}
 
 	got := LoadGoldenFile(t, path)
-	if string(got) != string(content) {
+	if !bytes.Equal(got, content) {
 		t.Errorf("LoadGoldenFile returned %q, want %q", got, content)
 	}
 }
