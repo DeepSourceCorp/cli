@@ -117,6 +117,18 @@ func Cyan(format string, a ...interface{}) string {
 	return pterm.Cyan(fmt.Sprintf(format, a...))
 }
 
+func Bold(format string, a ...interface{}) string {
+	return pterm.Bold.Sprintf(format, a...)
+}
+
+func BoldCyan(format string, a ...interface{}) string {
+	return pterm.NewStyle(pterm.Bold, pterm.FgCyan).Sprintf(format, a...)
+}
+
+func Gray(format string, a ...interface{}) string {
+	return pterm.Gray(fmt.Sprintf(format, a...))
+}
+
 // Pluralize returns singular when count is 1, plural otherwise.
 func Pluralize(count int, singular, plural string) string {
 	if count == 1 {
