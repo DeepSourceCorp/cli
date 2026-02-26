@@ -300,7 +300,7 @@ func (opts *ReportCardOptions) scopeLabel() string {
 		if len(commitShort) > 8 {
 			commitShort = commitShort[:8]
 		}
-		return fmt.Sprintf("%s (%s)", opts.branchName, commitShort)
+		return fmt.Sprintf("branch %s (%s)", opts.branchName, commitShort)
 	case opts.CommitOid != "":
 		commitShort := opts.CommitOid
 		if len(commitShort) > 8 {

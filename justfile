@@ -69,7 +69,7 @@ deploy-prod:
 	version=$(cat VERSION)
 	tag="v${version}"
 	echo "Creating tag ${tag}..."
-	git tag -a "${tag}" -m "Release ${tag}"
+	git tag -s "${tag}" -m "Release ${tag}"
 	git push origin "${tag}"
 	echo "Pushed ${tag} — build-and-deploy workflow triggered"
 
@@ -81,6 +81,6 @@ deploy-dev:
 	hash=$(git rev-parse --short HEAD)
 	tag="v${version}-${hash}"
 	echo "Creating dev tag ${tag}..."
-	git tag -a "${tag}" -m "Dev release ${tag}"
+	git tag -s "${tag}" -m "Dev release ${tag}"
 	git push origin "${tag}"
 	echo "Pushed ${tag} — dev build-and-deploy workflow triggered"
