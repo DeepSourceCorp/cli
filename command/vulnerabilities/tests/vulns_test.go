@@ -51,6 +51,7 @@ func TestVulnsAutoDetectPR(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
 		"pullRequests(":                           goldenPath("get_pr_by_branch_found_response.json"),
+		"query GetAnalysisRuns(":                  goldenPath("get_analysis_runs_response.json"),
 		"vulnerabilityOccurrences(first: $limit)": goldenPath("pr_vulns_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
@@ -63,6 +64,8 @@ func TestVulnsAutoDetectPR(t *testing.T) {
 		BranchNameFunc: func() (string, error) {
 			return "fix/upgrade-x-net", nil
 		},
+		HasUnpushedCommitsFunc:    func() bool { return false },
+		HasUncommittedChangesFunc: func() bool { return false },
 	}
 
 	cmd := vulnsCmd.NewCmdVulnerabilitiesWithDeps(deps)
@@ -97,6 +100,8 @@ func TestVulnsAutoDetectBranch(t *testing.T) {
 		BranchNameFunc: func() (string, error) {
 			return "main", nil
 		},
+		HasUnpushedCommitsFunc:    func() bool { return false },
+		HasUncommittedChangesFunc: func() bool { return false },
 	}
 
 	cmd := vulnsCmd.NewCmdVulnerabilitiesWithDeps(deps)

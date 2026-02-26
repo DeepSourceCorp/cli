@@ -114,7 +114,7 @@ func (opts *AnalyzersOptions) printAnalyzers(list []analyzers.Analyzer) error {
 			data = append(data, []string{a.Name, a.Shortcode})
 		}
 		pterm.DefaultTable.WithHasHeader().WithData(data).Render()
-		fmt.Fprintf(w, "\n%d analyzer(s) enabled\n", len(list))
+		fmt.Fprintf(w, "\n%d %s enabled\n", len(list), style.Pluralize(len(list), "analyzer", "analyzers"))
 		return nil
 	case "json":
 		payload, err := json.MarshalIndent(list, "", "  ")

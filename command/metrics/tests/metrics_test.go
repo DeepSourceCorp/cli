@@ -50,8 +50,9 @@ func TestMetricsDefaultBranchFlag(t *testing.T) {
 func TestMetricsAutoDetectPR(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"pullRequests(":  goldenPath("get_pr_by_branch_found_response.json"),
-		"GetPRMetrics":   goldenPath("pr_metrics_response.json"),
+		"pullRequests(":          goldenPath("get_pr_by_branch_found_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_response.json"),
+		"GetPRMetrics":           goldenPath("pr_metrics_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -63,6 +64,8 @@ func TestMetricsAutoDetectPR(t *testing.T) {
 		BranchNameFunc: func() (string, error) {
 			return "feature/vcs-resolver-tests", nil
 		},
+		HasUnpushedCommitsFunc:    func() bool { return false },
+		HasUncommittedChangesFunc: func() bool { return false },
 	}
 
 	cmd := metricsCmd.NewCmdMetricsWithDeps(deps)
@@ -97,6 +100,8 @@ func TestMetricsAutoDetectBranch(t *testing.T) {
 		BranchNameFunc: func() (string, error) {
 			return "main", nil
 		},
+		HasUnpushedCommitsFunc:    func() bool { return false },
+		HasUncommittedChangesFunc: func() bool { return false },
 	}
 
 	cmd := metricsCmd.NewCmdMetricsWithDeps(deps)

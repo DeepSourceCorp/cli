@@ -190,11 +190,48 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 	}
 
 	// Output based on format
+	var outErr error
 	switch opts.OutputFormat {
 	case "json":
-		return opts.outputJSON()
+		outErr = opts.outputJSON()
 	default:
-		return opts.outputHuman()
+		outErr = opts.outputHuman()
+	}
+	if outErr != nil {
+		return outErr
+	}
+
+	opts.warnIfLocalChanges()
+	return nil
+}
+
+// warnIfLocalChanges prints a warning if the branch was auto-detected and
+// has unpushed commits or uncommitted changes.
+func (opts *MetricsOptions) warnIfLocalChanges() {
+	if opts.autoDetectedBranch == "" || len(opts.getMetrics()) == 0 {
+		return
+	}
+
+	hasUnpushed := cmdutil.HasUnpushedCommits
+	if opts.deps != nil && opts.deps.HasUnpushedCommitsFunc != nil {
+		hasUnpushed = opts.deps.HasUnpushedCommitsFunc
+	}
+
+	hasUncommitted := cmdutil.HasUncommittedChanges
+	if opts.deps != nil && opts.deps.HasUncommittedChangesFunc != nil {
+		hasUncommitted = opts.deps.HasUncommittedChangesFunc
+	}
+
+	unpushed := hasUnpushed()
+	uncommitted := hasUncommitted()
+
+	switch {
+	case unpushed && uncommitted:
+		style.Infof(opts.stdout(), "You have unpushed commits and uncommitted changes on branch %s. Displayed metrics may not reflect your latest local changes.", opts.autoDetectedBranch)
+	case unpushed:
+		style.Infof(opts.stdout(), "You have unpushed commits on branch %s. Displayed metrics may not reflect your latest local changes.", opts.autoDetectedBranch)
+	case uncommitted:
+		style.Infof(opts.stdout(), "You have uncommitted changes on branch %s. Displayed metrics may not reflect your latest local changes.", opts.autoDetectedBranch)
 	}
 }
 
@@ -220,6 +257,31 @@ func (opts *MetricsOptions) resolveMetrics(ctx context.Context, client *deepsour
 		if prNumber, found := cmdutil.ResolvePRForBranch(ctx, client, branchName, remote); found {
 			opts.PRNumber = prNumber
 			opts.autoDetectedBranch = branchName
+
+			// Check if latest run is still in progress before fetching PR metrics.
+			run, runErr := cmdutil.ResolveLatestRunForBranch(ctx, client, branchName, remote)
+			if runErr == nil && cmdutil.IsRunInProgress(run.Status) {
+				finalStatus, waitErr := cmdutil.WaitOrFallback(
+					ctx, opts.stdout(), run.Status, run.CommitOid[:8], branchName, 5*time.Second,
+					func(ctx context.Context) (string, error) {
+						r, err := cmdutil.ResolveLatestRunForBranch(ctx, client, branchName, remote)
+						if err != nil {
+							return "", err
+						}
+						return r.Status, nil
+					})
+				if waitErr != nil {
+					return waitErr
+				}
+				if cmdutil.IsRunTimedOut(finalStatus) {
+					style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", branchName)
+					return nil
+				}
+			}
+			if runErr == nil {
+				opts.CommitOid = run.CommitOid
+			}
+
 			opts.prMetrics, err = client.GetPRMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, prNumber)
 			break
 		}
@@ -277,6 +339,9 @@ func (opts *MetricsOptions) getMetrics() []metrics.RepositoryMetric {
 func (opts *MetricsOptions) scopeLabel() string {
 	switch {
 	case opts.autoDetectedBranch != "":
+		if opts.CommitOid == "" {
+			return opts.autoDetectedBranch
+		}
 		commitShort := opts.CommitOid
 		if len(commitShort) > 8 {
 			commitShort = commitShort[:8]
@@ -367,16 +432,18 @@ func (opts *MetricsOptions) outputHuman() error {
 
 	grouped, seenKeys, totalItems := groupMetricsByKey(metricsList)
 
+	iw := &indentWriter{w: w, prefix: "  "}
+
 	for idx, key := range seenKeys {
 		label := strings.ToUpper(key[:1]) + strings.ToLower(key[1:])
-		fmt.Fprintln(w, pterm.Bold.Sprintf("── %s ──", label))
+		fmt.Fprintln(w, pterm.Bold.Sprintf("  ── %s ──", label))
 		fmt.Fprintln(w)
 
 		data := [][]string{{"Metric", "Value", "Threshold", "Status"}}
 		for _, r := range grouped[key] {
 			data = append(data, []string{r.name, r.value, r.threshold, r.status})
 		}
-		pterm.DefaultTable.WithHasHeader().WithData(data).WithWriter(w).Render()
+		pterm.DefaultTable.WithHasHeader().WithData(data).WithWriter(iw).Render()
 
 		if idx < len(seenKeys)-1 {
 			fmt.Fprintln(w)
@@ -395,9 +462,10 @@ func (opts *MetricsOptions) outputHuman() error {
 
 func (opts *MetricsOptions) outputChangesetStats(w io.Writer) {
 	stats := opts.runMetrics.ChangesetStats
+	iw := &indentWriter{w: w, prefix: "  "}
 
 	fmt.Fprintln(w)
-	fmt.Fprintln(w, pterm.Bold.Sprint("Changeset Coverage"))
+	fmt.Fprintln(w, pterm.Bold.Sprint("  Changeset Coverage"))
 
 	header := []string{"Type", "Overall", "Covered", "Overall %", "New", "New Covered", "New %"}
 	data := [][]string{header}
@@ -428,18 +496,37 @@ func (opts *MetricsOptions) outputChangesetStats(w io.Writer) {
 		newCoveragePct(stats.Conditions.New, stats.Conditions.NewCovered),
 	})
 
-	pterm.DefaultTable.WithHasHeader().WithData(data).WithWriter(w).Render()
+	pterm.DefaultTable.WithHasHeader().WithData(data).WithWriter(iw).Render()
 
 	if opts.Verbose {
 		fmt.Fprintln(w)
-		fmt.Fprintln(w, pterm.Gray("  Lines:      Executable source code lines — the most common coverage metric."))
-		fmt.Fprintln(w, pterm.Gray("  Branches:   Decision branches (if/else, switch arms) — did both paths execute?"))
-		fmt.Fprintln(w, pterm.Gray("  Conditions: Individual boolean sub-expressions in compound conditions (a && b)."))
+		fmt.Fprintln(w, pterm.Gray("    Lines:      Executable source code lines — the most common coverage metric."))
+		fmt.Fprintln(w, pterm.Gray("    Branches:   Decision branches (if/else, switch arms) — did both paths execute?"))
+		fmt.Fprintln(w, pterm.Gray("    Conditions: Individual boolean sub-expressions in compound conditions (a && b)."))
 	}
 }
 
 func (opts *MetricsOptions) printFooter(w io.Writer, count int) {
-	fmt.Fprintf(w, "Showing %d metric(s) in %s from %s\n", count, opts.repoSlug, opts.scopeLabel())
+	fmt.Fprintf(w, "Showing %d %s in %s from %s\n", count, style.Pluralize(count, "metric", "metrics"), opts.repoSlug, opts.scopeLabel())
+}
+
+// indentWriter wraps an io.Writer and prepends a prefix to each line.
+type indentWriter struct {
+	w      io.Writer
+	prefix string
+}
+
+func (iw *indentWriter) Write(p []byte) (int, error) {
+	lines := strings.Split(string(p), "\n")
+	for i, line := range lines {
+		if i > 0 {
+			fmt.Fprint(iw.w, "\n")
+		}
+		if line != "" {
+			fmt.Fprint(iw.w, iw.prefix+line)
+		}
+	}
+	return len(p), nil
 }
 
 func formatStatus(status string) string {
