@@ -69,6 +69,17 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 			if deps == nil {
 				deps = container.New()
 			}
+
+			// Resolve host: explicit flag > config > default
+			if !cmd.Flags().Changed("host") && !cmd.Flags().Changed("deepsource-host-endpoint") {
+				if cfg, err := deps.Config.Load(); err == nil && cfg.Host != "" {
+					opts.DeepSourceHostEndpoint = hostToEndpoint(cfg.Host)
+				}
+			}
+			if opts.DeepSourceHostEndpoint == "" {
+				opts.DeepSourceHostEndpoint = "https://app.deepsource.com"
+			}
+
 			svc := reportsvc.NewService(reportsvc.ServiceDeps{
 				GitClient:   deps.GitClient,
 				HTTPClient:  deps.HTTPClient,
@@ -99,7 +110,9 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 	cmd.Flags().StringVar(&opts.OIDCRequestToken, "oidc-request-token", "", "request ID token to fetch an OIDC token from OIDC provider")
 
 	cmd.Flags().StringVar(&opts.OIDCRequestUrl, "oidc-request-url", "", "OIDC provider's request URL to fetch an OIDC token")
-	cmd.Flags().StringVar(&opts.DeepSourceHostEndpoint, "deepsource-host-endpoint", "https://app.deepsource.com", "DeepSource host endpoint where the app is running. Defaults to the cloud endpoint https://app.deepsource.com")
+	cmd.Flags().StringVar(&opts.DeepSourceHostEndpoint, "host", "", "DeepSource host endpoint")
+	cmd.Flags().StringVar(&opts.DeepSourceHostEndpoint, "deepsource-host-endpoint", "", "DeepSource host endpoint")
+	_ = cmd.Flags().MarkDeprecated("deepsource-host-endpoint", "use --host instead")
 	cmd.Flags().StringVar(&opts.OIDCProvider, "oidc-provider", "", "OIDC provider to use for authentication. Supported providers: github-actions")
 	cmd.Flags().StringVar(&opts.Output, "output", "pretty", "Output format: pretty, json")
 
@@ -170,7 +183,7 @@ func setReportUsageFunc(cmd *cobra.Command) {
 			flags []string
 		}{
 			{"Artifact", []string{"analyzer", "analyzer-type", "key", "value", "value-file"}},
-			{"Authentication", []string{"use-oidc", "oidc-provider", "oidc-request-token", "oidc-request-url", "deepsource-host-endpoint"}},
+			{"Authentication", []string{"use-oidc", "oidc-provider", "oidc-request-token", "oidc-request-url", "host"}},
 			{"Output", []string{"output"}},
 			{"General", []string{"skip-verify", "help"}},
 		}
@@ -221,6 +234,18 @@ func flagUsageLine(f *pflag.Flag) string {
 		line += fmt.Sprintf(" (default %s)", f.DefValue)
 	}
 	return line
+}
+
+// hostToEndpoint converts a bare config hostname to a full endpoint URL.
+func hostToEndpoint(host string) string {
+	switch host {
+	case "deepsource.com", "deepsource.io":
+		return "https://app.deepsource.com"
+	case "deepsource.one":
+		return "https://app.deepsource.one"
+	default:
+		return "https://" + host
+	}
 }
 
 func printReportResult(output interfaces.OutputWriter, format string, result *reportsvc.Result) error {

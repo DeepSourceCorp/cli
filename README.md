@@ -1,98 +1,24 @@
-<p align="center">
-  <img src="https://cms.deepsource.io/logo-wordmark-dark.svg" />
-</p>
+# DeepSource Command Line Interface
 
-<p align="center">
-  <a href="https://docs.deepsource.com">Docs</a> |
-  <a href="https://deepsource.com">Get Started</a> |
-  <a href="https://discuss.deepsource.com/">Discuss</a>
-</p>
+Access DeepSource analysis data directly from your terminal.
 
-<p align="center">
-  The Code Health Platform
-</p>
+DeepSource CLI lets you view issues, metrics, vulnerabilities, and analysis runs from your terminal.
 
-</p>
+## What you can do
 
----
+- View the status and results of analysis runs across your repositories
+- Filter and inspect code issues by severity, category, analyzer, or file path
+- Check code coverage, code health scores, and other metrics
+- Send test coverage artifacts to DeepSource from CI pipelines or local environments
+- Review dependency vulnerabilities detected in your codebase
+- Get a report card of code health across all analyzers
 
-# CLI
-
-Command line interface to DeepSource
-
-## Installation
-
-### macOS
-
-DeepSource CLI is available on macOS via [Homebrew](https://brew.sh/):
-
-```sh
-brew install deepsourcelabs/cli/deepsource
-```
-### Binary Installation
-
-```sh
-curl https://cli.deepsource.com/install | sh
-```
-This script will detect the operating system and architecture and puts deepsource binary in `./bin/deepsource`.
-
-## Configuring DSN
-
-In order to report test-coverage to DeepSource using the `report` command, an environment variable named as `DEEPSOURCE_DSN` has to
-be set. It's value will be available under 'Settings' tab of the repository page.
-
-## Authentication
-
-### Browser-based login (default)
-```sh
-deepsource auth login
-```
-
-### Token-based login
-```sh
-deepsource auth login --token <your-token>
-```
-
-### Enterprise (custom hostname)
-```sh
-deepsource auth login --host your-enterprise.deepsource.com
-```
-
-### OIDC-based reporting (CI environments)
-```sh
-deepsource report --analyzer test-coverage --key go --value-file ./coverage.out --use-oidc
-```
-
-## Usage
-
-The CLI provides access to a wide range of commands. Here is a list of the
-commands along with their brief description.
-
-```
-Usage:
-    deepsource <command> [flags]
-
-Available commands are:
-    auth                Authentication commands (login, logout, refresh, status)
-    runs                View analysis runs
-    issues              View issues in a repository
-    repo                Operations related to the project repository (status, view)
-    report              Report artifacts to DeepSource
-    metrics             View repository metrics
-    vulnerabilities     View vulnerabilities in a repository
-
-Help:
-    Use 'deepsource <command> --help/-h' for more information about the command.
-```
+All commands support JSON output for scripting and automation.
 
 ## Documentation
 
-For complete documentation, refer to the [CLI Documentation](https://docs.deepsource.com/docs/cli)
-
-## Feedback/Support
-
-Want to share any feedback or need any help regarding the CLI? Feel free to
-open a discussion in the [community forum](https://discuss.deepsource.com)
+- [Installation](https://docs.deepsource.com/docs/cli#installation)
+- [Usage](https://docs.deepsource.com/docs/cli)
 
 ## License
 

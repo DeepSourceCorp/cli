@@ -2,11 +2,11 @@ package command
 
 import (
 	"context"
-	"os"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/command/auth"
+	completionCmd "github.com/deepsourcelabs/cli/command/completion"
 	"github.com/deepsourcelabs/cli/command/issues"
 	"github.com/deepsourcelabs/cli/command/metrics"
 	"github.com/deepsourcelabs/cli/command/report"
@@ -14,7 +14,6 @@ import (
 	"github.com/deepsourcelabs/cli/command/repository"
 	"github.com/deepsourcelabs/cli/command/runs"
 	"github.com/deepsourcelabs/cli/command/vulnerabilities"
-	"github.com/deepsourcelabs/cli/internal/cli/completion"
 	"github.com/spf13/cobra"
 )
 
@@ -52,7 +51,7 @@ func NewCmdRoot() *cobra.Command {
 			  repo             Repository info (status, dashboard)
 
 			Setup:
-			  --install-completions   Install shell completions for bash, zsh, or fish
+			  completion    Install shell completions for bash, zsh, or fish
 		`, buildinfo.AppName),
 		Example: heredoc.Docf(`
 			# Check for security issues on the current branch
@@ -80,20 +79,6 @@ func NewCmdRoot() *cobra.Command {
 		SilenceUsage:  true,
 	}
 
-	var installCompletions bool
-	cmd.PersistentFlags().BoolVar(&installCompletions, "install-completions", false, "Install shell completions for bash, zsh, or fish")
-
-	cmd.PersistentPreRunE = func(cmd *cobra.Command, args []string) error {
-		if !installCompletions {
-			return nil
-		}
-		if err := completion.Install(cmd.Root(), os.Stderr); err != nil {
-			return err
-		}
-		os.Exit(0)
-		return nil
-	}
-
 	// Set version using --version flag
 	info := buildinfo.GetBuildInfo()
 	if info != nil {
@@ -112,6 +97,7 @@ func NewCmdRoot() *cobra.Command {
 		&cobra.Group{ID: "auth", Title: "Authentication:"},
 		&cobra.Group{ID: "repository", Title: "Repository:"},
 		&cobra.Group{ID: "analysis", Title: "Analysis:"},
+		&cobra.Group{ID: "setup", Title: "Setup:"},
 	)
 
 	// Child Commands
@@ -146,6 +132,10 @@ func NewCmdRoot() *cobra.Command {
 	vulnsCmd := vulnerabilities.NewCmdVulnerabilities()
 	vulnsCmd.GroupID = "analysis"
 	cmd.AddCommand(vulnsCmd)
+
+	completionC := completionCmd.NewCmdCompletion()
+	completionC.GroupID = "setup"
+	cmd.AddCommand(completionC)
 
 	return cmd
 }

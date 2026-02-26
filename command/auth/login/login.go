@@ -46,7 +46,7 @@ func NewCmdLoginWithDeps(deps *cmddeps.Deps) *cobra.Command {
 
 		Use %[3]s to authenticate with a specific DeepSource instance, for example:
 		%[4]s
-		`, style.Yellow("--with-token"), style.Cyan("deepsource auth login --with-token dsp_abcd"), style.Yellow("--hostname"), style.Cyan("deepsource auth login --hostname my_instance"))
+		`, style.Yellow("--with-token"), style.Cyan("deepsource auth login --with-token dsp_abcd"), style.Yellow("--host"), style.Cyan("deepsource auth login --host my_instance"))
 
 	opts := LoginOptions{
 		AuthTimedOut: false,
@@ -66,8 +66,10 @@ func NewCmdLoginWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		},
 	}
 
-	// --host, -h flag
+	// --host flag (--hostname kept as deprecated alias)
+	cmd.Flags().StringVar(&opts.HostName, "host", "", "Authenticate with a specific DeepSource instance")
 	cmd.Flags().StringVar(&opts.HostName, "hostname", "", "Authenticate with a specific DeepSource instance")
+	_ = cmd.Flags().MarkDeprecated("hostname", "use --host instead")
 	cmd.Flags().BoolVarP(&opts.Interactive, "interactive", "i", false, "Interactive login prompt for authenticating with DeepSource")
 	cmd.Flags().StringVar(&opts.PAT, "with-token", "", "Personal Access Token (PAT) for DeepSource")
 
