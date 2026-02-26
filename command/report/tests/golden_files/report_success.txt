@@ -1,6 +1,6 @@
-Preparing artifact...
-Checking compression support...
-Uploading artifact...
+Preparing artifact..
+Checking compression support..
+Uploading artifact..
 Artifact published successfully
 
 Analyzer  test-coverage

@@ -66,7 +66,8 @@ func main() {
 		}
 	}()
 
-	os.Exit(run())
+	exitCode := run()
+	os.Exit(exitCode)
 }
 
 func run() int {

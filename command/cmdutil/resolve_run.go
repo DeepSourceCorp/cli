@@ -11,6 +11,7 @@ import (
 
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/runs"
+	"github.com/deepsourcelabs/cli/internal/cli/style"
 	"github.com/deepsourcelabs/cli/internal/debug"
 	"github.com/deepsourcelabs/cli/internal/vcs"
 )
@@ -209,6 +210,104 @@ func HasUncommittedChanges() bool {
 		return false
 	}
 	return strings.TrimSpace(stdout.String()) != ""
+}
+
+// AutoBranchResult holds the outcome of automatic branch resolution.
+type AutoBranchResult struct {
+	BranchName string
+	CommitOid  string
+	PRNumber   int  // >0 if a PR was detected for the branch
+	UseRepo    bool // true when the caller should fall back to repo-level (default branch) data
+	Empty      bool // true when there are no results (timeout, no completed runs)
+}
+
+// ResolveAutoBranch encapsulates the shared "default" branch resolution logic
+// used by the issues, metrics, and vulnerabilities commands. It detects the
+// current branch, checks for an open PR, waits for in-progress runs, and
+// handles fallback/timeout scenarios.
+func ResolveAutoBranch(
+	ctx context.Context,
+	w io.Writer,
+	client *deepsource.Client,
+	branchNameFunc func() (string, error),
+	remote *vcs.RemoteData,
+) (*AutoBranchResult, error) {
+	branchName, err := ResolveBranchName(branchNameFunc)
+	if err != nil {
+		return nil, err
+	}
+
+	result := &AutoBranchResult{BranchName: branchName}
+
+	// Check for an open PR on this branch.
+	if prNumber, found := ResolvePRForBranch(ctx, client, branchName, remote); found {
+		result.PRNumber = prNumber
+
+		run, runErr := ResolveLatestRunForBranch(ctx, client, branchName, remote)
+		if runErr == nil && IsRunInProgress(run.Status) {
+			finalStatus, waitErr := WaitOrFallback(
+				ctx, w, run.Status, run.CommitOid[:8], branchName, 5*time.Second,
+				func(ctx context.Context) (string, error) {
+					r, err := ResolveLatestRunForBranch(ctx, client, branchName, remote)
+					if err != nil {
+						return "", err
+					}
+					return r.Status, nil
+				})
+			if waitErr != nil {
+				return nil, waitErr
+			}
+			if IsRunTimedOut(finalStatus) {
+				style.Warnf(w, "Analysis timed out for branch %q.", branchName)
+				result.Empty = true
+				return result, nil
+			}
+		}
+		if runErr == nil {
+			result.CommitOid = run.CommitOid
+		}
+		return result, nil
+	}
+
+	// No PR — resolve latest run on the branch.
+	commitOid, _, runStatus, resolveErr := ResolveLatestRun(ctx, client, branchNameFunc, remote)
+	if resolveErr != nil {
+		if branchName != "" && branchName == GetDefaultBranch() {
+			result.UseRepo = true
+			return result, nil
+		}
+		return nil, resolveErr
+	}
+
+	finalStatus, waitErr := WaitOrFallback(ctx, w, runStatus, commitOid[:8], branchName, 5*time.Second,
+		func(ctx context.Context) (string, error) {
+			_, _, s, err := ResolveLatestRun(ctx, client, branchNameFunc, remote)
+			return s, err
+		})
+	if waitErr != nil {
+		return nil, waitErr
+	}
+	if finalStatus == "FALLBACK" {
+		run, fallbackErr := ResolveLatestCompletedRun(ctx, client, branchName, remote)
+		if fallbackErr != nil {
+			return nil, fallbackErr
+		}
+		if run == nil {
+			style.Infof(w, "No completed analysis runs found for branch %q.", branchName)
+			result.Empty = true
+			return result, nil
+		}
+		style.Infof(w, "Analysis is running on commit %s. Showing results from the last analyzed commit (%s).", commitOid[:8], run.CommitOid[:8])
+		commitOid = run.CommitOid
+	}
+	if IsRunTimedOut(finalStatus) {
+		style.Warnf(w, "Analysis timed out for branch %q.", branchName)
+		result.Empty = true
+		return result, nil
+	}
+
+	result.CommitOid = commitOid
+	return result, nil
 }
 
 // GetDefaultBranch returns the default branch name of the origin remote

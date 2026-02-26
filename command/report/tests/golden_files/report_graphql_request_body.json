@@ -2,7 +2,7 @@
     "query": "mutation($input: CreateArtifactInput!) {\r\n  createArtifact(input: $input) {\r\n    ok\r\n  message\r\n  error\r\n  }\r\n}",
     "variables": {
         "input": {
-            "accessToken": "f59ab9314307",
+            "accessToken": "test-mock-token",
             "commitOid": "b9e678d8dcb43fa1340e8a0c579b2c642280dc27",
             "reporter": "cli",
             "reporterVersion": "v0.1.6",

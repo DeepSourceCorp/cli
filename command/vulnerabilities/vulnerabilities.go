@@ -7,7 +7,6 @@ import (
 	"io"
 	"os"
 	"strings"
-	"time"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/command/cmddeps"
@@ -233,78 +232,25 @@ func (opts *VulnerabilitiesOptions) resolveVulnerabilities(ctx context.Context, 
 		if opts.deps != nil {
 			branchNameFunc = opts.deps.BranchNameFunc
 		}
-		branchName, branchErr := cmdutil.ResolveBranchName(branchNameFunc)
-		if branchErr != nil {
-			return branchErr
+		ab, abErr := cmdutil.ResolveAutoBranch(ctx, opts.stdout(), client, branchNameFunc, remote)
+		if abErr != nil {
+			return abErr
 		}
-
-		if prNumber, found := cmdutil.ResolvePRForBranch(ctx, client, branchName, remote); found {
-			opts.PRNumber = prNumber
-			opts.autoDetectedBranch = branchName
-
-			// Check if latest run is still in progress before fetching PR vulns.
-			run, runErr := cmdutil.ResolveLatestRunForBranch(ctx, client, branchName, remote)
-			if runErr == nil && cmdutil.IsRunInProgress(run.Status) {
-				finalStatus, waitErr := cmdutil.WaitOrFallback(
-					ctx, opts.stdout(), run.Status, run.CommitOid[:8], branchName, 5*time.Second,
-					func(ctx context.Context) (string, error) {
-						r, err := cmdutil.ResolveLatestRunForBranch(ctx, client, branchName, remote)
-						if err != nil {
-							return "", err
-						}
-						return r.Status, nil
-					})
-				if waitErr != nil {
-					return waitErr
-				}
-				if cmdutil.IsRunTimedOut(finalStatus) {
-					style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", branchName)
-					return nil
-				}
-			}
-			if runErr == nil {
-				opts.CommitOid = run.CommitOid
-			}
-
-			opts.prVulns, err = client.GetPRVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, prNumber, opts.LimitArg)
-			break
-		}
-
-		commitOid, _, runStatus, resolveErr := cmdutil.ResolveLatestRun(ctx, client, branchNameFunc, remote)
-		if resolveErr != nil {
-			if branchName != "" && branchName == cmdutil.GetDefaultBranch() {
-				opts.repoVulns, err = client.GetRepoVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
-				break
-			}
-			return resolveErr
-		}
-		finalStatus, waitErr := cmdutil.WaitOrFallback(ctx, opts.stdout(), runStatus, commitOid[:8], branchName, 5*time.Second,
-			func(ctx context.Context) (string, error) {
-				_, _, s, err := cmdutil.ResolveLatestRun(ctx, client, branchNameFunc, remote)
-				return s, err
-			})
-		if waitErr != nil {
-			return waitErr
-		}
-		if finalStatus == "FALLBACK" {
-			run, fallbackErr := cmdutil.ResolveLatestCompletedRun(ctx, client, branchName, remote)
-			if fallbackErr != nil {
-				return fallbackErr
-			}
-			if run == nil {
-				style.Infof(opts.stdout(), "No completed analysis runs found for branch %q.", branchName)
-				return nil
-			}
-			style.Infof(opts.stdout(), "Analysis is running on commit %s. Showing results from the last analyzed commit (%s).", commitOid[:8], run.CommitOid[:8])
-			commitOid = run.CommitOid
-		}
-		if cmdutil.IsRunTimedOut(finalStatus) {
-			style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", branchName)
+		if ab.Empty {
 			return nil
 		}
-		opts.CommitOid = commitOid
-		opts.autoDetectedBranch = branchName
-		opts.runVulns, err = client.GetRunVulns(ctx, commitOid, opts.LimitArg)
+		opts.autoDetectedBranch = ab.BranchName
+		switch {
+		case ab.PRNumber > 0:
+			opts.PRNumber = ab.PRNumber
+			opts.CommitOid = ab.CommitOid
+			opts.prVulns, err = client.GetPRVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, ab.PRNumber, opts.LimitArg)
+		case ab.UseRepo:
+			opts.repoVulns, err = client.GetRepoVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.LimitArg)
+		default:
+			opts.CommitOid = ab.CommitOid
+			opts.runVulns, err = client.GetRunVulns(ctx, ab.CommitOid, opts.LimitArg)
+		}
 	}
 	return err
 }

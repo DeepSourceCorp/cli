@@ -92,20 +92,7 @@ func (opts *LoginOptions) Run() (err error) {
 	opts.TokenExpired = cfg.IsExpired()
 
 	// If local says valid, verify against the server
-	if !opts.TokenExpired && cfg.Token != "" && cfg.Host != "" {
-		client, clientErr := deepsource.New(deepsource.ClientOpts{
-			Token:            cfg.Token,
-			HostName:         cfg.Host,
-			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
-		})
-		if clientErr == nil {
-			_, verifyErr := client.GetViewer(context.Background())
-			if verifyErr != nil {
-				// Server rejected the token — treat as expired
-				opts.TokenExpired = true
-			}
-		}
-	}
+	opts.verifyTokenWithServer(cfg, cfgMgr)
 
 	// Login using the interactive mode
 	if opts.Interactive {
@@ -150,6 +137,23 @@ func (opts *LoginOptions) Run() (err error) {
 	// Condition 2
 	// `startLoginFlow` implements the authentication flow for the CLI
 	return opts.startLoginFlow(svc, cfg)
+}
+
+func (opts *LoginOptions) verifyTokenWithServer(cfg *config.CLIConfig, cfgMgr *config.Manager) {
+	if opts.TokenExpired || cfg.Token == "" || cfg.Host == "" {
+		return
+	}
+	client, err := deepsource.New(deepsource.ClientOpts{
+		Token:            cfg.Token,
+		HostName:         cfg.Host,
+		OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+	})
+	if err != nil {
+		return
+	}
+	if _, err := client.GetViewer(context.Background()); err != nil {
+		opts.TokenExpired = true
+	}
 }
 
 func (opts *LoginOptions) handleInteractiveLogin() error {

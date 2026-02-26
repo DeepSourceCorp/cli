@@ -63,7 +63,7 @@ func parseDSNFromURL(raw string) (string, error) {
 	if parsed.Host == "" {
 		return "", fmt.Errorf("missing host in URL: %s", raw)
 	}
-	return fmt.Sprintf("%s://%s@%s", parsed.Scheme, "f59ab9314307", parsed.Host), nil
+	return fmt.Sprintf("%s://%s@%s", parsed.Scheme, "test-mock-token", parsed.Host), nil
 }
 
 func prepareArtifacts() error {
