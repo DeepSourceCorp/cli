@@ -174,11 +174,48 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 	opts.applyFilters()
 
 	// Output based on format
+	var outErr error
 	switch opts.OutputFormat {
 	case "json":
-		return opts.outputJSON()
+		outErr = opts.outputJSON()
 	default:
-		return opts.outputHuman()
+		outErr = opts.outputHuman()
+	}
+	if outErr != nil {
+		return outErr
+	}
+
+	opts.warnIfLocalChanges()
+	return nil
+}
+
+// warnIfLocalChanges prints a warning if the branch was auto-detected and
+// has unpushed commits or uncommitted changes.
+func (opts *VulnerabilitiesOptions) warnIfLocalChanges() {
+	if opts.autoDetectedBranch == "" || len(opts.getVulns()) == 0 {
+		return
+	}
+
+	hasUnpushed := cmdutil.HasUnpushedCommits
+	if opts.deps != nil && opts.deps.HasUnpushedCommitsFunc != nil {
+		hasUnpushed = opts.deps.HasUnpushedCommitsFunc
+	}
+
+	hasUncommitted := cmdutil.HasUncommittedChanges
+	if opts.deps != nil && opts.deps.HasUncommittedChangesFunc != nil {
+		hasUncommitted = opts.deps.HasUncommittedChangesFunc
+	}
+
+	unpushed := hasUnpushed()
+	uncommitted := hasUncommitted()
+
+	switch {
+	case unpushed && uncommitted:
+		style.Infof(opts.stdout(), "You have unpushed commits and uncommitted changes on branch %s. Displayed vulnerabilities may not reflect your latest local changes.", opts.autoDetectedBranch)
+	case unpushed:
+		style.Infof(opts.stdout(), "You have unpushed commits on branch %s. Displayed vulnerabilities may not reflect your latest local changes.", opts.autoDetectedBranch)
+	case uncommitted:
+		style.Infof(opts.stdout(), "You have uncommitted changes on branch %s. Displayed vulnerabilities may not reflect your latest local changes.", opts.autoDetectedBranch)
 	}
 }
 
@@ -204,6 +241,31 @@ func (opts *VulnerabilitiesOptions) resolveVulnerabilities(ctx context.Context, 
 		if prNumber, found := cmdutil.ResolvePRForBranch(ctx, client, branchName, remote); found {
 			opts.PRNumber = prNumber
 			opts.autoDetectedBranch = branchName
+
+			// Check if latest run is still in progress before fetching PR vulns.
+			run, runErr := cmdutil.ResolveLatestRunForBranch(ctx, client, branchName, remote)
+			if runErr == nil && cmdutil.IsRunInProgress(run.Status) {
+				finalStatus, waitErr := cmdutil.WaitOrFallback(
+					ctx, opts.stdout(), run.Status, run.CommitOid[:8], branchName, 5*time.Second,
+					func(ctx context.Context) (string, error) {
+						r, err := cmdutil.ResolveLatestRunForBranch(ctx, client, branchName, remote)
+						if err != nil {
+							return "", err
+						}
+						return r.Status, nil
+					})
+				if waitErr != nil {
+					return waitErr
+				}
+				if cmdutil.IsRunTimedOut(finalStatus) {
+					style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", branchName)
+					return nil
+				}
+			}
+			if runErr == nil {
+				opts.CommitOid = run.CommitOid
+			}
+
 			opts.prVulns, err = client.GetPRVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, prNumber, opts.LimitArg)
 			break
 		}
@@ -295,6 +357,9 @@ func (opts *VulnerabilitiesOptions) hasFilters() bool {
 func (opts *VulnerabilitiesOptions) scopeLabel() string {
 	switch {
 	case opts.autoDetectedBranch != "":
+		if opts.CommitOid == "" {
+			return opts.autoDetectedBranch
+		}
 		commitShort := opts.CommitOid
 		if len(commitShort) > 8 {
 			commitShort = commitShort[:8]
@@ -372,7 +437,7 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 			continue
 		}
 
-		fmt.Fprintln(w, pterm.Bold.Sprintf("── %s ──", style.VulnSeverityColor(sev, humanizeSeverity(sev))))
+		fmt.Fprintln(w, pterm.Bold.Sprintf("  ── %s ──", style.VulnSeverityColor(sev, humanizeSeverity(sev))))
 
 		header := []string{"ID", "Package", "Version", "Ecosystem", "Fix", "Reachability"}
 		data := [][]string{header}
@@ -390,11 +455,12 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 				formatReachability(v.Reachability),
 			})
 		}
-		pterm.DefaultTable.WithHasHeader().WithData(data).WithWriter(w).Render()
+		iw := &indentWriter{w: w, prefix: "  "}
+		pterm.DefaultTable.WithHasHeader().WithData(data).WithWriter(iw).Render()
 		fmt.Fprintln(w)
 	}
 
-	fmt.Fprintf(w, "\nShowing %d vulnerability(ies) in %s from %s\n", len(vulnsList), opts.repoSlug, opts.scopeLabel())
+	fmt.Fprintf(w, "Showing %d %s in %s from %s\n", len(vulnsList), style.Pluralize(len(vulnsList), "vulnerability", "vulnerabilities"), opts.repoSlug, opts.scopeLabel())
 	return nil
 }
 
@@ -498,6 +564,25 @@ func setVulnsUsageFunc(cmd *cobra.Command) {
 		fmt.Fprintln(w)
 		return nil
 	})
+}
+
+// indentWriter wraps an io.Writer and prepends a prefix to each line.
+type indentWriter struct {
+	w      io.Writer
+	prefix string
+}
+
+func (iw *indentWriter) Write(p []byte) (int, error) {
+	lines := strings.Split(string(p), "\n")
+	for i, line := range lines {
+		if i > 0 {
+			fmt.Fprint(iw.w, "\n")
+		}
+		if line != "" {
+			fmt.Fprint(iw.w, iw.prefix+line)
+		}
+	}
+	return len(p), nil
 }
 
 func vulnsFlagUsageLine(f *pflag.Flag) string {

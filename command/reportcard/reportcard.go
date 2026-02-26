@@ -28,7 +28,6 @@ type ReportCardOptions struct {
 	RepoArg       string
 	CommitOid     string
 	PRNumber      int
-	DefaultBranch bool
 	OutputFormat  string
 	deps          *cmddeps.Deps
 	reportCard    *runs.ReportCard
@@ -58,23 +57,20 @@ func NewCmdReportCardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		View the report card for a repository.
 
 		By default, shows the report card from the latest analyzed commit on the current branch.
-		Use %[1]s, %[2]s, or %[3]s to scope to a specific analysis run or pull request.
+		Use %[1]s or %[2]s to scope to a specific analysis run or pull request.
 
 		Examples:
+		  %[3]s
 		  %[4]s
 		  %[5]s
 		  %[6]s
-		  %[7]s
-		  %[8]s
 		`,
 		style.Yellow("--commit"),
 		style.Yellow("--pr"),
-		style.Yellow("--default-branch"),
 		style.Cyan("deepsource report-card"),
 		style.Cyan("deepsource report-card --repo gh/owner/name"),
 		style.Cyan("deepsource report-card --commit abc123f"),
 		style.Cyan("deepsource report-card --pr 123"),
-		style.Cyan("deepsource report-card --default-branch"),
 	)
 
 	cmd := &cobra.Command{
@@ -90,8 +86,6 @@ func NewCmdReportCardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
 	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit SHA")
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
-	cmd.Flags().BoolVar(&opts.DefaultBranch, "default-branch", false, "Show report card from the default branch instead of current branch")
-
 	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
 	})
@@ -102,7 +96,7 @@ func NewCmdReportCardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
 
-	cmd.MarkFlagsMutuallyExclusive("commit", "pr", "default-branch")
+	cmd.MarkFlagsMutuallyExclusive("commit", "pr")
 
 	setReportCardUsageFunc(cmd)
 
@@ -161,8 +155,6 @@ func (opts *ReportCardOptions) Run(ctx context.Context) error {
 		err = opts.resolveByCommit(ctx, client)
 	case opts.PRNumber > 0:
 		err = opts.resolveByPR(ctx, client, remote)
-	case opts.DefaultBranch:
-		err = opts.resolveByDefaultBranch(ctx, client, remote)
 	default:
 		err = opts.resolveByCurrentBranch(ctx, client, remote)
 	}
@@ -235,52 +227,6 @@ func (opts *ReportCardOptions) resolveByPR(ctx context.Context, client *deepsour
 	}
 	if cmdutil.IsRunTimedOut(finalStatus) {
 		style.Warnf(opts.stdout(), "Analysis timed out for PR #%d (branch %q).", opts.PRNumber, branch)
-		return nil
-	}
-
-	opts.reportCard = run.ReportCard
-	opts.resolvedCommitOid = run.CommitOid
-	opts.branchName = run.BranchName
-	return nil
-}
-
-func (opts *ReportCardOptions) resolveByDefaultBranch(ctx context.Context, client *deepsource.Client, remote *vcs.RemoteData) error {
-	defaultBranch := cmdutil.GetDefaultBranch()
-	if defaultBranch == "" {
-		return fmt.Errorf("could not detect default branch; try --commit instead")
-	}
-
-	run, err := cmdutil.ResolveLatestRunForBranch(ctx, client, defaultBranch, remote)
-	if err != nil {
-		return err
-	}
-
-	finalStatus, waitErr := cmdutil.WaitOrFallback(ctx, opts.stdout(), run.Status, run.CommitOid[:8], defaultBranch, 5*time.Second,
-		func(ctx context.Context) (string, error) {
-			r, err := cmdutil.ResolveLatestRunForBranch(ctx, client, defaultBranch, remote)
-			if err != nil {
-				return "", err
-			}
-			run = r
-			return r.Status, nil
-		})
-	if waitErr != nil {
-		return waitErr
-	}
-	if finalStatus == "FALLBACK" {
-		completed, err := cmdutil.ResolveLatestCompletedRun(ctx, client, defaultBranch, remote)
-		if err != nil {
-			return err
-		}
-		if completed == nil {
-			style.Infof(opts.stdout(), "No completed analysis runs found for branch %q.", defaultBranch)
-			return nil
-		}
-		style.Infof(opts.stdout(), "Analysis is running on commit %s. Showing results from the last analyzed commit (%s).", run.CommitOid[:8], completed.CommitOid[:8])
-		run = completed
-	}
-	if cmdutil.IsRunTimedOut(finalStatus) {
-		style.Warnf(opts.stdout(), "Analysis timed out for branch %q.", defaultBranch)
 		return nil
 	}
 
@@ -397,7 +343,7 @@ func setReportCardUsageFunc(cmd *cobra.Command) {
 			title string
 			flags []string
 		}{
-			{"Scope", []string{"commit", "pr", "default-branch"}},
+			{"Scope", []string{"commit", "pr"}},
 			{"Output", []string{"output"}},
 			{"General", []string{"repo", "help"}},
 		}

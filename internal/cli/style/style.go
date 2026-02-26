@@ -30,8 +30,7 @@ func Errorf(w io.Writer, format string, a ...interface{}) {
 // Infof prints an informational note with a "Note:" prefix (uncolored).
 func Infof(w io.Writer, format string, a ...interface{}) {
 	msg := capitalize(fmt.Sprintf(format, a...))
-	fmt.Fprintln(w)
-	fmt.Fprintln(w, "Note: "+msg)
+	fmt.Fprintln(w, "> Note: "+msg)
 }
 
 // Warnf prints a warning message with a yellow ! prefix.
@@ -116,4 +115,12 @@ func Yellow(format string, a ...interface{}) string {
 
 func Cyan(format string, a ...interface{}) string {
 	return pterm.Cyan(fmt.Sprintf(format, a...))
+}
+
+// Pluralize returns singular when count is 1, plural otherwise.
+func Pluralize(count int, singular, plural string) string {
+	if count == 1 {
+		return singular
+	}
+	return plural
 }

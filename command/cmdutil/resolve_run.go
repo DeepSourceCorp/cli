@@ -5,17 +5,12 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"os"
 	"os/exec"
 	"strings"
 	"time"
 
-	"golang.org/x/term"
-
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/runs"
-	"github.com/deepsourcelabs/cli/internal/cli/prompt"
-	"github.com/deepsourcelabs/cli/internal/cli/style"
 	"github.com/deepsourcelabs/cli/internal/debug"
 	"github.com/deepsourcelabs/cli/internal/vcs"
 )
@@ -88,67 +83,23 @@ func IsRunTimedOut(status string) bool {
 	return status == "TIMEOUT"
 }
 
-// WaitOrFallback handles in-progress analysis runs by either waiting for
-// completion (interactive TTY) or falling back to the last completed run
-// (non-interactive). Returns the final run status, or "FALLBACK" if the
+// WaitOrFallback handles in-progress analysis runs by falling back to the
+// last completed run. Returns the final run status, or "FALLBACK" if the
 // caller should fetch the last completed run instead.
 func WaitOrFallback(
-	ctx context.Context,
-	w io.Writer,
+	_ context.Context,
+	_ io.Writer,
 	initialStatus string,
-	commitShort string,
-	branchName string,
-	pollInterval time.Duration,
-	check func(ctx context.Context) (status string, err error),
+	_ string,
+	_ string,
+	_ time.Duration,
+	_ func(ctx context.Context) (status string, err error),
 ) (string, error) {
 	if !IsRunInProgress(initialStatus) {
 		return initialStatus, nil
 	}
 
-	if !term.IsTerminal(int(os.Stdout.Fd())) {
-		return "FALLBACK", nil
-	}
-
-	fmt.Fprintf(w, "\nAnalysis is still running on branch %q (latest commit %s).\n\n", branchName, commitShort)
-
-	choice, err := prompt.SelectFromOptions(
-		"What would you like to do?",
-		"",
-		[]string{
-			"Wait for the current analysis to finish",
-			"Show results from the last completed analysis",
-		},
-	)
-	if err != nil {
-		return "", err
-	}
-
-	if choice == "Show results from the last completed analysis" {
-		return "FALLBACK", nil
-	}
-
-	pollCtx, cancel := context.WithTimeout(ctx, 10*time.Minute)
-	defer cancel()
-
-	style.Infof(w, "Waiting for analysis to complete...")
-
-	ticker := time.NewTicker(pollInterval)
-	defer ticker.Stop()
-
-	for {
-		select {
-		case <-pollCtx.Done():
-			return "", pollCtx.Err()
-		case <-ticker.C:
-			status, checkErr := check(pollCtx)
-			if checkErr != nil {
-				return "", checkErr
-			}
-			if !IsRunInProgress(status) {
-				return status, nil
-			}
-		}
-	}
+	return "FALLBACK", nil
 }
 
 // ResolveLatestCompletedRun finds the most recent completed analysis run on

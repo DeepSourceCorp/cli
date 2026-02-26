@@ -7,7 +7,6 @@ import (
 	"io"
 	"os"
 	"slices"
-	"strconv"
 	"strings"
 	"time"
 
@@ -19,14 +18,12 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 	issuesQuery "github.com/deepsourcelabs/cli/deepsource/issues/queries"
 	"github.com/deepsourcelabs/cli/internal/cli/completion"
-	"github.com/deepsourcelabs/cli/internal/cli/prompt"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	"github.com/deepsourcelabs/cli/internal/vcs"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	"golang.org/x/term"
 )
 
 type IssuesOptions struct {
@@ -46,7 +43,6 @@ type IssuesOptions struct {
 	autoDetectedBranch string
 	issues          []issues.Issue
 	deps            *cmddeps.Deps
-	explicitScope   bool
 	client          *deepsource.Client
 	remote          *vcs.RemoteData
 }
@@ -253,8 +249,6 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 			return err
 		}
 	}
-
-	opts.explicitScope = opts.CommitOid != "" || opts.PRNumber > 0 || opts.DefaultBranch
 
 	if opts.CommitOid != "" {
 		opts.CommitOid = cmdutil.ResolveCommitOid(opts.CommitOid)
@@ -598,40 +592,12 @@ func groupIssuesByCategory(issuesList []issues.Issue) map[string][]issues.Issue 
 	return grouped
 }
 
-func (opts *IssuesOptions) outputHuman(ctx context.Context) error {
+func (opts *IssuesOptions) outputHuman(_ context.Context) error {
 	if len(opts.issues) == 0 {
-		// Safety net: check for in-progress run before scope menu.
-		// This catches cases where resolveIssues bypassed WaitOrFallback
-		// (e.g. PR path ignoring FALLBACK status).
-		if opts.autoDetectedBranch != "" && !opts.explicitScope {
-			handled, err := opts.checkInProgressAndRetry(ctx)
-			if err != nil {
-				return err
-			}
-			if handled {
-				return nil
-			}
-		}
-
 		if opts.hasFilters() {
 			style.Infof(opts.stdout(), "No issues matched the provided filters in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		} else {
 			style.Infof(opts.stdout(), "No issues found in %s on %s.", opts.repoSlug, opts.scopeLabel())
-		}
-
-		if opts.shouldPromptAlternativeScope() {
-			newIssues, err := opts.promptAlternativeScope(ctx)
-			if err != nil {
-				return err
-			}
-			if newIssues != nil {
-				opts.issues = newIssues
-				if len(opts.issues) == 0 {
-					style.Infof(opts.stdout(), "No issues found in %s on %s.", opts.repoSlug, opts.scopeLabel())
-					return nil
-				}
-				return opts.renderHumanIssues()
-			}
 		}
 		return nil
 	}
@@ -695,162 +661,9 @@ func (opts *IssuesOptions) renderHumanIssues() error {
 		}
 	}
 
-	fmt.Fprintf(w, "\nShowing %d issue(s) in %s from %s\n", len(opts.issues), opts.repoSlug, scopeLabel)
+	fmt.Fprintf(w, "\nShowing %d %s in %s from %s\n", len(opts.issues), style.Pluralize(len(opts.issues), "issue", "issues"), opts.repoSlug, scopeLabel)
 
 	return nil
-}
-
-// --- Safety-net: in-progress check before scope menu ---
-
-// checkInProgressAndRetry makes an extra API call to see if the latest run is
-// in-progress when we got 0 issues on an auto-detected branch. This catches
-// cases where resolveIssues bypassed or ignored the WaitOrFallback result
-// (e.g. the PR path). Returns (true, nil) if it handled the situation and
-// the scope menu should be skipped.
-func (opts *IssuesOptions) checkInProgressAndRetry(ctx context.Context) (bool, error) {
-	run, err := cmdutil.ResolveLatestRunForBranch(ctx, opts.client, opts.autoDetectedBranch, opts.remote)
-	if err != nil || !cmdutil.IsRunInProgress(run.Status) {
-		return false, nil
-	}
-
-	commitShort := run.CommitOid
-	if len(commitShort) > 8 {
-		commitShort = commitShort[:8]
-	}
-
-	return opts.refetchAfterFallback(ctx, commitShort)
-}
-
-// refetchAfterFallback finds the last completed run on the branch and
-// re-fetches issues from it. If no completed run exists, prints a message
-// and returns (true, nil) so the scope menu is skipped.
-func (opts *IssuesOptions) refetchAfterFallback(ctx context.Context, inProgressCommitShort string) (bool, error) {
-	run, err := cmdutil.ResolveLatestCompletedRun(ctx, opts.client, opts.autoDetectedBranch, opts.remote)
-	if err != nil {
-		return false, err
-	}
-	if run == nil {
-		style.Infof(opts.stdout(), "Analysis is in progress on branch %q (commit %s). Try again in a few minutes.", opts.autoDetectedBranch, inProgressCommitShort)
-		return true, nil
-	}
-
-	completedShort := run.CommitOid
-	if len(completedShort) > 8 {
-		completedShort = completedShort[:8]
-	}
-	style.Infof(opts.stdout(), "Analysis is running on commit %s. Showing results from the last analyzed commit (%s).", inProgressCommitShort, completedShort)
-	opts.CommitOid = run.CommitOid
-	return opts.refetchIssuesAndRender(ctx)
-}
-
-// refetchIssuesAndRender re-fetches issues based on the current scope
-// (PR or commit), filters them, and renders the result.
-func (opts *IssuesOptions) refetchIssuesAndRender(ctx context.Context) (bool, error) {
-	serverFilters := opts.buildServerFilters()
-
-	var issuesList []issues.Issue
-	var err error
-	if opts.PRNumber > 0 {
-		issuesList, err = opts.client.GetPRIssues(ctx, opts.remote.Owner, opts.remote.RepoName, opts.remote.VCSProvider, opts.PRNumber, opts.LimitArg)
-	} else if opts.CommitOid != "" {
-		issuesList, err = opts.client.GetRunIssuesFlat(ctx, opts.CommitOid, opts.LimitArg, serverFilters)
-	}
-	if err != nil {
-		return false, err
-	}
-
-	issuesList = opts.filterIssues(issuesList)
-	opts.issues = issuesList
-
-	if len(opts.issues) == 0 {
-		style.Infof(opts.stdout(), "No issues found in %s on %s.", opts.repoSlug, opts.scopeLabel())
-		return true, nil
-	}
-	return true, opts.renderHumanIssues()
-}
-
-// --- Interactive scope menu ---
-
-func (opts *IssuesOptions) selectFromOptions(msg, help string, options []string) (string, error) {
-	if opts.deps != nil && opts.deps.SelectFromOptionsFunc != nil {
-		return opts.deps.SelectFromOptionsFunc(msg, help, options)
-	}
-	return prompt.SelectFromOptions(msg, help, options)
-}
-
-func (opts *IssuesOptions) getSingleLineInput(msg, help string) (string, error) {
-	if opts.deps != nil && opts.deps.GetSingleLineInputFunc != nil {
-		return opts.deps.GetSingleLineInputFunc(msg, help)
-	}
-	return prompt.GetSingleLineInput(msg, help)
-}
-
-func (opts *IssuesOptions) isInteractive() bool {
-	if opts.deps != nil && opts.deps.IsInteractiveFunc != nil {
-		return opts.deps.IsInteractiveFunc()
-	}
-	return term.IsTerminal(int(os.Stdout.Fd()))
-}
-
-func (opts *IssuesOptions) shouldPromptAlternativeScope() bool {
-	return !opts.explicitScope &&
-		!opts.hasFilters() &&
-		opts.OutputFormat == "pretty" &&
-		opts.isInteractive()
-}
-
-const (
-	scopeOptionDefaultBranch = "View issues on default branch"
-	scopeOptionPR            = "View issues for a pull request"
-	scopeOptionCommit        = "View issues for a specific commit"
-	scopeOptionExit          = "Exit"
-)
-
-func (opts *IssuesOptions) promptAlternativeScope(ctx context.Context) ([]issues.Issue, error) {
-	fmt.Fprintln(opts.stdout())
-	choice, err := opts.selectFromOptions(
-		"Try a different scope?",
-		"",
-		[]string{scopeOptionDefaultBranch, scopeOptionPR, scopeOptionCommit, scopeOptionExit},
-	)
-	if err != nil {
-		return nil, err
-	}
-
-	// Reset scope fields
-	opts.CommitOid = ""
-	opts.PRNumber = 0
-	opts.DefaultBranch = false
-	opts.autoDetectedBranch = ""
-
-	switch choice {
-	case scopeOptionDefaultBranch:
-		opts.DefaultBranch = true
-	case scopeOptionPR:
-		prStr, inputErr := opts.getSingleLineInput("Pull request number:", "")
-		if inputErr != nil {
-			return nil, inputErr
-		}
-		prNum, parseErr := strconv.Atoi(strings.TrimSpace(prStr))
-		if parseErr != nil {
-			return nil, fmt.Errorf("invalid PR number: %s", prStr)
-		}
-		opts.PRNumber = prNum
-	case scopeOptionCommit:
-		sha, inputErr := opts.getSingleLineInput("Commit SHA:", "")
-		if inputErr != nil {
-			return nil, inputErr
-		}
-		opts.CommitOid = cmdutil.ResolveCommitOid(strings.TrimSpace(sha))
-	case scopeOptionExit:
-		return nil, nil
-	}
-
-	issuesList, err := opts.resolveIssues(ctx, opts.client, opts.remote)
-	if err != nil {
-		return nil, err
-	}
-	return opts.filterIssues(issuesList), nil
 }
 
 // --- JSON output ---
