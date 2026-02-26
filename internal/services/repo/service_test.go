@@ -51,6 +51,23 @@ func TestServiceStatus(t *testing.T) {
 	}
 }
 
+func TestGetDashboardHost(t *testing.T) {
+	tests := []struct {
+		host string
+		want string
+	}{
+		{"deepsource.com", "app.deepsource.com"},
+		{"deepsource.io", "app.deepsource.com"},
+		{"deepsource.one", "app.deepsource.one"},
+		{"on-prem.example.com", "on-prem.example.com"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.host, func(t *testing.T) {
+			assert.Equal(t, tt.want, getDashboardHost(tt.host))
+		})
+	}
+}
+
 func TestServiceViewURLUnauthorized(t *testing.T) {
 	tempDir := t.TempDir()
 	homeDir := func() (string, error) { return tempDir, nil }
