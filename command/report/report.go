@@ -370,7 +370,11 @@ func (opts *ReportOptions) Run() int {
 
 	if !queryResponse.Data.CreateArtifact.Ok {
 		fmt.Fprintln(os.Stderr, "DeepSource | Error | Reporting failed |", queryResponse.Data.CreateArtifact.Error)
-		sentry.CaptureException(errors.New(queryResponse.Data.CreateArtifact.Error))
+		if queryResponse.Data.CreateArtifact.Error == "" {
+			sentry.CaptureException(fmt.Errorf("reporting failed with empty error, raw response: %s", string(queryResponseBody)))
+		} else {
+			sentry.CaptureException(errors.New(queryResponse.Data.CreateArtifact.Error))
+		}
 		return 1
 	}
 
