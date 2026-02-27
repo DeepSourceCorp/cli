@@ -15,6 +15,12 @@ DeepSource CLI lets you view issues, metrics, vulnerabilities, and analysis runs
 
 All commands support JSON output for scripting and automation.
 
+## Installation
+
+```sh
+curl -sfL https://cli.deepsource.com/install | sh
+```
+
 ## Documentation
 
 - [Installation](https://docs.deepsource.com/docs/cli#installation)
