@@ -806,7 +806,7 @@ func TestIssuesPaginationHardCap(t *testing.T) {
 
 	mock := graphqlclient.NewMockClient()
 	callCount := 0
-	mock.QueryFunc = func(_ context.Context, query string, vars map[string]any, result any) error {
+	mock.QueryFunc = func(_ context.Context, query string, _ map[string]any, result any) error {
 		callCount++
 		return json.Unmarshal(pageJSON, result)
 	}

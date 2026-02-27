@@ -285,7 +285,7 @@ func TestReportSkipCertVerification(t *testing.T) {
 
 func TestCaptureSkipsUserErrors(t *testing.T) {
 	captured := false
-	mockSentry := &captureSentry{onCapture: func(err error) { captured = true }}
+	mockSentry := &captureSentry{onCapture: func(_ error) { captured = true }}
 
 	svc := &Service{sentry: mockSentry}
 
@@ -298,7 +298,7 @@ func TestCaptureSkipsUserErrors(t *testing.T) {
 	assert.False(t, captured)
 }
 
-func TestCaptureNilSentry(t *testing.T) {
+func TestCaptureNilSentry(_ *testing.T) {
 	svc := &Service{sentry: nil}
 	// Should not panic
 	svc.capture(errors.New("some error"))
@@ -308,8 +308,8 @@ type captureSentry struct {
 	onCapture func(error)
 }
 
-func (s *captureSentry) Init(_ string) error                      { return nil }
+func (*captureSentry) Init(_ string) error                        { return nil }
 func (s *captureSentry) CaptureException(err error)               { s.onCapture(err) }
-func (s *captureSentry) CaptureMessage(_ string)                  {}
-func (s *captureSentry) ConfigureScope(_ func(scope interface{})) {}
-func (s *captureSentry) Flush(_ time.Duration)                    {}
+func (*captureSentry) CaptureMessage(_ string)                    {}
+func (*captureSentry) ConfigureScope(_ func(scope interface{}))   {}
+func (*captureSentry) Flush(_ time.Duration)                      {}

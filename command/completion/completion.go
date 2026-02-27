@@ -11,7 +11,7 @@ func NewCmdCompletion() *cobra.Command {
 	return &cobra.Command{
 		Use:   "completion",
 		Short: "Install shell completions for bash, zsh, or fish",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			return completion.Install(cmd.Root(), os.Stderr)
 		},
 	}
