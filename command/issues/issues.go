@@ -215,7 +215,7 @@ func flagUsageLine(f *pflag.Flag) string {
 	return line
 }
 
-func (opts *IssuesOptions) Run(ctx context.Context) error {
+func (opts *IssuesOptions) initClientAndConfig() (*deepsource.Client, *vcs.RemoteData, error) {
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
 		cfgMgr = opts.deps.ConfigMgr
@@ -224,30 +224,36 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 	}
 	cfg, err := cfgMgr.Load()
 	if err != nil {
-		return clierrors.NewCLIError(clierrors.ErrInvalidConfig, "Error reading DeepSource CLI config", err)
+		return nil, nil, clierrors.NewCLIError(clierrors.ErrInvalidConfig, "Error reading DeepSource CLI config", err)
 	}
 	if err := cfg.VerifyAuthentication(); err != nil {
-		return err
+		return nil, nil, err
 	}
 
 	remote, err := vcs.ResolveRemote(opts.RepoArg)
 	if err != nil {
-		return err
+		return nil, nil, err
 	}
 	opts.repoSlug = remote.Owner + "/" + remote.RepoName
 
-	var client *deepsource.Client
 	if opts.deps != nil && opts.deps.Client != nil {
-		client = opts.deps.Client
-	} else {
-		client, err = deepsource.New(deepsource.ClientOpts{
-			Token:            cfg.Token,
-			HostName:         cfg.Host,
-			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
-		})
-		if err != nil {
-			return err
-		}
+		return opts.deps.Client, remote, nil
+	}
+	client, err := deepsource.New(deepsource.ClientOpts{
+		Token:            cfg.Token,
+		HostName:         cfg.Host,
+		OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+	})
+	if err != nil {
+		return nil, nil, err
+	}
+	return client, remote, nil
+}
+
+func (opts *IssuesOptions) Run(ctx context.Context) error {
+	client, remote, err := opts.initClientAndConfig()
+	if err != nil {
+		return err
 	}
 
 	if opts.CommitOid != "" {
