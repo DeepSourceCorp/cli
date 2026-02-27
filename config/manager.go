@@ -120,7 +120,7 @@ func (m *Manager) Write(cfg *CLIConfig) error {
 		return err
 	}
 
-	return m.fs.WriteFile(path, data, 0o644)
+	return m.fs.WriteFile(path, data, 0o600)
 }
 
 // Delete removes the CLI config file if it exists.
