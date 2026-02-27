@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path/filepath"
 	"slices"
 	"strings"
 
@@ -16,6 +17,7 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 	issuesQuery "github.com/deepsourcelabs/cli/deepsource/issues/queries"
+	"github.com/deepsourcelabs/cli/deepsource/pagination"
 	"github.com/deepsourcelabs/cli/internal/cli/completion"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
@@ -596,22 +598,40 @@ func (opts *IssuesOptions) renderHumanIssues() error {
 
 		fmt.Fprintln(w, pterm.Bold.Sprintf("  ── %s ──", humanizeCategory(cat)))
 
-		for i, issue := range group {
-			location := formatLocation(issue, cwd)
-			severity := humanizeSeverity(issue.IssueSeverity)
-			sevTag := style.IssueSeverityColor(issue.IssueSeverity, "["+severity+"]")
-			fmt.Fprintf(w, "  %s %s\n", sevTag, issue.IssueText)
-			if opts.Verbose && issue.Description != "" {
-				fmt.Fprintf(w, "  %s\n", pterm.Gray(issue.Description))
+		grouped := groupIdenticalIssues(group)
+		for i, g := range grouped {
+			severity := humanizeSeverity(g.Key.IssueSeverity)
+			sevTag := style.IssueSeverityColor(g.Key.IssueSeverity, "["+severity+"]")
+
+			if len(g.Issues) == 1 {
+				// Single occurrence: render exactly as before
+				fmt.Fprintf(w, "  %s %s\n", sevTag, g.Key.IssueText)
+				if opts.Verbose && g.Description != "" {
+					fmt.Fprintf(w, "  %s\n", pterm.Gray(g.Description))
+				}
+				fmt.Fprintf(w, "  %s\n", pterm.Gray(formatLocation(g.Issues[0], cwd)))
+			} else {
+				// Multi-occurrence: show count + compact locations
+				fmt.Fprintf(w, "  %s %s (%d occurrences)\n", sevTag, g.Key.IssueText, len(g.Issues))
+				if opts.Verbose && g.Description != "" {
+					fmt.Fprintf(w, "  %s\n", pterm.Gray(g.Description))
+				}
+				for _, loc := range formatGroupLocations(g.Issues, cwd) {
+					fmt.Fprintf(w, "  %s\n", pterm.Gray(loc))
+				}
 			}
-			fmt.Fprintf(w, "  %s\n", pterm.Gray(location))
-			if i < len(group)-1 {
+
+			if i < len(grouped)-1 {
 				fmt.Fprintln(w)
 			}
 		}
 	}
 
 	fmt.Fprintf(w, "\nShowing %d %s in %s from %s\n", len(opts.issues), style.Pluralize(len(opts.issues), "issue", "issues"), opts.repoSlug, scopeLabel)
+
+	if len(opts.issues) >= pagination.MaxResults {
+		style.Warnf(w, "Results capped at %d. Use --limit, filters, or scoping flags to narrow results.", pagination.MaxResults)
+	}
 
 	return nil
 }
@@ -734,5 +754,103 @@ func formatLocationFromParts(loc issues.Location, cwd string) string {
 
 func formatLocation(issue issues.Issue, cwd string) string {
 	return formatLocationFromParts(issue.Location, cwd)
+}
+
+// --- Issue grouping ---
+
+// issueGroupKey is the composite key used to group identical issues.
+type issueGroupKey struct {
+	IssueText     string
+	IssueSeverity string
+	IssueCode     string
+}
+
+// issueGroup holds a set of issues that share the same title, severity, and code.
+type issueGroup struct {
+	Key         issueGroupKey
+	Description string
+	Issues      []issues.Issue
+}
+
+// groupIdenticalIssues clusters issues by (IssueText, IssueSeverity, IssueCode),
+// preserving the order in which each group is first encountered.
+func groupIdenticalIssues(issuesList []issues.Issue) []issueGroup {
+	seen := map[issueGroupKey]int{} // key -> index into groups
+	var groups []issueGroup
+
+	for _, issue := range issuesList {
+		key := issueGroupKey{
+			IssueText:     issue.IssueText,
+			IssueSeverity: issue.IssueSeverity,
+			IssueCode:     issue.IssueCode,
+		}
+		if idx, ok := seen[key]; ok {
+			groups[idx].Issues = append(groups[idx].Issues, issue)
+		} else {
+			seen[key] = len(groups)
+			groups = append(groups, issueGroup{
+				Key:         key,
+				Description: issue.Description,
+				Issues:      []issues.Issue{issue},
+			})
+		}
+	}
+	return groups
+}
+
+// formatLineRange returns "42" for single-line or "42-96" for multi-line positions.
+func formatLineRange(pos issues.Position) string {
+	if pos.BeginLine == pos.EndLine {
+		return fmt.Sprintf("%d", pos.BeginLine)
+	}
+	return fmt.Sprintf("%d-%d", pos.BeginLine, pos.EndLine)
+}
+
+// formatGroupLocations returns one string per file, with line ranges joined by ", ".
+// e.g. "command/root.go:23-39, 42-96, 155"
+func formatGroupLocations(groupIssues []issues.Issue, cwd string) []string {
+	type fileEntry struct {
+		displayPath string
+		ranges      []string
+	}
+
+	seen := map[string]int{} // raw path -> index into files
+	var files []fileEntry
+
+	for _, issue := range groupIssues {
+		rawPath := issue.Location.Path
+		displayPath := rawPath
+		if cwd != "" && strings.HasPrefix(displayPath, cwd) {
+			displayPath = strings.TrimPrefix(displayPath, cwd+"/")
+		}
+
+		lineRange := formatLineRange(issue.Location.Position)
+
+		if idx, ok := seen[rawPath]; ok {
+			files[idx].ranges = append(files[idx].ranges, lineRange)
+		} else {
+			seen[rawPath] = len(files)
+			files = append(files, fileEntry{
+				displayPath: displayPath,
+				ranges:      []string{lineRange},
+			})
+		}
+	}
+
+	// Sort by directory depth then alphabetically for stable output
+	slices.SortStableFunc(files, func(a, b fileEntry) int {
+		aDepth := strings.Count(a.displayPath, string(filepath.Separator))
+		bDepth := strings.Count(b.displayPath, string(filepath.Separator))
+		if aDepth != bDepth {
+			return aDepth - bDepth
+		}
+		return strings.Compare(a.displayPath, b.displayPath)
+	})
+
+	result := make([]string, len(files))
+	for i, f := range files {
+		result[i] = f.displayPath + ":" + strings.Join(f.ranges, ", ")
+	}
+	return result
 }
 
