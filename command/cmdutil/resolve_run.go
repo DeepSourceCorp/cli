@@ -307,12 +307,14 @@ func resolveWithoutPR(
 	remote *vcs.RemoteData,
 	result *AutoBranchResult,
 ) (*AutoBranchResult, error) {
+	// If on the default branch, use repo-level data directly.
+	if branchName != "" && branchName == GetDefaultBranch() {
+		result.UseRepo = true
+		return result, nil
+	}
+
 	commitOid, _, runStatus, resolveErr := ResolveLatestRun(ctx, client, branchNameFunc, remote)
 	if resolveErr != nil {
-		if branchName != "" && branchName == GetDefaultBranch() {
-			result.UseRepo = true
-			return result, nil
-		}
 		return nil, resolveErr
 	}
 
