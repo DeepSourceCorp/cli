@@ -84,7 +84,14 @@ func (opts *LoginOptions) Run() (err error) {
 	} else {
 		cfgMgr = config.DefaultManager()
 	}
-	svc := authsvc.NewService(cfgMgr)
+	var svc *authsvc.Service
+	if opts.deps != nil && opts.deps.Client != nil {
+		svc = authsvc.NewServiceWithFactory(cfgMgr, func(_ deepsource.ClientOpts) (*deepsource.Client, error) {
+			return opts.deps.Client, nil
+		})
+	} else {
+		svc = authsvc.NewService(cfgMgr)
+	}
 	// Fetch config (errors are non-fatal: a zero config just means "not logged in")
 	cfg, err := svc.LoadConfig()
 	if err != nil {

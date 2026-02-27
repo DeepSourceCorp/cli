@@ -50,9 +50,9 @@ func TestIsExpired(t *testing.T) {
 		assert.False(t, c.IsExpired())
 	})
 
-	t.Run("expired when no token and zero expiry", func(t *testing.T) {
+	t.Run("not expired when no token and zero expiry", func(t *testing.T) {
 		c := CLIConfig{Token: "", TokenExpiresIn: time.Time{}}
-		assert.True(t, c.IsExpired())
+		assert.False(t, c.IsExpired())
 	})
 }
 

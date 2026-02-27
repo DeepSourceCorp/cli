@@ -26,6 +26,14 @@ func NewService(configMgr *config.Manager) *Service {
 	}
 }
 
+// NewServiceWithFactory creates an auth service with a custom client factory.
+func NewServiceWithFactory(configMgr *config.Manager, factory ClientFactory) *Service {
+	return &Service{
+		config:    configMgr,
+		newClient: factory,
+	}
+}
+
 func (s *Service) LoadConfig() (*config.CLIConfig, error) {
 	return s.config.Load()
 }

@@ -1,19 +1,35 @@
 package tests
 
 import (
+	"context"
+	"encoding/json"
+	"fmt"
 	"testing"
 
-	"github.com/deepsourcelabs/cli/command/cmddeps"
 	loginCmd "github.com/deepsourcelabs/cli/command/auth/login"
+	"github.com/deepsourcelabs/cli/command/cmddeps"
+	"github.com/deepsourcelabs/cli/deepsource"
+	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/internal/testutil"
 )
 
+func newMockViewerClient(t *testing.T) *deepsource.Client {
+	t.Helper()
+	mock := graphqlclient.NewMockClient()
+	mock.QueryFunc = func(_ context.Context, _ string, _ map[string]any, result any) error {
+		resp := `{"viewer":{"id":"1","firstName":"Test","lastName":"User","email":"test@example.com","accounts":{"edges":[]}}}`
+		return json.Unmarshal([]byte(resp), result)
+	}
+	return deepsource.NewWithGraphQLClient(mock)
+}
+
 func TestLoginPATFlow(t *testing.T) {
-	// Empty token → IsExpired() returns true → skips re-auth prompt
+	// Empty token → IsExpired() returns false → but token=="" check skips re-auth prompt
 	cfgMgr := testutil.CreateExpiredTestConfigManager(t, "", "deepsource.com", "")
 
 	deps := &cmddeps.Deps{
 		ConfigMgr: cfgMgr,
+		Client:    newMockViewerClient(t),
 	}
 
 	cmd := loginCmd.NewCmdLoginWithDeps(deps)
@@ -34,6 +50,9 @@ func TestLoginPATFlow(t *testing.T) {
 	if cfg.Host != "deepsource.com" {
 		t.Errorf("expected host %q, got %q", "deepsource.com", cfg.Host)
 	}
+	if cfg.User != "test@example.com" {
+		t.Errorf("expected user %q, got %q", "test@example.com", cfg.User)
+	}
 }
 
 func TestLoginPATWithHost(t *testing.T) {
@@ -41,6 +60,7 @@ func TestLoginPATWithHost(t *testing.T) {
 
 	deps := &cmddeps.Deps{
 		ConfigMgr: cfgMgr,
+		Client:    newMockViewerClient(t),
 	}
 
 	cmd := loginCmd.NewCmdLoginWithDeps(deps)
@@ -68,6 +88,7 @@ func TestLoginPATWithHostnameDeprecated(t *testing.T) {
 
 	deps := &cmddeps.Deps{
 		ConfigMgr: cfgMgr,
+		Client:    newMockViewerClient(t),
 	}
 
 	cmd := loginCmd.NewCmdLoginWithDeps(deps)
@@ -94,6 +115,7 @@ func TestLoginDefaultHostname(t *testing.T) {
 
 	deps := &cmddeps.Deps{
 		ConfigMgr: cfgMgr,
+		Client:    newMockViewerClient(t),
 	}
 
 	cmd := loginCmd.NewCmdLoginWithDeps(deps)
@@ -110,5 +132,28 @@ func TestLoginDefaultHostname(t *testing.T) {
 	// Without --host, host defaults to deepsource.com
 	if cfg.Host != "deepsource.com" {
 		t.Errorf("expected host %q, got %q", "deepsource.com", cfg.Host)
+	}
+}
+
+func TestLoginPATInvalidToken(t *testing.T) {
+	cfgMgr := testutil.CreateExpiredTestConfigManager(t, "", "deepsource.com", "")
+
+	mock := graphqlclient.NewMockClient()
+	mock.QueryFunc = func(_ context.Context, _ string, _ map[string]any, _ any) error {
+		return fmt.Errorf("unauthorized")
+	}
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	deps := &cmddeps.Deps{
+		ConfigMgr: cfgMgr,
+		Client:    client,
+	}
+
+	cmd := loginCmd.NewCmdLoginWithDeps(deps)
+	cmd.SetArgs([]string{"--with-token", "bad_token"})
+
+	err := cmd.Execute()
+	if err == nil {
+		t.Fatal("expected error for invalid token, got nil")
 	}
 }
