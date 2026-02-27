@@ -119,6 +119,11 @@ func (opts *LoginOptions) Run() (err error) {
 		cfg.Host = config.DefaultHostName
 	}
 
+	// If PAT is passed, start the login flow through PAT (skip interactive prompts)
+	if opts.PAT != "" {
+		return opts.startPATLoginFlow(svc, cfg, opts.PAT)
+	}
+
 	// Before starting the login workflow, check here for two conditions:
 	// Condition 1 : If the token has expired, display a message about it and re-authenticate user
 	// Condition 2 : If the token has not expired,does the user want to re-authenticate?
@@ -136,11 +141,6 @@ func (opts *LoginOptions) Run() (err error) {
 		if !response {
 			return nil
 		}
-	}
-
-	// If PAT is passed, start the login flow through PAT
-	if opts.PAT != "" {
-		return opts.startPATLoginFlow(svc, cfg, opts.PAT)
 	}
 
 	// Condition 2

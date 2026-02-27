@@ -16,3 +16,19 @@ cover.out
 completions
 
 .vscode
+
+# Build artifacts
+bin/
+
+# Environment files
+.env*
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# IDE/editor files
+.idea/
+*.swp
+*.swo
+*~
