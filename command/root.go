@@ -115,9 +115,7 @@ func buildExampleText() string {
 	}
 	var lines []string
 	for _, ex := range examples {
-		lines = append(lines, style.Gray("# %s", ex.comment))
-		lines = append(lines, ex.cmd)
-		lines = append(lines, "")
+		lines = append(lines, style.Gray("# %s", ex.comment), ex.cmd, "")
 	}
 	// Remove trailing blank line
 	if len(lines) > 0 {

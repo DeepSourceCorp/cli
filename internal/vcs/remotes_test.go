@@ -195,7 +195,7 @@ func TestExtractADSOwner_HTTPSVisualStudioEmptyHost(t *testing.T) {
 	}
 }
 
-func TestExtractOwner_SSHParseError(t *testing.T) {
+func TestExtractOwner_SSHParseError(_ *testing.T) {
 	// git@ prefix with a path that url.Parse can handle, but returns no owner
 	got := extractOwner("git@github.com:", "GITHUB")
 	// After splitting on ":", the second element is "" which url.Parse accepts

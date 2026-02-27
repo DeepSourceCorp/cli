@@ -52,7 +52,7 @@ func Install(rootCmd *cobra.Command, w io.Writer) error {
 		return fmt.Errorf("unsupported shell %q — supported shells: bash, zsh, fish", shell)
 	}
 
-	if err := os.MkdirAll(filepath.Dir(destPath), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Dir(destPath), 0o750); err != nil {
 		return fmt.Errorf("creating directory %s: %w", filepath.Dir(destPath), err)
 	}
 
@@ -78,7 +78,7 @@ func ensureZshFpath(home string) error {
 		return nil
 	}
 
-	f, err := os.OpenFile(zshrc, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
+	f, err := os.OpenFile(zshrc, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o600)
 	if err != nil {
 		return fmt.Errorf("opening %s: %w", zshrc, err)
 	}
