@@ -90,8 +90,11 @@ func NewCmdRoot() *cobra.Command {
 	cmd.AddCommand(completionC)
 
 	cmd.InitDefaultHelpFlag()
+	cmd.InitDefaultVersionFlag()
 	cmd.Flags().Lookup("help").Usage = "Show usage and available commands"
-	cmd.Flags().Lookup("version").Usage = "Print version and build info"
+	if f := cmd.Flags().Lookup("version"); f != nil {
+		f.Usage = "Print version and build info"
+	}
 
 	return cmd
 }

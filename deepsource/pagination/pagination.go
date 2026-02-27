@@ -8,7 +8,7 @@ const DefaultPageSize = 100
 const NestedPageSize = 500
 
 // MaxResults is the hard cap on total results fetched across all pages.
-const MaxResults = 500
+const MaxResults = 1000
 
 // PageInfo holds Relay-style cursor pagination state.
 type PageInfo struct {

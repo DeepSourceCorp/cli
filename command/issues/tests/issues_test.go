@@ -831,13 +831,74 @@ func TestIssuesPaginationHardCap(t *testing.T) {
 		t.Fatalf("failed to parse JSON output: %v", err)
 	}
 
-	// The hard cap is 500. Each page returns 1 issue, so we expect exactly 500 issues
-	// and 500 API calls (not infinite).
-	if len(issues) != 500 {
-		t.Errorf("expected 500 issues (hard cap), got %d", len(issues))
+	// The hard cap is 1000. Each page returns 1 issue, so we expect exactly 1000 issues
+	// and 1000 API calls (not infinite).
+	if len(issues) != 1000 {
+		t.Errorf("expected 1000 issues (hard cap), got %d", len(issues))
 	}
-	if callCount != 500 {
-		t.Errorf("expected 500 API calls, got %d", callCount)
+	if callCount != 1000 {
+		t.Errorf("expected 1000 API calls, got %d", callCount)
+	}
+}
+
+func TestIssuesPaginationHardCapWarning(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+
+	// Same infinite-page mock as TestIssuesPaginationHardCap.
+	pageJSON := []byte(`{
+  "repository": {
+    "issues": {
+      "edges": [{
+        "node": {
+          "occurrences": {
+            "edges": [{
+              "node": {
+                "path": "cmd/deepsource/main.go",
+                "beginLine": 1,
+                "endLine": 1,
+                "issue": {
+                  "title": "Test issue",
+                  "shortcode": "GO-W1007",
+                  "shortDescription": "desc",
+                  "category": "BUG_RISK",
+                  "severity": "MAJOR",
+                  "isRecommended": false,
+                  "analyzer": {"name": "Go", "shortcode": "go"}
+                }
+              }
+            }]
+          }
+        }
+      }],
+      "pageInfo": {"hasNextPage": true, "endCursor": "cursor-next"}
+    }
+  }
+}`)
+
+	mock := graphqlclient.NewMockClient()
+	mock.QueryFunc = func(_ context.Context, query string, vars map[string]any, result any) error {
+		return json.Unmarshal(pageJSON, result)
+	}
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	// Pretty output (no --output json) to exercise renderHumanIssues.
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--default-branch"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	output := buf.String()
+	if !strings.Contains(output, "Results capped at 1000") {
+		t.Errorf("expected truncation warning in pretty output, got:\n%s", output[max(0, len(output)-300):])
 	}
 }
 
