@@ -50,10 +50,10 @@ func CreateExpiredTestConfigManager(t *testing.T, token, host, user string) *con
 	}, secrets.NoopStore{}, "")
 
 	cfg := &config.CLIConfig{
-		Token: token,
-		Host:  host,
-		User:  user,
-		// Zero TokenExpiresIn → IsExpired() returns true
+		Token:          token,
+		Host:           host,
+		User:           user,
+		TokenExpiresIn: time.Now().Add(-24 * time.Hour),
 	}
 	if err := mgr.Write(cfg); err != nil {
 		t.Fatalf("failed to write test config: %v", err)

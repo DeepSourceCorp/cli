@@ -87,7 +87,19 @@ func (m *Manager) Load() (*CLIConfig, error) {
 			tokenFromKeychain = true
 		}
 	}
-	debug.Log("config: host=%q user=%q token_present=%v keychain=%v", cfg.Host, cfg.User, cfg.Token != "", tokenFromKeychain)
+	if cfg.Token == "" {
+		if envToken := os.Getenv("DEEPSOURCE_TOKEN"); envToken != "" {
+			cfg.Token = envToken
+			cfg.TokenFromEnv = true
+		}
+	}
+	if cfg.Host == "" {
+		if envHost := os.Getenv("DEEPSOURCE_HOST"); envHost != "" {
+			cfg.Host = envHost
+		}
+	}
+
+	debug.Log("config: host=%q user=%q token_present=%v keychain=%v env=%v", cfg.Host, cfg.User, cfg.Token != "", tokenFromKeychain, cfg.TokenFromEnv)
 
 	return cfg, nil
 }
@@ -157,6 +169,9 @@ func (m *Manager) TokenRefreshCallback() func(token, expiry, email string) {
 	return func(token, expiry, email string) {
 		cfg, err := m.Load()
 		if err != nil {
+			return
+		}
+		if cfg.TokenFromEnv {
 			return
 		}
 		cfg.Token = token

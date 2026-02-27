@@ -106,6 +106,13 @@ func ErrTokenExpired(cause error) *CLIError {
 		cause)
 }
 
+// ErrNotGitRepo returns a CLIError when a command is run outside a git repository.
+func ErrNotGitRepo() *CLIError {
+	return NewCLIError(ErrGitOperationFailed,
+		"Not a Git repository. Run this command from inside a Git repository, or use --repo to specify one",
+		nil)
+}
+
 // ErrAuthTimeout returns a CLIError for authentication timeouts.
 func ErrAuthTimeout() *CLIError {
 	return NewCLIError(ErrAuthRequired,
@@ -127,7 +134,7 @@ func WrapAPIError(message string, err error) error {
 // IsUserErrorCode returns true for error codes that represent user-correctable problems.
 func (c ErrorCode) IsUserErrorCode() bool {
 	switch c {
-	case ErrInvalidConfig, ErrAuthRequired, ErrAuthExpired, ErrInvalidDSN, ErrInvalidArtifact:
+	case ErrInvalidConfig, ErrAuthRequired, ErrAuthExpired, ErrInvalidDSN, ErrInvalidArtifact, ErrGitOperationFailed:
 		return true
 	}
 	return false

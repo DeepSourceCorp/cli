@@ -33,10 +33,27 @@ func TestSetTokenExpiry(t *testing.T) {
 }
 
 func TestIsExpired(t *testing.T) {
-	str := time.Now().UTC().Format("2006-01-02T15:04:05.999999999")
-	cfg.SetTokenExpiry(str)
-	result := cfg.IsExpired()
-	assert.Equal(t, true, result)
+	t.Run("expired when expiry is in the past", func(t *testing.T) {
+		c := CLIConfig{Token: "tok"}
+		c.SetTokenExpiry(time.Now().UTC().Add(-time.Hour).Format(time.RFC3339))
+		assert.True(t, c.IsExpired())
+	})
+
+	t.Run("not expired when expiry is in the future", func(t *testing.T) {
+		c := CLIConfig{Token: "tok"}
+		c.SetTokenExpiry(time.Now().UTC().Add(time.Hour).Format(time.RFC3339))
+		assert.False(t, c.IsExpired())
+	})
+
+	t.Run("not expired when token present but zero expiry", func(t *testing.T) {
+		c := CLIConfig{Token: "env-token", TokenExpiresIn: time.Time{}}
+		assert.False(t, c.IsExpired())
+	})
+
+	t.Run("expired when no token and zero expiry", func(t *testing.T) {
+		c := CLIConfig{Token: "", TokenExpiresIn: time.Time{}}
+		assert.True(t, c.IsExpired())
+	})
 }
 
 func TestGetConfig(t *testing.T) {

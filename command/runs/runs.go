@@ -173,7 +173,7 @@ func (opts *RunsOptions) fetchRuns(client *deepsource.Client) ([]runstypes.Analy
 		branchName, err = cmdutil.ResolveBranchName(nil)
 	}
 	if err != nil {
-		return nil, fmt.Errorf("failed to detect current branch: %w", err)
+		return nil, err
 	}
 
 	var remote *vcs.RemoteData

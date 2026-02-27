@@ -70,8 +70,9 @@ func (opts *AuthStatusOptions) Run() error {
 		return clierrors.ErrNotLoggedIn()
 	}
 
-	// Fast path: if the local token expiry has passed, no need for a network call
-	if cfg.IsExpired() {
+	// Fast path: if the local token expiry has passed, no need for a network call.
+	// Skip for env var tokens since they have no local expiry info.
+	if !cfg.TokenFromEnv && cfg.IsExpired() {
 		style.Warnf(opts.stdout(), "Authentication expired. Run %q to re-authenticate", "deepsource auth login")
 		return nil
 	}
@@ -104,6 +105,10 @@ func (opts *AuthStatusOptions) Run() error {
 		return nil
 	}
 
-	fmt.Fprintf(opts.stdout(), "Logged in to DeepSource as %s.\n", cfg.User)
+	msg := fmt.Sprintf("Logged in to DeepSource as %s", cfg.User)
+	if cfg.TokenFromEnv {
+		msg += " (via DEEPSOURCE_TOKEN)"
+	}
+	fmt.Fprintln(opts.stdout(), msg+".")
 	return nil
 }

@@ -6,6 +6,7 @@ import (
 
 	"github.com/deepsourcelabs/cli/internal/cli/prompt"
 	"github.com/deepsourcelabs/cli/internal/debug"
+	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 )
 
 type RemoteData struct {
@@ -37,7 +38,7 @@ func ResolveRemote(repoArg string) (*RemoteData, error) {
 	remotesData, err := ListRemotes()
 	if err != nil {
 		if strings.Contains(err.Error(), "exit status 128") {
-			fmt.Println("This repository has not been initialized with git. Please initialize it with git using `git init`")
+			return nil, clierrors.ErrNotGitRepo()
 		}
 		return nil, err
 	}

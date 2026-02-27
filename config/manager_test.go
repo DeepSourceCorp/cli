@@ -181,6 +181,75 @@ func TestManagerTokenRefreshCallback(t *testing.T) {
 	assert.False(t, cfg.TokenExpiresIn.IsZero(), "token expiry should be set")
 }
 
+func TestManagerLoadTokenFromEnv(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+
+	t.Setenv("DEEPSOURCE_TOKEN", "env-token-123")
+
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
+	cfg, err := mgr.Load()
+	require.NoError(t, err)
+	assert.Equal(t, "env-token-123", cfg.Token)
+	assert.True(t, cfg.TokenFromEnv)
+}
+
+func TestManagerLoadHostFromEnv(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+
+	t.Setenv("DEEPSOURCE_HOST", "enterprise.example.com")
+
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
+	cfg, err := mgr.Load()
+	require.NoError(t, err)
+	assert.Equal(t, "enterprise.example.com", cfg.Host)
+}
+
+func TestManagerLoadFileOverEnv(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+
+	// Write a config file with a token and host
+	configDir := filepath.Join(tempDir, buildinfo.ConfigDirName)
+	require.NoError(t, os.MkdirAll(configDir, 0o700))
+	tomlData := `host = "file-host.example.com"
+user = "alice"
+token = "file-token"
+`
+	require.NoError(t, os.WriteFile(filepath.Join(configDir, ConfigFileName), []byte(tomlData), 0o644))
+
+	// Set env vars that should be ignored because file takes priority
+	t.Setenv("DEEPSOURCE_TOKEN", "env-token")
+	t.Setenv("DEEPSOURCE_HOST", "env-host.example.com")
+
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
+	cfg, err := mgr.Load()
+	require.NoError(t, err)
+	assert.Equal(t, "file-token", cfg.Token)
+	assert.Equal(t, "file-host.example.com", cfg.Host)
+	assert.False(t, cfg.TokenFromEnv)
+}
+
+func TestManagerRefreshCallbackSkipsEnvToken(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+
+	t.Setenv("DEEPSOURCE_TOKEN", "env-token")
+
+	store := &fakeSecretStore{data: make(map[string]string)}
+	mgr := NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, store, "key")
+
+	cb := mgr.TokenRefreshCallback()
+	cb("refreshed-token", "2030-01-01T00:00:00Z", "new@test.com")
+
+	// Reload — should still be the env token, not the refreshed one
+	cfg, err := mgr.Load()
+	require.NoError(t, err)
+	assert.Equal(t, "env-token", cfg.Token)
+	assert.True(t, cfg.TokenFromEnv)
+}
+
 func TestNewManagerDefaults(t *testing.T) {
 	homeDir := func() (string, error) { return "/tmp", nil }
 

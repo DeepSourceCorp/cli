@@ -130,11 +130,12 @@ func TestErrorCode_IsAuthError(t *testing.T) {
 
 func TestErrorCode_IsUserErrorCode(t *testing.T) {
 	userCodes := map[ErrorCode]bool{
-		ErrInvalidConfig:  true,
-		ErrAuthRequired:   true,
-		ErrAuthExpired:    true,
-		ErrInvalidDSN:     true,
-		ErrInvalidArtifact: true,
+		ErrInvalidConfig:      true,
+		ErrAuthRequired:       true,
+		ErrAuthExpired:        true,
+		ErrInvalidDSN:         true,
+		ErrInvalidArtifact:    true,
+		ErrGitOperationFailed: true,
 	}
 	allCodes := []ErrorCode{
 		ErrInvalidConfig, ErrAuthRequired, ErrAuthExpired,
@@ -158,6 +159,22 @@ func TestErrNotLoggedIn(t *testing.T) {
 	}
 	if err.Cause != nil {
 		t.Error("Cause should be nil")
+	}
+}
+
+func TestErrNotGitRepo(t *testing.T) {
+	err := ErrNotGitRepo()
+	if err.Code != ErrGitOperationFailed {
+		t.Errorf("Code = %d, want %d", err.Code, ErrGitOperationFailed)
+	}
+	if !strings.Contains(err.Message, "Not a Git repository") {
+		t.Errorf("Message should contain 'Not a Git repository', got %q", err.Message)
+	}
+	if err.Cause != nil {
+		t.Error("Cause should be nil")
+	}
+	if !IsUserError(err) {
+		t.Error("IsUserError should return true")
 	}
 }
 

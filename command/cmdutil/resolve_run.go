@@ -13,6 +13,7 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource/runs"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
 	"github.com/deepsourcelabs/cli/internal/debug"
+	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	"github.com/deepsourcelabs/cli/internal/vcs"
 )
 
@@ -161,6 +162,9 @@ func getCurrentBranch() (string, error) {
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
 	if err := cmd.Run(); err != nil {
+		if strings.Contains(err.Error(), "128") {
+			return "", clierrors.ErrNotGitRepo()
+		}
 		return "", err
 	}
 	branch := strings.TrimSuffix(stdout.String(), "\n")

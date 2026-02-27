@@ -16,6 +16,7 @@ type CLIConfig struct {
 	User           string    `toml:"user"`
 	Token          string    `toml:"token"`
 	TokenExpiresIn time.Time `toml:"token_expires_in,omitempty"`
+	TokenFromEnv   bool      `toml:"-"`
 }
 
 // Sets the token expiry in the desired format
@@ -28,7 +29,7 @@ func (cfg *CLIConfig) SetTokenExpiry(str string) {
 // Checks if the token has expired or not
 func (cfg CLIConfig) IsExpired() bool {
 	if cfg.TokenExpiresIn.IsZero() {
-		return true
+		return false
 	}
 	return time.Now().After(cfg.TokenExpiresIn)
 }
