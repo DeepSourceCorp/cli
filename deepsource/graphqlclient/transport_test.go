@@ -154,7 +154,7 @@ func TestSetAuthToken(t *testing.T) {
 func TestMockClient_QueryDelegation(t *testing.T) {
 	called := false
 	mock := NewMockClient()
-	mock.QueryFunc = func(ctx context.Context, query string, vars map[string]any, result any) error {
+	mock.QueryFunc = func(_ context.Context, query string, _ map[string]any, _ any) error {
 		called = true
 		if query != "{ viewer }" {
 			t.Errorf("query = %q, want %q", query, "{ viewer }")
@@ -174,7 +174,7 @@ func TestMockClient_QueryDelegation(t *testing.T) {
 func TestMockClient_MutateDelegation(t *testing.T) {
 	wantErr := errors.New("mutation failed")
 	mock := NewMockClient()
-	mock.MutateFunc = func(ctx context.Context, mutation string, vars map[string]any, result any) error {
+	mock.MutateFunc = func(_ context.Context, _ string, _ map[string]any, _ any) error {
 		return wantErr
 	}
 

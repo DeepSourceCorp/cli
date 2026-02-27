@@ -472,7 +472,7 @@ func TestResolveWithPR_PendingNoCompletedRuns(t *testing.T) {
 
 	callCount := 0
 	mock := graphqlclient.NewMockClient()
-	mock.QueryFunc = func(_ context.Context, query string, _ map[string]any, result any) error {
+	mock.QueryFunc = func(_ context.Context, _ string, _ map[string]any, result any) error {
 		callCount++
 		if callCount == 1 {
 			return json.Unmarshal(pendingData, result)
