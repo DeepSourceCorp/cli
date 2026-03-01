@@ -1,4 +1,3 @@
-// Fetches metrics from a repository's default branch
 package queries
 
 import (

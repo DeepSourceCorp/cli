@@ -14,21 +14,16 @@ var (
 	}
 )
 
-// FetchOIDCTokenFromProvider fetches the OIDC token from the OIDC token provider.
-// It takes the request ID and the request URL as input and returns the OIDC token as a string.
 func FetchOIDCTokenFromProvider(requestId, requestUrl string) (string, error) {
-	// requestid is the bearer token that needs to be sent to the request url
 	req, err := http.NewRequest("GET", requestUrl, http.NoBody)
 	if err != nil {
 		return "", err
 	}
 	req.Header.Set("Authorization", "Bearer "+requestId)
-	// set the expected audiences as the audience parameter
 	q := req.URL.Query()
 	q.Set("audience", DEEPSOURCE_AUDIENCE)
 	req.URL.RawQuery = q.Encode()
 
-	// send the request
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -36,29 +31,22 @@ func FetchOIDCTokenFromProvider(requestId, requestUrl string) (string, error) {
 	}
 	defer resp.Body.Close()
 
-	// check if the response is 200
 	if resp.StatusCode != http.StatusOK {
 		return "", fmt.Errorf("Failed to fetch OIDC token: %s", resp.Status)
 	}
 
-	// extract the token from the json response. The token is sent under the key `value`
-	// and the response is a json object
 	var tokenResponse struct {
 		Value string `json:"value"`
 	}
 	if err := json.NewDecoder(resp.Body).Decode(&tokenResponse); err != nil {
 		return "", err
 	}
-	// check if the token is empty
 	if tokenResponse.Value == "" {
 		return "", fmt.Errorf("Failed to fetch OIDC token: empty token")
 	}
-	// return the token
 	return tokenResponse.Value, nil
 }
 
-// ExchangeOIDCTokenForTempDSN exchanges the OIDC token for a temporary DSN.
-// It sends the OIDC token to the respective DeepSource API endpoint and returns the temp DSN as string.
 func ExchangeOIDCTokenForTempDSN(oidcToken, dsEndpoint, provider string) (string, error) {
 	apiEndpoint := fmt.Sprintf("%s/services/oidc/%s/", dsEndpoint, provider)
 	req, err := http.NewRequest("POST", apiEndpoint, http.NoBody)
@@ -82,17 +70,13 @@ func ExchangeOIDCTokenForTempDSN(oidcToken, dsEndpoint, provider string) (string
 	if err := json.NewDecoder(resp.Body).Decode(&exchangeResponse); err != nil {
 		return "", err
 	}
-	// check if the token is empty
 	if exchangeResponse.DSN == "" {
 		return "", fmt.Errorf("Failed to exchange OIDC token for DSN: empty token")
 	}
-	// return the token
 	return exchangeResponse.DSN, nil
 }
 
 func GetDSNFromOIDC(requestId, requestUrl, dsEndpoint, provider string) (string, error) {
-	// infer provider from environment variables.
-	// Github actions sets the GITHUB_ACTIONS environment variable to true by default.
 	if os.Getenv("GITHUB_ACTIONS") == "true" {
 		provider = "github-actions"
 	}
@@ -111,7 +95,6 @@ func GetDSNFromOIDC(requestId, requestUrl, dsEndpoint, provider string) (string,
 	}
 	if requestId == "" || requestUrl == "" {
 		var foundIDToken, foundRequestURL bool
-		// try to fetch the token from the environment variables.
 		// skipcq: CRT-A0014
 		switch provider {
 		case "github-actions":

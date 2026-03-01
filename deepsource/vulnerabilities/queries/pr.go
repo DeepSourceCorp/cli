@@ -1,4 +1,3 @@
-// Fetches vulnerabilities from a pull request
 package queries
 
 import (

@@ -90,24 +90,14 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		},
 	}
 
-	// --repo, -r flag
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository in provider/owner/name format (e.g. gh/owner/name). Supported providers: gh, gl, bb, ads")
-
-	// --limit, -l flag
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 0, "Maximum number of metrics to display (0 = all)")
-
-	// --output, -o flag
 	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
-
-	// --verbose, -v flag
 	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show shortcodes and descriptions")
-
-	// Scoping flags
 	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit SHA")
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
 	cmd.Flags().BoolVar(&opts.DefaultBranch, "default-branch", false, "Show metrics from the default branch instead of current branch")
 
-	// Completions
 	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
 	})
@@ -118,7 +108,6 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		}, cobra.ShellCompDirectiveNoFileComp
 	})
 
-	// Mutual exclusivity
 	cmd.MarkFlagsMutuallyExclusive("commit", "pr", "default-branch")
 
 	setMetricsUsageFunc(cmd)
@@ -127,7 +116,6 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 }
 
 func (opts *MetricsOptions) Run(ctx context.Context) error {
-	// Load configuration
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
 		cfgMgr = opts.deps.ConfigMgr
@@ -142,14 +130,12 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 		return err
 	}
 
-	// Resolve remote repository
 	remote, err := vcs.ResolveRemote(opts.RepoArg)
 	if err != nil {
 		return err
 	}
 	opts.repoSlug = remote.Owner + "/" + remote.RepoName
 
-	// Create DeepSource client
 	var client *deepsource.Client
 	if opts.deps != nil && opts.deps.Client != nil {
 		client = opts.deps.Client
@@ -174,7 +160,6 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 
 	opts.applyLimit()
 
-	// Output based on format
 	var outErr error
 	switch opts.OutputFormat {
 	case "json":

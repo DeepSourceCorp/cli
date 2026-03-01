@@ -1,4 +1,3 @@
-// Lists the issues from a pull request
 package issues
 
 import (

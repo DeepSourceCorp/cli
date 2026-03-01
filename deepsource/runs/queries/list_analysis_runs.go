@@ -1,4 +1,3 @@
-// Lists the analysis runs for a repository
 package queries
 
 import (

@@ -75,6 +75,8 @@ func (m *Manager) Load() (*CLIConfig, error) {
 	if cfg.Host == "" {
 		if envHost := os.Getenv("DEEPSOURCE_HOST"); envHost != "" {
 			cfg.Host = envHost
+		} else {
+			cfg.Host = DefaultHostName
 		}
 	}
 
@@ -129,6 +131,14 @@ func (m *Manager) exists(path string) (bool, error) {
 		return false, nil
 	}
 	return false, err
+}
+
+// BackfillUser writes the user email to config if it is currently empty.
+func (m *Manager) BackfillUser(cfg *CLIConfig, email string) {
+	if cfg.User == "" && email != "" {
+		cfg.User = email
+		_ = m.Write(cfg)
+	}
 }
 
 // TokenRefreshCallback returns a callback that persists refreshed token

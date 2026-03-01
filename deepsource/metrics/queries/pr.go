@@ -1,4 +1,3 @@
-// Fetches metrics from a pull request
 package queries
 
 import (

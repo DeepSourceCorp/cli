@@ -18,7 +18,6 @@ type RemoteData struct {
 func ResolveRemote(repoArg string) (*RemoteData, error) {
 	var remote RemoteData
 
-	// If the user supplied a --repo flag with the repo URL
 	if repoArg != "" {
 		debug.Log("remote: using --repo flag %q", repoArg)
 		repoData, err := RepoArgumentResolver(repoArg)
@@ -32,8 +31,6 @@ func ResolveRemote(repoArg string) (*RemoteData, error) {
 		return &remote, nil
 	}
 
-	// If the user didn't pass --repo flag
-	// Figure out list of remotes by reading git config
 	debug.Log("remote: auto-detecting from git remotes")
 	remotesData, err := ListRemotes()
 	if err != nil {
@@ -43,12 +40,10 @@ func ResolveRemote(repoArg string) (*RemoteData, error) {
 		return nil, err
 	}
 
-	// If no supported VCS remotes were found
 	if len(remotesData) == 0 {
 		return nil, fmt.Errorf("No supported VCS remotes found. Use --repo flag to specify the repository manually")
 	}
 
-	// If there is only one remote, use it
 	if len(remotesData) == 1 {
 		for _, value := range remotesData {
 			remote.Owner = value[0]
@@ -59,10 +54,7 @@ func ResolveRemote(repoArg string) (*RemoteData, error) {
 		return &remote, nil
 	}
 
-	// If there are more than one remotes, give the option to user
-	// to select the one which they want
 	var promptOpts []string
-	// Preparing the options to show to the user
 	for _, value := range remotesData {
 		promptOpts = append(promptOpts, value[3])
 	}
@@ -72,7 +64,6 @@ func ResolveRemote(repoArg string) (*RemoteData, error) {
 		return nil, err
 	}
 
-	// Matching the list of remotes with the one selected by user
 	for _, value := range remotesData {
 		if value[3] == selectedRemote {
 			remote.Owner = value[0]
@@ -83,10 +74,7 @@ func ResolveRemote(repoArg string) (*RemoteData, error) {
 	return &remote, nil
 }
 
-// Utility to parse the --repo flag
 func RepoArgumentResolver(arg string) ([]string, error) {
-	// github.com/deepsourcelabs/cli or gh/deepsourcelabs/cli
-
 	argComponents := strings.Split(arg, "/")
 
 	switch argComponents[0] {

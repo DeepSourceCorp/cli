@@ -1,4 +1,3 @@
-// Get the branch name for a pull request
 package queries
 
 import (

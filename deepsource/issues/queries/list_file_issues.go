@@ -1,4 +1,3 @@
-// Lists the issues reported in a single file mentioned by the user
 package issues
 
 import (

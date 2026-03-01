@@ -23,7 +23,6 @@ type BuildInfo struct {
 	BuildMode string `json:"build_mode,omitempty"`
 }
 
-// SetBuildInfo sets the build info as a package global.
 func SetBuildInfo(version, dateStr, buildMode string) {
 	date, _ := time.Parse("2006-01-02T15:04:05Z", dateStr)
 
@@ -34,7 +33,6 @@ func SetBuildInfo(version, dateStr, buildMode string) {
 	}
 }
 
-// GetBuildInfo returns the package global `buildInfo`
 func GetBuildInfo() *BuildInfo {
 	return buildInfo
 }

@@ -8,7 +8,6 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource/repository"
 )
 
-// Query to fetch the status of the repo data sent as param
 const repoStatusQuery = `query RepoStatus($name: String!,$owner: String!, $provider: VCSProvider!){
         repository(name:$name, login:$owner, vcsProvider:$provider){
             isActivated
@@ -47,8 +46,6 @@ func (r *RepoStatusRequest) Do(ctx context.Context) (*repository.Meta, error) {
 		return nil, fmt.Errorf("Fetch repo status: %w", err)
 	}
 
-	// Formatting the query response w.r.t the repository.Meta structure
-	// defined in `repository.go`
 	repositoryData := repository.Meta{
 		Activated: false,
 		Name:      r.Params.RepoName,
@@ -59,7 +56,6 @@ func (r *RepoStatusRequest) Do(ctx context.Context) (*repository.Meta, error) {
 	repositoryData.Owner = r.Params.Owner
 	repositoryData.Provider = r.Params.Provider
 
-	// Check and set the activation status
 	if respData.Repository.Isactivated {
 		repositoryData.Activated = true
 	} else {

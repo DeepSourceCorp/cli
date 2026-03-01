@@ -143,6 +143,126 @@ func TestAuthStatusEnvVarToken(t *testing.T) {
 	}
 }
 
+func TestAuthStatusDefaultHostBackfill(t *testing.T) {
+	// Config with no host — Load() should default to deepsource.com and succeed
+	tmpDir := t.TempDir()
+	fs := adapters.NewOSFileSystem()
+	cfgMgr := config.NewManager(fs, func() (string, error) {
+		return tmpDir, nil
+	})
+	// Write config without host
+	cfg := &config.CLIConfig{Token: "test-token", User: "user@example.com"}
+	cfg.TokenExpiresIn = time.Now().Add(24 * time.Hour)
+	if err := cfgMgr.Write(cfg); err != nil {
+		t.Fatalf("failed to write test config: %v", err)
+	}
+
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"viewer": goldenPath("viewer_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf strings.Builder
+	deps := &cmddeps.Deps{
+		ConfigMgr: cfgMgr,
+		Client:    client,
+		Stdout:    &buf,
+	}
+
+	cmd := statusCmd.NewCmdStatusWithDeps(deps)
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if !strings.Contains(buf.String(), "Logged in to DeepSource as") {
+		t.Errorf("expected logged-in message, got: %q", buf.String())
+	}
+}
+
+func TestAuthStatusViewerEmailBackfill(t *testing.T) {
+	// Config with no user — BackfillUser should persist the viewer's email
+	cfgMgr := createConfigManager(t, "test-token", "deepsource.com", "", time.Now().Add(24*time.Hour))
+
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"viewer": goldenPath("viewer_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf strings.Builder
+	deps := &cmddeps.Deps{
+		ConfigMgr: cfgMgr,
+		Client:    client,
+		Stdout:    &buf,
+	}
+
+	cmd := statusCmd.NewCmdStatusWithDeps(deps)
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	// Verify user was backfilled to config
+	cfg, err := cfgMgr.Load()
+	if err != nil {
+		t.Fatalf("failed to load config: %v", err)
+	}
+	if cfg.User != "user@example.com" {
+		t.Errorf("expected user backfilled to %q, got %q", "user@example.com", cfg.User)
+	}
+}
+
+func TestAuthStatusViewerEmptyEmailFallback(t *testing.T) {
+	// Viewer returns empty email → display should fall back to config user
+	cfgMgr := createConfigManager(t, "test-token", "deepsource.com", "config-user@example.com", time.Now().Add(24*time.Hour))
+
+	mock := testutil.MockQueryFunc(t, map[string]string{
+		"viewer": goldenPath("viewer_no_email_response.json"),
+	})
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf strings.Builder
+	deps := &cmddeps.Deps{
+		ConfigMgr: cfgMgr,
+		Client:    client,
+		Stdout:    &buf,
+	}
+
+	cmd := statusCmd.NewCmdStatusWithDeps(deps)
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if !strings.Contains(buf.String(), "config-user@example.com") {
+		t.Errorf("expected fallback to config user, got: %q", buf.String())
+	}
+}
+
+func TestAuthStatusNetworkError(t *testing.T) {
+	cfgMgr := createConfigManager(t, "test-token", "deepsource.com", "user@example.com", time.Now().Add(24*time.Hour))
+
+	// Mock client that returns a non-auth error
+	mock := graphqlclient.NewMockClient()
+	mock.QueryFunc = func(_ context.Context, query string, _ map[string]any, _ any) error {
+		return fmt.Errorf("connection refused")
+	}
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf strings.Builder
+	deps := &cmddeps.Deps{
+		ConfigMgr: cfgMgr,
+		Client:    client,
+		Stdout:    &buf,
+	}
+
+	cmd := statusCmd.NewCmdStatusWithDeps(deps)
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if !strings.Contains(buf.String(), "Could not connect") {
+		t.Errorf("expected network error warning, got: %q", buf.String())
+	}
+}
+
 func TestAuthStatusServerRejected(t *testing.T) {
 	cfgMgr := createConfigManager(t, "test-token", "deepsource.com", "user@example.com", time.Now().Add(24*time.Hour))
 

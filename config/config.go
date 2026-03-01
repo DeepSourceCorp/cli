@@ -19,14 +19,11 @@ type CLIConfig struct {
 	TokenFromEnv   bool      `toml:"-"`
 }
 
-// Sets the token expiry in the desired format
-// Sets the token expiry in the desired format
 func (cfg *CLIConfig) SetTokenExpiry(str string) {
 	t, _ := time.Parse(time.RFC3339, str)
 	cfg.TokenExpiresIn = t.UTC()
 }
 
-// Checks if the token has expired or not
 func (cfg CLIConfig) IsExpired() bool {
 	if cfg.TokenExpiresIn.IsZero() {
 		return false
@@ -39,4 +36,10 @@ func (cfg *CLIConfig) VerifyAuthentication() error {
 		return clierrors.ErrNotLoggedIn()
 	}
 	return nil
+}
+
+// NewDefault returns a CLIConfig with the default host set.
+// Use this when Load() fails and a zero-value config is needed.
+func NewDefault() *CLIConfig {
+	return &CLIConfig{Host: DefaultHostName}
 }

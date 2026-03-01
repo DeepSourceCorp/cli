@@ -95,31 +95,19 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		},
 	}
 
-	// --repo, -r flag
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Repository in provider/owner/name format (e.g. gh/owner/name). Supported providers: gh, gl, bb, ads")
-
-	// --limit, -l flag
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 0, "Maximum number of issues to display (0 = all)")
-
-	// --output, -o flag
 	cmd.Flags().StringVarP(&opts.OutputFormat, "output", "o", "pretty", "Output format: pretty, json")
-
-	// --verbose, -v flag
 	cmd.Flags().BoolVarP(&opts.Verbose, "verbose", "v", false, "Show issue description")
-
-	// Scoping flags
 	cmd.Flags().StringVar(&opts.CommitOid, "commit", "", "Scope to a specific analysis run by commit SHA")
 	cmd.Flags().IntVar(&opts.PRNumber, "pr", 0, "Scope to a specific pull request by number")
 	cmd.Flags().BoolVar(&opts.DefaultBranch, "default-branch", false, "Show issues from the default branch instead of current branch")
-
-	// Filter flags
 	cmd.Flags().StringSliceVar(&opts.AnalyzerFilters, "analyzer", nil, "Filter by analyzer shortcode (e.g. python,go)")
 	cmd.Flags().StringSliceVar(&opts.CategoryFilters, "category", nil, "Filter by category (e.g. security,bug-risk)")
 	cmd.Flags().StringSliceVar(&opts.SeverityFilters, "severity", nil, "Filter by severity (e.g. critical,major)")
 	cmd.Flags().StringSliceVar(&opts.PathFilters, "path", nil, "Filter by path substring (e.g. cmd/,internal/)")
 	cmd.Flags().StringSliceVar(&opts.SourceFilters, "source", nil, "Filter by source (static, ai)")
 
-	// Completions
 	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
 	})
@@ -145,7 +133,6 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		return []string{"critical", "major", "minor"}, cobra.ShellCompDirectiveNoFileComp
 	})
 
-	// Mutual exclusivity
 	cmd.MarkFlagsMutuallyExclusive("commit", "pr", "default-branch")
 
 	setIssuesUsageFunc(cmd)
@@ -270,7 +257,6 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 
 	issuesList = opts.filterIssues(issuesList)
 
-	// Apply limit cap if set
 	if opts.LimitArg > 0 && len(issuesList) > opts.LimitArg {
 		issuesList = issuesList[:opts.LimitArg]
 	}

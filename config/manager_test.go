@@ -40,7 +40,7 @@ func TestManagerLoadNoFile(t *testing.T) {
 	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
 	cfg, err := mgr.Load()
 	require.NoError(t, err)
-	assert.Empty(t, cfg.Host)
+	assert.Equal(t, DefaultHostName, cfg.Host)
 	assert.Empty(t, cfg.User)
 	assert.Empty(t, cfg.Token)
 }
@@ -209,4 +209,53 @@ func TestNewManagerDefaults(t *testing.T) {
 
 	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
 	assert.NotNil(t, mgr)
+}
+
+func TestManagerLoadDefaultHost(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+
+	// No config file, no DEEPSOURCE_HOST env var → Host should default
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
+	cfg, err := mgr.Load()
+	require.NoError(t, err)
+	assert.Equal(t, DefaultHostName, cfg.Host)
+}
+
+func TestManagerBackfillUser(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
+
+	// Write initial config with no user
+	require.NoError(t, mgr.Write(&CLIConfig{Host: "example.com", Token: "tok"}))
+
+	cfg, err := mgr.Load()
+	require.NoError(t, err)
+	assert.Empty(t, cfg.User)
+
+	// BackfillUser should write the email
+	mgr.BackfillUser(cfg, "alice@example.com")
+	assert.Equal(t, "alice@example.com", cfg.User)
+
+	// Reload to confirm it was persisted
+	cfg2, err := mgr.Load()
+	require.NoError(t, err)
+	assert.Equal(t, "alice@example.com", cfg2.User)
+}
+
+func TestManagerBackfillUserNoop(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
+
+	// Write config with user already set
+	require.NoError(t, mgr.Write(&CLIConfig{Host: "example.com", Token: "tok", User: "existing@example.com"}))
+
+	cfg, err := mgr.Load()
+	require.NoError(t, err)
+
+	// BackfillUser should be a no-op
+	mgr.BackfillUser(cfg, "new@example.com")
+	assert.Equal(t, "existing@example.com", cfg.User)
 }

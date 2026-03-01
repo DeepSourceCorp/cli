@@ -1,4 +1,3 @@
-// Fetches metrics from a specific analysis run
 package queries
 
 import (

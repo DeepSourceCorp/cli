@@ -10,7 +10,6 @@ import (
 	"time"
 )
 
-// makeQuery makes a HTTP query with a specified body and returns the response
 func makeQuery(url string, body []byte, bodyMimeType string, skipCertificateVerification bool) ([]byte, error) {
 	var resBody []byte
 	httpClient := &http.Client{

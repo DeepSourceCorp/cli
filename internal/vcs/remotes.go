@@ -106,15 +106,6 @@ func getRemoteMap(remoteList []string) (map[string][]string, error) {
 	return remoteMap, nil
 }
 
-// 1. Run git remote -v
-// 2. Parse the output and get the list of remotes
-// 3. Do git config --get --local remote.<remote-name>.url
-// 4. Parse the urls to filter out reponame,owner,provider
-// 5. Send them back
-
-// Returns a map of remotes to their urls
-// { "origin":["reponame","owner","provider"]}
-// { "upstream":["reponame","owner","provider"]}
 func ListRemotes() (map[string][]string, error) {
 	remoteMap := make(map[string][]string)
 
@@ -123,17 +114,14 @@ func ListRemotes() (map[string][]string, error) {
 		return remoteMap, err
 	}
 
-	// Split the remotes into single remote array
 	remoteList := strings.Split(string(remotes), "\n")
 
 	if len(remoteList) <= 1 {
 		return remoteMap, fmt.Errorf("No remotes found")
 	}
 
-	// Removing the last blank element
 	remoteList = remoteList[:len(remoteList)-1]
 
-	// Get remote map
 	remoteMap, err = getRemoteMap(remoteList)
 	if err != nil {
 		return remoteMap, err

@@ -16,16 +16,9 @@ import (
 )
 
 var (
-	// Version is the build version.  This is set using ldflags -X
-	version = "development"
-
-	// Date is the build date.  This is set using ldflags -X
-	Date = "YYYY-MM-DD" // YYYY-MM-DD
-
-	// DSN used for sentry
+	version   = "development"
+	Date      = "YYYY-MM-DD"
 	SentryDSN string
-
-	// buildMode is "dev" or "prod" (default). Set via ldflags -X.
 	buildMode string
 )
 

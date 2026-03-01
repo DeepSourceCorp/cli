@@ -101,7 +101,6 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	cmd.Flags().BoolVar(&opts.DefaultBranch, "default-branch", false, "Show vulnerabilities from the default branch instead of current branch")
 	cmd.Flags().StringSliceVar(&opts.SeverityFilters, "severity", nil, "Filter by severity (e.g. critical,high)")
 
-	// Completions
 	_ = cmd.RegisterFlagCompletionFunc("repo", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return completion.RepoCompletionCandidates(), cobra.ShellCompDirectiveNoFileComp
 	})
@@ -123,7 +122,6 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 }
 
 func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
-	// Load configuration
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
 		cfgMgr = opts.deps.ConfigMgr
@@ -138,14 +136,12 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 		return err
 	}
 
-	// Resolve remote repository
 	remote, err := vcs.ResolveRemote(opts.RepoArg)
 	if err != nil {
 		return err
 	}
 	opts.repoSlug = remote.Owner + "/" + remote.RepoName
 
-	// Create DeepSource client
 	var client *deepsource.Client
 	if opts.deps != nil && opts.deps.Client != nil {
 		client = opts.deps.Client
@@ -168,13 +164,9 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 		return err
 	}
 
-	// Apply severity filter if provided
 	opts.applyFilters()
-
-	// Apply limit cap if set
 	opts.applyLimit()
 
-	// Output based on format
 	var outErr error
 	switch opts.OutputFormat {
 	case "json":

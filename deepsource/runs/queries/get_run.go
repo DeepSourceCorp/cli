@@ -1,4 +1,3 @@
-// Get an analysis run by commit OID
 package queries
 
 import (
