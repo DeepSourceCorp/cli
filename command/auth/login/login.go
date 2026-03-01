@@ -17,7 +17,6 @@ import (
 
 var accountTypes = []string{"DeepSource (deepsource.com)", "Enterprise Server"}
 
-// LoginOptions hold the metadata related to login operation
 type LoginOptions struct {
 	AuthTimedOut bool
 	TokenExpired bool
@@ -28,12 +27,10 @@ type LoginOptions struct {
 	deps         *cmddeps.Deps
 }
 
-// NewCmdLogin handles the login functionality for the CLI
 func NewCmdLogin() *cobra.Command {
 	return NewCmdLoginWithDeps(nil)
 }
 
-// NewCmdLoginWithDeps creates the login command with injectable dependencies.
 func NewCmdLoginWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	doc := heredoc.Docf(`
 		Log in to DeepSource using the CLI.
@@ -66,7 +63,6 @@ func NewCmdLoginWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		},
 	}
 
-	// --host flag (--hostname kept as deprecated alias)
 	cmd.Flags().StringVar(&opts.HostName, "host", "", "Authenticate with a specific DeepSource instance")
 	cmd.Flags().StringVar(&opts.HostName, "hostname", "", "Authenticate with a specific DeepSource instance")
 	_ = cmd.Flags().MarkDeprecated("hostname", "use --host instead")
@@ -76,7 +72,6 @@ func NewCmdLoginWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	return cmd
 }
 
-// Run executes the auth command and starts the login flow if not already authenticated
 func (opts *LoginOptions) Run() (err error) {
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
@@ -92,18 +87,15 @@ func (opts *LoginOptions) Run() (err error) {
 	} else {
 		svc = authsvc.NewService(cfgMgr)
 	}
-	// Fetch config (errors are non-fatal: a zero config just means "not logged in")
 	cfg, err := svc.LoadConfig()
 	if err != nil {
-		cfg = &config.CLIConfig{}
+		cfg = config.NewDefault()
 	}
 	opts.User = cfg.User
 	opts.TokenExpired = cfg.IsExpired()
 
-	// If local says valid, verify against the server
-	opts.verifyTokenWithServer(cfg, cfgMgr)
+	opts.verifyTokenWithServer(cfg, svc)
 
-	// Login using the interactive mode
 	if opts.Interactive {
 		err = opts.handleInteractiveLogin()
 		if err != nil {
@@ -111,73 +103,62 @@ func (opts *LoginOptions) Run() (err error) {
 		}
 	}
 
-	// Checking if the user passed a hostname. If yes, storing it in the config
-	// Else using the default hostname (deepsource.com)
 	if opts.HostName != "" {
 		cfg.Host = opts.HostName
 	} else {
 		cfg.Host = config.DefaultHostName
 	}
 
-	// If PAT is passed, start the login flow through PAT (skip interactive prompts)
 	if opts.PAT != "" {
 		return opts.startPATLoginFlow(svc, cfg, opts.PAT)
 	}
 
-	// Before starting the login workflow, check here for two conditions:
-	// Condition 1 : If the token has expired, display a message about it and re-authenticate user
-	// Condition 2 : If the token has not expired,does the user want to re-authenticate?
-
-	// Checking for condition 1
 	if !opts.TokenExpired {
-		// The user is already logged in, confirm re-authentication.
-		msg := fmt.Sprintf("You're already logged into DeepSource as %s. Do you want to re-authenticate?", opts.User)
+		var msg string
+		if opts.User != "" {
+			msg = fmt.Sprintf("You're already logged into DeepSource as %s. Do you want to re-authenticate?", opts.User)
+		} else {
+			msg = "You're already logged into DeepSource. Do you want to re-authenticate?"
+		}
 		response, err := prompt.ConfirmFromUser(msg, "")
 		if err != nil {
 			return fmt.Errorf("Error in fetching response. Please try again.")
 		}
-		// If the response is No, it implies that the user doesn't want to re-authenticate
-		// In this case, just exit
 		if !response {
 			return nil
 		}
 	}
 
-	// Condition 2
-	// `startLoginFlow` implements the authentication flow for the CLI
 	return opts.startLoginFlow(svc, cfg)
 }
 
-func (opts *LoginOptions) verifyTokenWithServer(cfg *config.CLIConfig, cfgMgr *config.Manager) {
-	if opts.TokenExpired || cfg.Token == "" || cfg.Host == "" {
+func (opts *LoginOptions) verifyTokenWithServer(cfg *config.CLIConfig, svc *authsvc.Service) {
+	if opts.TokenExpired || cfg.Token == "" {
 		return
 	}
-	client, err := deepsource.New(deepsource.ClientOpts{
-		Token:            cfg.Token,
-		HostName:         cfg.Host,
-		OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
-	})
+	viewer, err := svc.GetViewer(context.Background(), cfg)
 	if err != nil {
+		opts.TokenExpired = true
 		return
 	}
-	if _, err := client.GetViewer(context.Background()); err != nil {
-		opts.TokenExpired = true
+	// Backfill user from the server when config file was missing or incomplete.
+	if cfg.User == "" && viewer.Email != "" {
+		cfg.User = viewer.Email
+		opts.User = viewer.Email
+		_ = svc.SaveConfig(cfg)
 	}
 }
 
 func (opts *LoginOptions) handleInteractiveLogin() error {
-	// Prompt messages and help texts
 	loginPromptMessage := "Which account do you want to login into?"
 	loginPromptHelpText := "Select the type of account you want to authenticate"
 	hostPromptMessage := "Please enter the hostname:"
 	hostPromptHelpText := "The hostname of the DeepSource instance to authenticate with"
 
-	// Display prompt to user
 	loginType, err := prompt.SelectFromOptions(loginPromptMessage, loginPromptHelpText, accountTypes)
 	if err != nil {
 		return err
 	}
-	// Prompt the user for hostname only in the case of on-premise
 	if loginType == "Enterprise Server" {
 		opts.HostName, err = prompt.GetSingleLineInput(hostPromptMessage, hostPromptHelpText)
 		if err != nil {

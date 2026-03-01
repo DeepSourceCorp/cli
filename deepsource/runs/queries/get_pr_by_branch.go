@@ -1,4 +1,3 @@
-// Get the pull request for a branch
 package queries
 
 import (

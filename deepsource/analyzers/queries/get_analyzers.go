@@ -8,7 +8,6 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource/analyzers"
 )
 
-// GraphQL query
 const listAnalyzersQuery = `
 {
     analyzers {
@@ -48,7 +47,6 @@ func (a *AnalyzersRequest) Do(ctx context.Context) ([]analyzers.Analyzer, error)
 		return nil, fmt.Errorf("Fetch analyzers: %w", err)
 	}
 
-	// Formatting the query response w.r.t the output format
 	analyzersData := make([]analyzers.Analyzer, len(respData.Analyzers.Edges))
 	for index, edge := range respData.Analyzers.Edges {
 		analyzersData[index].Name = edge.Node.Name

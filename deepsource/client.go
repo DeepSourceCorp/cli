@@ -1,4 +1,3 @@
-// DeepSource SDK
 package deepsource
 
 import (
@@ -47,12 +46,10 @@ type Client struct {
 	token      string
 }
 
-// Returns a GraphQL client which can be used to interact with the GQL APIs
 func (c Client) GQL() *graphql.Client {
 	return c.gql
 }
 
-// Returns the PAT which is required for authentication and thus, interacting with the APIs
 func (c Client) GetToken() string {
 	return c.token
 }
@@ -63,7 +60,6 @@ func NewWithGraphQLClient(gql graphqlclient.GraphQLClient) *Client {
 	return &Client{gqlWrapper: gql}
 }
 
-// Returns a new GQLClient
 func New(cp ClientOpts) (*Client, error) {
 	apiClientURL := getAPIClientURL(cp.HostName)
 	httpClient := &http.Client{
@@ -106,20 +102,16 @@ func normalizeHostName(hostName string) string {
 	}
 }
 
-// Formats and returns the DeepSource Public API client URL
 func getAPIClientURL(hostName string) string {
 	hostName = normalizeHostName(hostName)
 	apiClientURL := fmt.Sprintf("https://api.%s/graphql/", defaultHostName)
 
-	// Check if the domain is different from the default domain (In case of Enterprise users)
 	if hostName != defaultHostName {
 		apiClientURL = fmt.Sprintf("https://%s/api/graphql/", hostName)
 	}
 	return apiClientURL
 }
 
-// Registers the device and allots it a device code which is further used for fetching
-// the PAT and other authentication data
 func (c Client) RegisterDevice(ctx context.Context) (*auth.Device, error) {
 	req := authmut.NewRegisterDeviceRequest(c.gqlWrapper)
 	res, err := req.Do(ctx)
@@ -129,7 +121,6 @@ func (c Client) RegisterDevice(ctx context.Context) (*auth.Device, error) {
 	return res, nil
 }
 
-// Logs in the client using the deviceCode and the user Code and returns the PAT and data which is required for authentication
 func (c Client) Login(ctx context.Context, deviceCode, description string) (*auth.PAT, error) {
 	req := authmut.NewRequestPATRequest(c.gqlWrapper, authmut.RequestPATParams{
 		DeviceCode:  deviceCode,
@@ -143,7 +134,6 @@ func (c Client) Login(ctx context.Context, deviceCode, description string) (*aut
 	return res, nil
 }
 
-// Refreshes the authentication credentials. Takes the refreshToken as a parameter.
 func (c Client) RefreshAuthCreds(ctx context.Context, token string) (*auth.PAT, error) {
 	req := authmut.NewRefreshTokenRequest(c.gqlWrapper, authmut.RefreshTokenParams{
 		Token: token,
@@ -155,7 +145,6 @@ func (c Client) RefreshAuthCreds(ctx context.Context, token string) (*auth.PAT, 
 	return res, nil
 }
 
-// Returns the list of Analyzers supported by DeepSource along with their meta like shortcode, metaschema.
 func (c Client) GetSupportedAnalyzers(ctx context.Context) ([]analyzers.Analyzer, error) {
 	req := analyzerQuery.NewAnalyzersRequest(c.gqlWrapper)
 	res, err := req.Do(ctx)
@@ -165,7 +154,6 @@ func (c Client) GetSupportedAnalyzers(ctx context.Context) ([]analyzers.Analyzer
 	return res, nil
 }
 
-// Returns the list of CodeFormatters supported by DeepSource along with their meta like shortcode.
 func (c Client) GetSupportedCodeFormatters(ctx context.Context) ([]codeformatters.CodeFormatter, error) {
 	req := codeformatterQuery.NewCodeFormattersRequest(c.gqlWrapper)
 	res, err := req.Do(ctx)
@@ -175,10 +163,6 @@ func (c Client) GetSupportedCodeFormatters(ctx context.Context) ([]codeformatter
 	return res, nil
 }
 
-// Returns the activation status of the repository whose data is sent as parameters.
-// Owner : The username of the owner of the repository
-// repoName : The name of the repository whose activation status has to be queried
-// provider : The VCS provider which hosts the repo (GITHUB/GITLAB/BITBUCKET)
 func (c Client) GetRepoStatus(ctx context.Context, owner, repoName, provider string) (*repository.Meta, error) {
 	req := repoQuery.NewRepoStatusRequest(c.gqlWrapper, repoQuery.RepoStatusParams{
 		Owner:    owner,
@@ -192,7 +176,7 @@ func (c Client) GetRepoStatus(ctx context.Context, owner, repoName, provider str
 	return res, nil
 }
 
-// Returns the list of issues for a certain repository. Auto-paginates to fetch all results.
+// Auto-paginates to fetch all results.
 func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string) ([]issues.Issue, error) {
 	req := issuesQuery.NewIssuesListRequest(c.gqlWrapper, issuesQuery.IssuesListParams{
 		Owner:    owner,
@@ -207,7 +191,7 @@ func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string)
 	return res, nil
 }
 
-// Returns the list of issues reported for a certain file. Auto-paginates to fetch all results.
+// Auto-paginates to fetch all results.
 func (c Client) GetIssuesForFile(ctx context.Context, owner, repoName, provider, filePath string) ([]issues.Issue, error) {
 	req := issuesQuery.NewFileIssuesListRequest(c.gqlWrapper, issuesQuery.FileIssuesListParams{
 		Owner:    owner,
@@ -222,7 +206,6 @@ func (c Client) GetIssuesForFile(ctx context.Context, owner, repoName, provider,
 	return res, nil
 }
 
-// Returns details of the authenticated user.
 func (c Client) GetViewer(ctx context.Context) (*user.User, error) {
 	req := userQuery.NewViewerRequest(c.gqlWrapper)
 	res, err := req.Do(ctx)
@@ -232,12 +215,6 @@ func (c Client) GetViewer(ctx context.Context) (*user.User, error) {
 	return res, nil
 }
 
-// Returns the list of analysis runs for a repository.
-// owner : The username of the owner of the repository
-// repoName : The name of the repository
-// provider : The VCS provider which hosts the repo (GITHUB/GITLAB/BITBUCKET)
-// limit : The number of analysis runs to fetch
-// after : Cursor for pagination (nil for first page)
 func (c Client) GetAnalysisRuns(ctx context.Context, owner, repoName, provider string, limit int, after *string, branchName *string) ([]runs.AnalysisRun, runsQuery.PageInfo, error) {
 	req := runsQuery.NewAnalysisRunsListRequest(c.gqlWrapper, runsQuery.AnalysisRunsListParams{
 		Owner:      owner,
@@ -254,7 +231,6 @@ func (c Client) GetAnalysisRuns(ctx context.Context, owner, repoName, provider s
 	return res, pageInfo, nil
 }
 
-// Returns the analysis run for a specific commit.
 // Returns nil (not an error) if no run exists for the given commit.
 func (c Client) GetRunByCommit(ctx context.Context, commitOid string) (*runs.AnalysisRun, error) {
 	req := runsQuery.NewGetRunRequest(c.gqlWrapper, runsQuery.GetRunParams{
@@ -267,8 +243,6 @@ func (c Client) GetRunByCommit(ctx context.Context, commitOid string) (*runs.Ana
 	return res, nil
 }
 
-// Returns the issues for a specific analysis run.
-// commitOid : The commit OID of the analysis run
 func (c Client) GetRunIssues(ctx context.Context, commitOid string) (*runs.RunWithIssues, error) {
 	req := runsQuery.NewRunIssuesRequest(c.gqlWrapper, runsQuery.RunIssuesParams{
 		CommitOid: commitOid,
@@ -280,7 +254,7 @@ func (c Client) GetRunIssues(ctx context.Context, commitOid string) (*runs.RunWi
 	return res, nil
 }
 
-// Returns issues for a specific run as a flat list (for issues --commit). Auto-paginates nested results.
+// Auto-paginates nested results.
 func (c Client) GetRunIssuesFlat(ctx context.Context, commitOid string, filters issuesQuery.RunIssuesFlatParams) ([]issues.Issue, error) {
 	filters.CommitOid = commitOid
 	req := issuesQuery.NewRunIssuesFlatRequest(c.gqlWrapper, filters)
@@ -291,7 +265,7 @@ func (c Client) GetRunIssuesFlat(ctx context.Context, commitOid string, filters 
 	return res, nil
 }
 
-// Returns issues for a specific pull request. Auto-paginates to fetch all results.
+// Auto-paginates to fetch all results.
 func (c Client) GetPRIssues(ctx context.Context, owner, repoName, provider string, prNumber int) ([]issues.Issue, error) {
 	req := issuesQuery.NewPRIssuesListRequest(c.gqlWrapper, issuesQuery.PRIssuesListParams{
 		Owner:    owner,
@@ -306,7 +280,6 @@ func (c Client) GetPRIssues(ctx context.Context, owner, repoName, provider strin
 	return res, nil
 }
 
-// Returns metrics for a repository's default branch.
 func (c Client) GetRepoMetrics(ctx context.Context, owner, repoName, provider string) ([]metrics.RepositoryMetric, error) {
 	req := metricsQuery.NewRepoMetricsRequest(c.gqlWrapper, metricsQuery.RepoMetricsParams{
 		Owner:    owner,
@@ -320,7 +293,6 @@ func (c Client) GetRepoMetrics(ctx context.Context, owner, repoName, provider st
 	return res, nil
 }
 
-// Returns metrics for a specific analysis run.
 func (c Client) GetRunMetrics(ctx context.Context, commitOid string) (*metrics.RunMetrics, error) {
 	req := metricsQuery.NewRunMetricsRequest(c.gqlWrapper, metricsQuery.RunMetricsParams{
 		CommitOid: commitOid,
@@ -332,7 +304,6 @@ func (c Client) GetRunMetrics(ctx context.Context, commitOid string) (*metrics.R
 	return res, nil
 }
 
-// Returns metrics for a specific pull request.
 func (c Client) GetPRMetrics(ctx context.Context, owner, repoName, provider string, prNumber int) (*metrics.PRMetrics, error) {
 	req := metricsQuery.NewPRMetricsRequest(c.gqlWrapper, metricsQuery.PRMetricsParams{
 		Owner:    owner,
@@ -347,7 +318,7 @@ func (c Client) GetPRMetrics(ctx context.Context, owner, repoName, provider stri
 	return res, nil
 }
 
-// Returns vulnerabilities for a repository's default branch. Auto-paginates to fetch all results.
+// Auto-paginates to fetch all results.
 func (c Client) GetRepoVulns(ctx context.Context, owner, repoName, provider string) ([]vulnerabilities.VulnerabilityOccurrence, error) {
 	req := vulnerabilitiesQuery.NewRepoVulnsRequest(c.gqlWrapper, vulnerabilitiesQuery.RepoVulnsParams{
 		Owner:    owner,
@@ -361,7 +332,6 @@ func (c Client) GetRepoVulns(ctx context.Context, owner, repoName, provider stri
 	return res, nil
 }
 
-// Returns vulnerabilities for a specific analysis run.
 func (c Client) GetRunVulns(ctx context.Context, commitOid string) (*vulnerabilities.RunVulns, error) {
 	req := vulnerabilitiesQuery.NewRunVulnsRequest(c.gqlWrapper, vulnerabilitiesQuery.RunVulnsParams{
 		CommitOid: commitOid,
@@ -373,7 +343,6 @@ func (c Client) GetRunVulns(ctx context.Context, commitOid string) (*vulnerabili
 	return res, nil
 }
 
-// Returns the list of enabled analyzers for a repository.
 func (c Client) GetEnabledAnalyzers(ctx context.Context, owner, repoName, provider string) ([]analyzers.Analyzer, error) {
 	req := repoQuery.NewEnabledAnalyzersRequest(c.gqlWrapper, repoQuery.EnabledAnalyzersParams{
 		Owner:    owner,
@@ -387,7 +356,6 @@ func (c Client) GetEnabledAnalyzers(ctx context.Context, owner, repoName, provid
 	return res, nil
 }
 
-// Returns the branch name for a specific pull request.
 func (c Client) GetPRBranch(ctx context.Context, owner, repoName, provider string, prNumber int) (string, error) {
 	req := runsQuery.NewPRBranchRequest(c.gqlWrapper, runsQuery.PRBranchParams{
 		Owner:    owner,
@@ -398,7 +366,6 @@ func (c Client) GetPRBranch(ctx context.Context, owner, repoName, provider strin
 	return req.Do(ctx)
 }
 
-// Returns the PR number for a branch, if an open PR exists.
 // Returns found=false when no PR exists or the PR is not open.
 func (c Client) GetPRForBranch(ctx context.Context, owner, repoName, provider, branch string) (prNumber int, found bool, err error) {
 	req := runsQuery.NewPRByBranchRequest(c.gqlWrapper, runsQuery.PRByBranchParams{
@@ -417,7 +384,7 @@ func (c Client) GetPRForBranch(ctx context.Context, owner, repoName, provider, b
 	return number, true, nil
 }
 
-// Returns vulnerabilities for a specific pull request. Auto-paginates to fetch all results.
+// Auto-paginates to fetch all results.
 func (c Client) GetPRVulns(ctx context.Context, owner, repoName, provider string, prNumber int) (*vulnerabilities.PRVulns, error) {
 	req := vulnerabilitiesQuery.NewPRVulnsRequest(c.gqlWrapper, vulnerabilitiesQuery.PRVulnsParams{
 		Owner:    owner,

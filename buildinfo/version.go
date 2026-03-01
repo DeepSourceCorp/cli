@@ -9,10 +9,8 @@ var buildInfo *BuildInfo
 
 // App identity variables. Defaults are prod values; overridden in main.go for dev builds.
 var (
-	AppName       = "deepsource"           // binary name / display name
-	ConfigDirName = ".deepsource"          // ~/<this>/
-	KeychainSvc   = "deepsource-cli"       // macOS keychain service
-	KeychainKey   = "deepsource-cli-token" // macOS keychain account
+	AppName       = "deepsource"  // binary name / display name
+	ConfigDirName = ".deepsource" // ~/<this>/
 )
 
 // BuildInfo describes the compile time information.
@@ -25,7 +23,6 @@ type BuildInfo struct {
 	BuildMode string `json:"build_mode,omitempty"`
 }
 
-// SetBuildInfo sets the build info as a package global.
 func SetBuildInfo(version, dateStr, buildMode string) {
 	date, _ := time.Parse("2006-01-02T15:04:05Z", dateStr)
 
@@ -36,7 +33,6 @@ func SetBuildInfo(version, dateStr, buildMode string) {
 	}
 }
 
-// GetBuildInfo returns the package global `buildInfo`
 func GetBuildInfo() *BuildInfo {
 	return buildInfo
 }

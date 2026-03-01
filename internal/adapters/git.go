@@ -50,41 +50,33 @@ func (*RealGitClient) ListRemotes(_ string) (map[string]interfaces.RemoteInfo, e
 
 // gitGetHead accepts a git directory and returns head commit OID / error.
 func gitGetHead(workspaceDir string) (headOID string, warning string, err error) {
-	// Check if DeepSource's Test coverage action triggered this first before executing any git commands.
 	headOID, err = getTestCoverageActionCommit()
 	if headOID != "" {
 		return
 	}
 
-	// Check if the `GIT_COMMIT_SHA` environment variable exists. If yes, return this as
-	// the latest commit sha.
 	if injectedSHA, isManuallyInjectedSHA := os.LookupEnv("GIT_COMMIT_SHA"); isManuallyInjectedSHA {
 		return injectedSHA, "", nil
 	}
 
-	// Get the top commit manually, using git command.
 	headOID, err = fetchHeadManually(workspaceDir)
 	if err != nil {
 		return
 	}
 
-	// TRAVIS CI
 	if envUser := os.Getenv("USER"); envUser == "travis" {
 		headOID, warning, err = getTravisCommit(headOID)
 		return
 	}
 
-	// GITHUB ACTIONS
 	if _, isGitHubEnv := os.LookupEnv("GITHUB_ACTIONS"); isGitHubEnv {
 		headOID, warning, err = getGitHubActionsCommit(headOID)
 		return
 	}
 
-	// If we are here, it means there weren't any special cases.
 	return
 }
 
-// Fetches the latest commit hash using the command `git rev-parse HEAD`.
 func fetchHeadManually(directoryPath string) (string, error) {
 	cmd := exec.Command("git", "--no-pager", "rev-parse", "HEAD")
 	cmd.Dir = directoryPath
@@ -99,7 +91,6 @@ func fetchHeadManually(directoryPath string) (string, error) {
 		return "", err
 	}
 
-	// Trim newline suffix from Commit OID.
 	return strings.TrimSuffix(outStr, "\n"), nil
 }
 

@@ -1,4 +1,3 @@
-// Lists the issues from a specific run (flattened to Issue type)
 package issues
 
 import (

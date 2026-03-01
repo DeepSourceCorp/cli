@@ -9,37 +9,23 @@ import (
 	"github.com/deepsourcelabs/cli/internal/adapters"
 	"github.com/deepsourcelabs/cli/internal/debug"
 	"github.com/deepsourcelabs/cli/internal/interfaces"
-	"github.com/deepsourcelabs/cli/internal/secrets"
 	"github.com/pelletier/go-toml"
 )
 
 // Manager handles reading and writing CLI config.
 type Manager struct {
-	fs         interfaces.FileSystem
-	homeDir    func() (string, error)
-	secrets    secrets.Store
-	secretsKey string
+	fs      interfaces.FileSystem
+	homeDir func() (string, error)
 }
 
 // NewManager creates a config manager with injected dependencies.
 func NewManager(fs interfaces.FileSystem, homeDir func() (string, error)) *Manager {
-	return NewManagerWithSecrets(fs, homeDir, secrets.NoopStore{}, "")
-}
-
-// NewManagerWithSecrets creates a config manager with a secrets store.
-func NewManagerWithSecrets(fs interfaces.FileSystem, homeDir func() (string, error), store secrets.Store, key string) *Manager {
-	if key == "" {
-		key = buildinfo.KeychainKey
-	}
-	if store == nil {
-		store = secrets.NoopStore{}
-	}
-	return &Manager{fs: fs, homeDir: homeDir, secrets: store, secretsKey: key}
+	return &Manager{fs: fs, homeDir: homeDir}
 }
 
 // DefaultManager returns a manager using OS-backed dependencies.
 func DefaultManager() *Manager {
-	return NewManagerWithSecrets(adapters.NewOSFileSystem(), os.UserHomeDir, secrets.DefaultStore(), "")
+	return NewManager(adapters.NewOSFileSystem(), os.UserHomeDir)
 }
 
 func (m *Manager) configDir() (string, error) {
@@ -80,13 +66,6 @@ func (m *Manager) Load() (*CLIConfig, error) {
 		}
 	}
 
-	tokenFromKeychain := false
-	if cfg.Token == "" {
-		if token, err := m.secrets.Get(m.secretsKey); err == nil {
-			cfg.Token = token
-			tokenFromKeychain = true
-		}
-	}
 	if cfg.Token == "" {
 		if envToken := os.Getenv("DEEPSOURCE_TOKEN"); envToken != "" {
 			cfg.Token = envToken
@@ -96,24 +75,19 @@ func (m *Manager) Load() (*CLIConfig, error) {
 	if cfg.Host == "" {
 		if envHost := os.Getenv("DEEPSOURCE_HOST"); envHost != "" {
 			cfg.Host = envHost
+		} else {
+			cfg.Host = DefaultHostName
 		}
 	}
 
-	debug.Log("config: host=%q user=%q token_present=%v keychain=%v env=%v", cfg.Host, cfg.User, cfg.Token != "", tokenFromKeychain, cfg.TokenFromEnv)
+	debug.Log("config: host=%q user=%q token_present=%v env=%v", cfg.Host, cfg.User, cfg.Token != "", cfg.TokenFromEnv)
 
 	return cfg, nil
 }
 
 // Write persists the CLI config file.
 func (m *Manager) Write(cfg *CLIConfig) error {
-	cfgToWrite := *cfg
-	if cfg.Token != "" {
-		if err := m.secrets.Set(m.secretsKey, cfg.Token); err == nil {
-			cfgToWrite.Token = ""
-		}
-	}
-
-	data, err := toml.Marshal(&cfgToWrite)
+	data, err := toml.Marshal(cfg)
 	if err != nil {
 		return err
 	}
@@ -137,10 +111,6 @@ func (m *Manager) Write(cfg *CLIConfig) error {
 
 // Delete removes the CLI config file if it exists.
 func (m *Manager) Delete() error {
-	if err := m.secrets.Delete(m.secretsKey); err != nil && !errors.Is(err, secrets.ErrNotFound) && !errors.Is(err, secrets.ErrUnavailable) {
-		return err
-	}
-
 	path, err := m.configPath()
 	if err != nil {
 		return err
@@ -161,6 +131,14 @@ func (m *Manager) exists(path string) (bool, error) {
 		return false, nil
 	}
 	return false, err
+}
+
+// BackfillUser writes the user email to config if it is currently empty.
+func (m *Manager) BackfillUser(cfg *CLIConfig, email string) {
+	if cfg.User == "" && email != "" {
+		cfg.User = email
+		_ = m.Write(cfg)
+	}
 }
 
 // TokenRefreshCallback returns a callback that persists refreshed token

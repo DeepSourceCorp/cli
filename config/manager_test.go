@@ -7,44 +7,10 @@ import (
 
 	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/internal/adapters"
-	"github.com/deepsourcelabs/cli/internal/secrets"
 	"github.com/pelletier/go-toml"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
-
-type fakeSecretStore struct {
-	data map[string]string
-}
-
-func (f *fakeSecretStore) Get(key string) (string, error) {
-	value, ok := f.data[key]
-	if !ok {
-		return "", secrets.ErrNotFound
-	}
-	return value, nil
-}
-
-func (f *fakeSecretStore) Set(key string, value string) error {
-	f.data[key] = value
-	return nil
-}
-
-func (f *fakeSecretStore) Delete(key string) error {
-	delete(f.data, key)
-	return nil
-}
-
-func TestManagerLoadTokenFromSecrets(t *testing.T) {
-	tempDir := t.TempDir()
-	homeDir := func() (string, error) { return tempDir, nil }
-	store := &fakeSecretStore{data: map[string]string{"token-key": "secret-token"}}
-
-	mgr := NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, store, "token-key")
-	cfg, err := mgr.Load()
-	assert.NoError(t, err)
-	assert.Equal(t, "secret-token", cfg.Token)
-}
 
 func TestManagerLoadFromFile(t *testing.T) {
 	tempDir := t.TempDir()
@@ -74,7 +40,7 @@ func TestManagerLoadNoFile(t *testing.T) {
 	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
 	cfg, err := mgr.Load()
 	require.NoError(t, err)
-	assert.Empty(t, cfg.Host)
+	assert.Equal(t, DefaultHostName, cfg.Host)
 	assert.Empty(t, cfg.User)
 	assert.Empty(t, cfg.Token)
 }
@@ -83,7 +49,6 @@ func TestManagerWrite(t *testing.T) {
 	tempDir := t.TempDir()
 	homeDir := func() (string, error) { return tempDir, nil }
 
-	// Use NoopStore so token stays in the TOML file
 	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
 	err := mgr.Write(&CLIConfig{
 		Host: "example.com",
@@ -102,37 +67,32 @@ func TestManagerWrite(t *testing.T) {
 	assert.Equal(t, "bob", got.User)
 }
 
-func TestManagerWriteStoresTokenInSecrets(t *testing.T) {
+func TestManagerWriteStoresTokenInTOML(t *testing.T) {
 	tempDir := t.TempDir()
 	homeDir := func() (string, error) { return tempDir, nil }
-	store := &fakeSecretStore{data: make(map[string]string)}
 
-	mgr := NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, store, "mykey")
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
 	err := mgr.Write(&CLIConfig{
 		Host:  "example.com",
 		Token: "super-secret",
 	})
 	require.NoError(t, err)
 
-	// Token should be in secret store
-	assert.Equal(t, "super-secret", store.data["mykey"])
-
-	// Token should NOT be in the TOML file
+	// Token should be in the TOML file
 	path := filepath.Join(tempDir, buildinfo.ConfigDirName, ConfigFileName)
 	data, err := os.ReadFile(path)
 	require.NoError(t, err)
 
 	var got CLIConfig
 	require.NoError(t, toml.Unmarshal(data, &got))
-	assert.Empty(t, got.Token, "token should not be written to TOML when secret store succeeds")
+	assert.Equal(t, "super-secret", got.Token, "token should be written to TOML")
 }
 
 func TestManagerDelete(t *testing.T) {
 	tempDir := t.TempDir()
 	homeDir := func() (string, error) { return tempDir, nil }
-	store := &fakeSecretStore{data: map[string]string{"mykey": "tok"}}
 
-	mgr := NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, store, "mykey")
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
 
 	// Write a config first
 	require.NoError(t, mgr.Write(&CLIConfig{Host: "example.com", Token: "tok"}))
@@ -144,10 +104,6 @@ func TestManagerDelete(t *testing.T) {
 	path := filepath.Join(tempDir, buildinfo.ConfigDirName, ConfigFileName)
 	_, err := os.Stat(path)
 	assert.True(t, os.IsNotExist(err), "config file should be deleted")
-
-	// Secret should be gone
-	_, ok := store.data["mykey"]
-	assert.False(t, ok, "secret should be deleted")
 }
 
 func TestManagerDeleteNonExistent(t *testing.T) {
@@ -162,9 +118,8 @@ func TestManagerDeleteNonExistent(t *testing.T) {
 func TestManagerTokenRefreshCallback(t *testing.T) {
 	tempDir := t.TempDir()
 	homeDir := func() (string, error) { return tempDir, nil }
-	store := &fakeSecretStore{data: make(map[string]string)}
 
-	mgr := NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, store, "key")
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
 
 	// Write initial config
 	require.NoError(t, mgr.Write(&CLIConfig{Host: "example.com", User: "old@test.com", Token: "old-token"}))
@@ -237,8 +192,7 @@ func TestManagerRefreshCallbackSkipsEnvToken(t *testing.T) {
 
 	t.Setenv("DEEPSOURCE_TOKEN", "env-token")
 
-	store := &fakeSecretStore{data: make(map[string]string)}
-	mgr := NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, store, "key")
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
 
 	cb := mgr.TokenRefreshCallback()
 	cb("refreshed-token", "2030-01-01T00:00:00Z", "new@test.com")
@@ -253,12 +207,55 @@ func TestManagerRefreshCallbackSkipsEnvToken(t *testing.T) {
 func TestNewManagerDefaults(t *testing.T) {
 	homeDir := func() (string, error) { return "/tmp", nil }
 
-	// NewManager uses NoopStore
 	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
 	assert.NotNil(t, mgr)
+}
 
-	// nil store defaults to NoopStore, empty key defaults to KeychainKey
-	mgr2 := NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, nil, "")
-	assert.NotNil(t, mgr2)
-	assert.Equal(t, buildinfo.KeychainKey, mgr2.secretsKey)
+func TestManagerLoadDefaultHost(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+
+	// No config file, no DEEPSOURCE_HOST env var → Host should default
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
+	cfg, err := mgr.Load()
+	require.NoError(t, err)
+	assert.Equal(t, DefaultHostName, cfg.Host)
+}
+
+func TestManagerBackfillUser(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
+
+	// Write initial config with no user
+	require.NoError(t, mgr.Write(&CLIConfig{Host: "example.com", Token: "tok"}))
+
+	cfg, err := mgr.Load()
+	require.NoError(t, err)
+	assert.Empty(t, cfg.User)
+
+	// BackfillUser should write the email
+	mgr.BackfillUser(cfg, "alice@example.com")
+	assert.Equal(t, "alice@example.com", cfg.User)
+
+	// Reload to confirm it was persisted
+	cfg2, err := mgr.Load()
+	require.NoError(t, err)
+	assert.Equal(t, "alice@example.com", cfg2.User)
+}
+
+func TestManagerBackfillUserNoop(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
+
+	// Write config with user already set
+	require.NoError(t, mgr.Write(&CLIConfig{Host: "example.com", Token: "tok", User: "existing@example.com"}))
+
+	cfg, err := mgr.Load()
+	require.NoError(t, err)
+
+	// BackfillUser should be a no-op
+	mgr.BackfillUser(cfg, "new@example.com")
+	assert.Equal(t, "existing@example.com", cfg.User)
 }

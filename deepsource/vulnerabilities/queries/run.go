@@ -1,4 +1,3 @@
-// Fetches vulnerabilities from a specific analysis run
 package queries
 
 import (

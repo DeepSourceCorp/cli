@@ -1,4 +1,3 @@
-// Fetches vulnerabilities from a repository's default branch
 package queries
 
 import (

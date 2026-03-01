@@ -1,7 +1,5 @@
 package report
 
-// ReportQueryInput is the schema for variables of artifacts
-// report GraphQL query
 type ReportQueryInput struct {
 	AccessToken       string      `json:"accessToken"`
 	CommitOID         string      `json:"commitOid"`
@@ -14,8 +12,6 @@ type ReportQueryInput struct {
 	Metadata          interface{} `json:"metadata,omitempty"`
 }
 
-// ReportQueryInput is the structure of artifacts report
-// GraphQL query
 type ReportQuery struct {
 	Query     string `json:"query"`
 	Variables struct {
@@ -23,8 +19,6 @@ type ReportQuery struct {
 	} `json:"variables"`
 }
 
-// QueryResponse is the response returned by artifacts report
-// GraphQL query
 type QueryResponse struct {
 	Data struct {
 		CreateArtifact struct {

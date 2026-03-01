@@ -1,4 +1,3 @@
-// Lists the issues reported in the whole project
 package issues
 
 import (

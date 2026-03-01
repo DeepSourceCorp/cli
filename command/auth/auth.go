@@ -8,10 +8,8 @@ import (
 	"github.com/deepsourcelabs/cli/command/auth/status"
 )
 
-// Options holds the metadata.
 type Options struct{}
 
-// NewCmdAuth handles the auth command which has various sub-commands like `login`, `logout` and `status`
 func NewCmdAuth() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "auth",

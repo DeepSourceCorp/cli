@@ -4,13 +4,19 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"os"
+	"path/filepath"
 	"testing"
 
 	loginCmd "github.com/deepsourcelabs/cli/command/auth/login"
 	"github.com/deepsourcelabs/cli/command/cmddeps"
+	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
+	"github.com/deepsourcelabs/cli/internal/adapters"
 	"github.com/deepsourcelabs/cli/internal/testutil"
+
+	"github.com/deepsourcelabs/cli/buildinfo"
 )
 
 func newMockViewerClient(t *testing.T) *deepsource.Client {
@@ -132,6 +138,110 @@ func TestLoginDefaultHostname(t *testing.T) {
 	// Without --host, host defaults to deepsource.com
 	if cfg.Host != "deepsource.com" {
 		t.Errorf("expected host %q, got %q", "deepsource.com", cfg.Host)
+	}
+}
+
+func TestLoginConfigLoadError(t *testing.T) {
+	// When LoadConfig fails, login should use NewDefault() and proceed with PAT flow
+	tmpDir := t.TempDir()
+	fs := adapters.NewOSFileSystem()
+	cfgMgr := config.NewManager(fs, func() (string, error) {
+		return tmpDir, nil
+	})
+	// Don't write any config — but the directory exists, so Load succeeds.
+	// To simulate a real failure we need a corrupt file.
+	configDir := filepath.Join(tmpDir, buildinfo.ConfigDirName)
+	if err := os.MkdirAll(configDir, 0o700); err != nil {
+		t.Fatalf("failed to create config dir: %v", err)
+	}
+	if err := os.WriteFile(filepath.Join(configDir, config.ConfigFileName), []byte("invalid[toml"), 0o644); err != nil {
+		t.Fatalf("failed to write corrupt config: %v", err)
+	}
+
+	deps := &cmddeps.Deps{
+		ConfigMgr: cfgMgr,
+		Client:    newMockViewerClient(t),
+	}
+
+	cmd := loginCmd.NewCmdLoginWithDeps(deps)
+	cmd.SetArgs([]string{"--with-token", "dsp_fallback"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("expected PAT flow to succeed despite config load error: %v", err)
+	}
+
+	// Token should have been saved
+	cfg, err := cfgMgr.Load()
+	if err != nil {
+		t.Fatalf("failed to load config: %v", err)
+	}
+	if cfg.Token != "dsp_fallback" {
+		t.Errorf("expected token %q, got %q", "dsp_fallback", cfg.Token)
+	}
+}
+
+func TestLoginVerifyTokenBackfillsUser(t *testing.T) {
+	// Valid token + empty user → verifyTokenWithServer backfills email from server
+	cfgMgr := testutil.CreateTestConfigManager(t, "valid-token", "deepsource.com", "")
+
+	deps := &cmddeps.Deps{
+		ConfigMgr: cfgMgr,
+		Client:    newMockViewerClient(t),
+	}
+
+	cmd := loginCmd.NewCmdLoginWithDeps(deps)
+	cmd.SetArgs([]string{"--with-token", "dsp_new"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	cfg, err := cfgMgr.Load()
+	if err != nil {
+		t.Fatalf("failed to load config: %v", err)
+	}
+	// User should have been backfilled by verifyTokenWithServer
+	if cfg.User != "test@example.com" {
+		t.Errorf("expected user %q, got %q", "test@example.com", cfg.User)
+	}
+}
+
+func TestLoginVerifyTokenServerReject(t *testing.T) {
+	// Server rejects token → marks expired, PAT flow re-authenticates
+	cfgMgr := testutil.CreateTestConfigManager(t, "old-token", "deepsource.com", "old@example.com")
+
+	rejectMock := graphqlclient.NewMockClient()
+	callCount := 0
+	rejectMock.QueryFunc = func(_ context.Context, _ string, _ map[string]any, result any) error {
+		callCount++
+		if callCount == 1 {
+			// First call: verifyTokenWithServer — reject the token
+			return fmt.Errorf("unauthorized")
+		}
+		// Subsequent calls: PAT verification — succeed
+		resp := `{"viewer":{"id":"1","firstName":"Test","lastName":"User","email":"new@example.com","accounts":{"edges":[]}}}`
+		return json.Unmarshal([]byte(resp), result)
+	}
+	client := deepsource.NewWithGraphQLClient(rejectMock)
+
+	deps := &cmddeps.Deps{
+		ConfigMgr: cfgMgr,
+		Client:    client,
+	}
+
+	cmd := loginCmd.NewCmdLoginWithDeps(deps)
+	cmd.SetArgs([]string{"--with-token", "dsp_renewed"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	cfg, err := cfgMgr.Load()
+	if err != nil {
+		t.Fatalf("failed to load config: %v", err)
+	}
+	if cfg.Token != "dsp_renewed" {
+		t.Errorf("expected renewed token %q, got %q", "dsp_renewed", cfg.Token)
 	}
 }
 

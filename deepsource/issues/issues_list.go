@@ -1,27 +1,27 @@
 package issues
 
 type Position struct {
-	BeginLine int `json:"begin"` // The line where the code covered under the issue starts
-	EndLine   int `json:"end"`   // The line where the code covered under the issue starts
+	BeginLine int `json:"begin"`
+	EndLine   int `json:"end"`
 }
 
 type Location struct {
-	Path     string   `json:"path"`     // The filepath where the issue is reported
-	Position Position `json:"position"` // The position info where the issue is raised
+	Path     string   `json:"path"`
+	Position Position `json:"position"`
 }
 
 type AnalyzerMeta struct {
-	Name      string `json:"name"`     // Analyzer name (human-readable)
-	Shortcode string `json:"analyzer"` // Analyzer shortcode
+	Name      string `json:"name"`
+	Shortcode string `json:"analyzer"`
 }
 
 type Issue struct {
-	IssueText     string       `json:"issue_title"`    // The describing heading of the issue
-	IssueCode     string       `json:"issue_code"`     // DeepSource code for the issue reported
-	IssueCategory string       `json:"issue_category"` // Category of the issue reported
-	IssueSeverity string       `json:"issue_severity"` // Severity of the issue reported
-	IssueSource   string       `json:"issue_source"`   // Source of the issue (STATIC or AI)
-	Description   string       `json:"description"`    // Short description / explanation of the issue
-	Location      Location     `json:"location"`       // The location data for the issue reported
-	Analyzer      AnalyzerMeta // The Analyzer which raised the issue
+	IssueText     string       `json:"issue_title"`
+	IssueCode     string       `json:"issue_code"`
+	IssueCategory string       `json:"issue_category"`
+	IssueSeverity string       `json:"issue_severity"`
+	IssueSource   string       `json:"issue_source"`
+	Description   string       `json:"description"`
+	Location      Location     `json:"location"`
+	Analyzer      AnalyzerMeta
 }

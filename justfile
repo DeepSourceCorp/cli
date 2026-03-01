@@ -14,14 +14,6 @@ build-local:
 test:
 	go test -v -coverprofile=coverage.out -count=1 ./...
 
-# Clone test fixtures and prepare test environment
-test-setup:
-	mkdir -p $CODE_PATH
-	cd $CODE_PATH && ls -A1 | xargs rm -rf
-	git clone https://github.com/DeepSourceCorp/july $CODE_PATH
-	chmod +x /tmp/deepsource
-	cp ./command/report/tests/golden_files/python_coverage.xml /tmp
-
 # Remove build artifacts and coverage files
 clean:
 	rm -rf /tmp/deepsource coverage.out dist/

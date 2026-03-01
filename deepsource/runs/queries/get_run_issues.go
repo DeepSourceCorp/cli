@@ -1,4 +1,3 @@
-// Get issues for a specific analysis run
 package queries
 
 import (

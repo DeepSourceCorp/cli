@@ -15,16 +15,13 @@ import (
 	"github.com/fatih/color"
 )
 
-// Starts the login flow for the CLI
 func (opts *LoginOptions) startLoginFlow(svc *authsvc.Service, cfg *config.CLIConfig) error {
-	// Register the device and get a device code through the response
 	ctx := context.Background()
 	deviceRegistrationResponse, err := registerDevice(ctx, svc, cfg)
 	if err != nil {
 		return err
 	}
 
-	// Open the browser for authentication
 	err = browser.OpenURL(deviceRegistrationResponse.VerificationURIComplete)
 	if err != nil {
 		c := color.New(color.FgCyan, color.Bold)
@@ -38,7 +35,6 @@ func (opts *LoginOptions) startLoginFlow(svc *authsvc.Service, cfg *config.CLICo
 	fmt.Println()
 	fmt.Println("Waiting for authentication")
 
-	// Fetch the PAT by polling the server
 	var tokenData *auth.PAT
 	tokenData, opts.AuthTimedOut, err = fetchPAT(ctx, deviceRegistrationResponse, svc, cfg)
 	if err != nil {
@@ -49,7 +45,6 @@ func (opts *LoginOptions) startLoginFlow(svc *authsvc.Service, cfg *config.CLICo
 		return clierrors.ErrAuthTimeout()
 	}
 
-	// Store auth data in config
 	cfg.User = tokenData.User.Email
 	cfg.Token = tokenData.Token
 	cfg.SetTokenExpiry(tokenData.Expiry)
@@ -76,9 +71,6 @@ func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device, svc *aut
 	userName := ""
 	authTimedOut := true
 
-	/* ======================================================================= */
-	// The username and hostname to add in the description for the PAT request
-	/* ======================================================================= */
 	userData, err := user.Current()
 	if err != nil {
 		userName = defaultUserName
@@ -92,11 +84,9 @@ func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device, svc *aut
 	}
 	userDescription := fmt.Sprintf("CLI PAT for %s@%s", userName, hostName)
 
-	// Keep polling the mutation at a certain interval till the expiry timeperiod
 	ticker := time.NewTicker(time.Duration(deviceRegistrationData.Interval) * time.Second)
 	pollStartTime := time.Now()
 
-	// Polling for fetching PAT
 	func() {
 		for range ticker.C {
 			tokenData, err = svc.RequestPAT(ctx, cfg, deviceRegistrationData.Code, userDescription)

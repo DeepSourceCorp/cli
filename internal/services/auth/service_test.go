@@ -5,14 +5,13 @@ import (
 
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/internal/adapters"
-	"github.com/deepsourcelabs/cli/internal/secrets"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestServiceSaveLoadDeleteConfig(t *testing.T) {
 	tempDir := t.TempDir()
 	homeDir := func() (string, error) { return tempDir, nil }
-	mgr := config.NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, secrets.NoopStore{}, "test-key")
+	mgr := config.NewManager(adapters.NewOSFileSystem(), homeDir)
 	svc := NewService(mgr)
 
 	cfg := &config.CLIConfig{Host: "deepsource.com", User: "demo", Token: "demo-token"}

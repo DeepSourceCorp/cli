@@ -94,7 +94,6 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 		},
 	}
 
-	// --analyzer flag
 	cmd.Flags().StringVar(&opts.Analyzer, "analyzer", "", "name of the analyzer to report the artifact to (example: test-coverage)")
 
 	cmd.Flags().StringVar(&opts.AnalyzerType, "analyzer-type", "", "type of the analyzer (example: community)")
@@ -116,7 +115,6 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 	cmd.Flags().StringVar(&opts.OIDCProvider, "oidc-provider", "", "OIDC provider to use for authentication. Supported providers: github-actions")
 	cmd.Flags().StringVar(&opts.Output, "output", "pretty", "Output format: pretty, json")
 
-	// --skip-verify flag to skip SSL certificate verification while reporting test coverage data.
 	cmd.Flags().BoolVar(&opts.SkipCertificateVerification, "skip-verify", false, "skip SSL certificate verification while sending the test coverage data")
 
 	_ = cmd.RegisterFlagCompletionFunc("analyzer", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {

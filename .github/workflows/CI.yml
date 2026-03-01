@@ -30,17 +30,10 @@ jobs:
       - name: Build the binary
         run: just build
 
-      - name: Setup tests
-        run: just test-setup
-        env:
-          CODE_PATH: /home/runner/code
-
       - name: Run tests
         run: just test
-        env:
-          CODE_PATH: /home/runner/code
 
       - name: Report test coverage to DeepSource
         run: |
-          curl https://deepsource.io/cli | sh
+          curl -fsSL https://cli.deepsource.com/install | BINDIR=./bin sh
           ./bin/deepsource report --analyzer test-coverage --key go --value-file ./coverage.out --use-oidc
