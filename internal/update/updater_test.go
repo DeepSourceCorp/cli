@@ -7,7 +7,6 @@ import (
 	"compress/gzip"
 	"crypto/sha256"
 	"encoding/hex"
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -124,9 +123,16 @@ func TestReplaceBinary(t *testing.T) {
 }
 
 func TestShouldAutoUpdate_DevBuild(t *testing.T) {
-	buildinfo.SetBuildInfo("development", "", "dev")
-	if ShouldAutoUpdate() {
-		t.Error("expected false for dev build")
+	buildinfo.SetBuildInfo("2.0.3", "", "dev")
+
+	// Clear CI vars so they don't interfere
+	ciVars := []string{"CI", "GITHUB_ACTIONS", "GITLAB_CI", "CIRCLECI", "TRAVIS", "JENKINS_URL", "BUILDKITE", "TF_BUILD"}
+	for _, v := range ciVars {
+		t.Setenv(v, "")
+	}
+
+	if !ShouldAutoUpdate() {
+		t.Error("expected true for dev build with real version")
 	}
 }
 
@@ -233,18 +239,6 @@ func TestCheckForUpdate_NewerVersion(t *testing.T) {
 			},
 		},
 	}
-	manifestJSON, _ := json.Marshal(manifest)
-
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write(manifestJSON)
-	}))
-	defer srv.Close()
-
-	origURL := manifestURL
-	// We can't reassign the const, so we'll test at a higher level.
-	// Instead, test by calling the pieces directly.
-	_ = origURL
-
 	// Simulate what CheckForUpdate does: fetch manifest, compare, write state
 	newer, _ := IsNewer("2.0.30", manifest.Version)
 	if !newer {
@@ -254,7 +248,7 @@ func TestCheckForUpdate_NewerVersion(t *testing.T) {
 	platform := manifest.Platforms[key]
 	state := &UpdateState{
 		Version:    manifest.Version,
-		ArchiveURL: "https://cli.deepsource.com/" + platform.Archive,
+		ArchiveURL: buildinfo.BaseURL + "/" + platform.Archive,
 		SHA256:     platform.SHA256,
 		CheckedAt:  time.Now().UTC(),
 	}
@@ -269,7 +263,7 @@ func TestCheckForUpdate_NewerVersion(t *testing.T) {
 	if got.Version != "2.0.40" {
 		t.Errorf("expected version 2.0.40, got %s", got.Version)
 	}
-	expectedURL := fmt.Sprintf("https://cli.deepsource.com/deepsource_2.0.40_%s.tar.gz", key)
+	expectedURL := fmt.Sprintf("%s/deepsource_2.0.40_%s.tar.gz", buildinfo.BaseURL, key)
 	if got.ArchiveURL != expectedURL {
 		t.Errorf("expected archive URL %s, got %s", expectedURL, got.ArchiveURL)
 	}

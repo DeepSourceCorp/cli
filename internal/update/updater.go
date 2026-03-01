@@ -102,7 +102,7 @@ func CheckForUpdate(client *http.Client) error {
 
 	state := &UpdateState{
 		Version:    manifest.Version,
-		ArchiveURL: "https://cli.deepsource.com/" + platform.Archive,
+		ArchiveURL: buildinfo.BaseURL + "/" + platform.Archive,
 		SHA256:     platform.SHA256,
 		CheckedAt:  time.Now().UTC(),
 	}
@@ -169,9 +169,9 @@ func ShouldAutoUpdate() bool {
 		return false
 	}
 
-	// Skip in dev mode
-	if bi.BuildMode == "dev" || bi.Version == "development" {
-		debug.Log("update: skipping (dev build)")
+	// Skip local dev builds (go run / go build without ldflags)
+	if bi.Version == "development" {
+		debug.Log("update: skipping (local dev build)")
 		return false
 	}
 

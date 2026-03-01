@@ -43,6 +43,7 @@ func mainRun() (exitCode int) {
 	if buildMode == "dev" {
 		v.AppName = "deepsource-dev"
 		v.ConfigDirName = ".deepsource-dev"
+		v.BaseURL = "https://cli.deepsource.one"
 	}
 
 	// Init sentry

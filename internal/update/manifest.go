@@ -6,9 +6,9 @@ import (
 	"io"
 	"net/http"
 	"runtime"
-)
 
-const manifestURL = "https://cli.deepsource.com/manifest.json"
+	"github.com/deepsourcelabs/cli/buildinfo"
+)
 
 // Manifest represents the CLI release manifest served by the CDN.
 type Manifest struct {
@@ -25,7 +25,7 @@ type PlatformInfo struct {
 
 // FetchManifest downloads and parses the release manifest.
 func FetchManifest(client *http.Client) (*Manifest, error) {
-	resp, err := client.Get(manifestURL)
+	resp, err := client.Get(buildinfo.BaseURL + "/manifest.json")
 	if err != nil {
 		return nil, fmt.Errorf("fetching manifest: %w", err)
 	}
