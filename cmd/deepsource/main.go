@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"strings"
 	"time"
@@ -11,7 +12,9 @@ import (
 	v "github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/command"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
+	"github.com/deepsourcelabs/cli/internal/debug"
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
+	"github.com/deepsourcelabs/cli/internal/update"
 	"github.com/getsentry/sentry-go"
 )
 
@@ -64,9 +67,26 @@ func mainRun() (exitCode int) {
 	return run()
 }
 
+type updateResult struct {
+	version string
+	err     error
+}
+
 func run() int {
 	v.SetBuildInfo(version, Date, buildMode)
 
+	// Start background auto-update check
+	var updateCh chan updateResult
+	if update.ShouldAutoUpdate() {
+		updateCh = make(chan updateResult, 1)
+		go func() {
+			client := &http.Client{Timeout: 30 * time.Second}
+			newVer, err := update.Update(client)
+			updateCh <- updateResult{version: newVer, err: err}
+		}()
+	}
+
+	exitCode := 0
 	if err := command.Execute(); err != nil {
 		var cliErr *clierrors.CLIError
 		if errors.As(err, &cliErr) {
@@ -78,7 +98,22 @@ func run() int {
 			sentry.CaptureException(err)
 		}
 		sentry.Flush(2 * time.Second)
-		return 1
+		exitCode = 1
 	}
-	return 0
+
+	// Wait for update result
+	if updateCh != nil {
+		select {
+		case res := <-updateCh:
+			if res.err != nil {
+				debug.Log("update: %v", res.err)
+			} else if res.version != "" {
+				fmt.Fprintf(os.Stderr, "%s\n", style.Yellow("Updated DeepSource CLI to v%s", res.version))
+			}
+		case <-time.After(30 * time.Second):
+			debug.Log("update: timed out waiting for result")
+		}
+	}
+
+	return exitCode
 }
