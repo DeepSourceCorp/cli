@@ -7,6 +7,8 @@ import (
 	"compress/gzip"
 	"crypto/sha256"
 	"encoding/hex"
+	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -14,50 +16,126 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
+	"time"
 
 	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/internal/debug"
 )
 
-// Update checks for a newer CLI version and replaces the current binary.
-// Returns the new version string if an update was applied, or "" if already
-// up to date. Errors are non-fatal — callers should log and move on.
-func Update(client *http.Client) (string, error) {
+// UpdateState is the on-disk state written by CheckForUpdate and consumed by ApplyUpdate.
+type UpdateState struct {
+	Version    string    `json:"version"`
+	ArchiveURL string    `json:"archive_url"`
+	SHA256     string    `json:"sha256"`
+	CheckedAt  time.Time `json:"checked_at"`
+}
+
+// updateStatePath returns the path to the update state file (~/.deepsource/update.json).
+func updateStatePath() string {
+	home, _ := os.UserHomeDir()
+	return filepath.Join(home, buildinfo.ConfigDirName, "update.json")
+}
+
+// ReadUpdateState reads the update state file. Returns nil if the file does not exist.
+func ReadUpdateState() (*UpdateState, error) {
+	data, err := os.ReadFile(updateStatePath())
+	if err != nil {
+		if errors.Is(err, os.ErrNotExist) {
+			return nil, nil
+		}
+		return nil, fmt.Errorf("reading update state: %w", err)
+	}
+	var s UpdateState
+	if err := json.Unmarshal(data, &s); err != nil {
+		return nil, fmt.Errorf("parsing update state: %w", err)
+	}
+	return &s, nil
+}
+
+func writeUpdateState(s *UpdateState) error {
+	data, err := json.MarshalIndent(s, "", "  ")
+	if err != nil {
+		return fmt.Errorf("marshaling update state: %w", err)
+	}
+	p := updateStatePath()
+	if err := os.MkdirAll(filepath.Dir(p), 0o755); err != nil {
+		return fmt.Errorf("creating config dir: %w", err)
+	}
+	if err := os.WriteFile(p, data, 0o644); err != nil {
+		return fmt.Errorf("writing update state: %w", err)
+	}
+	return nil
+}
+
+func clearUpdateState() {
+	_ = os.Remove(updateStatePath())
+}
+
+// CheckForUpdate fetches the manifest, compares versions, and writes a state
+// file if a newer version is available. This is meant to be fast (~100-200ms).
+func CheckForUpdate(client *http.Client) error {
 	bi := buildinfo.GetBuildInfo()
 	if bi == nil {
-		return "", fmt.Errorf("build info not set")
+		return fmt.Errorf("build info not set")
 	}
 
 	manifest, err := FetchManifest(client)
 	if err != nil {
-		return "", err
+		return err
 	}
 
 	newer, err := IsNewer(bi.Version, manifest.Version)
 	if err != nil {
-		return "", err
+		return err
 	}
 	if !newer {
 		debug.Log("update: already up to date (current=%s, remote=%s)", bi.Version, manifest.Version)
-		return "", nil
+		return nil
 	}
 
 	key := PlatformKey()
 	platform, ok := manifest.Platforms[key]
 	if !ok {
-		return "", fmt.Errorf("no release for platform %s", key)
+		return fmt.Errorf("no release for platform %s", key)
 	}
 
-	debug.Log("update: downloading %s", platform.Archive)
+	state := &UpdateState{
+		Version:    manifest.Version,
+		ArchiveURL: "https://cli.deepsource.com/" + platform.Archive,
+		SHA256:     platform.SHA256,
+		CheckedAt:  time.Now().UTC(),
+	}
 
-	archiveURL := "https://cli.deepsource.com/" + platform.Archive
-	data, err := downloadFile(client, archiveURL)
+	debug.Log("update: newer version %s available, writing state file", manifest.Version)
+	return writeUpdateState(state)
+}
+
+// ApplyUpdate reads the state file, downloads the archive, verifies, extracts,
+// and replaces the binary. Returns the new version string on success.
+// Clears the state file regardless of outcome so we don't retry broken updates forever.
+func ApplyUpdate(client *http.Client) (string, error) {
+	state, err := ReadUpdateState()
+	if err != nil {
+		clearUpdateState()
+		return "", err
+	}
+	if state == nil {
+		return "", nil
+	}
+
+	// Clear state file up front so a failed update doesn't retry forever.
+	// The next run will do a fresh CheckForUpdate instead.
+	clearUpdateState()
+
+	debug.Log("update: applying update to v%s", state.Version)
+
+	data, err := downloadFile(client, state.ArchiveURL)
 	if err != nil {
 		return "", err
 	}
 
-	if err := verifyChecksum(data, platform.SHA256); err != nil {
+	if err := verifyChecksum(data, state.SHA256); err != nil {
 		return "", err
 	}
 
@@ -67,7 +145,7 @@ func Update(client *http.Client) (string, error) {
 	}
 
 	var binaryData []byte
-	if strings.HasSuffix(platform.Archive, ".zip") {
+	if strings.HasSuffix(state.ArchiveURL, ".zip") {
 		binaryData, err = extractFromZip(data, binaryName)
 	} else {
 		binaryData, err = extractFromTarGz(data, binaryName)
@@ -80,8 +158,8 @@ func Update(client *http.Client) (string, error) {
 		return "", err
 	}
 
-	debug.Log("update: updated to v%s", manifest.Version)
-	return manifest.Version, nil
+	debug.Log("update: updated to v%s", state.Version)
+	return state.Version, nil
 }
 
 // ShouldAutoUpdate reports whether the auto-updater should run.

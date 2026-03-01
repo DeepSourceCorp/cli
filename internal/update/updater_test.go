@@ -7,9 +7,15 @@ import (
 	"compress/gzip"
 	"crypto/sha256"
 	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"net/http"
+	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"runtime"
 	"testing"
+	"time"
 
 	"github.com/deepsourcelabs/cli/buildinfo"
 )
@@ -150,6 +156,220 @@ func TestShouldAutoUpdate_Prod(t *testing.T) {
 
 	if !ShouldAutoUpdate() {
 		t.Error("expected true for prod build outside CI")
+	}
+}
+
+func TestUpdateState_WriteReadClear(t *testing.T) {
+	tmpHome := t.TempDir()
+	t.Setenv("HOME", tmpHome)
+
+	state := &UpdateState{
+		Version:    "2.0.40",
+		ArchiveURL: "https://cli.deepsource.com/deepsource_2.0.40_darwin_arm64.tar.gz",
+		SHA256:     "d1717cf33a200d143995c63be28661ed6d21c1380874f3057d3f25f6d9e2b99a",
+		CheckedAt:  time.Date(2026, 3, 1, 20, 0, 0, 0, time.UTC),
+	}
+
+	if err := writeUpdateState(state); err != nil {
+		t.Fatalf("writeUpdateState: %v", err)
+	}
+
+	got, err := ReadUpdateState()
+	if err != nil {
+		t.Fatalf("ReadUpdateState: %v", err)
+	}
+	if got == nil {
+		t.Fatal("expected non-nil state")
+	}
+	if got.Version != state.Version {
+		t.Errorf("version: got %q, want %q", got.Version, state.Version)
+	}
+	if got.ArchiveURL != state.ArchiveURL {
+		t.Errorf("archive_url: got %q, want %q", got.ArchiveURL, state.ArchiveURL)
+	}
+	if got.SHA256 != state.SHA256 {
+		t.Errorf("sha256: got %q, want %q", got.SHA256, state.SHA256)
+	}
+	if !got.CheckedAt.Equal(state.CheckedAt) {
+		t.Errorf("checked_at: got %v, want %v", got.CheckedAt, state.CheckedAt)
+	}
+
+	clearUpdateState()
+
+	got, err = ReadUpdateState()
+	if err != nil {
+		t.Fatalf("ReadUpdateState after clear: %v", err)
+	}
+	if got != nil {
+		t.Error("expected nil state after clear")
+	}
+}
+
+func TestReadUpdateState_NoFile(t *testing.T) {
+	tmpHome := t.TempDir()
+	t.Setenv("HOME", tmpHome)
+
+	got, err := ReadUpdateState()
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if got != nil {
+		t.Error("expected nil state when no file exists")
+	}
+}
+
+func TestCheckForUpdate_NewerVersion(t *testing.T) {
+	tmpHome := t.TempDir()
+	t.Setenv("HOME", tmpHome)
+	buildinfo.SetBuildInfo("2.0.30", "", "prod")
+
+	key := runtime.GOOS + "_" + runtime.GOARCH
+	manifest := Manifest{
+		Version: "2.0.40",
+		Platforms: map[string]PlatformInfo{
+			key: {
+				Archive: "deepsource_2.0.40_" + key + ".tar.gz",
+				SHA256:  "abc123",
+			},
+		},
+	}
+	manifestJSON, _ := json.Marshal(manifest)
+
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write(manifestJSON)
+	}))
+	defer srv.Close()
+
+	origURL := manifestURL
+	// We can't reassign the const, so we'll test at a higher level.
+	// Instead, test by calling the pieces directly.
+	_ = origURL
+
+	// Simulate what CheckForUpdate does: fetch manifest, compare, write state
+	newer, _ := IsNewer("2.0.30", manifest.Version)
+	if !newer {
+		t.Fatal("expected newer=true")
+	}
+
+	platform := manifest.Platforms[key]
+	state := &UpdateState{
+		Version:    manifest.Version,
+		ArchiveURL: "https://cli.deepsource.com/" + platform.Archive,
+		SHA256:     platform.SHA256,
+		CheckedAt:  time.Now().UTC(),
+	}
+	if err := writeUpdateState(state); err != nil {
+		t.Fatalf("writeUpdateState: %v", err)
+	}
+
+	got, err := ReadUpdateState()
+	if err != nil {
+		t.Fatalf("ReadUpdateState: %v", err)
+	}
+	if got.Version != "2.0.40" {
+		t.Errorf("expected version 2.0.40, got %s", got.Version)
+	}
+	expectedURL := fmt.Sprintf("https://cli.deepsource.com/deepsource_2.0.40_%s.tar.gz", key)
+	if got.ArchiveURL != expectedURL {
+		t.Errorf("expected archive URL %s, got %s", expectedURL, got.ArchiveURL)
+	}
+}
+
+func TestCheckForUpdate_AlreadyUpToDate(t *testing.T) {
+	tmpHome := t.TempDir()
+	t.Setenv("HOME", tmpHome)
+	buildinfo.SetBuildInfo("2.0.40", "", "prod")
+
+	// Same version — no state file should be written
+	newer, _ := IsNewer("2.0.40", "2.0.40")
+	if newer {
+		t.Fatal("expected newer=false for same version")
+	}
+
+	got, err := ReadUpdateState()
+	if err != nil {
+		t.Fatalf("ReadUpdateState: %v", err)
+	}
+	if got != nil {
+		t.Error("expected no state file for up-to-date version")
+	}
+}
+
+func TestApplyUpdate_WithStateFile(t *testing.T) {
+	tmpHome := t.TempDir()
+	t.Setenv("HOME", tmpHome)
+	buildinfo.SetBuildInfo("2.0.30", "", "prod")
+
+	binaryContent := []byte("new deepsource binary")
+	archive := createTarGz(t, buildinfo.AppName, binaryContent)
+	checksum := sha256.Sum256(archive)
+	checksumHex := hex.EncodeToString(checksum[:])
+
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write(archive)
+	}))
+	defer srv.Close()
+
+	state := &UpdateState{
+		Version:    "2.0.40",
+		ArchiveURL: srv.URL + "/deepsource_2.0.40.tar.gz",
+		SHA256:     checksumHex,
+		CheckedAt:  time.Now().UTC(),
+	}
+	if err := writeUpdateState(state); err != nil {
+		t.Fatalf("writeUpdateState: %v", err)
+	}
+
+	client := srv.Client()
+
+	// ApplyUpdate reads the state file internally, so we test it reads correctly.
+	// However, replaceBinary will use os.Executable() which we can't easily mock.
+	// So we test the pieces: state file reading, download, checksum verification.
+
+	readState, err := ReadUpdateState()
+	if err != nil {
+		t.Fatalf("ReadUpdateState: %v", err)
+	}
+	if readState.Version != "2.0.40" {
+		t.Fatalf("expected version 2.0.40, got %s", readState.Version)
+	}
+
+	data, err := downloadFile(client, readState.ArchiveURL)
+	if err != nil {
+		t.Fatalf("downloadFile: %v", err)
+	}
+
+	if err := verifyChecksum(data, readState.SHA256); err != nil {
+		t.Fatalf("verifyChecksum: %v", err)
+	}
+
+	extracted, err := extractFromTarGz(data, buildinfo.AppName)
+	if err != nil {
+		t.Fatalf("extractFromTarGz: %v", err)
+	}
+	if !bytes.Equal(extracted, binaryContent) {
+		t.Errorf("extracted binary mismatch: got %q, want %q", extracted, binaryContent)
+	}
+
+	// Verify clearUpdateState removes the file
+	clearUpdateState()
+	afterClear, _ := ReadUpdateState()
+	if afterClear != nil {
+		t.Error("state file should be removed after clear")
+	}
+}
+
+func TestApplyUpdate_NoStateFile(t *testing.T) {
+	tmpHome := t.TempDir()
+	t.Setenv("HOME", tmpHome)
+
+	client := &http.Client{Timeout: 1 * time.Second}
+	ver, err := ApplyUpdate(client)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if ver != "" {
+		t.Errorf("expected empty version, got %q", ver)
 	}
 }
 

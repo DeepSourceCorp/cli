@@ -67,23 +67,32 @@ func mainRun() (exitCode int) {
 	return run()
 }
 
-type updateResult struct {
-	version string
-	err     error
-}
-
 func run() int {
 	v.SetBuildInfo(version, Date, buildMode)
 
-	// Start background auto-update check
-	var updateCh chan updateResult
+	// Two-phase auto-update: apply pending update or check for new one
 	if update.ShouldAutoUpdate() {
-		updateCh = make(chan updateResult, 1)
-		go func() {
+		state, err := update.ReadUpdateState()
+		if err != nil {
+			debug.Log("update: %v", err)
+		}
+
+		if state != nil {
+			// Phase 2: a previous run found a newer version — apply it now
 			client := &http.Client{Timeout: 30 * time.Second}
-			newVer, err := update.Update(client)
-			updateCh <- updateResult{version: newVer, err: err}
-		}()
+			newVer, err := update.ApplyUpdate(client)
+			if err != nil {
+				debug.Log("update: %v", err)
+			} else if newVer != "" {
+				fmt.Fprintf(os.Stderr, "%s\n", style.Yellow("Updated DeepSource CLI to v%s", newVer))
+			}
+		} else {
+			// Phase 1: check manifest and write state file for next run
+			client := &http.Client{Timeout: 3 * time.Second}
+			if err := update.CheckForUpdate(client); err != nil {
+				debug.Log("update: %v", err)
+			}
+		}
 	}
 
 	exitCode := 0
@@ -99,20 +108,6 @@ func run() int {
 		}
 		sentry.Flush(2 * time.Second)
 		exitCode = 1
-	}
-
-	// Wait for update result
-	if updateCh != nil {
-		select {
-		case res := <-updateCh:
-			if res.err != nil {
-				debug.Log("update: %v", res.err)
-			} else if res.version != "" {
-				fmt.Fprintf(os.Stderr, "%s\n", style.Yellow("Updated DeepSource CLI to v%s", res.version))
-			}
-		case <-time.After(30 * time.Second):
-			debug.Log("update: timed out waiting for result")
-		}
 	}
 
 	return exitCode
