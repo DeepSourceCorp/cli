@@ -173,9 +173,9 @@ func TestLoginConfigLoadError(t *testing.T) {
 	// Token should have been saved
 	cfg, err := cfgMgr.Load()
 	if err != nil {
-		// Config may still be corrupt from our test setup, but the PAT flow should have overwritten it
-		t.Logf("config load after PAT: %v (may be expected if overwrite failed)", err)
-	} else if cfg.Token != "dsp_fallback" {
+		t.Fatalf("failed to load config: %v", err)
+	}
+	if cfg.Token != "dsp_fallback" {
 		t.Errorf("expected token %q, got %q", "dsp_fallback", cfg.Token)
 	}
 }
