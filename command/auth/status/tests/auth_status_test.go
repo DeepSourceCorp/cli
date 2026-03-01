@@ -16,7 +16,6 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/internal/adapters"
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
-	"github.com/deepsourcelabs/cli/internal/secrets"
 	"github.com/deepsourcelabs/cli/internal/testutil"
 )
 
@@ -29,9 +28,9 @@ func createConfigManager(t *testing.T, token, host, user string, expiry time.Tim
 	t.Helper()
 	tmpDir := t.TempDir()
 	fs := adapters.NewOSFileSystem()
-	mgr := config.NewManagerWithSecrets(fs, func() (string, error) {
+	mgr := config.NewManager(fs, func() (string, error) {
 		return tmpDir, nil
-	}, secrets.NoopStore{}, "")
+	})
 
 	cfg := &config.CLIConfig{
 		Token:          token,
@@ -115,9 +114,9 @@ func TestAuthStatusEnvVarToken(t *testing.T) {
 	// No config file — token comes purely from env var
 	tmpDir := t.TempDir()
 	fs := adapters.NewOSFileSystem()
-	cfgMgr := config.NewManagerWithSecrets(fs, func() (string, error) {
+	cfgMgr := config.NewManager(fs, func() (string, error) {
 		return tmpDir, nil
-	}, secrets.NoopStore{}, "")
+	})
 
 	t.Setenv("DEEPSOURCE_TOKEN", "env-test-token")
 

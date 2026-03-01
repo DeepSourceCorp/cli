@@ -70,6 +70,11 @@ func (opts *AuthStatusOptions) Run() error {
 		return clierrors.ErrNotLoggedIn()
 	}
 
+	// Default host if empty (e.g. env-var-only token case)
+	if cfg.Host == "" {
+		cfg.Host = config.DefaultHostName
+	}
+
 	// Fast path: if the local token expiry has passed, no need for a network call.
 	// Skip for env var tokens since they have no local expiry info.
 	if !cfg.TokenFromEnv && cfg.IsExpired() {
@@ -88,24 +93,34 @@ func (opts *AuthStatusOptions) Run() error {
 			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
 		})
 		if err != nil {
-			fmt.Fprintf(opts.stdout(), "Logged in to DeepSource as %s (could not verify with server).\n", cfg.User)
+			style.Warnf(opts.stdout(), "Could not connect to DeepSource to verify authentication")
 			return nil
 		}
 	}
 
-	_, verifyErr := client.GetViewer(context.Background())
+	viewer, verifyErr := client.GetViewer(context.Background())
 	if verifyErr != nil {
 		var ce *clierrors.CLIError
 		if stderrors.As(verifyErr, &ce) && ce.Code.IsAuthError() {
 			style.Warnf(opts.stdout(), "Authentication expired. Run %q to re-authenticate", "deepsource auth login")
 			return nil
 		}
-		// Network error or other non-auth failure — report as logged in but unverified
-		fmt.Fprintf(opts.stdout(), "Logged in to DeepSource as %s (could not verify with server).\n", cfg.User)
+		// Network error or other non-auth failure
+		style.Warnf(opts.stdout(), "Could not connect to DeepSource to verify authentication")
 		return nil
 	}
 
-	msg := fmt.Sprintf("Logged in to DeepSource as %s", cfg.User)
+	// Use viewer email; backfill config if empty
+	displayUser := viewer.Email
+	if displayUser == "" {
+		displayUser = cfg.User
+	}
+	if cfg.User == "" && viewer.Email != "" {
+		cfg.User = viewer.Email
+		_ = cfgMgr.Write(cfg)
+	}
+
+	msg := fmt.Sprintf("Logged in to DeepSource as %s", displayUser)
 	if cfg.TokenFromEnv {
 		msg += " (via DEEPSOURCE_TOKEN)"
 	}

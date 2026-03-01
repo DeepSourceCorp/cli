@@ -7,16 +7,15 @@ import (
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/internal/adapters"
 	"github.com/deepsourcelabs/cli/internal/container"
-	"github.com/deepsourcelabs/cli/internal/secrets"
 )
 
 func TestReportHostFallsBackToConfig(t *testing.T) {
 	// Create a config manager with an enterprise host
 	tmpDir := t.TempDir()
 	fs := adapters.NewOSFileSystem()
-	cfgMgr := config.NewManagerWithSecrets(fs, func() (string, error) {
+	cfgMgr := config.NewManager(fs, func() (string, error) {
 		return tmpDir, nil
-	}, secrets.NoopStore{}, "")
+	})
 
 	cfg := &config.CLIConfig{
 		Host: "enterprise.example.com",
@@ -66,9 +65,9 @@ func TestReportHostExplicitFlagOverridesConfig(t *testing.T) {
 	// Config has enterprise host, but --host flag overrides it
 	tmpDir := t.TempDir()
 	fs := adapters.NewOSFileSystem()
-	cfgMgr := config.NewManagerWithSecrets(fs, func() (string, error) {
+	cfgMgr := config.NewManager(fs, func() (string, error) {
 		return tmpDir, nil
-	}, secrets.NoopStore{}, "")
+	})
 
 	cfg := &config.CLIConfig{
 		Host: "enterprise.example.com",
@@ -115,9 +114,9 @@ func TestReportHostDefaultWhenNoConfigNoFlag(t *testing.T) {
 	// No config host, no --host flag: should use default
 	tmpDir := t.TempDir()
 	fs := adapters.NewOSFileSystem()
-	cfgMgr := config.NewManagerWithSecrets(fs, func() (string, error) {
+	cfgMgr := config.NewManager(fs, func() (string, error) {
 		return tmpDir, nil
-	}, secrets.NoopStore{}, "")
+	})
 
 	// Write empty config (no host)
 	cfg := &config.CLIConfig{}

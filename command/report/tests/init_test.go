@@ -66,14 +66,7 @@ func prepareArtifacts() error {
 		return err
 	}
 
-	defaultRoot := filepath.Clean(filepath.Join(wd, "..", "..", ".."))
-	rootDir := defaultRoot
-	if envRoot := os.Getenv("CODE_PATH"); envRoot != "" {
-		coverageCandidate := filepath.Join(envRoot, "command", "report", "tests", "golden_files", "python_coverage.xml")
-		if _, err := os.Stat(coverageCandidate); err == nil {
-			rootDir = envRoot
-		}
-	}
+	rootDir := filepath.Clean(filepath.Join(wd, "..", "..", ".."))
 	repoRoot = rootDir
 
 	tempDir, err := os.MkdirTemp("", "deepsource-report")

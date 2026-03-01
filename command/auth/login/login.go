@@ -100,6 +100,12 @@ func (opts *LoginOptions) Run() (err error) {
 	opts.User = cfg.User
 	opts.TokenExpired = cfg.IsExpired()
 
+	// Default host so that verifyTokenWithServer can reach the server
+	// even when no config file exists yet.
+	if cfg.Host == "" {
+		cfg.Host = config.DefaultHostName
+	}
+
 	// If local says valid, verify against the server
 	opts.verifyTokenWithServer(cfg, cfgMgr)
 
@@ -131,7 +137,12 @@ func (opts *LoginOptions) Run() (err error) {
 	// Checking for condition 1
 	if !opts.TokenExpired {
 		// The user is already logged in, confirm re-authentication.
-		msg := fmt.Sprintf("You're already logged into DeepSource as %s. Do you want to re-authenticate?", opts.User)
+		var msg string
+		if opts.User != "" {
+			msg = fmt.Sprintf("You're already logged into DeepSource as %s. Do you want to re-authenticate?", opts.User)
+		} else {
+			msg = "You're already logged into DeepSource. Do you want to re-authenticate?"
+		}
 		response, err := prompt.ConfirmFromUser(msg, "")
 		if err != nil {
 			return fmt.Errorf("Error in fetching response. Please try again.")
@@ -160,8 +171,16 @@ func (opts *LoginOptions) verifyTokenWithServer(cfg *config.CLIConfig, cfgMgr *c
 	if err != nil {
 		return
 	}
-	if _, err := client.GetViewer(context.Background()); err != nil {
+	viewer, err := client.GetViewer(context.Background())
+	if err != nil {
 		opts.TokenExpired = true
+		return
+	}
+	// Backfill user from the server when config file was missing or incomplete.
+	if cfg.User == "" && viewer.Email != "" {
+		cfg.User = viewer.Email
+		opts.User = viewer.Email
+		_ = cfgMgr.Write(cfg)
 	}
 }
 

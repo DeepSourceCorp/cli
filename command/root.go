@@ -125,6 +125,14 @@ func buildExampleText() string {
 }
 
 func rootHelpFunc(cmd *cobra.Command, _ []string) {
+	if cmd.Parent() != nil {
+		root := cmd.Root()
+		root.SetHelpFunc(nil)
+		cmd.Help()
+		root.SetHelpFunc(rootHelpFunc)
+		return
+	}
+
 	out := cmd.OutOrStdout()
 
 	// Long description (already colored)

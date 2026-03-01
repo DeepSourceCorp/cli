@@ -11,7 +11,6 @@ import (
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource/graphqlclient"
 	"github.com/deepsourcelabs/cli/internal/adapters"
-	"github.com/deepsourcelabs/cli/internal/secrets"
 )
 
 // CreateTestConfigManager creates a config.Manager backed by a temp directory
@@ -21,9 +20,9 @@ func CreateTestConfigManager(t *testing.T, token, host, user string) *config.Man
 
 	tmpDir := t.TempDir()
 	fs := adapters.NewOSFileSystem()
-	mgr := config.NewManagerWithSecrets(fs, func() (string, error) {
+	mgr := config.NewManager(fs, func() (string, error) {
 		return tmpDir, nil
-	}, secrets.NoopStore{}, "")
+	})
 
 	cfg := &config.CLIConfig{
 		Token:          token,
@@ -45,9 +44,9 @@ func CreateExpiredTestConfigManager(t *testing.T, token, host, user string) *con
 
 	tmpDir := t.TempDir()
 	fs := adapters.NewOSFileSystem()
-	mgr := config.NewManagerWithSecrets(fs, func() (string, error) {
+	mgr := config.NewManager(fs, func() (string, error) {
 		return tmpDir, nil
-	}, secrets.NoopStore{}, "")
+	})
 
 	cfg := &config.CLIConfig{
 		Token:          token,

@@ -9,10 +9,8 @@ var buildInfo *BuildInfo
 
 // App identity variables. Defaults are prod values; overridden in main.go for dev builds.
 var (
-	AppName       = "deepsource"           // binary name / display name
-	ConfigDirName = ".deepsource"          // ~/<this>/
-	KeychainSvc   = "deepsource-cli"       // macOS keychain service
-	KeychainKey   = "deepsource-cli-token" // macOS keychain account
+	AppName       = "deepsource"  // binary name / display name
+	ConfigDirName = ".deepsource" // ~/<this>/
 )
 
 // BuildInfo describes the compile time information.

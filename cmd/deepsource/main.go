@@ -47,8 +47,6 @@ func mainRun() (exitCode int) {
 	if buildMode == "dev" {
 		v.AppName = "deepsource-dev"
 		v.ConfigDirName = ".deepsource-dev"
-		v.KeychainSvc = "deepsource-dev-cli"
-		v.KeychainKey = "deepsource-dev-cli-token"
 	}
 
 	// Init sentry

@@ -10,7 +10,6 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource/analyzers"
 	"github.com/deepsourcelabs/cli/deepsource/repository"
 	"github.com/deepsourcelabs/cli/internal/adapters"
-	"github.com/deepsourcelabs/cli/internal/secrets"
 	"github.com/deepsourcelabs/cli/internal/vcs"
 	"github.com/stretchr/testify/assert"
 )
@@ -32,7 +31,7 @@ func (f *fakeRepoClient) GetEnabledAnalyzers(_ context.Context, _, _, _ string) 
 func TestServiceStatus(t *testing.T) {
 	tempDir := t.TempDir()
 	homeDir := func() (string, error) { return tempDir, nil }
-	mgr := config.NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, secrets.NoopStore{}, "test-key")
+	mgr := config.NewManager(adapters.NewOSFileSystem(), homeDir)
 	cfg := &config.CLIConfig{Host: "deepsource.com", User: "demo", Token: "token"}
 	assert.NoError(t, mgr.Write(cfg))
 
@@ -72,7 +71,7 @@ func TestGetDashboardHost(t *testing.T) {
 func TestServiceViewURLUnauthorized(t *testing.T) {
 	tempDir := t.TempDir()
 	homeDir := func() (string, error) { return tempDir, nil }
-	mgr := config.NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, secrets.NoopStore{}, "test-key")
+	mgr := config.NewManager(adapters.NewOSFileSystem(), homeDir)
 	cfg := &config.CLIConfig{Host: "deepsource.com", User: "demo", Token: "token"}
 	assert.NoError(t, mgr.Write(cfg))
 
@@ -92,7 +91,7 @@ func TestServiceViewURLUnauthorized(t *testing.T) {
 func TestServiceStatusWithAnalyzers_Activated(t *testing.T) {
 	tempDir := t.TempDir()
 	homeDir := func() (string, error) { return tempDir, nil }
-	mgr := config.NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, secrets.NoopStore{}, "test-key")
+	mgr := config.NewManager(adapters.NewOSFileSystem(), homeDir)
 	cfg := &config.CLIConfig{Host: "deepsource.com", User: "demo", Token: "token"}
 	assert.NoError(t, mgr.Write(cfg))
 
@@ -124,7 +123,7 @@ func TestServiceStatusWithAnalyzers_Activated(t *testing.T) {
 func TestServiceStatusWithAnalyzers_NotActivated(t *testing.T) {
 	tempDir := t.TempDir()
 	homeDir := func() (string, error) { return tempDir, nil }
-	mgr := config.NewManagerWithSecrets(adapters.NewOSFileSystem(), homeDir, secrets.NoopStore{}, "test-key")
+	mgr := config.NewManager(adapters.NewOSFileSystem(), homeDir)
 	cfg := &config.CLIConfig{Host: "deepsource.com", User: "demo", Token: "token"}
 	assert.NoError(t, mgr.Write(cfg))
 
