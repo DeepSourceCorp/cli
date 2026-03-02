@@ -259,3 +259,100 @@ func TestManagerBackfillUserNoop(t *testing.T) {
 	mgr.BackfillUser(cfg, "new@example.com")
 	assert.Equal(t, "existing@example.com", cfg.User)
 }
+
+func TestManagerLoadSkipTLSVerifyFromEnv(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+
+	t.Setenv("DEEPSOURCE_SKIP_TLS_VERIFY", "1")
+
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
+	cfg, err := mgr.Load()
+	require.NoError(t, err)
+	assert.True(t, cfg.SkipTLSVerify)
+}
+
+func TestManagerLoadSkipTLSVerifyFromEnvTrue(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+
+	t.Setenv("DEEPSOURCE_SKIP_TLS_VERIFY", "true")
+
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
+	cfg, err := mgr.Load()
+	require.NoError(t, err)
+	assert.True(t, cfg.SkipTLSVerify)
+}
+
+func TestManagerLoadSkipTLSVerifyEnvIgnoredValues(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+
+	t.Setenv("DEEPSOURCE_SKIP_TLS_VERIFY", "0")
+
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
+	cfg, err := mgr.Load()
+	require.NoError(t, err)
+	assert.False(t, cfg.SkipTLSVerify)
+}
+
+func TestManagerLoadSkipTLSVerifyFromFile(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+
+	configDir := filepath.Join(tempDir, buildinfo.ConfigDirName)
+	require.NoError(t, os.MkdirAll(configDir, 0o700))
+
+	tomlData := `host = "enterprise.example.com"
+token = "tok"
+skip_tls_verify = true
+`
+	require.NoError(t, os.WriteFile(filepath.Join(configDir, ConfigFileName), []byte(tomlData), 0o644))
+
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
+	cfg, err := mgr.Load()
+	require.NoError(t, err)
+	assert.True(t, cfg.SkipTLSVerify)
+}
+
+func TestManagerLoadSkipTLSVerifyFileOverEnv(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+
+	configDir := filepath.Join(tempDir, buildinfo.ConfigDirName)
+	require.NoError(t, os.MkdirAll(configDir, 0o700))
+
+	tomlData := `host = "enterprise.example.com"
+token = "tok"
+skip_tls_verify = true
+`
+	require.NoError(t, os.WriteFile(filepath.Join(configDir, ConfigFileName), []byte(tomlData), 0o644))
+
+	// Env not set — file value should still be true
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
+	cfg, err := mgr.Load()
+	require.NoError(t, err)
+	assert.True(t, cfg.SkipTLSVerify)
+}
+
+func TestManagerWriteSkipTLSVerify(t *testing.T) {
+	tempDir := t.TempDir()
+	homeDir := func() (string, error) { return tempDir, nil }
+
+	mgr := NewManager(adapters.NewOSFileSystem(), homeDir)
+	err := mgr.Write(&CLIConfig{
+		Host:          "enterprise.example.com",
+		Token:         "tok",
+		SkipTLSVerify: true,
+	})
+	require.NoError(t, err)
+
+	// Read back raw TOML and verify field is present
+	path := filepath.Join(tempDir, buildinfo.ConfigDirName, ConfigFileName)
+	data, err := os.ReadFile(path)
+	require.NoError(t, err)
+
+	var got CLIConfig
+	require.NoError(t, toml.Unmarshal(data, &got))
+	assert.True(t, got.SkipTLSVerify)
+}

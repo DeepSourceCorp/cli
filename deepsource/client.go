@@ -2,6 +2,7 @@ package deepsource
 
 import (
 	"context"
+	"crypto/tls"
 	"fmt"
 	"net/http"
 
@@ -34,6 +35,10 @@ type ClientOpts struct {
 	Token    string
 	HostName string
 
+	// InsecureSkipVerify disables TLS certificate verification.
+	// Use for self-hosted instances with self-signed certificates.
+	InsecureSkipVerify bool
+
 	// OnTokenRefreshed is called after a successful automatic token refresh.
 	// If set, enables transparent token refresh when API calls fail due to
 	// expired tokens. The callback should persist the new credentials.
@@ -62,8 +67,18 @@ func NewWithGraphQLClient(gql graphqlclient.GraphQLClient) *Client {
 
 func New(cp ClientOpts) (*Client, error) {
 	apiClientURL := getAPIClientURL(cp.HostName)
+
+	var base http.RoundTripper = http.DefaultTransport
+	if cp.InsecureSkipVerify {
+		base = &http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true, //nolint:gosec // user-requested for self-signed certs
+				MinVersion:         tls.VersionTLS12,
+			},
+		}
+	}
 	httpClient := &http.Client{
-		Transport: &graphqlclient.StatusCheckTransport{Base: http.DefaultTransport},
+		Transport: &graphqlclient.StatusCheckTransport{Base: base},
 	}
 	gql := graphql.NewClient(apiClientURL, graphql.WithHTTPClient(httpClient))
 

@@ -6,6 +6,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/command/cmddeps"
+	"github.com/deepsourcelabs/cli/command/cmdutil"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/internal/cli/args"
@@ -59,7 +60,7 @@ func NewCmdLoginWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Long:  doc,
 		Args:  args.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return opts.Run()
+			return opts.Run(cmd)
 		},
 	}
 
@@ -72,7 +73,7 @@ func NewCmdLoginWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	return cmd
 }
 
-func (opts *LoginOptions) Run() (err error) {
+func (opts *LoginOptions) Run(cmd *cobra.Command) (err error) {
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
 		cfgMgr = opts.deps.ConfigMgr
@@ -93,6 +94,9 @@ func (opts *LoginOptions) Run() (err error) {
 	}
 	opts.User = cfg.User
 	opts.TokenExpired = cfg.IsExpired()
+
+	// Resolve skip-tls-verify: flag > env > config
+	cfg.SkipTLSVerify = cmdutil.ResolveSkipTLSVerify(cmd, cfg.SkipTLSVerify)
 
 	opts.verifyTokenWithServer(cfg, svc)
 

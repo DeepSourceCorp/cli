@@ -14,6 +14,7 @@ import (
 	"github.com/deepsourcelabs/cli/command/cmdutil"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
+
 	"github.com/deepsourcelabs/cli/deepsource/runs"
 	"github.com/deepsourcelabs/cli/internal/cli/completion"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
@@ -78,7 +79,7 @@ func NewCmdReportCardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Short: "View repository report card",
 		Long:  doc,
 		RunE: func(cmd *cobra.Command, _ []string) error {
-			return opts.Run(cmd.Context())
+			return opts.Run(cmd, cmd.Context())
 		},
 	}
 
@@ -103,7 +104,7 @@ func NewCmdReportCardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	return cmd
 }
 
-func (opts *ReportCardOptions) initClientAndRemote() (*deepsource.Client, *vcs.RemoteData, error) {
+func (opts *ReportCardOptions) initClientAndRemote(cmd *cobra.Command) (*deepsource.Client, *vcs.RemoteData, error) {
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
 		cfgMgr = opts.deps.ConfigMgr
@@ -129,9 +130,10 @@ func (opts *ReportCardOptions) initClientAndRemote() (*deepsource.Client, *vcs.R
 		client = opts.deps.Client
 	} else {
 		client, err = deepsource.New(deepsource.ClientOpts{
-			Token:            cfg.Token,
-			HostName:         cfg.Host,
-			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+			Token:              cfg.Token,
+			HostName:           cfg.Host,
+			InsecureSkipVerify: cmdutil.ResolveSkipTLSVerify(cmd, cfg.SkipTLSVerify),
+			OnTokenRefreshed:   cfgMgr.TokenRefreshCallback(),
 		})
 		if err != nil {
 			return nil, nil, err
@@ -140,8 +142,8 @@ func (opts *ReportCardOptions) initClientAndRemote() (*deepsource.Client, *vcs.R
 	return client, remote, nil
 }
 
-func (opts *ReportCardOptions) Run(ctx context.Context) error {
-	client, remote, err := opts.initClientAndRemote()
+func (opts *ReportCardOptions) Run(cmd *cobra.Command, ctx context.Context) error {
+	client, remote, err := opts.initClientAndRemote(cmd)
 	if err != nil {
 		return err
 	}
