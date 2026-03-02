@@ -1,45 +1,39 @@
 {
   "repository": {
     "pullRequest": {
-      "issueOccurrences": {
+      "issues": {
         "edges": [
           {
             "node": {
+              "source": "static",
               "path": "cmd/deepsource/main.go",
               "beginLine": 42,
               "endLine": 42,
               "title": "Unchecked error return value of os.ReadFile",
-              "issue": {
-                "shortcode": "GO-W1007",
-                "shortDescription": "Return value of io.ReadAll is not checked for errors",
-                "category": "BUG_RISK",
-                "severity": "MAJOR",
-                "analyzer": {
-                  "name": "Go",
-                  "shortcode": "go"
-                }
-              }
+              "shortcode": "GO-W1007",
+              "category": "BUG_RISK",
+              "severity": "MAJOR",
+              "explanation": "Return value of io.ReadAll is not checked for errors"
             }
           },
           {
             "node": {
+              "source": "ai",
               "path": "internal/vcs/remotes.go",
               "beginLine": 87,
               "endLine": 91,
               "title": "HTTP request built with user-controlled URL",
-              "issue": {
-                "shortcode": "GO-S1010",
-                "shortDescription": "Constructing HTTP request with user-controlled URL allows SSRF",
-                "category": "SECURITY",
-                "severity": "MAJOR",
-                "analyzer": {
-                  "name": "Go",
-                  "shortcode": "go"
-                }
-              }
+              "shortcode": "GO-S1010",
+              "category": "SECURITY",
+              "severity": "MAJOR",
+              "explanation": "Constructing HTTP request with user-controlled URL allows SSRF"
             }
           }
-        ]
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": null
+        }
       }
     }
   }

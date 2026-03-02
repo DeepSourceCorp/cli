@@ -61,9 +61,9 @@ func TestIssuesAutoDetectBranch(t *testing.T) {
 func TestIssuesAutoDetectPR(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"pullRequests(":                   goldenPath("get_pr_by_branch_found_response.json"),
-		"query GetAnalysisRuns(":          goldenPath("get_analysis_runs_response.json"),
-		"issueOccurrences(first:": goldenPath("pr_scope_response.json"),
+		"pullRequests(":          goldenPath("get_pr_by_branch_found_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_response.json"),
+		"query GetPRIssues(":     goldenPath("pr_scope_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -185,7 +185,7 @@ func TestIssuesCommitScope(t *testing.T) {
 func TestIssuesPRScope(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"issueOccurrences(first:": goldenPath("pr_scope_response.json"),
+		"query GetPRIssues(": goldenPath("pr_scope_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
