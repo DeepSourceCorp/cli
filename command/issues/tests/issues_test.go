@@ -61,9 +61,9 @@ func TestIssuesAutoDetectBranch(t *testing.T) {
 func TestIssuesAutoDetectPR(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"pullRequests(":                   goldenPath("get_pr_by_branch_found_response.json"),
-		"query GetAnalysisRuns(":          goldenPath("get_analysis_runs_response.json"),
-		"issueOccurrences(first:": goldenPath("pr_scope_response.json"),
+		"pullRequests(":          goldenPath("get_pr_by_branch_found_response.json"),
+		"query GetAnalysisRuns(": goldenPath("get_analysis_runs_response.json"),
+		"query GetPRIssues(":     goldenPath("pr_scope_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -185,7 +185,7 @@ func TestIssuesCommitScope(t *testing.T) {
 func TestIssuesPRScope(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 	mock := testutil.MockQueryFunc(t, map[string]string{
-		"issueOccurrences(first:": goldenPath("pr_scope_response.json"),
+		"query GetPRIssues(": goldenPath("pr_scope_response.json"),
 	})
 	client := deepsource.NewWithGraphQLClient(mock)
 
@@ -447,8 +447,8 @@ func TestIssuesRunInProgress(t *testing.T) {
 	got := buf.String()
 	// In non-TTY (test runner), in-progress auto-falls back to last completed run.
 	// Since the mock only has a PENDING run, no completed run is found.
-	if !strings.Contains(got, "No completed analysis runs found") {
-		t.Errorf("expected fallback 'no completed runs' message, got: %q", got)
+	if !strings.Contains(got, "Analysis is still in progress") {
+		t.Errorf("expected 'analysis still in progress' message, got: %q", got)
 	}
 }
 

@@ -67,7 +67,7 @@ func resolveRunFromCommits(
 	}
 	if len(allRuns) == 0 {
 		return nil, fmt.Errorf(
-			"no analysis runs found for branch %q.\nTry: --default-branch, --commit <sha>, or --pr <number>",
+			"no analysis runs found for branch %q. Has this branch been pushed and analyzed on DeepSource?\nTry: --default-branch, --commit <sha>, or --pr <number>",
 			branchName,
 		)
 	}
@@ -223,6 +223,7 @@ type AutoBranchResult struct {
 	PRNumber   int  // >0 if a PR was detected for the branch
 	UseRepo    bool // true when the caller should fall back to repo-level (default branch) data
 	Empty      bool // true when there are no results (timeout, no completed runs)
+	Fallback   bool // true when showing results from a previous completed run while a new analysis is in progress
 }
 
 // ResolveAutoBranch encapsulates the shared "default" branch resolution logic
@@ -286,12 +287,13 @@ func resolveWithPR(
 				return nil, fallbackErr
 			}
 			if completedRun == nil {
-				style.Infof(w, "No completed analysis runs found for branch %q.", branchName)
+				style.Infof(w, "Analysis is still in progress for branch %q. Try again shortly, or use --default-branch to see results from the default branch.", branchName)
 				result.Empty = true
 				return result, nil
 			}
 			style.Infof(w, "Analysis is running on commit %s. Showing results from the last analyzed commit (%s).", run.CommitOid[:8], completedRun.CommitOid[:8])
 			result.CommitOid = completedRun.CommitOid
+			result.Fallback = true
 			return result, nil
 		}
 	}
@@ -336,12 +338,13 @@ func resolveWithoutPR(
 			return nil, fallbackErr
 		}
 		if run == nil {
-			style.Infof(w, "No completed analysis runs found for branch %q.", branchName)
+			style.Infof(w, "Analysis is still in progress for branch %q. Try again shortly, or use --default-branch to see results from the default branch.", branchName)
 			result.Empty = true
 			return result, nil
 		}
 		style.Infof(w, "Analysis is running on commit %s. Showing results from the last analyzed commit (%s).", commitOid[:8], run.CommitOid[:8])
 		commitOid = run.CommitOid
+		result.Fallback = true
 	}
 	if IsRunTimedOut(finalStatus) {
 		style.Warnf(w, "Analysis timed out for branch %q.", branchName)

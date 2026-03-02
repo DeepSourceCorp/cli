@@ -8,8 +8,8 @@
     "description": "Return value of io.ReadAll is not checked for errors",
     "category": "BUG_RISK",
     "severity": "MAJOR",
-    "source": "",
-    "analyzer": "go"
+    "source": "static",
+    "analyzer": ""
   },
   {
     "path": "internal/vcs/remotes.go",
@@ -20,7 +20,7 @@
     "description": "Constructing HTTP request with user-controlled URL allows SSRF",
     "category": "SECURITY",
     "severity": "MAJOR",
-    "source": "",
-    "analyzer": "go"
+    "source": "ai",
+    "analyzer": ""
   }
 ]

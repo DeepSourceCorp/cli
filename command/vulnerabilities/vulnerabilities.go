@@ -34,6 +34,7 @@ type VulnerabilitiesOptions struct {
 	SeverityFilters  []string
 	repoSlug         string
 	autoDetectedBranch string
+	fallback         bool
 	repoVulns        []vulnerabilities.VulnerabilityOccurrence
 	runVulns         *vulnerabilities.RunVulns
 	prVulns          *vulnerabilities.PRVulns
@@ -234,6 +235,7 @@ func (opts *VulnerabilitiesOptions) resolveVulnerabilities(ctx context.Context, 
 			return nil
 		}
 		opts.autoDetectedBranch = ab.BranchName
+		opts.fallback = ab.Fallback
 		switch {
 		case ab.PRNumber > 0:
 			opts.PRNumber = ab.PRNumber
@@ -342,6 +344,9 @@ func (opts *VulnerabilitiesOptions) outputHuman() error {
 	vulnsList := opts.getVulns()
 
 	if len(vulnsList) == 0 {
+		if opts.fallback {
+			return nil
+		}
 		if opts.hasFilters() {
 			style.Infof(opts.stdout(), "No vulnerabilities matched the provided filters in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		} else {

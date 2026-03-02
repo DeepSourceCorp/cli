@@ -42,6 +42,7 @@ type IssuesOptions struct {
 	DefaultBranch   bool
 	repoSlug        string
 	autoDetectedBranch string
+	fallback        bool
 	issues          []issues.Issue
 	deps            *cmddeps.Deps
 	client          *deepsource.Client
@@ -254,6 +255,9 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
+	if issuesList == nil {
+		return nil
+	}
 
 	issuesList = opts.filterIssues(issuesList)
 
@@ -280,6 +284,7 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 
 func (opts *IssuesOptions) resolveIssues(ctx context.Context, client *deepsource.Client, remote *vcs.RemoteData) ([]issues.Issue, error) {
 	serverFilters := opts.buildServerFilters()
+	prFilters := opts.buildPRFilters()
 
 	var issuesList []issues.Issue
 	var err error
@@ -287,7 +292,7 @@ func (opts *IssuesOptions) resolveIssues(ctx context.Context, client *deepsource
 	case opts.CommitOid != "":
 		issuesList, err = client.GetRunIssuesFlat(ctx, opts.CommitOid, serverFilters)
 	case opts.PRNumber > 0:
-		issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.PRNumber)
+		issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, opts.PRNumber, prFilters)
 	case opts.DefaultBranch:
 		issuesList, err = client.GetIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 	default:
@@ -303,11 +308,12 @@ func (opts *IssuesOptions) resolveIssues(ctx context.Context, client *deepsource
 			return nil, nil
 		}
 		opts.autoDetectedBranch = ab.BranchName
+		opts.fallback = ab.Fallback
 		switch {
 		case ab.PRNumber > 0:
 			opts.PRNumber = ab.PRNumber
 			opts.CommitOid = ab.CommitOid
-			issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, ab.PRNumber)
+			issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, ab.PRNumber, prFilters)
 		case ab.UseRepo:
 			issuesList, err = client.GetIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 		default:
@@ -360,6 +366,25 @@ func normalizeEnumValue(s string) string {
 // client-side filtering.
 func (opts *IssuesOptions) buildServerFilters() issuesQuery.RunIssuesFlatParams {
 	var params issuesQuery.RunIssuesFlatParams
+	if len(opts.SourceFilters) == 1 {
+		v := normalizeEnumValue(opts.SourceFilters[0])
+		params.Source = &v
+	}
+	if len(opts.CategoryFilters) == 1 {
+		v := normalizeEnumValue(opts.CategoryFilters[0])
+		params.Category = &v
+	}
+	if len(opts.SeverityFilters) == 1 {
+		v := normalizeEnumValue(opts.SeverityFilters[0])
+		params.Severity = &v
+	}
+	return params
+}
+
+// buildPRFilters returns PRIssuesListParams with server-side filters set
+// for any filter that has exactly one value.
+func (opts *IssuesOptions) buildPRFilters() issuesQuery.PRIssuesListParams {
+	var params issuesQuery.PRIssuesListParams
 	if len(opts.SourceFilters) == 1 {
 		v := normalizeEnumValue(opts.SourceFilters[0])
 		params.Source = &v
@@ -538,6 +563,9 @@ func groupIssuesByCategory(issuesList []issues.Issue) map[string][]issues.Issue 
 
 func (opts *IssuesOptions) outputHuman(_ context.Context) error {
 	if len(opts.issues) == 0 {
+		if opts.fallback {
+			return nil
+		}
 		if opts.hasFilters() {
 			style.Infof(opts.stdout(), "No issues matched the provided filters in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		} else {

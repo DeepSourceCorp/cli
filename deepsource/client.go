@@ -266,13 +266,12 @@ func (c Client) GetRunIssuesFlat(ctx context.Context, commitOid string, filters 
 }
 
 // Auto-paginates to fetch all results.
-func (c Client) GetPRIssues(ctx context.Context, owner, repoName, provider string, prNumber int) ([]issues.Issue, error) {
-	req := issuesQuery.NewPRIssuesListRequest(c.gqlWrapper, issuesQuery.PRIssuesListParams{
-		Owner:    owner,
-		RepoName: repoName,
-		Provider: provider,
-		PRNumber: prNumber,
-	})
+func (c Client) GetPRIssues(ctx context.Context, owner, repoName, provider string, prNumber int, filters issuesQuery.PRIssuesListParams) ([]issues.Issue, error) {
+	filters.Owner = owner
+	filters.RepoName = repoName
+	filters.Provider = provider
+	filters.PRNumber = prNumber
+	req := issuesQuery.NewPRIssuesListRequest(c.gqlWrapper, filters)
 	res, err := req.Do(ctx)
 	if err != nil {
 		return nil, err
