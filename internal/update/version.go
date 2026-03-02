@@ -41,7 +41,9 @@ func parseSemver(v string) (major, minor, patch int, err error) {
 	if err != nil {
 		return 0, 0, 0, err
 	}
-	patch, err = strconv.Atoi(parts[2])
+	// Strip pre-release or build metadata suffix (e.g. "44-e888cf0f" → "44")
+	patchStr, _, _ := strings.Cut(parts[2], "-")
+	patch, err = strconv.Atoi(patchStr)
 	if err != nil {
 		return 0, 0, 0, err
 	}
