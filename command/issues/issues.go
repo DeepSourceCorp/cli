@@ -254,6 +254,9 @@ func (opts *IssuesOptions) Run(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
+	if issuesList == nil {
+		return nil
+	}
 
 	issuesList = opts.filterIssues(issuesList)
 
