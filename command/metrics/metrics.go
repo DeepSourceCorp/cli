@@ -34,6 +34,7 @@ type MetricsOptions struct {
 	LimitArg         int
 	repoSlug         string
 	autoDetectedBranch string
+	fallback         bool
 	repoMetrics      []metrics.RepositoryMetric
 	runMetrics       *metrics.RunMetrics
 	prMetrics        *metrics.PRMetrics
@@ -246,6 +247,7 @@ func (opts *MetricsOptions) resolveMetrics(ctx context.Context, client *deepsour
 			return nil
 		}
 		opts.autoDetectedBranch = ab.BranchName
+		opts.fallback = ab.Fallback
 		switch {
 		case ab.PRNumber > 0:
 			opts.PRNumber = ab.PRNumber
@@ -359,6 +361,9 @@ func (opts *MetricsOptions) outputHuman() error {
 	w := opts.stdout()
 
 	if len(metricsList) == 0 {
+		if opts.fallback {
+			return nil
+		}
 		style.Infof(w, "No metrics found in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		return nil
 	}

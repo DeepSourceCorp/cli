@@ -42,6 +42,7 @@ type IssuesOptions struct {
 	DefaultBranch   bool
 	repoSlug        string
 	autoDetectedBranch string
+	fallback        bool
 	issues          []issues.Issue
 	deps            *cmddeps.Deps
 	client          *deepsource.Client
@@ -307,6 +308,7 @@ func (opts *IssuesOptions) resolveIssues(ctx context.Context, client *deepsource
 			return nil, nil
 		}
 		opts.autoDetectedBranch = ab.BranchName
+		opts.fallback = ab.Fallback
 		switch {
 		case ab.PRNumber > 0:
 			opts.PRNumber = ab.PRNumber
@@ -561,6 +563,9 @@ func groupIssuesByCategory(issuesList []issues.Issue) map[string][]issues.Issue 
 
 func (opts *IssuesOptions) outputHuman(_ context.Context) error {
 	if len(opts.issues) == 0 {
+		if opts.fallback {
+			return nil
+		}
 		if opts.hasFilters() {
 			style.Infof(opts.stdout(), "No issues matched the provided filters in %s on %s.", opts.repoSlug, opts.scopeLabel())
 		} else {
