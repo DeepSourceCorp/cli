@@ -219,7 +219,7 @@ func (opts *ReportCardOptions) resolveByPR(ctx context.Context, client *deepsour
 			return err
 		}
 		if completed == nil {
-			style.Infof(opts.stdout(), "No completed analysis runs found for branch %q.", branch)
+			style.Infof(opts.stdout(), "Analysis is still in progress for branch %q. Try again shortly, or use --default-branch to see results from the default branch.", branch)
 			return nil
 		}
 		style.Infof(opts.stdout(), "Analysis is running on commit %s. Showing results from the last analyzed commit (%s).", run.CommitOid[:8], completed.CommitOid[:8])
@@ -276,7 +276,7 @@ func (opts *ReportCardOptions) resolveByCurrentBranch(ctx context.Context, clien
 			return err
 		}
 		if completed == nil {
-			style.Infof(opts.stdout(), "No completed analysis runs found for branch %q.", branchName)
+			style.Infof(opts.stdout(), "Analysis is still in progress for branch %q. Try again shortly, or use --default-branch to see results from the default branch.", branchName)
 			return nil
 		}
 		style.Infof(opts.stdout(), "Analysis is running on commit %s. Showing results from the last analyzed commit (%s).", run.CommitOid[:8], completed.CommitOid[:8])

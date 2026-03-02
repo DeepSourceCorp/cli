@@ -491,8 +491,8 @@ func TestResolveWithPR_PendingNoCompletedRuns(t *testing.T) {
 	if !got.Empty {
 		t.Fatal("expected Empty=true when no completed runs exist")
 	}
-	if !strings.Contains(buf.String(), "No completed analysis runs found") {
-		t.Errorf("expected 'no completed runs' message, got: %s", buf.String())
+	if !strings.Contains(buf.String(), "Analysis is still in progress") {
+		t.Errorf("expected 'analysis still in progress' message, got: %s", buf.String())
 	}
 }
 

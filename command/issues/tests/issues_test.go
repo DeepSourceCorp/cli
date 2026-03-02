@@ -447,8 +447,8 @@ func TestIssuesRunInProgress(t *testing.T) {
 	got := buf.String()
 	// In non-TTY (test runner), in-progress auto-falls back to last completed run.
 	// Since the mock only has a PENDING run, no completed run is found.
-	if !strings.Contains(got, "No completed analysis runs found") {
-		t.Errorf("expected fallback 'no completed runs' message, got: %q", got)
+	if !strings.Contains(got, "Analysis is still in progress") {
+		t.Errorf("expected 'analysis still in progress' message, got: %q", got)
 	}
 }
 

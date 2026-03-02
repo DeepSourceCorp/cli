@@ -67,7 +67,7 @@ func resolveRunFromCommits(
 	}
 	if len(allRuns) == 0 {
 		return nil, fmt.Errorf(
-			"no analysis runs found for branch %q.\nTry: --default-branch, --commit <sha>, or --pr <number>",
+			"no analysis runs found for branch %q. Has this branch been pushed and analyzed on DeepSource?\nTry: --default-branch, --commit <sha>, or --pr <number>",
 			branchName,
 		)
 	}
@@ -286,7 +286,7 @@ func resolveWithPR(
 				return nil, fallbackErr
 			}
 			if completedRun == nil {
-				style.Infof(w, "No completed analysis runs found for branch %q.", branchName)
+				style.Infof(w, "Analysis is still in progress for branch %q. Try again shortly, or use --default-branch to see results from the default branch.", branchName)
 				result.Empty = true
 				return result, nil
 			}
@@ -336,7 +336,7 @@ func resolveWithoutPR(
 			return nil, fallbackErr
 		}
 		if run == nil {
-			style.Infof(w, "No completed analysis runs found for branch %q.", branchName)
+			style.Infof(w, "Analysis is still in progress for branch %q. Try again shortly, or use --default-branch to see results from the default branch.", branchName)
 			result.Empty = true
 			return result, nil
 		}
