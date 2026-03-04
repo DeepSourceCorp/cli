@@ -254,7 +254,34 @@ func (opts *IssuesOptions) Run(ctx context.Context, cmd *cobra.Command) error {
 
 	issuesList, err := opts.resolveIssues(ctx, client, remote)
 	if err != nil {
-		return err
+		// If the API says this is a monorepo, show a friendly message.
+		if strings.Contains(err.Error(), "This repository is a monorepo") {
+			return fmt.Errorf("This is a monorepo. Use --repo to specify a sub-project.\n\nHint: %s", err.Error())
+		}
+
+		// If we auto-detected a sub-repo path and the exact path wasn't found,
+		// progressively strip the last segment and retry.
+		if strings.Contains(err.Error(), "Repository does not exist") && remote.SubRepoSuffix != "" {
+			parts := strings.Split(remote.SubRepoSuffix, ":")
+			// Try stripping from the end: e.g. a:b:c → a:b → a
+			for len(parts) > 1 {
+				parts = parts[:len(parts)-1]
+				remote.SubRepoSuffix = strings.Join(parts, ":")
+				baseName := strings.SplitN(remote.RepoName, ":", 2)[0]
+				remote.RepoName = baseName + ":" + remote.SubRepoSuffix
+
+				issuesList, err = opts.resolveIssues(ctx, client, remote)
+				if err == nil {
+					break
+				}
+				if !strings.Contains(err.Error(), "Repository does not exist") {
+					return err
+				}
+			}
+		}
+		if err != nil {
+			return err
+		}
 	}
 	if issuesList == nil {
 		return nil
