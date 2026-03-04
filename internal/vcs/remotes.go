@@ -130,6 +130,36 @@ func ListRemotes() (map[string][]string, error) {
 	return remoteMap, nil
 }
 
+// detectSubRepoPath returns the CWD's path relative to the git root,
+// with "/" replaced by ":" (the DeepSource sub-repo delimiter).
+// If CWD is the git root itself, it returns "".
+func detectSubRepoPath() string {
+	toplevel, err := runCmd("git", []string{"rev-parse", "--show-toplevel"})
+	if err != nil {
+		return ""
+	}
+	toplevel = strings.TrimSpace(toplevel)
+
+	cwd, err := runCmd("pwd", nil)
+	if err != nil {
+		return ""
+	}
+	cwd = strings.TrimSpace(cwd)
+
+	if cwd == toplevel {
+		return ""
+	}
+
+	rel := strings.TrimPrefix(cwd, toplevel+"/")
+	if rel == cwd {
+		// cwd is not under toplevel (shouldn't happen)
+		return ""
+	}
+
+	debug.Log("git: sub-repo relative path %q", rel)
+	return strings.ReplaceAll(rel, "/", ":")
+}
+
 func runCmd(command string, args []string) (string, error) {
 	debug.Log("git: exec %s %s", command, strings.Join(args, " "))
 	output, err := exec.Command(command, args...).Output()
