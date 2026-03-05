@@ -9,8 +9,9 @@ var buildInfo *BuildInfo
 
 // App identity variables. Defaults are prod values; overridden in main.go for dev builds.
 var (
-	AppName       = "deepsource"  // binary name / display name
-	ConfigDirName = ".deepsource" // ~/<this>/
+	AppName       = "deepsource"              // binary name / display name
+	ConfigDirName = ".deepsource"             // ~/<this>/
+	BaseURL       = "https://cli.deepsource.com" // CDN base for manifest and archives
 )
 
 // BuildInfo describes the compile time information.
