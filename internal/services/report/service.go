@@ -205,8 +205,12 @@ func (s *Service) parseReportResponse(responseBody []byte, opts Options, warning
 	}
 
 	if !queryResponse.Data.CreateArtifact.Ok {
-		err := errors.New(queryResponse.Data.CreateArtifact.Error)
-		s.capture(err)
+		if queryResponse.Data.CreateArtifact.Error == "" {
+			s.capture(fmt.Errorf("reporting failed with empty error, raw response: %s", string(queryResponseBody)))
+		} else {
+		    err := errors.New(queryResponse.Data.CreateArtifact.Error)
+		    s.capture(err)
+		}
 		return nil, fmt.Errorf("Reporting failed: %s", queryResponse.Data.CreateArtifact.Error)
 	}
 
