@@ -76,9 +76,9 @@ func NewCmdRunsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		RunE: func(cmd *cobra.Command, _ []string) error {
 			if opts.commitOid != "" {
 				opts.commitOid = cmdutil.ResolveCommitOid(opts.commitOid)
-				return opts.runDetail(cmd.Context())
+				return opts.runDetail(cmd, cmd.Context())
 			}
-			return opts.runList()
+			return opts.runList(cmd)
 		},
 	}
 
@@ -103,7 +103,7 @@ func NewCmdRunsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 }
 
 // runList fetches and displays a table of recent analysis runs.
-func (opts *RunsOptions) runList() error {
+func (opts *RunsOptions) runList(cmd *cobra.Command) error {
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
 		cfgMgr = opts.deps.ConfigMgr
@@ -123,9 +123,10 @@ func (opts *RunsOptions) runList() error {
 		client = opts.deps.Client
 	} else {
 		client, err = deepsource.New(deepsource.ClientOpts{
-			Token:            cfg.Token,
-			HostName:         cfg.Host,
-			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+			Token:              cfg.Token,
+			HostName:           cfg.Host,
+			InsecureSkipVerify: cmdutil.ResolveSkipTLSVerify(cmd, cfg.SkipTLSVerify),
+			OnTokenRefreshed:   cfgMgr.TokenRefreshCallback(),
 		})
 		if err != nil {
 			return err
@@ -194,7 +195,7 @@ func (opts *RunsOptions) fetchRuns(client *deepsource.Client) ([]runstypes.Analy
 }
 
 // runDetail fetches and displays metadata + issues summary for a single commit.
-func (opts *RunsOptions) runDetail(ctx context.Context) error {
+func (opts *RunsOptions) runDetail(cmd *cobra.Command, ctx context.Context) error {
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
 		cfgMgr = opts.deps.ConfigMgr
@@ -214,9 +215,10 @@ func (opts *RunsOptions) runDetail(ctx context.Context) error {
 		client = opts.deps.Client
 	} else {
 		client, err = deepsource.New(deepsource.ClientOpts{
-			Token:            cfg.Token,
-			HostName:         cfg.Host,
-			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+			Token:              cfg.Token,
+			HostName:           cfg.Host,
+			InsecureSkipVerify: cmdutil.ResolveSkipTLSVerify(cmd, cfg.SkipTLSVerify),
+			OnTokenRefreshed:   cfgMgr.TokenRefreshCallback(),
 		})
 		if err != nil {
 			return err

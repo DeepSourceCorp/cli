@@ -89,7 +89,7 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Short: "View dependency vulnerabilities",
 		Long:  doc,
 		RunE: func(cmd *cobra.Command, _ []string) error {
-			return opts.Run(cmd.Context())
+			return opts.Run(cmd, cmd.Context())
 		},
 	}
 
@@ -122,7 +122,7 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	return cmd
 }
 
-func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
+func (opts *VulnerabilitiesOptions) Run(cmd *cobra.Command, ctx context.Context) error {
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
 		cfgMgr = opts.deps.ConfigMgr
@@ -148,9 +148,10 @@ func (opts *VulnerabilitiesOptions) Run(ctx context.Context) error {
 		client = opts.deps.Client
 	} else {
 		client, err = deepsource.New(deepsource.ClientOpts{
-			Token:            cfg.Token,
-			HostName:         cfg.Host,
-			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+			Token:              cfg.Token,
+			HostName:           cfg.Host,
+			InsecureSkipVerify: cmdutil.ResolveSkipTLSVerify(cmd, cfg.SkipTLSVerify),
+			OnTokenRefreshed:   cfgMgr.TokenRefreshCallback(),
 		})
 		if err != nil {
 			return err

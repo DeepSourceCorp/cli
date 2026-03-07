@@ -15,6 +15,17 @@ type flagExpectation struct {
 	defaultValue string
 }
 
+func TestRootSkipTLSVerifyFlag(t *testing.T) {
+	cmd := NewCmdRoot()
+	f := cmd.PersistentFlags().Lookup("skip-tls-verify")
+	if f == nil {
+		t.Fatal("expected skip-tls-verify persistent flag on root command, got nil")
+	}
+	if f.DefValue != "false" {
+		t.Errorf("expected default value %q, got %q", "false", f.DefValue)
+	}
+}
+
 func TestFlagDefaults(t *testing.T) {
 	tests := []struct {
 		name      string
