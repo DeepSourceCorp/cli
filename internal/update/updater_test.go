@@ -248,7 +248,7 @@ func TestCheckForUpdate_NewerVersion(t *testing.T) {
 	platform := manifest.Platforms[key]
 	state := &UpdateState{
 		Version:    manifest.Version,
-		ArchiveURL: buildinfo.BaseURL + "/" + platform.Archive,
+		ArchiveURL: buildinfo.BaseURL + "/build/" + platform.Archive,
 		SHA256:     platform.SHA256,
 		CheckedAt:  time.Now().UTC(),
 	}
@@ -263,7 +263,7 @@ func TestCheckForUpdate_NewerVersion(t *testing.T) {
 	if got.Version != "2.0.40" {
 		t.Errorf("expected version 2.0.40, got %s", got.Version)
 	}
-	expectedURL := fmt.Sprintf("%s/deepsource_2.0.40_%s.tar.gz", buildinfo.BaseURL, key)
+	expectedURL := fmt.Sprintf("%s/build/deepsource_2.0.40_%s.tar.gz", buildinfo.BaseURL, key)
 	if got.ArchiveURL != expectedURL {
 		t.Errorf("expected archive URL %s, got %s", expectedURL, got.ArchiveURL)
 	}
