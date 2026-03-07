@@ -102,7 +102,7 @@ func CheckForUpdate(client *http.Client) error {
 
 	state := &UpdateState{
 		Version:    manifest.Version,
-		ArchiveURL: buildinfo.BaseURL + "/" + platform.Archive,
+		ArchiveURL: buildinfo.BaseURL + "/build/" + platform.Archive,
 		SHA256:     platform.SHA256,
 		CheckedAt:  time.Now().UTC(),
 	}
