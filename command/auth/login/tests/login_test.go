@@ -245,6 +245,69 @@ func TestLoginVerifyTokenServerReject(t *testing.T) {
 	}
 }
 
+func TestLoginPATSkipTLSVerifyNotPersisted(t *testing.T) {
+	cfgMgr := testutil.CreateExpiredTestConfigManager(t, "", "deepsource.com", "")
+
+	deps := &cmddeps.Deps{
+		ConfigMgr: cfgMgr,
+		Client:    newMockViewerClient(t),
+	}
+
+	cmd := loginCmd.NewCmdLoginWithDeps(deps)
+	cmd.SetArgs([]string{"--with-token", "dsp_noskip"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	cfg, err := cfgMgr.Load()
+	if err != nil {
+		t.Fatalf("failed to load config: %v", err)
+	}
+	if cfg.SkipTLSVerify {
+		t.Error("expected SkipTLSVerify=false when flag is not set")
+	}
+}
+
+func TestLoginPATSkipTLSVerifyFromConfig(t *testing.T) {
+	// Write a config with SkipTLSVerify already set to true
+	tmpDir := t.TempDir()
+	fs := adapters.NewOSFileSystem()
+	cfgMgr := config.NewManager(fs, func() (string, error) {
+		return tmpDir, nil
+	})
+
+	// Use manager.Write to create valid TOML with expired token + SkipTLSVerify
+	initialCfg := &config.CLIConfig{
+		Host:          "enterprise.example.com",
+		Token:         "",
+		SkipTLSVerify: true,
+	}
+	if err := cfgMgr.Write(initialCfg); err != nil {
+		t.Fatalf("failed to write initial config: %v", err)
+	}
+
+	deps := &cmddeps.Deps{
+		ConfigMgr: cfgMgr,
+		Client:    newMockViewerClient(t),
+	}
+
+	cmd := loginCmd.NewCmdLoginWithDeps(deps)
+	cmd.SetArgs([]string{"--with-token", "dsp_skipyes"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	cfg, err := cfgMgr.Load()
+	if err != nil {
+		t.Fatalf("failed to load config: %v", err)
+	}
+	if !cfg.SkipTLSVerify {
+		t.Error("expected SkipTLSVerify=true to be preserved from config after login")
+	}
+}
+
 func TestLoginPATInvalidToken(t *testing.T) {
 	cfgMgr := testutil.CreateExpiredTestConfigManager(t, "", "deepsource.com", "")
 

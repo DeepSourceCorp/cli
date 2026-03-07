@@ -80,6 +80,12 @@ func (m *Manager) Load() (*CLIConfig, error) {
 		}
 	}
 
+	if !cfg.SkipTLSVerify {
+		if v := os.Getenv("DEEPSOURCE_SKIP_TLS_VERIFY"); v == "1" || v == "true" {
+			cfg.SkipTLSVerify = true
+		}
+	}
+
 	debug.Log("config: host=%q user=%q token_present=%v env=%v", cfg.Host, cfg.User, cfg.Token != "", cfg.TokenFromEnv)
 
 	return cfg, nil

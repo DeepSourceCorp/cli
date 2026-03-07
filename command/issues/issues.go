@@ -92,7 +92,7 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Short: "View issues in a repository",
 		Long:  doc,
 		RunE: func(cmd *cobra.Command, _ []string) error {
-			return opts.Run(cmd.Context())
+			return opts.Run(cmd.Context(), cmd)
 		},
 	}
 
@@ -203,7 +203,7 @@ func flagUsageLine(f *pflag.Flag) string {
 	return line
 }
 
-func (opts *IssuesOptions) initClientAndConfig() (*deepsource.Client, *vcs.RemoteData, error) {
+func (opts *IssuesOptions) initClientAndConfig(cmd *cobra.Command) (*deepsource.Client, *vcs.RemoteData, error) {
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
 		cfgMgr = opts.deps.ConfigMgr
@@ -228,9 +228,10 @@ func (opts *IssuesOptions) initClientAndConfig() (*deepsource.Client, *vcs.Remot
 		return opts.deps.Client, remote, nil
 	}
 	client, err := deepsource.New(deepsource.ClientOpts{
-		Token:            cfg.Token,
-		HostName:         cfg.Host,
-		OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+		Token:              cfg.Token,
+		HostName:           cfg.Host,
+		InsecureSkipVerify: cmdutil.ResolveSkipTLSVerify(cmd, cfg.SkipTLSVerify),
+		OnTokenRefreshed:   cfgMgr.TokenRefreshCallback(),
 	})
 	if err != nil {
 		return nil, nil, err
@@ -238,8 +239,8 @@ func (opts *IssuesOptions) initClientAndConfig() (*deepsource.Client, *vcs.Remot
 	return client, remote, nil
 }
 
-func (opts *IssuesOptions) Run(ctx context.Context) error {
-	client, remote, err := opts.initClientAndConfig()
+func (opts *IssuesOptions) Run(ctx context.Context, cmd *cobra.Command) error {
+	client, remote, err := opts.initClientAndConfig(cmd)
 	if err != nil {
 		return err
 	}

@@ -80,6 +80,18 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 				opts.DeepSourceHostEndpoint = "https://app.deepsource.com"
 			}
 
+			// Resolve skip-tls-verify: local --skip-verify | global --skip-tls-verify | config
+			if !opts.SkipCertificateVerification {
+				if f := cmd.Root().PersistentFlags().Lookup("skip-tls-verify"); f != nil && f.Changed {
+					opts.SkipCertificateVerification = true
+				}
+			}
+			if !opts.SkipCertificateVerification {
+				if cfg, err := deps.Config.Load(); err == nil {
+					opts.SkipCertificateVerification = cfg.SkipTLSVerify
+				}
+			}
+
 			svc := reportsvc.NewService(reportsvc.ServiceDeps{
 				GitClient:   deps.GitClient,
 				HTTPClient:  deps.HTTPClient,
@@ -116,6 +128,7 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 	cmd.Flags().StringVar(&opts.Output, "output", "pretty", "Output format: pretty, json")
 
 	cmd.Flags().BoolVar(&opts.SkipCertificateVerification, "skip-verify", false, "skip SSL certificate verification while sending the test coverage data")
+	_ = cmd.Flags().MarkDeprecated("skip-verify", "use the global --skip-tls-verify flag instead")
 
 	_ = cmd.RegisterFlagCompletionFunc("analyzer", func(_ *cobra.Command, _ []string, _ string) ([]string, cobra.ShellCompDirective) {
 		return []string{
