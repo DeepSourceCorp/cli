@@ -92,7 +92,7 @@ func NewCmdIssuesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Short: "View issues in a repository",
 		Long:  doc,
 		RunE: func(cmd *cobra.Command, _ []string) error {
-			return opts.Run(cmd, cmd.Context())
+			return opts.Run(cmd.Context(), cmd)
 		},
 	}
 
@@ -239,7 +239,7 @@ func (opts *IssuesOptions) initClientAndConfig(cmd *cobra.Command) (*deepsource.
 	return client, remote, nil
 }
 
-func (opts *IssuesOptions) Run(cmd *cobra.Command, ctx context.Context) error {
+func (opts *IssuesOptions) Run(ctx context.Context, cmd *cobra.Command) error {
 	client, remote, err := opts.initClientAndConfig(cmd)
 	if err != nil {
 		return err

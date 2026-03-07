@@ -89,7 +89,7 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Short: "View dependency vulnerabilities",
 		Long:  doc,
 		RunE: func(cmd *cobra.Command, _ []string) error {
-			return opts.Run(cmd, cmd.Context())
+			return opts.Run(cmd.Context(), cmd)
 		},
 	}
 
@@ -122,7 +122,7 @@ func NewCmdVulnerabilitiesWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	return cmd
 }
 
-func (opts *VulnerabilitiesOptions) Run(cmd *cobra.Command, ctx context.Context) error {
+func (opts *VulnerabilitiesOptions) Run(ctx context.Context, cmd *cobra.Command) error {
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
 		cfgMgr = opts.deps.ConfigMgr

@@ -87,7 +87,7 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Short: "View repository metrics",
 		Long:  doc,
 		RunE: func(cmd *cobra.Command, _ []string) error {
-			return opts.Run(cmd, cmd.Context())
+			return opts.Run(cmd.Context(), cmd)
 		},
 	}
 
@@ -116,7 +116,7 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	return cmd
 }
 
-func (opts *MetricsOptions) Run(cmd *cobra.Command, ctx context.Context) error {
+func (opts *MetricsOptions) Run(ctx context.Context, cmd *cobra.Command) error {
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
 		cfgMgr = opts.deps.ConfigMgr

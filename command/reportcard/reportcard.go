@@ -79,7 +79,7 @@ func NewCmdReportCardWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Short: "View repository report card",
 		Long:  doc,
 		RunE: func(cmd *cobra.Command, _ []string) error {
-			return opts.Run(cmd, cmd.Context())
+			return opts.Run(cmd.Context(), cmd)
 		},
 	}
 
@@ -142,7 +142,7 @@ func (opts *ReportCardOptions) initClientAndRemote(cmd *cobra.Command) (*deepsou
 	return client, remote, nil
 }
 
-func (opts *ReportCardOptions) Run(cmd *cobra.Command, ctx context.Context) error {
+func (opts *ReportCardOptions) Run(ctx context.Context, cmd *cobra.Command) error {
 	client, remote, err := opts.initClientAndRemote(cmd)
 	if err != nil {
 		return err
