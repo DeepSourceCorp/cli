@@ -87,7 +87,7 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Short: "View repository metrics",
 		Long:  doc,
 		RunE: func(cmd *cobra.Command, _ []string) error {
-			return opts.Run(cmd.Context())
+			return opts.Run(cmd.Context(), cmd)
 		},
 	}
 
@@ -116,7 +116,7 @@ func NewCmdMetricsWithDeps(deps *cmddeps.Deps) *cobra.Command {
 	return cmd
 }
 
-func (opts *MetricsOptions) Run(ctx context.Context) error {
+func (opts *MetricsOptions) Run(ctx context.Context, cmd *cobra.Command) error {
 	var cfgMgr *config.Manager
 	if opts.deps != nil && opts.deps.ConfigMgr != nil {
 		cfgMgr = opts.deps.ConfigMgr
@@ -142,9 +142,10 @@ func (opts *MetricsOptions) Run(ctx context.Context) error {
 		client = opts.deps.Client
 	} else {
 		client, err = deepsource.New(deepsource.ClientOpts{
-			Token:            cfg.Token,
-			HostName:         cfg.Host,
-			OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+			Token:              cfg.Token,
+			HostName:           cfg.Host,
+			InsecureSkipVerify: cmdutil.ResolveSkipTLSVerify(cmd, cfg.SkipTLSVerify),
+			OnTokenRefreshed:   cfgMgr.TokenRefreshCallback(),
 		})
 		if err != nil {
 			return err

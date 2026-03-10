@@ -47,7 +47,7 @@ func (s *Service) DeleteConfig() error {
 }
 
 func (s *Service) RegisterDevice(ctx context.Context, cfg *config.CLIConfig) (*dsauth.Device, error) {
-	client, err := s.newClient(deepsource.ClientOpts{Token: cfg.Token, HostName: cfg.Host})
+	client, err := s.newClient(deepsource.ClientOpts{Token: cfg.Token, HostName: cfg.Host, InsecureSkipVerify: cfg.SkipTLSVerify})
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ func (s *Service) RegisterDevice(ctx context.Context, cfg *config.CLIConfig) (*d
 }
 
 func (s *Service) RequestPAT(ctx context.Context, cfg *config.CLIConfig, deviceCode, description string) (*dsauth.PAT, error) {
-	client, err := s.newClient(deepsource.ClientOpts{Token: cfg.Token, HostName: cfg.Host})
+	client, err := s.newClient(deepsource.ClientOpts{Token: cfg.Token, HostName: cfg.Host, InsecureSkipVerify: cfg.SkipTLSVerify})
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ func (s *Service) RequestPAT(ctx context.Context, cfg *config.CLIConfig, deviceC
 }
 
 func (s *Service) GetViewer(ctx context.Context, cfg *config.CLIConfig) (*dsuser.User, error) {
-	client, err := s.newClient(deepsource.ClientOpts{Token: cfg.Token, HostName: cfg.Host})
+	client, err := s.newClient(deepsource.ClientOpts{Token: cfg.Token, HostName: cfg.Host, InsecureSkipVerify: cfg.SkipTLSVerify})
 	if err != nil {
 		return nil, err
 	}

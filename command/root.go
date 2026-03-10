@@ -89,6 +89,8 @@ func NewCmdRoot() *cobra.Command {
 	completionC.GroupID = "setup"
 	cmd.AddCommand(completionC)
 
+	cmd.PersistentFlags().Bool("skip-tls-verify", false, "Skip TLS certificate verification (for self-signed certs)")
+
 	cmd.InitDefaultHelpFlag()
 	cmd.InitDefaultVersionFlag()
 	cmd.Flags().Lookup("help").Usage = "Show usage and available commands"
