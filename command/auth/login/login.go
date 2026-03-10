@@ -113,7 +113,7 @@ func (opts *LoginOptions) Run() (err error) {
 		return opts.startPATLoginFlow(svc, cfg, opts.PAT)
 	}
 
-	if !opts.TokenExpired {
+	if !opts.TokenExpired && cfg.Token != "" {
 		var msg string
 		if opts.User != "" {
 			msg = fmt.Sprintf("You're already logged into DeepSource as %s. Do you want to re-authenticate?", opts.User)

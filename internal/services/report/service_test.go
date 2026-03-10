@@ -283,6 +283,92 @@ func TestReportSkipCertVerification(t *testing.T) {
 	assert.Error(t, err)
 }
 
+func TestReportCreateArtifactError(t *testing.T) {
+	tempDir := t.TempDir()
+	artifactPath := filepath.Join(tempDir, "coverage.xml")
+	assert.NoError(t, os.WriteFile(artifactPath, []byte("<coverage/>"), 0o644))
+
+	httpClient := &mockHTTPClient{DoFunc: func(req *http.Request) (*http.Response, error) {
+		body, _ := io.ReadAll(req.Body)
+		_ = req.Body.Close()
+		if bytes.Contains(body, []byte("ArtifactMetadataInput")) {
+			payload := `{"data":{"__type":{"inputFields":[]}}}`
+			return httpResponse(200, payload), nil
+		}
+		if bytes.Contains(body, []byte("createArtifact")) {
+			payload := `{"data":{"createArtifact":{"ok":false,"message":"","error":"Invalid repository"}}}`
+			return httpResponse(200, payload), nil
+		}
+		return httpResponse(400, `{"error":"unexpected"}`), nil
+	}}
+
+	git := adapters.NewMockGitClient()
+	git.SetHead("abc123", "")
+	env := adapters.NewMockEnvironment()
+	env.Set("DEEPSOURCE_DSN", "https://token@localhost:8080")
+
+	svc := NewService(ServiceDeps{
+		GitClient:   git,
+		HTTPClient:  httpClient,
+		FileSystem:  adapters.NewOSFileSystem(),
+		Environment: env,
+		Sentry:      adapters.NewNoOpSentry(),
+		Output:      adapters.NewBufferOutput(),
+		Workdir:     func() (string, error) { return tempDir, nil },
+	})
+
+	_, err := svc.Report(context.Background(), Options{
+		Analyzer:  "test-coverage",
+		Key:       "python",
+		ValueFile: artifactPath,
+	})
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "Invalid repository")
+}
+
+func TestReportCreateArtifactEmptyError(t *testing.T) {
+	tempDir := t.TempDir()
+	artifactPath := filepath.Join(tempDir, "coverage.xml")
+	assert.NoError(t, os.WriteFile(artifactPath, []byte("<coverage/>"), 0o644))
+
+	httpClient := &mockHTTPClient{DoFunc: func(req *http.Request) (*http.Response, error) {
+		body, _ := io.ReadAll(req.Body)
+		_ = req.Body.Close()
+		if bytes.Contains(body, []byte("ArtifactMetadataInput")) {
+			payload := `{"data":{"__type":{"inputFields":[]}}}`
+			return httpResponse(200, payload), nil
+		}
+		if bytes.Contains(body, []byte("createArtifact")) {
+			payload := `{"data":{"createArtifact":{"ok":false,"message":"","error":""}}}`
+			return httpResponse(200, payload), nil
+		}
+		return httpResponse(400, `{"error":"unexpected"}`), nil
+	}}
+
+	git := adapters.NewMockGitClient()
+	git.SetHead("abc123", "")
+	env := adapters.NewMockEnvironment()
+	env.Set("DEEPSOURCE_DSN", "https://token@localhost:8080")
+
+	svc := NewService(ServiceDeps{
+		GitClient:   git,
+		HTTPClient:  httpClient,
+		FileSystem:  adapters.NewOSFileSystem(),
+		Environment: env,
+		Sentry:      adapters.NewNoOpSentry(),
+		Output:      adapters.NewBufferOutput(),
+		Workdir:     func() (string, error) { return tempDir, nil },
+	})
+
+	_, err := svc.Report(context.Background(), Options{
+		Analyzer:  "test-coverage",
+		Key:       "python",
+		ValueFile: artifactPath,
+	})
+	assert.Error(t, err)
+	assert.Contains(t, err.Error(), "raw response")
+}
+
 func TestCaptureSkipsUserErrors(t *testing.T) {
 	captured := false
 	mockSentry := &captureSentry{onCapture: func(_ error) { captured = true }}
