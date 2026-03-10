@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"strings"
 	"time"
@@ -11,7 +12,9 @@ import (
 	v "github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/command"
 	"github.com/deepsourcelabs/cli/internal/cli/style"
+	"github.com/deepsourcelabs/cli/internal/debug"
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
+	"github.com/deepsourcelabs/cli/internal/update"
 	"github.com/getsentry/sentry-go"
 )
 
@@ -40,6 +43,7 @@ func mainRun() (exitCode int) {
 	if buildMode == "dev" {
 		v.AppName = "deepsource-dev"
 		v.ConfigDirName = ".deepsource-dev"
+		v.BaseURL = "https://cli.deepsource.one"
 	}
 
 	// Init sentry
@@ -67,6 +71,32 @@ func mainRun() (exitCode int) {
 func run() int {
 	v.SetBuildInfo(version, Date, buildMode)
 
+	// Two-phase auto-update: apply pending update or check for new one
+	if update.ShouldAutoUpdate() {
+		state, err := update.ReadUpdateState()
+		if err != nil {
+			debug.Log("update: %v", err)
+		}
+
+		if state != nil {
+			// Phase 2: a previous run found a newer version — apply it now
+			client := &http.Client{Timeout: 30 * time.Second}
+			newVer, err := update.ApplyUpdate(client)
+			if err != nil {
+				debug.Log("update: %v", err)
+			} else if newVer != "" {
+				fmt.Fprintf(os.Stderr, "%s\n", style.Yellow("Updated DeepSource CLI to v%s", newVer))
+			}
+		} else {
+			// Phase 1: check manifest and write state file for next run
+			client := &http.Client{Timeout: 3 * time.Second}
+			if err := update.CheckForUpdate(client); err != nil {
+				debug.Log("update: %v", err)
+			}
+		}
+	}
+
+	exitCode := 0
 	if err := command.Execute(); err != nil {
 		var cliErr *clierrors.CLIError
 		if errors.As(err, &cliErr) {
@@ -78,7 +108,8 @@ func run() int {
 			sentry.CaptureException(err)
 		}
 		sentry.Flush(2 * time.Second)
-		return 1
+		exitCode = 1
 	}
-	return 0
+
+	return exitCode
 }
