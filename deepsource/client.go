@@ -72,7 +72,7 @@ func New(cp ClientOpts) (*Client, error) {
 	if cp.InsecureSkipVerify {
 		base = &http.Transport{
 			TLSClientConfig: &tls.Config{
-				InsecureSkipVerify: true, //nolint:gosec // user-requested for self-signed certs
+				InsecureSkipVerify: true, //nolint:gosec //skipcq:GSC-G402 // user-requested for self-signed certs
 				MinVersion:         tls.VersionTLS12,
 			},
 		}
