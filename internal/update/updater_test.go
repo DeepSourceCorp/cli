@@ -253,10 +253,28 @@ func TestCheckForUpdate_AlreadyUpToDate(t *testing.T) {
 	t.Setenv("HOME", tmpHome)
 	buildinfo.SetBuildInfo("2.0.40", "", "prod")
 
-	// Same version — no state file should be written
-	newer, _ := IsNewer("2.0.40", "2.0.40")
-	if newer {
-		t.Fatal("expected newer=false for same version")
+	key := runtime.GOOS + "_" + runtime.GOARCH
+	manifestJSON := fmt.Sprintf(`{
+		"version": "2.0.40",
+		"platforms": {
+			%q: {
+				"archive": "deepsource_2.0.40_%s.tar.gz",
+				"sha256": "abc123"
+			}
+		}
+	}`, key, key)
+
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Write([]byte(manifestJSON))
+	}))
+	defer srv.Close()
+
+	origBaseURL := buildinfo.BaseURL
+	buildinfo.BaseURL = srv.URL
+	defer func() { buildinfo.BaseURL = origBaseURL }()
+
+	if err := CheckForUpdate(srv.Client()); err != nil {
+		t.Fatalf("CheckForUpdate: %v", err)
 	}
 
 	got, err := ReadUpdateState()
@@ -339,6 +357,266 @@ func TestApplyUpdate_NoStateFile(t *testing.T) {
 	}
 	if ver != "" {
 		t.Errorf("expected empty version, got %q", ver)
+	}
+}
+
+func TestCheckForUpdate_NoBuildInfo(t *testing.T) {
+	buildinfo.ClearBuildInfo()
+	err := CheckForUpdate(&http.Client{})
+	if err == nil {
+		t.Fatal("expected error when build info is nil")
+	}
+}
+
+func TestCheckForUpdate_NoPlatform(t *testing.T) {
+	tmpHome := t.TempDir()
+	t.Setenv("HOME", tmpHome)
+	buildinfo.SetBuildInfo("2.0.30", "", "prod")
+
+	// Manifest with no matching platform
+	manifestJSON := `{"version": "2.0.40", "platforms": {"fake_arch": {"archive": "a.tar.gz", "sha256": "abc"}}}`
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Write([]byte(manifestJSON))
+	}))
+	defer srv.Close()
+
+	origBaseURL := buildinfo.BaseURL
+	buildinfo.BaseURL = srv.URL
+	defer func() { buildinfo.BaseURL = origBaseURL }()
+
+	err := CheckForUpdate(srv.Client())
+	if err == nil {
+		t.Fatal("expected error for missing platform")
+	}
+}
+
+func TestFetchManifest(t *testing.T) {
+	key := runtime.GOOS + "_" + runtime.GOARCH
+	manifestJSON := fmt.Sprintf(`{
+		"version": "2.0.50",
+		"buildTime": "2026-03-01T00:00:00Z",
+		"platforms": {%q: {"archive": "a.tar.gz", "sha256": "abc"}}
+	}`, key)
+
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Write([]byte(manifestJSON))
+	}))
+	defer srv.Close()
+
+	origBaseURL := buildinfo.BaseURL
+	buildinfo.BaseURL = srv.URL
+	defer func() { buildinfo.BaseURL = origBaseURL }()
+
+	m, err := FetchManifest(srv.Client())
+	if err != nil {
+		t.Fatalf("FetchManifest: %v", err)
+	}
+	if m.Version != "2.0.50" {
+		t.Errorf("expected version 2.0.50, got %s", m.Version)
+	}
+	if _, ok := m.Platforms[key]; !ok {
+		t.Errorf("expected platform %s in manifest", key)
+	}
+}
+
+func TestFetchManifest_HTTPError(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.WriteHeader(http.StatusInternalServerError)
+	}))
+	defer srv.Close()
+
+	origBaseURL := buildinfo.BaseURL
+	buildinfo.BaseURL = srv.URL
+	defer func() { buildinfo.BaseURL = origBaseURL }()
+
+	_, err := FetchManifest(srv.Client())
+	if err == nil {
+		t.Fatal("expected error for HTTP 500")
+	}
+}
+
+func TestFetchManifest_InvalidJSON(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Write([]byte("not json"))
+	}))
+	defer srv.Close()
+
+	origBaseURL := buildinfo.BaseURL
+	buildinfo.BaseURL = srv.URL
+	defer func() { buildinfo.BaseURL = origBaseURL }()
+
+	_, err := FetchManifest(srv.Client())
+	if err == nil {
+		t.Fatal("expected error for invalid JSON")
+	}
+}
+
+func TestDownloadFile(t *testing.T) {
+	content := []byte("file data")
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Write(content)
+	}))
+	defer srv.Close()
+
+	data, err := downloadFile(srv.Client(), srv.URL+"/file")
+	if err != nil {
+		t.Fatalf("downloadFile: %v", err)
+	}
+	if !bytes.Equal(data, content) {
+		t.Errorf("got %q, want %q", data, content)
+	}
+}
+
+func TestDownloadFile_HTTPError(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.WriteHeader(http.StatusNotFound)
+	}))
+	defer srv.Close()
+
+	_, err := downloadFile(srv.Client(), srv.URL+"/missing")
+	if err == nil {
+		t.Fatal("expected error for HTTP 404")
+	}
+}
+
+func TestApplyUpdate_ChecksumMismatch(t *testing.T) {
+	tmpHome := t.TempDir()
+	t.Setenv("HOME", tmpHome)
+
+	archive := createTarGz(t, buildinfo.AppName, []byte("binary"))
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Write(archive)
+	}))
+	defer srv.Close()
+
+	state := &UpdateState{
+		Version:    "2.0.40",
+		ArchiveURL: srv.URL + "/archive.tar.gz",
+		SHA256:     "0000000000000000000000000000000000000000000000000000000000000000",
+		CheckedAt:  time.Now().UTC(),
+	}
+	if err := writeUpdateState(state); err != nil {
+		t.Fatal(err)
+	}
+
+	fakeBin := filepath.Join(t.TempDir(), buildinfo.AppName)
+	if err := os.WriteFile(fakeBin, []byte("old"), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	origExecPath := executablePath
+	executablePath = func() (string, error) { return fakeBin, nil }
+	defer func() { executablePath = origExecPath }()
+
+	_, err := ApplyUpdate(srv.Client())
+	if err == nil {
+		t.Fatal("expected checksum mismatch error")
+	}
+}
+
+func TestApplyUpdate_ZipArchive(t *testing.T) {
+	tmpHome := t.TempDir()
+	t.Setenv("HOME", tmpHome)
+	buildinfo.SetBuildInfo("2.0.30", "", "prod")
+
+	binaryContent := []byte("new deepsource binary from zip")
+	binaryName := buildinfo.AppName
+	if runtime.GOOS == "windows" {
+		binaryName += ".exe"
+	}
+	archive := createZip(t, binaryName, binaryContent)
+	checksum := sha256.Sum256(archive)
+	checksumHex := hex.EncodeToString(checksum[:])
+
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Write(archive)
+	}))
+	defer srv.Close()
+
+	state := &UpdateState{
+		Version:    "2.0.40",
+		ArchiveURL: srv.URL + "/deepsource_2.0.40.zip",
+		SHA256:     checksumHex,
+		CheckedAt:  time.Now().UTC(),
+	}
+	if err := writeUpdateState(state); err != nil {
+		t.Fatal(err)
+	}
+
+	fakeBin := filepath.Join(t.TempDir(), binaryName)
+	if err := os.WriteFile(fakeBin, []byte("old"), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	origExecPath := executablePath
+	executablePath = func() (string, error) { return fakeBin, nil }
+	defer func() { executablePath = origExecPath }()
+
+	ver, err := ApplyUpdate(srv.Client())
+	if err != nil {
+		t.Fatalf("ApplyUpdate: %v", err)
+	}
+	if ver != "2.0.40" {
+		t.Errorf("expected version 2.0.40, got %s", ver)
+	}
+
+	got, err := os.ReadFile(fakeBin)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !bytes.Equal(got, binaryContent) {
+		t.Errorf("binary content mismatch: got %q, want %q", got, binaryContent)
+	}
+}
+
+func TestApplyUpdate_DownloadError(t *testing.T) {
+	tmpHome := t.TempDir()
+	t.Setenv("HOME", tmpHome)
+
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.WriteHeader(http.StatusInternalServerError)
+	}))
+	defer srv.Close()
+
+	state := &UpdateState{
+		Version:    "2.0.40",
+		ArchiveURL: srv.URL + "/archive.tar.gz",
+		SHA256:     "abc",
+		CheckedAt:  time.Now().UTC(),
+	}
+	if err := writeUpdateState(state); err != nil {
+		t.Fatal(err)
+	}
+
+	_, err := ApplyUpdate(srv.Client())
+	if err == nil {
+		t.Fatal("expected download error")
+	}
+}
+
+func TestDownloadFile_NetworkError(t *testing.T) {
+	client := &http.Client{Timeout: 1 * time.Second}
+	_, err := downloadFile(client, "http://127.0.0.1:1/nonexistent")
+	if err == nil {
+		t.Fatal("expected network error")
+	}
+}
+
+func TestFetchManifest_NetworkError(t *testing.T) {
+	origBaseURL := buildinfo.BaseURL
+	buildinfo.BaseURL = "http://127.0.0.1:1"
+	defer func() { buildinfo.BaseURL = origBaseURL }()
+
+	client := &http.Client{Timeout: 1 * time.Second}
+	_, err := FetchManifest(client)
+	if err == nil {
+		t.Fatal("expected network error")
+	}
+}
+
+func TestPlatformKey(t *testing.T) {
+	key := PlatformKey()
+	expected := runtime.GOOS + "_" + runtime.GOARCH
+	if key != expected {
+		t.Errorf("PlatformKey() = %q, want %q", key, expected)
 	}
 }
 

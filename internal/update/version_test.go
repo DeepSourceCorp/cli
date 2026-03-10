@@ -23,6 +23,11 @@ func TestIsNewer(t *testing.T) {
 		{"invalid current", "abc", "2.0.4", false, true},
 		{"invalid remote", "2.0.3", "xyz", false, true},
 		{"two parts", "2.0", "2.0.1", false, true},
+		{"invalid minor", "1.abc.3", "2.0.0", false, true},
+		{"invalid patch", "1.2.abc", "2.0.0", false, true},
+		{"invalid remote minor", "1.0.0", "1.abc.0", false, true},
+		{"invalid remote patch", "1.0.0", "1.0.abc", false, true},
+		{"pre-release suffix", "2.0.43", "2.0.44-e888cf0f", true, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

@@ -38,6 +38,10 @@ func GetBuildInfo() *BuildInfo {
 	return buildInfo
 }
 
+func ClearBuildInfo() {
+	buildInfo = nil
+}
+
 func (bi BuildInfo) String() string {
 	s := fmt.Sprintf("Version:    v%s", bi.Version)
 	if bi.BuildMode == "dev" && !bi.Date.IsZero() {
