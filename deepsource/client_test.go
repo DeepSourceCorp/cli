@@ -19,6 +19,34 @@ func TestNormalizeHostName(t *testing.T) {
 	}
 }
 
+func TestNewClientDefaultTransport(t *testing.T) {
+	client, err := New(ClientOpts{
+		Token:              "test-token",
+		HostName:           "deepsource.com",
+		InsecureSkipVerify: false,
+	})
+	if err != nil {
+		t.Fatalf("unexpected error creating client: %v", err)
+	}
+	if client == nil {
+		t.Fatal("expected non-nil client")
+	}
+}
+
+func TestNewClientInsecureTransport(t *testing.T) {
+	client, err := New(ClientOpts{
+		Token:              "test-token",
+		HostName:           "enterprise.example.com",
+		InsecureSkipVerify: true,
+	})
+	if err != nil {
+		t.Fatalf("unexpected error creating client with InsecureSkipVerify: %v", err)
+	}
+	if client == nil {
+		t.Fatal("expected non-nil client")
+	}
+}
+
 func TestGetAPIClientURL(t *testing.T) {
 	tests := []struct {
 		hostName string

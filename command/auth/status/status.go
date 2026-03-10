@@ -9,6 +9,7 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/command/cmddeps"
+	"github.com/deepsourcelabs/cli/command/cmdutil"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	dsuser "github.com/deepsourcelabs/cli/deepsource/user"
@@ -16,6 +17,7 @@ import (
 	"github.com/deepsourcelabs/cli/internal/cli/style"
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	"github.com/spf13/cobra"
+
 )
 
 type AuthStatusOptions struct {
@@ -47,13 +49,13 @@ func NewCmdStatusWithDeps(deps *cmddeps.Deps) *cobra.Command {
 		Args:  args.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			opts := AuthStatusOptions{deps: deps}
-			return opts.Run()
+			return opts.Run(cmd)
 		},
 	}
 	return cmd
 }
 
-func (opts *AuthStatusOptions) Run() error {
+func (opts *AuthStatusOptions) Run(cmd *cobra.Command) error {
 	cfgMgr := opts.configManager()
 	cfg, err := cfgMgr.Load()
 	if err != nil {
@@ -68,7 +70,7 @@ func (opts *AuthStatusOptions) Run() error {
 		return nil
 	}
 
-	client, err := opts.apiClient(cfg, cfgMgr)
+	client, err := opts.apiClient(cmd, cfg, cfgMgr)
 	if err != nil {
 		style.Warnf(opts.stdout(), "Could not connect to DeepSource to verify authentication")
 		return nil
@@ -100,14 +102,15 @@ func (opts *AuthStatusOptions) configManager() *config.Manager {
 	return config.DefaultManager()
 }
 
-func (opts *AuthStatusOptions) apiClient(cfg *config.CLIConfig, cfgMgr *config.Manager) (*deepsource.Client, error) {
+func (opts *AuthStatusOptions) apiClient(cmd *cobra.Command, cfg *config.CLIConfig, cfgMgr *config.Manager) (*deepsource.Client, error) {
 	if opts.deps != nil && opts.deps.Client != nil {
 		return opts.deps.Client, nil
 	}
 	return deepsource.New(deepsource.ClientOpts{
-		Token:            cfg.Token,
-		HostName:         cfg.Host,
-		OnTokenRefreshed: cfgMgr.TokenRefreshCallback(),
+		Token:              cfg.Token,
+		HostName:           cfg.Host,
+		InsecureSkipVerify: cmdutil.ResolveSkipTLSVerify(cmd, cfg.SkipTLSVerify),
+		OnTokenRefreshed:   cfgMgr.TokenRefreshCallback(),
 	})
 }
 

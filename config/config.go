@@ -17,6 +17,7 @@ type CLIConfig struct {
 	Token          string    `toml:"token"`
 	TokenExpiresIn time.Time `toml:"token_expires_in,omitempty"`
 	AutoUpdate     *bool     `toml:"auto_update,omitempty"`
+	SkipTLSVerify  bool      `toml:"skip_tls_verify,omitempty"`
 	TokenFromEnv   bool      `toml:"-"`
 }
 
