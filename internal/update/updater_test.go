@@ -86,32 +86,10 @@ func TestReplaceBinary(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	// Point os.Executable to our fake binary by using a symlink
-	// Since we can't override os.Executable, test replaceBinary directly
-	// by calling the internal logic with a known path.
 	newContent := []byte("new binary content")
-
-	// Write new binary to temp, rename
-	tmp, err := os.CreateTemp(dir, "deepsource.new.*")
-	if err != nil {
-		t.Fatal(err)
+	if err := replaceBinaryAt(newContent, fakeBin); err != nil {
+		t.Fatalf("replaceBinaryAt: %v", err)
 	}
-	if _, err := tmp.Write(newContent); err != nil {
-		t.Fatal(err)
-	}
-	if err := tmp.Chmod(0o755); err != nil {
-		t.Fatal(err)
-	}
-	tmp.Close()
-
-	bakPath := fakeBin + ".bak"
-	if err := os.Rename(fakeBin, bakPath); err != nil {
-		t.Fatal(err)
-	}
-	if err := os.Rename(tmp.Name(), fakeBin); err != nil {
-		t.Fatal(err)
-	}
-	os.Remove(bakPath)
 
 	got, err := os.ReadFile(fakeBin)
 	if err != nil {
@@ -230,40 +208,41 @@ func TestCheckForUpdate_NewerVersion(t *testing.T) {
 	buildinfo.SetBuildInfo("2.0.30", "", "prod")
 
 	key := runtime.GOOS + "_" + runtime.GOARCH
-	manifest := Manifest{
-		Version: "2.0.40",
-		Platforms: map[string]PlatformInfo{
-			key: {
-				Archive: "deepsource_2.0.40_" + key + ".tar.gz",
-				SHA256:  "abc123",
-			},
-		},
-	}
-	// Simulate what CheckForUpdate does: fetch manifest, compare, write state
-	newer, _ := IsNewer("2.0.30", manifest.Version)
-	if !newer {
-		t.Fatal("expected newer=true")
-	}
+	manifestJSON := fmt.Sprintf(`{
+		"version": "2.0.40",
+		"platforms": {
+			%q: {
+				"archive": "deepsource_2.0.40_%s.tar.gz",
+				"sha256": "abc123"
+			}
+		}
+	}`, key, key)
 
-	platform := manifest.Platforms[key]
-	state := &UpdateState{
-		Version:    manifest.Version,
-		ArchiveURL: buildinfo.BaseURL + "/build/" + platform.Archive,
-		SHA256:     platform.SHA256,
-		CheckedAt:  time.Now().UTC(),
-	}
-	if err := writeUpdateState(state); err != nil {
-		t.Fatalf("writeUpdateState: %v", err)
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		w.Write([]byte(manifestJSON))
+	}))
+	defer srv.Close()
+
+	// Point manifest fetch at our test server
+	origBaseURL := buildinfo.BaseURL
+	buildinfo.BaseURL = srv.URL
+	defer func() { buildinfo.BaseURL = origBaseURL }()
+
+	if err := CheckForUpdate(srv.Client()); err != nil {
+		t.Fatalf("CheckForUpdate: %v", err)
 	}
 
 	got, err := ReadUpdateState()
 	if err != nil {
 		t.Fatalf("ReadUpdateState: %v", err)
 	}
+	if got == nil {
+		t.Fatal("expected non-nil state")
+	}
 	if got.Version != "2.0.40" {
 		t.Errorf("expected version 2.0.40, got %s", got.Version)
 	}
-	expectedURL := fmt.Sprintf("%s/build/deepsource_2.0.40_%s.tar.gz", buildinfo.BaseURL, key)
+	expectedURL := fmt.Sprintf("%s/build/deepsource_2.0.40_%s.tar.gz", srv.URL, key)
 	if got.ArchiveURL != expectedURL {
 		t.Errorf("expected archive URL %s, got %s", expectedURL, got.ArchiveURL)
 	}
@@ -299,7 +278,7 @@ func TestApplyUpdate_WithStateFile(t *testing.T) {
 	checksum := sha256.Sum256(archive)
 	checksumHex := hex.EncodeToString(checksum[:])
 
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Write(archive)
 	}))
 	defer srv.Close()
@@ -314,42 +293,38 @@ func TestApplyUpdate_WithStateFile(t *testing.T) {
 		t.Fatalf("writeUpdateState: %v", err)
 	}
 
-	client := srv.Client()
+	// Create a fake binary so replaceBinary can replace it
+	fakeBin := filepath.Join(t.TempDir(), buildinfo.AppName)
+	if err := os.WriteFile(fakeBin, []byte("old binary"), 0o755); err != nil {
+		t.Fatal(err)
+	}
 
-	// ApplyUpdate reads the state file internally, so we test it reads correctly.
-	// However, replaceBinary will use os.Executable() which we can't easily mock.
-	// So we test the pieces: state file reading, download, checksum verification.
+	// Override executablePath to point to our fake binary
+	origExecPath := executablePath
+	executablePath = func() (string, error) { return fakeBin, nil }
+	defer func() { executablePath = origExecPath }()
 
-	readState, err := ReadUpdateState()
+	ver, err := ApplyUpdate(srv.Client())
 	if err != nil {
-		t.Fatalf("ReadUpdateState: %v", err)
+		t.Fatalf("ApplyUpdate: %v", err)
 	}
-	if readState.Version != "2.0.40" {
-		t.Fatalf("expected version 2.0.40, got %s", readState.Version)
+	if ver != "2.0.40" {
+		t.Errorf("expected version 2.0.40, got %s", ver)
 	}
 
-	data, err := downloadFile(client, readState.ArchiveURL)
+	// Verify the binary was actually replaced
+	got, err := os.ReadFile(fakeBin)
 	if err != nil {
-		t.Fatalf("downloadFile: %v", err)
+		t.Fatal(err)
+	}
+	if !bytes.Equal(got, binaryContent) {
+		t.Errorf("binary content mismatch: got %q, want %q", got, binaryContent)
 	}
 
-	if err := verifyChecksum(data, readState.SHA256); err != nil {
-		t.Fatalf("verifyChecksum: %v", err)
-	}
-
-	extracted, err := extractFromTarGz(data, buildinfo.AppName)
-	if err != nil {
-		t.Fatalf("extractFromTarGz: %v", err)
-	}
-	if !bytes.Equal(extracted, binaryContent) {
-		t.Errorf("extracted binary mismatch: got %q, want %q", extracted, binaryContent)
-	}
-
-	// Verify clearUpdateState removes the file
-	clearUpdateState()
-	afterClear, _ := ReadUpdateState()
-	if afterClear != nil {
-		t.Error("state file should be removed after clear")
+	// Verify state file was cleared
+	afterApply, _ := ReadUpdateState()
+	if afterApply != nil {
+		t.Error("state file should be removed after apply")
 	}
 }
 

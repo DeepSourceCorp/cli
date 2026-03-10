@@ -23,6 +23,9 @@ import (
 	"github.com/deepsourcelabs/cli/internal/debug"
 )
 
+// executablePath returns the current executable path. Overridable in tests.
+var executablePath = os.Executable
+
 // UpdateState is the on-disk state written by CheckForUpdate and consumed by ApplyUpdate.
 type UpdateState struct {
 	Version    string    `json:"version"`
@@ -32,14 +35,21 @@ type UpdateState struct {
 }
 
 // updateStatePath returns the path to the update state file (~/.deepsource/update.json).
-func updateStatePath() string {
-	home, _ := os.UserHomeDir()
-	return filepath.Join(home, buildinfo.ConfigDirName, "update.json")
+func updateStatePath() (string, error) {
+	home, err := os.UserHomeDir()
+	if err != nil {
+		return "", fmt.Errorf("getting home directory: %w", err)
+	}
+	return filepath.Join(home, buildinfo.ConfigDirName, "update.json"), nil
 }
 
 // ReadUpdateState reads the update state file. Returns nil if the file does not exist.
 func ReadUpdateState() (*UpdateState, error) {
-	data, err := os.ReadFile(updateStatePath())
+	p, err := updateStatePath()
+	if err != nil {
+		return nil, err
+	}
+	data, err := os.ReadFile(p)
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
 			return nil, nil
@@ -58,8 +68,11 @@ func writeUpdateState(s *UpdateState) error {
 	if err != nil {
 		return fmt.Errorf("marshaling update state: %w", err)
 	}
-	p := updateStatePath()
-	if err := os.MkdirAll(filepath.Dir(p), 0o755); err != nil {
+	p, err := updateStatePath()
+	if err != nil {
+		return err
+	}
+	if err := os.MkdirAll(filepath.Dir(p), 0o750); err != nil {
 		return fmt.Errorf("creating config dir: %w", err)
 	}
 	if err := os.WriteFile(p, data, 0o644); err != nil {
@@ -69,7 +82,11 @@ func writeUpdateState(s *UpdateState) error {
 }
 
 func clearUpdateState() {
-	_ = os.Remove(updateStatePath())
+	p, err := updateStatePath()
+	if err != nil {
+		return
+	}
+	_ = os.Remove(p)
 }
 
 // CheckForUpdate fetches the manifest, compares versions, and writes a state
@@ -208,7 +225,8 @@ func downloadFile(client *http.Client, url string) ([]byte, error) {
 		return nil, fmt.Errorf("download returned HTTP %d", resp.StatusCode)
 	}
 
-	data, err := io.ReadAll(resp.Body)
+	const maxUpdateSize = 50 * 1024 * 1024 // 50MB
+	data, err := io.ReadAll(io.LimitReader(resp.Body, maxUpdateSize))
 	if err != nil {
 		return nil, fmt.Errorf("reading download body: %w", err)
 	}
@@ -276,7 +294,7 @@ func extractFromZip(data []byte, binaryName string) ([]byte, error) {
 
 // replaceBinary atomically replaces the current executable with newBinary.
 func replaceBinary(newBinary []byte) error {
-	exe, err := os.Executable()
+	exe, err := executablePath()
 	if err != nil {
 		return fmt.Errorf("finding current executable: %w", err)
 	}
@@ -284,9 +302,13 @@ func replaceBinary(newBinary []byte) error {
 	if err != nil {
 		return fmt.Errorf("resolving symlinks: %w", err)
 	}
+	return replaceBinaryAt(newBinary, exe)
+}
 
-	dir := filepath.Dir(exe)
-	base := filepath.Base(exe)
+// replaceBinaryAt atomically replaces the binary at destPath with newBinary.
+func replaceBinaryAt(newBinary []byte, destPath string) error {
+	dir := filepath.Dir(destPath)
+	base := filepath.Base(destPath)
 
 	// Write new binary to a temp file in the same directory (same filesystem for rename)
 	tmp, err := os.CreateTemp(dir, base+".new.*")
@@ -311,17 +333,17 @@ func replaceBinary(newBinary []byte) error {
 	}
 
 	// Rename current binary to .bak, then new to current
-	bakPath := exe + ".bak"
+	bakPath := destPath + ".bak"
 	_ = os.Remove(bakPath) // clean up any leftover .bak
 
-	if err := os.Rename(exe, bakPath); err != nil {
+	if err := os.Rename(destPath, bakPath); err != nil {
 		os.Remove(tmpPath)
 		return fmt.Errorf("backing up current binary: %w", err)
 	}
 
-	if err := os.Rename(tmpPath, exe); err != nil {
+	if err := os.Rename(tmpPath, destPath); err != nil {
 		// Try to restore the backup
-		_ = os.Rename(bakPath, exe)
+		_ = os.Rename(bakPath, destPath)
 		os.Remove(tmpPath)
 		return fmt.Errorf("replacing binary: %w", err)
 	}
