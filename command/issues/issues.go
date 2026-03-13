@@ -314,7 +314,11 @@ func (opts *IssuesOptions) resolveIssues(ctx context.Context, client *deepsource
 		case ab.PRNumber > 0:
 			opts.PRNumber = ab.PRNumber
 			opts.CommitOid = ab.CommitOid
-			issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, ab.PRNumber, prFilters)
+			if ab.Fallback {
+				issuesList, err = client.GetRunIssuesFlat(ctx, ab.CommitOid, serverFilters)
+			} else {
+				issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, ab.PRNumber, prFilters)
+			}
 		case ab.UseRepo:
 			issuesList, err = client.GetIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 		default:
