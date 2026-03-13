@@ -69,7 +69,12 @@
     }
 
     Expand-Archive -Path $TmpFile -DestinationPath $TmpExtract -Force
-    Copy-Item -Path (Join-Path $TmpExtract "$BinaryName.exe") -Destination (Join-Path $InstallDir "$BinaryName.exe") -Force
+    $ExePath = Get-ChildItem -Path $TmpExtract -Filter "$BinaryName.exe" -Recurse | Select-Object -First 1
+    if (-not $ExePath) {
+        Fail "Could not find $BinaryName.exe in extracted archive"
+        return
+    }
+    Copy-Item -Path $ExePath.FullName -Destination (Join-Path $InstallDir "$BinaryName.exe") -Force
 
     # Cleanup
     Remove-Item -Path $TmpFile -Force
