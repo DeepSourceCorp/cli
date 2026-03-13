@@ -277,6 +277,11 @@ jobs:
               -e 's|__DEFAULT_INSTALL_DIR__|./bin|g' \
             scripts/install.sh.template > artifacts/install-legacy
 
+          # PowerShell install script (Windows)
+          sed -e "s|__BASE_URL__|${{ needs.resolve-env.outputs.base_url }}|g" \
+              -e "s|__BINARY_NAME__|${{ needs.resolve-env.outputs.binary_name }}|g" \
+            scripts/install.ps1.template > artifacts/install.ps1
+
       - name: Upload to R2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
@@ -300,7 +305,7 @@ jobs:
           done
 
           # Upload manifest and install scripts (short cache)
-          for f in artifacts/manifest.json artifacts/install artifacts/install-legacy; do
+          for f in artifacts/manifest.json artifacts/install artifacts/install-legacy artifacts/install.ps1; do
             aws s3 cp "$f" "s3://${BUCKET}/${PREFIX}$(basename "$f")" \
               --endpoint-url "$ENDPOINT" \
               --cache-control "public, max-age=60"
