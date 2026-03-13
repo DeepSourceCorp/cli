@@ -1,84 +1,92 @@
 # DeepSource CLI installer for Windows
+# Wrapped in a scriptblock so that 'return' does not close the host when run via `irm | iex`
 
-$ErrorActionPreference = "Stop"
+& {
+    $ErrorActionPreference = "Stop"
 
-$BaseUrl = "__BASE_URL__"
-$BinaryName = "__BINARY_NAME__"
+    $BaseUrl = "__BASE_URL__"
+    $BinaryName = "__BINARY_NAME__"
 
-function Pass($msg) { Write-Host "✓ $msg" -ForegroundColor Green }
-function Fail($msg) { Write-Host "✗ $msg" -ForegroundColor Red; exit 1 }
-function Info($msg) { Write-Host "→ $msg" -ForegroundColor Cyan }
+    function Pass($msg) { Write-Host "✓ $msg" -ForegroundColor Green }
+    function Fail($msg) { Write-Host "✗ $msg" -ForegroundColor Red; return }
+    function Info($msg) { Write-Host "→ $msg" -ForegroundColor Cyan }
 
-$PlatformKey = "windows_amd64"
+    $PlatformKey = "windows_amd64"
 
-# Fetch manifest
-try {
-    $Manifest = Invoke-RestMethod -Uri "$BaseUrl/manifest.json"
-} catch {
-    Fail "Failed to fetch manifest: $_"
-}
+    # Fetch manifest
+    try {
+        $Manifest = Invoke-RestMethod -Uri "$BaseUrl/manifest.json"
+    } catch {
+        Fail "Failed to fetch manifest: $_"
+        return
+    }
 
-$Version = $Manifest.version
-if (-not $Version) {
-    Fail "Failed to determine latest version from manifest"
-}
-Pass "Version: v$Version"
+    $Version = $Manifest.version
+    if (-not $Version) {
+        Fail "Failed to determine latest version from manifest"
+        return
+    }
+    Pass "Version: v$Version"
 
-$Platform = $Manifest.platforms.$PlatformKey
-if (-not $Platform) {
-    Fail "No build available for $PlatformKey"
-}
+    $Platform = $Manifest.platforms.$PlatformKey
+    if (-not $Platform) {
+        Fail "No build available for $PlatformKey"
+        return
+    }
 
-$Archive = $Platform.archive
-$ExpectedSha = $Platform.sha256
-$ArchiveUrl = "$BaseUrl/build/$Archive"
+    $Archive = $Platform.archive
+    $ExpectedSha = $Platform.sha256
+    $ArchiveUrl = "$BaseUrl/build/$Archive"
 
-# Download archive
-$TmpFile = Join-Path ([System.IO.Path]::GetTempPath()) $Archive
-try {
-    Invoke-WebRequest -Uri $ArchiveUrl -OutFile $TmpFile -UseBasicParsing
-} catch {
-    Fail "Failed to download archive: $_"
-}
-Pass "Downloaded"
+    # Download archive
+    $TmpFile = Join-Path ([System.IO.Path]::GetTempPath()) $Archive
+    try {
+        Invoke-WebRequest -Uri $ArchiveUrl -OutFile $TmpFile -UseBasicParsing
+    } catch {
+        Fail "Failed to download archive: $_"
+        return
+    }
+    Pass "Downloaded"
 
-# Verify SHA256
-$ActualSha = (Get-FileHash -Path $TmpFile -Algorithm SHA256).Hash.ToLower()
-if ($ActualSha -ne $ExpectedSha) {
+    # Verify SHA256
+    $ActualSha = (Get-FileHash -Path $TmpFile -Algorithm SHA256).Hash.ToLower()
+    if ($ActualSha -ne $ExpectedSha) {
+        Remove-Item -Path $TmpFile -Force
+        Fail "Checksum mismatch: expected $ExpectedSha, got $ActualSha"
+        return
+    }
+    Pass "Checksum verified"
+
+    # Extract binary
+    $InstallDir = Join-Path $env:LOCALAPPDATA "DeepSource\bin"
+    if (-not (Test-Path $InstallDir)) {
+        New-Item -ItemType Directory -Path $InstallDir -Force | Out-Null
+    }
+
+    $TmpExtract = Join-Path ([System.IO.Path]::GetTempPath()) "deepsource_extract"
+    if (Test-Path $TmpExtract) {
+        Remove-Item -Path $TmpExtract -Recurse -Force
+    }
+
+    Expand-Archive -Path $TmpFile -DestinationPath $TmpExtract -Force
+    Copy-Item -Path (Join-Path $TmpExtract "$BinaryName.exe") -Destination (Join-Path $InstallDir "$BinaryName.exe") -Force
+
+    # Cleanup
     Remove-Item -Path $TmpFile -Force
-    Fail "Checksum mismatch: expected $ExpectedSha, got $ActualSha"
-}
-Pass "Checksum verified"
-
-# Extract binary
-$InstallDir = Join-Path $env:LOCALAPPDATA "DeepSource\bin"
-if (-not (Test-Path $InstallDir)) {
-    New-Item -ItemType Directory -Path $InstallDir -Force | Out-Null
-}
-
-$TmpExtract = Join-Path ([System.IO.Path]::GetTempPath()) "deepsource_extract"
-if (Test-Path $TmpExtract) {
     Remove-Item -Path $TmpExtract -Recurse -Force
+
+    Pass "Installed to $InstallDir\$BinaryName.exe"
+
+    # Add to user PATH if not already present
+    $UserPath = [Environment]::GetEnvironmentVariable("Path", "User")
+    if ($UserPath -notlike "*$InstallDir*") {
+        [Environment]::SetEnvironmentVariable("Path", "$InstallDir;$UserPath", "User")
+        Pass "Added $InstallDir to user PATH"
+        Info "Restart your terminal for PATH changes to take effect"
+    } else {
+        Pass "$InstallDir is already in PATH"
+    }
+
+    Write-Host ""
+    Info "Run '$BinaryName' to get started"
 }
-
-Expand-Archive -Path $TmpFile -DestinationPath $TmpExtract -Force
-Copy-Item -Path (Join-Path $TmpExtract "$BinaryName.exe") -Destination (Join-Path $InstallDir "$BinaryName.exe") -Force
-
-# Cleanup
-Remove-Item -Path $TmpFile -Force
-Remove-Item -Path $TmpExtract -Recurse -Force
-
-Pass "Installed to $InstallDir\$BinaryName.exe"
-
-# Add to user PATH if not already present
-$UserPath = [Environment]::GetEnvironmentVariable("Path", "User")
-if ($UserPath -notlike "*$InstallDir*") {
-    [Environment]::SetEnvironmentVariable("Path", "$InstallDir;$UserPath", "User")
-    Pass "Added $InstallDir to user PATH"
-    Info "Restart your terminal for PATH changes to take effect"
-} else {
-    Pass "$InstallDir is already in PATH"
-}
-
-Write-Host ""
-Info "Run '$BinaryName' to get started"
