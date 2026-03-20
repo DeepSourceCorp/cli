@@ -95,6 +95,7 @@ func NewCmdRoot() *cobra.Command {
 	cmd.AddCommand(updateC)
 
 	cmd.PersistentFlags().Bool("skip-tls-verify", false, "Skip TLS certificate verification (for self-signed certs)")
+	cmd.Flags().BoolP("verbose", "v", false, "Show detailed output including examples")
 
 	cmd.InitDefaultHelpFlag()
 	cmd.InitDefaultVersionFlag()
@@ -172,13 +173,19 @@ func rootHelpFunc(cmd *cobra.Command, _ []string) {
 		}
 	}
 
-	// Examples
-	examples := buildExampleText()
-	if examples != "" {
-		fmt.Fprintf(out, "%s\n", style.BoldCyan("Examples:"))
-		for _, line := range strings.Split(examples, "\n") {
-			fmt.Fprintf(out, "  %s\n", line)
+	// Examples (shown only with --verbose / -v)
+	verbose, _ := cmd.Flags().GetBool("verbose")
+	if verbose {
+		examples := buildExampleText()
+		if examples != "" {
+			fmt.Fprintf(out, "%s\n", style.BoldCyan("Examples:"))
+			for _, line := range strings.Split(examples, "\n") {
+				fmt.Fprintf(out, "  %s\n", line)
+			}
+			fmt.Fprintln(out)
 		}
+	} else {
+		fmt.Fprintln(out, pterm.Gray("Use --help -v to see usage examples."))
 		fmt.Fprintln(out)
 	}
 

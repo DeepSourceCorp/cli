@@ -3,11 +3,9 @@ package update
 import (
 	"fmt"
 	"net/http"
-	"os"
 	"time"
 
 	"github.com/deepsourcelabs/cli/buildinfo"
-	"github.com/deepsourcelabs/cli/internal/cli/style"
 	"github.com/deepsourcelabs/cli/internal/update"
 	"github.com/spf13/cobra"
 )
@@ -51,7 +49,7 @@ func runUpdate(cmd *cobra.Command) error {
 	}
 
 	if newVer != "" {
-		style.Successf(os.Stderr, "Updated DeepSource CLI to v%s", newVer)
+		fmt.Fprintf(w, "Updated to v%s\n", newVer)
 	}
 
 	return nil

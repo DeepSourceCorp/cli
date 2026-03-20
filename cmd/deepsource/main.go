@@ -16,6 +16,7 @@ import (
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	"github.com/deepsourcelabs/cli/internal/update"
 	"github.com/getsentry/sentry-go"
+	"github.com/pterm/pterm"
 )
 
 var (
@@ -71,8 +72,9 @@ func mainRun() (exitCode int) {
 func run() int {
 	v.SetBuildInfo(version, Date, buildMode)
 
-	// Check for available updates and notify
-	if update.ShouldCheckForUpdate() {
+	// Check for available updates and notify (skip when running "update" itself)
+	isUpdateCmd := len(os.Args) >= 2 && os.Args[1] == "update"
+	if !isUpdateCmd && update.ShouldCheckForUpdate() {
 		client := &http.Client{Timeout: 3 * time.Second}
 		if err := update.CheckForUpdate(client); err != nil {
 			debug.Log("update: %v", err)
@@ -83,7 +85,7 @@ func run() int {
 			debug.Log("update: %v", err)
 		}
 		if state != nil {
-			fmt.Fprintf(os.Stderr, "Update available: v%s — run 'deepsource update' to install.\n", state.Version)
+			fmt.Fprintln(os.Stderr, pterm.Yellow(fmt.Sprintf("Update available: v%s — run 'deepsource update' to install.", state.Version)))
 		}
 	}
 
