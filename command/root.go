@@ -8,6 +8,7 @@ import (
 	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/command/auth"
 	completionCmd "github.com/deepsourcelabs/cli/command/completion"
+	updateCmd "github.com/deepsourcelabs/cli/command/update"
 	"github.com/deepsourcelabs/cli/command/issues"
 	"github.com/deepsourcelabs/cli/command/metrics"
 	"github.com/deepsourcelabs/cli/command/report"
@@ -88,6 +89,10 @@ func NewCmdRoot() *cobra.Command {
 	completionC := completionCmd.NewCmdCompletion()
 	completionC.GroupID = "setup"
 	cmd.AddCommand(completionC)
+
+	updateC := updateCmd.NewCmdUpdate()
+	updateC.GroupID = "setup"
+	cmd.AddCommand(updateC)
 
 	cmd.PersistentFlags().Bool("skip-tls-verify", false, "Skip TLS certificate verification (for self-signed certs)")
 

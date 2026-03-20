@@ -100,7 +100,7 @@ func TestReplaceBinary(t *testing.T) {
 	}
 }
 
-func TestShouldAutoUpdate_DevBuild(t *testing.T) {
+func TestShouldCheckForUpdate_DevBuild(t *testing.T) {
 	buildinfo.SetBuildInfo("2.0.3", "", "dev")
 
 	// Clear CI vars so they don't interfere
@@ -109,27 +109,27 @@ func TestShouldAutoUpdate_DevBuild(t *testing.T) {
 		t.Setenv(v, "")
 	}
 
-	if !ShouldAutoUpdate() {
+	if !ShouldCheckForUpdate() {
 		t.Error("expected true for dev build with real version")
 	}
 }
 
-func TestShouldAutoUpdate_DevelopmentVersion(t *testing.T) {
+func TestShouldCheckForUpdate_DevelopmentVersion(t *testing.T) {
 	buildinfo.SetBuildInfo("development", "", "")
-	if ShouldAutoUpdate() {
+	if ShouldCheckForUpdate() {
 		t.Error("expected false for development version")
 	}
 }
 
-func TestShouldAutoUpdate_CI(t *testing.T) {
+func TestShouldCheckForUpdate_CI(t *testing.T) {
 	buildinfo.SetBuildInfo("2.0.3", "", "prod")
 	t.Setenv("CI", "true")
-	if ShouldAutoUpdate() {
+	if ShouldCheckForUpdate() {
 		t.Error("expected false in CI")
 	}
 }
 
-func TestShouldAutoUpdate_Prod(t *testing.T) {
+func TestShouldCheckForUpdate_Prod(t *testing.T) {
 	buildinfo.SetBuildInfo("2.0.3", "", "prod")
 
 	// Clear CI vars
@@ -138,7 +138,7 @@ func TestShouldAutoUpdate_Prod(t *testing.T) {
 		t.Setenv(v, "")
 	}
 
-	if !ShouldAutoUpdate() {
+	if !ShouldCheckForUpdate() {
 		t.Error("expected true for prod build outside CI")
 	}
 }

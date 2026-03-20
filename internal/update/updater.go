@@ -19,7 +19,6 @@ import (
 	"time"
 
 	"github.com/deepsourcelabs/cli/buildinfo"
-	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/internal/debug"
 )
 
@@ -179,8 +178,8 @@ func ApplyUpdate(client *http.Client) (string, error) {
 	return state.Version, nil
 }
 
-// ShouldAutoUpdate reports whether the auto-updater should run.
-func ShouldAutoUpdate() bool {
+// ShouldCheckForUpdate reports whether the update check should run.
+func ShouldCheckForUpdate() bool {
 	bi := buildinfo.GetBuildInfo()
 	if bi == nil {
 		return false
@@ -202,13 +201,6 @@ func ShouldAutoUpdate() bool {
 			debug.Log("update: skipping (CI detected via %s)", v)
 			return false
 		}
-	}
-
-	// Check config
-	cfg, err := config.GetConfig()
-	if err == nil && cfg.AutoUpdate != nil && !*cfg.AutoUpdate {
-		debug.Log("update: skipping (disabled in config)")
-		return false
 	}
 
 	return true
