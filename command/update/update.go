@@ -38,7 +38,7 @@ func runUpdate(cmd *cobra.Command) error {
 
 	if state == nil {
 		bi := buildinfo.GetBuildInfo()
-		style.Successf(w, "Already up to date (v%s)", bi.Version)
+		fmt.Fprintf(w, "Already up to date (v%s)\n", bi.Version)
 		return nil
 	}
 
