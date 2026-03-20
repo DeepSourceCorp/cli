@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -85,7 +86,7 @@ func run() int {
 			debug.Log("update: %v", err)
 		}
 		if state != nil {
-			fmt.Fprintln(os.Stderr, pterm.Yellow(fmt.Sprintf("Update available: v%s — run 'deepsource update' to install.", state.Version)))
+			fmt.Fprintln(os.Stderr, pterm.Yellow(fmt.Sprintf("Update available: v%s, run '%s update' to install.", state.Version, filepath.Base(os.Args[0]))))
 		}
 	}
 
