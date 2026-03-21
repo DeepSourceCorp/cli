@@ -34,7 +34,9 @@ const fetchPRIssuesQuery = `query GetPRIssues(
             shortcode
             category
             severity
-            explanation
+            issue {
+              shortDescription
+            }
           }
         }
         pageInfo {
@@ -76,7 +78,9 @@ type PRIssuesListResponse struct {
 						Shortcode  string `json:"shortcode"`
 						Category   string `json:"category"`
 						Severity   string `json:"severity"`
-						Explanation string `json:"explanation"`
+						Issue      struct {
+							ShortDescription string `json:"shortDescription"`
+						} `json:"issue"`
 					} `json:"node"`
 				} `json:"edges"`
 				PageInfo pagination.PageInfo `json:"pageInfo"`
@@ -130,7 +134,7 @@ func (r *PRIssuesListRequest) Do(ctx context.Context) ([]issues.Issue, error) {
 				IssueCategory: node.Category,
 				IssueSeverity: node.Severity,
 				IssueSource:   node.Source,
-				Description:   node.Explanation,
+				Description:   node.Issue.ShortDescription,
 				Location: issues.Location{
 					Path: node.Path,
 					Position: issues.Position{
