@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -16,6 +17,7 @@ import (
 	clierrors "github.com/deepsourcelabs/cli/internal/errors"
 	"github.com/deepsourcelabs/cli/internal/update"
 	"github.com/getsentry/sentry-go"
+	"github.com/pterm/pterm"
 )
 
 var (
@@ -71,28 +73,20 @@ func mainRun() (exitCode int) {
 func run() int {
 	v.SetBuildInfo(version, Date, buildMode)
 
-	// Two-phase auto-update: apply pending update or check for new one
-	if update.ShouldAutoUpdate() {
+	// Check for available updates and notify (skip when running "update" itself)
+	isUpdateCmd := len(os.Args) >= 2 && os.Args[1] == "update"
+	if !isUpdateCmd && update.ShouldCheckForUpdate() {
+		client := &http.Client{Timeout: 3 * time.Second}
+		if err := update.CheckForUpdate(client); err != nil {
+			debug.Log("update: %v", err)
+		}
+
 		state, err := update.ReadUpdateState()
 		if err != nil {
 			debug.Log("update: %v", err)
 		}
-
 		if state != nil {
-			// Phase 2: a previous run found a newer version — apply it now
-			client := &http.Client{Timeout: 30 * time.Second}
-			newVer, err := update.ApplyUpdate(client)
-			if err != nil {
-				debug.Log("update: %v", err)
-			} else if newVer != "" {
-				fmt.Fprintf(os.Stderr, "%s\n", style.Yellow("Updated DeepSource CLI to v%s", newVer))
-			}
-		} else {
-			// Phase 1: check manifest and write state file for next run
-			client := &http.Client{Timeout: 3 * time.Second}
-			if err := update.CheckForUpdate(client); err != nil {
-				debug.Log("update: %v", err)
-			}
+			fmt.Fprintln(os.Stderr, pterm.Yellow(fmt.Sprintf("Update available: v%s, run '%s update' to install.", state.Version, filepath.Base(os.Args[0]))))
 		}
 	}
 
