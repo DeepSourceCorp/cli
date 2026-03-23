@@ -156,6 +156,10 @@ func detectSubRepoPath() string {
 		return ""
 	}
 
+	if rel == "." {
+		return ""
+	}
+
 	debug.Log("git: sub-repo relative path %q", rel)
 	return strings.ReplaceAll(rel, string(os.PathSeparator), ":")
 }

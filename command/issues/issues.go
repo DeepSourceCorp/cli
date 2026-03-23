@@ -300,12 +300,16 @@ func (opts *IssuesOptions) resolveIssuesWithRetry(ctx context.Context, client *d
 		return nil, err
 	}
 
+	baseName := strings.SplitN(remote.RepoName, ":", 2)[0]
 	parts := strings.Split(remote.SubRepoSuffix, ":")
-	for len(parts) > 1 {
+	for len(parts) > 0 {
 		parts = parts[:len(parts)-1]
 		remote.SubRepoSuffix = strings.Join(parts, ":")
-		baseName := strings.SplitN(remote.RepoName, ":", 2)[0]
-		remote.RepoName = baseName + ":" + remote.SubRepoSuffix
+		if remote.SubRepoSuffix == "" {
+			remote.RepoName = baseName
+		} else {
+			remote.RepoName = baseName + ":" + remote.SubRepoSuffix
+		}
 
 		issuesList, err = opts.resolveIssues(ctx, client, remote)
 		if err == nil {

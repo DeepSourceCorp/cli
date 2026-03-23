@@ -420,6 +420,16 @@ func TestIssuesMultipleFilters(t *testing.T) {
 	}
 }
 
+// loadGoldenFile reads a golden file and fails the test if it cannot be read.
+func loadGoldenFile(t *testing.T, name string) []byte {
+	t.Helper()
+	data, err := os.ReadFile(goldenPath(name))
+	if err != nil {
+		t.Fatalf("failed to read golden file %s: %v", name, err)
+	}
+	return data
+}
+
 // TestIssuesPRFallbackUsesRunIssues verifies that when auto-branch resolution
 // detects a PR AND the current run is in-progress (fallback), the code fetches
 // issues via GetRunIssuesFlat (commit-scoped) instead of GetPRIssues.
@@ -427,23 +437,10 @@ func TestIssuesMultipleFilters(t *testing.T) {
 func TestIssuesPRFallbackUsesRunIssues(t *testing.T) {
 	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 
-	// Load golden files for the multi-step mock.
-	prFoundData, err := os.ReadFile(goldenPath("get_pr_by_branch_found_response.json"))
-	if err != nil {
-		t.Fatalf("failed to read PR golden file: %v", err)
-	}
-	runsFirstData, err := os.ReadFile(goldenPath("get_analysis_runs_pr_fallback_first_response.json"))
-	if err != nil {
-		t.Fatalf("failed to read first runs golden file: %v", err)
-	}
-	runsCompletedData, err := os.ReadFile(goldenPath("get_analysis_runs_pr_fallback_completed_response.json"))
-	if err != nil {
-		t.Fatalf("failed to read completed runs golden file: %v", err)
-	}
-	commitScopeData, err := os.ReadFile(goldenPath("commit_scope_response.json"))
-	if err != nil {
-		t.Fatalf("failed to read commit scope golden file: %v", err)
-	}
+	prFoundData := loadGoldenFile(t, "get_pr_by_branch_found_response.json")
+	runsFirstData := loadGoldenFile(t, "get_analysis_runs_pr_fallback_first_response.json")
+	runsCompletedData := loadGoldenFile(t, "get_analysis_runs_pr_fallback_completed_response.json")
+	commitScopeData := loadGoldenFile(t, "commit_scope_response.json")
 
 	mock := graphqlclient.NewMockClient()
 	analysisRunsCalls := 0
