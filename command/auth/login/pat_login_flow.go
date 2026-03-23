@@ -9,7 +9,7 @@ import (
 	"github.com/fatih/color"
 )
 
-func (opts *LoginOptions) startPATLoginFlow(svc *authsvc.Service, cfg *config.CLIConfig, token string) error {
+func (_ *LoginOptions) startPATLoginFlow(svc *authsvc.Service, cfg *config.CLIConfig, token string) error {
 	cfg.Token = token
 
 	viewer, err := svc.GetViewer(context.Background(), cfg)

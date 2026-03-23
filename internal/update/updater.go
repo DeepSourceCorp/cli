@@ -127,50 +127,78 @@ func CheckForUpdate(client *http.Client) error {
 	return writeUpdateState(state)
 }
 
-// ApplyUpdate reads the state file, downloads the archive, verifies, extracts,
-// and replaces the binary. Returns the new version string on success.
-// Clears the state file regardless of outcome so we don't retry broken updates forever.
-func ApplyUpdate(client *http.Client) (string, error) {
+// PrepareUpdate reads and clears the state file, returning the update state.
+// Returns nil if no update is available.
+func PrepareUpdate() (*UpdateState, error) {
 	state, err := ReadUpdateState()
 	if err != nil {
 		clearUpdateState()
-		return "", err
+		return nil, err
 	}
 	if state == nil {
-		return "", nil
+		return nil, nil
 	}
 
 	// Clear state file up front so a failed update doesn't retry forever.
-	// The next run will do a fresh CheckForUpdate instead.
 	clearUpdateState()
+	return state, nil
+}
 
-	debug.Log("update: applying update to v%s", state.Version)
+// DownloadUpdate downloads the archive from the state's URL.
+func DownloadUpdate(client *http.Client, state *UpdateState) ([]byte, error) {
+	return downloadFile(client, state.ArchiveURL)
+}
 
-	data, err := downloadFile(client, state.ArchiveURL)
-	if err != nil {
-		return "", err
-	}
+// VerifyUpdate checks the SHA256 checksum of the downloaded data.
+func VerifyUpdate(data []byte, state *UpdateState) error {
+	return verifyChecksum(data, state.SHA256)
+}
 
-	if err := verifyChecksum(data, state.SHA256); err != nil {
-		return "", err
-	}
-
+// ExtractAndInstall extracts the binary from the archive and replaces the current executable.
+func ExtractAndInstall(data []byte, archiveURL string) error {
 	binaryName := buildinfo.AppName
 	if runtime.GOOS == "windows" {
 		binaryName += ".exe"
 	}
 
 	var binaryData []byte
-	if strings.HasSuffix(state.ArchiveURL, ".zip") {
+	var err error
+	if strings.HasSuffix(archiveURL, ".zip") {
 		binaryData, err = extractFromZip(data, binaryName)
 	} else {
 		binaryData, err = extractFromTarGz(data, binaryName)
 	}
 	if err != nil {
+		return err
+	}
+
+	return replaceBinary(binaryData)
+}
+
+// ApplyUpdate reads the state file, downloads the archive, verifies, extracts,
+// and replaces the binary. Returns the new version string on success.
+// Clears the state file regardless of outcome so we don't retry broken updates forever.
+func ApplyUpdate(client *http.Client) (string, error) {
+	state, err := PrepareUpdate()
+	if err != nil {
+		return "", err
+	}
+	if state == nil {
+		return "", nil
+	}
+
+	debug.Log("update: applying update to v%s", state.Version)
+
+	data, err := DownloadUpdate(client, state)
+	if err != nil {
 		return "", err
 	}
 
-	if err := replaceBinary(binaryData); err != nil {
+	if err := VerifyUpdate(data, state); err != nil {
+		return "", err
+	}
+
+	if err := ExtractAndInstall(data, state.ArchiveURL); err != nil {
 		return "", err
 	}
 

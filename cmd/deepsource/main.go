@@ -73,21 +73,24 @@ func mainRun() (exitCode int) {
 func run() int {
 	v.SetBuildInfo(version, Date, buildMode)
 
-	// Check for available updates and notify (skip when running "update" itself)
+	// Notify about available updates from a previous check (instant, disk-only read).
+	// Then kick off a background check for the next invocation.
 	isUpdateCmd := len(os.Args) >= 2 && os.Args[1] == "update"
 	if !isUpdateCmd && update.ShouldCheckForUpdate() {
-		client := &http.Client{Timeout: 3 * time.Second}
-		if err := update.CheckForUpdate(client); err != nil {
-			debug.Log("update: %v", err)
-		}
-
 		state, err := update.ReadUpdateState()
 		if err != nil {
 			debug.Log("update: %v", err)
 		}
 		if state != nil {
-			fmt.Fprintln(os.Stderr, pterm.Yellow(fmt.Sprintf("Update available: v%s, run '%s update' to install.", state.Version, filepath.Base(os.Args[0]))))
+			fmt.Fprintln(os.Stderr, pterm.Yellow(fmt.Sprintf("Update available: v%s → v%s, run '%s update' to install.", version, state.Version, filepath.Base(os.Args[0]))))
 		}
+
+		go func() {
+			client := &http.Client{Timeout: 3 * time.Second}
+			if err := update.CheckForUpdate(client); err != nil {
+				debug.Log("update: %v", err)
+			}
+		}()
 	}
 
 	exitCode := 0

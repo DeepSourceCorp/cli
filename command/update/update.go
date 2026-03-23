@@ -3,10 +3,12 @@ package update
 import (
 	"fmt"
 	"net/http"
+	"runtime"
 	"time"
 
 	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/internal/update"
+	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
@@ -29,7 +31,7 @@ func runUpdate(cmd *cobra.Command) error {
 		return fmt.Errorf("checking for updates: %w", err)
 	}
 
-	state, err := update.ReadUpdateState()
+	state, err := update.PrepareUpdate()
 	if err != nil {
 		return fmt.Errorf("reading update state: %w", err)
 	}
@@ -40,17 +42,25 @@ func runUpdate(cmd *cobra.Command) error {
 		return nil
 	}
 
-	fmt.Fprintf(w, "Updating to v%s...\n", state.Version)
+	fmt.Fprintln(w, pterm.Green("✓")+" Platform: "+runtime.GOOS+"/"+runtime.GOARCH)
+	fmt.Fprintln(w, pterm.Green("✓")+" Version: v"+state.Version)
 
 	applyClient := &http.Client{Timeout: 30 * time.Second}
-	newVer, err := update.ApplyUpdate(applyClient)
+	data, err := update.DownloadUpdate(applyClient, state)
 	if err != nil {
-		return fmt.Errorf("applying update: %w", err)
+		return fmt.Errorf("downloading update: %w", err)
 	}
+	fmt.Fprintln(w, pterm.Green("✓")+" Downloaded")
 
-	if newVer != "" {
-		fmt.Fprintf(w, "Updated to v%s\n", newVer)
+	if err := update.VerifyUpdate(data, state); err != nil {
+		return fmt.Errorf("verifying update: %w", err)
 	}
+	fmt.Fprintln(w, pterm.Green("✓")+" Checksum verified")
+
+	if err := update.ExtractAndInstall(data, state.ArchiveURL); err != nil {
+		return fmt.Errorf("installing update: %w", err)
+	}
+	fmt.Fprintln(w, pterm.Green("✓")+" Installed")
 
 	return nil
 }

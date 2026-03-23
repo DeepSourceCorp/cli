@@ -3,7 +3,9 @@ package vcs
 import (
 	"fmt"
 	"net/url"
+	"os"
 	"os/exec"
+	"path/filepath"
 	"regexp"
 	"strings"
 
@@ -140,24 +142,22 @@ func detectSubRepoPath() string {
 	}
 	toplevel = strings.TrimSpace(toplevel)
 
-	cwd, err := runCmd("pwd", nil)
+	cwd, err := os.Getwd()
 	if err != nil {
 		return ""
 	}
-	cwd = strings.TrimSpace(cwd)
 
 	if cwd == toplevel {
 		return ""
 	}
 
-	rel := strings.TrimPrefix(cwd, toplevel+"/")
-	if rel == cwd {
-		// cwd is not under toplevel (shouldn't happen)
+	rel, err := filepath.Rel(toplevel, cwd)
+	if err != nil {
 		return ""
 	}
 
 	debug.Log("git: sub-repo relative path %q", rel)
-	return strings.ReplaceAll(rel, "/", ":")
+	return strings.ReplaceAll(rel, string(os.PathSeparator), ":")
 }
 
 func runCmd(command string, args []string) (string, error) {
