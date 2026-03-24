@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -1041,4 +1042,58 @@ func TestIssuesLimitCapAfterPagination(t *testing.T) {
 	}
 }
 
+func TestIssuesMonorepoHintError(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 
+	mock := graphqlclient.NewMockClient()
+	mock.QueryFunc = func(_ context.Context, _ string, _ map[string]any, _ any) error {
+		return fmt.Errorf("This repository is a monorepo. Please specify a sub-project")
+	}
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--commit", "abc123f", "--output", "json"})
+
+	err := cmd.Execute()
+	if err == nil {
+		t.Fatal("expected error for monorepo hint")
+	}
+	if !strings.Contains(err.Error(), "Use --repo to specify a sub-project") {
+		t.Errorf("expected monorepo hint in error, got: %s", err.Error())
+	}
+}
+
+func TestIssuesRepoNotFoundError(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+
+	mock := graphqlclient.NewMockClient()
+	mock.QueryFunc = func(_ context.Context, _ string, _ map[string]any, _ any) error {
+		return fmt.Errorf("Repository does not exist on DeepSource")
+	}
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--commit", "abc123f", "--output", "json"})
+
+	err := cmd.Execute()
+	if err == nil {
+		t.Fatal("expected error for repository not found")
+	}
+	if !strings.Contains(err.Error(), "Repository does not exist") {
+		t.Errorf("expected repo-not-found error, got: %s", err.Error())
+	}
+}
