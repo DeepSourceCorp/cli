@@ -88,10 +88,15 @@ func (s *Service) Report(ctx context.Context, opts Options) (*Result, error) {
 		return nil, uerr
 	}
 
-	headCommitOID, warning, err := s.git.GetHead(currentDir)
-	if err != nil {
-		s.capture(err)
-		return nil, errors.New("Unable to get commit OID HEAD. Make sure you are running the CLI from a git repository")
+	var headCommitOID, warning string
+	if opts.CommitOID != "" {
+		headCommitOID = opts.CommitOID
+	} else {
+		headCommitOID, warning, err = s.git.GetHead(currentDir)
+		if err != nil {
+			s.capture(err)
+			return nil, errors.New("Unable to get commit OID HEAD. Make sure you are running the CLI from a git repository or use --commit flag")
+		}
 	}
 
 	artifactValue, err := s.resolveArtifactValue(opts)

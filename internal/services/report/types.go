@@ -36,6 +36,7 @@ type QueryResponse struct {
 type Options struct {
 	Analyzer                    string
 	AnalyzerType                string
+	CommitOID                   string
 	Key                         string
 	Value                       string
 	ValueFile                   string

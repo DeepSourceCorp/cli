@@ -369,6 +369,59 @@ func TestReportCreateArtifactEmptyError(t *testing.T) {
 	assert.Contains(t, err.Error(), "raw response")
 }
 
+func TestReportExplicitCommitSkipsGit(t *testing.T) {
+	tempDir := t.TempDir()
+	artifactPath := filepath.Join(tempDir, "coverage.xml")
+	assert.NoError(t, os.WriteFile(artifactPath, []byte("<coverage/>"), 0o644))
+
+	var capturedCommit string
+	httpClient := &mockHTTPClient{DoFunc: func(req *http.Request) (*http.Response, error) {
+		body, _ := io.ReadAll(req.Body)
+		_ = req.Body.Close()
+		if bytes.Contains(body, []byte("ArtifactMetadataInput")) {
+			payload := `{"data":{"__type":{"inputFields":[]}}}`
+			return httpResponse(200, payload), nil
+		}
+		if bytes.Contains(body, []byte("createArtifact")) {
+			var q ReportQuery
+			_ = json.Unmarshal(body, &q)
+			capturedCommit = q.Variables.Input.CommitOID
+			payload := `{"data":{"createArtifact":{"ok":true,"message":"ok","error":""}}}`
+			return httpResponse(200, payload), nil
+		}
+		return httpResponse(400, `{"error":"unexpected"}`), nil
+	}}
+
+	// Git client returns an error — simulates no git repo available
+	git := adapters.NewMockGitClient()
+	git.SetError(errors.New("not a git repository"))
+	env := adapters.NewMockEnvironment()
+	env.Set("DEEPSOURCE_DSN", "https://token@localhost:8080")
+
+	svc := NewService(ServiceDeps{
+		GitClient:   git,
+		HTTPClient:  httpClient,
+		FileSystem:  adapters.NewOSFileSystem(),
+		Environment: env,
+		Sentry:      adapters.NewNoOpSentry(),
+		Output:      adapters.NewBufferOutput(),
+		Workdir:     func() (string, error) { return tempDir, nil },
+	})
+
+	result, err := svc.Report(context.Background(), Options{
+		Analyzer:  "test-coverage",
+		Key:       "python",
+		ValueFile: artifactPath,
+		CommitOID: "deadbeef1234567890abcdef1234567890abcdef",
+	})
+
+	assert.NoError(t, err)
+	if assert.NotNil(t, result) {
+		assert.Equal(t, "ok", result.Message)
+	}
+	assert.Equal(t, "deadbeef1234567890abcdef1234567890abcdef", capturedCommit)
+}
+
 func TestCaptureSkipsUserErrors(t *testing.T) {
 	captured := false
 	mockSentry := &captureSentry{onCapture: func(_ error) { captured = true }}
