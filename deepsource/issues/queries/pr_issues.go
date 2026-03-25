@@ -84,7 +84,7 @@ type PRIssuesListResponse struct {
 						Category   string `json:"category"`
 						Severity   string `json:"severity"`
 						Explanation string `json:"explanation"`
-						Issue       *struct {
+						Issue       struct {
 							ShortDescription string `json:"shortDescription"`
 							Analyzer struct {
 								Name      string `json:"name"`
@@ -153,11 +153,9 @@ func (r *PRIssuesListRequest) Do(ctx context.Context) ([]issues.Issue, error) {
 					},
 				},
 			}
-			if node.Issue != nil {
-				issue.Analyzer = issues.AnalyzerMeta{
-					Name:      node.Issue.Analyzer.Name,
-					Shortcode: node.Issue.Analyzer.Shortcode,
-				}
+			issue.Analyzer = issues.AnalyzerMeta{
+				Name:      node.Issue.Analyzer.Name,
+				Shortcode: node.Issue.Analyzer.Shortcode,
 			}
 			allIssues = append(allIssues, issue)
 		}
