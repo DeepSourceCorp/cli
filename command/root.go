@@ -8,6 +8,7 @@ import (
 	"github.com/deepsourcelabs/cli/buildinfo"
 	"github.com/deepsourcelabs/cli/command/auth"
 	completionCmd "github.com/deepsourcelabs/cli/command/completion"
+	updateCmd "github.com/deepsourcelabs/cli/command/update"
 	"github.com/deepsourcelabs/cli/command/issues"
 	"github.com/deepsourcelabs/cli/command/metrics"
 	"github.com/deepsourcelabs/cli/command/report"
@@ -89,7 +90,12 @@ func NewCmdRoot() *cobra.Command {
 	completionC.GroupID = "setup"
 	cmd.AddCommand(completionC)
 
+	updateC := updateCmd.NewCmdUpdate()
+	updateC.GroupID = "setup"
+	cmd.AddCommand(updateC)
+
 	cmd.PersistentFlags().Bool("skip-tls-verify", false, "Skip TLS certificate verification (for self-signed certs)")
+	cmd.Flags().BoolP("verbose", "v", false, "Show detailed output including examples")
 
 	cmd.InitDefaultHelpFlag()
 	cmd.InitDefaultVersionFlag()
@@ -167,13 +173,19 @@ func rootHelpFunc(cmd *cobra.Command, _ []string) {
 		}
 	}
 
-	// Examples
-	examples := buildExampleText()
-	if examples != "" {
-		fmt.Fprintf(out, "%s\n", style.BoldCyan("Examples:"))
-		for _, line := range strings.Split(examples, "\n") {
-			fmt.Fprintf(out, "  %s\n", line)
+	// Examples (shown only with --verbose / -v)
+	verbose, _ := cmd.Flags().GetBool("verbose")
+	if verbose {
+		examples := buildExampleText()
+		if examples != "" {
+			fmt.Fprintf(out, "%s\n", style.BoldCyan("Examples:"))
+			for _, line := range strings.Split(examples, "\n") {
+				fmt.Fprintf(out, "  %s\n", line)
+			}
+			fmt.Fprintln(out)
 		}
+	} else {
+		fmt.Fprintln(out, pterm.Gray("Use --help -v to see usage examples."))
 		fmt.Fprintln(out)
 	}
 

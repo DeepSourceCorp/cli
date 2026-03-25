@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -417,6 +418,101 @@ func TestIssuesMultipleFilters(t *testing.T) {
 
 	if strings.TrimSpace(got) != strings.TrimSpace(expected) {
 		t.Errorf("output mismatch.\nExpected:\n%s\nGot:\n%s", expected, got)
+	}
+}
+
+// loadGoldenFile reads a golden file and fails the test if it cannot be read.
+func loadGoldenFile(t *testing.T, name string) []byte {
+	t.Helper()
+	data, err := os.ReadFile(goldenPath(name))
+	if err != nil {
+		t.Fatalf("failed to read golden file %s: %v", name, err)
+	}
+	return data
+}
+
+// TestIssuesPRFallbackUsesRunIssues verifies that when auto-branch resolution
+// detects a PR AND the current run is in-progress (fallback), the code fetches
+// issues via GetRunIssuesFlat (commit-scoped) instead of GetPRIssues.
+// Regression test for ticket #6884175.
+func TestIssuesPRFallbackUsesRunIssues(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+
+	prFoundData := loadGoldenFile(t, "get_pr_by_branch_found_response.json")
+	runsFirstData := loadGoldenFile(t, "get_analysis_runs_pr_fallback_first_response.json")
+	runsCompletedData := loadGoldenFile(t, "get_analysis_runs_pr_fallback_completed_response.json")
+	commitScopeData := loadGoldenFile(t, "commit_scope_response.json")
+
+	mock := graphqlclient.NewMockClient()
+	analysisRunsCalls := 0
+	mock.QueryFunc = func(_ context.Context, query string, _ map[string]any, result any) error {
+		switch {
+		case strings.Contains(query, "pullRequests("):
+			return json.Unmarshal(prFoundData, result)
+		case strings.Contains(query, "query GetAnalysisRuns("):
+			analysisRunsCalls++
+			if analysisRunsCalls == 1 {
+				// First call (ResolveLatestRunForBranch, limit=1): RUNNING run
+				return json.Unmarshal(runsFirstData, result)
+			}
+			// Second call (ResolveLatestCompletedRun, limit=10): RUNNING + SUCCESS
+			return json.Unmarshal(runsCompletedData, result)
+		case strings.Contains(query, "checks {"):
+			// GetRunIssuesFlat for the fallback commit
+			return json.Unmarshal(commitScopeData, result)
+		default:
+			t.Fatalf("unexpected query: %s", query)
+			return nil
+		}
+	}
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+		BranchNameFunc: func() (string, error) {
+			return "feature/new-auth", nil
+		},
+		HasUnpushedCommitsFunc:    func() bool { return false },
+		HasUncommittedChangesFunc: func() bool { return false },
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--output", "json"})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	got := buf.String()
+
+	// Verify the fallback info message is present.
+	if !strings.Contains(got, "Analysis is running on commit") {
+		t.Errorf("expected fallback info message, got: %q", got)
+	}
+
+	// Extract the JSON array from the output (after the info message line).
+	// The JSON starts at the first '[' character.
+	jsonStart := strings.Index(got, "[")
+	if jsonStart < 0 {
+		t.Fatalf("no JSON array found in output: %s", got)
+	}
+
+	var issues []map[string]any
+	if err := json.Unmarshal([]byte(got[jsonStart:]), &issues); err != nil {
+		t.Fatalf("failed to parse JSON output: %v\nraw output: %s", err, got)
+	}
+
+	// Must NOT be empty — this was the bug.
+	if len(issues) == 0 {
+		t.Fatal("expected non-empty issues from fallback commit, got empty array")
+	}
+
+	// Verify we got the expected issues from commit_scope_response.json.
+	if issues[0]["issue_code"] != "GO-W1007" {
+		t.Errorf("expected first issue GO-W1007, got %v", issues[0]["issue_code"])
 	}
 }
 
@@ -946,4 +1042,58 @@ func TestIssuesLimitCapAfterPagination(t *testing.T) {
 	}
 }
 
+func TestIssuesMonorepoHintError(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
 
+	mock := graphqlclient.NewMockClient()
+	mock.QueryFunc = func(_ context.Context, _ string, _ map[string]any, _ any) error {
+		return fmt.Errorf("This repository is a monorepo. Please specify a sub-project")
+	}
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--commit", "abc123f", "--output", "json"})
+
+	err := cmd.Execute()
+	if err == nil {
+		t.Fatal("expected error for monorepo hint")
+	}
+	if !strings.Contains(err.Error(), "Use --repo to specify a sub-project") {
+		t.Errorf("expected monorepo hint in error, got: %s", err.Error())
+	}
+}
+
+func TestIssuesRepoNotFoundError(t *testing.T) {
+	cfgMgr := testutil.CreateTestConfigManager(t, "test-token", "deepsource.com", "test@example.com")
+
+	mock := graphqlclient.NewMockClient()
+	mock.QueryFunc = func(_ context.Context, _ string, _ map[string]any, _ any) error {
+		return fmt.Errorf("Repository does not exist on DeepSource")
+	}
+	client := deepsource.NewWithGraphQLClient(mock)
+
+	var buf bytes.Buffer
+	deps := &cmddeps.Deps{
+		Client:    client,
+		ConfigMgr: cfgMgr,
+		Stdout:    &buf,
+	}
+
+	cmd := issuesCmd.NewCmdIssuesWithDeps(deps)
+	cmd.SetArgs([]string{"--repo", "gh/testowner/testrepo", "--commit", "abc123f", "--output", "json"})
+
+	err := cmd.Execute()
+	if err == nil {
+		t.Fatal("expected error for repository not found")
+	}
+	if !strings.Contains(err.Error(), "Repository does not exist") {
+		t.Errorf("expected repo-not-found error, got: %s", err.Error())
+	}
+}

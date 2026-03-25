@@ -13,6 +13,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
 	"testing"
 	"time"
 
@@ -100,7 +101,7 @@ func TestReplaceBinary(t *testing.T) {
 	}
 }
 
-func TestShouldAutoUpdate_DevBuild(t *testing.T) {
+func TestShouldCheckForUpdate_DevBuild(t *testing.T) {
 	buildinfo.SetBuildInfo("2.0.3", "", "dev")
 
 	// Clear CI vars so they don't interfere
@@ -109,27 +110,27 @@ func TestShouldAutoUpdate_DevBuild(t *testing.T) {
 		t.Setenv(v, "")
 	}
 
-	if !ShouldAutoUpdate() {
+	if !ShouldCheckForUpdate() {
 		t.Error("expected true for dev build with real version")
 	}
 }
 
-func TestShouldAutoUpdate_DevelopmentVersion(t *testing.T) {
+func TestShouldCheckForUpdate_DevelopmentVersion(t *testing.T) {
 	buildinfo.SetBuildInfo("development", "", "")
-	if ShouldAutoUpdate() {
+	if ShouldCheckForUpdate() {
 		t.Error("expected false for development version")
 	}
 }
 
-func TestShouldAutoUpdate_CI(t *testing.T) {
+func TestShouldCheckForUpdate_CI(t *testing.T) {
 	buildinfo.SetBuildInfo("2.0.3", "", "prod")
 	t.Setenv("CI", "true")
-	if ShouldAutoUpdate() {
+	if ShouldCheckForUpdate() {
 		t.Error("expected false in CI")
 	}
 }
 
-func TestShouldAutoUpdate_Prod(t *testing.T) {
+func TestShouldCheckForUpdate_Prod(t *testing.T) {
 	buildinfo.SetBuildInfo("2.0.3", "", "prod")
 
 	// Clear CI vars
@@ -138,7 +139,7 @@ func TestShouldAutoUpdate_Prod(t *testing.T) {
 		t.Setenv(v, "")
 	}
 
-	if !ShouldAutoUpdate() {
+	if !ShouldCheckForUpdate() {
 		t.Error("expected true for prod build outside CI")
 	}
 }
@@ -617,6 +618,29 @@ func TestPlatformKey(t *testing.T) {
 	expected := runtime.GOOS + "_" + runtime.GOARCH
 	if key != expected {
 		t.Errorf("PlatformKey() = %q, want %q", key, expected)
+	}
+}
+
+func TestApplyUpdate_CorruptStateFile(t *testing.T) {
+	tmpHome := t.TempDir()
+	t.Setenv("HOME", tmpHome)
+
+	// Write corrupt JSON to the state file path
+	stateDir := filepath.Join(tmpHome, buildinfo.ConfigDirName)
+	if err := os.MkdirAll(stateDir, 0o750); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(stateDir, "update.json"), []byte("not valid json{{{"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+
+	client := &http.Client{Timeout: 1 * time.Second}
+	_, err := ApplyUpdate(client)
+	if err == nil {
+		t.Fatal("expected error for corrupt state file")
+	}
+	if !strings.Contains(err.Error(), "parsing update state") {
+		t.Errorf("expected parsing error, got: %v", err)
 	}
 }
 

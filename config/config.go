@@ -16,8 +16,7 @@ type CLIConfig struct {
 	User           string    `toml:"user"`
 	Token          string    `toml:"token"`
 	TokenExpiresIn time.Time `toml:"token_expires_in,omitempty"`
-	AutoUpdate     *bool     `toml:"auto_update,omitempty"`
-	SkipTLSVerify  bool      `toml:"skip_tls_verify,omitempty"`
+SkipTLSVerify  bool      `toml:"skip_tls_verify,omitempty"`
 	TokenFromEnv   bool      `toml:"-"`
 }
 
@@ -26,7 +25,7 @@ func (cfg *CLIConfig) SetTokenExpiry(str string) {
 	cfg.TokenExpiresIn = t.UTC()
 }
 
-func (cfg CLIConfig) IsExpired() bool {
+func (cfg *CLIConfig) IsExpired() bool {
 	if cfg.TokenExpiresIn.IsZero() {
 		return false
 	}
