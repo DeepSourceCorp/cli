@@ -252,7 +252,7 @@ func (opts *IssuesOptions) Run(ctx context.Context, cmd *cobra.Command) error {
 	opts.client = client
 	opts.remote = remote
 
-	issuesList, err := opts.resolveIssues(ctx, client, remote)
+	issuesList, err := opts.resolveIssuesWithRetry(ctx, client, remote)
 	if err != nil {
 		return err
 	}
@@ -281,6 +281,45 @@ func (opts *IssuesOptions) Run(ctx context.Context, cmd *cobra.Command) error {
 
 	opts.warnIfLocalChanges()
 	return nil
+}
+
+// resolveIssuesWithRetry calls resolveIssues and, for monorepos with an
+// auto-detected sub-repo path, progressively strips path segments on
+// "Repository does not exist" errors until a match is found.
+func (opts *IssuesOptions) resolveIssuesWithRetry(ctx context.Context, client *deepsource.Client, remote *vcs.RemoteData) ([]issues.Issue, error) {
+	issuesList, err := opts.resolveIssues(ctx, client, remote)
+	if err == nil {
+		return issuesList, nil
+	}
+
+	if strings.Contains(err.Error(), "This repository is a monorepo") {
+		return nil, fmt.Errorf("This is a monorepo. Use --repo to specify a sub-project.\n\nHint: %s", err.Error())
+	}
+
+	if !strings.Contains(err.Error(), "Repository does not exist") || remote.SubRepoSuffix == "" {
+		return nil, err
+	}
+
+	baseName := strings.SplitN(remote.RepoName, ":", 2)[0]
+	parts := strings.Split(remote.SubRepoSuffix, ":")
+	for len(parts) > 0 {
+		parts = parts[:len(parts)-1]
+		remote.SubRepoSuffix = strings.Join(parts, ":")
+		if remote.SubRepoSuffix == "" {
+			remote.RepoName = baseName
+		} else {
+			remote.RepoName = baseName + ":" + remote.SubRepoSuffix
+		}
+
+		issuesList, err = opts.resolveIssues(ctx, client, remote)
+		if err == nil {
+			return issuesList, nil
+		}
+		if !strings.Contains(err.Error(), "Repository does not exist") {
+			return nil, err
+		}
+	}
+	return nil, err
 }
 
 func (opts *IssuesOptions) resolveIssues(ctx context.Context, client *deepsource.Client, remote *vcs.RemoteData) ([]issues.Issue, error) {
@@ -314,7 +353,11 @@ func (opts *IssuesOptions) resolveIssues(ctx context.Context, client *deepsource
 		case ab.PRNumber > 0:
 			opts.PRNumber = ab.PRNumber
 			opts.CommitOid = ab.CommitOid
-			issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, ab.PRNumber, prFilters)
+			if ab.Fallback {
+				issuesList, err = client.GetRunIssuesFlat(ctx, ab.CommitOid, serverFilters)
+			} else {
+				issuesList, err = client.GetPRIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, ab.PRNumber, prFilters)
+			}
 		case ab.UseRepo:
 			issuesList, err = client.GetIssues(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 		default:
@@ -624,16 +667,20 @@ func (opts *IssuesOptions) renderHumanIssues() error {
 			severity := humanizeSeverity(g.Key.IssueSeverity)
 			sevTag := style.IssueSeverityColor(g.Key.IssueSeverity, "["+severity+"]")
 
+			// Build metadata suffix: "issue-code · Analyzer Name"
+			meta := g.Key.IssueCode
+			if analyzerName := g.Issues[0].Analyzer.Name; analyzerName != "" {
+				meta += " · " + analyzerName
+			}
+
 			if len(g.Issues) == 1 {
-				// Single occurrence: render exactly as before
-				fmt.Fprintf(w, "  %s %s\n", sevTag, g.Key.IssueText)
+				fmt.Fprintf(w, "  %s %s %s\n", sevTag, g.Key.IssueText, pterm.Gray("("+meta+")"))
 				if opts.Verbose && g.Description != "" {
 					fmt.Fprintf(w, "  %s\n", pterm.Gray(g.Description))
 				}
 				fmt.Fprintf(w, "  %s\n", pterm.Gray(formatLocation(g.Issues[0], cwd)))
 			} else {
-				// Multi-occurrence: show count + compact locations
-				fmt.Fprintf(w, "  %s %s (%d occurrences)\n", sevTag, g.Key.IssueText, len(g.Issues))
+				fmt.Fprintf(w, "  %s %s %s (%d occurrences)\n", sevTag, g.Key.IssueText, pterm.Gray("("+meta+")"), len(g.Issues))
 				if opts.Verbose && g.Description != "" {
 					fmt.Fprintf(w, "  %s\n", pterm.Gray(g.Description))
 				}

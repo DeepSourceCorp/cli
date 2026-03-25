@@ -25,7 +25,7 @@ func (cfg *CLIConfig) SetTokenExpiry(str string) {
 	cfg.TokenExpiresIn = t.UTC()
 }
 
-func (cfg CLIConfig) IsExpired() bool {
+func (cfg *CLIConfig) IsExpired() bool {
 	if cfg.TokenExpiresIn.IsZero() {
 		return false
 	}

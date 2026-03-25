@@ -13,6 +13,10 @@ type RemoteData struct {
 	Owner       string
 	RepoName    string
 	VCSProvider string
+
+	// SubRepoSuffix is the colon-delimited sub-repo path detected from CWD
+	// (e.g. "libs:shared:ui-elements"). Empty when at git root or using --repo.
+	SubRepoSuffix string
 }
 
 func ResolveRemote(repoArg string) (*RemoteData, error) {
@@ -50,27 +54,34 @@ func ResolveRemote(repoArg string) (*RemoteData, error) {
 			remote.RepoName = value[1]
 			remote.VCSProvider = value[2]
 		}
-		debug.Log("remote: resolved to %s/%s (provider=%s)", remote.Owner, remote.RepoName, remote.VCSProvider)
-		return &remote, nil
-	}
+	} else {
+		var promptOpts []string
+		for _, value := range remotesData {
+			promptOpts = append(promptOpts, value[3])
+		}
 
-	var promptOpts []string
-	for _, value := range remotesData {
-		promptOpts = append(promptOpts, value[3])
-	}
+		selectedRemote, err := prompt.SelectFromOptions("Please select the repository:", "", promptOpts)
+		if err != nil {
+			return nil, err
+		}
 
-	selectedRemote, err := prompt.SelectFromOptions("Please select the repository:", "", promptOpts)
-	if err != nil {
-		return nil, err
-	}
-
-	for _, value := range remotesData {
-		if value[3] == selectedRemote {
-			remote.Owner = value[0]
-			remote.RepoName = value[1]
-			remote.VCSProvider = value[2]
+		for _, value := range remotesData {
+			if value[3] == selectedRemote {
+				remote.Owner = value[0]
+				remote.RepoName = value[1]
+				remote.VCSProvider = value[2]
+			}
 		}
 	}
+
+	// Detect sub-repo path from CWD for monorepo support.
+	if subPath := detectSubRepoPath(); subPath != "" {
+		remote.SubRepoSuffix = subPath
+		remote.RepoName = remote.RepoName + ":" + subPath
+		debug.Log("remote: appended sub-repo suffix %q → %s", subPath, remote.RepoName)
+	}
+
+	debug.Log("remote: resolved to %s/%s (provider=%s)", remote.Owner, remote.RepoName, remote.VCSProvider)
 	return &remote, nil
 }
 

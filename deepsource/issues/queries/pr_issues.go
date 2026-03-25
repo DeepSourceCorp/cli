@@ -35,6 +35,12 @@ const fetchPRIssuesQuery = `query GetPRIssues(
             category
             severity
             explanation
+            issue {
+              analyzer {
+                name
+                shortcode
+              }
+            }
           }
         }
         pageInfo {
@@ -77,6 +83,12 @@ type PRIssuesListResponse struct {
 						Category   string `json:"category"`
 						Severity   string `json:"severity"`
 						Explanation string `json:"explanation"`
+						Issue       *struct {
+							Analyzer struct {
+								Name      string `json:"name"`
+								Shortcode string `json:"shortcode"`
+							} `json:"analyzer"`
+						} `json:"issue"`
 					} `json:"node"`
 				} `json:"edges"`
 				PageInfo pagination.PageInfo `json:"pageInfo"`
@@ -138,6 +150,12 @@ func (r *PRIssuesListRequest) Do(ctx context.Context) ([]issues.Issue, error) {
 						EndLine:   node.EndLine,
 					},
 				},
+			}
+			if node.Issue != nil {
+				issue.Analyzer = issues.AnalyzerMeta{
+					Name:      node.Issue.Analyzer.Name,
+					Shortcode: node.Issue.Analyzer.Shortcode,
+				}
 			}
 			allIssues = append(allIssues, issue)
 		}
