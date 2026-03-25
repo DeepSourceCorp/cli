@@ -667,16 +667,20 @@ func (opts *IssuesOptions) renderHumanIssues() error {
 			severity := humanizeSeverity(g.Key.IssueSeverity)
 			sevTag := style.IssueSeverityColor(g.Key.IssueSeverity, "["+severity+"]")
 
+			// Build metadata suffix: "issue-code · Analyzer Name"
+			meta := g.Key.IssueCode
+			if analyzerName := g.Issues[0].Analyzer.Name; analyzerName != "" {
+				meta += " · " + analyzerName
+			}
+
 			if len(g.Issues) == 1 {
-				// Single occurrence: render exactly as before
-				fmt.Fprintf(w, "  %s %s\n", sevTag, g.Key.IssueText)
+				fmt.Fprintf(w, "  %s %s %s\n", sevTag, g.Key.IssueText, pterm.Gray("("+meta+")"))
 				if opts.Verbose && g.Description != "" {
 					fmt.Fprintf(w, "  %s\n", pterm.Gray(g.Description))
 				}
 				fmt.Fprintf(w, "  %s\n", pterm.Gray(formatLocation(g.Issues[0], cwd)))
 			} else {
-				// Multi-occurrence: show count + compact locations
-				fmt.Fprintf(w, "  %s %s (%d occurrences)\n", sevTag, g.Key.IssueText, len(g.Issues))
+				fmt.Fprintf(w, "  %s %s %s (%d occurrences)\n", sevTag, g.Key.IssueText, pterm.Gray("("+meta+")"), len(g.Issues))
 				if opts.Verbose && g.Description != "" {
 					fmt.Fprintf(w, "  %s\n", pterm.Gray(g.Description))
 				}
