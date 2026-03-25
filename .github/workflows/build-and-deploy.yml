@@ -14,7 +14,7 @@ env:
 
 jobs:
   resolve-env:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     outputs:
       environment: ${{ steps.resolve.outputs.environment }}
       base_url: ${{ steps.resolve.outputs.base_url }}
@@ -38,7 +38,7 @@ jobs:
 
   build-linux:
     needs: resolve-env
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     strategy:
       matrix:
         include:
@@ -176,7 +176,7 @@ jobs:
 
   build-windows:
     needs: resolve-env
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -215,7 +215,7 @@ jobs:
 
   deploy:
     needs: [resolve-env, build-linux, build-darwin, build-windows]
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     steps:
       - uses: actions/checkout@v4
 
