@@ -45,7 +45,7 @@ func runUpdate(cmd *cobra.Command) error {
 	fmt.Fprintln(w, pterm.Green("✓")+" Platform: "+runtime.GOOS+"/"+runtime.GOARCH)
 	fmt.Fprintln(w, pterm.Green("✓")+" Version: v"+state.Version)
 
-	applyClient := &http.Client{Timeout: 30 * time.Second}
+	applyClient := &http.Client{Timeout: 5 * time.Minute}
 	data, err := update.DownloadUpdate(applyClient, state)
 	if err != nil {
 		return fmt.Errorf("downloading update: %w", err)
