@@ -36,6 +36,7 @@ const fetchPRIssuesQuery = `query GetPRIssues(
             severity
             explanation
             issue {
+              shortDescription
               analyzer {
                 name
                 shortcode
@@ -83,7 +84,8 @@ type PRIssuesListResponse struct {
 						Category   string `json:"category"`
 						Severity   string `json:"severity"`
 						Explanation string `json:"explanation"`
-						Issue       *struct {
+						Issue       struct {
+							ShortDescription string `json:"shortDescription"`
 							Analyzer struct {
 								Name      string `json:"name"`
 								Shortcode string `json:"shortcode"`
@@ -142,7 +144,7 @@ func (r *PRIssuesListRequest) Do(ctx context.Context) ([]issues.Issue, error) {
 				IssueCategory: node.Category,
 				IssueSeverity: node.Severity,
 				IssueSource:   node.Source,
-				Description:   node.Explanation,
+				Description:   node.Issue.ShortDescription,
 				Location: issues.Location{
 					Path: node.Path,
 					Position: issues.Position{
@@ -151,11 +153,9 @@ func (r *PRIssuesListRequest) Do(ctx context.Context) ([]issues.Issue, error) {
 					},
 				},
 			}
-			if node.Issue != nil {
-				issue.Analyzer = issues.AnalyzerMeta{
-					Name:      node.Issue.Analyzer.Name,
-					Shortcode: node.Issue.Analyzer.Shortcode,
-				}
+			issue.Analyzer = issues.AnalyzerMeta{
+				Name:      node.Issue.Analyzer.Name,
+				Shortcode: node.Issue.Analyzer.Shortcode,
 			}
 			allIssues = append(allIssues, issue)
 		}

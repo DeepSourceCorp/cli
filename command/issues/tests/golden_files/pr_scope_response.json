@@ -13,7 +13,9 @@
               "shortcode": "GO-W1007",
               "category": "BUG_RISK",
               "severity": "MAJOR",
-              "explanation": "Return value of io.ReadAll is not checked for errors"
+              "issue": {
+                "shortDescription": "Return value of io.ReadAll is not checked for errors"
+              }
             }
           },
           {
@@ -26,7 +28,9 @@
               "shortcode": "GO-S1010",
               "category": "SECURITY",
               "severity": "MAJOR",
-              "explanation": "Constructing HTTP request with user-controlled URL allows SSRF"
+              "issue": {
+                "shortDescription": "Constructing HTTP request with user-controlled URL allows SSRF"
+              }
             }
           }
         ],

@@ -27,9 +27,11 @@ const fetchRunIssuesFlatQuery = `query GetRunIssues($commitOid: String!, $limit:
                 endLine
                 title
                 shortcode
-                explanation
                 category
                 severity
+                issue {
+                  shortDescription
+                }
               }
             }
           }
@@ -70,9 +72,11 @@ type RunIssuesFlatResponse struct {
 								EndLine   int    `json:"endLine"`
 								Title       string `json:"title"`
 								Shortcode   string `json:"shortcode"`
-								Explanation string `json:"explanation"`
 								Category    string `json:"category"`
 								Severity    string `json:"severity"`
+								Issue       struct {
+									ShortDescription string `json:"shortDescription"`
+								} `json:"issue"`
 							} `json:"node"`
 						} `json:"edges"`
 					} `json:"issues"`
@@ -119,7 +123,7 @@ func (r *RunIssuesFlatRequest) Do(ctx context.Context) ([]issues.Issue, error) {
 				IssueCategory: node.Category,
 				IssueSeverity: node.Severity,
 				IssueSource:   node.Source,
-				Description:   node.Explanation,
+				Description:   node.Issue.ShortDescription,
 				Location: issues.Location{
 					Path: node.Path,
 					Position: issues.Position{
