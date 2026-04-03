@@ -27,7 +27,7 @@ bump-patch:
 	new="${major}.${minor}.$((patch + 1))"
 	echo "$new" > VERSION
 	git add VERSION
-	git commit -m "Bump version to ${new}"
+	git commit -m "chore: bump version to ${new}"
 	echo "Bumped ${current} -> ${new}"
 
 # Bump minor version (x.Y.0)
@@ -39,7 +39,7 @@ bump-minor:
 	new="${major}.$((minor + 1)).0"
 	echo "$new" > VERSION
 	git add VERSION
-	git commit -m "Bump version to ${new}"
+	git commit -m "chore: bump version to ${new}"
 	echo "Bumped ${current} -> ${new}"
 
 # Bump major version (X.0.0)
@@ -51,7 +51,7 @@ bump-major:
 	new="$((major + 1)).0.0"
 	echo "$new" > VERSION
 	git add VERSION
-	git commit -m "Bump version to ${new}"
+	git commit -m "chore: bump version to ${new}"
 	echo "Bumped ${current} -> ${new}"
 
 # Tag and push a production release
