@@ -114,7 +114,7 @@ func (opts *LoginOptions) Run(cmd *cobra.Command) (err error) {
 	}
 
 	if opts.PAT != "" {
-		return opts.startPATLoginFlow(svc, cfg, opts.PAT)
+		return startPATLoginFlow(svc, cfg, opts.PAT)
 	}
 
 	if !opts.TokenExpired && cfg.Token != "" {

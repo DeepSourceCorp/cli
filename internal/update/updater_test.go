@@ -13,6 +13,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
 	"testing"
 	"time"
 
@@ -617,6 +618,29 @@ func TestPlatformKey(t *testing.T) {
 	expected := runtime.GOOS + "_" + runtime.GOARCH
 	if key != expected {
 		t.Errorf("PlatformKey() = %q, want %q", key, expected)
+	}
+}
+
+func TestApplyUpdate_CorruptStateFile(t *testing.T) {
+	tmpHome := t.TempDir()
+	t.Setenv("HOME", tmpHome)
+
+	// Write corrupt JSON to the state file path
+	stateDir := filepath.Join(tmpHome, buildinfo.ConfigDirName)
+	if err := os.MkdirAll(stateDir, 0o750); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(stateDir, "update.json"), []byte("not valid json{{{"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+
+	client := &http.Client{Timeout: 1 * time.Second}
+	_, err := ApplyUpdate(client)
+	if err == nil {
+		t.Fatal("expected error for corrupt state file")
+	}
+	if !strings.Contains(err.Error(), "parsing update state") {
+		t.Errorf("expected parsing error, got: %v", err)
 	}
 }
 
