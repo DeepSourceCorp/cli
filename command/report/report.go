@@ -20,6 +20,7 @@ import (
 type ReportOptions struct {
 	Analyzer                    string
 	AnalyzerType                string
+	CommitOID                   string
 	Key                         string
 	Value                       string
 	ValueFile                   string
@@ -110,6 +111,8 @@ func NewCmdReportWithDeps(deps *container.Container) *cobra.Command {
 
 	cmd.Flags().StringVar(&opts.AnalyzerType, "analyzer-type", "", "type of the analyzer (example: community)")
 
+	cmd.Flags().StringVar(&opts.CommitOID, "commit", "", "commit SHA to report against (skips git detection)")
+
 	cmd.Flags().StringVar(&opts.Key, "key", "", "shortcode of the language (example: go)")
 
 	cmd.Flags().StringVar(&opts.Value, "value", "", "value of the artifact")
@@ -165,6 +168,7 @@ func (opts *ReportOptions) Run(ctx context.Context, svc *reportsvc.Service, outp
 	result, err := svc.Report(ctx, reportsvc.Options{
 		Analyzer:                    opts.Analyzer,
 		AnalyzerType:                opts.AnalyzerType,
+		CommitOID:                   opts.CommitOID,
 		Key:                         opts.Key,
 		Value:                       opts.Value,
 		ValueFile:                   opts.ValueFile,
@@ -193,7 +197,7 @@ func setReportUsageFunc(cmd *cobra.Command) {
 			title string
 			flags []string
 		}{
-			{"Artifact", []string{"analyzer", "analyzer-type", "key", "value", "value-file"}},
+			{"Artifact", []string{"analyzer", "analyzer-type", "commit", "key", "value", "value-file"}},
 			{"Authentication", []string{"use-oidc", "oidc-provider", "oidc-request-token", "oidc-request-url", "host"}},
 			{"Output", []string{"output"}},
 			{"General", []string{"skip-verify", "help"}},
