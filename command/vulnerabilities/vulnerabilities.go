@@ -241,7 +241,11 @@ func (opts *VulnerabilitiesOptions) resolveVulnerabilities(ctx context.Context, 
 		case ab.PRNumber > 0:
 			opts.PRNumber = ab.PRNumber
 			opts.CommitOid = ab.CommitOid
-			opts.prVulns, err = client.GetPRVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, ab.PRNumber)
+			if ab.Fallback {
+				opts.runVulns, err = client.GetRunVulns(ctx, ab.CommitOid)
+			} else {
+				opts.prVulns, err = client.GetPRVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, ab.PRNumber)
+			}
 		case ab.UseRepo:
 			opts.repoVulns, err = client.GetRepoVulns(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 		default:
