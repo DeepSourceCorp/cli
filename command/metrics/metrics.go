@@ -253,7 +253,11 @@ func (opts *MetricsOptions) resolveMetrics(ctx context.Context, client *deepsour
 		case ab.PRNumber > 0:
 			opts.PRNumber = ab.PRNumber
 			opts.CommitOid = ab.CommitOid
-			opts.prMetrics, err = client.GetPRMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, ab.PRNumber)
+			if ab.Fallback {
+				opts.runMetrics, err = client.GetRunMetrics(ctx, ab.CommitOid)
+			} else {
+				opts.prMetrics, err = client.GetPRMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider, ab.PRNumber)
+			}
 		case ab.UseRepo:
 			opts.repoMetrics, err = client.GetRepoMetrics(ctx, remote.Owner, remote.RepoName, remote.VCSProvider)
 		default:
