@@ -21,6 +21,16 @@ All commands support JSON output for scripting and automation.
 curl -sfL https://cli.deepsource.com/install | sh
 ```
 
+On Windows, use PowerShell:
+
+```powershell
+irm https://cli.deepsource.com/install.ps1 | iex
+```
+
+The Windows installer selects the native AMD64 or ARM64 artifact advertised by the release
+manifest. Native Windows ARM64 availability begins with the first release that includes the
+`windows_arm64` artifact.
+
 ## Documentation
 
 - [Installation](https://docs.deepsource.com/docs/cli#installation)

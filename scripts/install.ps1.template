@@ -1,17 +1,84 @@
 # DeepSource CLI installer for Windows
-# Wrapped in a scriptblock so that 'return' does not close the host when run via `irm | iex`
+# Wrapped in a scriptblock so helper functions do not leak into the host when run via `irm | iex`
 
-& {
+$InstallScript = {
+param([switch]$SkipInstall)
+
+$BaseUrl = "__BASE_URL__"
+$BinaryName = "__BINARY_NAME__"
+
+function Pass($msg) { Write-Host "✓ $msg" -ForegroundColor Green }
+function Fail($msg) { Write-Host "✗ $msg" -ForegroundColor Red; return }
+function Info($msg) { Write-Host "→ $msg" -ForegroundColor Cyan }
+
+# Get-DeepSourcePlatformKey detects the running architecture and maps it to a
+# manifest platform key (e.g. "windows_arm64").
+#
+# PROCESSOR_ARCHITEW6432 is checked first: it is set by Windows only when the
+# current process is running under WOW64 emulation (e.g. an x86/x64 PowerShell
+# host launched on an ARM64 machine), and always reflects the *native* host
+# architecture in that case. PROCESSOR_ARCHITECTURE reflects the architecture
+# of the current process itself, so it is used as the fallback for the common
+# (non-emulated) case.
+#
+# The Architew6432/Architecture parameters default to the real environment
+# variables but can be overridden by callers (tests) without mutating process
+# environment state.
+function Get-DeepSourcePlatformKey {
+    param(
+        [string]$Architew6432 = $env:PROCESSOR_ARCHITEW6432,
+        [string]$Architecture = $env:PROCESSOR_ARCHITECTURE
+    )
+
+    $rawArch = $Architew6432
+    if ([string]::IsNullOrEmpty($rawArch)) {
+        $rawArch = $Architecture
+    }
+
+    if ([string]::IsNullOrEmpty($rawArch)) {
+        throw "Unable to determine processor architecture: neither PROCESSOR_ARCHITEW6432 nor PROCESSOR_ARCHITECTURE is set"
+    }
+
+    switch ($rawArch.ToUpperInvariant()) {
+        "AMD64" { return "windows_amd64" }
+        "X86_64" { return "windows_amd64" }
+        "ARM64" { return "windows_arm64" }
+        "AARCH64" { return "windows_arm64" }
+        default {
+            throw "Unsupported architecture '$rawArch': DeepSource CLI does not provide a Windows build for this architecture"
+        }
+    }
+}
+
+# Install-DeepSourceCli runs the full install flow. It is a function (rather
+# than inline script) so that 'return' exits only the install routine, not the
+# host, when the script is invoked via 'irm | iex'.
+#
+# BaseUrl/BinaryName/InstallDir/Architew6432/Architecture parameters default to
+# the real script-level values / environment variables and only need to be
+# overridden by tests.
+function Install-DeepSourceCli {
+    param(
+        [string]$BaseUrl = $BaseUrl,
+        [string]$BinaryName = $BinaryName,
+        [string]$InstallDir = (Join-Path $env:LOCALAPPDATA "DeepSource\bin"),
+        [string]$Architew6432 = $env:PROCESSOR_ARCHITEW6432,
+        [string]$Architecture = $env:PROCESSOR_ARCHITECTURE,
+        # PathScope defaults to User (real, persisted behavior). Tests may pass
+        # 'Process' so PATH assertions only touch the current process's
+        # in-memory environment and never persist to the real user profile.
+        [System.EnvironmentVariableTarget]$PathScope = [System.EnvironmentVariableTarget]::User
+    )
+
     $ErrorActionPreference = "Stop"
 
-    $BaseUrl = "__BASE_URL__"
-    $BinaryName = "__BINARY_NAME__"
-
-    function Pass($msg) { Write-Host "✓ $msg" -ForegroundColor Green }
-    function Fail($msg) { Write-Host "✗ $msg" -ForegroundColor Red; return }
-    function Info($msg) { Write-Host "→ $msg" -ForegroundColor Cyan }
-
-    $PlatformKey = "windows_amd64"
+    try {
+        $PlatformKey = Get-DeepSourcePlatformKey -Architew6432 $Architew6432 -Architecture $Architecture
+    } catch {
+        Fail "$_"
+        return
+    }
+    Pass "Platform: $PlatformKey"
 
     # Fetch manifest
     try {
@@ -58,7 +125,6 @@
     Pass "Checksum verified"
 
     # Extract binary
-    $InstallDir = Join-Path $env:LOCALAPPDATA "DeepSource\bin"
     if (-not (Test-Path $InstallDir)) {
         New-Item -ItemType Directory -Path $InstallDir -Force | Out-Null
     }
@@ -83,9 +149,9 @@
     Pass "Installed to $InstallDir\$BinaryName.exe"
 
     # Add to user PATH if not already present
-    $UserPath = [Environment]::GetEnvironmentVariable("Path", "User")
+    $UserPath = [Environment]::GetEnvironmentVariable("Path", $PathScope)
     if ($UserPath -notlike "*$InstallDir*") {
-        [Environment]::SetEnvironmentVariable("Path", "$InstallDir;$UserPath", "User")
+        [Environment]::SetEnvironmentVariable("Path", "$InstallDir;$UserPath", $PathScope)
         Pass "Added $InstallDir to user PATH"
         Info "Restart your terminal for PATH changes to take effect"
     } else {
@@ -95,3 +161,10 @@
     Write-Host ""
     Info "Run '$BinaryName' to get started"
 }
+
+if (-not $SkipInstall) {
+    Install-DeepSourceCli
+}
+}
+
+& $InstallScript
